@@ -26,12 +26,12 @@ export function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <img 
               src={`${import.meta.env.BASE_URL}images/logo.png`} 
-              alt="Chuy Sala Logo" 
+              alt="Chouy Sala Logo" 
               className="w-12 h-12 object-contain group-hover:scale-105 transition-transform"
             />
             <div className="flex flex-col">
               <span className="font-display font-bold text-2xl leading-none text-primary">
-                Chuy Sala
+                Chouy Sala
               </span>
               <span className="font-khmer text-sm text-muted-foreground">
                 ជួយសាលា

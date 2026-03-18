@@ -12,12 +12,12 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-6">
               <img 
                 src={`${import.meta.env.BASE_URL}images/logo.png`} 
-                alt="Chuy Sala Logo" 
+                alt="Chouy Sala Logo" 
                 className="w-10 h-10 object-contain rounded-lg bg-white p-1"
               />
               <div className="flex flex-col">
                 <span className="font-display font-bold text-xl leading-none text-white">
-                  Chuy Sala
+                  Chouy Sala
                 </span>
                 <span className="font-khmer text-xs text-secondary/70">
                   ជួយសាលា
@@ -56,7 +56,7 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-secondary/50">
-          <p>© {new Date().getFullYear()} Chuy Sala. {t("All rights reserved.", "រក្សាសិទ្ធិគ្រប់យ៉ាង។")}</p>
+          <p>© {new Date().getFullYear()} Chouy Sala. {t("All rights reserved.", "រក្សាសិទ្ធិគ្រប់យ៉ាង។")}</p>
         </div>
       </div>
     </footer>
