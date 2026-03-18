@@ -1,0 +1,23 @@
+packages:
+  "react-leaflet": "Map components for React"
+  "leaflet": "Core map library"
+  "@types/leaflet": "Types for leaflet"
+  "framer-motion": "Animations and page transitions"
+  "zustand": "State management for language toggle"
+  "date-fns": "Date formatting"
+  "react-hook-form": "Form management"
+  "@hookform/resolvers": "Zod resolver for forms"
+  "zod": "Schema validation"
+
+images:
+  - path: "artifacts/chuy-sala/public/images/hero-bg.png"
+    description: "A beautiful, cinematic shot of rural Cambodian countryside at golden hour with soft sunlight, children walking to school, hyper-realistic, 4k, warm tones"
+    aspect_ratio: "16:9"
+  - path: "artifacts/chuy-sala/public/images/logo.png"
+    description: "Minimalist modern logo for a charity called Chuy Sala, featuring a subtle school and hands motif in deep blue, clean white background"
+    aspect_ratio: "1:1"
+
+notes:
+  - "Using zustand for global language state (EN/KH)"
+  - "Leaflet CSS imported in index.css"
+  - "Using @workspace/api-client-react for TanStack Query hooks"

@@ -1,22 +1,26 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Chuy Sala (Help School) API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: schools
+    description: School operations
+  - name: needs
+    description: School needs/requests
+  - name: completedProjects
+    description: Completed project transparency log
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +28,224 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /schools:
+    get:
+      operationId: listSchools
+      tags: [schools]
+      summary: List all schools with optional filters
+      parameters:
+        - name: province
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of schools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/School"
+    post:
+      operationId: createSchool
+      tags: [schools]
+      summary: Create a new school profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSchoolRequest"
+      responses:
+        "201":
+          description: School created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/School"
+
+  /schools/{id}:
+    get:
+      operationId: getSchool
+      tags: [schools]
+      summary: Get a school by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: School details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/School"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /needs:
+    get:
+      operationId: listNeeds
+      tags: [needs]
+      summary: List active needs with optional filters
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/NeedCategory"
+        - name: province
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: schoolId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of needs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Need"
+    post:
+      operationId: createNeed
+      tags: [needs]
+      summary: Create a new need/request for a school
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNeedRequest"
+      responses:
+        "201":
+          description: Need created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Need"
+
+  /needs/{id}:
+    get:
+      operationId: getNeed
+      tags: [needs]
+      summary: Get a need by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Need details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Need"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      operationId: updateNeedFunding
+      tags: [needs]
+      summary: Update funded amount for a need
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNeedFundingRequest"
+      responses:
+        "200":
+          description: Need updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Need"
+
+  /completed-projects:
+    get:
+      operationId: listCompletedProjects
+      tags: [completedProjects]
+      summary: List completed projects / transparency log
+      parameters:
+        - name: province
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of completed projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CompletedProject"
+    post:
+      operationId: createCompletedProject
+      tags: [completedProjects]
+      summary: Post a completed project with thank-you photo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCompletedProjectRequest"
+      responses:
+        "201":
+          description: Completed project created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompletedProject"
+
+  /provinces:
+    get:
+      operationId: listProvinces
+      tags: [schools]
+      summary: List all Cambodian provinces that have schools
+      responses:
+        "200":
+          description: List of provinces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +256,276 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    NeedCategory:
+      type: string
+      enum:
+        - Stationery
+        - Electronics
+        - Infrastructure
+        - Books
+        - Sports
+        - Other
+
+    NeedStatus:
+      type: string
+      enum:
+        - active
+        - funded
+        - completed
+
+    School:
+      type: object
+      properties:
+        id:
+          type: integer
+        nameEn:
+          type: string
+        nameKh:
+          type: string
+        province:
+          type: string
+        district:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        photoUrl:
+          type: string
+          nullable: true
+        contactEmail:
+          type: string
+          nullable: true
+        contactPhone:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        studentCount:
+          type: integer
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - nameEn
+        - nameKh
+        - province
+        - district
+        - latitude
+        - longitude
+        - createdAt
+
+    CreateSchoolRequest:
+      type: object
+      properties:
+        nameEn:
+          type: string
+        nameKh:
+          type: string
+        province:
+          type: string
+        district:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        photoUrl:
+          type: string
+          nullable: true
+        contactEmail:
+          type: string
+          nullable: true
+        contactPhone:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        studentCount:
+          type: integer
+          nullable: true
+      required:
+        - nameEn
+        - nameKh
+        - province
+        - district
+        - latitude
+        - longitude
+
+    Need:
+      type: object
+      properties:
+        id:
+          type: integer
+        schoolId:
+          type: integer
+        school:
+          $ref: "#/components/schemas/School"
+          nullable: true
+        titleEn:
+          type: string
+        titleKh:
+          type: string
+        descriptionEn:
+          type: string
+        descriptionKh:
+          type: string
+        category:
+          $ref: "#/components/schemas/NeedCategory"
+        photoUrl:
+          type: string
+          nullable: true
+        goalAmount:
+          type: number
+        fundedAmount:
+          type: number
+        status:
+          $ref: "#/components/schemas/NeedStatus"
+        contactEmail:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - schoolId
+        - titleEn
+        - titleKh
+        - descriptionEn
+        - descriptionKh
+        - category
+        - goalAmount
+        - fundedAmount
+        - status
+        - createdAt
+
+    CreateNeedRequest:
+      type: object
+      properties:
+        schoolId:
+          type: integer
+        titleEn:
+          type: string
+        titleKh:
+          type: string
+        descriptionEn:
+          type: string
+        descriptionKh:
+          type: string
+        category:
+          $ref: "#/components/schemas/NeedCategory"
+        photoUrl:
+          type: string
+          nullable: true
+        goalAmount:
+          type: number
+        contactEmail:
+          type: string
+          nullable: true
+      required:
+        - schoolId
+        - titleEn
+        - titleKh
+        - descriptionEn
+        - descriptionKh
+        - category
+        - goalAmount
+
+    UpdateNeedFundingRequest:
+      type: object
+      properties:
+        fundedAmount:
+          type: number
+        status:
+          $ref: "#/components/schemas/NeedStatus"
+      required:
+        - fundedAmount
+
+    CompletedProject:
+      type: object
+      properties:
+        id:
+          type: integer
+        needId:
+          type: integer
+          nullable: true
+        schoolId:
+          type: integer
+        school:
+          $ref: "#/components/schemas/School"
+          nullable: true
+        titleEn:
+          type: string
+        titleKh:
+          type: string
+        descriptionEn:
+          type: string
+        descriptionKh:
+          type: string
+        thankYouPhotoUrl:
+          type: string
+          nullable: true
+        category:
+          $ref: "#/components/schemas/NeedCategory"
+        completedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - schoolId
+        - titleEn
+        - titleKh
+        - descriptionEn
+        - descriptionKh
+        - category
+        - completedAt
+        - createdAt
+
+    CreateCompletedProjectRequest:
+      type: object
+      properties:
+        needId:
+          type: integer
+          nullable: true
+        schoolId:
+          type: integer
+        titleEn:
+          type: string
+        titleKh:
+          type: string
+        descriptionEn:
+          type: string
+        descriptionKh:
+          type: string
+        thankYouPhotoUrl:
+          type: string
+          nullable: true
+        category:
+          $ref: "#/components/schemas/NeedCategory"
+        completedAt:
+          type: string
+          format: date-time
+      required:
+        - schoolId
+        - titleEn
+        - titleKh
+        - descriptionEn
+        - descriptionKh
+        - category
+        - completedAt
