@@ -37,8 +37,7 @@ export function Footer() {
               {t("Contact Us", "ទំនាក់ទំនង")}
             </h4>
             <ul className="space-y-3 text-sm text-secondary/80">
-              <li>Email: hello@chuysala.org</li>
-              <li>Phone: +855 12 345 678</li>
+              <li>Email: jaredrobertw@gmail.com</li>
               <li>Phnom Penh, Cambodia</li>
             </ul>
           </div>
