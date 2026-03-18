@@ -1,11 +1,8 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import path from "path";
-import { fileURLToPath } from "url";
 import router from "./routes";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { uploadsDir } from "./routes/upload";
 
 const app: Express = express();
 
@@ -14,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded photos as static files
-app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use("/api/uploads", express.static(uploadsDir));
 
 app.use("/api", router);
 

@@ -1,13 +1,10 @@
 import { Router, type IRouter } from "express";
 import multer from "multer";
 import path from "path";
-import { fileURLToPath } from "url";
 import fs from "fs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const uploadsDir = path.join(__dirname, "../../uploads");
+// Resolve uploads dir relative to process cwd (works in both ESM dev and CJS prod bundle)
+const uploadsDir = path.resolve(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
@@ -43,4 +40,5 @@ router.post("/upload", upload.single("photo"), (req, res) => {
   res.json({ url });
 });
 
+export { uploadsDir };
 export default router;
