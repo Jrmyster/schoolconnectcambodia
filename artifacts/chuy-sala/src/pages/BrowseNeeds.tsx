@@ -2,17 +2,19 @@ import { useState } from "react";
 import { useListNeeds, useListProvinces, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Filter, SearchX, Smartphone } from "lucide-react";
+import { Loader2, Filter, SearchX, Smartphone, QrCode } from "lucide-react";
+import { DonationSuccessModal } from "@/components/DonationSuccessModal";
 
 export function BrowseNeeds() {
   const t = useTranslation();
   const { language } = useLanguageStore();
-  
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const [province, setProvince] = useState<string>("");
   const [category, setCategory] = useState<NeedCategory | "">("");
-  
+
   const { data: provinces } = useListProvinces();
-  
+
   const { data: needs, isLoading } = useListNeeds({
     province: province || undefined,
     category: (category as NeedCategory) || undefined,
@@ -41,8 +43,8 @@ export function BrowseNeeds() {
             <Filter className="w-5 h-5 text-primary" />
             <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Filters:", "តម្រង:")}</span>
           </div>
-          
-          <select 
+
+          <select
             className="w-full md:w-64 bg-background border-2 border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all cursor-pointer"
             value={province}
             onChange={(e) => setProvince(e.target.value)}
@@ -53,7 +55,7 @@ export function BrowseNeeds() {
             ))}
           </select>
 
-          <select 
+          <select
             className="w-full md:w-64 bg-background border-2 border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all cursor-pointer"
             value={category}
             onChange={(e) => setCategory(e.target.value as NeedCategory)}
@@ -131,17 +133,32 @@ export function BrowseNeeds() {
                 Scan this code using ACLEDA mobile, ABA, or any Bakong-supported banking app to support the creator of this website.
               </p>
 
-              <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+              <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                 {["ACLEDA", "ABA", "Bakong"].map((app) => (
                   <span key={app} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">
                     {app}
                   </span>
                 ))}
               </div>
+
+              {/* CTA button */}
+              <button
+                onClick={() => setShowSuccessModal(true)}
+                className="mt-2 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 active:scale-95 text-primary-foreground font-bold py-4 px-6 rounded-2xl transition-all text-base shadow-lg shadow-primary/20 w-full md:w-auto"
+              >
+                <QrCode className="w-5 h-5" />
+                {t("I Scanned the Code!", "ខ្ញុំបានស្កែនកូដ!")}
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Donation Success Modal */}
+      <DonationSuccessModal
+        open={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+      />
     </div>
   );
 }
