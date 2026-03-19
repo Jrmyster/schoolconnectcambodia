@@ -16,7 +16,7 @@ export function Home() {
   return (
     <div className="w-full min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full min-h-[700px] h-[92vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-foreground/40 z-10" /> {/* Dark overlay for readability */}
         
         <img 
@@ -25,7 +25,7 @@ export function Home() {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         
-        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-12">
+        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
           {/* Language toggle — front and center */}
           <div className="flex justify-center mb-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <button
@@ -74,7 +74,7 @@ export function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative -mt-16 z-30 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="relative -mt-8 z-30 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="bg-card rounded-2xl shadow-2xl border border-border p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border">
           <div className="flex flex-col items-center text-center pt-4 md:pt-0">
             <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-4">
