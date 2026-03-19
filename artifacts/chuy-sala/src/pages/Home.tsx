@@ -1,12 +1,11 @@
 import { Link } from "wouter";
-import { ArrowRight, MapPin, GraduationCap, Heart, CheckCircle2 } from "lucide-react";
+import { MapPin, GraduationCap, Heart, CheckCircle2, Languages } from "lucide-react";
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Button } from "@/components/ui/button";
 
 export function Home() {
   const t = useTranslation();
-  const { language } = useLanguageStore();
+  const { language, toggleLanguage } = useLanguageStore();
   
   const { data: schools } = useListSchools();
   const { data: needs } = useListNeeds();
@@ -27,6 +26,19 @@ export function Home() {
         />
         
         <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-12">
+          {/* Language toggle — front and center */}
+          <div className="flex justify-center mb-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/50 text-white font-bold text-sm hover:bg-white/30 active:scale-95 transition-all shadow-lg"
+            >
+              <Languages className="w-4 h-4" />
+              <span className={language === 'en' ? 'opacity-100' : 'opacity-50'}>EN</span>
+              <span className="opacity-40">|</span>
+              <span className={`font-khmer ${language === 'kh' ? 'opacity-100' : 'opacity-50'}`}>ខ្មែរ</span>
+            </button>
+          </div>
+
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Heart className="w-4 h-4 text-accent fill-accent" />
             <span className={language === 'kh' ? 'font-khmer text-sm' : 'text-sm'}>

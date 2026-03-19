@@ -15,6 +15,7 @@ export const schoolsTable = pgTable("schools", {
   contactPhone: text("contact_phone"),
   description: text("description"),
   studentCount: integer("student_count"),
+  pin: text("pin"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { 
-  useCreateSchool, 
-  useCreateNeed, 
-  useListSchools, 
+import {
+  useCreateSchool,
+  useCreateNeed,
+  useListSchools,
   NeedCategory,
   CreateSchoolRequest,
   CreateNeedRequest
@@ -11,31 +11,66 @@ import {
 import { Button } from "@/components/ui/button";
 import { PhotoUploader } from "@/components/PhotoUploader";
 import { useToast } from "@/hooks/use-toast";
-import { Building, Heart } from "lucide-react";
+import { Building, Heart, UserPlus } from "lucide-react";
+import { useTranslation, useLanguageStore } from "@/store/use-language";
+
+const CAMBODIA_PROVINCES = [
+  "Banteay Meanchey","Battambang","Kampong Cham","Kampong Chhnang","Kampong Speu",
+  "Kampong Thom","Kampot","Kandal","Kep","Koh Kong","Kratié","Mondulkiri",
+  "Oddar Meanchey","Pailin","Phnom Penh","Preah Sihanouk","Preah Vihear",
+  "Prey Veng","Pursat","Ratanakiri","Siem Reap","Stung Treng","Svay Rieng",
+  "Takéo","Tboung Khmum",
+];
 
 export function Admin() {
-  const [activeTab, setActiveTab] = useState<"school" | "need">("school");
+  const [activeTab, setActiveTab] = useState<"signup" | "school" | "need">("signup");
   const [schoolPhotoUrl, setSchoolPhotoUrl] = useState("");
   const [needPhotoUrl, setNeedPhotoUrl] = useState("");
   const { toast } = useToast();
   const { data: schools } = useListSchools();
+  const t = useTranslation();
+  const { language } = useLanguageStore();
 
   const createSchoolMutation = useCreateSchool();
   const createNeedMutation = useCreateNeed();
 
-  // School Form
+  // --- Simple Sign-Up Form ---
+  const { register: regSignup, handleSubmit: handleSignupSubmit, reset: resetSignup } = useForm<{
+    nameEn: string; province: string; pin: string;
+  }>();
+
+  const onSignupSubmit = (data: { nameEn: string; province: string; pin: string }) => {
+    const payload: CreateSchoolRequest = {
+      nameEn: data.nameEn,
+      nameKh: data.nameEn, // default; can update later
+      province: data.province,
+      district: "—",
+      latitude: 12.5,
+      longitude: 104.9,
+      description: `PIN: ${data.pin}`,
+    };
+    createSchoolMutation.mutate({ data: payload }, {
+      onSuccess: () => {
+        toast({ title: t("Registered!", "បានចុះឈ្មោះ!"), description: t("Your school has been added to the platform.", "សាលារបស់អ្នកត្រូវបានបន្ថែមទៅក្នុងប្រព័ន្ធ។") });
+        resetSignup();
+      },
+      onError: (err: any) => {
+        toast({ variant: "destructive", title: "Error", description: err.message });
+      }
+    });
+  };
+
+  // --- Full School Form ---
   const { register: registerSchool, handleSubmit: handleSchoolSubmit, reset: resetSchool } = useForm<CreateSchoolRequest>();
 
   const onSchoolSubmit = (data: CreateSchoolRequest) => {
-    const payload = {
+    createSchoolMutation.mutate({ data: {
       ...data,
       latitude: Number(data.latitude),
       longitude: Number(data.longitude),
       studentCount: data.studentCount ? Number(data.studentCount) : undefined,
       photoUrl: schoolPhotoUrl || undefined,
-    };
-    
-    createSchoolMutation.mutate({ data: payload }, {
+    }}, {
       onSuccess: () => {
         toast({ title: "Success", description: "School created successfully" });
         resetSchool();
@@ -47,18 +82,16 @@ export function Admin() {
     });
   };
 
-  // Need Form
+  // --- Need Form ---
   const { register: registerNeed, handleSubmit: handleNeedSubmit, reset: resetNeed } = useForm<CreateNeedRequest>();
 
   const onNeedSubmit = (data: CreateNeedRequest) => {
-    const payload = {
+    createNeedMutation.mutate({ data: {
       ...data,
       schoolId: Number(data.schoolId),
       goalAmount: Number(data.goalAmount),
       photoUrl: needPhotoUrl || undefined,
-    };
-
-    createNeedMutation.mutate({ data: payload }, {
+    }}, {
       onSuccess: () => {
         toast({ title: "Success", description: "Need created successfully" });
         resetNeed();
@@ -76,41 +109,124 @@ export function Admin() {
     <div className="min-h-screen bg-muted/30 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold text-foreground">Admin Dashboard</h1>
-          <p className="text-muted-foreground mt-2">Manage schools and submit new needs to the platform.</p>
+          <h1 className={`text-3xl font-bold text-foreground ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+            {t("Admin Dashboard", "ផ្ទាំងគ្រប់គ្រង")}
+          </h1>
+          <p className={`text-muted-foreground mt-2 ${language === 'kh' ? 'font-khmer' : ''}`}>
+            {t("Manage schools and submit new needs to the platform.", "គ្រប់គ្រងសាលា និងដាក់ស្នើតម្រូវការថ្មីទៅក្នុងប្រព័ន្ធ។")}
+          </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-8 bg-card p-2 rounded-2xl shadow-sm border border-border">
+        <div className="flex gap-2 mb-8 bg-card p-2 rounded-2xl shadow-sm border border-border flex-wrap">
           <button
-            onClick={() => setActiveTab("school")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-              activeTab === "school" 
-                ? "bg-primary text-primary-foreground shadow-md" 
-                : "text-muted-foreground hover:bg-secondary"
+            onClick={() => setActiveTab("signup")}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+              activeTab === "signup" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
-            <Building className="w-5 h-5" />
-            Add School
+            <UserPlus className="w-4 h-4" />
+            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("School Sign-Up", "ចុះឈ្មោះសាលា")}</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("school")}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+              activeTab === "school" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
+            }`}
+          >
+            <Building className="w-4 h-4" />
+            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Full Profile", "ព័ត៌មានពេញលេញ")}</span>
           </button>
           <button
             onClick={() => setActiveTab("need")}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-              activeTab === "need" 
-                ? "bg-primary text-primary-foreground shadow-md" 
-                : "text-muted-foreground hover:bg-secondary"
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+              activeTab === "need" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
-            <Heart className="w-5 h-5" />
-            Create Need
+            <Heart className="w-4 h-4" />
+            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Post a Need", "ដាក់ស្នើតម្រូវការ")}</span>
           </button>
         </div>
 
         <div className="bg-card rounded-3xl shadow-xl border border-border p-8">
+
+          {/* ── SIGN-UP TAB ── */}
+          {activeTab === "signup" && (
+            <form onSubmit={handleSignupSubmit(onSignupSubmit)} className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+              <div>
+                <h2 className={`text-2xl font-bold border-b pb-4 ${language === 'kh' ? 'font-khmer' : ''}`}>
+                  {t("Register Your School", "ចុះឈ្មោះសាលារបស់អ្នក")}
+                </h2>
+                <p className={`text-muted-foreground mt-2 text-sm ${language === 'kh' ? 'font-khmer' : ''}`}>
+                  {t("Just three steps to get started. You can add more details later.", "គ្រាន់តែបីជំហានដើម្បីចាប់ផ្តើម។ អ្នកអាចបន្ថែមព័ត៌មានលំអិតបន្ថែមទៀតនៅពេលក្រោយ។")}
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {/* School Name */}
+                <div className="space-y-2">
+                  <label className={`text-sm font-bold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("School Name", "ឈ្មោះសាលា")} *
+                  </label>
+                  <input
+                    {...regSignup("nameEn", { required: true })}
+                    className={`${inputClass} text-lg`}
+                    placeholder={t("e.g. Kampong Cham High School", "ឧ. វិទ្យាល័យកំពង់ចាម")}
+                  />
+                </div>
+
+                {/* Province */}
+                <div className="space-y-2">
+                  <label className={`text-sm font-bold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("Province", "ខេត្ត")} *
+                  </label>
+                  <select
+                    {...regSignup("province", { required: true })}
+                    className={`${inputClass} text-lg`}
+                  >
+                    <option value="">{t("Select your province", "ជ្រើសរើសខេត្តរបស់អ្នក")}</option>
+                    {CAMBODIA_PROVINCES.map(p => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Password / PIN */}
+                <div className="space-y-2">
+                  <label className={`text-sm font-bold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("Password", "ពាក្យសម្ងាត់")} *
+                  </label>
+                  <input
+                    type="password"
+                    {...regSignup("pin", { required: true, minLength: 4 })}
+                    className={`${inputClass} text-lg`}
+                    placeholder="••••••••"
+                  />
+                  <p className={`text-xs text-muted-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("Choose a password to manage your school profile.", "ជ្រើសរើសពាក្យសម្ងាត់ដើម្បីគ្រប់គ្រងប្រវត្តិរូបសាលារបស់អ្នក។")}
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t flex justify-end">
+                <Button
+                  type="submit"
+                  disabled={createSchoolMutation.isPending}
+                  className="px-10 py-6 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20"
+                >
+                  {createSchoolMutation.isPending
+                    ? t("Registering...", "កំពុងចុះឈ្មោះ...")
+                    : t("Register School", "ចុះឈ្មោះសាលា")}
+                </Button>
+              </div>
+            </form>
+          )}
+
+          {/* ── FULL PROFILE TAB ── */}
           {activeTab === "school" && (
             <form onSubmit={handleSchoolSubmit(onSchoolSubmit)} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-              <h2 className="text-2xl font-bold border-b pb-4">Register New School</h2>
-              
+              <h2 className="text-2xl font-bold border-b pb-4">Register Full School Profile</h2>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-foreground">Name (English)*</label>
@@ -120,10 +236,13 @@ export function Admin() {
                   <label className="text-sm font-bold text-foreground font-khmer">Name (Khmer)*</label>
                   <input {...registerSchool("nameKh", { required: true })} className={`${inputClass} font-khmer`} />
                 </div>
-                
+
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-foreground">Province*</label>
-                  <input {...registerSchool("province", { required: true })} className={inputClass} />
+                  <select {...registerSchool("province", { required: true })} className={inputClass}>
+                    <option value="">Select province</option>
+                    {CAMBODIA_PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-foreground">District*</label>
@@ -149,11 +268,7 @@ export function Admin() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <PhotoUploader
-                    label="School Photo"
-                    onUpload={setSchoolPhotoUrl}
-                    currentUrl={schoolPhotoUrl}
-                  />
+                  <PhotoUploader label="School Photo" onUpload={setSchoolPhotoUrl} currentUrl={schoolPhotoUrl} />
                 </div>
               </div>
 
@@ -165,10 +280,11 @@ export function Admin() {
             </form>
           )}
 
+          {/* ── NEED TAB ── */}
           {activeTab === "need" && (
             <form onSubmit={handleNeedSubmit(onNeedSubmit)} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
               <h2 className="text-2xl font-bold border-b pb-4">Create School Need</h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-sm font-bold text-foreground">Select School*</label>
@@ -213,11 +329,7 @@ export function Admin() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <PhotoUploader
-                    label="Need Photo"
-                    onUpload={setNeedPhotoUrl}
-                    currentUrl={needPhotoUrl}
-                  />
+                  <PhotoUploader label="Need Photo" onUpload={setNeedPhotoUrl} currentUrl={needPhotoUrl} />
                 </div>
               </div>
 
