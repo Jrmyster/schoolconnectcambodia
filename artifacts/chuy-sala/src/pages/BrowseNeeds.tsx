@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useListNeeds, useListProvinces, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Filter, SearchX } from "lucide-react";
+import { Loader2, Filter, SearchX, Smartphone } from "lucide-react";
 
 export function BrowseNeeds() {
   const t = useTranslation();
@@ -90,6 +90,57 @@ export function BrowseNeeds() {
             </p>
           </div>
         )}
+      </div>
+
+      {/* Local Support Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
+        <div className="border-t border-border pt-12">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Smartphone className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className={`text-2xl font-bold text-foreground ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+                {t("Local Support", "ការគាំទ្រក្នុងស្រុក")}
+              </h2>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-8 items-center bg-card rounded-3xl border border-border shadow-lg p-8">
+            {/* QR Image */}
+            <div className="w-full md:w-auto flex-shrink-0 flex justify-center">
+              <img
+                src={`${import.meta.env.BASE_URL}images/acleda-qr.png`}
+                alt="ACLEDA KHQR Code"
+                className="w-64 sm:w-72 md:w-80 max-w-full rounded-2xl shadow-md border border-border"
+              />
+            </div>
+
+            {/* Text content */}
+            <div className="flex flex-col gap-4 text-center md:text-left">
+              <div>
+                <h3 className="text-xl font-bold text-foreground mb-1">
+                  Support locally via KHQR
+                </h3>
+                <p className="font-khmer text-lg text-primary font-semibold">
+                  គាំទ្រតាមរយៈ KHQR
+                </p>
+              </div>
+
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
+                Scan this code using ACLEDA mobile, ABA, or any Bakong-supported banking app to support the creator of this website.
+              </p>
+
+              <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+                {["ACLEDA", "ABA", "Bakong"].map((app) => (
+                  <span key={app} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">
+                    {app}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
