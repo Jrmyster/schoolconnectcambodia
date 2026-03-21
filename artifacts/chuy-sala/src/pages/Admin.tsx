@@ -121,30 +121,30 @@ export function Admin() {
         <div className="flex gap-2 mb-8 bg-card p-2 rounded-2xl shadow-sm border border-border flex-wrap">
           <button
             onClick={() => setActiveTab("signup")}
-            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'} ${
               activeTab === "signup" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
-            <UserPlus className="w-4 h-4" />
-            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("School Sign-Up", "ចុះឈ្មោះសាលា")}</span>
+            <UserPlus className="w-4 h-4 flex-shrink-0" />
+            {t("School Sign-Up", "ចុះឈ្មោះសាលា")}
           </button>
           <button
             onClick={() => setActiveTab("school")}
-            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'} ${
               activeTab === "school" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
-            <Building className="w-4 h-4" />
-            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Full Profile", "ព័ត៌មានពេញលេញ")}</span>
+            <Building className="w-4 h-4 flex-shrink-0" />
+            {t("Register Full School Profile", "ចុះឈ្មោះប្រវត្តិសាលាពេញលេញ")}
           </button>
           <button
             onClick={() => setActiveTab("need")}
-            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all text-sm ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'} ${
               activeTab === "need" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
-            <Heart className="w-4 h-4" />
-            <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Post a Need", "ដាក់ស្នើតម្រូវការ")}</span>
+            <Heart className="w-4 h-4 flex-shrink-0" />
+            {t("Post a Need", "បង្ហោះតម្រូវការ")}
           </button>
         </div>
 
