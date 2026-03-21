@@ -1,14 +1,15 @@
 import { Link } from "wouter";
-import { Mail, GraduationCap, MapPin, Target } from "lucide-react";
+import { Mail, GraduationCap, MapPin, Pencil } from "lucide-react";
 import { Need } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
 
 interface NeedCardProps {
   need: Need;
+  onEdit?: (need: Need) => void;
 }
 
-export function NeedCard({ need }: NeedCardProps) {
+export function NeedCard({ need, onEdit }: NeedCardProps) {
   const t = useTranslation();
   const { language } = useLanguageStore();
   
@@ -50,6 +51,17 @@ export function NeedCard({ need }: NeedCardProps) {
             {need.category}
           </span>
         </div>
+
+        {/* Edit button — only when admin passes onEdit */}
+        {onEdit && (
+          <button
+            onClick={() => onEdit(need)}
+            className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all hover:scale-110"
+            title="Edit"
+          >
+            <Pencil className="w-4 h-4 text-primary" />
+          </button>
+        )}
         
         {/* fallback to stock photo of school supplies if no photo uploaded */}
         {/* stock photo: school notebooks and pencils */}

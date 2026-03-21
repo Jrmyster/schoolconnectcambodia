@@ -129,6 +129,27 @@ router.get("/needs/:id", async (req, res) => {
   }
 });
 
+router.put("/needs/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const allowed = [
+      "titleEn","titleKh","descriptionEn","descriptionKh",
+      "category","goalAmount","contactEmail","photoUrl",
+    ];
+    const update: Record<string, unknown> = {};
+    for (const key of allowed) {
+      if (key in req.body) update[key] = req.body[key];
+    }
+    if (Object.keys(update).length === 0) return res.status(400).json({ error: "No fields to update" });
+    const [need] = await db.update(needsTable).set(update).where(eq(needsTable.id, id)).returning();
+    if (!need) return res.status(404).json({ error: "Need not found" });
+    res.json(need);
+  } catch (e) {
+    res.status(400).json({ error: String(e) });
+  }
+});
+
 router.patch("/needs/:id", async (req, res) => {
   try {
     const { id } = UpdateNeedFundingParams.parse(req.params);

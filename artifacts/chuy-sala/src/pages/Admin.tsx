@@ -4,15 +4,20 @@ import {
   useCreateSchool,
   useCreateNeed,
   useListSchools,
+  useListNeeds,
   CreateSchoolRequest,
-  CreateNeedRequest
+  CreateNeedRequest,
+  School,
+  Need,
 } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
 import { PhotoUploader } from "@/components/PhotoUploader";
 import { useToast } from "@/hooks/use-toast";
-import { Building, Heart, UserPlus, BarChart2 } from "lucide-react";
+import { Building, Heart, UserPlus, BarChart2, Pencil, LayoutList } from "lucide-react";
 import { Link } from "wouter";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { EditSchoolModal } from "@/components/EditSchoolModal";
+import { EditNeedModal } from "@/components/EditNeedModal";
 
 const CAMBODIA_PROVINCES = [
   "Banteay Meanchey","Battambang","Kampong Cham","Kampong Chhnang","Kampong Speu",
@@ -62,11 +67,14 @@ const CATEGORY_OPTIONS: { value: string; en: string; kh: string }[] = [
 ];
 
 export function Admin() {
-  const [activeTab, setActiveTab] = useState<"signup" | "school" | "need">("signup");
+  const [activeTab, setActiveTab] = useState<"signup" | "school" | "need" | "manage">("signup");
   const [schoolPhotoUrl, setSchoolPhotoUrl] = useState("");
   const [needPhotoUrl, setNeedPhotoUrl] = useState("");
+  const [editingSchool, setEditingSchool] = useState<School | null>(null);
+  const [editingNeed, setEditingNeed] = useState<Need | null>(null);
   const { toast } = useToast();
   const { data: schools } = useListSchools();
+  const { data: needs } = useListNeeds();
   const t = useTranslation();
   const { language } = useLanguageStore();
 
@@ -193,6 +201,15 @@ export function Admin() {
           >
             <Heart className="w-4 h-4 flex-shrink-0" />
             {t("Post a Need", "បង្ហោះតម្រូវការ")}
+          </button>
+          <button
+            onClick={() => setActiveTab("manage")}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'} ${
+              activeTab === "manage" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:bg-secondary"
+            }`}
+          >
+            <LayoutList className="w-4 h-4 flex-shrink-0" />
+            {t("Manage", "គ្រប់គ្រង")}
           </button>
         </div>
 
@@ -492,8 +509,133 @@ export function Admin() {
               </div>
             </form>
           )}
+
+          {/* ── MANAGE TAB ── */}
+          {activeTab === "manage" && (
+            <div className="space-y-10">
+              {/* Schools Section */}
+              <section>
+                <h2 className={`text-xl font-bold mb-4 text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                  🏫 {t("Schools", "សាលា")}
+                </h2>
+                {!schools?.length ? (
+                  <p className={`text-muted-foreground text-sm ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("No schools registered yet.", "មិនទាន់មានសាលាណាចុះឈ្មោះ។")}
+                  </p>
+                ) : (
+                  <div className="overflow-x-auto rounded-2xl border border-border">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="bg-muted text-muted-foreground">
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("School", "សាលា")}</th>
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Province", "ខេត្ត")}</th>
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("District", "ស្រុក")}</th>
+                          <th className="px-4 py-3 w-24"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {schools.map((school, i) => (
+                          <tr key={school.id} className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+                            <td className="px-4 py-3">
+                              <div className={`font-semibold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                                {language === 'kh' ? school.nameKh : school.nameEn}
+                              </div>
+                              {school.contactEmail && (
+                                <div className="text-xs text-muted-foreground mt-0.5">{school.contactEmail}</div>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 text-muted-foreground">{school.province}</td>
+                            <td className="px-4 py-3 text-muted-foreground">{school.district || "—"}</td>
+                            <td className="px-4 py-3">
+                              <button
+                                onClick={() => setEditingSchool(school)}
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold transition-colors"
+                              >
+                                <Pencil className="w-3 h-3" />
+                                {t("Edit", "កែប្រែ")}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
+
+              {/* Needs Section */}
+              <section>
+                <h2 className={`text-xl font-bold mb-4 text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                  💙 {t("Needs", "តម្រូវការ")}
+                </h2>
+                {!needs?.length ? (
+                  <p className={`text-muted-foreground text-sm ${language === 'kh' ? 'font-khmer' : ''}`}>
+                    {t("No needs posted yet.", "មិនទាន់មានតម្រូវការណាដាក់ស្នើ។")}
+                  </p>
+                ) : (
+                  <div className="overflow-x-auto rounded-2xl border border-border">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="bg-muted text-muted-foreground">
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Title", "ចំណងជើង")}</th>
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Category", "ប្រភេទ")}</th>
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Goal", "គោលដៅ")}</th>
+                          <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Status", "ស្ថានភាព")}</th>
+                          <th className="px-4 py-3 w-24"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {needs.map((need, i) => (
+                          <tr key={need.id} className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+                            <td className="px-4 py-3">
+                              <div className={`font-semibold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+                                {language === 'kh' ? need.titleKh : need.titleEn}
+                              </div>
+                              {need.school && (
+                                <div className="text-xs text-muted-foreground mt-0.5">
+                                  {language === 'kh' ? need.school.nameKh : need.school.nameEn}
+                                </div>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 text-muted-foreground">{need.category}</td>
+                            <td className="px-4 py-3 font-semibold text-primary">${need.goalAmount.toLocaleString()}</td>
+                            <td className="px-4 py-3">
+                              <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                                need.status === "active"
+                                  ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400"
+                                  : "bg-muted text-muted-foreground"
+                              }`}>
+                                {need.status === "active" ? t("Active", "សកម្ម") : t("Fulfilled", "បានបំពេញ")}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">
+                              <button
+                                onClick={() => setEditingNeed(need)}
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-xs font-bold transition-colors"
+                              >
+                                <Pencil className="w-3 h-3" />
+                                {t("Edit", "កែប្រែ")}
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Edit Modals */}
+      {editingSchool && (
+        <EditSchoolModal school={editingSchool} onClose={() => setEditingSchool(null)} />
+      )}
+      {editingNeed && (
+        <EditNeedModal need={editingNeed} onClose={() => setEditingNeed(null)} />
+      )}
     </div>
   );
 }

@@ -1,3 +1,31 @@
+# Chouy Sala (ជួយសាលា / Help School)
+
+Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
+
+## Features
+- Interactive Leaflet map of school needs by province
+- School need cards with photo, category badge, funding progress bar
+- EN/Khmer language toggle (Zustand `useLanguageStore`)
+- Province + category filter bar on Browse Needs page with live school name search
+- Transparency log (Completed Projects page)
+- School Admin Dashboard (`/admin`):
+  - School Sign-Up form (quick 3-field form)
+  - Register Full School Profile form (photo upload, district dropdown)
+  - Post a Need form (bilingual, 9 categories, photo upload)
+  - **Manage tab**: table of all schools + needs with Edit buttons
+- Edit School modal (EditSchoolModal.tsx) — PUT /api/schools/:id
+- Edit Need modal (EditNeedModal.tsx) — PUT /api/needs/:id
+- Visual Analytics Dashboard (`/admin/dashboard`): Pie chart by category, Bar chart by province
+- PhotoUploader component with camera capture + file upload
+
+## API Routes
+- GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**
+- GET/POST /api/needs, GET /api/needs/:id, **PUT /api/needs/:id**, PATCH /api/needs/:id/funding
+- GET /api/provinces
+
+## Custom Hooks
+- `useUpdateSchool`, `useUpdateNeed` in `lib/api-client-react/src/custom-hooks.ts`
+
 # Workspace
 
 ## Overview

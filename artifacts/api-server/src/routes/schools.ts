@@ -57,6 +57,27 @@ router.get("/schools/:id", async (req, res) => {
   }
 });
 
+router.put("/schools/:id", async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid id" });
+    const allowed = [
+      "nameEn","nameKh","province","district","description",
+      "contactEmail","contactPhone","studentCount","photoUrl","latitude","longitude",
+    ];
+    const update: Record<string, unknown> = {};
+    for (const key of allowed) {
+      if (key in req.body) update[key] = req.body[key];
+    }
+    if (Object.keys(update).length === 0) return res.status(400).json({ error: "No fields to update" });
+    const [school] = await db.update(schoolsTable).set(update).where(eq(schoolsTable.id, id)).returning();
+    if (!school) return res.status(404).json({ error: "School not found" });
+    res.json(school);
+  } catch (e) {
+    res.status(400).json({ error: String(e) });
+  }
+});
+
 router.get("/provinces", async (_req, res) => {
   try {
     const result = await db
