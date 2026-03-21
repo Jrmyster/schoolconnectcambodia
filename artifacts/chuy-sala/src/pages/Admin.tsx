@@ -22,6 +22,34 @@ const CAMBODIA_PROVINCES = [
   "Takéo","Tboung Khmum",
 ];
 
+const DISTRICTS_BY_PROVINCE: Record<string, string[]> = {
+  "Banteay Meanchey": ["Serei Saophoan","Mongkol Borei","Poipet","Svay Chek","Thma Puok","Ou Chrov","Preah Netr Preah","Phnum Srok"],
+  "Battambang": ["Battambang","Banan","Bavel","Ek Phnom","Kamrieng","Koa Kraol","Maung Russei","Phnom Proek","Ratanak Mondul","Rukhak Kiri","Samlout","Sampov Lun","Sangkae","Thmor Koul"],
+  "Kampong Cham": ["Kampong Cham","Batheay","Chamkar Leu","Cheung Prey","Kampong Siem","Kang Meas","Koh Soutin","Prey Chhor","Srey Santhor","Stung Trang"],
+  "Kampong Chhnang": ["Kampong Chhnang","Baribour","Chol Kiri","Kampong Leaeng","Kampong Tralach","Kirivong","Rolea B'ier","Samaki Meanchey","Sameakki Mean Chey","Tuek Phos"],
+  "Kampong Speu": ["Chbar Mon","Basedth","Kong Pisei","Oral","Phnom Sruoch","Samraong Tong","Thpong"],
+  "Kampong Thom": ["Stung Sen","Baray","Kampong Svay","Prasat Ballangk","Prasat Sambour","Sandann","Stoung","Tbaeng Meanchey"],
+  "Kampot": ["Kampot","Angkor Chey","Chhuk","Chum Kiri","Dang Tong","Teuk Chhou","Banteay Meas"],
+  "Kandal": ["Ta Khmau","Ang Snuol","Kamboul","Kandal Stung","Kien Svay","Khsach Kandal","Leuk Daek","Loeuk Dek","Muk Kampul","Ponhea Lueu","Prey Kabas","Roha Kiri","S'ang","Saarthou"],
+  "Kep": ["Kep","Damnak Chang'aeur"],
+  "Koh Kong": ["Koh Kong","Botum Sakor","Kiri Sakor","Mondol Seima","Smach Mean Chey","Sre Ambel","Thma Bang"],
+  "Kratié": ["Kratié","Chhloung","Prek Prasab","Sambour","Snuol"],
+  "Mondulkiri": ["Senmonorom","Kaev Seima","Koh Nhek","O Reang Au","Pechr Chenda"],
+  "Oddar Meanchey": ["Samraong","Anlong Veng","Banteay Ampil","Chong Kal","Trapeang Prasat"],
+  "Pailin": ["Pailin","Sala Krau"],
+  "Phnom Penh": ["Chamkar Mon","Daun Penh","7 Makara","Tuol Kork","Dangkao","Mean Chey","Russei Keo","Saensokh","Pur Senchey","Chraoy Chongvar","Praek Pnov","Chbar Ampov","Boeng Keng Kang","Kamboul","Posenchey"],
+  "Preah Sihanouk": ["Preah Sihanouk","Prey Nob","Stueng Hav","Kampong Seila"],
+  "Preah Vihear": ["Tbeng Meanchey","Chhaeb","Choam Ksan","Kuleaen","Rovieng","Sangkom Thmei","Srayang"],
+  "Prey Veng": ["Prey Veng","Ba Phnom","Kamchay Mear","Kanhchriech","Me Sang","Peam Chor","Peam Ro","Pea Reang","Preah Sdach","Puok","Sithor Kandal","Svay Antor","Svay Chrum","Svay Teab"],
+  "Pursat": ["Pursat","Bakan","Kandieng","Krakor","Phnom Kravanh","Veal Veaeng"],
+  "Ratanakiri": ["Ban Lung","Bar Kaev","Koun Mom","Lumphat","O Chum","O Ya Dav","Ou Chum","Padah Chha","Taveng","Veun Sai"],
+  "Siem Reap": ["Siem Reap","Angkor Chum","Angkor Thom","Banteay Srei","Chi Kraeng","Kralanh","Prasat Bakong","Puok","Soutr Nikom","Srei Snam","Svay Leu","Varin"],
+  "Stung Treng": ["Stung Treng","Siem Bouk","Siem Pang","Thala Barivat","Borei O'Chresau"],
+  "Svay Rieng": ["Svay Rieng","Kampong Rou","Chantrea","Komrieng","Romeas Hek","Svay Chrum","Svay Teab"],
+  "Takéo": ["Doun Kaev","Angkor Borei","Bati","Borei Cholsar","Kaoh Andaet","Kirivong","Kiri Vong","Prey Kabbas","Samraong","Treang"],
+  "Tboung Khmum": ["Suong","Dambae","Krouch Chhmar","Memot","Ou Reang Ov","Ponhea Kraek","Tbong Khmum"],
+};
+
 export function Admin() {
   const [activeTab, setActiveTab] = useState<"signup" | "school" | "need">("signup");
   const [schoolPhotoUrl, setSchoolPhotoUrl] = useState("");
@@ -61,7 +89,9 @@ export function Admin() {
   };
 
   // --- Full School Form ---
-  const { register: registerSchool, handleSubmit: handleSchoolSubmit, reset: resetSchool } = useForm<CreateSchoolRequest>();
+  const { register: registerSchool, handleSubmit: handleSchoolSubmit, reset: resetSchool, watch: watchSchool, setValue: setSchoolValue } = useForm<CreateSchoolRequest>();
+  const selectedProvince = watchSchool("province");
+  const availableDistricts = selectedProvince ? (DISTRICTS_BY_PROVINCE[selectedProvince] ?? []) : [];
 
   const onSchoolSubmit = (data: CreateSchoolRequest) => {
     createSchoolMutation.mutate({ data: {
@@ -247,7 +277,14 @@ export function Admin() {
                   <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
                     {t("Province", "ខេត្ត")}*
                   </label>
-                  <select {...registerSchool("province", { required: true })} className={inputClass}>
+                  <select
+                    {...registerSchool("province", { required: true })}
+                    className={inputClass}
+                    onChange={(e) => {
+                      setSchoolValue("province", e.target.value);
+                      setSchoolValue("district", "");
+                    }}
+                  >
                     <option value="">{t("Select province", "ជ្រើសរើសខេត្ត")}</option>
                     {CAMBODIA_PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
                   </select>
@@ -256,7 +293,18 @@ export function Admin() {
                   <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
                     {t("District", "ស្រុក/ខណ្ឌ")}*
                   </label>
-                  <input {...registerSchool("district", { required: true })} className={inputClass} />
+                  <select
+                    {...registerSchool("district", { required: true })}
+                    className={inputClass}
+                    disabled={!selectedProvince || availableDistricts.length === 0}
+                  >
+                    <option value="">
+                      {!selectedProvince
+                        ? t("Select a province first", "សូមជ្រើសរើសខេត្តជាមុន")
+                        : t("Select district", "ជ្រើសរើសស្រុក/ខណ្ឌ")}
+                    </option>
+                    {availableDistricts.map(d => <option key={d} value={d}>{d}</option>)}
+                  </select>
                 </div>
 
                 <div className="space-y-2">
