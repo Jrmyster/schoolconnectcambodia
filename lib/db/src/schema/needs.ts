@@ -10,6 +10,9 @@ export const needCategoryEnum = pgEnum("need_category", [
   "Books",
   "Sports",
   "Other",
+  "Furniture",
+  "WASH",
+  "Teacher Training",
 ]);
 
 export const needStatusEnum = pgEnum("need_status", [

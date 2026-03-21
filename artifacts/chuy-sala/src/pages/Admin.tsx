@@ -4,7 +4,6 @@ import {
   useCreateSchool,
   useCreateNeed,
   useListSchools,
-  NeedCategory,
   CreateSchoolRequest,
   CreateNeedRequest
 } from "@workspace/api-client-react";
@@ -49,6 +48,17 @@ const DISTRICTS_BY_PROVINCE: Record<string, string[]> = {
   "Takéo": ["Doun Kaev","Angkor Borei","Bati","Borei Cholsar","Kaoh Andaet","Kirivong","Kiri Vong","Prey Kabbas","Samraong","Treang"],
   "Tboung Khmum": ["Suong","Dambae","Krouch Chhmar","Memot","Ou Reang Ov","Ponhea Kraek","Tbong Khmum"],
 };
+
+const CATEGORY_OPTIONS: { value: string; en: string; kh: string }[] = [
+  { value: "Electronics",       en: "Electronics & Tech",          kh: "គ្រឿងអេឡិចត្រូនិក និងបច្ចេកវិទ្យា" },
+  { value: "Books",             en: "Books & Stationery",           kh: "សៀវភៅ និងសម្ភារៈសិក្សា" },
+  { value: "Furniture",         en: "Furniture",                    kh: "គ្រឿងសង្ហារឹម" },
+  { value: "Infrastructure",    en: "Infrastructure & Repair",      kh: "ហេដ្ឋារចនាសម្ព័ន្ធ និងការជួសជុល" },
+  { value: "WASH",              en: "Water & Sanitation (WASH)",    kh: "ទឹកស្អាត និងអនាម័យ" },
+  { value: "Sports",            en: "Sports & Arts",                kh: "កីឡា និងសិល្បៈ" },
+  { value: "Teacher Training",  en: "Teacher Training",             kh: "ការបណ្តុះបណ្តាលគ្រូ" },
+  { value: "Other",             en: "Other",                        kh: "ផ្សេងៗ" },
+];
 
 export function Admin() {
   const [activeTab, setActiveTab] = useState<"signup" | "school" | "need">("signup");
@@ -373,6 +383,21 @@ export function Admin() {
                   </select>
                 </div>
 
+                {/* Category — positioned between school and title per spec */}
+                <div className="space-y-2 md:col-span-2">
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Category", "ប្រភេទ")}*
+                  </label>
+                  <select {...registerNeed("category", { required: true })} className={inputClass}>
+                    <option value="">{t("-- Select Category --", "-- ជ្រើសរើសប្រភេទ --")}</option>
+                    {CATEGORY_OPTIONS.map(cat => (
+                      <option key={cat.value} value={cat.value}>
+                        {language === 'kh' ? cat.kh : cat.en}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 {/* Title EN */}
                 <div className="space-y-2">
                   <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
@@ -418,17 +443,6 @@ export function Admin() {
                     rows={4}
                     className={`${inputClass} resize-none font-khmer leading-loose`}
                   />
-                </div>
-
-                {/* Category */}
-                <div className="space-y-2">
-                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
-                    {t("Category", "ប្រភេទ")}*
-                  </label>
-                  <select {...registerNeed("category", { required: true })} className={inputClass}>
-                    <option value="">{t("Select category", "ជ្រើសរើសប្រភេទ")}</option>
-                    {Object.values(NeedCategory).map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
                 </div>
 
                 {/* Goal Amount */}

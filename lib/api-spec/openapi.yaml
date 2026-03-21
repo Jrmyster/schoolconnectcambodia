@@ -273,6 +273,9 @@ components:
         - Books
         - Sports
         - Other
+        - Furniture
+        - WASH
+        - Teacher Training
 
     NeedStatus:
       type: string

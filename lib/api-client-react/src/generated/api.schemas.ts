@@ -22,6 +22,9 @@ export const NeedCategory = {
   Books: "Books",
   Sports: "Sports",
   Other: "Other",
+  Furniture: "Furniture",
+  WASH: "WASH",
+  TeacherTraining: "Teacher Training",
 } as const;
 
 export type NeedStatus = (typeof NeedStatus)[keyof typeof NeedStatus];
