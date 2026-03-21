@@ -1,8 +1,36 @@
 import { useState } from "react";
-import { useListNeeds, useListProvinces, NeedCategory } from "@workspace/api-client-react";
+import { useListNeeds, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Loader2, Search, SearchX, Heart, Clock, SlidersHorizontal } from "lucide-react";
+
+const PROVINCE_OPTIONS: { value: string; en: string; kh: string }[] = [
+  { value: "Banteay Meanchey", en: "Banteay Meanchey", kh: "បន្ទាយមានជ័យ" },
+  { value: "Battambang",       en: "Battambang",       kh: "បាត់ដំបង" },
+  { value: "Kampong Cham",     en: "Kampong Cham",     kh: "កំពង់ចាម" },
+  { value: "Kampong Chhnang",  en: "Kampong Chhnang",  kh: "កំពង់ឆ្នាំង" },
+  { value: "Kampong Speu",     en: "Kampong Speu",     kh: "កំពង់ស្ពឺ" },
+  { value: "Kampong Thom",     en: "Kampong Thom",     kh: "កំពង់ធំ" },
+  { value: "Kampot",           en: "Kampot",           kh: "កំពត" },
+  { value: "Kandal",           en: "Kandal",           kh: "កណ្តាល" },
+  { value: "Kep",              en: "Kep",              kh: "កែប" },
+  { value: "Koh Kong",         en: "Koh Kong",         kh: "កោះកុង" },
+  { value: "Kratié",           en: "Kratie",           kh: "ក្រចេះ" },
+  { value: "Mondulkiri",       en: "Mondulkiri",       kh: "មណ្ឌលគីរី" },
+  { value: "Oddar Meanchey",   en: "Oddar Meanchey",   kh: "ឧត្តរមានជ័យ" },
+  { value: "Pailin",           en: "Pailin",           kh: "ប៉ៃលិន" },
+  { value: "Phnom Penh",       en: "Phnom Penh",       kh: "ភ្នំពេញ" },
+  { value: "Preah Sihanouk",   en: "Preah Sihanouk",   kh: "ព្រះសីហនុ" },
+  { value: "Preah Vihear",     en: "Preah Vihear",     kh: "ព្រះវិហារ" },
+  { value: "Prey Veng",        en: "Prey Veng",        kh: "ព្រៃវែង" },
+  { value: "Pursat",           en: "Pursat",           kh: "ពោធិ៍សាត់" },
+  { value: "Ratanakiri",       en: "Ratanakiri",       kh: "រតនគីរី" },
+  { value: "Siem Reap",        en: "Siem Reap",        kh: "សៀមរាប" },
+  { value: "Stung Treng",      en: "Stung Treng",      kh: "ស្ទឹងត្រែង" },
+  { value: "Svay Rieng",       en: "Svay Rieng",       kh: "ស្វាយរៀង" },
+  { value: "Takéo",            en: "Takeo",            kh: "តាកែវ" },
+  { value: "Tboung Khmum",     en: "Tboung Khmum",     kh: "ត្បូងឃ្មុំ" },
+];
 
 const CATEGORY_OPTIONS: { value: string; en: string; kh: string }[] = [
   { value: "Electronics",      en: "Electronics & Tech",         kh: "គ្រឿងអេឡិចត្រូនិក និងបច្ចេកវិទ្យា" },
@@ -25,8 +53,6 @@ export function BrowseNeeds() {
   const [province, setProvince] = useState<string>("");
   const [category, setCategory] = useState<NeedCategory | "">("");
   const [search, setSearch] = useState<string>("");
-
-  const { data: provinces } = useListProvinces();
 
   const { data: needs, isLoading } = useListNeeds({
     province: province || undefined,
@@ -93,8 +119,10 @@ export function BrowseNeeds() {
               onChange={(e) => setProvince(e.target.value)}
             >
               <option value="">{t("All Provinces", "គ្រប់ខេត្ត")}</option>
-              {provinces?.map(p => (
-                <option key={p} value={p}>{p}</option>
+              {PROVINCE_OPTIONS.map(p => (
+                <option key={p.value} value={p.value}>
+                  {language === "kh" ? p.kh : p.en}
+                </option>
               ))}
             </select>
 
