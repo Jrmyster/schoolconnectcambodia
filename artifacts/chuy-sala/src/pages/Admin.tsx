@@ -10,7 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { PhotoUploader } from "@/components/PhotoUploader";
 import { useToast } from "@/hooks/use-toast";
-import { Building, Heart, UserPlus } from "lucide-react";
+import { Building, Heart, UserPlus, BarChart2 } from "lucide-react";
+import { Link } from "wouter";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 const CAMBODIA_PROVINCES = [
@@ -155,6 +156,13 @@ export function Admin() {
           <p className={`text-muted-foreground mt-2 ${language === 'kh' ? 'font-khmer' : ''}`}>
             {t("Manage schools and submit new needs to the platform.", "គ្រប់គ្រងសាលា និងដាក់ស្នើតម្រូវការថ្មីទៅក្នុងប្រព័ន្ធ។")}
           </p>
+          <Link
+            href="/admin/dashboard"
+            className={`inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-sm transition-colors ${language === 'kh' ? 'font-khmer text-base' : ''}`}
+          >
+            <BarChart2 className="w-4 h-4" />
+            {t("View Dashboard", "មើលផ្ទាំងព័ត៌មាន")}
+          </Link>
         </div>
 
         {/* Tabs */}

@@ -9,6 +9,7 @@ import { MapPage } from "@/pages/MapPage";
 import { BrowseNeeds } from "@/pages/BrowseNeeds";
 import { CompletedProjects } from "@/pages/CompletedProjects";
 import { Admin } from "@/pages/Admin";
+import { AdminDashboard } from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -34,6 +35,7 @@ function Router() {
           <Route path="/map" component={MapPage} />
           <Route path="/needs" component={BrowseNeeds} />
           <Route path="/projects" component={CompletedProjects} />
+          <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />
           <Route component={NotFound} />
         </Switch>

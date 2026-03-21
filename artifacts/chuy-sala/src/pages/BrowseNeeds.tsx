@@ -63,8 +63,8 @@ export function BrowseNeeds() {
     .filter(n => {
       if (!search.trim()) return true;
       const q = search.trim().toLowerCase();
-      const schoolEn = ((n as unknown as Record<string, string>).nameEn ?? "").toLowerCase();
-      const schoolKh = ((n as unknown as Record<string, string>).nameKh ?? "").toLowerCase();
+      const schoolEn = (n.school?.nameEn ?? "").toLowerCase();
+      const schoolKh = (n.school?.nameKh ?? "").toLowerCase();
       return schoolEn.includes(q) || schoolKh.includes(q);
     });
 
