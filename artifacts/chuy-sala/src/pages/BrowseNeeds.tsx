@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useListNeeds, useListProvinces, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Filter, SearchX, Smartphone, QrCode } from "lucide-react";
-import { DonationSuccessModal } from "@/components/DonationSuccessModal";
+import { Loader2, Filter, SearchX, Heart, Clock } from "lucide-react";
 
 export function BrowseNeeds() {
   const t = useTranslation();
   const { language } = useLanguageStore();
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [province, setProvince] = useState<string>("");
   const [category, setCategory] = useState<NeedCategory | "">("");
@@ -31,7 +29,10 @@ export function BrowseNeeds() {
             {t("Browse School Needs", "ស្វែងរកតម្រូវការសាលា")}
           </h1>
           <p className={`text-lg text-primary-foreground/80 max-w-2xl ${language === 'kh' ? 'font-khmer' : ''}`}>
-            {t("Find a project that speaks to you. Every donation makes a direct impact on a student's education.", "ស្វែងរកគម្រោងដែលអ្នកចាប់អារម្មណ៍។ រាល់ការបរិច្ចាគធ្វើឱ្យមានផលប៉ះពាល់ផ្ទាល់ដល់ការអប់រំរបស់សិស្ស។")}
+            {t(
+              "Find a project that speaks to you. Every donation makes a direct impact on a student's education.",
+              "ស្វែងរកគម្រោងដែលអ្នកចាប់អារម្មណ៍។ រាល់ការបរិច្ចាគធ្វើឱ្យមានផលប៉ះពាល់ផ្ទាល់ដល់ការអប់រំរបស់សិស្ស។"
+            )}
           </p>
         </div>
       </div>
@@ -94,71 +95,49 @@ export function BrowseNeeds() {
         )}
       </div>
 
-      {/* Local Support Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-        <div className="border-t border-border pt-12">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Smartphone className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h2 className={`text-2xl font-bold text-foreground ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-                {t("Local Support", "ការគាំទ្រក្នុងស្រុក")}
-              </h2>
+      {/* Support Section */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-8">
+        <div className="border-t border-border pt-12 text-center">
+
+          {/* About the Mission */}
+          <div className="flex justify-center mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Heart className="w-6 h-6 text-primary" />
             </div>
           </div>
+          <h2 className={`text-2xl font-bold text-foreground mb-3 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+            {t("About the Mission", "អំពីបេសកកម្ម")}
+          </h2>
+          <p className={`text-muted-foreground leading-relaxed max-w-xl mx-auto mb-12 ${language === 'kh' ? 'font-khmer' : ''}`}>
+            {t(
+              "Chouy Sala connects rural Cambodian high schools directly with donors and NGOs — with full transparency on where every contribution goes.",
+              "ជួយសាលាភ្ជាប់វិទ្យាល័យជនបទកម្ពុជាដោយផ្ទាល់ជាមួយអ្នកបរិច្ចាគ និងអង្គការ NGO ដោយមានតម្លាភាពពេញលេញអំពីទិសដៅនៃការចូលរួមចំណែករបស់គ្នា។"
+            )}
+          </p>
 
-          <div className="flex flex-col md:flex-row gap-8 items-center bg-card rounded-3xl border border-border shadow-lg p-8">
-            {/* QR Image */}
-            <div className="w-full md:w-auto flex-shrink-0 flex justify-center">
-              <img
-                src={`${import.meta.env.BASE_URL}images/acleda-qr.png`}
-                alt="ACLEDA KHQR Code"
-                className="w-64 sm:w-72 md:w-80 max-w-full rounded-2xl shadow-md border border-border"
-              />
+          {/* Ways to Give */}
+          <h3 className={`text-xl font-bold text-foreground mb-6 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+            {t("Ways to Give", "វិធីសាស្ត្របរិច្ចាគ")}
+          </h3>
+
+          {/* Placeholder card */}
+          <div className="bg-card border-2 border-dashed border-border rounded-3xl p-10 flex flex-col items-center gap-4">
+            <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center">
+              <Clock className="w-7 h-7 text-muted-foreground" />
             </div>
-
-            {/* Text content */}
-            <div className="flex flex-col gap-4 text-center md:text-left">
-              <div>
-                <h3 className="text-xl font-bold text-foreground mb-1">
-                  Support locally via KHQR
-                </h3>
-                <p className="font-khmer text-lg text-primary font-semibold">
-                  គាំទ្រតាមរយៈ KHQR
-                </p>
-              </div>
-
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                Scan this code using ACLEDA mobile, ABA, or any Bakong-supported banking app to support the creator of this website.
-              </p>
-
-              <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                {["ACLEDA", "ABA", "Bakong"].map((app) => (
-                  <span key={app} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">
-                    {app}
-                  </span>
-                ))}
-              </div>
-
-              {/* CTA button */}
-              <button
-                onClick={() => setShowSuccessModal(true)}
-                className="mt-2 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 active:scale-95 text-primary-foreground font-bold py-4 px-6 rounded-2xl transition-all text-base shadow-lg shadow-primary/20 w-full md:w-auto"
-              >
-                <QrCode className="w-5 h-5" />
-                {t("I Scanned the Code!", "ខ្ញុំបានស្កែនកូដ!")}
-              </button>
-            </div>
+            <p className={`text-lg font-semibold text-foreground ${language === 'kh' ? 'font-khmer' : ''}`}>
+              {t("Official donation portal coming soon.", "វិបផតថលបរិច្ចាគផ្លូវការនឹងមកដល់ឆាប់ៗនេះ។")}
+            </p>
+            <p className={`text-sm text-muted-foreground max-w-sm ${language === 'kh' ? 'font-khmer' : ''}`}>
+              {t(
+                "In the meantime, click 'Contact to Donate' on any school need above to reach the school directly.",
+                "ក្នុងពេលនេះ សូមចុច 'ទាក់ទងដើម្បីបរិច្ចាគ' លើតម្រូវការសាលាណាមួយខាងលើ ដើម្បីទំនាក់ទំនងសាលាដោយផ្ទាល់។"
+              )}
+            </p>
           </div>
+
         </div>
       </div>
-
-      {/* Donation Success Modal */}
-      <DonationSuccessModal
-        open={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
-      />
     </div>
   );
 }
