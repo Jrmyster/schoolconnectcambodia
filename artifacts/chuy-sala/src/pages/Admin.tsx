@@ -355,59 +355,117 @@ export function Admin() {
           {/* ── NEED TAB ── */}
           {activeTab === "need" && (
             <form onSubmit={handleNeedSubmit(onNeedSubmit)} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-              <h2 className="text-2xl font-bold border-b pb-4">Create School Need</h2>
+              <h2 className={`text-2xl font-bold border-b pb-4 ${language === 'kh' ? 'font-khmer' : ''}`}>
+                {t("Create School Need", "បង្កើតតម្រូវការសាលារៀន")}
+              </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* School selector */}
                 <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-bold text-foreground">Select School*</label>
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Select School", "ជ្រើសរើសសាលារៀន")}*
+                  </label>
                   <select {...registerNeed("schoolId", { required: true })} className={inputClass}>
-                    <option value="">-- Choose a school --</option>
+                    <option value="">{t("-- Choose a school --", "-- សូមជ្រើសរើសសាលារៀន --")}</option>
                     {schools?.map(s => (
                       <option key={s.id} value={s.id}>{s.nameEn} ({s.province})</option>
                     ))}
                   </select>
                 </div>
 
+                {/* Title EN */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Title (English)*</label>
-                  <input {...registerNeed("titleEn", { required: true })} className={inputClass} placeholder="e.g. 50 Library Books" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground font-khmer">Title (Khmer)*</label>
-                  <input {...registerNeed("titleKh", { required: true })} className={`${inputClass} font-khmer`} />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Description (English)*</label>
-                  <textarea {...registerNeed("descriptionEn", { required: true })} rows={4} className={`${inputClass} resize-none`} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground font-khmer">Description (Khmer)*</label>
-                  <textarea {...registerNeed("descriptionKh", { required: true })} rows={4} className={`${inputClass} resize-none font-khmer`} />
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Title (English)", "ចំណងជើង (ភាសាអង់គ្លេស)")}*
+                  </label>
+                  <input
+                    {...registerNeed("titleEn", { required: true })}
+                    className={inputClass}
+                    placeholder={t("e.g. 50 Library Books", "ឧទាហរណ៍៖ សៀវភៅបណ្ណាល័យចំនួន ៥០ ក្បាល")}
+                  />
                 </div>
 
+                {/* Title KH */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Category*</label>
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Title (Khmer)", "ចំណងជើង (ភាសាខ្មែរ)")}*
+                  </label>
+                  <input
+                    {...registerNeed("titleKh", { required: true })}
+                    className={`${inputClass} font-khmer`}
+                  />
+                </div>
+
+                {/* Description EN */}
+                <div className="space-y-2">
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Description (English)", "ការពិពណ៌នា (ភាសាអង់គ្លេស)")}*
+                  </label>
+                  <textarea
+                    {...registerNeed("descriptionEn", { required: true })}
+                    rows={4}
+                    className={`${inputClass} resize-none leading-relaxed`}
+                  />
+                </div>
+
+                {/* Description KH */}
+                <div className="space-y-2">
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Description (Khmer)", "ការពិពណ៌នា (ភាសាខ្មែរ)")}*
+                  </label>
+                  <textarea
+                    {...registerNeed("descriptionKh", { required: true })}
+                    rows={4}
+                    className={`${inputClass} resize-none font-khmer leading-loose`}
+                  />
+                </div>
+
+                {/* Category */}
+                <div className="space-y-2">
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Category", "ប្រភេទ")}*
+                  </label>
                   <select {...registerNeed("category", { required: true })} className={inputClass}>
+                    <option value="">{t("Select category", "ជ្រើសរើសប្រភេទ")}</option>
                     {Object.values(NeedCategory).map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
+
+                {/* Goal Amount */}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Goal Amount (USD)*</label>
+                  <label className={`font-semibold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Goal Amount (USD)", "ចំនួនទឹកប្រាក់គោលដៅ (ដុល្លារ)")}*
+                  </label>
                   <div className="relative">
                     <span className="absolute left-4 top-3.5 font-bold text-muted-foreground">$</span>
-                    <input type="number" {...registerNeed("goalAmount", { required: true, min: 1 })} className={`${inputClass} pl-8`} placeholder="500" />
+                    <input
+                      type="number"
+                      {...registerNeed("goalAmount", { required: true, min: 1 })}
+                      className={`${inputClass} pl-8`}
+                      placeholder="500"
+                    />
                   </div>
                 </div>
 
+                {/* Photo */}
                 <div className="md:col-span-2">
-                  <PhotoUploader label="Need Photo" onUpload={setNeedPhotoUrl} currentUrl={needPhotoUrl} />
+                  <PhotoUploader
+                    label={t("Need Photo", "រូបថតតម្រូវការ")}
+                    onUpload={setNeedPhotoUrl}
+                    currentUrl={needPhotoUrl}
+                  />
                 </div>
               </div>
 
               <div className="pt-4 border-t mt-8 flex justify-end">
-                <Button type="submit" disabled={createNeedMutation.isPending} className="px-8 py-6 rounded-xl text-lg font-bold">
-                  {createNeedMutation.isPending ? "Creating..." : "Post Need"}
+                <Button
+                  type="submit"
+                  disabled={createNeedMutation.isPending}
+                  className={`px-8 py-6 rounded-xl text-lg font-bold ${language === 'kh' ? 'font-khmer' : ''}`}
+                >
+                  {createNeedMutation.isPending
+                    ? t("Submitting...", "កំពុងដាក់បញ្ជូន...")
+                    : t("Submit", "ដាក់បញ្ជូន")}
                 </Button>
               </div>
             </form>
