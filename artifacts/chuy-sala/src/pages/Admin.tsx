@@ -225,56 +225,80 @@ export function Admin() {
           {/* ── FULL PROFILE TAB ── */}
           {activeTab === "school" && (
             <form onSubmit={handleSchoolSubmit(onSchoolSubmit)} className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-              <h2 className="text-2xl font-bold border-b pb-4">Register Full School Profile</h2>
+              <h2 className={`text-2xl font-bold border-b pb-4 ${language === 'kh' ? 'font-khmer' : ''}`}>
+                {t("Register Full School Profile", "ចុះឈ្មោះប្រវត្តិសាលាពេញលេញ")}
+              </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Name (English)*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Name (English)", "ឈ្មោះ (ភាសាអង់គ្លេស)")}*
+                  </label>
                   <input {...registerSchool("nameEn", { required: true })} className={inputClass} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground font-khmer">Name (Khmer)*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Name (Khmer)", "ឈ្មោះ (ភាសាខ្មែរ)")}*
+                  </label>
                   <input {...registerSchool("nameKh", { required: true })} className={`${inputClass} font-khmer`} />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Province*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Province", "ខេត្ត")}*
+                  </label>
                   <select {...registerSchool("province", { required: true })} className={inputClass}>
-                    <option value="">Select province</option>
+                    <option value="">{t("Select province", "ជ្រើសរើសខេត្ត")}</option>
                     {CAMBODIA_PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">District*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("District", "ស្រុក/ខណ្ឌ")}*
+                  </label>
                   <input {...registerSchool("district", { required: true })} className={inputClass} />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Latitude*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Latitude", "រដ្ឋបាលបណ្តោយ (Latitude)")}*
+                  </label>
                   <input type="number" step="any" {...registerSchool("latitude", { required: true })} className={inputClass} placeholder="12.5" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Longitude*</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Longitude", "រដ្ឋបាលទទឹង (Longitude)")}*
+                  </label>
                   <input type="number" step="any" {...registerSchool("longitude", { required: true })} className={inputClass} placeholder="105.0" />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Contact Email</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Contact Email", "អ៊ីមែលទំនាក់ទំនង")}
+                  </label>
                   <input type="email" {...registerSchool("contactEmail")} className={inputClass} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">Student Count</label>
+                  <label className={`font-bold text-foreground block ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}>
+                    {t("Student Count", "ចំនួនសិស្ស")}
+                  </label>
                   <input type="number" {...registerSchool("studentCount")} className={inputClass} />
                 </div>
 
                 <div className="md:col-span-2">
-                  <PhotoUploader label="School Photo" onUpload={setSchoolPhotoUrl} currentUrl={schoolPhotoUrl} />
+                  <PhotoUploader
+                    label={t("School Photo", "រូបថតសាលា")}
+                    onUpload={setSchoolPhotoUrl}
+                    currentUrl={schoolPhotoUrl}
+                  />
                 </div>
               </div>
 
               <div className="pt-4 border-t mt-8 flex justify-end">
-                <Button type="submit" disabled={createSchoolMutation.isPending} className="px-8 py-6 rounded-xl text-lg font-bold">
-                  {createSchoolMutation.isPending ? "Saving..." : "Create School"}
+                <Button type="submit" disabled={createSchoolMutation.isPending} className={`px-8 py-6 rounded-xl text-lg font-bold ${language === 'kh' ? 'font-khmer' : ''}`}>
+                  {createSchoolMutation.isPending
+                    ? t("Saving...", "កំពុងរក្សាទុក...")
+                    : t("Create School Profile", "បង្កើតប្រវត្តិសាលា")}
                 </Button>
               </div>
             </form>
