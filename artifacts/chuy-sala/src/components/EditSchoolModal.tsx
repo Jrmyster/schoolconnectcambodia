@@ -29,6 +29,8 @@ interface FormValues {
   contactEmail: string;
   contactPhone: string;
   studentCount: number | "";
+  latitude: number | "";
+  longitude: number | "";
 }
 
 export function EditSchoolModal({ school, onClose }: Props) {
@@ -48,6 +50,8 @@ export function EditSchoolModal({ school, onClose }: Props) {
       contactEmail: school.contactEmail ?? "",
       contactPhone: school.contactPhone ?? "",
       studentCount: school.studentCount ?? "",
+      latitude: school.latitude ?? "",
+      longitude: school.longitude ?? "",
     },
   });
 
@@ -58,6 +62,8 @@ export function EditSchoolModal({ school, onClose }: Props) {
     const payload = {
       ...values,
       studentCount: values.studentCount !== "" ? Number(values.studentCount) : undefined,
+      latitude: values.latitude !== "" ? Number(values.latitude) : undefined,
+      longitude: values.longitude !== "" ? Number(values.longitude) : undefined,
       photoUrl: photoUrl || undefined,
     };
     updateSchool.mutate(
@@ -138,6 +144,38 @@ export function EditSchoolModal({ school, onClose }: Props) {
             <input type="number" {...register("studentCount")} className={inputClass} min={0} />
           </div>
 
+          {/* Coordinates */}
+          <div className="rounded-2xl border-2 border-dashed border-primary/30 bg-primary/5 p-4 space-y-4">
+            <p className={`text-xs font-semibold text-primary/80 uppercase tracking-wide ${language === "kh" ? "font-khmer" : ""}`}>
+              📍 {t("Map Coordinates — updates the pin on the map", "ផ្លាស់ប្ដូរម្ជុលលើផែនទី")}
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className={`${labelClass} text-primary`}>{t("Latitude", "រយៈបណ្ណដេក")}</label>
+                <input
+                  type="number"
+                  step="0.00001"
+                  {...register("latitude", { min: -90, max: 90 })}
+                  className={`${inputClass} font-mono`}
+                  placeholder="e.g. 12.5657"
+                />
+              </div>
+              <div>
+                <label className={`${labelClass} text-primary`}>{t("Longitude", "រយៈបណ្ណឈរ")}</label>
+                <input
+                  type="number"
+                  step="0.00001"
+                  {...register("longitude", { min: -180, max: 180 })}
+                  className={`${inputClass} font-mono`}
+                  placeholder="e.g. 104.9910"
+                />
+              </div>
+            </div>
+            <p className={`text-xs text-muted-foreground ${language === "kh" ? "font-khmer" : ""}`}>
+              {t("Tip: find exact coordinates on Google Maps → right-click → copy lat/long", "គន្លឹះ: ស្វែងរកតាម Google Maps → ចុចខាងស្ដាំ → ចម្លង lat/long")}
+            </p>
+          </div>
+
           {/* Description */}
           <div>
             <label className={labelClass}>{t("Description", "ការពិពណ៌នា")}</label>
@@ -159,7 +197,9 @@ export function EditSchoolModal({ school, onClose }: Props) {
             </Button>
             <Button type="submit" disabled={updateSchool.isPending}
               className={`px-6 py-2.5 rounded-xl ${language === "kh" ? "font-khmer" : ""}`}>
-              {updateSchool.isPending ? t("Saving...", "កំពុងរក្សាទុក...") : t("Save", "រក្សាទុក")}
+              {updateSchool.isPending
+                ? t("Saving...", "កំពុងរក្សាទុក...")
+                : t("Save Changes", "រក្សាទុកការផ្លាស់ប្ដូរ")}
             </Button>
           </div>
         </form>

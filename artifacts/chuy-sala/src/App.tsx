@@ -11,6 +11,7 @@ import { CompletedProjects } from "@/pages/CompletedProjects";
 import { Admin } from "@/pages/Admin";
 import { AdminDashboard } from "@/pages/AdminDashboard";
 import { Login } from "@/pages/Login";
+import { SchoolProfile } from "@/pages/SchoolProfile";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -40,6 +41,7 @@ function Router() {
           <Route path="/needs" component={BrowseNeeds} />
           <Route path="/projects" component={CompletedProjects} />
           <Route path="/login" component={Login} />
+          <Route path="/school/:id" component={SchoolProfile} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />
           <Route component={NotFound} />

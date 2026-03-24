@@ -1,7 +1,8 @@
 import { useListSchools, useListNeeds } from "@workspace/api-client-react";
 import { MapComponent } from "@/components/MapComponent";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Map as MapIcon } from "lucide-react";
+import { Link } from "wouter";
+import { Loader2, Map as MapIcon, ChevronRight } from "lucide-react";
 
 export function MapPage() {
   const t = useTranslation();
@@ -39,10 +40,13 @@ export function MapPage() {
             schools?.map(school => {
               const activeCount = needs?.filter(n => n.schoolId === school.id && n.status === 'active').length || 0;
               return (
-                <div key={school.id} className="bg-white p-4 rounded-xl border border-border shadow-sm hover:border-primary/30 transition-colors">
-                  <h3 className={`font-bold text-foreground mb-1 ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
-                    {t(school.nameEn, school.nameKh)}
-                  </h3>
+                <Link key={school.id} href={`/school/${school.id}`} className="block bg-white p-4 rounded-xl border border-border shadow-sm hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className={`font-bold text-foreground mb-1 flex-1 ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
+                      {t(school.nameEn, school.nameKh)}
+                    </h3>
+                    <ChevronRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-primary transition-colors flex-shrink-0 mt-0.5" />
+                  </div>
                   <div className="flex items-center justify-between text-xs mt-2">
                     <span className="text-muted-foreground">{school.province}</span>
                     {activeCount > 0 ? (
@@ -55,7 +59,7 @@ export function MapPage() {
                       </span>
                     )}
                   </div>
-                </div>
+                </Link>
               );
             })
           )}

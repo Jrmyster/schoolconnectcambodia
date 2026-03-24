@@ -13,7 +13,7 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - Register Full School Profile form (photo upload, district dropdown)
   - Post a Need form (bilingual, 9 categories, photo upload)
   - **Manage tab**: table of all schools + needs with Edit buttons
-- Edit School modal (EditSchoolModal.tsx) — PUT /api/schools/:id
+- Edit School modal (EditSchoolModal.tsx) — PUT /api/schools/:id — includes **Latitude + Longitude** fields that move the map pin
 - Edit Need modal (EditNeedModal.tsx) — PUT /api/needs/:id
 - Visual Analytics Dashboard (`/admin/dashboard`): Pie chart by category, Bar chart by province
 - PhotoUploader component with camera capture + file upload
@@ -23,6 +23,14 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - express-session cookie-based sessions (7-day, httpOnly)
   - AuthContext (React Context) persists user + linked school across page refreshes
   - Navbar shows school name badge + Sign Out when logged in; Sign In button when logged out
+- **School Profile page** (`/school/:id`):
+  - School photo banner, bilingual name header, province/district/student-count badges
+  - **Edit button** (✏️) visible only when `user.schoolId === school.id` (protected)
+  - Mini Leaflet map with FlyToMarker showing school location + coordinate badge
+  - Active needs grid using NeedCard
+  - 404 state for missing schools; Back-to-Map link
+- **MapPage sidebar cards** link to `/school/:id` (hover animation, chevron icon)
+- **MapComponent popup** has two buttons: "View Profile → /school/:id" + "Needs"
 
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**

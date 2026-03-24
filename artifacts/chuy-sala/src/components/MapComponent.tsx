@@ -96,9 +96,14 @@ export function MapComponent({ schools, needs }: MapComponentProps) {
                     )}
                   </div>
                   
-                  <Link href={`/needs?schoolId=${school.id}`} className="block w-full text-center bg-primary text-white text-xs font-bold py-2.5 rounded-lg mt-2 hover:bg-primary/90 transition-colors">
-                    {t("View Needs", "មើលតម្រូវការ")}
-                  </Link>
+                  <div className="flex gap-2 mt-2">
+                    <Link href={`/school/${school.id}`} className="flex-1 text-center bg-primary text-white text-xs font-bold py-2.5 rounded-lg hover:bg-primary/90 transition-colors">
+                      {t("View Profile", "មើលប្រវត្តិ")}
+                    </Link>
+                    <Link href={`/needs?schoolId=${school.id}`} className="flex-1 text-center bg-secondary text-secondary-foreground text-xs font-bold py-2.5 rounded-lg hover:bg-secondary/80 transition-colors">
+                      {t("Needs", "តម្រូវការ")}
+                    </Link>
+                  </div>
                 </div>
               </Popup>
             </Marker>
