@@ -11,6 +11,8 @@ import { CompletedProjects } from "@/pages/CompletedProjects";
 import { Admin } from "@/pages/Admin";
 import { AdminDashboard } from "@/pages/AdminDashboard";
 import { Login } from "@/pages/Login";
+import { ForgotPassword } from "@/pages/ForgotPassword";
+import { ResetPassword } from "@/pages/ResetPassword";
 import { SchoolProfile } from "@/pages/SchoolProfile";
 import NotFound from "@/pages/not-found";
 
@@ -41,6 +43,8 @@ function Router() {
           <Route path="/needs" component={BrowseNeeds} />
           <Route path="/projects" component={CompletedProjects} />
           <Route path="/login" component={Login} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route path="/school/:id" component={SchoolProfile} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />

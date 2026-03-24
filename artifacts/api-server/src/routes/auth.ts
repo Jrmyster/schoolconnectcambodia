@@ -1,7 +1,8 @@
 import { Router, type IRouter } from "express";
+import { randomUUID } from "crypto";
 import { db } from "@workspace/db";
-import { usersTable, schoolsTable } from "@workspace/db/schema";
-import { eq } from "drizzle-orm";
+import { usersTable, schoolsTable, passwordResetTokensTable } from "@workspace/db/schema";
+import { eq, and, gt, isNull } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 
 const router: IRouter = Router();
@@ -96,6 +97,74 @@ router.get("/auth/me", async (req, res) => {
     }
 
     res.json({ id: user.id, email: user.email, schoolId: user.schoolId, school });
+  } catch (e) {
+    res.status(500).json({ error: String(e) });
+  }
+});
+
+router.post("/auth/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body as { email?: string };
+    if (!email) return res.status(400).json({ error: "Email is required." });
+
+    const rows = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
+    const user = rows[0];
+
+    if (!user) {
+      return res.json({ ok: true });
+    }
+
+    const token = randomUUID();
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+    await db.insert(passwordResetTokensTable).values({ token, userId: user.id, expiresAt });
+
+    const baseUrl = process.env.REPLIT_DEV_DOMAIN
+      ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+      : "http://localhost";
+    const devResetUrl = `${baseUrl}/reset-password?token=${token}`;
+
+    res.json({ ok: true, devResetUrl });
+  } catch (e) {
+    res.status(500).json({ error: String(e) });
+  }
+});
+
+router.post("/auth/reset-password", async (req, res) => {
+  try {
+    const { token, password } = req.body as { token?: string; password?: string };
+    if (!token || !password) return res.status(400).json({ error: "Token and password are required." });
+    if (password.length < 6) return res.status(400).json({ error: "Password must be at least 6 characters." });
+
+    const now = new Date();
+    const rows = await db
+      .select()
+      .from(passwordResetTokensTable)
+      .where(
+        and(
+          eq(passwordResetTokensTable.token, token),
+          gt(passwordResetTokensTable.expiresAt, now),
+          isNull(passwordResetTokensTable.usedAt)
+        )
+      )
+      .limit(1);
+
+    const resetToken = rows[0];
+    if (!resetToken) {
+      return res.status(400).json({ error: "This reset link is invalid or has expired. Please request a new one." });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    await db.update(usersTable)
+      .set({ passwordHash })
+      .where(eq(usersTable.id, resetToken.userId));
+
+    await db.update(passwordResetTokensTable)
+      .set({ usedAt: now })
+      .where(eq(passwordResetTokensTable.id, resetToken.id));
+
+    res.json({ ok: true });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }

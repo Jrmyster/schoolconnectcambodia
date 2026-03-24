@@ -23,6 +23,14 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - express-session cookie-based sessions (7-day, httpOnly)
   - AuthContext (React Context) persists user + linked school across page refreshes
   - Navbar shows school name badge + Sign Out when logged in; Sign In button when logged out
+- **Forgot Password flow** (`/forgot-password` → `/reset-password`):
+  - "Forgot Password?" link on the Login page (below Sign In button)
+  - Forgot-password form accepts the registered school email; always shows success (no email disclosure)
+  - Generates a secure UUID reset token stored in `password_reset_tokens` table (1-hour expiry, single-use)
+  - Dev mode: success screen shows a clickable `/reset-password?token=…` link for testing without email
+  - Reset-password form has New Password + Confirm New Password (show/hide toggle); validates min 6 chars, match check
+  - On success: marks token `usedAt`, hashes + saves new password, shows "Password Updated!" + "Sign In Now"
+  - Guards: missing token → warning card; invalid/expired/reused token → server-side 400 error message
 - **School Profile page** (`/school/:id`):
   - School photo banner, bilingual name header, province/district/student-count badges
   - **Edit button** (✏️) visible only when `user.schoolId === school.id` (protected)
@@ -37,9 +45,10 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
 - GET/POST /api/needs, GET /api/needs/:id, **PUT /api/needs/:id**, PATCH /api/needs/:id/funding
 - GET /api/provinces
 - POST /api/auth/register, POST /api/auth/login, POST /api/auth/logout, GET /api/auth/me
+- POST /api/auth/forgot-password, POST /api/auth/reset-password
 
 ## DB Tables
-- `schools`, `needs`, `completed_projects`, `users` (email, passwordHash, schoolId FK)
+- `schools`, `needs`, `completed_projects`, `users` (email, passwordHash, schoolId FK), `password_reset_tokens` (token UUID, userId FK, expiresAt, usedAt)
 
 ## Custom Hooks
 - `useUpdateSchool`, `useUpdateNeed` in `lib/api-client-react/src/custom-hooks.ts`

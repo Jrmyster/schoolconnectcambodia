@@ -6,6 +6,7 @@ import { useListSchools } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { Eye, EyeOff, LogIn, UserPlus, GraduationCap } from "lucide-react";
 
 type Tab = "login" | "register";
@@ -155,6 +156,15 @@ export function Login() {
                 <LogIn className="w-4 h-4 mr-2" />
                 {loginPending ? t("Signing in...", "កំពុងចូល...") : t("Sign In", "ចូលគណនី")}
               </Button>
+
+              <div className="text-center">
+                <Link
+                  href="/forgot-password"
+                  className={`text-muted-foreground hover:text-primary transition-colors ${language === "kh" ? "font-khmer text-sm" : "text-xs"}`}
+                >
+                  {t("Forgot Password?", "ភ្លេចពាក្យសម្ងាត់?")}
+                </Link>
+              </div>
 
               <p className={`text-center text-muted-foreground ${language === "kh" ? "font-khmer text-sm" : "text-xs"}`}>
                 {t("Don't have an account?", "មិនទាន់មានគណនី?")}{" "}
