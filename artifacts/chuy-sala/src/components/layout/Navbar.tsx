@@ -1,14 +1,16 @@
 import { Link, useLocation } from "wouter";
-import { Map, Heart, CheckCircle, Menu, X, PlusCircle } from "lucide-react";
+import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap } from "lucide-react";
 import { useState } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 export function Navbar() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, toggleLanguage } = useLanguageStore();
   const t = useTranslation();
+  const { user, logout } = useAuth();
 
   const navLinks = [
     { href: "/", label: t("Home", "ទំព័រដើម"), icon: Heart },
@@ -70,6 +72,33 @@ export function Navbar() {
               <span className="opacity-30">|</span>
               <span className={language === 'kh' ? 'opacity-100 font-khmer text-base' : 'opacity-40 font-normal font-khmer'}>ខ្មែរ</span>
             </button>
+
+            {/* Auth */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20">
+                  <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
+                  <span className={`text-xs font-semibold text-primary truncate max-w-[120px] ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
+                    {user.school ? (language === 'kh' ? user.school.nameKh : user.school.nameEn) : user.email}
+                  </span>
+                </div>
+                <button
+                  onClick={() => logout()}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted hover:bg-destructive/10 hover:text-destructive text-muted-foreground text-xs font-bold transition-all"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  {t("Sign out", "ចេញ")}
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95"
+              >
+                <LogIn className="w-4 h-4" />
+                {t("Sign In", "ចូលគណនី")}
+              </Link>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -114,6 +143,34 @@ export function Navbar() {
                 </Link>
               );
             })}
+            <div className="border-t border-border mt-2 pt-2">
+              {user ? (
+                <div className="flex flex-col gap-2 px-1">
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary/10">
+                    <GraduationCap className="w-4 h-4 text-primary" />
+                    <span className={`text-sm font-semibold text-primary ${language === 'kh' ? 'font-khmer' : ''}`}>
+                      {user.school ? (language === 'kh' ? user.school.nameKh : user.school.nameEn) : user.email}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-destructive hover:bg-destructive/10 transition-all ${language === 'kh' ? 'font-khmer text-base' : 'text-sm'}`}
+                  >
+                    <LogOut className="w-5 h-5" />
+                    {t("Sign out", "ចេញ")}
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-4 rounded-xl font-semibold bg-primary text-primary-foreground ${language === 'kh' ? 'font-khmer text-base' : 'text-lg'}`}
+                >
+                  <LogIn className="w-5 h-5" />
+                  {t("Sign In", "ចូលគណនី")}
+                </Link>
+              )}
+            </div>
           </nav>
         </div>
       )}

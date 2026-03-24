@@ -17,14 +17,28 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
 - Edit Need modal (EditNeedModal.tsx) — PUT /api/needs/:id
 - Visual Analytics Dashboard (`/admin/dashboard`): Pie chart by category, Bar chart by province
 - PhotoUploader component with camera capture + file upload
+- **User Authentication** (`/login`):
+  - Register + Login page with Sign In / Register tabs, bilingual (EN/KH)
+  - bcryptjs password hashing (bcrypt 12 rounds)
+  - express-session cookie-based sessions (7-day, httpOnly)
+  - AuthContext (React Context) persists user + linked school across page refreshes
+  - Navbar shows school name badge + Sign Out when logged in; Sign In button when logged out
 
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**
 - GET/POST /api/needs, GET /api/needs/:id, **PUT /api/needs/:id**, PATCH /api/needs/:id/funding
 - GET /api/provinces
+- POST /api/auth/register, POST /api/auth/login, POST /api/auth/logout, GET /api/auth/me
+
+## DB Tables
+- `schools`, `needs`, `completed_projects`, `users` (email, passwordHash, schoolId FK)
 
 ## Custom Hooks
 - `useUpdateSchool`, `useUpdateNeed` in `lib/api-client-react/src/custom-hooks.ts`
+
+## Auth Context
+- `artifacts/chuy-sala/src/context/AuthContext.tsx` — `AuthProvider`, `useAuth()`
+- Session state: `{ user: { id, email, schoolId, school } | null, loading, login, register, logout }`
 
 # Workspace
 
