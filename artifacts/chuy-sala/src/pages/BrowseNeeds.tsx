@@ -6,7 +6,7 @@ import { Loader2, Search, SearchX, Heart, SlidersHorizontal, Share2, Copy, Check
 import { SupportModal } from "@/components/SupportModal";
 
 const SHARE_TITLE =
-  "Check out School Connect Cambodia - A resource sharing platform for rural schools";
+  "Check out School Connect Cambodia - Supporting rural education through tech.";
 
 type SharePlatform = {
   name: string;
