@@ -6,7 +6,7 @@ import { Link } from "wouter";
 import { Loader2, Map as MapIcon, ChevronRight, Heart, X, QrCode, ExternalLink } from "lucide-react";
 
 const KHQR_IMAGE_URL =
-  "https://raw.githubusercontent.com/Jrmyster/anatomy-assets/main/donation_qr.png";
+  "https://raw.githubusercontent.com/Jrmyster/anatomy-assets/main/donation_qr.JPG";
 
 // ── Swap in your actual Ko-fi URL here ──
 const KOFI_URL = "https://ko-fi.com/chouysala";
@@ -78,6 +78,7 @@ function SupportModal({ onClose }: { onClose: () => void }) {
                 src={KHQR_IMAGE_URL}
                 alt="KHQR Donation QR Code"
                 className="w-[190px] h-[190px] object-contain rounded-lg"
+                style={{ maxWidth: "300px", margin: "0 auto" }}
                 onError={e => {
                   const img = e.target as HTMLImageElement;
                   img.style.display = "none";
