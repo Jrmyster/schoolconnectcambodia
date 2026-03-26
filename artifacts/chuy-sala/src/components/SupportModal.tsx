@@ -4,7 +4,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
 const KHQR_IMAGE_URL =
   "https://raw.githubusercontent.com/Jrmyster/anatomy-assets/main/donation_qr.JPG";
 
-const KOFI_URL = "https://ko-fi.com/chouysala";
+const KOFI_URL = "https://ko-fi.com/jrmyster";
 
 interface Props {
   onClose: () => void;
