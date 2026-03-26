@@ -75,8 +75,14 @@ export function SupportModal({ onClose }: Props) {
           {/* KHQR */}
           <div className="flex flex-col items-center gap-3">
             <div className="p-3 bg-white rounded-2xl border-2 border-border shadow-sm">
-              {/* Image wrapper — relative so the blur overlay can be positioned inside */}
-              <div className="relative w-[190px] h-[190px]">
+              {/* Image wrapper — relative so overlay can be positioned inside.       */}
+              {/* onMouseLeave on this outer container guarantees the name is re-hidden  */}
+              {/* whenever the pointer exits the entire QR area (more reliable than       */}
+              {/* relying solely on the 36px strip's own onMouseLeave).                  */}
+              <div
+                className="relative w-[190px] h-[190px]"
+                onMouseLeave={() => setNameRevealed(false)}
+              >
                 <img
                   src={KHQR_IMAGE_URL}
                   alt="KHQR Donation QR Code"
@@ -92,13 +98,14 @@ export function SupportModal({ onClose }: Props) {
                   <QrCode className="w-16 h-16 text-muted-foreground/40" />
                 </div>
 
-                {/* ── Name blur overlay ── */}
-                {/* "Wright Jared" sits in roughly the bottom 30px of the KHQR image */}
+                {/* ── Name cover overlay ── */}
+                {/* Solid white box that completely obscures "WRIGHT JARED" at the    */}
+                {/* bottom of the image. White matches the card bg — fully seamless.  */}
+                {/* Hover reveals the name for donor verification.                    */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 cursor-pointer"
-                  style={{ height: 30 }}
+                  className="absolute bottom-0 left-0 right-0 cursor-pointer rounded-b-lg"
+                  style={{ height: 36 }}
                   onMouseEnter={() => setNameRevealed(true)}
-                  onMouseLeave={() => setNameRevealed(false)}
                 >
                   {/* Tooltip — appears above on hover */}
                   <div
@@ -109,21 +116,18 @@ export function SupportModal({ onClose }: Props) {
                     <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-800/90" />
                   </div>
 
-                  {/* Frosted blur — clears on hover */}
+                  {/* Solid white cover — completely hides name; fades away on hover */}
                   <div
-                    className="absolute inset-0 rounded-b-lg transition-all duration-300"
-                    style={{
-                      backdropFilter: nameRevealed ? "blur(0px)" : "blur(5px)",
-                      backgroundColor: nameRevealed ? "rgba(255,255,255,0)" : "rgba(255,255,255,0.15)",
-                    }}
+                    className="absolute inset-0 rounded-b-lg transition-opacity duration-300"
+                    style={{ backgroundColor: "white", opacity: nameRevealed ? 0 : 1 }}
                   />
 
-                  {/* Eye-off icon — fades out on hover */}
+                  {/* Eye-off icon — visible on the cover, fades when name is revealed */}
                   <div
                     className="absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-                    style={{ opacity: nameRevealed ? 0 : 0.4 }}
+                    style={{ opacity: nameRevealed ? 0 : 0.35 }}
                   >
-                    <EyeOff className="w-3.5 h-3.5 text-gray-600" />
+                    <EyeOff className="w-3.5 h-3.5 text-gray-500" />
                   </div>
                 </div>
               </div>
