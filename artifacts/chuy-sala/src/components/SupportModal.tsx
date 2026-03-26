@@ -1,4 +1,5 @@
-import { Heart, X, QrCode, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Heart, X, QrCode, ExternalLink, EyeOff } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 const KHQR_IMAGE_URL =
@@ -13,6 +14,7 @@ interface Props {
 export function SupportModal({ onClose }: Props) {
   const t = useTranslation();
   const { language } = useLanguageStore();
+  const [nameRevealed, setNameRevealed] = useState(false);
 
   return (
     <div
@@ -73,20 +75,57 @@ export function SupportModal({ onClose }: Props) {
           {/* KHQR */}
           <div className="flex flex-col items-center gap-3">
             <div className="p-3 bg-white rounded-2xl border-2 border-border shadow-sm">
-              <img
-                src={KHQR_IMAGE_URL}
-                alt="KHQR Donation QR Code"
-                className="w-[190px] h-[190px] object-contain rounded-lg"
-                style={{ maxWidth: "300px", margin: "0 auto" }}
-                onError={e => {
-                  const img = e.target as HTMLImageElement;
-                  img.style.display = "none";
-                  const fallback = img.nextElementSibling as HTMLElement | null;
-                  if (fallback) fallback.classList.remove("hidden");
-                }}
-              />
-              <div className="hidden w-[190px] h-[190px] flex items-center justify-center bg-muted/30 rounded-lg">
-                <QrCode className="w-16 h-16 text-muted-foreground/40" />
+              {/* Image wrapper — relative so the blur overlay can be positioned inside */}
+              <div className="relative w-[190px] h-[190px]">
+                <img
+                  src={KHQR_IMAGE_URL}
+                  alt="KHQR Donation QR Code"
+                  className="w-full h-full object-contain rounded-lg"
+                  onError={e => {
+                    const img = e.target as HTMLImageElement;
+                    img.style.display = "none";
+                    const fallback = img.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.classList.remove("hidden");
+                  }}
+                />
+                <div className="hidden w-full h-full flex items-center justify-center bg-muted/30 rounded-lg">
+                  <QrCode className="w-16 h-16 text-muted-foreground/40" />
+                </div>
+
+                {/* ── Name blur overlay ── */}
+                {/* "Wright Jared" sits in roughly the bottom 30px of the KHQR image */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 cursor-pointer"
+                  style={{ height: 30 }}
+                  onMouseEnter={() => setNameRevealed(true)}
+                  onMouseLeave={() => setNameRevealed(false)}
+                >
+                  {/* Tooltip — appears above on hover */}
+                  <div
+                    className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-800/90 px-2.5 py-1 text-[10px] font-medium text-white transition-opacity duration-200 z-10"
+                    style={{ opacity: nameRevealed ? 1 : 0 }}
+                  >
+                    Hover to verify account holder
+                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-800/90" />
+                  </div>
+
+                  {/* Frosted blur — clears on hover */}
+                  <div
+                    className="absolute inset-0 rounded-b-lg transition-all duration-300"
+                    style={{
+                      backdropFilter: nameRevealed ? "blur(0px)" : "blur(5px)",
+                      backgroundColor: nameRevealed ? "rgba(255,255,255,0)" : "rgba(255,255,255,0.15)",
+                    }}
+                  />
+
+                  {/* Eye-off icon — fades out on hover */}
+                  <div
+                    className="absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+                    style={{ opacity: nameRevealed ? 0 : 0.4 }}
+                  >
+                    <EyeOff className="w-3.5 h-3.5 text-gray-600" />
+                  </div>
+                </div>
               </div>
             </div>
             <p className={`text-xs font-semibold text-muted-foreground text-center ${language === "kh" ? "font-khmer" : ""}`}>
