@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Heart, X, QrCode, ExternalLink, EyeOff } from "lucide-react";
+import { Heart, X, QrCode, ExternalLink } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 const KHQR_IMAGE_URL =
@@ -14,7 +13,6 @@ interface Props {
 export function SupportModal({ onClose }: Props) {
   const t = useTranslation();
   const { language } = useLanguageStore();
-  const [nameRevealed, setNameRevealed] = useState(false);
 
   return (
     <div
@@ -75,14 +73,18 @@ export function SupportModal({ onClose }: Props) {
           {/* KHQR */}
           <div className="flex flex-col items-center gap-3">
             <div className="p-3 bg-white rounded-2xl border-2 border-border shadow-sm">
-              {/* Image wrapper — relative so overlay can be positioned inside.       */}
-              {/* onMouseLeave on this outer container guarantees the name is re-hidden  */}
-              {/* whenever the pointer exits the entire QR area (more reliable than       */}
-              {/* relying solely on the 36px strip's own onMouseLeave).                  */}
-              <div
-                className="relative w-[190px] h-[190px]"
-                onMouseLeave={() => setNameRevealed(false)}
-              >
+              {/*
+                The ACLEDA image structure (top → bottom):
+                  ~0–22%   Bank logo + tagline
+                  ~22–68%  QR pattern  ← must stay 100% visible
+                  ~68–80%  "WRIGHT JARED" account name  ← cover this
+                  ~80–100% Empty white padding
+
+                The solid white div below sits from top:64% to top:82% (≈ 34px for
+                a 190px container) and uses pointer-events:none so it is purely
+                decorative — no click, no hover, no cursor change.
+              */}
+              <div className="relative w-[190px] h-[190px]">
                 <img
                   src={KHQR_IMAGE_URL}
                   alt="KHQR Donation QR Code"
@@ -98,38 +100,17 @@ export function SupportModal({ onClose }: Props) {
                   <QrCode className="w-16 h-16 text-muted-foreground/40" />
                 </div>
 
-                {/* ── Name cover overlay ── */}
-                {/* Solid white box that completely obscures "WRIGHT JARED" at the    */}
-                {/* bottom of the image. White matches the card bg — fully seamless.  */}
-                {/* Hover reveals the name for donor verification.                    */}
+                {/* Static solid-white privacy mask over the account-holder name.
+                    pointer-events:none = no click, no hover, no cursor change.     */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 cursor-pointer rounded-b-lg"
-                  style={{ height: 36 }}
-                  onMouseEnter={() => setNameRevealed(true)}
-                >
-                  {/* Tooltip — appears above on hover */}
-                  <div
-                    className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-800/90 px-2.5 py-1 text-[10px] font-medium text-white transition-opacity duration-200 z-10"
-                    style={{ opacity: nameRevealed ? 1 : 0 }}
-                  >
-                    Hover to verify account holder
-                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-800/90" />
-                  </div>
-
-                  {/* Solid white cover — completely hides name; fades away on hover */}
-                  <div
-                    className="absolute inset-0 rounded-b-lg transition-opacity duration-300"
-                    style={{ backgroundColor: "white", opacity: nameRevealed ? 0 : 1 }}
-                  />
-
-                  {/* Eye-off icon — visible on the cover, fades when name is revealed */}
-                  <div
-                    className="absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-                    style={{ opacity: nameRevealed ? 0 : 0.35 }}
-                  >
-                    <EyeOff className="w-3.5 h-3.5 text-gray-500" />
-                  </div>
-                </div>
+                  className="absolute left-0 right-0"
+                  style={{
+                    top: "64%",
+                    height: "18%",
+                    backgroundColor: "white",
+                    pointerEvents: "none",
+                  }}
+                />
               </div>
             </div>
             <p className={`text-xs font-semibold text-muted-foreground text-center ${language === "kh" ? "font-khmer" : ""}`}>
