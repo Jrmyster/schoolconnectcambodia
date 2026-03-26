@@ -2,8 +2,82 @@ import { useState } from "react";
 import { useListNeeds, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Search, SearchX, Heart, SlidersHorizontal } from "lucide-react";
+import { Loader2, Search, SearchX, Heart, SlidersHorizontal, Share2, Copy, Check } from "lucide-react";
 import { SupportModal } from "@/components/SupportModal";
+
+const SHARE_TITLE =
+  "Check out School Connect Cambodia - A resource sharing platform for rural schools";
+
+type SharePlatform = {
+  name: string;
+  bg: string;
+  text?: string;
+  buildUrl?: (url: string, title: string) => string;
+  type?: "native" | "copy";
+};
+
+const SHARE_PLATFORMS: SharePlatform[] = [
+  {
+    name: "Reddit",
+    bg: "#FF4500",
+    buildUrl: (u, t) =>
+      `https://www.reddit.com/submit?url=${encodeURIComponent(u)}&title=${encodeURIComponent(t)}`,
+  },
+  {
+    name: "Facebook",
+    bg: "#1877F2",
+    buildUrl: (u) =>
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(u)}`,
+  },
+  {
+    name: "Twitter / X",
+    bg: "#000000",
+    buildUrl: (u, t) =>
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(t)}&url=${encodeURIComponent(u)}`,
+  },
+  {
+    name: "Threads",
+    bg: "#101010",
+    buildUrl: (u, t) =>
+      `https://www.threads.net/intent/post?text=${encodeURIComponent(t + " " + u)}`,
+  },
+  {
+    name: "LinkedIn",
+    bg: "#0A66C2",
+    buildUrl: (u) =>
+      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(u)}`,
+  },
+  {
+    name: "WhatsApp",
+    bg: "#25D366",
+    buildUrl: (u, t) =>
+      `https://wa.me/?text=${encodeURIComponent(t + " " + u)}`,
+  },
+  {
+    name: "Telegram",
+    bg: "#2AABEE",
+    buildUrl: (u, t) =>
+      `https://t.me/share/url?url=${encodeURIComponent(u)}&text=${encodeURIComponent(t)}`,
+  },
+  {
+    name: "Pinterest",
+    bg: "#E60023",
+    buildUrl: (u, t) =>
+      `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(u)}&description=${encodeURIComponent(t)}`,
+  },
+  {
+    name: "Weibo",
+    bg: "#E6162D",
+    buildUrl: (u, t) =>
+      `https://service.weibo.com/share/share.php?url=${encodeURIComponent(u)}&title=${encodeURIComponent(t)}`,
+  },
+  // Platforms with no standard web share URL — use Web Share API or clipboard
+  { name: "Instagram",  bg: "#E1306C", type: "native" },
+  { name: "TikTok",     bg: "#010101", type: "native" },
+  { name: "Snapchat",   bg: "#FFFC00", text: "#000000", type: "copy" },
+  { name: "WeChat",     bg: "#07C160", type: "copy" },
+  { name: "ByteDance",  bg: "#1F1F1F", type: "copy" },
+];
 
 const PROVINCE_OPTIONS: { value: string; en: string; kh: string }[] = [
   { value: "Banteay Meanchey", en: "Banteay Meanchey", kh: "បន្ទាយមានជ័យ" },
@@ -55,6 +129,24 @@ export function BrowseNeeds() {
   const [category, setCategory] = useState<NeedCategory | "">("");
   const [search, setSearch] = useState<string>("");
   const [supportOpen, setSupportOpen] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const handleShare = (platform: SharePlatform) => {
+    const url = window.location.origin;
+    if (platform.buildUrl) {
+      window.open(platform.buildUrl(url, SHARE_TITLE), "_blank", "noopener,noreferrer");
+      return;
+    }
+    // Platforms without a web share URL: try Web Share API first (mobile), else clipboard
+    if (platform.type === "native" && navigator.share) {
+      navigator.share({ title: SHARE_TITLE, url }).catch(() => {});
+      return;
+    }
+    navigator.clipboard.writeText(`${SHARE_TITLE}: ${url}`).then(() => {
+      setCopied(platform.name);
+      setTimeout(() => setCopied(null), 3000);
+    });
+  };
 
   const { data: needs, isLoading } = useListNeeds({
     province: province || undefined,
@@ -225,6 +317,55 @@ export function BrowseNeeds() {
           </div>
 
           {supportOpen && <SupportModal onClose={() => setSupportOpen(false)} />}
+
+          {/* Spread the Word */}
+          <div className="mt-12 pt-10 border-t border-border">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Share2 className="w-5 h-5 text-primary" />
+              <h3 className={`text-xl font-bold text-foreground ${language === "kh" ? "font-khmer" : "font-display"}`}>
+                {t("Spread the Word", "ចែករំលែកព័ត៌មាន")}
+              </h3>
+            </div>
+            <p className={`text-sm text-muted-foreground mb-6 max-w-md mx-auto ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "Share this platform with teachers, NGOs, and communities who can help rural Cambodian schools.",
+                "ចែករំលែកវេទិកានេះជាមួយគ្រូ អង្គការ NGO និងសហគមន៍ ដែលអាចជួយសាលារៀននៅជនបទកម្ពុជា។"
+              )}
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-2">
+              {SHARE_PLATFORMS.map(p => (
+                <button
+                  key={p.name}
+                  onClick={() => handleShare(p)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all active:scale-95"
+                  style={{ backgroundColor: p.bg, color: p.text ?? "#ffffff" }}
+                  title={
+                    p.buildUrl
+                      ? `Share on ${p.name}`
+                      : `Copy link for ${p.name}`
+                  }
+                >
+                  {p.name === copied ? (
+                    <Check className="w-3 h-3 flex-shrink-0" />
+                  ) : !p.buildUrl ? (
+                    <Copy className="w-3 h-3 flex-shrink-0 opacity-70" />
+                  ) : null}
+                  {p.name}
+                </button>
+              ))}
+            </div>
+
+            {copied && (
+              <p className="mt-4 text-xs text-green-600 font-medium flex items-center justify-center gap-1">
+                <Check className="w-3.5 h-3.5" />
+                {t(
+                  `Link copied! Paste it into ${copied}.`,
+                  `តំណភ្ជាប់ត្រូវបានចម្លង! បិទភ្ជាប់វានៅក្នុង ${copied}។`
+                )}
+              </p>
+            )}
+          </div>
 
         </div>
       </div>
