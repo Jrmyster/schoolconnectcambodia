@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useListNeeds, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Loader2, Search, SearchX, Heart, Clock, SlidersHorizontal } from "lucide-react";
+import { Loader2, Search, SearchX, Heart, SlidersHorizontal } from "lucide-react";
+import { SupportModal } from "@/components/SupportModal";
 
 const PROVINCE_OPTIONS: { value: string; en: string; kh: string }[] = [
   { value: "Banteay Meanchey", en: "Banteay Meanchey", kh: "បន្ទាយមានជ័យ" },
@@ -53,6 +54,7 @@ export function BrowseNeeds() {
   const [province, setProvince] = useState<string>("");
   const [category, setCategory] = useState<NeedCategory | "">("");
   const [search, setSearch] = useState<string>("");
+  const [supportOpen, setSupportOpen] = useState(false);
 
   const { data: needs, isLoading } = useListNeeds({
     province: province || undefined,
@@ -195,20 +197,34 @@ export function BrowseNeeds() {
             {t("Ways to Give", "វិធីសាស្ត្របរិច្ចាគ")}
           </h3>
 
-          <div className="bg-card border-2 border-dashed border-border rounded-3xl p-10 flex flex-col items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center">
-              <Clock className="w-7 h-7 text-muted-foreground" />
+          <div className="bg-gradient-to-br from-primary/5 to-sky-50/60 border border-primary/20 rounded-3xl p-8 flex flex-col items-center gap-5 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Heart className="w-7 h-7 text-primary fill-primary/20" />
             </div>
-            <p className={`text-lg font-semibold text-foreground ${language === "kh" ? "font-khmer" : ""}`}>
-              {t("Official donation portal coming soon.", "វិបផតថលបរិច្ចាគផ្លូវការនឹងមកដល់ឆាប់ៗនេះ។")}
-            </p>
-            <p className={`text-sm text-muted-foreground max-w-sm ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
-              {t(
-                "In the meantime, click 'Contact to Donate' on any school need above to reach the school directly.",
-                "ក្នុងពេលនេះ សូមចុច 'ទាក់ទងដើម្បីបរិច្ចាគ' លើតម្រូវការសាលាណាមួយខាងលើ ដើម្បីទំនាក់ទំនងសាលាដោយផ្ទាល់។"
-              )}
-            </p>
+            <div>
+              <p className={`text-base font-semibold text-foreground mb-1 ${language === "kh" ? "font-khmer" : ""}`}>
+                {t(
+                  "100% of contributions fund hosting and digital resources for rural Cambodian schools.",
+                  "ការចូលរួម ១០០% ផ្ដល់មូលនិធិសម្រាប់ម៉ាស៊ីនបម្រើ និងធនធានឌីជីថលសម្រាប់សាលារៀននៅជនបទ។"
+                )}
+              </p>
+              <p className={`text-sm text-muted-foreground ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Donate locally via KHQR or internationally via Ko-fi.",
+                  "បរិច្ចាគក្នុងស្រុកតាម KHQR ឬអន្តរជាតិតាម Ko-fi។"
+                )}
+              </p>
+            </div>
+            <button
+              onClick={() => setSupportOpen(true)}
+              className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-white font-bold shadow-md hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg transition-all active:scale-95 ${language === "kh" ? "font-khmer text-base" : "text-sm"}`}
+            >
+              <Heart className="w-4 h-4 fill-white/70" />
+              {t("Support Our Mission", "គាំទ្របេសកកម្មរបស់យើង")}
+            </button>
           </div>
+
+          {supportOpen && <SupportModal onClose={() => setSupportOpen(false)} />}
 
         </div>
       </div>
