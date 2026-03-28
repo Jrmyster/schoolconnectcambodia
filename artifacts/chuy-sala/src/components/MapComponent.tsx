@@ -4,6 +4,7 @@ import L from "leaflet";
 import { Link } from "wouter";
 import { School, Need } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { localizeProvince } from "@/lib/province-data";
 import { GraduationCap, MapPin, Heart } from "lucide-react";
 
 // Fix Leaflet marker icons in React
@@ -78,7 +79,7 @@ export function MapComponent({ schools, needs }: MapComponentProps) {
                         {t(school.nameEn, school.nameKh)}
                       </h4>
                       <p className="text-xs text-muted-foreground m-0 flex items-center gap-1">
-                        <MapPin className="w-3 h-3" /> {school.province}
+                        <MapPin className="w-3 h-3" /> {localizeProvince(school.province, language)}
                       </p>
                     </div>
                   </div>

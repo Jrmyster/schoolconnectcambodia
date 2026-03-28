@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useListSchools, useListNeeds } from "@workspace/api-client-react";
 import { MapComponent } from "@/components/MapComponent";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { localizeProvince } from "@/lib/province-data";
 import { Link } from "wouter";
 import { Loader2, Map as MapIcon, ChevronRight, Heart } from "lucide-react";
 import { SupportModal } from "@/components/SupportModal";
@@ -51,7 +52,7 @@ export function MapPage() {
                     <ChevronRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-primary transition-colors flex-shrink-0 mt-0.5" />
                   </div>
                   <div className="flex items-center justify-between text-xs mt-2">
-                    <span className="text-muted-foreground">{school.province}</span>
+                    <span className="text-muted-foreground">{localizeProvince(school.province, language)}</span>
                     {activeCount > 0 ? (
                       <span className="font-bold text-accent bg-accent/10 px-2 py-1 rounded-md">
                         {activeCount} {t("Needs", "តម្រូវការ")}

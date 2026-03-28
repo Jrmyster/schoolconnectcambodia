@@ -7,6 +7,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
 } from "recharts";
 import { School, ListChecks, DollarSign, ArrowLeft, Loader2 } from "lucide-react";
+import { PROVINCE_KH } from "@/lib/province-data";
 
 const CATEGORY_LABEL: Record<string, { en: string; kh: string }> = {
   Electronics:       { en: "Electronics & Tech",        kh: "គ្រឿងអេឡិចត្រូនិក" },
@@ -18,22 +19,6 @@ const CATEGORY_LABEL: Record<string, { en: string; kh: string }> = {
   "Teacher Training":{ en: "Teacher Training",           kh: "បណ្តុះបណ្តាលគ្រូ" },
   Other:             { en: "Other",                      kh: "ផ្សេងៗ" },
   Stationery:        { en: "Stationery",                 kh: "សម្ភារៈ" },
-};
-
-const PROVINCE_KH: Record<string, string> = {
-  "Banteay Meanchey": "បន្ទាយមានជ័យ", "Battambang": "បាត់ដំបង",
-  "Kampong Cham": "កំពង់ចាម",         "Kampong Chhnang": "កំពង់ឆ្នាំង",
-  "Kampong Speu": "កំពង់ស្ពឺ",        "Kampong Thom": "កំពង់ធំ",
-  "Kampot": "កំពត",                   "Kandal": "កណ្តាល",
-  "Kep": "កែប",                       "Koh Kong": "កោះកុង",
-  "Kratié": "ក្រចេះ",                 "Mondulkiri": "មណ្ឌលគីរី",
-  "Oddar Meanchey": "ឧត្តរមានជ័យ",   "Pailin": "ប៉ៃលិន",
-  "Phnom Penh": "ភ្នំពេញ",           "Preah Sihanouk": "ព្រះសីហនុ",
-  "Preah Vihear": "ព្រះវិហារ",       "Prey Veng": "ព្រៃវែង",
-  "Pursat": "ពោធិ៍សាត់",             "Ratanakiri": "រតនគីរី",
-  "Siem Reap": "សៀមរាប",             "Stung Treng": "ស្ទឹងត្រែង",
-  "Svay Rieng": "ស្វាយរៀង",          "Takéo": "តាកែវ",
-  "Tboung Khmum": "ត្បូងឃ្មុំ",
 };
 
 const CHART_COLORS = [
