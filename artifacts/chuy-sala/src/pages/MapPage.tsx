@@ -4,8 +4,10 @@ import { MapComponent } from "@/components/MapComponent";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { localizeProvince } from "@/lib/province-data";
 import { Link } from "wouter";
-import { Loader2, Map as MapIcon, ChevronRight, Heart } from "lucide-react";
+import { Loader2, Map as MapIcon, ChevronRight, Heart, FlaskConical } from "lucide-react";
 import { SupportModal } from "@/components/SupportModal";
+
+const DEMO_PREFIX = "DEMO:";
 
 export function MapPage() {
   const t = useTranslation();
@@ -44,11 +46,23 @@ export function MapPage() {
             schools?.map(school => {
               const activeCount = needs?.filter(n => n.schoolId === school.id && n.status === 'active').length || 0;
               return (
-                <Link key={school.id} href={`/school/${school.id}`} className="block bg-white p-4 rounded-xl border border-border shadow-sm hover:border-primary/40 hover:shadow-md hover:-translate-y-0.5 transition-all group">
+                <Link key={school.id} href={`/school/${school.id}`} className={`block bg-white p-4 rounded-xl border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group ${school.description?.startsWith(DEMO_PREFIX) ? 'border-amber-200 hover:border-amber-400' : 'border-border hover:border-primary/40'}`}>
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className={`font-bold text-foreground mb-1 flex-1 ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
-                      {t(school.nameEn, school.nameKh)}
-                    </h3>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                        {school.description?.startsWith(DEMO_PREFIX) && (
+                          <FlaskConical className="w-3 h-3 text-amber-500 flex-shrink-0" />
+                        )}
+                        <h3 className={`font-bold text-foreground leading-tight ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
+                          {t(school.nameEn, school.nameKh)}
+                        </h3>
+                      </div>
+                      {school.description?.startsWith(DEMO_PREFIX) && (
+                        <span className="inline-block text-[9px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full leading-none">
+                          Demo entry
+                        </span>
+                      )}
+                    </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-primary transition-colors flex-shrink-0 mt-0.5" />
                   </div>
                   <div className="flex items-center justify-between text-xs mt-2">

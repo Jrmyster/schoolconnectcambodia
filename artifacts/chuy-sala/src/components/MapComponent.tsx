@@ -5,7 +5,10 @@ import { Link } from "wouter";
 import { School, Need } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { localizeProvince } from "@/lib/province-data";
-import { GraduationCap, MapPin, Heart } from "lucide-react";
+import { GraduationCap, MapPin, Heart, FlaskConical } from "lucide-react";
+
+const DEMO_PREFIX = "DEMO:";
+const isDemo = (school: School) => school.description?.startsWith(DEMO_PREFIX) ?? false;
 
 // Fix Leaflet marker icons in React
 import iconUrl from "leaflet/dist/images/marker-icon.png";
@@ -62,6 +65,8 @@ export function MapComponent({ schools, needs }: MapComponentProps) {
           
           if (!school.latitude || !school.longitude) return null;
 
+          const demo = isDemo(school);
+
           return (
             <Marker 
               key={school.id} 
@@ -71,20 +76,38 @@ export function MapComponent({ schools, needs }: MapComponentProps) {
               <Popup className="rounded-xl overflow-hidden shadow-lg border-0 p-0 m-0">
                 <div className="p-1 min-w-[220px]">
                   <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border/50">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                      <GraduationCap className="w-4 h-4" />
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${demo ? 'bg-amber-100 text-amber-600' : 'bg-primary/10 text-primary'}`}>
+                      {demo ? <FlaskConical className="w-4 h-4" /> : <GraduationCap className="w-4 h-4" />}
                     </div>
-                    <div>
-                      <h4 className={`font-bold text-sm m-0 leading-tight ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-                        {t(school.nameEn, school.nameKh)}
-                      </h4>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <h4 className={`font-bold text-sm m-0 leading-tight ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+                          {t(school.nameEn, school.nameKh)}
+                        </h4>
+                        {demo && (
+                          <span className="inline-block text-[9px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full leading-none flex-shrink-0">
+                            Demo
+                          </span>
+                        )}
+                      </div>
                       <p className="text-xs text-muted-foreground m-0 flex items-center gap-1">
                         <MapPin className="w-3 h-3" /> {localizeProvince(school.province, language)}
                       </p>
                     </div>
                   </div>
+
+                  {demo && (
+                    <div className="mb-2 px-2.5 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+                      <p className="text-[11px] text-amber-800 leading-snug m-0">
+                        {t(
+                          "This is a demonstration entry. School profiles must be completed by a verified principal.",
+                          "នេះជាការបញ្ចូលសាកល្បង។ ប្រវត្តិរូបសាលារៀនត្រូវតែបំពេញដោយនាយកដ្ឋានដែលបានផ្ទៀងផ្ទាត់។"
+                        )}
+                      </p>
+                    </div>
+                  )}
                   
-                  <div className="py-2">
+                  <div className="py-1">
                     {needsCount > 0 ? (
                       <div className="flex items-center gap-2 text-sm text-accent font-semibold">
                         <Heart className="w-4 h-4 fill-current" />
