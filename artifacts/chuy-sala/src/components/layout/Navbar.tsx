@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
-import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake } from "lucide-react";
-import { useState } from "react";
+import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink } from "lucide-react";
+import { useState, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -12,12 +12,13 @@ export function Navbar() {
   const t = useTranslation();
   const { user, logout } = useAuth();
 
-  const navLinks = [
+  const navLinks: { href: string; label: string; icon: ComponentType<{ className?: string }>; external?: boolean }[] = [
     { href: "/", label: t("Home", "ទំព័រដើម"), icon: Heart },
     { href: "/map", label: t("Map", "ផែនទី"), icon: Map },
     { href: "/needs", label: t("Browse Needs", "តម្រូវការសាលា"), icon: Heart },
     { href: "/projects", label: t("Completed", "គម្រោងបានបញ្ចប់"), icon: CheckCircle },
     { href: "/charities", label: t("Partners", "ដៃគូ"), icon: Handshake },
+    { href: "https://khmerenglishexam.com", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap, external: true },
     { href: "/admin", label: t("Admin", "គ្រប់គ្រង"), icon: PlusCircle },
   ];
 
@@ -45,16 +46,34 @@ export function Navbar() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1 md:gap-4 lg:gap-8">
             {navLinks.map((link) => {
-              const isActive = location === link.href || (link.href !== "/" && location.startsWith(link.href));
+              const isActive = !link.external && (location === link.href || (link.href !== "/" && location.startsWith(link.href)));
+              const baseClass = `flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200`;
+              const activeClass = isActive ? "bg-primary/10 text-primary" : "";
+              const internalHover = "text-muted-foreground hover:bg-black/5 hover:text-foreground";
+              const externalHover = "text-amber-600 hover:bg-amber-50 hover:text-amber-700";
+              const colorClass = isActive ? activeClass : (link.external ? externalHover : internalHover);
+
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${baseClass} ${colorClass}`}
+                  >
+                    <link.icon className="w-4 h-4" />
+                    <span className={language === 'kh' ? 'font-khmer text-base' : ''}>{link.label}</span>
+                    <ExternalLink className="w-3 h-3 opacity-60" />
+                  </a>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                    isActive 
-                      ? "bg-primary/10 text-primary" 
-                      : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
-                  }`}
+                  className={`${baseClass} ${colorClass}`}
                 >
                   <link.icon className="w-4 h-4" />
                   <span className={language === 'kh' ? 'font-khmer text-base' : ''}>{link.label}</span>
@@ -127,17 +146,37 @@ export function Navbar() {
         <div className="md:hidden absolute top-20 left-0 w-full glass-panel border-t border-border/50 shadow-2xl pb-6 rounded-b-3xl">
           <nav className="flex flex-col p-4 gap-2">
             {navLinks.map((link) => {
-              const isActive = location === link.href || (link.href !== "/" && location.startsWith(link.href));
+              const isActive = !link.external && (location === link.href || (link.href !== "/" && location.startsWith(link.href)));
+              const baseClass = `flex items-center gap-3 px-4 py-4 rounded-xl font-semibold text-lg transition-all`;
+              const colorClass = isActive
+                ? "bg-primary/10 text-primary"
+                : link.external
+                  ? "text-amber-600 hover:bg-amber-50"
+                  : "text-foreground hover:bg-black/5";
+
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`${baseClass} ${colorClass}`}
+                  >
+                    <link.icon className="w-5 h-5" />
+                    <span className={language === 'kh' ? 'font-khmer' : ''}>{link.label}</span>
+                    <ExternalLink className="w-4 h-4 opacity-60 ml-auto" />
+                  </a>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-4 rounded-xl font-semibold text-lg transition-all ${
-                    isActive 
-                      ? "bg-primary/10 text-primary" 
-                      : "text-foreground hover:bg-black/5"
-                  }`}
+                  className={`${baseClass} ${colorClass}`}
                 >
                   <link.icon className="w-5 h-5" />
                   <span className={language === 'kh' ? 'font-khmer' : ''}>{link.label}</span>
