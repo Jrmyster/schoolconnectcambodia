@@ -25,9 +25,9 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full glass-panel border-b-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-20 gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group flex-shrink-0 mr-2 lg:mr-6">
             <img 
               src={`${import.meta.env.BASE_URL}images/logo.png`} 
               alt="Chouy Sala Logo" 
@@ -44,10 +44,10 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 md:gap-4 lg:gap-8">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-3">
             {navLinks.map((link) => {
               const isActive = !link.external && (location === link.href || (link.href !== "/" && location.startsWith(link.href)));
-              const baseClass = `flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold transition-all duration-200`;
+              const baseClass = `flex items-center gap-1.5 px-2 py-2 xl:px-3 rounded-xl text-sm font-semibold transition-all duration-200`;
               const activeClass = isActive ? "bg-primary/10 text-primary" : "";
               const internalHover = "text-muted-foreground hover:bg-black/5 hover:text-foreground";
               const externalHover = "text-amber-600 hover:bg-amber-50 hover:text-amber-700";
@@ -122,7 +122,7 @@ export function Navbar() {
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-1 px-3 py-1.5 rounded-full border-2 border-primary/20 bg-white text-xs font-bold text-primary"
@@ -143,7 +143,7 @@ export function Navbar() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full glass-panel border-t border-border/50 shadow-2xl pb-6 rounded-b-3xl">
+        <div className="lg:hidden absolute top-20 left-0 w-full glass-panel border-t border-border/50 shadow-2xl pb-6 rounded-b-3xl">
           <nav className="flex flex-col p-4 gap-2">
             {navLinks.map((link) => {
               const isActive = !link.external && (location === link.href || (link.href !== "/" && location.startsWith(link.href)));
