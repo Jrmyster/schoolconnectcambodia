@@ -14,6 +14,7 @@ import { Login } from "@/pages/Login";
 import { ForgotPassword } from "@/pages/ForgotPassword";
 import { ResetPassword } from "@/pages/ResetPassword";
 import { SchoolProfile } from "@/pages/SchoolProfile";
+import { CharityDirectory } from "@/pages/CharityDirectory";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -46,6 +47,7 @@ function Router() {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route path="/school/:id" component={SchoolProfile} />
+          <Route path="/charities" component={CharityDirectory} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />
           <Route component={NotFound} />
