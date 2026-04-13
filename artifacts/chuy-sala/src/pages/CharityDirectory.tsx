@@ -41,7 +41,7 @@ const CHARITIES: Charity[] = [
     nameKh: "PEPY — ផ្តល់អំណាចដល់យុវវ័យ",
     descEn: "Builds leadership skills and educational opportunities for youth in rural Cambodian communities.",
     descKh: "បង្កើតជំនាញភាពជាអ្នកដឹកនាំ និងឱកាសសិក្សាដល់យុវវ័យនៅសហគមន៍ជនបទកម្ពុជា។",
-    url: "https://pepyempowersyouth.org/",
+    url: "https://www.pepyempoweringyouth.org/",
     accent: "from-[#059669] to-[#10B981]",
   },
   {
