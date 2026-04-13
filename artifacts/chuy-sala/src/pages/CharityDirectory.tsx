@@ -1,5 +1,5 @@
 import { ComponentType } from "react";
-import { ExternalLink, Users, ShoppingBag, Truck, LayoutGrid, Tag, TrendingUp } from "lucide-react";
+import { ExternalLink, Users, ShoppingBag, Truck, LayoutGrid, Tag, TrendingUp, HeartPulse } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type Charity = {
@@ -91,6 +91,28 @@ const CHARITIES: Charity[] = [
     descKh: "ផ្តល់ការបណ្តុះបណ្តាលវិជ្ជាជីវៈ និងការអប់រំបច្ចេកទេសដល់យុវវ័យ ដើម្បីរៀបចំពួកគេសម្រាប់ការងារមានតម្លៃ។",
     url: "https://donboscocambodia.org/",
     accent: "from-[#B45309] to-[#D97706]",
+  },
+];
+
+type HealthOrg = {
+  name: string;
+  nameKh: string;
+  descEn: string;
+  descKh: string;
+  url: string;
+  tagEn: string;
+  tagKh: string;
+};
+
+const HEALTH_ORGS: HealthOrg[] = [
+  {
+    name: "Khmer Cancer",
+    nameKh: "មហារីកកម្ពុជា",
+    descEn: "Provides essential education and resources for cancer awareness and prevention in Cambodia, supporting patients and families with compassionate, community-centred care.",
+    descKh: "ផ្តល់នូវការអប់រំ និងធនធានចាំបាច់សម្រាប់ការយល់ដឹង និងការបង្ការជំងឺមហារីកនៅក្នុងប្រទេសកម្ពុជា ដោយគាំទ្រអ្នកជំងឺ និងគ្រួសារដោយការថែទាំប្រកបដោយសហគមន៍។",
+    url: "https://khmercancer.com/",
+    tagEn: "Cancer Awareness & Prevention",
+    tagKh: "ការយល់ដឹង និងការបង្ការជំងឺមហារីក",
   },
 ];
 
@@ -229,6 +251,77 @@ export function CharityDirectory() {
             "បញ្ជីនេះមានគោលបំណងផ្តល់ព័ត៌មានប៉ុណ្ណោះ។ Chouy Sala មិនគាំទ្រផ្លូវការចំពោះអង្គការណាមួយឡើយ។"
           )}
         </p>
+      </div>
+
+      {/* ── Health Resources section ── */}
+      <div className="border-t border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+          {/* Section heading */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7C6EBE] to-[#9B8FD4] flex items-center justify-center flex-shrink-0 shadow-sm">
+              <HeartPulse className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h2 className={`font-display font-bold text-foreground text-xl ${kh ? "font-khmer" : ""}`}>
+                {t("Health Resources", "ធនធានសុខភាព")}
+              </h2>
+              <p className={`text-muted-foreground text-sm ${kh ? "font-khmer" : ""}`}>
+                {t("Trusted organisations supporting health and wellbeing in Cambodia.", "អង្គការដែលទុកចិត្ត ដែលគាំទ្រសុខភាព និងសុខុមាលភាពនៅកម្ពុជា។")}
+              </p>
+            </div>
+          </div>
+
+          {/* Health cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {HEALTH_ORGS.map((org) => (
+              <div
+                key={org.name}
+                className="group flex flex-col bg-card rounded-2xl border-2 border-[#9B8FD4]/30 shadow-sm hover:shadow-lg hover:border-[#9B8FD4]/60 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+              >
+                {/* Lavender accent bar */}
+                <div className="h-1.5 bg-gradient-to-r from-[#7C6EBE] to-[#9B8FD4]" />
+
+                <div className="flex flex-col flex-1 p-6 gap-4">
+                  {/* Icon + name row */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7C6EBE]/15 to-[#9B8FD4]/25 border border-[#9B8FD4]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <HeartPulse className="w-5 h-5 text-[#7C6EBE]" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className={`font-bold text-foreground leading-tight ${kh ? "font-khmer text-base" : "font-display text-lg"}`}>
+                        {kh ? org.nameKh : org.name}
+                      </h3>
+                      <span className={`inline-block mt-1 text-xs font-semibold text-[#7C6EBE] bg-[#7C6EBE]/10 px-2 py-0.5 rounded-full ${kh ? "font-khmer" : ""}`}>
+                        {kh ? org.tagKh : org.tagEn}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <p className={`text-muted-foreground flex-1 leading-relaxed ${kh ? "font-khmer text-sm leading-loose" : "text-sm"}`}>
+                    {kh ? org.descKh : org.descEn}
+                  </p>
+
+                  {/* Button */}
+                  <a
+                    href={org.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-auto flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-bold
+                      bg-gradient-to-r from-[#7C6EBE] to-[#9B8FD4] text-white
+                      hover:from-[#9B8FD4] hover:to-[#7C6EBE] hover:shadow-md hover:-translate-y-0.5
+                      active:scale-95 transition-all
+                      ${kh ? "font-khmer text-base" : "text-sm"}`}
+                  >
+                    {t("Visit Website", "ចូលទស្សនាគេហទំព័រ")}
+                    <ExternalLink className="w-3.5 h-3.5 opacity-80 flex-shrink-0" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* ── Support the Economy section ── */}
