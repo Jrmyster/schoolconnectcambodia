@@ -5,6 +5,7 @@ import needsRouter from "./needs";
 import completedProjectsRouter from "./completedProjects";
 import uploadRouter from "./upload";
 import authRouter from "./auth";
+import storiesRouter from "./stories";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(schoolsRouter);
 router.use(needsRouter);
 router.use(completedProjectsRouter);
 router.use(uploadRouter);
+router.use(storiesRouter);
 
 export default router;

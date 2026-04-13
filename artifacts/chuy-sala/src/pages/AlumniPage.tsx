@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Star, ExternalLink, X, Send, UserCircle2, Briefcase, Quote } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { Star, Send, UserCircle2, Briefcase, Quote, Loader2 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type Alumnus = {
@@ -116,27 +117,63 @@ const ALUMNI: Alumnus[] = [
   },
 ];
 
-const GOOGLE_FORM_URL = "https://forms.google.com";
+type CommunityStory = {
+  id: number;
+  fullName: string;
+  graduationYear: number;
+  profession: string;
+  story: string;
+  photoUrl: string | null;
+  createdAt: string;
+};
+
+function getInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+const AVATAR_COLORS = [
+  "from-[#1A6EA8] to-[#2196F3]",
+  "from-[#059669] to-[#10B981]",
+  "from-[#7C3AED] to-[#8B5CF6]",
+  "from-[#B45309] to-[#D97706]",
+  "from-[#DB2777] to-[#EC4899]",
+  "from-[#0284C7] to-[#38BDF8]",
+];
 
 export function AlumniPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [communityExpanded, setCommunityExpanded] = useState<number | null>(null);
+
+  const [communityStories, setCommunityStories] = useState<CommunityStory[]>([]);
+  const [loadingStories, setLoadingStories] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/stories?status=approved")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => setCommunityStories(Array.isArray(data) ? data : []))
+      .catch(() => setCommunityStories([]))
+      .finally(() => setLoadingStories(false));
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
 
       {/* ── Hero ── */}
       <div className="relative bg-gradient-to-br from-[#0a1628] via-[#1a2e4a] to-[#0f2040] text-white overflow-hidden">
-        {/* Gold top stripe */}
         <div className="flex h-2">
           <div className="flex-1 bg-[#c9a227]" />
           <div className="flex-1 bg-[#e8c547]" />
           <div className="flex-1 bg-[#c9a227]" />
         </div>
 
-        {/* Subtle star decorations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden>
           {["top-8 left-12 text-5xl", "top-16 right-20 text-3xl", "bottom-16 left-1/4 text-4xl", "bottom-8 right-1/3 text-2xl"].map((cls, i) => (
             <Star key={i} className={`absolute ${cls} opacity-10 text-[#c9a227]`} fill="currentColor" />
@@ -160,14 +197,23 @@ export function AlumniPage() {
           </p>
         </div>
 
-        {/* Gold wave */}
         <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 40" preserveAspectRatio="none">
           <path d="M0,40 C360,0 1080,0 1440,40 L1440,40 L0,40 Z" fill="hsl(var(--background))" />
         </svg>
       </div>
 
-      {/* ── Alumni Grid ── */}
+      {/* ── Featured Alumni Grid ── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+        {/* Section label */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c9a227]/30" />
+          <span className={`text-xs font-bold tracking-widest text-[#c9a227] uppercase ${kh ? "font-khmer tracking-normal" : ""}`}>
+            {t("Featured Graduates", "អ្នកបញ្ចប់ការសិក្សាលេចធ្លោ")}
+          </span>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c9a227]/30" />
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {ALUMNI.map((a) => {
             const isExpanded = expandedId === a.id;
@@ -176,12 +222,8 @@ export function AlumniPage() {
                 key={a.id}
                 className="group flex flex-col bg-card rounded-2xl border border-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden"
               >
-                {/* Gold top accent bar */}
                 <div className="h-1.5 bg-gradient-to-r from-[#c9a227] via-[#e8c547] to-[#c9a227]" />
-
                 <div className="flex flex-col flex-1 p-6 gap-4">
-
-                  {/* Avatar + identity */}
                   <div className="flex items-center gap-4">
                     <div className={`flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br ${a.avatarBg} flex items-center justify-center shadow-md`}>
                       <span className="text-white font-bold text-lg tracking-tight">{a.initials}</span>
@@ -196,7 +238,6 @@ export function AlumniPage() {
                     </div>
                   </div>
 
-                  {/* Current role */}
                   <div className="flex items-start gap-2.5 bg-[#0a1628]/5 border border-[#c9a227]/20 rounded-xl px-4 py-3">
                     <Briefcase className="w-4 h-4 text-[#c9a227] flex-shrink-0 mt-0.5" />
                     <p className={`text-sm text-foreground font-semibold leading-snug ${kh ? "font-khmer" : ""}`}>
@@ -204,7 +245,6 @@ export function AlumniPage() {
                     </p>
                   </div>
 
-                  {/* Journey quote — truncated / expanded */}
                   <div className="relative">
                     <Quote className="w-5 h-5 text-[#c9a227]/40 mb-1 flex-shrink-0" fill="currentColor" />
                     <p className={`text-muted-foreground text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}
@@ -218,18 +258,111 @@ export function AlumniPage() {
                       {isExpanded ? t("Show less ▲", "បង្ហាញតិច ▲") : t("Read more ▼", "អានបន្ថែម ▼")}
                     </button>
                   </div>
-
                 </div>
               </div>
             );
           })}
         </div>
 
+        {/* ── Community Stories ── */}
+        <div className="mt-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#c9a227]/30" />
+            <span className={`text-xs font-bold tracking-widest text-[#c9a227] uppercase ${kh ? "font-khmer tracking-normal" : ""}`}>
+              {t("Community Stories", "រឿងរ៉ាវសហគមន៍")}
+            </span>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#c9a227]/30" />
+          </div>
+
+          {loadingStories ? (
+            <div className="flex items-center justify-center py-12 text-muted-foreground gap-3">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              <span className={`text-sm ${kh ? "font-khmer" : ""}`}>
+                {t("Loading stories…", "កំពុងផ្ទុករឿងរ៉ាវ…")}
+              </span>
+            </div>
+          ) : communityStories.length === 0 ? (
+            <div className="text-center py-14 px-6 bg-muted/30 rounded-2xl border border-dashed border-[#c9a227]/30">
+              <div className="w-14 h-14 rounded-2xl bg-[#c9a227]/10 border border-[#c9a227]/20 flex items-center justify-center mx-auto mb-4">
+                <Star className="w-7 h-7 text-[#c9a227]/50" />
+              </div>
+              <p className={`font-bold text-foreground mb-1 ${kh ? "font-khmer" : ""}`}>
+                {t("Be the first to share your story!", "សូមក្លាយជាមនុស្សដំបូងដែលចែករំលែករឿងរ៉ាវ!")}
+              </p>
+              <p className={`text-muted-foreground text-sm ${kh ? "font-khmer" : ""}`}>
+                {t(
+                  "Approved submissions from the community will appear here.",
+                  "ការដាក់ស្នើដែលបានអនុម័តពីសហគមន៍នឹងលេចឡើងនៅទីនេះ។"
+                )}
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+              {communityStories.map((s, i) => {
+                const initials = getInitials(s.fullName);
+                const avatarBg = AVATAR_COLORS[i % AVATAR_COLORS.length];
+                const isExp = communityExpanded === s.id;
+                return (
+                  <div
+                    key={s.id}
+                    className="group flex flex-col bg-card rounded-2xl border border-[#c9a227]/20 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+                  >
+                    <div className="h-1.5 bg-gradient-to-r from-[#c9a227]/60 via-[#e8c547]/60 to-[#c9a227]/60" />
+                    <div className="flex flex-col flex-1 p-6 gap-4">
+                      <div className="flex items-center gap-4">
+                        {s.photoUrl ? (
+                          <img
+                            src={s.photoUrl}
+                            alt={s.fullName}
+                            className="flex-shrink-0 w-14 h-14 rounded-2xl object-cover border-2 border-[#c9a227]/30 shadow-md"
+                          />
+                        ) : (
+                          <div className={`flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br ${avatarBg} flex items-center justify-center shadow-md`}>
+                            <span className="text-white font-bold text-lg tracking-tight">{initials}</span>
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <h3 className="font-bold text-foreground leading-tight truncate font-display text-lg">
+                            {s.fullName}
+                          </h3>
+                          <p className="text-xs text-[#c9a227] font-semibold mt-0.5">
+                            {t("Class of", "ថ្នាក់ឆ្នាំ")} {s.graduationYear}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2.5 bg-[#0a1628]/5 border border-[#c9a227]/15 rounded-xl px-4 py-3">
+                        <Briefcase className="w-4 h-4 text-[#c9a227] flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-foreground font-semibold leading-snug">
+                          {s.profession}
+                        </p>
+                      </div>
+
+                      <div className="relative">
+                        <Quote className="w-5 h-5 text-[#c9a227]/30 mb-1" fill="currentColor" />
+                        <p className={`text-muted-foreground text-sm leading-relaxed ${!isExp ? "line-clamp-3" : ""}`}>
+                          {s.story}
+                        </p>
+                        {s.story.length > 200 && (
+                          <button
+                            onClick={() => setCommunityExpanded(isExp ? null : s.id)}
+                            className="mt-1.5 text-xs font-semibold text-[#c9a227] hover:text-[#e8c547] transition-colors"
+                          >
+                            {isExp ? t("Show less ▲", "បង្ហាញតិច ▲") : t("Read more ▼", "អានបន្ថែម ▼")}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
         {/* ── Share Your Story CTA ── */}
         <div className="mt-16 relative bg-gradient-to-br from-[#0a1628] to-[#1a2e4a] rounded-3xl overflow-hidden">
-          {/* Gold border */}
           <div className="absolute inset-0 rounded-3xl border-2 border-[#c9a227]/40 pointer-events-none" />
-          {/* Gold accent bar at top */}
           <div className="h-1 bg-gradient-to-r from-[#c9a227] via-[#e8c547] to-[#c9a227]" />
 
           <div className="px-8 py-12 text-center relative z-10">
@@ -249,10 +382,8 @@ export function AlumniPage() {
               )}
             </p>
 
-            <a
-              href={GOOGLE_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/submit-story"
               className={`inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold shadow-lg
                 bg-gradient-to-r from-[#c9a227] to-[#e8c547] text-[#0a1628]
                 hover:from-[#e8c547] hover:to-[#c9a227] hover:-translate-y-0.5 hover:shadow-xl
@@ -261,8 +392,7 @@ export function AlumniPage() {
             >
               <UserCircle2 className="w-5 h-5 flex-shrink-0" />
               {t("Share Your Story", "ចែករំលែករឿងរបស់អ្នក")}
-              <ExternalLink className="w-4 h-4 opacity-70 flex-shrink-0" />
-            </a>
+            </Link>
           </div>
         </div>
 

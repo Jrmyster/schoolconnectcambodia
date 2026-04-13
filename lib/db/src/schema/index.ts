@@ -3,3 +3,4 @@ export * from "./needs";
 export * from "./completedProjects";
 export * from "./users";
 export * from "./passwordResetTokens";
+export * from "./stories";
