@@ -73,7 +73,7 @@ const CHARITIES: Charity[] = [
     nameKh: "Helping Hands — ដៃជួយ",
     descEn: "Provides humanitarian aid, educational resources, and community development support to rural families.",
     descKh: "ផ្តល់ជំនួយមនុស្សធម៌ ធនធានអប់រំ និងការគាំទ្រការអភិវឌ្ឍសហគមន៍ដល់គ្រួសារជនបទ។",
-    url: "https://helpinghandscambodia.org/",
+    url: "https://www.globalteer.org/helpinghands/",
     accent: "from-[#D97706] to-[#F59E0B]",
   },
   {
