@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink, BookOpen, Leaf, Star, Shield } from "lucide-react";
+import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink, BookOpen, Leaf, Star, Shield, Rocket } from "lucide-react";
 import { useState, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
@@ -22,6 +22,7 @@ export function Navbar() {
     { href: "/alumni",    label: t("Alumni",         "រឿងជោគជ័យ"),            icon: Star },
     { href: "/safety",    label: t("Safety",         "សុវត្ថិភាព"),             icon: Shield },
     { href: "/exam-prep", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap },
+    { href: "/space",     label: t("Space",          "អវកាស"),                  icon: Rocket },
     { href: "/admin",     label: t("Admin",          "គ្រប់គ្រង"),              icon: PlusCircle },
   ];
 
