@@ -21,7 +21,7 @@ export function Navbar() {
     { href: "/sanctuary", label: t("Sanctuary",      "សុខុមាលភាព"),            icon: Leaf },
     { href: "/alumni",    label: t("Alumni",         "រឿងជោគជ័យ"),            icon: Star },
     { href: "/safety",    label: t("Safety",         "សុវត្ថិភាព"),             icon: Shield },
-    { href: "https://khmerenglishexam.com", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap, external: true },
+    { href: "/exam-prep", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap },
     { href: "/admin",     label: t("Admin",          "គ្រប់គ្រង"),              icon: PlusCircle },
   ];
 

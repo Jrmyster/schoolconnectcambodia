@@ -1,0 +1,241 @@
+{
+  "topics": [
+    {
+      "id": "cell_biology",
+      "titleEn": "Cell Biology",
+      "titleKh": "ជីវវិទ្យាកោសិកា",
+      "focusEn": "Organelles & ATP",
+      "focusKh": "សរីរាង្គ និង ATP",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What is the primary function of mitochondria in a cell?",
+          "questionKh": "តើមុខងារសំខាន់នៃ mitochondria ក្នុងកោសិកាគឺជាអ្វី?",
+          "options": [
+            { "textEn": "Protein synthesis", "textKh": "ការផលិតប្រូតេអ៊ីន" },
+            { "textEn": "Energy production (ATP)", "textKh": "ការផលិតថាមពល (ATP)" },
+            { "textEn": "DNA storage", "textKh": "ការផ្ទុក DNA" },
+            { "textEn": "Fat storage", "textKh": "ការផ្ទុកខ្លាញ់" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Mitochondria are the powerhouses of the cell. They convert nutrients into ATP (adenosine triphosphate), the molecule that fuels most cellular activities.",
+          "explanationKh": "Mitochondria ជា 'រោងចក្រថាមពល' នៃកោសិកា។ វាបំប្លែងជីវជាតិទៅជា ATP (adenosine triphosphate) ដែលជាម៉ូលេគុលផ្គត់ផ្គង់ថាមពលដល់សកម្មភាពកោសិកា។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Where is the DNA of a eukaryotic cell primarily stored?",
+          "questionKh": "DNA របស់កោសិការបស់សត្វ (eukaryotic) ត្រូវបានផ្ទុកនៅទីណា?",
+          "options": [
+            { "textEn": "Cytoplasm", "textKh": "ស្រទាប់ cytoplasm" },
+            { "textEn": "Mitochondria", "textKh": "Mitochondria" },
+            { "textEn": "Nucleus", "textKh": "គ្រាប់កោសិកា (Nucleus)" },
+            { "textEn": "Cell membrane", "textKh": "សរបស់កោសិកា" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "The nucleus is the control centre of the cell and contains most of the cell's genetic material (DNA), which carries instructions for all cellular functions.",
+          "explanationKh": "គ្រាប់កោសិកា (Nucleus) ជាមជ្ឈមណ្ឌលគ្រប់គ្រងនៃកោសិកា ហើយផ្ទុករូបភាព DNA ដែលជាសៀវភៅណែនាំ (instruction) នៃមុខងារកោសិកាទាំងអស់។"
+        },
+        {
+          "id": 3,
+          "questionEn": "ATP stands for:",
+          "questionKh": "ATP តំណាងឱ្យ:",
+          "options": [
+            { "textEn": "Adenine Triphosphate", "textKh": "Adenine Triphosphate" },
+            { "textEn": "Adenosine Triphosphate", "textKh": "Adenosine Triphosphate" },
+            { "textEn": "Amino Triphosphate", "textKh": "Amino Triphosphate" },
+            { "textEn": "Adenosine Triprotein", "textKh": "Adenosine Triprotein" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "ATP stands for Adenosine Triphosphate — the primary energy currency of cells. It stores and releases energy for almost every biochemical process.",
+          "explanationKh": "ATP តំណាងឱ្យ Adenosine Triphosphate — ដែលជាថាមពលសំខាន់នៃកោសិកា។ វាផ្ទុក និងបញ្ចេញថាមពលសម្រាប់ប្រតិបត្តិការជីវគីមីស្ទើរតែទាំងអស់។"
+        },
+        {
+          "id": 4,
+          "questionEn": "Which organelle is responsible for making proteins?",
+          "questionKh": "សរីរាង្គណាទទួលខុសត្រូវក្នុងការផលិតប្រូតេអ៊ីន?",
+          "options": [
+            { "textEn": "Golgi apparatus", "textKh": "Golgi apparatus" },
+            { "textEn": "Ribosome", "textKh": "Ribosome" },
+            { "textEn": "Lysosome", "textKh": "Lysosome" },
+            { "textEn": "Vacuole", "textKh": "Vacuole" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Ribosomes are tiny organelles that read the instructions from messenger RNA and assemble amino acids into protein chains — essential for life.",
+          "explanationKh": "Ribosome ជាសរីរាង្គតូចៗ ដែលអានការណែនាំពី messenger RNA ហើយភ្ជាប់ amino acid ទៅជាខ្សែប្រូតេអ៊ីន — ដែលចាំបាច់ណាស់សម្រាប់ជីវិត។"
+        },
+        {
+          "id": 5,
+          "questionEn": "What is the main role of the cell membrane?",
+          "questionKh": "តើមុខងារសំខាន់នៃសរបស់កោសិកា (cell membrane) គឺជាអ្វី?",
+          "options": [
+            { "textEn": "Producing energy", "textKh": "ផលិតថាមពល" },
+            { "textEn": "Storing DNA", "textKh": "ផ្ទុក DNA" },
+            { "textEn": "Controlling what enters and exits the cell", "textKh": "គ្រប់គ្រងអ្វីដែលចូល-ចេញកោសិកា" },
+            { "textEn": "Digesting waste materials", "textKh": "រំលាយសំណល់" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "The cell membrane acts as a selective barrier — it lets in nutrients and oxygen while keeping out harmful substances and regulating waste removal.",
+          "explanationKh": "សរបស់កោសិកាដើរតួជាសំណាញ់ (barrier) ជ្រើសរើស — វាអនុញ្ញាតឱ្យជីវជាតិ និងអុកស៊ីសែនចូល ខណៈកំណត់សារធាតុបង្កគ្រោះថ្នាក់ចេញ។"
+        }
+      ]
+    },
+    {
+      "id": "human_health",
+      "titleEn": "Human Health",
+      "titleKh": "សុខភាពមនុស្ស",
+      "focusEn": "Nutrition & Disease Prevention",
+      "focusKh": "អាហារូបត្ថម្ភ និងការបង្ការជំងឺ",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "Which vitamin does our body produce when skin is exposed to sunlight?",
+          "questionKh": "វីតាមីនណាដែលរាងកាយផលិតឡើងនៅពេលស្បែកប៉ះពន្លឺព្រះអាទិត្យ?",
+          "options": [
+            { "textEn": "Vitamin A", "textKh": "វីតាមីន A" },
+            { "textEn": "Vitamin B12", "textKh": "វីតាមីន B12" },
+            { "textEn": "Vitamin C", "textKh": "វីតាមីន C" },
+            { "textEn": "Vitamin D", "textKh": "វីតាមីន D" }
+          ],
+          "correctIndex": 3,
+          "explanationEn": "When UV rays from the sun hit the skin, they trigger the synthesis of Vitamin D — vital for strong bones, immune function, and mood regulation.",
+          "explanationKh": "នៅពេលដែលកាំរស្មី UV ពីព្រះអាទិត្យប៉ះស្បែក វាជំរុញការផលិតវីតាមីន D — ដែលចាំបាច់សម្រាប់ឆ្អឹងរឹង ប្រព័ន្ធភាពស៊ាំ និងអារម្មណ៍ល្អ។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Which macronutrient provides the most energy per gram?",
+          "questionKh": "តើ macronutrient ណាផ្តល់ថាមពលច្រើនបំផុតក្នុងមួយក្រាម?",
+          "options": [
+            { "textEn": "Protein", "textKh": "ប្រូតេអ៊ីន" },
+            { "textEn": "Carbohydrate", "textKh": "កាបូអ៊ីដ្រាត" },
+            { "textEn": "Fat", "textKh": "ខ្លាញ់" },
+            { "textEn": "Dietary fibre", "textKh": "សរសៃអាហារ" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "Fat provides 9 kcal per gram — more than double the 4 kcal per gram from protein or carbohydrate. Healthy fats (e.g. from fish, nuts) are essential for brain health.",
+          "explanationKh": "ខ្លាញ់ផ្តល់ 9 kcal ក្នុងមួយក្រាម — ច្រើនជាង 4 kcal ពីប្រូតេអ៊ីន ឬកាបូអ៊ីដ្រាតទ្វេដង។ ខ្លាញ់ល្អ (ដូចជាពីត្រី ឬគ្រាប់) ចាំបាច់សម្រាប់សុខភាពខួរក្បាល។"
+        },
+        {
+          "id": 3,
+          "questionEn": "Which practice BEST helps prevent the spread of infectious disease?",
+          "questionKh": "វិធីណាដែលល្អបំផុតក្នុងការការពារការរីករាលដាលជំងឺឆ្លង?",
+          "options": [
+            { "textEn": "Eating more salt", "textKh": "ញ៉ាំអំបិលបន្ថែម" },
+            { "textEn": "Regular handwashing with soap", "textKh": "លាងដៃជាប្រចាំជាមួយសាប៊ូ" },
+            { "textEn": "Sleeping fewer hours", "textKh": "គេងតិចម៉ោង" },
+            { "textEn": "Avoiding fruits and vegetables", "textKh": "ជៀសវាងផ្លែឈើ និងបន្លែ" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Handwashing with soap removes pathogens from the skin before they can enter the body or spread to others — the single most effective low-cost disease prevention measure.",
+          "explanationKh": "ការលាងដៃជាមួយសាប៊ូលើកដំបូងនៃការការពារជំងឺដ៏ឆ្ងាញ់ — វាលុបបំបាត់ pathogen ចេញពីស្បែកមុនពេលវាចូលរាងកាយ ឬរំដោះដល់អ្នកដទៃ។"
+        },
+        {
+          "id": 4,
+          "questionEn": "A balanced diet helps maintain which of the following?",
+          "questionKh": "អាហារប្រកបដោយតុល្យភាពជួយរក្សា?",
+          "options": [
+            { "textEn": "Elevated blood sugar levels", "textKh": "កំរិតជាតិស្ករក្នុងឈាមខ្ពស់" },
+            { "textEn": "Weaker bones over time", "textKh": "ឆ្អឹងទន់ជ្រាយ" },
+            { "textEn": "A healthy immune system", "textKh": "ប្រព័ន្ធភាពស៊ាំដ៏រឹងមាំ" },
+            { "textEn": "Reduced energy throughout the day", "textKh": "ថាមពលថយចុះពេញមួយថ្ងៃ" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "A diet rich in vitamins, minerals, fibre, and protein supports the immune system — helping the body fight infection, recover faster, and reduce the risk of chronic disease.",
+          "explanationKh": "អាហារដែលសម្បូរវីតាមីន ជីវធាតុ សរសៃ និងប្រូតេអ៊ីន គាំទ្រប្រព័ន្ធភាពស៊ាំ — ជួយរាងកាយប្រយុទ្ធប្រឆាំងការឆ្លងជំងឺ និងកាត់បន្ថយហានិភ័យជំងឺរ៉ាំរ៉ៃ។"
+        },
+        {
+          "id": 5,
+          "questionEn": "Dehydration occurs when the body loses too much:",
+          "questionKh": "ការខ្វះទឹកកើតឡើងនៅពេលរាងកាយបាត់បង់ច្រើនពេកនូវ:",
+          "options": [
+            { "textEn": "Fat", "textKh": "ខ្លាញ់" },
+            { "textEn": "Salt", "textKh": "អំបិល" },
+            { "textEn": "Water", "textKh": "ទឹក" },
+            { "textEn": "Protein", "textKh": "ប្រូតេអ៊ីន" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "The human body is about 60% water. Losing just 2% of body water can impair concentration and physical performance. Drinking clean water daily is essential for health.",
+          "explanationKh": "រាងកាយមនុស្សមានទឹកប្រហែល 60%។ ការបាត់បង់ 2% ប៉ុណ្ណោះអាចប៉ះពាល់ដល់ការផ្តោតអារម្មណ៍ និងការស្ថិត​ស្ថេរ​រាងកាយ។ ការផឹកទឹកស្អាតប្រចាំថ្ងៃចាំបាច់ណាស់សម្រាប់សុខភាព។"
+        }
+      ]
+    },
+    {
+      "id": "oncology",
+      "titleEn": "Oncology Basics",
+      "titleKh": "មូលដ្ឋានគ្រឹះនៃជំងឺមហារីក",
+      "focusEn": "Cell Changes & Early Detection",
+      "focusKh": "ការផ្លាស់ប្តូរកោសិកា និងការរកឃើញទាន់ពេល",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What is cancer?",
+          "questionKh": "តើជំងឺមហារីកគឺជាអ្វី?",
+          "options": [
+            { "textEn": "A type of bacteria", "textKh": "ប្រភេទបាក់តេរី" },
+            { "textEn": "Uncontrolled growth of abnormal cells", "textKh": "ការលូតលាស់គ្មានការគ្រប់គ្រងនៃកោសិកាមិនប្រក្រតី" },
+            { "textEn": "A vitamin deficiency", "textKh": "ការខ្វះខាតវីតាមីន" },
+            { "textEn": "An allergic reaction", "textKh": "ប្រតិកម្មអាឡែហ្ស៊ី" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Cancer occurs when cells in the body start growing uncontrollably and do not die as normal cells do. These abnormal cells can form tumors and spread to other parts of the body.",
+          "explanationKh": "ជំងឺមហារីកកើតឡើងនៅពេលដែលកោសិកានៅក្នុងរាងកាយចាប់ផ្តើមលូតលាស់ដោយគ្មានការគ្រប់គ្រង ហើយមិនស្លាប់ដូចកោសិកាធម្មតា។ កោសិកាមិនប្រក្រតីទាំងនេះអាចបង្កើតដុំ និងរីករាលដាល។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Why is early detection of cancer so important?",
+          "questionKh": "ហេតុអ្វីបានជាការរកឃើញជំងឺមហារីកទាន់ពេលសំខាន់ណាស់?",
+          "options": [
+            { "textEn": "It makes cancer grow faster", "textKh": "វាធ្វើឱ្យជំងឺមហារីកលូតលាស់ញាប់ជាង" },
+            { "textEn": "It reduces the chance of successful treatment", "textKh": "វាកាត់បន្ថយលទ្ធភាពព្យាបាលជោគជ័យ" },
+            { "textEn": "It greatly increases the chance of successful treatment", "textKh": "វាបង្កើនលទ្ធភាពព្យាបាលដោយជោគជ័យខ្លាំងណាស់" },
+            { "textEn": "It has no effect on outcomes", "textKh": "វាមិនមានឥទ្ធិពលលើលទ្ធផលឡើយ" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "When cancer is found early (before it has spread), treatment is far more effective. Many cancers caught at an early stage have survival rates above 90%.",
+          "explanationKh": "នៅពេលដែលជំងឺមហារីករកឃើញលឿន (មុននឹងរីករាលដាល) ការព្យាបាលមានប្រសិទ្ធភាពខ្ពស់ជាង។ ជំងឺមហារីកជាច្រើនដែលរកឃើញក្នុងដំណាក់ស្រាលមានអត្រារស់រានច្រើនជាង 90%។"
+        },
+        {
+          "id": 3,
+          "questionEn": "Which of the following is a well-known risk factor for cancer?",
+          "questionKh": "តើមួយណាខាងក្រោមជាកត្តាហានិភ័យនៃជំងឺមហារីក?",
+          "options": [
+            { "textEn": "Regular physical exercise", "textKh": "ការហាត់ប្រាណប្រចាំ" },
+            { "textEn": "Smoking tobacco", "textKh": "ការជក់បារី" },
+            { "textEn": "Eating vegetables daily", "textKh": "ញ៉ាំបន្លែប្រចាំថ្ងៃ" },
+            { "textEn": "Getting adequate sleep", "textKh": "ការគេងគ្រប់គ្រាន់" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Tobacco smoking is the leading preventable cause of cancer worldwide, linked to lung, throat, and many other cancers. Quitting smoking dramatically reduces risk.",
+          "explanationKh": "ការជក់បារីគឺជាមូលហេតុចម្បងដែលអាចបង្ការបាននៃជំងឺមហារីកនៅទូទាំងពិភពលោក ដែលទាក់ទងទៅនឹងមហារីកសួត ក ឬតែ​ក និងមហារីកផ្សេងទៀត។"
+        },
+        {
+          "id": 4,
+          "questionEn": "What is a tumor?",
+          "questionKh": "តើដុំ (tumor) ជាអ្វី?",
+          "options": [
+            { "textEn": "A type of vitamin", "textKh": "ប្រភេទវីតាមីន" },
+            { "textEn": "A healthy organ", "textKh": "សរីរាង្គដែលមានសុខភាព" },
+            { "textEn": "An abnormal mass of cells", "textKh": "ដុំជាលិការ្ចស្ងប់ (mass) នៃកោសិកាមិនប្រក្រតី" },
+            { "textEn": "A type of blood cell", "textKh": "ប្រភេទមួយនៃកោសិកាឈាម" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "A tumor is an abnormal mass of cells that can be benign (non-cancerous) or malignant (cancerous). Malignant tumors can invade nearby tissue and spread through the bloodstream.",
+          "explanationKh": "ដុំ (tumor) ជាដុំជាលិកា (mass) នៃកោសិកាមិនប្រក្រតី ដែលអាចជាប្រភេទ benign (មិនមែនជាមហារីក) ឬ malignant (ជាមហារីក)។ ដុំ malignant អាចឆ្លុះចូលជាលិកាជិតខាង ហើយរីករាលដាលតាមចរន្តឈាម។"
+        },
+        {
+          "id": 5,
+          "questionEn": "What does cancer 'screening' mean?",
+          "questionKh": "តើ 'ការត្រួតពិនិត្យ' ជំងឺមហារីក (screening) មានន័យដូចម្តេច?",
+          "options": [
+            { "textEn": "Watching documentary films about cancer", "textKh": "មើលភាពយន្តឯកសារអំពីជំងឺមហារីក" },
+            { "textEn": "Testing people with no symptoms to detect disease early", "textKh": "ពិនិត្យអ្នកដែលគ្មានរោគសញ្ញា ដើម្បីរកឃើញជំងឺទាន់ពេល" },
+            { "textEn": "Treating cancer with chemotherapy", "textKh": "ព្យាបាលជំងឺមហារីកដោយ chemotherapy" },
+            { "textEn": "Surgically removing a tumor", "textKh": "ធ្វើការវះកាត់ដុំ" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Screening tests check for cancer before symptoms appear. Regular screening (e.g. mammograms, pap smears, colonoscopies) allows doctors to catch and treat cancer at its earliest and most treatable stage.",
+          "explanationKh": "ការត្រួតពិនិត្យ (screening) ពិនិត្យរកមហារីកមុនពេលរោគសញ្ញាលេចឡើង។ ការត្រួតពិនិត្យជាប្រចាំ (ដូចជា mammogram, pap smear) អនុញ្ញាតឱ្យវេជ្ជបណ្ឌិតរកឃើញ និងព្យាបាលមហារីកនៅដំណាក់ដ្បិតតែបំផុត។"
+        }
+      ]
+    }
+  ]
+}
