@@ -166,26 +166,43 @@ const SCENARIOS: Scenario[] = [
 
 // ── Daily checklist ───────────────────────────────────────────────────────────
 
-const CHECKLIST_ITEMS = [
+type ChecklistItem = {
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+};
+
+const CHECKLIST_ITEMS: ChecklistItem[] = [
   {
-    en: "Check the full URL of any link before clicking — look for HTTPS and the exact domain name.",
-    kh: "ត្រូតពិនិត្យ URL ពេញ នៃតំណភ្ជាប់ណាមួយ មុននឹងចុច — រកមើល HTTPS និងឈ្មោះដែនពិតប្រាកដ។",
+    titleEn: "Pause Before Clicking",
+    titleKh: "ផ្អាកមុនពេលចុច",
+    descEn: "If a message creates a sense of 'Urgency' or 'Fear,' it is very likely a scam. Slow down and think before you tap.",
+    descKh: "ប្រសិនបើសារបង្កើត 'ភាពបន្ទាន់' ឬ 'ភាពភ័យខ្លាច' វាទំនងជាការបោកប្រាស់ណាស់។ សូមឈប់ហើយគិតមុននឹងចុច។",
   },
   {
-    en: "Never share your password, PIN, or OTP with anyone — not even tech support or teachers.",
-    kh: "កុំប្រាប់ពាក្យសម្ងាត់ PIN ឬ OTP ដល់នរណាម្នាក់ — សូម្បីតែបច្ចេកទេស ឬគ្រូក៏ដោយ។",
+    titleEn: "Verify the Sender",
+    titleKh: "ផ្ទៀងផ្ទាត់អ្នកផ្ញើ",
+    descEn: "Check the phone number or profile carefully. Is it a stranger, an unknown account, or someone impersonating a friend?",
+    descKh: "ត្រូតពិនិត្យលេខទូរស័ព្ទ ឬប្រវត្តិរូបឱ្យបានច្បាស់។ តើវាជាមនុស្សចម្លែក គណនីមិនស្គាល់ ឬអ្នកក្លែងបន្លំជាមិត្ត?",
   },
   {
-    en: "Verify news from at least 2 independent sources before sharing it with friends or family.",
-    kh: "ផ្ទៀងផ្ទាត់ព័ត៌មានពីប្រភពឯករាជ្យយ៉ាងតិច ២ ប្រភព មុននឹងចែករំលែកជាមួយមិត្ត ឬគ្រួសារ។",
+    titleEn: "Protect Your OTP",
+    titleKh: "ការពារលេខ OTP របស់អ្នក",
+    descEn: "Never share your One-Time Password or login verification codes with anyone — including someone who claims to be customer support.",
+    descKh: "មិនត្រូវចែករំលែកលេខ OTP ឬលេខកូដផ្ទៀងផ្ទាត់ការចូលរបស់អ្នកជាមួយនរណាម្នាក់ — ទោះបីអ្នកនោះអះអាងថាជាក្រុមការងារក៏ដោយ។",
   },
   {
-    en: "Log out of your accounts on any shared device (school computer, phone shop) when you're done.",
-    kh: "ចាកចេញ (log out) ពីគណនីរបស់អ្នកនៅឧបករណ៍ប្រើរួម (កុំព្យូទ័រសាលា ហាងទូរស័ព្ទ) ពេលអ្នករួចរាល់។",
+    titleEn: "Check the Link",
+    titleKh: "ពិនិត្យតំណភ្ជាប់",
+    descEn: "Look for spelling tricks: 'g00gle.com' or 'telegrarn.org' are not real sites. The correct domain must match exactly.",
+    descKh: "រកមើលល្បិចអក្ខរាវិរុទ្ធ: 'g00gle.com' ឬ 'telegrarn.org' មិនមែនជាគេហទំព័រពិត។ ដែនត្រឹមត្រូវត្រូវតែត្រូវគ្នាបញ្ជាក់ដាច់ខាត។",
   },
   {
-    en: "Enable 2-factor authentication (2FA) on your Facebook, email, and banking apps today.",
-    kh: "បើកការផ្ទៀងផ្ទាត់ ២ ជំហាន (2FA) នៅ Facebook អ៊ីមែល និងកម្មវិធីធនាគាររបស់អ្នកថ្ងៃនេះ។",
+    titleEn: "Report & Block",
+    titleKh: "រាយការណ៍ និងរារាំង",
+    descEn: "If you spot a scam, report it to the platform and immediately block the sender. You may protect someone else from becoming a victim.",
+    descKh: "ប្រសិនបើអ្នករកឃើញការបោកប្រាស់ ត្រូវរាយការណ៍ទៅប្រព័ន្ធ ហើយរារាំងអ្នកផ្ញើភ្លាមៗ។ អ្នកអាចការពារអ្នកផ្សេងទៀតពីការក្លាយជាជនរងគ្រោះ។",
   },
 ];
 
@@ -205,6 +222,7 @@ export function SafetyPage() {
 
   // Checklist state
   const [checked, setChecked] = useState<boolean[]>(Array(CHECKLIST_ITEMS.length).fill(false));
+  const [pingSet, setPingSet] = useState<Set<number>>(new Set());
 
   const current = SCENARIOS[quizIndex];
 
@@ -231,11 +249,38 @@ export function SafetyPage() {
   };
 
   const toggleCheck = (i: number) => {
+    const nowChecked = !checked[i];
     setChecked((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
+    if (nowChecked) {
+      setPingSet((prev) => new Set([...prev, i]));
+      setTimeout(() => {
+        setPingSet((prev) => { const n = new Set(prev); n.delete(i); return n; });
+      }, 650);
+    }
   };
+
+  const allProtected = checked.every(Boolean);
 
   return (
     <div className="min-h-screen bg-background">
+
+      <style>{`
+        @keyframes ping-once {
+          0%   { transform: scale(1);   opacity: 0.8; }
+          60%  { transform: scale(1.9); opacity: 0.3; }
+          100% { transform: scale(2.4); opacity: 0;   }
+        }
+        @keyframes protected-in {
+          0%   { transform: scale(0.75) translateY(12px); opacity: 0; }
+          65%  { transform: scale(1.04) translateY(-2px); opacity: 1; }
+          100% { transform: scale(1)   translateY(0);    opacity: 1; }
+        }
+        @keyframes star-spin {
+          0%   { transform: rotate(0deg)   scale(1);    }
+          50%  { transform: rotate(180deg) scale(1.25); }
+          100% { transform: rotate(360deg) scale(1);    }
+        }
+      `}</style>
 
       {/* ── Hero ── */}
       <div className="relative bg-gradient-to-br from-[#0d1b2a] via-[#1a2e4a] to-[#0d1b2a] text-white overflow-hidden">
@@ -439,58 +484,127 @@ export function SafetyPage() {
           )}
         </section>
 
-        {/* ── Daily Safety Checklist ── */}
+        {/* ── 5-Step Digital Safety Checklist ── */}
         <section>
           <div className="flex items-center gap-2 mb-2">
             <Lock className="w-5 h-5 text-[#fbbf24]" />
             <h2 className={`font-display font-bold text-foreground text-2xl ${kh ? "font-khmer" : ""}`}>
-              {t("Daily Safety Checklist", "បញ្ជីត្រួតពិនិត្យប្រចាំថ្ងៃ")}
+              {t("5-Step Digital Safety Checklist", "បញ្ជីត្រួតពិនិត្យ ៥ ជំហាន")}
             </h2>
           </div>
           <p className={`text-muted-foreground text-sm mb-7 ${kh ? "font-khmer" : ""}`}>
-            {t("5 habits that take under 30 seconds each — check them off every day.",
-              "ទំនោរ ៥ ដែលប្រើពេលតិចជាង ៣០ វិនាទីម្នាក់ — ធីកវារៀងរាល់ថ្ងៃ។")}
+            {t(
+              "Tap each card to mark it complete. Check all 5 to earn your protection badge.",
+              "ចុចកាតនីមួយៗ ដើម្បីសម្គាល់ថាបានបញ្ចប់។ ធីកទាំង ៥ ដើម្បីទទួលផ្លាកសញ្ញាការពារ។"
+            )}
           </p>
 
-          <div className="bg-card rounded-2xl border-2 border-border overflow-hidden shadow-sm">
-            <div className="h-1.5 bg-gradient-to-r from-[#fbbf24] to-[#f59e0b]" />
-            <div className="divide-y divide-border">
-              {CHECKLIST_ITEMS.map((item, i) => (
-                <button
-                  key={i}
-                  onClick={() => toggleCheck(i)}
-                  className={`w-full flex items-start gap-4 px-6 py-5 text-left transition-colors
-                    ${checked[i] ? "bg-emerald-50 dark:bg-emerald-950/20" : "hover:bg-muted/40"}`}
-                >
-                  <div className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center mt-0.5 transition-colors
-                    ${checked[i] ? "bg-emerald-500 border-emerald-500" : "border-muted-foreground/30"}`}>
-                    {checked[i] && <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={2.5} />}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#fbbf24]/20 text-[#b45309] font-bold text-xs mr-2 flex-shrink-0`}>
-                      {i + 1}
+          {/* Card list */}
+          <div className="space-y-4">
+            {CHECKLIST_ITEMS.map((item, i) => (
+              <button
+                key={i}
+                onClick={() => toggleCheck(i)}
+                className={`w-full text-left flex items-center gap-5 p-5 rounded-2xl border-2 shadow-sm
+                  hover:shadow-md active:scale-[0.99] transition-all duration-200
+                  ${checked[i]
+                    ? "border-emerald-400/60 bg-emerald-50 dark:bg-emerald-950/20"
+                    : "border-[#fbbf24]/40 bg-card hover:border-[#fbbf24]/80 hover:bg-[#fbbf24]/5"
+                  }`}
+              >
+                {/* Large step number */}
+                <div className="flex-shrink-0 w-14 text-center">
+                  <span className={`font-display font-black text-3xl leading-none transition-colors
+                    ${checked[i] ? "text-emerald-500" : "text-[#fbbf24]"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Text block */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Shield className="w-3.5 h-3.5 text-[#fbbf24] flex-shrink-0" />
+                    <span className={`font-bold text-[#0d1b2a] dark:text-foreground text-sm
+                      ${checked[i] ? "line-through text-muted-foreground" : ""}
+                      ${kh ? "font-khmer" : "font-display"}`}>
+                      {kh ? item.titleKh : item.titleEn}
                     </span>
-                    <span className={`text-sm text-foreground leading-relaxed ${checked[i] ? "line-through text-muted-foreground" : ""} ${kh ? "font-khmer leading-loose" : ""}`}>
-                      {kh ? item.kh : item.en}
-                    </span>
                   </div>
-                </button>
-              ))}
-            </div>
-            {/* Progress footer */}
-            <div className="px-6 py-4 bg-muted/30 border-t border-border flex items-center justify-between">
-              <span className={`text-sm font-semibold text-foreground ${kh ? "font-khmer" : ""}`}>
-                {checked.filter(Boolean).length}/{CHECKLIST_ITEMS.length}{" "}
-                {t("completed", "បានបញ្ចប់")}
-              </span>
-              {checked.every(Boolean) && (
-                <span className={`text-xs text-emerald-600 font-bold flex items-center gap-1 ${kh ? "font-khmer" : ""}`}>
-                  <Shield className="w-3.5 h-3.5" fill="currentColor" />
-                  {t("All clear! Stay safe today. 🛡️", "ស្អាតទាំងអស់! ស្ថិតសុវត្ថិភាពថ្ងៃនេះ។ 🛡️")}
-                </span>
-              )}
-            </div>
+                  <p className={`text-xs text-muted-foreground leading-relaxed
+                    ${checked[i] ? "opacity-60" : ""}
+                    ${kh ? "font-khmer leading-loose" : ""}`}>
+                    {kh ? item.descKh : item.descEn}
+                  </p>
+                </div>
+
+                {/* Checkbox with ping ring */}
+                <div className="flex-shrink-0 relative w-9 h-9 flex items-center justify-center">
+                  {/* One-shot ping ring */}
+                  {pingSet.has(i) && (
+                    <div
+                      className="absolute inset-0 rounded-full border-2 border-emerald-400"
+                      style={{ animation: "ping-once 0.65s ease-out forwards" }}
+                    />
+                  )}
+                  <div className={`w-9 h-9 rounded-full border-2 flex items-center justify-center transition-all duration-200
+                    ${checked[i]
+                      ? "bg-emerald-500 border-emerald-500 shadow-md shadow-emerald-300/40"
+                      : "border-[#fbbf24] bg-white dark:bg-card"}`}>
+                    {checked[i] && (
+                      <CheckCircle2 className="w-5 h-5 text-white" strokeWidth={2.5} />
+                    )}
+                  </div>
+                </div>
+              </button>
+            ))}
           </div>
+
+          {/* Progress bar */}
+          <div className="mt-6 flex items-center gap-3">
+            <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#fbbf24] to-emerald-400 rounded-full transition-all duration-500"
+                style={{ width: `${(checked.filter(Boolean).length / CHECKLIST_ITEMS.length) * 100}%` }}
+              />
+            </div>
+            <span className={`text-xs font-bold text-muted-foreground whitespace-nowrap ${kh ? "font-khmer" : ""}`}>
+              {checked.filter(Boolean).length}/{CHECKLIST_ITEMS.length} {t("done", "បានបញ្ចប់")}
+            </span>
+          </div>
+
+          {/* ── Celebration banner ── */}
+          {allProtected && (
+            <div
+              className="mt-8 relative overflow-hidden bg-gradient-to-br from-[#0d1b2a] via-[#0f2c1a] to-[#0d1b2a] rounded-3xl p-10 text-center"
+              style={{ animation: "protected-in 0.45s cubic-bezier(0.175,0.885,0.32,1.275) forwards" }}
+            >
+              {/* Gold border */}
+              <div className="absolute inset-0 rounded-3xl border-2 border-[#fbbf24]/50 pointer-events-none" />
+              {/* Top stripe */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#fbbf24] via-emerald-400 to-[#fbbf24]" />
+
+              {/* Spinning shield */}
+              <div
+                className="mx-auto mb-4 w-16 h-16 flex items-center justify-center"
+                style={{ animation: "star-spin 0.7s ease-out forwards" }}
+              >
+                <Shield className="w-16 h-16 text-[#fbbf24]" fill="currentColor" />
+              </div>
+
+              <h3 className={`font-display font-black text-white text-3xl mb-2 ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t("You are Protected! 🛡️", "អ្នកត្រូវបានការពារ! 🛡️")}
+              </h3>
+              <p className={`text-emerald-300 text-sm mb-1 ${kh ? "" : "font-khmer"}`}>
+                {kh ? "You are Protected! 🛡️" : "អ្នកត្រូវបានការពារ! 🛡️"}
+              </p>
+              <p className={`text-white/55 text-xs mt-3 max-w-sm mx-auto ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "You know all 5 safety rules. Share this knowledge — it could protect someone you care about.",
+                  "អ្នកស្គាល់ច្បាប់សុវត្ថិភាព ៥ ទាំងអស់ហើយ។ ចែករំលែកចំណេះដឹងនេះ — វាអាចការពារអ្នកណាម្នាក់ដែលអ្នកស្រឡាញ់។"
+                )}
+              </p>
+            </div>
+          )}
         </section>
 
       </div>
