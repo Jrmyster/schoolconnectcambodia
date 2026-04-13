@@ -33,7 +33,7 @@ const CHARITIES: Charity[] = [
     nameKh: "CCT — កុមារនៃថ្ងៃស្អែករបស់កម្ពុជា",
     descEn: "Supports access to quality education and social services for underprivileged children and families.",
     descKh: "គាំទ្រការទទួលបានការអប់រំប្រកបដោយគុណភាព និងសេវាសង្គមដល់កុមារ និងគ្រួសារដែលទទួលរងការខ្វះខាត។",
-    url: "https://cct.org.kh/",
+    url: "https://cambodianchildrenstrust.org/",
     accent: "from-[#F59E0B] to-[#FBBF24]",
   },
   {
