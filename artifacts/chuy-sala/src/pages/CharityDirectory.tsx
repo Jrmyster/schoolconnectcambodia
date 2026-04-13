@@ -89,7 +89,7 @@ const CHARITIES: Charity[] = [
     nameKh: "Don Bosco — ការបណ្តុះបណ្តាលវិជ្ជាជីវៈ",
     descEn: "Offers vocational training and technical education to youth, preparing them for dignified employment.",
     descKh: "ផ្តល់ការបណ្តុះបណ្តាលវិជ្ជាជីវៈ និងការអប់រំបច្ចេកទេសដល់យុវវ័យ ដើម្បីរៀបចំពួកគេសម្រាប់ការងារមានតម្លៃ។",
-    url: "https://www.donboscokh.org/",
+    url: "https://donboscocambodia.org/",
     accent: "from-[#B45309] to-[#D97706]",
   },
 ];
