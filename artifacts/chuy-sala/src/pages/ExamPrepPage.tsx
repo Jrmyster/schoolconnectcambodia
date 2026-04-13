@@ -185,10 +185,10 @@ export function ExamPrepPage() {
             <div className="mt-10 p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="flex-1">
                 <p className={`font-bold text-amber-800 dark:text-amber-300 text-sm ${kh ? "font-khmer" : ""}`}>
-                  {t("Looking for English language exam practice?", "កំពុងស្វែងរកការហ្វឹកហ្វឺនប្រឡងភាសាអង់គ្លេស?")}
+                  {t("Comprehensive Exam Practice & Quiz Generation", "ការហ្វឹកហ្វឺនប្រឡងទូលំទូលាយ និងការបង្កើតកម្រងសំណួរ")}
                 </p>
                 <p className={`text-amber-700/75 dark:text-amber-400/75 text-xs mt-0.5 ${kh ? "font-khmer" : ""}`}>
-                  {t("Visit the dedicated Khmer English Exam site for language study resources.", "ចូលទស្សនាគេហទំព័រ Khmer English Exam សម្រាប់ធនធានសិក្សាភាសា។")}
+                  {t("Access exam guidance and custom quiz generation for any school subject, including English, Science, and Math.", "ការណែនាំអំពីការប្រឡង និងការបង្កើតកម្រងសំណួរសម្រាប់គ្រប់មុខវិជ្ជាសិក្សា រួមទាំងភាសាអង់គ្លេស វិទ្យាសាស្ត្រ និងគណិតវិទ្យា។")}
                 </p>
               </div>
               <a
