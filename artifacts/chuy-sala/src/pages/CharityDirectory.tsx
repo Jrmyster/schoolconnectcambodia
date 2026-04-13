@@ -17,7 +17,7 @@ const CHARITIES: Charity[] = [
     nameKh: "EYC — សហគ្រិនសម្រាប់យុវវ័យកម្ពុជា",
     descEn: "Empowers Cambodian youth through entrepreneurship training and community leadership programs.",
     descKh: "ជំរុញយុវវ័យកម្ពុជាតាមរយៈការបណ្តុះបណ្តាលសហគ្រិន និងកម្មវិធីភាពជាអ្នកដឹកនាំសហគមន៍។",
-    url: "https://www.eyc.org.kh/",
+    url: "https://eycambodia.org/",
     accent: "from-[#1A6EA8] to-[#2196F3]",
   },
   {
