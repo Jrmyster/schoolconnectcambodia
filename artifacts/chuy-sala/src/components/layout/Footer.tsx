@@ -1,5 +1,6 @@
 import { Heart } from "lucide-react";
 import { useTranslation } from "@/store/use-language";
+import { DownloadGuideButton } from "@/components/DownloadGuideButton";
 
 export function Footer() {
   const t = useTranslation();
@@ -46,11 +47,12 @@ export function Footer() {
             <h4 className="font-display font-bold text-lg text-white mb-6">
               {t("Make a Difference", "បង្កើតភាពខុសគ្នា")}
             </h4>
-            <div className="bg-white/10 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-              <p className="text-sm mb-4 flex items-center gap-2">
-                <Heart className="w-4 h-4 text-destructive" fill="currentColor" />
+            <div className="bg-white/10 p-6 rounded-2xl border border-white/10 backdrop-blur-sm flex flex-col gap-4">
+              <p className="text-sm flex items-center gap-2">
+                <Heart className="w-4 h-4 text-destructive flex-shrink-0" fill="currentColor" />
                 {t("100% of your donation goes directly to the schools.", "១០០% នៃការបរិច្ចាគរបស់អ្នកទៅដល់សាលារៀនដោយផ្ទាល់។")}
               </p>
+              <DownloadGuideButton className="w-full justify-center" />
             </div>
           </div>
         </div>

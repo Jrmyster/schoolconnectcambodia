@@ -4,6 +4,7 @@ import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Loader2, Search, SearchX, Heart, SlidersHorizontal, Share2, Copy, Check } from "lucide-react";
 import { SupportModal } from "@/components/SupportModal";
+import { DownloadGuideButton } from "@/components/DownloadGuideButton";
 
 const SHARE_TITLE =
   "Check out School Connect Cambodia - Supporting rural education through tech.";
@@ -317,6 +318,20 @@ export function BrowseNeeds() {
           </div>
 
           {supportOpen && <SupportModal onClose={() => setSupportOpen(false)} />}
+
+          {/* Download Resource Guide */}
+          <div className="mt-10 pt-10 border-t border-border flex flex-col items-center gap-3">
+            <h3 className={`text-xl font-bold text-foreground ${language === "kh" ? "font-khmer" : "font-display"}`}>
+              {t("Take It Offline", "យកទៅប្រើដោយគ្មានអ៊ីនធឺណិត")}
+            </h3>
+            <p className={`text-sm text-muted-foreground max-w-sm mx-auto ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "Save the resource guide to your device and share it with students and teachers in areas without reliable internet.",
+                "រក្សាទុកមគ្គុទ្ទេសក៍ធនធាននៅលើឧបករណ៍របស់អ្នក ហើយចែករំលែកជាមួយសិស្ស និងគ្រូនៅតំបន់ដែលមានអ៊ីនធឺណិតមិនស្ថិតស្ថេរ។"
+              )}
+            </p>
+            <DownloadGuideButton />
+          </div>
 
           {/* Spread the Word */}
           <div className="mt-12 pt-10 border-t border-border">
