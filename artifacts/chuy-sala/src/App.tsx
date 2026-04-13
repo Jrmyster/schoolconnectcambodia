@@ -17,6 +17,7 @@ import { SchoolProfile } from "@/pages/SchoolProfile";
 import { CharityDirectory } from "@/pages/CharityDirectory";
 import { LaunchpadPage } from "@/pages/LaunchpadPage";
 import { SanctuaryPage } from "@/pages/SanctuaryPage";
+import { AlumniPage } from "@/pages/AlumniPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -52,6 +53,7 @@ function Router() {
           <Route path="/charities" component={CharityDirectory} />
           <Route path="/launchpad" component={LaunchpadPage} />
           <Route path="/sanctuary" component={SanctuaryPage} />
+          <Route path="/alumni" component={AlumniPage} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />
           <Route component={NotFound} />

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink, BookOpen, Leaf } from "lucide-react";
+import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink, BookOpen, Leaf, Star } from "lucide-react";
 import { useState, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ export function Navbar() {
     { href: "/charities", label: t("Partners", "ដៃគូ"), icon: Handshake },
     { href: "/launchpad", label: t("Scholarships", "អាហារូបករណ៍"), icon: BookOpen },
     { href: "/sanctuary", label: t("Sanctuary", "សុខុមាលភាព"), icon: Leaf },
+    { href: "/alumni", label: t("Success Stories", "រឿងជោគជ័យ"), icon: Star },
     { href: "https://khmerenglishexam.com", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap, external: true },
     { href: "/admin", label: t("Admin", "គ្រប់គ្រង"), icon: PlusCircle },
   ];
