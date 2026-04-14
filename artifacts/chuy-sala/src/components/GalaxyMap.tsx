@@ -87,10 +87,18 @@ function GalaxyFallback({ kh }: { kh: boolean }) {
 
 const PARTICLE_COUNT = 8000;
 const MAX_RADIUS     = 5.0;
-const ARMS           = 2;
+// Barred spiral constants
+// BAR_LENGTH ≈ 1/3 of total radius → arms originate from bar tips
+const BAR_LENGTH     = MAX_RADIUS * 0.33; // 1.65 units
+const ARM_WIND       = Math.PI * 2.8;     // total winding angle of each arm
 
-// ── Galaxy geometry ──────────────────────────────────────────────────────────
-
+// ── Galaxy geometry (Barred Spiral) ──────────────────────────────────────────
+//
+//  Structure (% of PARTICLE_COUNT):
+//   10 % → dense spherical bulge at absolute centre
+//   18 % → linear central bar along the X-axis (denser toward middle)
+//   72 % → 2 spiral arms that originate from the two ends of the bar
+//
 function useGalaxyGeometry() {
   return useMemo(() => {
     const positions = new Float32Array(PARTICLE_COUNT * 3);
@@ -100,38 +108,54 @@ function useGalaxyGeometry() {
     const midColor  = new THREE.Color(0.65, 0.80, 1.0);  // sky blue
     const edgeColor = new THREE.Color(0.35, 0.25, 0.85); // deep violet
 
-    const CORE_SHARE = 0.15; // 15 % of particles form the central bulge
+    const BULGE_END = Math.floor(PARTICLE_COUNT * 0.10);
+    const BAR_END   = Math.floor(PARTICLE_COUNT * 0.28); // 10 % + 18 %
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
       let x = 0, y = 0, z = 0;
 
-      if (i < PARTICLE_COUNT * CORE_SHARE) {
-        // ── Galactic bulge (compact, slightly spherical) ──
-        const r     = Math.pow(Math.random(), 2) * MAX_RADIUS * 0.18;
+      if (i < BULGE_END) {
+        // ── Spherical bulge — dense sphere overlapping bar centre ──
+        const r     = Math.pow(Math.random(), 2) * MAX_RADIUS * 0.16;
         const theta = Math.random() * Math.PI * 2;
         const phi   = Math.acos(2 * Math.random() - 1);
         x = r * Math.sin(phi) * Math.cos(theta);
-        y = (Math.random() - 0.5) * r * 0.5;
+        y = (Math.random() - 0.5) * r * 0.55;
         z = r * Math.sin(phi) * Math.sin(theta);
+
+      } else if (i < BAR_END) {
+        // ── Central bar — linear along X-axis ──
+        // Exponent > 1 biases particles toward the bar centre (x ≈ 0)
+        const sign = Math.random() < 0.5 ? 1 : -1;
+        const u    = Math.pow(Math.random(), 1.8); // 0..1, centre-heavy
+        x          = sign * u * BAR_LENGTH;
+        // Bar cross-section tapers from full-width at centre to ~35 % at tips
+        const taper = 1.0 - (Math.abs(x) / BAR_LENGTH) * 0.65;
+        y = (Math.random() - 0.5) * 0.14 * taper;
+        z = (Math.random() - 0.5) * 0.22 * taper;
+
       } else {
-        // ── Logarithmic spiral arms ──
-        const arm      = Math.floor(Math.random() * ARMS);
-        const armStart = (arm / ARMS) * Math.PI * 2;
+        // ── Spiral arms originating from bar tips ──
+        //  arm 0 → +X tip  (armBaseAngle = 0)
+        //  arm 1 → -X tip  (armBaseAngle = π)
+        const arm          = Math.floor(Math.random() * 2);
+        const armBaseAngle = arm * Math.PI;
+        const tipX         = Math.cos(armBaseAngle) * BAR_LENGTH;
+        const tipZ         = Math.sin(armBaseAngle) * BAR_LENGTH;
 
-        // Place along arm from inner edge to outer edge
-        const t     = Math.random(); // 0 = inner, 1 = outer
-        const r     = MAX_RADIUS * 0.15 + t * MAX_RADIUS * 0.85;
-        const wind  = 3.2; // total radians the arm winds
-        const angle = armStart + t * wind;
+        // t = 0 at bar tip, t = 1 at galaxy edge
+        const t     = Math.random();
+        const r     = t * (MAX_RADIUS - BAR_LENGTH);   // distance from bar tip
+        const angle = armBaseAngle + t * ARM_WIND;
 
-        // Random scatter perpendicular to arm, increasing with radius
-        const scatter = 0.28 * (0.3 + t * 0.7);
+        // Perpendicular scatter grows with radius
+        const scatter   = 0.28 * (0.2 + t * 0.8);
         const perpAngle = angle + Math.PI / 2;
-        const sOffset  = (Math.random() - 0.5) * scatter * r;
+        const sOffset   = (Math.random() - 0.5) * scatter * (r + 0.4);
 
-        x = Math.cos(angle) * r + Math.cos(perpAngle) * sOffset;
-        z = Math.sin(angle) * r + Math.sin(perpAngle) * sOffset;
+        x = tipX + Math.cos(angle) * r + Math.cos(perpAngle) * sOffset;
+        z = tipZ + Math.sin(angle) * r + Math.sin(perpAngle) * sOffset;
         y = (Math.random() - 0.5) * 0.22 * (1 - t * 0.7); // disc thins at edges
       }
 
@@ -139,7 +163,7 @@ function useGalaxyGeometry() {
       positions[i3 + 1] = y;
       positions[i3 + 2] = z;
 
-      // ── Per-particle colour (distance from centre, normalised 0-1) ──
+      // ── Per-particle colour (radial distance from centre, normalised 0-1) ──
       const dist  = Math.sqrt(x * x + z * z) / MAX_RADIUS;
       const color = new THREE.Color();
       if (dist < 0.3) {
@@ -147,7 +171,6 @@ function useGalaxyGeometry() {
       } else {
         color.lerpColors(midColor, edgeColor, (dist - 0.3) / 0.7);
       }
-      // Add slight brightness variance for sparkle
       const brightness = 0.75 + Math.random() * 0.25;
       colors[i3]     = Math.min(color.r * brightness, 1);
       colors[i3 + 1] = Math.min(color.g * brightness, 1);
@@ -237,10 +260,12 @@ function EarthMarker() {
     if (ringRef.current) ringRef.current.material.opacity = 0.35 + 0.35 * Math.sin(t * 2.2 + 1);
   });
 
-  // Orion Arm, ~26,000 ly from centre.
-  // Scaled: MAX_RADIUS = 5 ≈ 50,000 ly → Earth ≈ 2.6 units, offset slightly in arm
+  // Orion Spur, arm 0, t≈0.55 along the barred spiral arm:
+  //   tipX=1.65, tipZ=0 (bar +X end), arm angle=4.84 rad, r=1.84
+  //   → x=1.65+cos(4.84)*1.84≈1.88, z=sin(4.84)*1.84≈-1.83
+  //   dist from centre ≈ 2.63 units ≈ 26,300 light-years ✓
   return (
-    <group position={[2.55, 0.03, 0.85]}>
+    <group position={[1.88, 0.03, -1.83]}>
       <mesh ref={dotRef}>
         <sphereGeometry args={[0.065, 10, 10]} />
         <meshBasicMaterial color="#22ffcc" />
