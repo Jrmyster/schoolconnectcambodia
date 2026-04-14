@@ -1,0 +1,48 @@
+{
+  "Biological and Biomedical Sciences (វិទ្យាសាស្ត្រជីវសាស្ត្រ និងជីវវេជ្ជសាស្ត្រ)": {
+    "Biomedical Researcher (អ្នកស្រាវជ្រាវជីវវេជ្ជសាស្ត្រ)": {
+      "tasks": "Study viruses and bacteria in labs, develop new medicines, and analyze genetic data to cure diseases. (សិក្សាវីរុស និងបាក់តេរីក្នុងមន្ទីរពិសោធន៍ បង្កើតឱសថថ្មីៗ និងវិភាគទិន្នន័យហ្សែនដើម្បីព្យាបាលជំងឺ។)",
+      "impact": "Directly contribute to global health breakthroughs and improve the biological resilience of the nation. (រួមចំណែកដោយផ្ទាល់ដល់របកគំហើញសុខភាពសកល និងកែលម្អភាពធន់នៃជីវសាស្ត្ររបស់ជាតិ។)"
+    },
+    "Microbiologist (អ្នកមីក្រូជីវវិទូ)": {
+      "tasks": "Analyze microorganisms in water and food samples to ensure they are safe for human consumption. (វិភាគមីក្រូសរីរាង្គក្នុងសំណាកទឹក និងអាហារ ដើម្បីធានាថាវាមានសុវត្ថិភាពសម្រាប់ការបរិភោគ។)",
+      "impact": "Prevent pandemics and large-scale food poisoning, protecting the metabolic health of the public. (ការពារការរីករាលដាលនៃជំងឺ និងការពុលអាហារទ្រង់ទ្រាយធំ ការពារសុខភាពរំលាយអាហាររបស់សាធារណជន។)"
+    }
+  },
+  "Library Science (បណ្ណាល័យវិទ្យាសាស្ត្រ)": {
+    "Information Architect (អ្នករៀបចំរចនាសម្ព័ន្ធព័ត៌មាន)": {
+      "tasks": "Organize large digital databases, manage national archives, and help people find rare research materials. (រៀបចំមូលដ្ឋានទិន្នន័យឌីជីថលធំៗ គ្រប់គ្រងបណ្ណសារដ្ឋានជាតិ និងជួយមនុស្សឱ្យស្វែងរកឯកសារស្រាវជ្រាវកម្រៗ។)",
+      "impact": "Ensure that the collective knowledge of humanity is preserved and easily accessible to every student. (ធានាថាចំណេះដឹងរួមរបស់មនុស្សជាតិត្រូវបានរក្សាទុក និងអាចចូលប្រើប្រាស់បានយ៉ាងងាយស្រួលសម្រាប់សិស្សគ្រប់រូប។)"
+    }
+  },
+  "Multi/interdisciplinary Studies (ការសិក្សាពហុជំនាញ)": {
+    "Sustainability Consultant (ទីប្រឹក្សានិរន្តរភាព)": {
+      "tasks": "Combine knowledge of economics, science, and policy to help companies reduce their environmental footprint. (បញ្ចូលចំណេះដឹងសេដ្ឋកិច្ច វិទ្យាសាស្ត្រ និងគោលនយោបាយ ដើម្បីជួយក្រុមហ៊ុនកាត់បន្ថយផលប៉ះពាល់បរិស្ថាន។)",
+      "impact": "Solve complex, modern problems that a single field of study cannot handle alone. (ដោះស្រាយបញ្ហាទំនើបៗដ៏ស្មុគស្មាញ ដែលជំនាញតែមួយមិនអាចដោះស្រាយបានដោយម្នាក់ឯង។)"
+    }
+  },
+  "Precision Production (ផលិតកម្មច្បាស់លាស់)": {
+    "CNC Machinist (អ្នកបញ្ជាម៉ាស៊ីនផលិតកម្មច្បាស់លាស់)": {
+      "tasks": "Use computer-controlled tools to create high-precision metal parts for medical devices or aerospace. (ប្រើឧបករណ៍បញ្ជាដោយកុំព្យូទ័រ ដើម្បីបង្កើតគ្រឿងបន្លាស់លោហៈដែលមានភាពសុក្រឹតខ្ពស់សម្រាប់ឧបករណ៍វេជ្ជសាស្ត្រ ឬអាកាសចរណ៍។)",
+      "impact": "Build the intricate physical components that make modern high-tech life possible. (កសាងសមាសភាគរូបវន្តដ៏ស្មុគស្មាញ ដែលធ្វើឱ្យជីវិតបច្ចេកវិទ្យាទំនើបអាចដំណើរការបាន។)"
+    }
+  },
+  "Theology and Religious Vocations (ទេវវិទ្យា និងវិជ្ជាជីវៈសាសនា)": {
+    "Community Spiritual Leader (អ្នកដឹកនាំស្មារតីសហគមន៍)": {
+      "tasks": "Lead religious services, provide ethical guidance, and support families during major life transitions. (ដឹកនាំពិធីសាសនា ផ្តល់ការណែនាំអំពីសីលធម៌ និងគាំទ្រគ្រួសារក្នុងអំឡុងពេលផ្លាស់ប្តូរជីវិតសំខាន់ៗ។)",
+      "impact": "Provide the moral framework and spiritual comfort that stabilizes society during times of stress. (ផ្តល់ក្របខ័ណ្ឌសីលធម៌ និងការលួងលោមផ្លូវចិត្តដែលជួយឱ្យសង្គមមានស្ថិរភាពក្នុងគ្រាលំបាក។)"
+    }
+  },
+  "Transportation and Materials Moving (ការដឹកជញ្ជូន និងការផ្លាស់ទីសម្ភារៈ)": {
+    "Logistics Manager (អ្នកគ្រប់គ្រងភស្តុភារ)": {
+      "tasks": "Coordinate the movement of goods across provinces, manage shipping routes, and optimize supply chains. (សម្របសម្រួលការដឹកជញ្ជូនទំនិញឆ្លងកាត់ខេត្ត គ្រប់គ្រងផ្លូវដឹកជញ្ជូន និងបង្កើនប្រសិទ្ធភាពខ្សែសង្វាក់ផ្គត់ផ្គង់។)",
+      "impact": "Ensure that food, medicine, and technology reach every corner of Cambodia efficiently and affordably. (ធានាថាអាហារ ឱសថ និងបច្ចេកវិទ្យាទៅដល់គ្រប់ទីកន្លែងក្នុងប្រទេសកម្ពុជាប្រកបដោយប្រសិទ្ធភាព និងតម្លៃសមរម្យ។)"
+    }
+  },
+  "Liberal Arts and Sciences Studies and Humanities (ការសិក្សាសិល្បៈសេរី វិទ្យាសាស្ត្រ និងមនុស្សសាស្ត្រ)": {
+    "Policy Analyst (អ្នកវិភាគគោលនយោបាយ)": {
+      "tasks": "Evaluate government programs, write briefing reports, and suggest improvements for education and healthcare. (វាយតម្លៃកម្មវិធីរដ្ឋាភិបាល សរសេររបាយការណ៍សង្ខេប និងផ្តល់យោបល់កែលម្អសម្រាប់វិស័យអប់រំ និងសុខាភិបាល។)",
+      "impact": "Critical thinking applied to society to ensure that laws and rules work for the benefit of all citizens. (ប្រើការគិតស៊ីជម្រៅលើសង្គម ដើម្បីធានាថាច្បាប់ និងបទប្បញ្ញត្តិបម្រើដល់ផលប្រយោជន៍ប្រជាពលរដ្ឋគ្រប់រូប។)"
+    }
+  }
+}

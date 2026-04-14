@@ -112,7 +112,54 @@
     "en": "Area Studies",
     "kh": "ការសិក្សាតំបន់",
     "icon": "🗺️",
-    "careers": []
+    "careers": [
+      {
+        "id": "cultural-anthropologist",
+        "en": "Cultural Anthropologist",
+        "kh": "អ្នកនរវិទ្យាវប្បធម៌",
+        "tasks": {
+          "en": [
+            "Conduct field research in rural communities and with indigenous groups to document languages, rituals, and oral histories",
+            "Analyze the social and cultural impact of rapid economic modernization on traditional Khmer values and community structures",
+            "Publish academic papers and contribute to national and international encyclopedias of Southeast Asian cultures and peoples",
+            "Advise government ministries and NGOs on culturally sensitive approaches to development, education, and health programs"
+          ],
+          "kh": [
+            "ធ្វើការស្រាវជ្រាវវាល នៅក្នុងសហគមន៍ជនបទ និងជាមួយក្រុមមនុស្សដើមភ្នំ ដើម្បីចងក្រងភាសា ពិធីបុណ្យ និងប្រវត្តិផ្ទាល់មាត់",
+            "វិភាគផលប៉ះពាល់សង្គម និងវប្បធម៌ នៃទំនើបកម្មសេដ្ឋកិច្ចរហ័ស ចំពោះតម្លៃខ្មែរប្រពៃណី និងរចនាសម្ព័ន្ធសហគមន៍",
+            "បោះពុម្ពផ្សាយអត្ថបទសិក្សា និងចូលរួមចំណែកដល់សព្វវចនាធិប្បាយជាតិ និងអន្តរជាតិ ស្ដីពីវប្បធម៌ និងប្រជាជនអាស៊ីអាគ្នេយ៍",
+            "ផ្ដល់ប្រឹក្សាដល់ក្រសួង និង NGO ស្ដីពីវិធីសាស្ត្រប្រកបដោយភាពរសើបខាងវប្បធម៌ ចំពោះកម្មវិធីអភិវឌ្ឍន៍ ការអប់រំ និងសុខភាព"
+          ]
+        },
+        "impact": {
+          "en": "Preserve the rich DNA of human diversity against the erosion of globalization, ensuring Cambodia's unique cultures survive and thrive.",
+          "kh": "អភិរក្ស DNA ដ៏ស្ម ុគស្មាញ នៃភាពចម្រុះរបស់មនុស្សជាតិ ប្រឆាំងនឹងការហូ រចូលនៃសកលភាវូបនីយកម្ម ធានាថាវប្បធម៌ ដ៏ពិសេសរបស់កម្ពុជានៅរស់នៅ និងរីកចម្រើន។"
+        }
+      },
+      {
+        "id": "diversity-inclusion-officer",
+        "en": "Diversity and Inclusion Officer",
+        "kh": "មន្ត្រីផ្នែកចម្រុះ និងបរិយាបន្ន",
+        "tasks": {
+          "en": [
+            "Audit organizational hiring practices and pay equity to identify and eliminate systemic discrimination",
+            "Design and deliver cultural sensitivity, unconscious bias, and inclusion training programs for all staff levels",
+            "Develop internal policies and grievance mechanisms that protect employees from discrimination and harassment",
+            "Produce diversity reports, set measurable inclusion targets, and present findings to senior leadership and stakeholders"
+          ],
+          "kh": [
+            "ត្រួតពិនិត្យការអនុវត្តការជ្រើសរើសបុគ្គលិក និងភាពស្មើភាពប្រាក់ឈ្នួល ដើម្បីកំណត់ និងលុបបំបាត់ការរើសអើងប្រព័ន្ធ",
+            "រៀបចំ និងផ្ដល់ការបណ្ដុះបណ្ដាល ស្ដីពីភាពរសើបខាងវប្បធម៌ ការលំអៀងដោយអចេតនា និងកម្មវិធីបរិយាបន្ន សម្រាប់បុគ្គលិកគ្រប់កម្រិត",
+            "អភិវឌ្ឍគោលនយោបាយ ផ្ទៃក្នុង និងយន្តការដោះស្រាយការតវ៉ា ដែលការពារបុគ្គលិកពីការរើសអើង និងការបៀតបៀន",
+            "ផ្លិតរបាយការណ៍ចម្រុះ កំណត់គោលដៅបរិយាបន្នដែលអាចវាស់វែងបាន និងបង្ហាញលទ្ធផលដល់ ថ្នាក់ ដឹកនាំ និងភាគទុនិក"
+          ]
+        },
+        "impact": {
+          "en": "Build a society where every individual, regardless of background, ethnicity, or gender, has an equal opportunity to succeed and contribute.",
+          "kh": "កសាងសង្គមមួយ ដែលបុគ្គលគ្រប់រូប មិនថាមកពីមជ្ឈដ្ឋានណា ជនជាតិ ឬ យេនឌ័រណាក៏ដោយ មានឱកាសស្មើ ដើម្បីទទួលបានជោគជ័យ និងចូលរួមចំណែក។"
+        }
+      }
+    ]
   },
   {
     "id": "aviation",
@@ -589,7 +636,54 @@
     "en": "Engineering Technologies",
     "kh": "បច្ចេកវិទ្យាវិស្វកម្ម",
     "icon": "⚙️",
-    "careers": []
+    "careers": [
+      {
+        "id": "automation-technologist",
+        "en": "Automation Technologist",
+        "kh": "អ្នកបច្ចេកទេសស្វ័យប្រវត្តិកម្ម",
+        "tasks": {
+          "en": [
+            "Program PLCs and industrial controllers to automate manufacturing processes and smart factory production lines",
+            "Install and calibrate robotic sensors, actuators, and vision systems for quality control on assembly lines",
+            "Monitor automated system performance dashboards and troubleshoot software and hardware faults in real time",
+            "Collaborate with engineers to design upgrade plans that improve factory productivity and reduce manual labor costs"
+          ],
+          "kh": [
+            "សរសេរកូដ PLC និងឧបករណ៍បញ្ជាឧស្សាហកម្ម ដើម្បីធ្វើស្វ័យប្រវត្តិកម្មដំណើរការផលិតកម្ម និងខ្សែសង្វាក់ផលិតកម្មរោងចក្រឆ្លាតវៃ",
+            "ដំឡើង និងប្រើតម្លើងសេនស័រមនុស្សយន្ត actuator និងប្រព័ន្ធចក្ខុ ដើម្បីគ្រប់គ្រងគុណភាពនៅលើខ្សែផ្គុំ",
+            "ត្រួតពិនិត្យផ្ទាំងបញ្ជាប្រសិទ្ធភាពប្រព័ន្ធស្វ័យប្រវត្តិ និងដោះស្រាយបញ្ហា software និង hardware ក្នុងពេលជាក់ស្ដែង",
+            "សហការជាមួយវិស្វករ ដើម្បីរៀបចំផែនការ upgrade ដែលបង្កើនផលិតភាពរោងចក្រ និងកាត់បន្ថយថ្លៃដើមពលកម្មដោយដៃ"
+          ]
+        },
+        "impact": {
+          "en": "Drive Cambodia's next industrial revolution by bridging physical machines and software, positioning the country as a smart manufacturing hub.",
+          "kh": "ជំរុញបដិវត្តន៍ឧស្សាហកម្មបន្ទាប់នៅកម្ពុជា ដោយភ្ជាប់ម៉ាស៊ីនរូបវន្ត និងកម្មវិធី ដោយដាក់ប្រទេសជាកន្លែងផ្តោតសំខាន់នៃការផលិតឆ្លាតវៃ។"
+        }
+      },
+      {
+        "id": "surveying-technician",
+        "en": "Surveying Technician",
+        "kh": "អ្នកបច្ចេកទេសវាស់វែងដីធ្លី",
+        "tasks": {
+          "en": [
+            "Use GPS receivers, total stations, and drones to collect precise geospatial data for land mapping and development projects",
+            "Establish and mark legal property boundaries for residential, commercial, and government land parcels across provinces",
+            "Process raw survey data using GIS and CAD software to produce accurate topographic maps and construction drawings",
+            "Support infrastructure projects including roads, dams, and bridges by providing critical elevation and boundary data"
+          ],
+          "kh": [
+            "ប្រើឧបករណ៍ទទួល GPS total station និងដ្រូន ដើម្បីប្រមូលទិន្នន័យភូមិស្ថានប្រកបដោយភាពជាក់លាក់ សម្រាប់គម្រោងការចែកផែនទីដី",
+            "កំណត់ និងសម្គាល់ព្រំប្រទល់ដីធ្លីផ្លូវច្បាប់ សម្រាប់ដីក្បូនលំនៅ ពាណិជ្ជកម្ម និងអចលនទ្រព្យរដ្ឋ នៅគ្រប់ខេត្ត",
+            "ដំណើរការទិន្នន័យស្ទង់ស្រស់ ដោយប្រើ GIS និងកម្មវិធី CAD ដើម្បីផលិតផែនទីជ្រុងគ្រប់ ទិដ្ឋភាព និងប្លង់សំណង់ត្រឹមត្រូវ",
+            "គាំទ្រគម្រោងហេដ្ឋារចនាសម្ព័ន្ធ រួមមានផ្លូវ ទំនប់ ស្ពាន ដោយផ្ដល់ទិន្នន័យកម្ពស់ និងព្រំដែនដ៏សំខាន់"
+          ]
+        },
+        "impact": {
+          "en": "Provide the precise maps required to safely build hospitals, schools, and infrastructure, preventing land disputes and enabling Cambodia's development.",
+          "kh": "ផ្ដល់ផែនទីជាក់លាក់ ដែលចាំបាច់ដើម្បីសាងសង់មន្ទីរពេទ្យ សាលារៀន និងហេដ្ឋារចនាសម្ព័ន្ធដោយសុវត្ថិភាព ការពារជម្លោះដីធ្លី និងជំរុញការអភិវឌ្ឍន៍កម្ពុជា។"
+        }
+      }
+    ]
   },
   {
     "id": "engineering",
@@ -704,7 +798,54 @@
     "en": "Family Sciences",
     "kh": "វិទ្យាសាស្ត្រគ្រួសារ",
     "icon": "👨‍👩‍👧",
-    "careers": []
+    "careers": [
+      {
+        "id": "nutritionist",
+        "en": "Nutritionist / Dietitian",
+        "kh": "អ្នកឯកទេសអាហារូបត្ថម្ភ",
+        "tasks": {
+          "en": [
+            "Design medically appropriate meal plans for hospital patients, including those with diabetes, malnutrition, and kidney disease",
+            "Educate school children and parents on balanced diets, local nutrient-rich foods, and safe food preparation practices",
+            "Assess community-level nutritional deficiencies and advise government health programs on targeted food supplementation",
+            "Research the nutritional value of traditional Khmer ingredients and publish findings to support evidence-based dietary guidelines"
+          ],
+          "kh": [
+            "រៀបចំផែនការអាហារស្របតាមការព្យាបាល សម្រាប់អ្នកជំងឺមន្ទីរពេទ្យ រួមមានអ្នកជំងឺទឹកនោមផ្អែម អ្នករងទុក្ខបន្ថែម និងជំងឺតម្រងនោម",
+            "អប់រំកុមារសាលា និង父母អំពីរបបអាហារ មានតុល្យភាព ចំណីស្រស់ ដែលសំបូរជីវជាតិ និងការអនុវត្តបរិភោគអាហារប្រកបដោយសុវត្ថិភាព",
+            "វាយតម្លៃកង្វះអាហារូបត្ថម្ភកម្រិតសហគមន៍ និងផ្ដល់ប្រឹក្សាដល់កម្មវិធីសុខភាពរដ្ឋ ស្ដីពីការបន្ថែមអាហារ",
+            "ស្រាវជ្រាវតម្លៃអាហារូបត្ថម្ភនៃគ្រឿងផ្សំម្ហូបខ្មែរប្រពៃណី និងបោះពុម្ពផ្សាយលទ្ធផល ដើម្បីគាំទ្រការណែនាំអាហារូបត្ថម្ភដែលផ្អែកលើភស្ដុតាង"
+          ]
+        },
+        "impact": {
+          "en": "Prevent chronic diseases and build a physically stronger, more resilient generation by improving nutrition across Cambodian homes and schools.",
+          "kh": "ការពារជំងឺរ៉ាំរ៉ៃ និងកសាងយុវជនជំនាន់ក្រោយឱ្យមានរូបរាងរឹងមាំ ដោយបង្កើនគុណភាពអាហារូបត្ថម្ភនៅក្នុងផ្ទះ និងសាលានៅទូទាំងប្រទេស។"
+        }
+      },
+      {
+        "id": "family-financial-advisor",
+        "en": "Family Financial Advisor",
+        "kh": "ទីប្រឹក្សាហិរញ្ញវត្ថុគ្រួសារ",
+        "tasks": {
+          "en": [
+            "Help rural and urban families create monthly budgets, track expenses, and build emergency savings habits",
+            "Guide families in planning for major goals including children's university fees, home purchases, and retirement",
+            "Advise smallholder farmers and micro-business owners on managing seasonal income, debt restructuring, and microloans",
+            "Educate clients on avoiding predatory lending, understanding loan terms, and accessing formal banking and insurance products"
+          ],
+          "kh": [
+            "ជួយគ្រួសារជនបទ និងទីក្រុង ក្នុងការបង្កើតថវិកាប្រចាំខែ តាមដានការចំណាយ និងកសាងទម្លាប់សន្សំប្រាក់បម្រុង",
+            "ណែនាំគ្រួសារក្នុងការគ្រោងផែនការសម្រាប់គោលដៅសំខាន់ ដូចជាថ្លៃសិក្សាសាកលវិទ្យាល័យ ការទិញផ្ទះ និងការចូលនិវត្តន៍",
+            "ផ្ដល់ប្រឹក្សាដល់កសិករ និងម្ចាស់អាជីវកម្មខ្នាតតូច ស្ដីពីការគ្រប់គ្រងប្រាក់ចំណូលតាមមូសម ការរៀបចំបំណុលឡើងវិញ និងមីក្រូឥណទាន",
+            "អប់រំអ្នកប្រើប្រាស់ ស្ដីពីការជៀសវាងការខ្ចីប្រាក់ ចំណេញ ការយល់ពីលក្ខខណ្ឌប្រាក់កម្ចី និងការចូលប្រើប្រព័ន្ធធនាគារ និងផលិតផលធានារ៉ាប់រងផ្លូវការ"
+          ]
+        },
+        "impact": {
+          "en": "Remove the crushing stress of financial instability, allowing Cambodian families to thrive, invest in education, and build intergenerational wealth.",
+          "kh": "លុបបំបាត់សម្ពាធ នៃអស្ថិរភាពហិរញ្ញវត្ថុ ដែលអនុញ្ញាតឱ្យគ្រួសារខ្មែររីកចម្រើន វិនិយោគលើការអប់រំ និងស្ថាបនាទ្រព្យសម្បត្តិឆ្លងជំនាន់។"
+        }
+      }
+    ]
   },
   {
     "id": "foreign-languages",
@@ -927,7 +1068,54 @@
     "en": "Human Services",
     "kh": "សេវាមនុស្ស",
     "icon": "🤝",
-    "careers": []
+    "careers": [
+      {
+        "id": "social-worker",
+        "en": "Social Worker",
+        "kh": "អ្នកសង្គមកិច្ច",
+        "tasks": {
+          "en": [
+            "Assess the needs of at-risk families, document case histories, and develop personalized support and safety plans",
+            "Protect vulnerable children from abuse and neglect by coordinating with courts, police, and child welfare agencies",
+            "Connect individuals and families to government benefits, NGO aid programs, healthcare, and legal assistance services",
+            "Conduct home visits and follow-up consultations to monitor client progress and adjust intervention plans as needed"
+          ],
+          "kh": [
+            "វាយតម្លៃតម្រូវការគ្រួសារដែលស្ថិតក្នុងហានិភ័យ ចងក្រងប្រវត្តិករណី និងបង្កើតផែនការគាំទ្រ និងសុវត្ថិភាពផ្ទាល់ខ្លួន",
+            "ការពារកុមារងាយរងគ្រោះពីការរំលោភបំពាន និងការធ្វេសប្រហែស ដោយសម្របសម្រួលជាមួយតុលាការ ប៉ូលីស និងទីភ្នាក់ងារសុខុមាលភាពកុមារ",
+            "ភ្ជាប់បុគ្គល និងគ្រួសារទៅនឹងអត្ថប្រយោជន៍រដ្ឋ កម្មវិធីជំនួย NGO សេវាថែទាំសុខភាព និងជំនួយផ្នែកច្បាប់",
+            "ធ្វើការចុះទៅផ្ទះ និងការពិគ្រោះតាមដាន ដើម្បីត្រួតពិនិត្យវឌ្ឍនភាពអ្នកទទួលសេវា និងកែសម្រួលផែនការអន្តរាគមន៍តាមតម្រូវការ"
+          ]
+        },
+        "impact": {
+          "en": "Act as the critical immune system of society, healing fractured communities and protecting those who cannot protect themselves.",
+          "kh": "ដើរតួជាប្រព័ន្ធភាពស៊ាំដ៏សំខាន់របស់សង្គម ព្យាបាលសហគមន៍ដែលបែកបាក់ និងការពារអ្នកដែលមិនអាចការពារខ្លួនបាន។"
+        }
+      },
+      {
+        "id": "substance-abuse-counselor",
+        "en": "Substance Abuse Counselor",
+        "kh": "អ្នកប្រឹក្សាបញ្ហាគ្រឿងញៀន",
+        "tasks": {
+          "en": [
+            "Conduct individual and group counseling sessions to help clients understand addiction and build recovery motivation",
+            "Develop personalized relapse prevention plans and coping strategies based on each client's triggers and circumstances",
+            "Coordinate with medical staff, psychiatrists, and family members to deliver integrated treatment and aftercare support",
+            "Lead community awareness workshops in schools and villages to prevent substance abuse before it starts"
+          ],
+          "kh": [
+            "ធ្វើការប្រឹក្សាបុគ្គល និងក្រុម ដើម្បីជួយអ្នកទទួលសេវាឱ្យយល់ពីការញៀន និងបង្កើតការលើកទឹកចិត្តក្នុងការស្ដារ",
+            "រៀបចំផែនការការពារការរស្លាបស្ដែង និងយុទ្ធសាស្ត្រទប់ទល់ ដោយផ្អែកលើកត្តាបង្ក និងកាលៈទេសៈផ្ទាល់ខ្លួនរបស់អ្នករៀន",
+            "សម្របសម្រួលជាមួយបុគ្គលិកវេជ្ជសាស្ត្រ អ្នកចិត្តសាស្ត្រ និងសមាជិកគ្រួសារ ដើម្បីផ្ដល់ការព្យាបាលដ៏ស្ដូកស្ដើង និងការគាំទ្រក្រោយការព្យាបាល",
+            "ដឹកនាំវគ្គ啟发-ចំណេះ-ដឹងសហគមន៍ នៅសាលា និងភូមិ ដើម្បីទប់ស្កាត់ការប្រើប្រាស់គ្រឿងញៀន មុនពេលវាចាប់ផ្ដើម"
+          ]
+        },
+        "impact": {
+          "en": "Break the cycle of addiction and help individuals reclaim their lives, restoring dignity and productivity to families across Cambodia.",
+          "kh": "បំបែកវដ្ដនៃការញៀន និងជួយបុគ្គល ម្នាក់ៗឱ្យស្ដារជីវិតរបស់ពួកគេ ដោយស្ដារសេចក្ដីថ្លៃថ្នូរ និងផលិតភាពដល់គ្រួសារនៅទូទាំងកម្ពុជា។"
+        }
+      }
+    ]
   },
   {
     "id": "legal-professions",
@@ -1056,7 +1244,54 @@
     "en": "Mechanic Technologies",
     "kh": "បច្ចេកវិទ្យាមេកានិក",
     "icon": "🔩",
-    "careers": []
+    "careers": [
+      {
+        "id": "automotive-mechanic",
+        "en": "Automotive Master Mechanic",
+        "kh": "ជាងជួសជុលរថយន្តកម្រិតខ្ពស់",
+        "tasks": {
+          "en": [
+            "Diagnose complex engine failures using computerized diagnostic tools and repair hybrid and electric vehicle drive systems",
+            "Service and maintain commercial truck and bus fleets, performing brake, suspension, and transmission overhauls",
+            "Inspect and certify vehicles to national road safety standards and document all repairs for fleet maintenance records",
+            "Train apprentice mechanics on modern vehicle electronics, OBD systems, and safe workshop procedures"
+          ],
+          "kh": [
+            "ធ្វើរោគវិនិច្ឆ័យបញ្ហាម៉ាស៊ីនស្មុគ្រស្មាញ ដោយប្រើឧបករណ៍ធ្វើរោគវិនិច្ឆ័យកុំព្យូទ័រ និងជួសជុលប្រព័ន្ធដោះស្រាយរថយន្ត hybrid និងអគ្គិសនី",
+            "ថែទាំ និងសំអាតក្រុមរថយន្តដឹកទំនិញ និងឡានក្រុង ដោយអនុវត្តការជួសជុលហ្វ្រាំង ជើងតង់ និងប្រអប់លេខ",
+            "ត្រួតពិនិត្យ និងចេញវិញ្ញាបនបត្រដល់យានយន្ត ស្របតាមស្តង់ដារសុវត្ថិភាពផ្លូវជាតិ និងចងក្រងការជួសជុលទាំងអស់",
+            "បណ្ដុះបណ្ដាលជាងជួសជុលថ្មី ស្ដីពីអេឡិចត្រូនិចយានយន្តទំនើប ប្រព័ន្ធ OBD និងនីតិវិធីសុវត្ថិភាពនៅក្នុងឃ្លាំងជួសជុល"
+          ]
+        },
+        "impact": {
+          "en": "Keep Cambodia's logistics and transportation arteries flowing safely and efficiently, supporting trade and rural mobility across all provinces.",
+          "kh": "រក្សាប្រព័ន្ធភស្តុភារ និងការដឹកជញ្ជូនរបស់ជាតិឱ្យដំណើរការដោយសុវត្ថិភាព និងប្រសិទ្ធភាព ដោយគាំទ្រពាណិជ្ជកម្ម និងការចល័តនៅជនបទទូទាំងខេត្ត។"
+        }
+      },
+      {
+        "id": "industrial-mechanic",
+        "en": "Industrial Machinery Mechanic",
+        "kh": "ជាងជួសជុលគ្រឿងចក្រឧស្សាហកម្ម",
+        "tasks": {
+          "en": [
+            "Maintain and repair factory assembly lines, conveyor systems, and heavy production equipment to minimize downtime",
+            "Diagnose and fix hydraulic, pneumatic, and electrical faults in manufacturing machinery using technical schematics",
+            "Calibrate and program industrial robots and CNC machines to meet precise manufacturing tolerances",
+            "Develop preventive maintenance schedules and keep detailed service logs to extend the operational life of all equipment"
+          ],
+          "kh": [
+            "ថែទាំ និងជួសជុលខ្សែសង្វាក់ផលិតកម្ម ប្រព័ន្ធបញ្ជូន និងគ្រឿងចក្រផលិតកម្មធ្ងន់ ដើម្បីកាត់បន្ថយការចុះឈប់ប្រតិបត្តិការ",
+            "ធ្វើរោគវិនិច្ឆ័យ និងជួសជុលបញ្ហា hydraulic ខ្យល់ចុច និងអគ្គិសនី នៅក្នុងម៉ាស៊ីនផលិតកម្ម ដោយប្រើប្លង់បច្ចេកទេស",
+            "ប្រើតម្លើង និងកម្មវិធីម៉ាស៊ីនមនុស្សយន្ត industrial និងម៉ាស៊ីន CNC ដើម្បីបំពេញតម្រូវការការផលិតដ៏ជាក់លាក់",
+            "បង្កើតកាលវិភាគថែទាំបង្ការ និងរក្សាកំណត់ហេតុសេវាលម្អិត ដើម្បីពង្រីកអាយុកាលប្រតិបត្តិការរបស់គ្រឿងចក្រទាំងអស់"
+          ]
+        },
+        "impact": {
+          "en": "Ensure continuous production of goods and sustain the backbone of Cambodia's growing manufacturing economy by keeping its factories running.",
+          "kh": "ធានាបាននូវការផលិតទំនិញជាបន្តបន្ទាប់ និងទ្រទ្រង់ឆ្អឹងខ្នងនៃសេដ្ឋកិច្ចផលិតកម្មដែលកំពុងរីកចម្រើនរបស់កម្ពុជា ដោយរក្សារោងចក្រឱ្យដំណើរការ។"
+        }
+      }
+    ]
   },
   {
     "id": "military-technologies",
