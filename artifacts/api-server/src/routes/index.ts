@@ -9,7 +9,6 @@ import storiesRouter from "./stories";
 import openaiRouter from "./openai";
 import interviewRouter from "./interview";
 import adminMetricsRouter from "./adminMetrics";
-import quizRouter from "./quiz";
 
 const router: IRouter = Router();
 
@@ -23,6 +22,5 @@ router.use(storiesRouter);
 router.use(openaiRouter);
 router.use(interviewRouter);
 router.use(adminMetricsRouter);
-router.use(quizRouter);
 
 export default router;
