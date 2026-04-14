@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronRight, ChevronDown, MapPin, Briefcase, Star, BookOpen, Search } from "lucide-react";
+import { ChevronRight, ChevronDown, MapPin, Briefcase, Star, BookOpen, Search, X, RotateCcw } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import careersData from "@/data/careers.json";
 
@@ -116,10 +116,12 @@ function EmptyCareers({ kh }: { kh: boolean }) {
 function SearchBar({
   value,
   onChange,
+  onClear,
   kh,
 }: {
   value: string;
   onChange: (v: string) => void;
+  onClear: () => void;
   kh: boolean;
 }) {
   return (
@@ -134,7 +136,7 @@ function SearchBar({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={kh ? "ស្វែងរកមុខជំនាញ... (Search Majors...)" : "Search Majors... (ស្វែងរកមុខជំនាញ...)"}
-        className={`w-full pl-8 pr-3 py-2 text-xs border rounded-lg outline-none transition-colors ${kh ? "font-khmer" : ""}`}
+        className={`w-full pl-8 py-2 text-xs border rounded-lg outline-none transition-colors ${value ? "pr-8" : "pr-3"} ${kh ? "font-khmer" : ""}`}
         style={{
           borderColor: "#BFDBFE",
           background: "#F8FAFC",
@@ -143,6 +145,17 @@ function SearchBar({
         onFocus={(e) => (e.target.style.borderColor = "#2563EB")}
         onBlur={(e) => (e.target.style.borderColor = "#BFDBFE")}
       />
+      {value && (
+        <button
+          onClick={onClear}
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full flex items-center justify-center transition-colors hover:bg-blue-200"
+          style={{ color: "#93C5FD" }}
+          aria-label="Clear search"
+          type="button"
+        >
+          <X size={10} />
+        </button>
+      )}
     </div>
   );
 }
@@ -191,7 +204,7 @@ function DesktopView({
           <p className={`text-xs font-bold text-blue-200 uppercase tracking-wide mb-2 ${kh ? "font-khmer" : ""}`}>
             {kh ? "ជ្រើសជំនាញ" : "Select Major"}
           </p>
-          <SearchBar value={searchQuery} onChange={onSearchChange} kh={kh} />
+          <SearchBar value={searchQuery} onChange={onSearchChange} onClear={() => onSearchChange("")} kh={kh} />
         </div>
 
         <div
@@ -360,7 +373,7 @@ function MobileView({
         <p className={`text-xs font-bold text-blue-200 uppercase tracking-wide mb-2 ${kh ? "font-khmer" : ""}`}>
           {kh ? "ជ្រើសជំនាញ" : "Select Major"}
         </p>
-        <SearchBar value={searchQuery} onChange={onSearchChange} kh={kh} />
+        <SearchBar value={searchQuery} onChange={onSearchChange} onClear={() => onSearchChange("")} kh={kh} />
       </div>
 
       {/* Scrollable accordion */}
@@ -495,6 +508,7 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
   const kh = language === "kh";
 
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery ?? "");
+  const [resetKey,    setResetKey]    = useState(0);
 
   useEffect(() => {
     if (initialSearchQuery) {
@@ -503,6 +517,11 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSearchQuery]);
+
+  function handleReset() {
+    setSearchQuery("");
+    setResetKey(k => k + 1);
+  }
 
   const filteredMajors = searchQuery.trim()
     ? allMajors.filter(m =>
@@ -538,25 +557,41 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
         </div>
       </div>
 
-      <div
-        className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5 border text-xs font-medium"
-        style={{ borderColor: "#BFDBFE", background: "#EFF6FF", color: "#1D4ED8" }}
-      >
-        <BookOpen size={12} />
-        <span className={kh ? "font-khmer" : ""}>
-          {kh
-            ? "ជ្រើស Major → ជ្រើស Career → អានកិច្ចការប្រចាំថ្ងៃ"
-            : "Choose a Major → Choose a Career → Read Daily Tasks"}
-        </span>
+      <div className="flex flex-wrap items-center gap-3 mb-5">
+        <div
+          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 border text-xs font-medium"
+          style={{ borderColor: "#BFDBFE", background: "#EFF6FF", color: "#1D4ED8" }}
+        >
+          <BookOpen size={12} />
+          <span className={kh ? "font-khmer" : ""}>
+            {kh
+              ? "ជ្រើស Major → ជ្រើស Career → អានកិច្ចការប្រចាំថ្ងៃ"
+              : "Choose a Major → Choose a Career → Read Daily Tasks"}
+          </span>
+        </div>
+
+        <button
+          onClick={handleReset}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 border text-xs font-semibold transition-all min-h-[36px] active:scale-95 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50 ${kh ? "font-khmer" : ""}`}
+          style={{ borderColor: "#CBD5E1", color: "#64748B", background: "transparent" }}
+          title={kh ? "កំណត់ឡើងវិញ" : "Reset Explorer"}
+          type="button"
+        >
+          <RotateCcw size={11} />
+          <span>{kh ? "កំណត់ឡើងវិញ" : "Reset"}</span>
+          {!kh && <span className="font-khmer font-normal opacity-60 text-[10px]">(កំណត់ឡើងវិញ)</span>}
+        </button>
       </div>
 
       <DesktopView
+        key={`desktop-${resetKey}`}
         majors={filteredMajors}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
 
       <MobileView
+        key={`mobile-${resetKey}`}
         majors={filteredMajors}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
