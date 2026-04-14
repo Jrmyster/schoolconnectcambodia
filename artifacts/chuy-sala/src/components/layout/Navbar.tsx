@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
-  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -267,6 +267,13 @@ export function Navbar() {
                       {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
                     </span>
                   </div>
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-muted hover:bg-primary/10 hover:text-primary text-muted-foreground text-xs font-bold transition-all"
+                  >
+                    <User className="w-3.5 h-3.5" />
+                    {t("Profile", "ប្រូហ្វាយ")}
+                  </Link>
                   <button
                     type="button"
                     onClick={() => logout()}
@@ -431,6 +438,14 @@ export function Navbar() {
                       {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
                     </span>
                   </div>
+                  <Link
+                    href="/profile"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-primary hover:bg-primary/10 text-sm transition-all"
+                  >
+                    <User className="w-5 h-5" />
+                    <span className={kh ? "font-khmer" : ""}>{kh ? "ប្រូហ្វាយ" : "My Profile"}</span>
+                  </Link>
                   <button
                     type="button"
                     onClick={() => { logout(); setMobileOpen(false); }}

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import { ChevronRight, ChevronDown, MapPin, Briefcase, Star, BookOpen, Search, X, RotateCcw } from "lucide-react";
+import { ChevronRight, ChevronDown, MapPin, Briefcase, Star, BookOpen, Search, X, RotateCcw, Heart } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { useAuth } from "@/context/AuthContext";
+import { useSavedCareers, useToggleSavedCareer } from "@/hooks/use-saved-careers";
+import { useToast } from "@/hooks/use-toast";
 import careersData from "@/data/careers.json";
 
 type Career = {
@@ -23,7 +26,7 @@ const allMajors = careersData as Major[];
 
 /* ─── Shared sub-components ─────────────────────────────────────────── */
 
-function TaskPanel({ career, kh }: { career: Career; kh: boolean }) {
+function TaskPanel({ career, kh, majorKey }: { career: Career; kh: boolean; majorKey: string }) {
   const tasks  = kh ? career.tasks.kh : career.tasks.en;
   const impact = kh ? career.impact.kh : career.impact.en;
   const title  = kh ? career.kh        : career.en;
@@ -40,9 +43,10 @@ function TaskPanel({ career, kh }: { career: Career; kh: boolean }) {
         >
           <Briefcase size={14} color="white" />
         </div>
-        <p className={`font-bold text-slate-800 text-sm leading-snug ${kh ? "font-khmer" : ""}`}>
+        <p className={`font-bold text-slate-800 text-sm leading-snug flex-1 min-w-0 ${kh ? "font-khmer" : ""}`}>
           {title}
         </p>
+        <SaveButton majorKey={majorKey} careerKey={career.id} kh={kh} />
       </div>
 
       <div className="px-5 py-4 flex-1 overflow-y-auto">
@@ -108,6 +112,67 @@ function EmptyCareers({ kh }: { kh: boolean }) {
         {kh ? "ទិន្នន័យសម្រាប់ Major នេះ នឹងត្រូវបន្ថែមក្នុងពេលឆាប់ៗ។" : "Data for this major will be added shortly."}
       </p>
     </div>
+  );
+}
+
+/* ─── Save button ────────────────────────────────────────────────────── */
+
+function SaveButton({
+  majorKey,
+  careerKey,
+  kh,
+}: {
+  majorKey: string;
+  careerKey: string;
+  kh: boolean;
+}) {
+  const { user } = useAuth();
+  const { data: saved = [] } = useSavedCareers();
+  const toggle = useToggleSavedCareer();
+  const { toast } = useToast();
+
+  if (!user) return null;
+
+  const isSaved = saved.some(s => s.majorKey === majorKey && s.careerKey === careerKey);
+
+  function handleClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    toggle.mutate(
+      { majorKey, careerKey, isSaved },
+      {
+        onSuccess: () => {
+          toast({
+            title: isSaved
+              ? (kh ? "បានលុបចេញពីប្រូហ្វាយ" : "Removed from your profile")
+              : (kh ? "អាជីពត្រូវបានរក្សាទុកក្នុងប្រវត្តិរូបរបស់អ្នក!" : "Career saved to your profile!"),
+            description: isSaved
+              ? undefined
+              : (kh
+                  ? "ពិនិត្យប្រូហ្វាយរបស់អ្នក ដើម្បីស្វែងរកអាជីពដែលបានរក្សាទុក។"
+                  : "View your roadmap in your profile page."),
+            duration: 2500,
+          });
+        },
+      },
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={toggle.isPending}
+      aria-label={isSaved ? (kh ? "លុបចេញ" : "Remove from saved") : (kh ? "រក្សាទុក" : "Save career")}
+      title={isSaved ? (kh ? "លុបចេញ" : "Remove from saved") : (kh ? "រក្សាទុក" : "Save career")}
+      className="ml-auto flex-shrink-0 p-1.5 rounded-lg transition-all hover:scale-110 active:scale-95 disabled:opacity-50"
+      style={{ background: isSaved ? "#FEE2E2" : "#EFF6FF" }}
+    >
+      <Heart
+        size={15}
+        fill={isSaved ? "#EF4444" : "none"}
+        stroke={isSaved ? "#EF4444" : "#93C5FD"}
+      />
+    </button>
   );
 }
 
@@ -332,7 +397,7 @@ function DesktopView({
           </p>
         </div>
         {activeCareer ? (
-          <TaskPanel career={activeCareer} kh={kh} />
+          <TaskPanel career={activeCareer} kh={kh} majorKey={activeMajorId} />
         ) : (
           <EmptyCareers kh={kh} />
         )}
@@ -484,7 +549,7 @@ function MobileView({
 
                             {careerOpen && (
                               <div className="border-t" style={{ borderColor: "#DBEAFE" }}>
-                                <TaskPanel career={career} kh={kh} />
+                                <TaskPanel career={career} kh={kh} majorKey={major.id} />
                               </div>
                             )}
                           </div>

@@ -6,3 +6,4 @@ export * from "./passwordResetTokens";
 export * from "./stories";
 export * from "./conversations";
 export * from "./messages";
+export * from "./savedCareers";

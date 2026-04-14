@@ -22,6 +22,7 @@ import { SafetyPage } from "@/pages/SafetyPage";
 import { ExamPrepPage } from "@/pages/ExamPrepPage";
 import { SubmitStoryPage } from "@/pages/SubmitStoryPage";
 import { SpacePage } from "@/pages/SpacePage";
+import { ProfilePage } from "@/pages/ProfilePage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -63,6 +64,7 @@ function Router() {
           <Route path="/exam-prep" component={ExamPrepPage} />
           <Route path="/submit-story" component={SubmitStoryPage} />
           <Route path="/space" component={SpacePage} />
+          <Route path="/profile" component={ProfilePage} />
           <Route path="/admin/dashboard" component={AdminDashboard} />
           <Route path="/admin" component={Admin} />
           <Route component={NotFound} />

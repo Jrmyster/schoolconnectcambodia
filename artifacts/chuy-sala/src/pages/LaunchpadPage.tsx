@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSearch } from "wouter";
 import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
@@ -65,6 +66,16 @@ export function LaunchpadPage() {
   const [pathwaySearch,  setPathwaySearch]  = useState("");
   const [pathwayMajorId, setPathwayMajorId] = useState("");
   const pathwaysRef = useRef<HTMLDivElement>(null);
+  const search = useSearch();
+
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const majorParam = params.get("major");
+    if (majorParam) {
+      handleNavigateToMajor(majorParam);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   function handleNavigateToMajor(majorId: string) {
     setPathwayMajorId(majorId);
