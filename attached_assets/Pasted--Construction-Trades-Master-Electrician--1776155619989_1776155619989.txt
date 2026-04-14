@@ -1,0 +1,52 @@
+{
+  "Construction Trades (ជំនាញសាងសង់)": {
+    "Master Electrician (ជាងអគ្គិសនីជំនាញ)": {
+      "tasks": "Read technical blueprints, wire commercial buildings, and install renewable solar energy systems. (អានប្លង់បច្ចេកទេស រៀបចំបណ្តាញអគ្គិសនីក្នុងអគារពាណិជ្ជកម្ម និងដំឡើងប្រព័ន្ធថាមពលព្រះអាទិត្យ។)",
+      "impact": "Provide the essential power grid that keeps hospitals, schools, and local businesses running safely. (ផ្តល់បណ្តាញអគ្គិសនីសំខាន់ៗដែលជួយឱ្យមន្ទីរពេទ្យ សាលារៀន និងអាជីវកម្មក្នុងស្រុកដំណើរការដោយសុវត្ថិភាព។)"
+    },
+    "Heavy Equipment Operator (អ្នកបញ្ជាគ្រឿងចក្រធុនធ្ងន់)": {
+      "tasks": "Safely operate excavators and cranes to build highways, bridges, and regional water infrastructure. (បញ្ជាគ្រឿងចក្រ និងសត្វូចដោយសុវត្ថិភាពដើម្បីសាងសង់ផ្លូវជាតិ ស្ពាន និងហេដ្ឋារចនាសម្ព័ន្ធទឹកក្នុងតំបន់។)",
+      "impact": "Physically shape the development of the province and connect rural areas to modern resources. (ផ្លាស់ប្តូររូបរាងនៃការអភិវឌ្ឍន៍ខេត្តដោយផ្ទាល់ និងភ្ជាប់តំបន់ជនបទទៅនឹងធនធានទំនើប។)"
+    }
+  },
+  "Communication, Journalism, and Related Programs (ទំនាក់ទំនង អ្នកសារព័ត៌មាន និងកម្មវិធីពាក់ព័ន្ធ)": {
+    "Investigative Journalist (អ្នកសារព័ត៌មានស៊ើបអង្កេត)": {
+      "tasks": "Research community issues, interview local leaders, and write fact-based reports for digital and print media. (ស្រាវជ្រាវបញ្ហាសហគមន៍ សម្ភាសន៍ថ្នាក់ដឹកនាំមូលដ្ឋាន និងសរសេររបាយការណ៍ផ្អែកលើការពិតសម្រាប់ប្រព័ន្ធផ្សព្វផ្សាយ។)",
+      "impact": "Keep the public informed, hold institutions accountable, and give a voice to everyday citizens. (ផ្តល់ព័ត៌មានដល់សាធារណជន ជំរុញគណនេយ្យភាពស្ថាប័ន និងផ្តល់សំឡេងដល់ប្រជាពលរដ្ឋទូទៅ។)"
+    },
+    "Public Relations Specialist (អ្នកឯកទេសទំនាក់ទំនងសាធារណៈ)": {
+      "tasks": "Manage crisis communication, draft press releases, and build a positive public image for NGOs or companies. (គ្រប់គ្រងទំនាក់ទំនងពេលមានវិបត្តិ ព្រាងសេចក្តីប្រកាសព័ត៌មាន និងកសាងមុខមាត់វិជ្ជមានសម្រាប់អង្គការ ឬក្រុមហ៊ុន។)",
+      "impact": "Bridge the gap of understanding between organizations and the communities they serve. (ផ្សារភ្ជាប់ការយល់ដឹងរវាងស្ថាប័ន និងសហគមន៍ដែលពួកគេបម្រើ។)"
+    }
+  },
+  "Physical Sciences (វិទ្យាសាស្ត្ររូបវន្ត)": {
+    "Environmental Chemist (អ្នកគីមីវិទ្យាបរិស្ថាន)": {
+      "tasks": "Take water and soil samples from agricultural areas and analyze them in a lab for pollutants or toxins. (យកសំណាកទឹក និងដីពីតំបន់កសិកម្ម មកវិភាគនៅក្នុងមន្ទីរពិសោធន៍ដើម្បីរកសារធាតុបំពុល ឬជាតិពុល។)",
+      "impact": "Protect the local ecosystem and ensure that farming practices are safe for both the earth and the consumers. (ការពារប្រព័ន្ធអេកូឡូស៊ីក្នុងស្រុក និងធានាថាការអនុវត្តកសិកម្មមានសុវត្ថិភាពសម្រាប់ផែនដី និងអ្នកបរិភោគ។)"
+    },
+    "Geologist (អ្នកភូគព្ភវិទូ)": {
+      "tasks": "Study rock formations, map groundwater resources, and assess land for safe infrastructure development. (សិក្សាទម្រង់ថ្ម គូសផែនទីធនធានទឹកក្រោមដី និងវាយតម្លៃដីសម្រាប់ការអភិវឌ្ឍន៍ហេដ្ឋារចនាសម្ព័ន្ធប្រកបដោយសុវត្ថិភាព។)",
+      "impact": "Help the nation responsibly manage its natural resources and mitigate the risks of natural disasters. (ជួយជាតិគ្រប់គ្រងធនធានធម្មជាតិដោយការទទួលខុសត្រូវ និងកាត់បន្ថយហានិភ័យនៃគ្រោះមហន្តរាយធម្មជាតិ។)"
+    }
+  },
+  "Psychology (ចិត្តវិទ្យា)": {
+    "School Counselor (ទីប្រឹក្សាសាលា)": {
+      "tasks": "Conduct one-on-one sessions with students to guide them through academic stress and career planning. (រៀបចំការប្រឹក្សាផ្ទាល់ជាមួយសិស្ស ដើម្បីណែនាំពួកគេពីភាពតានតឹងក្នុងការសិក្សា និងការរៀបចំផែនការអាជីព។)",
+      "impact": "Provide the vital emotional support system that helps young minds thrive in high-pressure environments. (ផ្តល់ប្រព័ន្ធគាំទ្រផ្លូវចិត្តដ៏សំខាន់ ដែលជួយយុវជនឱ្យលូតលាស់ក្នុងបរិយាកាសដែលមានសម្ពាធខ្ពស់។)"
+    },
+    "Clinical Psychologist (អ្នកចិត្តវិទ្យាគ្លីនិក)": {
+      "tasks": "Diagnose mental health conditions, provide cognitive behavioral therapy, and support trauma recovery. (ធ្វើរោគវិនិច្ឆ័យស្ថានភាពសុខភាពផ្លូវចិត្ត ផ្តល់ការព្យាបាលដោយការផ្លាស់ប្តូរការគិត និងគាំទ្រការស្តារឡើងវិញពីការប៉ះទង្គិចផ្លូវចិត្ត។)",
+      "impact": "De-stigmatize mental health care and help individuals rebuild their lives and cognitive well-being. (លុបបំបាត់ការរើសអើងលើការថែទាំសុខភាពផ្លូវចិត្ត និងជួយបុគ្គលម្នាក់ៗកសាងជីវិត និងសុខុមាលភាពផ្លូវចិត្តរបស់ពួកគេឡើងវិញ។)"
+    }
+  },
+  "Social Sciences (វិទ្យាសាស្ត្រសង្គម)": {
+    "Economist (សេដ្ឋវិទូ)": {
+      "tasks": "Analyze financial data, forecast market trends, and advise government agencies on public spending policy. (វិភាគទិន្នន័យហិរញ្ញវត្ថុ ព្យាករណ៍និន្នាការទីផ្សារ និងផ្តល់ប្រឹក្សាដល់ស្ថាប័នរដ្ឋាភិបាលអំពីគោលនយោបាយចំណាយសាធារណៈ។)",
+      "impact": "Design the macroscopic systems that pull communities out of poverty and stabilize the national currency. (រៀបចំប្រព័ន្ធម៉ាក្រូសេដ្ឋកិច្ចដែលជួយសហគមន៍ឱ្យរួចផុតពីភាពក្រីក្រ និងរក្សាស្ថិរភាពរូបិយប័ណ្ណជាតិ។)"
+    },
+    "Community Development Worker (អ្នកអភិវឌ្ឍន៍សហគមន៍)": {
+      "tasks": "Partner with local NGOs, organize educational workshops, and implement sustainable sanitation projects. (សហការជាមួយអង្គការក្រៅរដ្ឋាភិបាល រៀបចំសិក្ខាសាលាអប់រំ និងអនុវត្តគម្រោងអនាម័យប្រកបដោយនិរន្តរភាព។)",
+      "impact": "Directly empower rural populations to build better, healthier, and more self-reliant villages. (ផ្តល់អំណាចដោយផ្ទាល់ដល់ប្រជាពលរដ្ឋនៅជនបទ ដើម្បីកសាងភូមិឱ្យកាន់តែប្រសើរ មានសុខភាពល្អ និងអាចពឹងផ្អែកលើខ្លួនឯងបាន។)"
+    }
+  }
+}

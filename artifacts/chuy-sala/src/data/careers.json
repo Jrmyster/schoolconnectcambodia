@@ -403,10 +403,22 @@
     "en": "Construction Trades",
     "kh": "ជំនាញសាងសង់",
     "icon": "🏗️",
-    "careers": []
-  },
-  {
-    "id": "education",
+    "careers": [
+      {
+        "id": "master-electrician",
+        "en": "Master Electrician",
+        "kh": "ជាងអគ្គិសនីជំនាញ",
+        "tasks": {
+          "en": [
+            "Read and interpret technical electrical blueprints and wiring schematics for commercial and industrial projects",
+            "Install, test, and maintain wiring systems, circuit breakers, and switchboards in commercial buildings",
+            "Set up and commission solar panel arrays and battery storage systems for renewable energy installations",
+            "Conduct site safety inspections, certify completed electrical work, and train apprentice electricians on best practices"
+          ],
+          "kh": [
+            "អាន និងបកស្រាយប្លង់អគ្គិសនីបច្ចេកទេស និងដ្យាក្រាមបណ្ដាញ សម្រាប់គម្រោងពាណិជ្ជកម្ម និងឧស្សាហកម្ម",
+            "ដំឡើង ធ្វើតេស្ត និងថែទាំប្រព័ន្ធបណ្ដាញ ប្រអប់បំបែកសៀគ្វី និងក្ដារចែកចាយ ក្នុងអគារពាណិជ្ជកម្ម",
+            "ដំឡើង និងបើកដំណើរការប្រព័ន្ធ solar panel និងថ្ម សម្រាប់ការដំឡើងថាមពលព្រះអាទិត្យ"id": "education",
     "en": "Education",
     "kh": "អប់រំ",
     "icon": "🎓",
