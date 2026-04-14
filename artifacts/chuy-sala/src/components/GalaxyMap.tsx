@@ -85,19 +85,30 @@ function GalaxyFallback({ kh }: { kh: boolean }) {
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-const PARTICLE_COUNT = 8000;
-const MAX_RADIUS     = 5.0;
-// Barred spiral constants
-// BAR_LENGTH ≈ 1/3 of total radius → arms originate from bar tips
-const BAR_LENGTH     = MAX_RADIUS * 0.33; // 1.65 units
-const ARM_WIND       = Math.PI * 2.8;     // total winding angle of each arm
+const PARTICLE_COUNT  = 8000;
+const MAX_RADIUS      = 5.0;
+const NUM_ARMS        = 2;
+// spinAngle = radius * SPIN_FACTOR
+// → particles further from centre lag further behind in rotation,
+//   creating open trailing arms that never close back on themselves.
+const SPIN_FACTOR     = 1.5;
+// Organic star scatter: scales with radius so arms are tight at the core
+// and fan out into loose stellar clouds at the edges.
+const SCATTER         = 0.38;
+const SCATTER_POWER   = 3;     // higher = scatter stays closer to arm spine
 
-// ── Galaxy geometry (Barred Spiral) ──────────────────────────────────────────
+// ── Galaxy geometry (Logarithmic Spin Spiral) ─────────────────────────────────
 //
-//  Structure (% of PARTICLE_COUNT):
-//   10 % → dense spherical bulge at absolute centre
-//   18 % → linear central bar along the X-axis (denser toward middle)
-//   72 % → 2 spiral arms that originate from the two ends of the bar
+//  For each of the 8 000 particles:
+//    radius      = biased-random (0 → MAX_RADIUS), more particles near centre
+//    branchAngle = (i % NUM_ARMS) × (2π / NUM_ARMS)  →  alternates arms by index
+//    spinAngle   = radius × SPIN_FACTOR               →  rotation lag grows with r
+//    scatter     = random offset (grows with radius)  →  organic cloud, not a line
+//    x = cos(branchAngle + spinAngle) × radius + randomX
+//    z = sin(branchAngle + spinAngle) × radius + randomZ
+//    y = randomY   (thin galactic disc)
+//
+//  Arms are OPEN — they trail off into space and never loop back.
 //
 function useGalaxyGeometry() {
   return useMemo(() => {
@@ -108,63 +119,37 @@ function useGalaxyGeometry() {
     const midColor  = new THREE.Color(0.65, 0.80, 1.0);  // sky blue
     const edgeColor = new THREE.Color(0.35, 0.25, 0.85); // deep violet
 
-    const BULGE_END = Math.floor(PARTICLE_COUNT * 0.10);
-    const BAR_END   = Math.floor(PARTICLE_COUNT * 0.28); // 10 % + 18 %
-
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
-      let x = 0, y = 0, z = 0;
 
-      if (i < BULGE_END) {
-        // ── Spherical bulge — dense sphere overlapping bar centre ──
-        const r     = Math.pow(Math.random(), 2) * MAX_RADIUS * 0.16;
-        const theta = Math.random() * Math.PI * 2;
-        const phi   = Math.acos(2 * Math.random() - 1);
-        x = r * Math.sin(phi) * Math.cos(theta);
-        y = (Math.random() - 0.5) * r * 0.55;
-        z = r * Math.sin(phi) * Math.sin(theta);
+      // ── Radius: power-bias toward centre for dense galactic core ──
+      const radius = Math.pow(Math.random(), 1.4) * MAX_RADIUS;
 
-      } else if (i < BAR_END) {
-        // ── Central bar — linear along X-axis ──
-        // Exponent > 1 biases particles toward the bar centre (x ≈ 0)
-        const sign = Math.random() < 0.5 ? 1 : -1;
-        const u    = Math.pow(Math.random(), 1.8); // 0..1, centre-heavy
-        x          = sign * u * BAR_LENGTH;
-        // Bar cross-section tapers from full-width at centre to ~35 % at tips
-        const taper = 1.0 - (Math.abs(x) / BAR_LENGTH) * 0.65;
-        y = (Math.random() - 0.5) * 0.14 * taper;
-        z = (Math.random() - 0.5) * 0.22 * taper;
+      // ── Which arm: alternates by particle index for balanced arm density ──
+      const branchAngle = (i % NUM_ARMS) * (Math.PI * 2 / NUM_ARMS);
 
-      } else {
-        // ── Spiral arms originating from bar tips ──
-        //  arm 0 → +X tip  (armBaseAngle = 0)
-        //  arm 1 → -X tip  (armBaseAngle = π)
-        const arm          = Math.floor(Math.random() * 2);
-        const armBaseAngle = arm * Math.PI;
-        const tipX         = Math.cos(armBaseAngle) * BAR_LENGTH;
-        const tipZ         = Math.sin(armBaseAngle) * BAR_LENGTH;
+      // ── Spin angle: the further out, the more the star trails behind ──
+      const spinAngle = radius * SPIN_FACTOR;
 
-        // t = 0 at bar tip, t = 1 at galaxy edge
-        const t     = Math.random();
-        const r     = t * (MAX_RADIUS - BAR_LENGTH);   // distance from bar tip
-        const angle = armBaseAngle + t * ARM_WIND;
+      // ── Organic scatter: Math.pow keeps it tight near the spine ──
+      const spread = SCATTER * radius;
+      const rnd = () =>
+        Math.pow(Math.random(), SCATTER_POWER) * (Math.random() < 0.5 ? 1 : -1);
+      const randomX = rnd() * spread;
+      const randomZ = rnd() * spread;
+      const randomY = rnd() * spread * 0.28; // much flatter in Y (galactic disc)
 
-        // Perpendicular scatter grows with radius
-        const scatter   = 0.28 * (0.2 + t * 0.8);
-        const perpAngle = angle + Math.PI / 2;
-        const sOffset   = (Math.random() - 0.5) * scatter * (r + 0.4);
-
-        x = tipX + Math.cos(angle) * r + Math.cos(perpAngle) * sOffset;
-        z = tipZ + Math.sin(angle) * r + Math.sin(perpAngle) * sOffset;
-        y = (Math.random() - 0.5) * 0.22 * (1 - t * 0.7); // disc thins at edges
-      }
+      // ── Final position ──
+      const x = Math.cos(branchAngle + spinAngle) * radius + randomX;
+      const z = Math.sin(branchAngle + spinAngle) * radius + randomZ;
+      const y = randomY;
 
       positions[i3]     = x;
       positions[i3 + 1] = y;
       positions[i3 + 2] = z;
 
-      // ── Per-particle colour (radial distance from centre, normalised 0-1) ──
-      const dist  = Math.sqrt(x * x + z * z) / MAX_RADIUS;
+      // ── Per-particle colour driven by raw radius (smooth gradient) ──
+      const dist  = radius / MAX_RADIUS; // 0 at centre, 1 at edge
       const color = new THREE.Color();
       if (dist < 0.3) {
         color.lerpColors(coreColor, midColor, dist / 0.3);
@@ -260,12 +245,12 @@ function EarthMarker() {
     if (ringRef.current) ringRef.current.material.opacity = 0.35 + 0.35 * Math.sin(t * 2.2 + 1);
   });
 
-  // Orion Spur, arm 0, t≈0.55 along the barred spiral arm:
-  //   tipX=1.65, tipZ=0 (bar +X end), arm angle=4.84 rad, r=1.84
-  //   → x=1.65+cos(4.84)*1.84≈1.88, z=sin(4.84)*1.84≈-1.83
-  //   dist from centre ≈ 2.63 units ≈ 26,300 light-years ✓
+  // Orion Spur — arm 0 (branchAngle=0), radius=2.6, SPIN_FACTOR=1.5:
+  //   spinAngle = 2.6 × 1.5 = 3.9 rad
+  //   x = cos(3.9) × 2.6 ≈ −1.89,  z = sin(3.9) × 2.6 ≈ −1.79
+  //   dist from centre ≈ 2.60 units ≈ 26,000 light-years ✓
   return (
-    <group position={[1.88, 0.03, -1.83]}>
+    <group position={[-1.89, 0.03, -1.79]}>
       <mesh ref={dotRef}>
         <sphereGeometry args={[0.065, 10, 10]} />
         <meshBasicMaterial color="#22ffcc" />
