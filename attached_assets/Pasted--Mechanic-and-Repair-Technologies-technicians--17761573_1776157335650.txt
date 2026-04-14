@@ -1,0 +1,52 @@
+{
+  "Mechanic and Repair Technologies/technicians (បច្ចេកវិទ្យាមេកានិក និងការជួសជុល / អ្នកបច្ចេកទេស)": {
+    "Automotive Master Mechanic (ជាងជួសជុលរថយន្តកម្រិតខ្ពស់)": {
+      "tasks": "Diagnose complex engine failures, repair hybrid/EV systems, and maintain commercial transportation fleets. (ធ្វើរោគវិនិច្ឆ័យបញ្ហាម៉ាស៊ីនស្មុគស្មាញ ជួសជុលប្រព័ន្ធរថយន្តអគ្គិសនី និងថែទាំកងរថយន្តដឹកជញ្ជូនពាណិជ្ជកម្ម។)",
+      "impact": "Keep the logistics and transportation arteries of the nation flowing safely and efficiently. (រក្សាប្រព័ន្ធភស្តុភារ និងការដឹកជញ្ជូនរបស់ជាតិឱ្យដំណើរការដោយសុវត្ថិភាព និងមានប្រសិទ្ធភាព។)"
+    },
+    "Industrial Machinery Mechanic (ជាងជួសជុលគ្រឿងចក្រឧស្សាហកម្ម)": {
+      "tasks": "Maintain factory assembly lines, fix hydraulic systems, and calibrate manufacturing robots. (ថែទាំខ្សែសង្វាក់ផលិតកម្មរោងចក្រ ជួសជុលប្រព័ន្ធធារាសាស្ត្រ និងតម្រឹមមនុស្សយន្តផលិតកម្ម។)",
+      "impact": "Ensure the continuous production of goods and sustain the backbone of the manufacturing economy. (ធានាបាននូវការផលិតទំនិញជាបន្តបន្ទាប់ និងទ្រទ្រង់ឆ្អឹងខ្នងនៃសេដ្ឋកិច្ចផលិតកម្ម។)"
+    }
+  },
+  "Engineering Technologies and Engineering-Related Fields (បច្ចេកវិទ្យាវិស្វកម្ម និងវិស័យពាក់ព័ន្ធនឹងវិស្វកម្ម)": {
+    "Automation Technologist (អ្នកបច្ចេកទេសស្វ័យប្រវត្តិកម្ម)": {
+      "tasks": "Program smart factory controllers, test robotic sensors, and optimize automated manufacturing operations. (សរសេរកូដបញ្ជាម៉ាស៊ីនរោងចក្រឆ្លាតវៃ ធ្វើតេស្តសេនស័រមនុស្សយន្ត និងបង្កើនប្រសិទ្ធភាពប្រតិបត្តិការផលិតកម្មស្វ័យប្រវត្តិ។)",
+      "impact": "Drive the next industrial revolution in Cambodia by bridging the gap between physical machines and software. (ជំរុញបដិវត្តន៍ឧស្សាហកម្មបន្ទាប់នៅកម្ពុជា ដោយផ្សារភ្ជាប់គម្លាតរវាងម៉ាស៊ីនរូបវន្ត និងកម្មវិធីកុំព្យូទ័រ។)"
+    },
+    "Surveying Technician (អ្នកបច្ចេកទេសវាស់វែងដីធ្លី)": {
+      "tasks": "Use GPS and drones to map terrain and establish property boundaries for new provincial developments. (ប្រើប្រាស់ប្រព័ន្ធ GPS និងដ្រូនដើម្បីគូសផែនទីដី និងកំណត់ព្រំប្រទល់កម្មសិទ្ធិសម្រាប់ការអភិវឌ្ឍន៍ខេត្តថ្មីៗ។)",
+      "impact": "Provide the precise, accurate 'maps' required to safely build new hospitals, schools, and infrastructure. (ផ្តល់ 'ផែនទី' ជាក់លាក់ និងត្រឹមត្រូវ ដែលចាំបាច់ដើម្បីសាងសង់មន្ទីរពេទ្យ សាលារៀន និងហេដ្ឋារចនាសម្ព័ន្ធថ្មីៗដោយសុវត្ថិភាព។)"
+    }
+  },
+  "Human Services (សេវាកម្មមនុស្សធម៌)": {
+    "Social Worker (អ្នកសង្គមកិច្ច)": {
+      "tasks": "Assess family needs, protect vulnerable children, and connect individuals to NGO or government assistance. (វាយតម្លៃតម្រូវការគ្រួសារ ការពារកុមារងាយរងគ្រោះ និងភ្ជាប់បុគ្គលទៅនឹងជំនួយពីអង្គការក្រៅរដ្ឋាភិបាល ឬរដ្ឋាភិបាល។)",
+      "impact": "Act as the critical immune system of society, healing fractured communities and protecting the defenseless. (ដើរតួជាប្រព័ន្ធភាពស៊ាំដ៏សំខាន់របស់សង្គម ព្យាបាលសហគមន៍ដែលបែកបាក់ និងការពារអ្នកដែលមិនអាចការពារខ្លួនបាន។)"
+    },
+    "Substance Abuse Counselor (អ្នកប្រឹក្សាបញ្ហាគ្រឿងញៀន)": {
+      "tasks": "Lead recovery groups, create relapse prevention plans, and provide deep emotional intervention. (ដឹកនាំក្រុមស្តារនីតិសម្បទា បង្កើតផែនការទប់ស្កាត់ការលាប់ឡើងវិញ និងផ្តល់អន្តរាគមន៍ផ្លូវចិត្តយ៉ាងស៊ីជម្រៅ។)",
+      "impact": "Break the cycle of addiction and help individuals reclaim their biological and social autonomy. (បំបែកវដ្តនៃការញៀន និងជួយបុគ្គលម្នាក់ៗឱ្យទទួលបានមកវិញនូវស្វ័យភាពជីវសាស្ត្រ និងសង្គមរបស់ពួកគេ។)"
+    }
+  },
+  "Family and Consumer Sciences/human Sciences (វិទ្យាសាស្ត្រគ្រួសារ និងអតិថិជន / វិទ្យាសាស្ត្រមនុស្ស)": {
+    "Nutritionist / Dietitian (អ្នកឯកទេសអាហារូបត្ថម្ភ)": {
+      "tasks": "Design meal plans for hospitals, educate schools on balanced diets, and treat metabolic conditions. (រៀបចំផែនការអាហារសម្រាប់មន្ទីរពេទ្យ អប់រំសាលារៀនអំពីរបបអាហារមានតុល្យភាព និងព្យាបាលជំងឺទាក់ទងនឹងការរំលាយអាហារ។)",
+      "impact": "Prevent chronic diseases and build a physically stronger, more resilient generation of students. (ការពារជំងឺរ៉ាំរ៉ៃ និងកសាងយុវជនជំនាន់ក្រោយឱ្យមានរាងកាយរឹងមាំ និងមានភាពធន់ខ្ពស់។)"
+    },
+    "Family Financial Advisor (ទីប្រឹក្សាហិរញ្ញវត្ថុគ្រួសារ)": {
+      "tasks": "Help families budget, plan for university savings, and manage agricultural or small business debt. (ជួយគ្រួសាររៀបចំថវិកា រៀបចំផែនការសន្សំសម្រាប់សាកលវិទ្យាល័យ និងគ្រប់គ្រងបំណុលកសិកម្ម ឬអាជីវកម្មខ្នាតតូច។)",
+      "impact": "Remove the crushing stress of financial instability, allowing families to thrive rather than just survive. (លុបបំបាត់សម្ពាធនៃអស្ថិរភាពហិរញ្ញវត្ថុ ដែលអនុញ្ញាតឱ្យគ្រួសារលូតលាស់ ជាជាងគ្រាន់តែរស់រានមានជីវិត។)"
+    }
+  },
+  "Area, Ethnic, Cultural, Gender, and Group Studies (ការសិក្សាពីតំបន់ ជនជាតិ វប្បធម៌ យេនឌ័រ និងក្រុម)": {
+    "Cultural Anthropologist (អ្នកនរវិទ្យាវប្បធម៌)": {
+      "tasks": "Study indigenous populations, document oral histories, and analyze the social impact of rapid modernization. (សិក្សាពីជនជាតិដើមភាគតិច ចងក្រងប្រវត្តិសាស្ត្រផ្ទាល់មាត់ និងវិភាគផលប៉ះពាល់សង្គមនៃទំនើបកម្មរហ័ស។)",
+      "impact": "Preserve the deep, complex 'DNA' of human diversity against the rapid erosion of globalization. (អភិរក្ស 'ឌីអិនអេ (DNA)' ដ៏ស្មុគស្មាញ និងជ្រាលជ្រៅនៃភាពចម្រុះរបស់មនុស្សជាតិ ប្រឆាំងនឹងការហូរចូលនៃសកលភាវូបនីយកម្ម។)"
+    },
+    "Diversity and Inclusion Officer (មន្ត្រីផ្នែកចម្រុះ និងបរិយាបន្ន)": {
+      "tasks": "Ensure fair hiring practices, train corporate staff on cultural sensitivity, and advocate for equal rights in the workplace. (ធានាការអនុវត្តការជួលបុគ្គលិកដោយយុត្តិធម៌ បណ្តុះបណ្តាលបុគ្គលិកក្រុមហ៊ុនពីភាពរសើបនៃវប្បធម៌ និងតស៊ូមតិដើម្បីសិទ្ធិស្មើគ្នានៅកន្លែងធ្វើការ។)",
+      "impact": "Build a society where every individual, regardless of background, has an equal opportunity to succeed. (កសាងសង្គមមួយដែលបុគ្គលគ្រប់រូប មិនថាមកពីមជ្ឈដ្ឋានណាក៏ដោយ មានឱកាសស្មើគ្នាក្នុងការទទួលបានជោគជ័យ។)"
+    }
+  }
+}
