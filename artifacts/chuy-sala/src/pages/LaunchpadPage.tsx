@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
 import { InterviewSimulator } from "@/components/InterviewSimulator";
 import { ResumeMasterclass } from "@/components/ResumeMasterclass";
 import { FuturePathways } from "@/components/FuturePathways";
+import { CareerMatcher } from "@/components/CareerMatcher";
 
 type ScholarshipCard = {
   name: string;
@@ -60,6 +61,16 @@ export function LaunchpadPage() {
   const kh = language === "kh";
   const [accordionOpen, setAccordionOpen] = useState(false);
   const { openChat } = useChatStore();
+
+  const [pathwaySearch, setPathwaySearch] = useState("");
+  const pathwaysRef = useRef<HTMLDivElement>(null);
+
+  function handleNavigateToMajor(majorEn: string) {
+    setPathwaySearch(majorEn);
+    setTimeout(() => {
+      pathwaysRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -497,8 +508,30 @@ export function LaunchpadPage() {
         {/* ── Resume & CV Masterclass ── */}
         <ResumeMasterclass />
 
+        {/* ── Career Matcher ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+          <div className="mb-5">
+            <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
+              {t("Career Matcher", "ឧបករណ៍ស្វែងរកអាជីព")}
+              {kh && <span className="ml-2 text-base font-normal text-muted-foreground">(Career Matcher)</span>}
+            </h2>
+            <p className={`text-sm text-muted-foreground mt-1 ${kh ? "font-khmer" : ""}`}>
+              {t(
+                "Rate your subject strengths and let AI identify the 3 college majors best aligned with your mind.",
+                "វាយតម្លៃភាពខ្លាំងខាងមុខវិជ្ជា ហើយឲ្យ AI កំណត់ជំនាញ ៣ ដែលស័ក្ដិសមបំផុត។"
+              )}
+            </p>
+          </div>
+          <CareerMatcher onNavigateToMajor={handleNavigateToMajor} />
+        </section>
+
         {/* ── Future Pathways Guide ── */}
-        <FuturePathways />
+        <div ref={pathwaysRef} className="scroll-mt-20">
+          <FuturePathways
+            initialSearchQuery={pathwaySearch}
+            onSearchQueryConsumed={() => setPathwaySearch("")}
+          />
+        </div>
 
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronRight, ChevronDown, MapPin, Briefcase, Star, BookOpen, Search } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import careersData from "@/data/careers.json";
@@ -485,11 +485,24 @@ function MobileView({
 
 /* ─── Main exported component ────────────────────────────────────────── */
 
-export function FuturePathways() {
+interface FuturePathwaysProps {
+  initialSearchQuery?: string;
+  onSearchQueryConsumed?: () => void;
+}
+
+export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: FuturePathwaysProps = {}) {
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery ?? "");
+
+  useEffect(() => {
+    if (initialSearchQuery) {
+      setSearchQuery(initialSearchQuery);
+      onSearchQueryConsumed?.();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialSearchQuery]);
 
   const filteredMajors = searchQuery.trim()
     ? allMajors.filter(m =>
