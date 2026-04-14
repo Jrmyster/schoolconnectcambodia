@@ -58,7 +58,54 @@
     "en": "Architecture",
     "kh": "ស្ថាបត្យកម្ម",
     "icon": "🏛️",
-    "careers": []
+    "careers": [
+      {
+        "id": "architect",
+        "en": "Architect",
+        "kh": "ស្ថាបត្យករ",
+        "tasks": {
+          "en": [
+            "Draft detailed blueprints and technical drawings for residential homes and commercial buildings using CAD software",
+            "Create photorealistic 3D models and renders to present design concepts to clients before construction begins",
+            "Select sustainable building materials that balance aesthetics, structural performance, and environmental impact",
+            "Collaborate with civil engineers and contractors during construction to ensure the design is executed accurately"
+          ],
+          "kh": [
+            "គូរប្លង់លម្អិត និងប្លង់បច្ចេកទេស សម្រាប់គេហដ្ឋាន និងអគារពាណិជ្ជកម្ម ដោយប្រើប្រាស់កម្មវិធី CAD",
+            "បង្កើតគំរូ 3D ប្រកបដោយភាពជាក់ស្ដែង ដើម្បីបង្ហាញគំនិតរចនាដល់អតិថិជន មុនពេលការសំណង់ចាប់ផ្ដើម",
+            "ជ្រើសរើសសម្ភារៈកសាងដែលមាននិរន្តរភាព ដែលបន្សំសោភ័ណភាព ការអនុវត្តរចនាសម្ព័ន្ធ និងផលប៉ះពាល់បរិស្ថាន",
+            "សហការជាមួយវិស្វករ និងអ្នកម៉ៅការ ក្នុងអំឡុងពេលការសំណង់ ដើម្បីធានាថាការរចនាត្រូវបានអនុវត្តដោយភាពត្រឹមត្រូវ"
+          ]
+        },
+        "impact": {
+          "en": "Design beautiful, functional spaces that blend modern engineering with traditional cultural aesthetics.",
+          "kh": "រចនាលំហដ៏ស្រស់ស្អាត និងមានមុខងារ ដែលរួមបញ្ចូលវិស្វកម្មទំនើបជាមួយនឹងសោភ័ណភាពវប្បធម៌ប្រពៃណី។"
+        }
+      },
+      {
+        "id": "urban-planner",
+        "en": "Urban Planner",
+        "kh": "អ្នករៀបចំក្រុង",
+        "tasks": {
+          "en": [
+            "Design city layouts and zoning maps that balance residential, commercial, and green public spaces",
+            "Plan networks of public parks, pedestrian walkways, and cycling lanes to improve livability",
+            "Analyse traffic flow data and propose infrastructure improvements to reduce congestion and accidents",
+            "Develop integrated water management and drainage plans to protect cities from flooding"
+          ],
+          "kh": [
+            "រចនាប្លង់ទីក្រុង និងផែនទីតំបន់ ដែលផ្សំលំនៅឋាន ពាណិជ្ជកម្ម និងលំហបៃតងសាធារណៈ",
+            "រៀបចំបណ្ដាញសួនច្បារសាធារណៈ ហូរចរណ៍ជើងថ្មើរ និងផ្លូវវេជ ដើម្បីបង្កើនភាពងាយស្រួលរស់នៅ",
+            "វិភាគទិន្នន័យលំហូរចរាចរណ៍ ហើយស្នើការកែលម្អហេដ្ឋារចនាសម្ព័ន្ធ ដើម្បីកាត់បន្ថយការស្ទះ និងគ្រោះថ្នាក់",
+            "អភិវឌ្ឍផែនការគ្រប់គ្រងទឹក និងប្រព័ន្ធបង្ហូរ ដើម្បីការពារទីក្រុងពីការជំនន់ទឹក"
+          ]
+        },
+        "impact": {
+          "en": "Make rapidly growing cities and provincial capitals more livable, sustainable, and organized.",
+          "kh": "ធ្វើឱ្យទីក្រុងដែលកំពុងរីកចម្រើន និងទីរួមខេត្តកាន់តែមានភាពងាយស្រួលរស់នៅ មាននិរន្តរភាព និងមានរបៀបរៀបរយ។"
+        }
+      }
+    ]
   },
   {
     "id": "area-studies",
@@ -72,7 +119,54 @@
     "en": "Aviation",
     "kh": "អាកាសចរណ៍",
     "icon": "✈️",
-    "careers": []
+    "careers": [
+      {
+        "id": "commercial-pilot",
+        "en": "Commercial Pilot",
+        "kh": "អាកាសយានិកពាណិជ្ជកម្ម",
+        "tasks": {
+          "en": [
+            "Conduct thorough pre-flight safety inspections of the aircraft's engines, instruments, and control systems",
+            "Navigate passenger aircraft along approved flight paths, adjusting for weather, turbulence, and air traffic",
+            "Monitor complex flight instruments including altitude, speed, and fuel gauges throughout every phase of flight",
+            "Communicate clearly with air traffic control and co-pilots to coordinate safe take-off, cruise, and landing"
+          ],
+          "kh": [
+            "ធ្វើការត្រួតពិនិត្យសុវត្ថិភាពមុនហោះហើរ ពេញលេញ លើម៉ាស៊ីន ឧបករណ៍ និងប្រព័ន្ធគ្រប់គ្រងយន្តហោះ",
+            "បើកយន្តហោះដឹកអ្នកដំណើរ តាមមាគ៌ាហោះហើរដែលបានអនុម័ត ដោយកែប្រែទៅតាមអាកាសធាតុ ការញ័រ និងចរាចរណ៍ផ្លូវអាកាស",
+            "ត្រួតពិនិត្យឧបករណ៍ហោះហើរដ៏ស្មុគស្មាញ រួមមានកម្ពស់ ល្បឿន និងទ្រមង់ប្រេង ក្នុងអំឡុងគ្រប់ដំណាក់កាលនៃការហោះហើរ",
+            "ទំនាក់ទំនងយ៉ាងច្បាស់លាស់ជាមួយផ្នែកគ្រប់គ្រងចរាចរណ៍ផ្លូវអាកាស និងជំនួយការ ដើម្បីសម្របសម្រួលការ離陸 ការហោះ និងការចុះចត"
+          ]
+        },
+        "impact": {
+          "en": "Safely connect local communities to the global economy and international tourism.",
+          "kh": "តភ្ជាប់សហគមន៍ក្នុងស្រុកដោយសុវត្ថិភាព ទៅនឹងសេដ្ឋកិច្ចសកល និងទេសចរណ៍អន្តរជាតិ។"
+        }
+      },
+      {
+        "id": "air-traffic-controller",
+        "en": "Air Traffic Controller",
+        "kh": "អ្នកគ្រប់គ្រងចរាចរណ៍ផ្លូវអាកាស",
+        "tasks": {
+          "en": [
+            "Use radar and radio communications to guide aircraft safely from take-off through landing in all weather conditions",
+            "Monitor multiple aircraft simultaneously, maintaining mandatory safe separation distances between every flight",
+            "Coordinate with pilots and neighbouring control centres to manage complex airspace in real time",
+            "Respond calmly and decisively to in-flight emergencies, rerouting aircraft and alerting emergency services"
+          ],
+          "kh": [
+            "ប្រើប្រាស់ radar និងការទំនាក់ទំនងតាមវិទ្យុ ដើម្បីណែនាំយន្តហោះប្រកបដោយសុវត្ថិភាព ពីការ离陆 រហូតដល់ការចុះចត ក្នុងគ្រប់លក្ខខណ្ឌអាកាសធាតុ",
+            "ត្រួតពិនិត្យយន្តហោះច្រើនក្បាល ក្នុងពេលតែមួយ ដោយរក្សាចម្ងាយសុវត្ថិភាពចាំបាច់ (mandatory) រវាងការហោះហើរទាំងអស់",
+            "សម្របសម្រួលជាមួយអ្នកបើកបរ និងមជ្ឈមណ្ឌលត្រួតពិនិត្យជិតខាង ដើម្បីគ្រប់គ្រងទំហំអាកាសដ៏ស្មុគស្មាញ ក្នុងពេលជាក់ស្ដែង",
+            "ឆ្លើយតបដោយភាពស្ងប់ស្ងាត់ និងការសម្រេចចិត្តច្បាស់លាស់ ចំពោះករណីអាសន្ននៅក្នុងពពក ដោយប្ដូរផ្លូវ ហើយជូនដំណឹងដល់សេវាសង្គ្រោះ"
+          ]
+        },
+        "impact": {
+          "en": "Prevent accidents and maintain order in the sky, protecting thousands of lives every day.",
+          "kh": "ការពារគ្រោះថ្នាក់ និងរក្សាសណ្ដាប់ធ្នាប់នៅលើអាកាស ការពារជីវិតមនុស្សរាប់ពាន់នាក់ជារៀងរាល់ថ្ងៃ។"
+        }
+      }
+    ]
   },
   {
     "id": "biological-sciences",
@@ -316,7 +410,54 @@
     "en": "Education",
     "kh": "អប់រំ",
     "icon": "🎓",
-    "careers": []
+    "careers": [
+      {
+        "id": "high-school-teacher",
+        "en": "High School Teacher",
+        "kh": "គ្រូបង្រៀនវិទ្យាល័យ",
+        "tasks": {
+          "en": [
+            "Design engaging lesson plans aligned to the national curriculum for subjects such as English or Chemistry",
+            "Deliver daily classroom instruction using visual aids, group activities, and hands-on demonstrations",
+            "Grade assignments and exams, providing personalised written feedback to guide each student's progress",
+            "Mentor struggling students after class and coordinate with parents to address learning challenges early"
+          ],
+          "kh": [
+            "រៀបចំផែនការមេរៀនដ៏គួរឱ្យចាប់អារម្មណ៍ ស្របតាមកម្មវិធីសិក្សាជាតិ សម្រាប់មុខវិជ្ជាដូចជាភាសាអង់គ្លេស ឬគីមីវិទ្យា",
+            "ផ្ដល់ការបង្រៀននៅក្នុងថ្នាក់ប្រចាំថ្ងៃ ដោយប្រើប្រាស់ឧបករណ៍ជំនួយ សកម្មភាពជាក្រុម និងការបង្ហាញជាក់ស្ដែង",
+            "ដាក់ពិន្ទុកិច្ចការ និងការប្រឡង ដោយផ្ដល់មតិស្ថាបនាជាលាយលក្ខណ៍អក្សរ ជំរុញដំណើរការអភិវឌ្ឍន៍របស់សិស្សម្នាក់ៗ",
+            "ណែនាំសិស្សដែលមានការលំបាករៀន ក្រោយពេលមេរៀន ហើយសម្របសម្រួលជាមួយឪពុកម្ដាយ ដើម្បីដោះស្រាយបញ្ហារៀនសូត្ររបស់សិស្ស"
+          ]
+        },
+        "impact": {
+          "en": "Shape the minds of the next generation and prepare them for national exams and university life.",
+          "kh": "បណ្តុះគំនិតយុវជនជំនាន់ក្រោយ និងរៀបចំពួកគេសម្រាប់ការប្រឡងថ្នាក់ជាតិ និងជីវិតនៅសាកលវិទ្យាល័យ។"
+        }
+      },
+      {
+        "id": "school-administrator",
+        "en": "School Administrator / Principal",
+        "kh": "អ្នកគ្រប់គ្រងសាលា / នាយកសាលា",
+        "tasks": {
+          "en": [
+            "Manage the school's annual budget, allocate resources to priority needs, and maintain accurate financial records",
+            "Observe classroom instruction and provide structured coaching and professional development for teaching staff",
+            "Organise community fundraising drives and apply for government grants to fund school improvements",
+            "Develop school safety policies, resolve student disciplinary matters, and represent the school to local authorities"
+          ],
+          "kh": [
+            "គ្រប់គ្រងថវិកាប្រចាំឆ្នាំរបស់សាលា ចំណាយធនធានទៅតាមតម្រូវការអាទិភាព ហើយរក្សាកំណត់ត្រាហិរញ្ញវត្ថុត្រឹមត្រូវ",
+            "ត្រួតពិនិត្យការបង្រៀននៅក្នុងថ្នាក់ ហើយផ្ដល់ការបណ្ដុះបណ្ដាល និងការអភិវឌ្ឍន៍វិជ្ជាជីវៈ ដល់គ្រូបង្រៀន",
+            "រៀបចំយុទ្ធនាការរៃអង្គាសប្រាក់ក្នុងសហគមន៍ ហើយដាក់ពាក្យសុំការឧបត្ថម្ភពីរដ្ឋ ដើម្បីផ្ដល់មូលនិធិកែលម្អសាលា",
+            "អភិវឌ្ឍគោលនយោបាយសុវត្ថិភាពសាលា ដោះស្រាយបញ្ហាវិន័យសិស្ស ហើយតំណាងសាលាចំពោះអាជ្ញាធរមូលដ្ឋាន"
+          ]
+        },
+        "impact": {
+          "en": "Create a safe, well-equipped, and inspiring learning environment for hundreds of students.",
+          "kh": "បង្កើតបរិយាកាសសិក្សាដែលមានសុវត្ថិភាព បំពាក់ដោយសម្ភារៈគ្រប់គ្រាន់ និងជំរុញទឹកចិត្តដល់សិស្សរាប់រយនាក់។"
+        }
+      }
+    ]
   },
   {
     "id": "electrical-engineering",
@@ -581,7 +722,54 @@
     "en": "Legal Professions",
     "kh": "វិជ្ជាជីវៈច្បាប់",
     "icon": "⚖️",
-    "careers": []
+    "careers": [
+      {
+        "id": "lawyer",
+        "en": "Lawyer / Legal Counsel",
+        "kh": "មេធាវី / ទីប្រឹក្សាច្បាប់",
+        "tasks": {
+          "en": [
+            "Draft and review contracts, legal agreements, and corporate documents to protect clients' interests",
+            "Research case law and statutes to build strong legal arguments for clients in civil or criminal matters",
+            "Advise businesses and individuals on regulatory compliance, risk management, and dispute resolution",
+            "Represent clients in court hearings, presenting evidence and oral arguments before judges"
+          ],
+          "kh": [
+            "ព្រាង និងពិនិត្យឡើងវិញ នូវកិច្ចសន្យា កិច្ចព្រមព្រៀងច្បាប់ និងឯកសារក្រុមហ៊ុន ដើម្បីការពារផលប្រយោជន៍អតិថិជន",
+            "ស្រាវជ្រាវការសម្រេចអំពីបទបញ្ជា និងច្បាប់ ដើម្បីបង្កើតភស្តុតាងច្បាប់ដ៏ស្ទង ជូនអតិថិជន ក្នុងបញ្ហារដ្ឋប្បវេណី ឬព្រហ្មទណ្ឌ",
+            "ផ្ដល់ជាប្រឹក្សាដល់អាជីវកម្ម និងបុគ្គល ស្ដីពីការអនុលោមតាមបទប្បញ្ញត្តិ ការគ្រប់គ្រងហានិភ័យ និងការដោះស្រាយវិវាទ",
+            "តំណាងអតិថិជននៅក្នុងសវនាការតុលាការ ដោយបង្ហាញភស្តុតាង និងការតាំងឡើងផ្ទាល់មាត់ ចំពោះចៅក្រម"
+          ]
+        },
+        "impact": {
+          "en": "Defend the rights of individuals and ensure fair business practices within the community.",
+          "kh": "ការពារសិទ្ធិបុគ្គល និងធានាការអនុវត្តអាជីវកម្មដោយយុត្តិធម៌នៅក្នុងសហគមន៍។"
+        }
+      },
+      {
+        "id": "judge",
+        "en": "Judge / Magistrate",
+        "kh": "ចៅក្រម / ព្រះរាជអាជ្ញា",
+        "tasks": {
+          "en": [
+            "Preside over civil and criminal trials, ensuring all proceedings follow proper legal procedure",
+            "Review evidence, witness testimony, and legal arguments presented by both prosecution and defence",
+            "Interpret and apply the law objectively, without bias or political influence, in every case",
+            "Issue written rulings and sentencing decisions that are clearly reasoned and publicly recorded"
+          ],
+          "kh": [
+            "ដឹកនាំសវនាការរដ្ឋប្បវេណី និងព្រហ្មទណ្ឌ ដោយធានាថាដំណើរការទាំងអស់ ធ្វើតាមនីតិវិធីច្បាប់ត្រឹមត្រូវ",
+            "ពិនិត្យភស្តុតាង សក្ខីភាពអ្នកសាក្សី និងភស្តុតាងច្បាប់ ដែលបង្ហាញដោយភាគីចោទប្រកាន់ និងការពារ",
+            "បកស្រាយ និងអនុវត្តច្បាប់ ដោយតម្លាភាព ដោយគ្មានការលំអៀង ឬឥទ្ធិពលនយោបាយ ក្នុងគ្រប់ករណី",
+            "ចេញសេចក្ដីសម្រេច និងការផ្ដន្ទាទោសជាលាយលក្ខណ៍អក្សរ ដែលមានហេតុផលច្បាស់លាស់ ហើយត្រូវបានកត់ត្រាជាសាធារណៈ"
+          ]
+        },
+        "impact": {
+          "en": "Uphold justice, resolve disputes peacefully, and maintain the rule of law in society.",
+          "kh": "រក្សាយុត្តិធម៌ ដោះស្រាយវិវាទដោយសន្តិវិធី និងរក្សានីតិរដ្ឋនៅក្នុងសង្គម។"
+        }
+      }
+    ]
   },
   {
     "id": "liberal-arts",
@@ -602,7 +790,54 @@
     "en": "Mathematics",
     "kh": "គណិតវិទ្យា",
     "icon": "🔢",
-    "careers": []
+    "careers": [
+      {
+        "id": "data-analyst",
+        "en": "Data Analyst",
+        "kh": "អ្នកវិភាគទិន្នន័យ",
+        "tasks": {
+          "en": [
+            "Collect and clean large datasets from business systems, surveys, and government databases",
+            "Apply statistical models and regression analysis to identify trends, anomalies, and patterns in the data",
+            "Build interactive dashboards and visual reports using tools such as Excel, Tableau, or Python",
+            "Present findings to management and non-technical teams with clear, data-backed recommendations"
+          ],
+          "kh": [
+            "ប្រមូល និងសម្អាតទិន្នន័យធំៗ ពីប្រព័ន្ធអាជីវកម្ម ការស្ទង់មតិ និងមូលដ្ឋានទិន្នន័យរដ្ឋ",
+            "អនុវត្តគំរូស្ថិតិ និងការវិភាគ regression ដើម្បីស្វែងរកនិន្នាការ ភាពមិនធម្មតា និងគំរូក្នុងទិន្នន័យ",
+            "បង្កើតផ្ទាំងព័ត៌មានអន្តរកម្ម និងរបាយការណ៍មើលឃើញ ដោយប្រើឧបករណ៍ដូចជា Excel, Tableau ឬ Python",
+            "ដាក់ជូនការរកឃើញ ចំពោះអ្នកគ្រប់គ្រង និងក្រុមដែលមិនមែនជាបច្ចេកទេស ជាមួយនឹងការណែនាំច្បាស់លាស់ ដែលគាំទ្រដោយទិន្នន័យ"
+          ]
+        },
+        "impact": {
+          "en": "Transform raw numbers into actionable insights that help businesses and governments solve problems.",
+          "kh": "បំប្លែងតួលេខឆៅ ទៅជាព័ត៌មានលម្អិតដែលអាចអនុវត្តបាន ដែលជួយអាជីវកម្ម និងរដ្ឋាភិបាលដោះស្រាយបញ្ហា។"
+        }
+      },
+      {
+        "id": "actuary",
+        "en": "Actuary",
+        "kh": "អ្នកគណនាហានិភ័យ",
+        "tasks": {
+          "en": [
+            "Use advanced mathematics and probability theory to model and quantify financial risk for insurance products",
+            "Analyse historical data on accidents, floods, and health events to forecast future claim costs accurately",
+            "Design fair and sustainable insurance premium structures for individuals, farmers, and businesses",
+            "Prepare actuarial reports and present risk assessments to senior management and financial regulators"
+          ],
+          "kh": [
+            "ប្រើគណិតវិទ្យាកម្រិតខ្ពស់ និងទ្រឹស្ដីប្រូបាប៊ីលីតេ ដើម្បីគំរូ និងវាស់ស្ទង់ហានិភ័យហិរញ្ញវត្ថុ សម្រាប់ផលិតផលធានារ៉ាប់រង",
+            "វិភាគទិន្នន័យប្រវត្តិសាស្ត្រ ស្ដីពីគ្រោះថ្នាក់ ការជំនន់ទឹក និងហេតុការណ៍សុខភាព ដើម្បីព្យាករណ៍ថ្លៃការទូទាត់នាថ្ងៃអនាគតប្រកបដោយភាពត្រឹមត្រូវ",
+            "រចនារចនាសម្ព័ន្ធថ្លៃសេវាធានារ៉ាប់រងដ៏យុត្តិធម៌ និងនិរន្តរ សម្រាប់បុគ្គល កសិករ និងអាជីវកម្ម",
+            "រៀបចំរបាយការណ៍ actuarial ហើយបង្ហាញការវាយតម្លៃហានិភ័យ ចំពោះអ្នកគ្រប់គ្រងជាន់ខ្ពស់ និងអ្នករៀបចំបទប្បញ្ញត្តិហិរញ្ញវត្ថុ"
+          ]
+        },
+        "impact": {
+          "en": "Protect families and farmers from financial ruin by designing fair safety nets and insurance plans.",
+          "kh": "ការពារគ្រួសារ និងកសិករ ពីការធ្លាក់ចុះផ្នែកហិរញ្ញវត្ថុ ដោយរៀបចំបណ្ដាញសុវត្ថិភាព និងគម្រោងធានារ៉ាប់រងដោយយុត្តិធម៌។"
+        }
+      }
+    ]
   },
   {
     "id": "mechanic-technologies",

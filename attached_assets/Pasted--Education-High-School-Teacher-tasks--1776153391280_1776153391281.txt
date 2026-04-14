@@ -1,0 +1,52 @@
+{
+  "Education (ការអប់រំ)": {
+    "High School Teacher (គ្រូបង្រៀនវិទ្យាល័យ)": {
+      "tasks": "Design lesson plans, grade assignments, and mentor students in specific subjects like English or Chemistry. (រៀបចំផែនការមេរៀន ដាក់ពិន្ទុកិច្ចការ និងណែនាំសិស្សលើមុខវិជ្ជាជាក់លាក់ដូចជាភាសាអង់គ្លេស ឬគីមីវិទ្យា។)",
+      "impact": "Shape the minds of the next generation and prepare them for national exams and university life. (បណ្តុះគំនិតយុវជនជំនាន់ក្រោយ និងរៀបចំពួកគេសម្រាប់ការប្រឡងថ្នាក់ជាតិ និងជីវិតនៅសាកលវិទ្យាល័យ។)"
+    },
+    "School Administrator / Principal (អ្នកគ្រប់គ្រងសាលា / នាយកសាលា)": {
+      "tasks": "Manage school budgets, support teaching staff, and organize community funding for school improvements. (គ្រប់គ្រងថវិកាសាលា គាំទ្របុគ្គលិកសិក្សា និងរៀបចំការរៃអង្គាសប្រាក់ពីសហគមន៍ដើម្បីកែលម្អសាលា។)",
+      "impact": "Create a safe, well-equipped, and inspiring learning environment for hundreds of students. (បង្កើតបរិយាកាសសិក្សាដែលមានសុវត្ថិភាព បំពាក់ដោយសម្ភារៈគ្រប់គ្រាន់ និងជំរុញទឹកចិត្តដល់សិស្សរាប់រយនាក់។)"
+    }
+  },
+  "Architecture and Related Services (ស្ថាបត្យកម្ម និងសេវាកម្មពាក់ព័ន្ធ)": {
+    "Architect (ស្ថាបត្យករ)": {
+      "tasks": "Draft blueprints, create 3D models, and select sustainable materials for homes and commercial buildings. (គូរទីតាំងប្លង់ បង្កើតគំរូត្រីមាត្រ(3D) និងជ្រើសរើសសម្ភារៈដែលមាននិរន្តរភាពសម្រាប់គេហដ្ឋាន និងអគារពាណិជ្ជកម្ម។)",
+      "impact": "Design beautiful, functional spaces that blend modern engineering with traditional cultural aesthetics. (រចនាលំហដ៏ស្រស់ស្អាត និងមានមុខងារដែលរួមបញ្ចូលវិស្វកម្មទំនើបជាមួយនឹងសោភ័ណភាពវប្បធម៌ប្រពៃណី។)"
+    },
+    "Urban Planner (អ្នករៀបចំក្រុង)": {
+      "tasks": "Design city layouts, plan public parks, and improve traffic flow and water management systems. (រចនាប្លង់ទីក្រុង រៀបចំសួនច្បារសាធារណៈ កែលម្អលំហូរចរាចរណ៍ និងប្រព័ន្ធគ្រប់គ្រងទឹក។)",
+      "impact": "Make rapidly growing cities and provincial capitals more livable, sustainable, and organized. (ធ្វើឱ្យទីក្រុងដែលកំពុងរីកចម្រើនយ៉ាងឆាប់រហ័ស និងទីរួមខេត្តកាន់តែមានភាពងាយស្រួលរស់នៅ មាននិរន្តរភាព និងមានរបៀបរៀបរយ។)"
+    }
+  },
+  "Aviation (អាកាសចរណ៍)": {
+    "Commercial Pilot (អាកាសយានិកពាណិជ្ជកម្ម)": {
+      "tasks": "Navigate passenger aircraft, monitor complex flight instruments, and communicate with air traffic control. (បើកយន្តហោះដឹកអ្នកដំណើរ ត្រួតពិនិត្យឧបករណ៍ហោះហើរដ៏ស្មុគស្មាញ ទាក់ទងជាមួយផ្នែកគ្រប់គ្រងចរាចរណ៍ផ្លូវអាកាស។)",
+      "impact": "Safely connect local communities to the global economy and international tourism. (តភ្ជាប់សហគមន៍ក្នុងស្រុកដោយសុវត្ថិភាពទៅនឹងសេដ្ឋកិច្ចសកល និងទេសចរណ៍អន្តរជាតិ។)"
+    },
+    "Air Traffic Controller (អ្នកគ្រប់គ្រងចរាចរណ៍ផ្លូវអាកាស)": {
+      "tasks": "Use radar to direct aircraft on the ground and in the air, ensuring safe distances between planes. (ប្រើរ៉ាដាដើម្បីដឹកនាំយន្តហោះនៅលើដី និងលើអាកាស ធានាចម្ងាយសុវត្ថិភាពរវាងយន្តហោះ។)",
+      "impact": "Prevent accidents and maintain order in the sky, protecting thousands of lives every day. (ការពារគ្រោះថ្នាក់ និងរក្សាសណ្តាប់ធ្នាប់នៅលើអាកាស ការពារជីវិតមនុស្សរាប់ពាន់នាក់ជារៀងរាល់ថ្ងៃ។)"
+    }
+  },
+  "Legal Professions and Studies (វិជ្ជាជីវៈច្បាប់ និងការសិក្សា)": {
+    "Lawyer / Legal Counsel (មេធាវី / ទីប្រឹក្សាច្បាប់)": {
+      "tasks": "Draft contracts, advise businesses on regulations, and represent clients in court hearings. (ព្រាងកិច្ចសន្យា ផ្តល់ប្រឹក្សាដល់អាជីវកម្មអំពីបទប្បញ្ញត្តិ តំណាងអតិថិជននៅក្នុងសវនាការតុលាការ។)",
+      "impact": "Defend the rights of individuals and ensure fair business practices within the community. (ការពារសិទ្ធិបុគ្គល និងធានាការអនុវត្តអាជីវកម្មដោយយុត្តិធម៌នៅក្នុងសហគមន៍។)"
+    },
+    "Judge / Magistrate (ចៅក្រម / ព្រះរាជអាជ្ញា)": {
+      "tasks": "Preside over trials, interpret the law objectively, and issue rulings based on evidence. (ដឹកនាំសវនាការ បកស្រាយច្បាប់ដោយតម្លាភាព ចេញសេចក្តីសម្រេចផ្អែកលើភស្តុតាង។)",
+      "impact": "Uphold justice, resolve disputes peacefully, and maintain the rule of law in society. (រក្សាយុត្តិធម៌ ដោះស្រាយវិវាទដោយសន្តិវិធី និងរក្សានីតិរដ្ឋនៅក្នុងសង្គម។)"
+    }
+  },
+  "Mathematics and Statistics (គណិតវិទ្យា និងស្ថិតិ)": {
+    "Data Analyst (អ្នកវិភាគទិន្នន័យ)": {
+      "tasks": "Collect large datasets, use statistical models to find trends, and create visual reports for companies. (ប្រមូលទិន្នន័យធំៗ ប្រើប្រាស់គំរូស្ថិតិដើម្បីស្វែងរកនិន្នាការ បង្កើតរបាយការណ៍ជាទម្រង់រូបភាពសម្រាប់ក្រុមហ៊ុន។)",
+      "impact": "Transform raw numbers into actionable insights that help businesses and governments solve problems. (បំប្លែងតួលេខឆៅទៅជាព័ត៌មានលម្អិតដែលអាចអនុវត្តបាន ដែលជួយអាជីវកម្ម និងរដ្ឋាភិបាលដោះស្រាយបញ្ហា។)"
+    },
+    "Actuary (អ្នកគណនាហានិភ័យ)": {
+      "tasks": "Use advanced math to calculate the financial risk of accidents or natural disasters to design insurance policies. (ប្រើគណិតវិទ្យាកម្រិតខ្ពស់ដើម្បីគណនាហានិភ័យហិរញ្ញវត្ថុនៃគ្រោះថ្នាក់ ឬគ្រោះមហន្តរាយធម្មជាតិ ដើម្បីរៀបចំគោលការណ៍ធានារ៉ាប់រង។)",
+      "impact": "Protect families and farmers from financial ruin by designing fair safety nets and insurance plans. (ការពារគ្រួសារ និងកសិករពីការធ្លាក់ចុះផ្នែកហិរញ្ញវត្ថុ ដោយរៀបចំបណ្តាញសុវត្ថិភាព និងគម្រោងធានារ៉ាប់រងដោយយុត្តិធម៌។)"
+    }
+  }
+}
