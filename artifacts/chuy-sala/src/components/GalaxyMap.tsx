@@ -158,11 +158,38 @@ function useGalaxyGeometry() {
   }, []);
 }
 
+// ── Star sprite texture (soft radial glow circle) ────────────────────────────
+
+function createStarTexture(): THREE.CanvasTexture {
+  const SIZE = 64;
+  const canvas = document.createElement("canvas");
+  canvas.width  = SIZE;
+  canvas.height = SIZE;
+  const ctx = canvas.getContext("2d")!;
+  const half = SIZE / 2;
+
+  // Radial gradient: opaque white centre → fully transparent at the edge
+  const grad = ctx.createRadialGradient(half, half, 0, half, half, half);
+  grad.addColorStop(0.0,  "rgba(255,255,255,1.0)");
+  grad.addColorStop(0.2,  "rgba(255,255,255,0.85)");
+  grad.addColorStop(0.5,  "rgba(255,255,255,0.3)");
+  grad.addColorStop(0.85, "rgba(255,255,255,0.05)");
+  grad.addColorStop(1.0,  "rgba(255,255,255,0.0)");
+
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(half, half, half, 0, Math.PI * 2);
+  ctx.fill();
+
+  return new THREE.CanvasTexture(canvas);
+}
+
 // ── Galaxy mesh ──────────────────────────────────────────────────────────────
 
 function GalaxyParticles() {
   const ref = useRef<THREE.Points>(null);
   const { positions, colors } = useGalaxyGeometry();
+  const starTexture = useMemo(() => createStarTexture(), []);
 
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += delta * 0.035;
@@ -185,12 +212,14 @@ function GalaxyParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.022}
+        map={starTexture}
+        size={0.048}
         sizeAttenuation
         vertexColors
         transparent
-        opacity={0.9}
+        opacity={0.92}
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
