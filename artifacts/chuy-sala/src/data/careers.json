@@ -1,5 +1,47 @@
 [
   {
+    "id": "agriculture",
+    "en": "Agriculture",
+    "kh": "កសិកម្ម",
+    "icon": "🌾",
+    "careers": []
+  },
+  {
+    "id": "architecture",
+    "en": "Architecture",
+    "kh": "ស្ថាបត្យកម្ម",
+    "icon": "🏛️",
+    "careers": []
+  },
+  {
+    "id": "area-studies",
+    "en": "Area Studies",
+    "kh": "ការសិក្សាតំបន់",
+    "icon": "🗺️",
+    "careers": []
+  },
+  {
+    "id": "aviation",
+    "en": "Aviation",
+    "kh": "អាកាសចរណ៍",
+    "icon": "✈️",
+    "careers": []
+  },
+  {
+    "id": "biological-sciences",
+    "en": "Biological Sciences",
+    "kh": "វិទ្យាសាស្ត្រជីវវិទ្យា",
+    "icon": "🧬",
+    "careers": []
+  },
+  {
+    "id": "business",
+    "en": "Business",
+    "kh": "ធុរកិច្ច",
+    "icon": "💼",
+    "careers": []
+  },
+  {
     "id": "chemistry",
     "en": "Chemistry",
     "kh": "គីមីវិទ្យា",
@@ -52,6 +94,109 @@
         }
       }
     ]
+  },
+  {
+    "id": "communication",
+    "en": "Communication",
+    "kh": "ទំនាក់ទំនង",
+    "icon": "📢",
+    "careers": []
+  },
+  {
+    "id": "communications-technologies",
+    "en": "Communications Technologies",
+    "kh": "បច្ចេកវិទ្យាទំនាក់ទំនង",
+    "icon": "📡",
+    "careers": []
+  },
+  {
+    "id": "computer-sciences",
+    "en": "Computer Sciences",
+    "kh": "វិទ្យាសាស្ត្រកំព្យូទ័រ",
+    "icon": "💻",
+    "careers": []
+  },
+  {
+    "id": "construction-trades",
+    "en": "Construction Trades",
+    "kh": "ជំនាញសាងសង់",
+    "icon": "🏗️",
+    "careers": []
+  },
+  {
+    "id": "education",
+    "en": "Education",
+    "kh": "អប់រំ",
+    "icon": "🎓",
+    "careers": []
+  },
+  {
+    "id": "electrical-engineering",
+    "en": "Electrical Engineering",
+    "kh": "វិស្វកម្មអគ្គិសនី",
+    "icon": "⚡",
+    "careers": [
+      {
+        "id": "circuit-designer",
+        "en": "Circuit Designer",
+        "kh": "អ្នករចនាសៀគ្វី",
+        "tasks": {
+          "en": [
+            "Design and layout printed circuit boards (PCBs) for electronic products",
+            "Build and test microchip prototypes using simulation software",
+            "Debug hardware failures and analyse signal integrity",
+            "Collaborate with firmware engineers to integrate software and hardware"
+          ],
+          "kh": [
+            "រចនា និងដាក់ layout ផ្ទាំងសៀគ្វីបោះពុម្ព (PCB) សម្រាប់ផលិតផលអេឡិចត្រូនិក",
+            "បង្កើត និងធ្វើតេស្ត prototype microchip ដោយប្រើកម្មវិធីក្លែងធ្វើ",
+            "ជួសជុលបញ្ហាហ្វែរវែ និងវិភាគភាពត្រឹមត្រូវនៃសញ្ញា",
+            "សហការជាមួយវិស្វករ firmware ដើម្បីបញ្ចូលបច្ចេកវិទ្យាទន់ និងរឹង"
+          ]
+        },
+        "impact": {
+          "en": "Power every modern device — from smartphones to medical equipment — through your chip designs.",
+          "kh": "ផ្តល់ថាមពលដល់ឧបករណ៍ទំនើបៗទាំងអស់ — ពីស្មាតហ្វូន រហូតដល់ឧបករណ៍វេជ្ជសាស្ត្រ — តាមរយៈការរចនា chip របស់អ្នក។"
+        }
+      },
+      {
+        "id": "aerospace-engineer",
+        "en": "Aerospace Engineer",
+        "kh": "វិស្វករអាកាសយានិក",
+        "tasks": {
+          "en": [
+            "Design power and electrical systems for satellites and spacecraft",
+            "Run thermal and radiation stress tests on flight hardware",
+            "Interface with global space agencies on system requirements",
+            "Analyse telemetry data to monitor satellite health in orbit"
+          ],
+          "kh": [
+            "រចនាប្រព័ន្ធថាមពល និងអគ្គិសនី សម្រាប់ផ្កាយរណប និងយានអវកាស",
+            "ធ្វើតេស្តស្ត្រេស កំដៅ និងវិទ្យុសកម្ម លើហ្វែរវែអំណោយ",
+            "ភ្ជាប់ទំនាក់ទំនងជាមួយភ្នាក់ងារអវកាសពិភពលោក ស្តីពីតម្រូវការប្រព័ន្ធ",
+            "វិភាគទិន្នន័យ telemetry ដើម្បីតាមដានសុខភាពផ្កាយរណបក្នុងគន្លង"
+          ]
+        },
+        "impact": {
+          "en": "Contribute to humanity's reach into space — connecting nations through satellite communication.",
+          "kh": "រួមចំណែកដល់ការឈានទៅអវកាសរបស់មនុស្សជាតិ — ភ្ជាប់ប្រទេសជាតិ តាមរយៈការទំនាក់ទំនងផ្កាយរណប។"
+        }
+      }
+    ]
+  },
+  {
+    "id": "engineering-technologies",
+    "en": "Engineering Technologies",
+    "kh": "បច្ចេកវិទ្យាវិស្វកម្ម",
+    "icon": "⚙️",
+    "careers": []
+  },
+  {
+    "id": "engineering",
+    "en": "Engineering",
+    "kh": "វិស្វកម្ម",
+    "icon": "🔧",
+    "careers": []
   },
   {
     "id": "english-literature",
@@ -108,57 +253,178 @@
     ]
   },
   {
-    "id": "electrical-engineering",
-    "en": "Electrical Engineering",
-    "kh": "វិស្វកម្មអគ្គិសនី",
-    "icon": "⚡",
-    "careers": [
-      {
-        "id": "circuit-designer",
-        "en": "Circuit Designer",
-        "kh": "អ្នករចនាសៀគ្វី",
-        "tasks": {
-          "en": [
-            "Design and layout printed circuit boards (PCBs) for electronic products",
-            "Build and test microchip prototypes using simulation software",
-            "Debug hardware failures and analyse signal integrity",
-            "Collaborate with firmware engineers to integrate software and hardware"
-          ],
-          "kh": [
-            "រចនា និងដាក់ layout ផ្ទាំងសៀគ្វីបោះពុម្ព (PCB) សម្រាប់ផលិតផលអេឡិចត្រូនិក",
-            "បង្កើត និងធ្វើតេស្ត prototype microchip ដោយប្រើកម្មវិធីក្លែងធ្វើ",
-            "ជួសជុលបញ្ហាហ្វែរវែ និងវិភាគភាពត្រឹមត្រូវនៃសញ្ញា",
-            "សហការជាមួយវិស្វករ firmware ដើម្បីបញ្ចូលបច្ចេកវិទ្យាទន់ និងរឹង"
-          ]
-        },
-        "impact": {
-          "en": "Power every modern device — from smartphones to medical equipment — through your chip designs.",
-          "kh": "ផ្តល់ថាមពលដល់ឧបករណ៍ទំនើបៗទាំងអស់ — ពីស្មាតហ្វូន រហូតដល់ឧបករណ៍វេជ្ជសាស្ត្រ — តាមរយៈការរចនា chip របស់អ្នក។"
-        }
-      },
-      {
-        "id": "aerospace-engineer",
-        "en": "Aerospace Engineer",
-        "kh": "វិស្វករអាកាសយានិក",
-        "tasks": {
-          "en": [
-            "Design power and electrical systems for satellites and spacecraft",
-            "Run thermal and radiation stress tests on flight hardware",
-            "Interface with global space agencies on system requirements",
-            "Analyse telemetry data to monitor satellite health in orbit"
-          ],
-          "kh": [
-            "រចនាប្រព័ន្ធថាមពល និងអគ្គិសនី សម្រាប់ផ្កាយរណប និងយានអវកាស",
-            "ធ្វើតេស្តស្ត្រេស កំដៅ និងវិទ្យុសកម្ម លើហ្វែរវែអំណោយ",
-            "ភ្ជាប់ទំនាក់ទំនងជាមួយភ្នាក់ងារអវកាសពិភពលោក ស្តីពីតម្រូវការប្រព័ន្ធ",
-            "វិភាគទិន្នន័យ telemetry ដើម្បីតាមដានសុខភាពផ្កាយរណបក្នុងគន្លង"
-          ]
-        },
-        "impact": {
-          "en": "Contribute to humanity's reach into space — connecting nations through satellite communication.",
-          "kh": "រួមចំណែកដល់ការឈានទៅអវកាសរបស់មនុស្សជាតិ — ភ្ជាប់ប្រទេសជាតិ តាមរយៈការទំនាក់ទំនងផ្កាយរណប។"
-        }
-      }
-    ]
+    "id": "family-sciences",
+    "en": "Family Sciences",
+    "kh": "វិទ្យាសាស្ត្រគ្រួសារ",
+    "icon": "👨‍👩‍👧",
+    "careers": []
+  },
+  {
+    "id": "foreign-languages",
+    "en": "Foreign Languages",
+    "kh": "ភាសាបរទេស",
+    "icon": "🌐",
+    "careers": []
+  },
+  {
+    "id": "health-professions",
+    "en": "Health Professions",
+    "kh": "វិជ្ជាជីវៈសុខភាព",
+    "icon": "🏥",
+    "careers": []
+  },
+  {
+    "id": "history",
+    "en": "History",
+    "kh": "ប្រវត្តិសាស្ត្រ",
+    "icon": "📜",
+    "careers": []
+  },
+  {
+    "id": "homeland-security",
+    "en": "Homeland Security",
+    "kh": "សន្តិសុខជាតិ",
+    "icon": "🛡️",
+    "careers": []
+  },
+  {
+    "id": "human-services",
+    "en": "Human Services",
+    "kh": "សេវាមនុស្ស",
+    "icon": "🤝",
+    "careers": []
+  },
+  {
+    "id": "legal-professions",
+    "en": "Legal Professions",
+    "kh": "វិជ្ជាជីវៈច្បាប់",
+    "icon": "⚖️",
+    "careers": []
+  },
+  {
+    "id": "liberal-arts",
+    "en": "Liberal Arts",
+    "kh": "សិល្បៈសេរី",
+    "icon": "🎨",
+    "careers": []
+  },
+  {
+    "id": "library-science",
+    "en": "Library Science",
+    "kh": "វិទ្យាសាស្ត្របណ្ណាល័យ",
+    "icon": "📖",
+    "careers": []
+  },
+  {
+    "id": "mathematics",
+    "en": "Mathematics",
+    "kh": "គណិតវិទ្យា",
+    "icon": "🔢",
+    "careers": []
+  },
+  {
+    "id": "mechanic-technologies",
+    "en": "Mechanic Technologies",
+    "kh": "បច្ចេកវិទ្យាមេកានិក",
+    "icon": "🔩",
+    "careers": []
+  },
+  {
+    "id": "military-technologies",
+    "en": "Military Technologies",
+    "kh": "បច្ចេកវិទ្យាយោធា",
+    "icon": "🪖",
+    "careers": []
+  },
+  {
+    "id": "multi-interdisciplinary-studies",
+    "en": "Multi/Interdisciplinary Studies",
+    "kh": "ការសិក្សាពហុជំនាញ",
+    "icon": "🔀",
+    "careers": []
+  },
+  {
+    "id": "natural-resources",
+    "en": "Natural Resources",
+    "kh": "ធនធានធម្មជាតិ",
+    "icon": "🌿",
+    "careers": []
+  },
+  {
+    "id": "parks-recreation",
+    "en": "Parks & Recreation",
+    "kh": "ឧទ្យាន និងកំសាន្ត",
+    "icon": "🌳",
+    "careers": []
+  },
+  {
+    "id": "personal-services",
+    "en": "Personal Services",
+    "kh": "សេវាផ្ទាល់ខ្លួន",
+    "icon": "💆",
+    "careers": []
+  },
+  {
+    "id": "philosophy",
+    "en": "Philosophy",
+    "kh": "វិជ្ជាបារម្ភ",
+    "icon": "🤔",
+    "careers": []
+  },
+  {
+    "id": "physical-sciences",
+    "en": "Physical Sciences",
+    "kh": "វិទ្យាសាស្ត្ររូបវន្ត",
+    "icon": "⚛️",
+    "careers": []
+  },
+  {
+    "id": "precision-production",
+    "en": "Precision Production",
+    "kh": "ផលិតកម្មភាពច្បាស់លាស់",
+    "icon": "🏭",
+    "careers": []
+  },
+  {
+    "id": "psychology",
+    "en": "Psychology",
+    "kh": "ចិត្តវិទ្យា",
+    "icon": "🧠",
+    "careers": []
+  },
+  {
+    "id": "science-technologies",
+    "en": "Science Technologies",
+    "kh": "បច្ចេកវិទ្យាវិទ្យាសាស្ត្រ",
+    "icon": "🔬",
+    "careers": []
+  },
+  {
+    "id": "social-sciences",
+    "en": "Social Sciences",
+    "kh": "វិទ្យាសាស្ត្រសង្គម",
+    "icon": "👥",
+    "careers": []
+  },
+  {
+    "id": "theology",
+    "en": "Theology",
+    "kh": "ទេវវិទ្យា",
+    "icon": "✝️",
+    "careers": []
+  },
+  {
+    "id": "transportation",
+    "en": "Transportation",
+    "kh": "ការដឹកជញ្ជូន",
+    "icon": "🚌",
+    "careers": []
+  },
+  {
+    "id": "visual-arts",
+    "en": "Visual Arts",
+    "kh": "សិល្បៈចក្ខុ",
+    "icon": "🎭",
+    "careers": []
   }
 ]
