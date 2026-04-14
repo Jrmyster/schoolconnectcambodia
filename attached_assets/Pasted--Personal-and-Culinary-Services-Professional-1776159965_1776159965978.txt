@@ -1,0 +1,32 @@
+{
+  "Personal and Culinary Services (សេវាកម្មផ្ទាល់ខ្លួន និងសិល្បៈធ្វើម្ហូប)": {
+    "Professional Esthetician / Spa Manager (អ្នកឯកទេសថែរក្សាសម្ភារៈ និងអ្នកគ្រប់គ្រងស្ប៉ា)": {
+      "tasks": "Manage professional skincare treatments, oversee staff at a wellness center, and ensure high hygiene standards. (គ្រប់គ្រងការថែទាំស្បែកតាមបច្ចេកទេស បញ្ជាបុគ្គលិកនៅមជ្ឈមណ្ឌលសុខភាព និងធានាស្តង់ដារអនាម័យខ្ពស់។)",
+      "impact": "Boost the tourism and wellness economy while providing specialized care that improves people's confidence and health. (លើកកម្ពស់សេដ្ឋកិច្ចទេសចរណ៍ និងសុខុមាលភាព ព្រមទាំងផ្តល់ការថែទាំដែលជួយបង្កើនទំនុកចិត្ត និងសុខភាពរបស់មនុស្ស។)"
+    }
+  },
+  "Precision Production (ផលិតកម្មច្បាស់លាស់)": {
+    "Quality Assurance Technician (អ្នកបច្គេកទេសធានាគុណភាព)": {
+      "tasks": "Inspect manufactured parts using digital sensors to ensure they meet exact international blueprints. (ពិនិត្យគ្រឿងបន្លាស់ដែលផលិតដោយប្រើសេនស័រឌីជីថល ដើម្បីធានាថាវាស្របតាមប្លង់បច្ចេកទេសអន្តរជាតិ។)",
+      "impact": "Ensure that Cambodian-made products are trusted worldwide for their safety and high-tech quality. (ធានាថាផលិតផលដែលផលិតនៅកម្ពុជាត្រូវបានគេជឿទុកចិត្តទូទាំងពិភពលោក ចំពោះសុវត្ថិភាព និងគុណភាពបច្ចេកវិទ្យាខ្ពស់។)"
+    }
+  },
+  "Library Science (បណ្ណាល័យវិទ្យាសាស្ត្រ)": {
+    "Digital Librarian (បណ្ណារក្សឌីជីថល)": {
+      "tasks": "Curate online learning resources, digitize historical books, and help students find research papers for their exams. (រៀបចំធនធានសិក្សាតាមអ៊ីនធឺណិត បម្លែងសៀវភៅប្រវត្តិសាស្ត្រជាទម្រង់ឌីជីថល និងជួយសិស្សស្វែងរកឯកសារស្រាវជ្រាវសម្រាប់ការប្រឡង។)",
+      "impact": "Democratize knowledge by making sure information is free, organized, and accessible to everyone with a phone. (ធ្វើឱ្យចំណេះដឹងក្លាយជាកម្មសិទ្ធិរបស់មនុស្សគ្រប់គ្នា ដោយធានាថាព័ត៌មានគឺឥតគិតថ្លៃ មានរបៀបរៀបរយ និងងាយស្រួលប្រើប្រាស់។)"
+    }
+  },
+  "Theology and Religious Vocations (ទេវវិទ្យា និងវិជ្ជាជីវៈសាសនា)": {
+    "Cultural Scholar (អ្នកប្រាជ្ញវប្បធម៌)": {
+      "tasks": "Teach the ethics and history of religious traditions and advise on preserving community moral frameworks. (បង្រៀនអំពីសីលធម៌ និងប្រវត្តិសាស្ត្រនៃប្រពៃណីសាសនា និងផ្តល់ប្រឹក្សាលើការអភិរក្សក្របខ័ណ្ឌសីលធម៌សហគមន៍។)",
+      "impact": "Strengthen the social fabric of the village by promoting peace, understanding, and shared values. (ពង្រឹងរចនាសម្ព័ន្ធសង្គមក្នុងភូមិដោយលើកកម្ពស់សន្តិភាព ការយល់ដឹង និងគុណតម្លៃរួម។)"
+    }
+  },
+  "Transportation and Materials Moving (ការដឹកជញ្ជូន និងការផ្លាស់ទីសម្ភារៈ)": {
+    "Supply Chain Coordinator (អ្នកសម្របសម្រួលខ្សែសង្វាក់ផ្គត់ផ្គង់)": {
+      "tasks": "Track the flow of goods from farms to cities and manage warehouse inventory levels using software. (តាមដានលំហូរទំនិញពីកសិដ្ឋានទៅទីក្រុង និងគ្រប់គ្រងកម្រិតស្តុកក្នុងឃ្លាំងដោយប្រើប្រាស់កម្មវិធីកុំព្យូទ័រ។)",
+      "impact": "Optimize the national economy by ensuring that food and supplies are never wasted and always arrive on time. (បង្កើនប្រសិទ្ធភាពសេដ្ឋកិច្ចជាតិដោយធានាថាអាហារ និងសម្ភារៈមិនត្រូវបានខ្ជះខ្ជាយ និងតែងតែទៅដល់ទាន់ពេលវេលា។)"
+    }
+  }
+}

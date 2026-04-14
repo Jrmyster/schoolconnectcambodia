@@ -1276,6 +1276,29 @@
           "en": "Transform how Cambodia's institutions learn and share knowledge, accelerating innovation and evidence-based decision-making across all sectors.",
           "kh": "ផ្លាស់ប្ដូររបៀបដែលស្ថាប័នកម្ពុជាសិក្សា និងចែករំលែកចំណេះដឹង ពន្លឿនការច្នៃប្រឌិត និងការសម្រេចចិត្តផ្អែកលើភស្ដុតាងនៅគ្រប់វិស័យ។"
         }
+      },
+      {
+        "id": "digital-librarian",
+        "en": "Digital Librarian",
+        "kh": "បណ្ណារក្សឌីជីថល",
+        "tasks": {
+          "en": [
+            "Curate and maintain online learning resource portals, ensuring content is current, credible, and organized by subject",
+            "Lead digitization projects that convert physical books, maps, and manuscripts into searchable digital formats",
+            "Assist students and researchers in locating academic papers, journals, and primary sources for coursework and exams",
+            "Promote digital literacy by running workshops that teach communities how to find, evaluate, and use information online"
+          ],
+          "kh": [
+            "រៀបចំ និងថែទាំវិបផតថលធនធានសិក្សាតាមអ៊ីនធឺណិត ដោយធានាថាខ្លឹមសារ ទំនើប ទំនុកចិត្ត និងរៀបចំតាមមុខវិជ្ជា",
+            "ដឹកនាំគម្រោងបំប្លែងព័ត៌មានជាឌីជីថល ដែលបំប្លែងសៀវភៅ ផែនទី និងគម្ពីរ ទៅជាទម្រង់ឌីជីថលអាចស្វែងរកបាន",
+            "ជួយសិស្ស និងអ្នកស្រាវជ្រាវ ក្នុងការស្វែងរកអត្ថបទសិក្សា ទស្សនាវដ្ដី និងប្រភពបឋម សម្រាប់វគ្គ និងការប្រឡង",
+            "លើកកម្ពស់ការចេះដឹងឌីជីថល ដោយដំណើរការវគ្គបណ្ដុះបណ្ដាល ដែលបង្រៀនសហគមន៍ ពីរបៀបស្វែងរក វាយតម្លៃ និងប្រើព័ត៌មានតាមអ៊ីនធឺណិត"
+          ]
+        },
+        "impact": {
+          "en": "Democratize knowledge by making information free, organized, and accessible to every Cambodian with a phone or computer.",
+          "kh": "ធ្វើឱ្យចំណេះដឹងក្លាយជាកម្មសិទ្ធិរបស់គ្រប់គ្នា ដោយធានាថាព័ត៌មានឥតគិតថ្លៃ មានរបៀបរៀបរយ និងអាចចូលប្រើបានដោយប្រជាជនខ្មែរគ្រប់រូប ដែលមានទូរស័ព្ទ ឬកុំព្យូទ័រ។"
+        }
       }
     ]
   },
@@ -1607,6 +1630,29 @@
           "en": "Create welcoming environments that boost national tourism revenues and provide thousands of quality jobs for Cambodian families.",
           "kh": "បង្កើតបរិយាកាសស្វាគមន៍ ដែលជួយបង្កើនប្រាក់ចំណូលទេសចរណ៍ជាតិ និងផ្តល់ការងារប្រកបដោយគុណភាពរាប់ពាន់ ដល់គ្រួសារខ្មែរ។"
         }
+      },
+      {
+        "id": "esthetician",
+        "en": "Professional Esthetician / Spa Manager",
+        "kh": "អ្នកឯកទេសថែរក្សាស្បែក / អ្នកគ្រប់គ្រងស្ប៉ា",
+        "tasks": {
+          "en": [
+            "Perform advanced skincare treatments including facials, chemical peels, and body therapies for hotel and resort clients",
+            "Manage daily spa operations, schedule appointments, supervise therapist staff, and maintain impeccable hygiene standards",
+            "Consult with clients to design personalized skincare regimens and recommend appropriate products for their skin type",
+            "Train junior estheticians on treatment techniques, sanitation protocols, and professional client communication skills"
+          ],
+          "kh": [
+            "ធ្វើការព្យាបាលស្បែកកម្រិតខ្ពស់ រួមមានការថែទាំមុខ ការ peel គីមី និងការព្យាបាលខ្លួន សម្រាប់អតិថិជនសណ្ឋាគារ និងរមណីដ្ឋាន",
+            "គ្រប់គ្រងប្រតិបត្តិការស្ប៉ាប្រចាំថ្ងៃ ធ្វើការណាត់ជួប ត្រួតពិនិត្យបុគ្គលិកព្យាបាល និងថែទាំស្តង់ដារអនាម័យឲ្យបាននឹងល្អ",
+            "ប្រឹក្សាអតិថិជន ដើម្បីរៀបចំកម្មវិធីថែទាំស្បែកផ្ទាល់ខ្លួន និងណែនាំផលិតផលល្អ ៗ ចំពោះប្រភេទស្បែករបស់ពួកគេ",
+            "បណ្ដុះបណ្ដាលអ្នកឯកទេសថែស្បែកថ្មី ស្ដីពីបច្ចេកទេសព្យាបាល ពិធីសារអនាម័យ និងជំនាញទំនាក់ទំនងអ្នកជំនាញជាមួយអតិថិជន"
+          ]
+        },
+        "impact": {
+          "en": "Boost the tourism and wellness economy while delivering specialized care that improves client confidence, health, and quality of life.",
+          "kh": "លើកកម្ពស់សេដ្ឋកិច្ចទេសចរណ៍ និងសុខុមាលភាព ព្រមទាំងផ្ដល់ការថែទាំឯកទេស ដែលជួយបង្កើនទំនុកចិត្ត សុខភាព និងគុណភាពជីវិតដល់អតិថិជន។"
+        }
       }
     ]
   },
@@ -1721,6 +1767,29 @@
         "impact": {
           "en": "Guarantee that goods made in Cambodia meet global standards, building the nation's reputation as a trusted and reliable manufacturing destination.",
           "kh": "ធានាថាទំនិញដែលផលិតក្នុងប្រទេសកម្ពុជា បំពេញស្ដង់ដារសកល ដោយស្ថាបនាកិត្តិយសជាតិ ជាគោលដៅផលិតកម្មដែលជឿជាក់ និងទុកចិត្តបាន។"
+        }
+      },
+      {
+        "id": "quality-assurance-technician",
+        "en": "Quality Assurance Technician",
+        "kh": "អ្នកបច្ចេកទេសធានាគុណភាព",
+        "tasks": {
+          "en": [
+            "Test manufactured components using digital sensors, gauges, and automated inspection equipment at each stage of production",
+            "Document non-conformances, trace defect sources through the production line, and initiate corrective action reports",
+            "Calibrate testing instruments regularly and maintain laboratory equipment to ensure measurement accuracy",
+            "Work with process engineers to update quality control checkpoints and reduce defect rates across production shifts"
+          ],
+          "kh": [
+            "ធ្វើតេស្តគ្រឿងបន្លាស់ ដោយប្រើសេនស័រឌីជីថល ឧបករណ៍វាស់ និងឧបករណ៍ត្រួតពិនិត្យស្វ័យប្រវត្តិ នៅគ្រប់ដំណាក់កាលផលិតកម្ម",
+            "ចងក្រងភាពមិនស្របតាម តាមដានប្រភពបញ្ហា ពាសពេញខ្សែសង្វាក់ផលិតកម្ម និងចាប់ផ្ដើមរបាយការណ៍ការកែតម្រូវ",
+            "ប្រើតម្លើងឧបករណ៍ធ្វើតេស្តទៀងទាត់ និងថែទាំឧបករណ៍មន្ទីរពិសោធន៍ ដើម្បីធានាភាពត្រឹមត្រូវនៃការវាស់វែង",
+            "ធ្វើការជាមួយវិស្វករដំណើរការ ដើម្បីធ្វើបច្ចុប្បន្នភាពចំណុចគ្រប់គ្រងគុណភាព និងកាត់បន្ថយអត្រាបញ្ហានៅគ្រប់វេនផលិតកម្ម"
+          ]
+        },
+        "impact": {
+          "en": "Ensure Cambodian-made products are trusted worldwide for their safety and precision, elevating the nation's standing as a quality manufacturer.",
+          "kh": "ធានាថាផលិតផលដែលផលិតនៅកម្ពុជា ត្រូវបានគេជឿទុកចិត្តទូទាំងពិភពលោក ចំពោះសុវត្ថិភាព និងភាពជាក់លាក់ ដោយលើកកម្ពស់ស្ថានភាពជាតិ ជាអ្នកផលិតប្រកបដោយគុណភាព។"
         }
       }
     ]
@@ -1844,6 +1913,29 @@
           "en": "Foster peaceful coexistence among Cambodia's diverse communities, using religious wisdom to heal social divisions and promote national unity.",
           "kh": "លើកកម្ពស់ការនៅរួមគ្នាដោយសន្តិភាព ក្នុងចំណោមសហគមន៍ចម្រុះរបស់កម្ពុជា ដោយប្រើប្រាស់ប្រជ្ញាញ្ញណសាសនា ដើម្បីព្យាបាលការបែកចែកសង្គម និងជំរុញឯកភាពជាតិ។"
         }
+      },
+      {
+        "id": "cultural-scholar",
+        "en": "Cultural Scholar / Religious Studies Teacher",
+        "kh": "អ្នកប្រាជ្ញវប្បធម៌ / គ្រូបង្រៀនការសិក្សាសាសនា",
+        "tasks": {
+          "en": [
+            "Teach the history, ethics, and philosophy of Buddhist and other religious traditions at secondary and tertiary levels",
+            "Research the role of religion in Cambodian social history and publish scholarly analyses of cultural transformation",
+            "Advise community leaders and schools on preserving traditional moral frameworks alongside modern civic values",
+            "Organize cultural seminars and festivals that celebrate religious diversity and reinforce shared community identity"
+          ],
+          "kh": [
+            "បង្រៀនប្រវត្តិ សីលធម៌ និងទស្សនវិជ្ជានៃប្រពៃណីពុទ្ធសាសនា និងសាសនាផ្សេងៗ នៅកម្រិតមធ្យមសិក្សា និងឧត្ដមសិក្សា",
+            "ស្រាវជ្រាវតួនាទីសាសនា ក្នុងប្រវត្តិសាស្ត្រសង្គមខ្មែរ និងបោះពុម្ពផ្សាយការវិភាគខាងវិទ្យាសាស្ត្រ ស្ដីពីការផ្លាស់ប្ដូរវប្បធម៌",
+            "ផ្ដល់ប្រឹក្សាដល់មេដឹកនាំសហគមន៍ និងសាលារៀន ស្ដីពីការអភិរក្សក្របខ័ណ្ឌសីលធម៌ប្រពៃណី ควบ​ together ជាមួយគុណតម្លៃពលរដ្ឋទំនើប",
+            "រៀបចំសន្និសីទ និងពិព័រណ៍វប្បធម៌ ដែលអបអរការចម្រុះសាសនា និងពង្រឹងអត្តសញ្ញាណសហគមន៍រួម"
+          ]
+        },
+        "impact": {
+          "en": "Strengthen the social fabric of communities by promoting peace, mutual understanding, and shared values rooted in Cambodia's rich spiritual traditions.",
+          "kh": "ពង្រឹងរចនាសម្ព័ន្ធសង្គម ក្នុងសហគមន៍ ដោយលើកកម្ពស់សន្តិភាព ការយល់ដឹងគ្នា និងគុណតម្លៃរួម ដែលមានឬសគល់ ក្នុងប្រពៃណីស្មារតីដ៏សម្បូរបែបរបស់កម្ពុជា។"
+        }
       }
     ]
   },
@@ -1897,6 +1989,29 @@
         "impact": {
           "en": "Build resilient transport networks that move people and goods safely and efficiently, driving economic integration across all of Cambodia's regions.",
           "kh": "ស្ថាបនាបណ្ដាញដឹកជញ្ជូនធន់ ដែលដឹកអ្នកដំណើរ និងទំនិញដោយសុវត្ថិភាព និងប្រសិទ្ធភាព ជំរុញការរួមបញ្ចូលសេដ្ឋកិច្ចនៅទូទាំងតំបន់កម្ពុជាទាំងអស់។"
+        }
+      },
+      {
+        "id": "supply-chain-coordinator",
+        "en": "Supply Chain Coordinator",
+        "kh": "អ្នកសម្របសម្រួលខ្សែសង្វាក់ផ្គត់ផ្គង់",
+        "tasks": {
+          "en": [
+            "Track the end-to-end flow of goods from farms and factories to distribution centers and retail outlets using ERP software",
+            "Coordinate with suppliers, transporters, and warehouse teams to maintain optimal inventory levels and prevent stockouts",
+            "Identify inefficiencies in procurement and distribution processes and recommend cost-saving improvements",
+            "Prepare supply chain performance reports for management and ensure compliance with import/export regulations"
+          ],
+          "kh": [
+            "តាមដានលំហូរទំនិញពីដើមដល់ចុង ពីកសិដ្ឋាន និងរោងចក្រ ដល់មជ្ឈមណ្ឌលចែកចាយ និងហាងលក់រាយ ដោយប្រើប្រាស់កម្មវិធី ERP",
+            "សម្របសម្រួលជាមួយអ្នកផ្គត់ផ្គង់ អ្នកដឹកជញ្ជូន និងក្រុមឃ្លាំង ដើម្បីរក្សាកម្រិតស្តុករ ដ៏ល្អប្រសើរ និងទប់ស្កាត់ការអស់ស្តុក",
+            "កំណត់ភាពអសប្បដិការ ក្នុងដំណើរការទិញ និងចែកចាយ ហើយណែនាំការកែលម្អ ដើម្បីកាត់បន្ថយការចំណាយ",
+            "រៀបចំរបាយការណ៍ប្រតិបត្តិការខ្សែសង្វាក់ផ្គត់ផ្គង់ ដល់ការគ្រប់គ្រង និងធានាការអនុវត្តតាមបទប្បញ្ញត្តិនាំចូល/នាំចេញ"
+          ]
+        },
+        "impact": {
+          "en": "Optimize the national economy by ensuring food and supplies are never wasted and always reach their destination on time and affordably.",
+          "kh": "បង្កើនប្រសិទ្ធភាពសេដ្ឋកិច្ចជាតិ ដោយធានាថាអាហារ និងសម្ភារៈ មិនត្រូវបានខ្ជះខ្ជាយ ហើយតែងតែទៅដល់គោលដៅទាន់ពេលវេលា និងក្នុងតម្លៃសមរម្យ។"
         }
       }
     ]
