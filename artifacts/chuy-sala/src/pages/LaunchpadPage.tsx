@@ -3,6 +3,7 @@ import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen,
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
 import { InterviewSimulator } from "@/components/InterviewSimulator";
+import { ResumeMasterclass } from "@/components/ResumeMasterclass";
 
 type ScholarshipCard = {
   name: string;
@@ -491,6 +492,9 @@ export function LaunchpadPage() {
           </div>
           <InterviewSimulator />
         </section>
+
+        {/* ── Resume & CV Masterclass ── */}
+        <ResumeMasterclass />
 
       </div>
     </div>
