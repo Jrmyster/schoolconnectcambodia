@@ -1,0 +1,52 @@
+{
+  "Visual and Performing Arts (សិល្បៈទស្សនីយភាព និងការសម្តែង)": {
+    "Graphic Designer / Animator (អ្នករចនាក្រាហ្វិក / អ្នកបង្កើតគំនូរជីវចល)": {
+      "tasks": "Design logos, create digital animations, and build user interfaces for tech companies and marketing agencies. (រចនានិមិត្តសញ្ញា បង្កើតគំនូរជីវចលឌីជីថល និងរៀបចំចំណុចប្រទាក់អ្នកប្រើប្រាស់សម្រាប់ក្រុមហ៊ុនបច្ចេកវិទ្យា និងទីភ្នាក់ងារទីផ្សារ។)",
+      "impact": "Shape how people experience digital products and tell compelling visual stories that cross language barriers. (កំណត់ពីរបៀបដែលមនុស្សជួបប្រទះផលិតផលឌីជីថល និងប្រាប់រឿងរ៉ាវទាក់ទាញដែលអាចរំលងរបាំងភាសា។)"
+    },
+    "Traditional Arts Director (នាយកសិល្បៈប្រពៃណី)": {
+      "tasks": "Direct Apsara dance performances, manage theater productions, and preserve cultural storytelling techniques. (ដឹកនាំការសម្តែងរបាំអប្សរា គ្រប់គ្រងការផលិតល្ខោន និងអភិរក្សបច្ចេកទេសនិទានរឿងវប្បធម៌។)",
+      "impact": "Keep Cambodia's rich artistic heritage alive and thriving for the next generation and the world. (ថែរក្សាបេតិកភណ្ឌសិល្បៈដ៏សម្បូរបែបរបស់កម្ពុជាឱ្យមានជីវិត និងរីកចម្រើនសម្រាប់មនុស្សជំនាន់ក្រោយ និងពិភពលោក។)"
+    }
+  },
+  "Communications Technologies/technicians and Support Services (បច្ចេកវិទ្យាទំនាក់ទំនង និងសេវាកម្មគាំទ្រ)": {
+    "Network Administrator (អ្នកគ្រប់គ្រងបណ្តាញ)": {
+      "tasks": "Install routers, manage secure Wi-Fi networks for schools or corporations, and troubleshoot internet connectivity. (ដំឡើងរ៉ោតទ័រ គ្រប់គ្រងបណ្តាញ Wi-Fi សុវត្ថិភាពសម្រាប់សាលារៀន ឬក្រុមហ៊ុន និងដោះស្រាយបញ្ហាការតភ្ជាប់អ៊ីនធឺណិត។)",
+      "impact": "Ensure students, hospitals, and businesses stay reliably connected to the global digital economy. (ធានាថាសិស្ស មន្ទីរពេទ្យ និងអាជីវកម្មនៅតែអាចតភ្ជាប់យ៉ាងរលូនទៅនឹងសេដ្ឋកិច្ចឌីជីថលសកល។)"
+    },
+    "Broadcast Technician (អ្នកបច្ចេកទេសផ្សាយ)": {
+      "tasks": "Operate complex audio and video equipment for television and radio stations during live news events. (ប្រតិបត្តិការឧបករណ៍អូឌីយ៉ូ និងវីដេអូដ៏ស្មុគស្មាញ សម្រាប់ស្ថានីយទូរទស្សន៍ និងវិទ្យុក្នុងអំឡុងពេលផ្សាយផ្ទាល់ព័ត៌មាន។)",
+      "impact": "Deliver critical information and entertainment seamlessly to millions of homes across the provinces. (ផ្តល់ព័ត៌មានសំខាន់ៗ និងការកម្សាន្តយ៉ាងរលូនដល់លំនៅដ្ឋានរាប់លានខ្នងនៅទូទាំងខេត្ត។)"
+    }
+  },
+  "Philosophy and Religious Studies (ទស្សនវិជ្ជា និងការសិក្សាសាសនា)": {
+    "Ethics Consultant (ទីប្រឹក្សាសីលធម៌)": {
+      "tasks": "Advise companies and hospitals on ethical decision-making, patient rights, and corporate social responsibility. (ផ្តល់ប្រឹក្សាដល់ក្រុមហ៊ុន និងមន្ទីរពេទ្យអំពីការសម្រេចចិត្តប្រកបដោយសីលធម៌ សិទ្ធិអ្នកជំងឺ និងការទទួលខុសត្រូវសង្គមរបស់សាជីវកម្ម។)",
+      "impact": "Ensure that rapid economic development and new technologies serve humanity without causing harm. (ធានាថាការអភិវឌ្ឍន៍សេដ្ឋកិច្ចយ៉ាងឆាប់រហ័ស និងបច្ចេកវិទ្យាថ្មីៗបម្រើមនុស្សជាតិដោយមិនបង្កគ្រោះថ្នាក់។)"
+    },
+    "Non-Profit Director (នាយកអង្គការមិនស្វែងរកប្រាក់ចំណេញ)": {
+      "tasks": "Lead charitable organizations, write grant proposals, and design community aid programs for vulnerable populations. (ដឹកនាំអង្គការសប្បុរសធម៌ សរសេរសំណើសុំជំនួយ និងរៀបចំកម្មវិធីជំនួយសហគមន៍សម្រាប់ជនងាយរងគ្រោះ។)",
+      "impact": "Translate deep moral and philosophical principles into tangible actions that alleviate suffering. (បំប្លែងគោលការណ៍សីលធម៌ និងទស្សនវិជ្ជាស៊ីជម្រៅ ទៅជាសកម្មភាពជាក់ស្តែងដែលជួយសម្រាលទុក្ខលំបាក។)"
+    }
+  },
+  "Parks, Recreation, Leisure, and Fitness Studies (ការសិក្សាឧទ្យាន លំហាត់ប្រាណ និងកន្លែងកម្សាន្ត)": {
+    "Ecotourism Manager (អ្នកគ្រប់គ្រងទេសចរណ៍ធម្មជាតិ)": {
+      "tasks": "Design sustainable tours, protect wildlife habitats, and manage visitor centers in national parks like Kulen Mountain. (រៀបចំដំណើរកម្សាន្តបែបនិរន្តរភាព ការពារជម្រកសត្វព្រៃ និងគ្រប់គ្រងមជ្ឈមណ្ឌលភ្ញៀវទេសចរនៅក្នុងឧទ្យានជាតិដូចជាភ្នំគូលែន។)",
+      "impact": "Promote economic growth while fiercely preserving Cambodia's pristine jungles and natural landscapes. (ជំរុញកំណើនសេដ្ឋកិច្ច ព្រមទាំងអភិរក្សព្រៃឈើ និងទេសភាពធម្មជាតិដ៏ស្រស់ត្រកាលរបស់កម្ពុជាយ៉ាងមុតមាំ។)"
+    },
+    "Kinesiologist / Physical Therapist (អ្នកឯកទេសចលនាសាស្ត្រ / អ្នកព្យាបាលដោយចលនា)": {
+      "tasks": "Design physical therapy routines, help patients recover from injuries, and promote healthy lifestyles in communities. (រៀបចំកម្មវិធីព្យាបាលដោយចលនា ជួយអ្នកជំងឺឱ្យជាសះស្បើយពីរបួស និងលើកកម្ពស់របៀបរស់នៅដែលមានសុខភាពល្អនៅក្នុងសហគមន៍។)",
+      "impact": "Restore physical mobility and build long-term biological resilience in individuals of all ages. (ស្តារចលនារាងកាយ និងកសាងភាពធន់នៃជីវសាស្ត្ររយៈពេលវែង សម្រាប់មនុស្សគ្រប់វ័យ។)"
+    }
+  },
+  "Natural Resources and Conservation (ធនធានធម្មជាតិ និងការអភិរក្ស)": {
+    "Wildlife Conservationist (អ្នកអភិរក្សសត្វព្រៃ)": {
+      "tasks": "Track endangered species, patrol protected forests, and educate local communities on anti-poaching laws. (តាមដានប្រភេទសត្វជិតផុតពូជ ល្បាតព្រៃការពារ និងអប់រំសហគមន៍មូលដ្ឋានអំពីច្បាប់ប្រឆាំងការបរបាញ់ខុសច្បាប់។)",
+      "impact": "Save Cambodia's unique biodiversity, including the Irrawaddy dolphins and Asian elephants, from extinction. (សង្គ្រោះជីវចម្រុះតែមួយគត់របស់កម្ពុជា រួមទាំងសត្វផ្សោតទន្លេមេគង្គ និងដំរីអាស៊ី ពីការផុតពូជ។)"
+    },
+    "Forestry Manager (អ្នកគ្រប់គ្រងព្រៃឈើ)": {
+      "tasks": "Monitor deforestation rates, plant new trees, and implement highly sustainable logging practices. (ត្រួតពិនិត្យអត្រានៃការកាប់បំផ្លាញព្រៃឈើ ដាំដើមឈើថ្មី និងអនុវត្តការកាប់ឈើប្រកបដោយនិរន្តរភាពខ្ពស់។)",
+      "impact": "Combat global climate change and ensure the long-term ecological health of the nation's forests. (ប្រយុទ្ធប្រឆាំងនឹងការប្រែប្រួលអាកាសធាតុសកល និងធានាសុខភាពអេកូឡូស៊ីរយៈពេលវែងនៃព្រៃឈើជាតិ។)"
+    }
+  }
+}

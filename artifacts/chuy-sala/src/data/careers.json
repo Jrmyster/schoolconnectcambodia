@@ -418,7 +418,19 @@
           "kh": [
             "អាន និងបកស្រាយប្លង់អគ្គិសនីបច្ចេកទេស និងដ្យាក្រាមបណ្ដាញ សម្រាប់គម្រោងពាណិជ្ជកម្ម និងឧស្សាហកម្ម",
             "ដំឡើង ធ្វើតេស្ត និងថែទាំប្រព័ន្ធបណ្ដាញ ប្រអប់បំបែកសៀគ្វី និងក្ដារចែកចាយ ក្នុងអគារពាណិជ្ជកម្ម",
-            "ដំឡើង និងបើកដំណើរការប្រព័ន្ធ solar panel និងថ្ម សម្រាប់ការដំឡើងថាមពលព្រះអាទិត្យ"id": "education",
+            "ដំឡើង និងបើកដំណើរការប្រព័ន្ធ solar panel និងថ្ម សម្រាប់ការដំឡើងថាមពលព្រះអាទិត្យ",
+            "ធ្វើការត្រួតពិនិត្យសុវត្ថិភាពនៅទីតាំង វាយតម្លៃការងារអគ្គិសនីដែលបានបញ្ចប់ និងបណ្តុះបណ្តាលជាងអគ្គិសនីកម្រិតដំបូងអំពីការអនុវត្តល្អបំផុត"
+          ]
+        },
+        "impact": {
+          "en": "Power Cambodia's construction boom with safe, certified electrical systems that support homes, hospitals, and factories.",
+          "kh": "ផ្គត់ផ្គង់ថាមពលដល់ការអភិវឌ្ឍន៍សំណង់ក្នុងប្រទេសកម្ពុជា ដោយប្រព័ន្ធអគ្គិសនីប្រកបដោយសុវត្ថិភាព ដែលគាំទ្រដល់ផ្ទះ មន្ទីរពេទ្យ និងរោងចក្រ។"
+        }
+      }
+    ]
+  },
+  {
+    "id": "education",
     "en": "Education",
     "kh": "អប់រំ",
     "icon": "🎓",
@@ -652,7 +664,54 @@
     "en": "Foreign Languages",
     "kh": "ភាសាបរទេស",
     "icon": "🌐",
-    "careers": []
+    "careers": [
+      {
+        "id": "professional-translator",
+        "en": "Professional Translator / Interpreter",
+        "kh": "អ្នកបកប្រែឯកសារ / អ្នកបកប្រែផ្ទាល់មាត់",
+        "tasks": {
+          "en": [
+            "Translate official government documents, legal contracts, and diplomatic communications between Khmer, English, and other languages",
+            "Provide simultaneous or consecutive interpretation at international business meetings, conferences, and embassy events",
+            "Review and proofread translated materials to ensure linguistic accuracy, cultural appropriateness, and terminological consistency",
+            "Build and maintain specialized glossaries for legal, medical, and technical fields to ensure precise and consistent translations"
+          ],
+          "kh": [
+            "បកប្រែឯកសារផ្លូវការរបស់រដ្ឋាភិបាល កិច្ចសន្យាច្បាប់ និងការទំនាក់ទំនងការទូត ពីភាសាខ្មែរ ភាសាអង់គ្លេស និងភាសាផ្សេងទៀត",
+            "ផ្តល់សេវាបកប្រែផ្ទាល់មាត់ ឬបន្តបន្ទាប់ នៅក្នុងកិច្ចប្រជុំអាជីវកម្មអន្តរជាតិ សន្និសីទ និងកម្មវិធីស្ថានទូត",
+            "ពិនិត្យ និងកែសម្រួលឯកសារដែលបានបកប្រែ ដើម្បីធានាភាពត្រឹមត្រូវខាងភាសា ភាពស្របតាមវប្បធម៌ និងភាពស្របគ្នានៃពាក្យបច្ចេកទេស",
+            "បង្កើត និងថែទាំវចនានុក្រមឯកទេសសម្រាប់ផ្នែកច្បាប់ វេជ្ជសាស្ត្រ និងបច្ចេកទេស ដើម្បីធានាភាពត្រឹមត្រូវ និងស្ថិរភាពនៃការបកប្រែ"
+          ]
+        },
+        "impact": {
+          "en": "Break down language barriers, attract foreign investment, and connect Cambodia to the global stage with clear and accurate communication.",
+          "kh": "បំបាត់របាំងភាសា ទាក់ទាញការវិនិយោគបរទេស និងតភ្ជាប់កម្ពុជាទៅនឹងឆាកអន្តរជាតិ តាមរយៈការទំនាក់ទំនងច្បាស់លាស់ និងត្រឹមត្រូវ។"
+        }
+      },
+      {
+        "id": "localization-specialist",
+        "en": "Localization Specialist",
+        "kh": "អ្នកឯកទេសបកប្រែតាមបរិបទមូលដ្ឋាន",
+        "tasks": {
+          "en": [
+            "Adapt international software applications, mobile apps, and websites to be linguistically and culturally appropriate for Khmer users",
+            "Test localized products for accuracy, formatting issues, and cultural sensitivity before public release",
+            "Work with global technology companies to ensure Khmer script renders correctly across all digital platforms and devices",
+            "Manage translation memory tools and coordinate teams of freelance translators to deliver large localization projects on schedule"
+          ],
+          "kh": [
+            "កែសម្រួលកម្មវិធីកុំព្យូទ័រ កម្មវិធីទូរស័ព្ទ និងគេហទំព័រអន្តរជាតិ ឱ្យស្របតាមភាសា និងវប្បធម៌សម្រាប់អ្នកប្រើប្រាស់ខ្មែរ",
+            "សាកល្បងផលិតផលដែលបានបកប្រែ ដើម្បីត្រួតពិនិត្យភាពត្រឹមត្រូវ បញ្ហាទ្រង់ទ្រាយ និងភាពស្របតាមវប្បធម៌ មុនការបញ្ចេញជាសាធារណៈ",
+            "ធ្វើការជាមួយក្រុមហ៊ុនបច្ចេកវិទ្យាសកល ដើម្បីធានាថាអក្សរខ្មែរបង្ហាញបានត្រឹមត្រូវលើប្រព័ន្ធឌីជីថល និងឧបករណ៍ទាំងអស់",
+            "គ្រប់គ្រងឧបករណ៍ការចងចាំការបកប្រែ និងសម្របសម្រួលក្រុមអ្នកបកប្រែ ដើម្បីដំណើរការគម្រោងបកប្រែធំៗឱ្យទាន់ពេលវេលា"
+          ]
+        },
+        "impact": {
+          "en": "Ensure global technology and information are fully accessible to every Cambodian, bridging the digital divide in local languages.",
+          "kh": "ធានាថាបច្ចេកវិទ្យា និងព័ត៌មានសកលអាចចូលដំណើរការបានពេញលេញ សម្រាប់ប្រជាពលរដ្ឋខ្មែរគ្រប់រូប ដោយកាត់បន្ថយគម្លាតឌីជីថលក្នុងភាសាក្នុងស្រុក។"
+        }
+      }
+    ]
   },
   {
     "id": "health-professions",
@@ -713,14 +772,108 @@
     "en": "History",
     "kh": "ប្រវត្តិសាស្ត្រ",
     "icon": "📜",
-    "careers": []
+    "careers": [
+      {
+        "id": "archivist",
+        "en": "Archivist / Museum Curator",
+        "kh": "អ្នកបណ្ណសារ / អ្នកអភិរក្សសារមន្ទីរ",
+        "tasks": {
+          "en": [
+            "Preserve and restore ancient artifacts, manuscripts, and historical objects using conservation techniques",
+            "Document and catalogue national historical records, photographs, and cultural items for public and scholarly access",
+            "Design and organize educational exhibitions that communicate Cambodia's history to local and international visitors",
+            "Collaborate with schools and universities to develop history curricula based on primary archival sources"
+          ],
+          "kh": [
+            "អភិរក្ស និងស្តារវត្ថុបុរាណ លិខិតទស្សនៈ និងវត្ថុប្រវត្តិសាស្ត្រ ដោយប្រើបច្ចេកទេសអភិរក្ស",
+            "ចងក្រង និងចាត់ថ្នាក់ឯកសារប្រវត្តិសាស្ត្រជាតិ រូបថត និងវត្ថុវប្បធម៌ ដើម្បីចូលដំណើរការដោយសាធារណជន និងអ្នកស្រាវជ្រាវ",
+            "រៀបចំ និងរចនាការតាំងពិព័រណ៍អប់រំ ដែលបង្ហាញប្រវត្តិសាស្ត្រកម្ពុជាដល់អ្នកទស្សនាក្នុងស្រុក និងអន្តរជាតិ",
+            "សហការជាមួយសាលា និងសកលវិទ្យាល័យ ដើម្បីបង្កើតកម្មវិធីសិក្សាប្រវត្តិសាស្ត្រ ដោយផ្អែកលើប្រភពឯកសារបឋម"
+          ]
+        },
+        "impact": {
+          "en": "Protect the rich cultural heritage of Cambodia and ensure future generations learn from and are inspired by the past.",
+          "kh": "ការពារបេតិកភណ្ឌវប្បធម៌ដ៏សម្បូរបែបរបស់កម្ពុជា និងធានាថាយុវជនជំនាន់ក្រោយរៀនសូត្រ និងទទួលការបំផុសចិត្តពីអតីតកាល។"
+        }
+      },
+      {
+        "id": "historical-researcher",
+        "en": "Historical Researcher",
+        "kh": "អ្នកស្រាវជ្រាវប្រវត្តិសាស្ត្រ",
+        "tasks": {
+          "en": [
+            "Analyze primary and secondary historical records, royal chronicles, and colonial-era documents for academic publications",
+            "Write textbooks, research papers, and policy briefs that connect historical events to contemporary Cambodian society",
+            "Present findings at national and international conferences to advance scholarly understanding of Southeast Asian history",
+            "Advise government ministries on heritage preservation policies and the historical context of land and border disputes"
+          ],
+          "kh": [
+            "វិភាគឯកសារប្រវត្តិសាស្ត្របឋម និងទ្វិតីយភូមិ ព្រះរាជពង្សាវតារ និងឯកសារសម័យអាណានិគម សម្រាប់ការបោះពុម្ព",
+            "សរសេរសៀវភៅសិក្សា ក្រដាសស្រាវជ្រាវ និងឯកសារគោលនយោបាយ ដែលភ្ជាប់ព្រឹត្តិការណ៍ប្រវត្តិសាស្ត្រទៅនឹងសង្គមកម្ពុជាបច្ចុប្បន្ន",
+            "បង្ហាញលទ្ធផលស្រាវជ្រាវនៅក្នុងសន្និសីទជាតិ និងអន្តរជាតិ ដើម្បីពង្រឹកការយល់ដឹងខាងវិទ្យាសាស្ត្រអំពីប្រវត្តិអាស៊ីអាគ្នេយ៍",
+            "ផ្តល់យោបល់ដល់ក្រសួងរដ្ឋាភិបាល អំពីគោលនយោបាយអភិរក្សបេតិកភណ្ឌ និងបរិបទប្រវត្តិសាស្ត្រនៃជម្លោះដីធ្លី និងព្រំដែន"
+          ]
+        },
+        "impact": {
+          "en": "Use the lessons of history to guide Cambodia toward better governance, national reconciliation, and sustainable development.",
+          "kh": "ប្រើប្រាស់មេរៀនប្រវត្តិសាស្ត្រ ដើម្បីដឹកនាំប្រទេសកម្ពុជាឆ្ពោះទៅរកអភិបាលកិច្ចល្អ ការផ្សះផ្សាជាតិ និងការអភិវឌ្ឍន៍ប្រកបដោយនិរន្តរភាព។"
+        }
+      }
+    ]
   },
   {
     "id": "homeland-security",
     "en": "Homeland Security",
     "kh": "សន្តិសុខជាតិ",
     "icon": "🛡️",
-    "careers": []
+    "careers": [
+      {
+        "id": "police-inspector",
+        "en": "Police Inspector / Criminal Investigator",
+        "kh": "អធិការនគរបាល / អ្នកស៊ើបអង្កេតឧក្រិដ្ឋកម្ម",
+        "tasks": {
+          "en": [
+            "Lead criminal investigations by gathering physical evidence, interviewing witnesses, and building prosecutable case files",
+            "Analyze crime patterns and data to develop targeted community policing strategies that reduce local crime rates",
+            "Coordinate with national and INTERPOL agencies on cases involving trafficking, cybercrime, and cross-border offenses",
+            "Conduct community outreach programs in schools and villages to build public trust and prevent youth involvement in crime"
+          ],
+          "kh": [
+            "ដឹកនាំការស៊ើបអង្កេតឧក្រិដ្ឋកម្ម ដោយប្រមូលភស្តុតាងរូបវន្ត សម្ភាស សាក្សី និងបង្កើតសំណុំឯកសារបណ្ដឹង",
+            "វិភាគគំរូ និងទិន្នន័យឧក្រិដ្ឋកម្ម ដើម្បីបង្កើតយុទ្ធសាស្ត្រប៉ូលិសសហគមន៍ ដែលកាត់បន្ថយអត្រាឧក្រិដ្ឋកម្មមូលដ្ឋាន",
+            "សម្របសម្រួលជាមួយភ្នាក់ងារជាតិ និង INTERPOL លើករណីពាក់ព័ន្ធនឹងការជួញដូរមនុស្ស ឧក្រិដ្ឋកម្មតាមអ៊ីនធឺណិត និងបទល្មើសឆ្លងព្រំដែន",
+            "ដឹកនាំកម្មវិធីទំនាក់ទំនងសហគមន៍នៅសាលា និងភូមិ ដើម្បីស្ថាបនាទំនុកចិត្តរបស់សាធារណជន និងទប់ស្កាត់យុវជនពីឧក្រិដ្ឋកម្ម"
+          ]
+        },
+        "impact": {
+          "en": "Maintain peace, protect citizens from harm, and enforce the rule of law to create safe and just communities across Cambodia.",
+          "kh": "រក្សាសន្តិភាព ការពារប្រជាពលរដ្ឋពីគ្រោះថ្នាក់ និងអនុវត្តនីតិរដ្ឋ ដើម្បីបង្កើតសហគមន៍ប្រកបដោយសុវត្ថិភាព និងយុត្តិធម៌ទូទាំងកម្ពុជា។"
+        }
+      },
+      {
+        "id": "emergency-management-director",
+        "en": "Emergency Management Director",
+        "kh": "នាយកគ្រប់គ្រងគ្រោះមហន្តរាយ",
+        "tasks": {
+          "en": [
+            "Develop and test national and provincial emergency response plans for floods, storms, droughts, and other natural disasters",
+            "Coordinate rescue teams, medical responders, and NGO partners to mobilize resources efficiently during active crises",
+            "Manage the procurement and distribution of emergency relief supplies including food, clean water, and medical equipment",
+            "Conduct post-disaster assessments, write official reports, and lead community resilience-building programs for future preparedness"
+          ],
+          "kh": [
+            "រៀបចំ និងសាកល្បងផែនការឆ្លើយតបគ្រោះអាសន្នជាតិ និងខេត្ត ចំពោះទឹកជំនន់ ព្យុះ គ្រោះរាំងស្ងួត និងគ្រោះមហន្តរាយធម្មជាតិផ្សេងទៀត",
+            "សម្របសម្រួលក្រុមសង្គ្រោះ អ្នកឆ្លើយតបផ្នែកវេជ្ជសាស្ត្រ និងដៃគូអង្គការមិនមែនរដ្ឋាភិបាល ដើម្បីចល័តធនធានប្រកបដោយប្រសិទ្ធភាពក្នុងអំឡុងវិបត្តិ",
+            "គ្រប់គ្រងការទិញ និងចែកចាយសម្ភារៈជំនួយអាសន្ន រួមទាំងអាហារ ទឹកស្អាត និងឧបករណ៍វេជ្ជសាស្ត្រ",
+            "ធ្វើការវាយតម្លៃក្រោយគ្រោះមហន្តរាយ សរសេររបាយការណ៍ផ្លូវការ និងដឹកនាំកម្មវិធីបង្កើនភាពស្ថិតស្ថេររបស់សហគមន៍ ដើម្បីត្រៀមខ្លួននាពេលអនាគត"
+          ]
+        },
+        "impact": {
+          "en": "Save lives and help communities recover quickly from severe crises, protecting Cambodia's most vulnerable people from natural disasters.",
+          "kh": "ជួយសង្គ្រោះជីវិត និងជួយសហគមន៍回復ឡើងវិញយ៉ាងលឿនពីវិបត្តិធ្ងន់ធ្ងរ ការពារប្រជាជនខ្មែរដែលងាយរងគ្រោះបំផុតពីគ្រោះមហន្តរាយធម្មជាតិ។"
+        }
+      }
+    ]
   },
   {
     "id": "human-services",
@@ -891,7 +1044,54 @@
     "en": "Personal Services",
     "kh": "សេវាផ្ទាល់ខ្លួន",
     "icon": "💆",
-    "careers": []
+    "careers": [
+      {
+        "id": "executive-chef",
+        "en": "Executive Chef / Restaurateur",
+        "kh": "ចុងភៅឯក / ម្ចាស់ភោជនីយដ្ឋាន",
+        "tasks": {
+          "en": [
+            "Design seasonal menus that celebrate traditional Khmer flavors while incorporating modern culinary techniques for upscale dining",
+            "Manage kitchen staff schedules, train junior cooks, and maintain strict food hygiene and safety standards at all times",
+            "Source high-quality local ingredients directly from rural farmers and manage food costs to keep the restaurant profitable",
+            "Develop tasting events and culinary tourism packages that introduce international visitors to authentic Cambodian cuisine"
+          ],
+          "kh": [
+            "រចនាម៉ឺនុយតាមមូសម ដែលបញ្ចេញរសជាតិម្ហូបខ្មែរប្រពៃណី ខណៈដែលបញ្ចូលបច្ចេកទេសសម័យទំនើប សម្រាប់ភោជនីយដ្ឋានកម្រិតខ្ពស់",
+            "គ្រប់គ្រងកាលវិភាគបុគ្គលិកផ្ទះបាយ បណ្តុះបណ្តាលចុងភៅថ្មី និងរក្សាស្តង់ដារអនាម័យ និងសុវត្ថិភាពអាហារប្រកបដោយភាពម៉ឺងម៉ាត់",
+            "ទំនាក់ទំនងជាមួយអ្នកដាំដំណាំក្នុងជនបទ ដើម្បីទទួលបានគ្រឿងផ្សំស្រស់ ហើយគ្រប់គ្រងចំណាយអាហារ ដើម្បីរក្សាការចំណេញ",
+            "អភិវឌ្ឍព្រឹត្តិការណ៍ជញ្ជឹងរស និងកញ្ចប់ទេសចរណ៍ធ្វើម្ហូប ដើម្បីណែនាំអ្នកទស្សនាអន្តរជាតិឱ្យស្គាល់ម្ហូបខ្មែរពិតប្រាកដ"
+          ]
+        },
+        "impact": {
+          "en": "Promote Cambodian culture through culinary arts, drive the hospitality economy, and create dignified livelihoods for kitchen workers.",
+          "kh": "ផ្សព្វផ្សាយវប្បធម៌ខ្មែរតាមរយៈសិល្បៈធ្វើម្ហូប ជំរុញសេដ្ឋកិច្ចបដិសណ្ឋារកិច្ច និងបង្កើតការរស់នៅប្រកបដោយសេចក្តីថ្លៃថ្នូរ សម្រាប់បុគ្គលិកផ្ទះបាយ។"
+        }
+      },
+      {
+        "id": "hospitality-manager",
+        "en": "Hospitality Manager",
+        "kh": "អ្នកគ្រប់គ្រងបដិសណ្ឋារកិច្ច",
+        "tasks": {
+          "en": [
+            "Oversee daily hotel or resort operations including front desk, housekeeping, food service, and guest relations departments",
+            "Implement quality assurance programs and guest satisfaction surveys to continuously improve service standards",
+            "Develop and manage budgets, monitor revenue from rooms and events, and prepare financial reports for ownership",
+            "Recruit, train, and mentor hospitality staff to deliver exceptional guest experiences that earn international recognition"
+          ],
+          "kh": [
+            "ត្រួតពិនិត្យប្រតិបត្តិការប្រចាំថ្ងៃរបស់សណ្ឋាគារ ឬរមណីដ្ឋាន រួមមានស្ថានីយទទួលភ្ញៀវ អ្នកសម្អាត សេវាអាហារ និងផ្នែកទំនាក់ទំនងភ្ញៀវ",
+            "អនុវត្តកម្មវិធីធានាគុណភាព និងការស្ទង់មតិការពេញចិត្តរបស់អ្នកស្នាក់នៅ ដើម្បីបង្កើនស្តង់ដារសេវាកម្មជាបន្ត",
+            "បង្កើត និងគ្រប់គ្រងថវិកា តាមដានប្រាក់ចំណូលពីបន្ទប់ និងកម្មវិធី ហើយរៀបចំរបាយការណ៍ហិរញ្ញវត្ថុសម្រាប់ម្ចាស់",
+            "ជ្រើសរើស បណ្តុះបណ្តាល និងណែនាំបុគ្គលិកបដិសណ្ឋារកិច្ច ដើម្បីផ្តល់បទពិសោធន៍ល្អឥតខ្ចោះ ដែលទទួលបានការទទួលស្គាល់អន្តរជាតិ"
+          ]
+        },
+        "impact": {
+          "en": "Create welcoming environments that boost national tourism revenues and provide thousands of quality jobs for Cambodian families.",
+          "kh": "បង្កើតបរិយាកាសស្វាគមន៍ ដែលជួយបង្កើនប្រាក់ចំណូលទេសចរណ៍ជាតិ និងផ្តល់ការងារប្រកបដោយគុណភាពរាប់ពាន់ ដល់គ្រួសារខ្មែរ។"
+        }
+      }
+    ]
   },
   {
     "id": "philosophy",
@@ -926,7 +1126,54 @@
     "en": "Science Technologies",
     "kh": "បច្ចេកវិទ្យាវិទ្យាសាស្ត្រ",
     "icon": "🔬",
-    "careers": []
+    "careers": [
+      {
+        "id": "lab-technician",
+        "en": "Medical / Research Laboratory Technician",
+        "kh": "បច្ចេកទេសសាស្ត្រមន្ទីរពិសោធន៍វេជ្ជសាស្ត្រ / ស្រាវជ្រាវ",
+        "tasks": {
+          "en": [
+            "Collect, prepare, and analyze biological and chemical samples to support medical diagnosis and scientific research projects",
+            "Operate and calibrate laboratory instruments including microscopes, centrifuges, and spectrophotometers following strict protocols",
+            "Record experimental data accurately, maintain specimen logs, and ensure all laboratory safety and biohazard procedures are followed",
+            "Assist senior scientists in developing new testing methodologies for infectious diseases and agricultural or environmental applications"
+          ],
+          "kh": [
+            "ប្រមូល រៀបចំ និងវិភាគគំរូជីវវិទ្យា និងគីមី ដើម្បីគាំទ្រការធ្វើរោគវិនិច្ឆ័យ និងគម្រោងស្រាវជ្រាវវិទ្យាសាស្ត្រ",
+            "ដំណើរការ និងកំណត់ទិសដៅឧបករណ៍មន្ទីរពិសោធន៍ រួមមានមីក្រូទស្សន៍ ម៉ាស៊ីនបង្វិល និង spectrophotometer តាមនីតិវិធីម៉ឺងម៉ាត់",
+            "ចុះបញ្ជីទិន្នន័យពិសោធន៍យ៉ាងត្រឹមត្រូវ រក្សាទំនាញគំរូ និងធានាការអនុវត្តន៍នីតិវិធីសុវត្ថិភាព និងសារធាតុគ្រោះថ្នាក់ជីវវិទ្យា",
+            "ជួយអ្នកវិទ្យាសាស្ត្រជាន់ខ្ពស់ ក្នុងការបង្កើតវិធីសាស្ត្រសាកល្បងថ្មី សម្រាប់ជំងឺឆ្លង និងការអនុវត្តកសិកម្ម ឬបរិស្ថាន"
+          ]
+        },
+        "impact": {
+          "en": "Advance public health and scientific knowledge in Cambodia by providing accurate laboratory data that drives life-saving medical and agricultural research.",
+          "kh": "លើកកម្ពស់សុខភាពសាធារណៈ និងចំណេះដឹងវិទ្យាសាស្ត្រនៅក្នុងប្រទេសកម្ពុជា ដោយផ្តល់ទិន្នន័យមន្ទីរពិសោធន៍ត្រឹមត្រូវ ដែលជំរុញការស្រាវជ្រាវវេជ្ជសាស្ត្រ និងកសិកម្ម។"
+        }
+      },
+      {
+        "id": "biotechnology-researcher",
+        "en": "Biotechnology Researcher",
+        "kh": "អ្នកស្រាវជ្រាវជីវបច្ចេកទេស",
+        "tasks": {
+          "en": [
+            "Conduct experiments in genetic engineering, cell biology, or fermentation technology to develop improved crop varieties and medicines",
+            "Analyze DNA sequences and protein structures using bioinformatics software to identify solutions for agricultural and health challenges",
+            "Write and submit research grant proposals to international funding bodies and publish findings in peer-reviewed scientific journals",
+            "Collaborate with government agencies and international universities to apply biotechnology innovations that address Cambodian development needs"
+          ],
+          "kh": [
+            "ធ្វើការពិសោធន៍ក្នុងវិស័យវិស្វកម្មហ្សែន ជីវវិទ្យាកោសិកា ឬបច្ចេកវិទ្យារំងែង ដើម្បីអភិវឌ្ឍពូជដំណាំ និងថ្នាំប្រសើរឡើង",
+            "វិភាគលំដាប់ DNA និងរចនាសម្ព័ន្ធប្រូតេអ៊ីន ដោយប្រើប្រាស់កម្មវិធីជីវព័ត៌មានវិទ្យា ដើម្បីស្វែងរកដំណោះស្រាយ ចំពោះបញ្ហាប្រឈមកសិកម្ម និងសុខភាព",
+            "សរសេរ និងដាក់ស្នើសំណើថវិកាស្រាវជ្រាវ ទៅកាន់អង្គភាពផ្តល់មូលនិធិអន្តរជាតិ ហើយបោះពុម្ពផ្សាយលទ្ធផលក្នុងទស្សនាវដ្តីវិទ្យាសាស្ត្រ",
+            "សហការជាមួយទីភ្នាក់ងាររដ្ឋ និងសកលវិទ្យាល័យអន្តរជាតិ ដើម្បីអនុវត្តការអភិវឌ្ឍន៍ជីវបច្ចេកទេស ដែលឆ្លើយតបនឹងតម្រូវការអភិវឌ្ឍន៍របស់ប្រទេសកម្ពុជា"
+          ]
+        },
+        "impact": {
+          "en": "Drive Cambodia's scientific progress by applying biotechnology to create drought-resistant crops, combat disease outbreaks, and build a knowledge economy.",
+          "kh": "ជំរុញវឌ្ឍនភាពវិទ្យាសាស្ត្ររបស់ប្រទេសកម្ពុជា ដោយអនុវត្តជីវបច្ចេកទេសដើម្បីបង្កើតដំណាំ ធន់នឹងភាពរាំងស្ងួត ប្រយុទ្ធប្រឆាំងនឹងជំងឺ និងស្ថាបនាសេដ្ឋកិច្ចចំណេះដឹង។"
+        }
+      }
+    ]
   },
   {
     "id": "social-sciences",
