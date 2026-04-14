@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight } from "lucide-react";
+import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight, Send, Loader2 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import healthData from "@/data/health_science.json";
+import { QuizLeaderboard, PROVINCES } from "@/components/QuizLeaderboard";
+
+const API_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 type Question = {
   id: number;
@@ -49,6 +52,12 @@ export function ExamPrepPage() {
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
   const [quiz, setQuiz] = useState<QuizState>({ index: 0, selected: null, score: 0, done: false });
 
+  const [submitName, setSubmitName] = useState("");
+  const [submitProvince, setSubmitProvince] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   function startTopic(topic: Topic) {
     setActiveTopic(topic);
     setQuiz({ index: 0, selected: null, score: 0, done: false });
@@ -72,6 +81,34 @@ export function ExamPrepPage() {
 
   function restartQuiz() {
     setQuiz({ index: 0, selected: null, score: 0, done: false });
+    setSubmitted(false);
+    setSubmitError(null);
+  }
+
+  async function handleSubmitScore() {
+    if (!submitName.trim() || !submitProvince) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const expEarned = Math.round((quiz.score / (activeTopic?.questions.length ?? 1)) * 100);
+      const res = await fetch(`${API_BASE}/api/quiz/score`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentName: submitName.trim(),
+          province: submitProvince,
+          expEarned,
+          subject: "health-science",
+          topic: activeTopic?.id ?? "unknown",
+        }),
+      });
+      if (!res.ok) throw new Error("submit failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError(t("Failed to submit. Please try again.", "បរាជ័យក្នុងការដាក់ជូន។ សូមព្យាយាមម្ដងទៀត។"));
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const current = activeTopic ? activeTopic.questions[quiz.index] : null;
@@ -201,6 +238,9 @@ export function ExamPrepPage() {
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
+
+            {/* ── Global Leaderboard ── */}
+            <QuizLeaderboard />
           </>
         )}
 
@@ -309,6 +349,61 @@ export function ExamPrepPage() {
                     ? t("Good effort! Review the explanations to improve further.", "ការខិតខំប្រឹងប្រែងល្អ! ពិនិត្យឡើងវិញនូវការពន្យល់ ដើម្បីកែលម្អ។")
                     : t("Keep practising — every attempt builds your knowledge.", "បន្តហ្វឹកហ្វឺន — ការប្រឡងរៀងរាល់ដងបង្កើនចំណេះដឹងរបស់អ្នក។")}
                 </p>
+
+                {/* ── Score submission ── */}
+                <div className="mb-6 p-5 rounded-2xl bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 text-left">
+                  <h4 className={`font-bold text-teal-800 dark:text-teal-200 text-sm mb-1 ${kh ? "font-khmer" : ""}`}>
+                    🏆 {t("Submit your score to the leaderboard", "ដាក់ជូនពិន្ទុទៅតារាងចំណាត់ថ្នាក់")}
+                  </h4>
+                  <p className={`text-xs text-teal-700/70 dark:text-teal-400/70 mb-4 ${kh ? "font-khmer leading-loose" : ""}`}>
+                    {t(
+                      `You earned ${Math.round((quiz.score / total) * 100)} EXP. Enter your name and province to appear on the global leaderboard.`,
+                      `អ្នកទទួលបាន ${Math.round((quiz.score / total) * 100)} EXP។ បញ្ចូលឈ្មោះ និងខេត្ត ដើម្បីបង្ហាញលើតារាងចំណាត់ថ្នាក់។`
+                    )}
+                  </p>
+
+                  {submitted ? (
+                    <div className={`flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-sm ${kh ? "font-khmer" : ""}`}>
+                      <CheckCircle2 className="w-4 h-4" />
+                      {t("Score submitted! Check the leaderboard below.", "ពិន្ទុត្រូវបានដាក់ជូន! ពិនិត្យតារាងខាងក្រោម។")}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <input
+                        type="text"
+                        maxLength={50}
+                        value={submitName}
+                        onChange={(e) => setSubmitName(e.target.value)}
+                        placeholder={t("Your name", "ឈ្មោះរបស់អ្នក")}
+                        className={`flex-1 px-3 py-2.5 rounded-xl border-2 border-teal-200 dark:border-teal-700 bg-white dark:bg-card text-sm focus:outline-none focus:border-teal-400 ${kh ? "font-khmer" : ""}`}
+                      />
+                      <select
+                        value={submitProvince}
+                        onChange={(e) => setSubmitProvince(e.target.value)}
+                        className={`flex-1 px-3 py-2.5 rounded-xl border-2 border-teal-200 dark:border-teal-700 bg-white dark:bg-card text-sm focus:outline-none focus:border-teal-400 ${kh ? "font-khmer" : ""}`}
+                      >
+                        <option value="">{t("Select province…", "ជ្រើសខេត្ត…")}</option>
+                        {PROVINCES.map((p) => (
+                          <option key={p.en} value={p.en}>
+                            {kh ? p.kh : p.en}
+                          </option>
+                        ))}
+                      </select>
+                      <button
+                        onClick={handleSubmitScore}
+                        disabled={submitting || !submitName.trim() || !submitProvince}
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 text-white text-sm font-bold hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+                      >
+                        {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                        {t("Submit", "ដាក់ជូន")}
+                      </button>
+                    </div>
+                  )}
+
+                  {submitError && (
+                    <p className={`mt-2 text-xs text-red-500 ${kh ? "font-khmer" : ""}`}>{submitError}</p>
+                  )}
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
