@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
+import { InterviewSimulator } from "@/components/InterviewSimulator";
 
 type ScholarshipCard = {
   name: string;
@@ -473,6 +474,22 @@ export function LaunchpadPage() {
               </div>
             </div>
           )}
+        </section>
+
+        {/* ── Job Interview Simulator ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+          <div className="mb-4">
+            <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
+              {t("Job Interview Simulator", "កម្មវិធីហ្វឹកហាត់សម្ភាសន៍ការងារ")}
+            </h2>
+            <p className={`text-sm text-muted-foreground mt-1 ${kh ? "font-khmer" : ""}`}>
+              {t(
+                "Practice real interviews with an AI coach — get instant feedback on your answers.",
+                "ហ្វឹកហាត់ការសម្ភាសន៍ជាក់ស្ដែងជាមួយ AI — ទទួលមតិភ្លាមៗអំពីចម្លើយរបស់អ្នក។"
+              )}
+            </p>
+          </div>
+          <InterviewSimulator />
         </section>
 
       </div>
