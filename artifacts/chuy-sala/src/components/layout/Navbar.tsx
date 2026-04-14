@@ -1,30 +1,180 @@
 import { Link, useLocation } from "wouter";
-import { Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut, GraduationCap, Handshake, ExternalLink, BookOpen, Leaf, Star, Shield, Rocket } from "lucide-react";
-import { useState, ComponentType } from "react";
+import {
+  Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
+  GraduationCap, Handshake, ExternalLink, BookOpen, Leaf, Star,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile,
+} from "lucide-react";
+import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
 
+// ── Types ────────────────────────────────────────────────────────────────────
+
+type NavItem = {
+  href: string;
+  labelEn: string;
+  labelKh: string;
+  icon: ComponentType<{ className?: string }>;
+};
+
+type NavGroup = {
+  labelEn: string;
+  labelKh: string;
+  icon: ComponentType<{ className?: string }>;
+  items: NavItem[];
+};
+
+// ── Link groups ───────────────────────────────────────────────────────────────
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    labelEn: "Explore",
+    labelKh: "រុករក",
+    icon: Compass,
+    items: [
+      { href: "/",       labelEn: "Home",         labelKh: "ទំព័រដើម",  icon: Heart },
+      { href: "/map",    labelEn: "Map",           labelKh: "ផែនទី",      icon: Map },
+      { href: "/needs",  labelEn: "Browse Needs",  labelKh: "តម្រូវការ",  icon: Heart },
+    ],
+  },
+  {
+    labelEn: "Resources",
+    labelKh: "ធនធាន",
+    icon: Library,
+    items: [
+      { href: "/launchpad", labelEn: "Scholarships", labelKh: "អាហារូបករណ៍", icon: BookOpen },
+      { href: "/charities", labelEn: "Partners",      labelKh: "ដៃគូ",          icon: Handshake },
+      { href: "/alumni",    labelEn: "Alumni",         labelKh: "រឿងជោគជ័យ",   icon: Star },
+    ],
+  },
+  {
+    labelEn: "Study Center",
+    labelKh: "មជ្ឈមណ្ឌលសិក្សា",
+    icon: FlaskConical,
+    items: [
+      { href: "/exam-prep", labelEn: "Exam Prep",      labelKh: "ត្រៀមប្រឡង", icon: GraduationCap },
+      { href: "/projects",  labelEn: "Completed",       labelKh: "បានបញ្ចប់",   icon: CheckCircle },
+      { href: "/safety",    labelEn: "Digital Safety",  labelKh: "សុវត្ថិភាព",  icon: Shield },
+    ],
+  },
+  {
+    labelEn: "Well-being",
+    labelKh: "សុខុមាលភាព",
+    icon: Smile,
+    items: [
+      { href: "/sanctuary", labelEn: "Sanctuary", labelKh: "សន្តិភាព",         icon: Leaf },
+      { href: "/space",     labelEn: "Space",      labelKh: "អវកាស",             icon: Rocket },
+    ],
+  },
+];
+
+// Admin link stays standalone (only visible when logged in / separate)
+const ADMIN_ITEM: NavItem = {
+  href: "/admin",
+  labelEn: "Admin",
+  labelKh: "គ្រប់គ្រង",
+  icon: PlusCircle,
+};
+
+// ── Dropdown ──────────────────────────────────────────────────────────────────
+
+function DropdownGroup({
+  group,
+  location,
+  language,
+  onNavigate,
+}: {
+  group: NavGroup;
+  location: string;
+  language: string;
+  onNavigate?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const kh = language === "kh";
+
+  const isGroupActive = group.items.some(
+    (item) =>
+      location === item.href ||
+      (item.href !== "/" && location.startsWith(item.href))
+  );
+
+  // Close on outside click
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative flex-shrink-0">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-all duration-150
+          ${isGroupActive
+            ? "bg-primary/10 text-primary"
+            : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
+          }`}
+      >
+        <group.icon className="w-3.5 h-3.5 flex-shrink-0" />
+        <span className={kh ? "font-khmer text-sm" : ""}>
+          {kh ? group.labelKh : group.labelEn}
+        </span>
+        <ChevronDown
+          className={`w-3 h-3 opacity-60 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 mt-1.5 min-w-[190px] bg-white dark:bg-card border border-border rounded-xl shadow-xl z-50 py-1.5 overflow-hidden">
+          {group.items.map((item) => {
+            const isActive =
+              location === item.href ||
+              (item.href !== "/" && location.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => {
+                  setOpen(false);
+                  onNavigate?.();
+                }}
+                className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors
+                  ${isActive
+                    ? "bg-primary/8 text-primary"
+                    : "text-foreground hover:bg-muted/60"
+                  }`}
+              >
+                <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
+                <span className={kh ? "font-khmer" : ""}>
+                  {kh ? item.labelKh : item.labelEn}
+                </span>
+                {isActive && (
+                  <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                )}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
 export function Navbar() {
   const [location] = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const { language, toggleLanguage } = useLanguageStore();
   const t = useTranslation();
   const { user, logout } = useAuth();
-
-  const navLinks: { href: string; label: string; icon: ComponentType<{ className?: string }>; external?: boolean }[] = [
-    { href: "/",          label: t("Home",           "ទំព័រដើម"),              icon: Heart },
-    { href: "/map",       label: t("Map",            "ផែនទី"),                 icon: Map },
-    { href: "/needs",     label: t("Browse Needs",   "តម្រូវការ"),             icon: Heart },
-    { href: "/projects",  label: t("Completed",      "បានបញ្ចប់"),             icon: CheckCircle },
-    { href: "/charities", label: t("Partners",       "ដៃគូ"),                  icon: Handshake },
-    { href: "/launchpad", label: t("Scholarships",   "អាហារូបករណ៍"),           icon: BookOpen },
-    { href: "/sanctuary", label: t("Sanctuary",      "សុខុមាលភាព"),            icon: Leaf },
-    { href: "/alumni",    label: t("Alumni",         "រឿងជោគជ័យ"),            icon: Star },
-    { href: "/safety",    label: t("Safety",         "សុវត្ថិភាព"),             icon: Shield },
-    { href: "/exam-prep", label: t("Exam Prep", "ត្រៀមប្រឡង"), icon: GraduationCap },
-    { href: "/space",     label: t("Space",          "អវកាស"),                  icon: Rocket },
-    { href: "/admin",     label: t("Admin",          "គ្រប់គ្រង"),              icon: PlusCircle },
-  ];
+  const kh = language === "kh";
 
   const LanguageToggle = ({ compact = false }: { compact?: boolean }) => (
     <button
@@ -41,12 +191,16 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full glass-panel border-b-0">
 
-      {/* ── Row 1: Logo | Controls ──────────────────────────────────── */}
+      {/* ── Row 1: Logo + controls ────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
 
-          {/* LEFT — Logo */}
-          <Link href="/" className="flex items-center gap-3 group flex-shrink-0" onClick={() => setMobileMenuOpen(false)}>
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-3 group flex-shrink-0"
+            onClick={() => setMobileOpen(false)}
+          >
             <img
               src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="Chouy Sala Logo"
@@ -58,10 +212,8 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* RIGHT — Language toggle + Auth (desktop) + Hamburger (mobile) */}
+          {/* Right controls */}
           <div className="flex items-center gap-3">
-
-            {/* Language toggle — always visible */}
             <LanguageToggle compact={false} />
 
             {/* Auth — desktop only */}
@@ -70,8 +222,8 @@ export function Navbar() {
                 <>
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20">
                     <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className={`text-xs font-semibold text-primary truncate max-w-[120px] ${language === "kh" ? "font-khmer text-sm" : ""}`}>
-                      {user.school ? (language === "kh" ? user.school.nameKh : user.school.nameEn) : user.email}
+                    <span className={`text-xs font-semibold text-primary truncate max-w-[120px] ${kh ? "font-khmer text-sm" : ""}`}>
+                      {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
                     </span>
                   </div>
                   <button
@@ -95,119 +247,147 @@ export function Navbar() {
 
             {/* Hamburger — mobile only */}
             <button
-              onClick={() => setMobileMenuOpen((o) => !o)}
+              onClick={() => setMobileOpen((o) => !o)}
               className="lg:hidden p-2 text-foreground bg-black/5 rounded-xl hover:bg-black/10 transition-colors"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* ── Row 2: Nav Links — desktop only ────────────────────────── */}
+      {/* ── Row 2: Dropdown nav — desktop only ───────────────────────── */}
       <div className="hidden lg:block border-t border-border/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-[15px] h-11 overflow-x-auto scrollbar-none">
-            {navLinks.map((link) => {
-              const isActive = !link.external && (
-                location === link.href ||
-                (link.href !== "/" && location.startsWith(link.href))
-              );
-              const base = "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-all duration-150 flex-shrink-0";
-              const color = isActive
-                ? "bg-primary/10 text-primary"
-                : link.external
-                  ? "text-amber-600 hover:bg-amber-50 hover:text-amber-700"
-                  : "text-muted-foreground hover:bg-black/5 hover:text-foreground";
+          <nav className="flex items-center gap-1 h-11 overflow-hidden">
+            {NAV_GROUPS.map((group) => (
+              <DropdownGroup
+                key={group.labelEn}
+                group={group}
+                location={location}
+                language={language}
+              />
+            ))}
 
-              if (link.external) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${base} ${color}`}
-                  >
-                    <link.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                    <span className={language === "kh" ? "font-khmer text-sm" : ""}>{link.label}</span>
-                    <ExternalLink className="w-3 h-3 opacity-50" />
-                  </a>
-                );
-              }
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`${base} ${color}`}
-                >
-                  <link.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                  <span className={language === "kh" ? "font-khmer text-sm" : ""}>{link.label}</span>
-                </Link>
-              );
-            })}
+            {/* Admin — standalone, only relevant to logged-in admins */}
+            {user && (
+              <Link
+                href={ADMIN_ITEM.href}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-all flex-shrink-0
+                  ${location.startsWith(ADMIN_ITEM.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
+                  }`}
+              >
+                <ADMIN_ITEM.icon className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className={kh ? "font-khmer text-sm" : ""}>
+                  {kh ? ADMIN_ITEM.labelKh : ADMIN_ITEM.labelEn}
+                </span>
+              </Link>
+            )}
           </nav>
         </div>
       </div>
 
-      {/* ── Mobile dropdown ──────────────────────────────────────────── */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-16 left-0 w-full glass-panel border-t border-border/50 shadow-2xl pb-4 rounded-b-3xl">
+      {/* ── Mobile slide-out menu ─────────────────────────────────────── */}
+      {mobileOpen && (
+        <div className="lg:hidden absolute top-16 left-0 w-full glass-panel border-t border-border/50 shadow-2xl pb-4 rounded-b-3xl max-h-[calc(100vh-4rem)] overflow-y-auto">
           <nav className="flex flex-col p-3 gap-1">
-            {navLinks.map((link) => {
-              const isActive = !link.external && (
-                location === link.href ||
-                (link.href !== "/" && location.startsWith(link.href))
-              );
-              const base = "flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold text-base transition-all";
-              const color = isActive
-                ? "bg-primary/10 text-primary"
-                : link.external
-                  ? "text-amber-600 hover:bg-amber-50"
-                  : "text-foreground hover:bg-black/5";
 
-              if (link.external) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`${base} ${color}`}
-                  >
-                    <link.icon className="w-5 h-5 flex-shrink-0" />
-                    <span className={language === "kh" ? "font-khmer" : ""}>{link.label}</span>
-                    <ExternalLink className="w-4 h-4 opacity-50 ml-auto" />
-                  </a>
-                );
-              }
+            {NAV_GROUPS.map((group) => {
+              const isGroupActive = group.items.some(
+                (item) =>
+                  location === item.href ||
+                  (item.href !== "/" && location.startsWith(item.href))
+              );
+              const isExpanded = mobileExpanded === group.labelEn;
+
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`${base} ${color}`}
-                >
-                  <link.icon className="w-5 h-5 flex-shrink-0" />
-                  <span className={language === "kh" ? "font-khmer" : ""}>{link.label}</span>
-                </Link>
+                <div key={group.labelEn}>
+                  {/* Group header */}
+                  <button
+                    onClick={() =>
+                      setMobileExpanded((prev) =>
+                        prev === group.labelEn ? null : group.labelEn
+                      )
+                    }
+                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold text-base transition-all
+                      ${isGroupActive
+                        ? "bg-primary/8 text-primary"
+                        : "text-foreground hover:bg-black/5"
+                      }`}
+                  >
+                    <group.icon className={`w-5 h-5 flex-shrink-0 ${isGroupActive ? "text-primary" : "text-muted-foreground"}`} />
+                    <span className={`flex-1 text-left ${kh ? "font-khmer" : ""}`}>
+                      {kh ? group.labelKh : group.labelEn}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 opacity-50 transition-transform duration-150 ${isExpanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
+
+                  {/* Group items */}
+                  {isExpanded && (
+                    <div className="ml-4 mt-0.5 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3">
+                      {group.items.map((item) => {
+                        const isActive =
+                          location === item.href ||
+                          (item.href !== "/" && location.startsWith(item.href));
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                              ${isActive
+                                ? "bg-primary/10 text-primary"
+                                : "text-foreground/80 hover:bg-black/5 hover:text-foreground"
+                              }`}
+                          >
+                            <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
+                            <span className={kh ? "font-khmer" : ""}>
+                              {kh ? item.labelKh : item.labelEn}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
 
-            {/* Auth row in mobile menu */}
+            {/* Admin (mobile) */}
+            {user && (
+              <Link
+                href={ADMIN_ITEM.href}
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold text-base transition-all
+                  ${location.startsWith(ADMIN_ITEM.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-foreground hover:bg-black/5"
+                  }`}
+              >
+                <ADMIN_ITEM.icon className="w-5 h-5 flex-shrink-0 text-muted-foreground" />
+                <span className={kh ? "font-khmer" : ""}>
+                  {kh ? ADMIN_ITEM.labelKh : ADMIN_ITEM.labelEn}
+                </span>
+              </Link>
+            )}
+
+            {/* Auth row */}
             <div className="border-t border-border mt-2 pt-2">
               {user ? (
                 <div className="flex flex-col gap-1.5 px-1">
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary/10">
                     <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className={`text-sm font-semibold text-primary truncate ${language === "kh" ? "font-khmer" : ""}`}>
-                      {user.school ? (language === "kh" ? user.school.nameKh : user.school.nameEn) : user.email}
+                    <span className={`text-sm font-semibold text-primary truncate ${kh ? "font-khmer" : ""}`}>
+                      {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
                     </span>
                   </div>
                   <button
-                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    onClick={() => { logout(); setMobileOpen(false); }}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-destructive hover:bg-destructive/10 text-sm transition-all"
                   >
                     <LogOut className="w-5 h-5" />
@@ -217,7 +397,7 @@ export function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold bg-primary text-primary-foreground text-base"
                 >
                   <LogIn className="w-5 h-5" />
