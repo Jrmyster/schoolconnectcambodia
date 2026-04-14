@@ -8,6 +8,7 @@ import authRouter from "./auth";
 import storiesRouter from "./stories";
 import openaiRouter from "./openai";
 import interviewRouter from "./interview";
+import adminMetricsRouter from "./adminMetrics";
 
 const router: IRouter = Router();
 
@@ -20,5 +21,6 @@ router.use(uploadRouter);
 router.use(storiesRouter);
 router.use(openaiRouter);
 router.use(interviewRouter);
+router.use(adminMetricsRouter);
 
 export default router;

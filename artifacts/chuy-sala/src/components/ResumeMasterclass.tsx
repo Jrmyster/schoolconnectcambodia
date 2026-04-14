@@ -4,16 +4,16 @@ import { Download, FileText, CheckCircle2, XCircle, Zap, BookOpen } from "lucide
 const t = (en: string, kh: string) => ({ en, kh });
 
 const POWER_VERBS = [
-  { en: "Led",          kh: "ដឹកនាំ" },
-  { en: "Created",      kh: "បង្កើត" },
-  { en: "Analyzed",     kh: "វិភាគ" },
-  { en: "Developed",    kh: "អភិវឌ្ឍ" },
-  { en: "Managed",      kh: "គ្រប់គ្រង" },
-  { en: "Implemented",  kh: "អនុវត្ត" },
-  { en: "Achieved",     kh: "សម្រេច" },
-  { en: "Coordinated",  kh: "សម្របសម្រួល" },
-  { en: "Designed",     kh: "រចនា" },
-  { en: "Delivered",    kh: "ផ្ដល់" },
+  { en: "Led",           kh: "ដឹកនាំ",    example: "Led a study group of 5 students." },
+  { en: "Created",       kh: "បង្កើត",    example: "Created a new digital quiz for Biology." },
+  { en: "Solved",        kh: "ដោះស្រាយ",  example: "Solved complex algebraic equations." },
+  { en: "Collaborated",  kh: "សហការ",     example: "Collaborated with peers on a community project." },
+  { en: "Achieved",      kh: "សម្រេចបាន", example: "Achieved a 95% score on the final exam." },
+  { en: "Improved",      kh: "កែលម្អ",    example: "Improved my English speaking skills daily." },
+  { en: "Analyzed",      kh: "វិភាគ",     example: "Analyzed chemical reactions in the lab." },
+  { en: "Developed",     kh: "អភិវឌ្ឍ",   example: "Developed a digital schedule for my studies." },
+  { en: "Organized",     kh: "រៀបចំ",     example: "Organized a school event for Khmer New Year." },
+  { en: "Presented",     kh: "បទបង្ហាញ",  example: "Presented a science project to the class." },
 ];
 
 const LOCAL_POINTS = [
@@ -217,19 +217,29 @@ export function ResumeMasterclass() {
         </div>
 
         <div className="py-5 px-4 bg-white overflow-hidden">
-          <div className="marquee-track flex gap-6" aria-hidden="true">
+          <div className="marquee-track flex gap-4" aria-hidden="true">
             {doubled.map((verb, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 flex flex-col items-center rounded-xl px-5 py-3 border shadow-sm"
-                style={{ borderColor: "#BFDBFE", background: "linear-gradient(160deg,#EFF6FF,#DBEAFE)" }}
+                className="flex-shrink-0 flex flex-col rounded-xl px-4 py-3 border shadow-sm"
+                style={{
+                  borderColor: "#BFDBFE",
+                  background: "linear-gradient(160deg,#EFF6FF,#DBEAFE)",
+                  minWidth: "200px",
+                  maxWidth: "220px",
+                }}
               >
-                <span className="font-extrabold text-base" style={{ color: "#1E3A5F" }}>
-                  {verb.en}
-                </span>
-                <span className={`text-xs mt-0.5 font-khmer`} style={{ color: "#2563EB" }}>
-                  {verb.kh}
-                </span>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="font-extrabold text-base" style={{ color: "#1E3A5F" }}>
+                    {verb.en}
+                  </span>
+                  <span className="text-xs font-khmer" style={{ color: "#2563EB" }}>
+                    {verb.kh}
+                  </span>
+                </div>
+                <p className="text-xs italic leading-snug" style={{ color: "#475569" }}>
+                  &ldquo;{verb.example}&rdquo;
+                </p>
               </div>
             ))}
           </div>

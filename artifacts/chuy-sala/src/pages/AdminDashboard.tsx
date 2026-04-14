@@ -8,6 +8,7 @@ import {
 } from "recharts";
 import { School, ListChecks, DollarSign, ArrowLeft, Loader2 } from "lucide-react";
 import { PROVINCE_KH } from "@/lib/province-data";
+import { WeeklyRecap } from "@/components/WeeklyRecap";
 
 const CATEGORY_LABEL: Record<string, { en: string; kh: string }> = {
   Electronics:       { en: "Electronics & Tech",        kh: "គ្រឿងអេឡិចត្រូនិក" },
@@ -140,6 +141,9 @@ export function AdminDashboard() {
           </div>
         ) : (
           <>
+            {/* ── Weekly Recap ── */}
+            <WeeklyRecap />
+
             {/* ── Metric Cards ── */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className={metricClass}>
