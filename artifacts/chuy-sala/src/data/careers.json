@@ -6,49 +6,49 @@
     "icon": "🌾",
     "careers": [
       {
-        "id": "agronomist",
-        "en": "Agronomist",
-        "kh": "អ្នកជំនាញស្រូវវាល",
+        "id": "crop-scientist",
+        "en": "Crop Scientist / Agronomist",
+        "kh": "អ្នកវិទ្យាសាស្ត្រដំណាំ / អ្នកកសិកម្ម",
         "tasks": {
           "en": [
-            "Conduct soil composition and nutrient tests to assess field health",
-            "Design seasonal crop rotation plans to maximise yield and prevent erosion",
-            "Analyse rainfall and climate data to recommend optimal planting schedules",
-            "Advise farming communities on sustainable pest and fertiliser management"
+            "Test soil quality and nutrient levels to determine the ideal conditions for growing rice and cassava",
+            "Develop and trial drought-resistant seed varieties suited to Cambodia's changing rainfall patterns",
+            "Analyse field data to identify factors limiting yield and recommend evidence-based improvements",
+            "Publish research findings and advise government agricultural departments on national crop policy"
           ],
           "kh": [
-            "ធ្វើការវិភាគសមាសភាពដី និងសារជាតិចិញ្ចឹម ដើម្បីវាស់វែងសុខភាពវាល",
-            "រចនាផែនការដំណាំផ្លាស់ប្តូររដូវ ដើម្បីបង្កើនផលទិត និងការពារការហូរដី",
-            "វិភាគទិន្នន័យភ្លៀង និងអាកាសធាតុ ដើម្បីផ្ដល់អនុសាសន៍ទៅអំពីពេលល្អបំផុតសម្រាប់ការដាំដំណាំ",
-            "ណែនាំសហគមន៍កសិករអំពីការគ្រប់គ្រងសត្វល្អិតបំផ្លាញ និងជីបុ់នដ្ឋានបែបនិរន្តរភាព"
+            "ត្រួតពិនិត្យគុណភាពដី និងកំរិតសារជាតិ ដើម្បីកំណត់លក្ខខណ្ឌដ៏ល្អបំផុត សម្រាប់ការដាំស្រូវ និងដំឡូងមី",
+            "អភិវឌ្ឍ និងសាកល្បងពូជស្រូវ និងដំណាំធន់នឹងគ្រោះរាំងស្ងួត ដែលសមស្របទៅនឹងគំរូភ្លៀងប្រែប្រួលរបស់កម្ពុជា",
+            "វិភាគទិន្នន័យវាល ដើម្បីស្វែងរកកត្តាកំណត់ចំណុចខ្វះខាតផលទិត ហើយផ្ដល់អនុសាសន៍ផ្អែកលើភស្តុតាង",
+            "បោះពុម្ពផ្សាយការរកឃើញ ហើយផ្ដល់ជាអនុសាសន៍ដល់នាយកដ្ឋានកសិកម្មរដ្ឋ ស្ដីពីគោលនយោបាយដំណាំជាតិ"
           ]
         },
         "impact": {
-          "en": "Strengthen Cambodia's food security by helping farming families increase safe, sustainable harvests.",
-          "kh": "ពង្រឹងសន្តិសុខស្បៀងអាហាររបស់កម្ពុជា ដោយជួយគ្រួសារកសិករបង្កើនផលទិតដែលមានសុវត្ថិភាព និងនិរន្តរ។"
+          "en": "Ensure national food security and adapt farming practices to climate change.",
+          "kh": "ធានាសន្តិសុខស្បៀងជាតិ និងបន្សាំការអនុវត្តកសិកម្មទៅនឹងការប្រែប្រួលអាកាសធាតុ។"
         }
       },
       {
-        "id": "agricultural-extension-officer",
-        "en": "Agricultural Extension Officer",
-        "kh": "មន្ត្រីផ្សព្វផ្សាយកសិកម្ម",
+        "id": "agricultural-engineer",
+        "en": "Agricultural Engineer",
+        "kh": "វិស្វករកសិកម្ម",
         "tasks": {
           "en": [
-            "Train rural farming communities on modern, climate-resilient cultivation techniques",
-            "Distribute drought-resistant seed varieties and demonstrate correct planting methods",
-            "Document crop yields and farmer feedback to report to government and NGO partners",
-            "Coordinate with international agricultural organisations on rural development projects"
+            "Design solar-powered irrigation systems that deliver water efficiently to fields without relying on the grid",
+            "Develop and test harvesting machinery optimised for Cambodia's small-scale paddy fields",
+            "Evaluate new agricultural technologies and prepare cost-benefit analyses for rural cooperatives",
+            "Train farmers and technicians on correct operation and maintenance of mechanised farm equipment"
           ],
           "kh": [
-            "បណ្ដុះបណ្ដាលសហគមន៍កសិករជនបទ អំពីបច្ចេកទេសដាំដំណាំទំនើប ដែលប្រឈមមុខទៅនឹងការប្រែប្រួលអាកាសធាតុ",
-            "ចែកចាយពូជស្រូវ និងដំណាំស៊ូទ្រាំភ្លៀងខ្វះ ហើយបង្ហាញពីវិធីដាំត្រឹមត្រូវ",
-            "កត់ត្រាផលទិតដំណាំ និងមតិរបស់កសិករ ដើម្បីរាយការណ៍ទៅក្រសួង និងដៃគូ NGO",
-            "សម្របសម្រួលជាមួយអង្គការកសិកម្មអន្តរជាតិ ស្ដីពីគម្រោងអភិវឌ្ឍន៍ជនបទ"
+            "រចនាប្រព័ន្ធធារាសាស្ត្រ ដែលដំណើរការដោយថាមពលព្រះអាទិត្យ ដែលចែកចាយទឹកប្រកបដោយប្រសិទ្ធភាព ទៅកាន់វាលដំណាំ ដោយមិនអាស្រ័យលើបណ្ដាញអគ្គិសនី",
+            "អភិវឌ្ឍ និងធ្វើតេស្តគ្រឿងចក្រប្រមូលផល ដែលបង្កើនប្រសិទ្ធភាពសម្រាប់វាលស្រែតូចៗ របស់កម្ពុជា",
+            "វាយតម្លៃបច្ចេកវិទ្យាកសិកម្មថ្មី ហើយរៀបចំការវិភាគថ្លៃដើម-ផលប្រយោជន៍ សម្រាប់សហករណ៍ជនបទ",
+            "បណ្ដុះបណ្ដាលកសិករ និងបច្ចេកទេសករ ស្ដីពីការប្រើប្រាស់ត្រឹមត្រូវ និងការថែទាំគ្រឿងចក្រកសិកម្មមេកានិក"
           ]
         },
         "impact": {
-          "en": "Bridge the gap between agricultural research and rural farmers, transforming scientific findings into real harvests.",
-          "kh": "ភ្ជាប់គម្លាតរវាងការស្រាវជ្រាវកសិកម្ម និងកសិករជនបទ — ប្រែឲ្យការស្រាវជ្រាវវិទ្យាសាស្ត្រក្លាយជាផលទិតពិតប្រាកដ។"
+          "en": "Modernize farming to make it more sustainable and profitable for local farmers.",
+          "kh": "ធ្វើទំនើបកម្មកសិកម្ម ដើម្បីធ្វើឱ្យវាមាននិរន្តរភាព និងប្រាក់ចំណេញ សម្រាប់កសិករក្នុងស្រុក។"
         }
       }
     ]
@@ -135,49 +135,49 @@
     "icon": "💼",
     "careers": [
       {
-        "id": "business-analyst",
-        "en": "Business Analyst",
-        "kh": "អ្នកវិភាគធុរកិច្ច",
+        "id": "entrepreneur",
+        "en": "Entrepreneur / Business Owner",
+        "kh": "សហគ្រិន / ម្ចាស់អាជីវកម្ម",
         "tasks": {
           "en": [
-            "Gather and analyse financial, operational, and market data to identify business opportunities",
-            "Prepare detailed reports and presentations with data-driven recommendations for management",
-            "Build financial models to forecast revenue, costs, and growth scenarios",
-            "Facilitate workshops with stakeholders to map current processes and design improvements"
+            "Develop comprehensive business plans covering market analysis, competitive positioning, and financial projections",
+            "Manage company finances, monitor cash flow, and ensure the business remains profitable day-to-day",
+            "Market products and services to local customers through community engagement and digital platforms",
+            "Build partnerships with international buyers and distributors to expand market reach and grow exports"
           ],
           "kh": [
-            "ប្រមូល និងវិភាគទិន្នន័យហិរញ្ញវត្ថុ ប្រតិបត្តិការ និងទីផ្សារ ដើម្បីស្វែងរកឱកាសពាណិជ្ជកម្ម",
-            "រៀបចំរបាយការណ៍លម្អិត និងការបង្ហាញ ដោយភ្ជាប់ការណែនាំផ្អែកលើទិន្នន័យ ចំពោះអ្នកគ្រប់គ្រង",
-            "បង្កើតគំរូហិរញ្ញវត្ថុ ដើម្បីព្យាករណ៍ចំណូល ចំណាយ និងស្ថានភាពការលូតលាស់",
-            "ដឹកនាំសិក្ខាសាលាជាមួយភាគីពាក់ព័ន្ធ ដើម្បីចារទ្រង់ទ្រាយដំណើរការបច្ចុប្បន្ន ហើយរចនាការកែប្រែ"
+            "បង្កើតផែនការអាជីវកម្មដ៏ទូលំទូលាយ ដែលគ្របដណ្ដប់ការវិភាគទីផ្សារ ការដាក់ទីតាំងប្រកួតប្រជែង និងការព្យាករណ៍ហិរញ្ញវត្ថុ",
+            "គ្រប់គ្រងហិរញ្ញវត្ថុក្រុមហ៊ុន តាមដានលំហូរសាច់ប្រាក់ ហើយធានាថាអាជីវកម្មមានប្រាក់ចំណេញប្រចាំថ្ងៃ",
+            "ធ្វើទីផ្សារផលិតផល និងសេវាកម្ម ទៅកាន់អតិថិជនក្នុងស្រុក តាមរយៈការចូលរួមសហគមន៍ និងវេទិកាឌីជីថល",
+            "កសាងភាពជាដៃគូជាមួយអ្នកទិញ និងអ្នកចែកចាយអន្តរជាតិ ដើម្បីពង្រីកទំហំទីផ្សារ ហើយជំរុញការនាំចេញ"
           ]
         },
         "impact": {
-          "en": "Help organisations grow smarter — turning raw data into strategies that create jobs and economic value.",
-          "kh": "ជួយស្ថាប័នឲ្យលូតលាស់ស្មាតជាងមុន — ប្រែទិន្នន័យឆៅទៅជាយុទ្ធសាស្ត្រ ដែលបង្កើតការងារ និងតម្លៃសេដ្ឋកិច្ច។"
+          "en": "Create jobs and drive economic growth in your community.",
+          "kh": "បង្កើតការងារ និងជំរុញកំណើនសេដ្ឋកិច្ចនៅក្នុងសហគមន៍របស់អ្នក។"
         }
       },
       {
-        "id": "entrepreneur",
-        "en": "Entrepreneur",
-        "kh": "សហគ្រិន",
+        "id": "marketing-manager",
+        "en": "Marketing Manager",
+        "kh": "អ្នកគ្រប់គ្រងទីផ្សារ",
         "tasks": {
           "en": [
-            "Identify unmet market needs and develop a viable product or service concept",
-            "Write business plans and pitch decks to secure funding from investors and banks",
-            "Recruit and lead a small team, setting goals and fostering a productive culture",
-            "Track cash flow, profit margins, and key performance indicators on a weekly basis"
+            "Analyse market trends, consumer behaviour, and competitor strategies to inform campaign decisions",
+            "Create and manage social media campaigns across platforms to drive brand engagement and awareness",
+            "Build and maintain a consistent brand identity across all digital and print marketing materials",
+            "Measure campaign performance using analytics tools and prepare monthly reports for senior management"
           ],
           "kh": [
-            "ស្វែងរកតម្រូវការទីផ្សារដែលមិនទាន់បំពេញ ហើយអភិវឌ្ឍគំរូផលិតផល ឬសេវាកម្មដែលមានលទ្ធភាព",
-            "សរសេរផែនការអាជីវកម្ម និង pitch deck ដើម្បីទទួលបានមូលនិធិពីអ្នកវិនិយោគ និងធនាគារ",
-            "ជ្រើសរើស និងដឹកនាំក្រុមដ៏តូចមួយ ដោយកំណត់គោលដៅ ហើយជំរុញវប្បធម៌ការងារប្រកបដោយផលិតភាព",
-            "តាមដានលំហូរសាច់ប្រាក់ ផ្នែករយភាគចំណេញ និងសូចនាករការអនុវត្តសំខាន់ប្រចាំសប្ដាហ៍"
+            "វិភាគនិន្នាការទីផ្សារ ឥរិយាបថអ្នកប្រើប្រាស់ និងយុទ្ធសាស្ត្រគូប្រជែង ដើម្បីណែនាំការសម្រេចចិត្តយុទ្ធនាការ",
+            "បង្កើត និងគ្រប់គ្រងយុទ្ធនាការប្រព័ន្ធផ្សព្វផ្សាយសង្គម នៅទូទាំងវេទិកា ដើម្បីជំរុញការចូលរួម និងការយល់ដឹងពីម៉ាកយីហោ",
+            "កសាង និងរក្សាអត្តសញ្ញាណម៉ាកយីហោដ៏ស៊ីសង្វាក់ នៅទូទាំងសម្ភារបើកផ្សាយទីផ្សារឌីជីថល និងការបោះពុម្ពផ្សាយ",
+            "វាស់ស្ទង់ការអនុវត្តយុទ្ធនាការ ដោយប្រើប្រាស់ឧបករណ៍ analytics ហើយរៀបចំរបាយការណ៍ប្រចាំខែ សម្រាប់អ្នកគ្រប់គ្រងជាន់ខ្ពស់"
           ]
         },
         "impact": {
-          "en": "Drive Cambodia's economic future by building businesses that create local jobs and solve real community problems.",
-          "kh": "ជំរុញអនាគតសេដ្ឋកិច្ចកម្ពុជា ដោយស្ថាបនាអាជីវកម្ម ដែលបង្កើតការងារក្នុងស្រុក ហើយដោះស្រាយបញ្ហាសហគមន៍ពិតប្រាកដ។"
+          "en": "Connect people with the products and services they need to improve their lives.",
+          "kh": "ភ្ជាប់មនុស្សទៅនឹងផលិតផល និងសេវាកម្មដែលពួកគេត្រូវការ ដើម្បីកែលម្អជីវិតរបស់ពួកគេ។"
         }
       }
     ]
@@ -257,49 +257,49 @@
     "icon": "💻",
     "careers": [
       {
-        "id": "software-engineer",
-        "en": "Software Engineer",
-        "kh": "វិស្វករកម្មវិធីកំព្យូទ័រ",
+        "id": "software-developer",
+        "en": "Software Developer",
+        "kh": "អ្នកអភិវឌ្ឍន៍កម្មវិធី",
         "tasks": {
           "en": [
-            "Write clean, well-documented code in languages such as Python, JavaScript, or Java",
-            "Conduct code reviews and collaborate with teammates through version control systems",
-            "Debug production issues, trace error logs, and deploy hotfixes under time pressure",
-            "Participate in sprint planning, daily stand-ups, and retrospectives in an Agile team"
+            "Write clean, maintainable code in languages such as Python or JavaScript to build web and mobile applications",
+            "Design and build mobile apps for Android and iOS that solve real-world problems for everyday users",
+            "Debug and resolve software issues by tracing error logs and testing under realistic conditions",
+            "Collaborate with product designers and engineers to define features and ship working code on schedule"
           ],
           "kh": [
-            "សរសេរកូដស្អាត ដែលមានឯកសារប្រកបដោយភាពច្បាស់លាស់ ក្នុងភាសាដូចជា Python, JavaScript ឬ Java",
-            "ពិនិត្យកូដ ហើយសហការជាមួយសមាជិកក្រុម តាមរយៈប្រព័ន្ធគ្រប់គ្រងជំនាន់",
-            "ជួសជុលបញ្ហាការផលិត ដោយតាមដានកំណត់ហេតុកំហុស ហើយដាក់ hotfix ក្នុងស្ថានភាពផ្ទាន់ផ្ទាត់",
-            "ចូលរួមក្នុងការរៀបចំ sprint ការប្រជុំប្រចាំថ្ងៃ និងការត្រឡប់មើលក្រោយ ក្នុងក្រុម Agile"
+            "សរសេរកូដស្អាត ដែលងាយថែទាំ ក្នុងភាសាដូចជា Python ឬ JavaScript ដើម្បីបង្កើតកម្មវិធីវេបសាយ និងទូរស័ព្ទ",
+            "រចនា និងបង្កើតកម្មវិធីទូរស័ព្ទ សម្រាប់ Android និង iOS ដែលដោះស្រាយបញ្ហាជាក់ស្ដែង ចំពោះអ្នកប្រើប្រាស់ប្រចាំថ្ងៃ",
+            "ជួសជុលបញ្ហាកម្មវិធី ដោយតាមដានកំណត់ហេតុកំហុស ហើយធ្វើតេស្តក្រោមលក្ខខណ្ឌជាក់ស្ដែង",
+            "សហការជាមួយអ្នករចនាផលិតផល និងវិស្វករ ដើម្បីកំណត់មុខងារ ហើយបញ្ជូនកូដដែលដំណើរការបានត្រឹមពេលកំណត់"
           ]
         },
         "impact": {
-          "en": "Build digital tools that improve education, health, finance, and daily life for millions of people.",
-          "kh": "បង្កើតឧបករណ៍ឌីជីថល ដែលធ្វើឲ្យការអប់រំ សុខភាព ហិរញ្ញវត្ថុ និងជីវិតប្រចាំថ្ងៃ កាន់តែប្រសើរឡើង សម្រាប់មនុស្សរាប់លាននាក់។"
+          "en": "Build digital tools that solve real-world problems, just like School Connect Cambodia!",
+          "kh": "បង្កើតឧបករណ៍ឌីជីថល ដែលដោះស្រាយបញ្ហាជាក់ស្ដែង ដូចជាគេហទំព័រ School Connect Cambodia!"
         }
       },
       {
-        "id": "data-scientist",
-        "en": "Data Scientist",
-        "kh": "អ្នកវិទ្យាសាស្ត្រទិន្នន័យ",
+        "id": "cybersecurity-analyst",
+        "en": "Cybersecurity Analyst",
+        "kh": "អ្នកវិភាគសុវត្ថិភាពអ៊ីនធឺណិត",
         "tasks": {
           "en": [
-            "Clean and preprocess large, messy datasets from multiple sources for analysis",
-            "Build and train machine learning models to predict trends and classify information",
-            "Create data visualisations and dashboards that communicate findings to non-technical teams",
-            "Present actionable insights to leadership and translate them into business decisions"
+            "Monitor networks and systems in real time to detect unusual activity, threats, and intrusion attempts",
+            "Conduct vulnerability assessments and penetration tests to find security weaknesses before attackers do",
+            "Encrypt sensitive organisational data and manage access controls to prevent unauthorised entry",
+            "Respond to security incidents, contain breaches, and write post-incident reports for leadership"
           ],
           "kh": [
-            "សម្អាត និងដំណើរការជាមុននូវសំណុំទិន្នន័យធំ ដែលមានភាពចៅហ្វាយ ពីប្រភពជាច្រើន សម្រាប់ការវិភាគ",
-            "បង្កើត និងបណ្ដុះបណ្ដាលគំរូការរៀនម៉ាស៊ីន ដើម្បីព្យាករណ៍និន្នាការ ហើយចាត់ចែងព័ត៌មាន",
-            "រៀបចំការមើលឃើញទិន្នន័យ និងផ្ទាំងព័ត៌មាន ដែលទំនាក់ទំនងការរកឃើញ ទៅកាន់ក្រុមដែលមិនមែនជាបច្ចេកទេស",
-            "ដាក់ជូននូវវិចារណ៍ជាក់ស្ដែងដល់ថ្នាក់ដឹកនាំ ហើយប្រែឲ្យជាការសម្រេចចិត្តធុរកិច្ច"
+            "ត្រួតពិនិត្យបណ្ដាញ និងប្រព័ន្ធជាក់ស្ដែង ដើម្បីរកឃើញសកម្មភាពមិនធម្មតា ការគំរាមកំហែង និងការព្យាយាមឈ្លានពាន",
+            "ធ្វើការវាយតម្លៃភាពងាយរងគ្រោះ និងការធ្វើតេស្តឆ្លងកាត់ ដើម្បីស្វែងរកចំណុចខ្សោយសន្តិសុខ មុនពេលអ្នកវាយប្រហាររកឃើញ",
+            "អ៊ិនគ្រីបទិន្នន័យរសើបរបស់អង្គភាព ហើយគ្រប់គ្រងការចូលប្រើ ដើម្បីការពារការចូលប្រើប្រាស់ដោយគ្មានការអនុញ្ញាត",
+            "ឆ្លើយតបទៅនឹងឧប្បត្តិហេតុសន្តិសុខ បង្ក្រាបការបំបែក ហើយសរសេររបាយការណ៍ក្រោយឧប្បត្តិហេតុ សម្រាប់ថ្នាក់ដឹកនាំ"
           ]
         },
         "impact": {
-          "en": "Turn raw data into powerful insights that guide smarter decisions in health, agriculture, and public policy.",
-          "kh": "ប្រែទិន្នន័យឆៅឲ្យជាការយល់ដឹងដ៏មានឥទ្ធិពល ដែលណែនាំការសម្រេចចិត្តវាងវៃជាងមុន ក្នុងវិស័យសុខភាព កសិកម្ម និងគោលនយោបាយសាធារណៈ។"
+          "en": "Keep national digital infrastructure and personal information safe.",
+          "kh": "រក្សាសុវត្ថិភាពហេដ្ឋារចនាសម្ព័ន្ធឌីជីថលជាតិ និងព័ត៌មានផ្ទាល់ខ្លួន។"
         }
       }
     ]
@@ -384,7 +384,54 @@
     "en": "Engineering",
     "kh": "វិស្វកម្ម",
     "icon": "🔧",
-    "careers": []
+    "careers": [
+      {
+        "id": "civil-engineer",
+        "en": "Civil Engineer",
+        "kh": "វិស្វករសំណង់ស៊ីវិល",
+        "tasks": {
+          "en": [
+            "Design bridges, roads, and drainage systems using structural engineering principles and CAD software",
+            "Manage construction sites, coordinate contractors, and ensure work stays on schedule and within budget",
+            "Inspect completed structures to verify they meet national safety standards and building codes",
+            "Prepare technical drawings, specifications, and reports for government approval and client handover"
+          ],
+          "kh": [
+            "រចនាស្ពាន ផ្លូវ និងប្រព័ន្ធបង្ហូរទឹក ដោយប្រើគោលការណ៍វិស្វកម្មរចនាសម្ព័ន្ធ និងកម្មវិធី CAD",
+            "គ្រប់គ្រងការដ្ឋានសំណង់ សម្របសម្រួលអ្នកម៉ៅការ ហើយធានាថាការងារត្រូវបញ្ចប់ទាន់ពេល និងទៅតាមថវិកា",
+            "ត្រួតពិនិត្យរចនាសម្ព័ន្ធដែលបានបញ្ចប់ ដើម្បីផ្ទៀងផ្ទាត់ថាវាបំពេញស្ដង់ដារសុវត្ថិភាពជាតិ និងក្រមអគារ",
+            "រៀបចំប្លង់បច្ចេកទេស លក្ខណៈបច្ចេកទេស និងរបាយការណ៍ សម្រាប់ការអនុម័តពីរដ្ឋាភិបាល និងការប្រគល់ជូនអតិថិជន"
+          ]
+        },
+        "impact": {
+          "en": "Build the physical infrastructure that connects cities and provinces.",
+          "kh": "កសាងហេដ្ឋារចនាសម្ព័ន្ធរូបវន្ត ដែលតភ្ជាប់ទីក្រុង និងខេត្ត។"
+        }
+      },
+      {
+        "id": "environmental-engineer",
+        "en": "Environmental Engineer",
+        "kh": "វិស្វករបរិស្ថាន",
+        "tasks": {
+          "en": [
+            "Design water filtration and treatment systems to deliver clean drinking water to rural communities",
+            "Plan and supervise safe waste disposal infrastructure including landfill and recycling facilities",
+            "Monitor industrial sites for pollution, collect environmental samples, and enforce compliance standards",
+            "Conduct environmental impact assessments for new construction projects affecting rivers and ecosystems"
+          ],
+          "kh": [
+            "រចនាប្រព័ន្ធចម្រោះ និងបន្សុតទឹក ដើម្បីផ្ដល់ទឹកស្អាតសម្រាប់ផឹក ជូនសហគមន៍ជនបទ",
+            "រៀបចំ និងត្រួតពិនិត្យហេដ្ឋារចនាសម្ព័ន្ធចោលកាកសំណល់ប្រកបដោយសុវត្ថិភាព រួមមានការដ្ឋានចោលកាក និងមណ្ឌលកែច្នៃឡើងវិញ",
+            "ត្រួតពិនិត្យការដ្ឋានឧស្សាហកម្ម ស្ដីពីការបំពុល ប្រមូលគំរូបរិស្ថាន ហើយអនុវត្តស្ដង់ដារអនុលោមភាព",
+            "ធ្វើការវាយតម្លៃផលប៉ះពាល់បរិស្ថាន សម្រាប់គម្រោងសំណង់ថ្មី ដែលប៉ះពាល់ដល់ទន្លេ និងប្រព័ន្ធបរិស្ថាន"
+          ]
+        },
+        "impact": {
+          "en": "Protect natural resources like the Tonle Sap and ensure clean drinking water for all.",
+          "kh": "ការពារធនធានធម្មជាតិ ដូចជាបឹងទន្លេសាប ហើយធានាឱ្យមានទឹកស្អាតប្រើប្រាស់ សម្រាប់ទាំងអស់គ្នា។"
+        }
+      }
+    ]
   },
   {
     "id": "english-literature",
@@ -463,47 +510,47 @@
       {
         "id": "public-health-officer",
         "en": "Public Health Officer",
-        "kh": "មន្ត្រីសាធារណសុខ",
+        "kh": "មន្ត្រីសុខភាពសាធារណៈ",
         "tasks": {
           "en": [
-            "Conduct community health surveys to identify disease patterns and at-risk populations",
-            "Design and coordinate vaccination campaigns, health screenings, and education programmes",
-            "Analyse epidemiological data to track the spread of infectious diseases across provinces",
-            "Train village health volunteers and community health workers on prevention protocols"
+            "Organise community vaccination campaigns and manage cold-chain storage of vaccines in the field",
+            "Track disease outbreaks by collecting epidemiological data from health centres and village reports",
+            "Educate communities on nutrition, hygiene, maternal health, and prevention of waterborne illnesses",
+            "Coordinate with international health organisations such as WHO and UNICEF on disease elimination programmes"
           ],
           "kh": [
-            "ធ្វើការស្ទង់មតិសុខភាពសហគមន៍ ដើម្បីស្វែងរកគំរូជំងឺ និងក្រុមមនុស្សដែលប្រឈមមានហានិភ័យ",
-            "រចនា និងសម្របសម្រួលយុទ្ធនាការចាក់វ៉ាក់សាំង ការពិនិត្យសុខភាព និងកម្មវិធីអប់រំ",
-            "វិភាគទិន្នន័យរោគវិទ្យា ដើម្បីតាមដានការរីករាលដាលជំងឺឆ្លង នៅតាមបណ្ដាខេត្ត",
-            "បណ្ដុះបណ្ដាលអ្នកស្ម័គ្រចិត្តសុខភាព និងបុគ្គលិកសុខភាពសហគមន៍ ស្ដីពីពិធីការការពារ"
+            "រៀបចំយុទ្ធនាការចាក់វ៉ាក់សាំងក្នុងសហគមន៍ ហើយគ្រប់គ្រងការស្តុកទុកវ៉ាក់សាំង តាមខ្សែទឹកកក នៅក្នុងវាល",
+            "តាមដានការផ្ទុះឡើងនៃជំងឺ ដោយប្រមូលទិន្នន័យរោគវិទ្យា ពីមណ្ឌលសុខភាព និងរបាយការណ៍ភូមិ",
+            "អប់រំសហគមន៍ ស្ដីពីអាហារូបត្ថម្ភ អនាម័យ សុខភាពម្ដាយ និងការការពារជំងឺដែលបង្ករដោយទឹក",
+            "សម្របសម្រួលជាមួយអង្គការសុខភាពអន្តរជាតិ ដូចជា WHO និង UNICEF ស្ដីពីកម្មវិធីលុបបំបាត់ជំងឺ"
           ]
         },
         "impact": {
-          "en": "Reduce preventable illness and child mortality across Cambodia's rural provinces through community-led health action.",
-          "kh": "កាត់បន្ថយជំងឺ និងការស្លាប់របស់កុមារ ដែលអាចការពារបាននៅតាមខេត្តជនបទកម្ពុជា តាមរយៈសកម្មភាពសុខភាពដែលដឹកនាំដោយសហគមន៍។"
+          "en": "Prevent disease on a large scale and improve the overall lifespan of the population.",
+          "kh": "ការពារជំងឺក្នុងទ្រង់ទ្រាយធំ និងកែលម្អអាយុសង្ឃឹមរស់របស់ប្រជាជនទូទៅ។"
         }
       },
       {
-        "id": "medical-lab-technician",
-        "en": "Medical Laboratory Technician",
-        "kh": "បច្ចេកទេសករបន្ទប់ពិសោធន៍វេជ្ជសាស្ត្រ",
+        "id": "clinical-nurse-doctor",
+        "en": "Clinical Nurse or Doctor",
+        "kh": "គិលានុបដ្ឋាយិកា ឬវេជ្ជបណ្ឌិត",
         "tasks": {
           "en": [
-            "Collect, label, and process blood, urine, and tissue specimens with precision",
-            "Operate diagnostic equipment to perform haematology, biochemistry, and microbiology tests",
-            "Maintain strict quality-control protocols to ensure accurate and reliable test results",
-            "Record and report results to physicians promptly, flagging critical values immediately"
+            "Examine patients, diagnose medical conditions, and prescribe or administer appropriate treatment",
+            "Monitor patients' vital signs and recovery progress, adjusting care plans based on clinical observations",
+            "Perform clinical procedures such as wound care, IV insertion, and medication administration safely",
+            "Provide care in hospital wards and provincial clinics, often serving patients with limited healthcare access"
           ],
           "kh": [
-            "ប្រមូល ដាក់ស្លាក និងដំណើរការគំរូឈាម ទឹកនោម និងជាលិកា ដោយភាពត្រឹមត្រូវ",
-            "ប្រើប្រាស់ឧបករណ៍ធ្វើរោគវិនិច្ឆ័យ ដើម្បីធ្វើតេស្តឈាមវិទ្យា ជីវគីមី និងមេរោគវិទ្យា",
-            "រក្សាពិធីការត្រួតពិនិត្យគុណភាពដ៏តឹងរ៉ឹង ដើម្បីធានាលទ្ធផលតេស្តដែលត្រឹមត្រូវ និងទុកចិត្តបាន",
-            "កត់ត្រា និងរាយការណ៍លទ្ធផលទៅកាន់វេជ្ជបណ្ឌិតភ្លាមៗ ដោយជូនដំណឹងអំពីតម្លៃសំខាន់ជាបន្ទាន់"
+            "ពិនិត្យអ្នកជំងឺ ធ្វើរោគវិនិច្ឆ័យស្ថានភាពវេជ្ជសាស្ត្រ ហើយចេញវេជ្ជបញ្ជា ឬផ្ដល់ការព្យាបាលត្រឹមត្រូវ",
+            "តាមដានសញ្ញាណសំខាន់ និងដំណើរការជាសះស្បើយរបស់អ្នកជំងឺ ដោយកែប្រែផែនការថែទាំ ផ្អែកលើការសង្កេតគ្លីនិក",
+            "ធ្វើដំណើរការព្យាបាលគ្លីនិក ដូចជាការថែរក្សារបួស ការដាក់ IV និងការផ្ដល់ថ្នាំ ប្រកបដោយសុវត្ថិភាព",
+            "ផ្ដល់ការថែទាំនៅតាមមន្ទីរពេទ្យ និងគ្លីនិកខេត្ត ដែលជាញឹកញាប់ ផ្ដល់ជូនអ្នកជំងឺដែលមានការចូលទទួលសេវាសុខភាពមានកំណត់"
           ]
         },
         "impact": {
-          "en": "Enable accurate diagnosis for thousands of patients every year — your results directly guide life-saving treatment.",
-          "kh": "ធ្វើឲ្យការធ្វើរោគវិនិច្ឆ័យត្រឹមត្រូវ សម្រាប់អ្នកជំងឺរាប់ពាន់នាក់ក្នុងមួយឆ្នាំ — លទ្ធផលរបស់អ្នក ណែនាំការព្យាបាលសង្គ្រោះជីវិតដោយផ្ទាល់។"
+          "en": "Save lives and provide direct comfort and healing to individuals in need.",
+          "kh": "ជួយសង្គ្រោះជីវិត ហើយផ្ដល់ការព្យាបាលដោយផ្ទាល់ដល់អ្នកដែលត្រូវការ។"
         }
       }
     ]

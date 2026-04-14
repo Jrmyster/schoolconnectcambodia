@@ -1,0 +1,52 @@
+{
+  "Business, Management, Marketing, and Related Support Services (ពាណិជ្ជកម្ម គ្រប់គ្រង ទីផ្សារ និងសេវាកម្មពាក់ព័ន្ធ)": {
+    "Entrepreneur / Business Owner (សហគ្រិន / ម្ចាស់អាជីវកម្ម)": {
+      "tasks": "Develop business plans, manage finances, and market products to local and international customers. (បង្កើតផែនការអាជីវកម្ម គ្រប់គ្រងហិរញ្ញវត្ថុ ធ្វើទីផ្សារផលិតផលទៅកាន់អតិថិជនក្នុងស្រុក និងអន្តរជាតិ។)",
+      "impact": "Create jobs and drive economic growth in your community. (បង្កើតការងារ និងជំរុញកំណើនសេដ្ឋកិច្ចនៅក្នុងសហគមន៍របស់អ្នក។)"
+    },
+    "Marketing Manager (អ្នកគ្រប់គ្រងទីផ្សារ)": {
+      "tasks": "Analyze market trends, create social media campaigns, and build brand awareness. (វិភាគនិន្នាការទីផ្សារ បង្កើតយុទ្ធសាស្ត្រផ្សព្វផ្សាយតាមបណ្តាញសង្គម កសាងការយល់ដឹងពីម៉ាកយីហោ។)",
+      "impact": "Connect people with the products and services they need to improve their lives. (ភ្ជាប់មនុស្សទៅនឹងផលិតផល និងសេវាកម្មដែលពួកគេត្រូវការដើម្បីកែលម្អជីវិតរបស់ពួកគេ។)"
+    }
+  },
+  "Computer and Information Sciences and Support Services (វិទ្យាសាស្ត្រកុំព្យូទ័រ និងព័ត៌មានវិទ្យា)": {
+    "Software Developer (អ្នកអភិវឌ្ឍន៍កម្មវិធី)": {
+      "tasks": "Write code in Python or React, build mobile apps, and debug software issues. (សរសេរកូដជាភាសា Python ឬ React បង្កើតកម្មវិធីទូរស័ព្ទ កែសម្រួលបញ្ហាកម្មវិធី។)",
+      "impact": "Build digital tools that solve real-world problems, just like School Connect Cambodia! (បង្កើតឧបករណ៍ឌីជីថលដែលដោះស្រាយបញ្ហាជាក់ស្តែង ដូចជាគេហទំព័រ School Connect Cambodia!)"
+    },
+    "Cybersecurity Analyst (អ្នកវិភាគសុវត្ថិភាពអ៊ីនធឺណិត)": {
+      "tasks": "Protect networks from hackers, encrypt sensitive data, and monitor systems for vulnerabilities. (ការពារបណ្តាញពីអ្នកវាយប្រហារ អ៊ិនគ្រីបទិន្នន័យសំខាន់ៗ ត្រួតពិនិត្យប្រព័ន្ធស្វែងរកចំណុចខ្សោយ។)",
+      "impact": "Keep national digital infrastructure and personal information safe. (រក្សាសុវត្ថិភាពហេដ្ឋារចនាសម្ព័ន្ធឌីជីថលជាតិ និងព័ត៌មានផ្ទាល់ខ្លួន។)"
+    }
+  },
+  "Agriculture, Agriculture Operations, and Related Sciences (កសិកម្ម ប្រតិបត្តិការកសិកម្ម និងវិទ្យាសាស្ត្រពាក់ព័ន្ធ)": {
+    "Crop Scientist / Agronomist (អ្នកវិទ្យាសាស្ត្រដំណាំ / អ្នកកសិកម្ម)": {
+      "tasks": "Test soil quality, develop drought-resistant seeds, and improve yields for crops like rice and cassava. (ត្រួតពិនិត្យគុណភាពដី បង្កើតពូជធន់នឹងគ្រោះរាំងស្ងួត បង្កើនទិន្នផលដំណាំដូចជាស្រូវ និងដំឡូងមី។)",
+      "impact": "Ensure national food security and adapt farming practices to climate change. (ធានាសន្តិសុខស្បៀងជាតិ និងបន្សាំការអនុវត្តកសិកម្មទៅនឹងការប្រែប្រួលអាកាសធាតុ។)"
+    },
+    "Agricultural Engineer (វិស្វករកសិកម្ម)": {
+      "tasks": "Design solar-powered irrigation systems and build efficient harvesting machinery. (រចនាប្រព័ន្ធធារាសាស្ត្រដើរដោយថាមពលព្រះអាទិត្យ បង្កើតគ្រឿងចក្រប្រមូលផលប្រកបដោយប្រសិទ្ធភាព។)",
+      "impact": "Modernize farming to make it more sustainable and profitable for local farmers. (ធ្វើទំនើបកម្មកសិកម្មដើម្បីធ្វើឱ្យវាមាននិរន្តរភាព និងប្រាក់ចំណេញសម្រាប់កសិករក្នុងស្រុក។)"
+    }
+  },
+  "Engineering (វិស្វកម្ម)": {
+    "Civil Engineer (វិស្វករសំណង់ស៊ីវិល)": {
+      "tasks": "Design bridges and roads, manage construction sites, and ensure building safety standards. (រចនាស្ពាន និងផ្លូវ គ្រប់គ្រងការដ្ឋានសំណង់ ធានាស្តង់ដារសុវត្ថិភាពអគារ។)",
+      "impact": "Build the physical infrastructure that connects cities and provinces. (កសាងហេដ្ឋារចនាសម្ព័ន្ធរូបវន្តដែលតភ្ជាប់ទីក្រុង និងខេត្ត។)"
+    },
+    "Environmental Engineer (វិស្វករបរិស្ថាន)": {
+      "tasks": "Design water filtration systems, manage waste disposal, and reduce industrial pollution. (រចនាប្រព័ន្ធចម្រោះទឹក គ្រប់គ្រងការចោលកាកសំណល់ កាត់បន្ថយការបំពុលពីឧស្សាហកម្ម។)",
+      "impact": "Protect natural resources like the Tonle Sap and ensure clean drinking water for all. (ការពារធនធានធម្មជាតិដូចជាបឹងទន្លេសាប និងធានាឱ្យមានទឹកស្អាតប្រើប្រាស់សម្រាប់ទាំងអស់គ្នា។)"
+    }
+  },
+  "Health Professions and Related Programs (វិជ្ជាជីវៈសុខាភិបាល និងកម្មវិធីពាក់ព័ន្ធ)": {
+    "Public Health Officer (មន្ត្រីសុខភាពសាធារណៈ)": {
+      "tasks": "Organize vaccination campaigns, track disease outbreaks, and educate communities on nutrition. (រៀបចំយុទ្ធនាការចាក់វ៉ាក់សាំង តាមដានការផ្ទុះឡើងនៃជំងឺ អប់រំសហគមន៍អំពីអាហារូបត្ថម្ភ។)",
+      "impact": "Prevent disease on a large scale and improve the overall lifespan of the population. (ការពារជំងឺក្នុងទ្រង់ទ្រាយធំ និងកែលម្អអាយុសង្ឃឹមរស់របស់ប្រជាជនទូទៅ។)"
+    },
+    "Clinical Nurse or Doctor (គិលានុបដ្ឋាយិកា ឬវេជ្ជបណ្ឌិត)": {
+      "tasks": "Diagnose illnesses, administer treatments, and provide patient care in hospitals or provincial clinics. (ធ្វើរោគវិនិច្ឆ័យជំងឺ ផ្តល់ការព្យាបាល ផ្តល់ការថែទាំអ្នកជំងឺនៅមន្ទីរពេទ្យ ឬគ្លីនិកខេត្ត។)",
+      "impact": "Save lives and provide direct comfort and healing to individuals in need. (ជួយសង្គ្រោះជីវិត និងផ្តល់ការព្យាបាលដោយផ្ទាល់ដល់អ្នកដែលត្រូវការ។)"
+    }
+  }
+}
