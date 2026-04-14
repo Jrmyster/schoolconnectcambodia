@@ -4,6 +4,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
 import { InterviewSimulator } from "@/components/InterviewSimulator";
 import { ResumeMasterclass } from "@/components/ResumeMasterclass";
+import { FuturePathways } from "@/components/FuturePathways";
 
 type ScholarshipCard = {
   name: string;
@@ -495,6 +496,9 @@ export function LaunchpadPage() {
 
         {/* ── Resume & CV Masterclass ── */}
         <ResumeMasterclass />
+
+        {/* ── Future Pathways Guide ── */}
+        <FuturePathways />
 
       </div>
     </div>

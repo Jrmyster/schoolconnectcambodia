@@ -1,0 +1,164 @@
+[
+  {
+    "id": "chemistry",
+    "en": "Chemistry",
+    "kh": "គីមីវិទ្យា",
+    "icon": "⚗️",
+    "careers": [
+      {
+        "id": "pharma-scientist",
+        "en": "Pharmaceutical Scientist",
+        "kh": "អ្នកវិទ្យាសាស្ត្រឱសថ",
+        "tasks": {
+          "en": [
+            "Test medicines to verify safety, purity, and effectiveness",
+            "Analyze molecular structures and chemical reactions in the lab",
+            "Document experimental results and write regulatory reports",
+            "Collaborate with clinical teams on drug development trials"
+          ],
+          "kh": [
+            "ធ្វើតេស្តឱសថ ដើម្បីផ្ទៀងផ្ទាត់សុវត្ថិភាព ភាពបរិសុទ្ធ និងប្រសិទ្ធភាព",
+            "វិភាគរចនាសម្ព័ន្ធម៉ូលេគុល និងប្រតិកម្មគីមីក្នុងបន្ទប់ពិសោធន៍",
+            "កត់ត្រាលទ្ធផលពិសោធន៍ និងសរសេររបាយការណ៍បទប្បញ្ញត្តិ",
+            "សហការជាមួយក្រុមគ្លីនិកក្នុងការអភិវឌ្ឍថ្នាំ"
+          ]
+        },
+        "impact": {
+          "en": "Help millions of patients worldwide access safe, life-saving medicines.",
+          "kh": "ជួយអ្នកជំងឺរាប់លាននាក់ទូទាំងពិភពលោកទទួលបានថ្នាំមានសុវត្ថិភាព ដែលអាចជួយសង្គ្រោះជីវិត។"
+        }
+      },
+      {
+        "id": "materials-chemist",
+        "en": "Materials Chemist",
+        "kh": "អ្នកគីមីសាស្ត្រសម្ភារៈ",
+        "tasks": {
+          "en": [
+            "Design and test eco-friendly biodegradable plastics",
+            "Research advanced battery chemistry to improve energy storage",
+            "Characterise material properties using electron microscopy",
+            "Optimise manufacturing processes for cost and sustainability"
+          ],
+          "kh": [
+            "រចនា និងធ្វើតេស្តផ្លាស្ទិចបំបែកបានដែលមិនប៉ះពាល់បរិស្ថាន",
+            "ស្រាវជ្រាវគីមីថ្ម័ខ្ពស់ ដើម្បីកែលម្អការស្តុកប្រើថាមពល",
+            "វិភាគលក្ខណៈសម្បត្តិសម្ភារៈ ដោយប្រើ electron microscopy",
+            "បង្កើនប្រសិទ្ធភាពដំណើរការផលិតកម្ម ដើម្បីលំហូរចំណាយ និងនិរន្តរភាព"
+          ]
+        },
+        "impact": {
+          "en": "Shape the future of green technology, from electric vehicles to recyclable packaging.",
+          "kh": "រៀបចំបង្ហាញផ្លូវទៅអនាគតបច្ចេកវិទ្យាបៃតង — ពីយានយន្តអគ្គិសនី រហូតដល់វេចខ្ចប់ដែលអាចចោលនោះ។"
+        }
+      }
+    ]
+  },
+  {
+    "id": "english-literature",
+    "en": "English Literature",
+    "kh": "អក្សរសាស្ត្រអង់គ្លេស",
+    "icon": "📚",
+    "careers": [
+      {
+        "id": "curriculum-developer",
+        "en": "Curriculum Developer",
+        "kh": "អ្នករចនាកម្មវិធីសិក្សា",
+        "tasks": {
+          "en": [
+            "Design structured lesson plans aligned with national standards",
+            "Create bilingual English–Khmer teaching and learning resources",
+            "Pilot new curriculum in schools and gather teacher feedback",
+            "Revise materials based on student performance data"
+          ],
+          "kh": [
+            "រចនាផែនការបង្រៀនដែលស្របតាមស្តង់ដារជាតិ",
+            "បង្កើតឯកសារបង្រៀន-រៀនពីរភាសា ខ្មែរ–អង់គ្លេស",
+            "សាកល្បងកម្មវិធីសិក្សាថ្មីនៅសាលា និងប្រមូលមតិគ្រូ",
+            "កែប្រែសម្ភារៈ ដោយផ្អែកលើទិន្នន័យការអនុវត្តរបស់សិស្ស"
+          ]
+        },
+        "impact": {
+          "en": "Empower the next generation of Cambodian learners with high-quality bilingual education.",
+          "kh": "ផ្តល់ថាមពលដល់ជំនាន់ក្រោយរបស់សិស្សសិក្សាខ្មែរ ជាមួយការអប់រំពីរភាសាដ៏ល្អប្រសើរ។"
+        }
+      },
+      {
+        "id": "technical-writer",
+        "en": "Technical Writer",
+        "kh": "អ្នកនិពន្ធបច្ចេកទេស",
+        "tasks": {
+          "en": [
+            "Translate complex engineering and software concepts into clear user manuals",
+            "Interview subject-matter experts to gather accurate technical information",
+            "Structure documents using plain-language principles for all literacy levels",
+            "Maintain version-controlled documentation for product updates"
+          ],
+          "kh": [
+            "បកប្រែគំនិតវិស្វកម្ម និងកម្មវិធីស្មុគស្មាញ ទៅជាសៀវភៅណែនាំច្បាស់លាស់",
+            "សម្ភាសអ្នកជំនាញប្រធានបទ ដើម្បីប្រមូលព័ត៌មានបច្ចេកទេសត្រឹមត្រូវ",
+            "រៀបចំឯកសារ ដោយប្រើគោលការណ៍ភាសាច្បាស់លាស់ សម្រាប់ស្រទាប់អក្ខរកម្មទាំងអស់",
+            "រក្សាឯកសារដែលគ្រប់គ្រងជំនាន់ សម្រាប់ការធ្វើបច្ចុប្បន្នភាពផលិតផល"
+          ]
+        },
+        "impact": {
+          "en": "Bridge the gap between technology teams and everyday users across industries.",
+          "kh": "ភ្ជាប់គម្លាតរវាងក្រុមបច្ចេកវិទ្យា និងអ្នកប្រើប្រាស់ទូទៅ នៅទូទាំងឧស្សាហកម្ម។"
+        }
+      }
+    ]
+  },
+  {
+    "id": "electrical-engineering",
+    "en": "Electrical Engineering",
+    "kh": "វិស្វកម្មអគ្គិសនី",
+    "icon": "⚡",
+    "careers": [
+      {
+        "id": "circuit-designer",
+        "en": "Circuit Designer",
+        "kh": "អ្នករចនាសៀគ្វី",
+        "tasks": {
+          "en": [
+            "Design and layout printed circuit boards (PCBs) for electronic products",
+            "Build and test microchip prototypes using simulation software",
+            "Debug hardware failures and analyse signal integrity",
+            "Collaborate with firmware engineers to integrate software and hardware"
+          ],
+          "kh": [
+            "រចនា និងដាក់ layout ផ្ទាំងសៀគ្វីបោះពុម្ព (PCB) សម្រាប់ផលិតផលអេឡិចត្រូនិក",
+            "បង្កើត និងធ្វើតេស្ត prototype microchip ដោយប្រើកម្មវិធីក្លែងធ្វើ",
+            "ជួសជុលបញ្ហាហ្វែរវែ និងវិភាគភាពត្រឹមត្រូវនៃសញ្ញា",
+            "សហការជាមួយវិស្វករ firmware ដើម្បីបញ្ចូលបច្ចេកវិទ្យាទន់ និងរឹង"
+          ]
+        },
+        "impact": {
+          "en": "Power every modern device — from smartphones to medical equipment — through your chip designs.",
+          "kh": "ផ្តល់ថាមពលដល់ឧបករណ៍ទំនើបៗទាំងអស់ — ពីស្មាតហ្វូន រហូតដល់ឧបករណ៍វេជ្ជសាស្ត្រ — តាមរយៈការរចនា chip របស់អ្នក។"
+        }
+      },
+      {
+        "id": "aerospace-engineer",
+        "en": "Aerospace Engineer",
+        "kh": "វិស្វករអាកាសយានិក",
+        "tasks": {
+          "en": [
+            "Design power and electrical systems for satellites and spacecraft",
+            "Run thermal and radiation stress tests on flight hardware",
+            "Interface with global space agencies on system requirements",
+            "Analyse telemetry data to monitor satellite health in orbit"
+          ],
+          "kh": [
+            "រចនាប្រព័ន្ធថាមពល និងអគ្គិសនី សម្រាប់ផ្កាយរណប និងយានអវកាស",
+            "ធ្វើតេស្តស្ត្រេស កំដៅ និងវិទ្យុសកម្ម លើហ្វែរវែអំណោយ",
+            "ភ្ជាប់ទំនាក់ទំនងជាមួយភ្នាក់ងារអវកាសពិភពលោក ស្តីពីតម្រូវការប្រព័ន្ធ",
+            "វិភាគទិន្នន័យ telemetry ដើម្បីតាមដានសុខភាពផ្កាយរណបក្នុងគន្លង"
+          ]
+        },
+        "impact": {
+          "en": "Contribute to humanity's reach into space — connecting nations through satellite communication.",
+          "kh": "រួមចំណែកដល់ការឈានទៅអវកាសរបស់មនុស្សជាតិ — ភ្ជាប់ប្រទេសជាតិ តាមរយៈការទំនាក់ទំនងផ្កាយរណប។"
+        }
+      }
+    ]
+  }
+]
