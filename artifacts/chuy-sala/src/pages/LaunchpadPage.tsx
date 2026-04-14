@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download } from "lucide-react";
+import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useChatStore } from "@/store/use-chat";
 
 type ScholarshipCard = {
   name: string;
@@ -55,6 +56,7 @@ export function LaunchpadPage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
   const [accordionOpen, setAccordionOpen] = useState(false);
+  const { openChat } = useChatStore();
 
   return (
     <div className="min-h-screen bg-background">
@@ -428,6 +430,44 @@ export function LaunchpadPage() {
                       "រួមបញ្ចូលគំរូលិខិតដែលត្រៀមបំពេញ និងបញ្ជីពាក្យសម្រាប់ការសរសេរ​នៅ​បរិបទ​វិទ្យាសាស្ត្រ។"
                     )}
                   </p>
+                </div>
+
+                {/* ── Get AI Review Button ── */}
+                <div className="mt-6 pt-5 border-t border-amber-100">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <button
+                      onClick={() =>
+                        openChat({
+                          reviewerMode: true,
+                          prompt:
+                            "I am ready to share my university application letter draft. Please review it using your professional checklist.",
+                        })
+                      }
+                      title={kh ? "ទទួលការពិនិត្យពី AI" : "Get AI Review"}
+                      className={`group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm shadow-md
+                        text-white transition-all active:scale-95 hover:-translate-y-0.5 hover:shadow-lg
+                        ${kh ? "font-khmer text-base" : ""}`}
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #b8860b 0%, #d4a017 50%, #b8860b 100%)",
+                        boxShadow: "0 4px 14px rgba(180,134,11,0.4)",
+                      }}
+                    >
+                      <Sparkles className="w-4 h-4 flex-shrink-0 group-hover:animate-spin" />
+                      {kh ? "ទទួលការពិនិត្យពី AI" : "Get AI Review"}
+                      {!kh && (
+                        <span className="ml-1 text-xs font-normal opacity-80 hidden sm:inline font-khmer">
+                          (ទទួលការពិនិត្យពី AI)
+                        </span>
+                      )}
+                    </button>
+                    <p className={`text-xs text-muted-foreground/70 max-w-xs ${kh ? "font-khmer" : ""}`}>
+                      {t(
+                        "AI will review your draft letter using a professional 8-point checklist and score it out of 10.",
+                        "AI នឹងពិនិត្យលិខិតពាក្យ​សុំ​ស្រាប់​របស់​អ្នក​ ដោយ​ប្រើ​បញ្ជីពិនិត្យ ៨ ចំណុច​ ហើយ​ វាយ​ផ្ដល់​ពិន្ទុ​ ១០​ ។"
+                      )}
+                    </p>
+                  </div>
                 </div>
 
               </div>

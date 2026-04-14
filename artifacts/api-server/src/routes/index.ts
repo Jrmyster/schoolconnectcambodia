@@ -6,6 +6,7 @@ import completedProjectsRouter from "./completedProjects";
 import uploadRouter from "./upload";
 import authRouter from "./auth";
 import storiesRouter from "./stories";
+import openaiRouter from "./openai";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(needsRouter);
 router.use(completedProjectsRouter);
 router.use(uploadRouter);
 router.use(storiesRouter);
+router.use(openaiRouter);
 
 export default router;

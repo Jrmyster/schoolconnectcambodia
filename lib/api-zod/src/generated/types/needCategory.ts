@@ -17,5 +17,5 @@ export const NeedCategory = {
   Other: "Other",
   Furniture: "Furniture",
   WASH: "WASH",
-  TeacherTraining: "Teacher Training",
+  Teacher_Training: "Teacher Training",
 } as const;

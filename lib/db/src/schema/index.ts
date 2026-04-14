@@ -4,3 +4,5 @@ export * from "./completedProjects";
 export * from "./users";
 export * from "./passwordResetTokens";
 export * from "./stories";
+export * from "./conversations";
+export * from "./messages";

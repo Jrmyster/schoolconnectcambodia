@@ -27,6 +27,7 @@ import NotFound from "@/pages/not-found";
 // Components
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AIChatPanel } from "@/components/AIChatPanel";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -81,6 +82,7 @@ function App() {
           <Router />
         </WouterRouter>
         <Toaster />
+        <AIChatPanel />
       </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>

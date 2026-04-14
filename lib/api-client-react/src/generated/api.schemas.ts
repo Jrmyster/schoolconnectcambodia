@@ -24,7 +24,7 @@ export const NeedCategory = {
   Other: "Other",
   Furniture: "Furniture",
   WASH: "WASH",
-  TeacherTraining: "Teacher Training",
+  Teacher_Training: "Teacher Training",
 } as const;
 
 export type NeedStatus = (typeof NeedStatus)[keyof typeof NeedStatus];
@@ -124,6 +124,39 @@ export interface CreateCompletedProjectRequest {
   thankYouPhotoUrl?: string | null;
   category: NeedCategory;
   completedAt: string;
+}
+
+export interface OpenaiConversation {
+  id: number;
+  title: string;
+  createdAt: string;
+}
+
+export interface OpenaiMessage {
+  id: number;
+  conversationId: number;
+  role: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface OpenaiConversationWithMessages {
+  id: number;
+  title: string;
+  createdAt: string;
+  messages: OpenaiMessage[];
+}
+
+export interface CreateOpenaiConversationBody {
+  title: string;
+}
+
+export interface SendOpenaiMessageBody {
+  content: string;
+}
+
+export interface OpenaiError {
+  error: string;
 }
 
 export type ListSchoolsParams = {
