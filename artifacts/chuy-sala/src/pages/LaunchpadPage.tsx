@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen } from "lucide-react";
+import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type ScholarshipCard = {
@@ -239,14 +239,198 @@ export function LaunchpadPage() {
           </button>
 
           {accordionOpen && (
-            <div className="mt-2 px-6 py-8 rounded-2xl border border-border bg-card text-muted-foreground text-sm">
-              {/* Content will be added later */}
-              <p className={`italic text-muted-foreground/60 text-center py-4 ${kh ? "font-khmer" : ""}`}>
-                {t(
-                  "Detailed guidance coming soon. Check back for step-by-step instructions.",
-                  "ការណែនាំលម្អិតនឹងមកដល់ឆាប់ៗ។ សូមពិនិត្យមើលមកវិញ ដើម្បីទទួលបានការណែនាំជាជំហានៗ។"
-                )}
-              </p>
+            <div className="mt-2 rounded-2xl border border-border bg-card overflow-hidden">
+
+              {/* ── Opening quote ── */}
+              <div className="px-6 pt-7 pb-5 border-b border-border/60 bg-gradient-to-r from-primary/5 to-amber-50/40">
+                <div className="flex items-start gap-3">
+                  <Quote className="w-6 h-6 text-primary/40 flex-shrink-0 mt-0.5" fill="currentColor" />
+                  <div>
+                    <p className={`font-semibold text-foreground text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                      {t(
+                        "Your letter is your voice. Use it to show the university who you are beyond your grades.",
+                        "លិខិតរបស់អ្នកគឺជាសំឡេងរបស់អ្នក។ សូមប្រើវាដើម្បីបង្ហាញសាកលវិទ្យាល័យថាអ្នកជានរណា ក្រៅពីពិន្ទុរបស់អ្នក។"
+                      )}
+                    </p>
+                    {kh && (
+                      <p className="mt-1 text-xs text-muted-foreground/60 italic">
+                        "Your letter is your voice. Use it to show the university who you are beyond your grades."
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="px-6 py-6 flex flex-col gap-6">
+
+                {/* ── Section helper ── */}
+                {[
+                  {
+                    num: "1",
+                    titleEn: "The Introduction",
+                    titleKh: "ការណែនាំ",
+                    color: "bg-primary",
+                    iconColor: "text-primary",
+                    borderColor: "border-primary/20",
+                    bgColor: "bg-primary/4",
+                    icon: FileText,
+                    bullets: [
+                      {
+                        en: "State clearly which programme or faculty you are applying for.",
+                        kh: "បញ្ជាក់ច្បាស់លាស់ថា អ្នកកំពុងស្នើសុំចូលរៀននៅក្នុងកម្មវិធី ឬនាយកដ្ឋានណា។",
+                      },
+                      {
+                        en: "Explain in one or two sentences why you are passionate about this field of study.",
+                        kh: "ពន្យល់ក្នុងមួយ ឬពីរប្រយោគ ថាហេតុអ្វីបានជាអ្នកចូលចិត្ត និងមានចំណង់ចំណូលចិត្តក្នុងផ្នែកសិក្សានេះ។",
+                      },
+                      {
+                        en: "Keep it brief — two to three sentences maximum. First impressions count.",
+                        kh: "ត្រូវរហ័សសង្ខេប — ច្រើនបំផុត ពីរ ឬបីប្រយោគ។ ការចាប់អារម្មណ៍ដំបូងមានសារៈសំខាន់ណាស់។",
+                      },
+                    ],
+                  },
+                  {
+                    num: "2",
+                    titleEn: "The Body",
+                    titleKh: "ខ្លឹមសារ",
+                    color: "bg-amber-500",
+                    iconColor: "text-amber-600",
+                    borderColor: "border-amber-200",
+                    bgColor: "bg-amber-50/60",
+                    icon: Star,
+                    bullets: [
+                      {
+                        en: "Highlight your specific achievements at school — academic awards, leadership roles, or community projects.",
+                        kh: "បង្ហាញពីសេចក្ដីសំរេចជាក់លាក់របស់អ្នកនៅសាលា — ពានរង្វាន់សិក្សា តួនាទីជាអ្នកដឹកនាំ ឬគម្រោងសហគមន៍។",
+                      },
+                      {
+                        en: "Connect those achievements to the degree you want. Show how your past prepared you for this next step.",
+                        kh: "ភ្ជាប់ការសម្រេចចិត្តទាំងនោះទៅនឹងសញ្ញាបត្រដែលអ្នកចង់បាន។ បង្ហាញថា ចំណេះដឹងរបស់អ្នកត្រៀមខ្លួនសម្រាប់ជំហានបន្ទាប់នេះ។",
+                      },
+                      {
+                        en: "Mention how resources — including tools like Chouy Sala — helped you develop skills and curiosity outside the classroom.",
+                        kh: "បញ្ជាក់ពីរបៀបដែលធនធាន — រួមទាំងឧបករណ៍ដូចជា Chouy Sala — បានជួយអ្នកអភិវឌ្ឍជំនាញ និងការចង់ដឹងចង់ឃើញ ក្រៅពីថ្នាក់រៀន។",
+                      },
+                      {
+                        en: "Use concrete numbers or examples wherever possible: \u201cI improved our school\u2019s science-lab access for 80 students.\u201d",
+                        kh: "ប្រើលេខ ឬឧទាហរណ៍ជាក់ស្ដែងនៅទីណាដែលអាចធ្វើបាន: «ខ្ញុំបានធ្វើឲ្យប្រសើរឡើងនូវការចូលប្រើប្រាស់មន្ទីរពិសោធន៍វិទ្យាសាស្ត្ររបស់សាលាយើង សម្រាប់សិស្ស ៨០ នាក់»",
+                      },
+                    ],
+                  },
+                  {
+                    num: "3",
+                    titleEn: "The Conclusion",
+                    titleKh: "សេចក្ដីសន្និដ្ឋាន",
+                    color: "bg-emerald-600",
+                    iconColor: "text-emerald-600",
+                    borderColor: "border-emerald-200",
+                    bgColor: "bg-emerald-50/50",
+                    icon: CheckCircle2,
+                    bullets: [
+                      {
+                        en: "Restate your commitment to the programme in one clear sentence.",
+                        kh: "បញ្ជាក់ម្ដងទៀតនូវការប្ដេជ្ញាចិត្តរបស់អ្នកក្នុងកម្មវិធីនេះ ក្នុងប្រយោគច្បាស់លាស់តែមួយ។",
+                      },
+                      {
+                        en: "Thank the admissions committee for their time and consideration — it shows professionalism.",
+                        kh: "សូមអរគុណគណៈកម្មការទទួលពាក្យ ចំពោះពេលវេលា និងការពិចារណារបស់ពួកគេ — វាបង្ហាញពីវិជ្ជាជីវៈ។",
+                      },
+                      {
+                        en: "Close with a forward-looking line: \u201cI look forward to contributing to [University Name].\u201d",
+                        kh: "បញ្ចប់ដោយប្រយោគដែលផ្ដោតទៅអនាគត: «ខ្ញុំរំពឹងទុកថានឹងបានចូលរួមចំណែកដល់ [ឈ្មោះសាកលវិទ្យាល័យ]»",
+                      },
+                    ],
+                  },
+                ].map((section) => (
+                  <div
+                    key={section.num}
+                    className={`rounded-xl border ${section.borderColor} ${section.bgColor} p-4 sm:p-5`}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-7 h-7 rounded-lg ${section.color} flex items-center justify-center flex-shrink-0`}>
+                        <span className="text-white text-xs font-bold">{section.num}</span>
+                      </div>
+                      <h3 className={`font-bold text-foreground text-sm ${kh ? "font-khmer text-base" : "font-display"}`}>
+                        {kh ? section.titleKh : section.titleEn}
+                        {kh && <span className="ml-2 text-xs text-muted-foreground font-sans font-normal">({section.titleEn})</span>}
+                      </h3>
+                    </div>
+                    <ul className="flex flex-col gap-2.5">
+                      {section.bullets.map((b, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                          <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${section.color}`} />
+                          <p className={`text-sm text-muted-foreground leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                            {kh ? b.kh : b.en}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+
+                {/* ── Pro Tips ── */}
+                <div className="rounded-xl border border-amber-300/60 bg-amber-50 p-4 sm:p-5">
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div className="w-7 h-7 rounded-lg bg-amber-400 flex items-center justify-center flex-shrink-0">
+                      <Lightbulb className="w-4 h-4 text-white" />
+                    </div>
+                    <h3 className={`font-bold text-amber-800 text-sm ${kh ? "font-khmer text-base" : "font-display"}`}>
+                      {t("Pro Tips", "គន្លឹះពីអ្នកជំនាញ")}
+                    </h3>
+                  </div>
+                  <ul className="flex flex-col gap-3">
+                    {[
+                      {
+                        titleEn: "Be Specific",
+                        titleKh: "ត្រូវបញ្ជាក់ជាក់លាក់",
+                        bodyEn: "Don't just say you are a hard worker — give a real example. Concrete details are far more convincing than general claims.",
+                        bodyKh: "កុំគ្រាន់តែនិយាយថាអ្នកខំប្រឹងធ្វើការ — ផ្ដល់ឧទាហរណ៍ជាក់ស្ដែង។ ព័ត៌មានជាក់លាក់ គួរជឿជាក់ជាងការអះអាងទូទៅ។",
+                      },
+                      {
+                        titleEn: "Proofread Carefully",
+                        titleKh: "ត្រួតពិនិត្យដោយយកចិត្តទុកដាក់",
+                        bodyEn: "A clean, error-free letter shows the committee you respect their time and pay attention to detail. Read it aloud before submitting.",
+                        bodyKh: "លិខិតស្អាត គ្មានកំហុស បង្ហាញដល់គណៈកម្មការថាអ្នកគោរពពេលវេលារបស់ពួកគេ ហើយយកចិត្តទុកដាក់ចំពោះព័ត៌មានលម្អិត។ អានរោទ៍ ជាសំឡេងមុននឹងដាក់ស្នើ។",
+                      },
+                    ].map((tip, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <span className={`font-semibold text-amber-800 text-sm ${kh ? "font-khmer" : ""}`}>
+                            {kh ? tip.titleKh : tip.titleEn}:{" "}
+                          </span>
+                          <span className={`text-amber-700/80 text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                            {kh ? tip.bodyKh : tip.bodyEn}
+                          </span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* ── Download button ── */}
+                <div className="pt-1">
+                  <a
+                    href={`${import.meta.env.BASE_URL}School_Connect_Resource_Guide.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm shadow-md
+                      bg-gradient-to-r from-primary to-primary/80 text-white
+                      hover:from-primary/90 hover:to-primary/70 hover:shadow-lg hover:-translate-y-0.5
+                      active:scale-95 transition-all ${kh ? "font-khmer text-base" : ""}`}
+                  >
+                    <Download className="w-4 h-4 flex-shrink-0" />
+                    {t("Download Letter Template (PDF)", "ទាញយកគំរូលិខិត (PDF)")}
+                  </a>
+                  <p className={`mt-2 text-xs text-muted-foreground/60 ${kh ? "font-khmer" : ""}`}>
+                    {t(
+                      "Includes a ready-to-fill template and a vocabulary list for academic writing.",
+                      "រួមបញ្ចូលគំរូលិខិតដែលត្រៀមបំពេញ និងបញ្ជីពាក្យសម្រាប់ការសរសេរ​នៅ​បរិបទ​វិទ្យាសាស្ត្រ។"
+                    )}
+                  </p>
+                </div>
+
+              </div>
             </div>
           )}
         </section>
