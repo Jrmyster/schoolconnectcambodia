@@ -166,16 +166,20 @@ function DesktopView({
   majors,
   searchQuery,
   onSearchChange,
+  initialActiveMajorId,
 }: {
   majors: Major[];
   searchQuery: string;
   onSearchChange: (v: string) => void;
+  initialActiveMajorId?: string;
 }) {
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
   const firstWithCareers = majors.find(m => m.careers.length > 0) ?? majors[0];
-  const [activeMajorId,   setActiveMajorId]   = useState<string>(firstWithCareers?.id ?? "");
+  const [activeMajorId,   setActiveMajorId]   = useState<string>(
+    initialActiveMajorId ?? firstWithCareers?.id ?? ""
+  );
   const [activeCareerIdx, setActiveCareerIdx] = useState<number>(0);
 
   const activeMajor  = majors.find(m => m.id === activeMajorId) ?? majors[0];
@@ -343,15 +347,17 @@ function MobileView({
   majors,
   searchQuery,
   onSearchChange,
+  initialActiveMajorId,
 }: {
   majors: Major[];
   searchQuery: string;
   onSearchChange: (v: string) => void;
+  initialActiveMajorId?: string;
 }) {
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
-  const [openMajorId,  setOpenMajorId]  = useState<string | null>(null);
+  const [openMajorId,  setOpenMajorId]  = useState<string | null>(initialActiveMajorId ?? null);
   const [openCareerId, setOpenCareerId] = useState<string | null>(null);
 
   const toggleMajor = (id: string) => {
@@ -501,9 +507,16 @@ function MobileView({
 interface FuturePathwaysProps {
   initialSearchQuery?: string;
   onSearchQueryConsumed?: () => void;
+  jumpToMajorId?: string;
+  onReset?: () => void;
 }
 
-export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: FuturePathwaysProps = {}) {
+export function FuturePathways({
+  initialSearchQuery,
+  onSearchQueryConsumed,
+  jumpToMajorId,
+  onReset,
+}: FuturePathwaysProps = {}) {
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
@@ -521,6 +534,7 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
   function handleReset() {
     setSearchQuery("");
     setResetKey(k => k + 1);
+    onReset?.();
   }
 
   const filteredMajors = searchQuery.trim()
@@ -588,6 +602,7 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
         majors={filteredMajors}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        initialActiveMajorId={jumpToMajorId}
       />
 
       <MobileView
@@ -595,6 +610,7 @@ export function FuturePathways({ initialSearchQuery, onSearchQueryConsumed }: Fu
         majors={filteredMajors}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        initialActiveMajorId={jumpToMajorId}
       />
 
       <p className={`mt-4 text-xs text-center text-slate-400 ${kh ? "font-khmer" : ""}`}>

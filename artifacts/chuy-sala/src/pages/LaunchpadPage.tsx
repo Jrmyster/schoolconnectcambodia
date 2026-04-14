@@ -62,14 +62,21 @@ export function LaunchpadPage() {
   const [accordionOpen, setAccordionOpen] = useState(false);
   const { openChat } = useChatStore();
 
-  const [pathwaySearch, setPathwaySearch] = useState("");
+  const [pathwaySearch,  setPathwaySearch]  = useState("");
+  const [pathwayMajorId, setPathwayMajorId] = useState("");
   const pathwaysRef = useRef<HTMLDivElement>(null);
 
-  function handleNavigateToMajor(majorEn: string) {
-    setPathwaySearch(majorEn);
+  function handleNavigateToMajor(majorId: string) {
+    setPathwayMajorId(majorId);
+    setPathwaySearch("");
     setTimeout(() => {
       pathwaysRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
+    }, 200);
+  }
+
+  function handlePathwaysReset() {
+    setPathwayMajorId("");
+    setPathwaySearch("");
   }
 
   return (
@@ -522,7 +529,10 @@ export function LaunchpadPage() {
               )}
             </p>
           </div>
-          <CareerMatcher onNavigateToMajor={handleNavigateToMajor} />
+          <CareerMatcher
+            onNavigateToMajor={handleNavigateToMajor}
+            onResetPathways={handlePathwaysReset}
+          />
         </section>
 
         {/* ── Future Pathways Guide ── */}
@@ -530,6 +540,8 @@ export function LaunchpadPage() {
           <FuturePathways
             initialSearchQuery={pathwaySearch}
             onSearchQueryConsumed={() => setPathwaySearch("")}
+            jumpToMajorId={pathwayMajorId}
+            onReset={handlePathwaysReset}
           />
         </div>
 

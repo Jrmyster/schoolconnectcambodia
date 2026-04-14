@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Brain, ChevronRight, Sparkles, RotateCcw, ExternalLink, Star } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useCareerMatchStore } from "@/store/use-career-match";
 import careersData from "@/data/careers.json";
 
 type Major = { id: string; en: string; kh: string; icon: string; careers: { en: string; kh: string }[] };
@@ -73,11 +74,9 @@ function Oscilloscope({ phase }: { phase: "scanning" | "locked" }) {
       const h = canvas!.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Dark background
       ctx.fillStyle = "#0a0f1e";
       ctx.fillRect(0, 0, w, h);
 
-      // Grid lines
       ctx.strokeStyle = "rgba(37,99,235,0.12)";
       ctx.lineWidth = 1;
       for (let x = 0; x < w; x += w / 10) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
@@ -86,7 +85,6 @@ function Oscilloscope({ phase }: { phase: "scanning" | "locked" }) {
       const t = tRef.current;
 
       if (phase === "scanning") {
-        // 3 waveforms — sine composite representing "neural analysis"
         const waves = [
           { amp: 0.28, freq: 2.8, speed: 1.4, color: "#2563EB", alpha: 0.9, lw: 2 },
           { amp: 0.14, freq: 6.5, speed: 2.1, color: "#34d399", alpha: 0.6, lw: 1.5 },
@@ -106,7 +104,6 @@ function Oscilloscope({ phase }: { phase: "scanning" | "locked" }) {
           ctx.globalAlpha = 1;
         });
 
-        // Moving scan line
         const scanX = ((t * 60) % w);
         const grad = ctx.createLinearGradient(scanX - 40, 0, scanX + 4, 0);
         grad.addColorStop(0, "rgba(99,179,237,0)");
@@ -118,7 +115,6 @@ function Oscilloscope({ phase }: { phase: "scanning" | "locked" }) {
         ctx.beginPath(); ctx.moveTo(scanX, 0); ctx.lineTo(scanX, h); ctx.stroke();
 
       } else {
-        // Locked: calm flat line with heartbeat pulse
         const beat = Math.max(0, 1 - ((t * 1.2) % 1) * 3);
         ctx.beginPath();
         ctx.strokeStyle = "#34d399";
@@ -177,32 +173,47 @@ function CompatBar({ pct, color }: { pct: number; color: string }) {
 
 /* ── Main component ───────────────────────────────────────────────── */
 interface CareerMatcherProps {
-  onNavigateToMajor: (majorEn: string) => void;
+  onNavigateToMajor: (majorId: string) => void;
+  onResetPathways?: () => void;
 }
 
 type Phase = "assessment" | "scanning" | "results";
 
-export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
+const DEFAULT_SCORES: Record<SubjectId, number> = { science: 3, math: 3, lit: 3, tech: 3, art: 3, social: 3 };
+
+export function CareerMatcher({ onNavigateToMajor, onResetPathways }: CareerMatcherProps) {
   const t  = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
-  const [phase,   setPhase]   = useState<Phase>("assessment");
-  const [scores,  setScores]  = useState<Record<SubjectId, number>>({
-    science: 3, math: 3, lit: 3, tech: 3, art: 3, social: 3,
-  });
-  const [results, setResults] = useState<{ def: RecommendationDef; major: Major; compat: number }[]>([]);
+  const store = useCareerMatchStore();
+
+  const [phase,       setPhase]       = useState<Phase>("assessment");
+  const [scores,      setScores]      = useState<Record<SubjectId, number>>(
+    store.preScores ?? DEFAULT_SCORES
+  );
+  const [results,     setResults]     = useState<{ def: RecommendationDef; major: Major; compat: number }[]>([]);
+  const [topSubject,  setTopSubject]  = useState<{ en: string; kh: string; score: number } | null>(null);
+
+  // Auto-trigger scan if arriving from ExamPrepPage
+  useEffect(() => {
+    if (store.autoTrigger && store.preScores) {
+      setScores(store.preScores);
+      store.clearAutoTrigger();
+      const timer = setTimeout(() => runAnalyse(store.preScores!), 400);
+      return () => clearTimeout(timer);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function setScore(id: SubjectId, val: number) {
     setScores(s => ({ ...s, [id]: val }));
   }
 
-  function analyse() {
-    // Sort subjects by score descending
-    const sorted = (Object.entries(scores) as [SubjectId, number][])
+  function runAnalyse(useScores: Record<SubjectId, number>) {
+    const sorted = (Object.entries(useScores) as [SubjectId, number][])
       .sort((a, b) => b[1] - a[1]);
 
-    // Collect top 3 recommendations de-duplicating majorId
     const seen = new Set<string>();
     const picks: { def: RecommendationDef; major: Major; compat: number }[] = [];
 
@@ -212,7 +223,6 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
         if (seen.has(def.majorId)) continue;
         const major = allMajors.find(m => m.id === def.majorId);
         if (!major || major.careers.length === 0) continue;
-        // compat = 60 + (score/5)*30 + small jitter per rank
         const compat = Math.min(99, Math.round(60 + (score / 5) * 30 + (3 - picks.length) * 3));
         picks.push({ def, major, compat });
         seen.add(def.majorId);
@@ -220,15 +230,37 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
       }
     }
 
+    // Find top subject label
+    const [topSubId, topScore] = sorted[0] ?? ["science", 3];
+    const subjectDef = SUBJECTS.find(s => s.id === topSubId)!;
+    setTopSubject({ en: subjectDef.en, kh: subjectDef.kh, score: topScore });
+
+    // Save to store for cross-page reference
+    if (picks[0]) {
+      store.setTopPick({
+        majorId: picks[0].major.id,
+        subjectLabelEn: subjectDef.en,
+        subjectLabelKh: subjectDef.kh,
+        scoreRating: topScore,
+      });
+    }
+
     setResults(picks);
     setPhase("scanning");
     setTimeout(() => setPhase("results"), 3800);
   }
 
+  function analyse() {
+    runAnalyse(scores);
+  }
+
   function reset() {
     setPhase("assessment");
-    setScores({ science: 3, math: 3, lit: 3, tech: 3, art: 3, social: 3 });
+    setScores(DEFAULT_SCORES);
     setResults([]);
+    setTopSubject(null);
+    store.clearAll();
+    onResetPathways?.();
   }
 
   const accentColors = ["#2563EB", "#059669", "#d97706"];
@@ -278,7 +310,6 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
                       {kh ? subj.kh : subj.en}
                     </span>
                   </div>
-                  {/* Star rating */}
                   <div className="flex gap-1.5">
                     {[1, 2, 3, 4, 5].map((v) => (
                       <button
@@ -335,7 +366,6 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
               </p>
             </div>
 
-            {/* Animated data points */}
             <div className="w-full grid grid-cols-3 gap-3">
               {["Profile Analysis", "Career Mapping", "Compatibility Score"].map((label, i) => (
                 <div key={label} className="rounded-lg bg-slate-800 dark:bg-slate-900 px-3 py-2.5 text-center border border-blue-900/40">
@@ -361,6 +391,26 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
               <Oscilloscope phase="locked" />
             </div>
 
+            {/* Bilingual "Based on your score" context banner */}
+            {topSubject && (
+              <div className="mb-5 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/20 px-4 py-3 flex items-start gap-3">
+                <span className="text-xl flex-shrink-0 mt-0.5">🧠</span>
+                <div>
+                  <p className={`text-sm font-semibold text-teal-800 dark:text-teal-300 leading-snug ${kh ? "font-khmer leading-loose" : ""}`}>
+                    {kh
+                      ? `ដោយផ្អែកលើពិន្ទុខ្ពស់របស់អ្នក (${topSubject.score}/5) ក្នុង${topSubject.kh} យើងបានកំណត់ ៣ ផ្លូវអាជីពដែលស័ក្ដិសមបំផុតរបស់អ្នក។`
+                      : `Based on your high score (${topSubject.score}/5) in ${topSubject.en}, we identified your top 3 compatible career pathways.`
+                    }
+                  </p>
+                  {kh && (
+                    <p className="text-xs text-teal-600/60 mt-0.5 italic">
+                      Based on your high score ({topSubject.score}/5) in {topSubject.en}, we identified your top 3 compatible career pathways.
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="flex items-center gap-2 mb-5">
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-50" />
               <span className={`text-xs font-bold text-green-600 dark:text-green-400 px-3 ${kh ? "font-khmer" : ""}`}>
@@ -376,7 +426,6 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
                   className="rounded-xl border-2 p-4 bg-gradient-to-br from-card to-muted/20 hover:shadow-md transition-shadow"
                   style={{ borderColor: accentColors[idx] + "40" }}
                 >
-                  {/* Card header */}
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2.5">
                       <span className="text-2xl">{major.icon}</span>
@@ -408,12 +457,10 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
                     </div>
                   </div>
 
-                  {/* Compat bar */}
                   <div className="mb-3">
                     <CompatBar pct={compat} color={accentColors[idx]} />
                   </div>
 
-                  {/* Why box */}
                   <div
                     className="rounded-lg p-3 mb-3 border"
                     style={{ borderColor: accentColors[idx] + "30", background: accentColors[idx] + "08" }}
@@ -427,7 +474,6 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
                     </p>
                   </div>
 
-                  {/* Sample careers */}
                   {major.careers.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {major.careers.slice(0, 3).map(c => (
@@ -438,14 +484,13 @@ export function CareerMatcher({ onNavigateToMajor }: CareerMatcherProps) {
                     </div>
                   )}
 
-                  {/* CTA */}
                   <button
-                    onClick={() => onNavigateToMajor(major.en)}
+                    onClick={() => onNavigateToMajor(major.id)}
                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-bold text-sm text-white hover:opacity-90 hover:shadow-sm active:scale-95 transition-all ${kh ? "font-khmer" : ""}`}
                     style={{ background: accentColors[idx] }}
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
-                    {t("Explore in Future Pathways Guide", "មើលក្នុងមគ្គុទ្ទេសក៍ផ្លូវ")}
+                    {t("Auto-select in Future Pathways Guide", "ជ្រើសស្វ័យប្រវត្តិក្នុងមគ្គុទ្ទេសក៍ផ្លូវ")}
                   </button>
                 </div>
               ))}

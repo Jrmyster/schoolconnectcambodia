@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { useLocation } from "wouter";
+import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight, Brain, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useCareerMatchStore } from "@/store/use-career-match";
 import healthData from "@/data/health_science.json";
 
 type Question = {
@@ -44,10 +46,14 @@ export function ExamPrepPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
+  const [, navigate] = useLocation();
+  const careerStore = useCareerMatchStore();
 
   const [view, setView] = useState<View>("home");
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
   const [quiz, setQuiz] = useState<QuizState>({ index: 0, selected: null, score: 0, done: false });
+  const [scanning, setScanning] = useState(false);
+  const scanTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function startTopic(topic: Topic) {
     setActiveTopic(topic);
@@ -73,6 +79,32 @@ export function ExamPrepPage() {
   function restartQuiz() {
     setQuiz({ index: 0, selected: null, score: 0, done: false });
   }
+
+  function handleFindCareerMatch() {
+    if (scanning) return;
+    const pct = total > 0 ? quiz.score / total : 0.6;
+    const scienceStars = Math.max(1, Math.min(5, Math.round(pct * 5)));
+    careerStore.setPreScores({
+      science: scienceStars,
+      math:    Math.max(1, scienceStars - 1),
+      lit:     3,
+      tech:    3,
+      art:     2,
+      social:  2,
+    });
+    careerStore.setAutoTrigger(true);
+    setScanning(true);
+    scanTimerRef.current = setTimeout(() => {
+      setScanning(false);
+      navigate("/launchpad");
+    }, 2600);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (scanTimerRef.current) clearTimeout(scanTimerRef.current);
+    };
+  }, []);
 
   const current = activeTopic ? activeTopic.questions[quiz.index] : null;
   const total = activeTopic ? activeTopic.questions.length : 0;
@@ -325,6 +357,67 @@ export function ExamPrepPage() {
                     {t("Choose Another Topic", "ជ្រើសប្រធានបទផ្សេង")}
                   </button>
                 </div>
+
+                {/* ── Neural Scan CTA ── */}
+                {scanning ? (
+                  <div className="mt-8 rounded-2xl border border-teal-300 dark:border-teal-700 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/20 p-6 flex flex-col items-center gap-4">
+                    <div className="relative w-14 h-14">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 animate-ping opacity-30" />
+                      <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                        <Brain className="w-7 h-7 text-white" />
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <p className={`font-bold text-teal-800 dark:text-teal-300 text-base ${kh ? "font-khmer leading-loose" : ""}`}>
+                        {t("Scanning neural strengths…", "កំពុងស្កេនភាពខ្លាំង…")}
+                      </p>
+                      <p className={`text-teal-600/70 dark:text-teal-400/70 text-sm mt-1 ${kh ? "font-khmer" : ""}`}>
+                        {t("Mapping your score to 76 career pathways", "ប្រៀបធៀបពិន្ទុរបស់អ្នក ជាមួយផ្លូវអាជីព ៧៦")}
+                      </p>
+                    </div>
+                    <div className="w-full max-w-xs h-1.5 rounded-full bg-teal-200 dark:bg-teal-900 overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-teal-400 to-amber-400 rounded-full animate-[scan-bar_2.6s_ease-in-out_forwards]"
+                        style={{ animation: "none", background: "linear-gradient(to right,#2dd4bf,#f59e0b)", width: "100%",
+                          maskImage: "linear-gradient(to right, black 0%, black var(--w, 0%))", WebkitMaskImage: "linear-gradient(to right, black 0%, black var(--w, 0%))" }}>
+                        <div className="h-full bg-gradient-to-r from-teal-400 to-amber-400 animate-pulse" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mt-8 rounded-2xl border border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50/60 to-indigo-50/40 dark:from-blue-950/20 dark:to-indigo-950/10 p-5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow flex-shrink-0">
+                        <Brain className="w-4.5 h-4.5 text-white w-[18px] h-[18px]" />
+                      </div>
+                      <div>
+                        <p className={`font-bold text-foreground text-sm leading-tight ${kh ? "font-khmer" : ""}`}>
+                          {t("Find My Career Match", "ស្វែងរកអាជីពដែលសាកសម")}
+                        </p>
+                        <p className="text-[11px] text-muted-foreground">
+                          {kh ? "ស្វែងរកអាជីពដែលសាកសមនឹងខ្ញុំ" : "Find My Career Match (ស្វែងរកអាជីពដែលសាកសម)"}
+                        </p>
+                      </div>
+                      <div className="ml-auto flex items-center gap-1 bg-blue-100 dark:bg-blue-900/40 px-2 py-0.5 rounded-full flex-shrink-0">
+                        <Sparkles className="w-3 h-3 text-blue-600" />
+                        <span className="text-[10px] font-bold text-blue-700 dark:text-blue-300">AI</span>
+                      </div>
+                    </div>
+                    <p className={`text-xs text-muted-foreground mb-4 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                      {t(
+                        "Your quiz score will be used to run a neural scan across 76 career pathways and auto-select the best major for you in the Future Pathways Guide.",
+                        "ពិន្ទុធ្វើតេស្តរបស់អ្នក នឹងត្រូវប្រើដើម្បីស្កេនផ្លូវអាជីព ៧៦ ហើយជ្រើសជំនាញដែលល្អបំផុតសម្រាប់អ្នកដោយស្វ័យប្រវត្តិ។"
+                      )}
+                    </p>
+                    <button
+                      onClick={handleFindCareerMatch}
+                      className={`w-full flex items-center justify-center gap-2.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all ${kh ? "font-khmer text-base" : ""}`}
+                    >
+                      <Brain className="w-4.5 h-4.5 w-[18px] h-[18px]" />
+                      {t("Find My Career Match", "ស្វែងរកអាជីពដែលសាកសម")}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
 
                 {/* Oncology cross-link */}
                 {isOncology && (
