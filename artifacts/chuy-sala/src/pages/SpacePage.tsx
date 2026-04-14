@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Rocket, Globe, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { GalaxyMap } from "@/components/GalaxyMap";
 
 // ── Types ───────────────────────────────────────────────────────────────────
 
@@ -432,6 +433,9 @@ export function SpacePage() {
             })}
           </div>
         </section>
+
+        {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
+        <GalaxyMap />
 
         {/* ── Explore More footer strip ──────────────────────────────────── */}
         <div className="border-t border-white/8 bg-white/3">
