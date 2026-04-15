@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { MapPin, GraduationCap, Heart, CheckCircle2, Languages } from "lucide-react";
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { WeatherWidget } from "@/components/WeatherWidget";
 
 export function Home() {
   const t = useTranslation();
@@ -110,6 +111,31 @@ export function Home() {
             <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Completed Projects", "គម្រោងបានបញ្ចប់")}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Weather Widget */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Left: intro copy */}
+          <div>
+            <div className="inline-flex items-center gap-2 bg-sky-50 text-sky-700 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-4 border border-sky-200">
+              🌤️ {t("Local Weather", "ការព្យាករណ៍អាកាសធាតុតាមតំបន់")}
+            </div>
+            <h2 className={`text-3xl md:text-4xl font-bold text-foreground mb-4 ${language === 'kh' ? 'font-khmer leading-loose' : 'font-display'}`}>
+              {t("Cambodia's weather, live", "អាកាសធាតុកម្ពុជា ផ្ទាល់")}
+            </h2>
+            <p className={`text-muted-foreground leading-relaxed ${language === 'kh' ? 'font-khmer leading-loose text-sm' : ''}`}>
+              {t(
+                "Whether you're a teacher planning an outdoor class or a donor traveling to a school, check real-time weather for any province in Cambodia.",
+                "មិនថាអ្នកជាគ្រូដែលរៀបចំថ្នាក់រៀននៅខាងក្រៅ ឬជាអ្នកផ្ដល់ប្រាក់ចំណូលដែលធ្វើដំណើរទៅសាលា ពិនិត្យអាកាសធាតុក្នុងពេលវេលាជាក់ស្ដែង សម្រាប់ខេត្តណាមួយក្នុងកម្ពុជា។"
+              )}
+            </p>
+          </div>
+          {/* Right: widget */}
+          <div>
+            <WeatherWidget />
           </div>
         </div>
       </section>
