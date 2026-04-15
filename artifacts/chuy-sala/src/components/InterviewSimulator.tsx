@@ -13,6 +13,8 @@ import {
   FileText,
   Mic,
   MicOff,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -90,6 +92,8 @@ export function InterviewSimulator() {
   const [streamingContent, setStreamingContent] = useState("");
   const [questionCount, setQuestionCount] = useState(0);
   const [isListening, setIsListening] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const containerRef = useRef<HTMLElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -107,6 +111,22 @@ export function InterviewSimulator() {
       setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 300);
     }
   }, [stage]);
+
+  useEffect(() => {
+    const onFsChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  const toggleFullscreen = useCallback(async () => {
+    if (!document.fullscreenElement) {
+      await containerRef.current?.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -332,12 +352,19 @@ export function InterviewSimulator() {
 
   return (
     <section
+      ref={containerRef}
       style={{
-        background: OFFICE_BLUE.bg,
-        borderRadius: "20px",
-        overflow: "hidden",
-        border: `1px solid ${OFFICE_BLUE.border}`,
-        boxShadow: "0 24px 64px rgba(0,0,0,0.4)",
+        background: isFullscreen ? "#0f172a" : OFFICE_BLUE.bg,
+        borderRadius: isFullscreen ? "0" : "20px",
+        overflow: isFullscreen ? "auto" : "hidden",
+        border: isFullscreen ? "none" : `1px solid ${OFFICE_BLUE.border}`,
+        boxShadow: isFullscreen ? "none" : "0 24px 64px rgba(0,0,0,0.4)",
+        ...(isFullscreen && {
+          display: "flex",
+          flexDirection: "column" as const,
+          height: "100vh",
+          width: "100vw",
+        }),
       }}
       className="mt-8"
     >
@@ -429,6 +456,34 @@ export function InterviewSimulator() {
             <RotateCcw size={15} />
           </button>
         )}
+
+        {/* Fullscreen toggle */}
+        <button
+          onClick={toggleFullscreen}
+          title={
+            isFullscreen
+              ? kh ? "ចាកចេញពីរបៀបដែលផ្ដោតអារម្មណ៍" : "Exit Immersive Mode"
+              : kh ? "ចូលទៅក្នុងរបៀបដែលផ្ដោតអារម្មណ៍" : "Enter Immersive Mode"
+          }
+          style={{
+            background: isFullscreen
+              ? "rgba(37,99,235,0.2)"
+              : "rgba(255,255,255,0.08)",
+            border: isFullscreen
+              ? "1px solid rgba(37,99,235,0.5)"
+              : "1px solid rgba(255,255,255,0.15)",
+            borderRadius: "8px",
+            padding: "7px",
+            cursor: "pointer",
+            color: isFullscreen ? "#93C5FD" : OFFICE_BLUE.muted,
+            display: "flex",
+            alignItems: "center",
+            flexShrink: 0,
+            transition: "background 0.15s, border-color 0.15s, color 0.15s",
+          }}
+        >
+          {isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+        </button>
       </div>
 
       {/* ── IDLE STAGE ── */}
@@ -687,13 +742,14 @@ export function InterviewSimulator() {
           <div
             ref={messagesContainerRef}
             style={{
-              height: "360px",
+              height: isFullscreen ? undefined : "360px",
+              flex: isFullscreen ? 1 : undefined,
               overflowY: "auto",
-              padding: "16px",
+              padding: isFullscreen ? "24px 32px" : "16px",
               display: "flex",
               flexDirection: "column",
               gap: "14px",
-              background: OFFICE_BLUE.bg,
+              background: isFullscreen ? "#0f172a" : OFFICE_BLUE.bg,
             }}
           >
             {messages.map((msg, i) => (
