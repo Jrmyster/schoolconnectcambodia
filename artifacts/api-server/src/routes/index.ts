@@ -12,6 +12,7 @@ import adminMetricsRouter from "./adminMetrics";
 import savedCareersRouter from "./savedCareers";
 import quizRouter from "./quiz";
 import leaderboardRouter from "./leaderboard";
+import skepticRouter from "./skeptic";
 
 const router: IRouter = Router();
 
@@ -28,5 +29,6 @@ router.use(adminMetricsRouter);
 router.use(savedCareersRouter);
 router.use(quizRouter);
 router.use(leaderboardRouter);
+router.use(skepticRouter);
 
 export default router;
