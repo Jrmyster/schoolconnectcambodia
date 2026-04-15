@@ -38,7 +38,7 @@ router.post("/auth/register", async (req, res) => {
       school = rows[0] ?? null;
     }
 
-    res.status(201).json({ id: user.id, email: user.email, schoolId: user.schoolId, school });
+    res.status(201).json({ id: user.id, email: user.email, schoolId: user.schoolId, isAdmin: user.isAdmin, school });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }
@@ -65,7 +65,7 @@ router.post("/auth/login", async (req, res) => {
       school = schoolRows[0] ?? null;
     }
 
-    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, school });
+    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, isAdmin: user.isAdmin, school });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }
@@ -96,7 +96,7 @@ router.get("/auth/me", async (req, res) => {
       school = schoolRows[0] ?? null;
     }
 
-    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, school });
+    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, isAdmin: user.isAdmin, school });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }

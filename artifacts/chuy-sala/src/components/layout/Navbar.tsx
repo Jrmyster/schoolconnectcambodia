@@ -320,22 +320,7 @@ export function Navbar() {
               />
             ))}
 
-            {/* Admin — only for logged-in users */}
-            {user && (
-              <Link
-                href={ADMIN_ITEM.href}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors flex-shrink-0
-                  ${location.startsWith(ADMIN_ITEM.href)
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
-                  }`}
-              >
-                <ADMIN_ITEM.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className={kh ? "font-khmer text-sm" : ""}>
-                  {kh ? ADMIN_ITEM.labelKh : ADMIN_ITEM.labelEn}
-                </span>
-              </Link>
-            )}
+            {/* Admin link intentionally omitted — hidden route only */}
           </nav>
         </div>
       </div>
@@ -415,18 +400,7 @@ export function Navbar() {
               );
             })}
 
-            {/* Admin */}
-            {user && (
-              <Link
-                href={ADMIN_ITEM.href}
-                onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold text-base transition-colors
-                  ${location.startsWith(ADMIN_ITEM.href) ? "bg-primary/10 text-primary" : "text-foreground hover:bg-black/5"}`}
-              >
-                <ADMIN_ITEM.icon className="w-5 h-5 flex-shrink-0 text-muted-foreground" />
-                <span className={kh ? "font-khmer" : ""}>{kh ? ADMIN_ITEM.labelKh : ADMIN_ITEM.labelEn}</span>
-              </Link>
-            )}
+            {/* Admin link intentionally omitted from mobile nav — hidden route only */}
 
             {/* Auth row */}
             <div className="border-t border-border mt-2 pt-2">

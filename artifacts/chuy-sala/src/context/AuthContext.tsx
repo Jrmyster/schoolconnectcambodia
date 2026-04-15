@@ -17,6 +17,7 @@ export interface AuthUser {
   id: number;
   email: string;
   schoolId: number | null;
+  isAdmin: boolean;
   school: AuthSchool | null;
 }
 

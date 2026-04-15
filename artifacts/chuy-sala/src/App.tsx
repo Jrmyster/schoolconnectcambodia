@@ -29,6 +29,7 @@ import NotFound from "@/pages/not-found";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
+import { AdminRoute } from "@/components/AdminRoute";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -65,8 +66,12 @@ function Router() {
           <Route path="/submit-story" component={SubmitStoryPage} />
           <Route path="/space" component={SpacePage} />
           <Route path="/profile" component={ProfilePage} />
-          <Route path="/admin/dashboard" component={AdminDashboard} />
-          <Route path="/admin" component={Admin} />
+          <Route path="/admin/dashboard">
+            {() => <AdminRoute component={AdminDashboard} />}
+          </Route>
+          <Route path="/admin">
+            {() => <AdminRoute component={Admin} />}
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </main>

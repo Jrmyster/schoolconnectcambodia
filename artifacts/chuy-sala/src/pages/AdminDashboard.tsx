@@ -6,9 +6,28 @@ import {
   PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
 } from "recharts";
-import { School, ListChecks, DollarSign, ArrowLeft, Loader2 } from "lucide-react";
+import { School, ListChecks, DollarSign, ArrowLeft, Loader2, Map } from "lucide-react";
 import { PROVINCE_KH } from "@/lib/province-data";
 import { WeeklyRecap } from "@/components/WeeklyRecap";
+
+const ALL_PROVINCES = [
+  "Banteay Meanchey","Battambang","Kampong Cham","Kampong Chhnang","Kampong Speu",
+  "Kampong Thom","Kampot","Kandal","Kep","Koh Kong","Kratié","Mondulkiri",
+  "Oddar Meanchey","Pailin","Phnom Penh","Preah Sihanouk","Preah Vihear",
+  "Prey Veng","Pursat","Ratanakiri","Siem Reap","Stung Treng","Svay Rieng",
+  "Takéo","Tboung Khmum",
+];
+
+const MAP_CATEGORIES: { key: string; en: string; kh: string; color: string }[] = [
+  { key: "Electronics",      en: "Tech",      kh: "បច្ចេកវិទ្យា",  color: "#3B82F6" },
+  { key: "Books",            en: "Books",     kh: "សៀវភៅ",         color: "#10B981" },
+  { key: "Furniture",        en: "Furniture", kh: "គ្រឿងសង្ហារឹម", color: "#F59E0B" },
+  { key: "Infrastructure",   en: "Infra",     kh: "ហេដ្ឋារចនា",    color: "#8B5CF6" },
+  { key: "WASH",             en: "WASH",      kh: "ទឹក/អនាម័យ",   color: "#06B6D4" },
+  { key: "Sports",           en: "Sports",    kh: "កីឡា",           color: "#EF4444" },
+  { key: "Teacher Training", en: "Teachers",  kh: "គ្រូ",           color: "#EC4899" },
+  { key: "Other",            en: "Other",     kh: "ផ្សេងៗ",        color: "#6B7280" },
+];
 
 const CATEGORY_LABEL: Record<string, { en: string; kh: string }> = {
   Electronics:       { en: "Electronics & Tech",        kh: "គ្រឿងអេឡិចត្រូនិក" },
@@ -110,6 +129,17 @@ export function AdminDashboard() {
       .map(([prov, count]) => ({ province: prov, count }));
   }, [activeNeeds]);
 
+  const provinceMatrix = useMemo(() => {
+    const matrix: Record<string, Record<string, number>> = {};
+    ALL_PROVINCES.forEach(p => { matrix[p] = {}; });
+    activeNeeds.forEach(n => {
+      const prov = n.school?.province ?? "";
+      if (!prov || !matrix[prov]) return;
+      matrix[prov][n.category] = (matrix[prov][n.category] ?? 0) + 1;
+    });
+    return matrix;
+  }, [activeNeeds]);
+
   const metricClass = "bg-card rounded-2xl border border-border shadow-sm p-6 flex items-start gap-4";
   const iconWrap = "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0";
 
@@ -182,6 +212,109 @@ export function AdminDashboard() {
                     {t("Estimated Total Value Needed", "តម្លៃប៉ាន់ស្មានសរុប ($)")}
                   </p>
                 </div>
+              </div>
+            </div>
+
+            {/* ── Province Needs Map ── */}
+            <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
+              <div className="px-6 py-5 border-b border-border flex items-center gap-3"
+                style={{ background: "linear-gradient(90deg,#1E3A5F,#2563EB)" }}>
+                <Map className="w-5 h-5 text-white flex-shrink-0" />
+                <div>
+                  <h2 className={`text-lg font-bold text-white ${language === "kh" ? "font-khmer" : ""}`}>
+                    {t("Province Needs Map", "ផែនទីតម្រូវការតាមខេត្ត")}
+                  </h2>
+                  <p className={`text-blue-200 text-xs mt-0.5 ${language === "kh" ? "font-khmer" : ""}`}>
+                    {t("All 25 provinces — active resource requests by category", "ខេត្ត ២៥ — សំណើធនធានដោយប្រភេទ")}
+                  </p>
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-muted/50 border-b border-border">
+                      <th className={`text-left px-4 py-3 font-bold text-foreground sticky left-0 bg-muted/50 z-10 min-w-[160px] ${language === "kh" ? "font-khmer" : ""}`}>
+                        {t("Province", "ខេត្ត")}
+                      </th>
+                      {MAP_CATEGORIES.map(cat => (
+                        <th key={cat.key} className="px-3 py-3 text-center whitespace-nowrap">
+                          <div className="flex flex-col items-center gap-1">
+                            <span
+                              className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
+                              style={{ background: cat.color }}
+                            >
+                              {language === "kh" ? cat.kh : cat.en}
+                            </span>
+                          </div>
+                        </th>
+                      ))}
+                      <th className={`px-4 py-3 text-center font-bold text-foreground ${language === "kh" ? "font-khmer" : ""}`}>
+                        {t("Total", "សរុប")}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ALL_PROVINCES.map((province, i) => {
+                      const row = provinceMatrix[province] ?? {};
+                      const rowTotal = Object.values(row).reduce((s, c) => s + c, 0);
+                      const displayName = language === "kh" ? (PROVINCE_KH[province] ?? province) : province;
+                      return (
+                        <tr
+                          key={province}
+                          className={`border-b border-border transition-colors hover:bg-primary/5 ${i % 2 === 0 ? "bg-background" : "bg-muted/20"}`}
+                        >
+                          <td className={`px-4 py-2.5 font-semibold text-foreground sticky left-0 z-10 ${i % 2 === 0 ? "bg-background" : "bg-muted/20"} ${language === "kh" ? "font-khmer text-xs" : "text-xs"}`}>
+                            {displayName}
+                          </td>
+                          {MAP_CATEGORIES.map(cat => {
+                            const count = row[cat.key] ?? 0;
+                            return (
+                              <td key={cat.key} className="px-3 py-2.5 text-center">
+                                {count > 0 ? (
+                                  <span
+                                    className="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold text-white shadow-sm"
+                                    style={{ background: cat.color }}
+                                  >
+                                    {count}
+                                  </span>
+                                ) : (
+                                  <span className="text-muted-foreground/30 text-xs">—</span>
+                                )}
+                              </td>
+                            );
+                          })}
+                          <td className="px-4 py-2.5 text-center">
+                            {rowTotal > 0 ? (
+                              <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-lg text-xs font-bold text-primary bg-primary/10">
+                                {rowTotal}
+                              </span>
+                            ) : (
+                              <span className="text-muted-foreground/30 text-xs">0</span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                  <tfoot>
+                    <tr className="border-t-2 border-primary/20 bg-primary/5">
+                      <td className={`px-4 py-3 font-bold text-foreground sticky left-0 bg-primary/5 z-10 ${language === "kh" ? "font-khmer" : ""}`}>
+                        {t("TOTAL", "សរុបទាំងអស់")}
+                      </td>
+                      {MAP_CATEGORIES.map(cat => {
+                        const colTotal = ALL_PROVINCES.reduce((s, p) => s + (provinceMatrix[p]?.[cat.key] ?? 0), 0);
+                        return (
+                          <td key={cat.key} className="px-3 py-3 text-center">
+                            <span className="text-xs font-bold text-foreground">{colTotal || "—"}</span>
+                          </td>
+                        );
+                      })}
+                      <td className="px-4 py-3 text-center">
+                        <span className="text-sm font-bold text-primary">{activeNeeds.length}</span>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
             </div>
 
