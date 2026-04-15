@@ -1,31 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, RotateCcw, CheckCircle2, XCircle, Send, Loader2 } from "lucide-react";
+import { Rocket, RotateCcw, CheckCircle2, XCircle, Send, Loader2, Shuffle } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
+import { randomScenario, nextScenario } from "@/data/relativityScenarios";
+import type { AnswerKey, Scenario } from "@/data/relativityScenarios";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-type AnswerKey = "A" | "B" | "C";
-
-const CHOICES: { key: AnswerKey; en: string; kh: string }[] = [
-  {
-    key: "A",
-    en: "About 5 months — the same as you felt on the ship",
-    kh: "ប្រហែល ៥ ខែ — ដូចអ្នកមានអារម្មណ៍នៅលើយានអវកាស",
-  },
-  {
-    key: "B",
-    en: "8.6 years — the light-travel time to Sirius",
-    kh: "8.6 ឆ្នាំ — ពេលវេលាធ្វើដំណើររបស់ពន្លឺទៅផ្កាយ ស៊ីរ្យូស",
-  },
-  {
-    key: "C",
-    en: "17.2 years — twice the distance to Sirius",
-    kh: "17.2 ឆ្នាំ — ចម្ងាយទ្វីគុណទៅផ្កាយ ស៊ីរ្យូស",
-  },
-];
-
-const CORRECT: AnswerKey = "B";
+// ── ClockFace ────────────────────────────────────────────────────────────────
 
 function ClockFace({
   fast,
@@ -134,6 +116,8 @@ function ClockFace({
   );
 }
 
+// ── RelativityChallenge ───────────────────────────────────────────────────────
+
 interface RelativityChallengeProps {
   onScoreSubmitted?: () => void;
 }
@@ -142,6 +126,9 @@ export function RelativityChallenge({ onScoreSubmitted }: RelativityChallengePro
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
+
+  // Pick a random scenario on first render
+  const [scenario, setScenario] = useState<Scenario>(() => randomScenario());
 
   const [selected, setSelected] = useState<AnswerKey | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -155,9 +142,9 @@ export function RelativityChallenge({ onScoreSubmitted }: RelativityChallengePro
 
   useEffect(() => {
     startTimeRef.current = Date.now();
-  }, []);
+  }, [scenario]); // Reset timer each time scenario changes
 
-  const isCorrect = selected === CORRECT;
+  const isCorrect = selected !== null && selected === scenario.correctKey;
 
   function handleSelect(key: AnswerKey) {
     if (revealed) return;
@@ -167,6 +154,8 @@ export function RelativityChallenge({ onScoreSubmitted }: RelativityChallengePro
   }
 
   function reset() {
+    // Pick a different scenario so the user always sees something new
+    setScenario((prev) => nextScenario(prev.id));
     setSelected(null);
     setRevealed(false);
     setNickname("");
@@ -217,285 +206,367 @@ export function RelativityChallenge({ onScoreSubmitted }: RelativityChallengePro
           {t("Relativity Challenge", "បញ្ហាប្រឈមនៃរ៉ឺឡាទីវីតេ")}
         </span>
         <div className="h-px flex-1 bg-gradient-to-r from-violet-400/20 to-transparent" />
+
+        {/* Scenario indicator */}
+        <div className="flex items-center gap-1.5 rounded-full border border-violet-400/20 bg-violet-400/8 px-3 py-1">
+          <Shuffle className="w-3 h-3 text-violet-400/60" />
+          <span className={`text-violet-400/60 text-xs ${kh ? "font-khmer" : ""}`}>
+            {kh
+              ? `ទិសដៅ: ${scenario.destination.kh}`
+              : `Destination: ${scenario.destination.en}`}
+          </span>
+        </div>
       </div>
 
       {/* Main card */}
-      <div
-        className="rounded-3xl overflow-hidden border border-violet-500/25"
-        style={{
-          background:
-            "linear-gradient(135deg,rgba(109,40,217,0.18) 0%,rgba(139,92,246,0.10) 50%,rgba(15,5,35,0.65) 100%)",
-        }}
-      >
-        {/* Scenario */}
-        <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-white/8">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-2xl">
-              🚀
-            </div>
-            <div>
-              <p
-                className={`text-white/45 text-xs font-semibold uppercase tracking-widest mb-2 ${
-                  kh ? "font-khmer tracking-normal" : ""
-                }`}
-              >
-                {t("The Scenario", "សេណារ្យូ")}
-              </p>
-              <p
-                className={`text-white/85 text-sm leading-relaxed ${
-                  kh ? "font-khmer leading-loose" : ""
-                }`}
-              >
-                {t(
-                  "You are 18 years old. You board a spaceship traveling at 99.9% the speed of light toward the star Sirius — 8.6 light-years away. Due to Time Dilation, only about 5 months pass for you on the ship during the entire trip.",
-                  "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកឡើងយានអវកាសដែលដើរដល់ ៩៩.៩% នៃល្បឿនពន្លឺ ទៅរកផ្កាយ ស៊ីរ្យូស — ចម្ងាយ ៨.៦ ឆ្នាំពន្លឺ។ ដោយសារការពន្យារពេលវេលា អ្នកនៅលើយានត្រឹមតែប្រហែល ៥ ខែប៉ុណ្ណោះ ក្នុងដំណើរទាំងមូល។"
-                )}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Question & choices */}
-        <div className="px-6 sm:px-8 pt-6 pb-6">
-          <p
-            className={`text-white font-bold text-base leading-snug mb-6 ${
-              kh ? "font-khmer leading-loose" : ""
-            }`}
-          >
-            {t(
-              "When you arrive at Sirius and look back at Earth — how many years have passed for your friends at school?",
-              "នៅពេលអ្នកទៅដល់ផ្កាយ ស៊ីរ្យូស ហើយក្រឡេកមើលក្រោយទៅផែនដី — ប៉ុន្មានឆ្នាំបានផ្លាស់ប្តូរសម្រាប់មិត្តភក្តិរបស់អ្នកនៅសាលា?"
-            )}
-          </p>
-
-          <div className="flex flex-col gap-3 mb-6">
-            {CHOICES.map((c) => {
-              const isSelected = selected === c.key;
-              const isRight = c.key === CORRECT;
-              let borderColor = "border-white/15";
-              let bg = "bg-white/5 hover:bg-white/8";
-              let textColor = "text-white/80";
-
-              if (revealed) {
-                if (isRight) {
-                  borderColor = "border-emerald-400/60";
-                  bg = "bg-emerald-400/10";
-                  textColor = "text-emerald-300";
-                } else if (isSelected && !isRight) {
-                  borderColor = "border-red-400/60";
-                  bg = "bg-red-400/10";
-                  textColor = "text-red-300";
-                }
-              }
-
-              return (
-                <button
-                  key={c.key}
-                  onClick={() => handleSelect(c.key)}
-                  disabled={revealed}
-                  className={`flex items-center gap-3 w-full text-left rounded-2xl border px-5 py-4 transition-all duration-200 ${borderColor} ${bg} ${
-                    !revealed ? "cursor-pointer" : "cursor-default"
-                  }`}
-                >
-                  <span
-                    className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center font-bold text-xs ${
-                      revealed && isRight
-                        ? "border-emerald-400 text-emerald-300"
-                        : revealed && isSelected && !isRight
-                        ? "border-red-400 text-red-300"
-                        : "border-white/30 text-white/50"
-                    }`}
-                  >
-                    {c.key}
-                  </span>
-                  <span
-                    className={`text-sm font-medium leading-snug ${textColor} ${
-                      kh ? "font-khmer leading-loose" : ""
-                    }`}
-                  >
-                    {kh ? c.kh : c.en}
-                  </span>
-                  {revealed && isRight && (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400 ml-auto flex-shrink-0" />
-                  )}
-                  {revealed && isSelected && !isRight && (
-                    <XCircle className="w-5 h-5 text-red-400 ml-auto flex-shrink-0" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Result panel */}
-          <AnimatePresence>
-            {revealed && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.35 }}
-              >
-                {/* Dual clock animation */}
-                <div
-                  className="rounded-2xl border border-white/10 p-6 mb-4"
-                  style={{
-                    background:
-                      "linear-gradient(135deg,rgba(30,10,60,0.8) 0%,rgba(10,5,25,0.9) 100%)",
-                  }}
-                >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={scenario.id}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-3xl overflow-hidden border border-violet-500/25"
+          style={{
+            background:
+              "linear-gradient(135deg,rgba(109,40,217,0.18) 0%,rgba(139,92,246,0.10) 50%,rgba(15,5,35,0.65) 100%)",
+          }}
+        >
+          {/* Scenario block */}
+          <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-white/8">
+            <div className="flex items-start gap-4">
+              {/* Destination emoji badge */}
+              <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-2xl">
+                {scenario.emoji}
+              </div>
+              <div className="flex-1">
+                {/* Destination tag */}
+                <div className="flex items-center gap-2 mb-2">
                   <p
-                    className={`text-white/45 text-xs font-semibold uppercase tracking-widest mb-5 text-center ${
+                    className={`text-white/45 text-xs font-semibold uppercase tracking-widest ${
                       kh ? "font-khmer tracking-normal" : ""
                     }`}
                   >
-                    {t("Time Dilation in Action", "ការពន្យារពេលវេលាក្នុងសកម្មភាព")}
+                    {t("The Scenario", "សេណារ្យូ")}
                   </p>
+                  <span className="text-violet-300/60 text-xs">·</span>
+                  <span
+                    className={`text-violet-300 text-xs font-bold ${kh ? "font-khmer" : ""}`}
+                  >
+                    {kh ? scenario.destination.kh : scenario.destination.en}
+                  </span>
+                  <span className="text-violet-300/60 text-xs">
+                    · {scenario.distanceLy} ly
+                  </span>
+                </div>
+                {/* Scenario prose */}
+                <p
+                  className={`text-white/85 text-sm leading-relaxed ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {kh ? scenario.scenarioText.kh : scenario.scenarioText.en}
+                </p>
+              </div>
+            </div>
+          </div>
 
-                  <div className="flex items-center justify-center gap-8 sm:gap-16">
-                    <ClockFace
-                      fast={false}
-                      label="Your Clock"
-                      labelKh="នាឡិការបស់អ្នក"
-                      color="#a78bfa"
-                    />
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="text-white/20 text-2xl">⟺</div>
+          {/* Question + choices */}
+          <div className="px-6 sm:px-8 pt-6 pb-6">
+            <p
+              className={`text-white font-bold text-base leading-snug mb-6 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {kh ? scenario.questionText.kh : scenario.questionText.en}
+            </p>
+
+            <div className="flex flex-col gap-3 mb-6">
+              {scenario.choices.map((c) => {
+                const isSelected = selected === c.key;
+                const isRight = c.key === scenario.correctKey;
+                let borderColor = "border-white/15";
+                let bg = "bg-white/5 hover:bg-white/8";
+                let textColor = "text-white/80";
+
+                if (revealed) {
+                  if (isRight) {
+                    borderColor = "border-emerald-400/60";
+                    bg = "bg-emerald-400/10";
+                    textColor = "text-emerald-300";
+                  } else if (isSelected && !isRight) {
+                    borderColor = "border-red-400/60";
+                    bg = "bg-red-400/10";
+                    textColor = "text-red-300";
+                  }
+                }
+
+                return (
+                  <button
+                    key={c.key}
+                    onClick={() => handleSelect(c.key)}
+                    disabled={revealed}
+                    className={`flex items-center gap-3 w-full text-left rounded-2xl border px-5 py-4 transition-all duration-200 ${borderColor} ${bg} ${
+                      !revealed ? "cursor-pointer" : "cursor-default"
+                    }`}
+                  >
+                    <span
+                      className={`flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center font-bold text-xs ${
+                        revealed && isRight
+                          ? "border-emerald-400 text-emerald-300"
+                          : revealed && isSelected && !isRight
+                          ? "border-red-400 text-red-300"
+                          : "border-white/30 text-white/50"
+                      }`}
+                    >
+                      {c.key}
+                    </span>
+                    <span
+                      className={`text-sm font-medium leading-snug flex-1 ${textColor} ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {kh ? c.kh : c.en}
+                    </span>
+                    {revealed && isRight && (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    )}
+                    {revealed && isSelected && !isRight && (
+                      <XCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Result panel */}
+            <AnimatePresence>
+              {revealed && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  {/* Dual clock animation */}
+                  <div
+                    className="rounded-2xl border border-white/10 p-6 mb-4"
+                    style={{
+                      background:
+                        "linear-gradient(135deg,rgba(30,10,60,0.8) 0%,rgba(10,5,25,0.9) 100%)",
+                    }}
+                  >
+                    <p
+                      className={`text-white/45 text-xs font-semibold uppercase tracking-widest mb-5 text-center ${
+                        kh ? "font-khmer tracking-normal" : ""
+                      }`}
+                    >
+                      {t("Time Dilation in Action", "ការពន្យារពេលវេលាក្នុងសកម្មភាព")}
+                    </p>
+
+                    <div className="flex items-center justify-center gap-8 sm:gap-16">
+                      <ClockFace
+                        fast={false}
+                        label="Your Clock"
+                        labelKh="នាឡិការបស់អ្នក"
+                        color="#a78bfa"
+                      />
+                      <div className="flex flex-col items-center gap-1">
+                        <div className="text-white/20 text-2xl">⟺</div>
+                        <p
+                          className={`text-white/30 text-xs text-center max-w-[80px] ${
+                            kh ? "font-khmer leading-loose" : ""
+                          }`}
+                        >
+                          {t("vs", "ទល់នឹង")}
+                        </p>
+                      </div>
+                      <ClockFace
+                        fast={true}
+                        label="Earth's Clock"
+                        labelKh="នាឡិកាផែនដី"
+                        color="#38bdf8"
+                      />
+                    </div>
+
+                    <p
+                      className={`text-white/40 text-xs text-center mt-5 leading-relaxed max-w-sm mx-auto ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {kh
+                        ? scenario.clockCaption.kh
+                        : scenario.clockCaption.en}
+                    </p>
+                  </div>
+
+                  {/* Feedback panel */}
+                  <div
+                    className={`rounded-2xl border p-5 mb-4 ${
+                      isCorrect
+                        ? "border-emerald-400/30 bg-emerald-400/8"
+                        : "border-amber-400/30 bg-amber-400/8"
+                    }`}
+                  >
+                    <p
+                      className={`font-bold mb-2 ${
+                        isCorrect ? "text-emerald-300" : "text-amber-300"
+                      } ${kh ? "font-khmer" : ""}`}
+                    >
+                      {isCorrect
+                        ? t("Correct! 🎉", "ត្រឹមត្រូវ! 🎉")
+                        : t(
+                            "Not quite — but here's what really happens:",
+                            "មិនត្រឹមត្រូវ — ប៉ុន្តែនេះជាអ្វីដែលពិតជាកើតឡើង:"
+                          )}
+                    </p>
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        isCorrect ? "text-emerald-200/80" : "text-amber-200/80"
+                      } ${kh ? "font-khmer leading-loose" : ""}`}
+                    >
+                      {kh
+                        ? isCorrect
+                          ? scenario.feedbackCorrect.kh
+                          : scenario.feedbackIncorrect.kh
+                        : isCorrect
+                        ? scenario.feedbackCorrect.en
+                        : scenario.feedbackIncorrect.en}
+                    </p>
+
+                    {/* Life fact — always shown regardless of correct/incorrect */}
+                    <div className="mt-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3">
                       <p
-                        className={`text-white/30 text-xs text-center max-w-[80px] ${
+                        className={`text-white/40 text-xs font-semibold uppercase tracking-wider mb-1 ${
+                          kh ? "font-khmer tracking-normal" : ""
+                        }`}
+                      >
+                        🌍 {t("Meanwhile, back on Earth…", "ក្នុងពេលនោះ នៅផែនដី…")}
+                      </p>
+                      <p
+                        className={`text-white/65 text-xs leading-relaxed ${
                           kh ? "font-khmer leading-loose" : ""
                         }`}
                       >
-                        {t("vs", "ទល់នឹង")}
+                        {kh ? scenario.lifeFact.kh : scenario.lifeFact.en}
                       </p>
                     </div>
-                    <ClockFace
-                      fast={true}
-                      label="Earth's Clock"
-                      labelKh="នាឡិកាផែនដី"
-                      color="#38bdf8"
-                    />
                   </div>
 
-                  <p
-                    className={`text-white/40 text-xs text-center mt-5 leading-relaxed max-w-sm mx-auto ${
-                      kh ? "font-khmer leading-loose" : ""
-                    }`}
-                  >
-                    {t(
-                      "While your clock ticks slowly at near light-speed, Earth's clock races forward — 8.6 years pass there for every ~5 months you experience.",
-                      "ខណៈពេលដែលនាឡិការបស់អ្នកដើរយឺតនៅល្បឿនជិតពន្លឺ នាឡិកាផែនដីរត់ទៅមុខ — ៨.៦ ឆ្នាំ កន្លងផ្លាស់ ក្នុងរយៈពេលតែ ៥ ខែដែលអ្នកមានអារម្មណ៍។"
-                    )}
-                  </p>
-                </div>
-
-                {/* Explanation */}
-                <div
-                  className={`rounded-2xl border p-5 mb-4 ${
-                    isCorrect
-                      ? "border-emerald-400/30 bg-emerald-400/8"
-                      : "border-amber-400/30 bg-amber-400/8"
-                  }`}
-                >
-                  <p
-                    className={`font-bold mb-2 ${
-                      isCorrect ? "text-emerald-300" : "text-amber-300"
-                    } ${kh ? "font-khmer" : ""}`}
-                  >
-                    {isCorrect
-                      ? t("Correct! 🎉", "ត្រឹមត្រូវ! 🎉")
-                      : t(
-                          "Not quite — but here's what really happens:",
-                          "មិនត្រឹមត្រូវ — ប៉ុន្តែនេះជាអ្វីដែលពិតជាកើតឡើង:"
-                        )}
-                  </p>
-                  <p
-                    className={`text-sm leading-relaxed ${
-                      isCorrect ? "text-emerald-200/80" : "text-amber-200/80"
-                    } ${kh ? "font-khmer leading-loose" : ""}`}
-                  >
-                    {kh
-                      ? "ត្រឹមត្រូវ! សម្រាប់មិត្តភក្តិរបស់អ្នកនៅលើផែនដី វាត្រូវចំណាយពេល ៨.៦ ឆ្នាំ ដើម្បីឱ្យអ្នកទៅដល់ផ្កាយនោះ។ ខណៈពេលដែលអ្នកមានអារម្មណ៍ថាទើបតែកន្លងផុតទៅពីរបីខែ ប៉ុន្តែផែនដីបានដើរទៅមុខជិតមួយទសវត្សរ៍ទៅហើយ!"
-                      : "Correct! To your friends on Earth, it took 8.6 years for you to reach the star. While you felt like you only aged a few months, the Earth \"clock\" moved forward nearly a decade!"}
-                  </p>
-                </div>
-
-                {/* Nickname submission form */}
-                {!submitted ? (
-                  <div
-                    className="rounded-2xl border border-white/10 p-5 mb-4"
-                    style={{ background: "rgba(255,255,255,0.03)" }}
-                  >
-                    <p className={`text-white/60 text-sm font-semibold mb-1 ${kh ? "font-khmer" : ""}`}>
-                      {t("Add your name to the leaderboard", "បន្ថែមឈ្មោះអ្នកទៅក្ដារលេខ")}
-                    </p>
-                    <p className={`text-white/30 text-xs mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
-                      {t(
-                        "Choose a nickname — your real name won't be shown publicly.",
-                        "ជ្រើសឈ្មោះហៅ — ឈ្មោះពិតរបស់អ្នកនឹងមិនត្រូវបានបង្ហាញជាសាធារណៈ។"
-                      )}
-                    </p>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        value={nickname}
-                        onChange={(e) => setNickname(e.target.value.slice(0, 30))}
-                        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                        placeholder={kh ? "ឈ្មោះហៅ…" : "Your nickname…"}
-                        maxLength={30}
-                        className={`flex-1 rounded-xl border border-white/15 bg-white/8 text-white text-sm px-4 py-2.5 placeholder-white/25 focus:outline-none focus:border-violet-400/50 transition-colors ${kh ? "font-khmer" : ""}`}
-                      />
-                      <button
-                        onClick={handleSubmit}
-                        disabled={!nickname.trim() || submitting}
-                        className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                        style={{
-                          background: "rgba(139,92,246,0.7)",
-                          color: "white",
-                        }}
+                  {/* Nickname submission */}
+                  {!submitted ? (
+                    <div
+                      className="rounded-2xl border border-white/10 p-5 mb-4"
+                      style={{ background: "rgba(255,255,255,0.03)" }}
+                    >
+                      <p
+                        className={`text-white/60 text-sm font-semibold mb-1 ${
+                          kh ? "font-khmer" : ""
+                        }`}
                       >
-                        {submitting ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <Send className="w-4 h-4" />
+                        {t(
+                          "Add your name to the leaderboard",
+                          "បន្ថែមឈ្មោះអ្នកទៅក្ដារលេខ"
                         )}
-                        <span className={kh ? "font-khmer" : ""}>{t("Submit", "បញ្ជូន")}</span>
-                      </button>
-                    </div>
-                    {submitError && (
-                      <p className={`text-red-400 text-xs mt-2 ${kh ? "font-khmer" : ""}`}>
-                        {t("Submission failed. Please try again.", "បញ្ជូនបរាជ័យ។ សូមព្យាយាមម្ដងទៀត។")}
                       </p>
-                    )}
-                  </div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="rounded-2xl border border-emerald-400/30 bg-emerald-400/8 p-4 mb-4 text-center"
-                  >
-                    <p className={`text-emerald-300 font-bold text-sm ${kh ? "font-khmer" : ""}`}>
-                      {t("Score submitted! Check the leaderboard below. 🌌", "ពិន្ទុបានបញ្ជូន! មើលក្ដារលេខខាងក្រោម។ 🌌")}
-                    </p>
-                  </motion.div>
-                )}
+                      <p
+                        className={`text-white/30 text-xs mb-3 ${
+                          kh ? "font-khmer leading-loose" : ""
+                        }`}
+                      >
+                        {t(
+                          "Choose a nickname — your real name won't be shown publicly.",
+                          "ជ្រើសឈ្មោះហៅ — ឈ្មោះពិតរបស់អ្នកនឹងមិនត្រូវបានបង្ហាញជាសាធារណៈ។"
+                        )}
+                      </p>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={nickname}
+                          onChange={(e) =>
+                            setNickname(e.target.value.slice(0, 30))
+                          }
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && handleSubmit()
+                          }
+                          placeholder={kh ? "ឈ្មោះហៅ…" : "Your nickname…"}
+                          maxLength={30}
+                          className={`flex-1 rounded-xl border border-white/15 bg-white/8 text-white text-sm px-4 py-2.5 placeholder-white/25 focus:outline-none focus:border-violet-400/50 transition-colors ${
+                            kh ? "font-khmer" : ""
+                          }`}
+                        />
+                        <button
+                          onClick={handleSubmit}
+                          disabled={!nickname.trim() || submitting}
+                          className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                          style={{
+                            background: "rgba(139,92,246,0.7)",
+                            color: "white",
+                          }}
+                        >
+                          {submitting ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Send className="w-4 h-4" />
+                          )}
+                          <span className={kh ? "font-khmer" : ""}>
+                            {t("Submit", "បញ្ជូន")}
+                          </span>
+                        </button>
+                      </div>
+                      {submitError && (
+                        <p
+                          className={`text-red-400 text-xs mt-2 ${
+                            kh ? "font-khmer" : ""
+                          }`}
+                        >
+                          {t(
+                            "Submission failed. Please try again.",
+                            "បញ្ជូនបរាជ័យ។ សូមព្យាយាមម្ដងទៀត។"
+                          )}
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="rounded-2xl border border-emerald-400/30 bg-emerald-400/8 p-4 mb-4 text-center"
+                    >
+                      <p
+                        className={`text-emerald-300 font-bold text-sm ${
+                          kh ? "font-khmer" : ""
+                        }`}
+                      >
+                        {t(
+                          "Score submitted! Check the leaderboard below. 🌌",
+                          "ពិន្ទុបានបញ្ជូន! មើលក្ដារលេខខាងក្រោម។ 🌌"
+                        )}
+                      </p>
+                    </motion.div>
+                  )}
 
-                {/* Reset */}
-                <div className="flex justify-center mt-2">
-                  <button
-                    onClick={reset}
-                    className="flex items-center gap-2 text-xs text-white/40 hover:text-white/70 transition-colors"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span className={kh ? "font-khmer" : ""}>
-                      {t("Try again", "សាកល្បងម្តងទៀត")}
-                    </span>
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
+                  {/* Try again — always gets a NEW scenario */}
+                  <div className="flex justify-center mt-2">
+                    <button
+                      onClick={reset}
+                      className="flex items-center gap-2 text-xs text-white/40 hover:text-white/70 transition-colors"
+                    >
+                      <Shuffle className="w-3.5 h-3.5" />
+                      <span className={kh ? "font-khmer" : ""}>
+                        {t(
+                          "Try a new scenario",
+                          "សាកល្បងសេណារ្យូថ្មី"
+                        )}
+                      </span>
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }
