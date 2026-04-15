@@ -54,11 +54,24 @@
     ]
   },
   {
-    "id": "architecture",
-    "en": "Architecture",
-    "kh": "ស្ថាបត្យកម្ម",
-    "icon": "🏛️",
+    "id": "agricultural-engineering",
+    "en": "Agricultural Engineering",
+    "kh": "វិស្វកម្មកសិកម្ម",
+    "icon": "🚜",
     "careers": [
+      {
+        "id": "smart-farming-specialist",
+        "en": "Smart Farming Specialist",
+        "kh": "អ្នកជំនាញកសិកម្មវៃឆ្លាត",
+        "tasks": {
+          "en": [
+            "Program drones and sensors to automate irrigation and pest control for rice farmers across the provinces.",
+            "Install and calibrate IoT soil-moisture sensors to deliver the right amount of water at the right time, cutting waste.",
+            "Analyze drone-collected crop imagery to detect disease outbreaks and nutrient deficiencies before they spread.",
+            "Train rural farming cooperatives to operate and maintain smart-agriculture technology with minimal outside support."
+          ],
+          "kh": [
+            "សរសេរកម្មវិធីតម្រង់ និងឧបករណ៍ចាប់ ដើម្បីស្វ័យប្រវត្តិកម្មធារាសាស្ត្រ និងការគ្រប់គ្រងសត្វល្អិត សម្រាប់កសិករស្រូវ នៅទូទាំងខេត្ត។"careers": [
       {
         "id": "architect",
         "en": "Architect",
