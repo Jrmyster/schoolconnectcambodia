@@ -865,6 +865,10 @@ export function InterviewSimulator() {
                   padding: "16px",
                   borderTop: `1px solid ${OFFICE_BLUE.border}`,
                   marginTop: "8px",
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
                 }}
               >
                 <button
@@ -874,7 +878,7 @@ export function InterviewSimulator() {
                     color: "white",
                     border: "none",
                     borderRadius: "10px",
-                    padding: "10px 24px",
+                    padding: "10px 20px",
                     fontWeight: 700,
                     fontSize: "13px",
                     cursor: "pointer",
@@ -886,6 +890,26 @@ export function InterviewSimulator() {
                 >
                   <RotateCcw size={14} />
                   {kh ? "ហ្វឹកហាត់ម្ដងទៀត" : "Practice Again"}
+                </button>
+                <button
+                  onClick={handleShare}
+                  style={{
+                    background: "linear-gradient(135deg, #059669, #047857)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "10px 20px",
+                    fontWeight: 700,
+                    fontSize: "13px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontFamily: kh ? "var(--font-khmer, sans-serif)" : "inherit",
+                  }}
+                >
+                  <Share2 size={14} />
+                  {kh ? "ចែករំលែកលទ្ធផលរបស់ខ្ញុំ" : "Share My Result"}
                 </button>
               </div>
             )}
