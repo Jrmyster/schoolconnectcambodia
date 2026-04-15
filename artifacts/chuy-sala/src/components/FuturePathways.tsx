@@ -6,12 +6,15 @@ import { useSavedCareers, useToggleSavedCareer } from "@/hooks/use-saved-careers
 import { useToast } from "@/hooks/use-toast";
 import careersData from "@/data/careers.json";
 
+type Specialty = { en: string; kh: string };
+
 type Career = {
   id: string;
   en: string;
   kh: string;
   tasks: { en: string[]; kh: string[] };
   impact: { en: string; kh: string };
+  specialties?: Specialty[];
 };
 
 type Major = {
@@ -74,7 +77,7 @@ function TaskPanel({ career, kh, majorKey }: { career: Career; kh: boolean; majo
       </div>
 
       <div
-        className="mx-4 mb-4 rounded-xl px-4 py-3 border"
+        className="mx-4 mb-3 rounded-xl px-4 py-3 border"
         style={{ borderColor: "#93C5FD", background: "linear-gradient(135deg,#DBEAFE,#EFF6FF)" }}
       >
         <div className="flex gap-2 items-start">
@@ -92,6 +95,32 @@ function TaskPanel({ career, kh, majorKey }: { career: Career; kh: boolean; majo
           </div>
         </div>
       </div>
+
+      {career.specialties && career.specialties.length > 0 && (
+        <div className="mx-4 mb-4 rounded-xl px-4 py-3 border" style={{ borderColor: "#BFDBFE", background: "#F0F7FF" }}>
+          <p
+            className={`text-[10px] font-bold uppercase tracking-wider mb-2.5 ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#1D4ED8" }}
+          >
+            {kh ? "ផ្នែកឯកទេស" : "Areas of Specialization"}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {career.specialties.map((s, i) => (
+              <span
+                key={i}
+                className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-medium cursor-default select-none transition-all duration-150 hover:scale-105 hover:shadow-md ${kh ? "font-khmer" : ""}`}
+                style={{
+                  background: "linear-gradient(135deg,#DBEAFE,#EFF6FF)",
+                  color: "#1E40AF",
+                  border: "1px solid #93C5FD",
+                }}
+              >
+                {kh ? s.kh : s.en}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
