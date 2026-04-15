@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
+import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 
 const SolarSystem3D = lazy(() =>
   import("@/components/SolarSystem3D").then((m) => ({ default: m.SolarSystem3D }))
