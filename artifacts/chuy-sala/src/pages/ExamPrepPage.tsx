@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
-import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight, Brain, Sparkles } from "lucide-react";
+import { Microscope, ChevronRight, ChevronLeft, RotateCcw, CheckCircle2, XCircle, FlaskConical, Heart, BookOpen, ExternalLink, Dna, Trophy, ArrowRight, Brain, Sparkles, Calculator, BarChart2 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useCareerMatchStore } from "@/store/use-career-match";
 import healthData from "@/data/health_science.json";
+import grammarData from "@/data/english_grammar.json";
+import mathData from "@/data/mathematics.json";
 
 type Question = {
   id: number;
@@ -35,12 +37,137 @@ type QuizState = {
   done: boolean;
 };
 
-const COMING_SOON = [
-  { titleEn: "English Grammar", titleKh: "វេយ្យាករណ៍អង់គ្លេស", icon: BookOpen, color: "from-[#3B82F6] to-[#60A5FA]" },
-  { titleEn: "Mathematics", titleKh: "គណិតវិទ្យា", icon: FlaskConical, color: "from-[#8B5CF6] to-[#A78BFA]" },
-];
+type SubjectConfig = {
+  id: string;
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+  icon: React.ComponentType<{ className?: string }>;
+  bar: string;
+  iconBg: string;
+  cardBorder: string;
+  hoverBorder: string;
+  badge: string;
+  link: string;
+  topicBorder: string;
+  topicHoverBorder: string;
+  topicIconBg: string;
+  topicIconColor: string;
+  topicFocus: string;
+  topicLink: string;
+  topicBar: string;
+  topicProgressBar: string;
+  quizBorder: string;
+  quizBar: string;
+  quizHover: string;
+  quizCorrect: string;
+  quizCorrectBg: string;
+  quizProgress: string;
+  btn: string;
+  topicIcons: React.ComponentType<{ className?: string }>[];
+  topics: Topic[];
+  careerScores: { science: number; math: number; lit: number; tech: number; art: number; social: number };
+};
 
-const TOPIC_ICONS = [Dna, Heart, Microscope];
+const SUBJECTS: SubjectConfig[] = [
+  {
+    id: "health",
+    titleEn: "Health & Science",
+    titleKh: "សុខភាព និងវិទ្យាសាស្ត្រ",
+    descEn: "Cell biology, human health, and oncology basics — bilingual quiz questions for Grade 11–12.",
+    descKh: "ជីវវិទ្យាកោសិកា សុខភាពមនុស្ស និងមូលដ្ឋានគ្រឹះមហារីក — ចំណោទ ២ ភាសាសម្រាប់ថ្នាក់ ១១–១២។",
+    icon: Microscope,
+    bar: "from-emerald-500 to-teal-500",
+    iconBg: "from-emerald-500 to-teal-500",
+    cardBorder: "border-emerald-200 dark:border-emerald-800",
+    hoverBorder: "hover:border-emerald-400",
+    badge: "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800",
+    link: "text-emerald-600",
+    topicBorder: "border-emerald-100 dark:border-emerald-900/40",
+    topicHoverBorder: "hover:border-emerald-400",
+    topicIconBg: "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800 group-hover:bg-emerald-100",
+    topicIconColor: "text-emerald-600",
+    topicFocus: "text-emerald-600",
+    topicLink: "text-emerald-600",
+    topicBar: "from-emerald-500 to-teal-400",
+    topicProgressBar: "from-emerald-500 to-teal-400",
+    quizBorder: "border-emerald-100 dark:border-emerald-900/40",
+    quizBar: "from-emerald-500 to-teal-400",
+    quizHover: "hover:border-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30",
+    quizCorrect: "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200",
+    quizCorrectBg: "border-emerald-500 bg-emerald-500",
+    quizProgress: "from-emerald-500 to-teal-400",
+    btn: "bg-emerald-600 hover:bg-emerald-700",
+    topicIcons: [Dna, Heart, Microscope],
+    topics: healthData.topics as Topic[],
+    careerScores: { science: 5, math: 3, lit: 3, tech: 3, art: 2, social: 2 },
+  },
+  {
+    id: "english",
+    titleEn: "English Grammar",
+    titleKh: "វេយ្យាករណ៍ភាសាអង់គ្លេស",
+    descEn: "Verb tenses, conditionals, and vocabulary — bilingual practice questions for Grade 12.",
+    descKh: "កាលនៃកិរិយាសព្ទ លក្ខខណ្ឌ និងវាក្យសព្ទ — សំណួរអនុវត្តទ្វេភាសាសម្រាប់ថ្នាក់ទី ១២។",
+    icon: BookOpen,
+    bar: "from-blue-500 to-sky-400",
+    iconBg: "from-blue-500 to-sky-400",
+    cardBorder: "border-blue-200 dark:border-blue-800",
+    hoverBorder: "hover:border-blue-400",
+    badge: "text-blue-600 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800",
+    link: "text-blue-600",
+    topicBorder: "border-blue-100 dark:border-blue-900/40",
+    topicHoverBorder: "hover:border-blue-400",
+    topicIconBg: "bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800 group-hover:bg-blue-100",
+    topicIconColor: "text-blue-600",
+    topicFocus: "text-blue-600",
+    topicLink: "text-blue-600",
+    topicBar: "from-blue-500 to-sky-400",
+    topicProgressBar: "from-blue-500 to-sky-400",
+    quizBorder: "border-blue-100 dark:border-blue-900/40",
+    quizBar: "from-blue-500 to-sky-400",
+    quizHover: "hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+    quizCorrect: "border-blue-500 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-200",
+    quizCorrectBg: "border-blue-500 bg-blue-500",
+    quizProgress: "from-blue-500 to-sky-400",
+    btn: "bg-blue-600 hover:bg-blue-700",
+    topicIcons: [BookOpen, Brain, Sparkles],
+    topics: grammarData.topics as Topic[],
+    careerScores: { science: 2, math: 2, lit: 5, tech: 3, art: 3, social: 4 },
+  },
+  {
+    id: "math",
+    titleEn: "Mathematics",
+    titleKh: "គណិតវិទ្យា",
+    descEn: "Algebra, limits, and statistics — bilingual practice questions for Grade 12.",
+    descKh: "ពីជគណិត លីមីត និងស្ថិតិ — សំណួរអនុវត្តទ្វេភាសាសម្រាប់ថ្នាក់ទី ១២។",
+    icon: Calculator,
+    bar: "from-violet-500 to-purple-400",
+    iconBg: "from-violet-500 to-purple-400",
+    cardBorder: "border-violet-200 dark:border-violet-800",
+    hoverBorder: "hover:border-violet-400",
+    badge: "text-violet-600 bg-violet-50 dark:bg-violet-950/50 border border-violet-200 dark:border-violet-800",
+    link: "text-violet-600",
+    topicBorder: "border-violet-100 dark:border-violet-900/40",
+    topicHoverBorder: "hover:border-violet-400",
+    topicIconBg: "bg-violet-50 dark:bg-violet-950/50 border-violet-200 dark:border-violet-800 group-hover:bg-violet-100",
+    topicIconColor: "text-violet-600",
+    topicFocus: "text-violet-600",
+    topicLink: "text-violet-600",
+    topicBar: "from-violet-500 to-purple-400",
+    topicProgressBar: "from-violet-500 to-purple-400",
+    quizBorder: "border-violet-100 dark:border-violet-900/40",
+    quizBar: "from-violet-500 to-purple-400",
+    quizHover: "hover:border-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30",
+    quizCorrect: "border-violet-500 bg-violet-50 dark:bg-violet-950/40 text-violet-800 dark:text-violet-200",
+    quizCorrectBg: "border-violet-500 bg-violet-500",
+    quizProgress: "from-violet-500 to-purple-400",
+    btn: "bg-violet-600 hover:bg-violet-700",
+    topicIcons: [FlaskConical, BarChart2, Calculator],
+    topics: mathData.topics as Topic[],
+    careerScores: { science: 3, math: 5, lit: 2, tech: 4, art: 2, social: 2 },
+  },
+];
 
 export function ExamPrepPage() {
   const t = useTranslation();
@@ -50,6 +177,7 @@ export function ExamPrepPage() {
   const careerStore = useCareerMatchStore();
 
   const [view, setView] = useState<View>("home");
+  const [selectedSubject, setSelectedSubject] = useState<SubjectConfig>(SUBJECTS[0]);
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
   const [quiz, setQuiz] = useState<QuizState>({ index: 0, selected: null, score: 0, done: false });
   const [scanning, setScanning] = useState(false);
@@ -83,15 +211,17 @@ export function ExamPrepPage() {
   function handleFindCareerMatch() {
     if (scanning) return;
     const pct = total > 0 ? quiz.score / total : 0.6;
-    const scienceStars = Math.max(1, Math.min(5, Math.round(pct * 5)));
+    const boost = Math.max(1, Math.min(5, Math.round(pct * 5)));
+    const base = selectedSubject.careerScores;
     careerStore.setPreScores({
-      science: scienceStars,
-      math:    Math.max(1, scienceStars - 1),
-      lit:     3,
-      tech:    3,
-      art:     2,
-      social:  2,
+      science: Math.max(1, Math.min(5, Math.round(base.science * (0.5 + pct * 0.5)))),
+      math:    Math.max(1, Math.min(5, Math.round(base.math    * (0.5 + pct * 0.5)))),
+      lit:     Math.max(1, Math.min(5, Math.round(base.lit     * (0.5 + pct * 0.5)))),
+      tech:    Math.max(1, Math.min(5, Math.round(base.tech    * (0.5 + pct * 0.5)))),
+      art:     Math.max(1, Math.min(5, Math.round(base.art     * (0.5 + pct * 0.5)))),
+      social:  Math.max(1, Math.min(5, Math.round(base.social  * (0.5 + pct * 0.5)))),
     });
+    void boost;
     careerStore.setAutoTrigger(true);
     setScanning(true);
     scanTimerRef.current = setTimeout(() => {
@@ -153,64 +283,40 @@ export function ExamPrepPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-              {/* ── Health & Science (active) ── */}
-              <button
-                onClick={() => setView("topics")}
-                className="group text-left flex flex-col bg-card rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-emerald-400 transition-all duration-200 overflow-hidden cursor-pointer"
-              >
-                <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
-                <div className="flex flex-col flex-1 p-6 gap-4">
-                  <div className="flex items-start justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                      <Microscope className="w-6 h-6 text-white" />
-                    </div>
-                    <span className="text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
-                      {t("3 topics", "៣ ប្រធានបទ")}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className={`font-bold text-foreground text-lg leading-tight ${kh ? "font-khmer" : "font-display"}`}>
-                      {t("Health & Science", "សុខភាព និងវិទ្យាសាស្ត្រ")}
-                    </h3>
-                    <p className={`text-muted-foreground text-sm mt-1.5 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
-                      {t("Cell biology, human health, and oncology basics — bilingual quiz questions for Grade 11–12.", "ជីវវិទ្យាកោសិកា សុខភាពមនុស្ស និងមូលដ្ឋានគ្រឹះមហារីក — ចំណោទ ២ ភាសាសម្រាប់ថ្នាក់ ១១–១២។")}
-                    </p>
-                  </div>
-                  <div className="mt-auto flex items-center gap-1.5 text-emerald-600 text-sm font-bold">
-                    {t("Start Studying", "ចាប់ផ្តើមសិក្សា")}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </button>
-
-              {/* ── Coming soon cards ── */}
-              {COMING_SOON.map((cs) => (
-                <div
-                  key={cs.titleEn}
-                  className="flex flex-col bg-card rounded-2xl border border-border shadow-sm overflow-hidden opacity-60 cursor-not-allowed select-none"
-                >
-                  <div className={`h-1.5 bg-gradient-to-r ${cs.color}`} />
-                  <div className="flex flex-col flex-1 p-6 gap-4">
-                    <div className="flex items-start justify-between">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cs.color} flex items-center justify-center shadow-md`}>
-                        <cs.icon className="w-6 h-6 text-white" />
+              {SUBJECTS.map((subj) => {
+                const SubjIcon = subj.icon;
+                return (
+                  <button
+                    key={subj.id}
+                    onClick={() => { setSelectedSubject(subj); setView("topics"); }}
+                    className={`group text-left flex flex-col bg-card rounded-2xl border-2 ${subj.cardBorder} shadow-sm hover:shadow-xl hover:-translate-y-1 ${subj.hoverBorder} transition-all duration-200 overflow-hidden cursor-pointer`}
+                  >
+                    <div className={`h-1.5 bg-gradient-to-r ${subj.bar}`} />
+                    <div className="flex flex-col flex-1 p-6 gap-4">
+                      <div className="flex items-start justify-between">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${subj.iconBg} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
+                          <SubjIcon className="w-6 h-6 text-white" />
+                        </div>
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${subj.badge}`}>
+                          {subj.topics.length} {t("topics", "ប្រធានបទ")}
+                        </span>
                       </div>
-                      <span className="text-xs font-bold text-muted-foreground bg-muted px-2.5 py-1 rounded-full">
-                        {t("Coming Soon", "ឆាប់ៗ")}
-                      </span>
+                      <div>
+                        <h3 className={`font-bold text-foreground text-lg leading-tight ${kh ? "font-khmer" : "font-display"}`}>
+                          {kh ? subj.titleKh : subj.titleEn}
+                        </h3>
+                        <p className={`text-muted-foreground text-sm mt-1.5 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                          {kh ? subj.descKh : subj.descEn}
+                        </p>
+                      </div>
+                      <div className={`mt-auto flex items-center gap-1.5 ${subj.link} text-sm font-bold`}>
+                        {t("Start Studying", "ចាប់ផ្តើមសិក្សា")}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                    <div>
-                      <h3 className={`font-bold text-foreground text-lg leading-tight ${kh ? "font-khmer" : "font-display"}`}>
-                        {kh ? cs.titleKh : cs.titleEn}
-                      </h3>
-                      <p className={`text-muted-foreground text-sm mt-1.5 ${kh ? "font-khmer" : ""}`}>
-                        {t("More bilingual practice questions coming soon.", "ចំណោទ ២ ភាសាបន្ថែម នឹងមានឆាប់ៗ។")}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  </button>
+                );
+              })}
             </div>
 
             {/* External Exam Prep link */}
@@ -249,11 +355,11 @@ export function ExamPrepPage() {
 
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-sm">
-                  <Microscope className="w-5 h-5 text-white" />
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${selectedSubject.iconBg} flex items-center justify-center shadow-sm`}>
+                  {(() => { const SI = selectedSubject.icon; return <SI className="w-5 h-5 text-white" />; })()}
                 </div>
                 <h2 className={`font-display font-bold text-foreground text-2xl ${kh ? "font-khmer" : ""}`}>
-                  {t("Health & Science", "សុខភាព និងវិទ្យាសាស្ត្រ")}
+                  {kh ? selectedSubject.titleKh : selectedSubject.titleEn}
                 </h2>
               </div>
               <p className={`text-muted-foreground text-sm ml-1 ${kh ? "font-khmer" : ""}`}>
@@ -262,31 +368,31 @@ export function ExamPrepPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {TOPICS.map((topic, i) => {
-                const Icon = TOPIC_ICONS[i];
+              {selectedSubject.topics.map((topic, i) => {
+                const Icon = selectedSubject.topicIcons[i] ?? selectedSubject.icon;
                 return (
                   <button
                     key={topic.id}
                     onClick={() => startTopic(topic)}
-                    className="group text-left flex flex-col bg-card rounded-2xl border-2 border-emerald-100 dark:border-emerald-900/40 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-emerald-400 transition-all duration-200 overflow-hidden"
+                    className={`group text-left flex flex-col bg-card rounded-2xl border-2 ${selectedSubject.topicBorder} shadow-sm hover:shadow-xl hover:-translate-y-1 ${selectedSubject.topicHoverBorder} transition-all duration-200 overflow-hidden`}
                   >
-                    <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-teal-400" />
+                    <div className={`h-1.5 bg-gradient-to-r ${selectedSubject.topicBar}`} />
                     <div className="flex flex-col flex-1 p-6 gap-3">
-                      <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
-                        <Icon className="w-5.5 h-5.5 text-emerald-600 w-5 h-5" />
+                      <div className={`w-11 h-11 rounded-xl border flex items-center justify-center transition-colors ${selectedSubject.topicIconBg}`}>
+                        <Icon className={`w-5 h-5 ${selectedSubject.topicIconColor}`} />
                       </div>
                       <div>
                         <h3 className={`font-bold text-foreground text-lg leading-tight ${kh ? "font-khmer" : "font-display"}`}>
                           {kh ? topic.titleKh : topic.titleEn}
                         </h3>
-                        <p className={`text-emerald-600 text-xs font-semibold mt-1 ${kh ? "font-khmer" : ""}`}>
+                        <p className={`text-xs font-semibold mt-1 ${selectedSubject.topicFocus} ${kh ? "font-khmer" : ""}`}>
                           {kh ? topic.focusKh : topic.focusEn}
                         </p>
                       </div>
                       <p className={`text-muted-foreground text-sm ${kh ? "font-khmer leading-loose" : ""}`}>
                         {topic.questions.length} {t("questions • Multiple choice", "ចំណោទ • ជ្រើសចម្លើយ")}
                       </p>
-                      <div className="mt-auto flex items-center gap-1.5 text-emerald-600 text-sm font-bold">
+                      <div className={`mt-auto flex items-center gap-1.5 ${selectedSubject.topicLink} text-sm font-bold`}>
                         {t("Start Quiz", "ចាប់ផ្តើមតេស្ត")}
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -313,7 +419,7 @@ export function ExamPrepPage() {
             {/* ── DONE state ── */}
             {quiz.done ? (
               <div className="max-w-lg mx-auto text-center py-10">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center mx-auto mb-6 shadow-xl">
+                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${selectedSubject.bar} flex items-center justify-center mx-auto mb-6 shadow-xl`}>
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
                 <h2 className={`font-display font-bold text-foreground text-2xl mb-2 ${kh ? "font-khmer" : ""}`}>
@@ -321,7 +427,7 @@ export function ExamPrepPage() {
                 </h2>
                 <p className={`text-muted-foreground text-base mb-6 ${kh ? "font-khmer" : ""}`}>
                   {t("Your score", "ពិន្ទុរបស់អ្នក")}:{" "}
-                  <span className="font-bold text-emerald-600 text-xl">
+                  <span className={`font-bold text-xl ${selectedSubject.link}`}>
                     {quiz.score} / {total}
                   </span>
                 </p>
@@ -329,7 +435,7 @@ export function ExamPrepPage() {
                 {/* Score bar */}
                 <div className="w-full bg-muted rounded-full h-3 mb-6 overflow-hidden">
                   <div
-                    className="h-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-700"
+                    className={`h-3 rounded-full bg-gradient-to-r ${selectedSubject.quizProgress} transition-all duration-700`}
                     style={{ width: `${(quiz.score / total) * 100}%` }}
                   />
                 </div>
@@ -345,7 +451,7 @@ export function ExamPrepPage() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
                     onClick={restartQuiz}
-                    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors ${kh ? "font-khmer text-base" : ""}`}
+                    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl ${selectedSubject.btn} text-white font-bold transition-colors ${kh ? "font-khmer text-base" : ""}`}
                   >
                     <RotateCcw className="w-4 h-4" />
                     {t("Try Again", "សាកល្បងម្តងទៀត")}
@@ -454,7 +560,7 @@ export function ExamPrepPage() {
                   {/* Header */}
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
-                      <span className={`text-sm font-bold text-emerald-600 ${kh ? "font-khmer" : ""}`}>
+                      <span className={`text-sm font-bold ${selectedSubject.link} ${kh ? "font-khmer" : ""}`}>
                         {kh ? activeTopic.titleKh : activeTopic.titleEn}
                       </span>
                     </div>
@@ -466,14 +572,14 @@ export function ExamPrepPage() {
                   {/* Progress bar */}
                   <div className="w-full bg-muted rounded-full h-2 mb-6 overflow-hidden">
                     <div
-                      className="h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-500"
+                      className={`h-2 rounded-full bg-gradient-to-r ${selectedSubject.quizProgress} transition-all duration-500`}
                       style={{ width: `${((quiz.index) / total) * 100}%` }}
                     />
                   </div>
 
                   {/* Question card */}
-                  <div className="bg-card rounded-2xl border-2 border-emerald-100 dark:border-emerald-900/40 shadow-md overflow-hidden">
-                    <div className="h-1 bg-gradient-to-r from-emerald-500 to-teal-400" />
+                  <div className={`bg-card rounded-2xl border-2 ${selectedSubject.quizBorder} shadow-md overflow-hidden`}>
+                    <div className={`h-1 bg-gradient-to-r ${selectedSubject.quizBar}`} />
                     <div className="p-6 sm:p-8">
                       <p className={`text-foreground font-bold text-lg leading-snug mb-6 ${kh ? "font-khmer leading-loose" : ""}`}>
                         {kh ? current.questionKh : current.questionEn}
@@ -488,9 +594,9 @@ export function ExamPrepPage() {
 
                           let cls = "flex items-center gap-3 w-full text-left px-4 py-3.5 rounded-xl border-2 font-semibold text-sm transition-all duration-150 ";
                           if (!revealed) {
-                            cls += "border-border hover:border-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 cursor-pointer";
+                            cls += `border-border ${selectedSubject.quizHover} cursor-pointer`;
                           } else if (isCorrect) {
-                            cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-200";
+                            cls += selectedSubject.quizCorrect;
                           } else if (isSelected) {
                             cls += "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300";
                           } else {
@@ -500,7 +606,7 @@ export function ExamPrepPage() {
                           return (
                             <button key={i} className={cls} onClick={() => handleSelect(i)} disabled={revealed}>
                               <span className={`flex-shrink-0 w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold
-                                ${revealed && isCorrect ? "border-emerald-500 bg-emerald-500 text-white" : ""}
+                                ${revealed && isCorrect ? `${selectedSubject.quizCorrectBg} text-white` : ""}
                                 ${revealed && isSelected && !isCorrect ? "border-red-400 bg-red-400 text-white" : ""}
                                 ${!revealed ? "border-border" : ""}`}>
                                 {revealed && isCorrect ? <CheckCircle2 className="w-4 h-4" /> : revealed && isSelected && !isCorrect ? <XCircle className="w-4 h-4" /> : String.fromCharCode(65 + i)}

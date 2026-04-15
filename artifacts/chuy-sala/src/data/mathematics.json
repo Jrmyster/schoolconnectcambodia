@@ -157,6 +157,57 @@
           "explanationKh": "Mode ជាតម្លៃដែលបង្ហាញញឹកញាប់ជាងគេ។ នៅទីនេះ 9 បង្ហាញ 3 ដង ច្រើនជាង 5 (2 ដង) ឬ 3 និង 7 (ម្ដងៗ)។ Mode មានប្រយោជន៍ស្វែងរកធាតុដ៏ពេញនិយម។"
         }
       ]
+    },
+    {
+      "id": "limits_derivatives",
+      "titleEn": "Limits & Derivatives",
+      "titleKh": "លីមីត និងដេរីវេ",
+      "focusEn": "Continuity, Rate of Change & Differentiation Rules",
+      "focusKh": "ភាពជាប់ ល្បឿននៃការផ្លាស់ប្ដូរ និងច្បាប់ Differentiation",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What is lim (x→2) of (x² − 4) / (x − 2)?",
+          "questionKh": "តើ lim (x→2) នៃ (x² − 4) / (x − 2) ប៉ុន្មាន?",
+          "options": [
+            { "textEn": "0", "textKh": "0" },
+            { "textEn": "2", "textKh": "2" },
+            { "textEn": "4", "textKh": "4" },
+            { "textEn": "Undefined", "textKh": "មិនកំណត់" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "Factor the numerator: x² − 4 = (x+2)(x−2). Cancel (x−2): (x+2)(x−2)/(x−2) = x+2. Now substitute x=2: 2+2 = 4. Factoring before substituting avoids 0/0 indeterminate form.",
+          "explanationKh": "ញែកកត្តា numerator: x² − 4 = (x+2)(x−2)។ លុប (x−2): ទទួល x+2។ ជំនួស x=2: 2+2 = 4។ ការញែកកត្តាជៀសវាង 0/0 indeterminate form។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Using the Power Rule, what is the derivative of y = 5x³?",
+          "questionKh": "ដោយប្រើ Power Rule តើ derivative នៃ y = 5x³ ជាអ្វី?",
+          "options": [
+            { "textEn": "5x²", "textKh": "5x²" },
+            { "textEn": "15x²", "textKh": "15x²" },
+            { "textEn": "15x³", "textKh": "15x³" },
+            { "textEn": "3x²", "textKh": "3x²" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Power Rule: d/dx[axⁿ] = n·a·x^(n−1). So d/dx[5x³] = 3·5·x^(3−1) = 15x². Derivatives measure instantaneous rate of change — critical in physics, engineering, and economics.",
+          "explanationKh": "Power Rule: d/dx[axⁿ] = n·a·x^(n−1)។ ដូច្នេះ d/dx[5x³] = 3·5·x² = 15x²។ Derivatives វាស់ល្បឿននៃការផ្លាស់ប្ដូរ — ចាំបាច់ក្នុងរូបវិទ្យា វិស្វកម្ម និងសេដ្ឋកិច្ច។"
+        },
+        {
+          "id": 3,
+          "questionEn": "A function is continuous at x = a if:",
+          "questionKh": "អនុគមន៍ជាប់នៅ x = a ប្រសិនបើ:",
+          "options": [
+            { "textEn": "f(a) is undefined", "textKh": "f(a) មិនកំណត់" },
+            { "textEn": "The limit exists but does not equal f(a)", "textKh": "លីមីតមាន ប៉ុន្ដែ មិនស្មើ f(a)" },
+            { "textEn": "lim(x→a) f(x) = f(a) and f(a) exists", "textKh": "lim(x→a) f(x) = f(a) ហើយ f(a) មាន" },
+            { "textEn": "f(a) = 0", "textKh": "f(a) = 0" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "A function is continuous at x = a if three conditions hold: (1) f(a) exists, (2) lim(x→a) f(x) exists, (3) the limit equals f(a). Continuity is required before we can differentiate a function.",
+          "explanationKh": "អនុគមន៍ជាប់នៅ x = a ប្រសិនបើ: (1) f(a) មាន, (2) lim(x→a) f(x) មាន, (3) លីមីតស្មើ f(a)។ ភាពជាប់ (continuity) ចាំបាច់មុនពេល differentiate អនុគមន៍។"
+        }
+      ]
     }
   ]
 }

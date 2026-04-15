@@ -157,6 +157,57 @@
           "explanationKh": "'ការអប់រំ' មានន័យថា 'education' — ដំណើរការបណ្ដុះបណ្ដាល និងការរៀន។ ការអប់រំជាមូលដ្ឋានគ្រឹះនៃផ្លូវអាជីពទាំងអស់ ពីវិស្វកម្ម រហូតដល់វេជ្ជសាស្ត្រ និងសិល្បៈ។"
         }
       ]
+    },
+    {
+      "id": "conditionals_passive",
+      "titleEn": "Conditionals & Passive Voice",
+      "titleKh": "លក្ខខណ្ឌ និងកិរិយាសព្ទកម្មវចនៈ",
+      "focusEn": "If-clauses & Voice Transformation",
+      "focusKh": "ប្រយោគ if-clause និងការផ្លាស់ប្ដូរវចនៈ",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "Which sentence uses the First Conditional correctly?",
+          "questionKh": "ប្រយោគណាប្រើ First Conditional ត្រឹមត្រូវ?",
+          "options": [
+            { "textEn": "If it rains, I will stay home.", "textKh": "If it rains, I will stay home." },
+            { "textEn": "If it rains, I would stay home.", "textKh": "If it rains, I would stay home." },
+            { "textEn": "If it rained, I will stay home.", "textKh": "If it rained, I will stay home." },
+            { "textEn": "If it rains, I stayed home.", "textKh": "If it rains, I stayed home." }
+          ],
+          "correctIndex": 0,
+          "explanationEn": "The First Conditional describes real/likely future situations: 'If + present simple, will + base verb.' It is used when the condition is possible. Example: 'If you study, you will pass.'",
+          "explanationKh": "First Conditional ពិពណ៌នាអំពីស្ថានភាពអនាគតពិត/ដែលអាចកើត: 'If + present simple, will + base verb.' ឧទាហរណ៍: 'If you study, you will pass.'"
+        },
+        {
+          "id": 2,
+          "questionEn": "Convert to Passive Voice: 'The teacher corrects the homework.'",
+          "questionKh": "ប្ដូរទៅជា Passive Voice: 'The teacher corrects the homework.'",
+          "options": [
+            { "textEn": "The homework corrects the teacher.", "textKh": "The homework corrects the teacher." },
+            { "textEn": "The homework is corrected by the teacher.", "textKh": "The homework is corrected by the teacher." },
+            { "textEn": "The homework was corrected by the teacher.", "textKh": "The homework was corrected by the teacher." },
+            { "textEn": "The teacher is corrected by the homework.", "textKh": "The teacher is corrected by the homework." }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Passive Voice formula (present): Subject + is/are + past participle + by + agent. The object 'homework' becomes the subject, and 'corrects' becomes 'is corrected'. Past tense would use 'was corrected'.",
+          "explanationKh": "រូបមន្ត Passive Voice (present): Subject + is/are + past participle + by + agent។ 'homework' ក្លាយជា subject ហើយ 'corrects' ក្លាយជា 'is corrected'។ Passive past tense ប្រើ 'was corrected'។"
+        },
+        {
+          "id": 3,
+          "questionEn": "Which is the correct Second Conditional sentence?",
+          "questionKh": "ប្រយោគ Second Conditional ណាដែលត្រឹមត្រូវ?",
+          "options": [
+            { "textEn": "If I am rich, I will travel.", "textKh": "If I am rich, I will travel." },
+            { "textEn": "If I were rich, I would travel.", "textKh": "If I were rich, I would travel." },
+            { "textEn": "If I was rich, I will travel.", "textKh": "If I was rich, I will travel." },
+            { "textEn": "If I were rich, I will travel.", "textKh": "If I were rich, I will travel." }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "The Second Conditional is used for unreal/hypothetical situations: 'If + past simple (were), would + base verb.' We use 'were' (not 'was') for all subjects in formal English. Example: 'If I were a doctor, I would help more people.'",
+          "explanationKh": "Second Conditional ប្រើសម្រាប់ស្ថានភាពមិនពិត/សម្មតិ: 'If + past simple (were), would + base verb.' ប្រើ 'were' (មិន 'was') សម្រាប់ subject ទាំងអស់ ក្នុងភាសាផ្លូវការ។"
+        }
+      ]
     }
   ]
 }
