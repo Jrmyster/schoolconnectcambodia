@@ -382,7 +382,54 @@
     "en": "Communication",
     "kh": "ទំនាក់ទំនង",
     "icon": "📢",
-    "careers": []
+    "careers": [
+      {
+        "id": "journalist-reporter",
+        "en": "Journalist / Reporter",
+        "kh": "អ្នកសារព័ត៌មាន / អ្នករាយការណ៍",
+        "tasks": {
+          "en": [
+            "Investigate local issues, write articles, and report on news affecting Cambodian communities.",
+            "Conduct interviews with community leaders, government officials, and citizens to gather accurate information.",
+            "Verify facts through multiple sources before publishing to maintain journalistic integrity.",
+            "Use digital tools and social media platforms to reach wider audiences across provinces."
+          ],
+          "kh": [
+            "ស៊ើបអង្កេតបញ្ហាក្នុងស្រុក សរសេរអត្ថបទ និងរាយការណ៍ពីព័ត៌មានដែលប៉ះពាល់ដល់សហគមន៍កម្ពុជា។",
+            "ធ្វើការសម្ភាសន៍ជាមួយអ្នកដឹកនាំសហគមន៍ មន្ត្រីរដ្ឋាភិបាល និងប្រជាពលរដ្ឋ ដើម្បីប្រមូលព័ត៌មានត្រឹមត្រូវ។",
+            "ផ្ទៀងផ្ទាត់ការពិតតាមប្រភពជាច្រើន មុននឹងបោះពុម្ពផ្សាយ ដើម្បីរក្សាសុចរិតភាពសារព័ត៌មាន។",
+            "ប្រើប្រាស់ឧបករណ៍ឌីជីថល និងវេទិកាប្រព័ន្ធផ្សព្វផ្សាយសង្គម ដើម្បីទៅដល់ទស្សនិកជនទូលទាំងខេត្ត។"
+          ]
+        },
+        "impact": {
+          "en": "Keep the public informed and hold institutions accountable through truth and transparency.",
+          "kh": "ផ្តល់ព័ត៌មានដល់សាធារណជន និងជំរុញឱ្យស្ថាប័នមានគណនេយ្យភាពតាមរយៈសេចក្តីពិត និងតម្លាភាព។"
+        }
+      },
+      {
+        "id": "pr-specialist",
+        "en": "Public Relations Specialist",
+        "kh": "អ្នកឯកទេសទំនាក់ទំនងសាធារណៈ",
+        "tasks": {
+          "en": [
+            "Manage communication for NGOs or businesses, write press releases, and build positive relationships with the community.",
+            "Develop strategic messaging and communication plans to promote organizational goals and values.",
+            "Monitor media coverage, respond to public inquiries, and manage crisis communications effectively.",
+            "Organize press conferences, community events, and stakeholder meetings to strengthen public trust."
+          ],
+          "kh": [
+            "គ្រប់គ្រងទំនាក់ទំនងសម្រាប់អង្គការក្រៅរដ្ឋាភិបាល ឬអាជីវកម្ម សរសេរសេចក្តីប្រកាសព័ត៌មាន និងកសាងទំនាក់ទំនងល្អជាមួយសហគមន៍។",
+            "អភិវឌ្ឍសាររយុទ្ធសាស្ត្រ និងផែនការទំនាក់ទំនង ដើម្បីលើកកម្ពស់គោលដៅ និងតម្លៃរបស់ស្ថាប័ន។",
+            "ត្រួតពិនិត្យការផ្តល់ព័ត៌មានប្រព័ន្ធផ្សព្វផ្សាយ ឆ្លើយតបទៅនឹងការសាកសួររបស់សាធារណជន និងគ្រប់គ្រងការទំនាក់ទំនងក្នុងវិបត្តិប្រកបដោយប្រសិទ្ធភាព។",
+            "រៀបចំសន្និសីទព័ត៌មាន ព្រឹត្តិការណ៍សហគមន៍ និងការប្រជុំភាគីពាក់ព័ន្ធ ដើម្បីពង្រឹងទំនុកចិត្តរបស់សាធារណជន។"
+          ]
+        },
+        "impact": {
+          "en": "Help organizations effectively share their mission and connect with the people they serve.",
+          "kh": "ជួយអង្គការនានាក្នុងការចែករំលែកបេសកកម្មរបស់ពួកគេប្រកបដោយប្រសិទ្ធភាព និងភ្ជាប់ទំនាក់ទំនងជាមួយប្រជាជនដែលពួកគេបម្រើ។"
+        }
+      }
+    ]
   },
   {
     "id": "communications-technologies",
@@ -1415,7 +1462,54 @@
     "en": "Military Technologies",
     "kh": "បច្ចេកវិទ្យាយោធា",
     "icon": "🪖",
-    "careers": []
+    "careers": [
+      {
+        "id": "defense-analyst",
+        "en": "Defense Analyst",
+        "kh": "អ្នកវិភាគការពារជាតិ",
+        "tasks": {
+          "en": [
+            "Evaluate security threats, analyze satellite data, and advise on defense strategies.",
+            "Monitor regional geopolitical developments and produce intelligence briefings for senior officials.",
+            "Assess vulnerabilities in national infrastructure and recommend protective countermeasures.",
+            "Collaborate with international partners to share threat intelligence and coordinate joint defense planning."
+          ],
+          "kh": [
+            "វាយតម្លៃការគំរាមកំហែងសន្តិសុខ វិភាគទិន្នន័យផ្កាយរណប និងផ្តល់ប្រឹក្សាលើយុទ្ធសាស្ត្រការពារជាតិ។",
+            "តាមដានការអភិវឌ្ឍភូមិរដ្ឋសាស្ត្រក្នុងតំបន់ និងផ្តល់របាយការណ៍ข้อมូលស៊ើបការណ៍ដល់មន្ត្រីជំនាញ។",
+            "វាយតម្លៃភាពងាយរងគ្រោះនៃហេដ្ឋារចនាសម្ព័ន្ធជាតិ និងណែនាំវិធានការការពារបន្ថែម។",
+            "សហការជាមួយដៃគូអន្តរជាតិ ដើម្បីចែករំលែកข้อមូលស៊ើបការណ៍ការគំរាមកំហែង និងសម្របសម្រួលការរៀបចំផែនការការពារជាតិរួម។"
+          ]
+        },
+        "impact": {
+          "en": "Ensure national sovereignty and protect citizens from external security risks.",
+          "kh": "ធានាអធិបតេយ្យភាពជាតិ និងការពារប្រជាពលរដ្ឋពីហានិភ័យសន្តិសុខខាងក្រៅ។"
+        }
+      },
+      {
+        "id": "military-engineer",
+        "en": "Military Engineer",
+        "kh": "វិស្វករយោធា",
+        "tasks": {
+          "en": [
+            "Design secure communications networks, build temporary infrastructure, and develop defensive technologies.",
+            "Plan and oversee construction of military facilities, bridges, and field fortifications under operational conditions.",
+            "Apply engineering principles to neutralize explosive hazards and clear minefields safely.",
+            "Support disaster relief operations by rapidly deploying field hospitals, water purification systems, and shelter structures."
+          ],
+          "kh": [
+            "រចនាបណ្តាញទំនាក់ទំនងដែលមានសុវត្ថិភាព កសាងហេដ្ឋារចនាសម្ព័ន្ធបណ្តោះអាសន្ន និងអភិវឌ្ឍបច្ចេកវិទ្យាការពារ។",
+            "រៀបចំ និងត្រួតពិនិត្យការសាងសង់មូលដ្ឋានយោធា ស្ពាន និងការពង្រឹងជំរំប្រតិបត្តិការក្នុងស្ថានភាពប្រតិបត្តិការ។",
+            "ប្រើប្រាស់គោលការណ៍វិស្វកម្ម ដើម្បីបន្សាបគ្រោះថ្នាក់ពីគ្រឿងផ្ទុះ និងសម្អាតវាលមីន យ៉ាងមានសុវត្ថិភាព។",
+            "គាំទ្រប្រតិបត្តិការសង្គ្រោះគ្រោះមហន្តរាយ ដោយដាក់ពង្រាយមន្ទីរពេទ្យពេញ ប្រព័ន្ធសម្អាតទឹក និងសំណង់ជម្រករហ័ស។"
+          ]
+        },
+        "impact": {
+          "en": "Support national defense operations and assist in disaster relief efforts across the country.",
+          "kh": "គាំទ្រប្រតិបត្តិការការពារជាតិ និងជួយក្នុងកិច្ចខិតខំប្រឹងប្រែងសង្គ្រោះគ្រោះមហន្តរាយនៅទូទាំងប្រទេស។"
+        }
+      }
+    ]
   },
   {
     "id": "multi-interdisciplinary-studies",
@@ -1715,7 +1809,54 @@
     "en": "Physical Sciences",
     "kh": "វិទ្យាសាស្ត្ររូបវន្ត",
     "icon": "⚛️",
-    "careers": []
+    "careers": [
+      {
+        "id": "geologist",
+        "en": "Geologist",
+        "kh": "អ្នកភូគព្ភវិទូ",
+        "tasks": {
+          "en": [
+            "Study soil composition, locate underground water sources, and assess earthquake risks.",
+            "Conduct field surveys and collect rock and sediment samples for laboratory analysis.",
+            "Map geological formations to support infrastructure planning, mining operations, and land management.",
+            "Prepare technical reports on natural resource deposits and advise on sustainable extraction practices."
+          ],
+          "kh": [
+            "សិក្សាពីសមាសភាពដី ស្វែងរកប្រភពទឹកក្រោមដី និងវាយតម្លៃហានិភ័យនៃការរញ្ជួយដី។",
+            "ធ្វើការស្ទង់មតិតាមវាល និងប្រមូលគំរូថ្ម និងតំបន់ក្រដាមសម្រាប់ការវិភាគក្នុងមន្ទីរពិសោធន៍។",
+            "គូរផែនទីការបង្កើតភូគព្ភ ដើម្បីគាំទ្រការរៀបចំផែនការហេដ្ឋារចនាសម្ព័ន្ធ ប្រតិបត្តិការរុករក និងការគ្រប់គ្រងដី។",
+            "រៀបចំរបាយការណ៍បច្ចេកទេសសំណល់ធនធានធម្មជាតិ និងផ្តល់ប្រឹក្សាលើការអនុវត្តការស្រង់ចេញប្រកបដោយចីរភាព។"
+          ]
+        },
+        "impact": {
+          "en": "Help locate safe construction sites and discover crucial natural resources for the economy.",
+          "kh": "ជួយស្វែងរកទីតាំងសំណង់ដែលមានសុវត្ថិភាព និងស្វែងរកធនធានធម្មជាតិដ៏សំខាន់សម្រាប់សេដ្ឋកិច្ច។"
+        }
+      },
+      {
+        "id": "meteorologist",
+        "en": "Meteorologist / Climate Scientist",
+        "kh": "អ្នកឧតុនិយម / អ្នកវិទ្យាសាស្ត្រអាកាសធាតុ",
+        "tasks": {
+          "en": [
+            "Monitor weather patterns, predict monsoon seasons, and study the effects of climate change on agriculture.",
+            "Operate meteorological stations and analyze data from satellites, weather balloons, and ground sensors.",
+            "Develop seasonal forecasting models to help farmers and disaster agencies plan for extreme weather events.",
+            "Publish climate research and collaborate with government agencies on national climate adaptation strategies."
+          ],
+          "kh": [
+            "តាមដានលំនាំអាកាសធាតុ ព្យាករណ៍រដូវមូសុង និងសិក្សាពីផលប៉ះពាល់នៃការប្រែប្រួលអាកាសធាតុលើវិស័យកសិកម្ម។",
+            "ដំណើរការស្ថានីយ​ឧតុនិយម​ ​និង​វិភាគ​ទិន្នន័យ​ពី​ផ្កាយ​រណប ​លាន​អាកាស​ធាតុ​ និង​ឧបករណ៍​ចាប់​ពន្លឺ​ដី។",
+            "អភិវឌ្ឍគំរូព្យាករណ៍តាមរដូវ ដើម្បីជួយកសិករ និងស្ថាប័នគ្រោះមហន្តរាយ រៀបចំផែនការសម្រាប់ព្រឹត្តការណ៍អាកាសធាតុធ្ងន់ធ្ងរ។",
+            "បោះផ្សាយការស្រាវជ្រាវអាកាសធាតុ និងសហការជាមួយស្ថាប័នរដ្ឋាភិបាល លើយុទ្ធសាស្ត្រការសម្របខ្លួនអាកាសធាតុជាតិ។"
+          ]
+        },
+        "impact": {
+          "en": "Provide early warnings for storms and help farmers protect their crops from extreme weather.",
+          "kh": "ផ្តល់ការព្រមានជាមុនសម្រាប់ព្យុះ និងជួយកសិករការពារដំណាំរបស់ពួកគេពីអាកាសធាតុធ្ងន់ធ្ងរ។"
+        }
+      }
+    ]
   },
   {
     "id": "precision-production",
@@ -1799,7 +1940,54 @@
     "en": "Psychology",
     "kh": "ចិត្តវិទ្យា",
     "icon": "🧠",
-    "careers": []
+    "careers": [
+      {
+        "id": "clinical-psychologist",
+        "en": "Clinical Psychologist",
+        "kh": "អ្នកចិត្តវិទ្យាគ្លីនិក",
+        "tasks": {
+          "en": [
+            "Counsel individuals facing trauma, diagnose mental health conditions, and provide therapy.",
+            "Conduct psychological assessments using standardized tests to evaluate cognitive and emotional functioning.",
+            "Design individualized treatment plans combining cognitive-behavioral therapy, mindfulness, and culturally sensitive approaches.",
+            "Collaborate with psychiatrists, social workers, and community health workers to provide holistic patient care."
+          ],
+          "kh": [
+            "ផ្តល់ប្រឹក្សាដល់បុគ្គលដែលប្រឈមនឹងរបួសផ្លូវចិត្ត ធ្វើរោគវិនិច្ឆ័យស្ថានភាពសុខភាពផ្លូវចិត្ត និងផ្តល់ការព្យាបាល។",
+            "ធ្វើការវាយតម្លៃចិត្តវិទ្យា ដោយប្រើការធ្វើតេស្តស្តង់ដារ ដើម្បីវាយតម្លៃមុខងារស្មារតី និងអារម្មណ៍។",
+            "រចនាផែនការព្យាបាលផ្ទាល់ខ្លួន ដោយបញ្ចូលការព្យាបាលតាមការយល់ដឹង-អាកប្បកិរិយា ការដឹងខ្លួន និងវិធីសាស្ត្រសំដៅទៅតាមវប្បធម៌។",
+            "សហការជាមួយគ្រូពេទ្យចិត្តសាស្ត្រ បុគ្គលិកសង្គម និងអ្នកការពារសុខភាពសហគមន៍ ដើម្បីផ្តល់ការថែទាំអ្នកជំងឺប្រកបដោយភាពគ្រប់ជ្រុងជ្រោយ។"
+          ]
+        },
+        "impact": {
+          "en": "Heal unseen wounds and build emotional resilience within individuals and families.",
+          "kh": "ព្យាបាលរបួសដែលមើលមិនឃើញ និងកសាងភាពធន់ផ្នែកអារម្មណ៍នៅក្នុងបុគ្គល និងគ្រួសារ។"
+        }
+      },
+      {
+        "id": "school-counselor",
+        "en": "School Counselor",
+        "kh": "អ្នកប្រឹក្សាតាមសាលារៀន",
+        "tasks": {
+          "en": [
+            "Guide students through academic stress, support career planning, and mediate peer conflicts.",
+            "Identify at-risk students early and connect them with appropriate mental health and social support resources.",
+            "Facilitate group workshops on topics such as study skills, self-esteem, and safe digital behavior.",
+            "Communicate with parents and teachers to create a unified support network around each student's well-being."
+          ],
+          "kh": [
+            "ណែនាំសិស្សអំពីភាពតានតឹងក្នុងការសិក្សា គាំទ្រការរៀបចំផែនការអាជីព និងសម្របសម្រួលជម្លោះរវាងមិត្តភក្តិ។",
+            "កំណត់អត្តសញ្ញាណសិស្សដែលប្រឈមមុខការប្រថុយប្រថានបានឆាប់ ហើយភ្ជាប់ពួកគេជាមួយធនធានសុខភាពផ្លូវចិត្ត និងការគាំទ្រសង្គមសមស្រប។",
+            "សម្របការសិក្ខាសាលាក្រុមក្នុងប្រធានបទ ដូចជាជំនាញការសិក្សា ការគោរពខ្លួនឯង និងអាកប្បកិរិយាឌីជីថលដែលមានសុវត្ថិភាព។",
+            "ទំនាក់ទំនងជាមួយឪពុកម្ដាយ និងគ្រូ ដើម្បីបង្កើតបណ្តាញគាំទ្ររួមគ្នាជុំវិញសុខភាពសិស្សនីមួយៗ។"
+          ]
+        },
+        "impact": {
+          "en": "Create a supportive educational environment where students can thrive mentally and academically.",
+          "kh": "បង្កើតបរិយាកាសអប់រំដែលគាំទ្រ ដែលសិស្សអាចរីកចម្រើនទាំងផ្នែកស្មារតី និងការសិក្សា។"
+        }
+      }
+    ]
   },
   {
     "id": "science-technologies",
@@ -1860,7 +2048,54 @@
     "en": "Social Sciences",
     "kh": "វិទ្យាសាស្ត្រសង្គម",
     "icon": "👥",
-    "careers": []
+    "careers": [
+      {
+        "id": "sociologist",
+        "en": "Sociologist",
+        "kh": "អ្នកសង្គមវិទូ",
+        "tasks": {
+          "en": [
+            "Research community dynamics, study population shifts from provinces to cities, and analyze social inequality.",
+            "Design and conduct surveys, focus groups, and ethnographic fieldwork to gather qualitative and quantitative social data.",
+            "Interpret research findings and translate them into actionable policy recommendations for government and NGOs.",
+            "Monitor the social impact of development projects and advise on inclusive practices that protect marginalized communities."
+          ],
+          "kh": [
+            "ស្រាវជ្រាវសក្ដានុពលសហគមន៍ សិក្សាពីការផ្លាស់ប្តូរប្រជាជនពីខេត្តទៅទីក្រុង និងវិភាគវិសមភាពសង្គម។",
+            "រចនា និងធ្វើការស្ទង់មតិ ក្រុមផ្ដោត និងការងារតាមវាលសរីរវប្បកម្ម ដើម្បីប្រមូលទិន្នន័យសង្គមតាមគុណភាព និងបរិមាណ។",
+            "បកស្រាយការរកឃើញការស្រាវជ្រាវ ហើយបំប្លែងទៅជាអនុសាសន៍គោលនយោបាយអាចអនុវត្តបានសម្រាប់រដ្ឋាភិបាល និងអង្គការ NGO។",
+            "ត្រួតពិនិត្យផលប៉ះពាល់សង្គមនៃគម្រោងអភិវឌ្ឍន៍ ហើយផ្ដល់ប្រឹក្សាលើការអនុវត្តរួមបញ្ចូលដែលការពារសហគមន៍ដែលជួបការលំបាក។"
+          ]
+        },
+        "impact": {
+          "en": "Provide data that helps the government and NGOs design better social programs for vulnerable populations.",
+          "kh": "ផ្តល់ទិន្នន័យដែលជួយរដ្ឋាភិបាល និងអង្គការក្រៅរដ្ឋាភិបាលរៀបចំកម្មវិធីសង្គមកាន់តែប្រសើរសម្រាប់ជនងាយរងគ្រោះ។"
+        }
+      },
+      {
+        "id": "economist",
+        "en": "Economist",
+        "kh": "អ្នកសេដ្ឋកិច្ច",
+        "tasks": {
+          "en": [
+            "Analyze market trends, study inflation rates, and evaluate the impact of international trade on local businesses.",
+            "Build economic models to forecast GDP growth, employment rates, and the effects of proposed fiscal policies.",
+            "Conduct cost-benefit analyses for infrastructure projects, agricultural subsidies, and education investment programs.",
+            "Present research findings to policymakers, international financial institutions, and the private sector to guide investment decisions."
+          ],
+          "kh": [
+            "វិភាគនិន្នាការទីផ្សារ សិក្សាអត្រាអតិផរណា និងវាយតម្លៃផលប៉ះពាល់នៃពាណិជ្ជកម្មអន្តរជាតិលើអាជីវកម្មក្នុងស្រុក។",
+            "បង្កើតគំរូសេដ្ឋកិច្ច ដើម្បីព្យាករណ៍កំណើន GDP អត្រាការងារ និងផលប៉ះពាល់នៃគោលនយោបាយហិរញ្ញវត្ថុដែលបានស្នើ។",
+            "ធ្វើការវិភាគចំណូល-ចំណាយ សម្រាប់គម្រោងហេដ្ឋារចនាសម្ព័ន្ធ ប្រាក់ឧបត្ថម្ភកសិកម្ម និងកម្មវិធីវិនិយោគការអប់រំ។",
+            "បង្ហាញការរកឃើញការស្រាវជ្រាព ដល់អ្នករៀបចំគោលនយោបាយ ស្ថាប័នហិរញ្ញវត្ថុអន្តរជាតិ និងវិស័យឯកជន ដើម្បីណែនាំការសម្រេចចិត្តវិនិយោគ។"
+          ]
+        },
+        "impact": {
+          "en": "Guide national financial policy to promote sustainable economic growth and reduce poverty.",
+          "kh": "ណែនាំគោលនយោបាយហិរញ្ញវត្ថុជាតិ ដើម្បីជំរុញកំណើនសេដ្ឋកិច្ចប្រកបដោយចីរភាព និងកាត់បន្ថយភាពក្រីក្រ។"
+        }
+      }
+    ]
   },
   {
     "id": "theology",
