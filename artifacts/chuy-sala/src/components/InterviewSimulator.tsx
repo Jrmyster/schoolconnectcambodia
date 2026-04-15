@@ -11,6 +11,8 @@ import {
   User,
   Bot,
   FileText,
+  Mic,
+  MicOff,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -87,8 +89,12 @@ export function InterviewSimulator() {
   const [streaming, setStreaming] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
   const [questionCount, setQuestionCount] = useState(0);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const savedInputRef = useRef<string>("");
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -99,6 +105,98 @@ export function InterviewSimulator() {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [stage]);
+
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.abort();
+        recognitionRef.current = null;
+      }
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+    };
+  }, []);
+
+  const stopListening = useCallback(() => {
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+    if (recognitionRef.current) {
+      recognitionRef.current.abort();
+      recognitionRef.current = null;
+    }
+    setIsListening(false);
+  }, []);
+
+  const toggleSpeech = useCallback(() => {
+    if (isListening) {
+      stopListening();
+      return;
+    }
+
+    const SpeechRecognitionCtor =
+      (window as typeof window & { SpeechRecognition?: typeof SpeechRecognition; webkitSpeechRecognition?: typeof SpeechRecognition }).SpeechRecognition ||
+      (window as typeof window & { webkitSpeechRecognition?: typeof SpeechRecognition }).webkitSpeechRecognition;
+
+    if (!SpeechRecognitionCtor) return;
+
+    const recognition = new SpeechRecognitionCtor();
+    recognitionRef.current = recognition;
+    recognition.lang = language === "kh" ? "km-KH" : "en-US";
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    savedInputRef.current = input;
+
+    const resetSilenceTimer = () => {
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = setTimeout(() => {
+        if (recognitionRef.current) {
+          recognitionRef.current.stop();
+        }
+      }, 2000);
+    };
+
+    recognition.onstart = () => {
+      setIsListening(true);
+      resetSilenceTimer();
+    };
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      resetSilenceTimer();
+      let interim = "";
+      let finalTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i];
+        if (result.isFinal) {
+          finalTranscript += result[0].transcript;
+        } else {
+          interim += result[0].transcript;
+        }
+      }
+      const base = savedInputRef.current;
+      const combined = (base + finalTranscript + interim).trimStart();
+      if (finalTranscript) {
+        savedInputRef.current = (base + finalTranscript).trimStart();
+      }
+      setInput(combined);
+    };
+
+    recognition.onerror = () => {
+      stopListening();
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      recognitionRef.current = null;
+      if (silenceTimerRef.current) {
+        clearTimeout(silenceTimerRef.current);
+        silenceTimerRef.current = null;
+      }
+    };
+
+    recognition.start();
+  }, [isListening, language, input, stopListening]);
 
   const callGemini = useCallback(
     async (
@@ -186,8 +284,10 @@ export function InterviewSimulator() {
 
   const sendAnswer = async () => {
     if (!input.trim() || streaming || !selectedRole) return;
+    if (isListening) stopListening();
     const answer = input.trim();
     setInput("");
+    savedInputRef.current = "";
     const updated: Message[] = [...messages, { role: "user", content: answer }];
     setMessages(updated);
     await callGemini(updated, selectedRole, false);
@@ -208,6 +308,9 @@ export function InterviewSimulator() {
   };
 
   const restart = () => {
+    if (isListening) stopListening();
+    savedInputRef.current = "";
+    setInput("");
     setStage("idle");
     setSelectedRole(null);
     setMessages([]);
@@ -717,6 +820,7 @@ export function InterviewSimulator() {
                   <button
                     onClick={sendAnswer}
                     disabled={streaming || !input.trim()}
+                    title={kh ? "ផ្ញើចម្លើយ" : "Send answer"}
                     style={{
                       width: 40,
                       height: 40,
@@ -743,6 +847,46 @@ export function InterviewSimulator() {
                           : "white"
                       }
                     />
+                  </button>
+                  <button
+                    onClick={toggleSpeech}
+                    disabled={streaming}
+                    title={
+                      isListening
+                        ? kh ? "ឈប់ស្ដាប់" : "Stop recording"
+                        : kh ? "និយាយចម្លើយ" : "Speak your answer"
+                    }
+                    className={isListening ? "mic-pulse" : ""}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: "10px",
+                      background: isListening
+                        ? "rgba(239,68,68,0.2)"
+                        : streaming
+                        ? OFFICE_BLUE.surface
+                        : "rgba(255,255,255,0.06)",
+                      border: `1px solid ${
+                        isListening
+                          ? "rgba(239,68,68,0.6)"
+                          : streaming
+                          ? OFFICE_BLUE.border
+                          : "rgba(255,255,255,0.12)"
+                      }`,
+                      cursor: streaming ? "not-allowed" : "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      transition: "background 0.15s, border-color 0.15s",
+                      position: "relative",
+                    }}
+                  >
+                    {isListening ? (
+                      <MicOff size={16} color="#EF4444" />
+                    ) : (
+                      <Mic size={16} color={streaming ? OFFICE_BLUE.muted : "#93C5FD"} />
+                    )}
                   </button>
                   <button
                     onClick={endInterview}
@@ -787,18 +931,49 @@ export function InterviewSimulator() {
                   marginTop: "8px",
                 }}
               >
-                <p
-                  style={{
-                    fontSize: "11px",
-                    color: OFFICE_BLUE.muted,
-                    margin: 0,
-                    fontFamily: kh ? "var(--font-khmer, sans-serif)" : "inherit",
-                  }}
-                >
-                  {kh
-                    ? "ចូរឆ្លើយឲ្យបានច្បាស់ ដូចជានៅក្នុងការសម្ភាសន៍ពិតប្រាកដ"
-                    : "Answer as you would in a real interview — be specific and confident"}
-                </p>
+                {isListening ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 7,
+                        height: 7,
+                        borderRadius: "50%",
+                        background: "#EF4444",
+                        flexShrink: 0,
+                        animation: "mic-dot-blink 0.9s ease-in-out infinite",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        color: "#FCA5A5",
+                        fontWeight: 600,
+                        fontFamily: kh ? "var(--font-khmer, sans-serif)" : "inherit",
+                      }}
+                    >
+                      {kh ? "កំពុងស្ដាប់... (ឈប់និយាយ ២ វិនាទីដើម្បីបញ្ឈប់)" : "Listening… (2 s of silence stops recording)"}
+                    </span>
+                  </div>
+                ) : (
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      color: OFFICE_BLUE.muted,
+                      margin: 0,
+                      fontFamily: kh ? "var(--font-khmer, sans-serif)" : "inherit",
+                    }}
+                  >
+                    {kh
+                      ? "ចូរឆ្លើយឲ្យបានច្បាស់ ដូចជានៅក្នុងការសម្ភាសន៍ពិតប្រាកដ"
+                      : "Answer as you would in a real interview — be specific and confident"}
+                  </p>
+                )}
                 {questionCount >= 2 && (
                   <button
                     onClick={endInterview}
@@ -865,6 +1040,18 @@ export function InterviewSimulator() {
         @keyframes cursor-blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
+        }
+        @keyframes mic-ring {
+          0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.6); }
+          70% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+          100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+        }
+        .mic-pulse {
+          animation: mic-ring 1.1s ease-out infinite;
+        }
+        @keyframes mic-dot-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
         }
       `}</style>
     </section>
