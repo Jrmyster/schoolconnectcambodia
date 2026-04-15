@@ -3,6 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
+  Banknote,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -15,6 +16,7 @@ type NavItem = {
   labelEn: string;
   labelKh: string;
   icon: ComponentType<{ className?: string }>;
+  external?: boolean;
 };
 
 type NavGroup = {
@@ -62,8 +64,9 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "សុខុមាលភាព",
     icon: Smile,
     items: [
-      { href: "/sanctuary", labelEn: "Sanctuary", labelKh: "សន្តិភាព", icon: Leaf },
-      { href: "/space",     labelEn: "Space",      labelKh: "អវកាស",    icon: Rocket },
+      { href: "/sanctuary",          labelEn: "Sanctuary",          labelKh: "សន្តិភាព",          icon: Leaf },
+      { href: "/space",              labelEn: "Space",               labelKh: "អវកាស",              icon: Rocket },
+      { href: "https://finlitkh.com", labelEn: "Financial Literacy", labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ", icon: Banknote, external: true },
     ],
   },
 ];
@@ -148,33 +151,35 @@ function DropdownGroup({
         >
           {group.items.map((item) => {
             const isActive =
-              location === item.href ||
-              (item.href !== "/" && location.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "10px 14px",
-                  borderRadius: "8px",
-                  textDecoration: "none",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  color: isActive ? "hsl(var(--primary))" : "hsl(var(--foreground))",
-                  backgroundColor: isActive ? "hsl(var(--primary) / 0.08)" : "transparent",
-                  transition: "background-color 0.1s",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLElement).style.backgroundColor = "hsl(var(--muted) / 0.6)";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-                }}
-              >
+              !item.external &&
+              (location === item.href ||
+                (item.href !== "/" && location.startsWith(item.href)));
+
+            const sharedStyle: React.CSSProperties = {
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "10px 14px",
+              borderRadius: "8px",
+              textDecoration: "none",
+              fontSize: "14px",
+              fontWeight: 500,
+              color: isActive ? "hsl(var(--primary))" : "hsl(var(--foreground))",
+              backgroundColor: isActive ? "hsl(var(--primary) / 0.08)" : "transparent",
+              transition: "background-color 0.1s",
+            };
+
+            const sharedHover = {
+              onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+                if (!isActive) (e.currentTarget as HTMLElement).style.backgroundColor = "hsl(var(--muted) / 0.6)";
+              },
+              onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+                if (!isActive) (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+              },
+            };
+
+            const inner = (
+              <>
                 <item.icon
                   className="w-4 h-4 flex-shrink-0"
                   style={{ color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))" }}
@@ -194,6 +199,30 @@ function DropdownGroup({
                     }}
                   />
                 )}
+              </>
+            );
+
+            return item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                style={sharedStyle}
+                {...sharedHover}
+              >
+                {inner}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                style={sharedStyle}
+                {...sharedHover}
+              >
+                {inner}
               </Link>
             );
           })}
@@ -377,20 +406,41 @@ export function Navbar() {
                     <div className="ml-4 mt-0.5 mb-1 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3">
                       {group.items.map((item) => {
                         const isActive =
-                          location === item.href ||
-                          (item.href !== "/" && location.startsWith(item.href));
-                        return (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setMobileOpen(false)}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
-                              ${isActive ? "bg-primary/10 text-primary" : "text-foreground/80 hover:bg-black/5 hover:text-foreground"}`}
-                          >
+                          !item.external &&
+                          (location === item.href ||
+                            (item.href !== "/" && location.startsWith(item.href)));
+
+                        const mobileItemClass = `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                          ${isActive ? "bg-primary/10 text-primary" : "text-foreground/80 hover:bg-black/5 hover:text-foreground"}`;
+
+                        const mobileInner = (
+                          <>
                             <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
                             <span className={kh ? "font-khmer" : ""}>
                               {kh ? item.labelKh : item.labelEn}
                             </span>
+                          </>
+                        );
+
+                        return item.external ? (
+                          <a
+                            key={item.href}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setMobileOpen(false)}
+                            className={mobileItemClass}
+                          >
+                            {mobileInner}
+                          </a>
+                        ) : (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            className={mobileItemClass}
+                          >
+                            {mobileInner}
                           </Link>
                         );
                       })}
