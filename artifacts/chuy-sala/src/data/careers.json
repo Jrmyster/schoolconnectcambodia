@@ -567,6 +567,75 @@
           "en": "Power Cambodia's construction boom with safe, certified electrical systems that support homes, hospitals, and factories.",
           "kh": "ផ្គត់ផ្គង់ថាមពលដល់ការអភិវឌ្ឍន៍សំណង់ក្នុងប្រទេសកម្ពុជា ដោយប្រព័ន្ធអគ្គិសនីប្រកបដោយសុវត្ថិភាព ដែលគាំទ្រដល់ផ្ទះ មន្ទីរពេទ្យ និងរោងចក្រ។"
         }
+      },
+      {
+        "id": "master-plumber",
+        "en": "Master Plumber",
+        "kh": "ជាងទុយោទឹកជំនាញ",
+        "tasks": {
+          "en": [
+            "Design, install, and repair water supply lines, sanitation systems, and irrigation networks for homes and agriculture.",
+            "Inspect existing pipework for leaks, corrosion, and blockages and carry out targeted repairs to restore service.",
+            "Install and service water pumps, storage tanks, and filtration units for rural communities with limited infrastructure.",
+            "Ensure all plumbing work complies with national building codes and sanitation standards to protect public health."
+          ],
+          "kh": [
+            "រចនា ដំឡើង និងជួសជុលប្រព័ន្ធផ្គត់ផ្គង់ទឹក ប្រព័ន្ធអនាម័យ និងបណ្តាញធារាសាស្ត្រសម្រាប់លំនៅដ្ឋាន និងកសិកម្ម។",
+            "ត្រួតពិនិត្យបំពង់ទឹកដែលមានស្រាប់ ក្នុងការស្វែងរករន្ធលូ ការផ្លូវ និងការស្ទះ ហើយធ្វើការជួសជុលទៅតាមគោលដៅ ដើម្បីស្ដារសេវាកម្ម។",
+            "ដំឡើង និងថែទាំម៉ាស៊ីនបូមទឹក ធុងទំនុក និងឧបករណ៍ច្រោះទឹក សម្រាប់សហគមន៍ជនបទដែលមានហេដ្ឋារចនាសម្ព័ន្ធកំណត់។",
+            "ធានាឱ្យការងារជាងទុយោទឹកទាំងអស់អនុវត្តតាមក្រមសំណង់ជាតិ និងស្តង់ដារអនាម័យ ដើម្បីការពារសុខភាពសាធារណៈ។"
+          ]
+        },
+        "impact": {
+          "en": "Ensure communities have access to clean drinking water and safe sanitation, which is vital for public health.",
+          "kh": "ធានាថាសហគមន៍មានទឹកស្អាតប្រើប្រាស់ និងអនាម័យសុវត្ថិភាព ដែលមានសារៈសំខាន់សម្រាប់សុខភាពសាធារណៈ។"
+        }
+      },
+      {
+        "id": "certified-welder",
+        "en": "Certified Welder",
+        "kh": "ជាងផ្សារដែកជំនាញ",
+        "tasks": {
+          "en": [
+            "Use intense heat to fuse metal components for building frameworks, bridges, agricultural equipment, and vehicles.",
+            "Read technical drawings and fabricate custom metal structures to precise specifications for construction projects.",
+            "Operate MIG, TIG, and arc welding equipment safely and select appropriate filler materials for different metals.",
+            "Inspect completed welds for strength and integrity using visual checks and non-destructive testing methods."
+          ],
+          "kh": [
+            "ប្រើកម្តៅខ្លាំងដើម្បីផ្សារភ្ជាប់លោហៈសម្រាប់គ្រោងអគារ ស្ពាន ឧបករណ៍កសិកម្ម និងយានយន្ត។",
+            "អានប្លង់បច្ចេកទេស និងផ្សារសំណង់金属ផ្ទាល់ខ្លួន ទៅតាមលក្ខណៈបច្ចេកទេសជាក់លាក់ សម្រាប់គម្រោងសាងសង់។",
+            "ប្រតិបត្តិការឧបករណ៍ផ្សារ MIG, TIG និង arc យ៉ាងមានសុវត្ថិភាព ហើយជ្រើសរើសសម្ភារៈបំពេញសមស្រប សម្រាប់金属ផ្សេងៗ។",
+            "ត្រួតពិនិត្យការផ្សារដែលបានបញ្ចប់ ទៅលើភាពរឹងមាំ និងភាពត្រឹមត្រូវ ដោយប្រើការត្រួតពិនិត្យដោយភ្នែក និងវិធីសាស្ត្រធ្វើតេស្តដោយមិនបំផ្លាញ។"
+          ]
+        },
+        "impact": {
+          "en": "Provide the critical structural strength needed to build resilient infrastructure and modernize local farming tools.",
+          "kh": "ផ្តល់នូវភាពរឹងមាំនៃរចនាសម្ព័ន្ធដែលចាំបាច់ដើម្បីកសាងហេដ្ឋារចនាសម្ព័ន្ធរឹងមាំ និងធ្វើទំនើបកម្មឧបករណ៍កសិកម្មក្នុងស្រុក។"
+        }
+      },
+      {
+        "id": "hvac-technician",
+        "en": "HVAC Technician",
+        "kh": "ជាងម៉ាស៊ីនត្រជាក់ និងខ្យល់ចេញចូល",
+        "tasks": {
+          "en": [
+            "Install, maintain, and repair climate control systems, refrigeration units, and ventilation in commercial and residential buildings.",
+            "Diagnose faults in air conditioning and refrigeration systems using diagnostic tools and pressure gauges.",
+            "Perform routine servicing including filter replacement, refrigerant recharging, and coil cleaning to optimize efficiency.",
+            "Advise building owners on energy-efficient upgrades and eco-friendly refrigerants to reduce operating costs."
+          ],
+          "kh": [
+            "ដំឡើង ថែទាំ និងជួសជុលប្រព័ន្ធគ្រប់គ្រងសីតុណ្ហភាព ទូទឹកកក និងប្រព័ន្ធខ្យល់ចេញចូលក្នុងអគារពាណិជ្ជកម្ម និងលំនៅដ្ឋាន។",
+            "វិភាគបញ្ហាក្នុងប្រព័ន្ធម៉ាស៊ីនត្រជាក់ និងម៉ាស៊ីនទូទឹកកក ដោយប្រើឧបករណ៍វិភាគ និងគីឡូម៉ែត្រសម្ពាធ។",
+            "ធ្វើការថែទាំទៀងទាត់ រួមមានការប្ដូរតម្រង ការបំពេញ refrigerant និងការសម្អាត coil ដើម្បីបង្កើនប្រសិទ្ធភាព។",
+            "ផ្ដល់ប្រឹក្សាដល់ម្ចាស់អគារ អំពីការ upgrade ប្រើប្រាស់ថាមពលដោយប្រសិទ្ធភាព និង refrigerant ដែលមិនបំផ្លាញបរិស្ថាន ដើម្បីកាត់បន្ថយថ្លៃប្រតិបត្តិការ។"
+          ]
+        },
+        "impact": {
+          "en": "Protect food supplies through refrigeration and maintain safe, comfortable indoor environments during extreme heat.",
+          "kh": "ការពារការផ្គត់ផ្គង់អាហារតាមរយៈការរក្សាសីតុណ្ហភាពត្រជាក់ និងរក្សាបរិយាកាសក្នុងផ្ទះឱ្យមានសុវត្ថិភាព និងផាសុកភាពក្នុងកំឡុងពេលអាកាសធាតុក្តៅខ្លាំង។"
+        }
       }
     ]
   },
