@@ -1,3 +1,8 @@
+/**
+ * Chouy Sala — Offline Resource Guide PDF Generator
+ * Uses jsPDF v4 + jspdf-autotable v5
+ * Khmer font (Noto Sans Khmer) is fetched at runtime and registered.
+ */
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import careersRaw from "@/data/careers.json";
@@ -5,102 +10,127 @@ import healthData from "@/data/health_science.json";
 import grammarData from "@/data/english_grammar.json";
 import mathData from "@/data/mathematics.json";
 
-// ── Brand colours ─────────────────────────────────────────────────────────────
-const NAVY  = [26, 58, 92]   as [number, number, number];  // #1A3A5C
-const BLUE  = [26, 110, 168] as [number, number, number];  // #1A6EA8
-const GOLD  = [245, 158, 11] as [number, number, number];  // #F59E0B
-const WHITE = [255, 255, 255] as [number, number, number];
-const LIGHT = [240, 244, 248] as [number, number, number]; // section bg
-const DARK  = [30,  41,  59]  as [number, number, number]; // body text
-const MUTED = [100, 116, 139] as [number, number, number];
-
-// ── Types ─────────────────────────────────────────────────────────────────────
-type Major = {
-  id: string; en: string; kh: string; icon: string;
-  careers: {
-    id: string; en: string; kh: string;
-    tasks: { en: string[]; kh: string[] };
-    impact: { en: string; kh: string };
-  }[];
+// ── Brand colours (R, G, B) ───────────────────────────────────────────────────
+const C = {
+  navy:  [26,  58,  92]  as [number, number, number], // #1A3A5C
+  blue:  [26,  110, 168] as [number, number, number], // #1A6EA8
+  gold:  [245, 158, 11]  as [number, number, number], // #F59E0B
+  white: [255, 255, 255] as [number, number, number],
+  light: [240, 244, 248] as [number, number, number],
+  dark:  [30,  41,  59]  as [number, number, number],
+  muted: [100, 116, 139] as [number, number, number],
+  teal:  [16,  150, 100] as [number, number, number],
+  indigo:[37,  99,  235] as [number, number, number],
+  violet:[124, 58,  237] as [number, number, number],
 };
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Types ─────────────────────────────────────────────────────────────────────
+type Career = {
+  id: string; en: string; kh: string;
+  tasks: { en: string[]; kh: string[] };
+  impact: { en: string; kh: string };
+};
+type Major = { id: string; en: string; kh: string; icon: string; careers: Career[] };
+
+type SubjectData = {
+  topics: { titleEn: string; titleKh: string; focusEn: string; focusKh: string; questions: unknown[] }[];
+};
+
+// ── Khmer font loader ─────────────────────────────────────────────────────────
 async function loadKhmerFont(): Promise<string | null> {
   try {
     const url =
       "https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansKhmer/NotoSansKhmer-Regular.ttf";
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: "force-cache" });
     if (!res.ok) return null;
     const buf = await res.arrayBuffer();
     const bytes = new Uint8Array(buf);
-    let bin = "";
-    const CHUNK = 0x8000;
+    let binary = "";
+    const CHUNK = 32768;
     for (let i = 0; i < bytes.length; i += CHUNK) {
-      bin += String.fromCharCode(...bytes.subarray(i, Math.min(i + CHUNK, bytes.length)));
+      binary += String.fromCharCode(...bytes.subarray(i, Math.min(i + CHUNK, bytes.length)));
     }
-    return btoa(bin);
-  } catch {
+    return btoa(binary);
+  } catch (err) {
+    console.warn("[PDF] Khmer font not loaded:", err);
     return null;
   }
 }
 
-function drawRect(
-  doc: jsPDF,
-  x: number, y: number, w: number, h: number,
-  color: [number, number, number],
-) {
-  doc.setFillColor(...color);
+// ── Drawing helpers ───────────────────────────────────────────────────────────
+function fillRect(doc: jsPDF, x: number, y: number, w: number, h: number, rgb: [number, number, number]) {
+  doc.setFillColor(rgb[0], rgb[1], rgb[2]);
   doc.rect(x, y, w, h, "F");
 }
 
-function hRule(doc: jsPDF, y: number, color: [number, number, number] = GOLD) {
-  doc.setDrawColor(...color);
-  doc.setLineWidth(0.6);
-  doc.line(20, y, 190, y);
+function hLine(doc: jsPDF, y: number, x1 = 20, x2 = 190, rgb = C.gold, lw = 0.5) {
+  doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  doc.setLineWidth(lw);
+  doc.line(x1, y, x2, y);
 }
 
-function sectionHeader(
-  doc: jsPDF,
-  title: string,
-  subtitle: string,
-  y: number,
-  pageW = 210,
-) {
-  drawRect(doc, 0, y, pageW, 14, NAVY);
+/** Draws the navy banner at top of a section page. Returns the y cursor after the banner. */
+function sectionBanner(doc: jsPDF, title: string, subtitle: string, pageW: number): number {
+  const H = 15;
+  fillRect(doc, 0, 0, pageW, H, C.navy);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(11);
-  doc.setTextColor(...WHITE);
-  doc.text(title, 20, y + 5.5);
+  doc.setFontSize(10);
+  doc.setTextColor(C.white[0], C.white[1], C.white[2]);
+  doc.text(title, 18, 6.5);
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(...GOLD);
-  doc.text(subtitle, 20, y + 11);
-  return y + 14;
+  doc.setFontSize(7.5);
+  doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.text(subtitle, 18, 12);
+  return H + 4; // cursor below banner with small gap
+}
+
+/** Draws a repeating mini-header on continuation pages for a section. */
+function continuationHeader(doc: jsPDF, label: string, pageW: number) {
+  fillRect(doc, 0, 0, pageW, 7, C.navy);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(6.5);
+  doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.text(label + " (continued)", 18, 5);
+}
+
+/** Draws the standard footer on any page. */
+function pageFooter(doc: jsPDF, pageNum: number | string, rightLabel = "") {
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  fillRect(doc, 0, pageH - 9, pageW, 9, C.navy);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(6.5);
+  doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.text("Chouy Sala  |  chouy-sala.replit.app", 18, pageH - 3.5);
+  if (rightLabel) {
+    doc.setTextColor(180, 210, 240);
+    doc.text(rightLabel, pageW - 18, pageH - 3.5, { align: "right" });
+  }
+  doc.setTextColor(200, 220, 240);
+  doc.text(String(pageNum), pageW / 2, pageH - 3.5, { align: "center" });
 }
 
 // ── Cover Page ────────────────────────────────────────────────────────────────
-function buildCoverPage(doc: jsPDF, khFont: string | null) {
+function buildCoverPage(doc: jsPDF, kh: string | null) {
   const pageW = 210;
   const pageH = 297;
 
-  // Navy top banner
-  drawRect(doc, 0, 0, pageW, 72, NAVY);
+  // Top hero banner
+  fillRect(doc, 0, 0, pageW, 80, C.navy);
+  fillRect(doc, 0, 80, pageW, 3, C.gold);
 
-  // Gold accent stripe
-  drawRect(doc, 0, 72, pageW, 3, GOLD);
-
-  // Site name — Latin
+  // Title
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(38);
-  doc.setTextColor(...WHITE);
-  doc.text("Chouy Sala", pageW / 2, 30, { align: "center" });
+  doc.setFontSize(36);
+  doc.setTextColor(C.white[0], C.white[1], C.white[2]);
+  doc.text("Chouy Sala", pageW / 2, 34, { align: "center" });
 
-  // Khmer subtitle
-  if (khFont) {
+  // Khmer title (only if font loaded)
+  if (kh) {
     doc.setFont("NotoSansKhmer", "normal");
-    doc.setFontSize(20);
-    doc.setTextColor(...GOLD);
-    doc.text("ជួយសាលា", pageW / 2, 46, { align: "center" });
+    doc.setFontSize(18);
+    doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+    doc.text("\u1787\u17BD\u1799\u179F\u17B6\u179B\u17B6", pageW / 2, 50, { align: "center" });
     doc.setFont("helvetica", "normal");
   }
 
@@ -108,499 +138,434 @@ function buildCoverPage(doc: jsPDF, khFont: string | null) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
   doc.setTextColor(180, 210, 240);
-  doc.text("Help School — Cambodia", pageW / 2, 62, { align: "center" });
+  doc.text("Help School  |  Cambodia", pageW / 2, 68, { align: "center" });
 
-  // Central document title
-  doc.setFontSize(22);
+  // Document heading
   doc.setFont("helvetica", "bold");
-  doc.setTextColor(...NAVY);
-  doc.text("OFFLINE RESOURCE GUIDE", pageW / 2, 100, { align: "center" });
+  doc.setFontSize(20);
+  doc.setTextColor(C.navy[0], C.navy[1], C.navy[2]);
+  doc.text("OFFLINE RESOURCE GUIDE", pageW / 2, 102, { align: "center" });
 
-  hRule(doc, 108, GOLD);
+  hLine(doc, 110, 30, 180, C.gold, 0.7);
 
-  // Mission statement block
+  // Mission statement (English)
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(11);
-  doc.setTextColor(...DARK);
-  const mission = doc.splitTextToSize(
-    "Empowering Cambodian students with access to career guidance, bilingual exam preparation, and scholarship pathways — even without an internet connection.",
-    160,
-  );
-  doc.text(mission, pageW / 2, 120, { align: "center", lineHeightFactor: 1.6 });
+  doc.setFontSize(10.5);
+  doc.setTextColor(C.dark[0], C.dark[1], C.dark[2]);
+  const missionEn =
+    "Empowering Cambodian students with access to career guidance, " +
+    "bilingual exam preparation, and scholarship pathways — " +
+    "even without an internet connection.";
+  const missionLines = doc.splitTextToSize(missionEn, 160);
+  doc.text(missionLines, pageW / 2, 120, { align: "center", lineHeightFactor: 1.6 });
 
-  if (khFont) {
+  // Mission in Khmer
+  if (kh) {
     doc.setFont("NotoSansKhmer", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(...MUTED);
-    const missionKh = doc.splitTextToSize(
-      "ផ្ដល់សិទ្ធិអំណាចដល់សិស្សកម្ពុជា ក្នុងការទទួលបានការណែនាំអំពីអាជីព ការត្រៀមប្រឡង ២ ភាសា និងផ្លូវទទួលបានអាហារូបករណ៍ — ទោះបីគ្មានអ៊ីន្ទឺណែតក៏ដោយ។",
-      160,
-    );
-    doc.text(missionKh, pageW / 2, 148, { align: "center", lineHeightFactor: 1.7 });
+    doc.setFontSize(9);
+    doc.setTextColor(C.muted[0], C.muted[1], C.muted[2]);
+    const missionKhStr =
+      "\u1795\u17D2\u178A\u17B6\u179B\u179F\u17B7\u1791\u17D2\u1792\u17B7\u17A2\u1798\u17D2\u178E\u17B6\u1785\u178A\u179B\u17CB\u179F\u17B7\u179F\u17D2\u179F\u1780\u1798\u17D2\u1796\u17BB\u1787\u17B6 " +
+      "\u1780\u17D2\u1793\u17BB\u1784\u1780\u17B6\u179A\u178F\u17BD\u179B\u178F\u17D0\u1793\u200B\u1780\u17B6\u179A\u178E\u17B2\u1793\u17B6\u17C6\u17A2\u17C6\u1796\u17B8\u17A2\u17B6\u1787\u17B8\u1796";
+    const khLines = doc.splitTextToSize(missionKhStr, 160);
+    doc.text(khLines, pageW / 2, 150, { align: "center", lineHeightFactor: 1.7 });
     doc.setFont("helvetica", "normal");
   }
 
-  // What's inside card
-  drawRect(doc, 20, 175, 170, 60, LIGHT);
-  doc.setDrawColor(...BLUE);
-  doc.setLineWidth(0.4);
-  doc.rect(20, 175, 170, 60);
+  // "What's inside" card
+  const cardY = 176;
+  fillRect(doc, 20, cardY, 170, 64, C.light);
+  doc.setDrawColor(C.blue[0], C.blue[1], C.blue[2]);
+  doc.setLineWidth(0.35);
+  doc.rect(20, cardY, 170, 64);
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(10);
-  doc.setTextColor(...NAVY);
-  doc.text("WHAT'S INSIDE", 25, 183);
+  doc.setFontSize(9);
+  doc.setTextColor(C.navy[0], C.navy[1], C.navy[2]);
+  doc.text("WHAT'S INSIDE", 28, cardY + 8);
 
-  const contents = [
-    "Section 1 — Future Pathways Guide: 43 majors & 95+ career profiles with bilingual descriptions",
-    "Section 2 — Exam Prep Topics: Grade 12 subjects — Health & Science, English Grammar, Mathematics",
-    "Section 3 — Interview Coach: Evidence-based tips for job interviews & scholarship panels",
+  const sections = [
+    "Section 1 - Future Pathways Guide:  43 majors and 95+ career profiles with bilingual descriptions",
+    "Section 2 - Exam Prep Guide:  Grade 12 topics for Health & Science, English Grammar, and Mathematics",
+    "Section 3 - The Interview Coach:  Evidence-based strategies for job interviews and scholarship panels",
   ];
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
-  doc.setTextColor(...DARK);
-  contents.forEach((line, i) => {
-    doc.setFillColor(...GOLD);
-    doc.circle(27, 191 + i * 13, 1.2, "F");
-    const wrapped = doc.splitTextToSize(line, 154);
-    doc.text(wrapped, 31, 191 + i * 13);
+  doc.setFontSize(8.5);
+  doc.setTextColor(C.dark[0], C.dark[1], C.dark[2]);
+  sections.forEach((s, i) => {
+    const ly = cardY + 18 + i * 15;
+    // Bullet square
+    doc.setFillColor(C.gold[0], C.gold[1], C.gold[2]);
+    doc.rect(27, ly - 3, 2, 2, "F");
+    const wrapped = doc.splitTextToSize(s, 152);
+    doc.text(wrapped, 32, ly);
   });
 
-  // Bottom footer bar
-  drawRect(doc, 0, pageH - 22, pageW, 22, NAVY);
+  // Footer bar
+  fillRect(doc, 0, pageH - 20, pageW, 20, C.navy);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
-  doc.setTextColor(...GOLD);
-  doc.text("chouy-sala.replit.app", pageW / 2, pageH - 13, { align: "center" });
+  doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.text("chouy-sala.replit.app", pageW / 2, pageH - 11, { align: "center" });
   doc.setTextColor(180, 210, 240);
-  doc.text(`Generated ${new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}`, pageW / 2, pageH - 7, { align: "center" });
+  const dateStr = new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
+  doc.text(`Generated: ${dateStr}`, pageW / 2, pageH - 5, { align: "center" });
 }
 
 // ── Section 1 — Future Pathways ───────────────────────────────────────────────
-function buildFuturePathwaysSection(doc: jsPDF, khFont: string | null) {
+function buildFuturePathwaysSection(doc: jsPDF) {
   doc.addPage();
-  const pageW = 210;
+  const pageW = doc.internal.pageSize.getWidth();
 
-  let y = sectionHeader(
+  const startY = sectionBanner(
     doc,
     "SECTION 1 — FUTURE PATHWAYS GUIDE",
-    "Career profiles drawn from Cambodia's university majors — English & Khmer",
-    0,
+    "All 43 university majors with career paths and real-world impact",
     pageW,
   );
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(...MUTED);
+  doc.setFontSize(8);
+  doc.setTextColor(C.muted[0], C.muted[1], C.muted[2]);
   doc.text(
-    "Each row shows a major offered at Cambodian universities, the career pathways it opens, and the real-world impact.",
-    20, y + 6,
+    "Each row shows a major, the career roles it opens, and the impact those careers have in Cambodia.",
+    18, startY + 4,
   );
 
   const majors = careersRaw as Major[];
 
-  const rows: (string | { content: string; styles: object })[][] = [];
-
+  // Build flat table rows: [Major (blank for 2nd career), Career EN, Impact EN]
+  const rows: string[][] = [];
   majors.forEach((major) => {
     major.careers.forEach((career, idx) => {
-      const majorCell = idx === 0
-        ? {
-            content: `${major.icon} ${major.en}\n${major.kh}`,
-            rowSpan: major.careers.length,
-            styles: { fontStyle: "bold", valign: "middle" } as object,
-          }
-        : null;
-
-      const careerCell = `${career.en}\n${career.kh}`;
-      const impactCell = career.impact.en;
-
-      if (majorCell) {
-        rows.push([majorCell, careerCell, impactCell]);
-      } else {
-        rows.push([careerCell, impactCell]);
-      }
-    });
-  });
-
-  // Flatten rows to a simpler format (rowSpan can be tricky; use simple approach)
-  const flatRows: string[][] = [];
-  majors.forEach((major) => {
-    major.careers.forEach((career, idx) => {
-      flatRows.push([
-        idx === 0 ? `${major.icon} ${major.en}\n${major.kh}` : "",
-        `${career.en}\n${career.kh}`,
+      rows.push([
+        idx === 0 ? `${major.en}` : "",
+        career.en,
         career.impact.en,
       ]);
     });
   });
 
   autoTable(doc, {
-    startY: y + 12,
-    head: [["MAJOR / ជំនាញ", "CAREER / អាជីព", "IMPACT / ផលប្រយោជន៍"]],
-    body: flatRows,
-    margin: { left: 20, right: 20 },
+    startY: startY + 10,
+    head: [["MAJOR", "CAREER PATH", "REAL-WORLD IMPACT"]],
+    body: rows,
+    margin: { left: 18, right: 18 },
+    tableWidth: "auto",
     styles: {
       fontSize: 7.5,
-      cellPadding: { top: 3, right: 3, bottom: 3, left: 3 },
-      lineColor: [200, 215, 230],
-      lineWidth: 0.25,
+      cellPadding: { top: 2.5, bottom: 2.5, left: 3, right: 3 },
+      lineColor: [200, 215, 230] as [number, number, number],
+      lineWidth: 0.2,
       overflow: "linebreak",
       font: "helvetica",
-      textColor: [...DARK],
+      textColor: [30, 41, 59] as [number, number, number],
     },
     headStyles: {
-      fillColor: [...BLUE],
-      textColor: [...WHITE],
+      fillColor: C.blue as [number, number, number],
+      textColor: C.white as [number, number, number],
       fontStyle: "bold",
       fontSize: 8,
       halign: "left",
-      cellPadding: { top: 4, right: 3, bottom: 4, left: 3 },
+      cellPadding: { top: 4, bottom: 4, left: 3, right: 3 },
     },
     columnStyles: {
-      0: { cellWidth: 42, fontStyle: "bold", fillColor: [235, 244, 252] },
-      1: { cellWidth: 65 },
-      2: { cellWidth: 63 },
+      0: { cellWidth: 42, fontStyle: "bold", fillColor: [235, 244, 252] as [number, number, number] },
+      1: { cellWidth: 70 },
+      2: { cellWidth: 64 },
     },
     alternateRowStyles: {
-      fillColor: [248, 251, 255],
+      fillColor: [248, 251, 255] as [number, number, number],
     },
-    didParseCell(data) {
-      // Apply Khmer font to cells containing Khmer characters
-      if (khFont && data.cell.text.some((t: string) => /[\u1780-\u17FF]/.test(t))) {
-        data.cell.styles.font = "NotoSansKhmer";
-        data.cell.styles.fontSize = 6.5;
-      }
-    },
-    didDrawPage(data) {
-      // Repeat section label on continuation pages
+    didDrawPage: (data) => {
       if (data.pageNumber > 1) {
-        drawRect(doc, 0, 0, pageW, 7, NAVY);
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(7);
-        doc.setTextColor(...GOLD);
-        doc.text("SECTION 1 — FUTURE PATHWAYS GUIDE (continued)", 20, 5);
+        continuationHeader(doc, "SECTION 1 — FUTURE PATHWAYS GUIDE", pageW);
       }
-      // Footer
-      const pageH = doc.internal.pageSize.getHeight();
-      drawRect(doc, 0, pageH - 10, pageW, 10, NAVY);
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(7);
-      doc.setTextColor(...GOLD);
-      doc.text("Chouy Sala — chouy-sala.replit.app", 20, pageH - 4);
-      doc.setTextColor(180, 210, 240);
-      doc.text(`Page ${data.pageNumber}`, pageW - 20, pageH - 4, { align: "right" });
+      pageFooter(doc, data.pageNumber, "Section 1 of 3");
     },
   });
 }
 
 // ── Section 2 — Exam Prep ─────────────────────────────────────────────────────
-function buildExamPrepSection(doc: jsPDF, khFont: string | null) {
+function buildExamPrepSection(doc: jsPDF, kh: string | null) {
   doc.addPage();
-  const pageW = 210;
+  const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
 
-  let y = sectionHeader(
+  let y = sectionBanner(
     doc,
     "SECTION 2 — EXAM PREP GUIDE",
-    "Grade 12 bilingual quiz topics for the National University Entrance Examination (NUEE)",
-    0,
+    "Grade 12 bilingual study topics for the National University Entrance Examination (NUEE)",
     pageW,
   );
-  y += 8;
 
-  const subjects = [
-    {
-      title: "Health & Science",
-      kh: "សុខភាព និងវិទ្យាសាស្ត្រ",
-      color: [16, 150, 100] as [number, number, number],
-      emoji: "🔬",
-      grade: "Grade 11–12",
-      data: healthData,
-    },
-    {
-      title: "English Grammar",
-      kh: "វេយ្យាករណ៍ភាសាអង់គ្លេស",
-      color: [37, 99, 235] as [number, number, number],
-      emoji: "📖",
-      grade: "Grade 12",
-      data: grammarData,
-    },
-    {
-      title: "Mathematics",
-      kh: "គណិតវិទ្យា",
-      color: [124, 58, 237] as [number, number, number],
-      emoji: "🧮",
-      grade: "Grade 12",
-      data: mathData,
-    },
+  const subjects: { title: string; titleKh: string; grade: string; color: [number, number, number]; data: SubjectData }[] = [
+    { title: "Health & Science",  titleKh: "\u179F\u17BB\u1781\u1797\u17B6\u1796 \u1793\u17B7\u1784\u179C\u17B7\u178F\u17D2\u1799\u17B6\u179F\u17B6\u179F\u17D2\u178F\u17D2\u179A", grade: "Grade 11-12", color: C.teal,   data: healthData  as SubjectData },
+    { title: "English Grammar",   titleKh: "\u179C\u17C1\u1799\u17D2\u1799\u17B6\u1780\u179A\u178E\u17CD\u1797\u17B6\u179F\u17B6\u17A2\u1784\u17CB\u1782\u17D2\u179B\u17C1\u179F", grade: "Grade 12",    color: C.indigo, data: grammarData as SubjectData },
+    { title: "Mathematics",       titleKh: "\u1782\u178E\u17B7\u178F\u179C\u17B7\u1791\u17D2\u1799\u17B6",                                                                          grade: "Grade 12",    color: C.violet, data: mathData    as SubjectData },
   ];
 
-  subjects.forEach((subj) => {
-    // Subject header bar
-    drawRect(doc, 20, y, 170, 10, subj.color);
+  for (const subj of subjects) {
+    // Subject colour bar
+    fillRect(doc, 18, y, 174, 11, subj.color);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(...WHITE);
-    doc.text(`${subj.emoji}  ${subj.title}`, 24, y + 7);
+    doc.setFontSize(9.5);
+    doc.setTextColor(C.white[0], C.white[1], C.white[2]);
+    doc.text(subj.title, 23, y + 7.5);
 
-    if (khFont) {
+    // Khmer name right-aligned in bar (only if font loaded)
+    if (kh) {
       doc.setFont("NotoSansKhmer", "normal");
       doc.setFontSize(8);
       doc.setTextColor(220, 240, 255);
-      doc.text(subj.kh, 130, y + 7);
+      doc.text(subj.titleKh, pageW - 22, y + 7.5, { align: "right" });
       doc.setFont("helvetica", "normal");
     }
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7.5);
-    doc.setTextColor(...MUTED);
-    doc.text(subj.grade, 175, y + 7, { align: "right" });
-    y += 10;
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(7);
+    doc.setTextColor(C.white[0], C.white[1], C.white[2]);
+    doc.text(subj.grade, 23, y + 7.5 + 0.1); // drawn over by bold above — grade shown via alpha
+    // Actually draw grade in the bar at the end
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7);
+    doc.text(subj.grade, 80, y + 7.5);
 
-    // Topics table
-    const topicRows = subj.data.topics.map((topic) => [
-      topic.titleEn,
-      topic.titleKh,
-      topic.focusEn,
-      `${topic.questions.length} questions`,
+    y += 11;
+
+    // Build topic rows: show English topic, English focus, question count
+    const topicRows = subj.data.topics.map((t) => [
+      t.titleEn,
+      t.focusEn,
+      `${t.questions.length} questions`,
     ]);
 
     autoTable(doc, {
       startY: y,
-      head: [["Topic", "ប្រធានបទ", "Focus Area", "Questions"]],
+      head: [["Topic", "Focus Area", "Questions"]],
       body: topicRows,
-      margin: { left: 20, right: 20 },
+      margin: { left: 18, right: 18 },
       styles: {
         fontSize: 8,
-        cellPadding: { top: 3, right: 3, bottom: 3, left: 3 },
-        lineColor: [200, 215, 230],
+        cellPadding: { top: 3, bottom: 3, left: 3, right: 3 },
+        lineColor: [200, 215, 230] as [number, number, number],
         lineWidth: 0.2,
-        textColor: [...DARK],
+        textColor: [30, 41, 59] as [number, number, number],
         font: "helvetica",
       },
       headStyles: {
         fillColor: subj.color,
-        textColor: [...WHITE],
+        textColor: C.white as [number, number, number],
         fontStyle: "bold",
         fontSize: 8,
-        cellPadding: { top: 3.5, right: 3, bottom: 3.5, left: 3 },
+        cellPadding: { top: 3.5, bottom: 3.5, left: 3, right: 3 },
       },
       columnStyles: {
-        0: { cellWidth: 50, fontStyle: "bold" },
-        1: { cellWidth: 55 },
-        2: { cellWidth: 60 },
-        3: { cellWidth: 20, halign: "center" },
+        0: { cellWidth: 70, fontStyle: "bold" },
+        1: { cellWidth: 86 },
+        2: { cellWidth: 22, halign: "center" },
       },
-      alternateRowStyles: { fillColor: [248, 251, 255] },
-      didParseCell(data) {
-        if (khFont && data.cell.text.some((t: string) => /[\u1780-\u17FF]/.test(t))) {
-          data.cell.styles.font = "NotoSansKhmer";
-          data.cell.styles.fontSize = 7;
-        }
-      },
+      alternateRowStyles: { fillColor: [248, 251, 255] as [number, number, number] },
     });
 
-    y = (doc as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
-  });
+    // Safe access to lastAutoTable
+    const lastTable = (doc as unknown as { lastAutoTable?: { finalY?: number } }).lastAutoTable;
+    y = (lastTable?.finalY ?? y + 30) + 8;
+  }
 
-  // Study tips callout
-  drawRect(doc, 20, y, 170, 32, [255, 251, 235]);
-  doc.setDrawColor(...GOLD);
-  doc.setLineWidth(0.5);
-  doc.rect(20, y, 170, 32);
-  drawRect(doc, 20, y, 4, 32, GOLD);
+  // Study tips callout box
+  if (y + 34 > pageH - 20) y = pageH - 54; // snap to bottom if overflowing
+  fillRect(doc, 18, y, 174, 34, [255, 251, 235]);
+  doc.setDrawColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.setLineWidth(0.4);
+  doc.rect(18, y, 174, 34);
+  fillRect(doc, 18, y, 5, 34, C.gold);
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
-  doc.setTextColor(...NAVY);
-  doc.text("📝  Grade 12 Study Tips", 28, y + 7);
+  doc.setTextColor(C.navy[0], C.navy[1], C.navy[2]);
+  doc.text("Grade 12 Study Tips", 27, y + 8);
 
-  const tips = [
-    "Start with topics where you feel most confident to build momentum.",
-    "Practice each topic at least twice — mistakes are how you learn.",
-    "Use the bilingual explanations to understand both EN and Khmer terminology.",
+  const studyTips = [
+    "Start with topics where you feel most confident to build momentum early.",
+    "Practice each topic at least twice — mistakes are the best teachers.",
+    "Use both English and Khmer explanations to deepen your understanding.",
   ];
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
-  doc.setTextColor(...DARK);
-  tips.forEach((tip, i) => {
-    doc.setFillColor(...GOLD);
-    doc.circle(28, y + 15 + i * 7, 1, "F");
-    doc.text(tip, 32, y + 15 + i * 7);
+  doc.setTextColor(C.dark[0], C.dark[1], C.dark[2]);
+  studyTips.forEach((tip, i) => {
+    doc.setFillColor(C.gold[0], C.gold[1], C.gold[2]);
+    doc.circle(28.5, y + 15 + i * 7, 1, "F");
+    doc.text(tip, 33, y + 15 + i * 7);
   });
 
-  y += 40;
-
-  // Page footer
-  drawRect(doc, 0, pageH - 10, pageW, 10, NAVY);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7);
-  doc.setTextColor(...GOLD);
-  doc.text("Chouy Sala — chouy-sala.replit.app", 20, pageH - 4);
-  doc.setTextColor(180, 210, 240);
-  doc.text("Section 2 — Exam Prep Guide", pageW - 20, pageH - 4, { align: "right" });
+  pageFooter(doc, "Exam Prep", "Section 2 of 3");
 }
 
 // ── Section 3 — Interview Coach ───────────────────────────────────────────────
-function buildInterviewCoachSection(doc: jsPDF, khFont: string | null) {
+function buildInterviewCoachSection(doc: jsPDF, kh: string | null) {
   doc.addPage();
-  const pageW = 210;
+  const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
 
-  sectionHeader(
+  const startY = sectionBanner(
     doc,
     "SECTION 3 — THE INTERVIEW COACH",
-    "Evidence-based preparation strategies for job interviews & scholarship panels",
-    0,
+    "Evidence-based preparation strategies for job interviews and scholarship panels",
     pageW,
   );
 
-  const tips: { title: string; titleKh: string; body: string; bodyKh: string; icon: string }[] = [
+  const coachTips: { title: string; titleKh: string; body: string; bodyKh: string }[] = [
     {
-      icon: "🎯",
       title: "Research Before You Walk In",
-      titleKh: "ស្រាវជ្រាវ មុនពេលអ្នកចូល",
-      body: "Study the organisation's mission, recent news, and the job description thoroughly. Interviewers immediately notice candidates who understand the role and connect it to the organisation's goals.",
-      bodyKh: "សិក្សាបេសកកម្ម ព័ត៌មានថ្មីៗ និងការពិពណ៌នាការងារ យ៉ាងហ្មត់ចត់។ អ្នកសំភាសន៍ ភ្លាមៗ កត់ចំណាំអ្នកដែលយល់ដឹងអំពីតួនាទី ហើយភ្ជាប់វាទៅគោលដៅអង្គការ។",
+      titleKh: "\u179F\u17D2\u179A\u17B6\u179C\u1787\u17D2\u179A\u17B6\u179C \u1798\u17BB\u1793\u1796\u17C1\u179B\u17A2\u17D2\u1793\u1780\u1785\u17BC\u179B",
+      body: "Study the organisation's mission, recent news, and the job description thoroughly. " +
+            "Interviewers immediately notice candidates who understand the role.",
+      bodyKh: "\u179F\u17B7\u1780\u17D2\u179F\u17B6\u1794\u17C1\u179F\u1780\u1780\u1798\u17D2\u1798 \u1796\u17D0\u178F\u17CC\u1798\u17B6\u1793\u1790\u17D2\u1798\u17B8\u17C6 \u1793\u17B7\u1784\u1780\u17B6\u179A\u1796\u17B7\u1796\u178E\u17CC\u1793\u17B6\u1780\u17B6\u179A\u1784\u17B6\u179A \u1799\u17B6\u1784\u17A0\u17D2\u1798\u178F\u17CB\u1785\u178F\u17CB\u17D4",
     },
     {
-      icon: "⭐",
       title: "Use the STAR Method",
-      titleKh: "ប្រើវិធី STAR",
-      body: "Structure every behavioural answer using Situation → Task → Action → Result. This makes your responses clear, concise, and evidence-based, which is valued by every interviewer globally.",
-      bodyKh: "រៀបចំចម្លើយរៀងរាល់ខ្ញុំ ដោយប្រើ: ស្ថានការណ៍ → ភារកិច្ច → សកម្មភាព → លទ្ធផល។ នេះធ្វើឱ្យចម្លើយរបស់អ្នកច្បាស់ល្អ សង្ខេប ហើយផ្អែកលើភស្តុតាង ដែលអ្នកសំភាសន៍ទូទៅជំនាញវាយតម្លៃ។",
+      titleKh: "\u1794\u17D2\u179A\u17be\u179C\u17B7\u1792\u17B7 STAR",
+      body: "Structure answers using Situation, Task, Action, and Result. " +
+            "This makes responses clear, concise, and evidence-based for every interviewer.",
+      bodyKh: "\u179A\u17C1\u1794\u1785\u1780\u1785\u1798\u17D2\u179B\u17BE\u1799\u179A\u17B7\u1799\u1784\u179A\u17B6\u179B\u17CB \u178A\u17C4\u1799\u1794\u17D2\u179A\u17be\u17D0 \u179F\u17D2\u1790\u17B6\u1793\u1780\u17B6\u179A\u178E\u17CD \u1797\u17B6\u179A\u1780\u17B7\u1785\u17D2\u1785 \u179F\u1780\u1798\u17D2\u1798\u1797\u17B6\u1796 \u179F \u179B\u178F\u17D2\u1792\u1795\u179B\u17D4",
     },
     {
-      icon: "🗣️",
-      title: "Tone, Pace & Clarity",
-      titleKh: "សម្លេង ល្បឿន និងភាពច្បាស់លាស់",
-      body: "Speak clearly at a measured pace — not too fast, not too slow. Pause briefly before answering to collect your thoughts. A calm, confident tone signals professionalism more than any single answer you give.",
-      bodyKh: "និយាយឱ្យច្បាស់ ក្នុងល្បឿនស្ថិតស្ថេរ — មិនលឿនពេក មិនយឺតពេក។ ឈប់ស្ងៀមមួយចំណុចក្រោយសំណួរ ដើម្បីប្រមូលគំនិត។ សម្លេងស្ងប់ស្ងាត់ និងជឿជាក់ បង្ហាញវិជ្ជាជីវៈ ច្រើនជាចម្លើយណាក៏ដោយ។",
+      title: "Tone, Pace and Clarity",
+      titleKh: "\u179F\u1798\u17D2\u179B\u17C1\u1784 \u179B\u17D2\u1794\u17BE\u1793 \u1793\u17B7\u1784\u1797\u17B6\u1796\u1785\u17D2\u1794\u17B6\u179F\u17CB\u179B\u17B6\u179F\u17CB",
+      body: "Speak clearly at a measured pace. Pause briefly before answering to collect your thoughts. " +
+            "A calm, confident tone signals professionalism.",
+      bodyKh: "\u1793\u17B7\u1799\u17B6\u1799\u17A2\u17C4\u1799\u1785\u17D2\u1794\u17B6\u179F\u17CB \u1780\u17D2\u1793\u17BB\u1784\u179B\u17D2\u1794\u17BE\u1793\u179F\u17D2\u1790\u17B7\u178F\u179F\u17D2\u1790\u17C1\u179A\u17D4 \u179F\u1798\u17D2\u179B\u17C1\u1784\u179F\u17D2\u1784\u1794\u17CB\u179F\u17D2\u1784\u17B6\u178F\u17CB \u1793\u17B7\u1784\u1787\u17BE\u1787\u17B6\u1780\u17CB \u1794\u1784\u17CB\u17A0\u17B6\u1789\u179C\u17B7\u1787\u17D2\u1787\u17B6\u1787\u17B8\u1796\u17D4",
     },
     {
-      icon: "💼",
-      title: "Body Language & Presence",
-      titleKh: "ភាសាកាយវិការ និងវត្តមាន",
-      body: "Sit upright with relaxed shoulders. Make natural eye contact — not a stare. Nod to show active listening. Avoid crossing arms or fidgeting. Your physical presence communicates confidence before you say a word.",
-      bodyKh: "អង្គុយ똑똑ត្រង់ ស្មាសម្រាក។ ធ្វើទំនាក់ទំនងភ្នែកដោយធម្មជាតិ — មិនមែនសម្លឹងដូចខ្លា។ ងាកក្បាលដើម្បីបង្ហាញការស្តាប់能动地。 វត្តមានរាងកាយផ្ទាល់ខ្លួនបញ្ជាក់ ជំនឿ មុនពេលអ្នកនិយាយ Word ណាម្ដង។",
+      title: "Body Language and Presence",
+      titleKh: "\u1797\u17B6\u179F\u17B6\u1780\u17B6\u1799\u179C\u17B7\u1780\u17B6\u179A \u1793\u17B7\u1784\u179C\u178F\u17D2\u178F\u1798\u1780\u17D2\u1793\u17BB\u1784",
+      body: "Sit upright with relaxed shoulders. Make natural eye contact. " +
+            "Nod to show active listening. Avoid crossing arms or fidgeting.",
+      bodyKh: "\u17A2\u1784\u17D2\u1782\u17BB\u1799\u178F\u17D2\u179A\u1784\u17CB \u179F\u17D2\u1798\u17B6\u179F\u1798\u17D2\u179A\u17B6\u1780\u17D4 \u1792\u17D2\u179C\u17BE\u178F\u1798\u17D2\u1793\u17B6\u1780\u178F\u1798\u17D2\u1793\u1784\u1797\u17D2\u1793\u17C1\u1780\u178A\u17C4\u1799\u1792\u1798\u17D2\u1798\u1787\u17B6\u178F\u17B7\u17D4 \u1784\u17B6\u1780\u1780\u17D2\u1794\u17B6\u179B\u178A\u17BE\u1798\u17D2\u1794\u17B8\u1794\u1784\u17CB\u17A0\u17B6\u1789\u1780\u17B6\u179A\u179F\u17D2\u178F\u17B6\u1794\u17CB\u17D4",
     },
     {
-      icon: "❓",
       title: "Ask Thoughtful Questions",
-      titleKh: "ស្នើសំណួរដ៏ស៊ីជម្រៅ",
-      body: "Prepare 3–5 genuine questions to ask the interviewer. Great options: 'What does success look like in this role in the first 90 days?' or 'How does this team contribute to the broader mission?'",
-      bodyKh: "រៀបចំ ៣–៥ សំណួរពិតប្រាកដ ដើម្បីសួរអ្នកសំភាស។ ជម្រើសល្អ: 'ភាពជោគជ័យក្នុងតួនាទីនេះ ក្នុង ៩០ ថ្ងៃដំបូង ហើទ?' ឬ 'តើក្រុមនេះ ចូលរួមមុខតូចយ៉ាងណា ទៅបេសកកម្មទូលំទូលាយ?'",
+      titleKh: "\u179F\u17D2\u1793\u17BE\u179F\u1798\u17D2\u178E\u17BD\u179A\u178A\u17D2\u178B\u179F\u17CA\u1787\u1798\u17D2\u179A\u17BD\u1780",
+      body: "Prepare 3 to 5 genuine questions. For example: What does success look like in this role in 90 days? " +
+            "How does this team contribute to the broader mission?",
+      bodyKh: "\u179A\u17C1\u1794\u1785\u1780 ៣ \u178F\u17B6\u1798 ៥ \u179F\u1798\u17D2\u178E\u17BD\u179A\u1796\u17B7\u178F\u1794\u17D2\u179A\u17B6\u1780\u178A\u17D4 \u1793\u17C1\u1780\u1793\u17C2\u1780\u17D2\u1793\u1784\u1793\u17B7\u1799\u17B6\u1799\u179F\u17D2\u179F\u17BB\u1798\u179F\u17D2\u179A\u17BD\u179B\u17C1\u1780\u17B6\u179A\u1784\u17B6\u179A\u1793\u17C1\u17D4",
     },
     {
-      icon: "🙏",
       title: "Follow Up With Gratitude",
-      titleKh: "តាមដានដោយការគោរព",
-      body: "Send a brief thank-you message within 24 hours. Mention one specific topic from the conversation to show you were genuinely engaged. This small act significantly increases your chance of being remembered positively.",
-      bodyKh: "ផ្ញើសាររំលឹកអំណរគុណ ក្នុង ២៤ ម៉ោង។ ដ.ស. ប្រធានបទមួយ ពីការសន្ទនា ដើម្បីបង្ហាញថាអ្នកបានចូលរួមពិតប្រាកដ។ ការប្រព្រឹត្ដតូចនេះ បង្កើន ឱកាស ឱ្យអ្នករំឭកបានជោគជ័យ ។",
+      titleKh: "\u178F\u17B6\u1798\u178A\u17B6\u1793\u178A\u17C4\u1799\u1780\u17B6\u179A\u1782\u17C4\u179A\u1796",
+      body: "Send a brief thank-you message within 24 hours. Mention one specific topic from the interview to show genuine engagement.",
+      bodyKh: "\u1795\u17D2\u1789\u17BE\u179F\u17B6\u179A\u179A\u1798\u17D2\u179B\u17B9\u1780\u17A2\u1789\u179A\u1782\u17BB\u178E \u1780\u17D2\u1793\u17BB\u1784 ២៤ \u1798\u17C9\u17B8\u1784\u17D4 \u1793\u17B7\u1799\u17B6\u1799\u178A\u17B9\u1784\u1794\u17D2\u179A\u1792\u17B6\u1793\u1794\u178F\u1798\u17BD\u1799\u1796\u17B8\u1780\u17B6\u179A\u179F\u1798\u17D2\u1797\u17B6\u179F \u178A\u17BE\u1798\u17D2\u1794\u17B8\u1794\u1784\u17CB\u17A0\u17B6\u1789\u1796\u17B7\u178F\u1794\u17D2\u179A\u17B6\u1780\u178A\u17D4",
     },
   ];
 
-  let y = 20;
+  let y = startY + 2;
+  const CARD_H = 39;
+  const CARD_GAP = 2;
 
-  tips.forEach((tip, i) => {
-    const even = i % 2 === 0;
-    const bgColor: [number, number, number] = even ? LIGHT : [255, 255, 255];
+  coachTips.forEach((tip, i) => {
+    const bg: [number, number, number] = i % 2 === 0 ? C.light : [255, 255, 255];
+    fillRect(doc, 18, y, 174, CARD_H, bg);
+    // Border
+    doc.setDrawColor(C.blue[0], C.blue[1], C.blue[2]);
+    doc.setLineWidth(0.25);
+    doc.rect(18, y, 174, CARD_H);
+    // Left accent bar
+    fillRect(doc, 18, y, 5, CARD_H, C.blue);
 
-    // Tip card
-    drawRect(doc, 20, y, 170, 38, bgColor);
-    doc.setDrawColor(...BLUE);
-    doc.setLineWidth(0.3);
-    doc.rect(20, y, 170, 38);
-    drawRect(doc, 20, y, 5, 38, BLUE);
+    // Number badge
+    fillRect(doc, 23, y + 2, 8, 8, C.navy);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8);
+    doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+    doc.text(String(i + 1), 27, y + 8, { align: "center" });
 
-    // Icon + title
+    // Title
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9);
-    doc.setTextColor(...NAVY);
-    doc.text(`${tip.icon}  ${tip.title}`, 30, y + 7);
+    doc.setTextColor(C.navy[0], C.navy[1], C.navy[2]);
+    doc.text(tip.title, 35, y + 8);
 
-    if (khFont) {
+    // Khmer title
+    if (kh) {
       doc.setFont("NotoSansKhmer", "normal");
       doc.setFontSize(7.5);
-      doc.setTextColor(...MUTED);
-      doc.text(tip.titleKh, 30, y + 13);
+      doc.setTextColor(C.muted[0], C.muted[1], C.muted[2]);
+      doc.text(tip.titleKh, 35, y + 14.5);
       doc.setFont("helvetica", "normal");
     }
 
     // Body text
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
-    doc.setTextColor(...DARK);
-    const bodyLines = doc.splitTextToSize(tip.body, 155);
-    doc.text(bodyLines, 30, khFont ? y + 20 : y + 14);
+    doc.setTextColor(C.dark[0], C.dark[1], C.dark[2]);
+    const bodyY = kh ? y + 20 : y + 14;
+    const bodyLines = doc.splitTextToSize(tip.body, 150);
+    doc.text(bodyLines, 35, bodyY);
 
-    if (khFont) {
+    // Khmer body (only if font loaded and space allows)
+    if (kh && bodyLines.length <= 2) {
       doc.setFont("NotoSansKhmer", "normal");
       doc.setFontSize(6.5);
-      doc.setTextColor(...MUTED);
-      const bodyKhLines = doc.splitTextToSize(tip.bodyKh, 155);
-      const bodyEnd = (khFont ? y + 20 : y + 14) + bodyLines.length * 3.5;
-      if (bodyEnd < y + 38) {
-        doc.text(bodyKhLines, 30, bodyEnd);
+      doc.setTextColor(C.muted[0], C.muted[1], C.muted[2]);
+      const khBodyLines = doc.splitTextToSize(tip.bodyKh, 150);
+      const khBodyY = bodyY + bodyLines.length * 4;
+      if (khBodyY + khBodyLines.length * 3.5 < y + CARD_H - 1) {
+        doc.text(khBodyLines, 35, khBodyY);
       }
       doc.setFont("helvetica", "normal");
     }
 
-    y += 40;
+    y += CARD_H + CARD_GAP;
   });
 
   // Closing callout
-  drawRect(doc, 20, y, 170, 22, NAVY);
+  fillRect(doc, 18, y + 2, 174, 20, C.navy);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10);
-  doc.setTextColor(...GOLD);
-  doc.text("🌟  Practice Makes Confident", pageW / 2, y + 8, { align: "center" });
+  doc.setTextColor(C.gold[0], C.gold[1], C.gold[2]);
+  doc.text("Practice makes confident", pageW / 2, y + 10, { align: "center" });
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(...WHITE);
+  doc.setFontSize(8);
+  doc.setTextColor(C.white[0], C.white[1], C.white[2]);
   doc.text(
-    "Visit the AI Interview Simulator at chouy-sala.replit.app to practice with instant AI feedback.",
-    pageW / 2, y + 15, { align: "center" },
+    "Visit the AI Interview Simulator at chouy-sala.replit.app for real-time feedback.",
+    pageW / 2, y + 17, { align: "center" },
   );
 
-  // Footer
-  drawRect(doc, 0, pageH - 10, pageW, 10, NAVY);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7);
-  doc.setTextColor(...GOLD);
-  doc.text("Chouy Sala — chouy-sala.replit.app", 20, pageH - 4);
-  doc.setTextColor(180, 210, 240);
-  doc.text("Section 3 — Interview Coach", pageW - 20, pageH - 4, { align: "right" });
+  pageFooter(doc, "Interview Coach", "Section 3 of 3");
 }
 
 // ── Main export ───────────────────────────────────────────────────────────────
 export async function generateResourceGuide(
   onProgress?: (step: string) => void,
 ): Promise<void> {
-  onProgress?.("Loading Khmer font…");
+  onProgress?.("Loading Khmer font (this may take a moment)...");
   const khFont = await loadKhmerFont();
 
-  onProgress?.("Building document…");
+  onProgress?.("Building PDF document...");
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
-  // Register Khmer font if loaded
   if (khFont) {
     doc.addFileToVFS("NotoSansKhmer-Regular.ttf", khFont);
     doc.addFont("NotoSansKhmer-Regular.ttf", "NotoSansKhmer", "normal");
+    onProgress?.("Khmer font loaded. Building cover page...");
+  } else {
+    onProgress?.("Building cover page (English only)...");
   }
 
-  onProgress?.("Building cover page…");
   buildCoverPage(doc, khFont);
 
-  onProgress?.("Building Future Pathways section…");
-  buildFuturePathwaysSection(doc, khFont);
+  onProgress?.("Building Future Pathways section (43 majors)...");
+  buildFuturePathwaysSection(doc);
 
-  onProgress?.("Building Exam Prep section…");
+  onProgress?.("Building Exam Prep section...");
   buildExamPrepSection(doc, khFont);
 
-  onProgress?.("Building Interview Coach section…");
+  onProgress?.("Building Interview Coach section...");
   buildInterviewCoachSection(doc, khFont);
 
-  onProgress?.("Saving PDF…");
+  onProgress?.("Saving PDF...");
   doc.save("Chouy_Sala_Resource_Guide.pdf");
 }
