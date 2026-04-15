@@ -90,19 +90,21 @@ export function InterviewSimulator() {
   const [streamingContent, setStreamingContent] = useState("");
   const [questionCount, setQuestionCount] = useState(0);
   const [isListening, setIsListening] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const silenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const savedInputRef = useRef<string>("");
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    container.scrollTop = container.scrollHeight;
   }, [messages, streamingContent]);
 
   useEffect(() => {
     if (stage === "interviewing" && inputRef.current) {
-      setTimeout(() => inputRef.current?.focus(), 300);
+      setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 300);
     }
   }, [stage]);
 
@@ -255,6 +257,10 @@ export function InterviewSimulator() {
               setStreaming(false);
               if (!generateSummary) {
                 setQuestionCount((n) => n + 1);
+                setTimeout(
+                  () => inputRef.current?.focus({ preventScroll: true }),
+                  50
+                );
               }
             }
             if (parsed.error) {
@@ -264,6 +270,10 @@ export function InterviewSimulator() {
               ]);
               setStreamingContent("");
               setStreaming(false);
+              setTimeout(
+                () => inputRef.current?.focus({ preventScroll: true }),
+                50
+              );
             }
           } catch {
             // skip malformed
@@ -675,6 +685,7 @@ export function InterviewSimulator() {
 
           {/* Messages area */}
           <div
+            ref={messagesContainerRef}
             style={{
               height: "360px",
               overflowY: "auto",
@@ -768,7 +779,6 @@ export function InterviewSimulator() {
               </div>
             )}
 
-            <div ref={messagesEndRef} />
           </div>
 
           {/* ── Input bar (only during active interview) ── */}
