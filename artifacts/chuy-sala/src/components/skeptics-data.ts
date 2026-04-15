@@ -185,4 +185,164 @@ export const CHALLENGES: Challenge[] = [
     },
     correctChecklist: { peer_reviewed: true, sample_size: true, conflict: true },
   },
+  {
+    id: "sugar-hyperactivity",
+    number: "#5",
+    verdict: "FALSE",
+    verdictColor: "#dc2626",
+    en: {
+      title: "Sugar & Hyperactivity",
+      claim: "Does sugar make children hyperactive?",
+      background:
+        "Eating sugar makes children hyperactive and 'crazy' for a few hours.",
+      reveal:
+        "Expectation Bias: Extensive double-blind studies show that sugar does not change behavior. The 'Sugar High' is usually a result of the environment (like a birthday party) or the parents' expectations, not the glucose itself.",
+      verdictDetail:
+        "It is a psychological expectation, not a physiological reaction to glucose.",
+      checklist: {
+        peer_reviewed:
+          "Yes — multiple double-blind, placebo-controlled studies find no link between sugar and hyperactivity.",
+        sample_size:
+          "Yes — large-scale meta-analyses covering hundreds of children confirm no behavioral change.",
+        conflict:
+          "No — research is largely independent with no commercial stake in the outcome.",
+      },
+    },
+    kh: {
+      title: "ស្ករ & ភាពរហរហួសហេតុ",
+      claim: "តើស្ករធ្វើឱ្យក្មេងៗមានភាពរហរហួសហេតុ (Hyperactive) មែនទេ?",
+      background:
+        "ការញ៉ាំស្ករធ្វើឱ្យក្មេងៗមានភាពរហរហួសហេតុ និង 'ឆ្កួត' ក្នុងរយៈពេលពីរបីម៉ោង។",
+      reveal:
+        "ការក្លែងបន្លំការរំពឹងទុក: ការស្រាវជ្រាវបង្ហាញថាស្ករមិនប្រែប្រួលអាកប្បកិរិយាទេ។ 'Sugar High' ជាធម្មតាមកពីបរិយាកាស ឬការរំពឹងទុករបស់មាតាបិតា។",
+      verdictDetail:
+        "នេះជាការរំពឹងទុកផ្លូវចិត្ត មិនមែនប្រតិកម្មខាងរាងកាយចំពោះជាតិស្ករទេ។",
+      checklist: {
+        peer_reviewed: "បាទ — ការស្រាវជ្រាវ double-blind ជាច្រើនមិនរកឃើញទំនាក់ទំនងទេ។",
+        sample_size: "បាទ — ការវិភាគធំៗលើក្មេងរាប់រយនាក់បញ្ជាក់ថាគ្មានការប្រែប្រួល។",
+        conflict: "ទេ — ការស្រាវជ្រាវភាគច្រើនឯករាជ្យ គ្មានបំណងពាណិជ្ជកម្ម។",
+      },
+    },
+    correctChecklist: { peer_reviewed: true, sample_size: true, conflict: false },
+  },
+  {
+    id: "hair-nails-death",
+    number: "#6",
+    verdict: "FALSE",
+    verdictColor: "#dc2626",
+    en: {
+      title: "Hair & Nails Growth After Death",
+      claim: "Do hair and nails grow after death?",
+      background:
+        "Your hair and fingernails continue to grow for several days after you die.",
+      reveal:
+        "Dehydration Illusion: Biological growth requires ATP and oxygen, which stop at death. The 'growth' is an illusion caused by the skin drying and shrinking back, making the hair and nails appear longer.",
+      verdictDetail:
+        "Skin shrinkage due to dehydration creates a visual illusion of growth.",
+      checklist: {
+        peer_reviewed:
+          "Yes — biology textbooks and forensic science confirm growth is impossible without cellular energy.",
+        sample_size:
+          "Yes — well-established across decades of forensic and pathological research.",
+        conflict:
+          "No — purely scientific finding with no commercial angle.",
+      },
+    },
+    kh: {
+      title: "សក់ & ក្រចកដុះបន្ទាប់ពីស្លាប់",
+      claim: "តើសក់ និងក្រចកបន្តដុះបន្ទាប់ពីមនុស្សស្លាប់មែនទេ?",
+      background:
+        "សក់ និងក្រចករបស់អ្នកបន្តដុះក្នុងរយៈពេលពីរបីថ្ងៃបន្ទាប់ពីស្លាប់។",
+      reveal:
+        "ការបំភ័ន្តដោយការខះទឹក: ការដុះតម្រូវឱ្យមាន ATP និងអុកស្សីហ្ស៊ែន ដែលឈប់ពេលស្លាប់។ 'ការដុះ' ជាការបំភ័ន្តមួយបណ្ដាលដោយស្បែកស្ងួត និងរួញ ធ្វើឱ្យសក់ និងក្រចកហាក់ដូចជាវែងជាង។",
+      verdictDetail:
+        "ការរួញស្បែកដោយសារការខះទឹកបង្កើតការបំភ័ន្តទស្សន៍ នៃការដុះ។",
+      checklist: {
+        peer_reviewed: "បាទ — វិទ្យាសាស្ត្រជីវសាស្ត្រ និងវេជ្ជសាស្ត្របញ្ជាក់ថាការដុះមិនអាចទៅរួចគ្មានថាមពលកោសិកា។",
+        sample_size: "បាទ — បង្ហាញច្បាស់ក្នុងការស្រាវជ្រាវវេជ្ជសាស្ត្រជាច្រើនទស្សវត្ស។",
+        conflict: "ទេ — ការរកឃើញវិទ្យាសាស្ត្រសុទ្ធ គ្មានបំណងពាណិជ្ជកម្ម។",
+      },
+    },
+    correctChecklist: { peer_reviewed: true, sample_size: true, conflict: false },
+  },
+  {
+    id: "goldfish-memory",
+    number: "#7",
+    verdict: "FALSE",
+    verdictColor: "#dc2626",
+    en: {
+      title: "Goldfish Memory",
+      claim: "Do goldfish only have a 3-second memory?",
+      background:
+        "Goldfish are very unintelligent and only have a memory span of 3 seconds.",
+      reveal:
+        "Cognitive Mapping: Research shows goldfish can remember things for months. They can be trained to respond to colors, music, and even navigate mazes, proving they have complex neural storage.",
+      verdictDetail:
+        "Goldfish can remember information for months and can be trained.",
+      checklist: {
+        peer_reviewed:
+          "Yes — laboratory studies show goldfish can be conditioned and remember tasks for many months.",
+        sample_size:
+          "Yes — repeated experiments across multiple research groups confirm robust long-term memory.",
+        conflict:
+          "No — independent academic research with no commercial motive.",
+      },
+    },
+    kh: {
+      title: "ការចងចាំរបស់ត្រីមាស",
+      claim: "តើត្រីមាសមានការចងចាំត្រឹមតែ ៣ វិនាទីប៉ុណ្ណោះមែនទេ?",
+      background:
+        "ត្រីមាសគ្មានប្រាជ្ញា ហើយមានការចងចាំត្រឹមតែ ៣ វិនាទីប៉ុណ្ណោះ។",
+      reveal:
+        "ការស្រាវជ្រាវបង្ហាញថាត្រីមាសអាចចងចាំបានជាច្រើនខែ។ ពួកវាអាចត្រូវបានបណ្តុះបណ្តាលឱ្យឆ្លើយតបចំពោះពណ៌ ចម្រៀង និងសូម្បីតែដើរតាមផ្លូវវង់ ។",
+      verdictDetail:
+        "ត្រីមាសអាចចងចាំព័ត៌មានបានជាខែៗ ហើយអាចបណ្តុះបណ្តាលបាន។",
+      checklist: {
+        peer_reviewed: "បាទ — ការសិក្សាបង្ហាញថាត្រីមាសអាចត្រូវបានបណ្តុះ ហើយចងចាំភារកិច្ចបានជាខែៗ។",
+        sample_size: "បាទ — ការពិសោធន៍ម្ដងហើយម្ដងទៀតបញ្ជាក់ការចងចាំរយៈពេលវែង។",
+        conflict: "ទេ — ការស្រាវជ្រាវវប្បធម៌សុទ្ធ គ្មានបំណងពាណិជ្ជកម្ម។",
+      },
+    },
+    correctChecklist: { peer_reviewed: true, sample_size: true, conflict: false },
+  },
+  {
+    id: "lightning-strikes",
+    number: "#8",
+    verdict: "FALSE",
+    verdictColor: "#dc2626",
+    en: {
+      title: "Lightning Strikes Twice",
+      claim: "Does lightning never strike the same place twice?",
+      background:
+        "Lightning never strikes the same place twice.",
+      reveal:
+        "Path of Least Resistance: Lightning is an electrical discharge seeking the quickest path to the ground. Tall buildings like the Empire State Building are struck dozens of times a year. Physics doesn't have a 'memory' of where it has been.",
+      verdictDetail:
+        "Lightning strikes the most efficient path, often hitting the same tall objects repeatedly.",
+      checklist: {
+        peer_reviewed:
+          "Yes — atmospheric physics and electrical engineering confirm lightning always seeks the path of least resistance.",
+        sample_size:
+          "Yes — lightning rod strike data from tall structures around the world provides extensive real-world evidence.",
+        conflict:
+          "No — well-established physics principle with no commercial interest.",
+      },
+    },
+    kh: {
+      title: "ផ្លេកបន្ទោរបាញ់ម្ដងហើយម្ដងទៀត",
+      claim: "តើផ្លេកបន្ទោរមិនដែលបាញ់ចំកន្លែងដដែលពីរដងមែនទេ?",
+      background:
+        "ផ្លេកបន្ទោរមិនដែលបាញ់ចំកន្លែងដដែលពីរដងទេ។",
+      reveal:
+        "ផ្លូវវាស់ប្រឆាំងតិចបំផុត: ផ្លេកបន្ទោរជាការចេញអគ្គិសនី ស្វែងរកផ្លូវលឿនបំផុតទៅដី។ អគារខ្ពស់ដូចជា Empire State Building ត្រូវបាញ់ជាច្រើនដងក្នុងមួយឆ្នាំ។ រូបវិទ្យាគ្មាន 'ការចងចាំ' ពីកន្លែងបានទៅ។",
+      verdictDetail:
+        "ផ្លេកបន្ទោរបាញ់ផ្លូវវាស់ប្រឆាំងតិចបំផុត ច្រើនតែបាញ់ចំវត្ថុខ្ពស់ដដែលម្ដងហើយម្ដងទៀត។",
+      checklist: {
+        peer_reviewed: "បាទ — រូបវិទ្យាបរិយាកាស និងវិស្វកម្មអគ្គិសនីបញ្ជាក់ផ្លេកបន្ទោរស្វែងរកផ្លូវវាស់ប្រឆាំងតិចបំផុត។",
+        sample_size: "បាទ — ទិន្នន័យការបាញ់ជាច្រើនពីអគារខ្ពស់ជុំវិញពិភពលោកផ្ដល់ភស្ដុតាង។",
+        conflict: "ទេ — គោលការណ៍រូបវិទ្យាច្បាស់ គ្មានបំណងពាណិជ្ជកម្ម។",
+      },
+    },
+    correctChecklist: { peer_reviewed: true, sample_size: true, conflict: false },
+  },
 ];
