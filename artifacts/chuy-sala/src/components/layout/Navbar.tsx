@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote,
+  Banknote, Wrench,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -54,9 +54,10 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "មជ្ឈមណ្ឌលសិក្សា",
     icon: FlaskConical,
     items: [
-      { href: "/exam-prep", labelEn: "Exam Prep",     labelKh: "ត្រៀមប្រឡង", icon: GraduationCap },
-      { href: "/projects",  labelEn: "Completed",      labelKh: "បានបញ្ចប់",   icon: CheckCircle },
-      { href: "/safety",    labelEn: "Digital Safety", labelKh: "សុវត្ថិភាព",  icon: Shield },
+      { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
+      { href: "https://khmervoc.com",   labelEn: "Vocational Guide", labelKh: "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ", icon: Wrench, external: true },
+      { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
+      { href: "/safety",                labelEn: "Digital Safety",    labelKh: "សុវត្ថិភាព",             icon: Shield },
     ],
   },
   {

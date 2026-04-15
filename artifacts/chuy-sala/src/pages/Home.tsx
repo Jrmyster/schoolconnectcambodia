@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, GraduationCap, Heart, CheckCircle2, Languages } from "lucide-react";
+import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink } from "lucide-react";
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
@@ -137,6 +137,77 @@ export function Home() {
           <div>
             <WeatherWidget />
           </div>
+        </div>
+      </section>
+
+      {/* Study Center */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-4 border border-primary/20">
+            📚 {t("Study Center", "មជ្ឈមណ្ឌលសិក្សា")}
+          </div>
+          <h2 className={`text-3xl md:text-4xl font-bold text-foreground mb-3 ${language === 'kh' ? 'font-khmer leading-loose' : 'font-display'}`}>
+            {t("Learning Pathways", "គន្លងសិក្សា")}
+          </h2>
+          <p className={`text-muted-foreground max-w-xl mx-auto ${language === 'kh' ? 'font-khmer leading-loose text-sm' : ''}`}>
+            {t(
+              "Academic and vocational resources to help every Cambodian student find their best path forward.",
+              "ធនធានសិក្សា និងវិជ្ជាជីវៈ ដើម្បីជួយសិស្សខ្មែរគ្រប់រូប ស្វែងរកផ្លូវវឌ្ឍនៈរបស់ពួកគេ។"
+            )}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Exam Prep card */}
+          <Link
+            href="/exam-prep"
+            className="group relative flex flex-col bg-white border border-border rounded-3xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-5">
+              <GraduationCap className="w-7 h-7" />
+            </div>
+            <h3 className={`text-xl font-bold text-foreground mb-2 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+              {t("Exam Prep", "ត្រៀមប្រឡង")}
+            </h3>
+            <p className={`text-muted-foreground text-sm leading-relaxed flex-1 ${language === 'kh' ? 'font-khmer leading-loose' : ''}`}>
+              {t(
+                "Practice with Grade 12 national exam questions, timed quizzes, and subject-by-subject study guides.",
+                "អនុវត្តជាមួយសំណួរប្រឡងថ្នាក់ជាតិថ្នាក់ទី ១២ កម្រងសំណួរប្រកបដោយពេលវេលា និងមគ្គុទ្ទេសក៍សិក្សាតាមមុខវិជ្ជា។"
+              )}
+            </p>
+            <div className={`mt-5 inline-flex items-center gap-1.5 text-primary text-sm font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
+              {t("Start studying", "ចាប់ផ្ដើមរៀន")} →
+            </div>
+          </Link>
+
+          {/* Vocational Guide card */}
+          <a
+            href="https://khmervoc.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex flex-col bg-white border border-border rounded-3xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-5">
+              <Wrench className="w-7 h-7" />
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className={`text-xl font-bold text-foreground ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+                {t("Vocational Guide", "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ")}
+              </h3>
+              <ExternalLink className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            </div>
+            <p className={`text-muted-foreground text-sm leading-relaxed flex-1 ${language === 'kh' ? 'font-khmer leading-loose' : ''}`}>
+              {t(
+                "Explore technical and vocational training opportunities across Cambodia.",
+                "ស្វែងយល់ពីឱកាសបណ្តុះបណ្តាលបច្ចេកទេស និងវិជ្ជាជីវៈនៅទូទាំងប្រទេសកម្ពុជា។"
+              )}
+            </p>
+            <div className={`mt-5 inline-flex items-center gap-1.5 text-amber-600 text-sm font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
+              {t("Explore programmes", "ស្វែងរកកម្មវិធី")} →
+            </div>
+          </a>
         </div>
       </section>
 
