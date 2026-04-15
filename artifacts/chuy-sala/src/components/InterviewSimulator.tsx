@@ -404,8 +404,8 @@ export function InterviewSimulator() {
             }}
           >
             {kh
-              ? "Interview Coach: Chrouy Sala"
-              : "Interview Coach: Chrouy Sala"}
+              ? "Interview Coach: Chouy Sala"
+              : "Interview Coach: Chouy Sala"}
           </h3>
           <p
             style={{
