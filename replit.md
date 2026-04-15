@@ -39,6 +39,16 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - 404 state for missing schools; Back-to-Map link
 - **MapPage sidebar cards** link to `/school/:id` (hover animation, chevron icon)
 - **MapComponent popup** has two buttons: "View Profile → /school/:id" + "Needs"
+- **Space page** (`/space`): NASA APOD, Space Agencies cards, **Interactive 3D Solar System** (`SolarSystem3D.tsx`):
+  - `@react-three/fiber` Canvas + `@react-three/drei` Stars + OrbitControls
+  - Sun with three-layer glow effect (meshBasicMaterial, no external textures)
+  - 8 planets with distinct procedural colors, orbit rings, self-rotation + orbital animation via `useFrame`
+  - Saturn's rings (RingGeometry, semi-transparent DoubleSide material)
+  - Click any planet → 2D overlay panel with bilingual (EN/KH) fast fact + close button
+  - Proactive WebGL detection (`checkWebGL()`) before Canvas mount; graceful bilingual fallback if unsupported
+  - `WebGLErrorBoundary` class component as secondary safety net
+  - Lazy-loaded via `React.lazy` + `Suspense` for mobile performance
+  - `dpr={[1, 1.5]}` cap to reduce pixel overdraw on Retina screens
 
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**

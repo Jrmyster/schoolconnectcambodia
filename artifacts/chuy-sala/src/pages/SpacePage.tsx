@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
-import { Rocket, Globe, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
+
+const SolarSystem3D = lazy(() =>
+  import("@/components/SolarSystem3D").then((m) => ({ default: m.SolarSystem3D }))
+);
 
 // ── Types ───────────────────────────────────────────────────────────────────
 
@@ -65,91 +69,6 @@ const AGENCIES = [
   },
 ];
 
-// ── Planets ──────────────────────────────────────────────────────────────────
-
-const PLANETS = [
-  {
-    name: "Mercury",
-    nameKh: "ភពស្វ",
-    emoji: "⚫",
-    color: "text-gray-300",
-    ringColor: "border-gray-500/40",
-    factEn: "A year on Mercury lasts just 88 Earth days — the fastest orbit in our Solar System.",
-    factKh: "មួយឆ្នាំនៅភពស្វ មានត្រឹមតែ ៨៨ ថ្ងៃផែនដី — ការផ្លូវវៀចលឿនបំផុតក្នុងប្រព័ន្ធព្រះអាទិត្យ។",
-    orderNum: 1,
-  },
-  {
-    name: "Venus",
-    nameKh: "ភពសុក្រ",
-    emoji: "🟡",
-    color: "text-yellow-300",
-    ringColor: "border-yellow-500/40",
-    factEn: "Venus is hotter than Mercury despite being farther from the Sun — its thick CO₂ atmosphere traps heat at 465 °C.",
-    factKh: "ភពសុក្រក្ដៅជាងភពស្វ ទោះបីនៅឆ្ងាយជាងពីព្រះអាទិត្យ — បរិយាកាស CO₂ ក្រាស់ធ្ងន់ ។ រក្សាកំដៅ ៤៦៥ °C",
-    orderNum: 2,
-  },
-  {
-    name: "Earth",
-    nameKh: "ភពផែនដី",
-    emoji: "🌍",
-    color: "text-blue-300",
-    ringColor: "border-blue-500/40",
-    factEn: "Earth is the only planet in the Solar System known to harbour life — protected by a magnetic field and a life-giving atmosphere.",
-    factKh: "ផែនដីជាភពតែមួយគត់ក្នុងប្រព័ន្ធព្រះអាទិត្យ ដែលស្គាល់ថាមានជីវិត — ការពារដោយសង្វាក់ម៉ាញ៉េទិក និងបរិយាកាសផ្ដល់ជីវិត។",
-    orderNum: 3,
-  },
-  {
-    name: "Mars",
-    nameKh: "ភពដែក",
-    emoji: "🔴",
-    color: "text-red-400",
-    ringColor: "border-red-500/40",
-    factEn: "Olympus Mons on Mars is the tallest volcano in the Solar System — nearly 3 times higher than Mount Everest.",
-    factKh: "Olympus Mons នៅភពដែក ជាភ្នំភ្លើងខ្ពស់បំផុតក្នុងប្រព័ន្ធព្រះអាទិត្យ — ខ្ពស់ជិត ៣ ដងភ្នំ Everest។",
-    orderNum: 4,
-  },
-  {
-    name: "Jupiter",
-    nameKh: "ភពព្រហស្បតិ",
-    emoji: "🟠",
-    color: "text-orange-300",
-    ringColor: "border-orange-500/40",
-    factEn: "Jupiter's Great Red Spot is a storm that has raged for over 350 years — wider than Earth itself.",
-    factKh: "ចំណុចក្រហមមហាភព Jupiter គឺជាព្យុះដែលបានបក់ជាង ៣៥០ ឆ្នាំ — ធំជាងផែនដីទាំងមូល។",
-    orderNum: 5,
-  },
-  {
-    name: "Saturn",
-    nameKh: "ភពសៅរ",
-    emoji: "🪐",
-    color: "text-amber-200",
-    ringColor: "border-amber-400/40",
-    factEn: "Saturn's rings are made mostly of ice chunks ranging from tiny grains to chunks the size of a house.",
-    factKh: "ចិញ្ចៀនភពសៅរ ភាគច្រើនធ្វើពីដុំទឹកកក ពីគ្រាប់ខ្សាច់តូចៗ រហូតដល់ដុំធំប្រហែលជាផ្ទះ។",
-    orderNum: 6,
-  },
-  {
-    name: "Uranus",
-    nameKh: "ភពអ៊ុយរ៉ានុស",
-    emoji: "🔵",
-    color: "text-cyan-300",
-    ringColor: "border-cyan-500/40",
-    factEn: "Uranus rotates on its side with an axial tilt of 98° — it essentially rolls around the Sun like a bowling ball.",
-    factKh: "ភពអ៊ុយរ៉ានុស វិលម្ខាងជាមួយ axial tilt ៩៨° — វាពិតជា lek​ ជុំព្រះអាទិត្យដូចបាល់ bowling។",
-    orderNum: 7,
-  },
-  {
-    name: "Neptune",
-    nameKh: "ភពណែបទូន",
-    emoji: "💙",
-    color: "text-indigo-300",
-    ringColor: "border-indigo-500/40",
-    factEn: "Neptune has the strongest winds in the Solar System — gusts can reach 2,100 km/h (1,300 mph).",
-    factKh: "ភពណែបទូនមានខ្យល់ខ្លាំងបំផុតក្នុងប្រព័ន្ធព្រះអាទិត្យ — ខ្យល់ជំរុញ អាចដល់ ២.១០០ គ.ម./ម៉ោង។",
-    orderNum: 8,
-  },
-];
-
 // ── Component ────────────────────────────────────────────────────────────────
 
 export function SpacePage() {
@@ -160,7 +79,6 @@ export function SpacePage() {
   const [apod, setApod] = useState<ApodData | null>(null);
   const [apodLoading, setApodLoading] = useState(true);
   const [apodError, setApodError] = useState(false);
-  const [expandedPlanet, setExpandedPlanet] = useState<number | null>(null);
   const [showFullExplanation, setShowFullExplanation] = useState(false);
 
   useEffect(() => {
@@ -175,9 +93,6 @@ export function SpacePage() {
       .catch(() => setApodError(true))
       .finally(() => setApodLoading(false));
   }, []);
-
-  const togglePlanet = (idx: number) =>
-    setExpandedPlanet((prev) => (prev === idx ? null : idx));
 
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg,#020c1b 0%,#0a1628 40%,#050d1a 100%)" }}>
@@ -379,59 +294,30 @@ export function SpacePage() {
           </div>
         </section>
 
-        {/* ── Solar System ──────────────────────────────────────────────── */}
+        {/* ── Solar System 3D ───────────────────────────────────────────── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <SectionLabel icon={<Orbit className="w-3.5 h-3.5" />} label={t("The Solar System", "ប្រព័ន្ធព្រះអាទិត្យ")} kh={kh} />
 
-          <p className={`text-white/45 text-sm mb-6 ${kh ? "font-khmer" : ""}`}>
+          <p className={`text-white/45 text-sm mb-5 ${kh ? "font-khmer" : ""}`}>
             {t(
-              "Tap any planet to reveal a fast fact.",
-              "ចុចលើភពណាមួយ ដើម្បីស្វែងយល់ពី Fast Fact ។"
+              "Click any planet to discover a fast fact in English and Khmer. Drag to rotate, scroll to zoom.",
+              "ចុចលើភពណាមួយ ដើម្បីស្វែងយល់ Fast Fact ជាភាសាអង់គ្លេស និងខ្មែរ។ អូសដើម្បីបង្វិល ស្ក្រូលដើម្បីពង្រីក។"
             )}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {PLANETS.map((planet, idx) => {
-              const isOpen = expandedPlanet === idx;
-              return (
-                <button
-                  key={planet.name}
-                  onClick={() => togglePlanet(idx)}
-                  className={`w-full text-left rounded-2xl border bg-white/5 backdrop-blur-sm p-4 transition-all duration-200
-                    hover:bg-white/10 hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400
-                    ${isOpen ? "border-sky-500/40 bg-white/10 shadow-[0_0_30px_rgba(56,189,248,0.10)]" : `border-white/10 ${planet.ringColor}`}
-                  `}
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-3xl flex-shrink-0" role="img" aria-label={planet.name}>
-                      {planet.emoji}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-2 flex-wrap">
-                        <span className={`font-display font-bold text-white text-base ${kh ? "font-khmer" : ""}`}>
-                          {kh ? planet.nameKh : planet.name}
-                        </span>
-                        {kh && (
-                          <span className="text-white/30 text-xs font-sans">{planet.name}</span>
-                        )}
-                        <span className="ml-auto flex-shrink-0 text-white/25 text-xs font-mono">
-                          #{planet.orderNum}
-                        </span>
-                      </div>
-                      {isOpen && (
-                        <p className={`mt-2 text-sm leading-relaxed ${planet.color} ${kh ? "font-khmer leading-loose" : ""}`}>
-                          {kh ? planet.factKh : planet.factEn}
-                        </p>
-                      )}
-                    </div>
-                    <span className="text-white/30 flex-shrink-0">
-                      {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          <Suspense
+            fallback={
+              <div className="w-full rounded-3xl border border-white/10 flex items-center justify-center gap-3 text-white/40"
+                style={{ height: "520px", background: "#000810" }}>
+                <Loader2 className="w-6 h-6 animate-spin text-sky-400" />
+                <span className={`text-sm ${kh ? "font-khmer" : ""}`}>
+                  {t("Loading Solar System…", "កំពុងផ្ទុកប្រព័ន្ធព្រះអាទិត្យ…")}
+                </span>
+              </div>
+            }
+          >
+            <SolarSystem3D kh={kh} />
+          </Suspense>
         </section>
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
