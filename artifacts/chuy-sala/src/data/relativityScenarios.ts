@@ -1,8 +1,7 @@
 // ── Relativity Scenarios ──────────────────────────────────────────────────────
-// Each scenario teaches Special Relativity / Time Dilation through a different
-// stellar destination. At 99.9% light-speed the Lorentz factor γ ≈ 22.4, so
-// the traveler's felt time ≈ distance (ly) / 22.4 years.
-// Earth observers always see elapsed time ≈ distance in light-years.
+// Rule: Earth time ≈ distance in light-years (ship at ≈99.99% c).
+// Choices always include: correct Earth time | traveler felt time | distractor.
+// Correct answer key varies per scenario (A / B / C) to prevent pattern guessing.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type AnswerKey = "A" | "B" | "C";
@@ -15,348 +14,299 @@ export type Choice = {
 
 export type Scenario = {
   id: string;
-  /** The star / destination */
   destination: { en: string; kh: string };
-  /** Decorative emoji for the scenario card */
   emoji: string;
-  /** Distance in light-years (used in the question text) */
   distanceLy: number;
-  /** What you feel on the ship */
+  distanceLabel: { en: string; kh: string };
   travelerTime: { en: string; kh: string };
-  /** Prose scenario paragraph */
+  earthTimeLabel: { en: string; kh: string };
   scenarioText: { en: string; kh: string };
-  /** The actual question asked */
   questionText: { en: string; kh: string };
-  /** Three answer choices – one correct, two wrong */
   choices: Choice[];
-  /** Which key is the correct answer */
   correctKey: AnswerKey;
-  /** Shown in the result panel when correct */
   feedbackCorrect: { en: string; kh: string };
-  /** Shown in the result panel when wrong */
   feedbackIncorrect: { en: string; kh: string };
-  /** Caption under the dual-clock animation */
   clockCaption: { en: string; kh: string };
-  /** A vivid "life" fact describing what changed on Earth */
   lifeFact: { en: string; kh: string };
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const SCENARIOS: Scenario[] = [
-  // ── 1. Sirius ──────────────────────────────────────────────────────────────
+  // ── 1. Proxima Centauri — correct: A ─────────────────────────────────────
   {
-    id: "sirius",
-    destination: { en: "Sirius", kh: "ផ្កាយ ស៊ីរ្យូស" },
-    emoji: "⭐",
-    distanceLy: 8.6,
-    travelerTime: { en: "about 5 months", kh: "ប្រហែល ៥ ខែ" },
-    scenarioText: {
-      en: "You are 18 years old. You board a spaceship traveling at 99.9% the speed of light toward Sirius — 8.6 light-years away. Due to Time Dilation, only about 5 months pass for you during the entire trip.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកឡើងយានអវកាសដែលដើរដល់ ៩៩.៩% នៃល្បឿនពន្លឺ ទៅផ្កាយ ស៊ីរ្យូស — ចម្ងាយ ៨.៦ ឆ្នាំពន្លឺ។ ដោយសារការពន្យារពេលវេលា អ្នកនៅលើយានត្រឹមតែប្រហែល ៥ ខែ ក្នុងដំណើរទាំងមូល។",
-    },
-    questionText: {
-      en: "When you arrive at Sirius and radio back to Earth — how many years have passed for your friends at school?",
-      kh: "នៅពេលអ្នកទៅដល់ ស៊ីរ្យូស ហើយផ្ញើសញ្ញាត្រឡប់ — ប៉ុន្មានឆ្នាំបានកន្លងទៅ សម្រាប់មិត្តភក្តិរបស់អ្នកនៅសាលា?",
-    },
-    choices: [
-      {
-        key: "A",
-        en: "About 5 months — the same as you felt on the ship",
-        kh: "ប្រហែល ៥ ខែ — ដូចអ្នកមានអារម្មណ៍នៅលើយានអវកាស",
-      },
-      {
-        key: "B",
-        en: "8.6 years — the light-travel time to Sirius",
-        kh: "៨.៦ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺទៅ ស៊ីរ្យូស",
-      },
-      {
-        key: "C",
-        en: "17.2 years — twice the distance to Sirius",
-        kh: "១៧.២ ឆ្នាំ — ចម្ងាយទ្វីគុណទៅ ស៊ីរ្យូស",
-      },
-    ],
-    correctKey: "B",
-    feedbackCorrect: {
-      en: "Correct! To your friends on Earth, 8.6 years passed while you traveled. You aged only 5 months — Einstein's Time Dilation at work!",
-      kh: "ត្រឹមត្រូវ! សម្រាប់មិត្តភក្តិរបស់អ្នកនៅផែនដី ៨.៦ ឆ្នាំបានកន្លងទៅ ខណៈអ្នកធ្វើដំណើរ។ អ្នកចាស់គ្រាន់តែ ៥ ខែ — ទ្រឹស្ដីអ៊ាំងស្ទីននៃការពន្យារពេលវេលា!",
-    },
-    feedbackIncorrect: {
-      en: "Not quite. Earth observers see 8.6 years pass — the time light itself would need to cover that distance. Your clock ran slower due to your speed.",
-      kh: "មិនត្រូវទេ។ អ្នកសង្កេតនៅផែនដីឃើញ ៨.៦ ឆ្នាំ — ពេលវេលាដែលពន្លឺខ្លួនឯងត្រូវការដើម្បីអស់ចម្ងាយនោះ។ នាឡិការបស់អ្នកដើរយឺតដោយសារល្បឿន។",
-    },
-    clockCaption: {
-      en: "While your clock ticked slowly at near-light speed, 8.6 years raced by on Earth — for every ~5 months you felt.",
-      kh: "ខណៈនាឡិការបស់អ្នកដើរយឺត ៨.៦ ឆ្នាំបានហូរកន្លងទៅនៅផែនដី — ក្នុងរយៈ ៥ ខែដែលអ្នកមានអារម្មណ៍។",
-    },
-    lifeFact: {
-      en: "Your school friends have finished high school and started university. Some may already be working!",
-      kh: "មិត្តភក្តិសាលារបស់អ្នកបានបញ្ចប់វិទ្យាល័យ ហើយចាប់ផ្ដើមមហាវិទ្យាល័យ។ ខ្លះប្រហែលជាធ្វើការហើយ!",
-    },
-  },
-
-  // ── 2. Proxima Centauri ────────────────────────────────────────────────────
-  {
-    id: "proxima",
+    id: "proxima-centauri",
     destination: { en: "Proxima Centauri", kh: "ផ្កាយ ប្រ៉ុកស៊ីម៉ា សិនតូរី" },
     emoji: "🌟",
-    distanceLy: 4.24,
-    travelerTime: { en: "about 7 weeks", kh: "ប្រហែល ៧ សប្ដាហ៍" },
+    distanceLy: 4.2,
+    distanceLabel: { en: "4.2 light-years", kh: "ឆ្នាំពន្លឺ ៤.២" },
+    travelerTime: { en: "about 2.2 months", kh: "ប្រហែល ២.២ ខែ" },
+    earthTimeLabel: { en: "4.2 years", kh: "៤.២ ឆ្នាំ" },
     scenarioText: {
-      en: "You are 18 years old. You board a spaceship at 99.9% the speed of light toward Proxima Centauri — the closest star to our Sun at 4.24 light-years. Time Dilation means only about 7 weeks pass for you on board.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកឡើងយានអវកាសដែលដើរ ៩៩.៩% នៃល្បឿនពន្លឺ ទៅ ប្រ៉ុកស៊ីម៉ា សិនតូរី — ផ្កាយដែលនៅជិតព្រះអាទិត្យបំផុត ចម្ងាយ ៤.២៤ ឆ្នាំពន្លឺ។ ការពន្យារពេលវេលាបណ្ដាលឱ្យអ្នកមានអារម្មណ៍ត្រឹមតែ ៧ សប្ដាហ៍ប៉ុណ្ណោះ។",
+      en: "You are 18 years old. You board a spacecraft bound for Proxima Centauri — our nearest stellar neighbor at 4.2 light-years away — at near-light speed. Due to Time Dilation, only about 2.2 months pass for you on board.",
+      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកឡើងយានអវកាស ទៅ ប្រ៉ុកស៊ីម៉ា សិនតូរី — ចម្ងាយ ៤.២ ឆ្នាំពន្លឺ — ក្នុងល្បឿនជិតពន្លឺ។ ដោយសារការពន្យារពេលវេលា ប្រហែល ២.២ ខែប៉ុណ្ណោះ ដែលកន្លងទៅ សម្រាប់អ្នកលើយាន។",
     },
     questionText: {
-      en: "When you arrive at Proxima Centauri — how many years have passed for your family back on Earth?",
-      kh: "នៅពេលអ្នកទៅដល់ ប្រ៉ុកស៊ីម៉ា សិនតូរី — ប៉ុន្មានឆ្នាំបានកន្លងទៅ សម្រាប់គ្រួសាររបស់អ្នកនៅផែនដី?",
+      en: "You arrive at Proxima Centauri feeling like barely a semester has passed. How many years have gone by for your friends back on Earth?",
+      kh: "អ្នកទៅដល់ ប្រ៉ុកស៊ីម៉ា សិនតូរី ក្នុងអារម្មណ៍ ២.២ ខែ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ សម្រាប់មិត្តភក្តិ នៅផែនដី?",
     },
     choices: [
       {
         key: "A",
-        en: "4.24 years — the light-travel time to Proxima Centauri",
-        kh: "៤.២៤ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺទៅ ប្រ៉ុកស៊ីម៉ា សិនតូរី",
+        en: "4.2 years — the light-travel time to Proxima Centauri",
+        kh: "៤.២ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ ប្រ៉ុកស៊ីម៉ា",
       },
       {
         key: "B",
-        en: "About 7 weeks — the same as you experienced",
-        kh: "ប្រហែល ៧ សប្ដាហ៍ — ដូចអ្នកដែលបានជួបប្រទះ",
+        en: "About 2.2 months — the same as you felt on the ship",
+        kh: "ប្រហែល ២.២ ខែ — ដូចអ្នកមានអារម្មណ៍នៅលើយាន",
       },
       {
         key: "C",
-        en: "8.48 years — twice the distance to Proxima",
-        kh: "៨.៤៨ ឆ្នាំ — ចម្ងាយទ្វីគុណទៅ ប្រ៉ុកស៊ីម៉ា",
+        en: "8.4 years — double the distance to Proxima",
+        kh: "៨.៤ ឆ្នាំ — ចម្ងាយទ្វីគុណ ទៅ ប្រ៉ុកស៊ីម៉ា",
       },
     ],
     correctKey: "A",
     feedbackCorrect: {
-      en: "Correct! Earth observers experienced 4.24 years passing — roughly the time light itself takes to travel that distance. You barely aged 7 weeks!",
-      kh: "ត្រឹមត្រូវ! អ្នកសង្កេតនៅផែនដីបានជួបប្រទះ ៤.២៤ ឆ្នាំ — ប្រហែលពេលដែលពន្លឺខ្លួនឯងត្រូវការ។ អ្នកចាស់ត្រឹមតែ ៧ សប្ដាហ៍!",
+      en: "Correct! While you felt only 2.2 months pass, 4.2 years elapsed on Earth — equal to the distance in light-years. You barely finished a semester; your friends graduated high school.",
+      kh: "ត្រឹមត្រូវ! ខណៈអ្នកមានអារម្មណ៍ ២.២ ខែ ៤.២ ឆ្នាំ ត្រូវបានកន្លងទៅ នៅផែនដី — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ អ្នកស្ទើរតែបញ្ចប់ ១ ឆមាស; មិត្តភក្តិបញ្ចប់វិទ្យាល័យ។",
     },
     feedbackIncorrect: {
-      en: "Not quite. Earth sees 4.24 years pass — equal to the distance in light-years. Your clock ran far slower than theirs due to your speed.",
-      kh: "មិនត្រូវទេ។ ផែនដីឃើញ ៤.២៤ ឆ្នាំ — ស្មើចម្ងាយជាឆ្នាំពន្លឺ។ នាឡិការបស់អ្នកដើរយឺតជាងពួកគេ ដោយសារល្បឿន។",
+      en: "Not quite. The correct answer is 4.2 years — always equal to the distance in light-years. Your clock ran far slower than Earth's at near-light speed.",
+      kh: "មិនត្រូវទេ។ ចម្លើយត្រឹមត្រូវ គឺ ៤.២ ឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ នាឡិការបស់អ្នកដើរយឺតជាងផែនដី ក្នុងល្បឿនជិតពន្លឺ។",
     },
     clockCaption: {
-      en: "Your 7-week journey = 4.24 years on Earth. You are still 18; your little sibling is almost 5 years older.",
-      kh: "ដំណើរ ៧ សប្ដាហ៍របស់អ្នក = ៤.២៤ ឆ្នាំនៅផែនដី។ អ្នកនៅតែ ១៨ ឆ្នាំ; ប្អូនរបស់អ្នកចាស់ជាង ៤ ឆ្នាំហើយ។",
+      en: "2.2 months on your ship = 4.2 years on Earth. You barely aged; your friends have moved on.",
+      kh: "២.២ ខែ នៅលើយាន = ៤.២ ឆ្នាំ នៅផែនដី។ អ្នកស្ទើរមិនបានចាស់; មិត្តភក្តិបន្ដជីវិតហើយ។",
     },
     lifeFact: {
-      en: "Your little sibling who was in Grade 1 is now finishing Grade 5. Your parents have aged four years while you barely aged at all.",
-      kh: "ប្អូនតូចរបស់អ្នកដែលនៅថ្នាក់ទី ១ ឥឡូវនៅថ្នាក់ទី ៥ ហើយ។ ឪពុកម្ដាយអ្នកចាស់ ៤ ឆ្នាំ ខណៈអ្នកស្ទើរតែមិនបានចាស់ទាល់តែ។",
+      en: "You've barely finished a semester — but your friends have graduated high school, turned 22, and many have already started their first jobs.",
+      kh: "អ្នកទើបបញ្ចប់ ១ ឆមាស — ប៉ុន្តែមិត្តភក្តិបញ្ចប់វិទ្យាល័យ អាយុ ២២ ឆ្នាំ ហើយជាច្រើននាក់ ចាប់ផ្ដើមមុខរបររបស់ពួកគេហើយ។",
     },
   },
 
-  // ── 3. Vega ────────────────────────────────────────────────────────────────
+  // ── 2. Vega — correct: B ──────────────────────────────────────────────────
   {
     id: "vega",
     destination: { en: "Vega", kh: "ផ្កាយ វេហ្គា" },
     emoji: "💫",
     distanceLy: 25,
-    travelerTime: { en: "about 13 months", kh: "ប្រហែល ១៣ ខែ" },
+    distanceLabel: { en: "25 light-years", kh: "ឆ្នាំពន្លឺ ២៥" },
+    travelerTime: { en: "about 1.1 years", kh: "ប្រហែល ១.១ ឆ្នាំ" },
+    earthTimeLabel: { en: "25 years", kh: "២៥ ឆ្នាំ" },
     scenarioText: {
-      en: "You are 18 years old. You blast off toward Vega — one of the brightest stars in the night sky at 25 light-years away — at 99.9% the speed of light. Time Dilation compresses your journey to just about 13 months on board.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកចេញដំណើរទៅ វេហ្គា — ផ្កាយភ្លឺបំផុតមួយក្នុងមេឃយប់ ចម្ងាយ ២៥ ឆ្នាំពន្លឺ — ក្នុងល្បឿន ៩៩.៩% នៃពន្លឺ។ ការពន្យារពេលវេលាហ្វត់ដំណើររបស់អ្នកទៅជាត្រឹមតែ ១៣ ខែ នៅលើយាន។",
+      en: "You are 18 years old. You set course for Vega — one of the brightest stars in the sky at 25 light-years away — at near-light speed. Time Dilation shrinks the voyage to just about 1.1 years for you on board.",
+      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នករៀបចំចេញដំណើរ ទៅ វេហ្គា — ផ្កាយភ្លឺ ចម្ងាយ ២៥ ឆ្នាំពន្លឺ — ក្នុងល្បឿនជិតពន្លឺ។ ការពន្យារពេលវេលា ហ្វត់ដំណើរ ជា ១.១ ឆ្នាំ ក្នុងការរំពឹងរបស់អ្នក។",
     },
     questionText: {
-      en: "You arrive at Vega feeling like just over a year has passed. How many years have elapsed for your classmates back on Earth?",
-      kh: "អ្នកទៅដល់ វេហ្គា ក្នុងអារម្មណ៍ថាកន្លងមកជាង ១ ឆ្នាំ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ សម្រាប់មិត្តរួមថ្នាក់នៅផែនដី?",
+      en: "You arrive at Vega just over a year older. How many years have passed for your friends and family on Earth?",
+      kh: "អ្នកទៅដល់ វេហ្គា ចាស់ជាងមួយឆ្នាំ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ សម្រាប់គ្រួសារ នៅផែនដី?",
     },
     choices: [
       {
         key: "A",
-        en: "About 13 months — the same as your ship-time",
-        kh: "ប្រហែល ១៣ ខែ — ដូចពេលវេលានៅលើយានរបស់អ្នក",
+        en: "About 1.1 years — the same as your ship-time",
+        kh: "ប្រហែល ១.១ ឆ្នាំ — ដូចពេលវេលានៅលើយាន",
       },
       {
         key: "B",
-        en: "50 years — double the distance to Vega",
-        kh: "៥០ ឆ្នាំ — ចម្ងាយទ្វីគុណទៅ វេហ្គា",
-      },
-      {
-        key: "C",
         en: "25 years — the light-travel time to Vega",
-        kh: "២៥ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺទៅ វេហ្គា",
-      },
-    ],
-    correctKey: "C",
-    feedbackCorrect: {
-      en: "Correct! Exactly 25 years passed on Earth while you traveled to Vega. You experienced only 13 months — a quarter-century of Earth history compressed into just over a year for you!",
-      kh: "ត្រឹមត្រូវ! ២៥ ឆ្នាំបានកន្លងទៅនៅផែនដី ខណៈអ្នកធ្វើដំណើរទៅ វេហ្គា។ អ្នកជួបប្រទះតែ ១៣ ខែ — ប្រវត្តិសាស្ត្រ ២៥ ឆ្នាំនៅផែនដី ក្នុងរយៈមួយឆ្នាំនៅលើអ្នក!",
-    },
-    feedbackIncorrect: {
-      en: "Not quite. Earth observers experienced 25 years — equal to Vega's distance in light-years. While you aged just 13 months, an entire generation grew up on Earth.",
-      kh: "មិនត្រូវទេ។ អ្នកសង្កេតនៅផែនដីជួបប្រទះ ២៥ ឆ្នាំ — ស្មើចម្ងាយ វេហ្គា ជាឆ្នាំពន្លឺ។ ខណៈអ្នកចាស់គ្រាន់ ១៣ ខែ មួយជំនាន់ទាំងមូលបានធំនៅផែនដី។",
-    },
-    clockCaption: {
-      en: "13 months on your ship = 25 years on Earth. The friends you left behind are now in their 40s.",
-      kh: "១៣ ខែនៅលើយានរបស់អ្នក = ២៥ ឆ្នាំនៅផែនដី។ មិត្តភក្តិដែលអ្នកចាកចេញ ឥឡូវជិត ៤០ ឆ្នាំហើយ។",
-    },
-    lifeFact: {
-      en: "Your classmates who were 18 are now in their 40s — many have families and careers. Some may even have grandchildren. You are still 19.",
-      kh: "មិត្តរួមថ្នាក់ដែលមានអាយុ ១៨ ឆ្នាំ ឥឡូវជិត ៤០ ឆ្នាំ — ច្រើននាក់មានគ្រួសារ និងការងារ។ ខ្លះប្រហែលជាមានចៅហ្វាយហើយ។ អ្នកនៅតែ ១៩ ឆ្នាំ។",
-    },
-  },
-
-  // ── 4. Tau Ceti ────────────────────────────────────────────────────────────
-  {
-    id: "tau-ceti",
-    destination: { en: "Tau Ceti", kh: "ផ្កាយ តៅ សេទី" },
-    emoji: "🪐",
-    distanceLy: 11.9,
-    travelerTime: { en: "about 6 months", kh: "ប្រហែល ៦ ខែ" },
-    scenarioText: {
-      en: "You are 18 years old. Scientists believe Tau Ceti — 11.9 light-years away — may harbor Earth-like planets. You volunteer to investigate, rocketing away at 99.9% light-speed. Only about 6 months pass for you on the journey.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ្នកវិទ្យាសាស្ត្រជឿថា តៅ សេទី — ចម្ងាយ ១១.៩ ឆ្នាំពន្លឺ — អាចមានភព ដូចផែនដី។ អ្នកស្ម័គ្រចិត្តធ្វើការស្រាវជ្រាវ ក្នុងល្បឿន ៩៩.៩% ពន្លឺ។ ប្រហែល ៦ ខែប៉ុណ្ណោះ ដែលកន្លងទៅ សម្រាប់អ្នកក្នុងដំណើរ។",
-    },
-    questionText: {
-      en: "You reach Tau Ceti after feeling just 6 months have passed. How many years have gone by on Earth?",
-      kh: "អ្នកទៅដល់ តៅ សេទី ក្នុងអារម្មណ៍ ៦ ខែ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ នៅផែនដី?",
-    },
-    choices: [
-      {
-        key: "A",
-        en: "6 months — equal to your travel time",
-        kh: "៦ ខែ — ស្មើពេលដំណើររបស់អ្នក",
-      },
-      {
-        key: "B",
-        en: "11.9 years — the light-travel time to Tau Ceti",
-        kh: "១១.៩ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺទៅ តៅ សេទី",
+        kh: "២៥ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ វេហ្គា",
       },
       {
         key: "C",
-        en: "23.8 years — the round-trip time at light-speed",
-        kh: "២៣.៨ ឆ្នាំ — ពេលដំណើរទៅ-ត្រឡប់ ក្នុងល្បឿនពន្លឺ",
+        en: "50 years — double the distance to Vega",
+        kh: "៥០ ឆ្នាំ — ចម្ងាយទ្វីគុណ ទៅ វេហ្គា",
       },
     ],
     correctKey: "B",
     feedbackCorrect: {
-      en: "Correct! Earth observers waited 11.9 years for you to arrive. They aged over a decade while you aged just 6 months. This is exactly what Einstein predicted!",
-      kh: "ត្រឹមត្រូវ! អ្នកសង្កេតនៅផែនដីរង់ចាំ ១១.៩ ឆ្នាំ សម្រាប់អ្នកទៅដល់។ ពួកគេចាស់ជាង ១ ទសវត្សរ៍ ខណៈអ្នកចាស់ ៦ ខែ។ នេះជាអ្វីដែល អ៊ាំងស្ទីន បានទស្សន័យ!",
+      en: "Correct! Exactly 25 years passed on Earth — equal to Vega's distance in light-years. You aged just one year; your friends are now in their 40s, many starting their own families.",
+      kh: "ត្រឹមត្រូវ! ២៥ ឆ្នាំបានកន្លងទៅ នៅផែនដី — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ អ្នកចាស់ ១ ឆ្នាំ; មិត្តភក្តិ ៤០ ជាងឆ្នាំ ហើយជាច្រើន ចាប់ផ្ដើមបង្កើតគ្រួសារ។",
     },
     feedbackIncorrect: {
-      en: "Not quite. Earth experiences 11.9 years — the distance to Tau Ceti in light-years. Your high-speed travel caused your clock to run dramatically slower.",
-      kh: "មិនត្រូវទេ។ ផែនដីជួបប្រទះ ១១.៩ ឆ្នាំ — ចម្ងាយ តៅ សេទី ជាឆ្នាំពន្លឺ។ ការធ្វើដំណើរក្នុងល្បឿនខ្ពស់ ធ្វើឱ្យនាឡិការបស់អ្នកដើរយឺតខ្លាំង។",
+      en: "Not quite. Earth experienced 25 years — matching Vega's distance in light-years. While you aged barely a year, a quarter-century passed for everyone you love.",
+      kh: "មិនត្រូវទេ។ ផែនដីបានកន្លង ២៥ ឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ ខណៈអ្នកចាស់ ១ ឆ្នាំ ២៥ ឆ្នាំបានកន្លងទៅ សម្រាប់ក្រុមគ្រួសារ។",
     },
     clockCaption: {
-      en: "Your 6 months felt normal — but Earth's clock counted nearly 12 years. Speed stretches time for observers left behind.",
-      kh: "ប្រាំមួយខែរបស់អ្នកមានអារម្មណ៍ធម្មតា — ប៉ុន្តែនាឡិកាផែនដីរាប់ ១២ ឆ្នាំ។ ល្បឿនពន្យារពេលវេលា សម្រាប់អ្នកដែលនៅខាងក្រោយ។",
+      en: "1.1 years on your ship = 25 years on Earth. You've aged one year; your friends have grown old.",
+      kh: "១.១ ឆ្នាំ នៅលើយាន = ២៥ ឆ្នាំ នៅផែនដី។ អ្នកចាស់ ១ ឆ្នាំ; មិត្តភក្តិចាស់ ២៥ ឆ្នាំ។",
     },
     lifeFact: {
-      en: "Your country has held three national elections since you left. A new generation of students has enrolled at your school — and graduated.",
-      kh: "ប្រទេសរបស់អ្នកបានរៀបចំការបោះឆ្នោតជាតិ ៣ ដងហើយ។ ជំនាន់ថ្មីនៃសិស្សបានចូលរៀន — ហើយបានបញ្ចប់ — នៅសាលារបស់អ្នក។",
+      en: "You've aged one year — but your friends are now starting their own families. Some already have teenage children. The pop songs from when you left are now considered \"classics\".",
+      kh: "អ្នកចាស់ ១ ឆ្នាំ — ប៉ុន្តែមិត្តភក្តិ ចាប់ផ្ដើមបង្កើតគ្រួសារ។ ខ្លះមានកូនជំទង់ហើយ។ បទចម្រៀង ពីពេលអ្នកចេញ ឥឡូវជា \"ចម្រៀងបុរាណ\"។",
     },
   },
 
-  // ── 5. Epsilon Eridani ─────────────────────────────────────────────────────
+  // ── 3. Pleiades Cluster — correct: C ─────────────────────────────────────
   {
-    id: "epsilon-eridani",
-    destination: { en: "Epsilon Eridani", kh: "ផ្កាយ អ៊ិបស៊ីឡុន អេរីដានី" },
-    emoji: "🔭",
-    distanceLy: 10.5,
-    travelerTime: { en: "about 5.6 months", kh: "ប្រហែល ៥.៦ ខែ" },
+    id: "pleiades",
+    destination: { en: "The Pleiades Cluster", kh: "ក្រុមផ្កាយ ផ្លេអ៊ែត" },
+    emoji: "✨",
+    distanceLy: 444,
+    distanceLabel: { en: "444 light-years", kh: "ឆ្នាំពន្លឺ ៤៤៤" },
+    travelerTime: { en: "about 19.8 years", kh: "ប្រហែល ១៩.៨ ឆ្នាំ" },
+    earthTimeLabel: { en: "444 years", kh: "៤៤៤ ឆ្នាំ" },
     scenarioText: {
-      en: "You are 18 years old. Epsilon Eridani — 10.5 light-years away — is one of the few nearby stars known to have a planetary system. Your mission: reach it at 99.9% light-speed. Only about 5.6 months pass for you on the voyage.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អ៊ិបស៊ីឡុន អេរីដានី — ចម្ងាយ ១០.៥ ឆ្នាំពន្លឺ — ជាផ្កាយជិតជំហានមួយចំនួនតិចណាស់ ដែលគេដឹងថាមានប្រព័ន្ធភព។ បេសកម្មរបស់អ្នក: ទៅដល់វា ក្នុងល្បឿន ៩៩.៩% ពន្លឺ។ ត្រឹមតែ ៥.៦ ខែ ដែលកន្លងទៅ សម្រាប់អ្នក។",
+      en: "You are 18 years old. The Pleiades — a breathtaking star cluster 444 light-years away — has inspired myths for millennia. You embark on a mission there at near-light speed. About 19.8 years pass for you on board — you will be nearly 38 when you arrive.",
+      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ ក្រុមផ្កាយ ផ្លេអ៊ែត — ចម្ងាយ ៤៤៤ ឆ្នាំពន្លឺ — បំផុះផ្លោះរឿងព្រេង ជាច្រើនពាន់ឆ្នាំ។ អ្នកចេញបេសកម្ម ទៅទីនោះ ក្នុងល្បឿនជិតពន្លឺ។ ប្រហែល ១៩.៨ ឆ្នាំ ដែលកន្លងទៅ; អ្នកដើបចូលដល់ ៣៨ ឆ្នាំ។",
     },
     questionText: {
-      en: "You arrive at Epsilon Eridani feeling like under half a year has passed. How much time passed on Earth?",
-      kh: "អ្នកទៅដល់ អ៊ិបស៊ីឡុន អេរីដានី ក្នុងអារម្មណ៍ក្រោម ៦ ខែ។ ពេលវេលាប៉ុន្មានបានកន្លងទៅ នៅផែនដី?",
+      en: "You arrive at the Pleiades nearly 20 years older. How many years have elapsed back on Earth?",
+      kh: "អ្នកទៅដល់ ក្រុមផ្កាយ ផ្លេអ៊ែត ចាស់ ២០ ឆ្នាំ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ នៅផែនដី?",
     },
     choices: [
       {
         key: "A",
-        en: "21 years — double the round-trip",
-        kh: "២១ ឆ្នាំ — ទ្វីគុណនៃដំណើរទៅ-ត្រឡប់",
+        en: "About 19.8 years — the same as your time on the ship",
+        kh: "ប្រហែល ១៩.៨ ឆ្នាំ — ដូចពេលវេលានៅលើយាន",
       },
       {
         key: "B",
-        en: "5.6 months — the same as the traveler's time",
-        kh: "៥.៦ ខែ — ដូចពេលវេលារបស់អ្នកធ្វើដំណើរ",
+        en: "888 years — double the distance to the Pleiades",
+        kh: "៨៨៨ ឆ្នាំ — ចម្ងាយទ្វីគុណ ទៅ ក្រុមផ្កាយ",
       },
       {
         key: "C",
-        en: "10.5 years — the light-travel time to Epsilon Eridani",
-        kh: "១០.៥ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ អ៊ិបស៊ីឡុន អេរីដានី",
+        en: "444 years — the light-travel time to the Pleiades",
+        kh: "៤៤៤ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ ក្រុមផ្កាយ ផ្លេអ៊ែត",
       },
     ],
     correctKey: "C",
     feedbackCorrect: {
-      en: "Correct! Earth waited 10.5 years. Two full classes of students enrolled and graduated from your old school while you experienced barely half a year!",
-      kh: "ត្រឹមត្រូវ! ផែនដីរង់ចាំ ១០.៥ ឆ្នាំ។ ថ្នាក់សិស្ស ២ ជំនាន់ ចូលរៀន ហើយបញ្ចប់ការសិក្សានៅសាលាចាស់របស់អ្នក ខណៈអ្នកជួបប្រទះគ្រាន់ ៦ ខែ!",
+      en: "Correct! 444 years passed on Earth — equal to the distance in light-years. You aged 20 years; Earth spanned the era from Shakespeare's time to today.",
+      kh: "ត្រឹមត្រូវ! ៤៤៤ ឆ្នាំបានកន្លងទៅ នៅផែនដី — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ អ្នកចាស់ ២០ ឆ្នាំ; ផែនដីបានផ្លាស់ប្ដូរ ៤ សតវត្សរ៍ ពីសម័យ ស្ហែ​ស្ពៀរ ដល់សព្វថ្ងៃ។",
     },
     feedbackIncorrect: {
-      en: "Not quite. The correct answer is 10.5 years — matching the distance in light-years. At near-light speed, your on-board time shrank dramatically while Earth's continued normally.",
-      kh: "មិនត្រូវទេ។ ចម្លើយត្រឹមត្រូវគឺ ១០.៥ ឆ្នាំ — ស្មើចម្ងាយជាឆ្នាំពន្លឺ។ ក្នុងល្បឿនជិតពន្លឺ ពេលវេលានៅលើយានរបស់អ្នកបានបន្ថយខ្លាំង ខណៈផែនដីរបស់អ្នកបន្តដើរធម្មតា។",
+      en: "Not quite. 444 years passed on Earth — matching the distance in light-years. While you aged 20 years, entire empires rose and fell. The world you left is now ancient history.",
+      kh: "មិនត្រូវទេ។ ៤៤៤ ឆ្នាំបានកន្លងទៅ នៅផែនដី — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ ខណៈអ្នកចាស់ ២០ ឆ្នាំ ចក្រភពទាំងមូល បានលេចឡើង ហើយដួលរលំ។",
     },
     clockCaption: {
-      en: "5.6 months on board = 10.5 years on Earth. Your school held a full decade of lessons without you.",
-      kh: "៥.៦ ខែនៅលើយាន = ១០.៥ ឆ្នាំនៅផែនដី។ សាលារបស់អ្នកបន្ត ១ ទសវត្សរ៍ ដោយគ្មានអ្នក។",
+      en: "19.8 years on your ship = 444 years on Earth. You've grown into an adult; civilizations have transformed.",
+      kh: "១៩.៨ ឆ្នាំ នៅលើយាន = ៤៤៤ ឆ្នាំ នៅផែនដី។ អ្នករីកចម្រើន ហើយ អរិយធម៌ ផ្លាស់ប្ដូររួចហើយ។",
     },
     lifeFact: {
-      en: "Your school has graduated two full cohorts of students. The teacher who taught you has since retired. And there's a new school canteen you've never seen.",
-      kh: "សាលារបស់អ្នកបានបញ្ចប់ ២ ជំនាន់ទាំងមូល។ គ្រូដែលបង្រៀនអ្នក ឥឡូវចូលនិវត្តន៍ហើយ។ ហើយមានសណ្ឋាគារថ្មីក្នុងសាលា ដែលអ្នកមិនដែលឃើញ។",
+      en: "You are 38 — but the world you left is ancient history. 444 years ago was the era of Shakespeare, the Khmer Kingdom's final dynasties, and the first telescopes. None of the countries or technologies you knew exist anymore.",
+      kh: "អ្នកអាយុ ៣៨ ឆ្នាំ — ប៉ុន្តែពិភពលោកដែលអ្នកចាកចេញ ឥឡូវជាប្រវត្តិសាស្ត្របុរាណ។ ៤៤៤ ឆ្នាំ មុននៅផែនដី គឺ សម័យ ស្ហែ​ស្ពៀរ និងជំនាន់ចុងក្រោយ ព្រះចៅ ខ្មែរ។",
     },
   },
 
-  // ── 6. Fomalhaut ───────────────────────────────────────────────────────────
+  // ── 4. Antares — correct: A ───────────────────────────────────────────────
   {
-    id: "fomalhaut",
-    destination: { en: "Fomalhaut", kh: "ផ្កាយ ហ្វ័ម៉ាល់ហ្វ័ត" },
-    emoji: "🌌",
-    distanceLy: 25.1,
-    travelerTime: { en: "about 13.5 months", kh: "ប្រហែល ១៣.៥ ខែ" },
+    id: "antares",
+    destination: { en: "Antares", kh: "ផ្កាយ អាំតារ៉េស" },
+    emoji: "🔴",
+    distanceLy: 550,
+    distanceLabel: { en: "550 light-years", kh: "ឆ្នាំពន្លឺ ៥៥០" },
+    travelerTime: { en: "about 24.5 years", kh: "ប្រហែល ២៤.៥ ឆ្នាំ" },
+    earthTimeLabel: { en: "550 years", kh: "៥៥០ ឆ្នាំ" },
     scenarioText: {
-      en: "You are 18 years old. Fomalhaut — 25.1 light-years away — glows brilliantly in the southern sky and is famous for its dusty debris disk. You make the voyage at 99.9% light-speed. Only about 13.5 months feel like they pass on your ship.",
-      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ ហ្វ័ម៉ាល់ហ្វ័ត — ចម្ងាយ ២៥.១ ឆ្នាំពន្លឺ — ភ្លឺចែងចាំងនៅមេឃខាងត្បូង ហើយល្បីក្នុងការមានចានធូលី។ អ្នកធ្វើដំណើរ ៩៩.៩% ពន្លឺ។ ប្រហែល ១៣.៥ ខែប៉ុណ្ណោះ ដែលអ្នកជួបប្រទះនៅលើយាន។",
+      en: "You are 18 years old. Antares — a colossal red supergiant 550 light-years away, so vast it would swallow Jupiter's orbit — beckons you. You travel there at near-light speed. About 24.5 years pass for you; you arrive in your early 40s.",
+      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ។ អាំតារ៉េស — ផ្កាយក្រហម យក្ស ចម្ងាយ ៥៥០ ឆ្នាំពន្លឺ — ហៅអ្នក។ អ្នកធ្វើដំណើរ ក្នុងល្បឿនជិតពន្លឺ។ ប្រហែល ២៤.៥ ឆ្នាំ ដែលកន្លងទៅ; អ្នកទៅដល់ ខណៈ ដើបចូលដល់ ៤០ ឆ្នាំ។",
     },
     questionText: {
-      en: "You arrive at Fomalhaut just over a year older. How many years has Earth experienced since you left?",
-      kh: "អ្នកទៅដល់ ហ្វ័ម៉ាល់ហ្វ័ត ចាស់ជាងមួយឆ្នាំបន្តិច។ ប៉ុន្មានឆ្នាំដែលផែនដីបានឆ្លងកាត់ ចាប់តាំងពីអ្នកចេញ?",
+      en: "You arrive at Antares in your 40s, having aged 24.5 years. How many years have passed on Earth since you left?",
+      kh: "អ្នកទៅដល់ អាំតារ៉េស ខណៈ ៤០ ជាងឆ្នាំ ចាស់ ២៤.៥ ឆ្នាំ។ ប៉ុន្មានឆ្នាំបានកន្លងទៅ នៅផែនដី?",
     },
     choices: [
       {
         key: "A",
-        en: "25.1 years — the light-travel time to Fomalhaut",
-        kh: "២៥.១ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ ហ្វ័ម៉ាល់ហ្វ័ត",
+        en: "550 years — the light-travel time to Antares",
+        kh: "៥៥០ ឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ អាំតារ៉េស",
       },
       {
         key: "B",
-        en: "About 13.5 months — matching your on-board experience",
-        kh: "ប្រហែល ១៣.៥ ខែ — ដូចអ្វីដែលអ្នកជួបប្រទះ",
+        en: "About 24.5 years — the same as you experienced",
+        kh: "ប្រហែល ២៤.៥ ឆ្នាំ — ដូចអ្នកបានជួបប្រទះ",
       },
       {
         key: "C",
-        en: "50.2 years — double the distance as a round-trip",
-        kh: "៥០.២ ឆ្នាំ — ចម្ងាយទ្វីគុណ សម្រាប់ដំណើរទៅ-ត្រឡប់",
+        en: "1,100 years — double the distance to Antares",
+        kh: "១.១០០ ឆ្នាំ — ចម្ងាយទ្វីគុណ ទៅ អាំតារ៉េស",
       },
     ],
     correctKey: "A",
     feedbackCorrect: {
-      en: "Correct! 25.1 years passed on Earth — matching Fomalhaut's distance in light-years. You aged barely a year; Earth experienced an entire generation.",
-      kh: "ត្រឹមត្រូវ! ២៥.១ ឆ្នាំបានកន្លងទៅ នៅផែនដី — ស្មើចម្ងាយ ហ្វ័ម៉ាល់ហ្វ័ត ជាឆ្នាំពន្លឺ។ អ្នកចាស់ស្ទើរ ១ ឆ្នាំ; ផែនដីជួបប្រទះ ១ ជំនាន់ទាំងមូល។",
+      en: "Correct! 550 years passed on Earth — equal to Antares' distance in light-years. You've reached your prime at 42; the city you left is completely unrecognizable.",
+      kh: "ត្រឹមត្រូវ! ៥៥០ ឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ — បានកន្លងទៅ នៅផែនដី។ អ្នកដើបចូលដល់ ៤២ ឆ្នាំ; ទីក្រុង ដែលអ្នកចាកចេញ ឥឡូវ ពុំអាចស្គាល់ទៀតទេ។",
     },
     feedbackIncorrect: {
-      en: "Not quite. Earth experienced 25.1 years — the distance in light-years. You aged only 13.5 months; an entire generation grew up and moved on without you.",
-      kh: "មិនត្រូវទេ។ ផែនដីជួបប្រទះ ២៥.១ ឆ្នាំ — ចម្ងាយ ជាឆ្នាំពន្លឺ។ អ្នកចាស់ ១៣.៥ ខែ; ជំនាន់ទាំងមូលបានធំ ហើយឆ្លងកាត់ដោយគ្មានអ្នក។",
+      en: "Not quite. The correct answer is 550 years — always the distance in light-years. While you aged 24.5 years, Earth experienced more than five centuries of history.",
+      kh: "មិនត្រូវទេ។ ចម្លើយត្រឹមត្រូវ គឺ ៥៥០ ឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ ខណៈអ្នករស់ ២៤.៥ ឆ្នាំ ផែនដីបានជួបប្រទះ ៥ សតវត្សរ៍ ប្រវត្តិសាស្ត្រ។",
     },
     clockCaption: {
-      en: "13.5 months on your ship = 25.1 years on Earth. You are now younger than your old classmates' children.",
-      kh: "១៣.៥ ខែនៅលើយានរបស់អ្នក = ២៥.១ ឆ្នាំនៅផែនដី។ ឥឡូវ អ្នកក្មេងជាងកូនរបស់មិត្តថ្នាក់ចាស់របស់អ្នក។",
+      en: "24.5 years on your ship = 550 years on Earth. You've reached your prime; entire civilizations came and went.",
+      kh: "២៤.៥ ឆ្នាំ នៅលើយាន = ៥៥០ ឆ្នាំ នៅផែនដី។ អ្នកដើបចូលដល់ ខណៈ អរិយធម៌ ទាំងមូលបានផ្លាស់ប្ដូរ។",
     },
     lifeFact: {
-      en: "You are now younger than many of your old classmates' children. The music, fashion, and slang from when you left are now considered \"vintage\". You are still just 19.",
-      kh: "ឥឡូវ អ្នកក្មេងជាងកូនរបស់មិត្តថ្នាក់ចាស់ជាច្រើន។ តន្ត្រី ម៉ូដ និងភាសាបង្ហើរ ពីពេលអ្នកចេញ ឥឡូវត្រូវបានគេចាត់ទុកជា \"បុរាណ\"។ អ្នកនៅតែ ១៩ ឆ្នាំ។",
+      en: "You've reached your prime at 42 — but the city you left is completely unrecognizable. 550 years of history have passed. The languages, borders, and technologies of Earth are entirely different. You are a living relic from a lost era.",
+      kh: "អ្នកដើបចូលដល់ ៤២ ឆ្នាំ — ប៉ុន្តែទីក្រុង ដែលអ្នកចាកចេញ ឥឡូវ ពុំអាចប្រៀបធៀបបាន។ ៥៥០ ឆ្នាំ ប្រវត្តិបានកន្លងទៅ។ ភាសា ព្រំដែន និងបច្ចេកវិទ្យា នៅផែនដី ខុសគ្នាទាំងស្រុង។",
+    },
+  },
+
+  // ── 5. Andromeda Galaxy — correct: B ─────────────────────────────────────
+  {
+    id: "andromeda",
+    destination: { en: "The Andromeda Galaxy", kh: "វិទ្យាសាស្ត្រ អង់ដ្រូម៉េដា" },
+    emoji: "🌌",
+    distanceLy: 2_500_000,
+    distanceLabel: { en: "2.5 million light-years", kh: "ឆ្នាំពន្លឺ ២.៥ លាន" },
+    travelerTime: { en: "about 28 years", kh: "ប្រហែល ២៨ ឆ្នាំ" },
+    earthTimeLabel: { en: "2.5 million years", kh: "២.៥ លានឆ្នាំ" },
+    scenarioText: {
+      en: "You are 18 years old — and you volunteer for the most ambitious voyage in human history: a one-way trip to the Andromeda Galaxy, 2.5 million light-years away, at near-light speed. Time Dilation condenses this cosmic journey to just about 28 years for you. You will arrive at 46.",
+      kh: "អ្នកមានអាយុ ១៨ ឆ្នាំ — ហើយអ្នក ស្ម័គ្រចិត្ត ក្នុងការធ្វើដំណើរ ដ៏មហិច្ឆតា ក្នុងប្រវត្តិ: ដំណើរ តែមួយទិស ទៅ អង់ដ្រូម៉េដា ចម្ងាយ ២.៥ លានឆ្នាំពន្លឺ ក្នុងល្បឿនជិតពន្លឺ។ ការពន្យារពេលវេលា ហ្វត់ ដំណើរ ជា ២៨ ឆ្នាំ ក្នុងការរំពឹងរបស់អ្នក។ អ្នកនឹងទៅដល់ ខណៈ ៤៦ ឆ្នាំ។",
+    },
+    questionText: {
+      en: "You arrive at Andromeda at age 46, having lived 28 years on the ship. How much time has passed on Earth since you launched?",
+      kh: "អ្នកទៅដល់ អង់ដ្រូម៉េដា ខណៈ ៤៦ ឆ្នាំ រស់ ២៨ ឆ្នាំ នៅលើយាន។ ពេលប៉ុន្មានបានកន្លងទៅ នៅផែនដី?",
+    },
+    choices: [
+      {
+        key: "A",
+        en: "About 28 years — equal to your journey time",
+        kh: "ប្រហែល ២៨ ឆ្នាំ — ស្មើពេលដំណើររបស់អ្នក",
+      },
+      {
+        key: "B",
+        en: "2.5 million years — the light-travel time to Andromeda",
+        kh: "២.៥ លានឆ្នាំ — ពេលវេលាដំណើររបស់ពន្លឺ ទៅ អង់ដ្រូម៉េដា",
+      },
+      {
+        key: "C",
+        en: "5 million years — double the distance to Andromeda",
+        kh: "៥ លានឆ្នាំ — ចម្ងាយទ្វីគុណ ទៅ អង់ដ្រូម៉េដា",
+      },
+    ],
+    correctKey: "B",
+    feedbackCorrect: {
+      en: "Correct! 2.5 million years passed on Earth — equal to Andromeda's distance in light-years. You aged 28 years; back home, the human species itself may have evolved beyond recognition. Homo sapiens didn't even fully exist 2.5 million years ago.",
+      kh: "ត្រឹមត្រូវ! ២.៥ លានឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ — បានកន្លងទៅ នៅផែនដី។ អ្នកចាស់ ២៨ ឆ្នាំ; នៅផ្ទះ មនុស្ស ប្រហែលជាបានវិវត្ត ហួសពីការទទួលស្គាល់ហើយ។",
+    },
+    feedbackIncorrect: {
+      en: "Not quite. The answer is 2.5 million years — always the distance in light-years. You are 46; on Earth, 2.5 million years of evolution and transformation have passed. The civilization that launched you no longer exists.",
+      kh: "មិនត្រូវទេ។ ចម្លើយ គឺ ២.៥ លានឆ្នាំ — ស្មើចម្ងាយ ជាឆ្នាំពន្លឺ។ អ្នកអាយុ ៤៦ ឆ្នាំ; នៅផែនដី ២.៥ លានឆ្នាំ នៃការវិវត្ត ត្រូវបានកន្លងទៅ។ អរិយធម៌ ដែលបានចាប់ផ្ដើម ពុំមានទៀតហើយ។",
+    },
+    clockCaption: {
+      en: "28 years on your ship = 2.5 million years on Earth. You are 46; the human species has had 2.5 million years to evolve.",
+      kh: "២៨ ឆ្នាំ នៅលើយាន = ២.៥ លានឆ្នាំ នៅផែនដី។ អ្នកអាយុ ៤៦ ឆ្នាំ; មនុស្សជាតិ មាន ២.៥ លានឆ្នាំ ដើម្បីវិវត្ត។",
+    },
+    lifeFact: {
+      en: "You are a veteran explorer at 46 — but 2.5 million years have passed on Earth. When you left, Homo sapiens had just emerged. Now the human species itself has had 2.5 million years to evolve, transform, or disappear entirely.",
+      kh: "អ្នកជា អ្នករុករក ដ៏ពូកែ ៤៦ ឆ្នាំ — ប៉ុន្តែ ២.៥ លានឆ្នាំ បានកន្លងទៅ នៅផែនដី។ ពេលអ្នកចេញ Homo sapiens ទើបតែលេចឡើង។ ឥឡូវ មនុស្សជាតិ មាន ២.៥ លានឆ្នាំ ដើម្បីវិវត្ត ឬបាត់ទៅ ទាំងស្រុង។",
     },
   },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 /** Pick a random scenario from the bank */
 export function randomScenario(): Scenario {
   return SCENARIOS[Math.floor(Math.random() * SCENARIOS.length)];
 }
 
-/** Pick a random scenario that is different from the given id */
+/** Pick a random scenario different from the current one */
 export function nextScenario(currentId: string): Scenario {
   const others = SCENARIOS.filter((s) => s.id !== currentId);
   return others[Math.floor(Math.random() * others.length)];
