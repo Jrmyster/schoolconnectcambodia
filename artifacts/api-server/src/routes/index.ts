@@ -10,6 +10,8 @@ import openaiRouter from "./openai";
 import interviewRouter from "./interview";
 import adminMetricsRouter from "./adminMetrics";
 import savedCareersRouter from "./savedCareers";
+import quizRouter from "./quiz";
+import leaderboardRouter from "./leaderboard";
 
 const router: IRouter = Router();
 

@@ -9,6 +9,7 @@ export const usersTable = pgTable("users", {
   passwordHash: text("password_hash").notNull(),
   schoolId: integer("school_id").references(() => schoolsTable.id, { onDelete: "set null" }),
   isAdmin: boolean("is_admin").notNull().default(false),
+  expPoints: integer("exp_points").notNull().default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

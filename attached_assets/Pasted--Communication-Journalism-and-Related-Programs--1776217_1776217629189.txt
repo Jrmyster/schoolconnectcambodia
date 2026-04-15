@@ -1,0 +1,62 @@
+{
+  "Communication, Journalism, and Related Programs (ទំនាក់ទំនង សារព័ត៌មាន និងកម្មវិធីពាក់ព័ន្ធ)": {
+    "Journalist / Reporter (អ្នកសារព័ត៌មាន / អ្នករាយការណ៍)": {
+      "tasks": "Investigate local issues, write articles, and report on news affecting Cambodian communities. (ស៊ើបអង្កេតបញ្ហាក្នុងស្រុក សរសេរអត្ថបទ និងរាយការណ៍ពីព័ត៌មានដែលប៉ះពាល់ដល់សហគមន៍កម្ពុជា។)",
+      "impact": "Keep the public informed and hold institutions accountable through truth and transparency. (ផ្តល់ព័ត៌មានដល់សាធារណជន និងជំរុញឱ្យស្ថាប័នមានគណនេយ្យភាពតាមរយៈសេចក្តីពិត និងតម្លាភាព។)"
+    },
+    "Public Relations Specialist (អ្នកឯកទេសទំនាក់ទំនងសាធារណៈ)": {
+      "tasks": "Manage communication for NGOs or businesses, write press releases, and build positive relationships with the community. (គ្រប់គ្រងទំនាក់ទំនងសម្រាប់អង្គការក្រៅរដ្ឋាភិបាល ឬអាជីវកម្ម សរសេរសេចក្តីប្រកាសព័ត៌មាន និងកសាងទំនាក់ទំនងល្អជាមួយសហគមន៍។)",
+      "impact": "Help organizations effectively share their mission and connect with the people they serve. (ជួយអង្គការនានាក្នុងការចែករំលែកបេសកកម្មរបស់ពួកគេប្រកបដោយប្រសិទ្ធភាព និងភ្ជាប់ទំនាក់ទំនងជាមួយប្រជាជនដែលពួកគេបម្រើ។)"
+    }
+  },
+  "Military Technologies and Applied Sciences (បច្ចេកវិទ្យាយោធា និងវិទ្យាសាស្ត្រអនុវត្ត)": {
+    "Defense Analyst (អ្នកវិភាគការពារជាតិ)": {
+      "tasks": "Evaluate security threats, analyze satellite data, and advise on defense strategies. (វាយតម្លៃការគំរាមកំហែងសន្តិសុខ វិភាគទិន្នន័យផ្កាយរណប និងផ្តល់ប្រឹក្សាលើយុទ្ធសាស្ត្រការពារជាតិ។)",
+      "impact": "Ensure national sovereignty and protect citizens from external security risks. (ធានាអធិបតេយ្យភាពជាតិ និងការពារប្រជាពលរដ្ឋពីហានិភ័យសន្តិសុខខាងក្រៅ។)"
+    },
+    "Military Engineer (វិស្វករយោធា)": {
+      "tasks": "Design secure communications networks, build temporary infrastructure, and develop defensive technologies. (រចនាបណ្តាញទំនាក់ទំនងដែលមានសុវត្ថិភាព កសាងហេដ្ឋារចនាសម្ព័ន្ធបណ្តោះអាសន្ន និងអភិវឌ្ឍបច្ចេកវិទ្យាការពារ។)",
+      "impact": "Support national defense operations and assist in disaster relief efforts across the country. (គាំទ្រប្រតិបត្តិការការពារជាតិ និងជួយក្នុងកិច្ចខិតខំប្រឹងប្រែងសង្គ្រោះគ្រោះមហន្តរាយនៅទូទាំងប្រទេស។)"
+    }
+  },
+  "Physical Sciences (វិទ្យាសាស្ត្ររូបវន្ត)": {
+    "Geologist (អ្នកភូគព្ភវិទូ)": {
+      "tasks": "Study soil composition, locate underground water sources, and assess earthquake risks. (សិក្សាពីសមាសភាពដី ស្វែងរកប្រភពទឹកក្រោមដី និងវាយតម្លៃហានិភ័យនៃការរញ្ជួយដី។)",
+      "impact": "Help locate safe construction sites and discover crucial natural resources for the economy. (ជួយស្វែងរកទីតាំងសំណង់ដែលមានសុវត្ថិភាព និងស្វែងរកធនធានធម្មជាតិដ៏សំខាន់សម្រាប់សេដ្ឋកិច្ច។)"
+    },
+    "Meteorologist / Climate Scientist (អ្នកឧតុនិយម / អ្នកវិទ្យាសាស្ត្រអាកាសធាតុ)": {
+      "tasks": "Monitor weather patterns, predict monsoon seasons, and study the effects of climate change on agriculture. (តាមដានលំនាំអាកាសធាតុ ព្យាករណ៍រដូវមូសុង និងសិក្សាពីផលប៉ះពាល់នៃការប្រែប្រួលអាកាសធាតុលើវិស័យកសិកម្ម។)",
+      "impact": "Provide early warnings for storms and help farmers protect their crops from extreme weather. (ផ្តល់ការព្រមានជាមុនសម្រាប់ព្យុះ និងជួយកសិករការពារដំណាំរបស់ពួកគេពីអាកាសធាតុធ្ងន់ធ្ងរ។)"
+    }
+  },
+  "Psychology (ចិត្តវិទ្យា)": {
+    "Clinical Psychologist (អ្នកចិត្តវិទ្យាគ្លីនិក)": {
+      "tasks": "Counsel individuals facing trauma, diagnose mental health conditions, and provide therapy. (ផ្តល់ប្រឹក្សាដល់បុគ្គលដែលប្រឈមនឹងរបួសផ្លូវចិត្ត ធ្វើរោគវិនិច្ឆ័យស្ថានភាពសុខភាពផ្លូវចិត្ត និងផ្តល់ការព្យាបាល។)",
+      "impact": "Heal unseen wounds and build emotional resilience within individuals and families. (ព្យាបាលរបួសដែលមើលមិនឃើញ និងកសាងភាពធន់ផ្នែកអារម្មណ៍នៅក្នុងបុគ្គល និងគ្រួសារ។)"
+    },
+    "School Counselor (អ្នកប្រឹក្សាតាមសាលារៀន)": {
+      "tasks": "Guide students through academic stress, support career planning, and mediate peer conflicts. (ណែនាំសិស្សអំពីភាពតានតឹងក្នុងការសិក្សា គាំទ្រការរៀបចំផែនការអាជីព និងសម្របសម្រួលជម្លោះរវាងមិត្តភក្តិ។)",
+      "impact": "Create a supportive educational environment where students can thrive mentally and academically. (បង្កើតបរិយាកាសអប់រំដែលគាំទ្រ ដែលសិស្សអាចរីកចម្រើនទាំងផ្នែកស្មារតី និងការសិក្សា។)"
+    }
+  },
+  "Social Sciences (វិទ្យាសាស្ត្រសង្គម)": {
+    "Sociologist (អ្នកសង្គមវិទូ)": {
+      "tasks": "Research community dynamics, study population shifts from provinces to cities, and analyze social inequality. (ស្រាវជ្រាវសក្ដានុពលសហគមន៍ សិក្សាពីការផ្លាស់ប្តូរប្រជាជនពីខេត្តទៅទីក្រុង និងវិភាគវិសមភាពសង្គម។)",
+      "impact": "Provide data that helps the government and NGOs design better social programs for vulnerable populations. (ផ្តល់ទិន្នន័យដែលជួយរដ្ឋាភិបាល និងអង្គការក្រៅរដ្ឋាភិបាលរៀបចំកម្មវិធីសង្គមកាន់តែប្រសើរសម្រាប់ជនងាយរងគ្រោះ។)"
+    },
+    "Economist (អ្នកសេដ្ឋកិច្ច)": {
+      "tasks": "Analyze market trends, study inflation rates, and evaluate the impact of international trade on local businesses. (វិភាគនិន្នាការទីផ្សារ សិក្សាអត្រាអតិផរណា និងវាយតម្លៃផលប៉ះពាល់នៃពាណិជ្ជកម្មអន្តរជាតិលើអាជីវកម្មក្នុងស្រុក។)",
+      "impact": "Guide national financial policy to promote sustainable economic growth and reduce poverty. (ណែនាំគោលនយោបាយហិរញ្ញវត្ថុជាតិ ដើម្បីជំរុញកំណើនសេដ្ឋកិច្ចប្រកបដោយចីរភាព និងកាត់បន្ថយភាពក្រីក្រ។)"
+    }
+  },
+  "Visual and Performing Arts (សិល្បៈទស្សនីយភាព និងការសម្តែង)": {
+    "Graphic Designer (អ្នករចនាក្រាហ្វិក)": {
+      "tasks": "Create visual concepts for websites, design marketing materials, and develop brand identities. (បង្កើតគំនិតច្នៃប្រឌិតសម្រាប់គេហទំព័រ រចនាសម្ភារៈទីផ្សារ និងអភិវឌ្ឍអត្តសញ្ញាណម៉ាកយីហោ។)",
+      "impact": "Make information visually accessible and help local businesses stand out in the digital age. (ធ្វើឱ្យព័ត៌មានងាយស្រួលយល់តាមរយៈរូបភាព និងជួយអាជីវកម្មក្នុងស្រុកឱ្យលេចធ្លោក្នុងយុគសម័យឌីជីថល។)"
+    },
+    "Cultural Preservationist / Artist (អ្នកអភិរក្សវប្បធម៌ / សិល្បករ)": {
+      "tasks": "Practice traditional arts, document historical performances, and teach techniques to the younger generation. (អនុវត្តសិល្បៈប្រពៃណី កត់ត្រាការសម្តែងប្រវត្តិសាស្ត្រ និងបង្រៀនបច្ចេកទេសដល់យុវជនជំនាន់ក្រោយ។)",
+      "impact": "Keep Cambodia's rich cultural heritage alive and vibrant while adapting it for modern audiences. (រក្សាកេរ្តិ៍ដំណែលវប្បធម៌ដ៏សម្បូរបែបរបស់កម្ពុជាឱ្យនៅរស់រវើក ស្របពេលដែលបន្សាំវាសម្រាប់ទស្សនិកជនសម័យទំនើប។)"
+    }
+  }
+}

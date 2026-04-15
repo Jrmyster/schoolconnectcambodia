@@ -1,0 +1,162 @@
+{
+  "topics": [
+    {
+      "id": "grammar_rules",
+      "titleEn": "Grammar Rules",
+      "titleKh": "វេយ្យាករណ៍",
+      "focusEn": "Tenses, Agreement & Conjunctions",
+      "focusKh": "កាល ការយល់ព្រម និងពាក្យភ្ជាប់",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "Which sentence is grammatically correct?",
+          "questionKh": "ប្រយោគណាដែលត្រឹមត្រូវតាមវេយ្យាករណ៍?",
+          "options": [
+            { "textEn": "She don't know the answer.", "textKh": "She don't know the answer." },
+            { "textEn": "She doesn't know the answer.", "textKh": "She doesn't know the answer." },
+            { "textEn": "She didn't knew the answer.", "textKh": "She didn't knew the answer." },
+            { "textEn": "She not know the answer.", "textKh": "She not know the answer." }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "With third-person singular subjects (he, she, it), we use 'doesn't' (does + not) in the present tense. 'Don't' is used with I, you, we, they.",
+          "explanationKh": "ជាមួយប្រធានបទ third-person singular (he, she, it) យើងប្រើ 'doesn't' ក្នុង present tense។ 'Don't' ប្រើជាមួយ I, you, we, they។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Which word is a conjunction?",
+          "questionKh": "ពាក្យណាជាពាក្យភ្ជាប់?",
+          "options": [
+            { "textEn": "Beautiful", "textKh": "Beautiful" },
+            { "textEn": "Quickly", "textKh": "Quickly" },
+            { "textEn": "Although", "textKh": "Although" },
+            { "textEn": "Mountain", "textKh": "Mountain" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "'Although' is a subordinating conjunction that joins two clauses and shows a contrast. 'Beautiful' is an adjective, 'quickly' is an adverb, and 'mountain' is a noun.",
+          "explanationKh": "'Although' ជាពាក្យភ្ជាប់ (conjunction) ដែលភ្ជាប់ប្រយោគពីរ ហើយបង្ហាញភាពផ្ទុយ។ 'Beautiful' ជាគុណនាម 'quickly' ជាគុណកិរិយា 'mountain' ជានាម។"
+        },
+        {
+          "id": 3,
+          "questionEn": "What is the past tense of 'teach'?",
+          "questionKh": "តើ past tense របស់ 'teach' ជាអ្វី?",
+          "options": [
+            { "textEn": "Teached", "textKh": "Teached" },
+            { "textEn": "Taught", "textKh": "Taught" },
+            { "textEn": "Teachd", "textKh": "Teachd" },
+            { "textEn": "Teach", "textKh": "Teach" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "'Teach' is an irregular verb. Its past tense is 'taught' — not 'teached'. Other irregular verbs include: bring→brought, catch→caught, think→thought.",
+          "explanationKh": "'Teach' ជាកិរិយាមិនទៀងទាត់ (irregular verb)។ Past tense របស់វាគឺ 'taught' — មិនមែន 'teached'។ កិរិយាមិនទៀងទាត់ផ្សេងៗ: bring→brought, catch→caught, think→thought។"
+        },
+        {
+          "id": 4,
+          "questionEn": "Which is the correct comparative form?",
+          "questionKh": "ទម្រង់ comparative (ប្រៀបធៀប) ណាដែលត្រឹមត្រូវ?",
+          "options": [
+            { "textEn": "More better", "textKh": "More better" },
+            { "textEn": "Most good", "textKh": "Most good" },
+            { "textEn": "Better", "textKh": "Better" },
+            { "textEn": "Gooder", "textKh": "Gooder" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "'Better' is the correct comparative form of 'good'. 'Good' is an irregular adjective: good → better → best. Never say 'more better' — that doubles the comparison.",
+          "explanationKh": "'Better' ជា comparative form ត្រឹមត្រូវរបស់ 'good'។ 'Good' ជា irregular adjective: good → better → best។ មិនត្រូវនិយាយ 'more better' ឡើយ — នោះជាការប្រៀបធៀបពីរដង។"
+        },
+        {
+          "id": 5,
+          "questionEn": "'The children _____ playing in the park.' — Choose the correct verb.",
+          "questionKh": "'The children _____ playing in the park.' — ជ្រើសប្រើកិរិយាត្រឹមត្រូវ។",
+          "options": [
+            { "textEn": "is", "textKh": "is" },
+            { "textEn": "are", "textKh": "are" },
+            { "textEn": "was", "textKh": "was" },
+            { "textEn": "has", "textKh": "has" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "'Children' is a plural noun, so it takes the plural verb 'are'. Subject-verb agreement is a key grammar rule: singular subjects → is/was; plural subjects → are/were.",
+          "explanationKh": "'Children' ជានាមមនោគម្ន (plural) ដូច្នេះប្រើ 'are'។ ច្បាប់ subject-verb agreement: ប្រធានបទ singular → is/was; ប្រធានបទ plural → are/were។"
+        }
+      ]
+    },
+    {
+      "id": "vocabulary_translation",
+      "titleEn": "Vocabulary & Translation",
+      "titleKh": "ពាក្យសព្ទ និងការបកប្រែ",
+      "focusEn": "Word Meaning, Synonyms & Khmer↔English",
+      "focusKh": "អត្ថន័យ ពាក្យស្រដៀង និង ខ្មែរ↔អង់គ្លេស",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What does the word 'diligent' mean?",
+          "questionKh": "ពាក្យ 'diligent' មានន័យថាអ្វី?",
+          "options": [
+            { "textEn": "Lazy", "textKh": "ខ្ជិលច្រអូស" },
+            { "textEn": "Hardworking", "textKh": "ព្យាយាម / ខំប្រឹង" },
+            { "textEn": "Careless", "textKh": "អ្នកធ្វេសប្រហែស" },
+            { "textEn": "Stubborn", "textKh": "ទ្រៀងទ្រឺ" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "'Diligent' means working hard and carefully. Example: 'She is a diligent student who always completes her homework on time.' Synonyms: hardworking, industrious, dedicated.",
+          "explanationKh": "'Diligent' មានន័យថា ព្យាយាម និងប្រុងប្រយ័ត្ន។ ឧទាហរណ៍: 'She is a diligent student who always completes her homework on time.' ពាក្យស្រដៀង: hardworking, industrious, dedicated។"
+        },
+        {
+          "id": 2,
+          "questionEn": "Which word is the antonym (opposite) of 'ancient'?",
+          "questionKh": "ពាក្យណាជា antonym (ភាពផ្ទុយ) របស់ 'ancient'?",
+          "options": [
+            { "textEn": "Old", "textKh": "ចាស់" },
+            { "textEn": "Tiny", "textKh": "តូចណាស់" },
+            { "textEn": "Modern", "textKh": "ទំនើប" },
+            { "textEn": "Brave", "textKh": "ក្លាហាន" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "'Ancient' means very old, from a long time ago. Its opposite (antonym) is 'modern', which means new or up-to-date. Cambodia has both ancient temples (Angkor Wat) and modern cities.",
+          "explanationKh": "'Ancient' មានន័យថា ចាស់ណាស់ ពីយូរយារណាស់។ ភាពផ្ទុយ (antonym) របស់វាគឺ 'modern' ដែលមានន័យថា ថ្មី ឬទំនើប។ ប្រទេសកម្ពុជាមានវត្ថុបុរាណ (អង្គរវត្ត) និងទីក្រុងទំនើប។"
+        },
+        {
+          "id": 3,
+          "questionEn": "The Khmer word 'រំខាន' (rum-khan) in English means:",
+          "questionKh": "ពាក្យខ្មែរ 'រំខាន' ជាភាសាអង់គ្លេសមានន័យថា:",
+          "options": [
+            { "textEn": "To help", "textKh": "ជួយ" },
+            { "textEn": "To remind", "textKh": "រំលឹក" },
+            { "textEn": "To disturb", "textKh": "រំខាន (disturb)" },
+            { "textEn": "To wonder", "textKh": "ភ្ញាក់ផ្អើល" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "'រំខាន' (rum-khan) means to disturb, interrupt, or bother someone. Example: 'Please don't disturb me while I am studying.' Building Khmer-English vocabulary helps in translation careers.",
+          "explanationKh": "'រំខាន' មានន័យថា disturb ឬ interrupt។ ឧទាហរណ៍: 'Please don't disturb me while I am studying.' ការសាងជំនាញ ខ្មែរ-អង់គ្លេស ជួយក្នុងអាជីពផ្នែកបកប្រែ។"
+        },
+        {
+          "id": 4,
+          "questionEn": "Choose the word that best completes: 'She spoke with great _____ to the audience.'",
+          "questionKh": "ជ្រើសពាក្យដែលសាកសមជាងគេ: 'She spoke with great _____ to the audience.'",
+          "options": [
+            { "textEn": "Boring", "textKh": "Boring" },
+            { "textEn": "Confidence", "textKh": "Confidence (ជំនឿជឿជាក់)" },
+            { "textEn": "Silence", "textKh": "Silence (ភាពស្ងាត់)" },
+            { "textEn": "Ignorance", "textKh": "Ignorance (ភាពល្ងង់)" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "'Confidence' fits the context — speaking to an audience requires self-assurance. 'Boring' is an adjective (not a noun), 'silence' is the opposite of speaking, and 'ignorance' means lack of knowledge.",
+          "explanationKh": "'Confidence' (ជំនឿជឿជាក់) សមនឹងបរិបទ — ការនិយាយទៅកាន់ទស្សនិកជនទាមទារការជឿជាក់ខ្លួនឯង។ 'Boring' ជា adjective 'silence' ផ្ទុយនឹងការនិយាយ 'ignorance' មានន័យថាខ្វះចំណេះដឹង។"
+        },
+        {
+          "id": 5,
+          "questionEn": "The Khmer word 'ការអប់រំ' (gaa-ap-rom) is closest in meaning to:",
+          "questionKh": "ពាក្យខ្មែរ 'ការអប់រំ' មានន័យជិតបំផុតទៅនឹង:",
+          "options": [
+            { "textEn": "Commerce", "textKh": "ពាណិជ្ជកម្ម" },
+            { "textEn": "Training and learning", "textKh": "ការបណ្ដុះបណ្ដាល និងការរៀន" },
+            { "textEn": "Government", "textKh": "រដ្ឋាភិបាល" },
+            { "textEn": "Tradition", "textKh": "ប្រពៃណី" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "'ការអប់រំ' (gaa-ap-rom) means 'education' — the process of training and learning. Education is the foundation of every career path, from engineering to medicine to the arts.",
+          "explanationKh": "'ការអប់រំ' មានន័យថា 'education' — ដំណើរការបណ្ដុះបណ្ដាល និងការរៀន។ ការអប់រំជាមូលដ្ឋានគ្រឹះនៃផ្លូវអាជីពទាំងអស់ ពីវិស្វកម្ម រហូតដល់វេជ្ជសាស្ត្រ និងសិល្បៈ។"
+        }
+      ]
+    }
+  ]
+}

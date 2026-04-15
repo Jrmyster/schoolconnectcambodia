@@ -1,0 +1,162 @@
+{
+  "topics": [
+    {
+      "id": "algebra_calculus",
+      "titleEn": "Algebra & Calculus",
+      "titleKh": "ពីជគណិត និងគណិតវិទ្យាជាន់ខ្ពស់",
+      "focusEn": "Equations, Slopes & Derivatives",
+      "focusKh": "សមីការ ជម្រាល និង Derivative",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "If 2x + 6 = 14, what is the value of x?",
+          "questionKh": "ប្រសិនបើ 2x + 6 = 14 តើ x មានតម្លៃប៉ុន្មាន?",
+          "options": [
+            { "textEn": "x = 3", "textKh": "x = 3" },
+            { "textEn": "x = 4", "textKh": "x = 4" },
+            { "textEn": "x = 7", "textKh": "x = 7" },
+            { "textEn": "x = 10", "textKh": "x = 10" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Solve step by step: 2x + 6 = 14 → subtract 6: 2x = 8 → divide by 2: x = 4. Always isolate the variable using inverse operations.",
+          "explanationKh": "ដោះស្រាយជំហានម្ដងៗ: 2x + 6 = 14 → ដក 6: 2x = 8 → ចែក 2: x = 4។ តែងតែញែក variable ដោយប្រើប្រតិបត្តិការច្រាស (inverse operations)។"
+        },
+        {
+          "id": 2,
+          "questionEn": "What is the slope of the line y = 3x − 5?",
+          "questionKh": "តើជម្រាល (slope) នៃបន្ទាត់ y = 3x − 5 ប៉ុន្មាន?",
+          "options": [
+            { "textEn": "−5", "textKh": "−5" },
+            { "textEn": "5", "textKh": "5" },
+            { "textEn": "3", "textKh": "3" },
+            { "textEn": "−3", "textKh": "−3" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "In slope-intercept form y = mx + b, 'm' is the slope and 'b' is the y-intercept. Here m = 3 (slope) and b = −5 (y-intercept).",
+          "explanationKh": "ក្នុងទម្រង់ y = mx + b 'm' ជាជម្រាល (slope) ហើយ 'b' ជា y-intercept។ នៅទីនេះ m = 3 (slope) ហើយ b = −5 (y-intercept)។"
+        },
+        {
+          "id": 3,
+          "questionEn": "Simplify: x² × x³",
+          "questionKh": "សន្សំ: x² × x³",
+          "options": [
+            { "textEn": "x⁵", "textKh": "x⁵" },
+            { "textEn": "x⁶", "textKh": "x⁶" },
+            { "textEn": "2x⁵", "textKh": "2x⁵" },
+            { "textEn": "x", "textKh": "x" }
+          ],
+          "correctIndex": 0,
+          "explanationEn": "When multiplying powers with the same base, add the exponents: x² × x³ = x^(2+3) = x⁵. This is the Product Rule of Exponents.",
+          "explanationKh": "នៅពេលគុណ powers ដែលមានមូលដ្ឋានដូចគ្នា ចូរបន្ថែម exponents: x² × x³ = x^(2+3) = x⁵។ នេះជា Product Rule of Exponents។"
+        },
+        {
+          "id": 4,
+          "questionEn": "What is the derivative of y = x² with respect to x?",
+          "questionKh": "តើ derivative (ដេរីវេ) នៃ y = x² ទៅ x ជាអ្វី?",
+          "options": [
+            { "textEn": "x", "textKh": "x" },
+            { "textEn": "2x", "textKh": "2x" },
+            { "textEn": "x²", "textKh": "x²" },
+            { "textEn": "2", "textKh": "2" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Using the Power Rule: if y = xⁿ, then dy/dx = n·x^(n−1). So y = x², dy/dx = 2·x^(2−1) = 2x. Derivatives measure rates of change in engineering and physics.",
+          "explanationKh": "ដោយប្រើ Power Rule: ប្រសិនបើ y = xⁿ ដូច្នេះ dy/dx = n·x^(n−1)។ ដូច្នេះ y = x², dy/dx = 2x។ Derivatives វាស់ល្បឿននៃការផ្លាស់ប្ដូរ — ចាំបាច់ក្នុងវិស្វកម្ម។"
+        },
+        {
+          "id": 5,
+          "questionEn": "If f(x) = 4x − 1, what is f(3)?",
+          "questionKh": "ប្រសិនបើ f(x) = 4x − 1 តើ f(3) ប៉ុន្មាន?",
+          "options": [
+            { "textEn": "11", "textKh": "11" },
+            { "textEn": "12", "textKh": "12" },
+            { "textEn": "7", "textKh": "7" },
+            { "textEn": "9", "textKh": "9" }
+          ],
+          "correctIndex": 0,
+          "explanationEn": "Substitute x = 3: f(3) = 4(3) − 1 = 12 − 1 = 11. Function notation is the language of all advanced mathematics and computer programming.",
+          "explanationKh": "ជំនួស x = 3: f(3) = 4(3) − 1 = 12 − 1 = 11។ ký hiệu function ជាភាសានៃគណិតវិទ្យាជាន់ខ្ពស់ និងការសរសេរកម្មវិធីកុំព្យូទ័រ។"
+        }
+      ]
+    },
+    {
+      "id": "statistics_probability",
+      "titleEn": "Statistics & Probability",
+      "titleKh": "ស្ថិតិ និងប្រូបាប",
+      "focusEn": "Mean, Median, Mode & Chance",
+      "focusKh": "មធ្យម មន្ទីរ ខ្ពស់បំផុត និងឱកាស",
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What is the mean (average) of: 4, 7, 9, 6, 4?",
+          "questionKh": "តើ mean (មធ្យម) នៃ: 4, 7, 9, 6, 4 ប៉ុន្មាន?",
+          "options": [
+            { "textEn": "5", "textKh": "5" },
+            { "textEn": "6", "textKh": "6" },
+            { "textEn": "7", "textKh": "7" },
+            { "textEn": "8", "textKh": "8" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "Mean = sum ÷ count. Sum = 4+7+9+6+4 = 30. Count = 5. Mean = 30 ÷ 5 = 6. The mean is the most common measure of average used in science and economics.",
+          "explanationKh": "Mean = ផលបូក ÷ ចំនួន។ ផលបូក = 4+7+9+6+4 = 30។ ចំនួន = 5។ Mean = 30 ÷ 5 = 6។ Mean ប្រើក្នុងវិទ្យាសាស្ត្រ សេដ្ឋកិច្ច និងការវិភាគទិន្នន័យ។"
+        },
+        {
+          "id": 2,
+          "questionEn": "A bag has 5 red and 3 blue marbles. What is the probability of picking red?",
+          "questionKh": "ថង់មួយមាន ៥ គ្រាប់ក្រហម និង ៣ គ្រាប់ខៀវ។ តើឱកាសបាន​គ្រាប់ក្រហមមានប៉ុន្មាន?",
+          "options": [
+            { "textEn": "3/8", "textKh": "3/8" },
+            { "textEn": "5/3", "textKh": "5/3" },
+            { "textEn": "5/8", "textKh": "5/8" },
+            { "textEn": "1/2", "textKh": "1/2" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "Probability = favourable outcomes ÷ total outcomes. Red = 5, Total = 5+3 = 8, P(red) = 5/8. Probability is always between 0 (impossible) and 1 (certain).",
+          "explanationKh": "ប្រូបាប = (លទ្ធផលអំណោយ) ÷ (លទ្ធផលសរុប)។ ក្រហម = 5, សរុប = 8, P(ក្រហម) = 5/8។ ប្រូបាបនៅចន្លោះ 0 (មិនអាច) និង 1 (ប្រាកដ)។"
+        },
+        {
+          "id": 3,
+          "questionEn": "What does the 'median' of a data set represent?",
+          "questionKh": "តើ 'median' (មន្ទីរ) នៃ dataset តំណាងឱ្យអ្វី?",
+          "options": [
+            { "textEn": "The most frequent value", "textKh": "តម្លៃដែលបង្ហាញញឹកញាប់ជាងគេ" },
+            { "textEn": "The middle value when data is ordered", "textKh": "តម្លៃកណ្ដាលបន្ទាប់ពីដាក់លំដាប់" },
+            { "textEn": "The highest minus the lowest value", "textKh": "តម្លៃខ្ពស់ ដក ​ទាប" },
+            { "textEn": "The total divided by the count", "textKh": "ផលបូក ចែក ចំនួន" }
+          ],
+          "correctIndex": 1,
+          "explanationEn": "The median is the middle value when data is sorted in order. The median is useful because it is not affected by extreme outlier values.",
+          "explanationKh": "Median គឺជាតម្លៃកណ្ដាល នៅពេលដាក់ data តាមលំដាប់លំដោយ។ Median មានប្រយោជន៍ ព្រោះវាមិនប៉ះពាល់ដោយ outlier។"
+        },
+        {
+          "id": 4,
+          "questionEn": "If the probability of rain tomorrow is 0.3, what is the probability it will NOT rain?",
+          "questionKh": "ប្រសិនបើប្រូបាបភ្លៀងថ្ងៃស្អែក 0.3 តើប្រូបាបមិនភ្លៀងប៉ុន្មាន?",
+          "options": [
+            { "textEn": "0.7", "textKh": "0.7" },
+            { "textEn": "0.3", "textKh": "0.3" },
+            { "textEn": "1.3", "textKh": "1.3" },
+            { "textEn": "0", "textKh": "0" }
+          ],
+          "correctIndex": 0,
+          "explanationEn": "The probability of an event NOT happening = 1 − P(event). So P(no rain) = 1 − 0.3 = 0.7. All probabilities of complementary events must add up to 1.",
+          "explanationKh": "ប្រូបាបនៃព្រឹត្តិការណ៍ដែលមិនកើត = 1 − P(ព្រឹត្តិការណ៍)។ ដូច្នេះ P(មិនភ្លៀង) = 1 − 0.3 = 0.7។ ប្រូបាបព្រឹត្តិការណ៍ complement សរុបត្រូវ = 1។"
+        },
+        {
+          "id": 5,
+          "questionEn": "The 'mode' of the set {3, 5, 5, 7, 9, 9, 9} is:",
+          "questionKh": "Mode (ខ្ពស់បំផុត) នៃ {3, 5, 5, 7, 9, 9, 9} គឺ:",
+          "options": [
+            { "textEn": "5", "textKh": "5" },
+            { "textEn": "7", "textKh": "7" },
+            { "textEn": "9", "textKh": "9" },
+            { "textEn": "3", "textKh": "3" }
+          ],
+          "correctIndex": 2,
+          "explanationEn": "The mode is the value that appears most often in a dataset. Here 9 appears 3 times, which is more than 5 (2 times) or 3 and 7 (once each). The mode is useful for finding the most popular item.",
+          "explanationKh": "Mode ជាតម្លៃដែលបង្ហាញញឹកញាប់ជាងគេ។ នៅទីនេះ 9 បង្ហាញ 3 ដង ច្រើនជាង 5 (2 ដង) ឬ 3 និង 7 (ម្ដងៗ)។ Mode មានប្រយោជន៍ស្វែងរកធាតុដ៏ពេញនិយម។"
+        }
+      ]
+    }
+  ]
+}
