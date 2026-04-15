@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { Wind, Search, MapPin, Loader2, RefreshCw, CloudRain, GraduationCap, X } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
+import { useWeatherStore } from "@/store/use-weather";
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
@@ -148,6 +149,7 @@ export function WeatherWidget() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
+  const setTemperature = useWeatherStore((s) => s.setTemperature);
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -173,18 +175,20 @@ export function WeatherWidget() {
       if (!res.ok) throw new Error("weather fetch failed");
       const data = await res.json();
       const cur = data.current;
+      const tempC = Math.round(cur.temperature_2m);
       setWeather({
-        tempC: Math.round(cur.temperature_2m),
+        tempC,
         windKmh: Math.round(cur.wind_speed_10m),
         condition: wmoToCondition(cur.weather_code),
         cityEn: labelEn,
       });
+      setTemperature(tempC);
     } catch {
       setError(true);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setTemperature]);
 
   // ── Reverse geocode via Nominatim ──────────────────────────────────────────
 

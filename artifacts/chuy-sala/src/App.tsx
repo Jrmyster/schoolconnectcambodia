@@ -30,6 +30,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
 import { AdminRoute } from "@/components/AdminRoute";
+import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -47,6 +48,7 @@ function Router() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <HeatSafetyAlert />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
