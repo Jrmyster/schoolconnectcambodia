@@ -15,6 +15,7 @@ import {
   MicOff,
   Maximize2,
   Minimize2,
+  Share2,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -335,6 +336,60 @@ export function InterviewSimulator() {
     setStage("ending");
     await callGemini(messages, selectedRole, true);
     setStage("ended");
+  };
+
+  const handleShare = async () => {
+    const url = "https://schoolconnectcambodia.com";
+    const textEn = `I just finished a mock interview on Chouy Sala! I'm getting ready for my future career. Check it out at ${url}`;
+    const textKh = `ខ្ញុំទើបតែបញ្ចប់ការសម្ភាសន៍សាកល្បងនៅលើ Chouy Sala! ខ្ញុំកំពុងត្រៀមខ្លួនសម្រាប់អាជីពនាពេលអនាគតរបស់ខ្ញុំ។ ចូលមើលនៅ ${url}`;
+    const text = kh ? textKh : textEn;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Chouy Sala — Interview Coach", text, url });
+      } catch {
+      }
+      return;
+    }
+
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`;
+    const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+
+    const popup = document.createElement("div");
+    popup.style.cssText = `
+      position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+      background:rgba(0,0,0,0.5);
+    `;
+    popup.innerHTML = `
+      <div style="background:#fff;border-radius:16px;padding:24px;max-width:320px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+        <p style="font-weight:700;font-size:16px;margin:0 0 16px;color:#1e3a5f;">
+          ${kh ? "ចែករំលែកលទ្ធផលរបស់ខ្ញុំ" : "Share My Result"}
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;margin-bottom:16px;">
+          <a href="${fbUrl}" target="_blank" rel="noopener" style="
+            display:flex;align-items:center;gap:8px;padding:10px 20px;
+            background:#1877f2;color:#fff;border-radius:10px;text-decoration:none;
+            font-weight:600;font-size:13px;">
+            Facebook
+          </a>
+          <a href="${tgUrl}" target="_blank" rel="noopener" style="
+            display:flex;align-items:center;gap:8px;padding:10px 20px;
+            background:#0088cc;color:#fff;border-radius:10px;text-decoration:none;
+            font-weight:600;font-size:13px;">
+            Telegram
+          </a>
+        </div>
+        <button id="cs-share-close" style="
+          background:none;border:1px solid #d1d5db;border-radius:8px;
+          padding:8px 20px;cursor:pointer;font-size:13px;color:#6b7280;">
+          ${kh ? "បិទ" : "Close"}
+        </button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+    const close = () => document.body.removeChild(popup);
+    popup.addEventListener("click", (e) => { if (e.target === popup) close(); });
+    popup.querySelector("#cs-share-close")?.addEventListener("click", close);
   };
 
   const restart = () => {
