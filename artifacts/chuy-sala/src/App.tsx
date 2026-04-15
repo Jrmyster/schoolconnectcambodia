@@ -23,6 +23,7 @@ import { ExamPrepPage } from "@/pages/ExamPrepPage";
 import { SubmitStoryPage } from "@/pages/SubmitStoryPage";
 import { SpacePage } from "@/pages/SpacePage";
 import { ProfilePage } from "@/pages/ProfilePage";
+import { ScientificLiteracyPage } from "@/pages/ScientificLiteracyPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -67,6 +68,7 @@ function Router() {
           <Route path="/exam-prep" component={ExamPrepPage} />
           <Route path="/submit-story" component={SubmitStoryPage} />
           <Route path="/space" component={SpacePage} />
+          <Route path="/science" component={ScientificLiteracyPage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}

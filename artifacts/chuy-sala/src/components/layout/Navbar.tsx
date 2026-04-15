@@ -64,9 +64,10 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "សុខុមាលភាព",
     icon: Smile,
     items: [
-      { href: "/sanctuary",          labelEn: "Sanctuary",          labelKh: "សន្តិភាព",          icon: Leaf },
-      { href: "/space",              labelEn: "Space",               labelKh: "អវកាស",              icon: Rocket },
-      { href: "https://finlitkh.com", labelEn: "Financial Literacy", labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ", icon: Banknote, external: true },
+      { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
+      { href: "/space",              labelEn: "Space",                  labelKh: "អវកាស",                    icon: Rocket },
+      { href: "/science",            labelEn: "Scientific Literacy",    labelKh: "ចំណេះដឹងវិទ្យាសាស្ត្រ",  icon: FlaskConical },
+      { href: "https://finlitkh.com", labelEn: "Financial Literacy",   labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ",    icon: Banknote, external: true },
     ],
   },
 ];
