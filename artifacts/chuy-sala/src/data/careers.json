@@ -193,6 +193,37 @@
     ]
   },
   {
+    "id": "atmospheric-science",
+    "en": "Atmospheric Science & Meteorology",
+    "kh": "វិទ្យាសាស្ត្របរិយាកាស និងឧតុនិយម",
+    "icon": "🌤️",
+    "careers": [
+      {
+        "id": "meteorologist-weather-forecaster",
+        "en": "Meteorologist / Weather Forecaster",
+        "kh": "អ្នកឧតុនិយម / អ្នកព្យាករណ៍អាកាសធាតុ",
+        "tasks": {
+          "en": [
+            "Analyze satellite imagery, atmospheric pressure maps, and wind patterns to generate accurate daily weather forecasts for Cambodia's provinces.",
+            "Monitor and model the seasonal monsoon cycle to provide advance warnings of heavy rainfall and drought conditions to farmers and authorities.",
+            "Operate and maintain weather stations and radar systems across the country, ensuring data quality and continuity.",
+            "Collaborate with the Ministry of Water Resources and international agencies such as ASEAN SCMET to issue flood and extreme-heat alerts."
+          ],
+          "kh": [
+            "វិភាគរូបភាពផ្កាយរណប ផែនទីសម្ពាធបរិយាកាស និងលំនាំខ្យល់ ដើម្បីរៀបចំការព្យាករណ៍អាកាសធាតុប្រចាំថ្ងៃ ដែលត្រឹមត្រូវ សម្រាប់ខេត្តនានាក្នុងប្រទេសកម្ពុជា។",
+            "តាមដាន និងកំណត់គំរូវដូវវដ្ដៃ​មូសុង ដើម្បីផ្ដល់ការព្រមានជ្រៅ ស្ដីពីភ្លៀងធ្លាក់ខ្លាំង និងលក្ខខណ្ឌរាំងស្ងួត ដល់កសិករ និងអាជ្រាធរ។",
+            "ប្រតិបត្តិ និងថែទាំស្ថានីយ​អាកាសធាតុ និងប្រព័ន្ធ Radar នៅទូទាំងប្រទេស ដើម្បីធានាគុណភាព និងបន្តភាពនៃទិន្នន័យ។",
+            "សហការជាមួយក្រសួងធនធានទឹក និងទីភ្នាក់ងារអន្តរជាតិ ដូចជា ASEAN SCMET ដើម្បីចេញការព្រមានទឹកជំនន់ និងកំដ ូ ខ្លាំង។"
+          ]
+        },
+        "impact": {
+          "en": "Provide essential warnings that protect farmers' crops and keep communities safe from floods and extreme heat.",
+          "kh": "ផ្ដល់ការព្រមានសំខាន់ៗ ដែលការពារដំណាំរបស់កសិករ និងរក្សាសហគមន៍ ឱ្យមានសុវត្ថិភាពពីទឹកជំនន់ និងកំដ ូ ខ្លាំង។"
+        }
+      }
+    ]
+  },
+  {
     "id": "aviation",
     "en": "Aviation",
     "kh": "អាកាសចរណ៍",
