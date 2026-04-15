@@ -1,8 +1,10 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense, useCallback } from "react";
 import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
+import { RelativityChallenge } from "@/components/RelativityChallenge";
+import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
 
 const SolarSystem3D = lazy(() =>
   import("@/components/SolarSystem3D").then((m) => ({ default: m.SolarSystem3D }))
@@ -81,6 +83,11 @@ export function SpacePage() {
   const [apodLoading, setApodLoading] = useState(true);
   const [apodError, setApodError] = useState(false);
   const [showFullExplanation, setShowFullExplanation] = useState(false);
+  const [leaderboardRefresh, setLeaderboardRefresh] = useState(0);
+
+  const handleScoreSubmitted = useCallback(() => {
+    setLeaderboardRefresh((n) => n + 1);
+  }, []);
 
   useEffect(() => {
     setApodLoading(true);
@@ -323,6 +330,15 @@ export function SpacePage() {
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
+
+        {/* ── Cosmic Time Machine ───────────────────────────────────────── */}
+        <CosmicTimeMachine />
+
+        {/* ── Relativity Challenge ──────────────────────────────────────── */}
+        <RelativityChallenge onScoreSubmitted={handleScoreSubmitted} />
+
+        {/* ── Chief Astronomer Leaderboard ──────────────────────────────── */}
+        <ChiefAstronomerLeaderboard refreshTrigger={leaderboardRefresh} />
 
         {/* ── Explore More footer strip ──────────────────────────────────── */}
         <div className="border-t border-white/8 bg-white/3">

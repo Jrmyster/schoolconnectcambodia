@@ -26,5 +26,7 @@ router.use(openaiRouter);
 router.use(interviewRouter);
 router.use(adminMetricsRouter);
 router.use(savedCareersRouter);
+router.use(quizRouter);
+router.use(leaderboardRouter);
 
 export default router;

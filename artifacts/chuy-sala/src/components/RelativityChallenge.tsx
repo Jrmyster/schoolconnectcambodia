@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, RotateCcw, CheckCircle2, XCircle } from "lucide-react";
+import { Rocket, RotateCcw, CheckCircle2, XCircle, Send, Loader2 } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
+
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 type AnswerKey = "A" | "B" | "C";
 
@@ -52,7 +54,6 @@ function ClockFace({
           boxShadow: `0 0 20px ${color}55`,
         }}
       >
-        {/* Tick marks */}
         {Array.from({ length: 12 }, (_, i) => {
           const angle = (i / 12) * 360;
           return (
@@ -73,11 +74,7 @@ function ClockFace({
           );
         })}
 
-        {/* Minute hand */}
-        <div
-          className={`absolute ${animClass}`}
-          style={{ width: "100%", height: "100%" }}
-        >
+        <div className={`absolute ${animClass}`} style={{ width: "100%", height: "100%" }}>
           <div
             className="absolute rounded-full"
             style={{
@@ -92,7 +89,6 @@ function ClockFace({
           />
         </div>
 
-        {/* Hour hand (slower) */}
         <div
           className="absolute"
           style={{
@@ -118,7 +114,6 @@ function ClockFace({
           />
         </div>
 
-        {/* Center dot */}
         <div
           className="absolute rounded-full z-10"
           style={{ width: 6, height: 6, background: color }}
@@ -131,30 +126,42 @@ function ClockFace({
         </p>
         <p className={`text-white/40 text-xs mt-0.5 ${kh ? "font-khmer" : ""}`}>
           {fast
-            ? kh
-              ? "ដើរលឿន"
-              : "Racing forward"
-            : kh
-            ? "ដើរយឺតណាស់"
-            : "Barely ticking"}
+            ? kh ? "ដើរលឿន" : "Racing forward"
+            : kh ? "ដើរយឺតណាស់" : "Barely ticking"}
         </p>
       </div>
     </div>
   );
 }
 
-export function RelativityChallenge() {
+interface RelativityChallengeProps {
+  onScoreSubmitted?: () => void;
+}
+
+export function RelativityChallenge({ onScoreSubmitted }: RelativityChallengeProps) {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
   const [selected, setSelected] = useState<AnswerKey | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [nickname, setNickname] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+
+  const startTimeRef = useRef<number>(Date.now());
+  const elapsedMsRef = useRef<number>(0);
+
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
 
   const isCorrect = selected === CORRECT;
 
   function handleSelect(key: AnswerKey) {
     if (revealed) return;
+    elapsedMsRef.current = Date.now() - startTimeRef.current;
     setSelected(key);
     setRevealed(true);
   }
@@ -162,7 +169,38 @@ export function RelativityChallenge() {
   function reset() {
     setSelected(null);
     setRevealed(false);
+    setNickname("");
+    setSubmitting(false);
+    setSubmitted(false);
+    setSubmitError(false);
+    elapsedMsRef.current = 0;
+    startTimeRef.current = Date.now();
   }
+
+  const handleSubmit = useCallback(async () => {
+    const trimmed = nickname.trim();
+    if (!trimmed || submitted || submitting) return;
+    setSubmitting(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch(`${BASE_URL}/api/leaderboard/space`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname: trimmed,
+          score: isCorrect ? 1 : 0,
+          completionTimeMs: elapsedMsRef.current,
+        }),
+      });
+      if (!res.ok) throw new Error("submit failed");
+      setSubmitted(true);
+      onScoreSubmitted?.();
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }, [nickname, submitted, submitting, isCorrect, onScoreSubmitted]);
 
   return (
     <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
@@ -320,7 +358,6 @@ export function RelativityChallenge() {
                       labelKh="នាឡិការបស់អ្នក"
                       color="#a78bfa"
                     />
-
                     <div className="flex flex-col items-center gap-1">
                       <div className="text-white/20 text-2xl">⟺</div>
                       <p
@@ -331,7 +368,6 @@ export function RelativityChallenge() {
                         {t("vs", "ទល់នឹង")}
                       </p>
                     </div>
-
                     <ClockFace
                       fast={true}
                       label="Earth's Clock"
@@ -354,7 +390,7 @@ export function RelativityChallenge() {
 
                 {/* Explanation */}
                 <div
-                  className={`rounded-2xl border p-5 ${
+                  className={`rounded-2xl border p-5 mb-4 ${
                     isCorrect
                       ? "border-emerald-400/30 bg-emerald-400/8"
                       : "border-amber-400/30 bg-amber-400/8"
@@ -383,8 +419,68 @@ export function RelativityChallenge() {
                   </p>
                 </div>
 
+                {/* Nickname submission form */}
+                {!submitted ? (
+                  <div
+                    className="rounded-2xl border border-white/10 p-5 mb-4"
+                    style={{ background: "rgba(255,255,255,0.03)" }}
+                  >
+                    <p className={`text-white/60 text-sm font-semibold mb-1 ${kh ? "font-khmer" : ""}`}>
+                      {t("Add your name to the leaderboard", "បន្ថែមឈ្មោះអ្នកទៅក្ដារលេខ")}
+                    </p>
+                    <p className={`text-white/30 text-xs mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+                      {t(
+                        "Choose a nickname — your real name won't be shown publicly.",
+                        "ជ្រើសឈ្មោះហៅ — ឈ្មោះពិតរបស់អ្នកនឹងមិនត្រូវបានបង្ហាញជាសាធារណៈ។"
+                      )}
+                    </p>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value.slice(0, 30))}
+                        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                        placeholder={kh ? "ឈ្មោះហៅ…" : "Your nickname…"}
+                        maxLength={30}
+                        className={`flex-1 rounded-xl border border-white/15 bg-white/8 text-white text-sm px-4 py-2.5 placeholder-white/25 focus:outline-none focus:border-violet-400/50 transition-colors ${kh ? "font-khmer" : ""}`}
+                      />
+                      <button
+                        onClick={handleSubmit}
+                        disabled={!nickname.trim() || submitting}
+                        className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                        style={{
+                          background: "rgba(139,92,246,0.7)",
+                          color: "white",
+                        }}
+                      >
+                        {submitting ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <Send className="w-4 h-4" />
+                        )}
+                        <span className={kh ? "font-khmer" : ""}>{t("Submit", "បញ្ជូន")}</span>
+                      </button>
+                    </div>
+                    {submitError && (
+                      <p className={`text-red-400 text-xs mt-2 ${kh ? "font-khmer" : ""}`}>
+                        {t("Submission failed. Please try again.", "បញ្ជូនបរាជ័យ។ សូមព្យាយាមម្ដងទៀត។")}
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="rounded-2xl border border-emerald-400/30 bg-emerald-400/8 p-4 mb-4 text-center"
+                  >
+                    <p className={`text-emerald-300 font-bold text-sm ${kh ? "font-khmer" : ""}`}>
+                      {t("Score submitted! Check the leaderboard below. 🌌", "ពិន្ទុបានបញ្ជូន! មើលក្ដារលេខខាងក្រោម។ 🌌")}
+                    </p>
+                  </motion.div>
+                )}
+
                 {/* Reset */}
-                <div className="flex justify-center mt-4">
+                <div className="flex justify-center mt-2">
                   <button
                     onClick={reset}
                     className="flex items-center gap-2 text-xs text-white/40 hover:text-white/70 transition-colors"

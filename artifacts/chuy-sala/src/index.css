@@ -119,3 +119,19 @@
 .glass-panel {
   @apply bg-white/80 backdrop-blur-md border border-white/40 shadow-lg shadow-black/5;
 }
+
+/* Space clock animations */
+@keyframes spinFast {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spin-fast {
+  animation: spinFast 0.96s linear infinite;
+}
+.animate-spin-slow {
+  animation: spinSlow 9.6s linear infinite;
+}
