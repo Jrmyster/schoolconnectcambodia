@@ -14,6 +14,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import SkepticsChallenge from "@/components/SkepticsChallenge";
 
 // ── Scientific Method Data ──────────────────────────────────────────────────
 
@@ -653,6 +654,8 @@ export function ScientificLiteracyPage() {
         <ScientificMethodSection onProgress={setMethodPts} />
         <FactOpinionSection onProgress={setQuizPts} />
         <ToolboxSection onProgress={setToolPts} />
+
+        <SkepticsChallenge />
 
         {/* Completion banner */}
         {total >= 90 && (
