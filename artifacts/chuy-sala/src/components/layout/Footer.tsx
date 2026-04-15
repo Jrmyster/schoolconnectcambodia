@@ -1,9 +1,10 @@
 import { Heart } from "lucide-react";
-import { useTranslation } from "@/store/use-language";
+import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { DownloadGuideButton } from "@/components/DownloadGuideButton";
 
 export function Footer() {
   const t = useTranslation();
+  const language = useLanguageStore((s) => s.language);
   
   return (
     <footer className="bg-foreground text-secondary py-12 mt-20 border-t-4 border-primary">
@@ -69,6 +70,35 @@ export function Footer() {
                 "គម្រោងនេះត្រូវបានគ្រប់គ្រងដោយអ្នកស្ម័គ្រចិត្ត Peace Corps ។ ការបរិច្ចាគត្រូវបានប្រើប្រាស់សម្រាប់តែការបង្ហោះម៉ាស៊ីនមេ និងការអភិវឌ្ឍន៍ធនធានប៉ុណ្ណោះ។"
               )}
             </p>
+          </div>
+          <div className="max-w-2xl mx-auto text-xs text-secondary/40 leading-relaxed border-t border-white/10 pt-6 mt-2">
+            {language === "kh" ? (
+              <span className="font-khmer">
+                អ្នកបង្កើតគម្រោងនេះគាំទ្រដល់ស្នាដៃរបស់លោក Jacque Fresco និង{" "}
+                <a
+                  href="https://thevenusproject.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-secondary/70 transition-colors"
+                >
+                  The Venus Project
+                </a>
+                ។ យើងជឿជាក់លើការប្រើប្រាស់វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា ដើម្បីបង្កើតពិភពលោកដ៏ល្អប្រសើរសម្រាប់មនុស្សគ្រប់គ្នា។
+              </span>
+            ) : (
+              <span>
+                The developer of this project supports the work of Jacque Fresco and{" "}
+                <a
+                  href="https://thevenusproject.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-secondary/70 transition-colors"
+                >
+                  The Venus Project
+                </a>
+                . We believe in using science and technology to create a better world for everyone.
+              </span>
+            )}
           </div>
         </div>
       </div>
