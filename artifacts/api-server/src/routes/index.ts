@@ -13,6 +13,7 @@ import savedCareersRouter from "./savedCareers";
 import quizRouter from "./quiz";
 import leaderboardRouter from "./leaderboard";
 import skepticRouter from "./skeptic";
+import booksRouter from "./books";
 
 const router: IRouter = Router();
 
@@ -30,5 +31,6 @@ router.use(savedCareersRouter);
 router.use(quizRouter);
 router.use(leaderboardRouter);
 router.use(skepticRouter);
+router.use(booksRouter);
 
 export default router;

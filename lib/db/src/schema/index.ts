@@ -10,3 +10,4 @@ export * from "./savedCareers";
 export * from "./spaceLeaderboard";
 export * from "./userBadges";
 export * from "./skepticCompletions";
+export * from "./books";

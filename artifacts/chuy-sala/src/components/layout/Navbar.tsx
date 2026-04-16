@@ -56,6 +56,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
       { href: "https://khmervoc.com",   labelEn: "Vocational Guide", labelKh: "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ", icon: Wrench, external: true },
+      { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
       { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
       { href: "/safety",                labelEn: "Digital Safety",    labelKh: "សុវត្ថិភាព",             icon: Shield },
     ],
