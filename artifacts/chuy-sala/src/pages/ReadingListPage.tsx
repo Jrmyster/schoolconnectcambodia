@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import {
   BookOpen, Heart, Plus, X, Loader2, User, Send,
-  Trash2, BookMarked, ChevronLeft, Star,
+  Trash2, BookMarked, ChevronLeft, Star, Award, FlaskConical,
+  Lightbulb, Briefcase, Scroll, DollarSign, Library,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
@@ -15,9 +16,34 @@ type BookEntry = {
   review: string;
   userId: number;
   isFeatured: boolean;
+  category: string | null;
   createdAt: string;
   likeCount: number;
   likedByMe: boolean;
+};
+
+type CategoryKey = "all" | "science" | "philosophy" | "career" | "fiction" | "finance";
+
+const CATEGORIES: { key: CategoryKey; en: string; kh: string; icon: React.ReactNode }[] = [
+  { key: "all",        en: "All",        kh: "ទាំងអស់",        icon: <Library className="w-3.5 h-3.5" /> },
+  { key: "science",    en: "Science",    kh: "វិទ្យាសាស្ត្រ",  icon: <FlaskConical className="w-3.5 h-3.5" /> },
+  { key: "philosophy", en: "Philosophy", kh: "ទស្សនវិជ្ជា",    icon: <Lightbulb className="w-3.5 h-3.5" /> },
+  { key: "career",     en: "Career",     kh: "អាជីព",           icon: <Briefcase className="w-3.5 h-3.5" /> },
+  { key: "fiction",    en: "Fiction",    kh: "ប្រឌិតកថា",      icon: <Scroll className="w-3.5 h-3.5" /> },
+  { key: "finance",    en: "Finance",    kh: "ហិរញ្ញវត្ថុ",    icon: <DollarSign className="w-3.5 h-3.5" /> },
+];
+
+const AUTHOR_OF_MONTH = {
+  name: "Buckminster Fuller",
+  initials: "BF",
+  lifespan: "1895 – 1983",
+  bioEn: "A 20th-century inventor and futurist who viewed the Earth as a spaceship — a complex vessel whose finite resources must be managed wisely for the benefit of all humanity.",
+  bioKh: "ជាអ្នកច្នៃប្រឌិត និងជាអ្នកមើលឃើញពីអនាគតនៅសតវត្សរ៍ទី ២០ ដែលបានចាត់ទុកផែនដីជាយានអវកាស — ជាយានដ៏ស្មុគ្រស្មាញដែលធនធានមានកំណត់របស់វាត្រូវតែគ្រប់គ្រងដោយEnglish ប្រាជ្ញាដើម្បីផលប្រយោជន៍មនុស្សជាតិទាំងមូល។",
+  works: [
+    { title: "Operating Manual for Spaceship Earth", year: "1969" },
+    { title: "Critical Path", year: "1981" },
+    { title: "Synergetics", year: "1975" },
+  ],
 };
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -35,14 +61,6 @@ function avatarColor(id: number) {
   return PALETTE[id % PALETTE.length];
 }
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
 export function ReadingListPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
@@ -52,6 +70,7 @@ export function ReadingListPage() {
   const [books, setBooks] = useState<BookEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>("all");
 
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -62,6 +81,7 @@ export function ReadingListPage() {
   const [author, setAuthor] = useState("");
   const [recommendedBy, setRecommendedBy] = useState("");
   const [review, setReview] = useState("");
+  const [category, setCategory] = useState<CategoryKey | "">("");
 
   const fetchBooks = useCallback(async () => {
     try {
@@ -81,23 +101,12 @@ export function ReadingListPage() {
   }, [fetchBooks]);
 
   function resetForm() {
-    setTitle("");
-    setAuthor("");
-    setRecommendedBy("");
-    setReview("");
-    setFormError("");
-    setFormSuccess(false);
+    setTitle(""); setAuthor(""); setRecommendedBy(""); setReview(""); setCategory("");
+    setFormError(""); setFormSuccess(false);
   }
 
-  function openForm() {
-    resetForm();
-    setShowForm(true);
-  }
-
-  function closeForm() {
-    setShowForm(false);
-    resetForm();
-  }
+  function openForm() { resetForm(); setShowForm(true); }
+  function closeForm() { setShowForm(false); resetForm(); }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -109,7 +118,7 @@ export function ReadingListPage() {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, author, recommendedBy, review }),
+        body: JSON.stringify({ title, author, recommendedBy, review, category: category || null }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Failed");
@@ -129,19 +138,12 @@ export function ReadingListPage() {
     setBooks((b) =>
       b.map((book) =>
         book.id === bookId
-          ? {
-              ...book,
-              likedByMe: !book.likedByMe,
-              likeCount: book.likedByMe ? book.likeCount - 1 : book.likeCount + 1,
-            }
+          ? { ...book, likedByMe: !book.likedByMe, likeCount: book.likedByMe ? book.likeCount - 1 : book.likeCount + 1 }
           : book
       )
     );
     try {
-      const res = await fetch(`${BASE}/api/books/${bookId}/like`, {
-        method: "POST",
-        credentials: "include",
-      });
+      const res = await fetch(`${BASE}/api/books/${bookId}/like`, { method: "POST", credentials: "include" });
       if (!res.ok) throw new Error();
     } catch {
       setBooks(prev);
@@ -154,30 +156,32 @@ export function ReadingListPage() {
     const prev = [...books];
     setBooks((b) => b.filter((book) => book.id !== bookId));
     try {
-      const res = await fetch(`${BASE}/api/books/${bookId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const res = await fetch(`${BASE}/api/books/${bookId}`, { method: "DELETE", credentials: "include" });
       if (!res.ok) throw new Error();
     } catch {
       setBooks(prev);
     }
   }
 
+  function matchesCategory(book: BookEntry) {
+    if (activeCategory === "all") return true;
+    return book.category === activeCategory;
+  }
+
+  const featuredBooks = books.filter((b) => b.isFeatured && matchesCategory(b));
+  const studentBooks  = books.filter((b) => !b.isFeatured && matchesCategory(b));
+
   const inputClass =
     "w-full rounded-xl border border-border bg-secondary/30 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition";
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* ── Header ── */}
       <section className="bg-gradient-to-br from-[#0a2240] to-[#1A6EA8] text-white py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-white/70 hover:text-white text-sm mb-6 transition-colors"
-          >
+          <Link href="/" className="inline-flex items-center gap-1.5 text-white/70 hover:text-white text-sm mb-6 transition-colors">
             <ChevronLeft className="w-4 h-4" />
-            {t("Back to Home", "귀ត្រឡប់ទំព័រដើម")}
+            {t("Back to Home", "ត្រឡប់ទំព័រដើម")}
           </Link>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center">
@@ -218,14 +222,11 @@ export function ReadingListPage() {
         </div>
       </section>
 
-      {/* Modal form */}
+      {/* ── Modal form ── */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-6 md:p-8 relative">
-            <button
-              onClick={closeForm}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-secondary transition-colors"
-            >
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-6 md:p-8 relative max-h-[90vh] overflow-y-auto">
+            <button onClick={closeForm} className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-secondary transition-colors">
               <X className="w-5 h-5 text-muted-foreground" />
             </button>
 
@@ -253,42 +254,36 @@ export function ReadingListPage() {
                   <label className={`block text-xs font-semibold text-muted-foreground mb-1.5 ${kh ? "font-khmer" : ""}`}>
                     {t("Book Title *", "ឈ្មោះសៀវភៅ *")}
                   </label>
-                  <input
-                    className={inputClass}
-                    placeholder={t("e.g. The Alchemist", "ឧ. ជ័យជំនះ")}
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                    maxLength={200}
-                  />
+                  <input className={inputClass} placeholder={t("e.g. The Alchemist", "ឧ. ជ័យជំនះ")}
+                    value={title} onChange={(e) => setTitle(e.target.value)} required maxLength={200} />
                 </div>
 
                 <div>
                   <label className={`block text-xs font-semibold text-muted-foreground mb-1.5 ${kh ? "font-khmer" : ""}`}>
                     {t("Author *", "អ្នកនិពន្ធ *")}
                   </label>
-                  <input
-                    className={inputClass}
-                    placeholder={t("e.g. Paulo Coelho", "ឧ. Paulo Coelho")}
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                    maxLength={200}
-                  />
+                  <input className={inputClass} placeholder={t("e.g. Paulo Coelho", "ឧ. Paulo Coelho")}
+                    value={author} onChange={(e) => setAuthor(e.target.value)} required maxLength={200} />
                 </div>
 
                 <div>
                   <label className={`block text-xs font-semibold text-muted-foreground mb-1.5 ${kh ? "font-khmer" : ""}`}>
                     {t("Your Name *", "ឈ្មោះរបស់អ្នក *")}
                   </label>
-                  <input
-                    className={inputClass}
-                    placeholder={t("e.g. Sophal Rath", "ឧ. សុផល រ៉ាត")}
-                    value={recommendedBy}
-                    onChange={(e) => setRecommendedBy(e.target.value)}
-                    required
-                    maxLength={200}
-                  />
+                  <input className={inputClass} placeholder={t("e.g. Sophal Rath", "ឧ. សុផល រ៉ាត")}
+                    value={recommendedBy} onChange={(e) => setRecommendedBy(e.target.value)} required maxLength={200} />
+                </div>
+
+                <div>
+                  <label className={`block text-xs font-semibold text-muted-foreground mb-1.5 ${kh ? "font-khmer" : ""}`}>
+                    {t("Category", "ប្រភេទ")}
+                  </label>
+                  <select className={inputClass} value={category} onChange={(e) => setCategory(e.target.value as CategoryKey | "")}>
+                    <option value="">{t("— Select a category (optional) —", "— ជ្រើសប្រភេទ (ជាជម្រើស) —")}</option>
+                    {CATEGORIES.filter((c) => c.key !== "all").map((c) => (
+                      <option key={c.key} value={c.key}>{kh ? c.kh : c.en}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
@@ -301,37 +296,22 @@ export function ReadingListPage() {
                       "Share what you loved about this book and why others should read it...",
                       "ចែករំលែកអ្វីដែលអ្នកចូលចិត្ត និងហេតុអ្វីអ្នកដទៃគួរអាន..."
                     )}
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
-                    required
-                    minLength={10}
-                    maxLength={1000}
+                    value={review} onChange={(e) => setReview(e.target.value)}
+                    required minLength={10} maxLength={1000}
                   />
                   <p className="text-xs text-muted-foreground mt-1 text-right">{review.length}/1000</p>
                 </div>
 
-                {formError && (
-                  <p className={`text-sm text-destructive ${kh ? "font-khmer" : ""}`}>{formError}</p>
-                )}
+                {formError && <p className={`text-sm text-destructive ${kh ? "font-khmer" : ""}`}>{formError}</p>}
 
                 <div className="flex gap-3 pt-2">
-                  <button
-                    type="button"
-                    onClick={closeForm}
-                    className={`flex-1 py-2.5 rounded-xl border border-border text-muted-foreground text-sm font-medium hover:bg-secondary transition-colors ${kh ? "font-khmer" : ""}`}
-                  >
+                  <button type="button" onClick={closeForm}
+                    className={`flex-1 py-2.5 rounded-xl border border-border text-muted-foreground text-sm font-medium hover:bg-secondary transition-colors ${kh ? "font-khmer" : ""}`}>
                     {t("Cancel", "បោះបង់")}
                   </button>
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className={`flex-1 py-2.5 rounded-xl bg-primary text-white font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60 ${kh ? "font-khmer" : ""}`}
-                  >
-                    {submitting ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <Send className="w-4 h-4" />
-                    )}
+                  <button type="submit" disabled={submitting}
+                    className={`flex-1 py-2.5 rounded-xl bg-primary text-white font-bold text-sm flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all disabled:opacity-60 ${kh ? "font-khmer" : ""}`}>
+                    {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                     {t("Submit", "ដាក់ស្នើ")}
                   </button>
                 </div>
@@ -341,8 +321,39 @@ export function ReadingListPage() {
         </div>
       )}
 
-      {/* Book feed */}
-      <section className="max-w-4xl mx-auto px-4 py-10 space-y-12">
+      {/* ── Body ── */}
+      <section className="max-w-4xl mx-auto px-4 py-10 space-y-10">
+
+        {/* ── Author of the Month ── */}
+        <AuthorOfMonthCard kh={kh} t={t} />
+
+        {/* ── Category filter chips ── */}
+        <div>
+          <p className={`text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3 ${kh ? "font-khmer" : ""}`}>
+            {t("Filter by category", "ត្រងតាមប្រភេទ")}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((cat) => {
+              const active = activeCategory === cat.key;
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => setActiveCategory(cat.key)}
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                    active
+                      ? "bg-primary text-white border-primary shadow-md"
+                      : "bg-white text-muted-foreground border-border hover:border-primary/40 hover:text-primary"
+                  } ${kh ? "font-khmer" : ""}`}
+                >
+                  {cat.icon}
+                  {kh ? cat.kh : cat.en}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── Book feed ── */}
         {loading ? (
           <div className="flex justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -351,8 +362,8 @@ export function ReadingListPage() {
           <div className={`text-center py-16 text-muted-foreground ${kh ? "font-khmer" : ""}`}>{error}</div>
         ) : (
           <>
-            {/* ── Featured Books ── */}
-            {books.filter((b) => b.isFeatured).length > 0 && (
+            {/* Featured */}
+            {featuredBooks.length > 0 && (
               <div>
                 <div className="flex items-center gap-2 mb-5">
                   <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
@@ -361,25 +372,16 @@ export function ReadingListPage() {
                   </h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {books.filter((b) => b.isFeatured).map((book) => (
-                    <BookCard
-                      key={book.id}
-                      book={book}
-                      user={user}
-                      kh={kh}
-                      t={t}
-                      onLike={handleLike}
-                      onDelete={handleDelete}
-                      featured
-                    />
+                  {featuredBooks.map((book) => (
+                    <BookCard key={book.id} book={book} user={user} kh={kh} t={t} onLike={handleLike} onDelete={handleDelete} featured />
                   ))}
                 </div>
               </div>
             )}
 
-            {/* ── Student Recommendations ── */}
+            {/* Student */}
             <div>
-              {books.filter((b) => !b.isFeatured).length > 0 && (
+              {studentBooks.length > 0 && (
                 <div className="flex items-center gap-2 mb-5">
                   <BookOpen className="w-4 h-4 text-primary" />
                   <h2 className={`font-bold text-foreground ${kh ? "font-khmer" : "font-display"}`}>
@@ -387,25 +389,19 @@ export function ReadingListPage() {
                   </h2>
                 </div>
               )}
-              {books.filter((b) => !b.isFeatured).length === 0 ? (
-                <div className="text-center py-16 text-muted-foreground">
+              {studentBooks.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground">
                   <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
                   <p className={`font-semibold text-lg ${kh ? "font-khmer" : ""}`}>
-                    {t("No student recommendations yet. Be the first!", "មិនទាន់មានការណែនាំពីសិស្សទេ។ ចូររួមចំណែកដំបូង!")}
+                    {activeCategory === "all"
+                      ? t("No student recommendations yet. Be the first!", "មិនទាន់មានការណែនាំពីសិស្សទេ។ ចូររួមចំណែកដំបូង!")
+                      : t("No books in this category yet.", "មិនទាន់មានសៀវភៅក្នុងប្រភេទនេះទេ។")}
                   </p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {books.filter((b) => !b.isFeatured).map((book) => (
-                    <BookCard
-                      key={book.id}
-                      book={book}
-                      user={user}
-                      kh={kh}
-                      t={t}
-                      onLike={handleLike}
-                      onDelete={handleDelete}
-                    />
+                  {studentBooks.map((book) => (
+                    <BookCard key={book.id} book={book} user={user} kh={kh} t={t} onLike={handleLike} onDelete={handleDelete} />
                   ))}
                 </div>
               )}
@@ -417,16 +413,77 @@ export function ReadingListPage() {
   );
 }
 
-// ── BookCard ────────────────────────────────────────────────────────────────
+// ── Author of the Month Card ─────────────────────────────────────────────────
 
-function BookCard({
-  book,
-  user,
+function AuthorOfMonthCard({
   kh,
   t,
-  onLike,
-  onDelete,
-  featured = false,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  const a = AUTHOR_OF_MONTH;
+  return (
+    <div className="rounded-3xl overflow-hidden border border-[#1A6EA8]/20 shadow-lg bg-white">
+      {/* Top banner */}
+      <div className="bg-gradient-to-r from-[#0a2240] via-[#1A6EA8] to-[#0891b2] px-6 py-3 flex items-center gap-2">
+        <Award className="w-4 h-4 text-amber-400 fill-amber-400" />
+        <span className={`text-white font-bold text-sm tracking-wide uppercase ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {t("Author of the Month", "អ្នកនិពន្ធប្រចាំខែ")}
+        </span>
+      </div>
+
+      <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6">
+        {/* Avatar */}
+        <div className="flex-shrink-0 flex flex-col items-center gap-2">
+          <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#1A6EA8] to-[#0a2240] flex items-center justify-center shadow-lg">
+            <span className="text-white font-black text-3xl tracking-tight">{a.initials}</span>
+          </div>
+          <span className="text-xs text-muted-foreground">{a.lifespan}</span>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <h2 className="text-2xl font-black text-foreground leading-tight mb-1">{a.name}</h2>
+          <p className={`text-sm text-muted-foreground leading-relaxed mb-4 ${kh ? "font-khmer leading-loose" : ""}`}>
+            {kh ? a.bioKh : a.bioEn}
+          </p>
+
+          {/* Recommended works */}
+          <div>
+            <p className={`text-xs font-bold text-primary uppercase tracking-wide mb-2 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {t("Recommended Works", "ស្នាដៃដែលណែនាំ")}
+            </p>
+            <ul className="space-y-1.5">
+              {a.works.map((work) => (
+                <li key={work.title} className="flex items-start gap-2">
+                  <BookOpen className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-foreground font-medium leading-snug">
+                    {work.title}
+                    <span className="text-muted-foreground font-normal ml-1.5">({work.year})</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── BookCard ─────────────────────────────────────────────────────────────────
+
+const CATEGORY_LABELS: Record<string, { en: string; kh: string }> = {
+  science:    { en: "Science",    kh: "វិទ្យាសាស្ត្រ" },
+  philosophy: { en: "Philosophy", kh: "ទស្សនវិជ្ជា" },
+  career:     { en: "Career",     kh: "អាជីព" },
+  fiction:    { en: "Fiction",    kh: "ប្រឌិតកថា" },
+  finance:    { en: "Finance",    kh: "ហិរញ្ញវត្ថុ" },
+};
+
+function BookCard({
+  book, user, kh, t, onLike, onDelete, featured = false,
 }: {
   book: BookEntry;
   user: { id: number } | null;
@@ -436,15 +493,12 @@ function BookCard({
   onDelete: (id: number) => void;
   featured?: boolean;
 }) {
+  const catLabel = book.category ? CATEGORY_LABELS[book.category] : null;
+
   return (
-    <div
-      className={`flex flex-col overflow-hidden rounded-2xl border transition-shadow hover:shadow-md ${
-        featured
-          ? "border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-sm"
-          : "border-border bg-white shadow-sm"
-      }`}
-    >
-      {/* Card header */}
+    <div className={`flex flex-col overflow-hidden rounded-2xl border transition-shadow hover:shadow-md ${
+      featured ? "border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-sm" : "border-border bg-white shadow-sm"
+    }`}>
       <div className={`bg-gradient-to-r ${avatarColor(book.id)} p-4 relative`}>
         {featured && (
           <div className="absolute top-2 right-2 flex items-center gap-1 bg-amber-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
@@ -457,53 +511,42 @@ function BookCard({
             <BookOpen className="w-4 h-4 text-white" />
           </div>
           <div className="flex-1 min-w-0 pr-12">
-            <h3 className="text-white font-bold text-sm leading-snug line-clamp-2">
-              {book.title}
-            </h3>
+            <h3 className="text-white font-bold text-sm leading-snug line-clamp-2">{book.title}</h3>
             <p className="text-white/80 text-xs mt-0.5">by {book.author}</p>
           </div>
         </div>
       </div>
 
-      {/* Card body */}
       <div className="p-4 flex flex-col flex-1">
+        {catLabel && (
+          <span className={`self-start mb-2 text-[10px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full bg-primary/10 text-primary ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {kh ? catLabel.kh : catLabel.en}
+          </span>
+        )}
         <p className={`text-sm text-muted-foreground leading-relaxed flex-1 ${kh ? "font-khmer leading-loose" : ""}`}>
           "{book.review}"
         </p>
 
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
           <div className={`flex items-center gap-1.5 text-xs ${featured ? "text-amber-700 font-semibold" : "text-muted-foreground"}`}>
-            {featured ? (
-              <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-            ) : (
-              <User className="w-3.5 h-3.5" />
-            )}
+            {featured ? <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> : <User className="w-3.5 h-3.5" />}
             <span className={kh ? "font-khmer" : ""}>{book.recommendedBy}</span>
           </div>
 
           <div className="flex items-center gap-2">
             {user && book.userId === user.id && (
-              <button
-                onClick={() => onDelete(book.id)}
+              <button onClick={() => onDelete(book.id)}
                 className="p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                title={t("Delete", "លុប")}
-              >
+                title={t("Delete", "លុប")}>
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
             )}
-            <button
-              onClick={() => onLike(book.id)}
-              disabled={!user}
+            <button onClick={() => onLike(book.id)} disabled={!user}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                book.likedByMe
-                  ? "bg-rose-100 text-rose-600"
-                  : "bg-secondary text-muted-foreground hover:bg-rose-50 hover:text-rose-500"
+                book.likedByMe ? "bg-rose-100 text-rose-600" : "bg-secondary text-muted-foreground hover:bg-rose-50 hover:text-rose-500"
               } disabled:cursor-default`}
-              title={!user ? t("Log in to like", "ចូលដើម្បីចុច") : undefined}
-            >
-              <Heart
-                className={`w-3.5 h-3.5 transition-all ${book.likedByMe ? "fill-rose-500 text-rose-500 scale-110" : ""}`}
-              />
+              title={!user ? t("Log in to like", "ចូលដើម្បីចុច") : undefined}>
+              <Heart className={`w-3.5 h-3.5 transition-all ${book.likedByMe ? "fill-rose-500 text-rose-500 scale-110" : ""}`} />
               <span>{book.likeCount}</span>
             </button>
           </div>

@@ -19,6 +19,7 @@ router.get("/books", async (req, res) => {
         review: booksTable.review,
         userId: booksTable.userId,
         isFeatured: booksTable.isFeatured,
+        category: booksTable.category,
         createdAt: booksTable.createdAt,
         likeCount: sql<number>`cast(count(${bookLikesTable.id}) as int)`,
       })
@@ -53,7 +54,7 @@ router.post("/books", async (req, res) => {
     return res.status(401).json({ error: "You must be logged in to recommend a book" });
   }
   const userId = req.session.userId;
-  const { title, author, recommendedBy, review } = req.body ?? {};
+  const { title, author, recommendedBy, review, category } = req.body ?? {};
 
   if (typeof title !== "string" || !title.trim())
     return res.status(400).json({ error: "title is required" });
@@ -84,6 +85,7 @@ router.post("/books", async (req, res) => {
         recommendedBy: recommendedBy.trim(),
         review: review.trim(),
         userId,
+        category: typeof category === "string" && category.trim() ? category.trim() : null,
       })
       .returning();
     return res.status(201).json({ ...inserted, likeCount: 0, likedByMe: false });

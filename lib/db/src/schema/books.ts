@@ -8,6 +8,7 @@ export const booksTable = pgTable("books", {
   review: text("review").notNull(),
   userId: integer("user_id").notNull(),
   isFeatured: boolean("is_featured").notNull().default(false),
+  category: text("category"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
