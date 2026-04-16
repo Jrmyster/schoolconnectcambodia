@@ -11,3 +11,5 @@ export * from "./spaceLeaderboard";
 export * from "./userBadges";
 export * from "./skepticCompletions";
 export * from "./books";
+export * from "./authorOfMonth";
+export * from "./challengeCompletions";

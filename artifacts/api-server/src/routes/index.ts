@@ -14,6 +14,7 @@ import quizRouter from "./quiz";
 import leaderboardRouter from "./leaderboard";
 import skepticRouter from "./skeptic";
 import booksRouter from "./books";
+import authorsRouter from "./authors";
 
 const router: IRouter = Router();
 
@@ -32,5 +33,6 @@ router.use(quizRouter);
 router.use(leaderboardRouter);
 router.use(skepticRouter);
 router.use(booksRouter);
+router.use(authorsRouter);
 
 export default router;
