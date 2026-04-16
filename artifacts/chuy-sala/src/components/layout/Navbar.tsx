@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench,
+  Banknote, Wrench, Globe,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -17,6 +17,8 @@ type NavItem = {
   labelKh: string;
   icon: ComponentType<{ className?: string }>;
   external?: boolean;
+  descEn?: string;
+  descKh?: string;
 };
 
 type NavGroup = {
@@ -69,7 +71,16 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       { href: "/space",              labelEn: "Space",                  labelKh: "អវកាស",                    icon: Rocket },
       { href: "/science",            labelEn: "Scientific Literacy",    labelKh: "ចំណេះដឹងវិទ្យាសាស្ត្រ",  icon: FlaskConical },
-      { href: "https://finlitkh.com", labelEn: "Financial Literacy",   labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ",    icon: Banknote, external: true },
+      { href: "https://finlitkh.com",    labelEn: "Financial Literacy",       labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ",    icon: Banknote, external: true },
+      {
+        href: "https://bfiworldgame.com",
+        labelEn: "Global Resource Game (BFI World Game)",
+        labelKh: "ល្បែងធនធានពិភពលោក (BFI World Game)",
+        icon: Globe,
+        external: true,
+        descEn: "Learn to manage Earth's resources so that 100% of humanity can thrive.",
+        descKh: "រៀនគ្រប់គ្រងធនធានរបស់ផែនដី ដើម្បីឱ្យមនុស្សជាតិ ១០០% អាចរីកចម្រើន។",
+      },
     ],
   },
 ];
@@ -95,6 +106,7 @@ function DropdownGroup({
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const kh = language === "kh";
+  const hasDescriptions = group.items.some((item) => item.descEn || item.descKh);
 
   const isGroupActive = group.items.some(
     (item) =>
@@ -144,7 +156,7 @@ function DropdownGroup({
             top: "calc(100% + 6px)",
             left: 0,
             zIndex: 9999,
-            minWidth: "200px",
+            minWidth: hasDescriptions ? "300px" : "200px",
             backgroundColor: "white",
             border: "1px solid #e5e7eb",
             borderRadius: "12px",
@@ -158,9 +170,10 @@ function DropdownGroup({
               (location === item.href ||
                 (item.href !== "/" && location.startsWith(item.href)));
 
+            const hasDesc = !!(item.descEn || item.descKh);
             const sharedStyle: React.CSSProperties = {
               display: "flex",
-              alignItems: "center",
+              alignItems: hasDesc ? "flex-start" : "center",
               gap: "10px",
               padding: "10px 14px",
               borderRadius: "8px",
@@ -185,10 +198,23 @@ function DropdownGroup({
               <>
                 <item.icon
                   className="w-4 h-4 flex-shrink-0"
-                  style={{ color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))" }}
+                  style={{
+                    color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
+                    marginTop: hasDesc ? "2px" : "0",
+                  }}
                 />
-                <span className={kh ? "font-khmer" : ""}>
-                  {kh ? item.labelKh : item.labelEn}
+                <span className="flex-1 min-w-0">
+                  <span className={`block ${kh ? "font-khmer" : ""}`}>
+                    {kh ? item.labelKh : item.labelEn}
+                  </span>
+                  {hasDesc && (
+                    <span
+                      className={`block leading-snug mt-0.5 ${kh ? "font-khmer" : ""}`}
+                      style={{ fontSize: "11px", color: "hsl(var(--muted-foreground))", fontWeight: 400 }}
+                    >
+                      {kh ? item.descKh : item.descEn}
+                    </span>
+                  )}
                 </span>
                 {isActive && (
                   <span
@@ -413,14 +439,21 @@ export function Navbar() {
                           (location === item.href ||
                             (item.href !== "/" && location.startsWith(item.href)));
 
-                        const mobileItemClass = `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                        const itemHasDesc = !!(item.descEn || item.descKh);
+                        const mobileItemClass = `flex ${itemHasDesc ? "items-start" : "items-center"} gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                           ${isActive ? "bg-primary/10 text-primary" : "text-foreground/80 hover:bg-black/5 hover:text-foreground"}`;
-
                         const mobileInner = (
                           <>
-                            <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
-                            <span className={kh ? "font-khmer" : ""}>
-                              {kh ? item.labelKh : item.labelEn}
+                            <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"} ${itemHasDesc ? "mt-0.5" : ""}`} />
+                            <span className="flex-1 min-w-0">
+                              <span className={`block ${kh ? "font-khmer" : ""}`}>
+                                {kh ? item.labelKh : item.labelEn}
+                              </span>
+                              {itemHasDesc && (
+                                <span className={`block text-xs text-muted-foreground leading-snug mt-0.5 font-normal ${kh ? "font-khmer" : ""}`}>
+                                  {kh ? item.descKh : item.descEn}
+                                </span>
+                              )}
                             </span>
                           </>
                         );
