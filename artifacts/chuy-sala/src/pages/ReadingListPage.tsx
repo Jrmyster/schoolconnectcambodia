@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import {
   BookOpen, Heart, Plus, X, Loader2, User, Send,
-  Trash2, BookMarked, ChevronLeft,
+  Trash2, BookMarked, ChevronLeft, Star,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
@@ -14,6 +14,7 @@ type BookEntry = {
   recommendedBy: string;
   review: string;
   userId: number;
+  isFeatured: boolean;
   createdAt: string;
   likeCount: number;
   likedByMe: boolean;
@@ -341,87 +342,173 @@ export function ReadingListPage() {
       )}
 
       {/* Book feed */}
-      <section className="max-w-4xl mx-auto px-4 py-10">
+      <section className="max-w-4xl mx-auto px-4 py-10 space-y-12">
         {loading ? (
           <div className="flex justify-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : error ? (
           <div className={`text-center py-16 text-muted-foreground ${kh ? "font-khmer" : ""}`}>{error}</div>
-        ) : books.length === 0 ? (
-          <div className="text-center py-20 text-muted-foreground">
-            <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className={`font-semibold text-lg ${kh ? "font-khmer" : ""}`}>
-              {t("No books yet. Be the first to recommend one!", "មិនទាន់មានសៀវភៅទេ។ ត្រូវជាអ្នកដំបូងណែនាំ!")}
-            </p>
-          </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {books.map((book) => (
-              <div
-                key={book.id}
-                className="bg-white rounded-2xl border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col overflow-hidden"
-              >
-                {/* Card header */}
-                <div className={`bg-gradient-to-r ${avatarColor(book.id)} p-5`}>
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-white font-bold text-sm">{initials(book.recommendedBy)}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-white font-bold text-base leading-snug line-clamp-2">
-                        {book.title}
-                      </h3>
-                      <p className="text-white/80 text-xs mt-0.5">by {book.author}</p>
-                    </div>
-                  </div>
+          <>
+            {/* ── Featured Books ── */}
+            {books.filter((b) => b.isFeatured).length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-5">
+                  <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                  <h2 className={`font-bold text-foreground ${kh ? "font-khmer" : "font-display"}`}>
+                    {t("Featured Recommendations", "ការណែនាំពិសេស")}
+                  </h2>
                 </div>
-
-                {/* Card body */}
-                <div className="p-5 flex flex-col flex-1">
-                  <p className={`text-sm text-muted-foreground leading-relaxed flex-1 ${kh ? "font-khmer leading-loose" : ""}`}>
-                    "{book.review}"
-                  </p>
-
-                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <User className="w-3.5 h-3.5" />
-                      <span className={kh ? "font-khmer" : ""}>{book.recommendedBy}</span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      {user && book.userId === user.id && (
-                        <button
-                          onClick={() => handleDelete(book.id)}
-                          className="p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                          title={t("Delete", "លុប")}
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      )}
-                      <button
-                        onClick={() => handleLike(book.id)}
-                        disabled={!user}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                          book.likedByMe
-                            ? "bg-rose-100 text-rose-600"
-                            : "bg-secondary text-muted-foreground hover:bg-rose-50 hover:text-rose-500"
-                        } disabled:cursor-default`}
-                        title={!user ? t("Log in to like", "ចូលដើម្បីចុច") : undefined}
-                      >
-                        <Heart
-                          className={`w-3.5 h-3.5 transition-all ${book.likedByMe ? "fill-rose-500 text-rose-500 scale-110" : ""}`}
-                        />
-                        <span>{book.likeCount}</span>
-                      </button>
-                    </div>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {books.filter((b) => b.isFeatured).map((book) => (
+                    <BookCard
+                      key={book.id}
+                      book={book}
+                      user={user}
+                      kh={kh}
+                      t={t}
+                      onLike={handleLike}
+                      onDelete={handleDelete}
+                      featured
+                    />
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            )}
+
+            {/* ── Student Recommendations ── */}
+            <div>
+              {books.filter((b) => !b.isFeatured).length > 0 && (
+                <div className="flex items-center gap-2 mb-5">
+                  <BookOpen className="w-4 h-4 text-primary" />
+                  <h2 className={`font-bold text-foreground ${kh ? "font-khmer" : "font-display"}`}>
+                    {t("Student Recommendations", "ការណែនាំពីសិស្ស")}
+                  </h2>
+                </div>
+              )}
+              {books.filter((b) => !b.isFeatured).length === 0 ? (
+                <div className="text-center py-16 text-muted-foreground">
+                  <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                  <p className={`font-semibold text-lg ${kh ? "font-khmer" : ""}`}>
+                    {t("No student recommendations yet. Be the first!", "មិនទាន់មានការណែនាំពីសិស្សទេ។ ចូររួមចំណែកដំបូង!")}
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {books.filter((b) => !b.isFeatured).map((book) => (
+                    <BookCard
+                      key={book.id}
+                      book={book}
+                      user={user}
+                      kh={kh}
+                      t={t}
+                      onLike={handleLike}
+                      onDelete={handleDelete}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
         )}
       </section>
+    </div>
+  );
+}
+
+// ── BookCard ────────────────────────────────────────────────────────────────
+
+function BookCard({
+  book,
+  user,
+  kh,
+  t,
+  onLike,
+  onDelete,
+  featured = false,
+}: {
+  book: BookEntry;
+  user: { id: number } | null;
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+  onLike: (id: number) => void;
+  onDelete: (id: number) => void;
+  featured?: boolean;
+}) {
+  return (
+    <div
+      className={`flex flex-col overflow-hidden rounded-2xl border transition-shadow hover:shadow-md ${
+        featured
+          ? "border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-sm"
+          : "border-border bg-white shadow-sm"
+      }`}
+    >
+      {/* Card header */}
+      <div className={`bg-gradient-to-r ${avatarColor(book.id)} p-4 relative`}>
+        {featured && (
+          <div className="absolute top-2 right-2 flex items-center gap-1 bg-amber-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <Star className="w-2.5 h-2.5 fill-white" />
+            {t("Featured", "ពិសេស")}
+          </div>
+        )}
+        <div className="flex items-start gap-3">
+          <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+            <BookOpen className="w-4 h-4 text-white" />
+          </div>
+          <div className="flex-1 min-w-0 pr-12">
+            <h3 className="text-white font-bold text-sm leading-snug line-clamp-2">
+              {book.title}
+            </h3>
+            <p className="text-white/80 text-xs mt-0.5">by {book.author}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Card body */}
+      <div className="p-4 flex flex-col flex-1">
+        <p className={`text-sm text-muted-foreground leading-relaxed flex-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+          "{book.review}"
+        </p>
+
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
+          <div className={`flex items-center gap-1.5 text-xs ${featured ? "text-amber-700 font-semibold" : "text-muted-foreground"}`}>
+            {featured ? (
+              <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+            ) : (
+              <User className="w-3.5 h-3.5" />
+            )}
+            <span className={kh ? "font-khmer" : ""}>{book.recommendedBy}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {user && book.userId === user.id && (
+              <button
+                onClick={() => onDelete(book.id)}
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                title={t("Delete", "លុប")}
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+            )}
+            <button
+              onClick={() => onLike(book.id)}
+              disabled={!user}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                book.likedByMe
+                  ? "bg-rose-100 text-rose-600"
+                  : "bg-secondary text-muted-foreground hover:bg-rose-50 hover:text-rose-500"
+              } disabled:cursor-default`}
+              title={!user ? t("Log in to like", "ចូលដើម្បីចុច") : undefined}
+            >
+              <Heart
+                className={`w-3.5 h-3.5 transition-all ${book.likedByMe ? "fill-rose-500 text-rose-500 scale-110" : ""}`}
+              />
+              <span>{book.likeCount}</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

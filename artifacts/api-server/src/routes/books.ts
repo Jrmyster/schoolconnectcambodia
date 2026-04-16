@@ -18,13 +18,14 @@ router.get("/books", async (req, res) => {
         recommendedBy: booksTable.recommendedBy,
         review: booksTable.review,
         userId: booksTable.userId,
+        isFeatured: booksTable.isFeatured,
         createdAt: booksTable.createdAt,
         likeCount: sql<number>`cast(count(${bookLikesTable.id}) as int)`,
       })
       .from(booksTable)
       .leftJoin(bookLikesTable, eq(bookLikesTable.bookId, booksTable.id))
       .groupBy(booksTable.id)
-      .orderBy(sql`${booksTable.createdAt} desc`);
+      .orderBy(sql`is_featured DESC, ${booksTable.createdAt} DESC`);
 
     if (!userId) {
       return res.json(books.map((b) => ({ ...b, likedByMe: false })));

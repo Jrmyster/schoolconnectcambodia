@@ -1,4 +1,4 @@
-import { pgTable, serial, text, integer, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, timestamp, uniqueIndex, boolean } from "drizzle-orm/pg-core";
 
 export const booksTable = pgTable("books", {
   id: serial("id").primaryKey(),
@@ -7,6 +7,7 @@ export const booksTable = pgTable("books", {
   recommendedBy: text("recommended_by").notNull(),
   review: text("review").notNull(),
   userId: integer("user_id").notNull(),
+  isFeatured: boolean("is_featured").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
