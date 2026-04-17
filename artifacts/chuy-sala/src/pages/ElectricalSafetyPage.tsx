@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Zap,
   Activity,
@@ -167,30 +167,45 @@ export function ElectricalSafetyPage() {
 
   const [hintOpen, setHintOpen] = useState(false);
   const [award, setAward] = useState<AwardState>({ kind: "idle" });
+  const [hintOpen3, setHintOpen3] = useState(false);
+  const [award3, setAward3] = useState<AwardState>({ kind: "idle" });
+  // Per-badge in-flight locks: prevents same-tick rapid double-clicks from
+  // firing two POSTs (the captured-state check alone is not race-safe).
+  const inFlight = useRef<Set<string>>(new Set());
 
-  async function claimParallelEngineer() {
-    setAward({ kind: "loading" });
+  async function claimBadge(
+    badgeType: string,
+    setter: (s: AwardState) => void,
+  ) {
+    if (inFlight.current.has(badgeType)) return;
+    inFlight.current.add(badgeType);
+    setter({ kind: "loading" });
     try {
       const res = await fetch(`${API_BASE}/api/achievements/award`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ badgeType: "parallel-engineer" }),
+        body: JSON.stringify({ badgeType }),
       });
-      if (res.status === 401) return setAward({ kind: "needLogin" });
-      if (res.status === 403) return setAward({ kind: "needStudentRole" });
+      if (res.status === 401) return setter({ kind: "needLogin" });
+      if (res.status === 403) return setter({ kind: "needStudentRole" });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        return setAward({
+        return setter({
           kind: "error",
           message: data?.error || `HTTP ${res.status}`,
         });
       }
-      setAward(data?.alreadyEarned ? { kind: "alreadyEarned" } : { kind: "awarded" });
+      setter(data?.alreadyEarned ? { kind: "alreadyEarned" } : { kind: "awarded" });
     } catch (e) {
-      setAward({ kind: "error", message: String(e) });
+      setter({ kind: "error", message: String(e) });
+    } finally {
+      inFlight.current.delete(badgeType);
     }
   }
+
+  const claimParallelEngineer = () => claimBadge("parallel-engineer", setAward);
+  const claimSafetyInspector = () => claimBadge("safety-inspector", setAward3);
 
   const heading = (en: string, khText: string) =>
     kh ? <span className="font-khmer">{khText}</span> : <span>{en}</span>;
@@ -1174,6 +1189,205 @@ export function ElectricalSafetyPage() {
                       : t(
                           "You already earned this badge. Great consistency!",
                           "អ្នកបានទទួលស្លាកសញ្ញានេះរួចហើយ។ ការខិតខំល្អណាស់!",
+                        )}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── Level 3 Mission: The Short Circuit Mystery ──────────────── */}
+        <div
+          className="mt-6 rounded-3xl bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-300 shadow-sm p-5 sm:p-6"
+          aria-labelledby="level3-heading"
+        >
+          <div className="flex items-start gap-4 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <Flame className="w-6 h-6" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span
+                className={`inline-block text-[10px] font-bold tracking-widest uppercase text-red-700 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Level 3 — Circuit Challenge", "កម្រិត ៣ — ការប្រកួតប្រជែងសៀគ្វី")}
+              </span>
+              <h3
+                id="level3-heading"
+                className={`text-base sm:text-lg font-bold text-red-900 ${
+                  kh ? "font-khmer" : ""
+                }`}
+              >
+                {t("The Short Circuit Mystery", "អាថ៌កំបាំងសៀគ្វីខ្លី")}
+              </h3>
+            </div>
+          </div>
+
+          {/* Goal */}
+          <p
+            className={`text-sm sm:text-base text-foreground/90 leading-relaxed mb-4 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            <span className="font-bold text-red-900">
+              {t("The Goal: ", "គោលដៅ៖ ")}
+            </span>
+            {t(
+              'Your virtual battery is catching fire! A wire is touching the wrong place. Can you find the "short circuit" and then add a Fuse to protect the system?',
+              'ថ្មនិម្មិតរបស់អ្នកកំពុងឆេះ! មានខ្សែភ្លើងប៉ះកន្លែងខុស។ តើអ្នកអាចរកឃើញ "សៀគ្វីខ្លី" ហើយបន្ទាប់មកបន្ថែម "ហ្វុយស៊ីប (Fuse)" ដើម្បីការពារប្រព័ន្ធបានទេ?',
+            )}
+          </p>
+
+          {/* Toggleable safety hint */}
+          <div className="mb-4">
+            <button
+              type="button"
+              onClick={() => setHintOpen3((o) => !o)}
+              aria-expanded={hintOpen3}
+              aria-controls="level3-hint"
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold text-red-700 hover:text-red-900 transition-colors ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              <ShieldCheck className="w-4 h-4" />
+              {hintOpen3
+                ? t("Hide safety hint", "លាក់គន្លឹះសុវត្ថិភាព")
+                : t("Show safety hint", "បង្ហាញគន្លឹះសុវត្ថិភាព")}
+              <ChevronDown
+                className="w-4 h-4 transition-transform duration-200"
+                style={{ transform: hintOpen3 ? "rotate(180deg)" : "rotate(0deg)" }}
+              />
+            </button>
+            {hintOpen3 && (
+              <div
+                id="level3-hint"
+                className="mt-2 rounded-xl bg-white border border-red-200 px-4 py-3"
+              >
+                <p
+                  className={`text-sm text-foreground/90 leading-relaxed ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  <span className="font-bold text-red-700">
+                    {t("Safety Hint: ", "គន្លឹះសុវត្ថិភាព៖ ")}
+                  </span>
+                  {t(
+                    'A Fuse is like a "Sacrificial Bridge." It is designed to break if the current gets too high, stopping the fire before it starts.',
+                    'ហ្វុយស៊ីបគឺដូចជា "ស្ពានបូជា" ដែរ។ វាត្រូវបានរចនាឡើងឱ្យដាច់ ប្រសិនបើចរន្តខ្ពស់ពេក ដើម្បីបញ្ឈប់ភ្លើងឆេះមុនពេលវាចាប់ផ្តើម។',
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* "I solved it" button + result feedback */}
+          <div className="pt-4 border-t border-red-200" aria-live="polite">
+            {(award3.kind === "idle" ||
+              award3.kind === "loading" ||
+              award3.kind === "error") && (
+              <>
+                <button
+                  type="button"
+                  onClick={claimSafetyInspector}
+                  disabled={award3.kind === "loading"}
+                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold shadow-sm transition-colors ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {award3.kind === "loading" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <ShieldCheck className="w-4 h-4" />
+                  )}
+                  {t("I solved Level 3!", "ខ្ញុំបានដោះស្រាយកម្រិត ៣ហើយ!")}
+                </button>
+                {award3.kind === "error" && (
+                  <p
+                    className={`mt-2 text-xs text-red-700 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t(
+                      "Could not save your badge. Please try again.",
+                      "មិនអាចរក្សាទុកស្លាកសញ្ញារបស់អ្នកបានទេ។ សូមព្យាយាមម្តងទៀត។",
+                    )}
+                  </p>
+                )}
+              </>
+            )}
+
+            {award3.kind === "needLogin" && (
+              <div
+                className={`flex items-center gap-2 text-sm text-red-900 bg-white border border-red-200 rounded-xl px-4 py-3 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <Award className="w-5 h-5 text-red-600 flex-shrink-0" />
+                <span>
+                  {t(
+                    "Sign in as a student to earn the Safety Inspector badge.",
+                    "សូមចូលគណនីជាសិស្ស ដើម្បីទទួលបានស្លាកសញ្ញាអធិការសុវត្ថិភាពអគ្គិសនី។",
+                  )}
+                </span>
+              </div>
+            )}
+
+            {award3.kind === "needStudentRole" && (
+              <div
+                className={`flex items-center gap-2 text-sm text-red-900 bg-white border border-red-200 rounded-xl px-4 py-3 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <Award className="w-5 h-5 text-red-600 flex-shrink-0" />
+                <span>
+                  {t(
+                    "Only student accounts can earn this badge — but you solved the challenge anyway. Well done!",
+                    "មានតែគណនីសិស្សប៉ុណ្ណោះដែលអាចទទួលបានស្លាកសញ្ញានេះ — ប៉ុន្តែអ្នកបានដោះស្រាយបញ្ហាប្រឈមជោគជ័យ។ ល្អណាស់!",
+                  )}
+                </span>
+              </div>
+            )}
+
+            {(award3.kind === "awarded" || award3.kind === "alreadyEarned") && (
+              <div className="flex items-start gap-3 rounded-2xl bg-gradient-to-br from-red-100 to-orange-100 border-2 border-red-300 px-4 py-4">
+                <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center flex-shrink-0 shadow">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 text-red-700 mb-0.5">
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                    <span
+                      className={`text-[10px] font-bold tracking-widest uppercase ${
+                        kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                      }`}
+                    >
+                      {award3.kind === "awarded"
+                        ? t("Badge Earned", "ទទួលបានស្លាកសញ្ញា")
+                        : t("Already Earned", "បានទទួលរួចហើយ")}
+                    </span>
+                  </div>
+                  <h4
+                    className={`text-base sm:text-lg font-bold text-red-900 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t("Safety Inspector", "អធិការសុវត្ថិភាពអគ្គិសនី")}
+                  </h4>
+                  <p
+                    className={`text-xs text-foreground/80 mt-1 ${
+                      kh ? "font-khmer leading-loose" : ""
+                    }`}
+                  >
+                    {award3.kind === "awarded"
+                      ? t(
+                          "Excellent work! Your new badge is now visible on your dashboard.",
+                          "ល្អណាស់! ស្លាកសញ្ញាថ្មីរបស់អ្នកឥឡូវនេះអាចមើលឃើញនៅលើផ្ទាំងគ្រប់គ្រងរបស់អ្នក។",
+                        )
+                      : t(
+                          "You already earned this badge. Stay safe!",
+                          "អ្នកបានទទួលស្លាកសញ្ញានេះរួចហើយ។ សូមរក្សាសុវត្ថិភាព!",
                         )}
                   </p>
                 </div>

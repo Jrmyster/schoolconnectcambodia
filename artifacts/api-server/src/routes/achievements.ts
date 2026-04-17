@@ -15,6 +15,7 @@ const SELF_AWARDABLE = new Set<string>([
   "galactic-explorer",
   "financial-wizard",
   "parallel-engineer",
+  "safety-inspector",
 ]);
 
 router.get("/achievements", async (req, res) => {
