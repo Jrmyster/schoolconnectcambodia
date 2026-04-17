@@ -85,8 +85,8 @@ const NAV_GROUPS: NavGroup[] = [
       },
       {
         href: "/chemistry/reactions-math",
-        labelEn: "2. Reactions & Math",
-        labelKh: "២. ប្រតិកម្ម និងគណិតវិទ្យា",
+        labelEn: "2. Chemical Reactions & Math",
+        labelKh: "២. ប្រតិកម្មគីមី និងគណិតវិទ្យា",
         icon: FlaskConical,
       },
       {

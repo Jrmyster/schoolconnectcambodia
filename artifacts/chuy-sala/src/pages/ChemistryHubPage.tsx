@@ -57,26 +57,14 @@ const MODULES: Module[] = [
   {
     href: "/chemistry/reactions-math",
     number: "02",
-    titleEn: "Reactions & Math",
-    titleKh: "ប្រតិកម្ម និងគណិតវិទ្យា",
+    titleEn: "Chemical Reactions & Math",
+    titleKh: "ប្រតិកម្មគីមី និងគណិតវិទ្យា",
     blurbEn:
-      "Learn how atoms recombine, how to balance equations, and how to measure what's happening.",
+      "How atoms bond, how to balance equations, plus an interactive molecular-weight calculator and a pH scale.",
     blurbKh:
-      "រៀនពីរបៀបដែលអាតូមផ្សំគ្នាឡើងវិញ របៀបធ្វើឱ្យស្មើនូវសមីការ និងរបៀបវាស់វែងអ្វីដែលកំពុងកើតឡើង។",
-    topicsEn: [
-      "Chemical reactions",
-      "Molecular weight",
-      "Stoichiometry",
-      "Units of measurement",
-      "Acids vs. Bases",
-    ],
-    topicsKh: [
-      "ប្រតិកម្មគីមី",
-      "ម៉ាសម៉ូលេគុល",
-      "ស្តូគីអូមេទ្រី",
-      "ឯកតារង្វាស់",
-      "អាស៊ីត និងបាស",
-    ],
+      "របៀបអាតូមភ្ជាប់គ្នា របៀបធ្វើឱ្យស្មើនូវសមីការ ព្រមទាំងម៉ាស៊ីនគណនាម៉ាសម៉ូលេគុល និងមាត្រដ្ឋាន pH។",
+    topicsEn: ["Bonding", "Stoichiometry", "Calculator", "Acids & Bases"],
+    topicsKh: ["ចំណងគីមី", "រូបមន្តតុល្យភាព", "ម៉ាស៊ីនគណនា", "អាស៊ីត និងបាស"],
     icon: FlaskConical,
     accent: {
       bgFrom: "from-emerald-50",

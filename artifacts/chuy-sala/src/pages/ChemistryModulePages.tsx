@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -9,6 +10,10 @@ import {
   AlertTriangle,
   CheckCircle2,
   Beaker,
+  Calculator,
+  Puzzle,
+  ChefHat,
+  Droplets,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -144,7 +149,7 @@ function Term({
 }
 
 // Bilingual paragraph helper
-function P({ en, kh }: { en: string; kh: string }) {
+function P({ en, kh }: { en: React.ReactNode; kh: React.ReactNode }) {
   const { language } = useLanguageStore();
   return <p>{language === "kh" ? kh : en}</p>;
 }
@@ -514,10 +519,10 @@ export function ChemistryReactionsPage() {
   return (
     <ModuleShell
       number="02"
-      titleEn="Reactions & Math"
-      titleKh="ប្រតិកម្ម និងគណិតវិទ្យា"
-      introEn="Chemistry is more than memorising names — it's an accounting system for atoms. Whatever goes in must come out."
-      introKh="គីមីវិទ្យាមិនមែនគ្រាន់តែជាការទន្ទេញឈ្មោះទេ — វាគឺជាប្រព័ន្ធគណនេយ្យសម្រាប់អាតូម។ អ្វីដែលចូល ត្រូវតែចេញដែរ។"
+      titleEn="Chemical Reactions & Math"
+      titleKh="ប្រតិកម្មគីមី និងគណិតវិទ្យា"
+      introEn="Why atoms join up, how to balance the books, and how to weigh them — all in one place."
+      introKh="ហេតុអ្វីអាតូមភ្ជាប់គ្នា របៀបធ្វើតុល្យភាពសៀវភៅគណនេយ្យ និងរបៀបថ្លឹងពួកវា — ទាំងអស់នៅកន្លែងតែមួយ។"
       icon={FlaskConical}
       accent={{
         iconBg: "bg-emerald-600",
@@ -527,119 +532,314 @@ export function ChemistryReactionsPage() {
         bgTo: "to-background",
       }}
     >
-      <Section titleEn="Chemical reactions" titleKh="ប្រតិកម្មគីមី">
-        <P
-          en="In a chemical reaction, the starting substances (reactants) rearrange their atoms to form new substances (products). Atoms are never created or destroyed — only rearranged. This is the Law of Conservation of Mass."
-          kh="ក្នុងប្រតិកម្មគីមី សារធាតុដើម (សារធាតុប្រតិកម្ម) រៀបចំអាតូមរបស់ខ្លួនឡើងវិញ ដើម្បីបង្កើតសារធាតុថ្មី (ផលិតផល)។ អាតូមមិនត្រូវបានបង្កើតឬបំផ្លាញឡើយ — គ្រាន់តែរៀបចំឡើងវិញប៉ុណ្ណោះ។ នេះគឺជាច្បាប់នៃការអភិរក្សម៉ាស។"
-        />
-        <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 not-prose">
-          <div className="font-mono text-base sm:text-lg text-emerald-900 break-words">
+      {/* ── 1. The 'Why': Bonding ─────────────────────────────── */}
+      <Section titleEn="The 'Why': Bonding" titleKh="មូលហេតុ៖ ចំណងគីមី">
+        <div className="flex items-start gap-3 not-prose mb-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Puzzle className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0 pt-1">
+            <P
+              en={
+                <>
+                  Atoms are like puzzles. They share or trade electrons to become stable. This is how hydrogen and oxygen become water (
+                  <span className="font-mono">H₂O</span>)!
+                </>
+              }
+              kh={
+                <>
+                  អាតូមប្រៀបដូចជាបំណែកផ្គុំរូប។ ពួកវាចែករំលែក ឬប្តូរអេឡិចត្រុង ដើម្បីឱ្យមានស្ថេរភាព។ នេះជារបៀបដែលអ៊ីដ្រូសែន និងអុកស៊ីសែន ក្លាយជាទឹក (
+                  <span className="font-mono">H₂O</span>)!
+                </>
+              }
+            />
+          </div>
+        </div>
+        <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 not-prose flex items-center justify-center">
+          <div className="font-mono text-base sm:text-xl text-emerald-900 text-center">
             2 H₂ + O₂ → 2 H₂O
           </div>
-          <P
-            en="Two hydrogen molecules + one oxygen molecule → two water molecules. Count the atoms on each side: 4 H and 2 O. Balanced!"
-            kh="ម៉ូលេគុលអ៊ីដ្រូសែនពីរ + ម៉ូលេគុលអុកស៊ីសែនមួយ → ម៉ូលេគុលទឹកពីរ។ រាប់អាតូមនៅសងខាង៖ H ៤ និង O ២។ មានតុល្យភាព!"
-          />
         </div>
       </Section>
 
-      <Section titleEn="Molecular weight" titleKh="ម៉ាសម៉ូលេគុល">
-        <P
-          en="The molecular weight of a substance is the sum of the atomic weights of its atoms, measured in 'atomic mass units' (u) or grams per mole (g/mol)."
-          kh="ម៉ាសម៉ូលេគុលនៃសារធាតុមួយ គឺជាផលបូកនៃម៉ាសអាតូមនៃអាតូមរបស់វា វាស់ជា 'ឯកតាម៉ាសអាតូម' (u) ឬក្រាមក្នុងមួយម៉ូល (g/mol)។"
-        />
-        <BList
-          itemsEn={[
-            <span>Hydrogen (H) ≈ 1 g/mol · Oxygen (O) ≈ 16 g/mol</span>,
-            <span>Water (H₂O) = 1 + 1 + 16 = <strong>18 g/mol</strong></span>,
-            <span>Carbon dioxide (CO₂) = 12 + 16 + 16 = <strong>44 g/mol</strong></span>,
-          ]}
-          itemsKh={[
-            <span>អ៊ីដ្រូសែន (H) ≈ ១ g/mol · អុកស៊ីសែន (O) ≈ ១៦ g/mol</span>,
-            <span>ទឹក (H₂O) = ១ + ១ + ១៦ = <strong>១៨ g/mol</strong></span>,
-            <span>កាបូនឌីអុកស៊ីត (CO₂) = ១២ + ១៦ + ១៦ = <strong>៤៤ g/mol</strong></span>,
-          ]}
-        />
-      </Section>
-
-      <Section titleEn="Stoichiometry — the recipe ratios" titleKh="ស្តូគីអូមេទ្រី — សមាមាត្ររូបមន្ត">
-        <P
-          en="Stoichiometry is the maths of chemistry: it uses balanced equations to predict how much product you'll get from a given amount of reactant. Like a cooking recipe — 'use 2 cups of flour for every 1 egg' — but for atoms."
-          kh="ស្តូគីអូមេទ្រី គឺជាគណិតវិទ្យានៃគីមីវិទ្យា៖ វាប្រើសមីការមានតុល្យភាព ដើម្បីព្យាករណ៍ផលិតផលដែលអ្នកនឹងទទួលបានពីបរិមាណសារធាតុប្រតិកម្ម។ ដូចជារូបមន្តចម្អិន — 'ប្រើម្សៅ ២ កែវ ចំពោះស៊ុត ១' — តែសម្រាប់អាតូម។"
-        />
-      </Section>
-
-      <Section titleEn="Units of measurement" titleKh="ឯកតារង្វាស់">
-        <BList
-          itemsEn={[
-            <span><Term en="Mole (mol)" kh="ម៉ូល" /> — 6.022 × 10²³ particles. The chemist's 'dozen'.</span>,
-            <span><Term en="Mass" kh="ម៉ាស" /> — measured in grams (g) or kilograms (kg).</span>,
-            <span><Term en="Volume" kh="មាឌ" /> — measured in litres (L) or millilitres (mL).</span>,
-            <span><Term en="Concentration" kh="ការប្រមូលផ្តុំ" /> — moles per litre (mol/L), also called molarity (M).</span>,
-            <span><Term en="Temperature" kh="សីតុណ្ហភាព" /> — Celsius (°C) for everyday, Kelvin (K) in equations.</span>,
-          ]}
-          itemsKh={[
-            <span><Term en="Mole (mol)" kh="ម៉ូល" /> — ៦,០២២ × ១០²³ ភាគល្អិត។ 'ឌូហ្សិន' របស់អ្នកគីមីវិទ្យា។</span>,
-            <span><Term en="Mass" kh="ម៉ាស" /> — វាស់ជាក្រាម (g) ឬគីឡូក្រាម (kg)។</span>,
-            <span><Term en="Volume" kh="មាឌ" /> — វាស់ជាលីត្រ (L) ឬមីលីលីត្រ (mL)។</span>,
-            <span><Term en="Concentration" kh="ការប្រមូលផ្តុំ" /> — ម៉ូលក្នុងមួយលីត្រ (mol/L) ហៅផងដែរថា ម៉ូលារ៉ាលីតេ (M)។</span>,
-            <span><Term en="Temperature" kh="សីតុណ្ហភាព" /> — សែលស្យូស (°C) ប្រចាំថ្ងៃ និងកេលវិន (K) ក្នុងសមីការ។</span>,
-          ]}
-        />
-      </Section>
-
-      <Section titleEn="Acids vs. Bases" titleKh="អាស៊ីត និងបាស">
-        <P
-          en="Acids release hydrogen ions (H⁺) in water. Bases release hydroxide ions (OH⁻). The pH scale runs from 0 (very acidic) to 14 (very basic), with 7 being neutral."
-          kh="អាស៊ីតលែងលែកអ៊ីយ៉ុងអ៊ីដ្រូសែន (H⁺) នៅក្នុងទឹក។ បាសលែងលែកអ៊ីយ៉ុងអ៊ីដ្រូកស៊ីត (OH⁻)។ មាត្រដ្ឋាន pH ដំណើរការពី ០ (អាស៊ីតខ្លាំង) ដល់ ១៤ (បាសខ្លាំង) ដោយ ៧ ជាអព្យាក្រឹត។"
-        />
-        <div className="grid sm:grid-cols-2 gap-4 not-prose">
-          <div className="rounded-xl bg-orange-50 border border-orange-200 p-4">
-            <div className="font-bold text-orange-900 mb-1.5"><Term en="Acids (low pH)" kh="អាស៊ីត (pH ទាប)" /></div>
-            <BList
-              itemsEn={[
-                <span>Lemon juice (~pH 2)</span>,
-                <span>Vinegar (~pH 3)</span>,
-                <span>Stomach acid (~pH 1.5)</span>,
-                <span>Taste sour, can corrode metal</span>,
-              ]}
-              itemsKh={[
-                <span>ទឹកក្រូចឆ្មារ (~pH ២)</span>,
-                <span>ទឹកខ្មេះ (~pH ៣)</span>,
-                <span>អាស៊ីតក្រពះ (~pH ១,៥)</span>,
-                <span>មានរសជាតិជូរ អាចច្រេះលោហៈ</span>,
-              ]}
-            />
+      {/* ── 2. Stoichiometry: The Recipe ──────────────────────── */}
+      <Section titleEn="Stoichiometry: The Recipe" titleKh="រូបមន្ត និងតុល្យភាព">
+        <div className="flex items-start gap-3 not-prose">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <ChefHat className="w-5 h-5" />
           </div>
-          <div className="rounded-xl bg-blue-50 border border-blue-200 p-4">
-            <div className="font-bold text-blue-900 mb-1.5"><Term en="Bases (high pH)" kh="បាស (pH ខ្ពស់)" /></div>
-            <BList
-              itemsEn={[
-                <span>Baking soda (~pH 9)</span>,
-                <span>Soap (~pH 10)</span>,
-                <span>Bleach (~pH 12)</span>,
-                <span>Feel slippery, neutralise acids</span>,
-              ]}
-              itemsKh={[
-                <span>សូដាដុតនំ (~pH ៩)</span>,
-                <span>សាប៊ូ (~pH ១០)</span>,
-                <span>ប្លេច (~pH ១២)</span>,
-                <span>មានអារម្មណ៍រអិល បន្សាបអាស៊ីត</span>,
-              ]}
+          <div className="flex-1 min-w-0 pt-1 space-y-3">
+            <P
+              en="Chemistry is like cooking. A chemical equation tells you exactly how much of each ingredient you need. Conservation of Mass means we cannot create or destroy atoms; we only rearrange them."
+              kh="គីមីវិទ្យាប្រៀបដូចជាការចម្អិនអាហារ។ សមីការគីមីប្រាប់អ្នកយ៉ាងច្បាស់ពីចំនួនគ្រឿងផ្សំនីមួយៗដែលអ្នកត្រូវការ។ ច្បាប់រក្សាម៉ាស់ មានន័យថា យើងមិនអាចបង្កើត ឬបំផ្លាញអាតូមបានទេ យើងគ្រាន់តែរៀបចំវាឡើងវិញប៉ុណ្ណោះ។"
             />
           </div>
         </div>
-        <div className="rounded-xl bg-amber-50 border-l-4 border-amber-500 px-4 py-3 not-prose flex items-start gap-2.5">
-          <Lightbulb className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
-          <P
-            en="Acid + Base → Salt + Water. Mixing vinegar with baking soda is a classic neutralisation reaction (and it fizzes — that's CO₂ gas!)."
-            kh="អាស៊ីត + បាស → អំបិល + ទឹក។ ការលាយទឹកខ្មេះជាមួយសូដាដុតនំ គឺជាប្រតិកម្មបន្សាបបុរាណ (ហើយវាហ៊ឺ — នោះគឺឧស្ម័ន CO₂!)។"
-          />
+      </Section>
+
+      {/* ── 3. Interactive Calculator ─────────────────────────── */}
+      <MolecularWeightCalculator />
+
+      {/* ── 4. Acids and Bases ────────────────────────────────── */}
+      <Section titleEn="Acids and Bases" titleKh="អាស៊ីត និងបាស">
+        <div className="flex items-start gap-3 not-prose mb-4">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Droplets className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0 pt-1">
+            <P
+              en="Acids (Low pH) taste sour, like lemons. Bases (High pH) feel slippery, like soap."
+              kh="អាស៊ីត (pH ទាប) មានរសជាតិជូរ ដូចជាក្រូចឆ្មារ។ បាស (pH ខ្ពស់) មានអារម្មណ៍រអិល ដូចជាសាប៊ូ។"
+            />
+          </div>
         </div>
+
+        <PhScaleVisual />
       </Section>
 
       <NextModuleLink to="/chemistry/advanced" labelEn="Next: Advanced Concepts" labelKh="បន្ទាប់៖ គំនិតកម្រិតខ្ពស់" />
     </ModuleShell>
+  );
+}
+
+// ── Interactive: Molecular Weight Calculator ──────────────────────────────
+function MolecularWeightCalculator() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const [protons, setProtons] = useState<string>("3");
+  const [neutrons, setNeutrons] = useState<string>("4");
+
+  const parsePos = (v: string): number | null => {
+    if (v.trim() === "") return null;
+    const n = Number(v);
+    if (!Number.isFinite(n) || n < 0) return null;
+    return Math.floor(n);
+  };
+
+  const p = parsePos(protons);
+  const n = parsePos(neutrons);
+  const valid = p !== null && n !== null;
+  const mass = valid ? (p as number) + (n as number) : null;
+
+  return (
+    <section className="rounded-2xl bg-white border-2 border-emerald-300 shadow-sm p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+          <Calculator className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h2 className={`text-xl sm:text-2xl font-bold text-emerald-900 leading-tight ${kh ? "font-khmer" : ""}`}>
+            {t("Molecular Weight Calculator", "ម៉ាស៊ីនគណនាម៉ាសម៉ូលេគុល")}
+          </h2>
+          <p className={`text-sm text-foreground/70 mt-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+            {t(
+              "Enter the number of protons and neutrons to find the approximate atomic mass.",
+              "បញ្ចូលចំនួនប្រូតុង និងណឺត្រុង ដើម្បីស្វែងរកម៉ាសអាតូមប្រហាក់ប្រហែល។",
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <CalcInput
+          id="mw-protons"
+          labelEn="Number of Protons"
+          labelKh="ចំនួនប្រូតុង"
+          value={protons}
+          onChange={setProtons}
+          accent="text-red-700"
+          symbol="p⁺"
+          symbolBg="bg-red-100 text-red-700"
+        />
+        <CalcInput
+          id="mw-neutrons"
+          labelEn="Number of Neutrons"
+          labelKh="ចំនួនណឺត្រុង"
+          value={neutrons}
+          onChange={setNeutrons}
+          accent="text-slate-700"
+          symbol="n⁰"
+          symbolBg="bg-slate-100 text-slate-700"
+        />
+      </div>
+
+      <div
+        className="rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white p-4 sm:p-5 shadow-inner"
+        aria-live="polite"
+      >
+        <div className={`text-xs sm:text-sm font-semibold uppercase tracking-wider opacity-90 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-sm" : ""}`}>
+          {t("Approximate Atomic Mass", "ម៉ាសអាតូមប្រហាក់ប្រហែល")}
+        </div>
+        {valid ? (
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="font-mono text-3xl sm:text-4xl font-bold">{mass}</span>
+            <span className="text-sm sm:text-base opacity-90">u</span>
+            <span className={`text-xs sm:text-sm opacity-80 ml-1 ${kh ? "font-khmer" : ""}`}>
+              ({p} + {n})
+            </span>
+          </div>
+        ) : (
+          <div className={`text-sm sm:text-base opacity-90 ${kh ? "font-khmer leading-loose" : ""}`}>
+            {t(
+              "Enter valid whole numbers (0 or higher) above.",
+              "សូមបញ្ចូលលេខគត់ត្រឹមត្រូវ (០ ឬច្រើនជាងនេះ) ខាងលើ។",
+            )}
+          </div>
+        )}
+      </div>
+
+      <p className={`mt-3 text-xs sm:text-sm text-foreground/60 ${kh ? "font-khmer leading-loose" : ""}`}>
+        {t(
+          "Tip: For Lithium (3 protons, 4 neutrons), the answer is 7 u.",
+          "ចំណាំ៖ សម្រាប់លីច្ចូម (ប្រូតុង ៣ ណឺត្រុង ៤) ចម្លើយគឺ ៧ u។",
+        )}
+      </p>
+    </section>
+  );
+}
+
+function CalcInput({
+  id,
+  labelEn,
+  labelKh,
+  value,
+  onChange,
+  accent,
+  symbol,
+  symbolBg,
+}: {
+  id: string;
+  labelEn: string;
+  labelKh: string;
+  value: string;
+  onChange: (v: string) => void;
+  accent: string;
+  symbol: string;
+  symbolBg: string;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <label htmlFor={id} className="block">
+      <span className={`block text-sm font-semibold mb-1.5 ${accent} ${kh ? "font-khmer" : ""}`}>
+        <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full mr-1.5 font-mono text-xs ${symbolBg}`} aria-hidden="true">
+          {symbol}
+        </span>
+        {kh ? labelKh : labelEn}
+      </span>
+      <input
+        id={id}
+        type="number"
+        inputMode="numeric"
+        min={0}
+        step={1}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3 py-2.5 rounded-lg border-2 border-emerald-200 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 text-base font-mono bg-white"
+        placeholder="0"
+      />
+    </label>
+  );
+}
+
+// ── pH Scale Visual ───────────────────────────────────────────────────────
+function PhScaleVisual() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const examples: { ph: number; en: string; kh: string }[] = [
+    { ph: 1,  en: "Stomach acid", kh: "អាស៊ីតក្រពះ" },
+    { ph: 2,  en: "Lemon juice",  kh: "ទឹកក្រូចឆ្មារ" },
+    { ph: 3,  en: "Vinegar",      kh: "ទឹកខ្មេះ" },
+    { ph: 7,  en: "Pure water",   kh: "ទឹកសុទ្ធ" },
+    { ph: 9,  en: "Baking soda",  kh: "សូដាដុតនំ" },
+    { ph: 10, en: "Soap",         kh: "សាប៊ូ" },
+    { ph: 12, en: "Bleach",       kh: "ប្លេច" },
+  ];
+
+  return (
+    <div className="not-prose space-y-4">
+      {/* Gradient bar with 0–14 markers */}
+      <div className="rounded-xl bg-white border border-border shadow-sm p-4 sm:p-5">
+        <div className="flex items-center justify-between mb-2">
+          <span className={`text-sm font-bold text-red-700 ${kh ? "font-khmer" : ""}`}>
+            {t("Acidic", "អាស៊ីត")}
+          </span>
+          <span className={`text-sm font-bold text-foreground/70 ${kh ? "font-khmer" : ""}`}>
+            {t("Neutral", "អព្យាក្រឹត")}
+          </span>
+          <span className={`text-sm font-bold text-blue-700 ${kh ? "font-khmer" : ""}`}>
+            {t("Basic", "បាស")}
+          </span>
+        </div>
+
+        {/* The pH bar */}
+        <div
+          className="relative h-10 sm:h-12 rounded-lg shadow-inner"
+          style={{
+            background:
+              "linear-gradient(to right, #dc2626 0%, #ea580c 14%, #f59e0b 28%, #facc15 42%, #84cc16 50%, #22c55e 58%, #14b8a6 72%, #2563eb 86%, #1e3a8a 100%)",
+          }}
+          role="img"
+          aria-label={
+            kh
+              ? "មាត្រដ្ឋាន pH ពីពណ៌ក្រហមសម្រាប់អាស៊ីត រហូតដល់ពណ៌ខៀវសម្រាប់បាស"
+              : "pH scale gradient from red (acid) to blue (base)"
+          }
+        >
+          {/* 0–14 tick marks */}
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute top-0 bottom-0 flex flex-col items-center"
+              style={{ left: `${(i / 14) * 100}%`, transform: "translateX(-50%)" }}
+            >
+              <div className="w-px h-2 bg-white/70 mt-1" aria-hidden="true" />
+            </div>
+          ))}
+        </div>
+
+        {/* Number row */}
+        <div className="relative h-5 mt-1">
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute top-0 text-[10px] sm:text-xs font-mono font-bold text-foreground/70"
+              style={{ left: `${(i / 14) * 100}%`, transform: "translateX(-50%)" }}
+            >
+              {i}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Example pills along the scale */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {examples.map((ex) => {
+          const isAcid = ex.ph < 7;
+          const isBase = ex.ph > 7;
+          const palette = isAcid
+            ? "bg-red-50 border-red-200 text-red-900"
+            : isBase
+              ? "bg-blue-50 border-blue-200 text-blue-900"
+              : "bg-emerald-50 border-emerald-200 text-emerald-900";
+          return (
+            <div
+              key={ex.ph}
+              className={`rounded-lg border ${palette} px-2.5 py-1.5 text-center`}
+            >
+              <div className="font-mono text-xs font-bold opacity-70">pH {ex.ph}</div>
+              <div className={`text-xs sm:text-sm font-semibold leading-tight ${kh ? "font-khmer" : ""}`}>
+                {kh ? ex.kh : ex.en}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
