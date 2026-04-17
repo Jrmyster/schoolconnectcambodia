@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink } from "lucide-react";
+import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink, PersonStanding } from "lucide-react";
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
@@ -157,7 +157,7 @@ export function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Exam Prep card */}
           <Link
             href="/exam-prep"
@@ -206,6 +206,37 @@ export function Home() {
             </p>
             <div className={`mt-5 inline-flex items-center gap-1.5 text-amber-600 text-sm font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Explore programmes", "ស្វែងរកកម្មវិធី")} →
+            </div>
+          </a>
+
+          {/* Human Anatomy card (Featured Resource — sister site) */}
+          <a
+            href="https://anatomykh.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex flex-col bg-white border border-border rounded-3xl p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute top-4 right-4 inline-flex items-center gap-1 bg-rose-100 text-rose-700 text-[10px] font-bold uppercase tracking-wider rounded-full px-2 py-0.5 border border-rose-200">
+              <span>{t("Featured", "ពិសេស")}</span>
+            </div>
+            <div className="w-14 h-14 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mb-5">
+              <PersonStanding className="w-7 h-7" />
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className={`text-xl font-bold text-foreground ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+                {t("Human Anatomy", "រូបកាយវិភាគវិទ្យា")}
+              </h3>
+              <ExternalLink className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            </div>
+            <p className={`text-muted-foreground text-sm leading-relaxed flex-1 ${language === 'kh' ? 'font-khmer leading-loose' : ''}`}>
+              {t(
+                "Explore the systems of the human body in detail on our sister site, AnatomyKH.",
+                "រុករកប្រព័ន្ធនៃរាងកាយមនុស្សឱ្យបានលម្អិតនៅលើគេហទំព័រ AnatomyKH របស់យើង។"
+              )}
+            </p>
+            <div className={`mt-5 inline-flex items-center gap-1.5 text-rose-600 text-sm font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
+              {t("Visit AnatomyKH", "ចូលទស្សនា AnatomyKH")} →
             </div>
           </a>
         </div>
