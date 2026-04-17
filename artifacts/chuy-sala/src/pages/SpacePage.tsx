@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense, useCallback } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
@@ -76,6 +77,24 @@ const AGENCIES = [
 
 export function SpacePage() {
   const t = useTranslation();
+  const { user } = useAuth();
+
+  // Award the "Galactic Explorer" badge after the student has spent a few
+  // seconds engaging with this page. We fire-and-forget; the server is
+  // idempotent and silently ignores duplicate awards.
+  useEffect(() => {
+    if (!user || user.role !== "student") return;
+    const id = setTimeout(() => {
+      const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+      fetch(`${base}/api/achievements/award`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ badgeType: "galactic-explorer" }),
+      }).catch(() => {});
+    }, 5000);
+    return () => clearTimeout(id);
+  }, [user]);
   const { language } = useLanguageStore();
   const kh = language === "kh";
 

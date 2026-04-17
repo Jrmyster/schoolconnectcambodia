@@ -1,8 +1,27 @@
 import { Router } from "express";
 import { db } from "@workspace/db";
-import { booksTable, bookLikesTable } from "@workspace/db/schema";
-import { eq, and, sql } from "drizzle-orm";
+import { booksTable, bookLikesTable, userBadgesTable } from "@workspace/db/schema";
+import { eq, and, sql, count } from "drizzle-orm";
 import { requireRole } from "../middleware/rbac";
+
+const KNOWLEDGE_SHARER = "knowledge-sharer";
+const KNOWLEDGE_SHARER_THRESHOLD = 3;
+
+async function maybeAwardKnowledgeSharer(db: any, userId: number): Promise<void> {
+  const [{ total }] = await db
+    .select({ total: count() })
+    .from(booksTable)
+    .where(eq(booksTable.userId, userId));
+  if (total < KNOWLEDGE_SHARER_THRESHOLD) return;
+  // Atomic + idempotent: the unique index on (user_id, badge_type) means a
+  // duplicate award is silently dropped. Cheaper and safer than check-then-insert.
+  await db
+    .insert(userBadgesTable)
+    .values({ userId, badgeType: KNOWLEDGE_SHARER })
+    .onConflictDoNothing({
+      target: [userBadgesTable.userId, userBadgesTable.badgeType],
+    });
+}
 
 const router = Router();
 
@@ -89,6 +108,12 @@ router.post("/books", requireRole("student"), async (req, res) => {
         category: typeof category === "string" && category.trim() ? category.trim() : null,
       })
       .returning();
+    // Award the "Knowledge Sharer" badge once the user has posted 3+ books.
+    try {
+      await maybeAwardKnowledgeSharer(db, userId);
+    } catch (e) {
+      console.error("knowledge-sharer award failed:", e);
+    }
     return res.status(201).json({ ...inserted, likeCount: 0, likedByMe: false });
   } catch (err) {
     console.error("POST /books error:", err);

@@ -15,6 +15,7 @@ import leaderboardRouter from "./leaderboard";
 import skepticRouter from "./skeptic";
 import booksRouter from "./books";
 import authorsRouter from "./authors";
+import achievementsRouter from "./achievements";
 
 const router: IRouter = Router();
 
@@ -34,5 +35,6 @@ router.use(leaderboardRouter);
 router.use(skepticRouter);
 router.use(booksRouter);
 router.use(authorsRouter);
+router.use(achievementsRouter);
 
 export default router;

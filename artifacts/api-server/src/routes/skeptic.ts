@@ -7,7 +7,7 @@ import { requireRole } from "../middleware/rbac";
 const router = Router();
 
 const BADGE_TYPE = "truth-seeker";
-const BADGE_THRESHOLD = 3;
+const BADGE_THRESHOLD = 15;
 
 router.get("/skeptic/status", async (req, res) => {
   if (!req.session.userId) {

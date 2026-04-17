@@ -16,6 +16,11 @@ import {
   Sparkles,
   Eye,
   EyeOff,
+  Search,
+  Rocket,
+  Banknote,
+  Share2,
+  Lock,
 } from "lucide-react";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -24,6 +29,12 @@ interface Badge {
   id: number;
   challengeId: string;
   earnedAt: string;
+}
+interface Achievement {
+  id: number;
+  userId: number;
+  badgeType: string;
+  awardedAt: string;
 }
 interface BookEntry {
   id: number;
@@ -67,6 +78,7 @@ function StudentDashboard() {
   const displayName = user?.email.split("@")[0] ?? "";
 
   const [badges, setBadges] = useState<Badge[] | null>(null);
+  const [achievements, setAchievements] = useState<Achievement[] | null>(null);
   const [books, setBooks] = useState<BookEntry[] | null>(null);
   const { data: savedCareers } = useSavedCareers();
 
@@ -75,6 +87,10 @@ function StudentDashboard() {
       .then((r) => (r.ok ? r.json() : []))
       .then(setBadges)
       .catch(() => setBadges([]));
+    fetch(`${BASE}/api/achievements`, { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : []))
+      .then(setAchievements)
+      .catch(() => setAchievements([]));
     fetch(`${BASE}/api/books`, { credentials: "include" })
       .then((r) => (r.ok ? r.json() : []))
       .then((b: BookEntry[]) => setBooks(b.slice(0, 3)))
@@ -106,7 +122,14 @@ function StudentDashboard() {
           </h1>
         </header>
 
-        {/* Progress: Badges */}
+        {/* My Achievements */}
+        <MyAchievements
+          achievements={achievements}
+          kh={kh}
+          t={t}
+        />
+
+        {/* Progress: Badges (Skeptic Challenge raw completions) */}
         <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
@@ -116,7 +139,7 @@ function StudentDashboard() {
                   kh ? "font-khmer" : "font-display"
                 }`}
               >
-                {t("Your Badges", "ស្លាកសញ្ញារបស់អ្នក")}
+                {t("Skeptic Challenges", "បញ្ហាប្រឈមអ្នកគិតវិភាគ")}
               </h2>
             </div>
             <span className="text-xs text-muted-foreground">
@@ -625,6 +648,172 @@ function SchoolDashboard() {
         </section>
       </div>
     </div>
+  );
+}
+
+/* ─── My Achievements (4 progress badges) ─────────────────────────── */
+
+interface AchievementDef {
+  type: string;
+  icon: typeof Award;
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+  color: string; // tailwind classes for the earned tile
+}
+
+const ACHIEVEMENT_DEFS: AchievementDef[] = [
+  {
+    type: "truth-seeker",
+    icon: Search,
+    titleEn: "Truth Seeker",
+    titleKh: "ស្វែងរកការពិត",
+    descEn: "Awarded for completing all 15 entries in the Skeptic's Challenge.",
+    descKh: "ទទួលបានដោយបញ្ចប់បញ្ហាទាំង ១៥ នៅក្នុងបញ្ហាប្រឈមអ្នកគិតវិភាគ។",
+    color: "from-amber-100 to-amber-200 border-amber-300 text-amber-700",
+  },
+  {
+    type: "galactic-explorer",
+    icon: Rocket,
+    titleEn: "Galactic Explorer",
+    titleKh: "អ្នករុករកកាឡាក់ស៊ី",
+    descEn: "Awarded for visiting and interacting with the Astronomy resources.",
+    descKh: "ទទួលបានដោយចូលមើល និងធ្វើអន្តរកម្មជាមួយធនធានតារាសាស្ត្រ។",
+    color: "from-indigo-100 to-purple-200 border-indigo-300 text-indigo-700",
+  },
+  {
+    type: "financial-wizard",
+    icon: Banknote,
+    titleEn: "Financial Wizard",
+    titleKh: "អ្នកជំនាញហិរញ្ញវត្ថុ",
+    descEn: "Awarded for finishing the Financial Literacy intro module.",
+    descKh: "ទទួលបានដោយបញ្ចប់មេរៀនណែនាំចំណេះដឹងហិរញ្ញវត្ថុ។",
+    color: "from-emerald-100 to-emerald-200 border-emerald-300 text-emerald-700",
+  },
+  {
+    type: "knowledge-sharer",
+    icon: Share2,
+    titleEn: "Knowledge Sharer",
+    titleKh: "អ្នកចែករំលែកចំណេះដឹង",
+    descEn: "Awarded for posting 3 book recommendations in the Reading List forum.",
+    descKh: "ទទួលបានដោយបង្ហោះការណែនាំសៀវភៅចំនួន ៣ ក្នុងវេទិកាបញ្ជីសៀវភៅ។",
+    color: "from-rose-100 to-pink-200 border-rose-300 text-rose-700",
+  },
+];
+
+function MyAchievements({
+  achievements,
+  kh,
+  t,
+}: {
+  achievements: Achievement[] | null;
+  kh: boolean;
+  t: ReturnType<typeof useTranslation>;
+}) {
+  const earnedMap = new Map<string, Achievement>();
+  (achievements ?? []).forEach((a) => earnedMap.set(a.badgeType, a));
+  const earnedCount = ACHIEVEMENT_DEFS.filter((d) => earnedMap.has(d.type)).length;
+
+  return (
+    <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-amber-500" />
+          <h2
+            className={`font-bold text-foreground text-lg ${
+              kh ? "font-khmer" : "font-display"
+            }`}
+          >
+            {t("My Achievements", "សមិទ្ធផលរបស់ខ្ញុំ")}
+          </h2>
+        </div>
+        <span className={`text-xs text-muted-foreground ${kh ? "font-khmer" : ""}`}>
+          {t(
+            `${earnedCount} of ${ACHIEVEMENT_DEFS.length} earned`,
+            `ទទួលបាន ${earnedCount} ក្នុងចំណោម ${ACHIEVEMENT_DEFS.length}`,
+          )}
+        </span>
+      </div>
+
+      {achievements === null ? (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="aspect-square rounded-2xl bg-sky-50 animate-pulse" />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {ACHIEVEMENT_DEFS.map((def) => {
+            const earned = earnedMap.get(def.type);
+            const Icon = def.icon;
+            const title = kh ? def.titleKh : def.titleEn;
+            const description = kh ? def.descKh : def.descEn;
+            const tooltip = `${def.titleEn} — ${def.descEn}\n${def.titleKh} — ${def.descKh}`;
+
+            return (
+              <div
+                key={def.type}
+                title={tooltip}
+                aria-label={tooltip}
+                className={`group relative aspect-square rounded-2xl border p-3 flex flex-col items-center justify-center text-center transition-all ${
+                  earned
+                    ? `bg-gradient-to-br ${def.color} hover:-translate-y-0.5 hover:shadow-md`
+                    : "bg-gray-100 border-gray-200 text-gray-400 opacity-70 grayscale"
+                }`}
+              >
+                {/* Lock indicator on unearned */}
+                {!earned && (
+                  <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center">
+                    <Lock className="w-3 h-3 text-gray-600" />
+                  </div>
+                )}
+                <Icon
+                  className={`w-8 h-8 mb-1.5 ${
+                    earned ? "" : "text-gray-400"
+                  }`}
+                />
+                <span
+                  className={`text-[11px] font-bold leading-tight line-clamp-2 break-words ${
+                    kh ? "font-khmer text-xs" : ""
+                  }`}
+                >
+                  {title}
+                </span>
+                {earned && (
+                  <span
+                    className={`text-[9px] mt-1 opacity-80 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {new Date(earned.awardedAt).toLocaleDateString(
+                      kh ? "km-KH" : "en-US",
+                      { year: "numeric", month: "short", day: "numeric" },
+                    )}
+                  </span>
+                )}
+
+                {/* Hover tooltip (shows on hover, supplements native title) */}
+                <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg">
+                    <p className="font-bold">
+                      {kh ? def.titleKh : def.titleEn}
+                    </p>
+                    <p
+                      className={`mt-1 text-gray-200 leading-snug ${
+                        kh ? "font-khmer leading-relaxed" : ""
+                      }`}
+                    >
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
   );
 }
 
