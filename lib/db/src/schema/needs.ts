@@ -21,6 +21,10 @@ export const needStatusEnum = pgEnum("need_status", [
   "completed",
 ]);
 
+// "request" = the school is asking for this item.
+// "surplus" = the school has extra of this item to give away to others.
+export const needKindEnum = pgEnum("need_kind", ["request", "surplus"]);
+
 export const needsTable = pgTable("needs", {
   id: serial("id").primaryKey(),
   schoolId: integer("school_id").references(() => schoolsTable.id).notNull(),
@@ -33,6 +37,7 @@ export const needsTable = pgTable("needs", {
   goalAmount: real("goal_amount").notNull(),
   fundedAmount: real("funded_amount").notNull().default(0),
   status: needStatusEnum("status").notNull().default("active"),
+  kind: needKindEnum("kind").notNull().default("request"),
   contactEmail: text("contact_email"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

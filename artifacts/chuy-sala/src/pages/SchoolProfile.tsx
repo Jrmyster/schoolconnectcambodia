@@ -7,7 +7,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { EditSchoolModal } from "@/components/EditSchoolModal";
 import { NeedCard } from "@/components/NeedCard";
-import { Loader2, MapPin, Phone, Mail, Users, Pencil, ArrowLeft, GraduationCap } from "lucide-react";
+import { SendSchoolMessageModal } from "@/components/SendSchoolMessageModal";
+import { Loader2, MapPin, Phone, Mail, Users, Pencil, ArrowLeft, GraduationCap, MessageSquare } from "lucide-react";
 
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
@@ -36,12 +37,16 @@ export function SchoolProfile() {
   const { language } = useLanguageStore();
   const { user } = useAuth();
   const [editOpen, setEditOpen] = useState(false);
+  const [messageOpen, setMessageOpen] = useState(false);
 
   const { data: school, isLoading, refetch } = useGetSchool(schoolId);
   const { data: needs } = useListNeeds({ schoolId });
 
   const activeNeeds = needs?.filter(n => n.status === "active") ?? [];
   const canEdit = !!(user && user.schoolId === schoolId);
+  // Schools can message OTHER schools (not their own).
+  const canMessage =
+    !!user && user.role === "school" && !!user.schoolId && user.schoolId !== schoolId;
 
   const labelClass = `text-xs font-semibold uppercase tracking-wide text-muted-foreground ${language === "kh" ? "font-khmer" : ""}`;
 
@@ -142,6 +147,20 @@ export function SchoolProfile() {
             </p>
           )}
 
+          {/* Message school button (visible to other school accounts) */}
+          {canMessage && (
+            <div className="mb-5">
+              <button
+                type="button"
+                onClick={() => setMessageOpen(true)}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 text-white text-sm font-bold hover:bg-sky-700 hover:shadow-md transition-all min-h-[44px] ${language === "kh" ? "font-khmer text-base" : ""}`}
+              >
+                <MessageSquare className="w-4 h-4" />
+                {t("Message This School", "ផ្ញើសារទៅសាលានេះ")}
+              </button>
+            </div>
+          )}
+
           {/* Contact row */}
           <div className="flex flex-wrap gap-4">
             {school.contactEmail && (
@@ -226,6 +245,16 @@ export function SchoolProfile() {
             setEditOpen(false);
             refetch();
           }}
+        />
+      )}
+
+      {/* Send Message Modal */}
+      {messageOpen && (
+        <SendSchoolMessageModal
+          toSchoolId={schoolId}
+          recipientNameEn={school.nameEn}
+          recipientNameKh={school.nameKh}
+          onClose={() => setMessageOpen(false)}
         />
       )}
     </div>

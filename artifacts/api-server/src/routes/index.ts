@@ -16,6 +16,8 @@ import skepticRouter from "./skeptic";
 import booksRouter from "./books";
 import authorsRouter from "./authors";
 import achievementsRouter from "./achievements";
+import notificationsRouter from "./notifications";
+import schoolMessagesRouter from "./schoolMessages";
 
 const router: IRouter = Router();
 
@@ -36,5 +38,7 @@ router.use(skepticRouter);
 router.use(booksRouter);
 router.use(authorsRouter);
 router.use(achievementsRouter);
+router.use(notificationsRouter);
+router.use(schoolMessagesRouter);
 
 export default router;

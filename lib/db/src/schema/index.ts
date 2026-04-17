@@ -13,3 +13,5 @@ export * from "./skepticCompletions";
 export * from "./books";
 export * from "./authorOfMonth";
 export * from "./challengeCompletions";
+export * from "./notifications";
+export * from "./schoolMessages";

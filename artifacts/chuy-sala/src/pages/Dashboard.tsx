@@ -541,16 +541,16 @@ function SchoolDashboard() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link
-              href="/charities"
+              href="/school-inbox"
               className="flex items-center gap-3 p-4 rounded-xl border border-sky-100 hover:bg-sky-50 transition-colors min-h-[44px]"
             >
-              <MessageSquare className="w-5 h-5 text-[#1A6EA8] flex-shrink-0" />
+              <Inbox className="w-5 h-5 text-[#1A6EA8] flex-shrink-0" />
               <div className="min-w-0">
                 <p className={`font-bold text-sm ${kh ? "font-khmer" : ""}`}>
-                  {t("Partner Directory", "បញ្ជីដៃគូ")}
+                  {t("Open Inbox", "បើកប្រអប់សារ")}
                 </p>
                 <p className="text-xs text-muted-foreground truncate">
-                  {t("Browse NGOs & charities", "មើលអង្គការមិនរកប្រាក់ចំណេញ")}
+                  {t("Read messages from other schools", "អានសារពីសាលាដទៃ")}
                 </p>
               </div>
             </Link>

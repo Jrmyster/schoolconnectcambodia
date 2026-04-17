@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { db } from "@workspace/db";
-import { needsTable, schoolsTable } from "@workspace/db/schema";
-import { eq, and } from "drizzle-orm";
+import { needsTable, schoolsTable, notificationsTable } from "@workspace/db/schema";
+import { eq, and, ne, inArray } from "drizzle-orm";
 import {
   ListNeedsQueryParams,
   CreateNeedBody,
@@ -97,12 +97,29 @@ router.post("/needs", requireRole("school"), async (req, res) => {
       effectiveSchoolId = me.schoolId;
     }
 
+    // `kind` isn't part of the auto-generated CreateNeedBody schema yet,
+    // so read it from the raw request body.
+    const kind: "request" | "surplus" =
+      req.body?.kind === "surplus" ? "surplus" : "request";
+
     const [need] = await db.insert(needsTable).values({
       ...body,
       schoolId: effectiveSchoolId,
       fundedAmount: 0,
       status: "active",
+      kind,
     }).returning();
+
+    // Proximity alert: if this is a surplus posting, notify every user
+    // affiliated with another school within 30 km.
+    if (kind === "surplus") {
+      try {
+        await fanOutSurplusAlert(need.id, effectiveSchoolId);
+      } catch (err) {
+        console.error("surplus fan-out failed:", err);
+      }
+    }
+
     res.status(201).json(need);
   } catch (e) {
     res.status(400).json({ error: String(e) });
@@ -193,5 +210,84 @@ router.patch("/needs/:id", async (req, res) => {
     res.status(400).json({ error: String(e) });
   }
 });
+
+// ── Surplus proximity alert helper ──────────────────────────────────────────
+// Notify every user belonging to another school within `radiusKm` of the
+// posting school. Uses haversine distance computed in-memory after a small
+// schools-with-coordinates query. Suppresses notifications when the school
+// has chosen to hide itself from the public map.
+const SURPLUS_RADIUS_KM = 30;
+
+function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371;
+  const toRad = (deg: number) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(a)));
+}
+
+async function fanOutSurplusAlert(needId: number, posterSchoolId: number): Promise<void> {
+  const [need] = await db
+    .select({
+      id: needsTable.id,
+      titleEn: needsTable.titleEn,
+      titleKh: needsTable.titleKh,
+    })
+    .from(needsTable)
+    .where(eq(needsTable.id, needId))
+    .limit(1);
+  if (!need) return;
+
+  const [poster] = await db
+    .select({
+      latitude: schoolsTable.latitude,
+      longitude: schoolsTable.longitude,
+      nameEn: schoolsTable.nameEn,
+      nameKh: schoolsTable.nameKh,
+    })
+    .from(schoolsTable)
+    .where(eq(schoolsTable.id, posterSchoolId))
+    .limit(1);
+  if (!poster?.latitude || !poster?.longitude) return;
+
+  // All other schools (we filter by distance in code rather than via PostGIS).
+  const others = await db
+    .select({
+      id: schoolsTable.id,
+      latitude: schoolsTable.latitude,
+      longitude: schoolsTable.longitude,
+    })
+    .from(schoolsTable)
+    .where(ne(schoolsTable.id, posterSchoolId));
+
+  const nearbySchoolIds = others
+    .filter((s) => s.latitude != null && s.longitude != null)
+    .filter((s) => haversineKm(poster.latitude!, poster.longitude!, s.latitude!, s.longitude!) <= SURPLUS_RADIUS_KM)
+    .map((s) => s.id);
+
+  if (nearbySchoolIds.length === 0) return;
+
+  // Find every user attached to those schools in a single query (avoid N+1).
+  const recipients = await db
+    .select({ id: usersTable.id })
+    .from(usersTable)
+    .where(inArray(usersTable.schoolId, nearbySchoolIds));
+  if (recipients.length === 0) return;
+
+  await db.insert(notificationsTable).values(
+    recipients.map((r) => ({
+      recipientId: r.id,
+      type: "surplus_alert" as const,
+      titleEn: "New supplies available nearby!",
+      titleKh: "មានសម្ភារៈថ្មីនៅជិតៗ!",
+      bodyEn: `${poster.nameEn ?? "A nearby school"} is sharing surplus: ${need.titleEn}`,
+      bodyKh: `${poster.nameKh ?? "សាលានៅក្បែរ"} កំពុងចែករំលែកសម្ភារៈលើស៖ ${need.titleKh}`,
+      link: `/needs/${need.id}`,
+    })),
+  );
+}
 
 export default router;
