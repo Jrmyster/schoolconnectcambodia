@@ -8,6 +8,7 @@ export const usersTable = pgTable("users", {
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   schoolId: integer("school_id").references(() => schoolsTable.id, { onDelete: "set null" }),
+  role: text("role").notNull().default("student"),
   isAdmin: boolean("is_admin").notNull().default(false),
   expPoints: integer("exp_points").notNull().default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),

@@ -161,6 +161,7 @@ function SaveButton({
   const { toast } = useToast();
 
   if (!user) return null;
+  if (user.role !== "student") return null;
 
   const isSaved = saved.some(s => s.majorKey === majorKey && s.careerKey === careerKey);
 

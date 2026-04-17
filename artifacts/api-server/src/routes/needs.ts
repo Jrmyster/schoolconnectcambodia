@@ -9,6 +9,8 @@ import {
   UpdateNeedFundingParams,
   UpdateNeedFundingBody,
 } from "@workspace/api-zod";
+import { requireRole } from "../middleware/rbac";
+import { usersTable } from "@workspace/db/schema";
 
 const router: IRouter = Router();
 
@@ -71,11 +73,33 @@ router.get("/needs", async (req, res) => {
   }
 });
 
-router.post("/needs", async (req, res) => {
+router.post("/needs", requireRole("school"), async (req, res) => {
   try {
     const body = CreateNeedBody.parse(req.body);
+
+    // Bind schoolId to the authenticated user's own school (prevent IDOR).
+    // Admin accounts may create needs for any school via body.schoolId.
+    const [me] = await db
+      .select({ schoolId: usersTable.schoolId, isAdmin: usersTable.isAdmin })
+      .from(usersTable)
+      .where(eq(usersTable.id, req.session.userId!))
+      .limit(1);
+
+    if (!me) return res.status(401).json({ error: "Session expired." });
+
+    let effectiveSchoolId = body.schoolId;
+    if (!me.isAdmin) {
+      if (!me.schoolId) {
+        return res.status(403).json({
+          error: "Your account is not linked to a school. Please link a school in your profile first.",
+        });
+      }
+      effectiveSchoolId = me.schoolId;
+    }
+
     const [need] = await db.insert(needsTable).values({
       ...body,
+      schoolId: effectiveSchoolId,
       fundedAmount: 0,
       status: "active",
     }).returning();

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { authorOfMonthTable, challengeCompletionsTable, userBadgesTable } from "@workspace/db/schema";
 import { eq, and } from "drizzle-orm";
+import { requireRole } from "../middleware/rbac";
 
 const router = Router();
 
@@ -52,7 +53,7 @@ router.get("/challenges/:challengeId/completion", async (req, res) => {
 });
 
 // POST /challenges/:challengeId/complete — auth required, marks complete and awards badge
-router.post("/challenges/:challengeId/complete", async (req, res) => {
+router.post("/challenges/:challengeId/complete", requireRole("student"), async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: "You must be logged in to complete a challenge" });
   }

@@ -2,6 +2,7 @@ import { Router, type IRouter } from "express";
 import { db } from "@workspace/db";
 import { savedCareersTable } from "@workspace/db/schema";
 import { eq, and } from "drizzle-orm";
+import { requireRole } from "../middleware/rbac";
 
 const router: IRouter = Router();
 
@@ -18,7 +19,7 @@ router.get("/saved-careers", async (req, res) => {
   }
 });
 
-router.post("/saved-careers", async (req, res) => {
+router.post("/saved-careers", requireRole("student"), async (req, res) => {
   if (!req.session.userId) return res.status(401).json({ error: "Not authenticated" });
   const { majorKey, careerKey } = req.body as { majorKey?: string; careerKey?: string };
   if (!majorKey || !careerKey) {

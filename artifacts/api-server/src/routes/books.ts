@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { booksTable, bookLikesTable } from "@workspace/db/schema";
 import { eq, and, sql } from "drizzle-orm";
+import { requireRole } from "../middleware/rbac";
 
 const router = Router();
 
@@ -49,7 +50,7 @@ router.get("/books", async (req, res) => {
 });
 
 // POST /books — auth required
-router.post("/books", async (req, res) => {
+router.post("/books", requireRole("student"), async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: "You must be logged in to recommend a book" });
   }

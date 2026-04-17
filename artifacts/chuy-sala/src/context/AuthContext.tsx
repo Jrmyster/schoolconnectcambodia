@@ -13,10 +13,13 @@ export interface AuthSchool {
   studentCount?: number | null;
 }
 
+export type UserRole = "student" | "school";
+
 export interface AuthUser {
   id: number;
   email: string;
   schoolId: number | null;
+  role: UserRole;
   isAdmin: boolean;
   school: AuthSchool | null;
 }
@@ -25,7 +28,7 @@ interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, schoolId?: number) => Promise<void>;
+  register: (email: string, password: string, role: UserRole, schoolId?: number) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -60,11 +63,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(u);
   };
 
-  const register = async (email: string, password: string, schoolId?: number) => {
+  const register = async (email: string, password: string, role: UserRole, schoolId?: number) => {
     const u = await apiCall<AuthUser>(`${API}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, schoolId }),
+      body: JSON.stringify({ email, password, role, schoolId }),
     });
     setUser(u);
   };

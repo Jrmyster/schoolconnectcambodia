@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { skepticCompletionsTable, userBadgesTable } from "@workspace/db/schema";
 import { eq, and, count } from "drizzle-orm";
+import { requireRole } from "../middleware/rbac";
 
 const router = Router();
 
@@ -36,7 +37,7 @@ router.get("/skeptic/status", async (req, res) => {
   });
 });
 
-router.post("/skeptic/complete", async (req, res) => {
+router.post("/skeptic/complete", requireRole("student"), async (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: "Unauthenticated" });
   }

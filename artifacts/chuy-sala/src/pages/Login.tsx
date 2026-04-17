@@ -7,7 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Eye, EyeOff, LogIn, UserPlus, GraduationCap } from "lucide-react";
+import { Eye, EyeOff, LogIn, UserPlus, GraduationCap, User, School as SchoolIcon } from "lucide-react";
+import type { UserRole } from "@/context/AuthContext";
 
 type Tab = "login" | "register";
 
@@ -21,6 +22,7 @@ interface RegisterForm {
   password: string;
   confirmPassword: string;
   schoolId: string;
+  role: UserRole;
 }
 
 export function Login() {
@@ -61,12 +63,21 @@ export function Login() {
   };
 
   const onRegister = async (data: RegisterForm) => {
+    if (!data.role) {
+      toast({ variant: "destructive", title: t("Please select an account type", "សូមជ្រើសរើសប្រភេទគណនី") });
+      return;
+    }
     if (data.password !== data.confirmPassword) {
       toast({ variant: "destructive", title: t("Passwords don't match", "លេខសម្ងាត់មិនត្រូវគ្នា") });
       return;
     }
     try {
-      await register(data.email, data.password, data.schoolId ? Number(data.schoolId) : undefined);
+      await register(
+        data.email,
+        data.password,
+        data.role,
+        data.role === "school" && data.schoolId ? Number(data.schoolId) : undefined,
+      );
       toast({ title: t("Account created!", "បានបង្កើតគណនី!"), description: t("You are now signed in.", "អ្នកបានចូលទៅក្នុងប្រព័ន្ធ។") });
       navigate("/admin");
     } catch (e: any) {
@@ -82,11 +93,14 @@ export function Login() {
           <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <GraduationCap className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="font-display text-3xl font-bold text-foreground">
-            {t("School Portal", "ច្រកទ្វារសាលា")}
+          <h1 className={`font-display text-3xl font-bold text-foreground ${language === "kh" ? "font-khmer" : ""}`}>
+            {t("School & Student Portal", "ច្រកទ្វារសាលា និង​សិស្ស")}
           </h1>
           <p className={`mt-2 text-muted-foreground ${language === "kh" ? "font-khmer text-base" : "text-sm"}`}>
-            {t("Sign in to manage your school's needs", "ចូលដើម្បីគ្រប់គ្រងតម្រូវការរបស់សាលា")}
+            {t(
+              "Sign in or create an account to access educational tools or manage your school's needs.",
+              "ចូល ឬ​បង្កើតគណនី ដើម្បីប្រើប្រាស់ឧបករណ៍សិក្សា ឬគ្រប់គ្រងតម្រូវការសាលារបស់អ្នក។",
+            )}
           </p>
         </div>
 
@@ -179,6 +193,51 @@ export function Login() {
           {tab === "register" && (
             <form onSubmit={handleRegSubmit(onRegister)} className="space-y-5">
               <div>
+                <label className={labelClass}>
+                  {t("I am registering as a:", "ខ្ញុំចុះឈ្មោះជា៖")}*
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(
+                    [
+                      { value: "student", icon: User, en: "Student", kh: "សិស្ស" },
+                      { value: "school", icon: SchoolIcon, en: "School Official", kh: "មន្ត្រីសាលា" },
+                    ] as const
+                  ).map((opt) => {
+                    const Icon = opt.icon;
+                    const checked = watchReg("role") === opt.value;
+                    return (
+                      <label
+                        key={opt.value}
+                        className={`relative flex flex-col items-center gap-1.5 px-3 py-4 rounded-xl border-2 cursor-pointer transition-all ${
+                          checked
+                            ? "border-primary bg-primary/5 ring-4 ring-primary/10"
+                            : "border-border hover:border-primary/40 hover:bg-muted/30"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          value={opt.value}
+                          {...regReg("role", { required: true })}
+                          className="sr-only"
+                        />
+                        <Icon className={`w-6 h-6 ${checked ? "text-primary" : "text-muted-foreground"}`} />
+                        <span
+                          className={`text-sm font-semibold ${checked ? "text-primary" : "text-foreground"} ${language === "kh" ? "font-khmer text-base" : ""}`}
+                        >
+                          {language === "kh" ? opt.kh : opt.en}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+                {regErrors.role && (
+                  <p className="text-destructive text-xs mt-1">
+                    {t("Please select an account type", "សូមជ្រើសរើសប្រភេទគណនី")}
+                  </p>
+                )}
+              </div>
+
+              <div>
                 <label className={labelClass}>{t("Email", "អ៊ីមែល")}*</label>
                 <input
                   type="email"
@@ -223,17 +282,19 @@ export function Login() {
                 {regErrors.confirmPassword && <p className="text-destructive text-xs mt-1">{t("Required", "ទាមទារ")}</p>}
               </div>
 
-              <div>
-                <label className={labelClass}>{t("Link to School", "ភ្ជាប់ទៅសាលា")} <span className="font-normal text-muted-foreground text-xs">({t("optional", "ស្រេចចិត្ត")})</span></label>
-                <select {...regReg("schoolId")} className={inputClass}>
-                  <option value="">{t("— Select your school (optional) —", "— ជ្រើសរើសសាលា (ស្រេចចិត្ត) —")}</option>
-                  {schools?.map(s => (
-                    <option key={s.id} value={s.id}>
-                      {language === "kh" ? s.nameKh : s.nameEn} — {s.province}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {watchReg("role") === "school" && (
+                <div>
+                  <label className={labelClass}>{t("Link to School", "ភ្ជាប់ទៅសាលា")} <span className="font-normal text-muted-foreground text-xs">({t("optional", "ស្រេចចិត្ត")})</span></label>
+                  <select {...regReg("schoolId")} className={inputClass}>
+                    <option value="">{t("— Select your school (optional) —", "— ជ្រើសរើសសាលា (ស្រេចចិត្ត) —")}</option>
+                    {schools?.map(s => (
+                      <option key={s.id} value={s.id}>
+                        {language === "kh" ? s.nameKh : s.nameEn} — {s.province}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <Button
                 type="submit"
