@@ -343,22 +343,49 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
 
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 group flex-shrink-0"
-            onClick={() => setMobileOpen(false)}
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}images/logo.png`}
-              alt="Chouy Sala Logo"
-              className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
-            />
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-bold text-xl text-primary">Chouy Sala</span>
-              <span className="font-khmer text-xs text-muted-foreground">ជួយសាលា</span>
+          {/* Logo + slogan */}
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-shrink">
+            <Link
+              href="/"
+              className="flex items-center gap-3 group flex-shrink-0"
+              onClick={() => setMobileOpen(false)}
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.png`}
+                alt="Chouy Sala Logo"
+                className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-xl text-primary">Chouy Sala</span>
+                <span className="font-khmer text-xs text-muted-foreground">ជួយសាលា</span>
+              </div>
+            </Link>
+
+            {/* Slogan — hidden on mobile, visible from lg up */}
+            <div
+              className="hidden lg:flex items-center gap-3 min-w-0"
+              aria-hidden={false}
+            >
+              <span
+                className="h-7 w-px bg-slate-300/80"
+                aria-hidden="true"
+              />
+              <span
+                className={`text-[13px] font-light text-slate-500 truncate ${
+                  language === "kh" ? "font-khmer leading-snug" : ""
+                }`}
+                title={t(
+                  "The Educational Front Page of Cambodia",
+                  "ទំព័រមុខនៃការអប់រំនៅកម្ពុជា",
+                )}
+              >
+                {t(
+                  "The Educational Front Page of Cambodia",
+                  "ទំព័រមុខនៃការអប់រំនៅកម្ពុជា",
+                )}
+              </span>
             </div>
-          </Link>
+          </div>
 
           {/* Right controls */}
           <div className="flex items-center gap-3">
