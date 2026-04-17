@@ -9,6 +9,7 @@ import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
 import { NotificationBell } from "@/components/NotificationBell";
+import { ThemePalette } from "@/components/ThemePalette";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -423,6 +424,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             {/* Bell appears only for school accounts (handles its own visibility) */}
             <NotificationBell />
+            <ThemePalette />
             <LanguageToggle />
 
             {/* Auth — desktop */}

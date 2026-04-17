@@ -91,6 +91,19 @@
   --ring: 204 73% 38%;
   
   --radius: 0.75rem;
+
+  /* Rainbow Theme Palette — overridable per-user */
+  --main-bg-color: transparent;
+  --main-text-color: inherit;
+}
+
+/* Smooth color transitions when the rainbow theme changes */
+html, body {
+  transition: background-color 320ms ease, color 320ms ease;
+}
+body[data-theme]:not([data-theme="default"]) {
+  background-color: var(--main-bg-color) !important;
+  color: var(--main-text-color);
 }
 
 @layer base {
