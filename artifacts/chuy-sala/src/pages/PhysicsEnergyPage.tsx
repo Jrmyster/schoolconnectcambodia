@@ -17,6 +17,9 @@ import {
   Thermometer,
   Snowflake,
   Sparkles,
+  Battery,
+  Lightbulb,
+  Calculator,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -182,11 +185,20 @@ export function PhysicsEnergyPage() {
         />
         <HeatTransferSimulator />
 
-        {/* ── 4. Second Law: Entropy ───────────────────────────── */}
+        {/* ── 4. Energy Converter ──────────────────────────────── */}
+        <SectionTitle
+          en="Interactive: energy converter"
+          kh="អន្តរកម្ម៖ ឧបករណ៍បំប្លែងថាមពល"
+          numberLabel="04"
+          icon={Calculator}
+        />
+        <EnergyConverter />
+
+        {/* ── 5. Second Law: Entropy ───────────────────────────── */}
         <SectionTitle
           en="The second law — entropy"
           kh="ច្បាប់ទីពីរ — អង់ត្រូពី"
-          numberLabel="04"
+          numberLabel="05"
           icon={Shuffle}
         />
         <EntropyCard kh={kh} t={t} />
@@ -796,6 +808,298 @@ function EntropyVisual() {
         HOT → COLD
       </text>
     </svg>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Energy Converter (kcal ↔ Joules) + LED context
+// ────────────────────────────────────────────────────────────────────────────
+function EnergyConverter() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const KCAL_TO_J = 4184;
+  const LED_W = 10;
+
+  const [kcalStr, setKcalStr] = useState("100");
+  const [joulesStr, setJoulesStr] = useState((100 * KCAL_TO_J).toString());
+
+  const handleKcal = (v: string) => {
+    setKcalStr(v);
+    if (v.trim() === "") {
+      setJoulesStr("");
+      return;
+    }
+    const n = parseFloat(v);
+    if (!isNaN(n) && isFinite(n)) {
+      setJoulesStr(Math.round(n * KCAL_TO_J).toString());
+    }
+  };
+
+  const handleJoules = (v: string) => {
+    setJoulesStr(v);
+    if (v.trim() === "") {
+      setKcalStr("");
+      return;
+    }
+    const n = parseFloat(v);
+    if (!isNaN(n) && isFinite(n)) {
+      // up to 4 decimals; trim trailing zeros
+      const k = n / KCAL_TO_J;
+      const rounded = k >= 100 ? k.toFixed(2) : k >= 1 ? k.toFixed(3) : k.toFixed(4);
+      setKcalStr(parseFloat(rounded).toString());
+    }
+  };
+
+  const reset = () => {
+    setKcalStr("100");
+    setJoulesStr((100 * KCAL_TO_J).toString());
+  };
+
+  // Derived: minutes the energy could power a 10W LED
+  const joulesNum = Math.max(0, parseFloat(joulesStr) || 0);
+  const totalSeconds = joulesNum / LED_W; // J / W = seconds
+  const totalMinutes = totalSeconds / 60;
+  const hours = Math.floor(totalSeconds / 3600);
+  const mins = Math.floor((totalSeconds % 3600) / 60);
+  const secs = Math.round(totalSeconds % 60);
+
+  // Pretty headline number
+  const headlineMinutes =
+    totalMinutes >= 100 ? Math.round(totalMinutes).toLocaleString() : totalMinutes.toFixed(1);
+
+  // Friendly time string
+  const timeStr = (() => {
+    if (totalSeconds < 60) return `${secs} ${kh ? "វិនាទី" : "sec"}`;
+    if (hours >= 1) {
+      return `${hours} ${kh ? "ម៉ោង" : "hr"} ${mins} ${kh ? "នាទី" : "min"}`;
+    }
+    return `${mins} ${kh ? "នាទី" : "min"} ${secs} ${kh ? "វិនាទី" : "sec"}`;
+  })();
+
+  return (
+    <section className="relative rounded-2xl border-2 border-orange-300 shadow-sm overflow-hidden mb-10" style={CARD_BG}>
+      <CornerMarks subtle />
+      <div className="relative p-4 sm:p-6">
+        {/* Title row */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Battery className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-orange-700 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {t("Calories ↔ Joules", "កាឡូរី ↔ ហ្សូល")}
+            </div>
+            <h3 className={`text-lg sm:text-xl font-bold text-orange-950 leading-tight ${kh ? "font-khmer" : ""}`}>
+              {t("Convert food energy into physics energy", "បំប្លែងថាមពលអាហារទៅជាថាមពលរូបវិទ្យា")}
+            </h3>
+          </div>
+        </div>
+
+        {/* Conversion factor pill */}
+        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-amber-100 border border-amber-300 text-amber-900 text-xs sm:text-sm font-semibold mb-4 ${kh ? "font-khmer" : ""}`}>
+          <span className="font-mono font-bold">1 kcal = 4,184 J</span>
+          <span className="opacity-60">·</span>
+          <span>{t("Type in either box", "វាយក្នុងប្រអប់ណាមួយ")}</span>
+        </div>
+
+        {/* Inputs */}
+        <div className="grid sm:grid-cols-[1fr_auto_1fr] gap-3 sm:gap-4 items-end">
+          {/* Calories */}
+          <div className="rounded-xl border-2 border-orange-300 bg-white px-4 py-3">
+            <label htmlFor="kcal-input" className={`block text-[11px] font-mono uppercase tracking-widest text-orange-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {t("Calories (food energy)", "កាឡូរី (ថាមពលអាហារ)")}
+            </label>
+            <div className="flex items-baseline gap-2">
+              <input
+                id="kcal-input"
+                type="number"
+                inputMode="decimal"
+                step="any"
+                min="0"
+                value={kcalStr}
+                onChange={(e) => handleKcal(e.target.value)}
+                placeholder="0"
+                className="flex-1 min-w-0 bg-transparent border-0 outline-none focus:ring-0 p-0 font-mono text-2xl sm:text-3xl font-bold text-orange-900"
+                aria-label={kh ? "បញ្ចូលកាឡូរី" : "Enter calories"}
+              />
+              <span className={`text-sm font-bold text-orange-700 ${kh ? "font-khmer" : ""}`}>
+                {t("kcal", "កាឡូរី")}
+              </span>
+            </div>
+          </div>
+
+          {/* swap symbol */}
+          <div className="flex sm:flex-col items-center justify-center gap-1 text-orange-700">
+            <span className="font-mono text-xl sm:text-2xl font-bold leading-none select-none" aria-hidden="true">⇌</span>
+            <span className={`text-[10px] font-mono uppercase tracking-widest ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {t("× 4,184", "× 4,184")}
+            </span>
+          </div>
+
+          {/* Joules */}
+          <div className="rounded-xl border-2 border-red-300 bg-white px-4 py-3">
+            <label htmlFor="joules-input" className={`block text-[11px] font-mono uppercase tracking-widest text-red-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {t("Joules (physics energy)", "ហ្សូល (ថាមពលរូបវិទ្យា)")}
+            </label>
+            <div className="flex items-baseline gap-2">
+              <input
+                id="joules-input"
+                type="number"
+                inputMode="decimal"
+                step="any"
+                min="0"
+                value={joulesStr}
+                onChange={(e) => handleJoules(e.target.value)}
+                placeholder="0"
+                className="flex-1 min-w-0 bg-transparent border-0 outline-none focus:ring-0 p-0 font-mono text-2xl sm:text-3xl font-bold text-red-900"
+                aria-label={kh ? "បញ្ចូលហ្សូល" : "Enter joules"}
+              />
+              <span className={`text-sm font-bold text-red-700 ${kh ? "font-khmer" : ""}`}>
+                {t("J", "J")}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick presets */}
+        <div className="flex flex-wrap items-center gap-2 mt-4">
+          <span className={`text-[10px] font-mono uppercase tracking-widest text-slate-500 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {t("Quick examples", "ឧទាហរណ៍រហ័ស")}
+          </span>
+          <Preset onClick={() => handleKcal("1")} kh={kh}>{t("1 kcal · sip of soda", "១ កាឡូរី · ស្រាសូដាមួយប៉ប់")}</Preset>
+          <Preset onClick={() => handleKcal("100")} kh={kh}>{t("100 kcal · banana", "១០០ កាឡូរី · ចេក")}</Preset>
+          <Preset onClick={() => handleKcal("250")} kh={kh}>{t("250 kcal · plate of rice", "២៥០ កាឡូរី · បាយមួយចាន")}</Preset>
+          <Preset onClick={() => handleKcal("2000")} kh={kh}>{t("2,000 kcal · daily diet", "២,០០០ កាឡូរី · អាហារប្រចាំថ្ងៃ")}</Preset>
+          <button
+            type="button"
+            onClick={reset}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-orange-300 bg-white text-[11px] font-bold text-orange-800 hover:bg-orange-50 transition-colors ${kh ? "font-khmer" : ""}`}
+          >
+            <RotateCcw className="w-3 h-3" />
+            {t("Reset", "កំណត់ឡើងវិញ")}
+          </button>
+        </div>
+
+        {/* "What does this energy do?" */}
+        <div className="mt-6 rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 p-4 sm:p-5">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-9 h-9 rounded-lg bg-amber-400 text-amber-950 flex items-center justify-center shadow-sm">
+              <Lightbulb className="w-5 h-5" />
+            </div>
+            <div>
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-orange-700 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("Real-world impact", "ផលប៉ះពាល់ពិតប្រាកដ")}
+              </div>
+              <h4 className={`text-base sm:text-lg font-bold text-orange-950 leading-tight ${kh ? "font-khmer" : ""}`}>
+                {t("What does this energy do?", "តើថាមពលនេះធ្វើអ្វីខ្លះ?")}
+              </h4>
+            </div>
+          </div>
+
+          <p className={`text-sm sm:text-base text-foreground leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            {kh ? (
+              <>
+                ថាមពលនេះអាចបំភ្លឺអំពូល <span className="font-bold text-red-700">LED ១០ វ៉ាត់</span> បាន​អស់រយៈពេល{" "}
+                <span className="font-mono font-bold text-orange-900 text-lg">{headlineMinutes}</span>{" "}
+                <span className="font-bold">នាទី</span>។
+              </>
+            ) : (
+              <>
+                This much energy could power a <span className="font-bold text-red-700">10 W LED lightbulb</span> for{" "}
+                <span className="font-mono font-bold text-orange-900 text-lg">{headlineMinutes}</span>{" "}
+                <span className="font-bold">minutes</span>.
+              </>
+            )}
+          </p>
+
+          {/* readout grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4">
+            <Readout
+              labelEn="Energy"
+              labelKh="ថាមពល"
+              value={`${joulesNum.toLocaleString()} J`}
+              kh={kh}
+            />
+            <Readout
+              labelEn="LED power"
+              labelKh="អំពូល LED"
+              value={`${LED_W} W`}
+              kh={kh}
+            />
+            <Readout
+              labelEn="Run time"
+              labelKh="រយៈពេលដំណើរការ"
+              value={timeStr}
+              kh={kh}
+              accent
+            />
+            <Readout
+              labelEn="Formula"
+              labelKh="រូបមន្ត"
+              value="(J ÷ 10) ÷ 60"
+              kh={kh}
+            />
+          </div>
+
+          <p className={`text-xs text-slate-600 mt-3 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            <span className={`font-mono font-bold uppercase tracking-widest text-slate-500 mr-1.5 text-[10px] ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {t("Why", "ហេតុអ្វី")}
+            </span>
+            {t(
+              "Power (Watts) = Joules per second. So time in seconds = Joules ÷ Watts. Divide by 60 to get minutes.",
+              "កម្លាំង (វ៉ាត់) = ហ្សូលក្នុងមួយវិនាទី។ ដូច្នេះ ពេលវេលាជាវិនាទី = ហ្សូល ÷ វ៉ាត់។ ចែកនឹង ៦០ ដើម្បីបានជានាទី។",
+            )}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Preset({ children, onClick, kh }: { children: React.ReactNode; onClick: () => void; kh: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex items-center px-2.5 py-1 rounded-full border border-orange-300 bg-white text-[11px] sm:text-xs font-semibold text-orange-800 hover:bg-orange-50 transition-colors ${kh ? "font-khmer" : ""}`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Readout({
+  labelEn,
+  labelKh,
+  value,
+  kh,
+  accent = false,
+}: {
+  labelEn: string;
+  labelKh: string;
+  value: string;
+  kh: boolean;
+  accent?: boolean;
+}) {
+  return (
+    <div className={`rounded-lg px-3 py-2 ${accent ? "bg-orange-600 text-white" : "bg-white border border-orange-200"}`}>
+      <div
+        className={`text-[10px] font-mono uppercase tracking-widest ${
+          accent ? "text-orange-100" : "text-orange-700"
+        } ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+      >
+        {kh ? labelKh : labelEn}
+      </div>
+      <div
+        className={`font-mono text-sm sm:text-base font-bold leading-tight ${
+          accent ? "text-white" : "text-orange-950"
+        }`}
+      >
+        {value}
+      </div>
+    </div>
   );
 }
 
