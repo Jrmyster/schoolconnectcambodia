@@ -25,6 +25,9 @@ import {
   Loader2,
   CheckCircle2,
   Award,
+  Trash2,
+  Wrench,
+  X,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -168,6 +171,7 @@ export function ElectricalSafetyPage() {
   const [hintOpen, setHintOpen] = useState(false);
   const [award, setAward] = useState<AwardState>({ kind: "idle" });
   const [hintOpen3, setHintOpen3] = useState(false);
+  const [panicOpen, setPanicOpen] = useState(false);
   const [award3, setAward3] = useState<AwardState>({ kind: "idle" });
   // Per-badge in-flight locks: prevents same-tick rapid double-clicks from
   // firing two POSTs (the captured-state check alone is not race-safe).
@@ -954,6 +958,187 @@ export function ElectricalSafetyPage() {
             />
           </div>
         </div>
+
+        {/* ── Lab Assistant: Panic Button ─────────────────────────────── */}
+        <div className="mt-5 rounded-3xl border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-4 sm:p-5 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2.5 flex-1 min-w-0">
+              <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0">
+                <Wrench className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div
+                  className={`text-[10px] font-bold tracking-widest uppercase text-rose-700 ${
+                    kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                  }`}
+                >
+                  {t("Lab Assistant", "ជំនួយការមន្ទីរពិសោធន៍")}
+                </div>
+                <div
+                  className={`text-sm text-rose-900/85 leading-snug ${
+                    kh ? "font-khmer leading-relaxed" : ""
+                  }`}
+                >
+                  {t(
+                    "Stuck or seeing smoke in the simulation? Click for help.",
+                    "ជាប់គាំង ឬឃើញផ្សែងក្នុងការសាកល្បង? ចុចសុំជំនួយ។",
+                  )}
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setPanicOpen(true)}
+              className={`group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-bold shadow-lg shadow-rose-500/30 ring-2 ring-rose-300/60 transition-all active:scale-95 text-sm sm:text-base ${
+                kh ? "font-khmer" : ""
+              }`}
+              aria-haspopup="dialog"
+              aria-expanded={panicOpen}
+            >
+              <Flame className="w-5 h-5 text-amber-200 group-hover:text-amber-100 animate-pulse" />
+              <span>
+                {t("Help! My battery is on fire!", "ជួយផង! ថ្មរបស់ខ្ញុំកំពុងឆេះ!")}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* ── Lab Assistant: Diagnostic Modal ─────────────────────────── */}
+        {panicOpen && (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lab-assistant-title"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setPanicOpen(false);
+            }}
+          >
+            <div className="relative w-full max-w-lg rounded-3xl bg-white border-2 border-rose-200 shadow-2xl overflow-hidden animate-in zoom-in-95">
+              {/* Top accent strip */}
+              <div className="h-1.5 bg-gradient-to-r from-rose-400 via-orange-400 to-amber-400" />
+
+              {/* Close X */}
+              <button
+                type="button"
+                onClick={() => setPanicOpen(false)}
+                aria-label={t("Close", "បិទ")}
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Header */}
+              <div className="px-5 sm:px-6 pt-6 pb-4 flex items-start gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0 ring-2 ring-rose-200">
+                  <AlertTriangle className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0 pr-6">
+                  <div
+                    className={`text-[10px] font-bold tracking-widest uppercase text-rose-600 mb-0.5 ${
+                      kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                    }`}
+                  >
+                    {t("Friendly Diagnosis", "ការវិភាគដោយមិត្តភាព")}
+                  </div>
+                  <h3
+                    id="lab-assistant-title"
+                    className={`text-lg sm:text-xl font-bold text-rose-900 leading-snug ${
+                      kh ? "font-khmer leading-relaxed" : "font-display"
+                    }`}
+                  >
+                    {t(
+                      "You Created a Short Circuit!",
+                      "អ្នកបានបង្កើតសៀគ្វីខ្លី!",
+                    )}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Explanation */}
+              <div className="px-5 sm:px-6 pb-5">
+                <p
+                  className={`text-sm sm:text-[15px] text-slate-700 leading-relaxed ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {t(
+                    "Electricity is lazy; it always takes the easiest path. You created a path with zero resistance (a wire going straight from one end of the battery to the other, bypassing the bulb). This causes massive current, which creates extreme heat and fire!",
+                    "អគ្គិសនីតែងតែឆ្លងកាត់ផ្លូវដែលងាយស្រួលបំផុត។ អ្នកបានបង្កើតផ្លូវដែលគ្មានរេស៊ីស្តង់ (ខ្សែភ្លើងរត់ត្រង់ពីចុងម្ខាងនៃថ្មទៅចុងម្ខាងទៀត ដោយរំលងអំពូល)។ នេះបណ្តាលឱ្យមានចរន្តអគ្គិសនីឆ្លងកាត់យ៉ាងច្រើន ដែលបង្កើតកម្ដៅខ្លាំង និងបង្កជាភ្លើង!",
+                  )}
+                </p>
+              </div>
+
+              {/* Next Steps */}
+              <div className="mx-5 sm:mx-6 mb-5 rounded-2xl bg-emerald-50 border border-emerald-200 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+                    <Wrench className="w-3.5 h-3.5" />
+                  </div>
+                  <h4
+                    className={`text-sm font-bold text-emerald-900 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t("Next Steps", "ជំហានបន្ទាប់")}
+                  </h4>
+                </div>
+                <ol className="space-y-2.5">
+                  <li className="flex items-start gap-2.5">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-400 text-emerald-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                      1
+                    </span>
+                    <span
+                      className={`text-sm text-emerald-900/90 leading-relaxed flex items-center gap-1.5 flex-wrap ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {t(
+                        "Click the",
+                        "ចុចលើរូប",
+                      )}{" "}
+                      <Trash2 className="inline w-4 h-4 text-rose-600" />{" "}
+                      {t(
+                        "trash can icon on the wire that caused the fire.",
+                        "ធុងសំរាមនៅលើខ្សែភ្លើងដែលបង្កឱ្យឆេះ។",
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-400 text-emerald-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                      2
+                    </span>
+                    <span
+                      className={`text-sm text-emerald-900/90 leading-relaxed ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {t(
+                        "Make sure the electricity has to travel THROUGH the lightbulb to get back to the battery.",
+                        "ត្រូវប្រាកដថា អគ្គិសនីត្រូវតែឆ្លងកាត់ អំពូលភ្លើង មុននឹងវិលទៅកាន់ថ្មវិញ។",
+                      )}
+                    </span>
+                  </li>
+                </ol>
+              </div>
+
+              {/* Footer button */}
+              <div className="px-5 sm:px-6 pb-5">
+                <button
+                  type="button"
+                  onClick={() => setPanicOpen(false)}
+                  className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-md transition-all active:scale-95 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                  autoFocus
+                >
+                  <CheckCircle2 className="w-5 h-5" />
+                  {t("Got it!", "យល់ហើយ!")}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Guided Mission box ──────────────────────────────────────────── */}
         <div className="mt-6 rounded-3xl bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 shadow-sm p-5 sm:p-6">
