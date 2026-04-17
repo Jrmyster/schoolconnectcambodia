@@ -56,7 +56,7 @@ export function Login() {
     try {
       await login(data.email, data.password);
       toast({ title: t("Welcome back!", "សូមស្វាគមន៍!"), description: t("You are now signed in.", "អ្នកបានចូលទៅក្នុងប្រព័ន្ធ។") });
-      navigate("/admin");
+      navigate("/dashboard");
     } catch (e: any) {
       toast({ variant: "destructive", title: t("Login failed", "ការចូលបានបរាជ័យ"), description: e.message });
     }
@@ -79,7 +79,7 @@ export function Login() {
         data.role === "school" && data.schoolId ? Number(data.schoolId) : undefined,
       );
       toast({ title: t("Account created!", "បានបង្កើតគណនី!"), description: t("You are now signed in.", "អ្នកបានចូលទៅក្នុងប្រព័ន្ធ។") });
-      navigate("/admin");
+      navigate("/dashboard");
     } catch (e: any) {
       toast({ variant: "destructive", title: t("Registration failed", "ការចុះឈ្មោះបានបរាជ័យ"), description: e.message });
     }

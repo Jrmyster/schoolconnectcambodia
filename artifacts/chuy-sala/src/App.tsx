@@ -25,6 +25,7 @@ import { SpacePage } from "@/pages/SpacePage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ScientificLiteracyPage } from "@/pages/ScientificLiteracyPage";
 import { ReadingListPage } from "@/pages/ReadingListPage";
+import { Dashboard } from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -72,6 +73,7 @@ function Router() {
           <Route path="/science" component={ScientificLiteracyPage} />
           <Route path="/reading-list" component={ReadingListPage} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>

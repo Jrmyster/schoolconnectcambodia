@@ -1,4 +1,4 @@
-import { pgTable, serial, text, real, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, real, integer, timestamp, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
@@ -16,6 +16,7 @@ export const schoolsTable = pgTable("schools", {
   description: text("description"),
   studentCount: integer("student_count"),
   pin: text("pin"),
+  hideFromMap: boolean("hide_from_map").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
