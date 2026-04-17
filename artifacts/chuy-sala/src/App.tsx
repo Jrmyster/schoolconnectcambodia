@@ -36,6 +36,7 @@ import {
   ChemistryAdvancedPage,
   ChemistryRealWorldPage,
 } from "@/pages/ChemistryModulePages";
+import { FunLabPage } from "@/pages/FunLabPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -92,6 +93,7 @@ function Router() {
           <Route path="/chemistry/reactions-math" component={ChemistryReactionsPage} />
           <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
           <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
+          <Route path="/fun-lab" component={FunLabPage} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>
