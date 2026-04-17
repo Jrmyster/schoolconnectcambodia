@@ -10,6 +10,13 @@ import {
   Power,
   HardHat,
   ShieldCheck,
+  BatteryCharging,
+  FlaskConical,
+  Flame,
+  Wind,
+  LifeBuoy,
+  Hand,
+  Sun,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -490,8 +497,333 @@ export function ElectricalSafetyPage() {
           })}
         </ol>
 
-        {/* Closing reminder */}
-        <div className="mt-8 text-center">
+      </section>
+
+      {/* ── Section 5: AC vs DC & Battery Safety ─────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div className="text-center mb-8">
+          <span
+            className={`inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-indigo-700 mb-2 ${
+              kh ? "font-khmer normal-case tracking-normal text-sm" : ""
+            }`}
+          >
+            <BatteryCharging className="w-4 h-4" />
+            {t("Going Deeper", "ស្វែងយល់បន្ថែម")}
+          </span>
+          <h2
+            className={`text-2xl sm:text-3xl font-bold ${
+              kh ? "font-khmer" : "font-display"
+            }`}
+          >
+            {t(
+              "AC vs. DC & Battery Safety",
+              "ចរន្តជាប់ ចរន្តឆ្លាស់ និងសុវត្ថិភាពអាគុយ",
+            )}
+          </h2>
+        </div>
+
+        {/* AC vs DC comparison ──────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-10">
+          {/* DC card */}
+          <article className="rounded-3xl border-2 border-indigo-200 bg-indigo-50 p-6 shadow-sm">
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
+                <Sun className="w-6 h-6" />
+              </div>
+              {/* DC symbol: equals sign */}
+              <div
+                className="font-mono text-4xl font-bold text-indigo-700 leading-none select-none"
+                aria-label={t("DC symbol", "និមិត្តសញ្ញា DC")}
+                role="img"
+              >
+                =
+              </div>
+            </div>
+            <h3 className={`text-xl font-bold mb-1 ${kh ? "font-khmer" : ""}`}>
+              {t("Direct Current (DC)", "ចរន្តជាប់ (DC)")}
+              <span
+                className={`block text-xs font-normal text-muted-foreground mt-1 ${
+                  kh ? "" : "italic"
+                }`}
+              >
+                {kh ? "Direct Current (DC)" : "ចរន្តជាប់"}
+              </span>
+            </h3>
+            <p
+              className={`text-sm font-bold text-foreground/90 mb-3 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              → {t("Flows in one direction — like a river", "ហូរទៅទិសតែមួយ — ដូចជាទន្លេ")}
+            </p>
+            <p
+              className={`text-sm text-foreground/80 leading-relaxed ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "DC is what batteries, solar panels, and most small electronics produce. The current always travels from the + terminal, through the device, and back to the − terminal. It is steady and predictable.",
+                "DC គឺជាអ្វីដែលអាគុយ ផ្ទាំងសូឡា និងឧបករណ៍អេឡិចត្រូនិកតូចៗភាគច្រើនផលិត។ ចរន្តតែងតែដើរពីកំពូល + ឆ្លងកាត់ឧបករណ៍ ហើយត្រឡប់មកកំពូល − វិញ។ វាមានស្ថេរភាព និងអាចព្យាករបាន។",
+              )}
+            </p>
+          </article>
+
+          {/* AC card */}
+          <article className="rounded-3xl border-2 border-rose-200 bg-rose-50 p-6 shadow-sm">
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center shadow-sm">
+                <Activity className="w-6 h-6" />
+              </div>
+              {/* AC symbol: tilde */}
+              <div
+                className="font-mono text-4xl font-bold text-rose-700 leading-none select-none"
+                aria-label={t("AC symbol", "និមិត្តសញ្ញា AC")}
+                role="img"
+              >
+                ∼
+              </div>
+            </div>
+            <h3 className={`text-xl font-bold mb-1 ${kh ? "font-khmer" : ""}`}>
+              {t("Alternating Current (AC)", "ចរន្តឆ្លាស់ (AC)")}
+              <span
+                className={`block text-xs font-normal text-muted-foreground mt-1 ${
+                  kh ? "" : "italic"
+                }`}
+              >
+                {kh ? "Alternating Current (AC)" : "ចរន្តឆ្លាស់"}
+              </span>
+            </h3>
+            <p
+              className={`text-sm font-bold text-foreground/90 mb-3 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              → {t("Switches direction many times per second", "ប្តូរទិសច្រើនដងក្នុងមួយវិនាទី")}
+            </p>
+            <p
+              className={`text-sm text-foreground/80 leading-relaxed ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "AC is what arrives through the big power lines and your wall outlets. In Cambodia it switches direction 50 times every second (50 Hz). AC is efficient to send over long distances, but more dangerous to touch than low-voltage DC.",
+                "AC គឺជាអ្វីដែលមកដល់តាមខ្សែបណ្តាញអគ្គិសនីធំៗ និងដោតភ្លើងជញ្ជាំងរបស់អ្នក។ នៅកម្ពុជាវាប្តូរទិស ៥០ ដងក្នុងមួយវិនាទី (៥០ Hz)។ AC មានប្រសិទ្ធភាពក្នុងការបញ្ជូនចម្ងាយឆ្ងាយ ប៉ុន្តែគ្រោះថ្នាក់ខ្លាំងជាង DC វ៉ុលទាប នៅពេលប៉ះវា។",
+              )}
+            </p>
+          </article>
+        </div>
+
+        {/* Battery Safety ────────────────────────────────────────────────── */}
+        <div className="bg-white rounded-3xl border border-amber-200 shadow-sm p-6 sm:p-8 mb-10">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">
+              <BatteryCharging className="w-5 h-5" />
+            </div>
+            <div>
+              <span
+                className={`block text-xs font-bold tracking-widest uppercase text-amber-700 ${
+                  kh ? "font-khmer normal-case tracking-normal text-sm" : ""
+                }`}
+              >
+                {t("Chemical Energy", "ថាមពលគីមី")}
+              </span>
+              <h3
+                className={`text-xl sm:text-2xl font-bold ${
+                  kh ? "font-khmer" : "font-display"
+                }`}
+              >
+                {t("Battery Safety Map", "ផែនទីសុវត្ថិភាពអាគុយ")}
+              </h3>
+            </div>
+          </div>
+
+          <p
+            className={`text-sm text-foreground/80 leading-relaxed mb-5 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "Batteries store energy as chemicals. That makes them small and portable, but also means they can leak, burn, or explode if abused.",
+              "អាគុយផ្ទុកថាមពលជាគីមី។ វាធ្វើឲ្យពួកវាតូច និងងាយចល័ត ប៉ុន្តែក៏មានន័យថាពួកវាអាចលេចធ្លាយ ឆេះ ឬផ្ទុះ ប្រសិនបើគេប្រើខុស។",
+            )}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Acid warning */}
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <FlaskConical className="w-5 h-5 text-amber-700 flex-shrink-0" />
+                <h4
+                  className={`text-sm font-bold text-amber-900 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {t("Corrosive Acid", "អាស៊ីតកាត់")}
+                </h4>
+              </div>
+              <p
+                className={`text-xs text-foreground/80 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Large batteries — especially lead-acid car batteries — contain sulfuric acid that can burn your skin and blind your eyes. If you see white powder around the terminals or any liquid leaking, do not touch it with bare hands. Wear gloves and eye protection.",
+                  "អាគុយធំៗ — ជាពិសេសអាគុយឡានសំណរ-អាស៊ីត — មានអាស៊ីតស៊ុលហ្វួរិកដែលអាចរលាកស្បែករបស់អ្នក និងធ្វើឲ្យភ្នែកអ្នកខូច។ បើអ្នកឃើញម្សៅស ៗ ជុំវិញកំពូល ឬមានសារធាតុរាវលេចធ្លាយ កុំប៉ះវាដោយដៃទទេ។ សូមពាក់ស្រោមដៃ និងកញ្ចក់ការពារភ្នែក។",
+                )}
+              </p>
+            </div>
+
+            {/* Short circuit */}
+            <div className="rounded-2xl border border-orange-200 bg-orange-50 p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Flame className="w-5 h-5 text-orange-700 flex-shrink-0" />
+                <h4
+                  className={`text-sm font-bold text-orange-900 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {t("Short-Circuit Risk", "ហានិភ័យសៀគ្វីខ្លី")}
+                </h4>
+              </div>
+              <p
+                className={`text-xs text-foreground/80 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Letting a metal tool — a screwdriver, wrench, or even a bracelet — touch both battery terminals at once creates a short circuit. The battery dumps all its energy through the metal in a fraction of a second, causing huge sparks, melted metal, fire, or even an explosion.",
+                  "ប្រសិនបើទុកឲ្យឧបករណ៍ដែក — កំ​បិត​វីស ឧបករណ៍មានកាំ ឬសូម្បីខ្សែដៃ — ប៉ះកំពូលអាគុយទាំងពីរក្នុងពេលតែមួយ វាបង្កើតសៀគ្វីខ្លី។ អាគុយបញ្ចេញថាមពលទាំងអស់របស់វាឆ្លងកាត់ដែកក្នុងរយៈពេលខ្លីបំផុត ដែលបង្កឲ្យមានផ្កាភ្លើងធំ ដែករលាយ ភ្លើងឆេះ ឬសូម្បីការផ្ទុះ។",
+                )}
+              </p>
+            </div>
+
+            {/* Ventilation */}
+            <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Wind className="w-5 h-5 text-sky-700 flex-shrink-0" />
+                <h4
+                  className={`text-sm font-bold text-sky-900 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {t("Always Ventilate", "តែងតែបញ្ចេញខ្យល់")}
+                </h4>
+              </div>
+              <p
+                className={`text-xs text-foreground/80 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Charging batteries can release invisible, odourless, explosive gases — especially hydrogen from lead-acid batteries. Always charge in a well-ventilated room with the windows open. Never charge in a closed bedroom or under a blanket, and keep flames or sparks away.",
+                  "ការសាកអាគុយអាចបញ្ចេញឧស្ម័នផ្ទុះ ដែលមើលមិនឃើញ និងគ្មានក្លិន — ជាពិសេសអ៊ីដ្រូសែនពីអាគុយសំណរ-អាស៊ីត។ សូមសាកនៅក្នុងបន្ទប់ដែលមានខ្យល់ចេញចូលបាន និងបើកបង្អួច។ កុំសាកនៅក្នុងបន្ទប់គេងបិទជិត ឬនៅក្រោមភួយ ហើយរក្សាភ្លើង ឬផ្កាភ្លើងឲ្យឆ្ងាយ។",
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Emergency: someone is shocked ─────────────────────────────────── */}
+        <div
+          className="rounded-3xl bg-red-50 border-2 border-red-300 shadow-md overflow-hidden"
+          role="region"
+          aria-labelledby="rescue-heading"
+        >
+          <div className="bg-red-700 text-white px-6 py-4 flex items-center gap-3">
+            <LifeBuoy className="w-7 h-7 flex-shrink-0" aria-hidden="true" />
+            <div>
+              <p
+                className={`text-[10px] font-bold tracking-widest uppercase text-red-100 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Emergency", "សង្គ្រោះបន្ទាន់")}
+              </p>
+              <h3
+                id="rescue-heading"
+                className={`text-xl sm:text-2xl font-bold ${
+                  kh ? "font-khmer" : "font-display"
+                }`}
+              >
+                {t(
+                  "What to do if someone is shocked",
+                  "ត្រូវធ្វើដូចម្ដេច បើអ្នកណាម្នាក់ត្រូវឆក់ភ្លើង",
+                )}
+              </h3>
+            </div>
+          </div>
+
+          <ol className="p-6 sm:p-8 space-y-0 list-none">
+            {[
+              {
+                icon: Hand,
+                titleEn: "DO NOT touch them with your bare hands",
+                titleKh: "កុំ​ប៉ះ​ពួក​គេ​ដោយ​ដៃ​ទទេ",
+                bodyEn:
+                  "If they are still in contact with the power source, electricity is flowing through them — and it will flow through you the moment you touch them. You will become a second victim, not a rescuer.",
+                bodyKh:
+                  "ប្រសិនបើពួកគេនៅតែប៉ះប្រភពភ្លើង អគ្គិសនីកំពុងហូរកាត់ពួកគេ — ហើយវានឹងហូរកាត់អ្នកនៅពេលអ្នកប៉ះពួកគេ។ អ្នកនឹងក្លាយជាជនរងគ្រោះទីពីរ មិនមែនជាអ្នកសង្គ្រោះទេ។",
+              },
+              {
+                icon: Power,
+                titleEn: "Cut the power, or push them away with a DRY wooden stick",
+                titleKh: "ផ្តាច់ភ្លើង ឬរុញពួកគេឲ្យឃ្លាតដោយដំបងឈើ​ស្ងួត",
+                bodyEn:
+                  "First try to flip the breaker or unplug the device. If you cannot reach the breaker, use a DRY wooden broomstick, plastic chair, or thick rubber object to push the person away from the wire. Never use anything wet or metal — it will conduct the electricity straight back into you.",
+                bodyKh:
+                  "ដំបូងសូមព្យាយាមបិទសៀគ្វីរបង ឬដកដោតភ្លើងចេញ។ ប្រសិនបើអ្នកមិនអាចទៅដល់សៀគ្វីរបង សូមប្រើដំបងបោសឈើ​ស្ងួត កៅអីប្លាស្ទិក ឬវត្ថុកៅស៊ូក្រាស់ ដើម្បីរុញមនុស្សនោះឲ្យឃ្លាតពីខ្សែ។ កុំប្រើវត្ថុសើម ឬដែកឡើយ — វានឹងបញ្ជូនអគ្គិសនីត្រឡប់មកអ្នកវិញ។",
+              },
+              {
+                icon: Heart,
+                titleEn: "Then call for medical help",
+                titleKh: "បន្ទាប់មកសូមហៅជំនួយវេជ្ជសាស្ត្រ",
+                bodyEn:
+                  "Once the person is clear of the power source, call emergency services (119 in Cambodia). Even if they look fine, electric shock can stop the heart hours later — they need to be checked by a doctor.",
+                bodyKh:
+                  "នៅពេលមនុស្សនោះឃ្លាតពីប្រភពភ្លើងហើយ សូមហៅសេវាសង្គ្រោះបន្ទាន់ (១១៩ នៅកម្ពុជា)។ ទោះបីពួកគេមើលទៅធម្មតា ការឆក់ភ្លើងអាចបញ្ឈប់បេះដូងបានច្រើនម៉ោងក្រោយ — ពួកគេត្រូវបានគ្រូពេទ្យពិនិត្យ។",
+              },
+            ].map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <li
+                  key={step.titleEn}
+                  className={`flex items-start gap-4 ${
+                    i > 0 ? "pt-4 mt-4 border-t border-red-200" : ""
+                  }`}
+                >
+                  <div className="w-11 h-11 rounded-2xl bg-red-200 text-red-800 flex items-center justify-center flex-shrink-0 relative">
+                    <Icon className="w-5 h-5" />
+                    <span
+                      className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-red-700 text-white text-[10px] font-bold flex items-center justify-center shadow"
+                      aria-hidden="true"
+                    >
+                      {i + 1}
+                    </span>
+                  </div>
+                  <div>
+                    <h4
+                      className={`text-base font-bold text-red-900 mb-1 ${
+                        kh ? "font-khmer" : ""
+                      }`}
+                    >
+                      {kh ? step.titleKh : step.titleEn}
+                    </h4>
+                    <p
+                      className={`text-sm text-foreground/80 leading-relaxed ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {kh ? step.bodyKh : step.bodyEn}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        {/* Closing reminder (moved here so it's the last thing on the page) */}
+        <div className="mt-10 text-center">
           <p
             className={`text-sm text-muted-foreground italic max-w-xl mx-auto ${
               kh ? "font-khmer not-italic leading-loose" : ""
