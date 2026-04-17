@@ -1,0 +1,36 @@
+Moving into Module 3: Energy & Thermodynamics (ថាមពល និងទែម៉ូឌីណាមិច) is a transition into the "Currency" of the universe. In General Semantics, "Energy" is a high-level abstraction—you can't see energy itself, only its effects (motion, light, or heat).
+
+From a biological perspective, you are a Heat Engine. Your body converts chemical energy from food into kinetic energy (movement) and thermal energy (body heat). By learning thermodynamics, students learn the fundamental laws that govern their own metabolism and the machines that power Cambodia's development.
+
+The Replit Agent Prompt: Module 3 - Energy & Thermodynamics
+Copy and paste this instruction to the Agent to build this essential module:
+
+"I want to build 'Module 3: Energy & Thermodynamics' (ម៉ូឌុលទី៣៖ ថាមពល និងទែម៉ូឌីណាមិច). Please implement the following bilingual sections:
+
+1. Types of Energy (ប្រភេទថាមពល):
+
+Kinetic Energy (ថាមពលស៊ីនេទិច): The energy of motion. If it’s moving, it has kinetic energy!
+
+Potential Energy (ថាមពលប៉ូតង់ស្យែល): Stored energy. A rock at the top of a hill has the 'potential' to fall.
+
+2. The First Law: Conservation (ច្បាប់រក្សាថាមពល):
+
+English: Energy cannot be created or destroyed; it only changes form. When you clap your hands, kinetic energy turns into sound and heat.
+
+Khmer: ថាមពលមិនអាចបង្កើត ឬបំផ្លាញបានទេ វាគ្រាន់តែផ្លាស់ប្តូរទម្រង់ប៉ុណ្ណោះ។ នៅពេលអ្នកទះដៃ ថាមពលស៊ីនេទិចប្រែទៅជាសំឡេង និងកម្ដៅ។
+
+3. Interactive Heat Transfer Simulator (JS/CSS):
+
+Create a visual 'Conduction' demo.
+
+Show a metal bar with a 'Heat Source' (Flame) at one end.
+
+Use a color gradient (Blue to Red) that moves slowly across the bar to show how heat travels through atoms.
+
+4. The Second Law: Entropy (អង់ត្រូពី):
+
+English: Heat always moves from hot to cold. Systems naturally move toward disorder unless energy is added.
+
+Khmer: កម្ដៅតែងតែផ្លាស់ទីពីកន្លែងក្តៅ ទៅកន្លែងត្រជាក់។ ប្រព័ន្ធនានាតែងតែប្រែជាគ្មានសណ្តាប់ធ្នាប់ លើកលែងតែមានការបន្ថែមថាមពល។
+
+5. Styling: Use 'Warm' colors (Oranges, Reds, Yellows) for this module and ensure the bilingual toggles are prominent."
