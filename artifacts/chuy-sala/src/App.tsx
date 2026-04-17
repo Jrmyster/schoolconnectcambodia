@@ -41,6 +41,7 @@ import { PhysicsHubPage, PhysicsModulePlaceholder } from "@/pages/PhysicsHubPage
 import { PhysicsMotionPage } from "@/pages/PhysicsMotionPage";
 import { PhysicsForcesPage } from "@/pages/PhysicsForcesPage";
 import { PhysicsEnergyPage } from "@/pages/PhysicsEnergyPage";
+import { PhysicsWavesPage } from "@/pages/PhysicsWavesPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -102,6 +103,7 @@ function Router() {
           <Route path="/physics/motion" component={PhysicsMotionPage} />
           <Route path="/physics/forces" component={PhysicsForcesPage} />
           <Route path="/physics/energy" component={PhysicsEnergyPage} />
+          <Route path="/physics/waves" component={PhysicsWavesPage} />
           <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
