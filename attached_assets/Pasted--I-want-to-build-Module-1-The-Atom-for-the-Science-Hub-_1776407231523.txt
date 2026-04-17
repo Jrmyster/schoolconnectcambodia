@@ -1,0 +1,45 @@
+"I want to build 'Module 1: The Atom' for the Science Hub. Please create a clean, modern page with the following bilingual text and a CSS-animated diagram of a Lithium atom.
+
+1. Page Header:
+
+Title: Module 1: The Atom (ម៉ូឌុលទី១៖ អាតូម)
+
+Subtitle: The building blocks of the universe. (ប្លុកសំណង់នៃសកលលោក។)
+
+2. The Visual Diagram (CSS/HTML):
+
+Draw a simple Bohr model of a Lithium atom using CSS circles and borders.
+
+Center: A cluster of 3 red dots (Protons) and 4 gray dots (Neutrons).
+
+Orbits: Two thin circular rings around the center.
+
+Electrons: Place 2 blue dots on the inner ring, and 1 blue dot moving along the outer ring.
+
+3. The Building Blocks (Text Cards): Create a grid of 4 cards below the diagram:
+
+Card 1: The Nucleus (ស្នូលអាតូម)
+
+English: The heavy, dense center of the atom. It holds almost all of the atom's weight but takes up almost no space!
+
+Khmer: ចំណុចកណ្តាលដ៏ធ្ងន់ និងហាប់ណែននៃអាតូម។ វាផ្ទុកស្ទើរតែទម្ងន់ទាំងអស់របស់អាតូម ប៉ុន្តែមិនសូវស៊ីទំហំធំនោះទេ!
+
+Card 2: Protons (ប្រូតុង - Positive Charge / បន្ទុកវិជ្ជមាន)
+
+English: These determine the atom's identity. If you change the number of protons, you change the element.
+
+Khmer: ពួកវាកំណត់អត្តសញ្ញាណរបស់អាតូម។ ប្រសិនបើអ្នកផ្លាស់ប្តូរចំនួនប្រូតុង អ្នកផ្លាស់ប្តូរប្រភេទធាតុគីមី។
+
+Card 3: Neutrons (ណឺត្រុង - No Charge / គ្មានបន្ទុក)
+
+English: The "glue" of the nucleus. They have no charge, but they add weight and keep the protons from pushing each other apart.
+
+Khmer: "កាវ" នៃស្នូលអាតូម។ ពួកវាគ្មានបន្ទុកអគ្គិសនីទេ ប៉ុន្តែពួកវាបន្ថែមទម្ងន់ និងរក្សាប្រូតុងមិនឱ្យរុញច្រានគ្នា។
+
+Card 4: Electrons (អេឡិចត្រុង - Negative Charge / បន្ទុកអវិជ្ជមាន)
+
+English: Tiny, fast-moving particles that orbit the nucleus. They are responsible for electricity and chemical bonding!
+
+Khmer: ភាគល្អិតតូចៗ និងផ្លាស់ទីយ៉ាងលឿនដែលគោចរជុំវិញស្នូល។ ពួកវាទទួលខុសត្រូវចំពោះអគ្គិសនី និងចំណងគីមី!
+
+4. Styling: Use a distinct color theme (e.g., a deep 'space' blue background for the diagram area) to make it feel like an exploration into the microscopic world."

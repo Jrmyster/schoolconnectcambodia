@@ -29,6 +29,13 @@ import { Dashboard } from "@/pages/Dashboard";
 import { FinLitIntroPage } from "@/pages/FinLitIntroPage";
 import { SchoolInbox } from "@/pages/SchoolInbox";
 import { ElectricalSafetyPage } from "@/pages/ElectricalSafetyPage";
+import { ChemistryHubPage } from "@/pages/ChemistryHubPage";
+import {
+  ChemistryBuildingBlocksPage,
+  ChemistryReactionsPage,
+  ChemistryAdvancedPage,
+  ChemistryRealWorldPage,
+} from "@/pages/ChemistryModulePages";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -80,6 +87,11 @@ function Router() {
           <Route path="/finlit-intro" component={FinLitIntroPage} />
           <Route path="/school-inbox" component={SchoolInbox} />
           <Route path="/electrical-safety" component={ElectricalSafetyPage} />
+          <Route path="/chemistry" component={ChemistryHubPage} />
+          <Route path="/chemistry/building-blocks" component={ChemistryBuildingBlocksPage} />
+          <Route path="/chemistry/reactions-math" component={ChemistryReactionsPage} />
+          <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
+          <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>

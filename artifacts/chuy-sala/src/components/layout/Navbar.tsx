@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -62,6 +62,45 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
       { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
       { href: "/safety",                labelEn: "Digital Safety",    labelKh: "សុវត្ថិភាព",             icon: Shield },
+    ],
+  },
+  {
+    labelEn: "Science",
+    labelKh: "វិទ្យាសាស្ត្រ",
+    icon: Atom,
+    items: [
+      {
+        href: "/chemistry",
+        labelEn: "Chemistry Hub",
+        labelKh: "មជ្ឈមណ្ឌលគីមីវិទ្យា",
+        icon: Beaker,
+        descEn: "Atoms, reactions, and chemistry in daily life — in 4 modules.",
+        descKh: "អាតូម ប្រតិកម្ម និងគីមីវិទ្យាក្នុងជីវភាពប្រចាំថ្ងៃ — ជា ៤ មុខវិជ្ជា។",
+      },
+      {
+        href: "/chemistry/building-blocks",
+        labelEn: "1. The Building Blocks",
+        labelKh: "១. មូលដ្ឋានគ្រឹះ",
+        icon: Atom,
+      },
+      {
+        href: "/chemistry/reactions-math",
+        labelEn: "2. Reactions & Math",
+        labelKh: "២. ប្រតិកម្ម និងគណិតវិទ្យា",
+        icon: FlaskConical,
+      },
+      {
+        href: "/chemistry/advanced",
+        labelEn: "3. Advanced Concepts",
+        labelKh: "៣. គំនិតកម្រិតខ្ពស់",
+        icon: Microscope,
+      },
+      {
+        href: "/chemistry/real-world",
+        labelEn: "4. Chemistry in the Real World",
+        labelKh: "៤. គីមីវិទ្យាក្នុងពិភពពិត",
+        icon: Sparkles,
+      },
     ],
   },
   {
