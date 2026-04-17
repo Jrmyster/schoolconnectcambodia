@@ -28,6 +28,8 @@ import {
   Trash2,
   Wrench,
   X,
+  HelpCircle,
+  Search,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -172,6 +174,7 @@ export function ElectricalSafetyPage() {
   const [award, setAward] = useState<AwardState>({ kind: "idle" });
   const [hintOpen3, setHintOpen3] = useState(false);
   const [panicOpen, setPanicOpen] = useState(false);
+  const [noLightOpen, setNoLightOpen] = useState(false);
   const [award3, setAward3] = useState<AwardState>({ kind: "idle" });
   // Per-badge in-flight locks: prevents same-tick rapid double-clicks from
   // firing two POSTs (the captured-state check alone is not race-safe).
@@ -959,33 +962,34 @@ export function ElectricalSafetyPage() {
           </div>
         </div>
 
-        {/* ── Lab Assistant: Panic Button ─────────────────────────────── */}
-        <div className="mt-5 rounded-3xl border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-4 sm:p-5 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <div className="flex items-center gap-2.5 flex-1 min-w-0">
-              <div className="w-10 h-10 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center flex-shrink-0">
-                <Wrench className="w-5 h-5" />
+        {/* ── Lab Assistant: Troubleshooting Menu ─────────────────────── */}
+        <div className="mt-5 rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 via-white to-amber-50/40 p-4 sm:p-5 shadow-sm">
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+              <Search className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <div
+                className={`text-[10px] font-bold tracking-widest uppercase text-slate-700 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Lab Assistant — Troubleshooting", "ជំនួយការមន្ទីរពិសោធន៍ — ការដោះស្រាយបញ្ហា")}
               </div>
-              <div className="min-w-0">
-                <div
-                  className={`text-[10px] font-bold tracking-widest uppercase text-rose-700 ${
-                    kh ? "font-khmer normal-case tracking-normal text-xs" : ""
-                  }`}
-                >
-                  {t("Lab Assistant", "ជំនួយការមន្ទីរពិសោធន៍")}
-                </div>
-                <div
-                  className={`text-sm text-rose-900/85 leading-snug ${
-                    kh ? "font-khmer leading-relaxed" : ""
-                  }`}
-                >
-                  {t(
-                    "Stuck or seeing smoke in the simulation? Click for help.",
-                    "ជាប់គាំង ឬឃើញផ្សែងក្នុងការសាកល្បង? ចុចសុំជំនួយ។",
-                  )}
-                </div>
+              <div
+                className={`text-sm text-slate-700 leading-snug ${
+                  kh ? "font-khmer leading-relaxed" : ""
+                }`}
+              >
+                {t(
+                  "Pick the problem you're seeing in the simulator and I'll explain how to fix it.",
+                  "ជ្រើសរើសបញ្ហាដែលអ្នកកំពុងឃើញក្នុងការសាកល្បង នោះខ្ញុំនឹងពន្យល់របៀបជួសជុល។",
+                )}
               </div>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               type="button"
               onClick={() => setPanicOpen(true)}
@@ -995,9 +999,23 @@ export function ElectricalSafetyPage() {
               aria-haspopup="dialog"
               aria-expanded={panicOpen}
             >
-              <Flame className="w-5 h-5 text-amber-200 group-hover:text-amber-100 animate-pulse" />
-              <span>
+              <Flame className="w-5 h-5 text-amber-200 group-hover:text-amber-100 animate-pulse flex-shrink-0" />
+              <span className="text-center">
                 {t("Help! My battery is on fire!", "ជួយផង! ថ្មរបស់ខ្ញុំកំពុងឆេះ!")}
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setNoLightOpen(true)}
+              className={`group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold shadow-lg shadow-amber-400/30 ring-2 ring-amber-300/60 transition-all active:scale-95 text-sm sm:text-base ${
+                kh ? "font-khmer" : ""
+              }`}
+              aria-haspopup="dialog"
+              aria-expanded={noLightOpen}
+            >
+              <HelpCircle className="w-5 h-5 text-amber-900 flex-shrink-0" />
+              <span className="text-center">
+                {t("Why didn't my bulb light up?", "ហេតុអ្វីបានជាអំពូលរបស់ខ្ញុំមិនភ្លឺ?")}
               </span>
             </button>
           </div>
@@ -1134,6 +1152,153 @@ export function ElectricalSafetyPage() {
                 >
                   <CheckCircle2 className="w-5 h-5" />
                   {t("Got it!", "យល់ហើយ!")}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Lab Assistant: "No Light" Diagnostic Modal ──────────────── */}
+        {noLightOpen && (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="no-light-title"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setNoLightOpen(false);
+            }}
+          >
+            <div className="relative w-full max-w-lg rounded-3xl bg-white border-2 border-amber-200 shadow-2xl overflow-hidden animate-in zoom-in-95">
+              {/* Top accent strip */}
+              <div className="h-1.5 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500" />
+
+              {/* Close X */}
+              <button
+                type="button"
+                onClick={() => setNoLightOpen(false)}
+                aria-label={t("Close", "បិទ")}
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Header */}
+              <div className="px-5 sm:px-6 pt-6 pb-4 flex items-start gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0 ring-2 ring-amber-200">
+                  <HelpCircle className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0 pr-6">
+                  <div
+                    className={`text-[10px] font-bold tracking-widest uppercase text-amber-700 mb-0.5 ${
+                      kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                    }`}
+                  >
+                    {t("Friendly Diagnosis", "ការវិភាគដោយមិត្តភាព")}
+                  </div>
+                  <h3
+                    id="no-light-title"
+                    className={`text-lg sm:text-xl font-bold text-amber-900 leading-snug ${
+                      kh ? "font-khmer leading-relaxed" : "font-display"
+                    }`}
+                  >
+                    {t(
+                      "You Have an Open Circuit!",
+                      "អ្នកមានសៀគ្វីចំហ!",
+                    )}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Explanation */}
+              <div className="px-5 sm:px-6 pb-5">
+                <p
+                  className={`text-sm sm:text-[15px] text-slate-700 leading-relaxed ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {t(
+                    "Electricity needs a complete, unbroken circle to flow. If there is even a tiny gap in the wire, or if a switch is open, the electrons cannot jump across the empty space. The flow stops entirely!",
+                    "អគ្គិសនីត្រូវការរង្វង់ពេញលេញ និងមិនដាច់ ដើម្បីហូរ។ ប្រសិនបើមានចន្លោះប្រហោងសូម្បីតែបន្តិចនៅក្នុងខ្សែភ្លើង ឬប្រសិនបើកុងតាក់ត្រូវបានបើក (ផ្តាច់) អេឡិចត្រុងមិនអាចលោតឆ្លងកាត់លំហទទេនោះទេ។ ចរន្តនឹងឈប់ទាំងស្រុង!",
+                  )}
+                </p>
+              </div>
+
+              {/* Next Steps */}
+              <div className="mx-5 sm:mx-6 mb-5 rounded-2xl bg-emerald-50 border border-emerald-200 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+                    <Wrench className="w-3.5 h-3.5" />
+                  </div>
+                  <h4
+                    className={`text-sm font-bold text-emerald-900 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t("Next Steps", "ជំហានបន្ទាប់")}
+                  </h4>
+                </div>
+                <ol className="space-y-2.5">
+                  <li className="flex items-start gap-2.5">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-400 text-emerald-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                      1
+                    </span>
+                    <span
+                      className={`text-sm text-emerald-900/90 leading-relaxed ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {t(
+                        "Trace the path with your finger from the negative side of the battery all the way to the positive side.",
+                        "ប្រើម្រាមដៃរបស់អ្នកតាមដានផ្លូវ ពីផ្នែកអវិជ្ជមាននៃថ្ម រហូតដល់ផ្នែកវិជ្ជមាន។",
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-400 text-emerald-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                      2
+                    </span>
+                    <span
+                      className={`text-sm text-emerald-900/90 leading-relaxed ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {t(
+                        "Make sure wires are touching the metal contacts on the bulb, not just the glass!",
+                        "ត្រូវប្រាកដថាខ្សែភ្លើងប៉ះនឹងចំណុចទំនាក់ទំនងលោហៈនៅលើអំពូល មិនមែនត្រឹមតែកញ្ចក់នោះទេ!",
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white border-2 border-emerald-400 text-emerald-700 text-xs font-bold flex items-center justify-center mt-0.5">
+                      3
+                    </span>
+                    <span
+                      className={`text-sm text-emerald-900/90 leading-relaxed ${
+                        kh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {t(
+                        "Make sure any switches are closed.",
+                        "ត្រូវប្រាកដថាកុងតាក់ទាំងអស់ត្រូវបានបិទ (ភ្ជាប់)។",
+                      )}
+                    </span>
+                  </li>
+                </ol>
+              </div>
+
+              {/* Footer button */}
+              <div className="px-5 sm:px-6 pb-5">
+                <button
+                  type="button"
+                  onClick={() => setNoLightOpen(false)}
+                  className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-md transition-all active:scale-95 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                  autoFocus
+                >
+                  <Lightbulb className="w-5 h-5" />
+                  {t("Let me try again!", "ទុកឱ្យខ្ញុំសាកល្បងម្តងទៀត!")}
                 </button>
               </div>
             </div>
