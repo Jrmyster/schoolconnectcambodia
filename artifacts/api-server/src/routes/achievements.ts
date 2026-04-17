@@ -14,6 +14,7 @@ const router: IRouter = Router();
 const SELF_AWARDABLE = new Set<string>([
   "galactic-explorer",
   "financial-wizard",
+  "parallel-engineer",
 ]);
 
 router.get("/achievements", async (req, res) => {

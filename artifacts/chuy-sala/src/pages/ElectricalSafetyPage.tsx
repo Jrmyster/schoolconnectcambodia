@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Zap,
   Activity,
@@ -19,6 +20,11 @@ import {
   Sun,
   Lightbulb,
   Target,
+  Trophy,
+  ChevronDown,
+  Loader2,
+  CheckCircle2,
+  Award,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -142,10 +148,49 @@ const PROTOCOLS: Protocol[] = [
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+// API base — Vite injects the artifact's mount path here (e.g. "/" or "/chuy-sala/").
+const API_BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+type AwardState =
+  | { kind: "idle" }
+  | { kind: "loading" }
+  | { kind: "awarded" }
+  | { kind: "alreadyEarned" }
+  | { kind: "needLogin" }
+  | { kind: "needStudentRole" }
+  | { kind: "error"; message: string };
+
 export function ElectricalSafetyPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
+
+  const [hintOpen, setHintOpen] = useState(false);
+  const [award, setAward] = useState<AwardState>({ kind: "idle" });
+
+  async function claimParallelEngineer() {
+    setAward({ kind: "loading" });
+    try {
+      const res = await fetch(`${API_BASE}/api/achievements/award`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ badgeType: "parallel-engineer" }),
+      });
+      if (res.status === 401) return setAward({ kind: "needLogin" });
+      if (res.status === 403) return setAward({ kind: "needStudentRole" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return setAward({
+          kind: "error",
+          message: data?.error || `HTTP ${res.status}`,
+        });
+      }
+      setAward(data?.alreadyEarned ? { kind: "alreadyEarned" } : { kind: "awarded" });
+    } catch (e) {
+      setAward({ kind: "error", message: String(e) });
+    }
+  }
 
   const heading = (en: string, khText: string) =>
     kh ? <span className="font-khmer">{khText}</span> : <span>{en}</span>;
@@ -938,6 +983,202 @@ export function ElectricalSafetyPage() {
                 )}
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* ── Level 2 Mission: Parallel Power ──────────────────────────── */}
+        <div
+          className="mt-6 rounded-3xl bg-gradient-to-br from-violet-50 to-fuchsia-50 border-2 border-violet-300 shadow-sm p-5 sm:p-6"
+          aria-labelledby="level2-heading"
+        >
+          <div className="flex items-start gap-4 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-violet-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <Trophy className="w-6 h-6" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span
+                className={`inline-block text-[10px] font-bold tracking-widest uppercase text-violet-700 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Level 2 — Circuit Challenge", "កម្រិត ២ — ការប្រកួតប្រជែងសៀគ្វី")}
+              </span>
+              <h3
+                id="level2-heading"
+                className={`text-base sm:text-lg font-bold text-violet-900 ${
+                  kh ? "font-khmer" : ""
+                }`}
+              >
+                {t("Parallel Power", "ថាមពលស្របគ្នា")}
+              </h3>
+            </div>
+          </div>
+
+          {/* Goal */}
+          <p
+            className={`text-sm sm:text-base text-foreground/90 leading-relaxed mb-4 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            <span className="font-bold text-violet-900">
+              {t("The Goal: ", "គោលដៅ៖ ")}
+            </span>
+            {t(
+              "Connect two lightbulbs to one battery so that if you remove one bulb, the other one stays bright!",
+              "ភ្ជាប់អំពូលពីរទៅនឹងថ្មមួយ តាមរបៀបដែលបើយើងដកអំពូលមួយចេញ អំពូលមួយទៀតនៅតែភ្លឺ!",
+            )}
+          </p>
+
+          {/* Toggleable hint */}
+          <div className="mb-4">
+            <button
+              type="button"
+              onClick={() => setHintOpen((o) => !o)}
+              aria-expanded={hintOpen}
+              aria-controls="level2-hint"
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold text-violet-700 hover:text-violet-900 transition-colors ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              <Lightbulb className="w-4 h-4" />
+              {hintOpen
+                ? t("Hide hint", "លាក់គន្លឹះ")
+                : t("Show hint", "បង្ហាញគន្លឹះ")}
+              <ChevronDown
+                className="w-4 h-4 transition-transform duration-200"
+                style={{ transform: hintOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              />
+            </button>
+            {hintOpen && (
+              <div
+                id="level2-hint"
+                className="mt-2 rounded-xl bg-white border border-violet-200 px-4 py-3"
+              >
+                <p
+                  className={`text-sm text-foreground/90 leading-relaxed ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  <span className="font-bold text-violet-700">
+                    {t("Hint: ", "គន្លឹះ៖ ")}
+                  </span>
+                  {t(
+                    "Don't put the bulbs in one single loop. Give each bulb its own separate path to the battery!",
+                    "កុំដាក់អំពូលក្នុងរង្វិលជុំតែមួយ។ សូមផ្តល់ឱ្យអំពូលនីមួយៗនូវផ្លូវដាច់ដោយឡែករៀងៗខ្លួនទៅកាន់ថ្ម!",
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* "I solved it" button + result feedback */}
+          <div className="pt-4 border-t border-violet-200" aria-live="polite">
+            {(award.kind === "idle" ||
+              award.kind === "loading" ||
+              award.kind === "error") && (
+              <>
+                <button
+                  type="button"
+                  onClick={claimParallelEngineer}
+                  disabled={award.kind === "loading"}
+                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-bold shadow-sm transition-colors ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {award.kind === "loading" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Trophy className="w-4 h-4" />
+                  )}
+                  {t("I solved Level 2!", "ខ្ញុំបានដោះស្រាយកម្រិត ២ហើយ!")}
+                </button>
+                {award.kind === "error" && (
+                  <p
+                    className={`mt-2 text-xs text-red-700 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t("Could not save your badge. Please try again.", "មិនអាចរក្សាទុកស្លាកសញ្ញារបស់អ្នកបានទេ។ សូមព្យាយាមម្តងទៀត។")}
+                  </p>
+                )}
+              </>
+            )}
+
+            {award.kind === "needLogin" && (
+              <div
+                className={`flex items-center gap-2 text-sm text-violet-900 bg-white border border-violet-200 rounded-xl px-4 py-3 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <Award className="w-5 h-5 text-violet-600 flex-shrink-0" />
+                <span>
+                  {t(
+                    "Sign in as a student to earn the Parallel Engineer badge.",
+                    "សូមចូលគណនីជាសិស្ស ដើម្បីទទួលបានស្លាកសញ្ញាវិស្វករសៀគ្វីស្រប។",
+                  )}
+                </span>
+              </div>
+            )}
+
+            {award.kind === "needStudentRole" && (
+              <div
+                className={`flex items-center gap-2 text-sm text-violet-900 bg-white border border-violet-200 rounded-xl px-4 py-3 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <Award className="w-5 h-5 text-violet-600 flex-shrink-0" />
+                <span>
+                  {t(
+                    "Only student accounts can earn this badge — but you solved the challenge anyway. Well done!",
+                    "មានតែគណនីសិស្សប៉ុណ្ណោះដែលអាចទទួលបានស្លាកសញ្ញានេះ — ប៉ុន្តែអ្នកបានដោះស្រាយបញ្ហាប្រឈមជោគជ័យ។ ល្អណាស់!",
+                  )}
+                </span>
+              </div>
+            )}
+
+            {(award.kind === "awarded" || award.kind === "alreadyEarned") && (
+              <div className="flex items-start gap-3 rounded-2xl bg-gradient-to-br from-violet-100 to-fuchsia-100 border-2 border-violet-300 px-4 py-4">
+                <div className="w-12 h-12 rounded-2xl bg-violet-600 text-white flex items-center justify-center flex-shrink-0 shadow">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 text-violet-700 mb-0.5">
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                    <span
+                      className={`text-[10px] font-bold tracking-widest uppercase ${
+                        kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                      }`}
+                    >
+                      {award.kind === "awarded"
+                        ? t("Badge Earned", "ទទួលបានស្លាកសញ្ញា")
+                        : t("Already Earned", "បានទទួលរួចហើយ")}
+                    </span>
+                  </div>
+                  <h4
+                    className={`text-base sm:text-lg font-bold text-violet-900 ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t("Parallel Engineer", "វិស្វករសៀគ្វីស្រប")}
+                  </h4>
+                  <p
+                    className={`text-xs text-foreground/80 mt-1 ${
+                      kh ? "font-khmer leading-loose" : ""
+                    }`}
+                  >
+                    {award.kind === "awarded"
+                      ? t(
+                          "Nice work! Your new badge is now visible on your dashboard.",
+                          "ល្អណាស់! ស្លាកសញ្ញាថ្មីរបស់អ្នកឥឡូវនេះអាចមើលឃើញនៅលើផ្ទាំងគ្រប់គ្រងរបស់អ្នក។",
+                        )
+                      : t(
+                          "You already earned this badge. Great consistency!",
+                          "អ្នកបានទទួលស្លាកសញ្ញានេះរួចហើយ។ ការខិតខំល្អណាស់!",
+                        )}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
