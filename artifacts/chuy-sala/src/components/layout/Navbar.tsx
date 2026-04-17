@@ -109,6 +109,38 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Safe, hands-on chemistry experiments you can try at home.",
         descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
       },
+      {
+        href: "/physics",
+        labelEn: "Physics Hub",
+        labelKh: "មជ្ឈមណ្ឌលរូបវិទ្យា",
+        icon: Atom,
+        descEn: "Motion, forces, energy, waves & light — the rules of the universe.",
+        descKh: "ចលនា កម្លាំង ថាមពល រលក និងពន្លឺ — ច្បាប់នៃសកលលោក។",
+      },
+      {
+        href: "/physics/motion",
+        labelEn: "1. Motion & Kinematics",
+        labelKh: "១. ចលនា និងគីនេម៉ាទិច",
+        icon: Rocket,
+      },
+      {
+        href: "/physics/forces",
+        labelEn: "2. Forces & Newton's Laws",
+        labelKh: "២. កម្លាំង និងច្បាប់ញូតុន",
+        icon: Compass,
+      },
+      {
+        href: "/physics/energy",
+        labelEn: "3. Energy & Thermodynamics",
+        labelKh: "៣. ថាមពល និងទែម៉ូឌីណាមិច",
+        icon: Zap,
+      },
+      {
+        href: "/physics/waves",
+        labelEn: "4. Waves, Sound & Light",
+        labelKh: "៤. រលក សំឡេង និងពន្លឺ",
+        icon: Globe,
+      },
     ],
   },
   {

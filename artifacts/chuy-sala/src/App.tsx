@@ -37,6 +37,7 @@ import {
   ChemistryRealWorldPage,
 } from "@/pages/ChemistryModulePages";
 import { FunLabPage } from "@/pages/FunLabPage";
+import { PhysicsHubPage, PhysicsModulePlaceholder } from "@/pages/PhysicsHubPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -94,6 +95,8 @@ function Router() {
           <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
           <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
           <Route path="/fun-lab" component={FunLabPage} />
+          <Route path="/physics" component={PhysicsHubPage} />
+          <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>
