@@ -21,6 +21,13 @@ router.post("/school-messages", requireRole("school"), async (req, res) => {
   const toSchoolId = Number(req.body?.toSchoolId);
   const subject = typeof req.body?.subject === "string" ? req.body.subject.trim() : "";
   const body = typeof req.body?.body === "string" ? req.body.body.trim() : "";
+  // Sender can flag the message category. Falls back to "general" for backward compat.
+  const allowedCategories = ["emergency", "surplus", "training", "general"] as const;
+  type AllowedCategory = (typeof allowedCategories)[number];
+  const rawCategory = typeof req.body?.category === "string" ? req.body.category : "general";
+  const category: AllowedCategory = (allowedCategories as readonly string[]).includes(rawCategory)
+    ? (rawCategory as AllowedCategory)
+    : "general";
 
   if (!Number.isFinite(toSchoolId)) return res.status(400).json({ error: "toSchoolId is required." });
   if (subject.length < 2 || subject.length > 200) return res.status(400).json({ error: "subject must be 2–200 characters." });
@@ -77,6 +84,7 @@ router.post("/school-messages", requireRole("school"), async (req, res) => {
         recipientUsers.map((u) => ({
           recipientId: u.id,
           type: "new_message" as const,
+          category,
           titleEn: `New message from ${sender?.nameEn ?? "another school"}`,
           titleKh: `សារថ្មីពី ${sender?.nameKh ?? "សាលាដទៃ"}`,
           bodyEn: subject,

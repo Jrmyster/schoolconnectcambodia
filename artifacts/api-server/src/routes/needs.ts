@@ -281,6 +281,7 @@ async function fanOutSurplusAlert(needId: number, posterSchoolId: number): Promi
     recipients.map((r) => ({
       recipientId: r.id,
       type: "surplus_alert" as const,
+      category: "surplus" as const,
       titleEn: "New supplies available nearby!",
       titleKh: "មានសម្ភារៈថ្មីនៅជិតៗ!",
       bodyEn: `${poster.nameEn ?? "A nearby school"} is sharing surplus: ${need.titleEn}`,

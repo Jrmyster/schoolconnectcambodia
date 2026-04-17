@@ -1,8 +1,57 @@
 import { useState } from "react";
-import { X, Send, Loader2 } from "lucide-react";
+import { X, Send, Loader2, AlertOctagon, PackagePlus, GraduationCap, MessageSquare } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+type Category = "emergency" | "surplus" | "training" | "general";
+
+const CATEGORY_OPTIONS: ReadonlyArray<{
+  value: Category;
+  en: string;
+  kh: string;
+  icon: React.ComponentType<{ className?: string }>;
+  ring: string;
+  text: string;
+  bg: string;
+}> = [
+  {
+    value: "general",
+    en: "General Message",
+    kh: "សារទូទៅ",
+    icon: MessageSquare,
+    ring: "ring-slate-400 border-slate-400",
+    text: "text-slate-700",
+    bg: "bg-slate-100",
+  },
+  {
+    value: "emergency",
+    en: "Emergency Need",
+    kh: "តម្រូវការបន្ទាន់",
+    icon: AlertOctagon,
+    ring: "ring-red-500 border-red-500",
+    text: "text-red-700",
+    bg: "bg-red-50",
+  },
+  {
+    value: "surplus",
+    en: "Surplus Item",
+    kh: "សម្ភារៈលើស",
+    icon: PackagePlus,
+    ring: "ring-emerald-500 border-emerald-500",
+    text: "text-emerald-700",
+    bg: "bg-emerald-50",
+  },
+  {
+    value: "training",
+    en: "Training Opportunity",
+    kh: "ឱកាសបណ្តុះបណ្តាល",
+    icon: GraduationCap,
+    ring: "ring-sky-500 border-sky-500",
+    text: "text-sky-700",
+    bg: "bg-sky-50",
+  },
+];
 
 interface Props {
   toSchoolId: number;
@@ -16,6 +65,7 @@ export function SendSchoolMessageModal({ toSchoolId, recipientNameEn, recipientN
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
+  const [category, setCategory] = useState<Category>("general");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +81,7 @@ export function SendSchoolMessageModal({ toSchoolId, recipientNameEn, recipientN
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ toSchoolId, subject: subject.trim(), body: body.trim() }),
+        body: JSON.stringify({ toSchoolId, subject: subject.trim(), body: body.trim(), category }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -83,6 +133,32 @@ export function SendSchoolMessageModal({ toSchoolId, recipientNameEn, recipientN
           </div>
         ) : (
           <form onSubmit={submit} className="p-6 space-y-4">
+            <div>
+              <label className={`block text-xs font-bold text-foreground mb-2 ${kh ? "font-khmer" : ""}`}>
+                {t("Category", "ប្រភេទ")}
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {CATEGORY_OPTIONS.map((opt) => {
+                  const Icon = opt.icon;
+                  const active = category === opt.value;
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setCategory(opt.value)}
+                      className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-left text-xs font-bold transition-all min-h-[44px] ${
+                        active
+                          ? `${opt.bg} ${opt.text} ${opt.ring} ring-2`
+                          : "bg-white text-muted-foreground border-sky-100 hover:bg-sky-50"
+                      } ${kh ? "font-khmer" : ""}`}
+                    >
+                      <Icon className={`w-4 h-4 flex-shrink-0 ${active ? opt.text : "text-muted-foreground"}`} />
+                      <span className="truncate">{kh ? opt.kh : opt.en}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
             <div>
               <label className={`block text-xs font-bold text-foreground mb-1 ${kh ? "font-khmer" : ""}`}>
                 {t("Subject", "ប្រធានបទ")}
