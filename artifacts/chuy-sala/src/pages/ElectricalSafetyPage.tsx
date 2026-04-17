@@ -962,6 +962,9 @@ export function ElectricalSafetyPage() {
           </div>
         </div>
 
+        {/* ── Bilingual Lab Glossary ─────────────────────────────────── */}
+        <LabGlossary t={t} kh={kh} />
+
         {/* ── Lab Assistant: Troubleshooting Menu ─────────────────────── */}
         <div className="mt-5 rounded-3xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 via-white to-amber-50/40 p-4 sm:p-5 shadow-sm">
           <div className="flex items-center gap-2.5 mb-4">
@@ -1761,5 +1764,220 @@ export function ElectricalSafetyPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+/* ── Bilingual Lab Glossary ──────────────────────────────────────────── */
+type GlossaryT = (en: string, kh: string | null | undefined) => string;
+
+function LabGlossary({ t, kh }: { t: GlossaryT; kh: boolean }) {
+  const items: Array<{
+    en: string;
+    khName: string;
+    descEn: string;
+    descKh: string;
+    icon: React.ReactNode;
+    ring: string;
+    chip: string;
+  }> = [
+    {
+      en: "Wire",
+      khName: "ខ្សែភ្លើង",
+      descEn: "The path for electrons",
+      descKh: "ផ្លូវសម្រាប់អេឡិចត្រុង",
+      ring: "border-orange-300 bg-orange-50/60",
+      chip: "bg-orange-100 text-orange-900",
+      icon: <WireIcon />,
+    },
+    {
+      en: "Battery",
+      khName: "ថ្ម / អាគុយ",
+      descEn: "The energy source",
+      descKh: "ប្រភពថាមពល",
+      ring: "border-sky-300 bg-sky-50/60",
+      chip: "bg-sky-100 text-sky-900",
+      icon: <BatteryIcon />,
+    },
+    {
+      en: "Light Bulb",
+      khName: "អំពូលភ្លើង",
+      descEn: "Turns energy into light",
+      descKh: "បំប្លែងថាមពលទៅជាពន្លឺ",
+      ring: "border-amber-300 bg-amber-50/70",
+      chip: "bg-amber-100 text-amber-900",
+      icon: <BulbIcon />,
+    },
+    {
+      en: "Resistor",
+      khName: "រេស៊ីស្តង់",
+      descEn: "Slows down the flow",
+      descKh: "ពន្យឺតល្បឿនចរន្ត",
+      ring: "border-yellow-400 bg-yellow-50/70",
+      chip: "bg-yellow-100 text-yellow-900",
+      icon: <ResistorIcon />,
+    },
+    {
+      en: "Switch",
+      khName: "កុងតាក់",
+      descEn: "Opens or closes the loop",
+      descKh: "បើក ឬបិទសៀគ្វី",
+      ring: "border-slate-300 bg-slate-50",
+      chip: "bg-slate-200 text-slate-900",
+      icon: <SwitchIcon />,
+    },
+  ];
+
+  return (
+    <section
+      aria-label={t("Bilingual Lab Glossary", "វចនានុក្រមមន្ទីរពិសោធន៍")}
+      className="mt-5 rounded-3xl border-2 border-teal-200 bg-gradient-to-br from-teal-50/60 via-white to-cyan-50/60 p-4 sm:p-5 shadow-sm"
+    >
+      <div className="flex items-center gap-2.5 mb-4">
+        <div className="w-10 h-10 rounded-2xl bg-teal-700 text-white flex items-center justify-center flex-shrink-0">
+          <BookIcon />
+        </div>
+        <div className="min-w-0">
+          <div
+            className={`text-[10px] font-bold tracking-widest uppercase text-teal-800 ${
+              kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {t("Bilingual Lab Glossary", "វចនានុក្រមមន្ទីរពិសោធន៍")}
+          </div>
+          <div
+            className={`text-sm text-slate-700 leading-snug ${
+              kh ? "font-khmer leading-relaxed" : ""
+            }`}
+          >
+            {t(
+              "Identify the components you see in the simulator above.",
+              "កំណត់សមាសភាគដែលអ្នកឃើញក្នុងការសាកល្បងខាងលើ។",
+            )}
+          </div>
+        </div>
+      </div>
+
+      <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        {items.map((it) => (
+          <li
+            key={it.en}
+            className={`rounded-2xl border-2 ${it.ring} p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow`}
+          >
+            <div className="h-12 w-full flex items-center justify-center mb-2">
+              {it.icon}
+            </div>
+            <div
+              className={`inline-block px-2 py-0.5 rounded-full text-[11px] font-bold ${it.chip} mb-1`}
+            >
+              {t(it.en, it.khName)}
+            </div>
+            <div
+              className={`text-[11px] font-semibold text-slate-700 leading-snug ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              {t(it.descEn, it.descKh)}
+            </div>
+            {/* Show the "other" language name as a small subtitle for learning */}
+            <div
+              className={`mt-1 text-[10px] text-slate-500 ${
+                kh ? "" : "font-khmer"
+              }`}
+            >
+              {kh ? it.en : it.khName}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/* ── Inline PhET-style component icons ───────────────────────────────── */
+function WireIcon() {
+  return (
+    <svg viewBox="0 0 64 32" className="w-14 h-8" aria-hidden="true">
+      <path
+        d="M2 16 C 14 2, 26 30, 38 16 S 60 2, 62 16"
+        stroke="#c2410c"
+        strokeWidth="5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M2 16 C 14 2, 26 30, 38 16 S 60 2, 62 16"
+        stroke="#fb923c"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function BatteryIcon() {
+  return (
+    <svg viewBox="0 0 64 32" className="w-14 h-8" aria-hidden="true">
+      <rect x="6" y="8" width="48" height="16" rx="2" fill="#1e3a8a" stroke="#0f172a" strokeWidth="1.5" />
+      <rect x="54" y="12" width="5" height="8" rx="1" fill="#0f172a" />
+      <line x1="20" y1="8" x2="20" y2="24" stroke="#facc15" strokeWidth="1.5" />
+      <text x="14" y="20" fontSize="10" fontWeight="700" fill="#fff">+</text>
+      <text x="44" y="20" fontSize="10" fontWeight="700" fill="#fff">−</text>
+    </svg>
+  );
+}
+
+function BulbIcon() {
+  return (
+    <svg viewBox="0 0 32 40" className="w-8 h-10" aria-hidden="true">
+      <circle cx="16" cy="16" r="11" fill="#fde68a" stroke="#b45309" strokeWidth="1.5" />
+      <path d="M11 24 h10 v3 h-10 z" fill="#94a3b8" stroke="#475569" strokeWidth="1" />
+      <path d="M12 27 h8 v2 h-8 z M13 29 h6 v2 h-6 z" fill="#64748b" />
+      <path d="M11 13 q5 6 10 0" stroke="#b45309" strokeWidth="1.2" fill="none" />
+      {/* glow rays */}
+      <g stroke="#f59e0b" strokeWidth="1.2" strokeLinecap="round">
+        <line x1="16" y1="1" x2="16" y2="4" />
+        <line x1="3" y1="14" x2="6" y2="14" />
+        <line x1="26" y1="14" x2="29" y2="14" />
+        <line x1="6" y1="4" x2="8" y2="6" />
+        <line x1="26" y1="4" x2="24" y2="6" />
+      </g>
+    </svg>
+  );
+}
+
+function ResistorIcon() {
+  return (
+    <svg viewBox="0 0 64 32" className="w-14 h-8" aria-hidden="true">
+      <line x1="2" y1="16" x2="14" y2="16" stroke="#475569" strokeWidth="2" />
+      <line x1="50" y1="16" x2="62" y2="16" stroke="#475569" strokeWidth="2" />
+      <rect x="14" y="9" width="36" height="14" rx="3" fill="#d4a373" stroke="#7c2d12" strokeWidth="1.5" />
+      {/* color bands */}
+      <rect x="20" y="9" width="3" height="14" fill="#7f1d1d" />
+      <rect x="27" y="9" width="3" height="14" fill="#fde047" />
+      <rect x="34" y="9" width="3" height="14" fill="#16a34a" />
+      <rect x="41" y="9" width="3" height="14" fill="#1e40af" />
+    </svg>
+  );
+}
+
+function SwitchIcon() {
+  return (
+    <svg viewBox="0 0 64 32" className="w-14 h-8" aria-hidden="true">
+      <line x1="2" y1="22" x2="16" y2="22" stroke="#475569" strokeWidth="2" />
+      <line x1="48" y1="22" x2="62" y2="22" stroke="#475569" strokeWidth="2" />
+      <circle cx="16" cy="22" r="3" fill="#94a3b8" stroke="#334155" strokeWidth="1.5" />
+      <circle cx="48" cy="22" r="3" fill="#94a3b8" stroke="#334155" strokeWidth="1.5" />
+      <line x1="16" y1="22" x2="46" y2="6" stroke="#334155" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
   );
 }
