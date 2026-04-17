@@ -79,8 +79,8 @@ const NAV_GROUPS: NavGroup[] = [
       },
       {
         href: "/chemistry/building-blocks",
-        labelEn: "1. The Building Blocks",
-        labelKh: "១. មូលដ្ឋានគ្រឹះ",
+        labelEn: "1. The Atom",
+        labelKh: "១. អាតូម",
         icon: Atom,
       },
       {

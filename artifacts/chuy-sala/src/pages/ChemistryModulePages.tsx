@@ -176,10 +176,10 @@ export function ChemistryBuildingBlocksPage() {
   return (
     <ModuleShell
       number="01"
-      titleEn="The Building Blocks"
-      titleKh="មូលដ្ឋានគ្រឹះ"
-      introEn="Everything around you — your body, the air, your phone, the stars — is built from the same tiny LEGO bricks called atoms. Let's open one up."
-      introKh="អ្វីៗគ្រប់យ៉ាងជុំវិញខ្លួនអ្នក — រាងកាយរបស់អ្នក ខ្យល់ ទូរសព្ទ ផ្កាយ — សុទ្ធតែសាងសង់ឡើងពីដុំឌុបតូចៗដូចគ្នាដែលហៅថាអាតូម។ តោះបើកវាមើល។"
+      titleEn="The Atom"
+      titleKh="អាតូម"
+      introEn="The building blocks of the universe."
+      introKh="ប្លុកសំណង់នៃសកលលោក។"
       icon={Atom}
       accent={{
         iconBg: "bg-sky-600",
@@ -189,80 +189,283 @@ export function ChemistryBuildingBlocksPage() {
         bgTo: "to-background",
       }}
     >
-      <Section titleEn="What is an atom?" titleKh="តើអាតូមជាអ្វី?">
-        <P
-          en="An atom is the smallest unit of an element that still behaves like that element. A single drop of water contains roughly 1.67 sextillion (1.67 × 10²¹) water molecules — and each one is built from 3 atoms."
-          kh="អាតូមគឺជាឯកតាតូចបំផុតនៃធាតុមួយ ដែលនៅតែមានលក្ខណៈដូចធាតុនោះ។ ទឹកមួយដំណក់មានម៉ូលេគុលទឹកប្រហែល ១,៦៧ × ១០²¹ — ហើយម៉ូលេគុលនីមួយៗត្រូវបានបង្កើតពីអាតូម ៣។"
-        />
-        <P
-          en="Every atom has two parts: a tiny dense centre called the nucleus, and a cloud of even tinier particles whirling around it."
-          kh="អាតូមនីមួយៗមានពីរផ្នែក៖ ចំណុចកណ្តាលតូចក្រាស់មួយហៅថា នុយក្លេអ៊ុស និងពពកនៃភាគល្អិតតូចជាងនេះទៀតដែលរុំព័ទ្ធវា។"
-        />
-      </Section>
+      {/* ── Bohr-model diagram of Lithium ──────────────────────── */}
+      <LithiumBohrDiagram />
 
-      <Section titleEn="The three particles" titleKh="ភាគល្អិតទាំងបី">
-        <div className="grid sm:grid-cols-3 gap-4 not-prose">
-          <ParticleCard
-            symbol="p⁺"
-            color="text-red-700 bg-red-50 border-red-200"
-            nameEn="Proton"
-            nameKh="ប្រូតុង"
-            chargeEn="Charge: +1"
-            chargeKh="បន្ទុក៖ +១"
-            descEn="Lives in the nucleus. The number of protons defines what element you have."
-            descKh="នៅក្នុងនុយក្លេអ៊ុស។ ចំនួនប្រូតុងកំណត់ថាអ្នកមានធាតុអ្វី។"
-          />
-          <ParticleCard
-            symbol="n⁰"
-            color="text-slate-700 bg-slate-50 border-slate-200"
-            nameEn="Neutron"
-            nameKh="ណឺត្រុង"
-            chargeEn="Charge: 0"
-            chargeKh="បន្ទុក៖ ០"
-            descEn="Also in the nucleus. Adds mass and helps hold the nucleus together."
-            descKh="ក៏នៅក្នុងនុយក្លេអ៊ុស។ បន្ថែមម៉ាស និងជួយរក្សានុយក្លេអ៊ុសឱ្យជាប់គ្នា។"
-          />
-          <ParticleCard
-            symbol="e⁻"
-            color="text-blue-700 bg-blue-50 border-blue-200"
-            nameEn="Electron"
-            nameKh="អេឡិចត្រុង"
-            chargeEn="Charge: −1"
-            chargeKh="បន្ទុក៖ −១"
-            descEn="Tiny, fast, and orbits the nucleus. Decides how atoms bond and react."
-            descKh="តូច លឿន ហើយវិលជុំវិញនុយក្លេអ៊ុស។ កំណត់របៀបអាតូមភ្ជាប់គ្នា និងធ្វើប្រតិកម្ម។"
-          />
-        </div>
-      </Section>
-
-      <Section titleEn="Charges, balance, and ions" titleKh="បន្ទុក តុល្យភាព និងអ៊ីយ៉ុង">
-        <P
-          en="Opposite charges attract; same charges repel. A neutral atom has the same number of protons (+) and electrons (−), so the charges cancel out."
-          kh="បន្ទុកផ្ទុយគ្នាទាក់ទាញគ្នា; បន្ទុកដូចគ្នាច្រានគ្នា។ អាតូមអព្យាក្រឹតមានចំនួនប្រូតុង (+) និងអេឡិចត្រុង (−) ស្មើគ្នា ដូច្នេះបន្ទុកលុបបំបាត់គ្នា។"
+      {/* ── The four building-block cards ──────────────────────── */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <BuildingBlockCard
+          accent="text-amber-900 bg-amber-50 border-amber-200"
+          symbolBg="bg-amber-500"
+          symbol="●"
+          titleEn="The Nucleus"
+          titleKh="ស្នូលអាតូម"
+          chargeLabelEn=""
+          chargeLabelKh=""
+          bodyEn="The heavy, dense center of the atom. It holds almost all of the atom's weight but takes up almost no space!"
+          bodyKh="ចំណុចកណ្តាលដ៏ធ្ងន់ និងហាប់ណែននៃអាតូម។ វាផ្ទុកស្ទើរតែទម្ងន់ទាំងអស់របស់អាតូម ប៉ុន្តែមិនសូវស៊ីទំហំធំនោះទេ!"
         />
-        <P
-          en="When an atom gains or loses electrons, it becomes an ion — a charged atom. Sodium (Na) loses 1 electron to become Na⁺. Chlorine (Cl) gains 1 to become Cl⁻. Together they form table salt (NaCl)."
-          kh="នៅពេលអាតូមមួយទទួលបាន ឬបាត់បង់អេឡិចត្រុង វាក្លាយជាអ៊ីយ៉ុង — អាតូមដែលមានបន្ទុក។ សូដ្យូម (Na) បាត់បង់អេឡិចត្រុង ១ ដើម្បីក្លាយជា Na⁺។ ក្លរ (Cl) ទទួលបាន ១ ដើម្បីក្លាយជា Cl⁻។ ផ្សំគ្នាបង្កើតបានជាអំបិលបាយ (NaCl)។"
+        <BuildingBlockCard
+          accent="text-red-900 bg-red-50 border-red-200"
+          symbolBg="bg-red-600"
+          symbol="+"
+          titleEn="Protons"
+          titleKh="ប្រូតុង"
+          chargeLabelEn="Positive Charge"
+          chargeLabelKh="បន្ទុកវិជ្ជមាន"
+          bodyEn="These determine the atom's identity. If you change the number of protons, you change the element."
+          bodyKh="ពួកវាកំណត់អត្តសញ្ញាណរបស់អាតូម។ ប្រសិនបើអ្នកផ្លាស់ប្តូរចំនួនប្រូតុង អ្នកផ្លាស់ប្តូរប្រភេទធាតុគីមី។"
         />
-      </Section>
-
-      <Section titleEn="Quick check" titleKh="ការត្រួតពិនិត្យរហ័ស">
-        <BList
-          itemsEn={[
-            <span><Term en="Element" kh="ធាតុ" /> = how many <Term en="protons" kh="ប្រូតុង" /> are in the nucleus.</span>,
-            <span><Term en="Isotope" kh="អ៊ីសូតូប" /> = same protons, different number of <Term en="neutrons" kh="ណឺត្រុង" />.</span>,
-            <span><Term en="Ion" kh="អ៊ីយ៉ុង" /> = an atom with extra or missing <Term en="electrons" kh="អេឡិចត្រុង" />.</span>,
-          ]}
-          itemsKh={[
-            <span><Term en="Element" kh="ធាតុ" /> = ចំនួន <Term en="protons" kh="ប្រូតុង" /> ក្នុងនុយក្លេអ៊ុស។</span>,
-            <span><Term en="Isotope" kh="អ៊ីសូតូប" /> = ប្រូតុងដូចគ្នា ប៉ុន្តែ <Term en="neutrons" kh="ណឺត្រុង" /> ខុសគ្នា។</span>,
-            <span><Term en="Ion" kh="អ៊ីយ៉ុង" /> = អាតូមដែលមាន <Term en="electrons" kh="អេឡិចត្រុង" /> លើស ឬខ្វះ។</span>,
-          ]}
+        <BuildingBlockCard
+          accent="text-slate-800 bg-slate-50 border-slate-200"
+          symbolBg="bg-slate-500"
+          symbol="0"
+          titleEn="Neutrons"
+          titleKh="ណឺត្រុង"
+          chargeLabelEn="No Charge"
+          chargeLabelKh="គ្មានបន្ទុក"
+          bodyEn={`The "glue" of the nucleus. They have no charge, but they add weight and keep the protons from pushing each other apart.`}
+          bodyKh={`"កាវ" នៃស្នូលអាតូម។ ពួកវាគ្មានបន្ទុកអគ្គិសនីទេ ប៉ុន្តែពួកវាបន្ថែមទម្ងន់ និងរក្សាប្រូតុងមិនឱ្យរុញច្រានគ្នា។`}
         />
-      </Section>
+        <BuildingBlockCard
+          accent="text-blue-900 bg-blue-50 border-blue-200"
+          symbolBg="bg-blue-600"
+          symbol="−"
+          titleEn="Electrons"
+          titleKh="អេឡិចត្រុង"
+          chargeLabelEn="Negative Charge"
+          chargeLabelKh="បន្ទុកអវិជ្ជមាន"
+          bodyEn="Tiny, fast-moving particles that orbit the nucleus. They are responsible for electricity and chemical bonding!"
+          bodyKh="ភាគល្អិតតូចៗ និងផ្លាស់ទីយ៉ាងលឿនដែលគោចរជុំវិញស្នូល។ ពួកវាទទួលខុសត្រូវចំពោះអគ្គិសនី និងចំណងគីមី!"
+        />
+      </div>
 
       <NextModuleLink to="/chemistry/reactions-math" labelEn="Next: Reactions & Math" labelKh="បន្ទាប់៖ ប្រតិកម្ម និងគណិតវិទ្យា" />
     </ModuleShell>
+  );
+}
+
+// ── Lithium Bohr-model diagram (pure CSS) ─────────────────────────────────
+function LithiumBohrDiagram() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <figure
+      className="relative overflow-hidden rounded-3xl border border-slate-700 shadow-lg"
+      style={{
+        background:
+          "radial-gradient(ellipse at center, #1e3a8a 0%, #0f172a 55%, #020617 100%)",
+      }}
+      aria-label={
+        kh
+          ? "ដ្យាក្រាមអាតូមលីច្ចូម តាមគំរូរបស់បូរ៍ — ស្នូល ៣ ប្រូតុង (ក្រហម) ៤ ណឺត្រុង (ប្រផេះ) ហើយ ៣ អេឡិចត្រុង (ខៀវ) គោចរលើគន្លងពីរ"
+          : "Bohr-model diagram of a Lithium atom — nucleus with 3 protons (red) and 4 neutrons (gray), with 3 electrons (blue) on two orbital rings"
+      }
+    >
+      {/* Local keyframes — scoped via a class name unique to this component */}
+      <style>{`
+        @keyframes csa-orbit-spin { to { transform: rotate(360deg); } }
+        .csa-orbit-anim { animation: csa-orbit-spin 6s linear infinite; transform-origin: 50% 50%; }
+        @media (prefers-reduced-motion: reduce) {
+          .csa-orbit-anim { animation: none; }
+        }
+      `}</style>
+
+      {/* Decorative starfield */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+        {[...Array(40)].map((_, i) => {
+          const top = (i * 37) % 100;
+          const left = (i * 53) % 100;
+          const size = (i % 3) + 1;
+          return (
+            <span
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                top: `${top}%`,
+                left: `${left}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                opacity: 0.4 + ((i % 5) * 0.1),
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* Diagram stage */}
+      <div className="relative h-[360px] sm:h-[420px] flex items-center justify-center">
+        {/* Outer orbit ring */}
+        <div
+          className="absolute rounded-full border border-blue-300/40"
+          style={{ width: 320, height: 320 }}
+          aria-hidden="true"
+        />
+        {/* Inner orbit ring */}
+        <div
+          className="absolute rounded-full border border-blue-300/50"
+          style={{ width: 180, height: 180 }}
+          aria-hidden="true"
+        />
+
+        {/* Nucleus: 3 protons (red) + 4 neutrons (gray), tightly clustered */}
+        <div className="relative w-[68px] h-[68px]" aria-hidden="true">
+          {/* Soft glow behind nucleus */}
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(248,113,113,0.45) 0%, rgba(248,113,113,0) 70%)",
+              transform: "scale(1.6)",
+            }}
+          />
+          {/* 7 nucleons arranged in a tight cluster */}
+          <Nucleon color="bg-red-500"   x={28} y={6}  />
+          <Nucleon color="bg-slate-400" x={6}  y={20} />
+          <Nucleon color="bg-red-500"   x={50} y={20} />
+          <Nucleon color="bg-slate-400" x={28} y={28} />
+          <Nucleon color="bg-slate-400" x={6}  y={42} />
+          <Nucleon color="bg-red-500"   x={50} y={42} />
+          <Nucleon color="bg-slate-400" x={28} y={50} />
+        </div>
+
+        {/* Inner orbit electrons — 2 fixed at left & right (180px ring → r=90) */}
+        <div className="absolute pointer-events-none" aria-hidden="true">
+          <Electron style={{ transform: "translate(-90px, 0)" }} />
+          <Electron style={{ transform: "translate( 90px, 0)" }} />
+        </div>
+
+        {/* Outer orbit — 1 electron, animated around the ring (320px ring → r=160) */}
+        <div
+          className="absolute pointer-events-none csa-orbit-anim"
+          style={{ width: 320, height: 320 }}
+          aria-hidden="true"
+        >
+          <div
+            className="absolute"
+            style={{ top: "50%", left: "50%", transform: "translate(160px, -50%)" }}
+          >
+            <Electron />
+          </div>
+        </div>
+
+        {/* Element label */}
+        <div className="absolute bottom-3 right-4 text-right text-blue-100/80">
+          <div className="font-mono text-[11px] tracking-widest uppercase opacity-70">Li</div>
+          <div className={`text-xs ${kh ? "font-khmer" : ""}`}>
+            {t("Lithium • Atomic # 3", "លីច្ចូម • លេខអាតូមិក ៣")}
+          </div>
+        </div>
+      </div>
+
+      {/* Legend */}
+      <figcaption
+        className={`relative bg-slate-950/70 backdrop-blur border-t border-slate-700 px-4 py-3 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm text-slate-200 ${
+          kh ? "font-khmer" : ""
+        }`}
+      >
+        <LegendDot color="bg-red-500" labelEn="Proton" labelKh="ប្រូតុង" />
+        <LegendDot color="bg-slate-400" labelEn="Neutron" labelKh="ណឺត្រុង" />
+        <LegendDot color="bg-blue-500" labelEn="Electron" labelKh="អេឡិចត្រុង" ring />
+      </figcaption>
+    </figure>
+  );
+}
+
+function Nucleon({ color, x, y }: { color: string; x: number; y: number }) {
+  return (
+    <span
+      className={`absolute w-4 h-4 rounded-full ${color} shadow-md ring-1 ring-white/20`}
+      style={{ top: y, left: x }}
+    />
+  );
+}
+
+function Electron({ style }: { style?: React.CSSProperties }) {
+  return (
+    <span
+      className="absolute w-3.5 h-3.5 rounded-full bg-blue-400 shadow-[0_0_8px_2px_rgba(96,165,250,0.7)] ring-1 ring-blue-200/60"
+      style={{ top: "50%", left: "50%", marginLeft: "-7px", marginTop: "-7px", ...style }}
+    />
+  );
+}
+
+function LegendDot({
+  color,
+  labelEn,
+  labelKh,
+  ring,
+}: {
+  color: string;
+  labelEn: string;
+  labelKh: string;
+  ring?: boolean;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span
+        className={`inline-block w-3 h-3 rounded-full ${color} ${
+          ring ? "shadow-[0_0_6px_1px_rgba(96,165,250,0.7)]" : ""
+        }`}
+        aria-hidden="true"
+      />
+      <span>{kh ? labelKh : labelEn}</span>
+    </span>
+  );
+}
+
+function BuildingBlockCard({
+  accent,
+  symbolBg,
+  symbol,
+  titleEn,
+  titleKh,
+  chargeLabelEn,
+  chargeLabelKh,
+  bodyEn,
+  bodyKh,
+}: {
+  accent: string;
+  symbolBg: string;
+  symbol: string;
+  titleEn: string;
+  titleKh: string;
+  chargeLabelEn: string;
+  chargeLabelKh: string;
+  bodyEn: string;
+  bodyKh: string;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  const hasCharge = chargeLabelEn.length > 0;
+  return (
+    <article className={`rounded-2xl border-2 ${accent} p-5 shadow-sm`}>
+      <div className="flex items-center gap-3 mb-2">
+        <span
+          className={`inline-flex items-center justify-center w-9 h-9 rounded-full ${symbolBg} text-white font-bold text-lg shadow`}
+          aria-hidden="true"
+        >
+          {symbol}
+        </span>
+        <div className="flex-1 min-w-0">
+          <h3 className={`text-lg sm:text-xl font-bold leading-tight ${kh ? "font-khmer" : ""}`}>
+            {kh ? titleKh : titleEn}
+          </h3>
+          {hasCharge && (
+            <p className={`text-xs font-semibold opacity-75 ${kh ? "font-khmer" : ""}`}>
+              {kh ? chargeLabelKh : chargeLabelEn}
+            </p>
+          )}
+        </div>
+      </div>
+      <p className={`text-sm sm:text-base leading-relaxed text-foreground/85 ${kh ? "font-khmer leading-loose" : ""}`}>
+        {kh ? bodyKh : bodyEn}
+      </p>
+    </article>
   );
 }
 

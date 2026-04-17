@@ -34,14 +34,14 @@ const MODULES: Module[] = [
   {
     href: "/chemistry/building-blocks",
     number: "01",
-    titleEn: "The Building Blocks",
-    titleKh: "មូលដ្ឋានគ្រឹះ",
+    titleEn: "The Atom",
+    titleKh: "អាតូម",
     blurbEn:
-      "Start at the smallest scale. Discover what every substance in the universe is made of.",
+      "The building blocks of the universe. Meet the nucleus, protons, neutrons, and electrons.",
     blurbKh:
-      "ចាប់ផ្តើមនៅកម្រិតតូចបំផុត។ ស្វែងយល់ពីសមាសធាតុនៃរូបធាតុទាំងអស់នៅក្នុងសាកលលោក។",
-    topicsEn: ["Atoms", "Protons & Neutrons", "Electrons", "Charges"],
-    topicsKh: ["អាតូម", "ប្រូតុង និងណឺត្រុង", "អេឡិចត្រុង", "បន្ទុកអគ្គិសនី"],
+      "ប្លុកសំណង់នៃសកលលោក។ ស្គាល់ស្នូលអាតូម ប្រូតុង ណឺត្រុង និងអេឡិចត្រុង។",
+    topicsEn: ["Nucleus", "Protons", "Neutrons", "Electrons"],
+    topicsKh: ["ស្នូលអាតូម", "ប្រូតុង", "ណឺត្រុង", "អេឡិចត្រុង"],
     icon: Atom,
     accent: {
       bgFrom: "from-sky-50",
