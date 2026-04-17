@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ExternalLink, Leaf, RotateCcw, Play, Pause, Heart, Wind } from "lucide-react";
+import { ExternalLink, Leaf, RotateCcw, Play, Pause, Heart, Wind, Phone, ShieldCheck, Lightbulb, HeartHandshake } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 const STUDY_SECS = 25 * 60;
@@ -358,7 +358,199 @@ export function SanctuaryPage() {
           </p>
         </section>
 
+        {/* ── Youth Reproductive Health & Support ── */}
+        <ReproductiveHealthSection kh={kh} t={t} />
+
       </div>
     </div>
+  );
+}
+
+/* ─── Youth Reproductive Health & Support ──────────────────────────── */
+
+type TFn = (en: string, kh: string) => string;
+
+interface RHResource {
+  name: string;
+  nameKh: string;
+  focusEn: string;
+  focusKh: string;
+  phone: string;
+  phoneLabel: string;
+  website: string;
+  websiteLabel: string;
+}
+
+const RH_RESOURCES: RHResource[] = [
+  {
+    name: "Mother's Heart",
+    nameKh: "Mother's Heart",
+    focusEn: "Crisis pregnancy counseling and parenting support.",
+    focusKh: "ការប្រឹក្សាស្តីពីការមានផ្ទៃពោះក្នុងស្ថានភាពលំបាក និងការគាំទ្រឪពុកម្ដាយ។",
+    phone: "+85512602384",
+    phoneLabel: "+855 12 60 23 84",
+    website: "https://mothersheartcambodia.org",
+    websiteLabel: "mothersheartcambodia.org",
+  },
+  {
+    name: "RHAC",
+    nameKh: "RHAC",
+    focusEn: "Professional clinics for sexual & reproductive health.",
+    focusKh: "គ្លីនិកជំនាញសម្រាប់សុខភាពផ្លូវភេទ និងបន្តពូជ។",
+    phone: "+855023883027",
+    phoneLabel: "023 883 027",
+    website: "https://rhac.org.kh",
+    websiteLabel: "rhac.org.kh",
+  },
+  {
+    name: "Marie Stopes",
+    nameKh: "Marie Stopes",
+    focusEn: "Safe family planning and reproductive healthcare.",
+    focusKh: "ការរៀបចំផែនការគ្រួសារ និងការថែទាំសុខភាពបន្តពូជប្រកបដោយសុវត្ថិភាព។",
+    phone: "1296",
+    phoneLabel: "1296",
+    website: "https://mariestopes.org.kh",
+    websiteLabel: "mariestopes.org.kh",
+  },
+  {
+    name: "RACHA",
+    nameKh: "RACHA",
+    focusEn: "Maternal and child health education in rural areas.",
+    focusKh: "ការអប់រំអំពីសុខភាពម្ដាយ និងកុមារនៅតំបន់ជនបទ។",
+    phone: "",
+    phoneLabel: "",
+    website: "https://racha.org.kh",
+    websiteLabel: "racha.org.kh",
+  },
+];
+
+function ReproductiveHealthSection({ kh, t }: { kh: boolean; t: TFn }) {
+  const [factOpen, setFactOpen] = useState(false);
+  return (
+    <section className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center gap-2">
+        <HeartHandshake className="w-5 h-5 text-rose-500" />
+        <h2 className={`font-display font-bold text-foreground text-xl ${kh ? "font-khmer" : ""}`}>
+          {t(
+            "Youth Reproductive Health & Support",
+            "សុខភាពបន្តពូជ និងការគាំទ្រយុវជន",
+          )}
+        </h2>
+      </div>
+
+      {/* Compassionate intro */}
+      <div className="bg-gradient-to-br from-rose-50 to-pink-50/60 border border-rose-100 rounded-3xl p-6">
+        <p className={`text-foreground/90 text-sm md:text-base leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+          {t(
+            "You are not alone. These trusted organizations provide confidential health services and support for teenagers and families.",
+            "អ្នកមិននៅម្នាក់ឯងទេ។ អង្គការដែលទុកចិត្តទាំងនេះ ផ្ដល់សេវាសុខភាព និងការគាំទ្រជាសម្ងាត់សម្រាប់មនុស្សវ័យជំទង់ និងគ្រួសារ។",
+          )}
+        </p>
+      </div>
+
+      {/* Resource cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {RH_RESOURCES.map((r) => (
+          <article
+            key={r.name}
+            className="bg-white rounded-3xl border border-rose-100 shadow-sm overflow-hidden flex flex-col"
+          >
+            <div className="h-1.5 bg-gradient-to-r from-rose-400 to-pink-400" />
+            <div className="p-6 flex flex-col gap-4 flex-1">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-rose-500" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className={`font-bold text-foreground text-lg leading-tight ${kh ? "font-khmer" : "font-display"}`}>
+                    {kh ? r.nameKh : r.name}
+                  </h3>
+                  <p className={`text-muted-foreground text-sm mt-1 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                    {kh ? r.focusKh : r.focusEn}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 mt-auto pt-2">
+                {r.phone && (
+                  <a
+                    href={`tel:${r.phone}`}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500 text-white font-bold text-sm hover:bg-rose-600 hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all min-h-[44px] ${kh ? "font-khmer text-base" : ""}`}
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>{t("Call Now", "ទូរស័ព្ទឥឡូវនេះ")}</span>
+                    <span className="font-mono font-semibold opacity-90 text-xs ml-1">{r.phoneLabel}</span>
+                  </a>
+                )}
+                <a
+                  href={r.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-50 text-rose-700 font-semibold text-sm hover:bg-rose-100 transition-colors min-h-[44px] ${kh ? "font-khmer text-base" : ""}`}
+                >
+                  <span>{r.websiteLabel}</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Health Literacy: Did You Know toggle */}
+      <div className="bg-white rounded-3xl border border-amber-200 shadow-sm overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setFactOpen((v) => !v)}
+          aria-expanded={factOpen}
+          className="w-full flex items-center gap-3 p-5 text-left hover:bg-amber-50/40 transition-colors"
+        >
+          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+            <Lightbulb className="w-5 h-5 text-amber-600" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className={`font-bold text-foreground ${kh ? "font-khmer text-base" : "font-display text-base"}`}>
+              {t("Did You Know?", "តើអ្នកដឹងទេ?")}
+            </h3>
+            <p className={`text-xs text-muted-foreground mt-0.5 ${kh ? "font-khmer text-sm" : ""}`}>
+              {t("Health literacy", "ចំណេះដឹងសុខភាព")}
+            </p>
+          </div>
+          <span
+            className="text-amber-600 text-2xl leading-none"
+            aria-hidden
+          >
+            {factOpen ? "−" : "+"}
+          </span>
+        </button>
+        {factOpen && (
+          <div className="px-5 pb-5 -mt-1">
+            <div className="border-t border-amber-100 pt-4">
+              <p className={`text-foreground/90 text-sm md:text-base leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Teen pregnancy is a health issue, not a moral one. Access to education and medical care is a human right.",
+                  "ការមានផ្ទៃពោះក្នុងវ័យជំទង់ គឺជាបញ្ហាសុខភាព មិនមែនជាបញ្ហាសីលធម៌នោះទេ។ ការទទួលបានការអប់រំ និងការថែទាំវេជ្ជសាស្ត្រ គឺជាសិទ្ធិរបស់មនុស្សគ្រប់រូប។",
+                )}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Anonymity / privacy note */}
+      <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl px-5 py-4 flex items-start gap-3">
+        <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+        <p className={`text-emerald-900 text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+          <span className="font-bold">
+            {t("Your privacy is important. ", "ភាពឯកជនរបស់អ្នកមានសារៈសំខាន់។ ")}
+          </span>
+          {t(
+            "Browsing these resources on Chouy Sala is private and confidential.",
+            "ការមើលឯកសារធនធានទាំងនេះនៅលើ Chouy Sala គឺឯកជន និងជាសម្ងាត់។",
+          )}
+        </p>
+      </div>
+    </section>
   );
 }
