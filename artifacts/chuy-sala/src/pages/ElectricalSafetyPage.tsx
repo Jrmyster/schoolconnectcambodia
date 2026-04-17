@@ -17,6 +17,8 @@ import {
   LifeBuoy,
   Hand,
   Sun,
+  Lightbulb,
+  Target,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -820,6 +822,123 @@ export function ElectricalSafetyPage() {
               );
             })}
           </ol>
+        </div>
+
+      </section>
+
+      {/* ── Section 6: Virtual Circuit Lab (PhET embed) ──────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <div className="text-center mb-6">
+          <span
+            className={`inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-teal-700 mb-2 ${
+              kh ? "font-khmer normal-case tracking-normal text-sm" : ""
+            }`}
+          >
+            <FlaskConical className="w-4 h-4" />
+            {t("Hands-On", "អនុវត្តដោយផ្ទាល់")}
+          </span>
+          <h2
+            className={`text-2xl sm:text-3xl font-bold ${
+              kh ? "font-khmer" : "font-display"
+            }`}
+          >
+            {t("Virtual Circuit Lab", "មន្ទីរពិសោធន៍សៀគ្វីនិម្មិត")}
+          </h2>
+          <p
+            className={`mt-3 text-sm sm:text-base text-foreground/80 max-w-3xl mx-auto leading-relaxed ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "Practice building circuits here! You can test batteries, wires, and bulbs safely before trying it in real life.",
+              "អនុវត្តការបង្កើតសៀគ្វីនៅទីនេះ! អ្នកអាចសាកល្បងថ្ម ខ្សែភ្លើង និងអំពូលដោយសុវត្ថិភាព មុននឹងសាកល្បងវាក្នុងជីវិតពិត។",
+            )}
+          </p>
+        </div>
+
+        {/* Responsive iframe container ─────────────────────────────────── */}
+        <div className="rounded-3xl border-2 border-teal-200 bg-white shadow-md overflow-hidden">
+          <div className="bg-teal-50 border-b border-teal-200 px-4 py-2.5 flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-teal-800">
+              <ShieldCheck className="w-4 h-4 flex-shrink-0" />
+              <span
+                className={`text-xs sm:text-sm font-semibold ${
+                  kh ? "font-khmer" : ""
+                }`}
+              >
+                {t("Safe Sandbox — no real electricity", "កន្លែងសាកល្បងសុវត្ថិភាព — គ្មានអគ្គិសនីពិតទេ")}
+              </span>
+            </div>
+            <a
+              href="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-xs font-semibold text-teal-700 hover:text-teal-900 underline underline-offset-2 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              {t("Open in new tab ↗", "បើកក្នុង tab ថ្មី ↗")}
+            </a>
+          </div>
+
+          <div className="relative w-full aspect-[16/10] min-h-[420px] sm:min-h-[520px] bg-slate-100">
+            <iframe
+              src="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_all.html"
+              title={t(
+                "PhET Circuit Construction Kit: DC",
+                "PhET ឧបករណ៍សាងសង់សៀគ្វី៖ DC",
+              )}
+              className="absolute inset-0 w-full h-full border-0"
+              allow="fullscreen"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* Guided Mission box ──────────────────────────────────────────── */}
+        <div className="mt-6 rounded-3xl bg-gradient-to-br from-amber-50 to-yellow-50 border-2 border-amber-300 shadow-sm p-5 sm:p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <Target className="w-6 h-6" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span
+                className={`inline-block text-[10px] font-bold tracking-widest uppercase text-amber-700 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Mission", "បេសកកម្ម")}
+              </span>
+              <h3
+                className={`text-base sm:text-lg font-bold text-amber-900 mb-2 flex items-center gap-2 ${
+                  kh ? "font-khmer" : ""
+                }`}
+              >
+                <Lightbulb className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                {t("Challenge", "បញ្ហាប្រឈម")}
+              </h3>
+              <p
+                className={`text-sm sm:text-base text-foreground/90 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Can you make the lightbulb shine using only one battery, two wires, and one bulb?",
+                  "តើអ្នកអាចធ្វើឱ្យអំពូលភ្លើងបញ្ចេញពន្លឺបានទេ ដោយប្រើតែថ្មមួយ ខ្សែភ្លើងពីរ និងអំពូលមួយ?",
+                )}
+              </p>
+              <p
+                className={`mt-2 text-xs text-amber-800/80 italic ${
+                  kh ? "font-khmer not-italic leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Hint: remember — electricity needs a closed loop.",
+                  "គន្លឹះ៖ ចូរចងចាំ — អគ្គិសនីត្រូវការរង្វិលជុំបិទ។",
+                )}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Closing reminder (moved here so it's the last thing on the page) */}
