@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
+import { MolarMassLookup } from "@/components/widgets/MolarMassLookup";
 
 type Module = {
   href: string;
@@ -180,9 +181,10 @@ export function ChemistryHubPage() {
           </p>
         </div>
 
-        {/* ── Chemistry Unit Converter ──────────────────────────── */}
-        <div className="mb-10 sm:mb-12">
+        {/* ── Chemistry Toolkit row ─────────────────────────────── */}
+        <div className="grid lg:grid-cols-2 gap-5 sm:gap-6 mb-10 sm:mb-12 items-start">
           <ChemistryUnitConverter />
+          <MolarMassLookup />
         </div>
 
         {/* ── Module grid ───────────────────────────────────────── */}
