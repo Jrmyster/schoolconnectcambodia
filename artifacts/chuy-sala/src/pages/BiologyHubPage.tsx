@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode, ComponentType } from "react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { CellExplorer } from "@/components/biology/CellExplorer";
 import { PunnettSquare } from "@/components/biology/PunnettSquare";
+import { FamilyTraitMapper } from "@/components/biology/FamilyTraitMapper";
 import { NaturalSelectionSim } from "@/components/biology/NaturalSelectionSim";
 import { HumanEvolutionTimeline } from "@/components/biology/HumanEvolutionTimeline";
 import { MekongEcology } from "@/components/biology/MekongEcology";
@@ -82,6 +83,7 @@ export function BiologyHubPage() {
           <CellExplorer />
           <Genetics101 kh={kh} />
           <PunnettSquare />
+          <FamilyTraitMapper />
         </Section>
 
         <Section number="02" Icon={Sprout} en="The Theory of Evolution" kh="ទ្រឹស្តីនៃការវិវត្ត"
