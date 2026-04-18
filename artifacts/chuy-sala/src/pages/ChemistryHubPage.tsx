@@ -7,6 +7,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
 
 type Module = {
   href: string;
@@ -177,6 +178,11 @@ export function ChemistryHubPage() {
               "មុខវិជ្ជារៀនបួន — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៅក្នុងផ្ទះបាយរបស់អ្នក។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
+        </div>
+
+        {/* ── Chemistry Unit Converter ──────────────────────────── */}
+        <div className="mb-10 sm:mb-12">
+          <ChemistryUnitConverter />
         </div>
 
         {/* ── Module grid ───────────────────────────────────────── */}
