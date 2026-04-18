@@ -13,6 +13,7 @@ import {
   Sigma,
   Zap,
   Sparkles,
+  Compass,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -21,7 +22,7 @@ import { useLanguageStore, useTranslation } from "@/store/use-language";
    Field metadata — colour + icon (matches Giants of Science palette).
    ──────────────────────────────────────────────────────────────────────── */
 
-type Field = "physics" | "astronomy" | "chemistry" | "biology" | "computing" | "philosophy";
+type Field = "physics" | "astronomy" | "chemistry" | "biology" | "computing" | "philosophy" | "design";
 
 const FIELDS: Record<Field, { en: string; kh: string; icon: LucideIcon; from: string; to: string; dot: string; glow: string }> = {
   physics:    { en: "Physics",          kh: "រូបវិទ្យា",          icon: Atom,        from: "from-indigo-400",  to: "to-violet-600",  dot: "#a78bfa", glow: "rgba(167,139,250,0.55)" },
@@ -29,7 +30,8 @@ const FIELDS: Record<Field, { en: string; kh: string; icon: LucideIcon; from: st
   chemistry:  { en: "Chemistry",        kh: "គីមីវិទ្យា",         icon: FlaskConical,from: "from-emerald-400", to: "to-teal-600",    dot: "#6ee7b7", glow: "rgba(110,231,183,0.55)" },
   biology:    { en: "Biology",          kh: "ជីវវិទ្យា",         icon: Dna,         from: "from-lime-400",    to: "to-green-600",   dot: "#bef264", glow: "rgba(190,242,100,0.55)" },
   computing:  { en: "Computing",        kh: "កុំព្យូទ័រ",        icon: Cpu,         from: "from-fuchsia-400", to: "to-purple-600",  dot: "#f0abfc", glow: "rgba(240,171,252,0.55)" },
-  philosophy: { en: "Philosophy of Sci", kh: "ទស្សនវិជ្ជាវិទ្យាសាស្ត្រ", icon: Sigma, from: "from-amber-400",   to: "to-orange-600",  dot: "#fcd34d", glow: "rgba(252,211,77,0.55)" },
+  philosophy: { en: "Philosophy & Logic", kh: "ទស្សនវិជ្ជា និងតក្កវិជ្ជា", icon: Sigma, from: "from-amber-400",   to: "to-orange-600",  dot: "#fcd34d", glow: "rgba(252,211,77,0.55)" },
+  design:     { en: "Design & Systems", kh: "រចនា និងប្រព័ន្ធ",     icon: Compass,     from: "from-rose-400",    to: "to-pink-600",    dot: "#fda4af", glow: "rgba(253,164,175,0.55)" },
 };
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -83,7 +85,7 @@ const EVENTS: EventDatum[] = [
     title:     { en: "Novum Organum — the scientific method", kh: "Novum Organum — វិធីសាស្ត្រវិទ្យាសាស្ត្រ" },
     summary:   { en: "Bacon argues that real knowledge comes from careful observation and controlled experiments, not from authority. He sketches the method that scientists still use today.",
                  kh: "បេកុនអះអាងថាចំណេះដឹងពិតមកពីការសង្កេតយ៉ាងប្រុងប្រយ័ត្ន និងពិសោធន៍ដែលគ្រប់គ្រងបាន មិនមែនពីសិទ្ធអំណាច។ គាត់រៀបចំវិធីសាស្ត្រដែលអ្នកវិទ្យាសាស្ត្រនៅតែប្រើដល់សព្វថ្ងៃ។" },
-    ledTo: ["newton-1687", "darwin-1859", "pasteur-1885"],
+    ledTo: ["descartes-1637", "newton-1687", "darwin-1859", "pasteur-1885"],
   },
   {
     id: "newton-1687", year: 1687, field: "physics",
@@ -92,7 +94,7 @@ const EVENTS: EventDatum[] = [
     summary:   { en: "Newton unifies the heavens and the Earth: the same gravity that pulls an apple to the ground keeps the Moon in orbit. His three laws explain Kepler's discoveries from a single principle.",
                  kh: "ញូតុនបានភ្ជាប់មេឃ និងផែនដី៖ ទំនាញដូចគ្នាដែលទាញផ្លែប៉ោមចុះមកដី គឺរក្សាព្រះច័ន្ទនៅក្នុងគន្លង។ ច្បាប់ទាំងបីរបស់គាត់ពន្យល់ការរកឃើញរបស់ខេបឡឺពីគោលការណ៍តែមួយ។" },
     buildsOn: ["kepler-1609", "galileo-1610", "bacon-1620"],
-    ledTo:    ["einstein-1905", "einstein-1915"],
+    ledTo:    ["kant-1781", "einstein-1905", "einstein-1915"],
   },
   {
     id: "lovelace-1843", year: 1843, field: "computing",
@@ -174,17 +176,84 @@ const EVENTS: EventDatum[] = [
                  kh: "ទូរីងស្រមៃម៉ាស៊ីនតែមួយដែលអាចក្លែងធ្វើម៉ាស៊ីនផ្សេងទៀត — គំនូសព្រាងទ្រឹស្តីសម្រាប់រាល់កុំព្យូទ័រដែលធ្លាប់បានសាងសង់។ ក្រោយមកគាត់ស្នើ Turing Test ដ៏ល្បីសម្រាប់បញ្ញាម៉ាស៊ីន។" },
     buildsOn: ["lovelace-1843"],
   },
+  /* ── Philosophy & Systems thinkers ──────────────────────────────── */
+  {
+    id: "descartes-1637", year: 1637, field: "philosophy",
+    scientist: { en: "Descartes", kh: "ដេការ" },
+    title:     { en: "Discourse on Method — 'I think, therefore I am.'",
+                 kh: "Discourse on Method — 'ខ្ញុំគិត ដូច្នេះខ្ញុំមានវត្តមាន។'" },
+    summary:   { en: "Descartes doubts everything that can be doubted, and finds one rock-solid truth: the very act of thinking proves that he exists. He also invents Cartesian coordinates, marrying algebra to geometry.",
+                 kh: "ដេការសង្ស័យអ្វីៗដែលអាចសង្ស័យបាន ហើយរកឃើញការពិតរឹងមាំមួយ៖ សកម្មភាពនៃការគិតផ្ទាល់បញ្ជាក់ថាគាត់មានវត្តមាន។ គាត់ក៏បានបង្កើតកូអរដោនេកាតេស្យាន ដោយបញ្ចូលពិជគណិតទៅក្នុងធរណីមាត្រ។" },
+    buildsOn: ["bacon-1620"],
+    ledTo:    ["locke-1689", "kant-1781"],
+  },
+  {
+    id: "locke-1689", year: 1689, field: "philosophy",
+    scientist: { en: "Locke", kh: "ឡុក" },
+    title:     { en: "Tabula Rasa — the mind as a blank slate",
+                 kh: "Tabula Rasa — ចិត្តគឺជាបន្ទះក្តារទទេ" },
+    summary:   { en: "Locke argues that no idea is born inside us — the mind starts empty and is filled entirely by experience. The same essay defends religious tolerance and the natural rights that later inspired modern democracies.",
+                 kh: "ឡុកអះអាងថាគ្មានគំនិតណាកើតនៅខាងក្នុងយើងទេ — ចិត្តចាប់ផ្ដើមទទេ ហើយត្រូវបានបំពេញទាំងស្រុងដោយបទពិសោធន៍។ អត្ថបទតែមួយនេះក៏ការពារសេរីភាពសាសនា និងសិទ្ធិធម្មជាតិ ដែលក្រោយមកបានបំផុសប្រជាធិបតេយ្យទំនើប។" },
+    buildsOn: ["descartes-1637"],
+    ledTo:    ["kant-1781"],
+  },
+  {
+    id: "kant-1781", year: 1781, field: "philosophy",
+    scientist: { en: "Kant", kh: "កាន់ត៍" },
+    title:     { en: "Critique of Pure Reason",
+                 kh: "Critique of Pure Reason" },
+    summary:   { en: "Kant argues that we never see reality directly: our mind actively organises sense-data using built-in categories like space, time and causality. It is a 'Copernican turn' for philosophy — and a direct response to Locke and to Newton's physics.",
+                 kh: "កាន់ត៍អះអាងថាយើងមិនដែលឃើញការពិតដោយផ្ទាល់ទេ៖ ចិត្តរបស់យើងរៀបចំទិន្នន័យអារម្មណ៍យ៉ាងសកម្មដោយប្រើប្រភេទស្រាប់ដូចជាលំហ ពេលវេលា និងបុព្វហេតុ។ វាគឺជា 'ការវិលកូពែរនិច' សម្រាប់ទស្សនវិជ្ជា — និងជាការឆ្លើយតបផ្ទាល់ចំពោះឡុក និងរូបវិទ្យារបស់ញូតុន។" },
+    buildsOn: ["locke-1689", "newton-1687"],
+    ledTo:    ["korzybski-1933"],
+  },
+  {
+    id: "keyser-1922", year: 1922, field: "philosophy",
+    scientist: { en: "Keyser", kh: "ខេយស៊ឺ" },
+    title:     { en: "Mathematical Philosophy",
+                 kh: "ទស្សនវិជ្ជាគណិតវិទ្យា" },
+    summary:   { en: "Cassius Keyser argues that mathematics is more than calculation: it is a discipline of careful thinking that reveals the deep logical structure of human reason. His writings directly inspired Korzybski's General Semantics.",
+                 kh: "ខាស្ស៊ូស ខេយស៊ឺ អះអាងថាគណិតវិទ្យាមិនមែនគ្រាន់តែជាការគណនានោះទេ៖ វាជាវិន័យនៃការគិតយ៉ាងប្រុងប្រយ័ត្ន ដែលបង្ហាញរចនាសម្ព័ន្ធតក្កវិជ្ជាជ្រៅនៃហេតុផលរបស់មនុស្ស។ សំណេររបស់គាត់បានបំផុសផ្ទាល់នូវសេម៉ង់ទិកទូទៅរបស់កូហ្ស៊ីបស្គី។" },
+    ledTo:    ["korzybski-1933"],
+  },
+  {
+    id: "korzybski-1933", year: 1933, field: "philosophy",
+    scientist: { en: "Korzybski", kh: "កូហ្ស៊ីបស្គី" },
+    title:     { en: "Science and Sanity — 'The map is not the territory.'",
+                 kh: "Science and Sanity — 'ផែនទីមិនមែនជាទឹកដីពិតនោះទេ។'" },
+    summary:   { en: "Korzybski founds General Semantics: the study of how language and symbols shape — and often distort — our perception of reality. His warning that 'the map is not the territory' becomes a cornerstone of modern critical thinking.",
+                 kh: "កូហ្ស៊ីបស្គីបង្កើតសេម៉ង់ទិកទូទៅ៖ ការសិក្សាពីរបៀបដែលភាសា និងនិមិត្តសញ្ញារូបរាង — ហើយជារឿយៗបង្ខូច — ការយល់ឃើញរបស់យើងពីការពិត។ ការព្រមានរបស់គាត់ថា 'ផែនទីមិនមែនជាទឹកដីពិតនោះទេ' បានក្លាយជាសសរស្តម្ភនៃការគិតបែបរិះគន់ទំនើប។" },
+    buildsOn: ["kant-1781", "keyser-1922"],
+  },
+  {
+    id: "fuller-1954", year: 1954, field: "design",
+    scientist: { en: "Fuller", kh: "ហ្វូលឺ" },
+    title:     { en: "Geodesic Dome & 'Spaceship Earth'",
+                 kh: "លំហ Geodesic និង 'យានអវកាសផែនដី'" },
+    summary:   { en: "Fuller patents the geodesic dome — the strongest structure for its weight ever built — and argues that humanity must learn to do 'more and more with less and less' on what he calls 'Spaceship Earth.'",
+                 kh: "ហ្វូលឺចុះប៉ាតង់លំហ Geodesic — រចនាសម្ព័ន្ធរឹងមាំបំផុតធៀបនឹងទម្ងន់ដែលធ្លាប់សាងសង់ — ហើយអះអាងថាមនុស្សជាតិត្រូវរៀនធ្វើ 'ច្រើនឡើងៗជាមួយធនធានតិចឡើងៗ' លើអ្វីដែលគាត់ហៅថា 'យានអវកាសផែនដី'។" },
+    ledTo:    ["fresco-1995"],
+  },
+  {
+    id: "fresco-1995", year: 1995, field: "design",
+    scientist: { en: "Fresco", kh: "ហ្វ្រេស្កូ" },
+    title:     { en: "The Venus Project — a resource-based economy",
+                 kh: "គម្រោង Venus — សេដ្ឋកិច្ចផ្អែកលើធនធាន" },
+    summary:   { en: "Jacque Fresco and Roxanne Meadows open The Venus Project in Florida to demonstrate cities, transport and technology designed around the careful use of Earth's resources and automation rather than money or scarcity — extending Fuller's 'more with less' vision.",
+                 kh: "ហ្ស៊ាក ហ្វ្រេស្កូ និង Roxanne Meadows បើកគម្រោង Venus នៅរដ្ឋ Florida ដើម្បីបង្ហាញទីក្រុង ការដឹកជញ្ជូន និងបច្ចេកវិទ្យាដែលរចនាជុំវិញការប្រើប្រាស់ធនធានផែនដីយ៉ាងប្រុងប្រយ័ត្ន និងការធ្វើស្វ័យប្រវត្តិកម្ម ជាជាងលុយ ឬការខ្វះខាត — ពង្រីកចក្ខុវិស័យ 'ច្រើនជាមួយតិច' របស់ហ្វូលឺ។" },
+    buildsOn: ["fuller-1954"],
+  },
 ];
 
 const EVENTS_BY_ID: Record<string, EventDatum> = Object.fromEntries(EVENTS.map((e) => [e.id, e]));
 
 /* Span of years on the rail. */
 const YEAR_MIN = 1500;
-const YEAR_MAX = 1960;
+const YEAR_MAX = 2010;
 const YEAR_RANGE = YEAR_MAX - YEAR_MIN;
 /* Decade ticks shown on the axis (every 50 years). */
 const TICK_YEARS: number[] = [];
-for (let y = 1500; y <= 1950; y += 50) TICK_YEARS.push(y);
+for (let y = 1500; y <= 2000; y += 50) TICK_YEARS.push(y);
 
 const TRACK_MIN_PX = 1600; // horizontal length on desktop
 const TRACK_MIN_PX_MOBILE = 1100;

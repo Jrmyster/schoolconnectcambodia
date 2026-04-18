@@ -11,6 +11,7 @@ import {
   Cpu,
   Sparkles,
   Quote,
+  Compass,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -25,7 +26,8 @@ type Field =
   | "chemistry"
   | "biology"
   | "computing"
-  | "philosophy";
+  | "philosophy"
+  | "design";
 
 const FIELDS: Record<
   Field,
@@ -36,7 +38,8 @@ const FIELDS: Record<
   chemistry:  { en: "Chemistry",        kh: "គីមីវិទ្យា",         icon: FlaskConical,from: "from-emerald-500", to: "to-teal-700",    ring: "ring-emerald-300/40" },
   biology:    { en: "Biology",          kh: "ជីវវិទ្យា",         icon: Dna,         from: "from-lime-500",    to: "to-green-700",   ring: "ring-lime-300/40" },
   computing:  { en: "Computing",        kh: "កុំព្យូទ័រ",        icon: Cpu,         from: "from-fuchsia-500", to: "to-purple-700",  ring: "ring-fuchsia-300/40" },
-  philosophy: { en: "Philosophy of Sci", kh: "ទស្សនវិជ្ជាវិទ្យាសាស្ត្រ", icon: Sigma, from: "from-amber-500",   to: "to-orange-700",  ring: "ring-amber-300/40" },
+  philosophy: { en: "Philosophy & Logic", kh: "ទស្សនវិជ្ជា និងតក្កវិជ្ជា", icon: Sigma, from: "from-amber-500",   to: "to-orange-700",  ring: "ring-amber-300/40" },
+  design:     { en: "Design & Systems", kh: "រចនា និងប្រព័ន្ធ",     icon: Compass,     from: "from-rose-500",    to: "to-pink-700",    ring: "ring-rose-300/40" },
 };
 
 /* ──────────────────────────────────────────────────────────────────────
@@ -214,6 +217,79 @@ const SCIENTISTS: Scientist[] = [
              kh: "គំរូនៃអាតូមដែលអេឡិចត្រុងស្ថិតនៅកម្រិតថាមពលថេរ។" },
     bio:   { en: "Bohr's 1913 model of the atom, with electrons orbiting the nucleus only at specific allowed energies, explained the spectral lines of hydrogen and bridged classical and quantum physics. He went on to lead the Copenhagen school of quantum mechanics and won the 1922 Nobel Prize in Physics.",
              kh: "គំរូអាតូមរបស់បូរឆ្នាំ ១៩១៣ ដែលមានអេឡិចត្រុងធ្វើគន្លងជុំវិញនុយក្លេអ៊ែរនៅកម្រិតថាមពលជាក់លាក់ បានពន្យល់ពីបន្ទាត់ស្ប៉ិចត្រាល​ នៃហ៊ីដ្រូសែន និងបានភ្ជាប់រូបវិទ្យាបុរាណ និងក្វាន់ទុំ។ គាត់បានដឹកនាំសាលា Copenhagen នៃមេកានិចក្វាន់ទុំ ហើយឈ្នះរង្វាន់ណូបែលរូបវិទ្យាក្នុងឆ្នាំ ១៩២២។" },
+  },
+  {
+    id: "descartes", initials: "RD", field: "philosophy",
+    name:  { en: "René Descartes",   kh: "រេណេ ដេការ" },
+    nationality: { en: "French", kh: "បារាំង" },
+    years: "1596–1650",
+    tag:   { en: "Father of modern philosophy — 'I think, therefore I am.'",
+             kh: "បិតានៃទស្សនវិជ្ជាទំនើប — 'ខ្ញុំគិត ដូច្នេះខ្ញុំមានវត្តមាន។'" },
+    bio:   { en: "Descartes set out to doubt everything that could possibly be doubted in order to find one absolutely certain truth. He found it in the very act of thinking: 'Cogito, ergo sum' — 'I think, therefore I am.' His method of systematic doubt and his invention of analytic geometry (Cartesian coordinates) became foundations of modern philosophy and mathematics.",
+             kh: "ដេការបានចាប់ផ្ដើមសង្ស័យអ្វីៗដែលអាចសង្ស័យបាន ដើម្បីស្វែងរកការពិតមួយដែលច្បាស់លាស់ឥតព្រួយ។ គាត់បានរកឃើញវាក្នុងសកម្មភាពនៃការគិត៖ 'Cogito, ergo sum' — 'ខ្ញុំគិត ដូច្នេះខ្ញុំមានវត្តមាន'។ វិធីសាស្ត្រនៃការសង្ស័យជាប្រព័ន្ធ និងធរណីមាត្រវិភាគ (កូអរដោនេកាតេស្យាន) របស់គាត់ បានក្លាយជាគ្រឹះនៃទស្សនវិជ្ជា និងគណិតវិទ្យាទំនើប។" },
+    quote: { en: "I think, therefore I am.", kh: "ខ្ញុំគិត ដូច្នេះខ្ញុំមានវត្តមាន។" },
+  },
+  {
+    id: "locke", initials: "JL", field: "philosophy",
+    name:  { en: "John Locke",       kh: "យ៉ូហាន ឡុក" },
+    nationality: { en: "English", kh: "អង់គ្លេស" },
+    years: "1632–1704",
+    tag:   { en: "Enlightenment thinker who proposed the 'Tabula Rasa' — the mind as a blank slate.",
+             kh: "អ្នកគិតក្នុងសម័យពន្លឺនៃបញ្ញា ដែលបានស្នើទ្រឹស្តី 'ចិត្តគឺជាបន្ទះក្តារទទេ'។" },
+    bio:   { en: "Locke argued that we are not born with built-in ideas — the mind starts as a blank slate (tabula rasa) and is filled by experience. His writings on knowledge, religious tolerance and government inspired the American and French revolutions and laid the philosophical groundwork for modern liberal democracy.",
+             kh: "ឡុកបានអះអាងថាយើងមិនកើតមកជាមួយគំនិតស្រាប់ទេ — ចិត្តចាប់ផ្ដើមជាបន្ទះក្តារទទេ (tabula rasa) ហើយត្រូវបានបំពេញដោយបទពិសោធន៍។ សំណេររបស់គាត់ស្ដីពីចំណេះដឹង សេរីភាពសាសនា និងរដ្ឋាភិបាល បានបំផុសបដិវត្តន៍អាមេរិក និងបារាំង ហើយបានដាក់គ្រឹះទស្សនវិជ្ជាសម្រាប់ប្រជាធិបតេយ្យសេរីទំនើប។" },
+  },
+  {
+    id: "kant", initials: "IK", field: "philosophy",
+    name:  { en: "Immanuel Kant",    kh: "អ៊ីម៉ានូអែល កាន់ត៍" },
+    nationality: { en: "German (Prussian)", kh: "អាល្លឺម៉ង់ (ព្រុស)" },
+    years: "1724–1804",
+    tag:   { en: "Explored how our mind structures the way we experience the world.",
+             kh: "បានរុករកពីរបៀបដែលចិត្តរបស់យើងរៀបចំរចនាសម្ព័ន្ធបទពិសោធន៍នៃពិភពលោក។" },
+    bio:   { en: "In his Critique of Pure Reason (1781), Kant argued that we never see reality directly: our minds actively organise raw sense-data using built-in categories like space, time and causality. This 'Copernican turn' in philosophy reframed every later debate about knowledge, ethics and the limits of reason.",
+             kh: "ក្នុង Critique of Pure Reason (១៧៨១) កាន់ត៍បានអះអាងថាយើងមិនដែលឃើញការពិតដោយផ្ទាល់ទេ៖ ចិត្តរបស់យើងរៀបចំទិន្នន័យអារម្មណ៍ឆៅយ៉ាងសកម្ម ដោយប្រើប្រភេទស្រាប់ដូចជាលំហ ពេលវេលា និងបុព្វហេតុ។ 'ការវិលកូពែរនិច' ក្នុងទស្សនវិជ្ជានេះបានកំណត់ឡើងវិញនូវរាល់ការពិភាក្សាក្រោយៗមកអំពីចំណេះដឹង សីលធម៌ និងព្រំដែននៃហេតុផល។" },
+    quote: { en: "Sapere aude — dare to know.", kh: "Sapere aude — ហ៊ានដឹង។" },
+  },
+  {
+    id: "keyser", initials: "CK", field: "philosophy",
+    name:  { en: "Cassius J. Keyser", kh: "ខាស្ស៊ូស ជេ. ខេយស៊ឺ" },
+    nationality: { en: "American", kh: "អាមេរិក" },
+    years: "1862–1947",
+    tag:   { en: "Mathematician who explored how mathematics shapes human reasoning and spiritual life.",
+             kh: "គណិតវិទូដែលបានរុករកពីរបៀបដែលគណិតវិទ្យារូបរាងហេតុផល និងជីវិតផ្នែកស្មារតីរបស់មនុស្ស។" },
+    bio:   { en: "A long-time professor at Columbia University, Keyser argued that mathematics is far more than a tool for calculation — it is a way of thinking that disciplines the mind and reveals the deep structure of human reasoning. His writings on 'mathematical philosophy' deeply influenced Alfred Korzybski's General Semantics.",
+             kh: "ជាសាស្ត្រាចារ្យយូរឆ្នាំនៅសកលវិទ្យាល័យកូឡុំប៊ីយ៉ា ខេយស៊ឺបានអះអាងថាគណិតវិទ្យាមិនមែនគ្រាន់តែជាឧបករណ៍សម្រាប់គណនានោះទេ — វាជាវិធីនៃការគិតដែលបង្ហាត់បង្រៀនចិត្ត និងបង្ហាញរចនាសម្ព័ន្ធជ្រៅនៃហេតុផលរបស់មនុស្ស។ សំណេររបស់គាត់ស្ដីពី 'ទស្សនវិជ្ជាគណិតវិទ្យា' បានជះឥទ្ធិពលយ៉ាងជ្រៅទៅលើសេម៉ង់ទិកទូទៅរបស់ Alfred Korzybski។" },
+  },
+  {
+    id: "korzybski", initials: "AK", field: "philosophy",
+    name:  { en: "Alfred Korzybski", kh: "អាល់ប្រេដ កូហ្ស៊ីបស្គី" },
+    nationality: { en: "Polish-American", kh: "ប៉ូឡូញ-អាមេរិក" },
+    years: "1879–1950",
+    tag:   { en: "Founder of General Semantics — 'The map is not the territory.'",
+             kh: "អ្នកបង្កើតសេម៉ង់ទិកទូទៅ — 'ផែនទីមិនមែនជាទឹកដីពិតនោះទេ។'" },
+    bio:   { en: "Korzybski founded General Semantics, a discipline studying how language and symbols shape — and often distort — our perception of reality. His central lesson, 'the map is not the territory,' reminds us that our words and models are never the same as the things they describe, and that careful, scientific thinking requires constant awareness of this gap.",
+             kh: "កូហ្ស៊ីបស្គីបានបង្កើតសេម៉ង់ទិកទូទៅ ដែលជាវិន័យសិក្សាពីរបៀបដែលភាសា និងនិមិត្តសញ្ញារូបរាង — ហើយជារឿយៗបង្ខូច — ការយល់ឃើញរបស់យើងពីការពិត។ មេរៀនកណ្ដាលរបស់គាត់ 'ផែនទីមិនមែនជាទឹកដីពិតនោះទេ' រំលឹកយើងថាពាក្យ និងគំរូរបស់យើងមិនដែលដូចគ្នាទៅនឹងវត្ថុដែលវាពិពណ៌នានោះទេ ហើយការគិតបែបវិទ្យាសាស្ត្រត្រូវការការដឹងខ្លួនជានិច្ចចំពោះចន្លោះនេះ។" },
+    quote: { en: "The map is not the territory.", kh: "ផែនទីមិនមែនជាទឹកដីពិតនោះទេ។" },
+  },
+  {
+    id: "fuller", initials: "BF", field: "design",
+    name:  { en: "Buckminster Fuller", kh: "បាក់មីនស្ទ័រ ហ្វូលឺ" },
+    nationality: { en: "American", kh: "អាមេរិក" },
+    years: "1895–1983",
+    tag:   { en: "Architect and systems theorist; inventor of the Geodesic Dome and the 'Dymaxion' concept.",
+             kh: "ស្ថាបត្យករ និងអ្នកទ្រឹស្តីប្រព័ន្ធ — អ្នកបង្កើតលំហ Geodesic និងគំនិត 'Dymaxion'។" },
+    bio:   { en: "Fuller spent his life asking how to do 'more and more with less and less.' He invented the geodesic dome — the strongest structure for its weight ever built — and coined 'Dymaxion' (dynamic + maximum + tension) to describe lightweight, efficient designs for cars, houses and maps. He saw the planet as 'Spaceship Earth' and urged humanity to live within its means.",
+             kh: "ហ្វូលឺបានចំណាយពេញមួយជីវិតសួរថាតើធ្វើដូចម្ដេចដើម្បីបាន 'ច្រើនឡើងៗជាមួយធនធានតិចឡើងៗ'។ គាត់បានបង្កើតលំហ Geodesic — រចនាសម្ព័ន្ធរឹងមាំបំផុតធៀបនឹងទម្ងន់ដែលធ្លាប់សាងសង់ — ហើយបង្កើតពាក្យ 'Dymaxion' ដើម្បីពិពណ៌នាការរចនាស្រាល និងមានប្រសិទ្ធភាពសម្រាប់រថយន្ត ផ្ទះ និងផែនទី។ គាត់បានចាត់ទុកផែនដីជា 'យានអវកាសផែនដី' ហើយបានជំរុញឱ្យមនុស្សជាតិរស់នៅក្នុងព្រំដែនរបស់វា។" },
+  },
+  {
+    id: "fresco", initials: "JF", field: "design",
+    name:  { en: "Jacque Fresco",    kh: "ហ្ស៊ាក ហ្វ្រេស្កូ" },
+    nationality: { en: "American", kh: "អាមេរិក" },
+    years: "1916–2017",
+    tag:   { en: "Industrial designer and social engineer; founder of The Venus Project for a resource-based economy.",
+             kh: "អ្នករចនាឧស្សាហកម្ម និងវិស្វករសង្គម — ស្ថាបនិកនៃគម្រោង Venus សម្រាប់សេដ្ឋកិច្ចផ្អែកលើធនធាន។" },
+    bio:   { en: "Fresco spent over seventy years designing cities, transportation systems and technologies aimed at meeting human needs sustainably. With Roxanne Meadows he founded The Venus Project in Florida to demonstrate a 'resource-based economy' — one organised around the careful use of Earth's resources and automation rather than money or scarcity.",
+             kh: "ហ្វ្រេស្កូបានចំណាយពេលជាង ៧០ ឆ្នាំរចនាទីក្រុង ប្រព័ន្ធដឹកជញ្ជូន និងបច្ចេកវិទ្យាដែលសំដៅបំពេញតម្រូវការមនុស្សដោយចីរភាព។ រួមជាមួយ Roxanne Meadows គាត់បានបង្កើតគម្រោង Venus នៅរដ្ឋ Florida ដើម្បីបង្ហាញ 'សេដ្ឋកិច្ចផ្អែកលើធនធាន' — ដែលរៀបចំជុំវិញការប្រើប្រាស់ធនធានផែនដីយ៉ាងប្រុងប្រយ័ត្ន និងការធ្វើស្វ័យប្រវត្តិកម្ម ជាជាងលុយ ឬការខ្វះខាត។" },
   },
 ];
 
