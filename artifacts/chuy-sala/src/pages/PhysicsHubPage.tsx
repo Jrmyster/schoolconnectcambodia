@@ -22,6 +22,7 @@ import {
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { ScientificCalculator } from "@/components/widgets/ScientificCalculator";
 
 type PhysicsModule = {
   slug: string;
@@ -260,6 +261,9 @@ export function PhysicsHubPage() {
 
         {/* ── Temperature Converter ─────────────────────────────── */}
         <TemperatureConverter t={t} kh={kh} />
+
+        {/* ── Floating Scientific Calculator ────────────────────── */}
+        <ScientificCalculator />
 
         {/* ── Module grid ───────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mt-10">
