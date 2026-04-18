@@ -8,7 +8,12 @@ import {
   ArrowRight,
   ArrowLeft,
   Compass,
+  Ruler,
+  Weight,
+  Clock,
+  Calculator,
 } from "lucide-react";
+import { useState, useMemo } from "react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type PhysicsModule = {
@@ -240,8 +245,11 @@ export function PhysicsHubPage() {
           </div>
         </header>
 
+        {/* ── Physics Unit Converter ────────────────────────────── */}
+        <PhysicsUnitConverter t={t} kh={kh} />
+
         {/* ── Module grid ───────────────────────────────────────── */}
-        <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+        <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mt-10">
           {PHYSICS_MODULES.map((m) => (
             <ModuleCard key={m.slug} module={m} kh={kh} t={t} />
           ))}
@@ -471,5 +479,299 @@ export function PhysicsModulePlaceholder() {
         </div>
       </div>
     </div>
+  );
+}
+
+/* ── Physics Unit Converter ─────────────────────────────────────────── */
+type ConvT = (en: string, kh: string) => string;
+
+type UnitDef = {
+  key: string;
+  symbol: string;
+  nameEn: string;
+  nameKh: string;
+  /** Multiplier to convert this unit → category base unit. */
+  toBase: number;
+};
+
+type Category = {
+  key: "distance" | "mass" | "time";
+  labelEn: string;
+  labelKh: string;
+  icon: React.ComponentType<{ className?: string }>;
+  accent: { bar: string; chip: string; ring: string; text: string };
+  units: UnitDef[];
+};
+
+const CATEGORIES: Category[] = [
+  {
+    key: "distance",
+    labelEn: "Distance",
+    labelKh: "ចម្ងាយ",
+    icon: Ruler,
+    accent: {
+      bar: "bg-cyan-600",
+      chip: "bg-cyan-100 text-cyan-900 border-cyan-300",
+      ring: "ring-cyan-400",
+      text: "text-cyan-700",
+    },
+    units: [
+      { key: "mm", symbol: "mm", nameEn: "Millimeter", nameKh: "មិល្លីម៉ែត្រ", toBase: 0.001 },
+      { key: "cm", symbol: "cm", nameEn: "Centimeter", nameKh: "សង់ទីម៉ែត្រ", toBase: 0.01 },
+      { key: "m",  symbol: "m",  nameEn: "Meter",      nameKh: "ម៉ែត្រ",       toBase: 1 },
+      { key: "km", symbol: "km", nameEn: "Kilometer",  nameKh: "គីឡូម៉ែត្រ",   toBase: 1000 },
+    ],
+  },
+  {
+    key: "mass",
+    labelEn: "Mass",
+    labelKh: "ម៉ាស់",
+    icon: Weight,
+    accent: {
+      bar: "bg-rose-600",
+      chip: "bg-rose-100 text-rose-900 border-rose-300",
+      ring: "ring-rose-400",
+      text: "text-rose-700",
+    },
+    units: [
+      { key: "mg", symbol: "mg", nameEn: "Milligram", nameKh: "មិល្លីក្រាម", toBase: 0.000001 },
+      { key: "g",  symbol: "g",  nameEn: "Gram",      nameKh: "ក្រាម",        toBase: 0.001 },
+      { key: "kg", symbol: "kg", nameEn: "Kilogram",  nameKh: "គីឡូក្រាម",    toBase: 1 },
+    ],
+  },
+  {
+    key: "time",
+    labelEn: "Time",
+    labelKh: "ពេលវេលា",
+    icon: Clock,
+    accent: {
+      bar: "bg-amber-600",
+      chip: "bg-amber-100 text-amber-900 border-amber-300",
+      ring: "ring-amber-400",
+      text: "text-amber-700",
+    },
+    units: [
+      { key: "s",   symbol: "s",   nameEn: "Second", nameKh: "វិនាទី",  toBase: 1 },
+      { key: "min", symbol: "min", nameEn: "Minute", nameKh: "នាទី",    toBase: 60 },
+      { key: "h",   symbol: "h",   nameEn: "Hour",   nameKh: "ម៉ោង",    toBase: 3600 },
+    ],
+  },
+];
+
+/** Format a number with scientific notation for very large/small values. */
+function formatValue(n: number): string {
+  if (!isFinite(n) || isNaN(n)) return "";
+  if (n === 0) return "0";
+  const abs = Math.abs(n);
+  if (abs >= 1e6 || abs < 1e-3) {
+    // Scientific notation: 4 significant digits
+    const [mantissa, exp] = n.toExponential(4).split("e");
+    const m = parseFloat(mantissa).toString(); // strip trailing zeros
+    return `${m}e${parseInt(exp, 10)}`;
+  }
+  // Plain format with up to 6 significant digits, no trailing zeros
+  const s = n.toPrecision(8);
+  const num = parseFloat(s);
+  return num.toString();
+}
+
+function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
+  const [activeKey, setActiveKey] = useState<Category["key"]>("distance");
+  /** Per-category source state: { unitKey, rawValue } so the typed text stays exact */
+  const [source, setSource] = useState<
+    Record<Category["key"], { unitKey: string; raw: string }>
+  >({
+    distance: { unitKey: "m", raw: "1" },
+    mass: { unitKey: "kg", raw: "1" },
+    time: { unitKey: "s", raw: "1" },
+  });
+
+  const active = CATEGORIES.find((c) => c.key === activeKey)!;
+  const src = source[activeKey];
+  const srcUnit = active.units.find((u) => u.key === src.unitKey)!;
+
+  // Compute the base value (e.g. meters / kilograms / seconds) from the source.
+  const baseValue = useMemo(() => {
+    const n = parseFloat(src.raw);
+    if (!isFinite(n) || isNaN(n)) return null;
+    return n * srcUnit.toBase;
+  }, [src.raw, srcUnit.toBase]);
+
+  const handleChange = (unitKey: string, raw: string) => {
+    setSource((prev) => ({ ...prev, [activeKey]: { unitKey, raw } }));
+  };
+
+  return (
+    <section
+      aria-label={t("Physics Unit Converter", "ឧបករណ៍បំប្លែងឯកតារូបវិទ្យា")}
+      className="mt-8 rounded-3xl border-2 border-slate-200 bg-white shadow-sm overflow-hidden"
+    >
+      {/* Header */}
+      <div className="px-5 sm:px-6 py-4 sm:py-5 border-b-2 border-slate-200 bg-gradient-to-br from-slate-50 via-white to-cyan-50/40">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+            <Calculator className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <div
+              className={`text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-slate-700 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Physics Toolkit", "ឧបករណ៍រូបវិទ្យា")}
+            </div>
+            <h2
+              className={`text-base sm:text-lg font-bold text-slate-900 leading-tight ${
+                kh ? "font-khmer leading-relaxed" : "font-display"
+              }`}
+            >
+              {t("Physics Unit Converter", "ឧបករណ៍បំប្លែងឯកតារូបវិទ្យា")}
+            </h2>
+            <p
+              className={`text-xs sm:text-sm text-slate-600 leading-snug mt-0.5 ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              {t(
+                "Type any value — every other unit updates instantly.",
+                "វាយតម្លៃណាមួយ — ឯកតាផ្សេងៗទាំងអស់នឹងធ្វើបច្ចុប្បន្នភាពភ្លាមៗ។",
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div
+        role="tablist"
+        aria-label={t("Conversion category", "ប្រភេទនៃការបំប្លែង")}
+        className="flex gap-1 sm:gap-2 px-3 sm:px-5 pt-3 sm:pt-4 border-b border-slate-200 bg-slate-50/60"
+      >
+        {CATEGORIES.map((c) => {
+          const Icon = c.icon;
+          const isActive = c.key === activeKey;
+          return (
+            <button
+              key={c.key}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => setActiveKey(c.key)}
+              className={`flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-t-xl text-xs sm:text-sm font-semibold transition-all border-b-2 ${
+                isActive
+                  ? `${c.accent.bar} text-white border-transparent shadow-sm`
+                  : "bg-white/60 text-slate-700 border-transparent hover:bg-white"
+              } ${kh ? "font-khmer" : ""}`}
+            >
+              <Icon className="w-4 h-4 flex-shrink-0" />
+              <span>{t(c.labelEn, c.labelKh)}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Inputs (vertical stack for mobile-first) */}
+      <div className="p-4 sm:p-6 space-y-3">
+        {active.units.map((u) => {
+          const isSource = u.key === src.unitKey;
+          // For source, show the user's raw text exactly; for others, derived value
+          const display = isSource
+            ? src.raw
+            : baseValue === null
+            ? ""
+            : formatValue(baseValue / u.toBase);
+
+          return (
+            <label
+              key={u.key}
+              htmlFor={`conv-${active.key}-${u.key}`}
+              className={`group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 rounded-2xl border-2 px-3 sm:px-4 py-3 transition-all cursor-text ${
+                isSource
+                  ? `${active.accent.chip} ring-2 ${active.accent.ring} shadow-sm`
+                  : "bg-slate-50/60 border-slate-200 hover:border-slate-300"
+              }`}
+            >
+              {/* Unit name */}
+              <div className="flex items-center gap-2 sm:w-44 sm:flex-shrink-0">
+                <span
+                  className={`inline-flex items-center justify-center min-w-[2.75rem] h-8 px-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-mono font-bold text-sm shadow-sm`}
+                >
+                  {u.symbol}
+                </span>
+                <div className="min-w-0">
+                  <div
+                    className={`text-sm font-semibold leading-tight ${
+                      isSource ? "" : "text-slate-800"
+                    } ${kh ? "font-khmer" : ""}`}
+                  >
+                    {t(u.nameEn, u.nameKh)}
+                  </div>
+                  <div
+                    className={`text-[10px] uppercase tracking-wider opacity-70 ${
+                      kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+                    }`}
+                  >
+                    {kh ? u.nameEn : u.nameKh}
+                  </div>
+                </div>
+              </div>
+
+              {/* Input */}
+              <div className="flex-1">
+                <input
+                  id={`conv-${active.key}-${u.key}`}
+                  type="text"
+                  inputMode="decimal"
+                  autoComplete="off"
+                  value={display}
+                  onChange={(e) => handleChange(u.key, e.target.value)}
+                  onFocus={(e) => {
+                    if (!isSource) {
+                      // Promote this unit to the source on focus
+                      handleChange(u.key, display);
+                    }
+                    e.currentTarget.select();
+                  }}
+                  placeholder="0"
+                  aria-label={t(
+                    `Value in ${u.nameEn}`,
+                    `តម្លៃជា${u.nameKh}`,
+                  )}
+                  className={`w-full bg-white rounded-xl border-2 px-3 sm:px-4 py-2.5 sm:py-3 text-right font-mono text-base sm:text-lg font-semibold text-slate-900 outline-none transition-colors ${
+                    isSource
+                      ? `border-current ${active.accent.text}`
+                      : "border-slate-200 focus:border-slate-400"
+                  }`}
+                />
+              </div>
+            </label>
+          );
+        })}
+
+        {baseValue === null && src.raw.trim() !== "" && (
+          <p
+            className={`text-xs text-rose-600 ${
+              kh ? "font-khmer leading-relaxed" : ""
+            }`}
+          >
+            {t(
+              "Please enter a valid number.",
+              "សូមបញ្ចូលលេខត្រឹមត្រូវ។",
+            )}
+          </p>
+        )}
+
+        <p
+          className={`pt-1 text-[11px] text-slate-500 leading-snug ${
+            kh ? "font-khmer leading-relaxed text-xs" : ""
+          }`}
+        >
+          {t(
+            "Very large or very small numbers are shown in scientific notation (e.g. 1e3 = 1 × 10³).",
+            "លេខធំ ឬតូចខ្លាំង នឹងបង្ហាញក្នុងសញ្ញាណវិទ្យាសាស្ត្រ (ឧ. 1e3 = 1 × 10³)។",
+          )}
+        </p>
+      </div>
+    </section>
   );
 }
