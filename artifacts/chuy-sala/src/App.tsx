@@ -38,6 +38,7 @@ import {
 } from "@/pages/ChemistryModulePages";
 import { FunLabPage } from "@/pages/FunLabPage";
 import { PhysicsHubPage, PhysicsModulePlaceholder } from "@/pages/PhysicsHubPage";
+import { BiologyHubPage } from "@/pages/BiologyHubPage";
 import { PhysicsMotionPage } from "@/pages/PhysicsMotionPage";
 import { PhysicsForcesPage } from "@/pages/PhysicsForcesPage";
 import { PhysicsEnergyPage } from "@/pages/PhysicsEnergyPage";
@@ -105,6 +106,7 @@ function Router() {
           <Route path="/physics/energy" component={PhysicsEnergyPage} />
           <Route path="/physics/waves" component={PhysicsWavesPage} />
           <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
+          <Route path="/biology" component={BiologyHubPage} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>

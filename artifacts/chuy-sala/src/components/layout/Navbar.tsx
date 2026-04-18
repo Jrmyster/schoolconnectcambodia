@@ -143,6 +143,14 @@ const NAV_GROUPS: NavGroup[] = [
         labelKh: "៤. រលក សំឡេង និងពន្លឺ",
         icon: Globe,
       },
+      {
+        href: "/biology",
+        labelEn: "Biology Hub",
+        labelKh: "មជ្ឈមណ្ឌលជីវវិទ្យា",
+        icon: Leaf,
+        descEn: "Cells, genetics, evolution and the Mekong's living web — bilingual & interactive.",
+        descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
+      },
     ],
   },
   {
