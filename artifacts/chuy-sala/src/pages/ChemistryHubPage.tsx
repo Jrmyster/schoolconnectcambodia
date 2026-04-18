@@ -9,6 +9,7 @@ import {
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
 import { MolarMassLookup } from "@/components/widgets/MolarMassLookup";
+import { EquationBalancer } from "@/components/widgets/EquationBalancer";
 
 type Module = {
   href: string;
@@ -182,9 +183,14 @@ export function ChemistryHubPage() {
         </div>
 
         {/* ── Chemistry Toolkit row ─────────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-5 sm:gap-6 mb-10 sm:mb-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-5 sm:gap-6 mb-5 sm:mb-6 items-start">
           <ChemistryUnitConverter />
           <MolarMassLookup />
+        </div>
+
+        {/* ── Equation Balancer (full width) ────────────────────── */}
+        <div className="mb-10 sm:mb-12">
+          <EquationBalancer />
         </div>
 
         {/* ── Module grid ───────────────────────────────────────── */}
