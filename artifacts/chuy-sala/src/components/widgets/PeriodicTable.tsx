@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Search, X, Filter, Grid3x3, List, Atom, Hash, Weight, Layers, Sparkles, RotateCcw } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { ELEMENTS, CATEGORY_META, type Element, type ElementCategory } from "./periodic-data";
+import { BohrModel } from "./BohrModel";
 
 type FamilyFilter = "all" | "metal" | "metalloid" | "nonmetal";
 type ViewMode = "grid" | "list";
@@ -451,6 +452,11 @@ function ElementModal({ element: el, kh, onClose }: { element: Element; kh: bool
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Bohr model visualizer */}
+        <div className="px-5 pt-5">
+          <BohrModel element={el} kh={kh} />
         </div>
 
         {/* Stats grid */}
