@@ -8,6 +8,7 @@ import { ResumeMasterclass } from "@/components/ResumeMasterclass";
 import { FuturePathways } from "@/components/FuturePathways";
 import { CareerMatcher } from "@/components/CareerMatcher";
 import { CareerDiscoveryMatrix } from "@/components/CareerDiscoveryMatrix";
+import { DayInLifeGallery } from "@/components/DayInLifeGallery";
 
 type ScholarshipCard = {
   name: string;
@@ -529,7 +530,7 @@ export function LaunchpadPage() {
 
         {/* ── Career Matcher ── */}
         {/* ── Career Discovery Matrix (interest-first) ── */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6">
+        <section id="career-discovery-matrix" className="max-w-4xl mx-auto px-4 sm:px-6 scroll-mt-20">
           <div className="mb-5">
             <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
               {t("Career Discovery Matrix", "ម៉ាទ្រីសស្វែងរកអាជីព")}
@@ -543,6 +544,23 @@ export function LaunchpadPage() {
             </p>
           </div>
           <CareerDiscoveryMatrix />
+        </section>
+
+        {/* ── Day in the Life Career Gallery ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="mb-5">
+            <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
+              {t("Day in the Life: Career Gallery", "ជីវិតប្រចាំថ្ងៃក្នុងអាជីព")}
+              {kh && <span className="ml-2 text-base font-normal text-muted-foreground">(Day in the Life)</span>}
+            </h2>
+            <p className={`text-sm text-muted-foreground mt-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "Real Cambodian professionals share their morning routine, the tools they use, the hardest part of their job, and what makes them love it.",
+                "អ្នកជំនាញខ្មែរពិតប្រាកដ ចែករំលែកទម្លាប់ពេលព្រឹក ឧបករណ៍ដែលប្រើ ផ្នែកលំបាកបំផុតនៃការងារ និងអ្វីដែលធ្វើឲ្យពួកគេស្រឡាញ់វា។"
+              )}
+            </p>
+          </div>
+          <DayInLifeGallery />
         </section>
 
         <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
