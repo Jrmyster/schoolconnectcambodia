@@ -16,6 +16,7 @@ import {
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import SkepticsChallenge from "@/components/SkepticsChallenge";
 import { GiantsOfScience } from "@/components/GiantsOfScience";
+import { ScientificTimeline } from "@/components/ScientificTimeline";
 
 // ── Scientific Method Data ──────────────────────────────────────────────────
 
@@ -657,6 +658,8 @@ export function ScientificLiteracyPage() {
         <ToolboxSection onProgress={setToolPts} />
 
         <GiantsOfScience />
+
+        <ScientificTimeline />
 
         <SkepticsChallenge />
 
