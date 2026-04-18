@@ -7,6 +7,7 @@ import { InterviewSimulator } from "@/components/InterviewSimulator";
 import { ResumeMasterclass } from "@/components/ResumeMasterclass";
 import { FuturePathways } from "@/components/FuturePathways";
 import { CareerMatcher } from "@/components/CareerMatcher";
+import { CareerDiscoveryMatrix } from "@/components/CareerDiscoveryMatrix";
 
 type ScholarshipCard = {
   name: string;
@@ -527,6 +528,23 @@ export function LaunchpadPage() {
         <ResumeMasterclass />
 
         {/* ── Career Matcher ── */}
+        {/* ── Career Discovery Matrix (interest-first) ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="mb-5">
+            <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
+              {t("Career Discovery Matrix", "ម៉ាទ្រីសស្វែងរកអាជីព")}
+              {kh && <span className="ml-2 text-base font-normal text-muted-foreground">(Career Discovery Matrix)</span>}
+            </h2>
+            <p className={`text-sm text-muted-foreground mt-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "Not sure what to study? Start with what you genuinely enjoy — and we'll show you both vocational and university paths that fit, plus how much demand they have in Cambodia today.",
+                "មិនទាន់ប្រាកដថាត្រូវរៀនអ្វី? ចាប់ផ្ដើមជាមួយអ្វីដែលអ្នកពិតជាសប្បាយចិត្ត — យើងនឹងបង្ហាញផ្លូវវិជ្ជាជីវៈ និងផ្លូវសាកលវិទ្យាល័យដែលត្រូវនឹងអ្នក រួមជាមួយតម្រូវការនៅកម្ពុជា។"
+              )}
+            </p>
+          </div>
+          <CareerDiscoveryMatrix />
+        </section>
+
         <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
           <div className="mb-5">
             <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
