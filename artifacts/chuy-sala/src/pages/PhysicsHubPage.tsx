@@ -15,7 +15,7 @@ import {
   BookOpen,
   Info,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -498,6 +498,8 @@ type UnitDef = {
   nameKh: string;
   /** Multiplier to convert this unit → category base unit. */
   toBase: number;
+  /** Imperial / non-metric — only shown when "Practical Units" is on. */
+  practical?: boolean;
 };
 
 type Category = {
@@ -526,6 +528,7 @@ const CATEGORIES: Category[] = [
       { key: "cm", symbol: "cm", nameEn: "Centimeter", nameKh: "សង់ទីម៉ែត្រ", toBase: 0.01 },
       { key: "m",  symbol: "m",  nameEn: "Meter",      nameKh: "ម៉ែត្រ",       toBase: 1 },
       { key: "km", symbol: "km", nameEn: "Kilometer",  nameKh: "គីឡូម៉ែត្រ",   toBase: 1000 },
+      { key: "in", symbol: "in", nameEn: "Inch",       nameKh: "អ៊ីញ",         toBase: 0.0254, practical: true },
     ],
   },
   {
@@ -543,6 +546,7 @@ const CATEGORIES: Category[] = [
       { key: "mg", symbol: "mg", nameEn: "Milligram", nameKh: "មិល្លីក្រាម", toBase: 0.000001 },
       { key: "g",  symbol: "g",  nameEn: "Gram",      nameKh: "ក្រាម",        toBase: 0.001 },
       { key: "kg", symbol: "kg", nameEn: "Kilogram",  nameKh: "គីឡូក្រាម",    toBase: 1 },
+      { key: "lb", symbol: "lb", nameEn: "Pound",     nameKh: "ផោន",          toBase: 0.45359237, practical: true },
     ],
   },
   {
@@ -583,6 +587,7 @@ function formatValue(n: number): string {
 
 function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
   const [activeKey, setActiveKey] = useState<Category["key"]>("distance");
+  const [practicalOn, setPracticalOn] = useState(false);
   /** Per-category source state: { unitKey, rawValue } so the typed text stays exact */
   const [source, setSource] = useState<
     Record<Category["key"], { unitKey: string; raw: string }>
@@ -593,8 +598,40 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
   });
 
   const active = CATEGORIES.find((c) => c.key === activeKey)!;
+  // Visible units depend on the Practical toggle.
+  const visibleUnits = useMemo(
+    () => active.units.filter((u) => !u.practical || practicalOn),
+    [active.units, practicalOn],
+  );
+  const hasPractical = active.units.some((u) => u.practical);
+
+  // If the user turned the toggle OFF while a practical unit was the source,
+  // persist a fallback to the category's base unit (toBase === 1) and convert
+  // the value so numeric intent is preserved (e.g. 12 in → 0.3048 m).
+  useEffect(() => {
+    const rawSrc = source[activeKey];
+    const rawSrcUnit = active.units.find((u) => u.key === rawSrc.unitKey);
+    if (!rawSrcUnit || (rawSrcUnit.practical && !practicalOn)) {
+      const fallback =
+        visibleUnits.find((u) => u.toBase === 1) ?? visibleUnits[0];
+      const n = parseFloat(rawSrc.raw);
+      const converted =
+        rawSrcUnit && isFinite(n) && !isNaN(n)
+          ? formatValue(n * rawSrcUnit.toBase) // base unit ⇒ divide by 1
+          : "1";
+      setSource((prev) => ({
+        ...prev,
+        [activeKey]: { unitKey: fallback.key, raw: converted },
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [practicalOn, activeKey]);
+
   const src = source[activeKey];
-  const srcUnit = active.units.find((u) => u.key === src.unitKey)!;
+  const srcUnit =
+    active.units.find((u) => u.key === src.unitKey) ??
+    visibleUnits.find((u) => u.toBase === 1) ??
+    visibleUnits[0];
 
   // Compute the base value (e.g. meters / kilograms / seconds) from the source.
   const baseValue = useMemo(() => {
@@ -647,6 +684,55 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
         </div>
       </div>
 
+      {/* Practical Units toggle */}
+      <div className="px-4 sm:px-6 py-3 border-b border-slate-200 bg-white flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div
+            className={`text-xs sm:text-sm font-semibold text-slate-900 ${
+              kh ? "font-khmer" : ""
+            }`}
+          >
+            {t("Practical Units", "ឯកតាអនុវត្តជាក់ស្តែង")}
+          </div>
+          <div
+            className={`text-[10px] sm:text-[11px] text-slate-500 leading-snug ${
+              kh ? "font-khmer leading-relaxed text-[11px] sm:text-xs" : ""
+            }`}
+          >
+            {practicalOn
+              ? t(
+                  "Imperial units (inch, pound) shown alongside metric.",
+                  "បង្ហាញឯកតាអង់គ្លេស (អ៊ីញ ផោន) រួមជាមួយឯកតាម៉ែត្រ។",
+                )
+              : t(
+                  "Scientific Mode — metric units only.",
+                  "របៀបវិទ្យាសាស្ត្រ — តែឯកតាម៉ែត្រប៉ុណ្ណោះ។",
+                )}
+          </div>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={practicalOn}
+          aria-label={t("Practical Units", "ឯកតាអនុវត្តជាក់ស្តែង")}
+          onClick={() => setPracticalOn((v) => !v)}
+          disabled={!hasPractical}
+          className={`relative inline-flex h-7 w-12 flex-shrink-0 items-center rounded-full transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-amber-400 ${
+            !hasPractical
+              ? "bg-slate-200 opacity-50 cursor-not-allowed"
+              : practicalOn
+              ? "bg-amber-500"
+              : "bg-slate-300"
+          }`}
+        >
+          <span
+            className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-md transition-transform ${
+              practicalOn ? "translate-x-6" : "translate-x-1"
+            }`}
+          />
+        </button>
+      </div>
+
       {/* Tabs */}
       <div
         role="tablist"
@@ -678,7 +764,7 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
 
       {/* Inputs (vertical stack for mobile-first) */}
       <div className="p-4 sm:p-6 space-y-3">
-        {active.units.map((u) => {
+        {visibleUnits.map((u) => {
           const isSource = u.key === src.unitKey;
           // For source, show the user's raw text exactly; for others, derived value
           const display = isSource
@@ -700,9 +786,18 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
               {/* Unit name */}
               <div className="flex items-center gap-2 sm:w-44 sm:flex-shrink-0">
                 <span
-                  className={`inline-flex items-center justify-center min-w-[2.75rem] h-8 px-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-mono font-bold text-sm shadow-sm`}
+                  className={`inline-flex items-center justify-center min-w-[2.75rem] h-8 px-2 rounded-lg bg-white border border-slate-300 text-slate-900 font-mono font-bold text-sm shadow-sm relative`}
                 >
                   {u.symbol}
+                  {u.practical && (
+                    <span
+                      aria-hidden="true"
+                      title="Imperial"
+                      className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-[1rem] h-4 px-1 rounded-full bg-amber-500 text-white text-[9px] font-bold leading-none"
+                    >
+                      lb/in
+                    </span>
+                  )}
                 </span>
                 <div className="min-w-0">
                   <div
@@ -777,6 +872,24 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
             "លេខធំ ឬតូចខ្លាំង នឹងបង្ហាញក្នុងសញ្ញាណវិទ្យាសាស្ត្រ (ឧ. 1e3 = 1 × 10³)។",
           )}
         </p>
+
+        {/* Bilingual context note */}
+        <div className="mt-2 flex items-start gap-2 rounded-2xl border border-amber-200 bg-amber-50/70 px-3 py-2.5">
+          <Info className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" aria-hidden="true" />
+          <p
+            className={`text-[11px] sm:text-xs text-amber-900 leading-snug ${
+              kh ? "font-khmer leading-relaxed" : ""
+            }`}
+          >
+            <span className="font-semibold">
+              {t("Note:", "សម្គាល់៖")}
+            </span>{" "}
+            {t(
+              "Cambodia uses the Metric system for science, but Imperial units are often found in markets and electronics.",
+              "ប្រទេសកម្ពុជាប្រើប្រាស់ប្រព័ន្ធម៉ែត្រសម្រាប់វិទ្យាសាស្ត្រ ប៉ុន្តែឯកតាអង់គ្លេសត្រូវបានរកឃើញជាញឹកញាប់នៅក្នុងទីផ្សារ និងឧបករណ៍អេឡិចត្រូនិក។",
+            )}
+          </p>
+        </div>
       </div>
     </section>
   );
