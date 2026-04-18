@@ -14,6 +14,10 @@ import {
   Calculator,
   BookOpen,
   Info,
+  Thermometer,
+  Snowflake,
+  HeartPulse,
+  Droplets,
 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
@@ -253,6 +257,9 @@ export function PhysicsHubPage() {
           <PhysicsUnitConverter t={t} kh={kh} />
           <PhysicsConstantsTable t={t} kh={kh} />
         </div>
+
+        {/* ── Temperature Converter ─────────────────────────────── */}
+        <TemperatureConverter t={t} kh={kh} />
 
         {/* ── Module grid ───────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mt-10">
@@ -1163,6 +1170,438 @@ function PhysicsConstantsTable({ t, kh }: { t: ConstT; kh: boolean }) {
             "ប្រភព៖ តម្លៃណែនាំរបស់ CODATA។ ផ្លាស់ទីលើ ឬប៉ះឈ្មោះ ដើម្បីយល់ពីអត្ថន័យ។",
           )}
         </p>
+      </div>
+    </section>
+  );
+}
+
+/* ── Temperature Converter ─────────────────────────────────────────── */
+type TempT = (en: string, kh: string) => string;
+type TempScale = "C" | "F" | "K";
+
+/** Format temperature with up to 2 decimals, trimming trailing zeros. */
+function formatTemp(n: number): string {
+  if (!isFinite(n) || isNaN(n)) return "";
+  const rounded = Math.round(n * 100) / 100;
+  return rounded.toString();
+}
+
+/** Map a Celsius value to a 0–1 "warmth" position for the gradient. */
+function warmth(c: number | null): number {
+  if (c === null) return 0.5;
+  // Clamp -20°C → 0, 50°C → 1
+  const min = -20;
+  const max = 50;
+  return Math.min(1, Math.max(0, (c - min) / (max - min)));
+}
+
+const TEMP_REFS: {
+  key: string;
+  c: number;
+  f: number;
+  labelEn: string;
+  labelKh: string;
+  icon: React.ComponentType<{ className?: string }>;
+  ring: string;
+  bg: string;
+  text: string;
+}[] = [
+  {
+    key: "freeze",
+    c: 0,
+    f: 32,
+    labelEn: "Water Freezes",
+    labelKh: "ទឹកកក",
+    icon: Snowflake,
+    ring: "ring-sky-300",
+    bg: "bg-sky-50",
+    text: "text-sky-700",
+  },
+  {
+    key: "body",
+    c: 37,
+    f: 98.6,
+    labelEn: "Human Body",
+    labelKh: "រាងកាយមនុស្ស",
+    icon: HeartPulse,
+    ring: "ring-rose-300",
+    bg: "bg-rose-50",
+    text: "text-rose-700",
+  },
+  {
+    key: "boil",
+    c: 100,
+    f: 212,
+    labelEn: "Water Boils",
+    labelKh: "ទឹកពុះ",
+    icon: Droplets,
+    ring: "ring-orange-300",
+    bg: "bg-orange-50",
+    text: "text-orange-700",
+  },
+];
+
+function TemperatureConverter({ t, kh }: { t: TempT; kh: boolean }) {
+  // Single source of truth: { scale, raw } so the typed text stays exact.
+  const [src, setSrc] = useState<{ scale: TempScale; raw: string }>({
+    scale: "C",
+    raw: "25",
+  });
+
+  // Compute Celsius (the canonical pivot) from the source value.
+  const celsius = useMemo<number | null>(() => {
+    const n = parseFloat(src.raw);
+    if (!isFinite(n) || isNaN(n)) return null;
+    if (src.scale === "C") return n;
+    if (src.scale === "F") return (n - 32) * (5 / 9);
+    return n - 273.15; // K
+  }, [src.raw, src.scale]);
+
+  const fahrenheit = celsius === null ? null : celsius * (9 / 5) + 32;
+  const kelvin = celsius === null ? null : celsius + 273.15;
+
+  const display = (scale: TempScale): string => {
+    if (src.scale === scale) return src.raw;
+    if (celsius === null) return "";
+    if (scale === "C") return formatTemp(celsius);
+    if (scale === "F") return formatTemp(fahrenheit!);
+    return formatTemp(kelvin!);
+  };
+
+  const handleChange = (scale: TempScale, raw: string) => {
+    setSrc({ scale, raw });
+  };
+
+  // Quick-jump from a reference card.
+  const applyRef = (c: number) => {
+    setSrc({ scale: "C", raw: c.toString() });
+  };
+
+  // Gradient warmth & validation
+  const w = warmth(celsius);
+  // Mix from cool blue (#1e40af) to warm red (#b91c1c) using HSL hue interpolation.
+  const hue = Math.round(220 - 220 * w); // 220 (blue) → 0 (red)
+  const gradientStyle: React.CSSProperties = {
+    background: `linear-gradient(135deg,
+      hsl(${Math.min(220, hue + 20)}, 80%, 96%) 0%,
+      hsl(${hue}, 75%, 92%) 55%,
+      hsl(${Math.max(0, hue - 20)}, 85%, 88%) 100%)`,
+  };
+
+  const SCALES: {
+    key: TempScale;
+    label: string;
+    nameEn: string;
+    nameKh: string;
+    accent: string;
+    chip: string;
+    ring: string;
+    text: string;
+  }[] = [
+    {
+      key: "C",
+      label: "°C",
+      nameEn: "Celsius",
+      nameKh: "សែលស្យូស",
+      accent: "from-sky-500 to-blue-600",
+      chip: "bg-sky-100 text-sky-900 border-sky-300",
+      ring: "ring-sky-400",
+      text: "text-sky-700",
+    },
+    {
+      key: "F",
+      label: "°F",
+      nameEn: "Fahrenheit",
+      nameKh: "ហ្វារិនហៃ",
+      accent: "from-amber-500 to-orange-600",
+      chip: "bg-amber-100 text-amber-900 border-amber-300",
+      ring: "ring-amber-400",
+      text: "text-amber-700",
+    },
+    {
+      key: "K",
+      label: "K",
+      nameEn: "Kelvin",
+      nameKh: "កែលវីន",
+      accent: "from-violet-500 to-purple-700",
+      chip: "bg-violet-100 text-violet-900 border-violet-300",
+      ring: "ring-violet-400",
+      text: "text-violet-700",
+    },
+  ];
+
+  const isInvalid = celsius === null && src.raw.trim() !== "";
+
+  return (
+    <section
+      aria-label={t("Temperature Converter", "ឧបករណ៍បំប្លែងសីតុណ្ហភាព")}
+      className="mt-8 rounded-3xl border-2 border-slate-200 bg-white shadow-sm overflow-hidden"
+    >
+      {/* Header with dynamic temperature gradient */}
+      <div
+        className="px-5 sm:px-6 py-4 sm:py-5 border-b-2 border-slate-200 transition-colors duration-500"
+        style={gradientStyle}
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-white/85 backdrop-blur text-slate-900 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Thermometer
+              className="w-5 h-5"
+              style={{ color: `hsl(${hue}, 70%, 35%)` }}
+            />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className={`text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-slate-800 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Physics Toolkit", "ឧបករណ៍រូបវិទ្យា")}
+            </div>
+            <h2
+              className={`text-base sm:text-lg font-bold text-slate-900 leading-tight ${
+                kh ? "font-khmer leading-relaxed" : "font-display"
+              }`}
+            >
+              {t("Temperature Converter", "ឧបករណ៍បំប្លែងសីតុណ្ហភាព")}
+            </h2>
+            <p
+              className={`text-xs sm:text-sm text-slate-700 leading-snug mt-0.5 ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              {t(
+                "Type any value — the colors warm up as the temperature rises.",
+                "វាយតម្លៃណាមួយ — ពណ៌នឹងក្តៅឡើងនៅពេលសីតុណ្ហភាពកើនឡើង។",
+              )}
+            </p>
+          </div>
+          {celsius !== null && (
+            <div
+              aria-hidden="true"
+              className={`hidden sm:flex flex-col items-center justify-center min-w-[5rem] px-3 py-2 rounded-2xl bg-white/80 backdrop-blur shadow-sm ${
+                kh ? "font-khmer" : "font-mono"
+              }`}
+              style={{ color: `hsl(${hue}, 70%, 30%)` }}
+            >
+              <span className="text-[10px] uppercase tracking-wider opacity-70">
+                {t("Now", "ឥឡូវ")}
+              </span>
+              <span className="text-xl font-bold leading-none mt-0.5">
+                {formatTemp(celsius)}°C
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-0">
+        {/* ── Inputs column ───────────────────────────── */}
+        <div className="p-4 sm:p-6 space-y-3 lg:border-r-2 border-slate-200">
+          {SCALES.map((s) => {
+            const isSource = s.key === src.scale;
+            const value = display(s.key);
+            return (
+              <label
+                key={s.key}
+                htmlFor={`temp-${s.key}`}
+                className={`group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 rounded-2xl border-2 px-3 sm:px-4 py-3 transition-all cursor-text ${
+                  isSource
+                    ? `${s.chip} ring-2 ${s.ring} shadow-sm`
+                    : "bg-slate-50/60 border-slate-200 hover:border-slate-300"
+                }`}
+              >
+                <div className="flex items-center gap-2 sm:w-44 sm:flex-shrink-0">
+                  <span
+                    className={`inline-flex items-center justify-center min-w-[2.75rem] h-9 px-2 rounded-lg bg-gradient-to-br ${s.accent} text-white font-mono font-bold text-sm shadow-sm`}
+                  >
+                    {s.label}
+                  </span>
+                  <div className="min-w-0">
+                    <div
+                      className={`text-sm font-semibold leading-tight ${
+                        isSource ? "" : "text-slate-800"
+                      } ${kh ? "font-khmer" : ""}`}
+                    >
+                      {t(s.nameEn, s.nameKh)}
+                    </div>
+                    <div
+                      className={`text-[10px] uppercase tracking-wider opacity-70 ${
+                        kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+                      }`}
+                    >
+                      {kh ? s.nameEn : s.nameKh}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <input
+                    id={`temp-${s.key}`}
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
+                    value={value}
+                    onChange={(e) => handleChange(s.key, e.target.value)}
+                    onFocus={(e) => {
+                      if (!isSource) handleChange(s.key, value);
+                      e.currentTarget.select();
+                    }}
+                    placeholder="0"
+                    aria-label={t(
+                      `Value in ${s.nameEn}`,
+                      `តម្លៃជា${s.nameKh}`,
+                    )}
+                    className={`w-full bg-white rounded-xl border-2 px-3 sm:px-4 py-2.5 sm:py-3 text-right font-mono text-base sm:text-lg font-semibold text-slate-900 outline-none transition-colors ${
+                      isSource
+                        ? `border-current ${s.text}`
+                        : "border-slate-200 focus:border-slate-400"
+                    }`}
+                  />
+                </div>
+              </label>
+            );
+          })}
+
+          {isInvalid && (
+            <p
+              className={`text-xs text-rose-600 ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              {t(
+                "Please enter a valid number.",
+                "សូមបញ្ចូលលេខត្រឹមត្រូវ។",
+              )}
+            </p>
+          )}
+
+          {/* Formula reference */}
+          <div className="pt-1">
+            <p
+              className={`text-[11px] sm:text-xs text-slate-600 leading-snug ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              <span className="font-semibold text-slate-800">
+                {t("Formulas:", "រូបមន្ត៖")}
+              </span>{" "}
+              <span className="inline-flex flex-wrap gap-x-3 gap-y-1 align-middle">
+                <span className="font-mono">
+                  <InlineMath math="F = (C \times 9/5) + 32" />
+                </span>
+                <span className="font-mono">
+                  <InlineMath math="K = C + 273.15" />
+                </span>
+              </span>
+            </p>
+          </div>
+
+          {/* Absolute Zero note */}
+          <div className="mt-2 flex items-start gap-2 rounded-2xl border border-violet-200 bg-violet-50/70 px-3 py-2.5">
+            <Info
+              className="w-4 h-4 text-violet-700 flex-shrink-0 mt-0.5"
+              aria-hidden="true"
+            />
+            <p
+              className={`text-[11px] sm:text-xs text-violet-900 leading-snug ${
+                kh ? "font-khmer leading-relaxed" : ""
+              }`}
+            >
+              <span className="font-semibold">
+                {t("Absolute Zero", "សូន្យដាច់ខាត")}
+              </span>{" "}
+              <span className="opacity-70">
+                ({kh ? "Absolute Zero" : "សូន្យដាច់ខាត"})
+              </span>
+              :{" "}
+              <span className="font-mono font-semibold">
+                <InlineMath math="0\,\text{K}" />
+              </span>{" "}
+              {t(
+                "is the temperature where all molecular motion stops. It is the coldest possible temperature in the universe!",
+                "គឺជាសីតុណ្ហភាពដែលចលនាម៉ូលេគុលទាំងអស់ឈប់។ វាគឺជាសីតុណ្ហភាពត្រជាក់បំផុតដែលអាចមាននៅក្នុងសកលលោក!",
+              )}
+            </p>
+          </div>
+        </div>
+
+        {/* ── Quick Reference column ──────────────────── */}
+        <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="w-4 h-4 text-slate-700" />
+            <h3
+              className={`text-[11px] sm:text-xs font-bold tracking-widest uppercase text-slate-700 ${
+                kh ? "font-khmer normal-case tracking-normal text-sm" : ""
+              }`}
+            >
+              {t("Quick Reference", "ឯកសារយោងរហ័ស")}
+            </h3>
+          </div>
+
+          <ul className="space-y-2">
+            {TEMP_REFS.map((r) => {
+              const Icon = r.icon;
+              const isActive =
+                celsius !== null && Math.abs(celsius - r.c) < 0.5;
+              return (
+                <li key={r.key}>
+                  <button
+                    type="button"
+                    onClick={() => applyRef(r.c)}
+                    aria-label={t(
+                      `Set to ${r.labelEn} (${r.c}°C)`,
+                      `កំណត់ទៅ ${r.labelKh} (${r.c}°C)`,
+                    )}
+                    className={`w-full flex items-center gap-3 rounded-2xl border-2 px-3 py-2.5 text-left transition-all ${
+                      isActive
+                        ? `${r.bg} ring-2 ${r.ring} border-transparent shadow-sm`
+                        : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                    }`}
+                  >
+                    <span
+                      className={`inline-flex items-center justify-center w-9 h-9 rounded-xl ${r.bg} ${r.text} flex-shrink-0`}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div
+                        className={`text-sm font-semibold text-slate-900 leading-tight ${
+                          kh ? "font-khmer" : ""
+                        }`}
+                      >
+                        {t(r.labelEn, r.labelKh)}
+                      </div>
+                      <div
+                        className={`text-[10px] uppercase tracking-wider text-slate-500 ${
+                          kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+                        }`}
+                      >
+                        {kh ? r.labelEn : r.labelKh}
+                      </div>
+                    </div>
+                    <div
+                      className={`text-right font-mono text-xs sm:text-sm font-semibold ${r.text} flex-shrink-0`}
+                    >
+                      <div>{r.c}°C</div>
+                      <div className="opacity-70">{r.f}°F</div>
+                    </div>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          <p
+            className={`mt-3 text-[10px] sm:text-[11px] text-slate-500 leading-snug ${
+              kh ? "font-khmer leading-relaxed text-[11px] sm:text-xs" : ""
+            }`}
+          >
+            {t(
+              "Tap any item to load that temperature into the converter.",
+              "ប៉ះធាតុណាមួយដើម្បីផ្ទុកសីតុណ្ហភាពនោះចូលក្នុងឧបករណ៍បំប្លែង។",
+            )}
+          </p>
+        </div>
       </div>
     </section>
   );
