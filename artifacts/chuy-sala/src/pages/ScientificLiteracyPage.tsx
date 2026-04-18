@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import SkepticsChallenge from "@/components/SkepticsChallenge";
+import { GiantsOfScience } from "@/components/GiantsOfScience";
 
 // ── Scientific Method Data ──────────────────────────────────────────────────
 
@@ -654,6 +655,8 @@ export function ScientificLiteracyPage() {
         <ScientificMethodSection onProgress={setMethodPts} />
         <FactOpinionSection onProgress={setQuizPts} />
         <ToolboxSection onProgress={setToolPts} />
+
+        <GiantsOfScience />
 
         <SkepticsChallenge />
 
