@@ -12,8 +12,11 @@ import {
   Weight,
   Clock,
   Calculator,
+  BookOpen,
+  Info,
 } from "lucide-react";
 import { useState, useMemo } from "react";
+import { InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type PhysicsModule = {
@@ -245,8 +248,11 @@ export function PhysicsHubPage() {
           </div>
         </header>
 
-        {/* ── Physics Unit Converter ────────────────────────────── */}
-        <PhysicsUnitConverter t={t} kh={kh} />
+        {/* ── Physics Toolkit (Converter + Constants) ──────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-start">
+          <PhysicsUnitConverter t={t} kh={kh} />
+          <PhysicsConstantsTable t={t} kh={kh} />
+        </div>
 
         {/* ── Module grid ───────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mt-10">
@@ -769,6 +775,279 @@ function PhysicsUnitConverter({ t, kh }: { t: ConvT; kh: boolean }) {
           {t(
             "Very large or very small numbers are shown in scientific notation (e.g. 1e3 = 1 × 10³).",
             "លេខធំ ឬតូចខ្លាំង នឹងបង្ហាញក្នុងសញ្ញាណវិទ្យាសាស្ត្រ (ឧ. 1e3 = 1 × 10³)។",
+          )}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ── Common Physics Constants (reference manual) ────────────────────── */
+type ConstT = (en: string, kh: string) => string;
+
+type PhysicsConstant = {
+  key: string;
+  nameEn: string;
+  nameKh: string;
+  /** KaTeX symbol */
+  symbolTex: string;
+  /** KaTeX value (number, possibly with scientific notation) */
+  valueTex: string;
+  /** KaTeX unit */
+  unitTex: string;
+  /** Plain-text fallback for screen readers / hover */
+  descEn: string;
+  descKh: string;
+};
+
+const PHYSICS_CONSTANTS: PhysicsConstant[] = [
+  {
+    key: "c",
+    nameEn: "Speed of Light",
+    nameKh: "ល្បឿនពន្លឺ",
+    symbolTex: "c",
+    valueTex: "299{,}792{,}458",
+    unitTex: "\\text{m/s}",
+    descEn: "How fast light travels through empty space — the universe's speed limit.",
+    descKh: "ល្បឿននៃពន្លឺឆ្លងកាត់លំហអវកាសទទេ — ល្បឿនកំពូលនៃសកលលោក។",
+  },
+  {
+    key: "g",
+    nameEn: "Acceleration of Gravity",
+    nameKh: "សន្ទុះទំនាញផែនដី",
+    symbolTex: "g",
+    valueTex: "9.81",
+    unitTex: "\\text{m/s}^2",
+    descEn: "The rate at which objects fall on Earth.",
+    descKh: "អត្រាដែលវត្ថុធ្លាក់លើផែនដី។",
+  },
+  {
+    key: "G",
+    nameEn: "Universal Gravitational Constant",
+    nameKh: "ថេរទំនាញសកល",
+    symbolTex: "G",
+    valueTex: "6.674 \\times 10^{-11}",
+    unitTex: "\\text{N·m}^2/\\text{kg}^2",
+    descEn: "How strongly any two masses attract each other across space.",
+    descKh: "កម្លាំងទាក់ទាញរវាងម៉ាស់ពីរណាមួយឆ្លងកាត់លំហ។",
+  },
+  {
+    key: "h",
+    nameEn: "Planck's Constant",
+    nameKh: "ថេរផ្លង់",
+    symbolTex: "h",
+    valueTex: "6.626 \\times 10^{-34}",
+    unitTex: "\\text{J·s}",
+    descEn: "The smallest 'packet' of energy — the heart of quantum physics.",
+    descKh: "កញ្ចប់ថាមពលតូចបំផុត — ខ្លឹមសារនៃរូបវិទ្យាក្វាន់ទុំ។",
+  },
+  {
+    key: "e",
+    nameEn: "Elementary Charge",
+    nameKh: "បន្ទុកអគ្គិសនីមូលដ្ឋាន",
+    symbolTex: "e",
+    valueTex: "1.602 \\times 10^{-19}",
+    unitTex: "\\text{C}",
+    descEn: "The electric charge carried by a single proton (or electron).",
+    descKh: "បន្ទុកអគ្គិសនីដែលផ្ទុកដោយប្រូតុង (ឬអេឡិចត្រុង) មួយ។",
+  },
+];
+
+function PhysicsConstantsTable({ t, kh }: { t: ConstT; kh: boolean }) {
+  return (
+    <section
+      aria-label={t("Common Physics Constants", "ថេររូបវិទ្យាទូទៅ")}
+      className="rounded-3xl border-2 border-slate-300 bg-[radial-gradient(circle_at_top_right,_rgba(148,163,184,0.10),transparent_60%)] bg-slate-50 shadow-sm overflow-hidden"
+    >
+      {/* Header */}
+      <div className="px-5 sm:px-6 py-4 sm:py-5 border-b-2 border-slate-300 bg-gradient-to-br from-slate-100 via-slate-50 to-stone-50">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-stone-800 text-amber-100 flex items-center justify-center flex-shrink-0">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className={`text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-stone-700 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Reference Manual", "សៀវភៅយោង")}
+            </div>
+            <h2
+              className={`text-base sm:text-lg font-bold text-stone-900 leading-tight ${
+                kh ? "font-khmer leading-relaxed" : "font-display"
+              }`}
+            >
+              {t("Common Physics Constants", "ថេររូបវិទ្យាទូទៅ")}
+            </h2>
+          </div>
+          <div
+            className={`hidden sm:flex items-center gap-1 text-[10px] font-mono text-stone-500 ${
+              kh ? "font-khmer text-xs" : ""
+            }`}
+            aria-hidden="true"
+          >
+            <Info className="w-3 h-3" />
+            <span>{t("Hover for details", "ផ្លាស់ទីលើដើម្បីមើលព័ត៌មាន")}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Table — desktop */}
+      <div className="hidden sm:block overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-stone-100/70 border-b-2 border-stone-300">
+              <th
+                scope="col"
+                className={`text-left text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-stone-700 px-4 py-2.5 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Constant", "ឈ្មោះថេរ")}
+              </th>
+              <th
+                scope="col"
+                className={`text-center text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-stone-700 px-3 py-2.5 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Symbol", "និមិត្តសញ្ញា")}
+              </th>
+              <th
+                scope="col"
+                className={`text-right text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-stone-700 px-4 py-2.5 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Value", "តម្លៃ")}
+              </th>
+              <th
+                scope="col"
+                className={`text-left text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-stone-700 px-4 py-2.5 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Unit", "ឯកតា")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {PHYSICS_CONSTANTS.map((c, idx) => (
+              <tr
+                key={c.key}
+                className={`border-b border-stone-200 last:border-0 transition-colors hover:bg-amber-50/60 ${
+                  idx % 2 === 0 ? "bg-white/40" : "bg-stone-50/40"
+                }`}
+              >
+                <td className="px-4 py-3 align-middle">
+                  <span
+                    tabIndex={0}
+                    title={t(c.descEn, c.descKh)}
+                    aria-label={`${t(c.nameEn, c.nameKh)}. ${t(c.descEn, c.descKh)}`}
+                    className={`group relative inline-flex items-center gap-1.5 cursor-help underline decoration-dotted decoration-stone-400 underline-offset-4 text-sm font-semibold text-stone-900 outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                  >
+                    {t(c.nameEn, c.nameKh)}
+                    <Info
+                      className="w-3 h-3 text-stone-400 group-hover:text-stone-600"
+                      aria-hidden="true"
+                    />
+                    {/* Tooltip */}
+                    <span
+                      role="tooltip"
+                      className={`pointer-events-none absolute left-0 top-full mt-1 z-30 w-64 max-w-[16rem] rounded-lg bg-stone-900 text-white text-[11px] leading-relaxed px-3 py-2 shadow-xl opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus:opacity-100 group-focus:visible group-focus:translate-y-0 transition-all ${
+                        kh ? "font-khmer leading-relaxed" : ""
+                      }`}
+                    >
+                      <span className="block font-semibold mb-0.5">
+                        {t(c.nameEn, c.nameKh)}
+                      </span>
+                      <span className="block opacity-90">
+                        {t(c.descEn, c.descKh)}
+                      </span>
+                    </span>
+                  </span>
+                  <div
+                    className={`text-[10px] uppercase tracking-wider text-stone-500 mt-0.5 ${
+                      kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+                    }`}
+                  >
+                    {kh ? c.nameEn : c.nameKh}
+                  </div>
+                </td>
+                <td className="px-3 py-3 text-center align-middle">
+                  <span className="inline-block min-w-[2rem]">
+                    <InlineMath math={c.symbolTex} />
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-right align-middle font-mono text-sm text-stone-900 whitespace-nowrap">
+                  <InlineMath math={c.valueTex} />
+                </td>
+                <td className="px-4 py-3 align-middle text-sm text-stone-700 whitespace-nowrap">
+                  <InlineMath math={c.unitTex} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile — stacked cards */}
+      <ul className="sm:hidden divide-y divide-stone-200">
+        {PHYSICS_CONSTANTS.map((c) => (
+          <li key={c.key} className="px-4 py-3">
+            <div className="flex items-baseline justify-between gap-3 mb-1">
+              <span
+                tabIndex={0}
+                title={t(c.descEn, c.descKh)}
+                className={`text-sm font-semibold text-stone-900 underline decoration-dotted decoration-stone-400 underline-offset-4 ${
+                  kh ? "font-khmer" : ""
+                }`}
+              >
+                {t(c.nameEn, c.nameKh)}
+              </span>
+              <span className="text-base font-mono text-stone-700 flex-shrink-0">
+                <InlineMath math={c.symbolTex} />
+              </span>
+            </div>
+            <div
+              className={`text-[10px] uppercase tracking-wider text-stone-500 mb-2 ${
+                kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {kh ? c.nameEn : c.nameKh}
+            </div>
+            <div className="flex items-baseline gap-2 font-mono text-sm">
+              <span className="text-stone-900">
+                <InlineMath math={c.valueTex} />
+              </span>
+              <span className="text-stone-600">
+                <InlineMath math={c.unitTex} />
+              </span>
+            </div>
+            <p
+              className={`mt-1.5 text-[11px] text-stone-600 leading-snug ${
+                kh ? "font-khmer leading-relaxed text-xs" : ""
+              }`}
+            >
+              {t(c.descEn, c.descKh)}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      {/* Footnote */}
+      <div className="px-5 sm:px-6 py-3 border-t border-stone-200 bg-stone-50/80">
+        <p
+          className={`text-[10px] sm:text-[11px] text-stone-500 leading-snug ${
+            kh ? "font-khmer leading-relaxed text-[11px] sm:text-xs" : ""
+          }`}
+        >
+          {t(
+            "Source: CODATA recommended values. Hover or tap a name to learn what it means.",
+            "ប្រភព៖ តម្លៃណែនាំរបស់ CODATA។ ផ្លាស់ទីលើ ឬប៉ះឈ្មោះ ដើម្បីយល់ពីអត្ថន័យ។",
           )}
         </p>
       </div>
