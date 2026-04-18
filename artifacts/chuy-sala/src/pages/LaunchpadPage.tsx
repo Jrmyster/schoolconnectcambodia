@@ -9,6 +9,7 @@ import { FuturePathways } from "@/components/FuturePathways";
 import { CareerMatcher } from "@/components/CareerMatcher";
 import { CareerDiscoveryMatrix } from "@/components/CareerDiscoveryMatrix";
 import { DayInLifeGallery } from "@/components/DayInLifeGallery";
+import { ChoosePathCompare } from "@/components/ChoosePathCompare";
 
 type ScholarshipCard = {
   name: string;
@@ -544,6 +545,23 @@ export function LaunchpadPage() {
             </p>
           </div>
           <CareerDiscoveryMatrix />
+        </section>
+
+        {/* ── Choose Your Path: Vocational vs. University ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="mb-5">
+            <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
+              {t("Choose Your Path: Vocational vs. University", "ជ្រើសរើសផ្លូវរបស់អ្នក៖ វិជ្ជាជីវៈ ឬសាកលវិទ្យាល័យ")}
+              {kh && <span className="ml-2 text-base font-normal text-muted-foreground">(Choose Your Path)</span>}
+            </h2>
+            <p className={`text-sm text-muted-foreground mt-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "Compare the two paths side-by-side, bust a few common myths, and take a 3-question quiz to find your starting point.",
+                "ប្រៀបធៀបផ្លូវទាំងពីរក្បែរគ្នា បំបាត់ការយល់ខុសទូទៅមួយចំនួន ហើយឆ្លើយសំណួរ ៣ ដើម្បីរកចំណុចចាប់ផ្ដើមរបស់អ្នក។"
+              )}
+            </p>
+          </div>
+          <ChoosePathCompare />
         </section>
 
         {/* ── Day in the Life Career Gallery ── */}
