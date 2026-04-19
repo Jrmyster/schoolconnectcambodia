@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -159,6 +159,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Mountain,
         descEn: "Tectonic plates, the rock cycle, and Cambodia's geological position — interactive maps & diagrams.",
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
+      },
+      {
+        href: "/disaster-prep",
+        labelEn: "Disaster Preparedness",
+        labelKh: "ការត្រៀមលក្ខណៈគ្រោះមហន្តរាយ",
+        icon: LifeBuoy,
+        descEn: "Floods, earthquakes, tsunamis — read the warning signs and pack your Go-Bag.",
+        descKh: "ទឹកជំនន់ ការរញ្ជួយដី ស៊ូណាមិ — អានសញ្ញាព្រមាន និងខ្ចប់កាបូបបន្ទាន់របស់អ្នក។",
       },
     ],
   },

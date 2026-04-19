@@ -41,6 +41,7 @@ import { FunLabPage } from "@/pages/FunLabPage";
 import { PhysicsHubPage, PhysicsModulePlaceholder } from "@/pages/PhysicsHubPage";
 import { BiologyHubPage } from "@/pages/BiologyHubPage";
 import { GeologyHubPage } from "@/pages/GeologyHubPage";
+import { DisasterPrepPage } from "@/pages/DisasterPrepPage";
 import { PhysicsMotionPage } from "@/pages/PhysicsMotionPage";
 import { PhysicsForcesPage } from "@/pages/PhysicsForcesPage";
 import { PhysicsEnergyPage } from "@/pages/PhysicsEnergyPage";
@@ -111,6 +112,7 @@ function Router() {
           <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
           <Route path="/biology" component={BiologyHubPage} />
           <Route path="/geology" component={GeologyHubPage} />
+          <Route path="/disaster-prep" component={DisasterPrepPage} />
           <Route path="/admin/dashboard">
             {() => <AdminRoute component={AdminDashboard} />}
           </Route>
