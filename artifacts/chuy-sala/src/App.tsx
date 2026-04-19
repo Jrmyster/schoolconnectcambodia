@@ -20,6 +20,7 @@ import { SanctuaryPage } from "@/pages/SanctuaryPage";
 import { AlumniPage } from "@/pages/AlumniPage";
 import { SafetyPage } from "@/pages/SafetyPage";
 import { ExamPrepPage } from "@/pages/ExamPrepPage";
+import { EnglishWritingPage } from "@/pages/EnglishWritingPage";
 import { SubmitStoryPage } from "@/pages/SubmitStoryPage";
 import { SpacePage } from "@/pages/SpacePage";
 import { ProfilePage } from "@/pages/ProfilePage";
@@ -85,6 +86,7 @@ function Router() {
           <Route path="/alumni" component={AlumniPage} />
           <Route path="/safety" component={SafetyPage} />
           <Route path="/exam-prep" component={ExamPrepPage} />
+          <Route path="/english-writing" component={EnglishWritingPage} />
           <Route path="/submit-story" component={SubmitStoryPage} />
           <Route path="/space" component={SpacePage} />
           <Route path="/science" component={ScientificLiteracyPage} />
