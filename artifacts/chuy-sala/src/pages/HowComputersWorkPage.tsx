@@ -1,9 +1,10 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2 } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
 import { HardwareSoftwareAnalogy } from "@/components/tech/HardwareSoftwareAnalogy";
+import { TechDoctor } from "@/components/tech/TechDoctor";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -61,7 +62,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 03", "ឧបករណ៍អន្តរកម្ម៖ ០៣")}</span>
+                <span>{t("INTERACTIVES: 04", "ឧបករណ៍អន្តរកម្ម៖ ០៤")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -105,6 +106,18 @@ export function HowComputersWorkPage() {
             Icon={Code2}
           />
           <HardwareSoftwareAnalogy />
+        </section>
+
+        {/* 4. Tech Doctor — symptom checker */}
+        <section>
+          <SectionHeading
+            kicker={kh ? "មេរៀនទី ៤" : "Lesson 4"}
+            titleEn="Tech Doctor — Troubleshooting Clinic"
+            titleKh="គ្រូពេទ្យបច្ចេកវិទ្យា — គ្លីនិកជួសជុល"
+            kh={kh}
+            Icon={Stethoscope}
+          />
+          <TechDoctor />
         </section>
       </div>
     </div>
