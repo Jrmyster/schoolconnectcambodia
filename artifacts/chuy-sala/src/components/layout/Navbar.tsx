@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -151,6 +151,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Leaf,
         descEn: "Cells, genetics, evolution and the Mekong's living web — bilingual & interactive.",
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
+      },
+      {
+        href: "/geology",
+        labelEn: "Geology & Earth Science",
+        labelKh: "ភូគព្ភវិទ្យា និងវិទ្យាសាស្ត្រផែនដី",
+        icon: Mountain,
+        descEn: "Tectonic plates, the rock cycle, and Cambodia's geological position — interactive maps & diagrams.",
+        descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
       },
     ],
   },
