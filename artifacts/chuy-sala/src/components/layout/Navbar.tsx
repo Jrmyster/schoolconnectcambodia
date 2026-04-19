@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -167,6 +167,21 @@ const NAV_GROUPS: NavGroup[] = [
         icon: LifeBuoy,
         descEn: "Floods, earthquakes, tsunamis — read the warning signs and pack your Go-Bag.",
         descKh: "ទឹកជំនន់ ការរញ្ជួយដី ស៊ូណាមិ — អានសញ្ញាព្រមាន និងខ្ចប់កាបូបបន្ទាន់របស់អ្នក។",
+      },
+    ],
+  },
+  {
+    labelEn: "Technology",
+    labelKh: "បច្ចេកវិទ្យា",
+    icon: Cpu,
+    items: [
+      {
+        href: "/how-computers-work",
+        labelEn: "How Computers Work",
+        labelKh: "របៀបដែលកុំព្យូទ័រដំណើរការ",
+        icon: Binary,
+        descEn: "Build a virtual PC, flip binary switches, and see hardware vs. software — interactive blueprint diagrams.",
+        descKh: "សាងសង់ Virtual PC ប្ដូរកុងតាក់គោលពីរ និងមើល Hardware ប្រឆាំងនឹង Software — តារាង blueprint អន្តរកម្ម។",
       },
     ],
   },
