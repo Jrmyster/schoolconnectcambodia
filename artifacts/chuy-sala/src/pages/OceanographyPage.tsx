@@ -82,7 +82,7 @@ export default function OceanographyPage() {
               )}
             </h1>
             <p
-              className={`text-cyan-100/65 max-w-2xl mx-auto leading-relaxed ${
+              className={`text-cyan-100/85 max-w-2xl mx-auto leading-relaxed ${
                 isKh ? "font-khmer text-base leading-loose" : "text-base"
               }`}
             >
@@ -146,7 +146,7 @@ export default function OceanographyPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
             <Anchor className="w-8 h-8 text-cyan-300/60 mx-auto mb-3" />
             <p
-              className={`text-cyan-100/45 text-sm max-w-md mx-auto ${
+              className={`text-cyan-100/80 text-sm max-w-md mx-auto ${
                 isKh ? "font-khmer leading-loose" : ""
               }`}
             >
@@ -265,7 +265,7 @@ function Section({
         <div className="h-px flex-1 bg-gradient-to-r from-cyan-400/25 to-transparent" />
       </div>
       <p
-        className={`text-cyan-100/60 text-sm mb-5 max-w-3xl ${
+        className={`text-cyan-100/85 text-sm mb-5 max-w-3xl ${
           isKh ? "font-khmer leading-loose" : "leading-relaxed"
         }`}
       >

@@ -673,7 +673,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
-              className="lg:hidden p-2 text-foreground bg-black/5 rounded-xl hover:bg-black/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              className="lg:hidden p-3 text-foreground bg-black/5 rounded-xl hover:bg-black/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label={mobileOpen ? t("Close menu", "បិទ​ម៉ឺនុយ") : t("Open menu", "បើក​ម៉ឺនុយ")}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav-menu"

@@ -199,7 +199,7 @@ export function NotificationBell() {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
+        className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all"
         aria-label={t("Notifications", "ការជូនដំណឹង")}
         title={t("Notifications", "ការជូនដំណឹង")}
       >

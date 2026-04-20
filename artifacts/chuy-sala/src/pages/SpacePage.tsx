@@ -169,7 +169,7 @@ export function SpacePage() {
                 <>ស្វែងយល់<span className="text-sky-400">ចក្រវាល</span></>
               )}
             </h1>
-            <p className={`text-white/55 max-w-2xl mx-auto leading-relaxed ${kh ? "font-khmer text-base leading-loose" : "text-base"}`}>
+            <p className={`text-white/80 max-w-2xl mx-auto leading-relaxed ${kh ? "font-khmer text-base leading-loose" : "text-base"}`}>
               {t(
                 "From the eight planets of our Solar System to the edge of the observable Universe — science is the greatest adventure of all.",
                 "ពីភព ៨ ក្នុងប្រព័ន្ធព្រះអាទិត្យ រហូតដល់ចុងទ្រង់ទ្រាយចក្រវាល — វិទ្យាសាស្ត្រជាការ冒険ធំបំផុតក្នុងជីវិត។"
@@ -184,7 +184,7 @@ export function SpacePage() {
 
           <div className="rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm">
             {apodLoading && (
-              <div className="flex flex-col items-center justify-center py-24 gap-4 text-white/50">
+              <div className="flex flex-col items-center justify-center py-24 gap-4 text-white/75">
                 <Loader2 className="w-8 h-8 animate-spin text-sky-400" />
                 <span className={`text-sm ${kh ? "font-khmer" : ""}`}>
                   {t("Fetching today's image from NASA…", "កំពុងទាញយករូបភាពថ្ងៃនេះពី NASA…")}
@@ -249,10 +249,10 @@ export function SpacePage() {
                     <h2 className="font-display font-bold text-white text-xl sm:text-2xl leading-snug">
                       {apod.title}
                     </h2>
-                    <span className="flex-shrink-0 text-xs text-white/40 font-mono mt-1">{apod.date}</span>
+                    <span className="flex-shrink-0 text-xs text-white/70 font-mono mt-1">{apod.date}</span>
                   </div>
                   {apod.copyright && (
-                    <p className="text-white/35 text-xs mb-3">
+                    <p className="text-white/70 text-xs mb-3">
                       {t("Image credit:", "ហត្ថប័ណ្ណ:")} {apod.copyright}
                     </p>
                   )}
@@ -327,7 +327,7 @@ export function SpacePage() {
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <SectionLabel icon={<Orbit className="w-3.5 h-3.5" />} label={t("The Solar System", "ប្រព័ន្ធព្រះអាទិត្យ")} kh={kh} />
 
-          <p className={`text-white/45 text-sm mb-5 ${kh ? "font-khmer" : ""}`}>
+          <p className={`text-white/75 text-sm mb-5 ${kh ? "font-khmer" : ""}`}>
             {t(
               "Click any planet to discover a fast fact in English and Khmer. Drag to rotate, scroll to zoom.",
               "ចុចលើភពណាមួយ ដើម្បីស្វែងយល់ Fast Fact ជាភាសាអង់គ្លេស និងខ្មែរ។ អូសដើម្បីបង្វិល ស្ក្រូលដើម្បីពង្រីក។"

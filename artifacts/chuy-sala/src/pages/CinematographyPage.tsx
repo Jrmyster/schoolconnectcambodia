@@ -75,7 +75,7 @@ export default function CinematographyPage() {
               )}
             </h1>
             <p
-              className={`text-white/55 max-w-2xl mx-auto leading-relaxed ${
+              className={`text-white/80 max-w-2xl mx-auto leading-relaxed ${
                 isKh ? "font-khmer text-base leading-loose" : "text-base"
               }`}
             >
@@ -127,7 +127,7 @@ export default function CinematographyPage() {
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
             <Lightbulb className="w-8 h-8 text-yellow-300/60 mx-auto mb-3" />
             <p
-              className={`text-white/40 text-sm max-w-md mx-auto ${
+              className={`text-white/75 text-sm max-w-md mx-auto ${
                 isKh ? "font-khmer leading-loose" : ""
               }`}
             >
@@ -262,7 +262,7 @@ function Section({
       </div>
 
       <p
-        className={`text-white/55 text-sm mb-5 max-w-3xl ${
+        className={`text-white/80 text-sm mb-5 max-w-3xl ${
           isKh ? "font-khmer leading-loose" : "leading-relaxed"
         }`}
       >
@@ -425,7 +425,7 @@ function LensPhysicsSimulator({ isKh }: { isKh: boolean }) {
             aria-valuetext={fStop}
             data-testid="lens-aperture-slider"
           />
-          <div className="flex justify-between mt-1 text-[10px] font-mono text-white/40">
+          <div className="flex justify-between mt-1 text-[10px] font-mono text-white/75">
             <span>f/22</span>
             <span>f/11</span>
             <span>f/5.6</span>

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Keep admin routes out of search engine indexes — they are also gated
+# server-side by authentication, this is just defence in depth.
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/dashboard
+Disallow: /school-inbox
+Disallow: /dashboard
+
+Sitemap: https://schoolconnectcambodia.com/sitemap.xml

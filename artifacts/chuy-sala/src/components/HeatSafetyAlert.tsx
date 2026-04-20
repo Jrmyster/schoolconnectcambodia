@@ -150,7 +150,7 @@ export function HeatSafetyAlert() {
             {/* Dismiss button */}
             <button
               onClick={dismiss}
-              className="flex-shrink-0 w-7 h-7 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-colors mt-0.5"
+              className="flex-shrink-0 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
               aria-label="Dismiss heat alert"
               title={
                 kh
