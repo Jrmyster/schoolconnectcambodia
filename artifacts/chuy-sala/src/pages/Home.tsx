@@ -5,6 +5,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
+import { CountUp } from "@/components/CountUp";
 
 export function Home() {
   const t = useTranslation();
@@ -96,8 +97,8 @@ export function Home() {
             <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-4">
               <GraduationCap className="w-8 h-8" />
             </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2">
-              {schools?.length || "0"}
+            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
+              <CountUp value={schools?.length ?? 0} />
             </h3>
             <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Registered Schools", "សាលារៀនដែលបានចុះឈ្មោះ")}
@@ -108,8 +109,8 @@ export function Home() {
             <div className="w-16 h-16 bg-orange-50 text-accent rounded-2xl flex items-center justify-center mb-4">
               <Heart className="w-8 h-8" />
             </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2">
-              {activeNeeds.length || "0"}
+            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
+              <CountUp value={activeNeeds.length} />
             </h3>
             <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Active Needs", "តម្រូវការសកម្ម")}
@@ -120,8 +121,8 @@ export function Home() {
             <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2">
-              {completed?.length || "0"}
+            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
+              <CountUp value={completed?.length ?? 0} />
             </h3>
             <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Completed Projects", "គម្រោងបានបញ្ចប់")}
