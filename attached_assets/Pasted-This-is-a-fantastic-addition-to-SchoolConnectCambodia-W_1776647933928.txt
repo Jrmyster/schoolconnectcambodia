@@ -1,0 +1,45 @@
+This is a fantastic addition to SchoolConnectCambodia. When building tools for early primary school learners, especially those encountering English as a second language, the Replit agent needs highly specific instructions regarding the UI/UX so it doesn't default to a dense, text-heavy layout.
+
+To get the best result, you want to give the agent a prompt that outlines the exact structure, the target audience, and the specific interactive elements you need.
+
+Here is a structured prompt you can copy and paste directly into your Replit agent:
+
+Copy and paste this into Replit:
+
+"I need to add a new 'Beginner English & Math Guide' module to our educational web app. The target audience is primary school children who are ESL learners. The UI needs to be highly visual, engaging, and use large, readable fonts with clear spacing. Please include placeholders where we can later add Khmer translations.
+
+Please build a dashboard with three main interactive sections:
+
+1. The Alphabet (A-Z):
+
+Create a visual grid displaying all 26 letters.
+
+Each letter should be a large, clickable card.
+
+On the card, include the uppercase and lowercase letter (e.g., 'A a') and a simple illustrative word (e.g., 'Apple').
+
+Add a placeholder button on each card for a future 'Play Audio' function.
+
+2. Numbers 1 to 100:
+
+Create a clean, interactive 10x10 number grid.
+
+Make the tens (10, 20, 30, etc.) a slightly different color so the children can easily see the pattern of counting by tens.
+
+Clicking a number should enlarge it and display the English word for that number (e.g., clicking '15' shows 'Fifteen').
+
+3. Numbers 100 to 1,000 (The Pattern Guide):
+
+Do not list every number. Instead, build a guide that teaches the pattern of hundreds.
+
+Create large cards for 100, 200, 300, up to 1,000.
+
+Below this, create a small 'number builder' tool where a user can select a 'hundreds' value, a 'tens' value, and a 'ones' value (e.g., 200 + 40 + 5) and see the final number combined as '245' and written out as 'Two hundred forty-five'.
+
+Technical Requirements:
+
+Keep the CSS bright, playful, and accessible.
+
+Ensure the layout is responsive, as many students may access this on mobile devices or tablets.
+
+Please write the necessary HTML, CSS, and JavaScript to make these components interactive."

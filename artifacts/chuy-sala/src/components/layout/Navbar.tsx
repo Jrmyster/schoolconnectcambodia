@@ -10,6 +10,7 @@ import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
 import { NotificationBell } from "@/components/NotificationBell";
 import { ThemePalette } from "@/components/ThemePalette";
+import { GlobalSearch } from "@/components/GlobalSearch";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -531,6 +532,11 @@ export function Navbar() {
               />
             ))}
 
+            {/* Compact global search — pushed to the right */}
+            <div className="ml-auto flex-shrink-0 w-64 xl:w-80">
+              <GlobalSearch variant="compact" />
+            </div>
+
             {/* Admin link intentionally omitted — hidden route only */}
           </nav>
         </div>
@@ -554,6 +560,11 @@ export function Navbar() {
           }}
         >
           <nav className="flex flex-col p-3 gap-1">
+            {/* Mobile global search */}
+            <div className="px-1 pt-1 pb-2">
+              <GlobalSearch variant="compact" onNavigate={() => setMobileOpen(false)} />
+            </div>
+
             {NAV_GROUPS.map((group) => {
               const isGroupActive = group.items.some(
                 (item) =>

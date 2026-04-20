@@ -3,6 +3,7 @@ import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, External
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
+import { GlobalSearch } from "@/components/GlobalSearch";
 
 export function Home() {
   const t = useTranslation();
@@ -61,6 +62,11 @@ export function Home() {
             )}
           </p>
           
+          {/* Global Search — welcoming entry point */}
+          <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+            <GlobalSearch variant="hero" />
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/map" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-primary text-white shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
               <MapPin className="w-5 h-5" />
