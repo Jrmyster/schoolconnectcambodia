@@ -2,6 +2,7 @@ import { PenLine, BookOpenCheck, Sparkles, Languages } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { ParagraphBuilder } from "@/components/widgets/ParagraphBuilder";
 import { GreetingsModule } from "@/components/widgets/GreetingsModule";
+import { VocabularyModule } from "@/components/widgets/VocabularyModule";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -37,6 +38,11 @@ export function EnglishWritingPage() {
         {/* Introductions & Greetings — for ESL beginners */}
         <div className="mb-10">
           <GreetingsModule />
+        </div>
+
+        {/* Everyday Vocabulary — categorized flashcards */}
+        <div className="mb-10">
+          <VocabularyModule />
         </div>
 
         {/* Quick tips strip */}
