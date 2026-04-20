@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -249,6 +249,14 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       { href: "/science",            labelEn: "Scientific Literacy",    labelKh: "ចំណេះដឹងវិទ្យាសាស្ត្រ",  icon: FlaskConical },
       { href: "/electrical-safety",  labelEn: "Electrical Safety",      labelKh: "សុវត្ថិភាពអគ្គិសនី",      icon: Zap },
+      {
+        href: "/sexual-health",
+        labelEn: "Sexual Health & Pathogen Protection",
+        labelKh: "សុខភាពផ្លូវភេទ និងការការពារមេរោគ",
+        icon: HeartPulse,
+        descEn: "Clear, non-judgmental information about STIs, common myths, and what to do if you are worried — with a Quick Exit button for privacy.",
+        descKh: "ព័ត៌មានច្បាស់លាស់ មិនវិនិច្ឆ័យ អំពី STI ការយល់ខុសសាមញ្ញ និងអ្វីដែលត្រូវធ្វើបើព្រួយបារម្ភ — មានប៊ូតុងចេញលឿនដើម្បីភាពឯកជន។",
+      },
       { href: "https://finlitkh.com",    labelEn: "Financial Literacy",       labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ",    icon: Banknote, external: true },
       {
         href: "https://bfiworldgame.com",
