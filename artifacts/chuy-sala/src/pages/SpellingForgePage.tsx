@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import {
   PenLine,
   Check,
@@ -10,6 +10,8 @@ import {
   BookOpenCheck,
   Trophy,
   Eraser,
+  Loader2,
+  WifiOff,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -23,10 +25,14 @@ import { useLanguageStore } from "@/store/use-language";
 //  lines, red margin line, classic serif body + handwriting accents.
 // ════════════════════════════════════════════════════════════════════════════
 
-// ──────────────────────────── Embedded dictionary ───────────────────────────
-// Common English words students are most likely to spell-check. ~700 words.
-// Kept inline so the tool works fully offline (no API).
-const DICT = [
+// ─────────────────────── Common-words list (helper only) ────────────────────
+// IMPORTANT: This list is NO LONGER the source of truth for "is this a word?".
+// Validation goes through the live dictionary API (see checkWord below).
+// This list is used only for two UX helpers:
+//   (1) Levenshtein "did-you-mean" suggestions when the API confirms a word
+//       is invalid (the API doesn't return spelling suggestions itself).
+//   (2) Nothing else — we no longer pre-seed any cache from it.
+const COMMON_WORDS = [
   // basic / pronouns / determiners
   "a","an","the","i","you","he","she","it","we","they","me","him","her","us","them",
   "my","your","his","its","our","their","this","that","these","those","what","which","who","whom","whose","why","when","where","how",
@@ -115,7 +121,96 @@ const DICT = [
   "yore","peas","heir","who's",
 ] as const;
 
-const DICT_SET: Set<string> = new Set(DICT.map((w) => w.toLowerCase()));
+// ───────────────────────── Live-dictionary plumbing ─────────────────────────
+// Source of truth: https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+// 200 → valid word, 404 → not a word, anything else → treat as network error.
+//
+// Each successful lookup is cached in memory AND localStorage so:
+//   • repeated checks of the same word are instant,
+//   • the tool keeps working for previously-seen words when the device is offline.
+
+const CACHE_STORAGE_KEY = "sf-dict-cache-v1";
+const dictCache = new Map<string, boolean>();
+
+// Hydrate once on module load (browser only)
+if (typeof window !== "undefined") {
+  try {
+    const raw = window.localStorage.getItem(CACHE_STORAGE_KEY);
+    if (raw) {
+      const obj = JSON.parse(raw) as Record<string, boolean>;
+      for (const [k, v] of Object.entries(obj)) dictCache.set(k, !!v);
+    }
+  } catch {
+    /* localStorage may be disabled (private mode) — ignore */
+  }
+}
+
+function persistCache() {
+  if (typeof window === "undefined") return;
+  try {
+    // Cap cache to last 500 entries to keep storage bounded
+    const entries = Array.from(dictCache.entries()).slice(-500);
+    window.localStorage.setItem(
+      CACHE_STORAGE_KEY,
+      JSON.stringify(Object.fromEntries(entries)),
+    );
+  } catch {
+    /* quota exceeded or unavailable — ignore */
+  }
+}
+
+export type CheckOutcome =
+  | { kind: "valid" }
+  | { kind: "invalid" }
+  | { kind: "invalid-format" }
+  | { kind: "network-error" };
+
+/** Sanitize, then check the word against the live dictionary (with caching). */
+async function checkWord(rawInput: string, externalSignal?: AbortSignal): Promise<CheckOutcome> {
+  // 1. Sanitize: trim, lowercase, normalize curly apostrophes.
+  const cleaned = rawInput.trim().toLowerCase().replace(/[\u2018\u2019]/g, "'");
+
+  if (!cleaned) return { kind: "invalid-format" };
+  // Allow letters, internal apostrophes (it's, they're) and hyphens (well-known)
+  if (!/^[a-z][a-z'-]*$/.test(cleaned)) return { kind: "invalid-format" };
+
+  // 2. Cache hit → return immediately (no network call).
+  if (dictCache.has(cleaned)) {
+    return dictCache.get(cleaned) ? { kind: "valid" } : { kind: "invalid" };
+  }
+
+  // 3. API call with timeout + external abort support.
+  const ctrl = new AbortController();
+  const onExternalAbort = () => ctrl.abort();
+  externalSignal?.addEventListener("abort", onExternalAbort);
+  const timeoutId = window.setTimeout(() => ctrl.abort(), 6000);
+
+  try {
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleaned)}`,
+      { signal: ctrl.signal },
+    );
+
+    if (res.status === 200) {
+      dictCache.set(cleaned, true);
+      persistCache();
+      return { kind: "valid" };
+    }
+    if (res.status === 404) {
+      dictCache.set(cleaned, false);
+      persistCache();
+      return { kind: "invalid" };
+    }
+    // 5xx, 429, etc. → don't cache, treat as transient network error.
+    return { kind: "network-error" };
+  } catch {
+    // Network down, CORS, abort, timeout — all surface as network-error.
+    return { kind: "network-error" };
+  } finally {
+    window.clearTimeout(timeoutId);
+    externalSignal?.removeEventListener("abort", onExternalAbort);
+  }
+}
 
 // ─── Levenshtein distance for suggestions ───────────────────────────────────
 function levenshtein(a: string, b: string): number {
@@ -142,7 +237,7 @@ function suggest(word: string, max = 4): string[] {
   if (!w) return [];
   const scored: Array<{ word: string; d: number }> = [];
   // Pre-filter by length difference for performance
-  for (const candidate of DICT) {
+  for (const candidate of COMMON_WORDS) {
     const c = candidate.toLowerCase();
     if (Math.abs(c.length - w.length) > 2) continue;
     const d = levenshtein(w, c);
@@ -237,37 +332,74 @@ function PaperBg() {
 //  1. Smart Type
 // ════════════════════════════════════════════════════════════════════════════
 
-type Status = "idle" | "correct" | "incorrect";
+type Status =
+  | "idle"
+  | "checking"
+  | "correct"
+  | "incorrect"
+  | "invalid-format"
+  | "network-error";
 
 function SmartType({ isKh }: { isKh: boolean }) {
   const [text, setText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [history, setHistory] = useState<Array<{ word: string; ok: boolean }>>([]);
+  const [lastChecked, setLastChecked] = useState<string>("");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const inFlightRef = useRef<AbortController | null>(null);
+
+  // Cancel any in-flight check on unmount.
+  useEffect(() => {
+    return () => inFlightRef.current?.abort();
+  }, []);
 
   const correctCount = history.filter((h) => h.ok).length;
 
-  const check = () => {
+  const check = useCallback(async () => {
     const raw = text.trim();
     if (!raw) return;
-    // Only accept single English-letter words for the dictionary check
-    const w = raw.toLowerCase();
-    if (!/^[a-z'’-]+$/.test(w)) {
-      setStatus("incorrect");
-      setSuggestions([]);
+
+    // Cancel any previous in-flight request before starting a new one.
+    inFlightRef.current?.abort();
+    const ctrl = new AbortController();
+    inFlightRef.current = ctrl;
+
+    setStatus("checking");
+    setSuggestions([]);
+    setLastChecked(raw);
+
+    const outcome = await checkWord(raw, ctrl.signal);
+
+    // If a newer request superseded this one, drop the result.
+    if (ctrl.signal.aborted) return;
+
+    if (outcome.kind === "valid") {
+      setStatus("correct");
+      setHistory((h) => [{ word: raw, ok: true }, ...h].slice(0, 6));
       return;
     }
-    const ok = DICT_SET.has(w.replace(/[’]/g, "'"));
-    setStatus(ok ? "correct" : "incorrect");
-    setSuggestions(ok ? [] : suggest(w));
-    setHistory((h) => [{ word: raw, ok }, ...h].slice(0, 6));
-  };
+    if (outcome.kind === "invalid") {
+      setStatus("incorrect");
+      setSuggestions(suggest(raw.toLowerCase()));
+      setHistory((h) => [{ word: raw, ok: false }, ...h].slice(0, 6));
+      return;
+    }
+    if (outcome.kind === "invalid-format") {
+      setStatus("invalid-format");
+      // Don't pollute history with non-words.
+      return;
+    }
+    // network-error → don't add to history; surface a distinct message.
+    setStatus("network-error");
+  }, [text]);
 
   const reset = () => {
+    inFlightRef.current?.abort();
     setText("");
     setStatus("idle");
     setSuggestions([]);
+    setLastChecked("");
     inputRef.current?.focus();
   };
 
@@ -280,7 +412,7 @@ function SmartType({ isKh }: { isKh: boolean }) {
 
   const useSuggestion = (s: string) => {
     setText(s);
-    setStatus("correct");
+    setStatus("idle");
     setSuggestions([]);
     inputRef.current?.focus();
   };
@@ -289,8 +421,12 @@ function SmartType({ isKh }: { isKh: boolean }) {
   const ringClass =
     status === "correct"
       ? "border-emerald-500 ring-emerald-200 sf-flash-green"
-      : status === "incorrect"
+      : status === "incorrect" || status === "invalid-format"
       ? "border-rose-500 ring-rose-200 sf-flash-red"
+      : status === "network-error"
+      ? "border-amber-500 ring-amber-200"
+      : status === "checking"
+      ? "border-sky-400 ring-sky-100"
       : "border-stone-300 ring-transparent";
 
   return (
@@ -331,9 +467,14 @@ function SmartType({ isKh }: { isKh: boolean }) {
           <div className="flex gap-2">
             <button
               onClick={check}
-              className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold inline-flex items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
+              disabled={status === "checking" || !text.trim()}
+              className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-bold inline-flex items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
             >
-              <Sparkles className="w-4 h-4" />
+              {status === "checking" ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Sparkles className="w-4 h-4" />
+              )}
               {isKh ? "ពិនិត្យ" : "Check"}
             </button>
             <button
@@ -366,6 +507,24 @@ function SmartType({ isKh }: { isKh: boolean }) {
             </div>
           )}
 
+          {status === "checking" && (
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-sky-50 border-2 border-sky-200">
+              <div className="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center text-white flex-shrink-0">
+                <Loader2 className="w-6 h-6 animate-spin" />
+              </div>
+              <div>
+                <div className={`text-2xl font-display font-bold text-sky-700 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "កំពុង​ពិនិត្យ..." : "Checking dictionary…"}
+                </div>
+                <div className={`text-sm text-sky-700/80 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                  {isKh
+                    ? "កំពុង​ស្វែង​រក​ពាក្យ “" + lastChecked + "” នៅ​ក្នុង​វចនានុក្រម​អង់គ្លេស។"
+                    : `Looking up “${lastChecked}” in the English dictionary…`}
+                </div>
+              </div>
+            </div>
+          )}
+
           {status === "incorrect" && (
             <div className="flex items-start gap-3 p-4 rounded-xl bg-rose-50 border-2 border-rose-300">
               <div className="w-12 h-12 rounded-full bg-rose-500 flex items-center justify-center text-white text-2xl flex-shrink-0">
@@ -378,7 +537,9 @@ function SmartType({ isKh }: { isKh: boolean }) {
                 <div className={`text-sm text-rose-700/85 mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}>
                   {suggestions.length > 0
                     ? (isKh ? "តើអ្នក​មាន​បំណង​សរសេរ​ថា...?" : "Did you mean...?")
-                    : (isKh ? "ខ្ញុំ​មិន​ស្គាល់​ពាក្យ​នេះ​ទេ — សូម​ពិនិត្យ​អក្ខរា​ឡើង​វិញ។" : "I don't recognise that word — please check the letters again.")}
+                    : (isKh
+                        ? `ពាក្យ “${lastChecked}” មិន​មាន​ក្នុង​វចនានុក្រម​អង់គ្លេស​ទេ។`
+                        : `“${lastChecked}” isn't in the English dictionary. Check the letters and try again.`)}
                 </div>
                 {suggestions.length > 0 && (
                   <div className="flex flex-wrap gap-2">
@@ -393,6 +554,49 @@ function SmartType({ isKh }: { isKh: boolean }) {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+          )}
+
+          {status === "invalid-format" && (
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-rose-50 border-2 border-rose-300">
+              <div className="w-12 h-12 rounded-full bg-rose-500 flex items-center justify-center text-white text-2xl flex-shrink-0">
+                ✕
+              </div>
+              <div>
+                <div className={`text-2xl font-display font-bold text-rose-700 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "ទម្រង់​មិន​ត្រឹមត្រូវ" : "Letters only, please"}
+                </div>
+                <div className={`text-sm text-rose-700/85 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                  {isKh
+                    ? "សូម​វាយ​ពាក្យ​មួយ​ប្រើ​អក្សរ​អង់គ្លេស​តែ​ប៉ុណ្ណោះ (a–z) — គ្មាន​លេខ ឬ​សញ្ញា​ផ្សេងៗ។"
+                    : "Please type a single English word using letters only (a–z) — no numbers or special characters."}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {status === "network-error" && (
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-amber-50 border-2 border-amber-300">
+              <div className="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-white flex-shrink-0">
+                <WifiOff className="w-6 h-6" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className={`text-2xl font-display font-bold text-amber-800 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "បញ្ហា​បណ្ដាញ" : "Network error"}
+                </div>
+                <div className={`text-sm text-amber-800/85 mb-3 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                  {isKh
+                    ? "មិន​អាច​ភ្ជាប់​ទៅ​វចនានុក្រម​បាន​ទេ — សូម​ពិនិត្យ​ការ​ភ្ជាប់​អ៊ីនធឺណិត​របស់​អ្នក រួច​សាកល្បង​ម្ដងទៀត។ ពាក្យ​នេះ​មិន​ត្រូវ​បាន​សម្គាល់​ថា​ខុស​ទេ។"
+                    : "Couldn't reach the dictionary service — please check your internet connection and try again. We did not mark this word as wrong."}
+                </div>
+                <button
+                  onClick={check}
+                  className="px-3 py-1.5 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  {isKh ? "សាកល្បង​ម្ដងទៀត" : "Try again"}
+                </button>
               </div>
             </div>
           )}
