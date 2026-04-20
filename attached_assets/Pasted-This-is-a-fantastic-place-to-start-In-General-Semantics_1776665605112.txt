@@ -1,0 +1,34 @@
+This is a fantastic place to start. In General Semantics, giving a child a "Shopping List" takes math out of the abstract world of symbols and puts it directly into the physical "Territory" of their daily lives.
+
+From a biological perspective, when a child physically drags an item across a screen with their finger, they are using their Motor Cortex. When this physical movement is tied to a number and an English word, it creates a much stronger, multi-layered neural pathway than just looking at a static textbook page.
+
+The Replit Agent Prompt: Local Market Counter
+Copy and paste this instruction to the Agent to build the interactive market game:
+
+"I want to add a new interactive game called 'Local Market Counter' (បញ្ជររាប់ទំនិញនៅផ្សារ) to the Beginner English & Math section. Please implement the following:
+
+1. The 'Market Stall' UI:
+
+Create a colorful, kid-friendly interface with a large 'Basket' drop-zone in the center.
+
+Provide 3-4 draggable item stacks at the bottom (e.g., Mango/ស្វាយ, Banana/ចេក, Fish/ត្រី).
+
+2. Interactive Math Logic:
+
+When a student drags an item into the basket, automatically update a large, easy-to-read math equation below the basket.
+
+Example: If they drop 2 mangoes and 1 banana, the text should read: '2 Mangoes + 1 Banana = 3 Items'.
+
+Ensure the logic handles basic English plurals (changing 'Mango' to 'Mangoes' when the count is > 1).
+
+3. Audio Integration (Web Speech API):
+
+Using window.speechSynthesis (which we used in the vocabulary section), make the game speak the number and the item aloud when it is dropped in the basket (e.g., 'One... Mango!', 'Two... Mangoes!'). Slow the speech rate slightly for ESL learners.
+
+4. The 'Shopping List' Challenge:
+
+Add a 'Goal' card at the top that generates a simple random challenge (e.g., 'Please buy 3 Mangoes and 1 Fish').
+
+When the basket contents match the goal, trigger a fun CSS 'Confetti' or 'Star' animation and a success sound. Include a 'Clear Basket' button to reset.
+
+5. Styling: Use bright, engaging colors. Ensure the draggable items are large enough for small fingers on mobile devices. Keep the Khmer translations clear but secondary to the English targets."

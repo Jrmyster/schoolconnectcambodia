@@ -5,6 +5,7 @@ import { GreetingsModule } from "@/components/widgets/GreetingsModule";
 import { VocabularyModule } from "@/components/widgets/VocabularyModule";
 import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridge";
 import { PunctuationChecker } from "@/components/widgets/PunctuationChecker";
+import { SentenceTrain } from "@/components/widgets/SentenceTrain";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -35,6 +36,11 @@ export function EnglishWritingPage() {
         {/* The main builder */}
         <div className="mb-10">
           <ParagraphBuilder />
+        </div>
+
+        {/* Sentence Train — drag-and-drop S+V+O game for young learners */}
+        <div className="mb-10">
+          <SentenceTrain />
         </div>
 
         {/* Introductions & Greetings — for ESL beginners */}
