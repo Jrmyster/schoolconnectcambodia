@@ -191,6 +191,20 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["អគ្គិសនី", "ភ្លើង", "សុវត្ថិភាព", "ឆក់ភ្លើង"],
   },
 
+  // ── BEGINNER GUIDE (ESL kids) ────────────────────────────
+  {
+    id: "beginner-guide",
+    href: "/beginner-guide",
+    icon: BookOpen,
+    titleEn: "Beginner English & Math Starter",
+    titleKh: "មគ្គុទ្ទេសក៍ភាសាអង់គ្លេស និងគណិតវិទ្យា (ចាប់ផ្ដើម)",
+    categoryEn: "Beginner", categoryKh: "ចាប់ផ្ដើម",
+    descEn: "Alphabet A–Z with pictures, numbers 1–100, and a 100–1,000 number-builder for primary-school students.",
+    descKh: "អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០ សម្រាប់សិស្សបឋមសិក្សា។",
+    keywordsEn: ["alphabet", "abc", "letters", "primary", "kids", "children", "esl", "beginner", "starter", "counting", "numbers", "1 to 100", "100 to 1000", "kindergarten", "early learning"],
+    keywordsKh: ["អក្ខរក្រម", "កុមារ", "បឋម", "ចាប់ផ្ដើម", "លេខ", "រាប់"],
+  },
+
   // ── ENGLISH WRITING ──────────────────────────────────────
   {
     id: "english-writing",
