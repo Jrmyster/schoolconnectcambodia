@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import {
   Volume2, BookOpen, Bed, ShowerHead, Sofa, Car, Boxes, Trees, Flower2,
-  Trophy, GraduationCap, Stethoscope, Armchair, Utensils, Layers,
+  Trophy, GraduationCap, Stethoscope, Armchair, Utensils, Layers, Shirt,
   Search, X, SearchX,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
@@ -30,7 +30,8 @@ type Category = {
   /** Tailwind color name root used for chip + active state. */
   color:
     | "rose" | "amber" | "sky" | "emerald" | "violet" | "indigo"
-    | "lime" | "teal" | "orange" | "blue" | "pink" | "fuchsia" | "cyan";
+    | "lime" | "teal" | "orange" | "blue" | "pink" | "fuchsia" | "cyan"
+    | "yellow";
   items: VocabItem[];
 };
 
@@ -49,6 +50,7 @@ const COLOR: Record<Category["color"], { card: string; iconBg: string; iconText:
   pink:    { card: "from-pink-50 to-pink-100 border-pink-200",       iconBg: "bg-pink-100",    iconText: "text-pink-700",    activeBg: "bg-pink-500",    activeBorder: "border-pink-700" },
   fuchsia: { card: "from-fuchsia-50 to-fuchsia-100 border-fuchsia-200", iconBg: "bg-fuchsia-100", iconText: "text-fuchsia-700", activeBg: "bg-fuchsia-500", activeBorder: "border-fuchsia-700" },
   cyan:    { card: "from-cyan-50 to-cyan-100 border-cyan-200",       iconBg: "bg-cyan-100",    iconText: "text-cyan-700",    activeBg: "bg-cyan-500",    activeBorder: "border-cyan-700" },
+  yellow:  { card: "from-yellow-50 to-yellow-100 border-yellow-200", iconBg: "bg-yellow-100",  iconText: "text-yellow-800",  activeBg: "bg-yellow-500",  activeBorder: "border-yellow-700" },
 };
 
 /* ── Category catalog ───────────────────────────────────────────────── */
@@ -183,6 +185,21 @@ const CATEGORIES: Category[] = [
       { en: "Window",         kh: KH_TODO("បង្អួច"),  emoji: "🪟" },
       { en: "Pedal",          kh: KH_TODO("ជាន់"),    emoji: "👟" },
       { en: "Seatbelt",       kh: KH_TODO("ខ្សែក្រវាត់សុវត្ថិភាព"), emoji: "🪢" },
+    ],
+  },
+  {
+    id: "clothes", en: "Clothes", kh: KH_TODO("សម្លៀកបំពាក់"), icon: Shirt, color: "yellow",
+    items: [
+      { en: "Shirt",   kh: KH_TODO("អាវ"),                 emoji: "👕" },
+      { en: "Pants",   kh: KH_TODO("ខោវែង"),               emoji: "👖" },
+      { en: "Shoes",   kh: KH_TODO("ស្បែកជើង"),            emoji: "👟" },
+      { en: "Belt",    kh: KH_TODO("ខ្សែក្រវាត់"),         emoji: "🧷" },
+      { en: "Hat",     kh: KH_TODO("មួក"),                 emoji: "🧢" },
+      { en: "Glasses", kh: KH_TODO("វ៉ែនតា"),              emoji: "👓" },
+      { en: "Watch",   kh: KH_TODO("នាឡិកាដៃ"),            emoji: "⌚" },
+      { en: "Tie",     kh: KH_TODO("ក្រវាត់ក"),            emoji: "👔" },
+      { en: "Sandals", kh: KH_TODO("ស្បែកជើងផ្ទាត់"),     emoji: "🩴" },
+      { en: "Shorts",  kh: KH_TODO("ខោខ្លី"),              emoji: "🩳" },
     ],
   },
   {
