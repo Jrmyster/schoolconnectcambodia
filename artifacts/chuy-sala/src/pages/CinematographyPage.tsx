@@ -481,47 +481,111 @@ function LensPhysicsSimulator({ isKh }: { isKh: boolean }) {
 //  Tool 2: Exposure Triangle Game
 // ════════════════════════════════════════════════════════════════════════════
 
-const ISO_VALUES = [100, 400, 1600, 6400];
-const APERTURE_VALUES = ["f/11", "f/5.6", "f/2.8", "f/1.4"]; // index = "more light"
-const SHUTTER_LABELS = ["1/2000", "1/500", "1/125", "1/30"];   // index = "more light, more blur"
+// ─── Continuous range definitions ───────────────────────────────────────────
+// Sliders are linear 0..1000 (step=1) for fluid control. We then map each
+// position to its real-world photographic value using the correct math:
+//   • ISO is linear (100 → 6400)
+//   • Aperture follows a geometric (exponential) sequence (f/1.4 → f/22)
+//   • Shutter denominator is also geometric (1/30 → 1/2000)
+const ISO_MIN = 100, ISO_MAX = 6400;
+const AP_MIN = 1.4, AP_MAX = 22;
+const SH_DENOM_MIN = 30, SH_DENOM_MAX = 2000;
+const SLIDER_MAX = 1000;
+
+// Visual tick guides on the track. They are positioned at each value's true
+// mathematical position (not evenly spaced), so the slider thumb passes
+// directly under each marker as you scrub.
+const ISO_TICKS = [100, 400, 1600, 6400];
+const AP_TICKS = [1.4, 2.8, 5.6, 11, 22];
+const SH_DENOM_TICKS = [30, 125, 500, 2000];
+
+function isoFromPos(p: number): number {
+  return ISO_MIN + (p / SLIDER_MAX) * (ISO_MAX - ISO_MIN);
+}
+function fStopFromPos(p: number): number {
+  return AP_MIN * Math.pow(AP_MAX / AP_MIN, p / SLIDER_MAX);
+}
+function shutterDenomFromPos(p: number): number {
+  return SH_DENOM_MIN * Math.pow(SH_DENOM_MAX / SH_DENOM_MIN, p / SLIDER_MAX);
+}
+
+// Tick → slider-position percentage (0..100) for absolute-positioned guides.
+const isoTickPct = (v: number) => ((v - ISO_MIN) / (ISO_MAX - ISO_MIN)) * 100;
+const apTickPct = (v: number) =>
+  (Math.log(v / AP_MIN) / Math.log(AP_MAX / AP_MIN)) * 100;
+const shTickPct = (denom: number) =>
+  (Math.log(denom / SH_DENOM_MIN) / Math.log(SH_DENOM_MAX / SH_DENOM_MIN)) * 100;
 
 function ExposureTriangleGame({ isKh }: { isKh: boolean }) {
-  const [iso, setIso] = useState(1);       // ISO 400
-  const [aperture, setAperture] = useState(2); // f/2.8
-  const [shutter, setShutter] = useState(1);   // 1/500
+  // Default positions equivalent to ISO 400, f/2.8, 1/500 — the same defaults
+  // as the previous "good shot" starting point, just expressed as continuous
+  // slider positions on a 0..1000 scale.
+  const [isoPos, setIsoPos] = useState(48);   // → ISO 400
+  const [apPos, setApPos] = useState(252);    // → f/2.8
+  const [shPos, setShPos] = useState(670);    // → 1/500
 
-  // Total exposure: 0..9 (3 stops each * 3 sliders)
-  const exposureSum = iso + aperture + shutter;
+  // Derive real photographic values from slider positions (continuous).
+  const iso = isoFromPos(isoPos);
+  const fStop = fStopFromPos(apPos);
+  const denom = shutterDenomFromPos(shPos);
 
-  // Brightness 0.2..1.6 mapped from 0..9
+  // Display strings — round only at the moment of rendering, never the math.
+  const isoDisplay = Math.round(iso);
+  const apDisplay = `f/${fStop.toFixed(1)}`;
+  const shDisplay = `1/${Math.round(denom)}`;
+
+  // ─── Continuous exposure math (in EV stops above the "correct" baseline) ──
+  // Light reaching the sensor ∝ ISO · t · (1/fStop²). In log2 (stops):
+  //   stops = log2(ISO/400) + log2((1/denom)/(1/500)) + 2·log2(2.8/fStop)
+  // Baseline (ISO 400, f/2.8, 1/500) = 0 stops = perfect exposure.
+  const exposureStops = useMemo(
+    () =>
+      Math.log2(iso / 400) +
+      Math.log2(500 / denom) +
+      2 * Math.log2(2.8 / fStop),
+    [iso, fStop, denom],
+  );
+
+  // Map stops → preview brightness. Each ±2 stops doubles/halves brightness.
+  // Clamped to keep extreme values visible without crashing the CSS filter.
   const brightness = useMemo(() => {
-    return 0.25 + (exposureSum / 9) * 1.4;
-  }, [exposureSum]);
+    const raw = 0.85 * Math.pow(2, exposureStops / 3);
+    return Math.max(0.18, Math.min(1.7, raw));
+  }, [exposureStops]);
 
-  // Motion blur on the bike (px). Slow shutter (high shutter index) = more blur.
-  // Note: in real photography, the bike's actual speed is unchanged — only the
-  // amount of blur on the captured frame changes. So bikeDur stays constant.
-  const motionBlur = useMemo(() => Math.max(0, shutter * 2.5 - 1), [shutter]);
+  // Motion blur on the bike (px). Slower shutter (lower denom) = more blur.
+  // 0 px at 1/500 or faster, scaling logarithmically as it slows.
+  const motionBlur = useMemo(
+    () => Math.max(0, Math.log2(500 / denom) * 2),
+    [denom],
+  );
   const bikeDur = "1.6s";
 
-  // Background defocus — wider aperture = more bokeh blur
-  const bgBlur = useMemo(() => aperture * 1.6, [aperture]);
+  // Background defocus — wider aperture (smaller f-number) = more bokeh.
+  const bgBlur = useMemo(
+    () => Math.max(0, Math.log2(2.8 / fStop) * 3),
+    [fStop],
+  );
 
-  // Grain intensity 0..1 from ISO
-  const grain = iso / 3;
+  // Grain intensity 0..1 from ISO — log scaled across the full range.
+  const grain = useMemo(
+    () => Math.log2(iso / ISO_MIN) / Math.log2(ISO_MAX / ISO_MIN),
+    [iso],
+  );
 
-  // "Perfect photo" criteria
-  const goodExposure = exposureSum >= 4 && exposureSum <= 6;
-  const goodFreeze = shutter <= 1;     // sharp motion
-  const goodGrain = iso <= 1;          // clean
+  // "Perfect photo" criteria — generous bands so continuous sliders are still
+  // achievable without pixel-perfect placement.
+  const goodExposure = Math.abs(exposureStops) <= 1; // within ±1 EV
+  const goodFreeze = denom >= 500;                    // shutter ≥ 1/500
+  const goodGrain = iso <= 500;                       // up to ~ISO 500
   const isPerfect = goodExposure && goodFreeze && goodGrain;
 
   // Diagnostic message
   const issues: { en: string; kh: string }[] = [];
-  if (exposureSum > 6) issues.push({ en: "Too bright (overexposed)", kh: "ភ្លឺពេក (Overexposed)" });
-  if (exposureSum < 4) issues.push({ en: "Too dark (underexposed)", kh: "ងងឹតពេក (Underexposed)" });
-  if (shutter > 1) issues.push({ en: "Shutter too slow → motion blur", kh: "ល្បឿនឈុតយឺតពេក → រូបព្រិលដោយចលនា" });
-  if (iso > 1) issues.push({ en: "ISO too high → grainy noise", kh: "ISO ខ្ពស់ពេក → គ្រេន" });
+  if (exposureStops > 1) issues.push({ en: "Too bright (overexposed)", kh: "ភ្លឺពេក (Overexposed)" });
+  if (exposureStops < -1) issues.push({ en: "Too dark (underexposed)", kh: "ងងឹតពេក (Underexposed)" });
+  if (denom < 500) issues.push({ en: "Shutter too slow → motion blur", kh: "ល្បឿនឈុតយឺតពេក → រូបព្រិលដោយចលនា" });
+  if (iso > 500) issues.push({ en: "ISO too high → grainy noise", kh: "ISO ខ្ពស់ពេក → គ្រេន" });
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,320px)] gap-0">
@@ -613,9 +677,9 @@ function ExposureTriangleGame({ isKh }: { isKh: boolean }) {
 
         {/* Read-out card under the preview */}
         <div className="mt-3 grid grid-cols-3 gap-2 text-[11px] font-mono">
-          <ReadOut label="ISO" value={String(ISO_VALUES[iso])} hot={iso > 1} />
-          <ReadOut label={isKh ? "ប្រហោង" : "Aperture"} value={APERTURE_VALUES[aperture]} hot={false} />
-          <ReadOut label={isKh ? "ឈុត" : "Shutter"} value={SHUTTER_LABELS[shutter]} hot={shutter > 1} />
+          <ReadOut label="ISO" value={String(isoDisplay)} hot={iso > 500} />
+          <ReadOut label={isKh ? "ប្រហោង" : "Aperture"} value={apDisplay} hot={false} />
+          <ReadOut label={isKh ? "ឈុត" : "Shutter"} value={shDisplay} hot={denom < 500} />
         </div>
       </div>
 
@@ -627,17 +691,25 @@ function ExposureTriangleGame({ isKh }: { isKh: boolean }) {
               <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
               ISO {isKh ? "(ភាពងាយរំញោច)" : "(Sensitivity)"}
             </label>
-            <span className="text-yellow-300 font-mono text-sm font-bold">{ISO_VALUES[iso]}</span>
+            <span className="text-yellow-300 font-mono text-sm font-bold tabular-nums" data-testid="exposure-iso-value">{isoDisplay}</span>
           </div>
           <input
-            id="cine-iso" type="range" min={0} max={3} step={1}
-            value={iso} onChange={(e) => setIso(Number(e.target.value))}
-            className="cine-range"
-            aria-valuetext={String(ISO_VALUES[iso])}
+            id="cine-iso" type="range" min={0} max={SLIDER_MAX} step={1}
+            value={isoPos} onChange={(e) => setIsoPos(Number(e.target.value))}
+            className="cine-range w-full"
+            aria-valuetext={String(isoDisplay)}
             data-testid="exposure-iso"
           />
-          <div className="flex justify-between text-[10px] font-mono text-white/40 mt-1">
-            {ISO_VALUES.map((v) => <span key={v}>{v}</span>)}
+          <div className="relative h-3 mt-1 text-[10px] font-mono text-white/40" aria-hidden="true">
+            {ISO_TICKS.map((v) => (
+              <span
+                key={v}
+                className="absolute -translate-x-1/2"
+                style={{ left: `${isoTickPct(v)}%` }}
+              >
+                {v}
+              </span>
+            ))}
           </div>
         </div>
 
@@ -647,17 +719,25 @@ function ExposureTriangleGame({ isKh }: { isKh: boolean }) {
               <ApertureIcon className="w-3.5 h-3.5 text-yellow-300" />
               {isKh ? "ប្រហោងពន្លឺ (ទំហំ)" : "Aperture (Size)"}
             </label>
-            <span className="text-yellow-300 font-mono text-sm font-bold">{APERTURE_VALUES[aperture]}</span>
+            <span className="text-yellow-300 font-mono text-sm font-bold tabular-nums" data-testid="exposure-aperture-value">{apDisplay}</span>
           </div>
           <input
-            id="cine-ap" type="range" min={0} max={3} step={1}
-            value={aperture} onChange={(e) => setAperture(Number(e.target.value))}
-            className="cine-range"
-            aria-valuetext={APERTURE_VALUES[aperture]}
+            id="cine-ap" type="range" min={0} max={SLIDER_MAX} step={1}
+            value={apPos} onChange={(e) => setApPos(Number(e.target.value))}
+            className="cine-range w-full"
+            aria-valuetext={apDisplay}
             data-testid="exposure-aperture"
           />
-          <div className="flex justify-between text-[10px] font-mono text-white/40 mt-1">
-            {APERTURE_VALUES.map((v) => <span key={v}>{v}</span>)}
+          <div className="relative h-3 mt-1 text-[10px] font-mono text-white/40" aria-hidden="true">
+            {AP_TICKS.map((v) => (
+              <span
+                key={v}
+                className="absolute -translate-x-1/2"
+                style={{ left: `${apTickPct(v)}%` }}
+              >
+                f/{v}
+              </span>
+            ))}
           </div>
         </div>
 
@@ -667,17 +747,25 @@ function ExposureTriangleGame({ isKh }: { isKh: boolean }) {
               <Timer className="w-3.5 h-3.5 text-yellow-300" />
               {isKh ? "ល្បឿនឈុត (ពេលវេលា)" : "Shutter Speed (Time)"}
             </label>
-            <span className="text-yellow-300 font-mono text-sm font-bold">{SHUTTER_LABELS[shutter]}</span>
+            <span className="text-yellow-300 font-mono text-sm font-bold tabular-nums" data-testid="exposure-shutter-value">{shDisplay}</span>
           </div>
           <input
-            id="cine-sh" type="range" min={0} max={3} step={1}
-            value={shutter} onChange={(e) => setShutter(Number(e.target.value))}
-            className="cine-range"
-            aria-valuetext={SHUTTER_LABELS[shutter]}
+            id="cine-sh" type="range" min={0} max={SLIDER_MAX} step={1}
+            value={shPos} onChange={(e) => setShPos(Number(e.target.value))}
+            className="cine-range w-full"
+            aria-valuetext={shDisplay}
             data-testid="exposure-shutter"
           />
-          <div className="flex justify-between text-[10px] font-mono text-white/40 mt-1">
-            {SHUTTER_LABELS.map((v) => <span key={v}>{v}</span>)}
+          <div className="relative h-3 mt-1 text-[10px] font-mono text-white/40" aria-hidden="true">
+            {SH_DENOM_TICKS.map((d) => (
+              <span
+                key={d}
+                className="absolute -translate-x-1/2"
+                style={{ left: `${shTickPct(d)}%` }}
+              >
+                1/{d}
+              </span>
+            ))}
           </div>
         </div>
 
