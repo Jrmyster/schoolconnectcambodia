@@ -88,7 +88,7 @@ export function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative -mt-8 z-30 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="relative -mt-8 z-30 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="bg-card rounded-2xl shadow-2xl border border-border p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border">
           <div className="flex flex-col items-center text-center pt-4 md:pt-0">
             <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-4">
@@ -124,6 +124,55 @@ export function Home() {
             <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
               {t("Completed Projects", "គម្រោងបានបញ្ចប់")}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* How it works — placed directly under the stats bar so visitors learn
+          the donation flow before scrolling into deeper content. The stats
+          card sits with mb-16 above this band, and the section's own py-20
+          gives generous breathing room so the two never visually collide. */}
+      <section className="py-20 bg-secondary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className={`text-3xl md:text-4xl font-bold text-foreground mb-4 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+              {t("How it works", "តើវាដំណើរការយ៉ាងដូចម្តេច?")}
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              {t("We believe in total transparency. See exactly what schools need and contact them directly.", "យើងជឿជាក់លើតម្លាភាពទាំងស្រុង។ សូមមើលយ៉ាងច្បាស់នូវអ្វីដែលសាលារៀនត្រូវការ ហើយទាក់ទងពួកគេដោយផ្ទាល់។")}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              {
+                step: "01",
+                title: t("Find a School", "ស្វែងរកសាលារៀន"),
+                desc: t("Browse the interactive map to find rural schools and see their specific needs.", "រុករកផែនទីអន្តរកម្មដើម្បីស្វែងរកសាលារៀននៅជនបទ និងមើលតម្រូវការជាក់លាក់របស់ពួកគេ។")
+              },
+              {
+                step: "02",
+                title: t("Contact Directly", "ទាក់ទងដោយផ្ទាល់"),
+                desc: t("Click 'Donate' to email the school administration directly. No middlemen.", "ចុច 'បរិច្ចាគ' ដើម្បីផ្ញើអ៊ីមែលទៅរដ្ឋបាលសាលាដោយផ្ទាល់។ គ្មានអ្នកកណ្តាលទេ។")
+              },
+              {
+                step: "03",
+                title: t("See the Impact", "មើលពីផលប៉ះពាល់"),
+                desc: t("Schools post 'Thank You' photos on the transparency log once items are received.", "សាលារៀនបង្ហោះរូបភាព 'អរគុណ' នៅលើកំណត់ហេតុតម្លាភាពនៅពេលទទួលបានសម្ភារៈ។")
+              }
+            ].map((item, i) => (
+              <div key={i} className="relative bg-white p-8 rounded-3xl shadow-lg border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <span className="absolute -top-6 -left-6 text-7xl font-black text-primary/10 font-display select-none">
+                  {item.step}
+                </span>
+                <h3 className={`text-xl font-bold text-foreground mb-4 mt-4 relative z-10 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
+                  {item.title}
+                </h3>
+                <p className={`text-muted-foreground relative z-10 ${language === 'kh' ? 'font-khmer leading-loose text-sm' : ''}`}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -255,52 +304,6 @@ export function Home() {
               {t("Visit AnatomyKH", "ចូលទស្សនា AnatomyKH")} →
             </div>
           </a>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-20 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className={`text-3xl md:text-4xl font-bold text-foreground mb-4 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-              {t("How it works", "តើវាដំណើរការយ៉ាងដូចម្តេច?")}
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              {t("We believe in total transparency. See exactly what schools need and contact them directly.", "យើងជឿជាក់លើតម្លាភាពទាំងស្រុង។ សូមមើលយ៉ាងច្បាស់នូវអ្វីដែលសាលារៀនត្រូវការ ហើយទាក់ទងពួកគេដោយផ្ទាល់។")}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              { 
-                step: "01", 
-                title: t("Find a School", "ស្វែងរកសាលារៀន"), 
-                desc: t("Browse the interactive map to find rural schools and see their specific needs.", "រុករកផែនទីអន្តរកម្មដើម្បីស្វែងរកសាលារៀននៅជនបទ និងមើលតម្រូវការជាក់លាក់របស់ពួកគេ។")
-              },
-              { 
-                step: "02", 
-                title: t("Contact Directly", "ទាក់ទងដោយផ្ទាល់"), 
-                desc: t("Click 'Donate' to email the school administration directly. No middlemen.", "ចុច 'បរិច្ចាគ' ដើម្បីផ្ញើអ៊ីមែលទៅរដ្ឋបាលសាលាដោយផ្ទាល់។ គ្មានអ្នកកណ្តាលទេ។")
-              },
-              { 
-                step: "03", 
-                title: t("See the Impact", "មើលពីផលប៉ះពាល់"), 
-                desc: t("Schools post 'Thank You' photos on the transparency log once items are received.", "សាលារៀនបង្ហោះរូបភាព 'អរគុណ' នៅលើកំណត់ហេតុតម្លាភាពនៅពេលទទួលបានសម្ភារៈ។")
-              }
-            ].map((item, i) => (
-              <div key={i} className="relative bg-white p-8 rounded-3xl shadow-lg border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <span className="absolute -top-6 -left-6 text-7xl font-black text-primary/10 font-display select-none">
-                  {item.step}
-                </span>
-                <h3 className={`text-xl font-bold text-foreground mb-4 mt-4 relative z-10 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-                  {item.title}
-                </h3>
-                <p className={`text-muted-foreground relative z-10 ${language === 'kh' ? 'font-khmer leading-loose text-sm' : ''}`}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </div>
