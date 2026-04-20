@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -285,6 +285,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Plane,
         descEn: "See air particles race over an airfoil to make Lift, meet the Wright brothers, and click each of the four forces of flight on a real plane diagram.",
         descKh: "មើលភាគល្អិតខ្យល់រត់លើស្លាបយន្តហោះបង្កើតកម្លាំងលើក ស្គាល់បងប្អូន Wright និងចុចលើកម្លាំងបួននៃការហោះហើរលើតារាងយន្តហោះពិតប្រាកដ។",
+      },
+      {
+        href: "/robotics",
+        labelEn: "Robotics: Machines That Think",
+        labelKh: "រ៉ូបូតវិទ្យា៖ ម៉ាស៊ីនដែលចេះគិត",
+        icon: Bot,
+        descEn: "Run the Sense-Think-Act loop, click hotspots on a Build-a-Bot, and follow the 4-step engineering cycle from idea to working machine.",
+        descKh: "ដំណើរការវដ្តយល់ឃើញ-គិត-ធ្វើសកម្មភាព ចុចចំណុចភ្លឺលើ Build-a-Bot និងអនុវត្តតាមវដ្តវិស្វកម្មបួនជំហាន។",
       },
     ],
   },
