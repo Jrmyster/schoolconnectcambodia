@@ -22,6 +22,7 @@ import { SafetyPage } from "@/pages/SafetyPage";
 import { ExamPrepPage } from "@/pages/ExamPrepPage";
 import { EnglishWritingPage } from "@/pages/EnglishWritingPage";
 import { SubmitStoryPage } from "@/pages/SubmitStoryPage";
+import { SubmitNeedPage } from "@/pages/SubmitNeedPage";
 import { SpacePage } from "@/pages/SpacePage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ScientificLiteracyPage } from "@/pages/ScientificLiteracyPage";
@@ -93,6 +94,7 @@ function Router() {
           <Route path="/exam-prep" component={ExamPrepPage} />
           <Route path="/english-writing" component={EnglishWritingPage} />
           <Route path="/submit-story" component={SubmitStoryPage} />
+          <Route path="/submit-need" component={SubmitNeedPage} />
           <Route path="/space" component={SpacePage} />
           <Route path="/science" component={ScientificLiteracyPage} />
           <Route path="/reading-list" component={ReadingListPage} />
