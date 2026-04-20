@@ -40,9 +40,10 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "រុករក",
     icon: Compass,
     items: [
-      { href: "/",      labelEn: "Home",        labelKh: "ទំព័រដើម",  icon: Heart },
-      { href: "/map",   labelEn: "Map",          labelKh: "ផែនទី",     icon: Map },
-      { href: "/needs", labelEn: "Browse Needs", labelKh: "តម្រូវការ", icon: Heart },
+      { href: "/",          labelEn: "Home",        labelKh: "ទំព័រដើម",  icon: Heart },
+      { href: "/map",       labelEn: "Map",          labelKh: "ផែនទី",     icon: Map },
+      { href: "/needs",     labelEn: "Browse Needs", labelKh: "តម្រូវការ", icon: Heart },
+      { href: "/projects",  labelEn: "Completed",    labelKh: "បានបញ្ចប់", icon: CheckCircle },
     ],
   },
   {
@@ -107,7 +108,6 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "The Science of Society — core concepts, the Veblen Lens on conspicuous consumption, and what sociologists really do.",
         descKh: "វិទ្យាសាស្ត្រនៃសង្គម — គោលគំនិតសំខាន់ៗ កែវយឹត Veblen លើការប្រើប្រាស់បង្ហាញឈ្មោះ និងអ្វីដែលអ្នកសង្គមវិទ្យាធ្វើពិតប្រាកដ។",
       },
-      { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
     ],
   },
   {
