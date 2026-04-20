@@ -1,0 +1,32 @@
+The "Future of Computing" (អនាគតនៃបច្ចេកវិទ្យាកុំព្យូទ័រ) section is the final piece of the timeline. In General Semantics, this teaches students that the "Map" is still being drawn. They aren't just passive observers of history; they are the generation that will navigate and build these future territories.
+
+From a biological perspective, we are looking at the potential Merging of Biology and Technology. We are moving from tools we hold in our hands to tools that can interface directly with our nervous systems or solve problems that are currently impossible for biological brains.
+
+The Replit Agent Prompt: Future Computing 2050
+Copy and paste this instruction to the Agent to add the final, futuristic chapter to your timeline:
+
+"I want to add a final, forward-looking era to the Computing Timeline called 'The Horizon: 2050 & Beyond' (អនាគត៖ ឆ្នាំ២០៥០ និងលើសពីនេះ). Please implement:
+
+1. Quantum Computing (កុំព្យូទ័រខ្វានតូម):
+
+Use a 'Glow' effect to explain that while current computers use 'Bits' (0 or 1), Quantum computers use 'Qubits' that can be both at the same time.
+
+The Benefit: They can solve medicine and climate problems in seconds that would take today's computers millions of years.
+
+2. Brain-Computer Interfaces (ចំណុចប្រទាក់ខួរក្បាល និងកុំព្យូទ័រ):
+
+Explain the concept of 'Neural-Link' technology—where we might one day control computers just by thinking.
+
+Add a bilingual note: 'This could help people who cannot move their bodies to walk or talk again.'
+
+3. Sustainable Computing (បច្ចេកវិទ្យាបៃតង):
+
+Highlight the move toward 'DNA Data Storage' (using biology to store digital info) and computers powered entirely by light/solar.
+
+4. The Interactive 'Future-Predictor' Quiz:
+
+Ask students: 'What problem do you want a 2050 computer to solve?' (e.g., Curing diseases, Cleaning the ocean, Growing food in the desert).
+
+Allow them to type an answer and display it on a 'Wall of Future Ideas'.
+
+5. Styling: Use a sleek, 'Glassmorphism' effect with animated 'Energy Pulses' or 'Particles' to represent the shift from solid hardware to quantum/biological systems."
