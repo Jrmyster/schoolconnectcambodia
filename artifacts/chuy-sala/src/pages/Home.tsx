@@ -22,16 +22,21 @@ export function Home() {
       <DailySparkChallenge />
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-[700px] h-[92vh] flex items-center justify-center overflow-hidden">
+      {/* NOTE: overflow is intentionally NOT hidden here so the GlobalSearch
+          dropdown can extend below the hero. The bg image is absolutely
+          positioned to inset-0 of the section, so it stays bounded anyway. */}
+      <section className="relative w-full min-h-[700px] h-[92vh] flex items-center justify-center">
         <div className="absolute inset-0 bg-foreground/40 z-10" /> {/* Dark overlay for readability */}
-        
-        <img 
+
+        <img
           src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
-          alt="Cambodian countryside school" 
+          alt="Cambodian countryside school"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        
-        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
+
+        {/* z-40 lifts hero content (and the GlobalSearch dropdown inside it)
+            above the stats card below (which sits at z-30). */}
+        <div className="relative z-40 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
           {/* Language toggle — front and center */}
           <div className="flex justify-center mb-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <button
