@@ -107,6 +107,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sparkles,
       },
       {
+        href: "/quantum-limit",
+        labelEn: "The Quantum Limit: Max Planck's Discovery",
+        labelKh: "ដែនកំណត់កង់ទិច៖ ការរកឃើញរបស់ Max Planck",
+        icon: Atom,
+        descEn: "Energy comes in tiny packets. Tune a light beam to see E = hν, zoom from a human down to the Planck length, and meet the smallest possible moment of time.",
+        descKh: "ថាមពលមកជាកញ្ចប់តូចៗ។ លៃតម្រូវធ្នឹមពន្លឺដើម្បីមើល E = hν ពង្រីកពីមនុស្សដល់ប្រវែង Planck និងស្គាល់ពេលខ្លីបំផុតដែលមាន។",
+      },
+      {
         href: "/fun-lab",
         labelEn: "Fun Lab",
         labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
