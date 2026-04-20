@@ -4,6 +4,7 @@ import { ParagraphBuilder } from "@/components/widgets/ParagraphBuilder";
 import { GreetingsModule } from "@/components/widgets/GreetingsModule";
 import { VocabularyModule } from "@/components/widgets/VocabularyModule";
 import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridge";
+import { PunctuationChecker } from "@/components/widgets/PunctuationChecker";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -49,6 +50,11 @@ export function EnglishWritingPage() {
         {/* Connecting Words — Bridge Builder game */}
         <div className="mb-10">
           <ConnectingWordsBridge />
+        </div>
+
+        {/* Punctuation Checker — Traffic Signs game */}
+        <div className="mb-10">
+          <PunctuationChecker />
         </div>
 
         {/* Quick tips strip */}
