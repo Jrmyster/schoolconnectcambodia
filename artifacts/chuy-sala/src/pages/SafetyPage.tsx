@@ -5,6 +5,7 @@ import {
   MessageSquare
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { CybersecurityShield } from "@/components/safety/CybersecurityShield";
 
 // ── Threat warning cards ──────────────────────────────────────────────────────
 
@@ -369,6 +370,23 @@ export function SafetyPage() {
               );
             })}
           </div>
+        </section>
+
+        {/* ── The Cybersecurity Shield (3 interactive tools) ── */}
+        <section>
+          <div className="flex items-center gap-2 mb-2">
+            <Shield className="w-5 h-5 text-emerald-500" />
+            <h2 className={`font-display font-bold text-foreground text-2xl ${kh ? "font-khmer" : ""}`}>
+              {t("Digital Safety: The Cybersecurity Shield", "សុវត្ថិភាពឌីជីថល៖ ខែលសុវត្ថិភាពតាមអ៊ីនធឺណិត")}
+            </h2>
+          </div>
+          <p className={`text-muted-foreground text-sm mb-7 ${kh ? "font-khmer" : ""}`}>
+            {t(
+              "Three hands-on tools: spot a real phishing message, forge an unbreakable password, and trace where a single photo can travel.",
+              "ឧបករណ៍អន្តរកម្មបី៖ រកឃើញសារ phishing ពិត ផ្គុំពាក្យសម្ងាត់មិនអាចបំបាក់បាន និងតាមដានកន្លែងដែលរូបភាពតែមួយអាចធ្វើដំណើរទៅដល់។",
+            )}
+          </p>
+          <CybersecurityShield />
         </section>
 
         {/* ── Trust or Trash Quiz ── */}
