@@ -8,6 +8,7 @@ import { TechDoctor } from "@/components/tech/TechDoctor";
 import { BatteryCareGuide } from "@/components/tech/BatteryCareGuide";
 import { HistoryOfComputingTimeline } from "@/components/tech/HistoryOfComputingTimeline";
 import { ApolloVsPhoneCard } from "@/components/tech/ApolloVsPhoneCard";
+import { HorizonFutureCard } from "@/components/tech/HorizonFutureCard";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -147,6 +148,9 @@ export function HowComputersWorkPage() {
           <HistoryOfComputingTimeline />
           <div className="mt-6">
             <ApolloVsPhoneCard />
+          </div>
+          <div className="mt-6">
+            <HorizonFutureCard />
           </div>
         </section>
       </div>
