@@ -1,0 +1,32 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "D81Z3lvE6LT7pSIQRmx_c"
+uri = "file://attached_assets/stock_images/nyc-statue-liberty.jpg"
+type = "image"
+title = "Statue of Liberty New York City harbor sunset clear sky"
+
+[[outputs]]
+id = "ZTSba_SCI8bCUP-EvDSjZ"
+uri = "file://attached_assets/stock_images/paris-eiffel-tower.jpg"
+type = "image"
+title = "Eiffel Tower Paris France cityscape blue sky daytime"
+
+[[outputs]]
+id = "BaSF-CX9CPWUg3ggrRCLm"
+uri = "file://attached_assets/stock_images/tokyo-shibuya.jpg"
+type = "image"
+title = "Shibuya crossing intersection Tokyo Japan night neon lights crowd"
+
+[[outputs]]
+id = "81pTp1a4wBVROExZE4prZ"
+uri = "file://attached_assets/stock_images/phnom-penh-monument.jpg"
+type = "image"
+title = "Independence Monument Phnom Penh Cambodia city sunset"
+
+[[outputs]]
+id = "aNmFEN3vGV5Xa8p-ThTRI"
+uri = "file://attached_assets/stock_images/cairo-pyramids.jpg"
+type = "image"
+title = "Great Pyramid of Giza Egypt Cairo desert clear sky"
