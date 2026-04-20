@@ -14,20 +14,32 @@ type Block = {
 
 const BLOCKS: Block[] = [
   // Subjects (blue)
-  { id: "s1", slot: "subject", en: "I",        kh: "ខ្ញុំ" },
-  { id: "s2", slot: "subject", en: "You",      kh: "អ្នក" },
-  { id: "s3", slot: "subject", en: "The cow",  kh: "គោ" },
-  { id: "s4", slot: "subject", en: "The boy",  kh: "ក្មេងប្រុស" },
+  { id: "s1", slot: "subject", en: "I",           kh: "ខ្ញុំ" },
+  { id: "s2", slot: "subject", en: "You",         kh: "អ្នក" },
+  { id: "s3", slot: "subject", en: "The cow",     kh: "គោ" },
+  { id: "s4", slot: "subject", en: "The boy",     kh: "ក្មេងប្រុស" },
+  { id: "s5", slot: "subject", en: "We",          kh: "ពួកយើង" },
+  { id: "s6", slot: "subject", en: "They",        kh: "ពួកគេ" },
+  { id: "s7", slot: "subject", en: "The teacher", kh: "គ្រូបង្រៀន" },
+  { id: "s8", slot: "subject", en: "The girl",    kh: "ក្មេងស្រី" },
   // Verbs (red)
-  { id: "v1", slot: "verb", en: "eat",  kh: "ញ៉ាំ" },
-  { id: "v2", slot: "verb", en: "see",  kh: "ឃើញ" },
-  { id: "v3", slot: "verb", en: "like", kh: "ចូលចិត្ត" },
-  { id: "v4", slot: "verb", en: "walk", kh: "ដើរ" },
+  { id: "v1", slot: "verb", en: "eat",    kh: "ញ៉ាំ" },
+  { id: "v2", slot: "verb", en: "see",    kh: "ឃើញ" },
+  { id: "v3", slot: "verb", en: "like",   kh: "ចូលចិត្ត" },
+  { id: "v4", slot: "verb", en: "walk",   kh: "ដើរ" },
+  { id: "v5", slot: "verb", en: "read",   kh: "អាន" },
+  { id: "v6", slot: "verb", en: "want",   kh: "ចង់បាន" },
+  { id: "v7", slot: "verb", en: "go to",  kh: "ទៅ" },
+  { id: "v8", slot: "verb", en: "play",   kh: "លេង" },
   // Objects (green)
   { id: "o1", slot: "object", en: "rice",       kh: "បាយ" },
   { id: "o2", slot: "object", en: "water",      kh: "ទឹក" },
   { id: "o3", slot: "object", en: "the dog",    kh: "ឆ្កែ" },
   { id: "o4", slot: "object", en: "the school", kh: "សាលា" },
+  { id: "o5", slot: "object", en: "a book",     kh: "សៀវភៅ" },
+  { id: "o6", slot: "object", en: "the market", kh: "ផ្សារ" },
+  { id: "o7", slot: "object", en: "football",   kh: "បាល់ទាត់" },
+  { id: "o8", slot: "object", en: "an apple",   kh: "ផ្លែប៉ោម" },
 ];
 
 const SLOT_META: Record<Slot, { en: string; kh: string; subEn: string; subKh: string; color: string; ring: string; chip: string }> = {
