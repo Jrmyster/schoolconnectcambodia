@@ -36,6 +36,7 @@ import ArtOfLearningPage from "@/pages/ArtOfLearningPage";
 import FossilFuelsPage from "@/pages/FossilFuelsPage";
 import BicyclePhysicsPage from "@/pages/BicyclePhysicsPage";
 import RoboticsPage from "@/pages/RoboticsPage";
+import VideoGamesPage from "@/pages/VideoGamesPage";
 import SexualHealthPage from "@/pages/SexualHealthPage";
 import GlobalCitiesPage from "@/pages/GlobalCitiesPage";
 import CinematographyPage from "@/pages/CinematographyPage";
@@ -142,6 +143,7 @@ function Router() {
           <Route path="/fossil-fuels" component={FossilFuelsPage} />
           <Route path="/physics/bicycle" component={BicyclePhysicsPage} />
           <Route path="/robotics" component={RoboticsPage} />
+          <Route path="/video-games" component={VideoGamesPage} />
           <Route path="/sexual-health" component={SexualHealthPage} />
           <Route path="/global-cities" component={GlobalCitiesPage} />
           <Route path="/cinematography" component={CinematographyPage} />

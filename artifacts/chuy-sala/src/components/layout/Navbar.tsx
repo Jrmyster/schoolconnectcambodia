@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -293,6 +293,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Bot,
         descEn: "Run the Sense-Think-Act loop, click hotspots on a Build-a-Bot, and follow the 4-step engineering cycle from idea to working machine.",
         descKh: "ដំណើរការវដ្តយល់ឃើញ-គិត-ធ្វើសកម្មភាព ចុចចំណុចភ្លឺលើ Build-a-Bot និងអនុវត្តតាមវដ្តវិស្វកម្មបួនជំហាន។",
+      },
+      {
+        href: "/video-games",
+        labelEn: "Video Games: The Science of Play",
+        labelKh: "បច្ចេកវិទ្យាហ្គេម៖ វិទ្យាសាស្ត្រនៃការលេង",
+        icon: Gamepad2,
+        descEn: "Race a CPU against a GPU painting pixels, follow the Input → Update → Render game loop, and watch a 3D head get built from triangles, textures, and light.",
+        descKh: "ប្រណាំង CPU ប្រឆាំងនឹង GPU ក្នុងការគូរភីកសែល ដើរតាមវដ្តហ្គេម និងមើលក្បាល 3D ត្រូវសាងសង់ពីត្រីកោណ វាយនភាព និងពន្លឺ។",
       },
     ],
   },
