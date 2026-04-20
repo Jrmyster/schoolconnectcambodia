@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -9,6 +9,7 @@ import { BatteryCareGuide } from "@/components/tech/BatteryCareGuide";
 import { HistoryOfComputingTimeline } from "@/components/tech/HistoryOfComputingTimeline";
 import { ApolloVsPhoneCard } from "@/components/tech/ApolloVsPhoneCard";
 import { HorizonFutureCard } from "@/components/tech/HorizonFutureCard";
+import { IoT5GModule } from "@/components/tech/IoT5GModule";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -66,7 +67,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 06", "ឧបករណ៍អន្តរកម្ម៖ ០៦")}</span>
+                <span>{t("INTERACTIVES: 07", "ឧបករណ៍អន្តរកម្ម៖ ០៧")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -136,10 +137,22 @@ export function HowComputersWorkPage() {
           <BatteryCareGuide />
         </section>
 
-        {/* 6. History of Computing Timeline */}
+        {/* 6. IoT & 5G — The Global Nervous System */}
         <section>
           <SectionHeading
             kicker={kh ? "មេរៀនទី ៦" : "Lesson 6"}
+            titleEn="IoT & 5G: The Global Nervous System"
+            titleKh="អ៉ីនធឺណិតនៃកិច្ចការនានា និង 5G — ប្រព័ន្ធសរសៃប្រសាទសកល"
+            kh={kh}
+            Icon={Wifi}
+          />
+          <IoT5GModule />
+        </section>
+
+        {/* 7. History of Computing Timeline */}
+        <section>
+          <SectionHeading
+            kicker={kh ? "មេរៀនទី ៧" : "Lesson 7"}
             titleEn="History of Computing — Timeline"
             titleKh="ប្រវត្តិរូបវិទ្យាកុំព្យូទ័រ — បន្ទាត់ពេលវេលា"
             kh={kh}
