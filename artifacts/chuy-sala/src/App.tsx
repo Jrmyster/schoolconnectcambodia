@@ -59,6 +59,7 @@ import { AIChatPanel } from "@/components/AIChatPanel";
 import { AdminRoute } from "@/components/AdminRoute";
 import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
 import { MascotCheer } from "@/components/MascotCheer";
+import { BackToTop } from "@/components/BackToTop";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -147,6 +148,7 @@ function App() {
         <Toaster />
         <AIChatPanel />
         <MascotCheer />
+        <BackToTop />
       </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
