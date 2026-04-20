@@ -1,10 +1,11 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
 import { HardwareSoftwareAnalogy } from "@/components/tech/HardwareSoftwareAnalogy";
 import { TechDoctor } from "@/components/tech/TechDoctor";
+import { BatteryCareGuide } from "@/components/tech/BatteryCareGuide";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -62,7 +63,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 04", "ឧបករណ៍អន្តរកម្ម៖ ០៤")}</span>
+                <span>{t("INTERACTIVES: 05", "ឧបករណ៍អន្តរកម្ម៖ ០៥")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -118,6 +119,18 @@ export function HowComputersWorkPage() {
             Icon={Stethoscope}
           />
           <TechDoctor />
+        </section>
+
+        {/* 5. Battery Life & Care Guide */}
+        <section>
+          <SectionHeading
+            kicker={kh ? "មេរៀនទី ៥" : "Lesson 5"}
+            titleEn="Battery Life & Care Guide"
+            titleKh="មគ្គុទ្ទេសក៍ថែទាំថ្ម"
+            kh={kh}
+            Icon={BatteryCharging}
+          />
+          <BatteryCareGuide />
         </section>
       </div>
     </div>
