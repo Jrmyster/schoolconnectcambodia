@@ -50,6 +50,7 @@ import { PhysicsMotionPage } from "@/pages/PhysicsMotionPage";
 import { PhysicsForcesPage } from "@/pages/PhysicsForcesPage";
 import { PhysicsEnergyPage } from "@/pages/PhysicsEnergyPage";
 import { PhysicsWavesPage } from "@/pages/PhysicsWavesPage";
+import { ImpactReportPage } from "@/pages/ImpactReportPage";
 import NotFound from "@/pages/not-found";
 
 // Components
@@ -84,6 +85,7 @@ function Router() {
           <Route path="/map" component={MapPage} />
           <Route path="/needs" component={BrowseNeeds} />
           <Route path="/projects" component={CompletedProjects} />
+          <Route path="/impact" component={ImpactReportPage} />
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />

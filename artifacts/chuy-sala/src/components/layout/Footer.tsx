@@ -41,6 +41,15 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-secondary/80">
               <li>Email: jaredrobertw@gmail.com</li>
               <li>Phnom Penh, Cambodia</li>
+              <li>
+                <a
+                  href="/impact"
+                  data-testid="link-impact-report"
+                  className="underline underline-offset-2 hover:text-white transition-colors"
+                >
+                  {t("Impact & Transparency Report", "របាយការណ៍ផលប៉ះពាល់ និងតម្លាភាព")}
+                </a>
+              </li>
             </ul>
           </div>
           

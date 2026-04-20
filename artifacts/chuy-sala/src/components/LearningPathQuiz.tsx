@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import {
   Compass,
@@ -371,6 +371,22 @@ export function LearningPathQuiz() {
 
   const recommendedKeys = a1 && a2 && a3 ? recommend(a1, a2, a3) : [];
   const recommended = recommendedKeys.map((k) => SECTIONS[k]).filter(Boolean);
+
+  // Fire-and-forget anonymous completion logging for the Impact Report.
+  const loggedRef = useRef(false);
+  useEffect(() => {
+    if (step !== 3 || loggedRef.current) return;
+    if (!a1 || !a2 || !a3) return;
+    loggedRef.current = true;
+    const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+    fetch(`${base}/api/quiz-completions`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ curiosity: a1, level: a2, goal: a3 }),
+    }).catch(() => {
+      /* silent — analytics only */
+    });
+  }, [step, a1, a2, a3]);
 
   return (
     <section

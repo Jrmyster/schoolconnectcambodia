@@ -18,6 +18,7 @@ import authorsRouter from "./authors";
 import achievementsRouter from "./achievements";
 import notificationsRouter from "./notifications";
 import schoolMessagesRouter from "./schoolMessages";
+import impactRouter from "./impact";
 
 const router: IRouter = Router();
 
@@ -40,5 +41,6 @@ router.use(authorsRouter);
 router.use(achievementsRouter);
 router.use(notificationsRouter);
 router.use(schoolMessagesRouter);
+router.use(impactRouter);
 
 export default router;

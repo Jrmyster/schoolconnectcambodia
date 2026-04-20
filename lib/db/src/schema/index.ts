@@ -15,3 +15,4 @@ export * from "./authorOfMonth";
 export * from "./challengeCompletions";
 export * from "./notifications";
 export * from "./schoolMessages";
+export * from "./quizCompletions";
