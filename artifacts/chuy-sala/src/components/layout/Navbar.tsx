@@ -67,7 +67,6 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
       { href: "/world-history",         labelEn: "World History",     labelKh: "ប្រវត្តិសាស្ត្រពិភពលោក",  icon: Library },
       { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
-      { href: "/safety",                labelEn: "Digital Safety",    labelKh: "សុវត្ថិភាព",             icon: Shield },
     ],
   },
   {
@@ -191,6 +190,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Binary,
         descEn: "Build a virtual PC, flip binary switches, and see hardware vs. software — interactive blueprint diagrams.",
         descKh: "សាងសង់ Virtual PC ប្ដូរកុងតាក់គោលពីរ និងមើល Hardware ប្រឆាំងនឹង Software — តារាង blueprint អន្តរកម្ម។",
+      },
+      {
+        href: "/safety",
+        labelEn: "Digital Safety",
+        labelKh: "សុវត្ថិភាពឌីជីថល",
+        icon: Shield,
+        descEn: "Spot phishing scams, forge unbreakable passwords, and trace your digital footprint.",
+        descKh: "ស្គាល់ការបោកប្រាស់ phishing ផ្គុំពាក្យសម្ងាត់មិនអាចបំបាក់បាន និងតាមដានស្នាមជើងឌីជីថលរបស់អ្នក។",
       },
     ],
   },
