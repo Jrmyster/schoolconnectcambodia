@@ -89,16 +89,8 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "Philosophy",
         labelKh: "ទស្សនវិជ្ជា",
         icon: Compass,
-        descEn: "An interactive 7-branch Map of Thinking — explore ethics, logic, metaphysics, and more from Plato to today.",
-        descKh: "ផែនទីនៃការគិតមាន ៧ មែកធាងអន្តរកម្ម — ស្វែងយល់ពីសីលធម៌ តក្កវិជ្ជា មេតាហ្វីស៊ិក និងច្រើនទៀត ពី Plato មកដល់សព្វថ្ងៃ។",
-      },
-      {
-        href: "/study-center/buddhism",
-        labelEn: "Buddhist Philosophy",
-        labelKh: "ពុទ្ធសាសនទស្សនវិជ្ជា",
-        icon: Leaf,
-        descEn: "The Science of the Mind — the Four Noble Truths and a guided Mindful Pause exercise.",
-        descKh: "វិទ្យាសាស្ត្រនៃចិត្ត — អរិយសច្ច៤ និងលំហាត់សតិសម្រាប់ផ្អាកដោយការណែនាំ។",
+        descEn: "The Map of Thinking — a 7-branch interactive compass plus a deep dive into Buddhist Philosophy and the Four Noble Truths.",
+        descKh: "ផែនទីនៃការគិតមាន ៧ មែកធាងអន្តរកម្ម ព្រមទាំងការជ្រៅជ្រះអំពីពុទ្ធសាសនទស្សនវិជ្ជា និងអរិយសច្ច៤។",
       },
       {
         href: "/study-center/sociology",
