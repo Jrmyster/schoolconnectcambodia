@@ -11,6 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 import { NotificationBell } from "@/components/NotificationBell";
 import { ThemePalette } from "@/components/ThemePalette";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -514,6 +515,7 @@ export function Navbar() {
                   {t("Sign In", "ចូលគណនី")}
                 </Link>
               )}
+              <InstallAppButton variant="compact" />
             </div>
 
             {/* Hamburger — mobile */}
@@ -699,6 +701,7 @@ export function Navbar() {
                   {t("Sign In", "ចូលគណនី")}
                 </Link>
               )}
+              <InstallAppButton variant="full" className="w-full" />
             </div>
           </nav>
         </div>

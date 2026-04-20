@@ -50,6 +50,16 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - Lazy-loaded via `React.lazy` + `Suspense` for mobile performance
   - `dpr={[1, 1.5]}` cap to reduce pixel overdraw on Retina screens
 
+- **Progressive Web App (PWA)** — installable + offline-capable for rural Cambodia internet outages:
+  - `public/manifest.webmanifest` (standalone, theme `#1e3a8a`, EN names "Chouy Sala / School Connect")
+  - PNG icons (`icons/icon-192.png`, `icon-512.png`, `maskable-512.png`, `apple-touch-icon-180.png`) plus SVG variants drawn from Royal Turtle + Kouprey mascots
+  - `public/sw.js` service worker — Stale-While-Revalidate for same-origin GETs, network-first navigations with cached-shell fallback, `/api/*` bypassed
+  - Pre-cached app shell + Beginner English Writing, Financial Literacy Intro, and Exam Prep routes
+  - `src/lib/pwa.ts` — registers SW (respects `import.meta.env.BASE_URL`), captures `beforeinstallprompt`, exposes pub/sub install-prompt store
+  - `<PWAStatusBar />` mounted in `App.tsx` — fixed amber offline banner with bilingual text and dismiss button (uses `useOnline()` hook)
+  - `<OfflineFallback />` — bilingual "This section needs internet" card with Try Again + Back to Home; wraps `ImpactReportPage` when offline
+  - `<InstallAppButton />` in Navbar (compact in desktop row 1, full-width in mobile menu); auto-hides when no install prompt available or app already installed
+
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**
 - GET/POST /api/needs, GET /api/needs/:id, **PUT /api/needs/:id**, PATCH /api/needs/:id/funding

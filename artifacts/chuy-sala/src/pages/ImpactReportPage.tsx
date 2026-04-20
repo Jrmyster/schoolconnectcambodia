@@ -22,6 +22,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useOnline } from "@/components/PWAStatusBar";
+import { OfflineFallback } from "@/components/OfflineFallback";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -64,12 +66,17 @@ export function ImpactReportPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
+  const online = useOnline();
 
   const [data, setData] = useState<ImpactStatsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!online) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     setLoading(true);
     fetch(`${BASE}/api/impact-stats`, { credentials: "include" })
@@ -92,7 +99,16 @@ export function ImpactReportPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [online]);
+
+  if (!online && !data) {
+    return (
+      <OfflineFallback
+        titleEn="The Impact Report needs internet"
+        titleKh="របាយការណ៍ផលប៉ះពាល់ត្រូវការអ៊ីនធឺណិត"
+      />
+    );
+  }
 
   const handlePrint = () => {
     window.print();

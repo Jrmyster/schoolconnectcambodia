@@ -1,0 +1,40 @@
+{
+  "name": "Chouy Sala — School Connect",
+  "short_name": "School Connect",
+  "description": "Bilingual (English/Khmer) educational portal for Cambodian students. Career guides, exam prep, scientific literacy tools, and school donation resources — works offline.",
+  "start_url": ".",
+  "scope": ".",
+  "id": "chouy-sala",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#1e3a8a",
+  "lang": "en",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

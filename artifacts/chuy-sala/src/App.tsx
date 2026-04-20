@@ -57,6 +57,7 @@ import NotFound from "@/pages/not-found";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
+import { PWAStatusBar } from "@/components/PWAStatusBar";
 import { AdminRoute } from "@/components/AdminRoute";
 import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
 import { MascotCheer } from "@/components/MascotCheer";
@@ -77,6 +78,7 @@ const queryClient = new QueryClient({
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <PWAStatusBar />
       <Navbar />
       <HeatSafetyAlert />
       <main className="flex-grow">
