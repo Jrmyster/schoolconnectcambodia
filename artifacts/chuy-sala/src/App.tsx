@@ -25,6 +25,7 @@ import { SubmitStoryPage } from "@/pages/SubmitStoryPage";
 import { SubmitNeedPage } from "@/pages/SubmitNeedPage";
 import { SpacePage } from "@/pages/SpacePage";
 import OceanographyPage from "@/pages/OceanographyPage";
+import CinematographyPage from "@/pages/CinematographyPage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ScientificLiteracyPage } from "@/pages/ScientificLiteracyPage";
 import { ReadingListPage } from "@/pages/ReadingListPage";
@@ -117,6 +118,7 @@ function Router() {
           <Route path="/submit-need" component={SubmitNeedPage} />
           <Route path="/space" component={SpacePage} />
           <Route path="/oceanography" component={OceanographyPage} />
+          <Route path="/cinematography" component={CinematographyPage} />
           <Route path="/science" component={ScientificLiteracyPage} />
           <Route path="/reading-list" component={ReadingListPage} />
           <Route path="/profile" component={ProfilePage} />
