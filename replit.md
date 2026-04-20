@@ -70,6 +70,13 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - Linked from Navbar "Resources" group with the Library icon
   - `/world-history` added to `public/sw.js` precache list for offline access
   - Historical claims deliberately softened (e.g. Angkor Wat described as "one of the largest religious monuments in the world", Angkor population given as a researcher-estimated range of 700K–900K) to remain credible in a school context
+  - **Interactive 3D History Globe** (`src/components/world-history/HistoryGlobe.tsx`) embedded near the top of `/world-history`:
+    - Built on `@react-three/fiber` + `@react-three/drei` + `three`; lazy-loaded inside `WorldHistoryPage` so the three.js bundle isn't paid for elsewhere
+    - 4 region pins (Asia / Europe / Africa / Americas) placed via lat/lng→vec3 helper at GLOBE_RADIUS + 0.04
+    - Time Machine slider (native `<input type="range">` for free a11y) drives 4 eras: Neolithic (lush green), Ancient Empires (warm sandstone), Industrial (smoky grey), Modern (deep blue with 60 deterministic city-light dots on the surface)
+    - Region × era content matrix (4×4 = 16 bilingual entries) renders in a Radix Dialog modal; Ancient + Asia, Industrial + Europe, and Modern + Asia each carry an extra "Why it matters" callout (Khmer Empire engineering, Watt's steam engine, Asian-Century manufacturing)
+    - Performance: 48-segment sphere, MeshBasicMaterial atmosphere with `BackSide` for cheap glow, capped DPR `[1, 1.5]`, `powerPreference: "low-power"`, auto-spin pauses while user interacts or while a modal is open, respects `useReducedMotion`
+    - Resilience: synchronous `detectWebGL()` probe runs on mount; if WebGL is unavailable the Canvas is never mounted and a bilingual `<GlobeFallback />` (`data-testid="globe-fallback"`) is shown — slider, region pills, and modals stay fully functional. A `<WebGLBoundary>` class component catches any post-mount THREE errors as a second safety net.
 
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**

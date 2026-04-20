@@ -1,5 +1,8 @@
-import { useEffect, useMemo, useRef, useState, useCallback, ComponentType } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback, ComponentType, lazy, Suspense } from "react";
 import { Link } from "wouter";
+
+// Heavy: contains three.js + R3F. Code-split it so it only loads when this page does.
+const HistoryGlobe = lazy(() => import("@/components/world-history/HistoryGlobe"));
 import {
   ArrowLeft,
   Compass,
@@ -567,6 +570,19 @@ export default function WorldHistoryPage() {
         onJump={jumpTo}
         kh={kh}
       />
+
+      {/* ── Interactive 3D History Globe ───────────────────────────── */}
+      <Suspense
+        fallback={
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
+            <div className="rounded-3xl bg-white/85 backdrop-blur-sm border border-white/80 shadow-xl ring-1 ring-black/5 h-[500px] grid place-items-center text-slate-600 text-sm">
+              {t("Loading interactive globe…", "កំពុងផ្ទុកផែនដីអន្តរកម្ម…")}
+            </div>
+          </div>
+        }
+      >
+        <HistoryGlobe />
+      </Suspense>
 
       {/* ── Eras ───────────────────────────────────────────────────── */}
       <main className="relative z-10">
