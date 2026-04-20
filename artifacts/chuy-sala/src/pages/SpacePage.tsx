@@ -3,6 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
+import { TheSunModule } from "@/components/space/TheSunModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -346,6 +347,9 @@ export function SpacePage() {
             <SolarSystem3D kh={kh} />
           </Suspense>
         </section>
+
+        {/* ── The Sun: Our Local Star ───────────────────────────────────── */}
+        <TheSunModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
