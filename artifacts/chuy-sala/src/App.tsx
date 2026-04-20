@@ -45,6 +45,8 @@ import { BiologyHubPage } from "@/pages/BiologyHubPage";
 import { GeologyHubPage } from "@/pages/GeologyHubPage";
 import { DisasterPrepPage } from "@/pages/DisasterPrepPage";
 import { HowComputersWorkPage } from "@/pages/HowComputersWorkPage";
+import { lazy, Suspense } from "react";
+const WorldHistoryPage = lazy(() => import("@/pages/WorldHistoryPage"));
 import BeginnerGuidePage from "@/pages/BeginnerGuidePage";
 import { PhysicsMotionPage } from "@/pages/PhysicsMotionPage";
 import { PhysicsForcesPage } from "@/pages/PhysicsForcesPage";
@@ -88,6 +90,17 @@ function Router() {
           <Route path="/needs" component={BrowseNeeds} />
           <Route path="/projects" component={CompletedProjects} />
           <Route path="/impact" component={ImpactReportPage} />
+          <Route path="/world-history">
+            <Suspense
+              fallback={
+                <div className="min-h-[60vh] grid place-items-center text-slate-600 text-sm">
+                  Loading timeline…
+                </div>
+              }
+            >
+              <WorldHistoryPage />
+            </Suspense>
+          </Route>
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />

@@ -65,6 +65,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "https://khmervoc.com",   labelEn: "Vocational Guide", labelKh: "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ", icon: Wrench, external: true },
       { href: "https://anatomykh.com",  labelEn: "Human Anatomy",    labelKh: "រូបកាយវិភាគវិទ្យា",      icon: PersonStanding, external: true },
       { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
+      { href: "/world-history",         labelEn: "World History",     labelKh: "ប្រវត្តិសាស្ត្រពិភពលោក",  icon: Library },
       { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
       { href: "/safety",                labelEn: "Digital Safety",    labelKh: "សុវត្ថិភាព",             icon: Shield },
     ],

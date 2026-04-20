@@ -60,6 +60,17 @@ Full-stack web app connecting rural Cambodian high schools with donors and NGOs.
   - `<OfflineFallback />` — bilingual "This section needs internet" card with Try Again + Back to Home; wraps `ImpactReportPage` when offline
   - `<InstallAppButton />` in Navbar (compact in desktop row 1, full-width in mobile menu); auto-hides when no install prompt available or app already installed
 
+- **World History — "The Human Journey"** (`src/pages/WorldHistoryPage.tsx`, route `/world-history`):
+  - Interactive bilingual EN/Khmer timeline across 5 eras: Neolithic Revolution, Khmer Empire, Industrial Revolution, Information Age, The Horizon (speculative future)
+  - 12 clickable "artifact" zoom nodes (Stone Sickle → Climate Survival) each opening a Radix Dialog modal with a "Why it changed everything" callout
+  - Sticky cross-fading background gradient: 5 fixed full-screen gradient layers, opacity-driven by an `IntersectionObserver` watching the active era section (rootMargin `-30% 0px -50% 0px`) — no scroll listeners
+  - "Time Machine" quick-jump UI: fixed right rail on desktop with `aria-current` on the active era; mobile uses a floating button + custom `MobileJumpSheet` (role=dialog) with Escape-to-close, click-outside dismiss, and auto-focus on the first jump button
+  - Smooth `scrollIntoView` with reduced-motion fallback (`useReducedMotion` from framer-motion)
+  - Route lazy-loaded via `React.lazy` + `Suspense` in `App.tsx` to keep the main bundle small (the bilingual content payload is ~30KB of strings)
+  - Linked from Navbar "Resources" group with the Library icon
+  - `/world-history` added to `public/sw.js` precache list for offline access
+  - Historical claims deliberately softened (e.g. Angkor Wat described as "one of the largest religious monuments in the world", Angkor population given as a researcher-estimated range of 700K–900K) to remain credible in a school context
+
 ## API Routes
 - GET/POST /api/schools, GET /api/schools/:id, **PUT /api/schools/:id**
 - GET/POST /api/needs, GET /api/needs/:id, **PUT /api/needs/:id**, PATCH /api/needs/:id/funding

@@ -1,0 +1,36 @@
+Building an Interactive Globe (ផែនដីអន្តរកម្ម) is the ultimate application of mapping the "Territory." In General Semantics, a flat 2D map inevitably distorts reality (like making Greenland look as big as Africa). A 3D globe removes that distortion, allowing students to see the true spatial relationships of human history.
+
+From a biological perspective, interacting with a 3D object engages the brain's Hippocampus—the center for spatial navigation and memory. Instead of memorizing a list of dates, students will physically encode history into their spatial memory. They will "feel" that while the Roman Empire was expanding in Europe, the Khmer Empire was organizing the rivers of Southeast Asia.
+
+The Replit Agent Prompt: The 3D History Globe
+Copy and paste this instruction to the Agent to build the interactive 3D component:
+
+"I want to add an 'Interactive History Globe' (ផែនដីប្រវត្តិសាស្ត្រអន្តរកម្ម) to the World History section. Please implement the following using a 3D library like Three.js or Globe.gl:
+
+1. The 3D Globe UI:
+
+Render a draggable, spinning 3D globe.
+
+Highlight 4 clickable major regions: Asia, Europe, Africa, and the Americas.
+
+2. The 'Time Machine' Slider:
+
+Add a prominent timeline slider at the bottom of the globe with 4 stops: 1. Neolithic (បុរេប្រវត្តិ), 2. Ancient Empires (សម័យចក្រភព), 3. Industrial (សម័យឧស្សាហកម្ម), 4. Modern (សម័យទំនើប).
+
+When the slider moves, change the visual texture/atmosphere of the globe (e.g., green/lush for Neolithic, glowing lights for Modern).
+
+3. Regional History Modals (Bilingual):
+
+When a student clicks a region, display a card showing what was happening there during the selected era.
+
+Crucial Data points to include:
+
+Ancient Empires + Asia: Must highlight the Khmer Empire & Angkor Wat (ចក្រភពខ្មែរ និងអង្គរវត្ត) as a global engineering marvel.
+
+Industrial + Europe: Highlight the invention of the steam engine.
+
+Modern + Asia: Highlight the rapid rise of technology and manufacturing.
+
+4. Styling & Performance:
+
+Ensure the 3D rendering is optimized for mobile phones, as many students will be accessing this on older devices. Use simple geometries if necessary to keep the framerate smooth."

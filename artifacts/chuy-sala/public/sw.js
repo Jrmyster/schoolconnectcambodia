@@ -27,6 +27,7 @@ const PRECACHE_URLS = [
   "english-writing",
   "finlit-intro",
   "exam-prep",
+  "world-history",
 ].map((p) => BASE + p);
 
 self.addEventListener("install", (event) => {
