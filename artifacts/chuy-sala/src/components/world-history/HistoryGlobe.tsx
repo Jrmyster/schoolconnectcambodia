@@ -23,8 +23,6 @@ interface EraDef {
   globeColor: string;
   /** Glowing atmosphere color */
   atmosphereColor: string;
-  /** True if Modern → render city-light point dots on the night side */
-  showCityLights?: boolean;
 }
 
 const ERAS: EraDef[] = [
@@ -64,10 +62,9 @@ const ERAS: EraDef[] = [
     labelKh: "សម័យទំនើប",
     shortEn: "1950–today",
     shortKh: "១៩៥០–សព្វថ្ងៃ",
-    // Deep blue with city-light dots scattered on the surface.
+    // Deep blue — atmospheric halo carries the era's identity.
     globeColor: "#1e3a8a",
     atmosphereColor: "#7dd3fc",
-    showCityLights: true,
   },
 ];
 
@@ -283,11 +280,13 @@ function latLngToVec3(latDeg: number, lngDeg: number, radius: number): [number, 
 /* ── Texture URLs (served from public/textures/, cached by SW for offline use) ──
  * Diffuse  — NASA "Blue Marble" composite (continents, oceans, ice).
  * Specular — white = water (so light bounces off oceans, not landmasses).
- * Night    — city lights overlay used as the emissive map for the Modern era. */
+ * Note: a separate night-lights texture used to be applied as an emissive map
+ * for the Modern era, but it tinted the whole sphere yellow when blended with
+ * the directional light. All four eras now share the identical base material;
+ * the era's identity is carried by the atmospheric halo color. */
 const TEX_BASE = `${import.meta.env.BASE_URL}textures/`;
 const EARTH_DIFFUSE_URL = `${TEX_BASE}earth-blue-marble.jpg`;
 const EARTH_SPECULAR_URL = `${TEX_BASE}earth-water.png`;
-const EARTH_NIGHT_URL = `${TEX_BASE}earth-night.jpg`;
 
 /**
  * Realistic, textured Earth. Suspends while the diffuse + specular maps load
@@ -302,22 +301,20 @@ const EARTH_NIGHT_URL = `${TEX_BASE}earth-night.jpg`;
  * lands in eastern North America; Cambodia ≈ 105°,12° lands on the
  * Indochinese peninsula).
  */
-function TexturedEarth({ era }: { era: EraDef }) {
+function TexturedEarth() {
   // Loading either map will suspend this component until both resolve.
   // useLoader caches by URL so we only pay this cost once per session.
-  const [diffuse, specular, night] = useLoader(THREE.TextureLoader, [
+  const [diffuse, specular] = useLoader(THREE.TextureLoader, [
     EARTH_DIFFUSE_URL,
     EARTH_SPECULAR_URL,
-    EARTH_NIGHT_URL,
   ]);
 
-  // Configure colour spaces synchronously *before* first render so the very
+  // Configure colour space synchronously *before* first render so the very
   // first paint is gamma-correct (no brief over-dark flash). The specular
   // map is data, not colour — leave it as the default linear space.
   useMemo(() => {
     diffuse.colorSpace = THREE.SRGBColorSpace;
-    night.colorSpace = THREE.SRGBColorSpace;
-  }, [diffuse, night]);
+  }, [diffuse]);
 
   return (
     <mesh>
@@ -328,11 +325,6 @@ function TexturedEarth({ era }: { era: EraDef }) {
         // White-ish specular highlight on water; subtle so it doesn't blow out.
         specular={new THREE.Color("#3a4a5e")}
         shininess={12}
-        // Modern era → bright city lights glow on the night side via emissiveMap.
-        // Other eras → no emission.
-        emissiveMap={era.showCityLights ? night : null}
-        emissive={era.showCityLights ? new THREE.Color("#ffd47a") : new THREE.Color("#000000")}
-        emissiveIntensity={era.showCityLights ? 1.1 : 0}
       />
     </mesh>
   );
@@ -365,9 +357,10 @@ function GlobeMesh({
 
   return (
     <group ref={groupRef}>
-      {/* Realistic Earth — suspends until textures load. */}
+      {/* Realistic Earth — suspends until textures load. Same base material
+          for every era so the diffuse map always reads correctly. */}
       <Suspense fallback={<FallbackSphere />}>
-        <TexturedEarth era={era} />
+        <TexturedEarth />
       </Suspense>
 
       {/* Era-tinted atmospheric halo — back-side material gives a cheap glow. */}
