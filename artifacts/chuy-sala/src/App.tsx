@@ -58,6 +58,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
 import { AdminRoute } from "@/components/AdminRoute";
 import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
+import { MascotCheer } from "@/components/MascotCheer";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -145,6 +146,7 @@ function App() {
         </WouterRouter>
         <Toaster />
         <AIChatPanel />
+        <MascotCheer />
       </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>

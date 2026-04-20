@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import { Train, Sparkles, RotateCcw, Check, X } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useMascotCheer } from "@/store/use-mascot";
 
 type Slot = "subject" | "verb" | "object";
 
@@ -72,6 +73,7 @@ export function SentenceTrain() {
   const [moving, setMoving] = useState(false);
   const [solvedCount, setSolvedCount] = useState(0);
   const dragIdRef = useRef<string | null>(null);
+  const cheer = useMascotCheer();
 
   const blockMap = useMemo(() => Object.fromEntries(BLOCKS.map((b) => [b.id, b])), []);
   const placedIds = useMemo(() => new Set(Object.values(placed).filter(Boolean) as string[]), [placed]);
@@ -88,8 +90,10 @@ export function SentenceTrain() {
     if (!block) return;
     if (block.slot !== slot) {
       bounceBack(blockId);
+      cheer("wrong");
       return;
     }
+    cheer("correct");
     setPlaced((p) => {
       const next: Placed = { ...p };
       // remove this block from any slot it was in
@@ -120,6 +124,7 @@ export function SentenceTrain() {
   function chooChoo() {
     if (!allFilled || moving) return;
     setMoving(true);
+    cheer("win");
     setTimeout(() => {
       setSolvedCount((n) => n + 1);
       reset();

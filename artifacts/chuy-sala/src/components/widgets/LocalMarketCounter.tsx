@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { ShoppingBasket, RotateCcw, RefreshCw, Sparkles, Volume2 } from "lucide-react";
 import { speakWord } from "@/lib/speech";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { useMascotCheer } from "@/store/use-mascot";
 
 type ItemKey = "mango" | "banana" | "fish" | "rice";
 
@@ -118,6 +119,7 @@ export function LocalMarketCounter() {
   const [basketHot, setBasketHot] = useState(false);
   const [winsCount, setWinsCount] = useState(0);
   const dragKeyRef = useRef<ItemKey | null>(null);
+  const cheer = useMascotCheer();
 
   const total = useMemo(() => totalItems(counts), [counts]);
   const isMatch = useMemo(() => countsEqual(counts, goal) && totalItems(goal) > 0, [counts, goal]);
@@ -128,13 +130,14 @@ export function LocalMarketCounter() {
       setSolved(true);
       setWinsCount((n) => n + 1);
       playChime();
+      cheer("win");
       // Speak "Great job!" after the last item-spoken settles.
       setTimeout(() => speakWord("Great job!"), 450);
     } else if (!isMatch && solved) {
       // Reset solved flag if the basket changes after a win
       setSolved(false);
     }
-  }, [isMatch, solved]);
+  }, [isMatch, solved, cheer]);
 
   function addToBasket(key: ItemKey) {
     if (solved) return;
@@ -148,6 +151,7 @@ export function LocalMarketCounter() {
     });
     setBumpKey(key);
     setBasketHot(true);
+    cheer("correct");
     setTimeout(() => setBumpKey((cur) => (cur === key ? null : cur)), 400);
     setTimeout(() => setBasketHot(false), 250);
   }
