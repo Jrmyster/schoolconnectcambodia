@@ -90,6 +90,9 @@ const PhysicsForcesPage         = lazy(() => import("@/pages/PhysicsForcesPage")
 const PhysicsEnergyPage         = lazy(() => import("@/pages/PhysicsEnergyPage").then(m => ({ default: m.PhysicsEnergyPage })));
 const PhysicsWavesPage          = lazy(() => import("@/pages/PhysicsWavesPage").then(m => ({ default: m.PhysicsWavesPage })));
 const ImpactReportPage          = lazy(() => import("@/pages/ImpactReportPage").then(m => ({ default: m.ImpactReportPage })));
+const PhilosophyPage            = lazy(() => import("@/pages/PhilosophyPage").then(m => ({ default: m.PhilosophyPage })));
+const BuddhismPage              = lazy(() => import("@/pages/BuddhismPage").then(m => ({ default: m.BuddhismPage })));
+const SociologyPage             = lazy(() => import("@/pages/SociologyPage").then(m => ({ default: m.SociologyPage })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -207,6 +210,9 @@ function Router() {
             <Route path="/disaster-prep" component={DisasterPrepPage} />
             <Route path="/how-computers-work" component={HowComputersWorkPage} />
             <Route path="/beginner-guide" component={BeginnerGuidePage} />
+            <Route path="/study-center/philosophy" component={PhilosophyPage} />
+            <Route path="/study-center/buddhism" component={BuddhismPage} />
+            <Route path="/study-center/sociology" component={SociologyPage} />
             <Route path="/admin/dashboard">
               {() => <AdminRoute component={AdminDashboard} />}
             </Route>

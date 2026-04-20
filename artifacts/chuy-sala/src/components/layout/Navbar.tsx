@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -82,6 +82,30 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Plane,
         descEn: "A travel-journal tour of the world's biggest cities and most iconic landmarks, from Tokyo's Shibuya Crossing to Phnom Penh's Independence Monument.",
         descKh: "ដំណើរទេសចរណ៍តាមសៀវភៅធ្វើដំណើរ ទស្សនាទីក្រុងធំៗ និងតំបន់ល្បីៗបំផុតលើពិភពលោក ពីផ្លូវកាត់ស៊ីប៊ូយ៉ានៅតូក្យូ ដល់វិមានឯករាជ្យនៅភ្នំពេញ។",
+      },
+      {
+        href: "/study-center/philosophy",
+        labelEn: "Philosophy",
+        labelKh: "ទស្សនវិជ្ជា",
+        icon: Compass,
+        descEn: "An interactive 7-branch Map of Thinking — explore ethics, logic, metaphysics, and more from Plato to today.",
+        descKh: "ផែនទីនៃការគិតមាន ៧ មែកធាងអន្តរកម្ម — ស្វែងយល់ពីសីលធម៌ តក្កវិជ្ជា មេតាហ្វីស៊ិក និងច្រើនទៀត ពី Plato មកដល់សព្វថ្ងៃ។",
+      },
+      {
+        href: "/study-center/buddhism",
+        labelEn: "Buddhist Philosophy",
+        labelKh: "ពុទ្ធសាសនទស្សនវិជ្ជា",
+        icon: Leaf,
+        descEn: "The Science of the Mind — the Four Noble Truths and a guided Mindful Pause exercise.",
+        descKh: "វិទ្យាសាស្ត្រនៃចិត្ត — អរិយសច្ច៤ និងលំហាត់សតិសម្រាប់ផ្អាកដោយការណែនាំ។",
+      },
+      {
+        href: "/study-center/sociology",
+        labelEn: "Sociology",
+        labelKh: "សង្គមវិទ្យា",
+        icon: Users,
+        descEn: "The Science of Society — core concepts, the Veblen Lens on conspicuous consumption, and what sociologists really do.",
+        descKh: "វិទ្យាសាស្ត្រនៃសង្គម — គោលគំនិតសំខាន់ៗ កែវយឹត Veblen លើការប្រើប្រាស់បង្ហាញឈ្មោះ និងអ្វីដែលអ្នកសង្គមវិទ្យាធ្វើពិតប្រាកដ។",
       },
       { href: "/projects",              labelEn: "Completed",         labelKh: "បានបញ្ចប់",              icon: CheckCircle },
     ],
