@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -129,6 +129,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Magnet,
         descEn: "Three types of magnetism, an interactive atomic-spin simulator, and a bar magnet whose invisible field lines you can reveal with iron filings.",
         descKh: "ប្រភេទមេដែកបី ការក្លែងសាកល្បងរង្វិលអាតូមអន្តរកម្ម និងមេដែកដំបងដែលអ្នកអាចបង្ហាញខ្សែដែនមើលមិនឃើញរបស់វាដោយកំទេចដែក។",
+      },
+      {
+        href: "/mathematics",
+        labelEn: "Mathematics: The Language of Logic",
+        labelKh: "គណិតវិទ្យា៖ ភាសានៃតក្កវិជ្ជា",
+        icon: Sigma,
+        descEn: "A 5-part journey: a 10-second mental-math trainer, a balance-scale algebra puzzle, a draggable right triangle with live sin/cos/tan, and a car-graph that explains derivatives and integrals.",
+        descKh: "ដំណើរ ៥ ផ្នែក៖ Trainer គណិតក្នុងក្បាល ១០ វិនាទី, ល្បែងជញ្ជីងពិជគណិត, ត្រីកោណកែងអូសបាន និងក្រាហ្វិកឡានដែលពន្យល់ derivative និង integral។",
       },
       {
         href: "/fun-lab",

@@ -31,6 +31,7 @@ import MagnetsPage from "@/pages/MagnetsPage";
 import HvacPage from "@/pages/HvacPage";
 import AviationPage from "@/pages/AviationPage";
 import MusicTheoryPage from "@/pages/MusicTheoryPage";
+import MathematicsPage from "@/pages/MathematicsPage";
 import SexualHealthPage from "@/pages/SexualHealthPage";
 import GlobalCitiesPage from "@/pages/GlobalCitiesPage";
 import CinematographyPage from "@/pages/CinematographyPage";
@@ -132,6 +133,7 @@ function Router() {
           <Route path="/hvac" component={HvacPage} />
           <Route path="/aviation" component={AviationPage} />
           <Route path="/music-theory" component={MusicTheoryPage} />
+          <Route path="/mathematics" component={MathematicsPage} />
           <Route path="/sexual-health" component={SexualHealthPage} />
           <Route path="/global-cities" component={GlobalCitiesPage} />
           <Route path="/cinematography" component={CinematographyPage} />

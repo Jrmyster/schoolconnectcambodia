@@ -1,0 +1,1246 @@
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import {
+  Sigma,
+  Calculator,
+  Scale,
+  Triangle,
+  TrendingUp,
+  AreaChart,
+  Play,
+  Pause,
+  RotateCcw,
+  Check,
+  X as XIcon,
+  Info,
+  Sparkles,
+  Building2,
+  Mountain,
+} from "lucide-react";
+import { useLanguageStore } from "@/store/use-language";
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Mathematics: The Language of Logic — គណិតវិទ្យា៖ ភាសានៃតក្កវិជ្ជា
+//
+//  Sections:
+//    1. Arithmetic       — Mental Math trainer (10s timer, 4 op modes)
+//    2. Algebra          — Balance scale (X + 5 = 12, "subtract 5")
+//    3. Trigonometry     — Draggable right-triangle, live sin/cos/tan
+//    4. Calculus         — Derivative (slope = speed) & Integral (area = distance)
+//
+//  Aesthetic: graph-paper background, blue/ink accents, italic-serif math
+//  variables. Bilingual EN / Khmer throughout.
+// ════════════════════════════════════════════════════════════════════════════
+
+const I = ({ children }: { children: React.ReactNode }) => (
+  <em className="font-serif italic font-medium text-stone-900">{children}</em>
+);
+
+export default function MathematicsPage() {
+  const { language } = useLanguageStore();
+  const isKh = language === "kh";
+
+  return (
+    <div className="min-h-screen relative text-slate-900 overflow-hidden">
+      <ScopedStyles />
+      <GraphPaperBg />
+
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
+      <header className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
+        <div className="inline-flex items-center gap-2 bg-white border border-blue-200 text-blue-700 rounded-full px-4 py-1.5 mb-5 text-xs font-bold shadow-sm">
+          <Sigma className="w-3.5 h-3.5" />
+          {isKh ? "មេរៀនធំ · វិទ្យាសាស្ត្រ" : "Major Lesson · Science"}
+        </div>
+        <h1
+          className={`font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-slate-900 mb-4 leading-tight ${
+            isKh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {isKh ? (
+            <>គណិតវិទ្យា៖ <span className="math-text-ink">ភាសានៃតក្កវិជ្ជា</span></>
+          ) : (
+            <>Mathematics: <span className="math-text-ink">The Language of Logic</span></>
+          )}
+        </h1>
+        <p
+          className={`text-slate-700 max-w-2xl text-base ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "គណិតវិទ្យាមិនមែនជាការទន្ទេញរូបមន្តទេ — វាជាវិធីដ៏ច្បាស់លាស់ក្នុងការគិត។ ចាប់ផ្ដើមពីការគិតលេខក្នុងក្បាល តាមរយៈតំណាងអក្សរ ត្រីកោណមាត្រ និងគណនាឌីផេរ៉ង់ស្យែល — ហើយមើលពីរបៀបដែលមនុស្សប្រើពួកវាដើម្បីស្រាយបញ្ហាពិតៗ។"
+            : "Mathematics isn't memorising formulas — it's a precise way of thinking. From mental arithmetic through letter-substitution, triangles, and the math of change — and how people use each one to solve real problems."}
+        </p>
+        <div className="hidden sm:flex absolute top-12 right-8 items-center gap-3 text-blue-300 font-serif italic text-2xl select-none">
+          <span>π</span>
+          <span>√2</span>
+          <span>∞</span>
+          <span>Σ</span>
+        </div>
+      </header>
+
+      {/* ── 1. Arithmetic ────────────────────────────────────────────── */}
+      <Section
+        eyebrowEn="01 · Foundation"
+        eyebrowKh="០១ · មូលដ្ឋាន"
+        titleEn="Arithmetic — the foundation"
+        titleKh="លេខនព្វន្ត — មូលដ្ឋានគ្រឹះ"
+        khTerm="លេខនព្វន្ត"
+        descEn="Adding, subtracting, multiplying, dividing — the four operations under everything else. The faster you can do them in your head, the more brain you have left for the harder thinking."
+        descKh="បូក ដក គុណ ចែក — ប្រតិបត្តិការទាំងបួនដែលនៅពីក្រោមអ្វីៗគ្រប់យ៉ាង។ កាលណាអ្នកធ្វើពួកវានៅក្នុងក្បាលបានលឿនជាង នោះខួរក្បាលអ្នកនៅសល់សម្រាប់ការគិតស្មុគ្រស្មាញកាន់តែច្រើន។"
+        isKh={isKh}
+      >
+        <MentalMathTrainer isKh={isKh} />
+      </Section>
+
+      {/* ── 2. Algebra ───────────────────────────────────────────────── */}
+      <Section
+        eyebrowEn="02 · The Unknown"
+        eyebrowKh="០២ · មិនស្គាល់"
+        titleEn="Algebra — finding the unknown"
+        titleKh="ពិជគណិត — ស្វែងរកដែលមិនស្គាល់"
+        khTerm="ពិជគណិត"
+        descEn={"Algebra is one big trick: replace the number you don't know with a letter — usually X — and use the rules of equality to uncover it. The whole game is “do the same thing to both sides.”"}
+        descKh={"ពិជគណិតគឺជាល្បិចធំមួយ៖ ជំនួសលេខដែលអ្នកមិនដឹងដោយអក្សរមួយ — ជាធម្មតា X — ហើយប្រើច្បាប់នៃភាពស្មើគ្នាដើម្បីបង្ហាញវា។ ល្បែងទាំងមូលគឺ៖ “ធ្វើអ្វីដូចគ្នាទៅទាំងសងខាង។”"}
+        isKh={isKh}
+      >
+        <BalanceScale isKh={isKh} />
+      </Section>
+
+      {/* ── 3. Trigonometry ─────────────────────────────────────────── */}
+      <Section
+        eyebrowEn="03 · Triangles"
+        eyebrowKh="០៣ · ត្រីកោណ"
+        titleEn="Trigonometry — the math of triangles"
+        titleKh="ត្រីកោណមាត្រ — គណិតវិទ្យានៃត្រីកោណ"
+        khTerm="ត្រីកោណមាត្រ"
+        descEn={
+          "Inside every right triangle, the ratios between the three sides depend only on one angle, θ. Those ratios — sine, cosine, tangent — let you measure things you can't physically reach."
+        }
+        descKh="នៅក្នុងត្រីកោណកែងនីមួយៗ សមាមាត្ររវាងជ្រុងទាំងបីពឹងផ្អែកតែលើមុំមួយ θ ប៉ុណ្ណោះ។ សមាមាត្រទាំងនោះ — sine, cosine, tangent — អនុញ្ញាតឲ្យអ្នកវាស់របស់ដែលអ្នកមិនអាចទៅដល់ដោយរូបកាយ។"
+        isKh={isKh}
+      >
+        <RightTriangle isKh={isKh} />
+      </Section>
+
+      {/* ── 4. Calculus ─────────────────────────────────────────────── */}
+      <Section
+        eyebrowEn="04 · Change"
+        eyebrowKh="០៤ · ការផ្លាស់ប្ដូរ"
+        titleEn="Calculus — the math of change"
+        titleKh="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល — គណិតវិទ្យានៃការផ្លាស់ប្ដូរ"
+        khTerm="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល"
+        descEn={
+          "Two ideas, invented by Newton and Leibniz around 1670, that quietly run modern science. The Derivative asks 'how fast?' at one instant. The Integral asks 'how much?' over a whole journey."
+        }
+        descKh="គំនិតពីរ ត្រូវបានរកឃើញដោយ Newton និង Leibniz ប្រហែលឆ្នាំ ១៦៧០ ដែលដំណើរការសម្ងាត់នៅពីក្រោយវិទ្យាសាស្ត្រទំនើប។ Derivative សួរថា 'លឿនប៉ុណ្ណា?' នៅពេលមួយ។ Integral សួរថា 'ប៉ុន្មាន?' លើដំណើរទាំងមូល។"
+        isKh={isKh}
+      >
+        <DerivativeCard isKh={isKh} />
+        <IntegralCard isKh={isKh} />
+      </Section>
+
+      {/* ── Closing ──────────────────────────────────────────────────── */}
+      <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-600 text-sm italic">
+        <span className={isKh ? "font-khmer not-italic" : "font-serif"}>
+          {isKh
+            ? "“គណិតវិទ្យាគឺជាភាសាដែលព្រះបានសរសេរសកលលោក។” — Galileo Galilei"
+            : "“Mathematics is the language with which God wrote the universe.” — Galileo Galilei"}
+        </span>
+      </footer>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section wrapper, paper card, graph-paper background
+// ════════════════════════════════════════════════════════════════════════════
+
+function Section({
+  eyebrowEn, eyebrowKh, titleEn, titleKh, khTerm, descEn, descKh, isKh, children,
+}: {
+  eyebrowEn: string; eyebrowKh: string;
+  titleEn: string; titleKh: string;
+  khTerm?: string;
+  descEn: string; descKh: string;
+  isKh: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-blue-700 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+        <Sparkles className="w-3 h-3" />
+        {isKh ? eyebrowKh : eyebrowEn}
+      </div>
+      <h2 className={`font-display font-bold text-2xl sm:text-3xl text-slate-900 mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh ? titleKh : (
+          <>
+            {titleEn}
+            {khTerm && <span className="ml-2 font-khmer text-base font-normal text-slate-500">({khTerm})</span>}
+          </>
+        )}
+      </h2>
+      <p className={`text-slate-700 text-sm max-w-3xl mb-6 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh ? descKh : descEn}
+      </p>
+      <div className="space-y-6">{children}</div>
+    </section>
+  );
+}
+
+function PaperCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`bg-white/90 backdrop-blur-sm rounded-2xl border border-blue-200/70 shadow-[0_2px_24px_-12px_rgba(30,64,175,0.35)] ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function GraphPaperBg() {
+  return (
+    <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #eff6ff 60%, #e0ecfb 100%)" }} />
+      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+        <defs>
+          <pattern id="math-grid-fine" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#bfdbfe" strokeWidth="0.5" opacity="0.55" />
+          </pattern>
+          <pattern id="math-grid-bold" width="100" height="100" patternUnits="userSpaceOnUse">
+            <rect width="100" height="100" fill="url(#math-grid-fine)" />
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#93c5fd" strokeWidth="0.9" opacity="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#math-grid-bold)" />
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  1. Mental Math Trainer
+// ════════════════════════════════════════════════════════════════════════════
+
+type Op = "+" | "−" | "×" | "÷";
+
+type Problem = { a: number; b: number; op: Op; answer: number };
+
+function genProblem(op: Op): Problem {
+  const r = (n: number) => Math.floor(Math.random() * n) + 1;
+  switch (op) {
+    case "+": {
+      const a = r(50) + 10, b = r(50) + 10;
+      return { a, b, op, answer: a + b };
+    }
+    case "−": {
+      const big = r(80) + 20, small = r(big - 5);
+      return { a: big, b: small, op, answer: big - small };
+    }
+    case "×": {
+      const a = r(11) + 1, b = r(11) + 1;
+      return { a, b, op, answer: a * b };
+    }
+    case "÷": {
+      const b = r(11) + 1, q = r(11) + 1;
+      return { a: b * q, b, op, answer: q };
+    }
+  }
+}
+
+const ROUND_SECS = 10;
+
+function MentalMathTrainer({ isKh }: { isKh: boolean }) {
+  const [op, setOp] = useState<Op | "mix">("mix");
+  const [problem, setProblem] = useState<Problem | null>(null);
+  const [input, setInput] = useState("");
+  const [running, setRunning] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(ROUND_SECS);
+  const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [feedback, setFeedback] = useState<"ok" | "miss" | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const pickOp = (): Op => {
+    if (op !== "mix") return op;
+    const opts: Op[] = ["+", "−", "×", "÷"];
+    return opts[Math.floor(Math.random() * opts.length)];
+  };
+
+  const newProblem = useCallback(() => {
+    setProblem(genProblem(pickOp()));
+    setInput("");
+    setTimeLeft(ROUND_SECS);
+    setFeedback(null);
+    requestAnimationFrame(() => inputRef.current?.focus());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [op]);
+
+  // Start round
+  const startRound = () => {
+    setScore({ correct: 0, wrong: 0 });
+    setRunning(true);
+    newProblem();
+  };
+
+  const stopRound = () => {
+    if (advanceTimerRef.current !== null) {
+      window.clearTimeout(advanceTimerRef.current);
+      advanceTimerRef.current = null;
+    }
+    resolvedRef.current = true;
+    setRunning(false);
+    setProblem(null);
+    setTimeLeft(ROUND_SECS);
+    setFeedback(null);
+  };
+
+  // Per-problem "resolved" guard: ensures we only score / advance ONCE per
+  // problem, even if the timer expires the same tick the user hits Enter.
+  const resolvedRef = useRef(false);
+  const advanceTimerRef = useRef<number | null>(null);
+
+  // Reset the guard whenever a new problem appears.
+  useEffect(() => {
+    resolvedRef.current = false;
+  }, [problem]);
+
+  // Timer
+  useEffect(() => {
+    if (!running || !problem) return;
+    const id = window.setInterval(() => {
+      setTimeLeft((t) => {
+        if (t <= 0.1) {
+          // Time-out — only count it if the user hasn't already submitted.
+          if (!resolvedRef.current) {
+            resolvedRef.current = true;
+            window.clearInterval(id);
+            setScore((s) => ({ ...s, wrong: s.wrong + 1 }));
+            setFeedback("miss");
+            advanceTimerRef.current = window.setTimeout(newProblem, 450);
+          }
+          return 0;
+        }
+        return +(t - 0.1).toFixed(1);
+      });
+    }, 100);
+    return () => window.clearInterval(id);
+  }, [running, problem, newProblem]);
+
+  // Always clean up any pending advance-timer on unmount or when stopping.
+  useEffect(() => () => {
+    if (advanceTimerRef.current !== null) window.clearTimeout(advanceTimerRef.current);
+  }, []);
+
+  const submit = () => {
+    if (!problem || resolvedRef.current) return;
+    const v = parseInt(input, 10);
+    if (Number.isNaN(v)) return;
+    resolvedRef.current = true;
+    if (v === problem.answer) {
+      setScore((s) => ({ ...s, correct: s.correct + 1 }));
+      setFeedback("ok");
+    } else {
+      setScore((s) => ({ ...s, wrong: s.wrong + 1 }));
+      setFeedback("miss");
+    }
+    advanceTimerRef.current = window.setTimeout(newProblem, 450);
+  };
+
+  const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") submit();
+  };
+
+  const total = score.correct + score.wrong;
+  const accuracy = total > 0 ? Math.round((score.correct / total) * 100) : 0;
+  const timerPct = (timeLeft / ROUND_SECS) * 100;
+
+  return (
+    <PaperCard className="p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <Calculator className="w-5 h-5 text-blue-700" />
+        </div>
+        <div className="flex-1">
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "Trainer គណិតក្នុងក្បាល" : "Mental math trainer"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "អ្នកមាន ១០ វិនាទីក្នុងបញ្ហានីមួយៗ។ វាយចម្លើយ ហើយចុច Enter។"
+              : "You have 10 seconds per problem. Type the answer and press Enter."}
+          </p>
+        </div>
+      </div>
+
+      {/* Operation selector */}
+      <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label="Operation mode">
+        {(["mix", "+", "−", "×", "÷"] as const).map((o) => {
+          const isActive = op === o;
+          const labelEn = o === "mix" ? "Mix" : o;
+          const labelKh = o === "mix" ? "ច្រឡំ" : o;
+          return (
+            <button
+              key={o}
+              onClick={() => { if (!running) setOp(o); }}
+              aria-pressed={isActive}
+              disabled={running}
+              className={`px-3 py-1.5 rounded-full text-sm font-bold border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+                isActive
+                  ? "bg-blue-700 border-blue-800 text-white"
+                  : "bg-white border-blue-200 text-slate-600 hover:bg-blue-50"
+              } ${isKh ? "font-khmer" : "font-mono"}`}
+            >
+              {isKh ? labelKh : labelEn}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Main play area */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4">
+        <div className={`rounded-xl border-2 ${
+          feedback === "ok" ? "border-emerald-400 bg-emerald-50"
+            : feedback === "miss" ? "border-rose-400 bg-rose-50"
+            : "border-blue-200 bg-white"
+        } p-6 transition-colors min-h-[180px] flex flex-col items-center justify-center text-center`}>
+          {!running ? (
+            <>
+              <p className={`text-slate-600 mb-4 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? "រួចហើយ?" : "Ready to start?"}
+              </p>
+              <button
+                onClick={startRound}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+              >
+                <Play className="w-4 h-4 fill-white" />
+                {isKh ? "ចាប់ផ្ដើម" : "Start round"}
+              </button>
+            </>
+          ) : problem ? (
+            <>
+              <div className="font-serif text-4xl sm:text-5xl font-bold text-slate-900 tabular-nums mb-3 select-none">
+                {problem.a} <span className="text-blue-700">{problem.op}</span> {problem.b} <span className="text-slate-400">=</span> ?
+              </div>
+              <input
+                ref={inputRef}
+                type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={onKey}
+                aria-label="Your answer"
+                className="w-32 text-center font-mono text-2xl font-bold py-2 rounded-lg border-2 border-blue-300 focus:border-blue-700 focus:outline-none bg-white"
+                autoFocus
+              />
+              <div className="mt-2 text-xs text-slate-500">
+                {feedback === "ok" && (
+                  <span className="inline-flex items-center gap-1 text-emerald-700 font-bold"><Check className="w-3 h-3" /> {isKh ? "ត្រឹមត្រូវ!" : "Correct!"}</span>
+                )}
+                {feedback === "miss" && (
+                  <span className="inline-flex items-center gap-1 text-rose-700 font-bold"><XIcon className="w-3 h-3" /> {isKh ? "ខុស — ចម្លើយ" : "Wrong — answer was"} <span className="font-mono">{problem.answer}</span></span>
+                )}
+              </div>
+            </>
+          ) : null}
+        </div>
+
+        {/* Stats panel */}
+        <div className="space-y-3">
+          {/* Timer */}
+          <div className="bg-white rounded-xl border border-blue-200 p-3">
+            <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+              <span className={isKh ? "font-khmer tracking-normal normal-case" : ""}>{isKh ? "ពេលវេលា" : "Time left"}</span>
+              <span className="font-mono tabular-nums text-slate-900">{timeLeft.toFixed(1)}s</span>
+            </div>
+            <div className="h-2 bg-blue-100 rounded-full overflow-hidden">
+              <div
+                className={`h-full transition-all duration-100 ${
+                  timeLeft > 5 ? "bg-emerald-500" : timeLeft > 2 ? "bg-amber-500" : "bg-rose-500"
+                }`}
+                style={{ width: `${timerPct}%` }}
+              />
+            </div>
+          </div>
+          {/* Score */}
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <Stat label={isKh ? "ត្រូវ" : "Right"} value={score.correct} colour="emerald" isKh={isKh} />
+            <Stat label={isKh ? "ខុស" : "Wrong"} value={score.wrong} colour="rose" isKh={isKh} />
+            <Stat label={isKh ? "ភាពត្រឹមត្រូវ" : "Accuracy"} value={`${accuracy}%`} colour="blue" isKh={isKh} />
+          </div>
+          {running && (
+            <button
+              onClick={stopRound}
+              className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-bold transition-colors"
+            >
+              <Pause className="w-3.5 h-3.5" /> {isKh ? "ឈប់" : "Stop round"}
+            </button>
+          )}
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+function Stat({ label, value, colour, isKh }: { label: string; value: number | string; colour: "emerald" | "rose" | "blue"; isKh: boolean }) {
+  const cls =
+    colour === "emerald" ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+    : colour === "rose"  ? "bg-rose-50 border-rose-200 text-rose-800"
+    :                       "bg-blue-50 border-blue-200 text-blue-800";
+  return (
+    <div className={`rounded-lg border p-2 ${cls}`}>
+      <div className="font-mono font-bold text-lg tabular-nums">{value}</div>
+      <div className={`text-[10px] uppercase tracking-wider font-bold opacity-80 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>{label}</div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  2. Algebra — Balance Scale (X + 5 = 12)
+// ════════════════════════════════════════════════════════════════════════════
+
+function BalanceScale({ isKh }: { isKh: boolean }) {
+  // Equation state: left = "X + (5 - subtracted)", right = "12 - subtracted"
+  const [step, setStep] = useState<0 | 1 | 2>(0); // 0 = initial, 1 = subtracted 5, 2 = solved (same as 1 here)
+  const subtracted = step >= 1 ? 5 : 0;
+  const leftAdded = 5 - subtracted;
+  const rightVal = 12 - subtracted;
+  const xValue = step >= 1 ? 7 : null;
+
+  const reset = () => setStep(0);
+  const subFive = () => setStep(1);
+
+  // Tilt offset: scale tilts toward the heavier side. After subtracting 5, both sides equal 7 → balanced.
+  // Left = X + leftAdded (X = 7 unknown but assume 7 → left "weight" = 7 + leftAdded)
+  // Right = rightVal
+  const leftWeight = 7 + leftAdded;
+  const rightWeight = rightVal;
+  const tilt = Math.max(-8, Math.min(8, (leftWeight - rightWeight) * 1.6));
+
+  return (
+    <PaperCard className="p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <Scale className="w-5 h-5 text-blue-700" />
+        </div>
+        <div className="flex-1">
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ជញ្ជីងតុល្យភាព — រកតម្លៃ X" : "Balance scale — find X"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>គោលដៅរបស់យើង៖ <I>X</I> + 5 = 12 ។ ដើម្បីញែក <I>X</I> យើងត្រូវលុបបង់ "+ 5" — ហើយវិធីត្រឹមត្រូវតែមួយគត់គឺ៖ ដក 5 ចេញពី <strong>ទាំងសងខាង</strong>។</>
+            ) : (
+              <>Our goal: <I>X</I> + 5 = 12. To isolate <I>X</I> we need to remove the "+ 5" — and the only fair move is: subtract 5 from <strong>both sides</strong>.</>
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* Equation display */}
+      <div className="bg-blue-50/60 rounded-xl border border-blue-200 p-4 mb-4 text-center font-serif text-2xl sm:text-3xl">
+        <span className="text-slate-900">
+          <I>X</I> {leftAdded > 0 && <>+ <span className="tabular-nums">{leftAdded}</span></>}
+        </span>
+        <span className="mx-3 text-blue-700 font-bold">=</span>
+        <span className="tabular-nums text-slate-900">{rightVal}</span>
+        {xValue !== null && (
+          <div className="mt-3 text-xl">
+            <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-emerald-600 text-white font-bold font-serif">
+              <I>X</I> = <span className="font-mono not-italic">{xValue}</span>
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Scale SVG */}
+      <div className="bg-white rounded-xl border border-blue-200 p-4">
+        <svg viewBox="0 0 540 280" className="w-full h-auto block" aria-label="Balance scale showing the equation">
+          {/* Pillar */}
+          <rect x="262" y="120" width="16" height="120" rx="2" fill="#475569" />
+          <rect x="220" y="240" width="100" height="14" rx="3" fill="#334155" />
+
+          {/* Beam — rotates around the centre */}
+          <g style={{ transform: `rotate(${tilt}deg)`, transformOrigin: "270px 120px", transition: "transform 600ms cubic-bezier(.4,.1,.2,1)" }}>
+            <rect x="60" y="113" width="420" height="14" rx="3" fill="#64748b" />
+            <circle cx="270" cy="120" r="9" fill="#1e293b" />
+
+            {/* Left pan ropes */}
+            <line x1="110" y1="120" x2="110" y2="160" stroke="#475569" strokeWidth="1.5" />
+            {/* Left pan */}
+            <Pan
+              x={110}
+              y={185}
+              colour="#3b82f6"
+              labelTopX={<span><I>X</I>{leftAdded > 0 && <> + <span className="font-mono not-italic">{leftAdded}</span></>}</span>}
+            >
+              {/* X box */}
+              <rect x={-32} y={-22} width={26} height={26} rx={3} fill="#1d4ed8" />
+              <text x={-19} y={-3} fontSize="16" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="serif" fontStyle="italic">X</text>
+              {/* +N weights */}
+              {Array.from({ length: leftAdded }).map((_, i) => (
+                <circle key={i} cx={6 + (i % 5) * 8} cy={-7 - Math.floor(i / 5) * 8} r={3.2} fill="#475569" />
+              ))}
+            </Pan>
+
+            {/* Right pan ropes */}
+            <line x1="430" y1="120" x2="430" y2="160" stroke="#475569" strokeWidth="1.5" />
+            {/* Right pan */}
+            <Pan
+              x={430}
+              y={185}
+              colour="#10b981"
+              labelTopX={<span className="font-mono not-italic">{rightVal}</span>}
+            >
+              {Array.from({ length: rightVal }).map((_, i) => (
+                <circle key={i} cx={-22 + (i % 6) * 8} cy={-6 - Math.floor(i / 6) * 8} r={3.2} fill="#0f766e" />
+              ))}
+            </Pan>
+          </g>
+        </svg>
+
+        {/* Legend */}
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-slate-600 mt-2">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-sm bg-blue-700" /> {isKh ? <>ប្រអប់ <I>X</I></> : <><I>X</I> box</>}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-500" /> {isKh ? "តម្លៃ +1" : "+1 weight"}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-700" /> {isKh ? "តម្លៃ +1 (ស្ដាំ)" : "+1 weight (right)"}
+          </span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <button
+          onClick={subFive}
+          disabled={step >= 1}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-sm shadow-sm transition-colors"
+        >
+          <span className="font-mono">−5</span> {isKh ? "ពីទាំងសងខាង" : "from both sides"}
+        </button>
+        <button
+          onClick={reset}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-bold transition-colors"
+        >
+          <RotateCcw className="w-4 h-4" /> {isKh ? "ចាប់ផ្ដើមឡើងវិញ" : "Reset"}
+        </button>
+      </div>
+
+      {/* Caption */}
+      <div className={`mt-4 flex items-start gap-2 text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <Info className="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" />
+        <span>
+          {step === 0
+            ? (isKh
+                ? <>ជញ្ជីងផ្ដៀង — ខាងឆ្វេងធ្ងន់ជាងនៅពេលដែល <I>X</I> = 7 (ដែលនឹងបង្ហាញ) បូកបន្ថែម 5 = 12 — តួលេខ 12 នៅខាងស្ដាំស្មើគ្នា ដូច្នេះវាពិតជាមានតុល្យភាព ប៉ុន្តែយើងមិនទាន់ដឹង <I>X</I> ទេ។</>
+                : <>The scale starts level — both sides "weigh" 12. But we don't yet know what <I>X</I> is on its own.</>)
+            : (isKh
+                ? <>បន្ទាប់ពីដក 5 ចេញពីទាំងសងខាង សមីការក្លាយជា <I>X</I> = 7 ។ <I>X</I> ត្រូវបាន<strong>ញែក</strong>។ យើងបានដោះស្រាយ!</>
+                : <>After subtracting 5 from both sides, the equation becomes <I>X</I> = 7. <I>X</I> is now <strong>isolated</strong>. We've solved it!</>)}
+        </span>
+      </div>
+    </PaperCard>
+  );
+}
+
+function Pan({ x, y, colour, labelTopX, children }: {
+  x: number; y: number; colour: string; labelTopX: React.ReactNode; children: React.ReactNode;
+}) {
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      {/* Pan body */}
+      <path d={`M -50 0 Q 0 30 50 0 L 40 5 Q 0 30 -40 5 Z`} fill={colour} opacity="0.85" />
+      <line x1={-50} x2={50} y1={0} y2={0} stroke={colour} strokeWidth="2" />
+      {/* Contents */}
+      {children}
+      {/* Label below */}
+      <foreignObject x={-60} y={32} width={120} height={28}>
+        <div className="text-center font-serif text-base text-slate-900">{labelTopX}</div>
+      </foreignObject>
+    </g>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  3. Trigonometry — Right Triangle (drag the top corner)
+// ════════════════════════════════════════════════════════════════════════════
+
+function RightTriangle({ isKh }: { isKh: boolean }) {
+  // SVG canvas: 480 × 320. Right angle at bottom-left (60, 280). Adjacent runs to (380, 280).
+  // The user drags the top vertex up/down to change height (and thus angle).
+  const ORIGIN = { x: 60, y: 280 };
+  const ADJACENT = 320; // px length of horizontal leg
+  const MIN_H = 30, MAX_H = 240;
+
+  const [height, setHeight] = useState(180);
+
+  const top = { x: ORIGIN.x, y: ORIGIN.y - height };
+  const right = { x: ORIGIN.x + ADJACENT, y: ORIGIN.y };
+
+  // angle θ at the bottom-right (between horizontal and hypotenuse)
+  const opp = height;          // opposite to θ
+  const adj = ADJACENT;        // adjacent to θ
+  const hyp = Math.sqrt(opp * opp + adj * adj);
+  const thetaRad = Math.atan2(opp, adj);
+  const thetaDeg = (thetaRad * 180) / Math.PI;
+
+  const sin = Math.sin(thetaRad);
+  const cos = Math.cos(thetaRad);
+  const tan = Math.tan(thetaRad);
+
+  // Drag state (top vertex)
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const updateFromClient = useCallback((clientY: number) => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const pt = svg.createSVGPoint();
+    pt.x = 0;
+    pt.y = clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const local = pt.matrixTransform(ctm.inverse());
+    const newH = ORIGIN.y - local.y;
+    setHeight(Math.max(MIN_H, Math.min(MAX_H, newH)));
+  }, [ORIGIN.y]);
+
+  const onPointerDown = (e: React.PointerEvent<SVGCircleElement>) => {
+    e.preventDefault();
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    const move = (ev: PointerEvent) => updateFromClient(ev.clientY);
+    const up = () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+  };
+
+  return (
+    <PaperCard className="p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <Triangle className="w-5 h-5 text-blue-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ត្រីកោណកែងអន្តរកម្ម — អូសកំពូលដើម្បីផ្លាស់ប្ដូរមុំ θ" : "Interactive right triangle — drag the corner to change θ"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ជ្រុងបី៖ Opposite (កំពស់), Adjacent (បាត), Hypotenuse (ជ្រុងជម្រាល)។ ខណៈពេលអ្នកអូស តម្លៃ sin / cos / tan ប្រែប្រួលផងដែរ។"
+              : "Three sides: Opposite (height), Adjacent (base), Hypotenuse (slope). As you drag, sin / cos / tan update live."}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
+        {/* SVG triangle */}
+        <div className="bg-white rounded-xl border border-blue-200 p-4">
+          <svg
+            ref={svgRef}
+            viewBox="0 0 480 320"
+            className="w-full h-auto block touch-none select-none"
+            aria-label={`Right triangle with theta of ${thetaDeg.toFixed(1)} degrees`}
+          >
+            {/* Inner grid */}
+            <defs>
+              <pattern id="trig-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dbeafe" strokeWidth="0.7" />
+              </pattern>
+            </defs>
+            <rect width="480" height="320" fill="url(#trig-grid)" />
+
+            {/* Triangle fill */}
+            <polygon
+              points={`${ORIGIN.x},${ORIGIN.y} ${right.x},${right.y} ${top.x},${top.y}`}
+              fill="rgba(59,130,246,0.10)"
+            />
+
+            {/* Right angle marker (square at origin) */}
+            <rect x={ORIGIN.x} y={ORIGIN.y - 14} width={14} height={14} fill="none" stroke="#1e40af" strokeWidth="1.5" />
+
+            {/* Angle θ arc at right vertex */}
+            <path
+              d={describeArc(right.x, right.y, 32, 180, 180 + thetaDeg)}
+              fill="none"
+              stroke="#dc2626"
+              strokeWidth="2"
+            />
+            <text
+              x={right.x - 50}
+              y={right.y - 12}
+              fontSize="16"
+              fill="#dc2626"
+              fontFamily="serif"
+              fontStyle="italic"
+              fontWeight="700"
+            >
+              θ
+            </text>
+
+            {/* Sides */}
+            <line x1={ORIGIN.x} y1={ORIGIN.y} x2={right.x} y2={right.y} stroke="#1e40af" strokeWidth="3" />
+            <line x1={ORIGIN.x} y1={ORIGIN.y} x2={top.x} y2={top.y} stroke="#1e40af" strokeWidth="3" />
+            <line x1={top.x} y1={top.y} x2={right.x} y2={right.y} stroke="#1e40af" strokeWidth="3" />
+
+            {/* Side labels */}
+            <text x={(ORIGIN.x + right.x) / 2} y={ORIGIN.y + 22} fontSize="13" fill="#0f172a" fontFamily="serif" fontStyle="italic" textAnchor="middle">
+              Adjacent · {adj.toFixed(0)}
+            </text>
+            <text
+              x={ORIGIN.x - 10}
+              y={(ORIGIN.y + top.y) / 2}
+              fontSize="13" fill="#0f172a" fontFamily="serif" fontStyle="italic"
+              textAnchor="middle"
+              transform={`rotate(-90 ${ORIGIN.x - 10} ${(ORIGIN.y + top.y) / 2})`}
+            >
+              Opposite · {opp.toFixed(0)}
+            </text>
+            <text
+              x={(top.x + right.x) / 2 + 12}
+              y={(top.y + right.y) / 2 - 6}
+              fontSize="13" fill="#0f172a" fontFamily="serif" fontStyle="italic"
+              transform={`rotate(${-thetaDeg} ${(top.x + right.x) / 2 + 12} ${(top.y + right.y) / 2 - 6})`}
+            >
+              Hypotenuse · {hyp.toFixed(0)}
+            </text>
+
+            {/* Drag handle (top vertex) */}
+            <circle
+              cx={top.x}
+              cy={top.y}
+              r={11}
+              fill="#3b82f6"
+              stroke="#fff"
+              strokeWidth="2.5"
+              cursor="ns-resize"
+              onPointerDown={onPointerDown}
+              role="slider"
+              tabIndex={0}
+              aria-label="Triangle angle theta"
+              aria-valuemin={Math.round((Math.atan2(MIN_H, ADJACENT) * 180) / Math.PI)}
+              aria-valuemax={Math.round((Math.atan2(MAX_H, ADJACENT) * 180) / Math.PI)}
+              aria-valuenow={Math.round(thetaDeg)}
+              aria-valuetext={`${thetaDeg.toFixed(1)} degrees`}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp")   setHeight((h) => Math.min(MAX_H, h + 10));
+                if (e.key === "ArrowDown") setHeight((h) => Math.max(MIN_H, h - 10));
+              }}
+            />
+            {/* "drag" hint */}
+            <text x={top.x + 18} y={top.y + 4} fontSize="11" fill="#64748b" fontStyle="italic">
+              ← drag
+            </text>
+          </svg>
+        </div>
+
+        {/* Live values */}
+        <div className="space-y-3">
+          <div className="bg-white rounded-xl border border-blue-200 p-4 text-center">
+            <div className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">
+              {isKh ? "មុំ" : "Angle"} <I>θ</I>
+            </div>
+            <div className="font-serif text-3xl font-bold text-rose-600 tabular-nums">{thetaDeg.toFixed(1)}°</div>
+          </div>
+          <RatioRow label="sin" value={sin} formula={<>opp / hyp</>} />
+          <RatioRow label="cos" value={cos} formula={<>adj / hyp</>} />
+          <RatioRow label="tan" value={tan} formula={<>opp / adj</>} />
+        </div>
+      </div>
+
+      {/* Real-world examples */}
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <RealWorldCard
+          icon={Building2}
+          titleEn="Measure a building"
+          titleKh="វាស់អគារ"
+          isKh={isKh}
+          bodyEn={
+            <>Stand a known distance away. Measure the angle θ from your eyes up to the roof. Then <strong>height ≈ distance × tan(θ)</strong>. No ladder needed.</>
+          }
+          bodyKh={
+            <>ឈរនៅចម្ងាយដែលអ្នកដឹង។ វាស់មុំ θ ពីភ្នែកអ្នកឡើងទៅកំពូលដំបូល។ បន្ទាប់មក <strong>កំពស់ ≈ ចម្ងាយ × tan(θ)</strong>។ មិនចាំបាច់ប្រើជណ្ដើរទេ។</>
+          }
+        />
+        <RealWorldCard
+          icon={Mountain}
+          titleEn="Measure a mountain"
+          titleKh="វាស់ភ្នំ"
+          isKh={isKh}
+          bodyEn={
+            <>The first survey of Mount Everest in 1856 used exactly this method — six trigonometric stations, a few angles, careful arithmetic, and they got the height to within 9 metres of today's number.</>
+          }
+          bodyKh={
+            <>ការវាស់ស្ទង់ភ្នំ Everest ជាលើកដំបូងនៅឆ្នាំ ១៨៥៦ បានប្រើវិធីនេះច្បាស់ៗ — ស្ថានីយ៍ត្រីកោណមាត្រ ៦, មុំពីរបី, និងការគណនាដោយយកចិត្តទុកដាក់។ ពួកគេបានទទួលកំពស់ខុសគ្នាតែ ៩ ម៉ែត្រពីលេខបច្ចុប្បន្ន។</>
+          }
+        />
+      </div>
+    </PaperCard>
+  );
+}
+
+// SVG arc helper for the θ marker
+function polarToCartesian(cx: number, cy: number, r: number, deg: number) {
+  const rad = ((deg - 90) * Math.PI) / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+function describeArc(cx: number, cy: number, r: number, startDeg: number, endDeg: number) {
+  const start = polarToCartesian(cx, cy, r, endDeg);
+  const end = polarToCartesian(cx, cy, r, startDeg);
+  const large = endDeg - startDeg <= 180 ? 0 : 1;
+  return ["M", start.x, start.y, "A", r, r, 0, large, 0, end.x, end.y].join(" ");
+}
+
+function RatioRow({ label, value, formula }: { label: string; value: number; formula: React.ReactNode }) {
+  return (
+    <div className="bg-white rounded-xl border border-blue-200 p-3 flex items-center gap-3">
+      <div className="font-serif italic text-xl font-bold text-blue-700 w-12">{label}<span className="not-italic text-slate-500"> θ</span></div>
+      <div className="flex-1 text-xs text-slate-500 font-serif italic">{formula}</div>
+      <div className="font-mono font-bold text-lg tabular-nums text-slate-900 w-20 text-right">{value.toFixed(3)}</div>
+    </div>
+  );
+}
+
+function RealWorldCard({
+  icon: Icon, titleEn, titleKh, bodyEn, bodyKh, isKh,
+}: {
+  icon: typeof Building2;
+  titleEn: string; titleKh: string;
+  bodyEn: React.ReactNode; bodyKh: React.ReactNode;
+  isKh: boolean;
+}) {
+  return (
+    <div className="bg-blue-50/70 rounded-xl border border-blue-200 p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <Icon className="w-5 h-5 text-blue-700" />
+        <div className={`font-display font-bold text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+          {isKh ? titleKh : titleEn}
+        </div>
+      </div>
+      <p className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  4a. Calculus — Derivatives (slope = instantaneous speed)
+// ════════════════════════════════════════════════════════════════════════════
+
+const CAR_T_MAX = 10;          // seconds simulated
+const CAR_ACCEL = 1.4;         // m/s² (chosen for nice numbers)
+// distance d(t) = 0.5 * a * t²  →  speed = a * t
+
+function DerivativeCard({ isKh }: { isKh: boolean }) {
+  const [t, setT] = useState(4); // seconds — slider position
+
+  const distance = 0.5 * CAR_ACCEL * t * t;
+  const speed = CAR_ACCEL * t;
+
+  // Plot dimensions
+  const W = 480, H = 240;
+  const PAD_L = 50, PAD_R = 16, PAD_T = 16, PAD_B = 36;
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+
+  // Max distance: 0.5 * a * 100 = 70 m
+  const MAX_D = 0.5 * CAR_ACCEL * CAR_T_MAX * CAR_T_MAX;
+
+  const xOf = (sec: number) => PAD_L + (sec / CAR_T_MAX) * plotW;
+  const yOf = (d: number) => PAD_T + (1 - d / MAX_D) * plotH;
+
+  // Curve path
+  const curve = useMemo(() => {
+    const pts: string[] = [];
+    for (let i = 0; i <= 100; i++) {
+      const tt = (i / 100) * CAR_T_MAX;
+      const dd = 0.5 * CAR_ACCEL * tt * tt;
+      pts.push(`${i === 0 ? "M" : "L"} ${xOf(tt).toFixed(2)} ${yOf(dd).toFixed(2)}`);
+    }
+    return pts.join(" ");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Tangent line at t — drawn as a short segment of the actual tangent
+  //   y = distance + speed * (t' - t)
+  // evaluated at t' = t ± dt. (Two points on the tangent line itself, not on
+  // the curve, so it really IS the tangent, not a secant approximation.)
+  const tx = xOf(t), ty = yOf(distance);
+  const dt = 1.2;
+  const t1 = Math.max(0, t - dt), t2 = Math.min(CAR_T_MAX, t + dt);
+  const x1 = xOf(t1), y1 = yOf(distance + speed * (t1 - t));
+  const x2 = xOf(t2), y2 = yOf(distance + speed * (t2 - t));
+
+  return (
+    <PaperCard className="p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <TrendingUp className="w-5 h-5 text-blue-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "Derivative — ជម្រាល = ល្បឿនភ្លាមៗ" : "Derivative — slope = instantaneous speed"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>ឡានចេញដំណើរពីផ្ទះ ហើយធ្វើការបង្កើនល្បឿនយ៉ាងថេរ។ ក្រាហ្វិកបង្ហាញ <I>ចម្ងាយ</I> ធៀបនឹង <I>ពេលវេលា</I>។ ជម្រាលនៅចំណុចនីមួយៗ — ហោយកំពុងតែកើនឡើង — គឺជា <strong>ល្បឿនភ្លាមៗ</strong> នាពេលនោះ។</>
+            ) : (
+              <>A car leaves home and accelerates steadily. The graph shows <I>distance</I> vs <I>time</I>. The slope at any point — getting steeper — is the <strong>instantaneous speed</strong> at that moment.</>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
+        <div className="bg-white rounded-xl border border-blue-200 p-3">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block">
+            <defs>
+              <pattern id="calc-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dbeafe" strokeWidth="0.7" />
+              </pattern>
+            </defs>
+            <rect x={PAD_L} y={PAD_T} width={plotW} height={plotH} fill="url(#calc-grid)" />
+
+            {/* Axes */}
+            <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + plotH} stroke="#0f172a" strokeWidth="1.4" />
+            <line x1={PAD_L} y1={PAD_T + plotH} x2={PAD_L + plotW} y2={PAD_T + plotH} stroke="#0f172a" strokeWidth="1.4" />
+
+            {/* Axis labels */}
+            <text x={PAD_L + plotW / 2} y={H - 10} textAnchor="middle" fontSize="11" fill="#475569" fontFamily="serif" fontStyle="italic">
+              time (s)
+            </text>
+            <text x={14} y={PAD_T + plotH / 2} fontSize="11" fill="#475569" fontFamily="serif" fontStyle="italic" transform={`rotate(-90 14 ${PAD_T + plotH / 2})`} textAnchor="middle">
+              distance (m)
+            </text>
+
+            {/* Tick marks */}
+            {[0, 2, 4, 6, 8, 10].map((tk) => (
+              <g key={`tx-${tk}`}>
+                <line x1={xOf(tk)} y1={PAD_T + plotH} x2={xOf(tk)} y2={PAD_T + plotH + 4} stroke="#64748b" />
+                <text x={xOf(tk)} y={PAD_T + plotH + 16} fontSize="10" fill="#64748b" textAnchor="middle">{tk}</text>
+              </g>
+            ))}
+            {[0, 20, 40, 60].map((dk) => (
+              <g key={`dy-${dk}`}>
+                <line x1={PAD_L - 4} y1={yOf(dk)} x2={PAD_L} y2={yOf(dk)} stroke="#64748b" />
+                <text x={PAD_L - 7} y={yOf(dk) + 3} fontSize="10" fill="#64748b" textAnchor="end">{dk}</text>
+              </g>
+            ))}
+
+            {/* Distance curve */}
+            <path d={curve} fill="none" stroke="#1d4ed8" strokeWidth="2.5" />
+
+            {/* Tangent line */}
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#dc2626" strokeWidth="2.5" strokeDasharray="4 3" />
+
+            {/* Tangent slope label box */}
+            <g transform={`translate(${tx + 14} ${ty - 30})`}>
+              <rect x={-2} y={-12} width={92} height={20} rx={4} fill="#fee2e2" stroke="#dc2626" strokeWidth="1" />
+              <text x={3} y={3} fontSize="11" fill="#991b1b" fontFamily="serif" fontStyle="italic" fontWeight="700">
+                slope = {speed.toFixed(2)} m/s
+              </text>
+            </g>
+
+            {/* Point on curve */}
+            <circle cx={tx} cy={ty} r={6} fill="#dc2626" stroke="#fff" strokeWidth="2" />
+          </svg>
+        </div>
+
+        <div className="space-y-3">
+          <CalcStat label={isKh ? "ពេលវេលា" : "Time"} value={`${t.toFixed(1)} s`} colour="slate" />
+          <CalcStat label={isKh ? "ចម្ងាយ" : "Distance"} value={`${distance.toFixed(1)} m`} colour="blue" />
+          <CalcStat label={isKh ? "ល្បឿនភ្លាមៗ (ជម្រាល)" : "Speed (slope)"} value={`${speed.toFixed(2)} m/s`} colour="rose" />
+          <div>
+            <label className={`text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "ផ្លាស់ទីពេលវេលា" : "Move time"}
+            </label>
+            <input
+              type="range"
+              min={0.5} max={CAR_T_MAX} step={0.1}
+              value={t}
+              onChange={(e) => setT(parseFloat(e.target.value))}
+              className="w-full accent-rose-600"
+              aria-label="Time"
+            />
+          </div>
+          <div className={`text-xs text-slate-600 italic font-serif p-2 bg-blue-50/60 rounded-lg border border-blue-200 ${isKh ? "font-khmer not-italic" : ""}`}>
+            <I>d</I>(<I>t</I>) = ½ · <I>a</I> · <I>t</I><sup>2</sup> &nbsp;→&nbsp; <I>d</I> ′(<I>t</I>) = <I>a</I> · <I>t</I>
+          </div>
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+function CalcStat({ label, value, colour }: { label: string; value: string; colour: "slate" | "blue" | "rose" }) {
+  const cls = colour === "blue" ? "bg-blue-50 border-blue-200 text-blue-800"
+    : colour === "rose" ? "bg-rose-50 border-rose-200 text-rose-800"
+    : "bg-slate-50 border-slate-200 text-slate-800";
+  return (
+    <div className={`rounded-lg border p-3 ${cls}`}>
+      <div className="text-[10px] uppercase tracking-wider font-bold opacity-80">{label}</div>
+      <div className="font-mono font-bold text-xl tabular-nums">{value}</div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  4b. Calculus — Integrals (area under curve = total distance)
+// ════════════════════════════════════════════════════════════════════════════
+
+function IntegralCard({ isKh }: { isKh: boolean }) {
+  const [t, setT] = useState(6);
+
+  const W = 480, H = 240;
+  const PAD_L = 50, PAD_R = 16, PAD_T = 16, PAD_B = 36;
+  const plotW = W - PAD_L - PAD_R;
+  const plotH = H - PAD_T - PAD_B;
+  const MAX_V = CAR_ACCEL * CAR_T_MAX; // top speed in window (14 m/s)
+
+  const xOf = (sec: number) => PAD_L + (sec / CAR_T_MAX) * plotW;
+  const yOf = (v: number) => PAD_T + (1 - v / MAX_V) * plotH;
+
+  // Speed line v(t) = a*t — straight line from (0,0) to (T, a*T)
+  const speedAtT = CAR_ACCEL * t;
+  const totalDistance = 0.5 * CAR_ACCEL * t * t; // ∫₀ᵗ a·s ds
+
+  // Filled area under v(t) from 0 to t — a triangle
+  const areaPath = `
+    M ${xOf(0)} ${yOf(0)}
+    L ${xOf(t)} ${yOf(0)}
+    L ${xOf(t)} ${yOf(speedAtT)}
+    Z
+  `;
+
+  // Speed-line full extent
+  const lineX1 = xOf(0), lineY1 = yOf(0);
+  const lineX2 = xOf(CAR_T_MAX), lineY2 = yOf(MAX_V);
+
+  return (
+    <PaperCard className="p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <AreaChart className="w-5 h-5 text-blue-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "Integral — តំបន់ក្រោមខ្សែ = ចម្ងាយសរុប" : "Integral — area under the curve = total distance"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>បច្ចុប្បន្ននេះគ្រាហ្វិកបង្ហាញ <I>ល្បឿន</I> ធៀបនឹង <I>ពេលវេលា</I>។ ផ្ទៃនៃតំបន់ខៀវ — ល្បឿន × ពេលវេលា — គឺជា <strong>ចម្ងាយដែលឡានបានធ្វើដំណើរ</strong>។</>
+            ) : (
+              <>The graph now shows <I>speed</I> vs <I>time</I>. The blue area — speed × time — is the <strong>total distance the car has travelled</strong>.</>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
+        <div className="bg-white rounded-xl border border-blue-200 p-3">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block">
+            <rect x={PAD_L} y={PAD_T} width={plotW} height={plotH} fill="url(#calc-grid)" />
+
+            {/* Axes */}
+            <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + plotH} stroke="#0f172a" strokeWidth="1.4" />
+            <line x1={PAD_L} y1={PAD_T + plotH} x2={PAD_L + plotW} y2={PAD_T + plotH} stroke="#0f172a" strokeWidth="1.4" />
+
+            <text x={PAD_L + plotW / 2} y={H - 10} textAnchor="middle" fontSize="11" fill="#475569" fontFamily="serif" fontStyle="italic">
+              time (s)
+            </text>
+            <text x={14} y={PAD_T + plotH / 2} fontSize="11" fill="#475569" fontFamily="serif" fontStyle="italic" transform={`rotate(-90 14 ${PAD_T + plotH / 2})`} textAnchor="middle">
+              speed (m/s)
+            </text>
+
+            {[0, 2, 4, 6, 8, 10].map((tk) => (
+              <g key={`tx-${tk}`}>
+                <line x1={xOf(tk)} y1={PAD_T + plotH} x2={xOf(tk)} y2={PAD_T + plotH + 4} stroke="#64748b" />
+                <text x={xOf(tk)} y={PAD_T + plotH + 16} fontSize="10" fill="#64748b" textAnchor="middle">{tk}</text>
+              </g>
+            ))}
+            {[0, 4, 8, 12].map((vk) => (
+              <g key={`dy-${vk}`}>
+                <line x1={PAD_L - 4} y1={yOf(vk)} x2={PAD_L} y2={yOf(vk)} stroke="#64748b" />
+                <text x={PAD_L - 7} y={yOf(vk) + 3} fontSize="10" fill="#64748b" textAnchor="end">{vk}</text>
+              </g>
+            ))}
+
+            {/* Filled area under curve up to t */}
+            <path d={areaPath} fill="rgba(29,78,216,0.25)" stroke="none" />
+            {/* Hatch lines for "area" feel */}
+            <pattern id="int-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="6" stroke="#1d4ed8" strokeWidth="0.7" opacity="0.4" />
+            </pattern>
+            <path d={areaPath} fill="url(#int-hatch)" />
+
+            {/* Speed line */}
+            <line x1={lineX1} y1={lineY1} x2={lineX2} y2={lineY2} stroke="#1d4ed8" strokeWidth="2.5" />
+
+            {/* Vertical drop at t */}
+            <line x1={xOf(t)} y1={yOf(speedAtT)} x2={xOf(t)} y2={yOf(0)} stroke="#1d4ed8" strokeWidth="1.5" strokeDasharray="3 3" />
+            <circle cx={xOf(t)} cy={yOf(speedAtT)} r={5.5} fill="#1d4ed8" stroke="#fff" strokeWidth="2" />
+
+            {/* Area label */}
+            <g transform={`translate(${xOf(t / 2) - 22} ${yOf(speedAtT / 2) - 6})`}>
+              <rect x={-4} y={-12} width={64} height={20} rx={4} fill="#dbeafe" stroke="#1d4ed8" strokeWidth="1" />
+              <text x={28} y={3} fontSize="11" fill="#1e3a8a" fontFamily="serif" fontStyle="italic" fontWeight="700" textAnchor="middle">
+                area = {totalDistance.toFixed(1)} m
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <div className="space-y-3">
+          <CalcStat label={isKh ? "ពេលវេលាបច្ចុប្បន្ន" : "Current time"} value={`${t.toFixed(1)} s`} colour="slate" />
+          <CalcStat label={isKh ? "ល្បឿន ឥឡូវ" : "Speed now"} value={`${speedAtT.toFixed(2)} m/s`} colour="rose" />
+          <CalcStat label={isKh ? "ចម្ងាយសរុប = ផ្ទៃ" : "Total distance = area"} value={`${totalDistance.toFixed(1)} m`} colour="blue" />
+          <div>
+            <label className={`text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "ផ្លាស់ទីពេលវេលា" : "Move time"}
+            </label>
+            <input
+              type="range"
+              min={0.5} max={CAR_T_MAX} step={0.1}
+              value={t}
+              onChange={(e) => setT(parseFloat(e.target.value))}
+              className="w-full accent-blue-600"
+              aria-label="Time"
+            />
+          </div>
+          <div className={`text-xs text-slate-600 italic font-serif p-2 bg-blue-50/60 rounded-lg border border-blue-200 ${isKh ? "font-khmer not-italic" : ""}`}>
+            ∫<sub>0</sub><sup><I>t</I></sup> <I>a</I> · <I>s</I> &nbsp;<I>ds</I> = ½ · <I>a</I> · <I>t</I><sup>2</sup>
+          </div>
+        </div>
+      </div>
+
+      <div className={`mt-4 flex items-start gap-2 text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <Info className="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" />
+        <span>
+          {isKh
+            ? "ចំណាំ៖ derivative នៃចម្ងាយផ្ដល់ឲ្យអ្នកនូវល្បឿន ; integral នៃល្បឿនផ្ដល់ឲ្យអ្នកនូវចម្ងាយ។ វាគឺជា Fundamental Theorem of Calculus — ប្រតិបត្តិការទាំងពីរគឺជាមុខងារត្រឡប់នៃគ្នាទៅវិញទៅមក។"
+            : "Notice: the derivative of distance gives you speed; the integral of speed gives you distance back. That's the Fundamental Theorem of Calculus — the two operations are inverses of each other."}
+        </span>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Scoped styles
+// ════════════════════════════════════════════════════════════════════════════
+
+function ScopedStyles() {
+  return (
+    <style>{`
+      .math-text-ink {
+        background: linear-gradient(180deg, #1d4ed8 0%, #1e3a8a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    `}</style>
+  );
+}
