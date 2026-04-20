@@ -4,7 +4,6 @@ import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspa
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
-import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
 import { CountUp } from "@/components/CountUp";
 import { LearningPathQuiz } from "@/components/LearningPathQuiz";
 
@@ -20,9 +19,6 @@ export function Home() {
   
   return (
     <div className="w-full min-h-screen">
-      {/* Daily Spark Challenge — top-of-page motivator */}
-      <DailySparkChallenge />
-
       {/* Hero Section */}
       {/* NOTE: overflow is intentionally NOT hidden here so the GlobalSearch
           dropdown can extend below the hero. The bg image is absolutely
