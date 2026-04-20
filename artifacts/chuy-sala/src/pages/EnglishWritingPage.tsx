@@ -6,6 +6,7 @@ import { VocabularyModule } from "@/components/widgets/VocabularyModule";
 import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridge";
 import { PunctuationChecker } from "@/components/widgets/PunctuationChecker";
 import { SentenceTrain } from "@/components/widgets/SentenceTrain";
+import { LocalMarketCounter } from "@/components/widgets/LocalMarketCounter";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -41,6 +42,11 @@ export function EnglishWritingPage() {
         {/* Sentence Train — drag-and-drop S+V+O game for young learners */}
         <div className="mb-10">
           <SentenceTrain />
+        </div>
+
+        {/* Local Market Counter — beginner English + Math counting game */}
+        <div className="mb-10">
+          <LocalMarketCounter />
         </div>
 
         {/* Introductions & Greetings — for ESL beginners */}
