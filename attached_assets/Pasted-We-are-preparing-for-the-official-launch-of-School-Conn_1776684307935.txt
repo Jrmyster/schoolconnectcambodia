@@ -1,0 +1,35 @@
+We are preparing for the official launch of School Connect Cambodia, a comprehensive, bilingual (English/Khmer) educational Progressive Web App (PWA). I need you to perform the ultimate System-Wide Quality Assurance (QA) Audit. Please execute the following checks and implement fixes immediately:
+
+1. Global Navigation & Routing (The Map Check):
+
+Verify that all new modules—especially 'The Spelling Forge', 'Robotics', 'Aviation', 'Global Cities', and the 'Sexual Health Sanctuary'—are correctly nested in their respective Dropdowns (Science, Technology, Study Center, Sanctuary).
+
+Crawl the entire site for 404 errors or 'Dead Ends'. Every page must have a working 'Home' button and a functional 'Back to Top' link.
+
+2. Mobile-First Optimization (The Smartphone Test):
+
+Enforce strict responsive grids. Ensure zero horizontal scrolling on screens 320px to 768px wide.
+
+Verify that all interactive simulators (e.g., A/C Loop, Quantum Zoom, Spelling Forge) resize correctly on mobile without breaking the UI.
+
+Ensure the mobile 'Hamburger' navigation menu opens smoothly, traps focus, and allows users to easily tap nested subjects.
+
+3. Bilingual Design & Typography (The Aesthetic Check):
+
+Standardize the font stack. Ensure Khmer script (e.g., 'Battambang' or 'Suwannaphum') has proper line spacing and does not overlap with English text.
+
+Standardize all UI components: Buttons, Cards, and Input Fields (like the Spell Checker) must share consistent border-radiuses, padding, and hover states.
+
+Check WCAG AA Contrast Ratios, especially in 'Dark Mode' sections like Space and Cinematography.
+
+4. Code Quality & Performance (The Engine Check):
+
+Clear out any React hydration errors, missing 'key' props in arrays, or undefined variables in the console.
+
+Check for memory leaks in simulators (ensure useEffect cleanup functions are clearing intervals/event listeners when unmounting).
+
+Verify the PWA Manifest and Service Worker are perfectly configured to cache core HTML/CSS/JS for offline availability and fast loading on 3G networks.
+
+5. Security Finalization:
+
+Ensure the /admin dashboard and Replit Secrets (environment variables) are fully locked down and inaccessible from the public frontend."
