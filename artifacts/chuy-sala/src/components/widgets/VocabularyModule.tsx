@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Volume2, BookOpen, Bed, ShowerHead, Sofa, Car, Boxes, Trees, Flower2,
   Trophy, GraduationCap, Stethoscope, Armchair, Utensils, Layers,
+  Search, X, SearchX,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -199,13 +200,42 @@ const CATEGORIES: Category[] = [
 
 /* ──────────────────────────────────────────────────────────────────── */
 
+/** A single visible flashcard, plus the category it came from (for color + label). */
+type ResultRow = { item: VocabItem; cat: Category };
+
 export function VocabularyModule() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
   const [activeId, setActiveId] = useState<string>(CATEGORIES[0].id);
+  const [query, setQuery] = useState<string>("");
 
   const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
-  const tone = COLOR[active.color];
+  const trimmed = query.trim().toLowerCase();
+  const isSearching = trimmed.length > 0;
+
+  /** Live results — search across ALL categories when typing, otherwise show
+   *  only the currently selected category's items. Memoized for snappy typing. */
+  const results = useMemo<ResultRow[]>(() => {
+    if (isSearching) {
+      const out: ResultRow[] = [];
+      for (const cat of CATEGORIES) {
+        const catNameMatches =
+          cat.en.toLowerCase().includes(trimmed) ||
+          cat.kh.includes(query.trim());
+        for (const item of cat.items) {
+          if (
+            catNameMatches ||
+            item.en.toLowerCase().includes(trimmed) ||
+            item.kh.includes(query.trim())
+          ) {
+            out.push({ item, cat });
+          }
+        }
+      }
+      return out;
+    }
+    return active.items.map((item) => ({ item, cat: active }));
+  }, [isSearching, trimmed, query, active]);
 
   function playAudio(word: string) {
     alert((kh ? KH_TODO("អូឌីយ៉ូនឹងបន្ថែមនៅពេលក្រោយ — ") : "Audio coming soon — ") + word);
@@ -240,6 +270,51 @@ export function VocabularyModule() {
             : "Pick a room or place — then learn the words you'll find there!"}
         </p>
       </header>
+
+      {/* ── Live search bar ─────────────────────────────────── */}
+      <div className="mb-5">
+        <label htmlFor="vocab-search" className="sr-only">
+          {kh ? KH_TODO("ស្វែងរកវត្ថុ") : "Search for an item"}
+        </label>
+        <div className="relative">
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-sky-500 pointer-events-none"
+            aria-hidden
+          />
+          <input
+            id="vocab-search"
+            type="search"
+            inputMode="search"
+            autoComplete="off"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={kh ? KH_TODO("ស្វែងរកវត្ថុ...") : "Search for an item..."}
+            className={`w-full rounded-2xl border-4 border-sky-300 focus:border-sky-500 focus:ring-4 focus:ring-sky-200 outline-none bg-white shadow-md pl-12 sm:pl-14 pr-12 py-3 sm:py-4 text-base sm:text-lg font-bold text-slate-800 placeholder:text-slate-400 placeholder:font-normal transition ${kh ? "font-khmer text-lg" : ""}`}
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label={kh ? "សម្អាតការស្វែងរក" : "Clear search"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-100 hover:bg-rose-100 hover:text-rose-700 text-slate-500 flex items-center justify-center transition active:scale-95"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+        {isSearching && (
+          <div
+            className={`mt-2 text-center text-xs sm:text-sm font-bold text-sky-700 ${kh ? "font-khmer text-sm sm:text-base" : ""}`}
+            aria-live="polite"
+          >
+            {results.length > 0
+              ? kh
+                ? KH_TODO(`បានរកឃើញ ${results.length} លទ្ធផលសម្រាប់ «${query}»`)
+                : `Found ${results.length} ${results.length === 1 ? "match" : "matches"} for "${query}"`
+              : ""}
+          </div>
+        )}
+      </div>
 
       {/* ── Category navigation ──────────────────────────────── */}
       <SubsectionHeader
@@ -289,61 +364,119 @@ export function VocabularyModule() {
         })}
       </div>
 
-      {/* ── Active flashcard panel ───────────────────────────── */}
+      {/* ── Flashcard panel ──────────────────────────────────── */}
       <SubsectionHeader
         kh={kh}
-        en={`2. Words: ${active.en}`}
-        khText={KH_TODO(`២. ពាក្យ៖ ${active.kh}`)}
+        en={isSearching ? `2. Search Results` : `2. Words: ${active.en}`}
+        khText={
+          isSearching
+            ? KH_TODO("២. លទ្ធផលស្វែងរក")
+            : KH_TODO(`២. ពាក្យ៖ ${active.kh}`)
+        }
       />
 
-      <div
-        role="tabpanel"
-        id={`vocab-panel-${active.id}`}
-        aria-labelledby={`vocab-tab-${active.id}`}
-        key={active.id}
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-2 duration-200"
-      >
-        {active.items.map((it) => (
-          <article
-            key={it.en}
-            className={`group rounded-2xl border-4 bg-gradient-to-br ${tone.card} p-3 sm:p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col`}
+      {results.length === 0 ? (
+        /* Empty state — friendly "no matches" card */
+        <div
+          role="status"
+          aria-live="polite"
+          className="rounded-2xl border-4 border-dashed border-amber-300 bg-amber-50 p-8 sm:p-10 text-center"
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 text-amber-600 mb-3">
+            <SearchX className="w-8 h-8" />
+          </div>
+          <div
+            className={`font-display font-extrabold text-xl sm:text-2xl text-amber-900 ${kh ? "font-khmer leading-snug" : ""}`}
           >
-            {/* Big illustrative emoji (placeholder for future custom images) */}
-            <div
-              className="w-full aspect-square rounded-xl bg-white/70 flex items-center justify-center text-5xl sm:text-6xl shadow-inner mb-2 select-none"
-              aria-hidden
-            >
-              {it.emoji}
-            </div>
+            {kh
+              ? KH_TODO("បន្តស្វែងរក! សាកល្បងពាក្យផ្សេង។")
+              : "Keep looking! Try another word."}
+          </div>
+          <p
+            className={`mt-2 text-sm sm:text-base text-amber-700 max-w-md mx-auto ${kh ? "font-khmer text-base sm:text-lg leading-loose" : ""}`}
+          >
+            {kh
+              ? KH_TODO(`យើងមិនបានរកឃើញពាក្យណាដែលត្រូវនឹង «${query}» ទេ។ សូមសាកល្បងពាក្យសាមញ្ញដូចជា «bed» ឬ «ball»។`)
+              : `We couldn't find anything matching "${query}". Try a simple word like "bed" or "ball".`}
+          </p>
+          <button
+            type="button"
+            onClick={() => setQuery("")}
+            className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md active:scale-95 transition"
+          >
+            <X className="w-4 h-4" />
+            {kh ? KH_TODO("សម្អាតការស្វែងរក") : "Clear search"}
+          </button>
+        </div>
+      ) : (
+        <div
+          role={isSearching ? "region" : "tabpanel"}
+          aria-label={isSearching ? (kh ? "លទ្ធផលស្វែងរក" : "Search results") : undefined}
+          id={isSearching ? undefined : `vocab-panel-${active.id}`}
+          aria-labelledby={isSearching ? undefined : `vocab-tab-${active.id}`}
+          key={isSearching ? `search:${trimmed}` : active.id}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-2 duration-200"
+        >
+          {results.map(({ item: it, cat }) => {
+            const cardTone = COLOR[cat.color];
+            return (
+              <article
+                key={`${cat.id}:${it.en}`}
+                className={`group rounded-2xl border-4 bg-gradient-to-br ${cardTone.card} p-3 sm:p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col`}
+              >
+                {/* Category breadcrumb chip — only useful in cross-category search */}
+                {isSearching && (
+                  <button
+                    type="button"
+                    onClick={() => { setActiveId(cat.id); setQuery(""); }}
+                    className={`self-start inline-flex items-center gap-1 px-2 py-0.5 rounded-full ${cardTone.iconBg} ${cardTone.iconText} text-[10px] font-bold uppercase tracking-wider mb-1.5 hover:opacity-80`}
+                    title={kh ? "មើលប្រភេទនេះ" : "View this category"}
+                  >
+                    <cat.icon className="w-3 h-3" />
+                    <span className={kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}>
+                      {kh ? cat.kh : cat.en}
+                    </span>
+                  </button>
+                )}
 
-            {/* English word — large, school-friendly */}
-            <div className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 leading-tight">
-              {it.en}
-            </div>
+                {/* Big illustrative emoji (placeholder for future custom images) */}
+                <div
+                  className="w-full aspect-square rounded-xl bg-white/70 flex items-center justify-center text-5xl sm:text-6xl shadow-inner mb-2 select-none"
+                  aria-hidden
+                >
+                  {it.emoji}
+                </div>
 
-            {/* Khmer translation placeholder slot */}
-            <div className="mt-1.5 rounded-md bg-white/80 border border-dashed border-slate-300 px-2 py-1">
-              <div className="text-[10px] uppercase tracking-wider font-mono text-slate-400">
-                Khmer Translation Here
-              </div>
-              <div className={`font-khmer text-base text-slate-700 leading-snug ${kh ? "" : "italic opacity-80"}`}>
-                {it.kh}
-              </div>
-            </div>
+                {/* English word — large, school-friendly */}
+                <div className="font-display font-extrabold text-xl sm:text-2xl text-slate-900 leading-tight">
+                  {it.en}
+                </div>
 
-            {/* Audio placeholder button */}
-            <button
-              type="button"
-              onClick={() => playAudio(it.en)}
-              className={`mt-2 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 ${tone.activeBorder.replace("border-", "border-")} font-bold text-xs ${tone.iconText} hover:shadow active:scale-95 transition-all`}
-              aria-label={`Play audio for ${it.en} (coming soon)`}
-            >
-              <Volume2 className="w-3.5 h-3.5" />
-              {kh ? KH_TODO("ស្ដាប់") : "Play Audio"}
-            </button>
-          </article>
-        ))}
-      </div>
+                {/* Khmer translation placeholder slot */}
+                <div className="mt-1.5 rounded-md bg-white/80 border border-dashed border-slate-300 px-2 py-1">
+                  <div className="text-[10px] uppercase tracking-wider font-mono text-slate-400">
+                    Khmer Translation
+                  </div>
+                  <div className={`font-khmer text-base text-slate-700 leading-snug ${kh ? "" : "italic opacity-80"}`}>
+                    {it.kh}
+                  </div>
+                </div>
+
+                {/* Audio placeholder button */}
+                <button
+                  type="button"
+                  onClick={() => playAudio(it.en)}
+                  className={`mt-2 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 ${cardTone.activeBorder} font-bold text-xs ${cardTone.iconText} hover:shadow active:scale-95 transition-all`}
+                  aria-label={`Play audio for ${it.en} (coming soon)`}
+                >
+                  <Volume2 className="w-3.5 h-3.5" />
+                  {kh ? KH_TODO("ស្ដាប់") : "Play"}
+                </button>
+              </article>
+            );
+          })}
+        </div>
+      )}
 
       {/* Helper hint */}
       <p
@@ -351,8 +484,8 @@ export function VocabularyModule() {
       >
         <BookOpen className="inline w-4 h-4 mr-1 -mt-0.5 text-slate-400" />
         {kh
-          ? KH_TODO("ប្ដូររវាងប្រភេទដើម្បីមើលពាក្យផ្សេងៗ — មានតែប្រភេទមួយដែលបានបើក្នុងពេលតែមួយ។")
-          : "Switch between categories above to see different words — only one is shown at a time."}
+          ? KH_TODO("វាយអ្វីមួយដើម្បីស្វែងរកគ្រប់ប្រភេទ ឬចុចលើប្រភេទដើម្បីមើលពាក្យដែលនៅក្នុងវា។")
+          : "Type something to search every category, or tap a category above to browse its words."}
       </p>
     </section>
   );
