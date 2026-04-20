@@ -169,6 +169,12 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Floods, earthquakes, tsunamis — read the warning signs and pack your Go-Bag.",
         descKh: "ទឹកជំនន់ ការរញ្ជួយដី ស៊ូណាមិ — អានសញ្ញាព្រមាន និងខ្ចប់កាបូបបន្ទាន់របស់អ្នក។",
       },
+      {
+        href: "/space",
+        labelEn: "Space",
+        labelKh: "អវកាស",
+        icon: Rocket,
+      },
     ],
   },
   {
@@ -192,7 +198,6 @@ const NAV_GROUPS: NavGroup[] = [
     icon: Smile,
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
-      { href: "/space",              labelEn: "Space",                  labelKh: "អវកាស",                    icon: Rocket },
       { href: "/science",            labelEn: "Scientific Literacy",    labelKh: "ចំណេះដឹងវិទ្យាសាស្ត្រ",  icon: FlaskConical },
       { href: "/electrical-safety",  labelEn: "Electrical Safety",      labelKh: "សុវត្ថិភាពអគ្គិសនី",      icon: Zap },
       { href: "https://finlitkh.com",    labelEn: "Financial Literacy",       labelKh: "ចំណេះដឹងហិរញ្ញវត្ថុ",    icon: Banknote, external: true },
