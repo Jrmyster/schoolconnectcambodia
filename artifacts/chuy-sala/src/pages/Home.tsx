@@ -9,6 +9,7 @@ import { CountUp } from "@/components/CountUp";
 import { PhilosophyMap } from "@/components/PhilosophyMap";
 import { BuddhistPhilosophy } from "@/components/BuddhistPhilosophy";
 import { SociologyPortal } from "@/components/SociologyPortal";
+import { LearningPathQuiz } from "@/components/LearningPathQuiz";
 
 export function Home() {
   const t = useTranslation();
@@ -133,6 +134,9 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* Learning Path Discovery Quiz — onboarding for new visitors */}
+      <LearningPathQuiz />
 
       {/* Weather Widget */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
