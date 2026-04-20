@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -230,6 +230,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Camera,
         descEn: "Trace photons through a camera lens, balance the exposure triangle to freeze a moving motorbike, and learn how filmmakers tell whole stories with three shot sizes.",
         descKh: "តាមដានពន្លឺឆ្លងកាត់កែវកាមេរ៉ា ផ្គុំត្រីកោណការថតឱ្យបង្ហាប់ម៉ូតូកំពុងធ្វើដំណើរ និងរៀនរបៀបដែលអ្នកថតភាពយន្តនិទានរឿងទាំងមូលដោយស៊ុមបី។",
+      },
+      {
+        href: "/hvac",
+        labelEn: "HVAC: Managing Our Environment",
+        labelKh: "HVAC៖ ការគ្រប់គ្រងសីតុណ្ហភាព និងខ្យល់ចេញចូល",
+        icon: Thermometer,
+        descEn: "Watch refrigerant cycle through an air conditioner, see how heaters glow red, and discover why ventilation keeps classrooms healthy.",
+        descKh: "មើលរូបធាតុត្រជាក់ផ្លាស់ប្ដូរក្នុងម៉ាស៊ីនត្រជាក់ មើលឧបករណ៍កំដៅភ្លឺក្រហម និងរកឃើញហេតុអ្វីការបញ្ចេញខ្យល់ធ្វើឲ្យបន្ទប់រៀនមានសុខភាពល្អ។",
       },
     ],
   },

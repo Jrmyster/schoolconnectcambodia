@@ -27,6 +27,7 @@ import { SpacePage } from "@/pages/SpacePage";
 import OceanographyPage from "@/pages/OceanographyPage";
 import WeatherPage from "@/pages/WeatherPage";
 import QuantumLimitPage from "@/pages/QuantumLimitPage";
+import HvacPage from "@/pages/HvacPage";
 import CinematographyPage from "@/pages/CinematographyPage";
 import { ProfilePage } from "@/pages/ProfilePage";
 import { ScientificLiteracyPage } from "@/pages/ScientificLiteracyPage";
@@ -122,6 +123,7 @@ function Router() {
           <Route path="/oceanography" component={OceanographyPage} />
           <Route path="/weather" component={WeatherPage} />
           <Route path="/quantum-limit" component={QuantumLimitPage} />
+          <Route path="/hvac" component={HvacPage} />
           <Route path="/cinematography" component={CinematographyPage} />
           <Route path="/science" component={ScientificLiteracyPage} />
           <Route path="/reading-list" component={ReadingListPage} />
