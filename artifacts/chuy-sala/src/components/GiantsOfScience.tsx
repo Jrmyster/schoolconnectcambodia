@@ -12,6 +12,7 @@ import {
   Sparkles,
   Quote,
   Compass,
+  Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -27,7 +28,8 @@ type Field =
   | "biology"
   | "computing"
   | "philosophy"
-  | "design";
+  | "design"
+  | "social";
 
 const FIELDS: Record<
   Field,
@@ -40,6 +42,7 @@ const FIELDS: Record<
   computing:  { en: "Computing",        kh: "កុំព្យូទ័រ",        icon: Cpu,         from: "from-fuchsia-500", to: "to-purple-700",  ring: "ring-fuchsia-300/40" },
   philosophy: { en: "Philosophy & Logic", kh: "ទស្សនវិជ្ជា និងតក្កវិជ្ជា", icon: Sigma, from: "from-amber-500",   to: "to-orange-700",  ring: "ring-amber-300/40" },
   design:     { en: "Design & Systems", kh: "រចនា និងប្រព័ន្ធ",     icon: Compass,     from: "from-rose-500",    to: "to-pink-700",    ring: "ring-rose-300/40" },
+  social:     { en: "Social Sciences",  kh: "វិទ្យាសាស្ត្រសង្គម",     icon: Users,       from: "from-teal-600",    to: "to-slate-800",   ring: "ring-teal-300/40" },
 };
 
 /* ──────────────────────────────────────────────────────────────────────
@@ -290,6 +293,18 @@ const SCIENTISTS: Scientist[] = [
              kh: "អ្នករចនាឧស្សាហកម្ម និងវិស្វករសង្គម — ស្ថាបនិកនៃគម្រោង Venus សម្រាប់សេដ្ឋកិច្ចផ្អែកលើធនធាន។" },
     bio:   { en: "Fresco spent over seventy years designing cities, transportation systems and technologies aimed at meeting human needs sustainably. With Roxanne Meadows he founded The Venus Project in Florida to demonstrate a 'resource-based economy' — one organised around the careful use of Earth's resources and automation rather than money or scarcity.",
              kh: "ហ្វ្រេស្កូបានចំណាយពេលជាង ៧០ ឆ្នាំរចនាទីក្រុង ប្រព័ន្ធដឹកជញ្ជូន និងបច្ចេកវិទ្យាដែលសំដៅបំពេញតម្រូវការមនុស្សដោយចីរភាព។ រួមជាមួយ Roxanne Meadows គាត់បានបង្កើតគម្រោង Venus នៅរដ្ឋ Florida ដើម្បីបង្ហាញ 'សេដ្ឋកិច្ចផ្អែកលើធនធាន' — ដែលរៀបចំជុំវិញការប្រើប្រាស់ធនធានផែនដីយ៉ាងប្រុងប្រយ័ត្ន និងការធ្វើស្វ័យប្រវត្តិកម្ម ជាជាងលុយ ឬការខ្វះខាត។" },
+  },
+  {
+    id: "veblen", initials: "TV", field: "social",
+    name:  { en: "Thorstein Veblen", kh: "ធរស្ទីន វេបឡែន" },
+    nationality: { en: "Norwegian-American", kh: "ន័រវេស-អាមេរិក" },
+    years: "1857–1929",
+    tag:   { en: "Founder of institutional economics and evolutionary sociology; coined the term \"conspicuous consumption\" to describe how humans use wealth for social status.",
+             kh: "ស្ថាបនិកសេដ្ឋកិច្ចវិទ្យាស្ថាប័ន និងសង្គមវិទ្យាវិវត្តន៍; បានបង្កើតពាក្យ \"ការប្រើប្រាស់បង្អួត\" ដើម្បីពណ៌នាពីរបៀបដែលមនុស្សប្រើប្រាស់ទ្រព្យសម្បត្តិសម្រាប់ឋានៈសង្គម។" },
+    bio:   { en: "In The Theory of the Leisure Class (1899), Veblen argued that economics cannot be understood without sociology and history: people do not just buy what is useful — they buy what signals status. He coined 'conspicuous consumption' to describe spending designed to be seen by others, and 'conspicuous leisure' for the visible avoidance of work. By treating economies as evolving social institutions shaped by habit, custom and power, he founded what is now called institutional economics and gave generations of social scientists a sharper lens on inequality.",
+             kh: "ក្នុងសៀវភៅ The Theory of the Leisure Class (១៨៩៩) វេបឡែនបានអះអាងថាសេដ្ឋកិច្ចវិទ្យាមិនអាចយល់បានដោយគ្មានសង្គមវិទ្យា និងប្រវត្តិសាស្ត្រ៖ មនុស្សមិនគ្រាន់តែទិញអ្វីដែលមានប្រយោជន៍នោះទេ — ពួកគេទិញអ្វីដែលបង្ហាញពីឋានៈ។ គាត់បានបង្កើតពាក្យ 'ការប្រើប្រាស់បង្អួត' ដើម្បីពណ៌នាការចំណាយដែលរចនាឱ្យអ្នកដទៃឃើញ និង 'ការទំនេរបង្អួត' សម្រាប់ការគេចចេញពីការងារយ៉ាងបង្ហាញ។ ដោយចាត់ទុកសេដ្ឋកិច្ចជាស្ថាប័នសង្គមដែលវិវត្តន៍ និងត្រូវបានរូបរាងដោយទម្លាប់ ប្រពៃណី និងអំណាច គាត់បានបង្កើតនូវអ្វីដែលឥឡូវហៅថាសេដ្ឋកិច្ចវិទ្យាស្ថាប័ន ហើយបានផ្ដល់ឱ្យជំនាន់ៗនៃអ្នកវិទ្យាសាស្ត្រសង្គមនូវកែវយឹតមួយដ៏មុតចំពោះវិសមភាព។" },
+    quote: { en: "Conspicuous consumption of valuable goods is a means of reputability to the gentleman of leisure.",
+             kh: "ការប្រើប្រាស់ទំនិញដ៏មានតម្លៃជាបង្អួត គឺជាមធ្យោបាយនៃកិត្តិនាមសម្រាប់អភិជនទំនេរ។" },
   },
 ];
 
