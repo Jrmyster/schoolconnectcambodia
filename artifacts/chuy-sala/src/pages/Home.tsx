@@ -6,6 +6,7 @@ import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
 import { CountUp } from "@/components/CountUp";
+import { PhilosophyMap } from "@/components/PhilosophyMap";
 
 export function Home() {
   const t = useTranslation();
@@ -257,6 +258,9 @@ export function Home() {
           </a>
         </div>
       </section>
+
+      {/* Philosophy: The Map of Thinking — interactive 7-branch portal */}
+      <PhilosophyMap />
 
       {/* How it works */}
       <section className="py-20 bg-secondary/30">
