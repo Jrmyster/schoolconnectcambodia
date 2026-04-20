@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -194,6 +194,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Mountain,
         descEn: "Tectonic plates, the rock cycle, and Cambodia's geological position — interactive maps & diagrams.",
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
+      },
+      {
+        href: "/fossil-fuels",
+        labelEn: "Fossil Fuels: Ancient Energy",
+        labelKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល៖ ថាមពលបុរាណ",
+        icon: Fuel,
+        descEn: "Watch oil form over 300 million years, separate it in a fractionating tower, fire a 4-stroke piston, and break down what you actually pay at the pump.",
+        descKh: "មើលប្រេងបង្កើតក្នុងរយៈពេល ៣០០ លានឆ្នាំ បំបែកវាក្នុងប៉មចម្រាញ់ បាញ់ស៊ីឡាំងបួនជំហាន និងបែងចែកអ្វីដែលអ្នកពិតជាបង់នៅស្ថានីយប្រេង។",
       },
       {
         href: "/disaster-prep",

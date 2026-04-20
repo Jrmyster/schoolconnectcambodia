@@ -1,0 +1,1238 @@
+import { useState, useEffect, useRef, useMemo } from "react";
+import {
+  Fuel,
+  Droplet,
+  Flame,
+  Mountain,
+  Clock,
+  Zap,
+  Cog,
+  TrendingUp,
+  AlertTriangle,
+  Factory,
+  Truck,
+  Layers,
+  Gauge,
+  Sparkles,
+  Globe2,
+  Play,
+  Pause,
+  RotateCcw,
+} from "lucide-react";
+import { useLanguageStore } from "@/store/use-language";
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Fossil Fuels: Ancient Energy — ប្រេងឥន្ធនៈហ្វូស៊ីល៖ ថាមពលបុរាណ
+//
+//    1. Formation & scarcity   — burial animation + global reserve countdown
+//    2. Fractional distillation — vertical refinery tower
+//    3. Internal combustion     — interactive 4-stroke piston
+//    4. Economics               — gasoline price breakdown
+//
+//  Aesthetic: industrial dark grays, amber highlights for crude oil, blue
+//  flames. All technical terms bilingual (English + Khmer).
+// ════════════════════════════════════════════════════════════════════════════
+
+export default function FossilFuelsPage() {
+  const { language } = useLanguageStore();
+  const isKh = language === "kh";
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-stone-900 via-stone-800 to-stone-900 text-stone-100 relative overflow-hidden">
+      <ScopedStyles />
+      <IndustrialBg />
+
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
+      <header className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6">
+        <div className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-500/40 text-amber-300 rounded-full px-4 py-1.5 mb-5 text-xs font-bold uppercase tracking-widest">
+          <Fuel className="w-3.5 h-3.5" />
+          {isKh ? "មេរៀនពិសេស · ភូគព្ភវិទ្យា" : "Major Lesson · Earth Science"}
+        </div>
+        <h1
+          className={`font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-stone-50 mb-4 leading-tight ${
+            isKh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {isKh ? (
+            <>ប្រេងឥន្ធនៈហ្វូស៊ីល៖ <span className="ff-text-flame">ថាមពលបុរាណ</span></>
+          ) : (
+            <>Fossil Fuels: <span className="ff-text-flame">Ancient Energy</span></>
+          )}
+        </h1>
+        <p
+          className={`text-stone-300 max-w-2xl text-base ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "រាល់ដងដែលអ្នកជិះម៉ូតូ ឬឡានទៅសាលា អ្នកកំពុងដុតថាមពលដែលបានស្តុកទុករយៈពេល ៣០០ លានឆ្នាំ។ យើងនឹងតាមដានវាពីផ្នែករុក្ខជាតិ និងសត្វរស់នៅសមុទ្របុរាណ ឆ្លងកាត់ ស្ថានីយចម្រាញ់ ចូលក្នុងស៊ីឡាំងម៉ាស៊ីន និងចេញមកជាតម្លៃនៅស្ថានីយប្រេងសាំង។"
+            : "Every time you ride a moto or a car to school, you're burning energy that took 300 million years to store. We're going to follow it from ancient sea-life, through a refinery tower, into the cylinder of an engine, and out as the price you pay at the pump."}
+        </p>
+        <div className="hidden sm:flex absolute top-12 right-8 items-center gap-3 text-amber-500/30 select-none">
+          <Droplet className="w-7 h-7 ff-float" style={{ animationDelay: "0s" }} />
+          <Flame className="w-7 h-7 ff-float text-blue-400/40" style={{ animationDelay: "0.6s" }} />
+          <Cog className="w-7 h-7 ff-float ff-spin-slow" style={{ animationDelay: "1.2s" }} />
+        </div>
+      </header>
+
+      {/* ── 1. Formation & scarcity ───────────────────────────────── */}
+      <Section
+        eyebrowEn="01 · Geology"
+        eyebrowKh="០១ · ភូគព្ភវិទ្យា"
+        titleEn="Formation — 300 million years in the dark"
+        titleKh="ការបង្កើត — ៣០០ លានឆ្នាំក្នុងភាពងងឹត"
+        descEn="Fossil fuels aren't 'made' in a factory. They started as plankton, algae and tiny sea-creatures. When they died they sank into mud, were buried under more mud, then more rock. Heat + pressure + time slowly cooked the carbon into the oil and gas we drill today."
+        descKh={"ប្រេងឥន្ធនៈហ្វូស៊ីលមិនត្រូវបាន “ផលិត” នៅក្នុងរោងចក្រទេ។ វាបានចាប់ផ្ដើមជាប្លង់តុង សារាយ និងសត្វសមុទ្រតូចៗ។ នៅពេលពួកវាស្លាប់ ពួកវាបានធ្លាក់ចូលទៅក្នុងភក់ ត្រូវបានកប់នៅក្រោមភក់បន្ថែម បន្ទាប់មកថ្មបន្ថែម។ កំដៅ + សម្ពាធ + ពេលវេលា បានចម្អិនកាបោនយឺតៗឲ្យក្លាយជាប្រេង និងហ្គាសដែលយើងជីករកសព្វថ្ងៃ។"}
+        isKh={isKh}
+      >
+        <FormationAnimation isKh={isKh} />
+        <ReserveCountdown isKh={isKh} />
+      </Section>
+
+      {/* ── 2. Fractional distillation ────────────────────────────── */}
+      <Section
+        eyebrowEn="02 · Chemistry of separation"
+        eyebrowKh="០២ · គីមីនៃការបំបែក"
+        titleEn="Fractional distillation — one oil, six products"
+        titleKh="ការចម្រាញ់ដាច់ដោយផ្នែក — ប្រេងមួយ ផលិតផលប្រាំមួយ"
+        descEn="Crude oil is a soup of hundreds of different hydrocarbon chains, each with its own boiling point. Heat the soup, let the vapours rise, and at every level of the tower a different molecule turns back into liquid — and is tapped off."
+        descKh="ប្រេងឆៅគឺជាល្បាយនៃខ្សែកាបូនអ៊ីដ្រូកាបោនរាប់រយខុសៗគ្នា ដែលនីមួយៗមានចំណុចរំពុះផ្ទាល់របស់វា។ ដុតល្បាយ ទុកឲ្យចំហាយឡើងលើ ហើយនៅរាល់កម្រិតនៃប៉ម ម៉ូលេគុលផ្សេងៗគ្នាប្រែជាវត្ថុរាវឡើងវិញ — ហើយត្រូវបានដក។"
+        isKh={isKh}
+      >
+        <DistillationTower isKh={isKh} />
+      </Section>
+
+      {/* ── 3. Internal combustion engine ─────────────────────────── */}
+      <Section
+        eyebrowEn="03 · Physics of the explosion"
+        eyebrowKh="០៣ · ហ្វីស៊ីកនៃការផ្ទុះ"
+        titleEn="Internal combustion — the four-stroke cycle"
+        titleKh="ការដុតផ្ទៃក្នុង — វដ្តបួនជំហាន"
+        descEn="A petrol engine repeats the same four moves a thousand times a minute: suck in fuel + air, squeeze it small, light it, push the leftovers out. The 'explosion' on stroke three is what shoves the piston down and ultimately turns your wheels."
+        descKh={"ម៉ាស៊ីនប្រេងសាំងធ្វើចលនាដូចគ្នាបួនយ៉ាងម្ដងហើយម្ដងទៀតរាប់ពាន់ដងក្នុងមួយនាទី៖ ស្រូបឥន្ធនៈ + អុកស៊ីសែន ច្របាច់វាឲ្យតូច បំភ្លឺវា រុញសំណល់ចេញ។ “ការផ្ទុះ” នៅជំហានទីបី ជាអ្វីដែលរុញស៊ីឡាំងចុះក្រោម ហើយចុងក្រោយបង្វិលកង់របស់អ្នក។"}
+        isKh={isKh}
+      >
+        <PistonAnimation isKh={isKh} />
+        <OxidationNote isKh={isKh} />
+      </Section>
+
+      {/* ── 4. Economics ──────────────────────────────────────────── */}
+      <Section
+        eyebrowEn="04 · Economics"
+        eyebrowKh="០៤ · សេដ្ឋកិច្ច"
+        titleEn="What you actually pay for at the pump"
+        titleKh="អ្វីដែលអ្នកពិតជាបង់ប្រាក់នៅស្ថានីយប្រេង"
+        descEn="When you hand over 5,000 riel for a litre of petrol in Phnom Penh, that money splits between four big buckets — and not all of them stay in Cambodia."
+        descKh="នៅពេលអ្នកប្រគល់ ៥.០០០ រៀលសម្រាប់ប្រេងសាំងមួយលីត្រនៅភ្នំពេញ ប្រាក់នោះត្រូវបានបែងចែកទៅជាបួនធុង — ហើយមិនមែនទាំងអស់នៅក្នុងកម្ពុជាទេ។"
+        isKh={isKh}
+      >
+        <PriceBreakdown isKh={isKh} />
+      </Section>
+
+      {/* ── Closing ─────────────────────────────────────────────── */}
+      <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-stone-400 text-sm italic">
+        <span className={isKh ? "font-khmer not-italic" : ""}>
+          {isKh
+            ? "“Stone Age មិនបានបញ្ចប់ដោយសារយើងអស់ដុំថ្មទេ ហើយយុគសម័យប្រេងនឹងបញ្ចប់មុនពេលយើងអស់ប្រេង។” — Ahmed Zaki Yamani"
+            : "“The Stone Age did not end because we ran out of stones, and the Oil Age will end long before we run out of oil.” — Ahmed Zaki Yamani"}
+        </span>
+      </footer>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Layout helpers
+// ════════════════════════════════════════════════════════════════════════════
+
+function Section({
+  eyebrowEn, eyebrowKh, titleEn, titleKh, descEn, descKh, isKh, children,
+}: {
+  eyebrowEn: string; eyebrowKh: string;
+  titleEn: string; titleKh: string;
+  descEn: string; descKh: string;
+  isKh: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-amber-400/90 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+        <Sparkles className="w-3 h-3" />
+        {isKh ? eyebrowKh : eyebrowEn}
+      </div>
+      <h2 className={`font-display font-bold text-2xl sm:text-3xl text-stone-50 mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh ? titleKh : titleEn}
+      </h2>
+      <p className={`text-stone-300 text-sm max-w-3xl mb-6 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh ? descKh : descEn}
+      </p>
+      <div className="space-y-6">{children}</div>
+    </section>
+  );
+}
+
+function SteelCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`bg-stone-800/80 backdrop-blur-sm rounded-xl border border-stone-700 shadow-[0_2px_24px_-12px_rgba(245,158,11,0.18)] ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function CardHeader({
+  icon: Icon, titleEn, titleKh, isKh,
+}: {
+  icon: typeof Fuel;
+  titleEn: string; titleKh: string; isKh: boolean;
+}) {
+  return (
+    <div className="flex items-start gap-3 mb-4">
+      <div className="w-10 h-10 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center flex-shrink-0">
+        <Icon className="w-5 h-5" />
+      </div>
+      <h3 className={`font-display font-bold text-xl text-stone-50 mt-1 ${isKh ? "font-khmer" : ""}`}>
+        {isKh ? titleKh : titleEn}
+      </h3>
+    </div>
+  );
+}
+
+function IndustrialBg() {
+  return (
+    <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+      <svg width="100%" height="100%" className="opacity-[0.06]">
+        <defs>
+          <pattern id="ff-rivets" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="20" cy="20" r="1.2" fill="#fbbf24" />
+            <line x1="0" y1="20" x2="40" y2="20" stroke="#fbbf24" strokeWidth="0.3" />
+            <line x1="20" y1="0" x2="20" y2="40" stroke="#fbbf24" strokeWidth="0.3" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#ff-rivets)" />
+      </svg>
+      <div className="absolute top-32 -left-20 w-80 h-80 rounded-full bg-amber-600/10 blur-3xl" />
+      <div className="absolute top-1/2 -right-20 w-96 h-96 rounded-full bg-blue-700/10 blur-3xl" />
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  1a. Formation animation — organic matter buried over millions of years
+// ════════════════════════════════════════════════════════════════════════════
+
+function FormationAnimation({ isKh }: { isKh: boolean }) {
+  const STAGES = [
+    {
+      yearsAgo: "300M",
+      titleEn: "Living sea — algae & plankton",
+      titleKh: "សមុទ្ររស់ — សារាយ និងប្លង់តុង",
+      bodyEn: "Carboniferous oceans teem with microscopic life. When it dies it sinks into the soft mud at the bottom.",
+      bodyKh: "មហាសមុទ្រសម័យកាបូនីហ្វឺមានពោរពេញដោយជីវិតមីក្រូទស្សន៍។ នៅពេលវាស្លាប់ វាធ្លាក់ចូលទៅក្នុងភក់ទន់នៅបាត។",
+    },
+    {
+      yearsAgo: "200M",
+      titleEn: "Buried under sediment",
+      titleKh: "កប់នៅក្រោមរ៉ែ",
+      bodyEn: "Layer after layer of sand and silt seal the dead matter away from oxygen — so it can't fully decay.",
+      bodyKh: "ស្រទាប់នៃខ្សាច់ និងកាក់ៗបិទផ្ទប់សារធាតុស្លាប់ឲ្យឃ្លាតពីអុកស៊ីសែន — ដូច្នេះវាមិនអាចរលាយទាំងស្រុង។",
+    },
+    {
+      yearsAgo: "100M",
+      titleEn: "Heat & pressure cook the carbon",
+      titleKh: "កំដៅ និងសម្ពាធចម្អិនកាបោន",
+      bodyEn: "Pressed down by km of rock, temperatures hit 60–150 °C. The complex organics break into smaller hydrocarbon chains — kerogen → oil → gas.",
+      bodyKh: "ត្រូវបានច្របាច់ដោយថ្មរាប់គីឡូម៉ែត្រ កំដៅឡើងដល់ ៦០–១៥០ °C។ សារធាតុសរីរាង្គស្មុគស្មាញបែកជាខ្សែកាបូនអ៊ីដ្រូកាបោនតូចជាង — kerogen → ប្រេង → ហ្គាស។",
+    },
+    {
+      yearsAgo: isKh ? "ឥឡូវ" : "today",
+      titleEn: "Trapped in porous rock",
+      titleKh: "ជាប់ក្នុងថ្មរន្ធ",
+      bodyEn: "Oil & gas migrate up until they hit a layer of impermeable rock. We drill down through that 'cap rock' to release them — minutes of drilling for millions of years of storage.",
+      bodyKh: "ប្រេង និងហ្គាសរំកិលឡើងលើរហូតដល់ពួកវាប៉ះស្រទាប់ថ្មមិនជ្រាប។ យើងជីកចុះកាត់ \"ថ្មគ្រប\" នោះដើម្បីបញ្ចេញវា — ការជីករាប់នាទីសម្រាប់ការផ្ទុករយៈពេលរាប់លានឆ្នាំ។",
+    },
+  ];
+
+  const [stage, setStage] = useState(0);
+  const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => {
+      setStage((s) => {
+        if (s >= STAGES.length - 1) {
+          setPlaying(false);
+          return s;
+        }
+        return s + 1;
+      });
+    }, 2200);
+    return () => clearInterval(id);
+  }, [playing, STAGES.length]);
+
+  // SVG layout
+  const W = 720, H = 320;
+  const seaY = 70;
+  const groundY = 100;
+
+  // Sediment depth grows with stage
+  const sedimentDepth = stage === 0 ? 0 : stage === 1 ? 70 : stage === 2 ? 130 : 180;
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Mountain}
+        titleEn="From living sea to drilled well"
+        titleKh="ពីសមុទ្ររស់ ដល់អណ្ដូងជីក"
+        isKh={isKh}
+      />
+
+      <div className="bg-stone-900 rounded-lg border border-stone-700 p-3 mb-4">
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-labelledby="ff-form-title ff-form-desc">
+          <title id="ff-form-title">{isKh ? "ការបង្កើតប្រេង និងហ្គាសក្នុងរយៈពេលរាប់លានឆ្នាំ" : "Formation of oil and gas over millions of years"}</title>
+          <desc id="ff-form-desc">{isKh ? "ផ្នែកឆ្លងកាត់នៃផែនដីបង្ហាញជីវិតសមុទ្រធ្លាក់ចូលក្នុងភក់ ត្រូវបានកប់ដោយរ៉ែបន្តិចម្ដងៗ បន្ទាប់មកត្រូវបានចម្អិនទៅជាប្រេង (ពណ៌អំបារ) និងហ្គាស (ពណ៌ខៀវ) ដែលជាប់ក្នុងថ្ម។" : "Cross-section of the Earth showing sea-life sinking into mud, gradually buried under sediment, then cooked into oil (amber) and gas (blue) trapped within rock."}</desc>
+
+          <defs>
+            <linearGradient id="ff-sea-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#60a5fa" />
+              <stop offset="100%" stopColor="#1e3a8a" />
+            </linearGradient>
+            <linearGradient id="ff-rock-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#57534e" />
+              <stop offset="100%" stopColor="#292524" />
+            </linearGradient>
+            <linearGradient id="ff-oil-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#fbbf24" />
+              <stop offset="100%" stopColor="#b45309" />
+            </linearGradient>
+            <radialGradient id="ff-gas-grad" cx="0.5" cy="0.5" r="0.6">
+              <stop offset="0%"   stopColor="#93c5fd" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#1e40af" stopOpacity="0.4" />
+            </radialGradient>
+          </defs>
+
+          {/* Sky */}
+          <rect x="0" y="0" width={W} height={seaY} fill="#1c1917" />
+          {/* Sun / atmosphere hint */}
+          <circle cx={W - 60} cy={30} r={14} fill="#fbbf24" opacity="0.7" />
+          <circle cx={W - 60} cy={30} r={20} fill="#fbbf24" opacity="0.15" />
+
+          {/* Sea */}
+          <rect x="0" y={seaY} width={W} height={groundY - seaY + sedimentDepth} fill="url(#ff-sea-grad)" />
+          {/* Subtle waves */}
+          {stage === 0 && (
+            <>
+              <path d={`M 0 ${seaY + 6} Q ${W * 0.25} ${seaY}, ${W * 0.5} ${seaY + 6} T ${W} ${seaY + 6}`} stroke="#bfdbfe" strokeWidth="1" fill="none" opacity="0.5" />
+              <path d={`M 0 ${seaY + 14} Q ${W * 0.3} ${seaY + 10}, ${W * 0.6} ${seaY + 14} T ${W} ${seaY + 14}`} stroke="#bfdbfe" strokeWidth="1" fill="none" opacity="0.3" />
+            </>
+          )}
+
+          {/* Plankton/algae floating in sea (stage 0) */}
+          {stage === 0 && Array.from({ length: 24 }).map((_, i) => {
+            const x = (i * 31) % W;
+            const y = seaY + 8 + ((i * 17) % (groundY - seaY - 12));
+            return (
+              <circle key={`pk-${i}`} cx={x} cy={y} r={2.2} fill="#86efac" className="ff-pulse" style={{ animationDelay: `${(i % 6) * 0.2}s` }} />
+            );
+          })}
+
+          {/* Mud / sediment growing layers */}
+          {stage >= 1 && (
+            <>
+              <rect x="0" y={groundY} width={W} height={sedimentDepth * 0.45} fill="#78716c" />
+              <rect x="0" y={groundY + sedimentDepth * 0.45} width={W} height={sedimentDepth * 0.30} fill="#57534e" />
+              <rect x="0" y={groundY + sedimentDepth * 0.75} width={W} height={sedimentDepth * 0.25} fill="#3f3f46" />
+              {/* Stratification lines */}
+              {Array.from({ length: 4 }).map((_, i) => (
+                <line key={`st-${i}`} x1="0" y1={groundY + (i + 1) * (sedimentDepth / 5)} x2={W} y2={groundY + (i + 1) * (sedimentDepth / 5)} stroke="#1c1917" strokeWidth="0.5" opacity="0.5" />
+              ))}
+            </>
+          )}
+
+          {/* Bedrock — always present */}
+          <rect x="0" y={groundY + sedimentDepth} width={W} height={H - groundY - sedimentDepth} fill="url(#ff-rock-grad)" />
+
+          {/* Dead organic matter falling / settled (stage 0–1) */}
+          {stage <= 1 && Array.from({ length: 14 }).map((_, i) => {
+            const x = 30 + i * 48;
+            const y = groundY - 4 - (stage === 0 ? Math.sin(i) * 8 : 0);
+            return <circle key={`om-${i}`} cx={x} cy={y} r={3} fill="#78716c" />;
+          })}
+
+          {/* Oil reservoir forming (stage 2) */}
+          {stage >= 2 && (
+            <>
+              <ellipse cx={W * 0.32} cy={H - 78} rx={110} ry={22} fill="url(#ff-oil-grad)" opacity="0.95" />
+              <ellipse cx={W * 0.7}  cy={H - 60} rx={80}  ry={15} fill="url(#ff-oil-grad)" opacity="0.85" />
+              {/* Gas cap above oil */}
+              <ellipse cx={W * 0.32} cy={H - 100} rx={70} ry={12} fill="url(#ff-gas-grad)" />
+            </>
+          )}
+
+          {/* Drilling rig (stage 3) */}
+          {stage >= 3 && (
+            <>
+              {/* Tower */}
+              <g transform={`translate(${W * 0.32 - 18}, ${seaY - 60})`}>
+                <polygon points="0,60 36,60 30,0 6,0" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+                <line x1="6" y1="0"  x2="30" y2="60" stroke="#fbbf24" strokeWidth="1" opacity="0.7" />
+                <line x1="30" y1="0" x2="6"  y2="60" stroke="#fbbf24" strokeWidth="1" opacity="0.7" />
+              </g>
+              {/* Borehole down to oil */}
+              <line
+                x1={W * 0.32} y1={seaY - 1}
+                x2={W * 0.32} y2={H - 78}
+                stroke="#fbbf24"
+                strokeWidth="3"
+                strokeDasharray="6 4"
+                className="ff-pulse"
+              />
+              {/* Drop rising */}
+              <circle cx={W * 0.32} cy={seaY - 8} r={5} fill="#fbbf24" />
+            </>
+          )}
+
+          {/* Time stamp */}
+          <g>
+            <rect x={W - 110} y={H - 36} width={100} height={26} rx={4} fill="#0c0a09" stroke="#44403c" />
+            <text x={W - 60} y={H - 19} fontSize="13" fontFamily="monospace" fill="#fbbf24" textAnchor="middle" fontWeight="700">
+              {STAGES[stage].yearsAgo}{stage < 3 ? (isKh ? " ឆ្នាំ" : " yrs ago") : ""}
+            </text>
+          </g>
+
+          {/* Depth ruler on left */}
+          {stage >= 1 && (
+            <g>
+              <line x1={20} y1={groundY} x2={20} y2={H - 20} stroke="#78716c" strokeWidth="1" />
+              <text x={26} y={groundY + 12} fontSize="9" fill="#a8a29e">0 km</text>
+              <text x={26} y={H - 24} fontSize="9" fill="#a8a29e">~2 km</text>
+            </g>
+          )}
+        </svg>
+      </div>
+
+      {/* Stage info */}
+      <div className="bg-stone-900/60 border border-stone-700 rounded-lg p-4 mb-4">
+        <div className={`text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh ? "ដំណាក់កាល" : "Stage"} {stage + 1} / {STAGES.length} · {STAGES[stage].yearsAgo}{stage < 3 ? (isKh ? " ឆ្នាំមុន" : " years ago") : ""}
+        </div>
+        <h4 className={`font-display font-bold text-lg text-stone-100 mb-1 ${isKh ? "font-khmer" : ""}`}>
+          {isKh ? STAGES[stage].titleKh : STAGES[stage].titleEn}
+        </h4>
+        <p className={`text-sm text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? STAGES[stage].bodyKh : STAGES[stage].bodyEn}
+        </p>
+      </div>
+
+      {/* Controls */}
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          onClick={() => { setPlaying(true); if (stage >= STAGES.length - 1) setStage(0); }}
+          disabled={playing}
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-colors bg-amber-500 hover:bg-amber-400 text-stone-900 disabled:opacity-50 disabled:cursor-not-allowed ${isKh ? "font-khmer" : ""}`}
+        >
+          <Play className="w-4 h-4" />
+          {isKh ? "លេង" : "Play"}
+        </button>
+        <button
+          onClick={() => setPlaying(false)}
+          disabled={!playing}
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm bg-stone-700 hover:bg-stone-600 text-stone-100 disabled:opacity-50 disabled:cursor-not-allowed ${isKh ? "font-khmer" : ""}`}
+        >
+          <Pause className="w-4 h-4" />
+          {isKh ? "ឈប់" : "Pause"}
+        </button>
+        <button
+          onClick={() => { setPlaying(false); setStage(0); }}
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm bg-stone-700 hover:bg-stone-600 text-stone-100 ${isKh ? "font-khmer" : ""}`}
+        >
+          <RotateCcw className="w-4 h-4" />
+          {isKh ? "ចាប់ផ្ដើមឡើងវិញ" : "Reset"}
+        </button>
+        <div className="ml-auto flex items-center gap-1">
+          {STAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setPlaying(false); setStage(i); }}
+              aria-label={`Stage ${i + 1}`}
+              aria-current={i === stage}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${i === stage ? "bg-amber-400" : "bg-stone-600 hover:bg-stone-500"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  1b. Global reserve countdown
+// ════════════════════════════════════════════════════════════════════════════
+
+function ReserveCountdown({ isKh }: { isKh: boolean }) {
+  // Reference values (illustrative, BP Statistical Review style):
+  // Proven oil reserves ≈ 1.7 trillion barrels.
+  // Daily consumption    ≈ 100 million barrels per day → ~36.5 bn / yr.
+  // R/P ratio ≈ 47 years at current rate. Pick a target depletion date for the live ticker.
+  const TARGET_DATE = useMemo(() => new Date(Date.UTC(2073, 0, 1)).getTime(), []); // Jan 1 2073
+  // Widely-cited estimate (Dukes 2003, U. Utah): one year of modern fossil-fuel
+  // burn ≈ what photosynthesis + burial historically built up in ~1,000,000 years.
+  const FORMATION_YEARS_PER_YEAR_OF_USE = 1_000_000;
+
+  const [now, setNow] = useState<number>(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const remainingMs = Math.max(0, TARGET_DATE - now);
+  const totalSec = Math.floor(remainingMs / 1000);
+  const years   = Math.floor(totalSec / (365.25 * 24 * 3600));
+  const days    = Math.floor((totalSec % (365.25 * 24 * 3600)) / (24 * 3600));
+  const hours   = Math.floor((totalSec % (24 * 3600)) / 3600);
+  const minutes = Math.floor((totalSec % 3600) / 60);
+  const seconds = totalSec % 60;
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Clock}
+        titleEn="The limited resource — global reserve countdown"
+        titleKh="ធនធានមានកំណត់ — ការរាប់ថយក្រោយនៃទុនបំរុងពិភពលោក"
+        isKh={isKh}
+      />
+      <p className={`text-sm text-stone-300 mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "នៅអត្រាប្រើប្រាស់សព្វថ្ងៃ — ប្រហែល ១០០ លានធុងក្នុងមួយថ្ងៃ — ទុនបំរុងប្រេងដែលបានបញ្ជាក់របស់ពិភពលោកនឹងគ្រប់គ្រាន់ប្រហែល ៥០ ឆ្នាំ។ នេះគឺជាការប៉ាន់ស្មាន មិនមែនជាការរាប់ត្រឹមត្រូវទេ — ប៉ុន្តែវាបង្ហាញប្រធានបទនេះ៖ យើងកំពុងប្រើវាលឿនជាងផែនដីអាចបង្កើតវាបាន។"
+          : "At today's burn rate — about 100 million barrels per day — the world's proven oil reserves last about 50 years. The number isn't an exact end date, but it makes the point: we're using it far faster than the Earth can replace it."}
+      </p>
+
+      <div className="bg-gradient-to-br from-stone-900 to-stone-950 rounded-lg border border-amber-500/30 p-5 mb-4">
+        <div className={`text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-3 text-center ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh ? "ប្រេងបំរុងពិភពលោក · ការប៉ាន់ស្មានបំបាត់" : "Global oil reserves · estimated depletion in"}
+        </div>
+        <div className="grid grid-cols-5 gap-2 sm:gap-3" role="timer" aria-live="off">
+          <TimeUnit n={years}  labelEn="years"   labelKh="ឆ្នាំ"   isKh={isKh} accent />
+          <TimeUnit n={days}   labelEn="days"    labelKh="ថ្ងៃ"   isKh={isKh} />
+          <TimeUnit n={hours}  labelEn="hours"   labelKh="ម៉ោង" isKh={isKh} />
+          <TimeUnit n={minutes} labelEn="min"    labelKh="នាទី" isKh={isKh} />
+          <TimeUnit n={seconds} labelEn="sec"    labelKh="វិ."   isKh={isKh} pulse />
+        </div>
+        <div className={`mt-3 text-center text-xs text-stone-500 italic ${isKh ? "font-khmer not-italic" : ""}`}>
+          {isKh ? "ការប៉ាន់ស្មានដោយប្រើ R/P ≈ ៥០ ឆ្នាំ (ឆ្នាំគោលដៅ ២០៧៣)" : "Illustrative R/P ≈ 50 years (target year 2073)"}
+        </div>
+      </div>
+
+      {/* The mismatch */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 flex items-start gap-3">
+          <Gauge className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+          <div>
+            <div className={`text-xs font-bold uppercase tracking-wider text-amber-300 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "យើងដុត" : "We burn"}
+            </div>
+            <div className={`text-stone-100 font-semibold mb-1 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "~១០០ លានធុង / ថ្ងៃ" : "~100 million barrels / day"}
+            </div>
+            <div className={`text-xs text-stone-400 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh ? "ប្រហែល ៦៦០ លានលីត្រ រាល់ម៉ោង ទូទាំងពិភពលោក (១ ធុង = ១៥៩ លីត្រ)។" : "About 660 million litres every hour, worldwide (1 barrel = 159 L)."}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 flex items-start gap-3">
+          <Droplet className="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" />
+          <div>
+            <div className={`text-xs font-bold uppercase tracking-wider text-blue-300 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "ផែនដីបង្កើត" : "Earth replaces"}
+            </div>
+            <div className={`text-stone-100 font-semibold mb-1 ${isKh ? "font-khmer" : ""}`}>
+              {isKh
+                ? `យើងដុតក្នុង ១ ឆ្នាំ = ~${FORMATION_YEARS_PER_YEAR_OF_USE.toLocaleString()} ឆ្នាំនៃការបង្កើត`
+                : `1 year of burning = ~${FORMATION_YEARS_PER_YEAR_OF_USE.toLocaleString()} years of formation`}
+            </div>
+            <div className={`text-xs text-stone-400 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "ការសិក្សាមួយ (Dukes ២០០៣) ប៉ាន់ប្រមាណថា ឥន្ធនៈដែលយើងដុតក្នុងមួយឆ្នាំ ត្រូវចំណាយពេលប្រហែលមួយលានឆ្នាំសម្រាប់រុក្ខជាតិ និងប្លង់តុងបុរាណក្នុងការបង្កើត។"
+                : "A 2003 study (Dukes) estimated that the fuel we burn in a single year took ancient plants and plankton roughly a million years to lay down."}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={`mt-4 flex items-start gap-2 text-sm text-amber-200/90 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-400" />
+        <span>
+          {isKh
+            ? "នេះជាមូលហេតុដែលថាមពលអាចបន្តបាន — ពន្លឺព្រះអាទិត្យ ខ្យល់ ទឹក — សំខាន់ខ្លាំងណាស់៖ ពួកវាមកដល់ភ្លាម។ ប្រេងប្រហែលជាបុរាណ ប៉ុន្តែទីផ្សារសមទំនើបនឹងមិនរង់ចាំ ៣០០ លានឆ្នាំទេ។"
+            : "This is why renewable energy — sun, wind, water — matters: it arrives in real time. Oil may be ancient, but a modern economy can't wait 300 million years for the next batch."}
+        </span>
+      </div>
+    </SteelCard>
+  );
+}
+
+function TimeUnit({
+  n, labelEn, labelKh, isKh, accent, pulse,
+}: {
+  n: number; labelEn: string; labelKh: string; isKh: boolean;
+  accent?: boolean; pulse?: boolean;
+}) {
+  return (
+    <div className={`text-center rounded-md py-2 sm:py-3 border ${accent ? "bg-amber-500/15 border-amber-400/50" : "bg-stone-800/80 border-stone-700"}`}>
+      <div className={`font-mono font-bold tabular-nums text-2xl sm:text-3xl ${accent ? "text-amber-300" : "text-stone-100"} ${pulse ? "ff-pulse-fast" : ""}`}>
+        {String(n).padStart(2, "0")}
+      </div>
+      <div className={`text-[10px] uppercase tracking-wider text-stone-400 mt-0.5 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+        {isKh ? labelKh : labelEn}
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  2. Distillation tower
+// ════════════════════════════════════════════════════════════════════════════
+
+function DistillationTower({ isKh }: { isKh: boolean }) {
+  // Fractions from coolest top → hottest bottom
+  const FRACTIONS = [
+    { en: "Refinery gases", kh: "ហ្គាសរោងចម្រាញ់", uses: { en: "Propane, butane — bottled cooking gas", kh: "ប្រូប៉ាន ប៊ូតាន — ហ្គាសចម្អិនម្ហូបក្នុងដប" }, tempC: 25,  carbon: "C₁–C₄",  color: "#bfdbfe" },
+    { en: "Gasoline (Petrol)", kh: "ប្រេងសាំង", uses: { en: "Cars, motorbikes, small engines", kh: "ឡាន ម៉ូតូ ម៉ាស៊ីនតូចៗ" }, tempC: 70,  carbon: "C₅–C₁₀",  color: "#fde68a" },
+    { en: "Kerosene (Jet fuel)", kh: "ប្រេងកាត (ប្រេងម៉ាស៊ីនយន្តហោះ)", uses: { en: "Jet engines, rural lamps", kh: "ម៉ាស៊ីនយន្តហោះ ចង្កៀងតាមជនបទ" }, tempC: 170, carbon: "C₁₀–C₁₆", color: "#fbbf24" },
+    { en: "Diesel", kh: "ម៉ាស៊ូត", uses: { en: "Trucks, buses, generators, tractors", kh: "ឡានដឹកទំនិញ ឡានក្រុង ម៉ាស៊ីនភ្លើង ត្រាក់ទ័រ" }, tempC: 270, carbon: "C₁₄–C₂₀", color: "#f59e0b" },
+    { en: "Lubricating oil", kh: "ប្រេងរំអិល", uses: { en: "Engine oil, machine grease", kh: "ប្រេងម៉ាស៊ីន ខ្លាញ់ម៉ាស៊ីន" }, tempC: 340, carbon: "C₂₀–C₃₅", color: "#d97706" },
+    { en: "Bitumen (Asphalt)", kh: "ស្នាមជ័រ (អាស្វាល)", uses: { en: "Roads, roof tar", kh: "ផ្លូវ ជ័រដំបូលផ្ទះ" }, tempC: 400, carbon: "C₃₀⁺",   color: "#92400e" },
+  ];
+
+  // Tower drawing dimensions
+  const W = 720, H = 540;
+  const towerLeft = 280, towerRight = 520;
+  const towerTop = 30, towerBottom = H - 80;
+  const innerH = towerBottom - towerTop;
+  const trayCount = FRACTIONS.length;
+
+  // y position of each tray, from coolest (top) to hottest (bottom)
+  const trays = FRACTIONS.map((_, i) => towerTop + ((i + 0.5) / trayCount) * innerH);
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Layers}
+        titleEn="The fractionating tower"
+        titleKh="ប៉មចម្រាញ់"
+        isKh={isKh}
+      />
+
+      <div className="bg-stone-900 rounded-lg border border-stone-700 p-3">
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-labelledby="ff-tower-title ff-tower-desc">
+          <title id="ff-tower-title">{isKh ? "ប៉មចម្រាញ់ដាច់ដោយផ្នែក" : "Fractional distillation tower"}</title>
+          <desc id="ff-tower-desc">
+            {isKh
+              ? "ប្រេងឆៅចូលនៅខាងក្រោមហើយត្រូវបានកំដៅ។ ចំហាយឡើងលើ។ នៅរាល់កម្រិត ផ្នែកផ្សេងគ្នាប្រែជាវត្ថុរាវ៖ ហ្គាសរោងចម្រាញ់ (ខាងលើបំផុត ត្រជាក់បំផុត) ប្រេងសាំង កេរ៉ូស៊ីន ម៉ាស៊ូត ប្រេងរំអិល ហើយស្នាមជ័រ (ខាងក្រោមបំផុត ក្ដៅបំផុត)។"
+              : "Crude oil enters at the bottom and is heated. The vapours rise. At each level, a different fraction turns back into liquid: refinery gases (top, coolest), gasoline, kerosene, diesel, lubricating oil, and bitumen (bottom, hottest)."}
+          </desc>
+
+          <defs>
+            <linearGradient id="ff-tower-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#1c1917" />
+              <stop offset="50%"  stopColor="#292524" />
+              <stop offset="100%" stopColor="#1c1917" />
+            </linearGradient>
+            <linearGradient id="ff-vapor-grad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%"   stopColor="#fbbf24" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#bfdbfe" stopOpacity="0.05" />
+            </linearGradient>
+            <linearGradient id="ff-flame" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%"   stopColor="#3b82f6" />
+              <stop offset="60%"  stopColor="#60a5fa" />
+              <stop offset="100%" stopColor="#fef3c7" stopOpacity="0.9" />
+            </linearGradient>
+          </defs>
+
+          {/* Tower outer shell */}
+          <rect x={towerLeft} y={towerTop} width={towerRight - towerLeft} height={innerH} rx={12} fill="url(#ff-tower-grad)" stroke="#fbbf24" strokeWidth="2" />
+          {/* Top dome */}
+          <path d={`M ${towerLeft} ${towerTop + 8} Q ${(towerLeft + towerRight) / 2} ${towerTop - 26}, ${towerRight} ${towerTop + 8}`} fill="url(#ff-tower-grad)" stroke="#fbbf24" strokeWidth="2" />
+          {/* Tower vent at top */}
+          <rect x={(towerLeft + towerRight) / 2 - 8} y={towerTop - 36} width={16} height={14} fill="#1c1917" stroke="#fbbf24" strokeWidth="1.5" />
+
+          {/* Rising vapor inside */}
+          <rect x={towerLeft + 8} y={towerTop + 10} width={towerRight - towerLeft - 16} height={innerH - 20} fill="url(#ff-vapor-grad)" />
+
+          {/* Trays + fractions */}
+          {trays.map((y, i) => {
+            const f = FRACTIONS[i];
+            const isLeft = i % 2 === 0;
+            return (
+              <g key={`tray-${i}`}>
+                {/* Tray inside tower */}
+                <line x1={towerLeft + 6} y1={y} x2={towerRight - 6} y2={y} stroke="#fbbf24" strokeWidth="0.6" strokeDasharray="3 3" opacity="0.6" />
+                <rect x={towerLeft + 12} y={y - 2} width={(towerRight - towerLeft - 24) * 0.6} height={4} fill={f.color} opacity="0.9" />
+
+                {/* Outflow pipe */}
+                {isLeft ? (
+                  <>
+                    <line x1={towerLeft} y1={y} x2={towerLeft - 30} y2={y} stroke="#a8a29e" strokeWidth="3" />
+                    <circle cx={towerLeft - 36} cy={y} r={5} fill={f.color} />
+                  </>
+                ) : (
+                  <>
+                    <line x1={towerRight} y1={y} x2={towerRight + 30} y2={y} stroke="#a8a29e" strokeWidth="3" />
+                    <circle cx={towerRight + 36} cy={y} r={5} fill={f.color} />
+                  </>
+                )}
+
+                {/* Label box */}
+                <g>
+                  <rect
+                    x={isLeft ? 16 : towerRight + 50}
+                    y={y - 24}
+                    width={isLeft ? towerLeft - 50 : W - towerRight - 66}
+                    height={48}
+                    rx={6}
+                    fill="#1c1917"
+                    stroke={f.color}
+                    strokeWidth="1.2"
+                  />
+                  <text
+                    x={isLeft ? 24 : towerRight + 58}
+                    y={y - 8}
+                    fontSize="11"
+                    fontWeight="700"
+                    fill={f.color}
+                  >
+                    {isKh ? f.kh : f.en}
+                  </text>
+                  <text
+                    x={isLeft ? 24 : towerRight + 58}
+                    y={y + 6}
+                    fontSize="9"
+                    fill="#d6d3d1"
+                  >
+                    {f.carbon} · ~{f.tempC}°C
+                  </text>
+                  <text
+                    x={isLeft ? 24 : towerRight + 58}
+                    y={y + 18}
+                    fontSize="8"
+                    fill="#a8a29e"
+                    fontStyle="italic"
+                  >
+                    {(isKh ? f.uses.kh : f.uses.en).slice(0, 38)}
+                  </text>
+                </g>
+              </g>
+            );
+          })}
+
+          {/* Crude-oil inlet pipe at bottom */}
+          <g>
+            <line x1={towerLeft - 60} y1={towerBottom + 14} x2={towerLeft + 6} y2={towerBottom + 14} stroke="#a8a29e" strokeWidth="6" />
+            <line x1={towerLeft - 60} y1={towerBottom + 14} x2={towerLeft + 6} y2={towerBottom + 14} stroke="#fbbf24" strokeWidth="2" className="ff-pulse" />
+            <text x={towerLeft - 62} y={towerBottom + 6} fontSize="10" fontWeight="700" fill="#fbbf24" textAnchor="end">
+              {isKh ? "ប្រេងឆៅចូល" : "Crude oil in"}
+            </text>
+          </g>
+
+          {/* Furnace */}
+          <g>
+            <rect x={towerLeft - 6} y={towerBottom + 6} width={towerRight - towerLeft + 12} height={28} rx={4} fill="#0c0a09" stroke="#fbbf24" strokeWidth="1.5" />
+            {/* Blue flames */}
+            {[0.2, 0.4, 0.6, 0.8].map((t) => (
+              <path
+                key={`fl-${t}`}
+                d={`M ${towerLeft + (towerRight - towerLeft) * t} ${towerBottom + 32}
+                   Q ${towerLeft + (towerRight - towerLeft) * t - 6} ${towerBottom + 18},
+                     ${towerLeft + (towerRight - towerLeft) * t}     ${towerBottom + 12}
+                   Q ${towerLeft + (towerRight - towerLeft) * t + 6} ${towerBottom + 18},
+                     ${towerLeft + (towerRight - towerLeft) * t}     ${towerBottom + 32} Z`}
+                fill="url(#ff-flame)"
+                className="ff-flicker"
+                style={{ animationDelay: `${t * 0.4}s` }}
+              />
+            ))}
+          </g>
+
+          {/* Temperature gradient label */}
+          <g>
+            <text x={W - 22} y={towerTop + 6} fontSize="9" fill="#bfdbfe" textAnchor="end">{isKh ? "ត្រជាក់" : "cool"} ↑</text>
+            <text x={W - 22} y={towerBottom + 4} fontSize="9" fill="#fbbf24" textAnchor="end">{isKh ? "ក្ដៅ" : "hot"} ↓</text>
+          </g>
+        </svg>
+      </div>
+
+      <div className={`mt-4 text-sm text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "ច្បាប់សាមញ្ញ៖ ខ្សែកាបោនខ្លី (C₁–C₄) រំពុះនៅត្រជាក់ ដូច្នេះវាឡើងដល់កំពូល។ ខ្សែវែង (C₃₀⁺) រំពុះ និងផ្ដិតឡើងវិញតែនៅពេលក្ដៅខ្លាំង ដូច្នេះវានៅជាប់ខាងក្រោម — ហើយត្រូវបានចាក់នៅលើផ្លូវរបស់យើង។"
+          : "Simple rule: short carbon chains (C₁–C₄) boil at low temperatures, so they rise to the top. Long chains (C₃₀⁺) only boil and condense at very high temperatures, so they stay at the bottom — and end up paving our roads."}
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  3. Piston animation — 4-stroke cycle
+// ════════════════════════════════════════════════════════════════════════════
+
+const STROKES = [
+  {
+    key: "intake",
+    titleEn: "Intake", titleKh: "ស្រូប",
+    bodyEn: "The piston moves DOWN. The intake valve opens, sucking in a mist of petrol and air.",
+    bodyKh: "ស៊ីឡាំងផ្លាស់ទីចុះក្រោម។ វ៉ាល់ស្រូបបើក ស្រូបចូលនូវចំហាយប្រេងសាំង និងខ្យល់។",
+    pistonY: 0.9, // 0 = top, 1 = bottom
+    intakeOpen: true, exhaustOpen: false, spark: false, mixDensity: 0.4,
+    color: "#3b82f6",
+  },
+  {
+    key: "compression",
+    titleEn: "Compression", titleKh: "ច្របាច់",
+    bodyEn: "Both valves close. The piston moves UP, squeezing the fuel-air mix into a tiny, dense cloud.",
+    bodyKh: "វ៉ាល់ទាំងពីរបិទ។ ស៊ីឡាំងផ្លាស់ទីឡើងលើ ច្របាច់ល្បាយប្រេង-ខ្យល់ទៅជាពពកតូច ក្រាស់។",
+    pistonY: 0.15, intakeOpen: false, exhaustOpen: false, spark: false, mixDensity: 0.95,
+    color: "#fbbf24",
+  },
+  {
+    key: "power",
+    titleEn: "Power (the explosion)", titleKh: "ថាមពល (ការផ្ទុះ)",
+    bodyEn: "The spark plug fires. The hot dense mix EXPLODES and shoves the piston down hard — this is the only stroke that does useful work.",
+    bodyKh: "ភ្លើងស្ប៉ាក់បាញ់។ ល្បាយក្ដៅក្រាស់ផ្ទុះ ហើយរុញស៊ីឡាំងចុះក្រោមយ៉ាងខ្លាំង — នេះគឺជាជំហានតែមួយគត់ដែលធ្វើការងារមានប្រយោជន៍។",
+    pistonY: 0.85, intakeOpen: false, exhaustOpen: false, spark: true, mixDensity: 0.2,
+    color: "#ef4444",
+  },
+  {
+    key: "exhaust",
+    titleEn: "Exhaust", titleKh: "បំភាយ",
+    bodyEn: "The exhaust valve opens. The piston moves UP, pushing the burnt gases (CO₂ + H₂O + NOₓ) out the tailpipe.",
+    bodyKh: "វ៉ាល់បំភាយបើក។ ស៊ីឡាំងផ្លាស់ទីឡើងលើ រុញហ្គាសដែលបានឆេះ (CO₂ + H₂O + NOₓ) ចេញតាមបំពង់ផ្សែង។",
+    pistonY: 0.15, intakeOpen: false, exhaustOpen: true, spark: false, mixDensity: 0.0,
+    color: "#78716c",
+  },
+] as const;
+
+function PistonAnimation({ isKh }: { isKh: boolean }) {
+  const [stroke, setStroke] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [rpm, setRpm] = useState(40); // strokes per minute (slow for visibility)
+
+  // Use a ref to keep track of timer to avoid stale-closure restart bugs
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (!running) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      return;
+    }
+    const intervalMs = (60 / rpm) * 1000;
+    timerRef.current = setTimeout(() => {
+      setStroke((s) => (s + 1) % STROKES.length);
+    }, intervalMs);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [running, rpm, stroke]);
+
+  const cur = STROKES[stroke];
+
+  // SVG layout
+  const W = 360, H = 420;
+  const cylX = 90, cylW = 180;
+  const cylTop = 50, cylBottom = 320;
+  const cylHeight = cylBottom - cylTop;
+  const pistonTopAt = cylTop + cur.pistonY * (cylHeight - 60);
+  const pistonHeight = 60;
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Cog}
+        titleEn="Inside a single cylinder"
+        titleKh="ខាងក្នុងស៊ីឡាំងមួយ"
+        isKh={isKh}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* SVG */}
+        <div className="bg-stone-900 rounded-lg border border-stone-700 p-3">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-labelledby="ff-piston-title ff-piston-desc">
+            <title id="ff-piston-title">{isKh ? "វដ្តម៉ាស៊ីនបួនជំហាន" : "Four-stroke engine cycle"}</title>
+            <desc id="ff-piston-desc">{isKh ? `ស៊ីឡាំងបង្ហាញជំហានបច្ចុប្បន្ន៖ ${STROKES[stroke].titleKh}` : `Cylinder diagram showing the current stroke: ${STROKES[stroke].titleEn}`}</desc>
+
+            <defs>
+              <linearGradient id="ff-cyl-wall" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stopColor="#44403c" />
+                <stop offset="50%"  stopColor="#78716c" />
+                <stop offset="100%" stopColor="#44403c" />
+              </linearGradient>
+              <radialGradient id="ff-spark-flash" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0%"   stopColor="#fef9c3" />
+                <stop offset="40%"  stopColor="#fbbf24" />
+                <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            {/* Cylinder walls */}
+            <rect x={cylX - 8} y={cylTop - 4} width={cylW + 16} height={cylHeight + 8} fill="#1c1917" stroke="#fbbf24" strokeWidth="1.5" rx={6} />
+            <rect x={cylX} y={cylTop} width={cylW} height={cylHeight} fill="url(#ff-cyl-wall)" />
+
+            {/* Spark plug */}
+            <g transform={`translate(${cylX + cylW / 2}, ${cylTop - 6})`}>
+              <rect x={-7} y={-22} width={14} height={22} fill="#a8a29e" stroke="#1c1917" />
+              <rect x={-9} y={-30} width={18} height={8} fill="#fbbf24" />
+              <line x1="0" y1="0" x2="0" y2="12" stroke="#78716c" strokeWidth="2" />
+              {cur.spark && (
+                <>
+                  <circle cx="0" cy="14" r="14" fill="url(#ff-spark-flash)" className="ff-flicker" />
+                  <line x1="-4" y1="11" x2="4" y2="17" stroke="#fef9c3" strokeWidth="1.5" />
+                  <line x1="4"  y1="11" x2="-4" y2="17" stroke="#fef9c3" strokeWidth="1.5" />
+                </>
+              )}
+            </g>
+
+            {/* Intake valve (left top) */}
+            <g transform={`translate(${cylX + 30}, ${cylTop})`}>
+              <rect x={-10} y={-14} width={20} height={6} fill={cur.intakeOpen ? "#3b82f6" : "#44403c"} />
+              <rect x={-2}  y={-8}  width={4}  height={cur.intakeOpen ? 14 : 6} fill="#a8a29e" />
+              <text x={0} y={-22} fontSize="8" fill="#bfdbfe" textAnchor="middle" fontWeight="700">{isKh ? "ស្រូប" : "IN"}</text>
+            </g>
+            {/* Exhaust valve (right top) */}
+            <g transform={`translate(${cylX + cylW - 30}, ${cylTop})`}>
+              <rect x={-10} y={-14} width={20} height={6} fill={cur.exhaustOpen ? "#ef4444" : "#44403c"} />
+              <rect x={-2}  y={-8}  width={4}  height={cur.exhaustOpen ? 14 : 6} fill="#a8a29e" />
+              <text x={0} y={-22} fontSize="8" fill="#fca5a5" textAnchor="middle" fontWeight="700">{isKh ? "បំភាយ" : "EX"}</text>
+            </g>
+
+            {/* Fuel-air mixture density (above piston) */}
+            {Array.from({ length: 28 }).map((_, i) => {
+              const visible = Math.random() < cur.mixDensity || true;
+              const px = cylX + 12 + ((i * 19) % (cylW - 24));
+              const py = cylTop + 18 + ((i * 13) % Math.max(20, pistonTopAt - cylTop - 28));
+              if (py > pistonTopAt - 4) return null;
+              const dotSize = 1.4 + cur.mixDensity * 1.6;
+              return (
+                <circle
+                  key={`mx-${i}`}
+                  cx={px}
+                  cy={py}
+                  r={dotSize}
+                  fill={cur.spark ? "#ef4444" : (cur.key === "exhaust" ? "#78716c" : "#fbbf24")}
+                  opacity={cur.mixDensity * 0.95 + 0.05}
+                />
+              );
+            })}
+
+            {/* Piston */}
+            <g style={{ transition: "transform 0.6s ease-in-out" }} transform={`translate(0, ${pistonTopAt - cylTop})`}>
+              <rect x={cylX + 4} y={cylTop} width={cylW - 8} height={pistonHeight} rx={3} fill="#a8a29e" stroke="#1c1917" strokeWidth="1.5" />
+              {/* Piston rings */}
+              <line x1={cylX + 6} y1={cylTop + 8} x2={cylX + cylW - 6} y2={cylTop + 8} stroke="#1c1917" strokeWidth="1" />
+              <line x1={cylX + 6} y1={cylTop + 14} x2={cylX + cylW - 6} y2={cylTop + 14} stroke="#1c1917" strokeWidth="1" />
+              <line x1={cylX + 6} y1={cylTop + 20} x2={cylX + cylW - 6} y2={cylTop + 20} stroke="#1c1917" strokeWidth="1" />
+              {/* Connecting rod */}
+              <rect x={cylX + cylW / 2 - 8} y={cylTop + pistonHeight} width={16} height={cylBottom - (cylTop + pistonHeight) + 30} fill="#78716c" />
+            </g>
+
+            {/* Crankshaft (just a circle below) */}
+            <circle cx={cylX + cylW / 2} cy={cylBottom + 60} r={32} fill="#1c1917" stroke="#fbbf24" strokeWidth="1.5" />
+            <circle cx={cylX + cylW / 2} cy={cylBottom + 60} r={5}  fill="#fbbf24" />
+            {/* Crankshaft web (rotates with stroke index) */}
+            <g transform={`translate(${cylX + cylW / 2}, ${cylBottom + 60}) rotate(${stroke * 90})`}>
+              <line x1="0" y1="0" x2="0" y2="-26" stroke="#fbbf24" strokeWidth="3" />
+              <circle cx="0" cy="-26" r="5" fill="#fbbf24" />
+            </g>
+
+            {/* Stroke counter */}
+            <g>
+              <rect x={W - 86} y={H - 38} width={72} height={26} rx={4} fill="#0c0a09" stroke="#44403c" />
+              <text x={W - 50} y={H - 21} fontSize="11" fontFamily="monospace" fill={cur.color} textAnchor="middle" fontWeight="700">
+                {stroke + 1}/4 · {(isKh ? cur.titleKh : cur.titleEn).split(" ")[0]}
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        {/* Description + controls */}
+        <div className="flex flex-col">
+          <div className="bg-stone-900/60 border border-stone-700 rounded-lg p-4 mb-4 flex-1">
+            <div className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`} style={{ color: cur.color }}>
+              {isKh ? "ជំហាន" : "Stroke"} {stroke + 1} / 4
+            </div>
+            <h4 className={`font-display font-bold text-lg text-stone-100 mb-2 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? cur.titleKh : cur.titleEn}
+            </h4>
+            <p className={`text-sm text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh ? cur.bodyKh : cur.bodyEn}
+            </p>
+          </div>
+
+          {/* Controls */}
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <button
+              onClick={() => setRunning((r) => !r)}
+              aria-pressed={running}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-colors ${
+                running ? "bg-stone-700 hover:bg-stone-600 text-stone-100" : "bg-amber-500 hover:bg-amber-400 text-stone-900"
+              } ${isKh ? "font-khmer" : ""}`}
+            >
+              {running ? <><Pause className="w-4 h-4" />{isKh ? "ឈប់" : "Pause"}</> : <><Play className="w-4 h-4" />{isKh ? "ចាប់ផ្ដើម" : "Start"}</>}
+            </button>
+            <button
+              onClick={() => setStroke((s) => (s + 1) % STROKES.length)}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm bg-stone-700 hover:bg-stone-600 text-stone-100 ${isKh ? "font-khmer" : ""}`}
+            >
+              {isKh ? "ជំហានបន្ទាប់" : "Step"}
+            </button>
+          </div>
+
+          {/* Stroke pills */}
+          <div className="grid grid-cols-2 gap-2">
+            {STROKES.map((s, i) => (
+              <button
+                key={s.key}
+                onClick={() => { setRunning(false); setStroke(i); }}
+                aria-current={i === stroke}
+                className={`text-xs px-3 py-2 rounded-md border transition-colors text-left ${
+                  i === stroke
+                    ? "bg-stone-700 border-amber-400 text-stone-50"
+                    : "bg-stone-800 border-stone-700 text-stone-400 hover:text-stone-200 hover:border-stone-600"
+                } ${isKh ? "font-khmer" : ""}`}
+              >
+                <span className="font-mono font-bold mr-1.5" style={{ color: s.color }}>{i + 1}.</span>
+                {isKh ? s.titleKh : s.titleEn}
+              </button>
+            ))}
+          </div>
+
+          {/* Speed slider */}
+          <div className="mt-4">
+            <label className={`text-xs text-stone-400 mb-1 block ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? `ល្បឿន: ${rpm} ស្រ្តូក / នាទី` : `Speed: ${rpm} strokes/min`}
+            </label>
+            <input
+              type="range"
+              min={10}
+              max={120}
+              value={rpm}
+              onChange={(e) => setRpm(parseInt(e.target.value, 10))}
+              className="w-full accent-amber-500"
+              aria-label={isKh ? "ល្បឿនវដ្ត" : "Cycle speed"}
+            />
+          </div>
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+function OxidationNote({ isKh }: { isKh: boolean }) {
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Flame}
+        titleEn="Oxidation — why fuel 'explodes'"
+        titleKh={"ការអុកស៊ីតកម្ម — ហេតុអ្វីឥន្ធនៈ “ផ្ទុះ”"}
+        isKh={isKh}
+      />
+      <p className={`text-sm text-stone-300 mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "ប្រេងសាំងគឺជាខ្សែកាបូនអ៊ីដ្រូកាបោន — អាតូមកាបោន និងហ៊ីដ្រូសែនដែលជាប់នឹងគ្នាដោយចំណង។ ចំណងទាំងនេះផ្ទុកថាមពលច្រើន។ នៅពេលអ្នកលាយវាជាមួយអុកស៊ីសែន ហើយផ្ដល់ស្ប៉ាក់តូចមួយ ប្រតិកម្មស៊ីសេនថ្នាក់ខ្ពស់បាញ់ចេញឲ្យទាំងអស់គ្នា — ដោយបញ្ចេញកំដៅ និងបង្កើតហ្គាសដែលរំពុះ។"
+          : "Petrol is a hydrocarbon — carbon and hydrogen atoms locked together by chemical bonds. Those bonds store a lot of energy. When you mix it with oxygen and add a tiny spark, a fast chain-reaction releases all of that energy at once — making heat and a sudden burst of expanding gas."}
+      </p>
+
+      {/* Reaction equation */}
+      <div className="bg-stone-900 border border-amber-500/30 rounded-lg p-4 mb-4 overflow-x-auto">
+        <div className={`text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh ? "ការដុតប្រេងសាំង (សាមញ្ញសម្រាប់អុកតាន)" : "Combustion of petrol (simplified for octane)"}
+        </div>
+        <div className="font-mono text-base sm:text-lg text-stone-100 whitespace-nowrap text-center">
+          <span className="text-amber-300">2 C₈H₁₈</span>
+          <span className="text-stone-500"> + </span>
+          <span className="text-blue-300">25 O₂</span>
+          <span className="text-amber-400 mx-3 ff-flicker">→</span>
+          <span className="text-stone-300">16 CO₂</span>
+          <span className="text-stone-500"> + </span>
+          <span className="text-stone-300">18 H₂O</span>
+          <span className="text-stone-500"> + </span>
+          <span className="text-rose-400 font-bold">energy</span>
+        </div>
+        <div className={`text-xs text-stone-500 mt-3 italic text-center ${isKh ? "font-khmer not-italic" : ""}`}>
+          {isKh
+            ? "ប្រេងសាំង + អុកស៊ីសែន → កាបោនឌីអុកស៊ីត + ទឹក + ថាមពល (ភាគច្រើនជាកំដៅ)"
+            : "Petrol + oxygen → carbon dioxide + water + energy (mostly heat)"}
+        </div>
+      </div>
+
+      <div className={`flex items-start gap-2 text-sm text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <Zap className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-400" />
+        <span>
+          {isKh
+            ? "មានបញ្ហាមួយ៖ កាបោនឌីអុកស៊ីត (CO₂) ដែលត្រូវបានបញ្ចេញ កាន់តែច្រើននៅក្នុងបរិយាកាស ហើយចាប់យកកំដៅរបស់ព្រះអាទិត្យ — នេះជាមូលហេតុដែលការផ្លាស់ប្ដូរអាកាសធាតុកំពុងពន្លឿន។"
+            : "There's a catch: the CO₂ released builds up in the atmosphere and traps the sun's heat — which is the reason climate change is accelerating."}
+        </span>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  4. Price breakdown
+// ════════════════════════════════════════════════════════════════════════════
+
+function PriceBreakdown({ isKh }: { isKh: boolean }) {
+  const PARTS = [
+    {
+      key: "crude",
+      pct: 55,
+      titleEn: "Crude oil cost",
+      titleKh: "តម្លៃប្រេងឆៅ",
+      bodyEn: "The biggest slice. Set globally by supply (OPEC+ production quotas, US shale, sanctions) and demand (winter heating, summer driving, recessions).",
+      bodyKh: "ចំណែកធំបំផុត។ កំណត់ដោយផ្គត់ផ្គង់សកល (កូតាផលិតកម្មរបស់ OPEC+ ហ៊ីនស្គេស សហរដ្ឋអាមេរិក ការដាក់ទណ្ឌកម្ម) និងតម្រូវការ (កំដៅរដូវរងារ ការបើកបររដូវក្ដៅ វិបត្តិសេដ្ឋកិច្ច)។",
+      icon: Globe2, color: "#f59e0b",
+    },
+    {
+      key: "refining",
+      pct: 18,
+      titleEn: "Refining",
+      titleKh: "ការចម្រាញ់",
+      bodyEn: "Running the distillation tower 24/7 — energy, maintenance, workers, and the refinery's profit margin.",
+      bodyKh: "ដំណើរការប៉មចម្រាញ់ ២៤ ម៉ោង / ៧ ថ្ងៃ — ថាមពល ការថែទាំ កម្មករ និងប្រាក់ចំណេញរបស់រោងចក្រ។",
+      icon: Factory, color: "#fbbf24",
+    },
+    {
+      key: "distribution",
+      pct: 12,
+      titleEn: "Shipping & distribution",
+      titleKh: "ការដឹកជញ្ជូន និងការចែកចាយ",
+      bodyEn: "Cambodia imports nearly all its refined fuel. Tankers, port fees, trucks from Sihanoukville to your village pump.",
+      bodyKh: "កម្ពុជានាំចូលឥន្ធនៈចម្រាញ់ស្ទើរតែទាំងអស់។ កប៉ាល់ដឹកប្រេង កម្រៃកំពង់ផែ ឡានដឹកពីក្រុងព្រះសីហនុទៅស្ថានីយប្រេងភូមិរបស់អ្នក។",
+      icon: Truck, color: "#60a5fa",
+    },
+    {
+      key: "tax",
+      pct: 15,
+      titleEn: "Taxes & station markup",
+      titleKh: "ពន្ធ និងតម្លៃបន្ថែមរបស់ស្ថានីយ",
+      bodyEn: "Government excise + VAT, plus the petrol station's own margin. Cambodia's pump tax is lower than most ASEAN neighbours.",
+      bodyKh: "ពន្ធរដ្ឋ + អាករ បូករួមនឹងប្រាក់ចំណេញរបស់ស្ថានីយប្រេង។ ពន្ធនៅស្ថានីយប្រេងរបស់កម្ពុជាទាបជាងប្រទេសភាគច្រើននៅអាស៊ាន។",
+      icon: TrendingUp, color: "#a78bfa",
+    },
+  ];
+
+  // Stable percentages should sum to 100; if rounding drifts, normalise.
+  const total = PARTS.reduce((s, p) => s + p.pct, 0);
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={TrendingUp}
+        titleEn="Price-influencer breakdown"
+        titleKh="ការបែងចែកអ្នកមានឥទ្ធិពលលើតម្លៃ"
+        isKh={isKh}
+      />
+
+      {/* Stacked bar */}
+      <div className="mb-4">
+        <div className={`text-[10px] font-bold uppercase tracking-widest text-amber-400 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh ? "១ លីត្រ ប្រេងសាំង = ១០០%" : "1 litre of petrol = 100%"}
+        </div>
+        <div className="flex h-12 rounded-lg overflow-hidden border border-stone-600 shadow-inner" role="img" aria-label={isKh ? "ការបែងចែកតម្លៃប្រេងសាំង" : "Gasoline price breakdown"}>
+          {PARTS.map((p) => {
+            const w = (p.pct / total) * 100;
+            return (
+              <div
+                key={p.key}
+                className="flex items-center justify-center text-xs font-bold text-stone-900 transition-all"
+                style={{ width: `${w}%`, backgroundColor: p.color }}
+                title={`${(isKh ? p.titleKh : p.titleEn)} · ${p.pct}%`}
+              >
+                {p.pct >= 10 && `${p.pct}%`}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Legend cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {PARTS.map((p) => {
+          const Icon = p.icon;
+          return (
+            <div key={p.key} className="bg-stone-900/60 border border-stone-700 rounded-lg p-4 flex gap-3 relative overflow-hidden">
+              <div className="absolute top-0 left-0 bottom-0 w-1" style={{ backgroundColor: p.color }} />
+              <div className="w-9 h-9 rounded-md flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${p.color}25`, border: `1px solid ${p.color}55` }}>
+                <Icon className="w-4 h-4" style={{ color: p.color }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-baseline justify-between gap-2 mb-1">
+                  <h4 className={`font-display font-bold text-sm text-stone-100 ${isKh ? "font-khmer" : ""}`}>
+                    {isKh ? p.titleKh : p.titleEn}
+                  </h4>
+                  <span className="font-mono font-bold text-sm" style={{ color: p.color }}>{p.pct}%</span>
+                </div>
+                <p className={`text-xs text-stone-400 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh ? p.bodyKh : p.bodyEn}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={`mt-4 flex items-start gap-2 text-sm text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-400" />
+        <span>
+          {isKh
+            ? "ប្រហែល ៧០% នៃតម្លៃនៅស្ថានីយប្រេងរបស់អ្នកត្រូវបានសម្រេចនៅខាងក្រៅប្រទេសកម្ពុជា — នេះជាមូលហេតុដែលការផ្លាស់ប្ដូរនៅតម្លៃប្រេងសាកល (សង្គ្រាមនៅអ៊ុយក្រែន ការសម្រេចរបស់ OPEC+) ប៉ះពាល់នឹងគ្រួសារនៅភ្នំពេញដោយផ្ទាល់។ តម្លៃ និងសមាមាត្រគឺគ្រាន់តែជាការបង្ហាញ — តម្លៃពិតប្រាកដផ្លាស់ប្ដូររាល់ខែ។"
+            : "Roughly 70% of the price at your local pump is decided outside Cambodia — which is why a war in Ukraine or an OPEC+ vote shows up directly on a Phnom Penh family's weekly bill. The percentages above are illustrative; real values shift every month."}
+        </span>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Scoped styles
+// ════════════════════════════════════════════════════════════════════════════
+
+function ScopedStyles() {
+  return (
+    <style>{`
+      .ff-text-flame {
+        background: linear-gradient(180deg, #fbbf24 0%, #f97316 50%, #ef4444 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      @keyframes ff-float-kf {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-6px); }
+      }
+      .ff-float { animation: ff-float-kf 3.6s ease-in-out infinite; }
+
+      @keyframes ff-spin-kf {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+      .ff-spin-slow { animation: ff-spin-kf 8s linear infinite; transform-origin: 50% 50%; }
+
+      @keyframes ff-pulse-kf {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0.4; }
+      }
+      .ff-pulse      { animation: ff-pulse-kf 1.6s ease-in-out infinite; }
+      .ff-pulse-fast { animation: ff-pulse-kf 1s ease-in-out infinite; }
+
+      @keyframes ff-flicker-kf {
+        0%, 100% { transform: scaleY(1)   translateY(0); opacity: 1; }
+        50%      { transform: scaleY(1.1) translateY(-2px); opacity: 0.85; }
+      }
+      .ff-flicker { animation: ff-flicker-kf 0.6s ease-in-out infinite; transform-origin: 50% 100%; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ff-float, .ff-spin-slow, .ff-pulse, .ff-pulse-fast, .ff-flicker {
+          animation: none !important;
+        }
+      }
+    `}</style>
+  );
+}

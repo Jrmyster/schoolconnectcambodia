@@ -33,6 +33,7 @@ import AviationPage from "@/pages/AviationPage";
 import MusicTheoryPage from "@/pages/MusicTheoryPage";
 import MathematicsPage from "@/pages/MathematicsPage";
 import ArtOfLearningPage from "@/pages/ArtOfLearningPage";
+import FossilFuelsPage from "@/pages/FossilFuelsPage";
 import SexualHealthPage from "@/pages/SexualHealthPage";
 import GlobalCitiesPage from "@/pages/GlobalCitiesPage";
 import CinematographyPage from "@/pages/CinematographyPage";
@@ -136,6 +137,7 @@ function Router() {
           <Route path="/music-theory" component={MusicTheoryPage} />
           <Route path="/mathematics" component={MathematicsPage} />
           <Route path="/art-of-learning" component={ArtOfLearningPage} />
+          <Route path="/fossil-fuels" component={FossilFuelsPage} />
           <Route path="/sexual-health" component={SexualHealthPage} />
           <Route path="/global-cities" component={GlobalCitiesPage} />
           <Route path="/cinematography" component={CinematographyPage} />
