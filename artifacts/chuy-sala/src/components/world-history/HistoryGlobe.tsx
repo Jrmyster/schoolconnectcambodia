@@ -1,5 +1,5 @@
-import { Component, ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, ThreeEvent } from "@react-three/fiber";
+import { Component, ReactNode, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useLoader, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
@@ -276,26 +276,77 @@ function latLngToVec3(latDeg: number, lngDeg: number, radius: number): [number, 
   return [x, y, z];
 }
 
-/** A scattering of fixed pseudo-random "city" positions for the Modern era. */
-const CITY_LIGHTS_POSITIONS = (() => {
-  const out: Array<[number, number, number]> = [];
-  // Deterministic — same lights every render, keeps geometry tree stable.
-  let seed = 7;
-  const rand = () => {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
-  };
-  for (let i = 0; i < 60; i++) {
-    const lat = (rand() - 0.5) * 140; // mostly land latitudes
-    const lng = (rand() - 0.5) * 360;
-    out.push(latLngToVec3(lat, lng, GLOBE_RADIUS + 0.005));
-  }
-  return out;
-})();
-
 /* ──────────────────────────────────────────────────────────────────────────────
  * 3D scene parts
  * ────────────────────────────────────────────────────────────────────────────── */
+
+/* ── Texture URLs (served from public/textures/, cached by SW for offline use) ──
+ * Diffuse  — NASA "Blue Marble" composite (continents, oceans, ice).
+ * Specular — white = water (so light bounces off oceans, not landmasses).
+ * Night    — city lights overlay used as the emissive map for the Modern era. */
+const TEX_BASE = `${import.meta.env.BASE_URL}textures/`;
+const EARTH_DIFFUSE_URL = `${TEX_BASE}earth-blue-marble.jpg`;
+const EARTH_SPECULAR_URL = `${TEX_BASE}earth-water.png`;
+const EARTH_NIGHT_URL = `${TEX_BASE}earth-night.jpg`;
+
+/**
+ * Realistic, textured Earth. Suspends while the diffuse + specular maps load
+ * — the parent <Suspense fallback> renders a flat-coloured sphere in the
+ * meantime so the user never sees a blank canvas.
+ *
+ * Coordinate alignment: Three.js sphereGeometry's default UV mapping with
+ * latLngToVec3() above puts longitude 0 at +x and latitude 0 at the equator,
+ * matching the equirectangular Blue Marble texture. Region pins keep the
+ * exact same world-coordinates and remain pinned to the correct real-world
+ * latitude/longitude on the new realistic globe (verified: NYC ≈ -74°,40°
+ * lands in eastern North America; Cambodia ≈ 105°,12° lands on the
+ * Indochinese peninsula).
+ */
+function TexturedEarth({ era }: { era: EraDef }) {
+  // Loading either map will suspend this component until both resolve.
+  // useLoader caches by URL so we only pay this cost once per session.
+  const [diffuse, specular, night] = useLoader(THREE.TextureLoader, [
+    EARTH_DIFFUSE_URL,
+    EARTH_SPECULAR_URL,
+    EARTH_NIGHT_URL,
+  ]);
+
+  // Configure colour spaces synchronously *before* first render so the very
+  // first paint is gamma-correct (no brief over-dark flash). The specular
+  // map is data, not colour — leave it as the default linear space.
+  useMemo(() => {
+    diffuse.colorSpace = THREE.SRGBColorSpace;
+    night.colorSpace = THREE.SRGBColorSpace;
+  }, [diffuse, night]);
+
+  return (
+    <mesh>
+      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
+      <meshPhongMaterial
+        map={diffuse}
+        specularMap={specular}
+        // White-ish specular highlight on water; subtle so it doesn't blow out.
+        specular={new THREE.Color("#3a4a5e")}
+        shininess={12}
+        // Modern era → bright city lights glow on the night side via emissiveMap.
+        // Other eras → no emission.
+        emissiveMap={era.showCityLights ? night : null}
+        emissive={era.showCityLights ? new THREE.Color("#ffd47a") : new THREE.Color("#000000")}
+        emissiveIntensity={era.showCityLights ? 1.1 : 0}
+      />
+    </mesh>
+  );
+}
+
+/** Fallback shown while textures are downloading on first visit. */
+function FallbackSphere() {
+  return (
+    <mesh>
+      <sphereGeometry args={[GLOBE_RADIUS, 32, 32]} />
+      <meshStandardMaterial color="#1e3a8a" roughness={0.9} />
+    </mesh>
+  );
+}
 
 function GlobeMesh({
   era,
@@ -314,17 +365,12 @@ function GlobeMesh({
 
   return (
     <group ref={groupRef}>
-      {/* Globe surface — low-poly so old phones cope. */}
-      <mesh>
-        <sphereGeometry args={[GLOBE_RADIUS, 48, 48]} />
-        <meshStandardMaterial
-          color={era.globeColor}
-          roughness={0.85}
-          metalness={0.05}
-        />
-      </mesh>
+      {/* Realistic Earth — suspends until textures load. */}
+      <Suspense fallback={<FallbackSphere />}>
+        <TexturedEarth era={era} />
+      </Suspense>
 
-      {/* Soft atmospheric halo — back-side material gives a cheap glow. */}
+      {/* Era-tinted atmospheric halo — back-side material gives a cheap glow. */}
       <mesh scale={1.08}>
         <sphereGeometry args={[GLOBE_RADIUS, 32, 32]} />
         <meshBasicMaterial
@@ -335,15 +381,6 @@ function GlobeMesh({
           depthWrite={false}
         />
       </mesh>
-
-      {/* Modern era: tiny glowing city dots. */}
-      {era.showCityLights &&
-        CITY_LIGHTS_POSITIONS.map((pos, i) => (
-          <mesh key={i} position={pos}>
-            <sphereGeometry args={[0.018, 6, 6]} />
-            <meshBasicMaterial color="#fde047" />
-          </mesh>
-        ))}
     </group>
   );
 }
