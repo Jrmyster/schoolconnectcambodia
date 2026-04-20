@@ -1,6 +1,6 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -113,9 +113,32 @@ function PageLoading() {
   );
 }
 
+/**
+ * Resets the window scroll position to the top on every route change.
+ * Without this, wouter (like most SPA routers) preserves the previous page's
+ * scroll offset, so a user who clicked a nav link from the bottom of one page
+ * would land mid-way down the next one.
+ *
+ * Uses `behavior: "instant"` so the new page appears at the top immediately
+ * rather than animating — users perceive it as a normal page navigation.
+ *
+ * Skips the reset when the URL contains a hash (e.g. /page#section), so
+ * in-page anchor links continue to work as expected.
+ */
+function ScrollToTop() {
+  const [pathname] = useLocation();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, [pathname]);
+  return null;
+}
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <PWAStatusBar />
       <Navbar />
       <HeatSafetyAlert />
