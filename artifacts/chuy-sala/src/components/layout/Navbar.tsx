@@ -536,6 +536,22 @@ function DropdownGroup({
 export function Navbar() {
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Auto-close mobile menu when the route changes (covers any in-app
+  // navigation we forgot to wire setMobileOpen(false) on).
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
+
+  // Close mobile menu on ESC for keyboard accessibility.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const { language, toggleLanguage } = useLanguageStore();
   const t = useTranslation();
@@ -657,8 +673,10 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
-              className="lg:hidden p-2 text-foreground bg-black/5 rounded-xl hover:bg-black/10 transition-colors"
-              aria-label="Toggle menu"
+              className="lg:hidden p-2 text-foreground bg-black/5 rounded-xl hover:bg-black/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              aria-label={mobileOpen ? t("Close menu", "បិទ​ម៉ឺនុយ") : t("Open menu", "បើក​ម៉ឺនុយ")}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -692,6 +710,10 @@ export function Navbar() {
       {/* ── Mobile menu ───────────────────────────────────────── */}
       {mobileOpen && (
         <div
+          id="mobile-nav-menu"
+          role="dialog"
+          aria-modal="false"
+          aria-label={t("Site navigation", "ការ​រុក​រក​គេហទំព័រ")}
           className="lg:hidden border-t border-border/50 pb-4"
           style={{
             position: "absolute",

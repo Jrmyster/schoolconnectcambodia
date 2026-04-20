@@ -1,0 +1,43 @@
+We are preparing for the official launch of School Connect Cambodia, a comprehensive, bilingual (English/Khmer) educational Progressive Web App (PWA). I need you to perform a Global Codebase Audit and Synchronization. Disregard our focus on recent additions and analyze the entire application from top to bottom. Please execute the following phases and implement fixes:
+
+Phase 1: Global Routing & Link Integrity
+
+The Deep Crawl: Scan every single route in the application (Home, Beginner Hub, Science, Technology, Philosophy & Society, World History, Space, Study Center, Sanctuary, Exam Prep, and all nested sub-pages).
+
+Zero Dead Ends: Ensure there are no 404 errors, broken internal links, or orphaned pages. Every page must have a functional path back to the Home page.
+
+Anchor Links: Verify that all on-page navigational elements (like 'Back to Top' or table-of-contents jumps) scroll smoothly to the correct ID.
+
+Phase 2: Mobile-First & Responsive Architecture
+
+Strict Viewport Enforcement: Ensure <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> is correctly set. There must be zero horizontal scrolling on screens from 320px up to desktop resolutions.
+
+Touch Optimization: Verify that all interactive elements across every module (simulators, dropdowns, quiz buttons) have a minimum touch target size of 44x44 pixels.
+
+Global Navigation: Ensure the mobile 'Hamburger' menu traps focus when open, scrolls internally if the menu is long, and cleanly displays all nested categories without UI clipping.
+
+Phase 3: Bilingual UI & Aesthetic Cohesion
+
+Typography Engine: Verify that the font stack properly supports Khmer script (e.g., 'Battambang', 'Suwannaphum', or 'Kantumruy') across all components. Ensure line-heights are adjusted globally so Khmer subscripts/superscripts are not cut off.
+
+Component Standardization: Audit all UI elements (Cards, Buttons, Modals, Input Fields). They must share a unified design system (consistent border-radius, padding, drop-shadows, and hover/active states).
+
+Accessibility (a11y): Run a contrast check. Ensure text across all themes (especially dark-mode pages like 'Space' or 'Cinematography') meets WCAG AA readability standards.
+
+Phase 4: Code Quality & State Management
+
+Console Silence: Clear all React warnings, including hydration mismatches, missing 'key' props in iterables, and unused variables.
+
+Memory Leak Prevention: Audit all interactive simulators (physics, chemistry, weather, etc.). Ensure all useEffect hooks have proper cleanup functions to clear intervals, timeouts, and event listeners when a user navigates away.
+
+Phase 5: PWA, Performance, & Offline Readiness
+
+Service Worker Check: Verify that the manifest.json is correctly linked and that the Service Worker is actively caching the core app shell (HTML, CSS, JS, and UI icons).
+
+Asset Optimization: Ensure all heavy assets (like 3D globe models or high-res images) are lazy-loaded to protect bandwidth on 3G/4G networks.
+
+Phase 6: Security Finalization
+
+Admin Lockdown: Confirm that the /admin route and any associated statistic dashboards are fully isolated, require authentication, and are excluded from any public sitemaps or navigation trees.
+
+Environment Variables: Ensure all API keys or database credentials are securely stored in Replit Secrets and are never exposed in the client-side bundle."

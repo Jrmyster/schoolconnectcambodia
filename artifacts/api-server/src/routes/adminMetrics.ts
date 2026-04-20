@@ -3,6 +3,7 @@ import { db } from "@workspace/db";
 import { storiesTable, conversations } from "@workspace/db/schema";
 import { count, gte, eq } from "drizzle-orm";
 import { openai } from "@workspace/integrations-openai-ai-server";
+import { requireAdmin } from "../middleware/rbac";
 
 const router = Router();
 
@@ -12,7 +13,7 @@ function weekAgo(): Date {
   return d;
 }
 
-router.get("/admin/weekly-metrics", async (_req, res) => {
+router.get("/admin/weekly-metrics", requireAdmin, async (_req, res) => {
   try {
     const since = weekAgo();
 
@@ -38,7 +39,7 @@ router.get("/admin/weekly-metrics", async (_req, res) => {
   }
 });
 
-router.post("/admin/weekly-summary", async (req, res) => {
+router.post("/admin/weekly-summary", requireAdmin, async (req, res) => {
   const { metrics } = req.body as {
     metrics: {
       pendingStories: number;
