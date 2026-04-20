@@ -275,6 +275,7 @@ function DropdownGroup({
       {/* Dropdown panel — rendered with inline styles to guarantee visibility */}
       {open && (
         <div
+          className="nav-dropdown-scroll"
           style={{
             position: "absolute",
             top: "calc(100% + 6px)",
@@ -286,6 +287,10 @@ function DropdownGroup({
             borderRadius: "12px",
             boxShadow: "0 10px 40px rgba(0,0,0,0.14)",
             padding: "6px",
+            maxHeight: "min(60vh, 480px)",
+            overflowY: "auto",
+            overscrollBehavior: "contain",
+            scrollBehavior: "smooth",
           }}
         >
           {group.items.map((item) => {
