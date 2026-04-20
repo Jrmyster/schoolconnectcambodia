@@ -4,6 +4,7 @@ import { Rocket, ExternalLink, Star, Telescope, Orbit, AlertCircle, Loader2, Che
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
 import { TheSunModule } from "@/components/space/TheSunModule";
+import { SolarPowerModule } from "@/components/space/SolarPowerModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -350,6 +351,9 @@ export function SpacePage() {
 
         {/* ── The Sun: Our Local Star ───────────────────────────────────── */}
         <TheSunModule />
+
+        {/* ── Solar Power: Harvesting the Sun ───────────────────────────── */}
+        <SolarPowerModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
