@@ -7,6 +7,7 @@ import { GlobalSearch } from "@/components/GlobalSearch";
 import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
 import { CountUp } from "@/components/CountUp";
 import { PhilosophyMap } from "@/components/PhilosophyMap";
+import { SociologyPortal } from "@/components/SociologyPortal";
 
 export function Home() {
   const t = useTranslation();
@@ -261,6 +262,9 @@ export function Home() {
 
       {/* Philosophy: The Map of Thinking — interactive 7-branch portal */}
       <PhilosophyMap />
+
+      {/* Sociology: The Science of Society — 4-part interactive portal */}
+      <SociologyPortal />
 
       {/* How it works */}
       <section className="py-20 bg-secondary/30">
