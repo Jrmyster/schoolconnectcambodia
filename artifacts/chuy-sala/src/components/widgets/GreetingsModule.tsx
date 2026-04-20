@@ -1,5 +1,6 @@
 import { Volume2, Sunrise, Sun, Moon, AlertTriangle, MessageCircle, Hand, Smile, Coffee } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { speakWord } from "@/lib/speech";
 
 /* ──────────────────────────────────────────────────────────────────────
  * Introductions & Greetings — ESL learner module
@@ -75,9 +76,7 @@ export function GreetingsModule() {
   const kh = language === "kh";
 
   function playAudio(phrase: string) {
-    alert(
-      (kh ? KH_TODO("អូឌីយ៉ូនឹងបន្ថែមនៅពេលក្រោយ — ") : "Audio coming soon — ") + phrase,
-    );
+    speakWord(phrase);
   }
 
   return (

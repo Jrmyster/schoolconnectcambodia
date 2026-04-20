@@ -5,6 +5,7 @@ import {
   Search, X, SearchX,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { speakWord } from "@/lib/speech";
 
 /* ──────────────────────────────────────────────────────────────────────
  * Everyday Vocabulary — ESL learner module
@@ -255,7 +256,7 @@ export function VocabularyModule() {
   }, [isSearching, trimmed, query, active]);
 
   function playAudio(word: string) {
-    alert((kh ? KH_TODO("អូឌីយ៉ូនឹងបន្ថែមនៅពេលក្រោយ — ") : "Audio coming soon — ") + word);
+    speakWord(word);
   }
 
   return (

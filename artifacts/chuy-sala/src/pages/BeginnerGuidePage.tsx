@@ -3,6 +3,7 @@ import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { speakWord } from "@/lib/speech";
 
 /* ──────────────────────────────────────────────────────────────────────
  * Beginner English & Math Guide
@@ -234,8 +235,7 @@ function AlphabetSection({ kh }: { kh: boolean }) {
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  // Placeholder for future audio playback
-                  alert((kh ? KH_TODO("អូឌីយ៉ូនឹងបន្ថែមនៅពេលក្រោយ — ") : "Audio coming soon — ") + L.word);
+                  speakWord(L.word);
                 }}
                 className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 border-2 border-current font-bold text-xs hover:bg-white active:scale-95 transition-all"
                 aria-label={`Play audio for ${L.word} (coming soon)`}
