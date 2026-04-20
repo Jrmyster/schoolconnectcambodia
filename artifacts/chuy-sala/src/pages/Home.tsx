@@ -4,6 +4,7 @@ import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspa
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
 
 export function Home() {
   const t = useTranslation();
@@ -17,6 +18,9 @@ export function Home() {
   
   return (
     <div className="w-full min-h-screen">
+      {/* Daily Spark Challenge — top-of-page motivator */}
+      <DailySparkChallenge />
+
       {/* Hero Section */}
       <section className="relative w-full min-h-[700px] h-[92vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-foreground/40 z-10" /> {/* Dark overlay for readability */}
