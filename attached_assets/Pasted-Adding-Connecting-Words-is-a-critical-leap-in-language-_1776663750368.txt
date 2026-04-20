@@ -1,0 +1,40 @@
+Adding Connecting Words (ពាក្យភ្ជាប់) is a critical leap in language acquisition. In General Semantics, if vocabulary words are the "Locations" on a map, connecting words are the "Roads." Without them, a student's thoughts are just isolated islands.
+
+From a biological perspective, these words act as Synapses. They allow two independent neural signals (simple sentences) to fire together and form a much more complex, nuanced thought.
+
+To make this effective for your ESL students, the Replit agent shouldn't just create a list; it should create an interactive environment where students can practice building these "Bridges."
+
+The Replit Agent Prompt: The Sentence Bridge Builder
+Copy and paste this instruction to the Agent to build the interactive grammar module:
+
+"I want to add a 'Connecting Words: The Bridge Builder' (ពាក្យភ្ជាប់៖ អ្នកសាងសង់ស្ពាន) interactive tool to the English Writing section. Please implement the following:
+
+1. The 'Word Categories' Guide (Bilingual): Group the following target words logically so students understand their function:
+
+Adding Ideas (ការបន្ថែម): and, nor
+
+Showing Contrast (ការផ្ទុយ): but, however, yet
+
+Cause & Effect (ហេតុ និងផល): because, so, therefore, for
+
+Time & Sequence (ពេលវេលា និងលំដាប់): then, and then
+
+2. The Interactive 'Bridge' Game:
+
+Create a UI that looks like two 'Cliffs' separated by a gap.
+
+Cliff 1 (Left): Display a starting sentence (e.g., 'It was raining hard').
+
+Cliff 2 (Right): Display a finishing sentence (e.g., 'we stayed inside').
+
+The Gap: Provide 3 multiple-choice 'Bridge Stones' (e.g., [because], [so], [however]).
+
+When the student clicks the correct word ('so'), the bridge completes, and a success sound/animation plays.
+
+3. Feedback Logic:
+
+If they choose the wrong word (e.g., 'however'), show a gentle bilingual hint: 'Try again! Look for a word that shows Cause & Effect.'
+
+Create a bank of 10-15 sentence pairs using the target words so students can practice repeatedly.
+
+4. Styling: Use a friendly, visual aesthetic. Make the 'Bridge Stones' look like clickable buttons. Ensure the Khmer instructions and translations are clear and prominent."

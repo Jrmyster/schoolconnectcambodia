@@ -3,6 +3,7 @@ import { useLanguageStore } from "@/store/use-language";
 import { ParagraphBuilder } from "@/components/widgets/ParagraphBuilder";
 import { GreetingsModule } from "@/components/widgets/GreetingsModule";
 import { VocabularyModule } from "@/components/widgets/VocabularyModule";
+import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridge";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -43,6 +44,11 @@ export function EnglishWritingPage() {
         {/* Everyday Vocabulary — categorized flashcards */}
         <div className="mb-10">
           <VocabularyModule />
+        </div>
+
+        {/* Connecting Words — Bridge Builder game */}
+        <div className="mb-10">
+          <ConnectingWordsBridge />
         </div>
 
         {/* Quick tips strip */}
