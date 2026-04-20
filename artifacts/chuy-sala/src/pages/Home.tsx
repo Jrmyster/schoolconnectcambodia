@@ -7,6 +7,7 @@ import { GlobalSearch } from "@/components/GlobalSearch";
 import { DailySparkChallenge } from "@/components/widgets/DailySparkChallenge";
 import { CountUp } from "@/components/CountUp";
 import { PhilosophyMap } from "@/components/PhilosophyMap";
+import { BuddhistPhilosophy } from "@/components/BuddhistPhilosophy";
 import { SociologyPortal } from "@/components/SociologyPortal";
 
 export function Home() {
@@ -262,6 +263,9 @@ export function Home() {
 
       {/* Philosophy: The Map of Thinking — interactive 7-branch portal */}
       <PhilosophyMap />
+
+      {/* Buddhist Philosophy: The Science of the Mind — Four Noble Truths + Mindful Pause */}
+      <BuddhistPhilosophy />
 
       {/* Sociology: The Science of Society — 4-part interactive portal */}
       <SociologyPortal />
