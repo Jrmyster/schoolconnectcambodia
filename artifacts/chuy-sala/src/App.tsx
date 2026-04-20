@@ -31,6 +31,7 @@ import { FinLitIntroPage } from "@/pages/FinLitIntroPage";
 import { SchoolInbox } from "@/pages/SchoolInbox";
 import { ElectricalSafetyPage } from "@/pages/ElectricalSafetyPage";
 import { ChemistryHubPage } from "@/pages/ChemistryHubPage";
+import { OrganicChemistry101Page } from "@/pages/OrganicChemistry101Page";
 import {
   ChemistryBuildingBlocksPage,
   ChemistryReactionsPage,
@@ -105,6 +106,7 @@ function Router() {
           <Route path="/chemistry/reactions-math" component={ChemistryReactionsPage} />
           <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
           <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
+          <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
           <Route path="/fun-lab" component={FunLabPage} />
           <Route path="/physics" component={PhysicsHubPage} />
           <Route path="/physics/motion" component={PhysicsMotionPage} />

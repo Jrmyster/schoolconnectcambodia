@@ -5,6 +5,7 @@ import {
   Microscope,
   Sparkles,
   ArrowRight,
+  Hexagon,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -117,6 +118,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/chemistry/organic-101",
+    number: "05",
+    titleEn: "Organic Chemistry 101",
+    titleKh: "គីមីសរីរាង្គមូលដ្ឋាន",
+    blurbEn:
+      "The chemistry of carbon — from the Rule of 4 to a 3D molecule viewer you can spin with your finger.",
+    blurbKh:
+      "គីមីវិទ្យានៃកាបូន — ចាប់ពីច្បាប់នៃ ៤ ដល់កម្មវិធីបង្ហាញម៉ូលេគុល ៣D ដែលអ្នកអាចបង្វិលដោយម្រាមដៃ។",
+    topicsEn: ["Carbon & Bonds", "Methane · Ethanol · Glucose", "3D Viewer", "Plastics & Medicine"],
+    topicsKh: ["កាបូន & ចំណង", "មេតាន · អេតាណុល · គ្លុយកូស", "កម្មវិធីបង្ហាញ ៣D", "ប្លាស្ទិក & ឱសថ"],
+    icon: Hexagon,
+    accent: {
+      bgFrom: "from-teal-50",
+      bgTo: "to-cyan-50",
+      border: "border-teal-200",
+      chip: "bg-teal-100 text-teal-800",
+      iconBg: "bg-teal-600",
+      btn: "bg-teal-600",
+      btnHover: "hover:bg-teal-700",
+      title: "text-teal-900",
+    },
+  },
+  {
     href: "/chemistry/real-world",
     number: "04",
     titleEn: "Chemistry in the Real World",
@@ -177,8 +201,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Four learning modules — from the tiniest atom to chemistry in your kitchen. Pick where you want to start.",
-              "មុខវិជ្ជារៀនបួន — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៅក្នុងផ្ទះបាយរបស់អ្នក។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Five learning modules — from the tiniest atom to chemistry in your kitchen. Pick where you want to start.",
+              "មុខវិជ្ជារៀនប្រាំ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៅក្នុងផ្ទះបាយរបស់អ្នក។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>
