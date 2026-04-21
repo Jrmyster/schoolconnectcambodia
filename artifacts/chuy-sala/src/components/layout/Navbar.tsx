@@ -407,6 +407,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ដំណើរការវដ្តយល់ឃើញ-គិត-ធ្វើសកម្មភាព ចុចចំណុចភ្លឺលើ Build-a-Bot និងអនុវត្តតាមវដ្តវិស្វកម្មបួនជំហាន។",
       },
       {
+        href: "/technology/nanotechnology",
+        labelEn: "Nanotechnology: Building from the Atom Up",
+        labelKh: "បច្ចេកវិទ្យាណាណូ៖ ការស្ថាបនាពីអាតូមឡើងលើ",
+        icon: Atom,
+        descEn: "What a nanometre actually is, why ordinary light microscopes can't see atoms, and how an Atomic Force Microscope lets us not just read individual atoms but push them — building matter one atom at a time.",
+        descKh: "ណាណូម៉ែត្រគឺជាអ្វី ហេតុអ្វីមីក្រូទស្សន៍ពន្លឺធម្មតាមើលអាតូមមិនឃើញ និងរបៀបដែលមីក្រូទស្សន៍កម្លាំងអាតូម អនុញ្ញាតឱ្យយើងមិនត្រឹមតែអានអាតូមនីមួយៗ ប៉ុន្តែក៏រុញវាបានផងដែរ — ស្ថាបនាសារធាតុម្ដងមួយអាតូម។",
+      },
+      {
         href: "/video-games",
         labelEn: "Video Games: The Science of Play",
         labelKh: "បច្ចេកវិទ្យាហ្គេម៖ វិទ្យាសាស្ត្រនៃការលេង",
