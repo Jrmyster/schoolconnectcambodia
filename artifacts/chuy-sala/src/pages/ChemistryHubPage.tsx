@@ -6,6 +6,7 @@ import {
   Sparkles,
   ArrowRight,
   Hexagon,
+  Gem,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -141,6 +142,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/science/chemistry/inorganic",
+    number: "06",
+    titleEn: "Inorganic Chemistry 101",
+    titleKh: "គីមីវិទ្យាអសរីរាង្គ ១០១",
+    blurbEn:
+      "Metals, alloys, salts, and battery acid — the chemistry of the material world that builds our roads, schools, and farms.",
+    blurbKh:
+      "លោហៈ លោហៈធាតុផ្សំ អំបិល និងអាស៊ីតថ្ម — គីមីវិទ្យានៃពិភពសម្ភារៈដែលស្ថាបនាផ្លូវ សាលា និងចម្ការរបស់យើង។",
+    topicsEn: ["Metals & Alloys", "Salts & Crystals", "Fertilizers", "Battery Acid"],
+    topicsKh: ["លោហៈ & លោហៈធាតុផ្សំ", "អំបិល & គ្រីស្តាល់", "ជី", "អាស៊ីតថ្ម"],
+    icon: Gem,
+    accent: {
+      bgFrom: "from-slate-50",
+      bgTo: "to-orange-50",
+      border: "border-slate-300",
+      chip: "bg-slate-200 text-slate-800",
+      iconBg: "bg-gradient-to-br from-slate-600 to-orange-700",
+      btn: "bg-slate-700",
+      btnHover: "hover:bg-slate-800",
+      title: "text-slate-900",
+    },
+  },
+  {
     href: "/chemistry/real-world",
     number: "04",
     titleEn: "Chemistry in the Real World",
@@ -201,8 +225,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Five learning modules — from the tiniest atom to chemistry in your kitchen. Pick where you want to start.",
-              "មុខវិជ្ជារៀនប្រាំ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៅក្នុងផ្ទះបាយរបស់អ្នក។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Six learning modules — from the tiniest atom to the metals and salts that build our world. Pick where you want to start.",
+              "មុខវិជ្ជារៀនប្រាំមួយ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់លោហៈ និងអំបិលដែលស្ថាបនាពិភពលោករបស់យើង។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>

@@ -1,0 +1,29 @@
+"I want to add a new advanced module called 'Module 07: Physical Chemistry (គីមីរូបវិទ្យា)' to the Chemistry hub. This should serve as an 'Undergraduate Preview' for high school students. Please implement the following sections:
+
+1. The Introduction (Math Meets Matter):
+
+Explain that Physical Chemistry is what happens when Physics and Calculus are used to explain Chemical Reactions.
+
+2. P-Chem 1: The Macroscopic World (Thermodynamics & Kinetics):
+
+Thermodynamics (ទែម៉ូឌីណាមិច): The study of heat and energy. Explain 'Entropy' (the universe's tendency toward disorder) and 'Enthalpy' (heat exchange). Connect this to real-world engineering: How much energy can we extract from burning a liter of fuel in an engine?
+
+Kinetics (គីនេទិច): The study of speed. Explain why some reactions (like explosions) happen in milliseconds, while others (like iron rusting) take years. Explain how temperature and catalysts speed up reactions.
+
+3. P-Chem 2: The Microscopic World (Quantum Mechanics & Spectroscopy):
+
+Quantum Mechanics (មេកានិចកង់ទិច): Explain that at the atomic level, electrons don't orbit like planets; they act like waves of probability.
+
+Spectroscopy (វិសាលគមវិទ្យា): The study of how light interacts with matter. Explain that this is how scientists know what elements are inside distant stars—by looking at the specific colors of light the star absorbs and emits.
+
+4. Real-World Applications (Why do we use it?):
+
+Add a 'Careers & Impact' section highlighting how P-Chem is used to design better Solar Panels (quantum mechanics of silicon), longer-lasting Batteries (electrochemistry), and Climate Science (how CO2 absorbs infrared heat).
+
+5. UI & Routing:
+
+Create a new module card on the main Chemistry page labeled 'Module 07'. Include the tags: 'Thermodynamics', 'Quantum', 'Kinetics', 'Energy'.
+
+Route the new page to /science/chemistry/physical.
+
+Use a 'University Lecture' aesthetic: deep blackboard greens, glowing chalk-white text, and mathematical grid backgrounds. Ensure all technical terms are bilingual (English/Khmer) using your AI translation capabilities."

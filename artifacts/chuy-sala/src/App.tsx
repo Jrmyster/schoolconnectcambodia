@@ -77,6 +77,7 @@ const SchoolInbox               = lazy(() => import("@/pages/SchoolInbox").then(
 const ElectricalSafetyPage      = lazy(() => import("@/pages/ElectricalSafetyPage").then(m => ({ default: m.ElectricalSafetyPage })));
 const ChemistryHubPage          = lazy(() => import("@/pages/ChemistryHubPage").then(m => ({ default: m.ChemistryHubPage })));
 const OrganicChemistry101Page   = lazy(() => import("@/pages/OrganicChemistry101Page").then(m => ({ default: m.OrganicChemistry101Page })));
+const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry101Page").then(m => ({ default: m.InorganicChemistry101Page })));
 const ChemistryBuildingBlocksPage = lazy(() => import("@/pages/ChemistryModulePages").then(m => ({ default: m.ChemistryBuildingBlocksPage })));
 const ChemistryReactionsPage    = lazy(() => import("@/pages/ChemistryModulePages").then(m => ({ default: m.ChemistryReactionsPage })));
 const ChemistryAdvancedPage     = lazy(() => import("@/pages/ChemistryModulePages").then(m => ({ default: m.ChemistryAdvancedPage })));
@@ -205,6 +206,8 @@ function Router() {
             <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
             <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
+            <Route path="/science/chemistry/inorganic" component={InorganicChemistry101Page} />
+            <Route path="/chemistry/inorganic-101" component={InorganicChemistry101Page} />
             <Route path="/fun-lab" component={FunLabPage} />
             <Route path="/physics" component={PhysicsHubPage} />
             <Route path="/physics/motion" component={PhysicsMotionPage} />
