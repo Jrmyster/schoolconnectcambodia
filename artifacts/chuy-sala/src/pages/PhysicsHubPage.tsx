@@ -18,6 +18,7 @@ import {
   Snowflake,
   HeartPulse,
   Droplets,
+  Wrench,
 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
@@ -122,6 +123,29 @@ export const PHYSICS_MODULES: PhysicsModule[] = [
       title: "text-amber-900",
       code: "text-amber-700",
       glow: "shadow-amber-200/40",
+    },
+  },
+  {
+    slug: "simple-machines",
+    number: "05",
+    code: "M-05",
+    titleEn: "Six Simple Machines",
+    titleKh: "ម៉ាស៊ីនងាយទាំងប្រាំមួយ",
+    blurbEn:
+      "Multiply your force using six ancient inventions: lever, ramp, wheel, wedge, screw and pulley.",
+    blurbKh:
+      "បង្កើនកម្លាំងរបស់អ្នកដោយប្រើឧបករណ៍បុរាណប្រាំមួយ ៖ ឃ្នាស់ ប្លង់ទេរ កង់ កំណល់ ខ្ចៅ និងរ៉ក។",
+    topicsEn: ["Mechanical Advantage", "Lever", "Pulley", "Inclined Plane"],
+    topicsKh: ["ការបង្កើនកម្លាំង", "ឃ្នាស់", "រ៉ក", "ប្លង់ទេរ"],
+    icon: Wrench,
+    accent: {
+      border: "border-emerald-300",
+      chipBorder: "border-emerald-300/80",
+      chipText: "text-emerald-800",
+      iconBg: "bg-emerald-600",
+      title: "text-emerald-900",
+      code: "text-emerald-700",
+      glow: "shadow-emerald-200/40",
     },
   },
   {

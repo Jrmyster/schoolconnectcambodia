@@ -96,6 +96,7 @@ const PhysicsMotionPage         = lazy(() => import("@/pages/PhysicsMotionPage")
 const PhysicsForcesPage         = lazy(() => import("@/pages/PhysicsForcesPage").then(m => ({ default: m.PhysicsForcesPage })));
 const PhysicsEnergyPage         = lazy(() => import("@/pages/PhysicsEnergyPage").then(m => ({ default: m.PhysicsEnergyPage })));
 const PhysicsWavesPage          = lazy(() => import("@/pages/PhysicsWavesPage").then(m => ({ default: m.PhysicsWavesPage })));
+const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
 const NeurologyPage             = lazy(() => import("@/pages/NeurologyPage").then(m => ({ default: m.NeurologyPage })));
 const ImpactReportPage          = lazy(() => import("@/pages/ImpactReportPage").then(m => ({ default: m.ImpactReportPage })));
@@ -223,6 +224,7 @@ function Router() {
             <Route path="/physics/forces" component={PhysicsForcesPage} />
             <Route path="/physics/energy" component={PhysicsEnergyPage} />
             <Route path="/physics/waves" component={PhysicsWavesPage} />
+            <Route path="/physics/simple-machines" component={SimpleMachinesPage} />
             <Route path="/science/materials" component={MaterialsSciencePage} />
             <Route path="/science/neurology" component={NeurologyPage} />
             <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
