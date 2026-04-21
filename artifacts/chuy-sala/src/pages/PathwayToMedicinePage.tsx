@@ -449,14 +449,14 @@ const SPECIALTIES: Specialty[] = [
     key: "allergy",
     icon: ShieldAlert,
     tint: "sky",
-    nameEn: "Allergy and Immunology",
-    nameKh: "ភាពអាឡែស៊ី និងភាពស៊ាំ",
-    residencyEn: "3-year IM + 2-year fellowship",
-    residencyKh: "ពេទ្យផ្ទៃក្នុង ៣ ឆ្នាំ + កម្មសិក្សាឯកទេស ២ ឆ្នាំ",
-    forYouEn: "You love detective work on the immune system and want patients to breathe and eat without fear.",
-    forYouKh: "អ្នកស្រឡាញ់ការស៊ើបអង្កេតលើប្រព័ន្ធស៊ាំ និងចង់ឲ្យអ្នកជំងឺដកដង្ហើម និងហូបបានដោយគ្មានការភ័យខ្លាច។",
-    workdayEn: "Skin-prick tests for asthma and food allergies, immunotherapy injections, and managing chronic eczema or severe reactions.",
-    workdayKh: "ការធ្វើតេស្តចាក់ស្បែកសម្រាប់ជំងឺហឺត និងអាឡែស៊ីអាហារ ការចាក់ភាពស៊ាំ និងការគ្រប់គ្រងជំងឺស្បែកអុជរ៉ាំរ៉ៃ ឬប្រតិកម្មធ្ងន់ធ្ងរ។",
+    nameEn: "Allergy",
+    nameKh: "ភាពអាឡែស៊ី",
+    residencyEn: "3-year IM or Pediatrics + 2-year fellowship",
+    residencyKh: "ពេទ្យផ្ទៃក្នុង ឬកុមារ ៣ ឆ្នាំ + កម្មសិក្សាឯកទេស ២ ឆ្នាំ",
+    forYouEn: "You love detective work on the body's reactions to food, dust, and pollen, and want patients to breathe and eat without fear.",
+    forYouKh: "អ្នកស្រឡាញ់ការស៊ើបអង្កេតលើប្រតិកម្មរាងកាយចំពោះអាហារ ធូលី និងលំអងផ្កា ហើយចង់ឲ្យអ្នកជំងឺដកដង្ហើម និងហូបបានដោយគ្មានការភ័យខ្លាច។",
+    workdayEn: "Skin-prick tests for asthma and food allergies, immunotherapy injections, and managing chronic eczema or severe allergic reactions.",
+    workdayKh: "ការធ្វើតេស្តចាក់ស្បែកសម្រាប់ជំងឺហឺត និងអាឡែស៊ីអាហារ ការចាក់ភាពស៊ាំ និងការគ្រប់គ្រងជំងឺស្បែកអុជរ៉ាំរ៉ៃ ឬប្រតិកម្មអាឡែស៊ីធ្ងន់ធ្ងរ។",
     ruralEn: "Asthma and dust allergies are widespread in farming communities — a single allergist serving a province can prevent thousands of ER visits.",
     ruralKh: "ជំងឺហឺត និងអាឡែស៊ីធូលីកើតមានយ៉ាងទូលំទូលាយក្នុងសហគមន៍កសិកម្ម — អ្នកឯកទេសអាឡែស៊ីម្នាក់ដែលបម្រើមួយខេត្តអាចបញ្ចៀសការទៅមន្ទីរពេទ្យបន្ទាន់រាប់ពាន់ដង។",
   },
@@ -536,6 +536,21 @@ const SPECIALTIES: Specialty[] = [
     ruralKh: "ពេទ្យដែលត្រូវការច្រើនបំផុតមួយនៅជនបទកម្ពុជា។ ពេទ្យគ្រួសារម្នាក់អាចជាប្រព័ន្ធសុខាភិបាលទាំងមូលសម្រាប់ឃុំមួយដែលមានមនុស្សរាប់ពាន់នាក់។",
   },
   {
+    key: "immunology",
+    icon: ShieldCheck,
+    tint: "indigo",
+    nameEn: "Immunology",
+    nameKh: "រោគស៊ាំ",
+    residencyEn: "3-year IM or Pediatrics + 2-year fellowship",
+    residencyKh: "ពេទ្យផ្ទៃក្នុង ឬកុមារ ៣ ឆ្នាំ + កម្មសិក្សាឯកទេស ២ ឆ្នាំ",
+    forYouEn: "You are fascinated by the body's microscopic defence systems and enjoy solving complex diagnostic mysteries involving rare diseases or severe inflammatory responses.",
+    forYouKh: "អ្នកចាប់អារម្មណ៍លើប្រព័ន្ធការពាររាងកាយដ៏តូចល្អិត និងស្រឡាញ់ការដោះស្រាយល្បែងផ្គុំរោគវិនិច្ឆ័យស្មុគស្មាញ ដែលពាក់ព័ន្ធនឹងជំងឺកម្រ ឬប្រតិកម្មរលាកធ្ងន់ធ្ងរ។",
+    workdayEn: "Diagnosing immunodeficiencies, managing complex autoimmune treatments, and consulting with other specialists on severe, unexplained allergic or immune reactions.",
+    workdayKh: "ធ្វើរោគវិនិច្ឆ័យជំងឺខ្វះភាពស៊ាំ គ្រប់គ្រងការព្យាបាលអូតូអ៊ុយមីនស្មុគស្មាញ និងពិគ្រោះជាមួយពេទ្យឯកទេសផ្សេងទៀតលើប្រតិកម្មអាឡែស៊ី ឬប្រតិកម្មស៊ាំធ្ងន់ធ្ងរដែលគ្មានការពន្យល់។",
+    ruralEn: "As Cambodia's healthcare system rapidly advances, accurately diagnosing complex autoimmune disorders — and managing specialised immune responses to tropical infectious diseases — is becoming a vital medical frontier.",
+    ruralKh: "ខណៈប្រព័ន្ធសុខាភិបាលកម្ពុជាកំពុងវិវត្តរីកចម្រើនយ៉ាងឆាប់រហ័ស សមត្ថភាពធ្វើរោគវិនិច្ឆ័យជំងឺអូតូអ៊ុយមីនស្មុគស្មាញ និងគ្រប់គ្រងប្រតិកម្មស៊ាំឯកទេសចំពោះជំងឺឆ្លងត្រូពិច កំពុងក្លាយជាព្រំដែនវេជ្ជសាស្ត្រដ៏សំខាន់មួយ។",
+  },
+  {
     key: "internal",
     icon: Stethoscope,
     tint: "indigo",
@@ -579,6 +594,21 @@ const SPECIALTIES: Specialty[] = [
     workdayKh: "ពិនិត្យអ្នកជំងឺក្រោយជំងឺដាច់សរសៃខួរ កែច្នៃថ្នាំជំងឺឆ្កួតជ្រូក និងតាមដានជំងឺ Parkinson អស់ជាច្រើនទសវត្សរ៍។",
     ruralEn: "Stroke is one of the leading causes of death in Cambodia. Even one neurologist per province can save thousands by getting clot-busting drugs in early.",
     ruralKh: "ជំងឺដាច់សរសៃខួរគឺជាមូលហេតុលេខមួយនៃការស្លាប់នៅកម្ពុជា។ សូម្បីពេទ្យសរសៃប្រសាទម្នាក់ក្នុងមួយខេត្តអាចសង្គ្រោះមនុស្សរាប់ពាន់ដោយផ្ដល់ថ្នាំបំបែកកំណកឈាមឲ្យបានទាន់ពេលវេលា។",
+  },
+  {
+    key: "nephrology",
+    icon: Droplet,
+    tint: "sky",
+    nameEn: "Nephrology",
+    nameKh: "តម្រងនោម",
+    residencyEn: "3-year IM + 2-to-3-year fellowship",
+    residencyKh: "ពេទ្យផ្ទៃក្នុង ៣ ឆ្នាំ + កម្មសិក្សាឯកទេស ២–៣ ឆ្នាំ",
+    forYouEn: "You love complex physiology, fluid dynamics, and solving intricate electrolyte puzzles, while building long-term, supportive relationships with chronically ill patients.",
+    forYouKh: "អ្នកស្រឡាញ់សរីរវិទ្យាស្មុគស្មាញ ការច្រាលនៃសារធាតុរាវ និងការដោះស្រាយល្បែងផ្គុំអេឡិចត្រូលីតដ៏ស្មុគស្មាញ ខណៈពេលដែលកសាងទំនាក់ទំនងគាំទ្ររយៈពេលវែងជាមួយអ្នកជំងឺរ៉ាំរ៉ៃ។",
+    workdayEn: "Managing dialysis units, adjusting complex medication regimens, treating acute kidney injury in the ICU, and managing severe cases of hypertension.",
+    workdayKh: "គ្រប់គ្រងផ្នែកលាងតម្រងនោម កែច្នៃរបបថ្នាំស្មុគស្មាញ ព្យាបាលការខូចតម្រងនោមស្រួចស្រាវនៅផ្នែកសង្គ្រោះបន្ទាន់ និងគ្រប់គ្រងករណីសម្ពាធឈាមខ្ពស់ធ្ងន់ធ្ងរ។",
+    ruralEn: "Rising rates of undiagnosed diabetes and hypertension are driving a surge in Chronic Kidney Disease (CKD) across the country. Provincial access to affordable dialysis and preventative kidney care is critically limited and urgently needs expansion.",
+    ruralKh: "អត្រាកើនឡើងនៃជំងឺទឹកនោមផ្អែម និងសម្ពាធឈាមខ្ពស់ដែលមិនបានធ្វើរោគវិនិច្ឆ័យ កំពុងជំរុញឲ្យជំងឺតម្រងនោមរ៉ាំរ៉ៃ (CKD) ផ្ទុះឡើងទូទាំងប្រទេស។ ការប្រើប្រាស់សេវាលាងតម្រងនោមដែលមានតម្លៃសមរម្យ និងការមើលថែបង្ការតម្រងនោមនៅខេត្ត ត្រូវបានកម្រិតយ៉ាងធ្ងន់ធ្ងរ និងត្រូវការការពង្រីកជាបន្ទាន់។",
   },
   {
     key: "nuclear",
@@ -988,8 +1018,8 @@ function SpecialtyDeck({ isKh }: { isKh: boolean }) {
       {/* Helper note */}
       <p className={`text-xs text-slate-500 italic text-center ${isKh ? "font-khmer not-italic" : ""}`}>
         {isKh
-          ? "ស្វែងរក ឬចុចលើឯកទេសខាងលើដើម្បីប្ដូរកាត។ ឯកទេសទាំង ២១ ដែលបានបង្ហាញនៅទីនេះគឺជាមធ្យោបាយអាជីពចម្បង — នៅតែមានឯកទេសរង និងវិជ្ជាជីវៈរងជាច្រើនទៀតក្នុងវេជ្ជសាស្ត្រ។"
-          : "Search or tap a specialty above to flip the card. The 21 specialties shown here are the main career paths — many more sub-specialties and fellowships branch from them."}
+          ? "ស្វែងរក ឬចុចលើឯកទេសខាងលើដើម្បីប្ដូរកាត។ ឯកទេសទាំង ២៣ ដែលបានបង្ហាញនៅទីនេះគឺជាមធ្យោបាយអាជីពចម្បង — នៅតែមានឯកទេសរង និងវិជ្ជាជីវៈរងជាច្រើនទៀតក្នុងវេជ្ជសាស្ត្រ។"
+          : "Search or tap a specialty above to flip the card. The 23 specialties shown here are the main career paths — many more sub-specialties and fellowships branch from them."}
       </p>
     </div>
   );
