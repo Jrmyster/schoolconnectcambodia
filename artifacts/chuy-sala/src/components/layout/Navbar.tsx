@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -44,6 +44,14 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/map",       labelEn: "Map",          labelKh: "ផែនទី",     icon: Map },
       { href: "/needs",     labelEn: "Browse Needs", labelKh: "តម្រូវការ", icon: Heart },
       { href: "/projects",  labelEn: "Completed",    labelKh: "បានបញ្ចប់", icon: CheckCircle },
+      {
+        href: "/cambodia",
+        labelEn: "Cambodia: The Heart of Southeast Asia",
+        labelKh: "កម្ពុជា៖ បេះដូងនៃអាស៊ីអាគ្នេយ៍",
+        icon: Landmark,
+        descEn: "A heritage tour of the country: the river that flows two ways, Angkor's barays still visible from space, the 74-letter Khmer alphabet, and the thinkers who modernised it.",
+        descKh: "ដំណើរទស្សនាបេតិកភណ្ឌប្រទេស ៖ ទន្លេដែលហូរពីរទិស បារាយណ៍អង្គរដែលនៅមើលឃើញពីលំហ អក្សរខ្មែរ ៧៤ តួ និងអ្នកប្រាជ្ញដែលបានធ្វើឲ្យវាទាន់សម័យ។",
+      },
     ],
   },
   {

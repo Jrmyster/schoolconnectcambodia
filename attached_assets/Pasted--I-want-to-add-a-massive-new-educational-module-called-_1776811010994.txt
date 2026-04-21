@@ -1,0 +1,36 @@
+"I want to add a massive new educational module called 'Renewable & Future Energies: Powering Spaceship Earth' (ថាមពលកកើតឡើងវិញ និងអនាគត៖ ការផ្តល់ថាមពលដល់ផែនដី) to the Science section. Please organize the technologies into logical categories and implement the following cleanly:
+
+1. The Giants of Nature (ថាមពលធម្មជាតិ):
+
+Solar (ថាមពលព្រះអាទិត្យ): Explain how photovoltaic cells turn photons directly into moving electrons.
+
+Wind & Hydroelectric (ថាមពលខ្យល់ និងវារីអគ្គិសនី): Explain that these are just spinning turbines. Wind pushes the blades directly, while Hydro uses the gravity of falling water (like at the Lower Sesan 2 Dam in Cambodia).
+
+Geothermal & Tidal (កម្ដៅផែនដី និងរលកសមុទ្រ): Explain how we harvest the internal heat of the Earth's magma, and the gravitational pull of the Moon on our oceans.
+
+2. The Atomic Engine (ម៉ាស៊ីនបរមាណូ):
+
+Clarify that while not strictly 'renewable' (they use fuel), these are massive zero-carbon energy sources.
+
+Nuclear Fission (ប្រតិកម្មបំបែកនុយក្លេអ៊ែរ): Explain how splitting heavy Uranium atoms releases millions of times more heat than burning coal. 
+
+
+The Thorium Fuel Cycle (វដ្តឥន្ធនៈថូរីយ៉ូម): Introduce Thorium as the safer, greener alternative to Uranium. It cannot melt down and produces significantly less dangerous waste.
+
+3. Micro & Frugal Power (ថាមពលខ្នាតតូច):
+
+Piezoelectric (ថាមពលពីសម្ពាធ): Explain the science of harvesting electricity from physical pressure. Give a real-world example: floor tiles in a busy train station that generate electricity every time a human steps on them!
+
+4. The Speculative Frontier (បច្ចេកវិទ្យាអនាគត):
+
+Hot Fusion (ប្រតិកម្មរលាយនុយក្លេអ៊ែរ): The holy grail of energy. Smashing hydrogen atoms together to make a miniature star in a magnetic bottle.
+
+Cold Fusion / LENR (រលាយនុយក្លេអ៊ែរត្រជាក់): Explain that this is a highly speculative, mostly debunked concept of achieving fusion at room temperature, but serves as a great lesson in the scientific method and why experiments must be repeatable.
+
+Space-Based Solar (ថាមពលព្រះអាទិត្យពីអវកាស): Satellites collecting 24/7 unfiltered sunlight in orbit and beaming the energy down to Earth via microwaves.
+
+5. UI & Layout:
+
+Use a 'Clean Future' aesthetic: stark whites, glowing neon blues (for atomic energy), and vibrant greens (for nature).
+
+Ensure all core concepts, headings, and scientific terminology are strictly bilingual (English/Khmer)."
