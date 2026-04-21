@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -342,6 +342,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: CloudRain,
         descEn: "Trap CO₂ and watch the Earth glow red, crash a cold front into a warm one to make rain, build lightning inside a cloud, and meet hurricanes and tornadoes.",
         descKh: "ស្ទះ CO₂ ហើយមើលផែនដីចាំងពន្លឺក្រហម ប៉ះផ្ទៃខ្យល់ត្រជាក់ និងក្ដៅឱ្យកើតភ្លៀង សាងសង់រន្ទះក្នុងពពក និងស្គាល់ខ្យល់ព្យុះធំ និងខ្យល់ព្យុះក្រឡុក។",
+      },
+      {
+        href: "/science/trains-railways",
+        labelEn: "Trains & Railways: The Steel Arteries",
+        labelKh: "រថភ្លើង និងផ្លូវដែក៖ សរសៃឈាមដែកនៃពិភពលោក",
+        icon: Train,
+        descEn: "Why steel-on-steel wheels waste so little energy, the four kinds of trains (including Battambang's bamboo Norry), how 'diesel' locomotives are secretly electric, and why every railway sits on a deep bed of crushed rock.",
+        descKh: "ហេតុអ្វីកង់ដែកលើផ្លូវដែកខាតថាមពលតិច ប្រភេទរថភ្លើងបួន (រួមបញ្ចូលណូរីឫស្សីនៃខេត្តបាត់ដំបង) របៀបដែលរថភ្លើង «ឌីសែល» ពិតជាដំណើរការដោយអគ្គិសនី និងហេតុអ្វីផ្លូវដែកទាំងអស់អង្គុយលើគ្រែថ្មកំទេចដ៏ជ្រៅ។",
       },
       {
         href: "/weather/snow",
