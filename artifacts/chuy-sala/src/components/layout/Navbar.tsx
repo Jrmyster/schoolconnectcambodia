@@ -423,6 +423,14 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       {
+        href: "/well-being/survival-skills",
+        labelEn: "Survival Skills: Thriving in the Wild",
+        labelKh: "ជំនាញរស់រានមានជីវិត៖ ការរស់នៅក្នុងព្រៃ",
+        icon: Compass,
+        descEn: "What to do if you ever get lost in the forest: the S.T.O.P. method, the universal Rule of Threes (3 minutes air, 3 hours shelter, 3 days water, 3 weeks food), and Cambodia-specific tips on bamboo water, raised beds, and signal smoke.",
+        descKh: "អ្វីដែលត្រូវធ្វើបើអ្នកវង្វេងផ្លូវនៅក្នុងព្រៃ ៖ វិធីសាស្ត្រ S.T.O.P. ច្បាប់នៃលេខ 3 (3 នាទីខ្យល់ 3 ម៉ោងជម្រក 3 ថ្ងៃទឹក 3 សប្ដាហ៍អាហារ) និងគន្លឹះពិសេសសម្រាប់កម្ពុជាស្ដីពីទឹកឫស្សី គ្រែលើកខ្ពស់ និងផ្សែងសញ្ញា។",
+      },
+      {
         href: "/human-engine",
         labelEn: "The Human Engine: Nutrition & Movement",
         labelKh: "ម៉ាស៊ីនរាងកាយ៖ អាហារូបត្ថម្ភ និងចលនា",
