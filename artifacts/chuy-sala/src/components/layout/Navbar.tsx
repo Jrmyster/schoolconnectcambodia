@@ -63,6 +63,14 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
+      {
+        href: "/pathway-to-medicine",
+        labelEn: "Pathway to Medicine",
+        labelKh: "ផ្លូវទៅកាន់វិជ្ជាជីវៈពេទ្យ",
+        icon: HeartPulse,
+        descEn: "The 10–15-year journey from high-school biology to becoming a doctor — plus an interactive guide to choosing your specialty.",
+        descKh: "ដំណើរ ១០–១៥ ឆ្នាំពីជីវវិទ្យាវិទ្យាល័យ ដល់ការក្លាយជាវេជ្ជបណ្ឌិត — ព្រមទាំងមគ្គុទ្ទេសក៍អន្តរកម្មសម្រាប់ជ្រើសរើសឯកទេសរបស់អ្នក។",
+      },
       { href: "/english-writing",       labelEn: "English Writing",  labelKh: "ការសរសេរភាសាអង់គ្លេស", icon: PenLine },
       {
         href: "/spelling-forge",

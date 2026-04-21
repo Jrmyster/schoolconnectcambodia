@@ -1,0 +1,33 @@
+I want to add a new comprehensive module called 'The Human Engine: Nutrition & Movement' (ម៉ាស៊ីនរាងកាយ៖ អាហារូបត្ថម្ភ និងចលនា) to the Well-being dropdown menu. Please implement the following sections:
+
+1. Fueling the Engine (Nutrition & Diet):
+
+Create a bilingual visual guide to Macronutrients using local context:
+
+Carbohydrates (កាបូអ៊ីដ្រាត): The immediate energy source (e.g., Rice, Noodles).
+
+Proteins (ប្រូតេអុីន): The building blocks for repair (e.g., Fish, Chicken, Beans).
+
+Fats (ខ្លាញ់): Long-term energy and brain health (e.g., Nuts, Cooking Oils).
+
+Explain the concept of 'Caloric Balance': eating more energy than you burn leads to storage (fat), while eating less leads to weight loss.
+
+2. The Science of Movement (Exercise & Hypertrophy):
+
+Divide physical activity into two main biological categories:
+
+Cardiovascular Health (សុខភាពបេះដូង): Explain how steady-state cardio, like taking a daily bicycle ride in the evening, strengthens the heart muscle and improves blood flow to the brain, directly aiding in studying and focus.
+
+Resistance Training & Hypertrophy (ការលូតលាស់សាច់ដុំ): Explain the biological mechanics of strength training. Use examples like progressing on a bench press or doing pull-ups. Explain that lifting weights creates micro-tears in the muscle fibers. With proper protein and sleep, the body repairs these tears to be thicker and stronger than before (Hypertrophy).
+
+3. The Dangers of 'Rust' (Sedentary Lifestyle & Disease):
+
+Create a stark, clinical section explaining the biological consequences of a sedentary lifestyle (sitting too much and not moving).
+
+Obesity (ជំងឺធាត់): Explain how chronic caloric surplus strains the joints and organs.
+
+Heart Disease (ជំងឺបេះដូង): Show how a lack of cardio and poor diet can lead to plaque buildup in the arteries, forcing the heart to work harder until it fails.
+
+4. Styling & Layout:
+
+Use a 'Clean Health' aesthetic: vibrant greens for nutrition, energetic oranges for exercise, and clinical reds for the disease warnings. Ensure all major headings and biological terms are bilingual (English/Khmer)."

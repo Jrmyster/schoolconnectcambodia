@@ -32,6 +32,7 @@ const AviationPage              = lazy(() => import("@/pages/AviationPage"));
 const MusicTheoryPage           = lazy(() => import("@/pages/MusicTheoryPage"));
 const MathematicsPage           = lazy(() => import("@/pages/MathematicsPage"));
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
+const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
 const FossilFuelsPage           = lazy(() => import("@/pages/FossilFuelsPage"));
 const BicyclePhysicsPage        = lazy(() => import("@/pages/BicyclePhysicsPage"));
 const RoboticsPage              = lazy(() => import("@/pages/RoboticsPage"));
@@ -178,6 +179,7 @@ function Router() {
             <Route path="/music-theory" component={MusicTheoryPage} />
             <Route path="/mathematics" component={MathematicsPage} />
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
+            <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/fossil-fuels" component={FossilFuelsPage} />
             <Route path="/physics/bicycle" component={BicyclePhysicsPage} />
             <Route path="/robotics" component={RoboticsPage} />

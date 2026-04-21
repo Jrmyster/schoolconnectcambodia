@@ -5,7 +5,7 @@ import {
   Building2, Users, FileText,
   Sigma, Music, Plane, Bot, Camera, Magnet, Wrench, Fuel, Thermometer,
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
-  CheckCircle,
+  CheckCircle, Stethoscope,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -724,12 +724,81 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["sanctuary", "adolescence", "teenager", "teen", "puberty", "emotion", "emotions", "stress", "anxiety", "mental health", "wellbeing", "well-being", "feelings", "friendship"],
     keywordsKh: ["សន្តិភាព", "វ័យជំទង់", "អារម្មណ៍", "ភាពតានតឹង", "សុខភាពផ្លូវចិត្ត", "សុខុមាលភាព", "មិត្តភាព"],
   },
+  {
+    id: "pathway-to-medicine",
+    href: "/pathway-to-medicine",
+    icon: HeartPulse,
+    titleEn: "Pathway to Medicine",
+    titleKh: "ផ្លូវទៅកាន់វិជ្ជាជីវៈពេទ្យ",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Your 10-15 year roadmap to becoming a doctor — high school, pre-med, medical school, and residency, plus an interactive specialty selector.",
+    descKh: "ផែនទីផ្លូវ ១០–១៥ ឆ្នាំសម្រាប់ក្លាយជាវេជ្ជបណ្ឌិត — វិទ្យាល័យ មុនវេជ្ជសាស្ត្រ សាលាពេទ្យ និងកម្មសិក្សាឯកទេស ព្រមទាំងឧបករណ៍ជ្រើសរើសឯកទេសអន្តរកម្ម។",
+    keywordsEn: [
+      "medicine", "medical", "doctor", "doctors", "physician", "md",
+      "med school", "medical school", "pre-med", "premed",
+      "residency", "specialty", "specialist", "intern", "internship",
+      "hospital", "clinic", "stethoscope", "career path",
+      "pediatrics", "internal medicine", "surgery", "emergency",
+      "anatomy", "pharmacology", "pathology",
+      "osler", "biology career", "health career",
+    ],
+    keywordsKh: [
+      "វេជ្ជសាស្ត្រ", "ពេទ្យ", "វេជ្ជបណ្ឌិត", "ឱសថការី",
+      "សាលាពេទ្យ", "កម្មសិក្សាឯកទេស", "ឯកទេស",
+      "មន្ទីរពេទ្យ", "គ្លីនិក", "អាជីពពេទ្យ",
+      "ពេទ្យកុមារ", "ពេទ្យគ្រួសារ", "វះកាត់", "ពេទ្យបន្ទាន់",
+      "កាយវិភាគ", "ឱសថវិទ្យា", "រោគវិទ្យា",
+    ],
+  },
+
   // ════════════════════════════════════════════════════════════════
   // DEEP-INDEX MODULES — in-page sections (hash navigation)
   // Each `href` ends with #anchor; the search dropdown will route to
   // the page AND smooth-scroll to the matching id (with a 6rem
   // sticky-nav offset applied globally via index.css).
   // ════════════════════════════════════════════════════════════════
+
+  // ── Pathway to Medicine sub-modules ─────────────────────────────
+  {
+    id: "medicine-journey",
+    href: "/pathway-to-medicine#journey",
+    icon: GraduationCap,
+    titleEn: "Doctor's Timeline — High School → Residency",
+    titleKh: "ពេលវេលានៃវេជ្ជបណ្ឌិត — វិទ្យាល័យ → កម្មសិក្សាឯកទេស",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "A vertical timeline of the four phases: High School (foundation), Undergraduate/Pre-Med (4 yrs), Medical School (4 yrs), and Residency (3–7 yrs).",
+    descKh: "ពេលវេលាបញ្ឈរនៃដំណាក់កាលទាំងបួន៖ វិទ្យាល័យ (មូលដ្ឋាន) បរិញ្ញាបត្រ/មុនវេជ្ជសាស្ត្រ (៤ ឆ្នាំ) សាលាពេទ្យ (៤ ឆ្នាំ) និងកម្មសិក្សាឯកទេស (៣–៧ ឆ្នាំ)។",
+    keywordsEn: ["timeline", "phases", "journey", "med school years", "pre-med", "premed", "residency length", "how to become doctor", "doctor steps", "rotations", "clinical"],
+    keywordsKh: ["ពេលវេលា", "ដំណាក់កាល", "ដំណើរ", "ឆ្នាំសិក្សាពេទ្យ", "មុនវេជ្ជសាស្ត្រ", "កម្មសិក្សាឯកទេស", "របៀបក្លាយជាវេជ្ជបណ្ឌិត"],
+    type: "module",
+  },
+  {
+    id: "medicine-specialties",
+    href: "/pathway-to-medicine#specialties",
+    icon: Stethoscope,
+    titleEn: "Choosing a Medical Specialty",
+    titleKh: "ការជ្រើសរើសឯកទេសវេជ្ជសាស្ត្រ",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Interactive cards comparing Family Medicine, Internal Medicine, General Surgery, and Emergency Medicine — and where rural Cambodia needs each one.",
+    descKh: "កាតអន្តរកម្មប្រៀបធៀបពេទ្យគ្រួសារ ពេទ្យផ្ទៃក្នុង វះកាត់ទូទៅ និងវេជ្ជសាស្ត្របន្ទាន់ — និងកន្លែងដែលជនបទកម្ពុជាត្រូវការនីមួយៗ។",
+    keywordsEn: [
+      "specialty", "specialties", "specialist",
+      "family medicine", "pediatrics", "paediatrics", "child doctor",
+      "internal medicine", "internist",
+      "surgery", "surgeon", "general surgery",
+      "emergency medicine", "er doctor", "emergency room", "trauma",
+      "choose specialty", "sorting hat",
+    ],
+    keywordsKh: [
+      "ឯកទេស", "អ្នកឯកទេស",
+      "ពេទ្យគ្រួសារ", "ពេទ្យកុមារ",
+      "ពេទ្យផ្ទៃក្នុង",
+      "វះកាត់", "ពេទ្យវះកាត់",
+      "ពេទ្យបន្ទាន់", "បន្ទប់សង្គ្រោះបន្ទាន់", "របួស",
+      "ជ្រើសរើសឯកទេស",
+    ],
+    type: "module",
+  },
 
   // ── Mathematics sub-modules ──────────────────────────────────────
   {
