@@ -17,6 +17,7 @@ import { JupiterPlanetModule } from "@/components/space/JupiterPlanetModule";
 import { NeptunePlanetModule } from "@/components/space/NeptunePlanetModule";
 import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
 import { ISSModule } from "@/components/space/ISSModule";
+import { SupernovaModule } from "@/components/space/SupernovaModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -402,6 +403,9 @@ export function SpacePage() {
 
         {/* ── ISS: Our Floating Laboratory ──────────────────────────────── */}
         <ISSModule />
+
+        {/* ── Supernova: Death and Rebirth of Stars ─────────────────────── */}
+        <SupernovaModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
