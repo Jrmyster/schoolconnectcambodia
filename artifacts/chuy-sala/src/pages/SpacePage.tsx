@@ -15,6 +15,7 @@ import { EarthMoonModule } from "@/components/space/EarthMoonModule";
 import { SaturnPlanetModule } from "@/components/space/SaturnPlanetModule";
 import { JupiterPlanetModule } from "@/components/space/JupiterPlanetModule";
 import { NeptunePlanetModule } from "@/components/space/NeptunePlanetModule";
+import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -388,6 +389,9 @@ export function SpacePage() {
 
         {/* ── Saturn: The Lord of the Rings ─────────────────────────────── */}
         <SaturnPlanetModule />
+
+        {/* ── Uranus: The Sideways Planet ───────────────────────────────── */}
+        <UranusPlanetModule />
 
         {/* ── Neptune: The Supersonic Ice Giant ─────────────────────────── */}
         <NeptunePlanetModule />
