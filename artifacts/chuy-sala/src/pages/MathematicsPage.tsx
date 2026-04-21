@@ -1869,6 +1869,7 @@ function DraftingPaperBg() {
 /* ── Card 1: The Radius of One ─────────────────────────────────────────── */
 function RadiusOfOneCard({ isKh }: { isKh: boolean }) {
   const [angle, setAngle] = useState<number>(50); // degrees
+  const [showExtended, setShowExtended] = useState<boolean>(false);
   const rad = (angle * Math.PI) / 180;
   const cosV = Math.cos(rad);
   const sinV = Math.sin(rad);
@@ -1896,6 +1897,38 @@ function RadiusOfOneCard({ isKh }: { isKh: boolean }) {
   const R = 140;
   const px = cx + R * cosV;
   const py = cy - R * sinV;
+
+  // ── Extended trig functions (tan, sec, cot, csc) ──
+  // Geometry uses unit-circle coordinates (1 = R px). The SVG viewBox is 400×400
+  // with the origin at (cx, cy), so the visible half-width in unit coords is
+  // MAX_U = 200/140 ≈ 1.4286 — we cap any extended drawing to this box so
+  // near-vertical/horizontal angles never shoot off-canvas.
+  const EPS = 1e-3;
+  const MAX_U = 200 / R;
+  const tanDefined = Math.abs(cosV) > EPS;
+  const cotDefined = Math.abs(sinV) > EPS;
+  const tanV = tanDefined ? sinV / cosV : null;
+  const secV = tanDefined ? 1 / cosV : null;
+  const cotV = cotDefined ? cosV / sinV : null;
+  const cscV = cotDefined ? 1 / sinV : null;
+  const toX = (u: number) => cx + R * u;
+  const toY = (u: number) => cy - R * u;
+  // Cap a unit-coord point to the visible box (preserves direction from origin).
+  const capToBox = (ux: number, uy: number): [number, number] => {
+    const ax = Math.abs(ux);
+    const ay = Math.abs(uy);
+    const maxA = Math.max(ax, ay);
+    if (maxA <= MAX_U || maxA === 0) return [ux, uy];
+    const k = MAX_U / maxA;
+    return [ux * k, uy * k];
+  };
+  // Cap a 1-D coord (for the tan/cot segments which run parallel to an axis).
+  const cap1 = (v: number): number => Math.max(-MAX_U, Math.min(MAX_U, v));
+
+  const fmt = (v: number | null): string =>
+    v === null
+      ? (isKh ? "មិនកំណត់" : "Undefined")
+      : v.toFixed(3);
 
   return (
     <PaperCard className="p-5 sm:p-6 mb-6 relative overflow-hidden" data-testid="radius-of-one">
@@ -1953,6 +1986,118 @@ function RadiusOfOneCard({ isKh }: { isKh: boolean }) {
             <line x1={px} y1={cy} x2={px} y2={py} stroke="#16a34a" strokeWidth="2.5" />
             {/* radius */}
             <line x1={cx} y1={cy} x2={px} y2={py} stroke="#1e3a8a" strokeWidth="2" />
+
+            {/* ── Extended trig construction (toggle) ────────────────────── */}
+            {showExtended && (
+              <g data-testid="uc-extended-group">
+                {/* Vertical tangent guide line at x = 1 (touches circle at (1,0)) */}
+                <line
+                  x1={toX(1)}
+                  y1={toY(MAX_U)}
+                  x2={toX(1)}
+                  y2={toY(-MAX_U)}
+                  stroke="#92400e"
+                  strokeWidth="1"
+                  strokeDasharray="3 3"
+                  opacity={0.5}
+                />
+                {/* Horizontal cotangent guide line at y = 1 (touches circle at (0,1)) */}
+                <line
+                  x1={toX(-MAX_U)}
+                  y1={toY(1)}
+                  x2={toX(MAX_U)}
+                  y2={toY(1)}
+                  stroke="#0d9488"
+                  strokeWidth="1"
+                  strokeDasharray="3 3"
+                  opacity={0.5}
+                />
+
+                {/* Secant ray: from origin through point, capped to (1, tan θ) or box edge */}
+                {tanDefined && (() => {
+                  const [ex, ey] = capToBox(1, tanV!);
+                  return (
+                    <line
+                      x1={cx}
+                      y1={cy}
+                      x2={toX(ex)}
+                      y2={toY(ey)}
+                      stroke="#6366f1"
+                      strokeWidth="2"
+                      data-testid="uc-sec-ray"
+                    />
+                  );
+                })()}
+                {/* Tangent segment: vertical from (1,0) up/down to (1, tan θ), capped */}
+                {tanDefined && (
+                  <line
+                    x1={toX(1)}
+                    y1={toY(0)}
+                    x2={toX(1)}
+                    y2={toY(cap1(tanV!))}
+                    stroke="#92400e"
+                    strokeWidth="3"
+                    data-testid="uc-tan-seg"
+                  />
+                )}
+
+                {/* Cosecant ray: from origin through point, capped to (cot θ, 1) or box edge */}
+                {cotDefined && (() => {
+                  const [ex, ey] = capToBox(cotV!, 1);
+                  return (
+                    <line
+                      x1={cx}
+                      y1={cy}
+                      x2={toX(ex)}
+                      y2={toY(ey)}
+                      stroke="#db2777"
+                      strokeWidth="2"
+                      data-testid="uc-csc-ray"
+                    />
+                  );
+                })()}
+                {/* Cotangent segment: horizontal from (0,1) to (cot θ, 1), capped */}
+                {cotDefined && (
+                  <line
+                    x1={toX(0)}
+                    y1={toY(1)}
+                    x2={toX(cap1(cotV!))}
+                    y2={toY(1)}
+                    stroke="#0d9488"
+                    strokeWidth="3"
+                    data-testid="uc-cot-seg"
+                  />
+                )}
+
+                {/* Small labels (only when value fits comfortably on-canvas) */}
+                {tanDefined && Math.abs(tanV!) < MAX_U && (
+                  <text
+                    x={toX(1) + 6}
+                    y={toY(tanV! / 2) + 4}
+                    fontSize="11"
+                    fontStyle="italic"
+                    fontFamily="serif"
+                    fill="#92400e"
+                  >
+                    tan θ
+                  </text>
+                )}
+                {cotDefined && Math.abs(cotV!) < MAX_U && (
+                  <text
+                    x={toX(cotV! / 2)}
+                    y={toY(1) - 6}
+                    textAnchor="middle"
+                    fontSize="11"
+                    fontStyle="italic"
+                    fontFamily="serif"
+                    fill="#0d9488"
+                  >
+                    cot θ
+                  </text>
+                )}
+              </g>
+            )}
+
             {/* arc for theta */}
             <path
               d={`M ${cx + 28} ${cy} A 28 28 0 ${angle > 180 ? 1 : 0} 0 ${cx + 28 * cosV} ${cy - 28 * sinV}`}
@@ -2018,6 +2163,79 @@ function RadiusOfOneCard({ isKh }: { isKh: boolean }) {
             <div className="rounded-lg border-2 border-emerald-300 bg-emerald-50/70 p-3 text-center">
               <div className="text-[10px] uppercase tracking-widest font-bold text-emerald-700">sin θ</div>
               <div className="font-serif italic text-xl text-slate-900" data-testid="uc-sin">{sinV.toFixed(3)}</div>
+            </div>
+          </div>
+
+          {/* ── Toggle: show extended trig lines ────────────────────────── */}
+          <label
+            className="flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white/70 px-3 py-2 cursor-pointer select-none hover:bg-white"
+            data-testid="uc-extended-toggle-label"
+          >
+            <input
+              type="checkbox"
+              checked={showExtended}
+              onChange={(e) => setShowExtended(e.target.checked)}
+              className="w-4 h-4 accent-slate-700"
+              data-testid="uc-extended-toggle"
+            />
+            <span className={`text-xs text-slate-700 ${isKh ? "font-khmer leading-snug" : ""}`}>
+              {isKh ? "បង្ហាញបន្ទាត់បន្ថែម" : "Show extended lines"}
+            </span>
+          </label>
+
+          {/* ── 2×2 grid: tan / sec / cot / csc ─────────────────────────── */}
+          <div className="grid grid-cols-2 gap-2" data-testid="uc-extended-cards">
+            <div className="rounded-lg border-2 border-amber-300 bg-amber-50/70 p-3 text-center">
+              <div className={`text-[10px] uppercase tracking-widest font-bold text-amber-800 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "តង់សង់ θ" : "tan θ"}
+              </div>
+              <div
+                className={`font-serif italic text-lg text-slate-900 ${
+                  tanV === null ? "text-[13px] not-italic font-sans text-amber-800" : ""
+                } ${isKh && tanV === null ? "font-khmer" : ""}`}
+                data-testid="uc-tan"
+              >
+                {fmt(tanV)}
+              </div>
+            </div>
+            <div className="rounded-lg border-2 border-indigo-300 bg-indigo-50/70 p-3 text-center">
+              <div className={`text-[10px] uppercase tracking-widest font-bold text-indigo-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "សេកង់ θ" : "sec θ"}
+              </div>
+              <div
+                className={`font-serif italic text-lg text-slate-900 ${
+                  secV === null ? "text-[13px] not-italic font-sans text-indigo-700" : ""
+                } ${isKh && secV === null ? "font-khmer" : ""}`}
+                data-testid="uc-sec"
+              >
+                {fmt(secV)}
+              </div>
+            </div>
+            <div className="rounded-lg border-2 border-teal-300 bg-teal-50/70 p-3 text-center">
+              <div className={`text-[10px] uppercase tracking-widest font-bold text-teal-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "កូតង់សង់ θ" : "cot θ"}
+              </div>
+              <div
+                className={`font-serif italic text-lg text-slate-900 ${
+                  cotV === null ? "text-[13px] not-italic font-sans text-teal-700" : ""
+                } ${isKh && cotV === null ? "font-khmer" : ""}`}
+                data-testid="uc-cot"
+              >
+                {fmt(cotV)}
+              </div>
+            </div>
+            <div className="rounded-lg border-2 border-pink-300 bg-pink-50/70 p-3 text-center">
+              <div className={`text-[10px] uppercase tracking-widest font-bold text-pink-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "កូសេកង់ θ" : "csc θ"}
+              </div>
+              <div
+                className={`font-serif italic text-lg text-slate-900 ${
+                  cscV === null ? "text-[13px] not-italic font-sans text-pink-700" : ""
+                } ${isKh && cscV === null ? "font-khmer" : ""}`}
+                data-testid="uc-csc"
+              >
+                {fmt(cscV)}
+              </div>
             </div>
           </div>
         </div>
