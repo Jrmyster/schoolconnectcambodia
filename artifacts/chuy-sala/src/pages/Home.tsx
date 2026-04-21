@@ -27,7 +27,7 @@ export function Home() {
         <div className="absolute inset-0 bg-foreground/40 z-10" /> {/* Dark overlay for readability */}
 
         <img
-          src={`${import.meta.env.BASE_URL}images/hero-bg.png`}
+          src={`${import.meta.env.BASE_URL}images/hero-bg.jpg`}
           alt="Cambodian countryside school"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
