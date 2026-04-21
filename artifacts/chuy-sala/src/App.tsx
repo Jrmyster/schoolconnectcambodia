@@ -36,6 +36,7 @@ const LogarithmsPage            = lazy(() => import("@/pages/LogarithmsPage").th
 const SurvivalSkillsPage        = lazy(() => import("@/pages/SurvivalSkillsPage").then(m => ({ default: m.SurvivalSkillsPage })));
 const NanotechnologyPage        = lazy(() => import("@/pages/NanotechnologyPage").then(m => ({ default: m.NanotechnologyPage })));
 const TrainsRailwaysPage        = lazy(() => import("@/pages/TrainsRailwaysPage").then(m => ({ default: m.TrainsRailwaysPage })));
+const LinguisticsPage           = lazy(() => import("@/pages/LinguisticsPage").then(m => ({ default: m.LinguisticsPage })));
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
 const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
 const HumanEnginePage           = lazy(() => import("@/pages/HumanEnginePage"));
@@ -197,6 +198,7 @@ function Router() {
             <Route path="/well-being/survival-skills" component={SurvivalSkillsPage} />
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/science/trains-railways" component={TrainsRailwaysPage} />
+            <Route path="/study-center/linguistics" component={LinguisticsPage} />
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
             <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/human-engine" component={HumanEnginePage} />

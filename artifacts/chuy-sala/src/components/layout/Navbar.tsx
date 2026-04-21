@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -91,6 +91,14 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "https://khmervoc.com",   labelEn: "Vocational Guide", labelKh: "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ", icon: Wrench, external: true },
       { href: "https://anatomykh.com",  labelEn: "Human Anatomy",    labelKh: "រូបកាយវិភាគវិទ្យា",      icon: PersonStanding, external: true },
       { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
+      {
+        href: "/study-center/linguistics",
+        labelEn: "Linguistics: The Architecture of Thought",
+        labelKh: "ភាសាវិទ្យា៖ ស្ថាបត្យកម្មនៃការគិត",
+        icon: ScrollText,
+        descEn: "The three pillars of word science (linguistics, semantics, etymology), the 'map is not the territory' insight, and the pioneers — Sir William Jones who linked Sanskrit to Latin, and Lord Monboddo who dared to argue language was invented by humans.",
+        descKh: "សសរស្តម្ភទាំងបីនៃវិទ្យាសាស្ត្រពាក្យ (ភាសាវិទ្យា អត្ថន័យវិទ្យា និរុត្តិវិទ្យា) ការយល់ឃើញថា «ផែនទីមិនមែនជាទឹកដី» និងអ្នកត្រួសត្រាយផ្លូវ — លោក Sir William Jones ដែលបានភ្ជាប់សំស្ក្រឹតទៅឡាតាំង និងលោក Lord Monboddo ដែលហ៊ានអះអាងថាភាសាត្រូវបានបង្កើតឡើងដោយមនុស្ស។",
+      },
       { href: "/world-history",         labelEn: "World History",     labelKh: "ប្រវត្តិសាស្ត្រពិភពលោក",  icon: Library },
       {
         href: "/global-cities",

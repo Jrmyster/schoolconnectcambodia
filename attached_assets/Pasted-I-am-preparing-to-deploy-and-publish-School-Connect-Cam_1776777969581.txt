@@ -1,0 +1,41 @@
+I am preparing to deploy and publish School Connect Cambodia to production. We have made massive additions today across the Space, Mathematics, Chemistry, Fossil Fuels, and Beginner modules. Before we build and publish, I need you to run a comprehensive Master Codebase Audit.
+
+Please scan the entire project and report on the following critical areas, automatically fixing any minor bugs you find and asking for my permission on major architectural changes:
+
+1. Routing & Dead Links (The Navigation Audit):
+
+Verify that all new module cards (e.g., Biochemistry, Sequences & Series, Heat Death, Big Bang, Rubber & Tires, Unit Circle, Black Holes) point to valid, existing routes.
+
+Ensure there are no 404 errors or missing pages in the main navigation menus.
+
+2. Bilingual Integrity (The Translation Audit):
+
+Scan the UI text arrays, data structures (like the 24-animal Wild-life Grid), and component headings.
+
+Flag any hardcoded English strings that are missing their corresponding Khmer translations or bilingual toggles.
+
+Ensure custom fonts required for Khmer rendering are loading correctly across all new pages.
+
+3. Interactive Widget Stability (The Component Audit):
+
+Review the logic for all interactive simulators (Canvas/WebGL/JS components).
+
+Speech API: Verify that the window.speechSynthesis on the 'Beginner Guide' Number Grid is wrapped safely and only triggers on user interaction to prevent browser autoplay blocking.
+
+Ensure there are no infinite loops or heavy memory leaks in the interactive orbital/physics animations.
+
+4. Mobile Responsiveness & Layout:
+
+Check the CSS/Tailwind grid layouts for all new modules. Ensure that complex grids (like the Wild-life Explorer) collapse elegantly on mobile devices (e.g., moving from 4 columns to 2 or 1).
+
+Ensure that interactive Canvas/SVG elements scale down properly without breaking the viewport width on standard mobile screens.
+
+5. Frugal Performance (The Payload Audit):
+
+This site must load quickly on rural Cambodian 3G/4G networks.
+
+Check for any uncompressed, massive image assets that were added today and suggest optimizations.
+
+Ensure React components are code-splitting or lazy-loading where appropriate so the initial bundle size isn't too heavy.
+
+Output: Provide a clean, bulleted summary of your findings. If everything passes, give me the 'All Clear' to publish!"
