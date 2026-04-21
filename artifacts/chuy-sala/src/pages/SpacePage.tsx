@@ -13,6 +13,7 @@ import { VenusPlanetModule } from "@/components/space/VenusPlanetModule";
 import { MercuryPlanetModule } from "@/components/space/MercuryPlanetModule";
 import { EarthMoonModule } from "@/components/space/EarthMoonModule";
 import { SaturnPlanetModule } from "@/components/space/SaturnPlanetModule";
+import { JupiterPlanetModule } from "@/components/space/JupiterPlanetModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -380,6 +381,9 @@ export function SpacePage() {
 
         {/* ── Mars: Our Next-Door Neighbor ──────────────────────────────── */}
         <MarsPlanetModule />
+
+        {/* ── Jupiter: The King of Planets ──────────────────────────────── */}
+        <JupiterPlanetModule />
 
         {/* ── Saturn: The Lord of the Rings ─────────────────────────────── */}
         <SaturnPlanetModule />
