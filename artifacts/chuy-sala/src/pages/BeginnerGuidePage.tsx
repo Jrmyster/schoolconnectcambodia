@@ -76,6 +76,29 @@ function numberToWords(n: number): string {
   return out.charAt(0).toUpperCase() + out.slice(1);
 }
 
+/** Spell out an integer 0..1000 in Khmer. */
+function numberToKhmerWords(n: number): string {
+  if (n === 0) return "សូន្យ";
+  if (n === 1000) return "មួយពាន់";
+
+  const ones  = ["", "មួយ", "ពីរ", "បី", "បួន", "ប្រាំ", "ប្រាំមួយ", "ប្រាំពីរ", "ប្រាំបី", "ប្រាំបួន"];
+  const tens  = ["", "ដប់", "ម្ភៃ", "សាមសិប", "សែសិប", "ហាសិប", "ហុកសិប", "ចិតសិប", "ប៉ែតសិប", "កៅសិប"];
+
+  function under100(num: number): string {
+    if (num < 10) return ones[num];
+    const t = Math.floor(num / 10);
+    const o = num % 10;
+    return o === 0 ? tens[t] : `${tens[t]}${ones[o]}`;
+  }
+
+  const h = Math.floor(n / 100);
+  const rest = n % 100;
+  let out = "";
+  if (h > 0) out += `${ones[h]}រយ`;
+  if (rest > 0) out += under100(rest);
+  return out;
+}
+
 /* ──────────────────────────────────────────────────────────────────── */
 
 export default function BeginnerGuidePage() {
@@ -279,7 +302,10 @@ function NumbersGridSection({ kh }: { kh: boolean }) {
       />
 
       {/* The selected number — large display */}
-      <div className="rounded-3xl bg-white border-4 border-sky-200 shadow-md p-5 sm:p-6 mb-5 text-center min-h-[140px] flex flex-col items-center justify-center">
+      <div
+        className="rounded-3xl bg-white border-4 border-sky-200 shadow-md p-5 sm:p-6 mb-5 text-center min-h-[140px] flex flex-col items-center justify-center"
+        data-testid="number-display"
+      >
         {selected === null ? (
           <p className={`text-slate-500 text-base sm:text-lg ${kh ? "font-khmer text-lg sm:text-xl" : ""}`}>
             {kh
@@ -288,17 +314,34 @@ function NumbersGridSection({ kh }: { kh: boolean }) {
           </p>
         ) : (
           <>
-            <div className="font-display font-black text-7xl sm:text-8xl text-sky-600 leading-none animate-in zoom-in-50 fade-in duration-200">
+            <div
+              className="font-display font-black text-7xl sm:text-8xl text-sky-600 leading-none animate-in zoom-in-50 fade-in duration-200"
+              data-testid="number-display-digit"
+            >
               {selected}
             </div>
-            <div className={`mt-2 font-bold text-2xl sm:text-3xl text-slate-800 ${kh ? "font-khmer text-xl sm:text-2xl" : ""}`}>
-              {numberToWords(selected)}
+            <div
+              className="mt-2 font-bold text-2xl sm:text-3xl text-slate-800 flex items-baseline justify-center gap-2 flex-wrap"
+              data-testid="number-display-bilingual"
+            >
+              <span>{selected} - {numberToWords(selected)}</span>
+              <span className="text-slate-400 font-normal">/</span>
+              <span className="font-khmer text-xl sm:text-2xl text-slate-700">
+                {numberToKhmerWords(selected)}
+              </span>
             </div>
-            {kh && (
-              <div className="mt-1 text-sm italic text-slate-500">
-                {KH_TODO("(កន្លែងបម្រុងសម្រាប់បកប្រែខ្មែរ)")}
-              </div>
-            )}
+            <button
+              type="button"
+              onClick={() => speakWord(numberToWords(selected))}
+              aria-label={`Hear ${numberToWords(selected)} again`}
+              data-testid="number-display-speaker"
+              className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500 text-white font-bold text-sm hover:bg-sky-600 active:scale-95 transition-all shadow-md focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+            >
+              <Volume2 className="w-4 h-4" />
+              <span className={kh ? "font-khmer" : ""}>
+                {kh ? KH_TODO("ស្ដាប់ម្ដងទៀត") : "Hear it again"}
+              </span>
+            </button>
           </>
         )}
       </div>
@@ -313,9 +356,13 @@ function NumbersGridSection({ kh }: { kh: boolean }) {
               <button
                 key={n}
                 type="button"
-                onClick={() => setSelected(isSelected ? null : n)}
+                onClick={() => {
+                  setSelected(isSelected ? null : n);
+                  speakWord(numberToWords(n));
+                }}
                 aria-pressed={isSelected}
                 aria-label={`Number ${n}`}
+                data-testid={`number-cell-${n}`}
                 className={`aspect-square rounded-lg sm:rounded-xl font-bold text-sm sm:text-lg md:text-xl transition-all duration-150 active:scale-95 border-2 ${
                   isSelected
                     ? "bg-sky-500 text-white border-sky-700 scale-110 shadow-lg ring-2 ring-amber-400 z-10"
