@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -131,6 +131,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Users,
         descEn: "The Science of Society — core concepts, the Veblen Lens on conspicuous consumption, and what sociologists really do.",
         descKh: "វិទ្យាសាស្ត្រនៃសង្គម — គោលគំនិតសំខាន់ៗ កែវយឹត Veblen លើការប្រើប្រាស់បង្ហាញឈ្មោះ និងអ្វីដែលអ្នកសង្គមវិទ្យាធ្វើពិតប្រាកដ។",
+      },
+      {
+        href: "/study-center/competition-cooperation",
+        labelEn: "Competition vs. Cooperation",
+        labelKh: "ការប្រកួតប្រជែង និងកិច្ចសហប្រតិបត្តិការ",
+        icon: Network,
+        descEn: "The Social Operating System — zero-sum vs positive-sum games, the Space Race, the expanding circle of cooperation, the Resource-Based Economy thought experiment, and Cambodian Pravas Dai mutual aid.",
+        descKh: "ប្រព័ន្ធប្រតិបត្តិការសង្គម — ហ្គេមផលសរុបសូន្យ ទល់នឹងវិជ្ជមាន ការប្រកួតប្រជែងអវកាស រង្វង់នៃកិច្ចសហប្រតិបត្តិការដែលពង្រីក សេដ្ឋកិច្ចផ្អែកលើធនធាន និងប្រវ៉ាស់ដៃខ្មែរ។",
       },
     ],
   },
