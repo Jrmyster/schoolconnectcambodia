@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Hexagon,
   Gem,
+  Sigma,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -165,6 +166,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/science/chemistry/physical",
+    number: "07",
+    titleEn: "Physical Chemistry",
+    titleKh: "គីមីរូបវិទ្យា",
+    blurbEn:
+      "An undergraduate preview — where physics and calculus walk into the chemistry lab to explain why every reaction in the universe behaves the way it does.",
+    blurbKh:
+      "ការមើលជាមុនថ្នាក់បរិញ្ញាបត្រ — កន្លែងដែលរូបវិទ្យា និងកាល់គុល ចូលមកក្នុងមន្ទីរពិសោធន៍គីមី ដើម្បីពន្យល់ហេតុអ្វីបានជារាល់ប្រតិកម្មក្នុងសកលលោក ប្រព្រឹត្តដូចនេះ។",
+    topicsEn: ["Thermodynamics", "Quantum", "Kinetics", "Energy"],
+    topicsKh: ["ទែម៉ូឌីណាមិច", "កង់ទិច", "គីនេទិច", "ថាមពល"],
+    icon: Sigma,
+    accent: {
+      bgFrom: "from-emerald-900",
+      bgTo: "to-slate-900",
+      border: "border-emerald-700",
+      chip: "bg-emerald-800 text-emerald-100",
+      iconBg: "bg-emerald-700",
+      btn: "bg-emerald-700",
+      btnHover: "hover:bg-emerald-800",
+      title: "text-emerald-50",
+    },
+  },
+  {
     href: "/chemistry/real-world",
     number: "04",
     titleEn: "Chemistry in the Real World",
@@ -225,8 +249,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Six learning modules — from the tiniest atom to the metals and salts that build our world. Pick where you want to start.",
-              "មុខវិជ្ជារៀនប្រាំមួយ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់លោហៈ និងអំបិលដែលស្ថាបនាពិភពលោករបស់យើង។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Seven learning modules — from the tiniest atom to the physics and calculus behind every reaction. Pick where you want to start.",
+              "មុខវិជ្ជារៀនប្រាំពីរ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់រូបវិទ្យា និងកាល់គុលនៅពីក្រោយរាល់ប្រតិកម្ម។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>
