@@ -2,9 +2,13 @@ import { Link } from "wouter";
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowRightLeft,
   BookOpen,
   Brain,
+  Compass,
+  Languages,
   MessageSquareQuote,
+  Newspaper,
   ScrollText,
   Map as MapIcon,
   Sprout,
@@ -134,6 +138,7 @@ export function LinguisticsPage() {
 
         <SectionPillars  kh={kh} t={t} />
         <SectionPioneers kh={kh} t={t} />
+        <SectionSyntax   kh={kh} t={t} />
 
         {/* Closing */}
         <div
@@ -594,6 +599,324 @@ function FamilyTreeDiagram({
         {kh ? "កំណត់ ៖ ភាសាខ្មែរស្ថិតក្នុងគ្រួសារខ្មែរ-ម៉ុនដាច់ដោយឡែក" : "Note: Khmer belongs to the separate Austroasiatic family"}
       </text>
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 03 — Syntax: The Blueprint of Thought
+//                វាក្យសម្ព័ន្ធ៖ ប្លង់នៃការគិត
+// ════════════════════════════════════════════════════════════════════════════
+
+function SectionSyntax({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section className="mt-10 mb-10" data-testid="section-syntax">
+      <SectionHeader
+        spec="03"
+        en="Syntax: The Blueprint of Thought"
+        kh="វាក្យសម្ព័ន្ធ៖ ប្លង់នៃការគិត"
+        kh_={kh}
+      />
+
+      {/* ── 3.1 The Invisible Rules ───────────────────────────────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-amber-800/70 p-5 sm:p-7 shadow-md overflow-hidden mb-5"
+        style={PAPER}
+        data-testid="syntax-invisible-rules"
+      >
+        <CornerFlourish />
+        <div className="flex items-center gap-2 mb-3">
+          <ScrollText className="w-5 h-5" style={{ color: MAHOGANY }} />
+          <h3 className={`text-lg sm:text-xl font-bold text-amber-950 ${kh ? "font-khmer" : "font-serif"}`}>
+            {t("The Invisible Rules", "ច្បាប់ដែលមើលមិនឃើញ")}
+          </h3>
+          <VocabChip
+            en="Syntax"
+            kh="វាក្យសម្ព័ន្ធ"
+            k={kh}
+          />
+        </div>
+
+        <p className={`text-sm text-amber-950 mb-3 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+          {t(
+            "Syntax is the set of invisible rules that governs the order of words in a sentence. Without it, language is just a pile of random words — a heap of bricks that has never become a house.",
+            "វាក្យសម្ព័ន្ធ គឺជាសំណុំច្បាប់ដែលមើលមិនឃើញ ដែលគ្រប់គ្រងលំដាប់នៃពាក្យក្នុងប្រយោគ។ បើគ្មានវាទេ ភាសាគ្រាន់តែជាគំនរពាក្យចៃដន្យ — ជាគំនរឥដ្ឋដែលមិនដែលក្លាយជាផ្ទះ។"
+          )}
+        </p>
+
+        <p className={`text-sm text-amber-950 mb-4 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+          {t(
+            "The classic example: the exact same five words can describe two completely different realities, just by changing their order.",
+            "ឧទាហរណ៍បុរាណ៖ ពាក្យដូចគ្នាបេះបិទនេះអាចពណ៌នានូវការពិតពីរផ្សេងគ្នាស្រឡះ ដោយគ្រាន់តែផ្លាស់ប្ដូរលំដាប់របស់វា។"
+          )}
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* Sentence A */}
+          <div
+            className="relative rounded-xl border-2 border-emerald-800/40 p-4 overflow-hidden bg-amber-50/60"
+            data-testid="syntax-sentence-a"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Sprout className="w-4 h-4 text-emerald-800" />
+              <span className={`text-[10px] font-mono tracking-widest uppercase text-emerald-900 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Everyday event", "ព្រឹត្តិការណ៍ប្រចាំថ្ងៃ")}
+              </span>
+            </div>
+            <p className={`text-base sm:text-lg text-amber-950 italic ${kh ? "font-khmer not-italic leading-loose" : "font-serif"}`}>
+              {t("\u201CThe dog bit the man.\u201D", "«ឆ្កែ ខាំ បុរស។»")}
+            </p>
+            <p className={`mt-2 text-xs text-amber-900/80 ${kh ? "font-khmer leading-loose" : "font-serif italic"}`}>
+              {t(
+                "Boring. It happens every day, somewhere in the world.",
+                "ធម្មតា។ វាកើតឡើងជារៀងរាល់ថ្ងៃ កន្លែងណាមួយក្នុងពិភពលោក។"
+              )}
+            </p>
+          </div>
+
+          {/* Sentence B */}
+          <div
+            className="relative rounded-xl border-2 border-rose-800/40 p-4 overflow-hidden bg-amber-50/60"
+            data-testid="syntax-sentence-b"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Newspaper className="w-4 h-4 text-rose-900" />
+              <span className={`text-[10px] font-mono tracking-widest uppercase text-rose-900 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Breaking news", "ព័ត៌មានពិសេស")}
+              </span>
+            </div>
+            <p className={`text-base sm:text-lg text-amber-950 italic ${kh ? "font-khmer not-italic leading-loose" : "font-serif"}`}>
+              {t("\u201CThe man bit the dog.\u201D", "«បុរស ខាំ ឆ្កែ។»")}
+            </p>
+            <p className={`mt-2 text-xs text-amber-900/80 ${kh ? "font-khmer leading-loose" : "font-serif italic"}`}>
+              {t(
+                "Astonishing. The same five words — but a completely new reality, all because of word order.",
+                "គួរឲ្យភ្ញាក់ផ្អើល។ ពាក្យដូចគ្នា — ប៉ុន្តែការពិតថ្មីទាំងស្រុង គ្រាន់តែដោយសារលំដាប់នៃពាក្យ។"
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 3.2 English vs. Khmer ─────────────────────────────────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-amber-800/70 p-5 sm:p-7 shadow-md overflow-hidden mb-5"
+        style={PAPER}
+        data-testid="syntax-en-vs-kh"
+      >
+        <CornerFlourish />
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <Languages className="w-5 h-5" style={{ color: MAHOGANY }} />
+          <h3 className={`text-lg sm:text-xl font-bold text-amber-950 ${kh ? "font-khmer" : "font-serif"}`}>
+            {t("English vs. Khmer", "អង់គ្លេស និងខ្មែរ")}
+          </h3>
+          <VocabChip en="SVO" kh="ប្រធាន-កិរិយា-កម្ម" k={kh} />
+        </div>
+
+        <p className={`text-sm text-amber-950 mb-4 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+          {t(
+            "Both English and Khmer generally follow Subject–Verb–Object (SVO) order at the sentence level — but the moment you zoom in on a noun phrase, the internal rule flips. The two languages are mirror images of each other.",
+            "ទាំងភាសាអង់គ្លេស និងខ្មែរ ជាទូទៅប្រើលំដាប់ ប្រធាន–កិរិយាស័ព្ទ–កម្ម (SVO) នៅកម្រិតប្រយោគ — ប៉ុន្តែពេលអ្នកពិនិត្យឲ្យកាន់តែជិតលើឃ្លានាម ច្បាប់ខាងក្នុងបែរផ្ទុយ។ ភាសាទាំងពីរ ជារូបឆ្លុះរបស់គ្នាទៅវិញទៅមក។"
+          )}
+        </p>
+
+        <div className="grid sm:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+          {/* English noun phrase */}
+          <div
+            className="relative rounded-xl border-2 border-amber-700/50 p-4 bg-amber-50/60 text-center"
+            data-testid="syntax-noun-en"
+          >
+            <div className={`text-[10px] font-mono tracking-widest uppercase text-amber-900 mb-2 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {t("English · Adjective first", "អង់គ្លេស · គុណនាមមុន")}
+            </div>
+            <p className={`text-base sm:text-lg text-amber-950 italic mb-3 ${kh ? "font-khmer not-italic" : "font-serif"}`}>
+              {t("\u201CThe red apple\u201D", "«The red apple»")}
+            </p>
+            <div className="inline-flex items-center gap-1 flex-wrap justify-center">
+              <span className="px-2 py-1 rounded border border-rose-700/50 bg-rose-100/70 text-rose-900 text-[11px] font-bold tracking-wide">
+                {kh ? "គុណនាម · red" : "ADJECTIVE · red"}
+              </span>
+              <ArrowRight className="w-3 h-3 text-amber-800" />
+              <span className="px-2 py-1 rounded border border-amber-700/50 bg-amber-100/70 text-amber-900 text-[11px] font-bold tracking-wide">
+                {kh ? "នាម · apple" : "NOUN · apple"}
+              </span>
+            </div>
+          </div>
+
+          {/* Mirror divider */}
+          <div className="hidden sm:flex flex-col items-center justify-center text-amber-800">
+            <ArrowRightLeft className="w-6 h-6" />
+            <span className={`mt-1 text-[10px] font-mono uppercase tracking-widest ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {t("mirror", "ឆ្លុះ")}
+            </span>
+          </div>
+
+          {/* Khmer noun phrase */}
+          <div
+            className="relative rounded-xl border-2 border-amber-700/50 p-4 bg-amber-50/60 text-center"
+            data-testid="syntax-noun-kh"
+          >
+            <div className={`text-[10px] font-mono tracking-widest uppercase text-amber-900 mb-2 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {t("Khmer · Noun first", "ខ្មែរ · នាមមុន")}
+            </div>
+            <p className="text-base sm:text-lg text-amber-950 mb-1 font-khmer leading-loose">
+              «ផ្លែប៉ោម ក្រហម»
+            </p>
+            <p className={`text-[11px] text-amber-900/80 mb-3 ${kh ? "font-khmer" : "font-serif italic"}`}>
+              {t("(literally: \u201CApple red\u201D)", "(តាមព្យញ្ជនៈ៖ «Apple red»)")}
+            </p>
+            <div className="inline-flex items-center gap-1 flex-wrap justify-center">
+              <span className="px-2 py-1 rounded border border-amber-700/50 bg-amber-100/70 text-amber-900 text-[11px] font-bold tracking-wide font-khmer">
+                នាម · ផ្លែប៉ោម
+              </span>
+              <ArrowRight className="w-3 h-3 text-amber-800" />
+              <span className="px-2 py-1 rounded border border-rose-700/50 bg-rose-100/70 text-rose-900 text-[11px] font-bold tracking-wide font-khmer">
+                គុណនាម · ក្រហម
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <p className={`mt-4 text-sm text-amber-950 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+          <strong className={kh ? "" : "font-bold"}>
+            {t("The takeaway: ", "សាររួម៖ ")}
+          </strong>
+          {t(
+            "When you translate between English and Khmer, the sentence-level structure usually lines up — but inside every noun phrase, you have to flip the order. Forgetting this is the single most common syntax mistake students make.",
+            "ពេលអ្នកបកប្រែរវាងភាសាអង់គ្លេស និងខ្មែរ រចនាសម្ព័ន្ធកម្រិតប្រយោគជាធម្មតាស៊ីសង្វាក់គ្នា — ប៉ុន្តែខាងក្នុងឃ្លានាមនីមួយៗ អ្នកត្រូវផ្លាស់លំដាប់។ ការភ្លេចចំណុចនេះ គឺជាកំហុសវាក្យសម្ព័ន្ធដែលសិស្សធ្វើច្រើនបំផុត។"
+          )}
+        </p>
+      </div>
+
+      {/* ── 3.3 Sapir–Whorf · Does Language Shape Thought? ────────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-amber-800/70 p-5 sm:p-7 shadow-md overflow-hidden"
+        style={PAPER}
+        data-testid="syntax-sapir-whorf"
+      >
+        <CornerFlourish />
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <Brain className="w-5 h-5" style={{ color: MAHOGANY }} />
+          <h3 className={`text-lg sm:text-xl font-bold text-amber-950 ${kh ? "font-khmer" : "font-serif"}`}>
+            {t("Does Language Shape Thought?", "តើភាសាបង្កើតការគិតមែនទេ?")}
+          </h3>
+          <VocabChip en="Sapir–Whorf Hypothesis" kh="សម្មតិកម្ម Sapir–Whorf" k={kh} />
+        </div>
+
+        <p className={`text-sm text-amber-950 mb-3 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+          {t(
+            "In the early 20th century, the American linguists Edward Sapir and his student Benjamin Lee Whorf proposed an unsettling idea now known as ",
+            "នៅដើមសតវត្សទី ២០ អ្នកភាសាវិទ្យាអាមេរិកាំង Edward Sapir និងសិស្សរបស់គាត់ Benjamin Lee Whorf បានស្នើគំនិតមួយដ៏គួរឲ្យភ្ញាក់ផ្អើល ដែលឥឡូវនេះត្រូវបានគេស្គាល់ថា "
+          )}
+          <strong>{t("Linguistic Relativity", "ទ្រឹស្ដីភាពទាក់ទងភាសា")}</strong>
+          {t(
+            ": the structure of the language you speak may quietly shape — perhaps even limit — the way you perceive the world.",
+            "៖ រចនាសម្ព័ន្ធនៃភាសាដែលអ្នកនិយាយ អាចបង្កើតរូបរាង — ហើយប្រហែលជាកម្រិត — របៀបដែលអ្នកយល់ឃើញពិភពលោក។"
+          )}
+        </p>
+
+        <blockquote
+          className={`relative pl-5 border-l-4 italic text-amber-950 mb-4 ${kh ? "font-khmer not-italic leading-loose" : "font-serif"}`}
+          style={{ borderColor: MAHOGANY }}
+        >
+          <Quote className="absolute -left-3 -top-1 w-4 h-4 bg-[#fbf3df]" style={{ color: MAHOGANY }} aria-hidden="true" />
+          <span className="text-base">
+            {t(
+              "\u201CThe limits of my language mean the limits of my world.\u201D",
+              "«ដែនកំណត់នៃភាសារបស់ខ្ញុំ មានន័យថាដែនកំណត់នៃពិភពលោករបស់ខ្ញុំ។»"
+            )}
+          </span>
+          <span className={`block mt-1 text-xs not-italic text-amber-900/80 ${kh ? "font-khmer" : "font-serif"}`}>
+            — Ludwig Wittgenstein
+          </span>
+        </blockquote>
+
+        {/* Thought experiment */}
+        <div
+          className="rounded-xl border-2 border-amber-800/40 bg-amber-50/60 p-4 sm:p-5"
+          data-testid="syntax-thought-experiment"
+        >
+          <div className="flex items-center gap-2 mb-2 flex-wrap">
+            <Sparkles className="w-4 h-4" style={{ color: MAHOGANY }} />
+            <span className={`text-[10px] font-mono tracking-widest uppercase text-amber-900 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {t("Thought experiment", "ការពិសោធន៍គំនិត")}
+            </span>
+            <span className={`text-[11px] text-amber-900/70 ${kh ? "font-khmer" : "font-serif italic"}`}>
+              {t("Guugu Yimithirr · north-east Australia", "Guugu Yimithirr · ភាគឦសានអូស្ត្រាលី")}
+            </span>
+          </div>
+
+          <p className={`text-sm text-amber-950 mb-4 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+            {t(
+              "Imagine a language with no words for ",
+              "ស្រមៃថាមានភាសាមួយដែលគ្មានពាក្យសម្រាប់ "
+            )}
+            <strong>{t("\u201Cleft\u201D", "«ឆ្វេង»")}</strong>
+            {t(" or ", " ឬ ")}
+            <strong>{t("\u201Cright.\u201D", "«ស្ដាំ»")}</strong>
+            {t(
+              " To say where anything is, speakers must use the absolute compass directions: ",
+              " ដើម្បីប្រាប់ថារបស់អ្វីនៅទីណា អ្នកនិយាយត្រូវតែប្រើទិសត្រីវិស័យដាច់ខាត៖ "
+            )}
+            <strong>{t("North, South, East, West", "ខាងជើង ខាងត្បូង ខាងកើត ខាងលិច")}</strong>
+            {t(
+              ". \u201CYour cup is on the north side of the table.\u201D \u201CCould you move a little to the east?\u201D",
+              "។ «ពែងរបស់អ្នកនៅផ្នែកខាងជើងនៃតុ។» «តើអ្នកអាចផ្លាស់បន្តិចទៅខាងកើតបានទេ?»"
+            )}
+          </p>
+
+          {/* Side-by-side compass comparison */}
+          <div className="grid sm:grid-cols-2 gap-4 mb-4">
+            <div className="rounded-lg border border-amber-700/40 bg-amber-100/40 p-3 text-center">
+              <div className={`text-[10px] font-mono tracking-widest uppercase text-amber-900 mb-2 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Most languages · relative", "ភាសាភាគច្រើន · ប្រៀបធៀប")}
+              </div>
+              <div className="flex items-center justify-center gap-2 text-amber-900 font-serif italic text-sm">
+                <ArrowLeft className="w-4 h-4" />
+                <span>{t("left", "ឆ្វេង")}</span>
+                <span className="opacity-40">·</span>
+                <span>{t("right", "ស្ដាំ")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+              <p className={`mt-2 text-[11px] text-amber-900/80 ${kh ? "font-khmer leading-loose" : "font-serif italic"}`}>
+                {t(
+                  "Depends on which way you are facing.",
+                  "អាស្រ័យលើទិសដៅដែលអ្នកកំពុងបែរមុខ។"
+                )}
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-amber-700/40 bg-amber-100/40 p-3 text-center">
+              <div className={`text-[10px] font-mono tracking-widest uppercase text-amber-900 mb-2 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Guugu Yimithirr · absolute", "Guugu Yimithirr · ដាច់ខាត")}
+              </div>
+              <div className="flex items-center justify-center gap-2 text-amber-900 font-serif italic text-sm">
+                <Compass className="w-5 h-5" style={{ color: MAHOGANY }} />
+                <span className="font-bold not-italic font-mono tracking-wider text-amber-950">N · S · E · W</span>
+              </div>
+              <p className={`mt-2 text-[11px] text-amber-900/80 ${kh ? "font-khmer leading-loose" : "font-serif italic"}`}>
+                {t(
+                  "Always anchored to the sun and the land.",
+                  "បង្គាប់ជានិច្ចទៅព្រះអាទិត្យ និងផែនដី។"
+                )}
+              </p>
+            </div>
+          </div>
+
+          <p className={`text-sm text-amber-950 ${kh ? "font-khmer leading-loose" : "font-serif leading-relaxed"}`}>
+            {t(
+              "The astonishing result: Guugu Yimithirr speakers grow up with what feels like an absolute, near-perfect sense of direction. Their syntax forces their brain to constantly track the sun, the wind, and the land — just to speak a normal sentence. The language doesn't only describe their world; it appears to help build the mental map they walk around with.",
+              "លទ្ធផលគួរឲ្យភ្ញាក់ផ្អើល៖ អ្នកនិយាយ Guugu Yimithirr ធំដឹងក្ដីមកជាមួយនូវអ្វីដែលហាក់ដូចជាការយល់ឃើញទិសដៅដាច់ខាត និងស្ទើរតែឥតខ្ចោះ។ វាក្យសម្ព័ន្ធរបស់ពួកគេ បង្ខំខួរក្បាលឲ្យតាមដានព្រះអាទិត្យ ខ្យល់ និងផែនដីរហូត — គ្រាន់តែដើម្បីនិយាយប្រយោគធម្មតាមួយ។ ភាសាមិនត្រឹមតែពណ៌នាពិភពលោករបស់ពួកគេទេ — វាហាក់ដូចជាជួយសាងសង់ផែនទីផ្លូវចិត្តដែលពួកគេយកទៅតាមខ្លួន។"
+            )}
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 

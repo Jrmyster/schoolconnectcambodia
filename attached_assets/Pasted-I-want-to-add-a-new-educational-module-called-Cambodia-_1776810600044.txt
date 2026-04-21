@@ -1,0 +1,41 @@
+I want to add a new educational module called 'Cambodia: The Heart of Southeast Asia' (កម្ពុជា៖ បេះដូងនៃអាស៊ីអាគ្នេយ៍) to the main Explore or Science section. Please implement the following sections cleanly:
+
+1. Fast Facts & Geography (ទិន្នន័យរហ័ស និងភូមិសាស្ត្រ):
+
+Area: 181,035 square kilometers.
+
+The Great Lake: Explain the Tonle Sap, the largest freshwater lake in Southeast Asia. Highlight the 'Uncommon Fact': It is the only river system in the world that reverses its flow twice a year due to the monsoon rains!
+
+The Cities: Highlight Phnom Penh (The Pearl of Asia), Siem Reap (Gateway to Angkor), and Battambang (The Rice Bowl).
+
+2. Nature & Wildlife (ធម្មជាតិ និងសត្វព្រៃ):
+
+National Symbols: Include the Kouprey (forest ox) and the Giant Ibis.
+
+The Mekong Wonders: Mention the rare Irrawaddy dolphins in Kratie and the importance of the Mekong River as the lifeblood of Cambodian agriculture.
+
+3. The Empire of Stone (អាណាចក្រថ្ម):
+
+Angkor Wat: Explain that it is the largest religious monument in the world.
+
+Engineering Fact: Highlight the 'Uncommonly Known' engineering feat: The ancient Khmer engineers managed the massive water levels of the region using a complex system of 'Barays' (reservoirs) that are still visible from space today.
+
+4. Language, Religion, & Economy (ភាសា សាសនា និងសេដ្ឋកិច្ច):
+
+Khmer Language: Note that Khmer has one of the largest alphabets in the world (74 characters).
+
+Theravada Buddhism: Explain how it shapes the daily life and values of 97% of the population.
+
+The Modern Economy: Discuss the transition from a purely agricultural society (Rice and Rubber) to a growing hub for textiles, tourism, and emerging technology.
+
+5. Famous Intellectual Thinkers (អ្នកប្រាជ្ញល្បីៗ):
+
+Samdech Chuon Nath: The creator of the modern Khmer dictionary and the national anthem, who preserved the language for future generations.
+
+Keng Vansak: Highlight the 'Uncommon Fact': He was a brilliant linguist who invented the first Khmer typewriter keyboard in the 1950s, allowing the Khmer script to enter the modern age of printing and technology.
+
+6. UI & Layout:
+
+Use a 'Heritage' aesthetic: warm golds, temple-stone grays, and forest greens.
+
+Ensure every section, fact, and heading is strictly bilingual (English/Khmer)
