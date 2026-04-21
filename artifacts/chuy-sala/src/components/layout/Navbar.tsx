@@ -750,7 +750,19 @@ export function Navbar() {
               <GlobalSearch variant="compact" />
             </div>
 
-            {/* Admin link intentionally omitted — hidden route only */}
+            {user?.isAdmin && (
+              <Link
+                href="/admin"
+                className={`ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
+                  location.startsWith("/admin")
+                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                    : "bg-white text-primary border-primary/30 hover:border-primary/60 hover:bg-primary/5"
+                } ${kh ? "font-khmer" : ""}`}
+              >
+                <Shield className="w-3.5 h-3.5" />
+                {kh ? "គ្រប់គ្រង" : "Admin"}
+              </Link>
+            )}
           </nav>
         </div>
       </div>
@@ -867,7 +879,16 @@ export function Navbar() {
               );
             })}
 
-            {/* Admin link intentionally omitted from mobile nav — hidden route only */}
+            {user?.isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMobileOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-primary border-2 border-primary/25 hover:bg-primary/5 text-sm transition-all ${kh ? "font-khmer" : ""}`}
+              >
+                <Shield className="w-5 h-5" />
+                {kh ? "គ្រប់គ្រង" : "Admin Dashboard"}
+              </Link>
+            )}
 
             {/* Auth row */}
             <div className="border-t border-border mt-2 pt-2">
