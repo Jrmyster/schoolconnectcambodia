@@ -6,6 +6,7 @@ import { GalaxyMap } from "@/components/GalaxyMap";
 import { TheSunModule } from "@/components/space/TheSunModule";
 import { SolarPowerModule } from "@/components/space/SolarPowerModule";
 import { SpectroscopyModule } from "@/components/space/SpectroscopyModule";
+import { JWSTModule } from "@/components/space/JWSTModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -358,6 +359,9 @@ export function SpacePage() {
 
         {/* ── Spectroscopy: Reading the Light ───────────────────────────── */}
         <SpectroscopyModule />
+
+        {/* ── JWST: The Cosmic Time Machine ─────────────────────────────── */}
+        <JWSTModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
