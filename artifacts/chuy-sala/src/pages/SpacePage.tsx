@@ -19,6 +19,7 @@ import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
 import { ISSModule } from "@/components/space/ISSModule";
 import { SupernovaModule } from "@/components/space/SupernovaModule";
 import { BlackHoleModule } from "@/components/space/BlackHoleModule";
+import { HeatDeathModule } from "@/components/space/HeatDeathModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -410,6 +411,9 @@ export function SpacePage() {
 
         {/* ── Black Holes: The End of Space and Time ────────────────────── */}
         <BlackHoleModule />
+
+        {/* ── Heat Death: The End of the Universe ───────────────────────── */}
+        <HeatDeathModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
