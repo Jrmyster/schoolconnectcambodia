@@ -463,6 +463,14 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       {
+        href: "/well-being/public-health",
+        labelEn: "Public Health: The Web of Well-Being",
+        labelKh: "សុខភាពសាធារណៈ៖ បណ្តាញនៃសុខុមាលភាព",
+        icon: HeartPulse,
+        descEn: "How disease detectives stop outbreaks, why vaccines protect even the people who can't get them, what cigarette smoke really does to DNA, how chronic stress and inequality damage the heart, and the 85-year Harvard finding that close relationships are the strongest medicine ever measured.",
+        descKh: "របៀបដែលអ្នកស៊ើបអង្កេតជំងឺ ឈប់ការផ្ទុះ ហេតុអ្វីវ៉ាក់សាំងការពារសូម្បីតែមនុស្សដែលមិនអាចទទួលវា អ្វីដែលផ្សែងបារីពិតជាធ្វើទៅលើ DNA របៀបដែលភាពតានតឹង និងវិសមភាពបំផ្លាញបេះដូង និងការរកឃើញ ៨៥ ឆ្នាំរបស់ហាវ៉ាដ ដែលថាទំនាក់ទំនងជិតស្និទ្ធគឺជាឱសថខ្លាំងបំផុត។",
+      },
+      {
         href: "/well-being/survival-skills",
         labelEn: "Survival Skills: Thriving in the Wild",
         labelKh: "ជំនាញរស់រានមានជីវិត៖ ការរស់នៅក្នុងព្រៃ",
