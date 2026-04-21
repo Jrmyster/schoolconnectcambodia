@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -17,6 +17,14 @@ import {
   Sparkles,
   Leaf,
   Trash2,
+  Flame,
+  Lightbulb,
+  Bug,
+  LifeBuoy,
+  PawPrint,
+  AlertOctagon,
+  Scissors,
+  CheckCircle2,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -157,6 +165,25 @@ export function MaterialsSciencePage() {
         <LifecycleCompare kh={kh} t={t} />
 
         <UpcyclingCallout kh={kh} t={t} />
+
+        {/* ── 4. Waste Upcycling: Frugal Engineering ──────────── */}
+        <div className="mt-12">
+          <SectionTitle
+            en="Waste Upcycling: Frugal Engineering"
+            kh="ការកែច្នៃកាកសំណល់៖ វិស្វកម្មសន្សំសំចៃ"
+            numberLabel="04"
+            icon={Leaf}
+          />
+          <p className={`text-sm sm:text-base text-slate-700 leading-relaxed mb-6 max-w-3xl ${kh ? "font-khmer leading-loose" : ""}`}>
+            {t(
+              "An empty PET bottle is not garbage — it is a free, weatherproof, perfectly engineered building block. In this workshop we look at why we should never burn it, what makes it useful, and three projects you can build today.",
+              "ដបប្លាស្ទិក PET ទទេមួយមិនមែនជាសំរាមទេ — វាគឺជាសម្ភារៈសំណង់ឥតគិតថ្លៃ ដែលធន់នឹងអាកាសធាតុ និងបានវិស្វកម្មយ៉ាងល្អ។ នៅសិក្ខាសាលានេះ យើងពិនិត្យមើលថា ហេតុអ្វីយើងមិនគួរដុតវា អ្វីដែលធ្វើឱ្យវាមានប្រយោជន៍ និងគម្រោងបីដែលអ្នកអាចសាងសង់ថ្ងៃនេះ។"
+            )}
+          </p>
+          <BurnVsUpcycle kh={kh} t={t} />
+          <PetBottleProperties kh={kh} t={t} />
+          <BlueprintGallery kh={kh} t={t} />
+        </div>
 
         {/* footer crumbs */}
         <div className="mt-12 pt-6 border-t border-dashed border-slate-300 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 font-mono">
@@ -789,6 +816,408 @@ function UpcyclingCallout({ kh, t }: { kh: boolean; t: (en: string, k: string) =
         </div>
       </div>
     </article>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Section 04: Waste Upcycling — Frugal Engineering
+// ─────────────────────────────────────────────────────────────────────────
+
+function EcoCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div
+      className={`relative rounded-2xl border-2 border-emerald-700/30 shadow-sm ${className}`}
+      style={{
+        backgroundColor: "#fdfaf3",
+        backgroundImage:
+          "radial-gradient(rgba(120, 81, 45, 0.12) 1px, transparent 1.4px), " +
+          "radial-gradient(rgba(120, 81, 45, 0.08) 1px, transparent 1.4px), " +
+          "linear-gradient(180deg, #fdfaf3 0%, #f4ecd8 100%)",
+        backgroundSize: "14px 14px, 9px 9px, 100% 100%",
+        backgroundPosition: "0 0, 5px 6px, 0 0",
+      }}
+    >
+      <CornerMarks tone="slate" />
+      {children}
+    </div>
+  );
+}
+
+function BurnVsUpcycle({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  return (
+    <div className="grid md:grid-cols-2 gap-4 mb-8">
+      {/* BURN — danger panel */}
+      <div className="relative rounded-2xl border-2 border-red-300 bg-red-50/80 p-5 sm:p-6 overflow-hidden">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-red-200/40 rounded-full blur-2xl" />
+        <div className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-red-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          <AlertOctagon className="w-3.5 h-3.5" />
+          {t("Avoid · Burning", "ចៀសវាង · ការដុត")}
+        </div>
+        <div className="flex items-start gap-3 mb-3">
+          <div className="w-10 h-10 rounded-xl bg-red-500/15 border border-red-400 text-red-600 flex items-center justify-center flex-shrink-0">
+            <Flame className="w-5 h-5" />
+          </div>
+          <h3 className={`text-lg font-bold text-red-900 leading-tight pt-1 ${kh ? "font-khmer" : ""}`}>
+            {t("Why we should never burn plastic", "ហេតុអ្វីយើងមិនត្រូវដុតប្លាស្ទិក")}
+          </h3>
+        </div>
+        <p className={`text-sm text-red-950/85 mb-3 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {t(
+            "When PET, PVC, and other plastics burn at the low temperature of an open fire, they don't fully break apart. Instead they release a soup of toxins — including dioxins, one of the most poisonous chemical families known.",
+            "នៅពេលប្លាស្ទិក PET, PVC និងប្លាស្ទិកដទៃត្រូវបានដុតនៅសីតុណ្ហភាពទាបនៃភ្លើងបើកចំហ ពួកវាមិនឆេះអស់ទាំងស្រុងទេ។ ផ្ទុយទៅវិញ វាបញ្ចេញល្បាយនៃជាតិពុលជាច្រើន — រួមទាំង ឌីអុកស៊ីន ដែលជាគ្រួសារសារធាតុគីមីពុលបំផុតមួយ។"
+          )}
+        </p>
+        <ul className="space-y-2">
+          {[
+            { en: "Dioxins drift in smoke and settle on rice paddies, vegetables, and animal feed.", kh: "ឌីអុកស៊ីនរសាត់នៅក្នុងផ្សែង ហើយធ្លាក់លើស្រែស្រូវ បន្លែ និងចំណីសត្វ។" },
+            { en: "Lung damage is fastest in children, the elderly, and people who already have asthma.", kh: "ការខូចសួតលឿនបំផុតចំពោះកុមារ មនុស្សចាស់ និងអ្នកដែលមានជំងឺហឺត។" },
+            { en: "Soil contamination can last for years and reduce crop yields nearby.", kh: "ការបំពុលដីអាចមានរយៈពេលច្រើនឆ្នាំ ហើយកាត់បន្ថយផលដំណាំនៅជិតៗ។" },
+          ].map((b) => (
+            <li key={b.en} className={`flex items-start gap-2 text-sm text-red-950 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <span className="mt-1 w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+              <span>{kh ? b.kh : b.en}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* UPCYCLE — solution panel */}
+      <div className="relative rounded-2xl border-2 border-emerald-400 bg-emerald-50/80 p-5 sm:p-6 overflow-hidden">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-200/50 rounded-full blur-2xl" />
+        <div className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-emerald-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          <Leaf className="w-3.5 h-3.5" />
+          {t("Better · Upcycling", "ល្អជាង · ការកែច្នៃថ្មី")}
+        </div>
+        <div className="flex items-start gap-3 mb-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500 text-emerald-700 flex items-center justify-center flex-shrink-0">
+            <Recycle className="w-5 h-5" />
+          </div>
+          <h3 className={`text-lg font-bold text-emerald-900 leading-tight pt-1 ${kh ? "font-khmer" : ""}`}>
+            {t("Why upcycling wins", "ហេតុអ្វីការកែច្នៃថ្មីឈ្នះ")}
+          </h3>
+        </div>
+        <p className={`text-sm text-emerald-950/85 mb-3 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {t(
+            "Upcycling keeps the same plastic doing a useful second job — no smoke, no toxins, and no fuel cost. The bottle's strength becomes a tool instead of a pollutant.",
+            "ការកែច្នៃថ្មីរក្សាប្លាស្ទិកដដែលឱ្យធ្វើការងារទីពីរដ៏មានប្រយោជន៍ — គ្មានផ្សែង គ្មានជាតិពុល និងគ្មានថ្លៃឥន្ធនៈ។ កម្លាំងរបស់ដបក្លាយជាឧបករណ៍ ជំនួសឱ្យសារធាតុបំពុល។"
+          )}
+        </p>
+        <ul className="space-y-2">
+          {[
+            { en: "Zero air or soil pollution — the bottle stays solid.", kh: "គ្មានការបំពុលខ្យល់ ឬដី — ដបនៅរឹងដដែល។" },
+            { en: "Free building material — works for tools, furniture, and farming.", kh: "សម្ភារៈសំណង់ឥតគិតថ្លៃ — ប្រើបានសម្រាប់ឧបករណ៍ គ្រឿងសង្ហារឹម និងកសិកម្ម។" },
+            { en: "Teaches frugal engineering — solving real problems with what you already have.", kh: "បង្រៀនវិស្វកម្មសន្សំសំចៃ — ដោះស្រាយបញ្ហាពិតៗដោយប្រើអ្វីដែលអ្នកមានរួចហើយ។" },
+          ].map((b) => (
+            <li key={b.en} className={`flex items-start gap-2 text-sm text-emerald-950 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <span>{kh ? b.kh : b.en}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function PetBottleProperties({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  const props = [
+    {
+      icon: Recycle,
+      titleEn: "400+ years",
+      titleKh: "៤០០+ ឆ្នាំ",
+      labelEn: "Decomposition time",
+      labelKh: "រយៈពេលបំបែកធាតុ",
+      bodyEn: "A discarded PET bottle outlasts every person alive today by a dozen lifetimes — which is exactly why we should keep using each one.",
+      bodyKh: "ដប PET ដែលបោះចោលមួយមានអាយុវែងជាងមនុស្សរស់នៅសព្វថ្ងៃនេះដប់ជីវិត — នេះហើយជាមូលហេតុដែលយើងគួរបន្តប្រើដបនីមួយៗ។",
+    },
+    {
+      icon: Droplets,
+      titleEn: "100% waterproof",
+      titleKh: "ទប់ទឹក ១០០%",
+      labelEn: "Liquid barrier",
+      labelKh: "ស្រទាប់ការពារទឹក",
+      bodyEn: "PET does not absorb water and does not let it through — perfect for water storage, drip irrigation, and rain-proof toolkits.",
+      bodyKh: "PET មិនស្រូបទឹក និងមិនឱ្យទឹកជ្រាបឆ្លងកាត់ទេ — សមរម្យសម្រាប់ការផ្ទុកទឹក ការស្រោចស្រពតក់ៗ និងឧបករណ៍ការពារភ្លៀង។",
+    },
+    {
+      icon: Wind,
+      titleEn: "Traps air perfectly",
+      titleKh: "បិទជិតខ្យល់បានល្អឥតខ្ចោះ",
+      labelEn: "High buoyancy",
+      labelKh: "ភាពអណ្ដែតខ្ពស់",
+      bodyEn: "A capped 1.5 L bottle can support about 1.5 kg of weight on water — making it a free, life-saving floatation block.",
+      bodyKh: "ដប ១,៥ លីត្រដែលបិទគម្របអាចទ្រទម្ងន់ប្រហែល ១,៥ គីឡូក្រាមនៅលើទឹក — ធ្វើឱ្យវាជាដុំអណ្ដែតសង្គ្រោះជីវិតឥតគិតថ្លៃ។",
+    },
+  ];
+  return (
+    <div className="mb-8">
+      <div className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-cyan-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        <Lightbulb className="w-3.5 h-3.5" />
+        {t("Material spec · PET bottle", "សមាសភាព · ដប PET")}
+      </div>
+      <div className="grid sm:grid-cols-3 gap-3">
+        {props.map(({ icon: Icon, titleEn, titleKh, labelEn, labelKh, bodyEn, bodyKh }) => (
+          <div key={titleEn} className="relative rounded-2xl border-2 border-emerald-700/30 bg-white p-4" style={CARD_BG}>
+            <CornerMarks tone="slate" />
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-9 h-9 rounded-lg bg-emerald-600/10 border border-emerald-600/40 text-emerald-700 flex items-center justify-center">
+                <Icon className="w-4 h-4" />
+              </div>
+              <div className={`text-[10px] uppercase tracking-widest text-slate-500 font-mono ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {kh ? labelKh : labelEn}
+              </div>
+            </div>
+            <div className={`text-2xl font-black text-slate-900 leading-tight mb-1 ${kh ? "font-khmer text-xl" : ""}`}>
+              {kh ? titleKh : titleEn}
+            </div>
+            <p className={`text-xs text-slate-700 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {kh ? bodyKh : bodyEn}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Blueprint SVGs ────────────────────────────────────────────────────────
+
+function BlueprintFrame({ titleId, label, children }: { titleId: string; label: string; children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-xl border-2 border-emerald-900/40 p-2"
+      style={{
+        backgroundColor: "#0e3b2e",
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), " +
+          "linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+        backgroundSize: "16px 16px",
+      }}
+    >
+      <svg viewBox="0 0 200 160" className="w-full h-auto block" role="img" aria-labelledby={titleId}>
+        <title id={titleId}>{label}</title>
+        {children}
+      </svg>
+    </div>
+  );
+}
+
+function MosquitoTrapBlueprint({ kh }: { kh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const titleId = `bp-trap-${uid}`;
+  const tipId = `bp-tip-${uid}`;
+  const stroke = "#a7f3d0", dim = "#5eead4";
+  return (
+    <BlueprintFrame titleId={titleId} label={kh ? "ផែនការអន្ទាក់រុយនិងមូស" : "Mosquito trap blueprint"}>
+      {/* base bottle (lower 2/3) */}
+      <path d="M 70 60 L 70 130 Q 70 144 84 144 L 116 144 Q 130 144 130 130 L 130 60" fill="none" stroke={stroke} strokeWidth="1.5" />
+      {/* inverted spout funnel inside */}
+      <path d="M 78 60 L 100 92 L 122 60" fill="none" stroke={stroke} strokeWidth="1.5" />
+      <line x1="100" y1="92" x2="100" y2="100" stroke={stroke} strokeWidth="1.2" />
+      {/* sugar water level */}
+      <line x1="74" y1="120" x2="126" y2="120" stroke={dim} strokeDasharray="2 3" strokeWidth="1" />
+      <text x="135" y="124" fontSize="7" fill={dim} fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ទឹកស្ករ" : "sugar water"}
+      </text>
+      {/* mosquito */}
+      <g>
+        <circle cx="100" cy="76" r="1.5" fill={stroke} />
+        <line x1="100" y1="76" x2="96" y2="72" stroke={stroke} strokeWidth="0.6" />
+        <line x1="100" y1="76" x2="104" y2="72" stroke={stroke} strokeWidth="0.6" />
+        <text x="106" y="78" fontSize="6" fill={stroke}>↓</text>
+      </g>
+      {/* dimensions */}
+      <line x1="50" y1="60" x2="50" y2="144" stroke={dim} strokeWidth="0.6" markerStart={`url(#${tipId})`} markerEnd={`url(#${tipId})`} />
+      <text x="46" y="105" fontSize="7" fill={dim} textAnchor="end" fontFamily="monospace">1.5L</text>
+      <defs>
+        <marker id={tipId} viewBox="0 0 6 6" refX="3" refY="3" markerWidth="4" markerHeight="4" orient="auto">
+          <path d="M0,3 L6,0 L6,6 z" fill={dim} />
+        </marker>
+      </defs>
+    </BlueprintFrame>
+  );
+}
+
+function FloatationBlueprint({ kh }: { kh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const titleId = `bp-float-${uid}`;
+  const stroke = "#a7f3d0", dim = "#5eead4";
+  return (
+    <BlueprintFrame titleId={titleId} label={kh ? "ផែនការឧបករណ៍អណ្ដែតទឹក" : "Floatation device blueprint"}>
+      {/* water line */}
+      <line x1="0" y1="110" x2="200" y2="110" stroke={dim} strokeDasharray="4 3" strokeWidth="1" />
+      <text x="6" y="106" fontSize="7" fill={dim} fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ផ្ទៃទឹក" : "water line"}
+      </text>
+      {/* 4 sealed bottles bound by string */}
+      {[40, 80, 120, 160].map((cx) => (
+        <g key={cx}>
+          {/* cap */}
+          <rect x={cx - 5} y="78" width="10" height="6" fill="none" stroke={stroke} strokeWidth="1.2" />
+          {/* body */}
+          <path d={`M ${cx - 12} 92 L ${cx - 12} 124 Q ${cx - 12} 132 ${cx - 4} 132 L ${cx + 4} 132 Q ${cx + 12} 132 ${cx + 12} 124 L ${cx + 12} 92 Z`} fill="none" stroke={stroke} strokeWidth="1.5" />
+          {/* neck */}
+          <path d={`M ${cx - 5} 84 L ${cx - 12} 92 L ${cx + 12} 92 L ${cx + 5} 84 Z`} fill="none" stroke={stroke} strokeWidth="1.2" />
+        </g>
+      ))}
+      {/* string lashing across all */}
+      <path d="M 30 100 Q 100 92, 170 100" fill="none" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="3 2" />
+      <path d="M 30 118 Q 100 110, 170 118" fill="none" stroke="#fbbf24" strokeWidth="1.2" strokeDasharray="3 2" />
+      <text x="100" y="148" fontSize="7" fill="#fbbf24" textAnchor="middle" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ខ្សែ × ២" : "string × 2"}
+      </text>
+    </BlueprintFrame>
+  );
+}
+
+function PetWatererBlueprint({ kh }: { kh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const titleId = `bp-pet-${uid}`;
+  const arrowId = `bp-pet-arrow-${uid}`;
+  const stroke = "#a7f3d0", dim = "#5eead4";
+  return (
+    <BlueprintFrame titleId={titleId} label={kh ? "ផែនការប្រដាប់ដាក់ទឹកសត្វ" : "Automatic pet waterer blueprint"}>
+      {/* inverted bottle (cap at bottom) */}
+      <path d="M 80 20 L 80 100 L 92 110 L 108 110 L 120 100 L 120 20 Z" fill="none" stroke={stroke} strokeWidth="1.5" />
+      {/* water inside */}
+      <line x1="82" y1="35" x2="118" y2="35" stroke={dim} strokeDasharray="2 3" strokeWidth="1" />
+      <text x="125" y="38" fontSize="7" fill={dim} fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ទឹក" : "water"}
+      </text>
+      {/* dish */}
+      <path d="M 60 120 Q 60 145 100 145 Q 140 145 140 120 L 140 132 Q 140 140 100 140 Q 60 140 60 132 Z" fill="none" stroke={stroke} strokeWidth="1.5" />
+      {/* water in dish */}
+      <line x1="68" y1="132" x2="132" y2="132" stroke={dim} strokeDasharray="2 3" strokeWidth="1" />
+      {/* atmospheric pressure arrows pointing down on dish surface */}
+      {[72, 100, 128].map((x, i) => (
+        <g key={i}>
+          <line x1={x} y1={120} x2={x} y2={130} stroke="#fbbf24" strokeWidth="0.8" markerEnd={`url(#${arrowId})`} />
+        </g>
+      ))}
+      <text x="100" y="158" fontSize="7" fill="#fbbf24" textAnchor="middle" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "សម្ពាធបរិយាកាស" : "atm. pressure"}
+      </text>
+      <defs>
+        <marker id={arrowId} viewBox="0 0 6 6" refX="3" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+          <path d="M0,0 L6,0 L3,6 z" fill="#fbbf24" />
+        </marker>
+      </defs>
+    </BlueprintFrame>
+  );
+}
+
+function BlueprintGallery({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  const projects = [
+    {
+      key: "trap",
+      icon: Bug,
+      titleEn: "The Mosquito / Fly Trap",
+      titleKh: "អន្ទាក់រុយនិងមូស",
+      blurbEn: "Insects fly in for the sweet smell — and can't fly back out through the inverted funnel.",
+      blurbKh: "សត្វល្អិតហើរចូលដោយក្លិនផ្អែម — ហើយមិនអាចហើរត្រឡប់ចេញតាមបំពង់ចីបដែលដាក់បញ្ច្រាសវិញបានទេ។",
+      blueprint: <MosquitoTrapBlueprint kh={kh} />,
+      stepsEn: [
+        "Cut the top third off a clean 1.5 L PET bottle.",
+        "Flip the cut top upside-down and push it into the base — spout pointing down inside.",
+        "Pour 100 mL of warm sugar water with a pinch of yeast (or vinegar + soap) into the base.",
+      ],
+      stepsKh: [
+        "កាត់ផ្នែកខាងលើមួយភាគបីនៃដប PET ១,៥ លីត្រស្អាត។",
+        "បញ្ច្រាសផ្នែកខាងលើដែលបានកាត់ឱ្យដើរវិញ ហើយរុញចូលក្នុងផ្នែកខាងក្រោម — បំពង់ចីបចង្អុលចុះក្រោម។",
+        "ចាក់ទឹកស្ករក្ដៅ ១០០ មល ជាមួយម្សៅយ៉ាស្ដបន្តិច (ឬទឹកខ្មេះ + សាប៊ូ) ចូលផ្នែកខាងក្រោម។",
+      ],
+    },
+    {
+      key: "float",
+      icon: LifeBuoy,
+      titleEn: "Floatation Devices & Rafts",
+      titleKh: "ឧបករណ៍អណ្ដែតទឹក",
+      blurbEn: "Sealed air gives huge buoyancy — four bottles can hold a child safely above water during swim practice or monsoon flooding.",
+      blurbKh: "ខ្យល់ដែលឃុំទុកផ្ដល់ភាពអណ្ដែតយ៉ាងខ្លាំង — ដបបួនអាចទ្រកុមារឱ្យអណ្ដែតលើទឹកដោយសុវត្ថិភាព ក្នុងការហាត់ហែលទឹក ឬទឹកជំនន់រដូវវស្សា។",
+      blueprint: <FloatationBlueprint kh={kh} />,
+      stepsEn: [
+        "Take 4–8 empty 1.5 L bottles and screw the caps on tight (this is the safety check).",
+        "Lay them in a 2×2 or 2×4 grid and lash them together with strong nylon string in two places.",
+        "Test in shallow water before any real use — adult supervision required for children.",
+      ],
+      stepsKh: [
+        "យកដបទទេ ១,៥ លីត្រ ៤–៨ ហើយបង្គៀរគម្របឱ្យជាប់ល្អ (នេះជាការត្រួតពិនិត្យសុវត្ថិភាព)។",
+        "ដាក់ពួកវាជាក្រឡា ២×២ ឬ ២×៤ ហើយចងពួកវាជាមួយខ្សែនីឡុងរឹងមាំនៅពីរកន្លែង។",
+        "សាកល្បងនៅក្នុងទឹករាក់មុនការប្រើពិត — ទាមទារការតាមដានពីមនុស្សពេញវ័យសម្រាប់កុមារ។",
+      ],
+    },
+    {
+      key: "pet",
+      icon: PawPrint,
+      titleEn: "Automatic Pet Waterer",
+      titleKh: "ប្រដាប់ដាក់ទឹកសត្វ",
+      blurbEn: "Atmospheric pressure pushes down on the dish surface, refilling it from the inverted bottle every time the pet drinks.",
+      blurbKh: "សម្ពាធបរិយាកាសរុញចុះក្រោមលើផ្ទៃចាន ហើយបំពេញវាឡើងវិញពីដបដែលដាក់បញ្ច្រាស រាល់ពេលដែលសត្វផឹកទឹក។",
+      blueprint: <PetWatererBlueprint kh={kh} />,
+      stepsEn: [
+        "Fill a clean 1.5 L bottle with fresh water and screw the cap on tight.",
+        "Place a wide, shallow dish on the ground and quickly invert the bottle into it — the cap should rest just below the dish's rim.",
+        "Water flows out only as the pet drinks down the level — the dish stays perfectly full all day.",
+      ],
+      stepsKh: [
+        "បំពេញដបស្អាត ១,៥ លីត្រដោយទឹកស្អាត ហើយបង្គៀរគម្របឱ្យជាប់ល្អ។",
+        "ដាក់ចានរាក់ធំៗនៅលើដី ហើយបញ្ច្រាសដបយ៉ាងលឿនចូលទៅក្នុងវា — គម្របគួរនៅខាងក្រោមគែមចានបន្តិច។",
+        "ទឹកហូរចេញតែនៅពេលសត្វផឹកធ្វើឱ្យកម្រិតធ្លាក់ — ចានពេញដដែលពេញមួយថ្ងៃ។",
+      ],
+    },
+  ];
+
+  return (
+    <div>
+      <div className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-bold text-emerald-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        <Hammer className="w-3.5 h-3.5" />
+        {t("Upcycle Blueprint Gallery", "វិចិត្រសាលផែនការកែច្នៃថ្មី")}
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {projects.map(({ key, icon: Icon, titleEn, titleKh, blurbEn, blurbKh, blueprint, stepsEn, stepsKh }) => (
+          <EcoCard key={key} className="p-4 sm:p-5 flex flex-col gap-3">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                <Icon className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className={`font-bold text-slate-900 leading-snug ${kh ? "font-khmer text-base" : "text-base"}`}>
+                  {kh ? titleKh : titleEn}
+                </h4>
+                <div className={`text-[10px] uppercase tracking-widest text-emerald-700/80 font-mono mt-0.5 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  {kh ? (key === "trap" ? "អន្ទាក់" : key === "float" ? "សុវត្ថិភាពទឹក" : "ការផ្ដល់ទឹកសត្វ") : `Project · ${key.toUpperCase()}`}
+                </div>
+              </div>
+            </div>
+
+            {blueprint}
+
+            <p className={`text-xs sm:text-sm text-slate-700 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {kh ? blurbKh : blurbEn}
+            </p>
+
+            <ol className="space-y-1.5">
+              {(kh ? stepsKh : stepsEn).map((step, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-700 text-white text-[11px] font-bold flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  <span className={`text-xs sm:text-sm text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                    {step}
+                  </span>
+                </li>
+              ))}
+            </ol>
+
+            <div className={`mt-auto pt-2 flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-slate-500 font-mono ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              <Scissors className="w-3 h-3" />
+              {t("Tools: scissors, string, water", "ឧបករណ៍៖ កន្ត្រៃ ខ្សែ ទឹក")}
+            </div>
+          </EcoCard>
+        ))}
+      </div>
+    </div>
   );
 }
 
