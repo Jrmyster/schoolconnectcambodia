@@ -5,6 +5,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { GalaxyMap } from "@/components/GalaxyMap";
 import { TheSunModule } from "@/components/space/TheSunModule";
 import { SolarPowerModule } from "@/components/space/SolarPowerModule";
+import { SpectroscopyModule } from "@/components/space/SpectroscopyModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -354,6 +355,9 @@ export function SpacePage() {
 
         {/* ── Solar Power: Harvesting the Sun ───────────────────────────── */}
         <SolarPowerModule />
+
+        {/* ── Spectroscopy: Reading the Light ───────────────────────────── */}
+        <SpectroscopyModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
