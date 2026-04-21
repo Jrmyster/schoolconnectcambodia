@@ -1,0 +1,35 @@
+"I want to add a new comprehensive guide called 'The Pathway to Medicine' (ផ្លូវទៅកាន់វិជ្ជាជីវៈពេទ្យ) to the Study Center. Please implement the following sections cleanly and interactively:
+
+1. The Timeline of a Doctor (The Journey):
+
+Create a visual vertical timeline or stepper component that breaks down the entire process, including estimated years.
+
+Phase 1: High School (វិទ្យាល័យ): Focus on Biology, Chemistry, Physics, and English. Building the foundation and study habits.
+
+Phase 2: Undergraduate/Pre-Med (បរិញ្ញាបត្រ - 4 Years): University level. Emphasize that you don't have to major in Biology, but you must complete core pre-med sciences (Organic Chemistry, Biochemistry, Physics) and pass entrance exams.
+
+Phase 3: Medical School (សាលាពេទ្យ - 4 Years): >       * Years 1 & 2 (Pre-Clinical): Book learning. Anatomy, Pharmacology, Pathology, and Neurology. Drinking from a firehose of information.
+
+Years 3 & 4 (Clinical Rotations): Working in the hospital. Delivering babies, assisting in surgeries, and rotating through different wards to find what you love.
+
+Phase 4: Residency (កម្មសិក្សាឯកទេស - 3 to 7 Years): You are officially a doctor, but you are training under experts. This is where you learn your specific job.
+
+2. Choosing a Specialty (The Sorting Hat):
+
+Create a set of interactive flashcards or a dropdown to explore different medical fields, emphasizing rural/local needs:
+
+Family Medicine/Pediatrics: 3-year residency. You love long-term relationships with patients and preventative care.
+
+Internal Medicine: 3-year residency. You love solving complex diagnostic puzzles for adults.
+
+General Surgery: 5-year residency. You love working with your hands, anatomy, and immediate, physical fixes.
+
+Emergency Medicine: 3-to-4-year residency. You thrive in chaos, think fast, and want to save lives in critical moments.
+
+3. UI & Styling:
+
+Use a 'Clinical/Hospital' aesthetic: clean whites, stethoscope blues, and emergency-cross reds.
+
+Ensure all major headings and medical phases are bilingual (English/Khmer).
+
+Include a motivational quote at the top: 'Medicine is a science of uncertainty and an art of probability. - William Osler'"

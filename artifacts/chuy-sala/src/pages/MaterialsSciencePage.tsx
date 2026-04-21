@@ -125,6 +125,7 @@ export function MaterialsSciencePage() {
         </header>
 
         {/* ── 1. The Big Three ────────────────────────────────── */}
+        <div id="big-three" className="scroll-mt-24" />
         <SectionTitle
           en="The 'Big Three' material families"
           kh="ក្រុមធំទាំងបីនៃសម្ភារៈ"
@@ -140,6 +141,7 @@ export function MaterialsSciencePage() {
         <BigThreeGrid kh={kh} t={t} />
 
         {/* ── 2. Stress Test flashcards ───────────────────────── */}
+        <div id="stress-test" className="scroll-mt-24" />
         <SectionTitle
           en="The 'Stress Test' — engineering vocabulary"
           kh="ការសាកល្បងស្ត្រេស — វាក្យសព្ទវិស្វកម្ម"
@@ -159,6 +161,7 @@ export function MaterialsSciencePage() {
         </div>
 
         {/* ── 3. Lifecycle: Glass vs Plastic ──────────────────── */}
+        <div id="lifecycle" className="scroll-mt-24" />
         <SectionTitle
           en="Lifecycle — glass vs. plastic"
           kh="វដ្តជីវិត — កញ្ចក់ ប្រឆាំងនឹង ប្លាស្ទិក"
@@ -170,7 +173,7 @@ export function MaterialsSciencePage() {
         <UpcyclingCallout kh={kh} t={t} />
 
         {/* ── 4. Waste Upcycling: Frugal Engineering ──────────── */}
-        <div className="mt-12">
+        <div id="upcycling" className="mt-12 scroll-mt-24">
           <SectionTitle
             en="Waste Upcycling: Frugal Engineering"
             kh="ការកែច្នៃកាកសំណល់៖ វិស្វកម្មសន្សំសំចៃ"

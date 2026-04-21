@@ -118,6 +118,13 @@ body[data-theme]:not([data-theme="default"]) {
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight font-bold;
   }
+
+  /* Global anchor offset so deep-link search results don't get hidden
+     under the sticky navbar (h-16 = 4rem; we leave extra breathing room). */
+  :target,
+  [id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 /* Fix for leaflet map z-index issues with sticky nav */

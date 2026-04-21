@@ -63,10 +63,34 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
     setOpen(false);
     setQ("");
     if (onNavigate) onNavigate();
-    // Smooth transition: blur first, then navigate next tick so the dropdown
-    // collapse animates out cleanly
     inputRef.current?.blur();
-    requestAnimationFrame(() => navigate(href));
+
+    // Split path and #hash so wouter routes the path while we manually scroll
+    // to the in-page anchor with sticky-header offset.
+    const hashIdx = href.indexOf("#");
+    const path = hashIdx === -1 ? href : href.slice(0, hashIdx);
+    const hash = hashIdx === -1 ? "" : href.slice(hashIdx + 1);
+
+    requestAnimationFrame(() => {
+      navigate(path);
+      if (!hash) {
+        // Top of page on plain navigation
+        window.scrollTo({ top: 0, behavior: "auto" });
+        return;
+      }
+      // Wait for the destination page to mount, then scroll to the anchor.
+      // We retry briefly because heavy pages may take a moment to render.
+      let tries = 0;
+      const tryScroll = () => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        if (tries++ < 20) setTimeout(tryScroll, 60);
+      };
+      setTimeout(tryScroll, 50);
+    });
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {

@@ -11,6 +11,7 @@ import type { ComponentType } from "react";
 
 export type SearchEntry = {
   id: string;
+  /** Route path. May optionally include a `#hash` for in-page anchors. */
   href: string;
   icon: ComponentType<{ className?: string }>;
   titleEn: string;
@@ -23,6 +24,8 @@ export type SearchEntry = {
   keywordsEn: string[];
   /** Khmer synonyms */
   keywordsKh: string[];
+  /** "page" for top-level pages, "module" for in-page sections (deep links). */
+  type?: "page" | "module";
 };
 
 /**
@@ -721,6 +724,237 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["sanctuary", "adolescence", "teenager", "teen", "puberty", "emotion", "emotions", "stress", "anxiety", "mental health", "wellbeing", "well-being", "feelings", "friendship"],
     keywordsKh: ["សន្តិភាព", "វ័យជំទង់", "អារម្មណ៍", "ភាពតានតឹង", "សុខភាពផ្លូវចិត្ត", "សុខុមាលភាព", "មិត្តភាព"],
   },
+  // ════════════════════════════════════════════════════════════════
+  // DEEP-INDEX MODULES — in-page sections (hash navigation)
+  // Each `href` ends with #anchor; the search dropdown will route to
+  // the page AND smooth-scroll to the matching id (with a 6rem
+  // sticky-nav offset applied globally via index.css).
+  // ════════════════════════════════════════════════════════════════
+
+  // ── Mathematics sub-modules ──────────────────────────────────────
+  {
+    id: "math-arithmetic",
+    href: "/mathematics#arithmetic",
+    icon: Calculator,
+    titleEn: "Arithmetic — Mental Math Trainer",
+    titleKh: "លេខនព្វន្ត — Trainer គណិតក្នុងក្បាល",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "A 10-second mental-math sprint covering addition, subtraction, multiplication and division.",
+    descKh: "ការប្រកួតគណិតក្នុងក្បាល ១០ វិនាទី ក្នុងការបូក ដក គុណ និងចែក។",
+    keywordsEn: ["arithmetic", "mental math", "addition", "subtraction", "multiplication", "division", "times tables", "plus", "minus", "math sprint"],
+    keywordsKh: ["លេខនព្វន្ត", "គណិតក្នុងក្បាល", "បូក", "ដក", "គុណ", "ចែក", "តារាងគុណ"],
+    type: "module",
+  },
+  {
+    id: "math-algebra",
+    href: "/mathematics#algebra",
+    icon: Sigma,
+    titleEn: "Algebra — Balance Scale (X + 5 = 12)",
+    titleKh: "ពិជគណិត — ល្បែងជញ្ជីង (X + 5 = 12)",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "Solve for X using the rules of equality on a live balance scale.",
+    descKh: "ដោះស្រាយរក X ដោយប្រើច្បាប់នៃភាពស្មើគ្នានៅលើជញ្ជីងផ្ទាល់។",
+    keywordsEn: ["algebra", "equation", "equations", "variable", "unknown", "x", "solve", "balance", "linear equation"],
+    keywordsKh: ["ពិជគណិត", "ពីជគណិត", "សមីការ", "អថេរ", "X", "ដោះស្រាយ", "ជញ្ជីង"],
+    type: "module",
+  },
+  {
+    id: "math-trigonometry",
+    href: "/mathematics#trigonometry",
+    icon: Sigma,
+    titleEn: "Trigonometry — Right Triangle (sin / cos / tan)",
+    titleKh: "ត្រីកោណមាត្រ — ត្រីកោណកែង (sin / cos / tan)",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "Drag the corner of a right triangle and watch sine, cosine and tangent update live.",
+    descKh: "អូសជ្រុងនៃត្រីកោណកែង ហើយមើល sine, cosine និង tangent ផ្លាស់ប្ដូរផ្ទាល់។",
+    keywordsEn: ["trigonometry", "trig", "sin", "cos", "tan", "sine", "cosine", "tangent", "right triangle", "pythagoras", "hypotenuse", "angle", "theta"],
+    keywordsKh: ["ត្រីកោណមាត្រ", "ត្រីកោណកែង", "ស៊ីនុស", "កូស៊ីនុស", "តង់ហ្សង់", "មុំ", "θ"],
+    type: "module",
+  },
+  {
+    id: "math-calculus",
+    href: "/mathematics#calculus",
+    icon: Sigma,
+    titleEn: "Calculus — Derivatives & Integrals",
+    titleKh: "គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល — ដេរីវេ និងអាំងតេក្រាល",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "A car-graph that shows the derivative as instantaneous speed and the integral as total distance traveled.",
+    descKh: "ក្រាហ្វិកឡានដែលបង្ហាញ derivative ជាល្បឿនភ្លាមៗ និង integral ជាចម្ងាយដែលបានធ្វើដំណើរសរុប។",
+    keywordsEn: ["calculus", "derivative", "derivatives", "integral", "integrals", "limit", "newton", "leibniz", "rate of change", "slope", "area under curve"],
+    keywordsKh: ["គណនាឌីផេរ៉ង់ស្យែល", "អាំងតេក្រាល", "ដេរីវេ", "អាំងតេក្រាល", "លីមីត", "ល្បឿនភ្លាមៗ"],
+    type: "module",
+  },
+
+  // ── Physics: Waves, Sound & Light sub-modules ────────────────────
+  {
+    id: "physics-optics",
+    href: "/physics/waves#optics",
+    icon: Sun,
+    titleEn: "Optics — Reflection, Refraction & the Visible Spectrum",
+    titleKh: "ឱ្យព្ទិច — ការជះត្រឡប់ ការចំណាំងបែរ និងវិសាលគមមើលឃើញ",
+    categoryEn: "Physics", categoryKh: "រូបវិទ្យា",
+    descEn: "All light is the same wave — only the wavelength changes. See the electromagnetic spectrum, the visible window, and how light reflects off mirrors and bends through water.",
+    descKh: "ពន្លឺទាំងអស់គឺជារលកដូចគ្នា — មានតែរលកប្រវែងផ្លាស់ប្ដូរ។ មើលវិសាលគមអេឡិចត្រូម៉ាញេទិច បង្អួចមើលឃើញ និងរបៀបដែលពន្លឺជះត្រឡប់ និងបត់បែននៅពេលឆ្លងកាត់ទឹក។",
+    keywordsEn: [
+      "optic", "optics", "optical",
+      "light", "visible light", "spectrum", "electromagnetic spectrum", "em spectrum", "rainbow", "color", "colour",
+      "reflection", "reflect", "mirror",
+      "refraction", "refract", "lens", "lenses", "prism",
+      "wavelength", "frequency", "photon",
+      "infrared", "ultraviolet", "uv", "x-ray", "gamma", "microwave", "radio wave",
+      "snell", "eye", "vision",
+    ],
+    keywordsKh: ["ឱ្យព្ទិច", "ពន្លឺ", "វិសាលគម", "ឥន្ទធនូ", "ពណ៌", "ការជះត្រឡប់", "ការចំណាំងបែរ", "ឡង់ទី", "ឡង់", "កែវ", "ភ្នែក", "រលកប្រវែង", "ហ្វូតុង", "កាំរស្មីអ៊ុលត្រាវីយូឡេ", "កាំរស្មីអ៊ិច"],
+    type: "module",
+  },
+  {
+    id: "physics-frequency",
+    href: "/physics/waves#frequency-pitch",
+    icon: Waves,
+    titleEn: "Frequency, Wavelength & Pitch",
+    titleKh: "ប្រេកង់ រលកប្រវែង និងសំឡេង",
+    categoryEn: "Physics", categoryKh: "រូបវិទ្យា",
+    descEn: "Higher frequency = more energy = higher pitch. The wave equation that ties them all together.",
+    descKh: "ប្រេកង់ខ្ពស់ = ថាមពលច្រើន = សំឡេងស្រួច។ សមីការរលកដែលភ្ជាប់ពួកវាទាំងអស់គ្នា។",
+    keywordsEn: ["frequency", "wavelength", "pitch", "hertz", "hz", "wave equation", "lambda", "amplitude", "wave"],
+    keywordsKh: ["ប្រេកង់", "រលកប្រវែង", "សំឡេងស្រួច", "សមីការរលក", "ហឺត", "λ"],
+    type: "module",
+  },
+  {
+    id: "physics-sound",
+    href: "/physics/waves#sound",
+    icon: Waves,
+    titleEn: "Sound — Why It Needs a Medium",
+    titleKh: "សំឡេង — ហេតុអ្វីវាត្រូវការមជ្ឈដ្ឋាន",
+    categoryEn: "Physics", categoryKh: "រូបវិទ្យា",
+    descEn: "In space no one can hear you scream — sound needs particles to travel through. Compare its speed in air, water and steel.",
+    descKh: "នៅក្នុងលំហអាកាស គ្មាននរណាឮការស្រែករបស់អ្នកទេ — សំឡេងត្រូវការភាគល្អិតដើម្បីធ្វើដំណើរ។ ប្រៀបធៀបល្បឿនរបស់វាក្នុងខ្យល់ ទឹក និងដែក។",
+    keywordsEn: ["sound", "audio", "acoustic", "vibration", "echo", "speed of sound", "air", "decibel", "loud"],
+    keywordsKh: ["សំឡេង", "ការញ័រ", "ល្បឿនសំឡេង", "ខ្យល់", "សំឡេងខ្លាំង"],
+    type: "module",
+  },
+
+  // ── Materials Science sub-modules ────────────────────────────────
+  {
+    id: "materials-big-three",
+    href: "/science/materials#big-three",
+    icon: Wrench,
+    titleEn: "The Big Three — Metals, Polymers, Ceramics & Glass",
+    titleKh: "ក្រុមធំទាំងបី — លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់",
+    categoryEn: "Materials Science", categoryKh: "វិទ្យាសាស្ត្រសម្ភារៈ",
+    descEn: "Tap a card to inspect each material family's lab profile — strengths, weaknesses, and where you find them in everyday Cambodian life.",
+    descKh: "ចុចលើកាតមួយដើម្បីពិនិត្យព័ត៌មានរបស់ក្រុមសម្ភារៈនីមួយៗ — ភាពរឹងមាំ ភាពខ្សោយ និងកន្លែងដែលអ្នកនឹងឃើញវានៅក្នុងជីវភាពប្រចាំថ្ងៃ។",
+    keywordsEn: ["metal", "metals", "polymer", "polymers", "plastic", "ceramic", "ceramics", "glass", "material families", "big three"],
+    keywordsKh: ["លោហៈ", "ប្លាស្ទិក", "សេរ៉ាមិច", "កញ្ចក់", "ក្រុមធំទាំងបី"],
+    type: "module",
+  },
+  {
+    id: "materials-stress-test",
+    href: "/science/materials#stress-test",
+    icon: Wrench,
+    titleEn: "Stress–Strain — Engineering Vocabulary",
+    titleKh: "ស្ត្រេស–បន្ទះ — វាក្យសព្ទវិស្វកម្ម",
+    categoryEn: "Materials Science", categoryKh: "វិទ្យាសាស្ត្រសម្ភារៈ",
+    descEn: "Tensile, compressive, ductile, brittle, elastic — the words engineers use to describe how strong is strong.",
+    descKh: "Tensile, compressive, ductile, brittle, elastic — ពាក្យដែលវិស្វករប្រើដើម្បីពិពណ៌នាថា 'រឹងមាំ' មានន័យយ៉ាងម៉េច។",
+    keywordsEn: ["stress", "strain", "tensile", "compressive", "ductile", "brittle", "elastic", "yield", "fracture", "strength", "engineering"],
+    keywordsKh: ["ស្ត្រេស", "បន្ទះ", "បត់", "បែក", "ការទាញ", "ការសង្កត់", "វិស្វកម្ម"],
+    type: "module",
+  },
+  {
+    id: "materials-lifecycle",
+    href: "/science/materials#lifecycle",
+    icon: Wrench,
+    titleEn: "Lifecycle — Glass vs. Plastic",
+    titleKh: "វដ្តជីវិត — កញ្ចក់ ប្រឆាំងនឹង ប្លាស្ទិក",
+    categoryEn: "Materials Science", categoryKh: "វិទ្យាសាស្ត្រសម្ភារៈ",
+    descEn: "Trace a glass bottle and a plastic bottle from factory to landfill (or back into circulation).",
+    descKh: "តាមដានដបកញ្ចក់ និងដបប្លាស្ទិកពីរោងចក្រដល់កន្លែងបោះបង់សំរាម (ឬត្រឡប់ទៅប្រើឡើងវិញ)។",
+    keywordsEn: ["lifecycle", "life cycle", "glass", "plastic", "recycle", "recycling", "landfill", "sustainability"],
+    keywordsKh: ["វដ្តជីវិត", "កញ្ចក់", "ប្លាស្ទិក", "ការកែច្នៃ", "ការអភិវឌ្ឍន៍ប្រកបដោយចីរភាព"],
+    type: "module",
+  },
+  {
+    id: "materials-upcycling",
+    href: "/science/materials#upcycling",
+    icon: Leaf,
+    titleEn: "Waste Upcycling: Frugal Engineering",
+    titleKh: "ការកែច្នៃកាកសំណល់៖ វិស្វកម្មសន្សំសំចៃ",
+    categoryEn: "Materials Science", categoryKh: "វិទ្យាសាស្ត្រសម្ភារៈ",
+    descEn: "Five buildable projects from waste PET bottles: mosquito/fly trap, floatation device, automatic pet waterer, bio-sand water filter, and a solar water heater.",
+    descKh: "គម្រោងសាងសង់បាន ៥ ពីដបប្លាស្ទិក PET ចោល៖ អន្ទាក់មូស/រុយ ឧបករណ៍អណ្ដែតទឹក ឧបករណ៍ឲ្យទឹកសត្វស្វ័យប្រវត្តិ តម្រងទឹកដោយខ្សាច់ និងគ្រឿងកម្ដៅទឹកថាមពលព្រះអាទិត្យ។",
+    keywordsEn: ["upcycling", "upcycle", "recycle", "pet bottle", "plastic bottle", "frugal engineering", "diy", "fly trap", "mosquito trap", "water filter", "solar heater", "bio-sand"],
+    keywordsKh: ["ការកែច្នៃ", "ដបប្លាស្ទិក", "PET", "វិស្វកម្មសន្សំសំចៃ", "អន្ទាក់រុយ", "អន្ទាក់មូស", "តម្រងទឹក", "ថាមពលព្រះអាទិត្យ"],
+    type: "module",
+  },
+
+  // ── Fossil Fuels sub-modules ─────────────────────────────────────
+  {
+    id: "fossil-formation",
+    href: "/fossil-fuels#formation",
+    icon: Fuel,
+    titleEn: "Formation — 300 Million Years in the Dark",
+    titleKh: "ការបង្កើត — ៣០០ លានឆ្នាំក្នុងភាពងងឹត",
+    categoryEn: "Fossil Fuels", categoryKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល",
+    descEn: "How plankton, mud, heat, and pressure became the oil and gas we drill today.",
+    descKh: "របៀបដែលប្លង់តុង ភក់ កំដៅ និងសម្ពាធ បានក្លាយជាប្រេង និងហ្គាសដែលយើងជីករកសព្វថ្ងៃ។",
+    keywordsEn: ["formation", "fossil", "oil formation", "petroleum", "plankton", "geology", "hydrocarbon"],
+    keywordsKh: ["ការបង្កើត", "ហ្វូស៊ីល", "ប្រេង", "ប្លង់តុង", "ភូគព្ភវិទ្យា"],
+    type: "module",
+  },
+  {
+    id: "fossil-distillation",
+    href: "/fossil-fuels#distillation",
+    icon: FlaskConical,
+    titleEn: "Fractional Distillation — One Oil, Six Products",
+    titleKh: "ការចម្រាញ់ដាច់ដោយផ្នែក — ប្រេងមួយ ផលិតផលប្រាំមួយ",
+    categoryEn: "Fossil Fuels", categoryKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល",
+    descEn: "Inside a refinery tower: gas, gasoline, kerosene, diesel, lubricating oil, and the heavy bitumen at the bottom.",
+    descKh: "នៅក្នុងប៉មចម្រាញ់៖ ហ្គាស ប្រេងសាំង ប្រេងកាត ប្រេងម៉ាស៊ូត ប្រេងរំអិល និងប៊ីទុយម៉ែនធ្ងន់នៅបាត។",
+    keywordsEn: ["distillation", "refinery", "fractional distillation", "gasoline", "petrol", "diesel", "kerosene", "bitumen", "boiling point"],
+    keywordsKh: ["ការចម្រាញ់", "រោងចម្រាញ់", "ប្រេងសាំង", "ប្រេងម៉ាស៊ូត", "ប្រេងកាត", "ប៊ីទុយម៉ែន", "ចំណុចរំពុះ"],
+    type: "module",
+  },
+  {
+    id: "fossil-combustion",
+    href: "/fossil-fuels#combustion",
+    icon: Fuel,
+    titleEn: "Internal Combustion — The Four-Stroke Cycle",
+    titleKh: "ការដុតផ្ទៃក្នុង — វដ្តបួនជំហាន",
+    categoryEn: "Fossil Fuels", categoryKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល",
+    descEn: "Suck, squeeze, bang, blow — the four moves a petrol engine repeats a thousand times a minute.",
+    descKh: "ស្រូប ច្របាច់ ផ្ទុះ រុញ — ចលនាបួននៃម៉ាស៊ីនប្រេងសាំងធ្វើម្ដងហើយម្ដងទៀតរាប់ពាន់ដងក្នុងមួយនាទី។",
+    keywordsEn: ["combustion", "engine", "four stroke", "4 stroke", "piston", "cylinder", "petrol engine", "motorbike", "car engine"],
+    keywordsKh: ["ការដុត", "ម៉ាស៊ីន", "បួនជំហាន", "ស៊ីឡាំង", "ម៉ាស៊ីនប្រេងសាំង", "ម៉ូតូ", "រថយន្ត"],
+    type: "module",
+  },
+  {
+    id: "fossil-pump-economics",
+    href: "/fossil-fuels#pump-economics",
+    icon: Fuel,
+    titleEn: "What You Pay For at the Pump — Petrol Economics",
+    titleKh: "អ្វីដែលអ្នកបង់ប្រាក់នៅស្ថានីយប្រេង — សេដ្ឋកិច្ចប្រេងសាំង",
+    categoryEn: "Fossil Fuels", categoryKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល",
+    descEn: "When you hand over 5,000 riel for a litre of petrol in Phnom Penh, where does the money go? Crude cost, refining, transport, taxes — the four buckets explained.",
+    descKh: "នៅពេលអ្នកបង់ ៥.០០០ រៀលសម្រាប់ប្រេងសាំងមួយលីត្រនៅភ្នំពេញ ប្រាក់នោះទៅណា? ថ្លៃប្រេងឆៅ ការចម្រាញ់ ការដឹកជញ្ជូន ពន្ធ — បួនធុងត្រូវបានពន្យល់។",
+    keywordsEn: ["pump", "gas pump", "petrol price", "gasoline price", "fuel price", "economics", "tax", "riel", "crude oil price", "phnom penh", "cost breakdown"],
+    keywordsKh: ["ស្ថានីយប្រេង", "តម្លៃប្រេងសាំង", "តម្លៃឥន្ធនៈ", "សេដ្ឋកិច្ច", "ពន្ធ", "រៀល", "ភ្នំពេញ", "ការបំបែកថ្លៃដើម"],
+    type: "module",
+  },
+  {
+    id: "fossil-asphalt",
+    href: "/fossil-fuels#asphalt",
+    icon: Mountain,
+    titleEn: "Asphalt: The World's Glue",
+    titleKh: "អាស្វាល់៖ កាវរបស់ពិភពលោក",
+    categoryEn: "Fossil Fuels", categoryKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល",
+    descEn: "Bitumen mixed with stone to pave 64 million km of road. Recipe, dashboard, and the science of why asphalt softens in the heat.",
+    descKh: "ប៊ីទុយម៉ែនលាយជាមួយថ្មដើម្បីចាក់ផ្លូវ ៦៤ លានគីឡូម៉ែត្រ។ រូបមន្ត ផ្ទាំងបង្ហាញ និងវិទ្យាសាស្ត្រនៃហេតុដែលអាស្វាល់ទន់នៅពេលក្ដៅ។",
+    keywordsEn: ["asphalt", "bitumen", "tar", "road", "pavement", "civil engineering", "tarmac", "highway"],
+    keywordsKh: ["អាស្វាល់", "ប៊ីទុយម៉ែន", "ផ្លូវ", "ផ្លូវលាតកៅស៊ូ", "វិស្វកម្មសំណង់ស៊ីវិល", "ផ្លូវធំ"],
+    type: "module",
+  },
+
   {
     id: "sexual-health",
     href: "/sexual-health",

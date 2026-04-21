@@ -83,6 +83,7 @@ export default function FossilFuelsPage() {
 
       {/* ── 1. Formation & scarcity ───────────────────────────────── */}
       <Section
+        id="formation"
         eyebrowEn="01 · Geology"
         eyebrowKh="០១ · ភូគព្ភវិទ្យា"
         titleEn="Formation — 300 million years in the dark"
@@ -97,6 +98,7 @@ export default function FossilFuelsPage() {
 
       {/* ── 2. Fractional distillation ────────────────────────────── */}
       <Section
+        id="distillation"
         eyebrowEn="02 · Chemistry of separation"
         eyebrowKh="០២ · គីមីនៃការបំបែក"
         titleEn="Fractional distillation — one oil, six products"
@@ -110,6 +112,7 @@ export default function FossilFuelsPage() {
 
       {/* ── 3. Internal combustion engine ─────────────────────────── */}
       <Section
+        id="combustion"
         eyebrowEn="03 · Physics of the explosion"
         eyebrowKh="០៣ · ហ្វីស៊ីកនៃការផ្ទុះ"
         titleEn="Internal combustion — the four-stroke cycle"
@@ -124,6 +127,7 @@ export default function FossilFuelsPage() {
 
       {/* ── 4. Economics ──────────────────────────────────────────── */}
       <Section
+        id="pump-economics"
         eyebrowEn="04 · Economics"
         eyebrowKh="០៤ · សេដ្ឋកិច្ច"
         titleEn="What you actually pay for at the pump"
@@ -137,6 +141,7 @@ export default function FossilFuelsPage() {
 
       {/* ── 5. Asphalt: the world's glue ──────────────────────────── */}
       <Section
+        id="asphalt"
         eyebrowEn="05 · Civil Engineering"
         eyebrowKh="០៥ · វិស្វកម្មសំណង់ស៊ីវិល"
         titleEn="Asphalt: The World's Glue"
@@ -167,8 +172,9 @@ export default function FossilFuelsPage() {
 // ════════════════════════════════════════════════════════════════════════════
 
 function Section({
-  eyebrowEn, eyebrowKh, titleEn, titleKh, descEn, descKh, isKh, children,
+  id, eyebrowEn, eyebrowKh, titleEn, titleKh, descEn, descKh, isKh, children,
 }: {
+  id?: string;
   eyebrowEn: string; eyebrowKh: string;
   titleEn: string; titleKh: string;
   descEn: string; descKh: string;
@@ -176,7 +182,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section id={id} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24">
       <div className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-amber-400/90 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
         <Sparkles className="w-3 h-3" />
         {isKh ? eyebrowKh : eyebrowEn}

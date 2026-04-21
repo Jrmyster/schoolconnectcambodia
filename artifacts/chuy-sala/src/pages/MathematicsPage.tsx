@@ -80,6 +80,7 @@ export default function MathematicsPage() {
 
       {/* ── 1. Arithmetic ────────────────────────────────────────────── */}
       <Section
+        id="arithmetic"
         eyebrowEn="01 · Foundation"
         eyebrowKh="០១ · មូលដ្ឋាន"
         titleEn="Arithmetic — the foundation"
@@ -94,6 +95,7 @@ export default function MathematicsPage() {
 
       {/* ── 2. Algebra ───────────────────────────────────────────────── */}
       <Section
+        id="algebra"
         eyebrowEn="02 · The Unknown"
         eyebrowKh="០២ · មិនស្គាល់"
         titleEn="Algebra — finding the unknown"
@@ -108,6 +110,7 @@ export default function MathematicsPage() {
 
       {/* ── 3. Trigonometry ─────────────────────────────────────────── */}
       <Section
+        id="trigonometry"
         eyebrowEn="03 · Triangles"
         eyebrowKh="០៣ · ត្រីកោណ"
         titleEn="Trigonometry — the math of triangles"
@@ -124,6 +127,7 @@ export default function MathematicsPage() {
 
       {/* ── 4. Calculus ─────────────────────────────────────────────── */}
       <Section
+        id="calculus"
         eyebrowEn="04 · Change"
         eyebrowKh="០៤ · ការផ្លាស់ប្ដូរ"
         titleEn="Calculus — the math of change"
@@ -156,8 +160,9 @@ export default function MathematicsPage() {
 // ════════════════════════════════════════════════════════════════════════════
 
 function Section({
-  eyebrowEn, eyebrowKh, titleEn, titleKh, khTerm, descEn, descKh, isKh, children,
+  id, eyebrowEn, eyebrowKh, titleEn, titleKh, khTerm, descEn, descKh, isKh, children,
 }: {
+  id?: string;
   eyebrowEn: string; eyebrowKh: string;
   titleEn: string; titleKh: string;
   khTerm?: string;
@@ -166,7 +171,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section id={id} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24">
       <div className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-blue-700 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
         <Sparkles className="w-3 h-3" />
         {isKh ? eyebrowKh : eyebrowEn}

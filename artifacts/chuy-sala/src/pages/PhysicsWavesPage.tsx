@@ -412,7 +412,7 @@ function LongitudinalAnim() {
 // ── Frequency & wavelength card ───────────────────────────────────────────
 function FrequencyWavelengthCard({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
   return (
-    <section className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10" style={CARD_BG}>
+    <section id="frequency-pitch" className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10 scroll-mt-24" style={CARD_BG}>
       <CornerMarks subtle />
       <div className="relative p-5 sm:p-6 grid md:grid-cols-[1fr_280px] gap-5 items-start">
         <div>
@@ -512,7 +512,7 @@ function FrequencyCompareSvg() {
 // ── Sound card ────────────────────────────────────────────────────────────
 function SoundCard({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
   return (
-    <section className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10" style={CARD_BG}>
+    <section id="sound" className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10 scroll-mt-24" style={CARD_BG}>
       <CornerMarks subtle />
       <div className="relative p-5 sm:p-6 grid md:grid-cols-[1fr_260px] gap-5 items-start">
         <div>
@@ -640,7 +640,7 @@ const BANDS: SpectrumBand[] = [
 
 function EMSpectrumCard({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
   return (
-    <section className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10" style={CARD_BG}>
+    <section id="optics" className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden mb-10 scroll-mt-24" style={CARD_BG}>
       <CornerMarks subtle />
       <div className="relative p-5 sm:p-6">
         <div className="flex items-center gap-3 mb-4">
