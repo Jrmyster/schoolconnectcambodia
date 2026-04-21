@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -154,6 +154,24 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "4. Chemistry in the Real World",
         labelKh: "៤. គីមីវិទ្យាក្នុងពិភពពិត",
         icon: Sparkles,
+      },
+      {
+        href: "/chemistry/organic-101",
+        labelEn: "5. Organic Chemistry 101",
+        labelKh: "៥. គីមីសរីរាង្គ ១០១",
+        icon: Hexagon,
+      },
+      {
+        href: "/science/chemistry/inorganic",
+        labelEn: "6. Inorganic Chemistry 101",
+        labelKh: "៦. គីមីអសរីរាង្គ ១០១",
+        icon: Diamond,
+      },
+      {
+        href: "/science/chemistry/physical",
+        labelEn: "7. Physical Chemistry",
+        labelKh: "៧. គីមីរូបវិទ្យា",
+        icon: Sigma,
       },
       {
         href: "/quantum-limit",
@@ -833,7 +851,9 @@ export function Navbar() {
                   </button>
 
                   {isExpanded && (
-                    <div className="ml-4 mt-0.5 mb-1 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3">
+                    <div
+                      className="nav-dropdown-scroll ml-4 mt-0.5 mb-1 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3 max-h-[60vh] overflow-y-auto overscroll-contain"
+                    >
                       {group.items.map((item) => {
                         const isActive =
                           !item.external &&
