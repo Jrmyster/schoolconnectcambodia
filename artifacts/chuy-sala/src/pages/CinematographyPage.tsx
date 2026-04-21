@@ -12,6 +12,8 @@ import {
   Sparkles,
   CheckCircle2,
   AlertCircle,
+  Glasses,
+  Layers,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -120,6 +122,18 @@ export default function CinematographyPage() {
           isKh={isKh}
         >
           <ShotSizesGallery isKh={isKh} />
+        </Section>
+
+        {/* ── Tool 4 ───────────────────────────────────────────────── */}
+        <Section
+          icon={<Glasses className="w-3.5 h-3.5" />}
+          en="3D Cinema: The Illusion of Depth"
+          kh="ភាពយន្ត 3D៖ ការបំភាន់ជម្រៅ"
+          descEn="A flat screen has no depth. So how does an alien spaceship seem to fly out at your face? It's a beautiful trick — half biology, half physics — that fools your brain into building a third dimension out of two pictures."
+          descKh="អេក្រង់រាបស្មើគ្មានជម្រៅឡើយ។ ដូច្នេះតើយានអវកាសហោះហើរចេញមករកមុខអ្នកយ៉ាងដូចម្តេច? វាជាការបំភាន់យ៉ាងស្រស់ស្អាត — ពាក់កណ្តាលជីវវិទ្យា ពាក់កណ្តាលរូបវិទ្យា — ដែលបញ្ឆោតខួរក្បាលរបស់អ្នកឱ្យបង្កើតវិមាត្រទីបីពីរូបពីរ។"
+          isKh={isKh}
+        >
+          <ThreeDCinemaModule isKh={isKh} />
         </Section>
 
         {/* ── Closing strip ───────────────────────────────────────── */}
@@ -1156,5 +1170,564 @@ function FilmGrainOverlay() {
         backgroundSize: "300px 300px",
       }}
     />
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tool 4: 3D Cinema — The Illusion of Depth / ភាពយន្ត 3D
+//  Four cards in a dark-cinema aesthetic: stereopsis, dual-camera rig + the
+//  "two movies overlapping" projector trick, and the two glasses technologies
+//  (anaglyph red/cyan vs polarised RealD 3D).
+// ════════════════════════════════════════════════════════════════════════════
+
+const T = (en: string, kh: string, isKh: boolean) =>
+  isKh ? kh : en;
+
+function ThreeDCinemaModule({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="space-y-6">
+      <StereopsisCard isKh={isKh} />
+      <DualCameraCard isKh={isKh} />
+      <GlassesComparisonCard isKh={isKh} />
+    </div>
+  );
+}
+
+// ── Sub-card wrapper — black panel with a subtle projector glow ────────────
+function CinemaPanel({
+  step,
+  titleEn,
+  titleKh,
+  isKh,
+  children,
+}: {
+  step: string;
+  titleEn: string;
+  titleKh: string;
+  isKh: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <article
+      className="relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl"
+      style={{
+        background:
+          "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(250,204,21,0.07) 0%, transparent 65%), linear-gradient(180deg, #050505 0%, #0a0a0a 100%)",
+      }}
+    >
+      <header className="px-5 sm:px-6 pt-5 pb-3 border-b border-white/10">
+        <div
+          className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-yellow-300/80 mb-1 ${
+            isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {step}
+        </div>
+        <h3
+          className={`text-lg sm:text-xl font-bold text-white ${
+            isKh ? "font-khmer leading-snug" : "font-display"
+          }`}
+        >
+          {isKh ? titleKh : titleEn}
+        </h3>
+      </header>
+      <div className="px-5 sm:px-6 py-5">{children}</div>
+    </article>
+  );
+}
+
+// ── 4.1 The Biology of Depth (Stereopsis) ─────────────────────────────────
+function StereopsisCard({ isKh }: { isKh: boolean }) {
+  const [view, setView] = useState<"left" | "right" | "both">("both");
+  return (
+    <CinemaPanel
+      step={T("01 · The Biology of Depth", "០១ · ជីវវិទ្យានៃជម្រៅ", isKh)}
+      titleEn="Stereopsis — Why two eyes see one world"
+      titleKh="ស្តេរ៉េអុបស៊ីស — ហេតុអ្វីភ្នែកពីរឃើញពិភពតែមួយ"
+      isKh={isKh}
+    >
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-5 items-center">
+        <div>
+          <p className={`text-white/80 text-sm sm:text-base leading-relaxed mb-3 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {T(
+              "Hold up a finger and close one eye, then the other. Your finger jumps sideways. That's because your eyes are about 6.5 cm apart, so each one sees the world from a slightly different angle. Your brain compares the two pictures and uses the difference to calculate how far away things are. This is called stereopsis — the biology that 3D movies hijack.",
+              "លើកម្រាមដៃមួយឡើង រួចបិទភ្នែកម្ខាងម្តងៗ។ ម្រាមដៃរបស់អ្នកលោតទៅខាង។ នោះដោយព្រោះភ្នែករបស់អ្នកនៅឆ្ងាយគ្នាប្រហែល ៦.៥ ស.ម ដូច្នេះម្នាក់ៗមើលឃើញពិភពលោកពីមុំខុសគ្នាបន្តិច។ ខួរក្បាលរបស់អ្នកប្រៀបធៀបរូបទាំងពីរ ហើយប្រើភាពខុសគ្នានោះដើម្បីគណនាថាវត្ថុនៅឆ្ងាយប៉ុណ្ណា។ នេះត្រូវបានគេហៅថា ស្តេរ៉េអុបស៊ីស — ជីវវិទ្យាដែលភាពយន្ត 3D ប្រើ។",
+              isKh,
+            )}
+          </p>
+          <div className="rounded-xl border border-yellow-300/20 bg-yellow-300/5 p-3">
+            <div
+              id="cine-stereopsis-toggle-label"
+              className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-yellow-300 mb-1 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            >
+              {T("Try it →", "សាកល្បង →", isKh)}
+            </div>
+            <div role="group" aria-labelledby="cine-stereopsis-toggle-label" className="flex flex-wrap gap-2">
+              {([
+                ["left", T("Left eye only", "ភ្នែកឆ្វេងតែប៉ុណ្ណោះ", isKh)],
+                ["right", T("Right eye only", "ភ្នែកស្តាំតែប៉ុណ្ណោះ", isKh)],
+                ["both", T("Both → brain combines", "ទាំងពីរ → ខួរក្បាលផ្សំ", isKh)],
+              ] as const).map(([v, label]) => {
+                const active = view === v;
+                return (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => setView(v)}
+                    aria-pressed={active}
+                    className={`px-3 py-1.5 rounded-md text-xs font-bold border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                      active
+                        ? "bg-yellow-400 text-black border-yellow-300 shadow-[0_0_10px_rgba(250,204,21,0.5)]"
+                        : "bg-white/5 text-white/75 border-white/15 hover:border-yellow-300/60 hover:text-white"
+                    } ${isKh ? "font-khmer" : ""}`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <StereopsisSvg view={view} isKh={isKh} />
+      </div>
+    </CinemaPanel>
+  );
+}
+
+function StereopsisSvg({ view, isKh }: { view: "left" | "right" | "both"; isKh: boolean }) {
+  const showL = view === "left" || view === "both";
+  const showR = view === "right" || view === "both";
+  // Object position
+  const obj = { x: 240, y: 60 };
+  const leftEye = { x: 200, y: 200 };
+  const rightEye = { x: 280, y: 200 };
+  return (
+    <div className="rounded-xl border border-white/10 bg-black p-3">
+      <svg viewBox="0 0 480 260" className="w-full h-auto" role="img" aria-label={T("Stereopsis diagram", "ដ្យាក្រាមស្តេរ៉េអុបស៊ីស", isKh)}>
+        {/* faint grid */}
+        <defs>
+          <pattern id="cine-3d-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(250,204,21,0.06)" strokeWidth="0.6" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cine-3d-grid)" />
+
+        {/* Object — a glowing 3D-ish cube */}
+        <g style={{ filter: "drop-shadow(0 0 6px rgba(250,204,21,0.5))" }}>
+          <polygon points="240,30 280,50 280,90 240,110 200,90 200,50" fill="#1a1a1a" stroke="#facc15" strokeWidth="1.5" />
+          <polygon points="240,30 280,50 240,70 200,50" fill="rgba(250,204,21,0.18)" stroke="#facc15" strokeWidth="1" />
+          <line x1="240" y1="70" x2="240" y2="110" stroke="#facc15" strokeWidth="1" opacity="0.6" />
+        </g>
+
+        {/* Sight lines */}
+        {showL && (
+          <line x1={leftEye.x} y1={leftEye.y} x2={obj.x} y2={obj.y + 40} stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="3 3" style={{ filter: "drop-shadow(0 0 3px #22d3ee)" }} />
+        )}
+        {showR && (
+          <line x1={rightEye.x} y1={rightEye.y} x2={obj.x} y2={obj.y + 40} stroke="#f472b6" strokeWidth="1.5" strokeDasharray="3 3" style={{ filter: "drop-shadow(0 0 3px #f472b6)" }} />
+        )}
+
+        {/* Eyes */}
+        <g>
+          {/* Left eye */}
+          <ellipse cx={leftEye.x} cy={leftEye.y} rx="22" ry="14" fill="#0f172a" stroke={showL ? "#22d3ee" : "rgba(255,255,255,0.25)"} strokeWidth="1.5" />
+          <circle cx={leftEye.x + 4} cy={leftEye.y} r="6" fill={showL ? "#22d3ee" : "rgba(255,255,255,0.2)"} />
+          <text x={leftEye.x} y={leftEye.y + 32} fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} fill="#22d3ee" textAnchor="middle">
+            {T("LEFT EYE", "ភ្នែកឆ្វេង", isKh)}
+          </text>
+          {/* Right eye */}
+          <ellipse cx={rightEye.x} cy={rightEye.y} rx="22" ry="14" fill="#0f172a" stroke={showR ? "#f472b6" : "rgba(255,255,255,0.25)"} strokeWidth="1.5" />
+          <circle cx={rightEye.x - 4} cy={rightEye.y} r="6" fill={showR ? "#f472b6" : "rgba(255,255,255,0.2)"} />
+          <text x={rightEye.x} y={rightEye.y + 32} fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} fill="#f472b6" textAnchor="middle">
+            {T("RIGHT EYE", "ភ្នែកស្តាំ", isKh)}
+          </text>
+        </g>
+
+        {/* Brain combination indicator */}
+        {view === "both" && (
+          <g>
+            <rect x="195" y="232" width="90" height="20" rx="10" fill="rgba(250,204,21,0.12)" stroke="#facc15" strokeWidth="1" />
+            <text x="240" y="246" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle" fontWeight="bold">
+              {T("→ DEPTH!", "→ ជម្រៅ!", isKh)}
+            </text>
+          </g>
+        )}
+
+        {/* Object label */}
+        <text x="240" y="20" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+          {T("OBJECT", "វត្ថុ", isKh)}
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// ── 4.2 The Camera Trick (filming + projecting in 3D) ──────────────────────
+function DualCameraCard({ isKh }: { isKh: boolean }) {
+  const [glassesOn, setGlassesOn] = useState(true);
+  return (
+    <CinemaPanel
+      step={T("02 · The Camera Trick", "០២ · ល្បិចកាមេរ៉ា", isKh)}
+      titleEn="Two lenses on set, two films on screen"
+      titleKh="កែវពីរនៅទីកន្លែងថត រូបពីរនៅលើអេក្រង់"
+      isKh={isKh}
+    >
+      <div className="grid md:grid-cols-2 gap-5">
+        {/* Left: dual camera rig */}
+        <div>
+          <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-yellow-300/80 mb-2 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {T("On the film set", "នៅទីកន្លែងថតភាពយន្ត", isKh)}
+          </div>
+          <div className="rounded-xl border border-white/10 bg-black p-3 mb-3">
+            <DualCameraSvg isKh={isKh} />
+          </div>
+          <p className={`text-white/80 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {T(
+              "A 3D rig holds two matching cameras a few inches apart — exactly mimicking the spacing of human eyes. Both cameras roll at the same time, capturing the same scene from two slightly different angles. The director now has TWO movies — one for the left eye, one for the right.",
+              "ឧបករណ៍តម្រឹម 3D ផ្ទុកកាមេរ៉ាដូចគ្នាពីរ ឆ្ងាយគ្នាពីរបីអ៊ីញ — ធ្វើត្រាប់តាមចំងាយរបស់ភ្នែកមនុស្សយ៉ាងពិតប្រាកដ។ កាមេរ៉ាទាំងពីរបញ្ចូលទាន់ពេលដូចគ្នា ថតឆាកដដែលពីមុំខុសគ្នាបន្តិច។ ឥឡូវនេះអ្នកដឹកនាំមានភាពយន្តពីរ — មួយសម្រាប់ភ្នែកឆ្វេង មួយសម្រាប់ភ្នែកស្តាំ។",
+              isKh,
+            )}
+          </p>
+        </div>
+
+        {/* Right: projector + screen with overlap */}
+        <div>
+          <div className="flex items-center justify-between mb-2 gap-2">
+            <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-yellow-300/80 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {T("In the cinema", "នៅរោងភាពយន្ត", isKh)}
+            </div>
+            <button
+              type="button"
+              onClick={() => setGlassesOn((v) => !v)}
+              aria-pressed={glassesOn}
+              aria-label={T("Toggle 3D glasses on or off", "បិទបើកវ៉ែនតា 3D", isKh)}
+              className={`px-2.5 py-1 rounded-md text-[11px] font-bold border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                glassesOn
+                  ? "bg-yellow-400 text-black border-yellow-300"
+                  : "bg-white/5 text-white/70 border-white/15 hover:border-yellow-300/60"
+              } ${isKh ? "font-khmer" : ""}`}
+            >
+              {glassesOn ? T("Glasses ON", "ពាក់វ៉ែនតា", isKh) : T("Glasses OFF", "ដោះវ៉ែនតា", isKh)}
+            </button>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-black p-3 mb-3">
+            <ProjectorScreenSvg glassesOn={glassesOn} isKh={isKh} />
+          </div>
+          <p className={`text-white/80 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {T(
+              "The cinema's projector plays BOTH movies on the same screen at the exact same time. With glasses off, you see two ghostly overlapping images — that's why the screen looks blurry and out of focus. The glasses are not magic windows; they are filters that hand each eye only its own picture.",
+              "ម៉ាស៊ីនបញ្ចាំងរូបនៃរោងភាពយន្តចាក់ភាពយន្តទាំងពីរលើអេក្រង់ដដែលនៅពេលដូចគ្នាបេះបិទ។ ពេលដោះវ៉ែនតា អ្នកឃើញរូបពីរត្រួតគ្នាដូចខ្មោច — នោះហើយជាហេតុដែលអេក្រង់ឃើញព្រិលខ្មៅ។ វ៉ែនតាមិនមែនជាបង្អួចមន្តអាគមទេ វាគ្រាន់តែជាតម្រងដែលប្រគល់ឱ្យភ្នែកនីមួយៗនូវរូបរបស់វាផ្ទាល់។",
+              isKh,
+            )}
+          </p>
+        </div>
+      </div>
+    </CinemaPanel>
+  );
+}
+
+function DualCameraSvg({ isKh }: { isKh: boolean }) {
+  return (
+    <svg viewBox="0 0 360 200" className="w-full h-auto" role="img" aria-label={T("3D camera rig", "ឧបករណ៍កាមេរ៉ា 3D", isKh)}>
+      {/* Tripod */}
+      <line x1="180" y1="140" x2="180" y2="190" stroke="#facc15" strokeWidth="2" />
+      <line x1="180" y1="190" x2="150" y2="200" stroke="#facc15" strokeWidth="2" />
+      <line x1="180" y1="190" x2="210" y2="200" stroke="#facc15" strokeWidth="2" />
+      <line x1="180" y1="190" x2="180" y2="200" stroke="#facc15" strokeWidth="2" />
+      {/* Rig bar */}
+      <rect x="100" y="135" width="160" height="10" rx="2" fill="#1a1a1a" stroke="#facc15" strokeWidth="1.2" />
+
+      {/* Two cameras */}
+      {[
+        { x: 122, color: "#22d3ee", label: T("LEFT CAM", "កាមេរ៉ាឆ្វេង", isKh) },
+        { x: 218, color: "#f472b6", label: T("RIGHT CAM", "កាមេរ៉ាស្តាំ", isKh) },
+      ].map((c) => (
+        <g key={c.label} style={{ filter: `drop-shadow(0 0 3px ${c.color})` }}>
+          <rect x={c.x} y="80" width="40" height="55" rx="4" fill="#0a0a0a" stroke={c.color} strokeWidth="1.5" />
+          <circle cx={c.x + 20} cy="108" r="13" fill="#000" stroke={c.color} strokeWidth="1.5" />
+          <circle cx={c.x + 20} cy="108" r="6" fill={c.color} opacity="0.4" />
+          {/* Sight beam */}
+          <line x1={c.x + 20} y1="95" x2={c.x + 20 + (c.color === "#22d3ee" ? -50 : 50) * 0.4} y2="20" stroke={c.color} strokeWidth="1" strokeDasharray="2 3" opacity="0.7" />
+          <text x={c.x + 20} y="76" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill={c.color} textAnchor="middle" fontWeight="bold">{c.label}</text>
+        </g>
+      ))}
+
+      {/* Subject */}
+      <circle cx="180" cy="20" r="10" fill="#facc15" opacity="0.85" />
+      <text x="180" y="14" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+        {T("ACTOR", "តួសម្តែង", isKh)}
+      </text>
+
+      {/* Spacing label */}
+      <defs>
+        <marker id="cine-arr-l" viewBox="0 0 8 8" refX="2" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 6 4 L 0 8 z" fill="#facc15" />
+        </marker>
+      </defs>
+      <line x1="142" y1="158" x2="218" y2="158" stroke="#facc15" strokeWidth="0.8" markerStart="url(#cine-arr-l)" markerEnd="url(#cine-arr-l)" />
+      <text x="180" y="172" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+        {T("~6.5 cm — eye spacing", "~៦.៥ ស.ម — ចំងាយភ្នែក", isKh)}
+      </text>
+    </svg>
+  );
+}
+
+function ProjectorScreenSvg({ glassesOn, isKh }: { glassesOn: boolean; isKh: boolean }) {
+  // Two ghost copies of a simple shape (a triangle "spaceship") — overlap when off
+  return (
+    <svg viewBox="0 0 360 200" className="w-full h-auto" role="img" aria-label={T("Projector and screen", "ម៉ាស៊ីនបញ្ចាំង និងអេក្រង់", isKh)}>
+      {/* Projector */}
+      <g style={{ filter: "drop-shadow(0 0 4px rgba(250,204,21,0.5))" }}>
+        <rect x="10" y="100" width="50" height="35" rx="4" fill="#0a0a0a" stroke="#facc15" strokeWidth="1.5" />
+        <circle cx="60" cy="117" r="6" fill="#facc15" opacity="0.5" />
+      </g>
+      {/* Two beam cones */}
+      <polygon points="60,113 320,40 320,90" fill="rgba(34,211,238,0.10)" stroke="rgba(34,211,238,0.35)" strokeWidth="1" />
+      <polygon points="60,121 320,110 320,160" fill="rgba(244,114,182,0.10)" stroke="rgba(244,114,182,0.35)" strokeWidth="1" />
+
+      {/* Screen */}
+      <rect x="320" y="20" width="34" height="160" fill="#1a1a1a" stroke="#facc15" strokeWidth="1.5" rx="2" />
+
+      {/* Two projected spaceships overlapping on the screen */}
+      {/* Left-eye image (cyan) */}
+      <g opacity={glassesOn ? 0.95 : 0.7}>
+        <polygon points="332,90 348,100 332,110" fill={glassesOn ? "#22d3ee" : "rgba(34,211,238,0.7)"} stroke="#22d3ee" strokeWidth="1" />
+      </g>
+      {/* Right-eye image (pink), offset slightly */}
+      <g opacity={glassesOn ? 0.95 : 0.7} transform={glassesOn ? "translate(0,0)" : "translate(-4,2)"}>
+        <polygon points="332,90 348,100 332,110" fill={glassesOn ? "#f472b6" : "rgba(244,114,182,0.7)"} stroke="#f472b6" strokeWidth="1" />
+      </g>
+
+      {/* Audience eye */}
+      <g>
+        <ellipse cx="190" cy="180" rx="18" ry="11" fill="#0a0a0a" stroke="#facc15" strokeWidth="1.2" />
+        <circle cx="190" cy="180" r="5" fill="#facc15" opacity="0.7" />
+        <text x="190" y="160" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+          {glassesOn ? T("With glasses", "ពាក់វ៉ែនតា", isKh) : T("Naked eye", "ភ្នែកទទេ", isKh)}
+        </text>
+      </g>
+
+      {/* Result caption */}
+      <text x="180" y="16" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} fill={glassesOn ? "#facc15" : "#f472b6"} textAnchor="middle" fontWeight="bold">
+        {glassesOn
+          ? T("Each eye sees ONE crisp image → 3D depth", "ភ្នែកនីមួយៗឃើញរូបច្បាស់មួយ → ជម្រៅ 3D", isKh)
+          : T("Two images overlap → looks blurry", "រូបពីរត្រួតគ្នា → ឃើញព្រិល", isKh)}
+      </text>
+    </svg>
+  );
+}
+
+// ── 4.3 How the Glasses Work — Anaglyph vs Polarisation ────────────────────
+function GlassesComparisonCard({ isKh }: { isKh: boolean }) {
+  return (
+    <CinemaPanel
+      step={T("03 · How the Glasses Filter Light", "០៣ · របៀបវ៉ែនតាតម្រងពន្លឺ", isKh)}
+      titleEn="Two filters, two technologies"
+      titleKh="តម្រងពីរ បច្ចេកវិទ្យាពីរ"
+      isKh={isKh}
+    >
+      <div className="grid md:grid-cols-2 gap-5">
+        {/* Anaglyph */}
+        <div className="rounded-xl border border-white/15 bg-black p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/15 flex items-center justify-center">
+              <Layers className="w-4 h-4 text-white/80" />
+            </div>
+            <div className="min-w-0">
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-white/60 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {T("Classic — the old method", "បុរាណ — វិធីចាស់", isKh)}
+              </div>
+              <h4 className={`text-base font-bold text-white ${isKh ? "font-khmer" : ""}`}>
+                {T("Anaglyph (Red/Cyan) — តម្រងពណ៌", "អាណាគ្លីហ្វ (ក្រហម/ស៊ីយ៉ាន់) — Anaglyph", isKh)}
+              </h4>
+            </div>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-black p-2 mb-3">
+            <AnaglyphSvg isKh={isKh} />
+          </div>
+          <p className={`text-white/80 text-sm leading-relaxed mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {T(
+              "The two films are tinted: the left-eye film is printed in red and the right-eye film in cyan, then overlapped. Your glasses have one RED lens and one CYAN lens. The red lens BLOCKS cyan light (only the red image passes). The cyan lens BLOCKS red light (only the cyan image passes). Each eye gets just one picture.",
+              "រូបទាំងពីរត្រូវបានជ្រលក់ពណ៌ ៖ រូបភ្នែកឆ្វេងបោះពុម្ពពណ៌ក្រហម រូបភ្នែកស្តាំពណ៌ស៊ីយ៉ាន់ រួចត្រួតគ្នា។ វ៉ែនតារបស់អ្នកមានកញ្ចក់ក្រហមមួយ និងកញ្ចក់ស៊ីយ៉ាន់មួយ។ កញ្ចក់ក្រហមរារាំងពន្លឺស៊ីយ៉ាន់ (តែរូបក្រហមទេដែលឆ្លងកាត់)។ កញ្ចក់ស៊ីយ៉ាន់រារាំងពន្លឺក្រហម (តែរូបស៊ីយ៉ាន់ទេដែលឆ្លងកាត់)។ ភ្នែកនីមួយៗទទួលបានតែរូបមួយ។",
+              isKh,
+            )}
+          </p>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded border border-emerald-400/30 bg-emerald-400/5 p-2">
+              <div className={`font-mono font-bold text-emerald-300 mb-0.5 ${isKh ? "font-khmer text-[11px]" : ""}`}>{T("PRO", "ល្អ", isKh)}</div>
+              <div className={`text-white/70 ${isKh ? "font-khmer" : ""}`}>{T("Cheap, works on any TV or printed page.", "ថោក ដំណើរការលើទូរទស្សន៍ ឬក្រដាសបោះពុម្ព។", isKh)}</div>
+            </div>
+            <div className="rounded border border-rose-400/30 bg-rose-400/5 p-2">
+              <div className={`font-mono font-bold text-rose-300 mb-0.5 ${isKh ? "font-khmer text-[11px]" : ""}`}>{T("CON", "មិនល្អ", isKh)}</div>
+              <div className={`text-white/70 ${isKh ? "font-khmer" : ""}`}>{T("Colours look strange — half the palette is gone.", "ពណ៌ឃើញចម្លែក — បាត់ពាក់កណ្តាលសំណុំពណ៌។", isKh)}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Polarisation */}
+        <div className="rounded-xl border border-yellow-300/30 bg-black p-4 shadow-[0_0_18px_rgba(250,204,21,0.08)]">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-9 h-9 rounded-lg bg-yellow-400/10 border border-yellow-300/40 flex items-center justify-center">
+              <Glasses className="w-4 h-4 text-yellow-300" />
+            </div>
+            <div className="min-w-0">
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-yellow-300/80 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {T("Modern — the cinema method", "ទំនើប — វិធីរោងភាពយន្ត", isKh)}
+              </div>
+              <h4 className={`text-base font-bold text-white ${isKh ? "font-khmer" : ""}`}>
+                {T("Polarisation (RealD 3D) — ប្លែងកម្មពន្លឺ", "ប្លែងកម្មពន្លឺ (RealD 3D) — Polarisation", isKh)}
+              </h4>
+            </div>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-black p-2 mb-3">
+            <PolarisationSvg isKh={isKh} />
+          </div>
+          <p className={`text-white/80 text-sm leading-relaxed mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {T(
+              "Light is a wave that normally vibrates in every direction at once. The cinema projector adds a special filter that gives it a 'handedness' — like a spiral staircase. The left-eye image goes out as a left-handed spiral, the right-eye image as a right-handed spiral. Each lens of your glasses is a matching spiral filter that only lets light of its own handedness pass through. Full colour. No headache.",
+              "ពន្លឺជារលកដែលជាធម្មតាញ័រគ្រប់ទិសដៅក្នុងពេលតែមួយ។ ម៉ាស៊ីនបញ្ចាំងភាពយន្តបន្ថែមតម្រងពិសេសដែលផ្តល់ឱ្យវានូវ 'ទិសបង្វិល' — ដូចជាជណ្តើរវង់។ រូបភ្នែកឆ្វេងចេញជាខ្សែវង់បង្វិលឆ្វេង រូបភ្នែកស្តាំជាខ្សែវង់បង្វិលស្តាំ។ កញ្ចក់នីមួយៗនៃវ៉ែនតារបស់អ្នកគឺជាតម្រងវង់ត្រូវគ្នា ដែលអនុញ្ញាតឱ្យតែពន្លឺនៃទិសបង្វិលផ្ទាល់ខ្លួនឆ្លងកាត់។ ពណ៌ពេញ។ គ្មានឈឺក្បាល។",
+              isKh,
+            )}
+          </p>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded border border-emerald-400/30 bg-emerald-400/5 p-2">
+              <div className={`font-mono font-bold text-emerald-300 mb-0.5 ${isKh ? "font-khmer text-[11px]" : ""}`}>{T("PRO", "ល្អ", isKh)}</div>
+              <div className={`text-white/70 ${isKh ? "font-khmer" : ""}`}>{T("Full colour, can tilt your head a little.", "ពណ៌ពេញ អាចផ្អៀងក្បាលបន្តិចបាន។", isKh)}</div>
+            </div>
+            <div className="rounded border border-rose-400/30 bg-rose-400/5 p-2">
+              <div className={`font-mono font-bold text-rose-300 mb-0.5 ${isKh ? "font-khmer text-[11px]" : ""}`}>{T("CON", "មិនល្អ", isKh)}</div>
+              <div className={`text-white/70 ${isKh ? "font-khmer" : ""}`}>{T("Needs a special silver screen — only works at the cinema.", "ត្រូវការអេក្រង់ប្រាក់ពិសេស — ដំណើរការតែនៅរោងភាពយន្ត។", isKh)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </CinemaPanel>
+  );
+}
+
+function AnaglyphSvg({ isKh }: { isKh: boolean }) {
+  return (
+    <svg viewBox="0 0 360 170" className="w-full h-auto" role="img" aria-label={T("Anaglyph red/cyan filtering", "តម្រងអាណាគ្លីហ្វក្រហម/ស៊ីយ៉ាន់", isKh)}>
+      {/* Screen with two overlapping coloured copies */}
+      <rect x="20" y="20" width="120" height="100" rx="4" fill="#0a0a0a" stroke="#facc15" strokeWidth="1" />
+      <text x="80" y="14" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">{T("SCREEN", "អេក្រង់", isKh)}</text>
+      {/* Red shape */}
+      <polygon points="50,50 110,55 100,95 55,90" fill="#ef4444" opacity="0.85" style={{ filter: "drop-shadow(0 0 4px #ef4444)" }} />
+      {/* Cyan shape, offset */}
+      <polygon points="55,53 115,58 105,98 60,93" fill="#22d3ee" opacity="0.7" style={{ filter: "drop-shadow(0 0 4px #22d3ee)" }} />
+
+      {/* Light rays out */}
+      <line x1="140" y1="60" x2="220" y2="50" stroke="#ef4444" strokeWidth="1.5" />
+      <line x1="140" y1="80" x2="220" y2="100" stroke="#22d3ee" strokeWidth="1.5" />
+
+      {/* Glasses */}
+      <g>
+        {/* Left lens (red) — passes red, blocks cyan */}
+        <circle cx="240" cy="60" r="22" fill="rgba(239,68,68,0.5)" stroke="#ef4444" strokeWidth="1.5" />
+        <text x="240" y="36" fontSize="8" fontFamily={isKh ? "inherit" : "monospace"} fill="#ef4444" textAnchor="middle">{T("RED LENS", "កញ្ចក់ក្រហម", isKh)}</text>
+        {/* Right lens (cyan) */}
+        <circle cx="240" cy="110" r="22" fill="rgba(34,211,238,0.5)" stroke="#22d3ee" strokeWidth="1.5" />
+        <text x="240" y="148" fontSize="8" fontFamily={isKh ? "inherit" : "monospace"} fill="#22d3ee" textAnchor="middle">{T("CYAN LENS", "កញ្ចក់ស៊ីយ៉ាន់", isKh)}</text>
+      </g>
+
+      {/* After-filter rays */}
+      <line x1="262" y1="60" x2="320" y2="60" stroke="#ef4444" strokeWidth="1.5" />
+      <line x1="262" y1="110" x2="320" y2="110" stroke="#22d3ee" strokeWidth="1.5" />
+
+      {/* Eyes */}
+      <ellipse cx="335" cy="60" rx="14" ry="8" fill="#0a0a0a" stroke="#ef4444" strokeWidth="1.2" />
+      <ellipse cx="335" cy="110" rx="14" ry="8" fill="#0a0a0a" stroke="#22d3ee" strokeWidth="1.2" />
+      <text x="340" y="86" fontSize="8" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">{T("EYES", "ភ្នែក", isKh)}</text>
+
+      {/* Caption */}
+      <text x="180" y="166" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+        {T("Each colour passes through only one lens", "ពណ៌នីមួយៗឆ្លងកាត់តែកញ្ចក់មួយ", isKh)}
+      </text>
+    </svg>
+  );
+}
+
+function PolarisationSvg({ isKh }: { isKh: boolean }) {
+  // Build a left-handed (LHC) and right-handed (RHC) helix as a 3D-ish projection
+  // travelling along x. We trace three "wraps" so the spiralling sense reads clearly.
+  const buildHelix = (
+    x0: number, y0: number, length: number, amp: number, turns: number, sense: 1 | -1,
+  ) => {
+    const N = 60;
+    let d = "";
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      const x = x0 + t * length;
+      const phase = t * turns * Math.PI * 2;
+      // The "sense" controls whether the depth (z) leads or lags the vertical
+      // wobble (y), giving an opposite handedness when projected to 2D.
+      const y = y0 + amp * Math.sin(phase);
+      // simulate depth with a subtle x offset that follows cosine — sign flips
+      // for opposite handedness so the visible curl reverses.
+      const z = sense * amp * 0.55 * Math.cos(phase);
+      d += `${i === 0 ? "M" : "L"} ${x + z} ${y} `;
+    }
+    return d;
+  };
+
+  const lhPath = buildHelix(50, 70, 170, 8, 3, 1);   // left-handed (left eye, cyan)
+  const rhPath = buildHelix(50, 100, 170, 8, 3, -1); // right-handed (right eye, pink)
+
+  return (
+    <svg viewBox="0 0 360 180" className="w-full h-auto" role="img" aria-label={T("Circular polarisation filtering", "តម្រងប្លែងកម្មពន្លឺវង់", isKh)}>
+      {/* Projector */}
+      <rect x="10" y="60" width="40" height="50" rx="3" fill="#0a0a0a" stroke="#facc15" strokeWidth="1.2" />
+      <text x="30" y="54" fontSize="8" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">{T("PROJ.", "បញ្ចាំង", isKh)}</text>
+
+      {/* Top beam — left-handed circular polarisation (LHC) */}
+      <g style={{ filter: "drop-shadow(0 0 3px #22d3ee)" }}>
+        <path d={lhPath} stroke="#22d3ee" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        <text x="135" y="48" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#22d3ee" textAnchor="middle">
+          {T("Left-handed spiral ↺ (left eye)", "វង់បង្វិលឆ្វេង ↺ (ភ្នែកឆ្វេង)", isKh)}
+        </text>
+      </g>
+      {/* Bottom beam — right-handed circular polarisation (RHC) */}
+      <g style={{ filter: "drop-shadow(0 0 3px #f472b6)" }}>
+        <path d={rhPath} stroke="#f472b6" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        <text x="135" y="138" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#f472b6" textAnchor="middle">
+          {T("Right-handed spiral ↻ (right eye)", "វង់បង្វិលស្តាំ ↻ (ភ្នែកស្តាំ)", isKh)}
+        </text>
+      </g>
+
+      {/* Glasses with matching spiral filters embossed in each lens */}
+      <g>
+        {/* Left lens — accepts left-handed light. A small ↺ spiral inside. */}
+        <circle cx="245" cy="70" r="22" fill="rgba(34,211,238,0.18)" stroke="#22d3ee" strokeWidth="1.5" />
+        <path
+          d="M 245 70 m -10 0 a 10 10 0 1 0 10 -10 a 7 7 0 1 1 -7 7 a 4 4 0 1 0 4 -4"
+          fill="none"
+          stroke="#22d3ee"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+        {/* Right lens — accepts right-handed light. A small ↻ spiral (mirrored). */}
+        <circle cx="245" cy="110" r="22" fill="rgba(244,114,182,0.18)" stroke="#f472b6" strokeWidth="1.5" />
+        <path
+          d="M 245 110 m 10 0 a 10 10 0 1 1 -10 -10 a 7 7 0 1 0 7 7 a 4 4 0 1 1 -4 -4"
+          fill="none"
+          stroke="#f472b6"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+      </g>
+
+      {/* After lenses — single clean ray to each eye */}
+      <line x1="267" y1="70" x2="320" y2="70" stroke="#22d3ee" strokeWidth="1.5" />
+      <line x1="267" y1="110" x2="320" y2="110" stroke="#f472b6" strokeWidth="1.5" />
+
+      {/* Eyes */}
+      <ellipse cx="335" cy="70" rx="14" ry="8" fill="#0a0a0a" stroke="#22d3ee" strokeWidth="1.2" />
+      <ellipse cx="335" cy="110" rx="14" ry="8" fill="#0a0a0a" stroke="#f472b6" strokeWidth="1.2" />
+
+      {/* Caption */}
+      <text x="180" y="174" fontSize="9" fontFamily={isKh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle">
+        {T("Each lens is a spiral filter — only matching handedness passes", "កញ្ចក់នីមួយៗជាតម្រងវង់ — តែទិសបង្វិលត្រូវគ្នាឆ្លងកាត់", isKh)}
+      </text>
+    </svg>
   );
 }
