@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -328,6 +328,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Leaf,
         descEn: "Cells, genetics, evolution and the Mekong's living web — bilingual & interactive.",
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
+      },
+      {
+        href: "/biology/botany",
+        labelEn: "Botany: The Green Engine of Earth",
+        labelKh: "រុក្ខសាស្ត្រ៖ ម៉ាស៊ីនពណ៌បៃតងនៃផែនដី",
+        icon: Trees,
+        descEn: "Deep history (8m mushrooms!), photosynthesis (LaTeX), xylem & phloem, conifers vs Cambodian dipterocarps, the Wood Wide Web of Mother Trees, and why tree burls don't kill the tree.",
+        descKh: "ប្រវត្តិដ៏ជ្រាលជ្រៅ (ផ្សិត ៨ ម៉ែត្រ!) រស្មីសំយោគ (LaTeX) ស៊ីឡែម និងផ្លូអែម ដើមស្វិតទល់នឹងឈើជ័រដ្បូងកម្ពុជា បណ្តាញព្រៃនៃដើមឈើមេ និងហេតុអ្វីដុំសាច់ឈើមិនសម្លាប់ដើមឈើ។",
       },
       {
         href: "/geology",
