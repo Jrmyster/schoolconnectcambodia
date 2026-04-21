@@ -346,6 +346,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
       },
       {
+        href: "/geology/wonders",
+        labelEn: "Geological Wonders: The Earth's Sculptures",
+        labelKh: "អច្ឆរិយភូមិសាស្ត្រ៖ ចម្លាក់របស់ផែនដី",
+        icon: Globe,
+        descEn: "The Grand Canyon as a vertical timeline, Niagara Falls walking upstream, the Mariana Trench deep enough to swallow Everest, and the Great Barrier Reef built by living polyps.",
+        descKh: "មហាអន្លង់ធំជាបន្ទាត់ពេលវេលាបញ្ឈរ ទឹកធ្លាក់ណាយអាហ្គារ៉ាដើរឡើងលើ អន្លង់ម៉ារីយ៉ាណាជ្រៅល្មមលេបភ្នំអេវើរេស និងថ្មប៉ប្រះទឹកដែលសាងសង់ដោយប៉ូលីបមានជីវិត។",
+      },
+      {
         href: "/fossil-fuels",
         labelEn: "Fossil Fuels: Ancient Energy",
         labelKh: "ប្រេងឥន្ធនៈហ្វូស៊ីល៖ ថាមពលបុរាណ",

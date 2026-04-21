@@ -42,6 +42,7 @@ const EnergyFuturePage          = lazy(() => import("@/pages/EnergyFuturePage").
 const PublicHealthPage          = lazy(() => import("@/pages/PublicHealthPage").then(m => ({ default: m.PublicHealthPage })));
 const CompetitionCooperationPage = lazy(() => import("@/pages/CompetitionCooperationPage").then(m => ({ default: m.CompetitionCooperationPage })));
 const BotanyPage                 = lazy(() => import("@/pages/BotanyPage").then(m => ({ default: m.BotanyPage })));
+const GeologicalWondersPage      = lazy(() => import("@/pages/GeologicalWondersPage").then(m => ({ default: m.GeologicalWondersPage })));
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
 const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
 const HumanEnginePage           = lazy(() => import("@/pages/HumanEnginePage"));
@@ -209,6 +210,7 @@ function Router() {
             <Route path="/well-being/public-health" component={PublicHealthPage} />
             <Route path="/study-center/competition-cooperation" component={CompetitionCooperationPage} />
             <Route path="/biology/botany" component={BotanyPage} />
+            <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
             <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/human-engine" component={HumanEnginePage} />
