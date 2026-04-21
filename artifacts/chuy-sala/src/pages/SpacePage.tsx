@@ -7,6 +7,7 @@ import { TheSunModule } from "@/components/space/TheSunModule";
 import { SolarPowerModule } from "@/components/space/SolarPowerModule";
 import { SpectroscopyModule } from "@/components/space/SpectroscopyModule";
 import { JWSTModule } from "@/components/space/JWSTModule";
+import { MarsRoversModule } from "@/components/space/MarsRoversModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -362,6 +363,9 @@ export function SpacePage() {
 
         {/* ── JWST: The Cosmic Time Machine ─────────────────────────────── */}
         <JWSTModule />
+
+        {/* ── Mars Rovers: Robotic Mapmakers ────────────────────────────── */}
+        <MarsRoversModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
