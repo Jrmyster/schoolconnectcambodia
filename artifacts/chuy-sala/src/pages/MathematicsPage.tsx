@@ -498,26 +498,74 @@ function Stat({ label, value, colour, isKh }: { label: string; value: number | s
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  2. Algebra — Balance Scale (X + 5 = 12)
+//  2. Algebra — Balance Scale (dynamic problem generator)
 // ════════════════════════════════════════════════════════════════════════════
 
+type AlgebraProblem = {
+  id: number;
+  xValue: number;
+  leftConstant: number;
+  rightTotal: number;
+};
+
+const ALGEBRA_PROBLEMS: AlgebraProblem[] = [
+  { id: 1,  xValue: 7, leftConstant: 5, rightTotal: 12 },
+  { id: 2,  xValue: 7, leftConstant: 3, rightTotal: 10 },
+  { id: 3,  xValue: 8, leftConstant: 7, rightTotal: 15 },
+  { id: 4,  xValue: 6, leftConstant: 2, rightTotal: 8  },
+  { id: 5,  xValue: 8, leftConstant: 6, rightTotal: 14 },
+  { id: 6,  xValue: 7, leftConstant: 4, rightTotal: 11 },
+  { id: 7,  xValue: 8, leftConstant: 1, rightTotal: 9  },
+  { id: 8,  xValue: 8, leftConstant: 8, rightTotal: 16 },
+  { id: 9,  xValue: 4, leftConstant: 9, rightTotal: 13 },
+  { id: 10, xValue: 5, leftConstant: 5, rightTotal: 10 },
+];
+
+function pickRandomProblem(excludeId?: number): AlgebraProblem {
+  const pool =
+    excludeId == null
+      ? ALGEBRA_PROBLEMS
+      : ALGEBRA_PROBLEMS.filter((p) => p.id !== excludeId);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
 function BalanceScale({ isKh }: { isKh: boolean }) {
-  // Equation state: left = "X + (5 - subtracted)", right = "12 - subtracted"
-  const [step, setStep] = useState<0 | 1 | 2>(0); // 0 = initial, 1 = subtracted 5, 2 = solved (same as 1 here)
-  const subtracted = step >= 1 ? 5 : 0;
-  const leftAdded = 5 - subtracted;
-  const rightVal = 12 - subtracted;
-  const xValue = step >= 1 ? 7 : null;
+  // Seed with the first problem so SSR/initial render has data; useEffect
+  // picks a random one on mount per the requested behavior.
+  const [currentProblem, setCurrentProblem] = useState<AlgebraProblem>(
+    ALGEBRA_PROBLEMS[0],
+  );
+  // step: 0 = initial state, 1 = subtracted leftConstant from both sides
+  const [step, setStep] = useState<0 | 1>(0);
+
+  useEffect(() => {
+    setCurrentProblem(pickRandomProblem());
+    setStep(0);
+  }, []);
+
+  const { xValue, leftConstant, rightTotal } = currentProblem;
+  const subtracted = step >= 1 ? leftConstant : 0;
+  const leftAdded = leftConstant - subtracted;
+  const rightVal = rightTotal - subtracted;
+  const solvedX = step >= 1 ? xValue : null;
 
   const reset = () => setStep(0);
-  const subFive = () => setStep(1);
+  const subtractConstant = () => setStep(1);
+  const nextProblem = () => {
+    setCurrentProblem((prev) => pickRandomProblem(prev.id));
+    setStep(0);
+  };
 
-  // Tilt offset: scale tilts toward the heavier side. After subtracting 5, both sides equal 7 → balanced.
-  // Left = X + leftAdded (X = 7 unknown but assume 7 → left "weight" = 7 + leftAdded)
-  // Right = rightVal
-  const leftWeight = 7 + leftAdded;
+  // Tilt: heavier side dips. Left "weight" = xValue + leftAdded; right = rightVal.
+  // After subtracting leftConstant, both sides equal xValue → balanced.
+  const leftWeight = xValue + leftAdded;
   const rightWeight = rightVal;
   const tilt = Math.max(-8, Math.min(8, (leftWeight - rightWeight) * 1.6));
+
+  // Dot wrap configs scale to the largest expected counts (leftConstant ≤ 9,
+  // rightTotal ≤ 16) so dots never overflow the pan area.
+  const LEFT_COLS = 5;
+  const RIGHT_COLS = 6;
 
   return (
     <PaperCard className="p-5 sm:p-6">
@@ -529,27 +577,57 @@ function BalanceScale({ isKh }: { isKh: boolean }) {
           <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
             {isKh ? "ជញ្ជីងតុល្យភាព — រកតម្លៃ X" : "Balance scale — find X"}
           </h3>
-          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+          <p
+            className={`text-sm text-slate-600 mt-1 ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+            data-testid="balance-instructions"
+          >
             {isKh ? (
-              <>គោលដៅរបស់យើង៖ <I>X</I> + 5 = 12 ។ ដើម្បីញែក <I>X</I> យើងត្រូវលុបបង់ "+ 5" — ហើយវិធីត្រឹមត្រូវតែមួយគត់គឺ៖ ដក 5 ចេញពី <strong>ទាំងសងខាង</strong>។</>
+              <>
+                គោលដៅរបស់យើង៖ <I>X</I> +{" "}
+                <span className="font-mono not-italic">{leftConstant}</span> ={" "}
+                <span className="font-mono not-italic">{rightTotal}</span> ។
+                ដើម្បីញែក <I>X</I> យើងត្រូវលុបបង់ "+ {leftConstant}" — ហើយវិធីត្រឹមត្រូវតែមួយគត់គឺ៖
+                ដក <span className="font-mono not-italic">{leftConstant}</span> ចេញពី{" "}
+                <strong>ទាំងសងខាង</strong>។
+              </>
             ) : (
-              <>Our goal: <I>X</I> + 5 = 12. To isolate <I>X</I> we need to remove the "+ 5" — and the only fair move is: subtract 5 from <strong>both sides</strong>.</>
+              <>
+                Our goal: <I>X</I> +{" "}
+                <span className="font-mono not-italic">{leftConstant}</span> ={" "}
+                <span className="font-mono not-italic">{rightTotal}</span>. To isolate{" "}
+                <I>X</I> we need to remove the "+ {leftConstant}" — and the only fair move
+                is: subtract <span className="font-mono not-italic">{leftConstant}</span>{" "}
+                from <strong>both sides</strong>.
+              </>
             )}
           </p>
         </div>
       </div>
 
       {/* Equation display */}
-      <div className="bg-blue-50/60 rounded-xl border border-blue-200 p-4 mb-4 text-center font-serif text-2xl sm:text-3xl">
+      <div
+        className="bg-blue-50/60 rounded-xl border border-blue-200 p-4 mb-4 text-center font-serif text-2xl sm:text-3xl"
+        data-testid="balance-equation"
+      >
         <span className="text-slate-900">
-          <I>X</I> {leftAdded > 0 && <>+ <span className="tabular-nums">{leftAdded}</span></>}
+          <I>X</I>{" "}
+          {leftAdded > 0 && (
+            <>
+              + <span className="tabular-nums">{leftAdded}</span>
+            </>
+          )}
         </span>
         <span className="mx-3 text-blue-700 font-bold">=</span>
         <span className="tabular-nums text-slate-900">{rightVal}</span>
-        {xValue !== null && (
+        {solvedX !== null && (
           <div className="mt-3 text-xl">
             <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-emerald-600 text-white font-bold font-serif">
-              <I>X</I> = <span className="font-mono not-italic">{xValue}</span>
+              <I>X</I> ={" "}
+              <span className="font-mono not-italic" data-testid="balance-solved-x">
+                {solvedX}
+              </span>
             </span>
           </div>
         )}
@@ -557,13 +635,27 @@ function BalanceScale({ isKh }: { isKh: boolean }) {
 
       {/* Scale SVG */}
       <div className="bg-white rounded-xl border border-blue-200 p-4">
-        <svg viewBox="0 0 540 280" className="w-full h-auto block" aria-label="Balance scale showing the equation">
+        <svg
+          viewBox="0 0 540 280"
+          className="w-full h-auto block"
+          aria-label={
+            isKh
+              ? `ជញ្ជីងតុល្យភាពបង្ហាញសមីការ X + ${leftConstant} = ${rightTotal}`
+              : `Balance scale showing the equation X + ${leftConstant} = ${rightTotal}`
+          }
+        >
           {/* Pillar */}
           <rect x="262" y="120" width="16" height="120" rx="2" fill="#475569" />
           <rect x="220" y="240" width="100" height="14" rx="3" fill="#334155" />
 
           {/* Beam — rotates around the centre */}
-          <g style={{ transform: `rotate(${tilt}deg)`, transformOrigin: "270px 120px", transition: "transform 600ms cubic-bezier(.4,.1,.2,1)" }}>
+          <g
+            style={{
+              transform: `rotate(${tilt}deg)`,
+              transformOrigin: "270px 120px",
+              transition: "transform 600ms cubic-bezier(.4,.1,.2,1)",
+            }}
+          >
             <rect x="60" y="113" width="420" height="14" rx="3" fill="#64748b" />
             <circle cx="270" cy="120" r="9" fill="#1e293b" />
 
@@ -574,15 +666,44 @@ function BalanceScale({ isKh }: { isKh: boolean }) {
               x={110}
               y={185}
               colour="#3b82f6"
-              labelTopX={<span><I>X</I>{leftAdded > 0 && <> + <span className="font-mono not-italic">{leftAdded}</span></>}</span>}
+              labelTopX={
+                <span>
+                  <I>X</I>
+                  {leftAdded > 0 && (
+                    <>
+                      {" "}
+                      + <span className="font-mono not-italic">{leftAdded}</span>
+                    </>
+                  )}
+                </span>
+              }
             >
               {/* X box */}
               <rect x={-32} y={-22} width={26} height={26} rx={3} fill="#1d4ed8" />
-              <text x={-19} y={-3} fontSize="16" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="serif" fontStyle="italic">X</text>
-              {/* +N weights */}
-              {Array.from({ length: leftAdded }).map((_, i) => (
-                <circle key={i} cx={6 + (i % 5) * 8} cy={-7 - Math.floor(i / 5) * 8} r={3.2} fill="#475569" />
-              ))}
+              <text
+                x={-19}
+                y={-3}
+                fontSize="16"
+                fontWeight="700"
+                fill="#fff"
+                textAnchor="middle"
+                fontFamily="serif"
+                fontStyle="italic"
+              >
+                X
+              </text>
+              {/* leftAdded weights — exactly leftAdded dots */}
+              <g data-testid="left-pan-dots">
+                {Array.from({ length: leftAdded }).map((_, i) => (
+                  <circle
+                    key={i}
+                    cx={6 + (i % LEFT_COLS) * 8}
+                    cy={-7 - Math.floor(i / LEFT_COLS) * 8}
+                    r={3.2}
+                    fill="#475569"
+                  />
+                ))}
+              </g>
             </Pan>
 
             {/* Right pan ropes */}
@@ -594,9 +715,18 @@ function BalanceScale({ isKh }: { isKh: boolean }) {
               colour="#10b981"
               labelTopX={<span className="font-mono not-italic">{rightVal}</span>}
             >
-              {Array.from({ length: rightVal }).map((_, i) => (
-                <circle key={i} cx={-22 + (i % 6) * 8} cy={-6 - Math.floor(i / 6) * 8} r={3.2} fill="#0f766e" />
-              ))}
+              {/* rightVal weights — exactly rightVal dots */}
+              <g data-testid="right-pan-dots">
+                {Array.from({ length: rightVal }).map((_, i) => (
+                  <circle
+                    key={i}
+                    cx={-22 + (i % RIGHT_COLS) * 8}
+                    cy={-6 - Math.floor(i / RIGHT_COLS) * 8}
+                    r={3.2}
+                    fill="#0f766e"
+                  />
+                ))}
+              </g>
             </Pan>
           </g>
         </svg>
@@ -615,34 +745,85 @@ function BalanceScale({ isKh }: { isKh: boolean }) {
         </div>
       </div>
 
-      {/* Controls */}
+      {/* Controls — primary actions */}
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button
-          onClick={subFive}
+          onClick={subtractConstant}
           disabled={step >= 1}
+          data-testid="balance-subtract"
           className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold text-sm shadow-sm transition-colors"
         >
-          <span className="font-mono">−5</span> {isKh ? "ពីទាំងសងខាង" : "from both sides"}
+          <span className="font-mono">−{leftConstant}</span>{" "}
+          {isKh ? "ពីទាំងសងខាង" : "from both sides"}
         </button>
         <button
           onClick={reset}
+          data-testid="balance-reset"
           className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-bold transition-colors"
         >
           <RotateCcw className="w-4 h-4" /> {isKh ? "ចាប់ផ្ដើមឡើងវិញ" : "Reset"}
         </button>
       </div>
 
+      {/* Secondary action — pull a different problem from the bank */}
+      <button
+        onClick={nextProblem}
+        data-testid="balance-next-problem"
+        className={`mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-amber-900 text-sm font-bold transition-colors ${
+          isKh ? "font-khmer" : ""
+        }`}
+        aria-label={
+          isKh ? "បង្ហាញលំហាត់ថ្មី" : "Show a new randomly-selected algebra problem"
+        }
+      >
+        <Sparkles className="w-4 h-4" />
+        {isKh ? "លំហាត់បន្ទាប់" : "Next Problem"}
+        <span className={`text-xs opacity-80 font-normal ${isKh ? "" : "font-khmer"}`}>
+          {isKh ? "(Next Problem)" : "(លំហាត់បន្ទាប់)"}
+        </span>
+      </button>
+
       {/* Caption */}
-      <div className={`mt-4 flex items-start gap-2 text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+      <div
+        className={`mt-4 flex items-start gap-2 text-sm text-slate-700 ${
+          isKh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
         <Info className="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" />
         <span>
           {step === 0
-            ? (isKh
-                ? <>ជញ្ជីងផ្ដៀង — ខាងឆ្វេងធ្ងន់ជាងនៅពេលដែល <I>X</I> = 7 (ដែលនឹងបង្ហាញ) បូកបន្ថែម 5 = 12 — តួលេខ 12 នៅខាងស្ដាំស្មើគ្នា ដូច្នេះវាពិតជាមានតុល្យភាព ប៉ុន្តែយើងមិនទាន់ដឹង <I>X</I> ទេ។</>
-                : <>The scale starts level — both sides "weigh" 12. But we don't yet know what <I>X</I> is on its own.</>)
-            : (isKh
-                ? <>បន្ទាប់ពីដក 5 ចេញពីទាំងសងខាង សមីការក្លាយជា <I>X</I> = 7 ។ <I>X</I> ត្រូវបាន<strong>ញែក</strong>។ យើងបានដោះស្រាយ!</>
-                : <>After subtracting 5 from both sides, the equation becomes <I>X</I> = 7. <I>X</I> is now <strong>isolated</strong>. We've solved it!</>)}
+            ? isKh
+              ? (
+                <>
+                  ជញ្ជីងមានតុល្យភាព — ទាំងសងខាង "ធ្ងន់"{" "}
+                  <span className="font-mono not-italic">{rightTotal}</span> ប៉ុន្តែយើងមិនទាន់ដឹងថា <I>X</I>{" "}
+                  ស្មើនឹងប៉ុន្មាននៅពេលនៅម្នាក់ឯងទេ។
+                </>
+              )
+              : (
+                <>
+                  The scale starts level — both sides "weigh"{" "}
+                  <span className="font-mono not-italic">{rightTotal}</span>. But we don't
+                  yet know what <I>X</I> is on its own.
+                </>
+              )
+            : isKh
+              ? (
+                <>
+                  បន្ទាប់ពីដក <span className="font-mono not-italic">{leftConstant}</span>{" "}
+                  ចេញពីទាំងសងខាង សមីការក្លាយជា <I>X</I> ={" "}
+                  <span className="font-mono not-italic">{xValue}</span> ។ <I>X</I>{" "}
+                  ត្រូវបាន<strong>ញែក</strong>។ យើងបានដោះស្រាយ!
+                </>
+              )
+              : (
+                <>
+                  After subtracting <span className="font-mono not-italic">{leftConstant}</span>{" "}
+                  from both sides, the equation becomes <I>X</I> ={" "}
+                  <span className="font-mono not-italic">{xValue}</span>. <I>X</I> is now{" "}
+                  <strong>isolated</strong>. We've solved it!
+                </>
+              )}
         </span>
       </div>
     </PaperCard>
