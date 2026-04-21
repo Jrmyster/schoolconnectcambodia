@@ -16,6 +16,7 @@ import { SaturnPlanetModule } from "@/components/space/SaturnPlanetModule";
 import { JupiterPlanetModule } from "@/components/space/JupiterPlanetModule";
 import { NeptunePlanetModule } from "@/components/space/NeptunePlanetModule";
 import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
+import { ISSModule } from "@/components/space/ISSModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -398,6 +399,9 @@ export function SpacePage() {
 
         {/* ── Mars Rovers: Robotic Mapmakers ────────────────────────────── */}
         <MarsRoversModule />
+
+        {/* ── ISS: Our Floating Laboratory ──────────────────────────────── */}
+        <ISSModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
