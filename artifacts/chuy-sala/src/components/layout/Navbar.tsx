@@ -204,6 +204,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ដំណើរ ៥ ផ្នែក៖ Trainer គណិតក្នុងក្បាល ១០ វិនាទី, ល្បែងជញ្ជីងពិជគណិត, ត្រីកោណកែងអូសបាន និងក្រាហ្វិកឡានដែលពន្យល់ derivative និង integral។",
       },
       {
+        href: "/mathematics/logarithms",
+        labelEn: "Logarithms: The Scale of Nature",
+        labelKh: "លោការីត៖ រង្វាស់នៃធម្មជាតិ",
+        icon: Sigma,
+        descEn: "Logarithms as the inverse of exponents, the Richter earthquake scale as a real-world log scale, and an introduction to Euler's number e and the natural logarithm ln(x).",
+        descKh: "លោការីតជាច្រាសនៃអិចស្ប៉ូណង់សយល រង្វាស់រញ្ជួយដីរីឆ្ទ័រជារង្វាស់លោការីតក្នុងជីវិតពិត និងការណែនាំចំនួន e របស់អ៊ុយលឺរ ព្រមទាំងលោការីតធម្មជាតិ ln(x)។",
+      },
+      {
         href: "/fun-lab",
         labelEn: "Fun Lab",
         labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",

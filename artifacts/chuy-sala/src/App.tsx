@@ -32,6 +32,7 @@ const HvacPage                  = lazy(() => import("@/pages/HvacPage"));
 const AviationPage              = lazy(() => import("@/pages/AviationPage"));
 const MusicTheoryPage           = lazy(() => import("@/pages/MusicTheoryPage"));
 const MathematicsPage           = lazy(() => import("@/pages/MathematicsPage"));
+const LogarithmsPage            = lazy(() => import("@/pages/LogarithmsPage").then(m => ({ default: m.LogarithmsPage })));
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
 const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
 const HumanEnginePage           = lazy(() => import("@/pages/HumanEnginePage"));
@@ -189,6 +190,7 @@ function Router() {
             <Route path="/aviation" component={AviationPage} />
             <Route path="/music-theory" component={MusicTheoryPage} />
             <Route path="/mathematics" component={MathematicsPage} />
+            <Route path="/mathematics/logarithms" component={LogarithmsPage} />
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
             <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/human-engine" component={HumanEnginePage} />
