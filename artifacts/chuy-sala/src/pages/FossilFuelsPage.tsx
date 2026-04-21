@@ -24,6 +24,15 @@ import {
   Heart,
   Route,
   Hammer,
+  Disc3,
+  Trees,
+  FlaskConical,
+  Snowflake,
+  Sun,
+  Ruler,
+  CalendarClock,
+  CloudRain,
+  ShieldAlert,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -155,6 +164,23 @@ export default function FossilFuelsPage() {
         <RoadwayDashboard isKh={isKh} />
       </Section>
 
+      {/* ── 6. Rubber & Tires ─────────────────────────────────────── */}
+      <Section
+        id="rubber-tires"
+        eyebrowEn="06 · Materials Science"
+        eyebrowKh="០៦ · វិទ្យាសាស្ត្រសម្ភារៈ"
+        titleEn="Rubber & Tires: The Fossil Fuel You Drive On"
+        titleKh="កៅស៊ូ និងសំបកកង់៖ ឥន្ធនៈហ្វូស៊ីលដែលអ្នកបើកបរលើ"
+        descEn="The four black circles under every car and moto are quietly one of the most important pieces of chemistry on the planet. Half of every modern tire is grown on a tree in Cambodia or Vietnam — the other half is squeezed out of crude oil in a factory. Then both halves are 'baked' with sulfur until they become tougher than steel for their weight."
+        descKh="រង្វង់ខ្មៅទាំងបួនក្រោមឡាន និងម៉ូតូគ្រប់គ្រឿង គឺជាគីមីដ៏សំខាន់បំផុតមួយនៅលើភពផែនដី។ ពាក់កណ្ដាលនៃសំបកកង់ទំនើបនីមួយៗ ដាំដុះនៅលើដើមឈើនៅកម្ពុជា ឬវៀតណាម — ពាក់កណ្ដាលទៀតត្រូវបានច្របាច់ចេញពីប្រេងឆៅនៅរោងចក្រ។ បន្ទាប់មកពាក់កណ្ដាលទាំងពីរត្រូវបានដុតកម្ដៅជាមួយស្ពាន់ធ័រ រហូតដល់វារឹងមាំជាងដែកសម្រាប់ទម្ងន់របស់វា។"
+        isKh={isKh}
+      >
+        <RubberTypesCard isKh={isKh} />
+        <VulcanizationCard isKh={isKh} />
+        <TireAnatomyCard isKh={isKh} />
+        <TireSafetyCard isKh={isKh} />
+      </Section>
+
       {/* ── Closing ─────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-stone-400 text-sm italic">
         <span className={isKh ? "font-khmer not-italic" : ""}>
@@ -198,9 +224,16 @@ function Section({
   );
 }
 
-function SteelCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function SteelCard({
+  children,
+  className = "",
+  ...rest
+}: { children: React.ReactNode; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`bg-stone-800/80 backdrop-blur-sm rounded-xl border border-stone-700 shadow-[0_2px_24px_-12px_rgba(245,158,11,0.18)] ${className}`}>
+    <div
+      {...rest}
+      className={`bg-stone-800/80 backdrop-blur-sm rounded-xl border border-stone-700 shadow-[0_2px_24px_-12px_rgba(245,158,11,0.18)] ${className}`}
+    >
       {children}
     </div>
   );
@@ -1573,6 +1606,778 @@ function RoadwayDashboard({ isKh }: { isKh: boolean }) {
 // ════════════════════════════════════════════════════════════════════════════
 //  Scoped styles
 // ════════════════════════════════════════════════════════════════════════════
+
+// ════════════════════════════════════════════════════════════════════════════
+//  6. Rubber & Tires
+// ════════════════════════════════════════════════════════════════════════════
+
+function RubberTypesCard({ isKh }: { isKh: boolean }) {
+  return (
+    <SteelCard className="p-6 sm:p-8" data-testid="rubber-types">
+      <CardHeader
+        icon={Layers}
+        titleEn="The Two Types of Rubber"
+        titleKh="ប្រភេទកៅស៊ូទាំងពីរ"
+        isKh={isKh}
+      />
+      <p className={`text-stone-300 text-sm mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "កៅស៊ូដែលនៅជុំវិញយើងសព្វថ្ងៃ មានពីរប្រភេទ — មួយចេញពីដើមឈើ មួយទៀតចេញពីប្រេងឆៅ។ សំបកកង់ទំនើបជាការលាយរបស់ទាំងពីរ។"
+          : "The rubber around us today comes in two flavours — one grown on a tree, one squeezed out of crude oil. A modern tire is a blend of both."}
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-5">
+        {/* Natural rubber */}
+        <div
+          className="rounded-xl border border-emerald-500/40 bg-emerald-500/5 p-5"
+          data-testid="natural-rubber"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 flex items-center justify-center">
+              <Trees className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className={`font-display font-bold text-stone-50 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? "កៅស៊ូធម្មជាតិ" : "Natural Rubber"}
+              </h4>
+              <p className="text-emerald-300/80 text-xs uppercase tracking-widest font-bold">
+                {isKh ? "ពីដើមឈើ" : "From a tree"}
+              </p>
+            </div>
+          </div>
+
+          {/* Mini SVG: rubber tree with latex drip */}
+          <svg viewBox="0 0 220 130" className="w-full h-32 mb-3" aria-hidden="true">
+            <defs>
+              <linearGradient id="rt-canopy" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#34d399" />
+                <stop offset="100%" stopColor="#047857" />
+              </linearGradient>
+            </defs>
+            {/* ground */}
+            <rect x="0" y="115" width="220" height="15" fill="#44403c" />
+            {/* trunk */}
+            <rect x="60" y="55" width="14" height="62" fill="#78350f" />
+            {/* diagonal cut */}
+            <line x1="58" y1="78" x2="76" y2="68" stroke="#fbbf24" strokeWidth="2" />
+            {/* canopy */}
+            <ellipse cx="67" cy="42" rx="42" ry="32" fill="url(#rt-canopy)" />
+            {/* latex bucket */}
+            <path d="M 56 92 L 78 92 L 76 110 L 58 110 Z" fill="#1c1917" stroke="#a8a29e" strokeWidth="1" />
+            <ellipse cx="67" cy="92" rx="11" ry="2.4" fill="#f5f5f4" />
+            {/* drip */}
+            <circle cx="67" cy="86" r="2" fill="#f5f5f4" className="ff-pulse" />
+            {/* label arrow */}
+            <line x1="100" y1="96" x2="135" y2="96" stroke="#a8a29e" strokeWidth="1" />
+            <polygon points="100,96 106,93 106,99" fill="#a8a29e" />
+            <text x="138" y="92" fill="#f5f5f4" fontSize="10" fontFamily="monospace">{isKh ? "ជ័រ" : "latex"}</text>
+            <text x="138" y="104" fill="#a8a29e" fontSize="9" fontFamily="monospace">{isKh ? "ជ័រស" : "white sap"}</text>
+          </svg>
+
+          <ul className={`space-y-2 text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : ""}`}>
+            <li className="flex gap-2">
+              <span className="text-emerald-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "មកពីជ័រស ( latex / ជ័រ ) នៃដើមកៅស៊ូ Hevea brasiliensis។"
+                  : "Comes from the white sap (latex / ជ័រ) of the Hevea brasiliensis tree."}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "កម្ពុជានាំចេញកៅស៊ូជាង ៤០០.០០០ តោនក្នុងមួយឆ្នាំ — ផលិតផលកសិកម្មសំខាន់មួយ។"
+                  : "Cambodia exports over 400,000 tonnes per year — a major agricultural product."}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "ផលិតករត្រូវរោទ៍សំបកដើមឈើ ហើយយកជ័រស្រក់ចូលក្នុងពែងនីមួយៗរាល់ព្រឹក។"
+                  : "Farmers cut a thin diagonal stripe in the bark and collect the dripping latex in a cup each morning."}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Synthetic rubber */}
+        <div
+          className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-5"
+          data-testid="synthetic-rubber"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center">
+              <FlaskConical className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className={`font-display font-bold text-stone-50 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? "កៅស៊ូសំយោគ" : "Synthetic Rubber"}
+              </h4>
+              <p className="text-amber-300/80 text-xs uppercase tracking-widest font-bold">
+                {isKh ? "ពីប្រេងឆៅ" : "From crude oil"}
+              </p>
+            </div>
+          </div>
+
+          {/* Mini SVG: oil → factory → rubber pellets */}
+          <svg viewBox="0 0 220 130" className="w-full h-32 mb-3" aria-hidden="true">
+            {/* ground */}
+            <rect x="0" y="115" width="220" height="15" fill="#44403c" />
+            {/* oil barrel */}
+            <rect x="14" y="74" width="36" height="40" fill="#1c1917" stroke="#fbbf24" strokeWidth="1.5" rx="2" />
+            <rect x="14" y="80" width="36" height="3" fill="#fbbf24" opacity="0.6" />
+            <rect x="14" y="100" width="36" height="3" fill="#fbbf24" opacity="0.6" />
+            <text x="32" y="135" fill="#fbbf24" fontSize="9" fontFamily="monospace" textAnchor="middle">{isKh ? "ប្រេង" : "oil"}</text>
+            {/* arrow */}
+            <line x1="55" y1="92" x2="78" y2="92" stroke="#a8a29e" strokeWidth="1.5" />
+            <polygon points="78,92 73,89 73,95" fill="#a8a29e" />
+            {/* factory */}
+            <rect x="82" y="60" width="60" height="55" fill="#292524" stroke="#a8a29e" strokeWidth="1.5" />
+            <polygon points="82,60 112,42 142,60" fill="#1c1917" stroke="#a8a29e" strokeWidth="1.5" />
+            <rect x="118" y="35" width="8" height="25" fill="#1c1917" stroke="#a8a29e" strokeWidth="1" />
+            <ellipse cx="122" cy="32" rx="6" ry="3" fill="#a8a29e" opacity="0.5" className="ff-pulse" />
+            <ellipse cx="122" cy="26" rx="8" ry="4" fill="#a8a29e" opacity="0.3" className="ff-pulse" />
+            <rect x="92" y="78" width="10" height="10" fill="#fbbf24" opacity="0.6" />
+            <rect x="108" y="78" width="10" height="10" fill="#fbbf24" opacity="0.6" />
+            <rect x="124" y="78" width="10" height="10" fill="#fbbf24" opacity="0.6" />
+            {/* arrow */}
+            <line x1="148" y1="92" x2="171" y2="92" stroke="#a8a29e" strokeWidth="1.5" />
+            <polygon points="171,92 166,89 166,95" fill="#a8a29e" />
+            {/* rubber pellets */}
+            <circle cx="180" cy="100" r="4" fill="#1c1917" />
+            <circle cx="190" cy="105" r="4" fill="#1c1917" />
+            <circle cx="200" cy="100" r="4" fill="#1c1917" />
+            <circle cx="195" cy="95" r="4" fill="#1c1917" />
+            <circle cx="185" cy="93" r="4" fill="#1c1917" />
+            <text x="190" y="125" fill="#fbbf24" fontSize="9" fontFamily="monospace" textAnchor="middle">{isKh ? "កៅស៊ូ" : "rubber"}</text>
+          </svg>
+
+          <ul className={`space-y-2 text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : ""}`}>
+            <li className="flex gap-2">
+              <span className="text-amber-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "ពិភពលោកត្រូវការកៅស៊ូច្រើនជាងដើមឈើអាចផលិតបាន។"
+                  : "The world needs more rubber than trees can produce."}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-amber-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "អ្នកគីមីវិទូយកសារធាតុ ( butadiene · styrene ) ដែលទាញចេញពីប្រេងឆៅ ហើយផ្សំវានៅរោងចក្រ។"
+                  : "Chemists take molecules (butadiene · styrene) pulled from crude oil and link them together in a factory."}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-amber-400 font-bold">·</span>
+              <span>
+                {isKh
+                  ? "សំបកកង់ទំនើបគឺជាល្បាយ — ប្រហែល ៤០% ធម្មជាតិ ៦០% សំយោគ។"
+                  : "A modern tire is a blend — roughly 40% natural, 60% synthetic."}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+/* ── Card 2: Vulcanization (baking) ────────────────────────────────────── */
+function VulcanizationCard({ isKh }: { isKh: boolean }) {
+  const [stage, setStage] = useState<"raw" | "baked">("raw");
+
+  return (
+    <SteelCard className="p-6 sm:p-8" data-testid="vulcanization">
+      <CardHeader
+        icon={Flame}
+        titleEn="Baking a Tire — Vulcanization"
+        titleKh="ការដុតកម្ដៅសំបកកង់ — Vulcanization"
+        isKh={isKh}
+      />
+      <p className={`text-stone-300 text-sm mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "កៅស៊ូឆៅមានបញ្ហាធំ ៖ វាស្អិតពេកនៅរដូវក្ដៅ និងផុយពេកនៅរដូវត្រជាក់។ ដំណោះស្រាយ — ដាក់ស្ពាន់ធ័រ ( sulfur ) ហើយ “ដុតកម្ដៅ” វា។ ម៉ូលេគុលនឹងភ្ជាប់គ្នា ហើយក្លាយជាខ្លាំងហើយធន់នឹងអាកាសធាតុ។"
+          : "Raw rubber has a big problem: it's sticky in the heat and brittle in the cold. The fix — add sulfur and 'bake' it. The molecules lock together and become tough and weather-proof."}
+      </p>
+
+      {/* Toggle */}
+      <div className="flex gap-2 mb-5">
+        <button
+          type="button"
+          onClick={() => setStage("raw")}
+          data-testid="vulc-toggle-raw"
+          className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm uppercase tracking-widest transition-all ${
+            stage === "raw"
+              ? "bg-stone-700 border-stone-500 text-stone-50"
+              : "bg-stone-900/40 border-stone-700 text-stone-400 hover:text-stone-200"
+          } ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}
+        >
+          {isKh ? "កៅស៊ូឆៅ" : "Raw rubber"}
+        </button>
+        <button
+          type="button"
+          onClick={() => setStage("baked")}
+          data-testid="vulc-toggle-baked"
+          className={`flex-1 py-3 rounded-lg border-2 font-bold text-sm uppercase tracking-widest transition-all ${
+            stage === "baked"
+              ? "bg-amber-500/20 border-amber-500 text-amber-200"
+              : "bg-stone-900/40 border-stone-700 text-stone-400 hover:text-stone-200"
+          } ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}
+        >
+          {isKh ? "កៅស៊ូដុតកម្ដៅ ( + ស្ពាន់ធ័រ )" : "Baked rubber ( + sulfur )"}
+        </button>
+      </div>
+
+      {/* Molecule diagram */}
+      <div className="rounded-xl bg-stone-900/60 border border-stone-700 p-4 mb-4">
+        <svg viewBox="0 0 480 200" className="w-full h-48" aria-hidden="true" data-testid="vulc-molecules">
+          {/* 4 long polymer chains */}
+          {[0, 1, 2, 3].map((row) => {
+            const y = 30 + row * 45;
+            return (
+              <g key={row}>
+                <polyline
+                  points={Array.from({ length: 13 }, (_, i) => `${20 + i * 36},${y + (i % 2 === 0 ? 0 : 8)}`).join(" ")}
+                  fill="none"
+                  stroke={stage === "baked" ? "#fbbf24" : "#a8a29e"}
+                  strokeWidth="3"
+                />
+                {Array.from({ length: 13 }).map((_, i) => (
+                  <circle
+                    key={i}
+                    cx={20 + i * 36}
+                    cy={y + (i % 2 === 0 ? 0 : 8)}
+                    r="5"
+                    fill={stage === "baked" ? "#fbbf24" : "#d6d3d1"}
+                  />
+                ))}
+              </g>
+            );
+          })}
+          {/* sulfur cross-links — only when baked */}
+          {stage === "baked" &&
+            [
+              { x: 56, y1: 30, y2: 75 },
+              { x: 164, y1: 75, y2: 120 },
+              { x: 272, y1: 30, y2: 75 },
+              { x: 380, y1: 120, y2: 165 },
+              { x: 128, y1: 120, y2: 165 },
+              { x: 308, y1: 75, y2: 120 },
+            ].map((bond, i) => (
+              <g key={i}>
+                <line
+                  x1={bond.x}
+                  y1={bond.y1 + 8}
+                  x2={bond.x}
+                  y2={bond.y2}
+                  stroke="#facc15"
+                  strokeWidth="2.5"
+                  strokeDasharray="4 3"
+                />
+                <circle cx={bond.x} cy={(bond.y1 + bond.y2) / 2 + 4} r="6" fill="#fde047" stroke="#a16207" strokeWidth="1.5" />
+                <text
+                  x={bond.x}
+                  y={(bond.y1 + bond.y2) / 2 + 7}
+                  fill="#78350f"
+                  fontSize="8"
+                  fontFamily="monospace"
+                  textAnchor="middle"
+                  fontWeight="bold"
+                >
+                  S
+                </text>
+              </g>
+            ))}
+          {/* legend */}
+          <text x="20" y="195" fill="#a8a29e" fontSize="11" fontFamily={isKh ? "inherit" : "monospace"} className={isKh ? "font-khmer" : ""}>
+            {stage === "raw"
+              ? isKh
+                ? "ខ្សែកៅស៊ូវែង រអិលឆ្លងគ្នា"
+                : "long rubber chains slip past each other"
+              : isKh
+              ? "ស្ពាន់ធ័រ ( S ) ភ្ជាប់ខ្សែទាំងអស់គ្នា"
+              : "sulfur (S) bridges lock the chains together"}
+          </text>
+        </svg>
+      </div>
+
+      {/* Property compare */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="rounded-lg border border-sky-500/40 bg-sky-500/5 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Snowflake className="w-4 h-4 text-sky-300" />
+            <span className={`text-sky-200 text-xs font-bold uppercase tracking-widest ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "នៅរដូវត្រជាក់" : "In cold weather"}
+            </span>
+          </div>
+          <p className={`text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : ""}`} data-testid="vulc-cold-result">
+            {stage === "raw"
+              ? isKh
+                ? "ផុយ — បាក់ដូចកញ្ចក់។"
+                : "Brittle — snaps like glass."
+              : isKh
+              ? "នៅតែទន់ងាយបត់បែន។"
+              : "Stays soft and flexible."}
+          </p>
+        </div>
+        <div className="rounded-lg border border-rose-500/40 bg-rose-500/5 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Sun className="w-4 h-4 text-rose-300" />
+            <span className={`text-rose-200 text-xs font-bold uppercase tracking-widest ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "នៅរដូវក្ដៅ" : "In hot weather"}
+            </span>
+          </div>
+          <p className={`text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : ""}`} data-testid="vulc-hot-result">
+            {stage === "raw"
+              ? isKh
+                ? "ស្អិត និងរលាយ — ដូចស្ករកៅស៊ូ។"
+                : "Sticky and melting — like chewing gum."
+              : isKh
+              ? "រឹង រក្សារូបរាង ធន់នឹងការសឹក។"
+              : "Firm, holds its shape, resists wear."}
+          </p>
+        </div>
+      </div>
+
+      <div className={`mt-5 rounded-lg border-l-4 border-amber-500 bg-stone-900/60 p-4 text-sm text-stone-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <span className="text-amber-300 font-bold">
+          {isKh ? "ការពិតប្រវត្តិសាស្ត្រ ៖ " : "History fact: "}
+        </span>
+        {isKh
+          ? "Charles Goodyear បានរកឃើញដំណើរការនេះដោយចៃដន្យក្នុងឆ្នាំ ១៨៣៩ — គាត់ទម្លាក់ល្បាយកៅស៊ូ + ស្ពាន់ធ័រលើឡានៅផ្ទះបាយ។ ផ្លាកសញ្ញាសំបកកង់ Goodyear ឥឡូវនេះ ដាក់ឈ្មោះតាមគាត់។"
+          : "Charles Goodyear discovered this process by accident in 1839 — he dropped a rubber-and-sulfur mix on a hot stove. The Goodyear tire brand today is named after him."}
+      </div>
+    </SteelCard>
+  );
+}
+
+/* ── Card 3: Tire anatomy infographic ─────────────────────────────────── */
+function TireAnatomyCard({ isKh }: { isKh: boolean }) {
+  const [hover, setHover] = useState<string | null>(null);
+
+  const layers: { id: string; en: string; kh: string; color: string; descEn: string; descKh: string }[] = [
+    {
+      id: "tread",
+      en: "Tread (the part that touches the road)",
+      kh: "ផ្ទៃខាងក្រៅ ( ជាន់នឹងផ្លូវ )",
+      color: "#1c1917",
+      descEn: "Tough rubber with deep grooves to grip the road and push water away.",
+      descKh: "កៅស៊ូរឹង មានគ្រឡុកជ្រៅៗ សម្រាប់ចាប់ផ្លូវ និងរុញទឹកចេញ។",
+    },
+    {
+      id: "belt",
+      en: "Steel belts",
+      kh: "ខ្សែដែក",
+      color: "#9ca3af",
+      descEn: "Two crossed layers of steel wire that stop the tread from stretching.",
+      descKh: "ខ្សែដែកពីរស្រទាប់ឆ្លងគ្នា ជួយកុំឲ្យផ្ទៃខាងក្រៅពង្រីកលូត។",
+    },
+    {
+      id: "nylon",
+      en: "Nylon cap ply",
+      kh: "ស្រទាប់ Nylon",
+      color: "#fde047",
+      descEn: "A wrap of nylon fabric that holds everything together at high speed.",
+      descKh: "ស្រទាប់ក្រណាត់ Nylon ជួយរក្សារូបរាងពេលរត់លឿន។",
+    },
+    {
+      id: "body",
+      en: "Body ply (rubber + polyester)",
+      kh: "តួសំបក ( កៅស៊ូ + Polyester )",
+      color: "#44403c",
+      descEn: "The main rubber body, reinforced with polyester threads, that gives the tire its shape.",
+      descKh: "តួកៅស៊ូសំខាន់ ជាមួយខ្សែ Polyester ដែលផ្ដល់រូបរាងដល់សំបកកង់។",
+    },
+    {
+      id: "inner",
+      en: "Inner liner (holds air)",
+      kh: "ស្រទាប់ក្នុង ( រក្សាខ្យល់ )",
+      color: "#78716c",
+      descEn: "An airtight rubber lining that does the job of an old-fashioned inner tube.",
+      descKh: "ស្រទាប់កៅស៊ូបិទជិតខ្យល់ ជំនួសបំពង់ខ្យល់ខាងក្នុងបុរាណ។",
+    },
+    {
+      id: "bead",
+      en: "Bead (locks tire to wheel)",
+      kh: "គែម ( ភ្ជាប់ទៅកង់ដែក )",
+      color: "#52525b",
+      descEn: "A loop of high-strength steel wire that clamps the tire onto the metal wheel.",
+      descKh: "រង្វង់ខ្សែដែករឹង ដែលបង្ខាំងសំបកកង់ទៅនឹងកង់ដែក។",
+    },
+  ];
+
+  return (
+    <SteelCard className="p-6 sm:p-8" data-testid="tire-anatomy">
+      <CardHeader
+        icon={Disc3}
+        titleEn="Inside a Tire — Cross-Section"
+        titleKh="ខាងក្នុងសំបកកង់ — ផ្នែកកាត់"
+        isKh={isKh}
+      />
+      <p className={`text-stone-300 text-sm mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "សំបកកង់មួយមិនមែនជាដុំកៅស៊ូទេ — វាមានជិត ២០ ស្រទាប់នៃកៅស៊ូ ខ្សែដែក និងក្រណាត់ Nylon ភ្ជាប់ជាមួយគ្នា។ ផ្អៀលលើស្រទាប់នីមួយៗដើម្បីមើលអ្វីខ្លះនៅខាងក្នុង។"
+          : "A tire isn't a single lump of rubber — it's nearly 20 layers of rubber, steel and nylon stacked together. Hover any layer to see what it does."}
+      </p>
+
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-6 items-start">
+        {/* SVG cross-section */}
+        <div className="rounded-xl bg-stone-900/60 border border-stone-700 p-4">
+          <svg viewBox="0 0 360 280" className="w-full h-auto" data-testid="tire-cross-section">
+            {/* outer tire silhouette: rounded rectangle (cross-section of a tire) */}
+            {/* tread */}
+            <path
+              d="M 60 40 L 300 40 Q 320 40 320 60 L 320 90 L 40 90 L 40 60 Q 40 40 60 40 Z"
+              fill={hover === "tread" ? "#292524" : layers[0].color}
+              stroke={hover === "tread" ? "#facc15" : "#000"}
+              strokeWidth={hover === "tread" ? "3" : "1"}
+              onMouseEnter={() => setHover("tread")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-tread"
+              style={{ cursor: "pointer" }}
+            />
+            {/* tread grooves on top */}
+            <rect x="90" y="32" width="14" height="10" fill="#0a0a0a" />
+            <rect x="140" y="32" width="14" height="10" fill="#0a0a0a" />
+            <rect x="190" y="32" width="14" height="10" fill="#0a0a0a" />
+            <rect x="240" y="32" width="14" height="10" fill="#0a0a0a" />
+
+            {/* steel belts */}
+            <rect
+              x="40"
+              y="92"
+              width="280"
+              height="14"
+              fill={hover === "belt" ? "#d4d4d8" : layers[1].color}
+              stroke={hover === "belt" ? "#facc15" : "#000"}
+              strokeWidth={hover === "belt" ? "3" : "1"}
+              onMouseEnter={() => setHover("belt")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-belt"
+              style={{ cursor: "pointer" }}
+            />
+            {/* belt cross-hatch */}
+            <g opacity="0.5" pointerEvents="none">
+              {Array.from({ length: 28 }).map((_, i) => (
+                <line key={i} x1={40 + i * 10} y1={92} x2={50 + i * 10} y2={106} stroke="#000" strokeWidth="0.7" />
+              ))}
+            </g>
+
+            {/* nylon */}
+            <rect
+              x="40"
+              y="108"
+              width="280"
+              height="10"
+              fill={hover === "nylon" ? "#fef08a" : layers[2].color}
+              stroke={hover === "nylon" ? "#facc15" : "#a16207"}
+              strokeWidth={hover === "nylon" ? "3" : "1"}
+              onMouseEnter={() => setHover("nylon")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-nylon"
+              style={{ cursor: "pointer" }}
+            />
+
+            {/* body ply (sidewalls) */}
+            <path
+              d="M 40 118 L 320 118 L 320 220 Q 320 240 300 240 L 60 240 Q 40 240 40 220 Z"
+              fill={hover === "body" ? "#57534e" : layers[3].color}
+              stroke={hover === "body" ? "#facc15" : "#000"}
+              strokeWidth={hover === "body" ? "3" : "1"}
+              onMouseEnter={() => setHover("body")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-body"
+              style={{ cursor: "pointer" }}
+            />
+
+            {/* inner liner */}
+            <rect
+              x="50"
+              y="220"
+              width="260"
+              height="12"
+              fill={hover === "inner" ? "#a8a29e" : layers[4].color}
+              stroke={hover === "inner" ? "#facc15" : "#000"}
+              strokeWidth={hover === "inner" ? "3" : "1"}
+              onMouseEnter={() => setHover("inner")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-inner"
+              style={{ cursor: "pointer" }}
+            />
+
+            {/* beads */}
+            <circle
+              cx="55"
+              cy="245"
+              r="9"
+              fill={hover === "bead" ? "#71717a" : layers[5].color}
+              stroke={hover === "bead" ? "#facc15" : "#000"}
+              strokeWidth={hover === "bead" ? "3" : "1.5"}
+              onMouseEnter={() => setHover("bead")}
+              onMouseLeave={() => setHover(null)}
+              data-testid="layer-bead"
+              style={{ cursor: "pointer" }}
+            />
+            <circle
+              cx="305"
+              cy="245"
+              r="9"
+              fill={hover === "bead" ? "#71717a" : layers[5].color}
+              stroke={hover === "bead" ? "#facc15" : "#000"}
+              strokeWidth={hover === "bead" ? "3" : "1.5"}
+              onMouseEnter={() => setHover("bead")}
+              onMouseLeave={() => setHover(null)}
+              style={{ cursor: "pointer" }}
+            />
+            {/* wheel rim hint */}
+            <rect x="30" y="252" width="300" height="14" fill="#3f3f46" stroke="#000" strokeWidth="1" />
+            <text x="180" y="276" fill="#a1a1aa" fontSize="11" fontFamily={isKh ? "inherit" : "monospace"} textAnchor="middle" className={isKh ? "font-khmer" : ""}>
+              {isKh ? "កង់ដែក" : "metal wheel"}
+            </text>
+
+            {/* "ROAD" arrow above tread */}
+            <text x="180" y="20" fill="#facc15" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} textAnchor="middle" fontWeight="bold" className={isKh ? "font-khmer" : ""}>
+              {isKh ? "↓ ផ្លូវ ↓" : "↓ ROAD ↓"}
+            </text>
+          </svg>
+        </div>
+
+        {/* Layer legend */}
+        <ul className="space-y-2" data-testid="tire-anatomy-legend">
+          {layers.map((l) => {
+            const active = hover === l.id;
+            return (
+              <li
+                key={l.id}
+                onMouseEnter={() => setHover(l.id)}
+                onMouseLeave={() => setHover(null)}
+                data-testid={`legend-${l.id}`}
+                className={`rounded-lg border-2 p-3 transition-all cursor-pointer ${
+                  active
+                    ? "border-amber-500 bg-amber-500/10"
+                    : "border-stone-700 bg-stone-900/40 hover:border-stone-500"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-1">
+                  <span
+                    className="w-5 h-5 rounded border border-stone-500 flex-shrink-0"
+                    style={{ background: l.color }}
+                  />
+                  <span className={`font-bold text-stone-50 text-sm ${isKh ? "font-khmer" : ""}`}>
+                    {isKh ? l.kh : l.en}
+                  </span>
+                </div>
+                <p className={`text-stone-300 text-xs pl-8 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh ? l.descKh : l.descEn}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </SteelCard>
+  );
+}
+
+/* ── Card 4: When to change a tire (vocational) ────────────────────────── */
+function TireSafetyCard({ isKh }: { isKh: boolean }) {
+  const [tread, setTread] = useState<number>(8); // mm
+
+  const status =
+    tread >= 4
+      ? { en: "SAFE", kh: "សុវត្ថិភាព", color: "#22c55e", bg: "rgba(34,197,94,0.12)", border: "#16a34a" }
+      : tread >= 3
+      ? { en: "MONITOR", kh: "តាមដាន", color: "#facc15", bg: "rgba(250,204,21,0.12)", border: "#ca8a04" }
+      : tread >= 1.7
+      ? { en: "REPLACE SOON", kh: "ត្រូវផ្លាស់ឆាប់ៗ", color: "#fb923c", bg: "rgba(251,146,60,0.12)", border: "#ea580c" }
+      : { en: "BALD — DANGEROUS", kh: "ដាច់គ្រឡុក — គ្រោះថ្នាក់", color: "#ef4444", bg: "rgba(239,68,68,0.12)", border: "#dc2626" };
+
+  return (
+    <SteelCard className="p-6 sm:p-8" data-testid="tire-safety">
+      <CardHeader
+        icon={ShieldAlert}
+        titleEn="Vocational Skill: When to Change a Tire"
+        titleKh="ជំនាញវិជ្ជាជីវៈ ៖ ពេលណាត្រូវផ្លាស់ប្តូរសំបកកង់"
+        isKh={isKh}
+      />
+
+      {/* Hazard stripe banner */}
+      <div
+        className="rounded-lg mb-5 p-3 flex items-center gap-3 border-l-4"
+        style={{
+          background:
+            "repeating-linear-gradient(45deg, #fbbf24 0 14px, #1c1917 14px 28px)",
+          borderColor: "#fbbf24",
+        }}
+      >
+        <AlertTriangle className="w-5 h-5 text-stone-900 flex-shrink-0 bg-amber-300 rounded p-0.5" />
+        <span className={`text-stone-50 font-bold text-xs sm:text-sm uppercase tracking-widest bg-stone-900/80 px-2 py-1 rounded ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh
+            ? "សំបកកង់ចាស់ ឬដាច់គ្រឡុក = មូលហេតុចំបងនៃគ្រោះថ្នាក់ចរាចរណ៍"
+            : "Worn or aged tires are a leading cause of road accidents"}
+        </span>
+      </div>
+
+      {/* ── Tread depth interactive ── */}
+      <div className="rounded-xl bg-stone-900/60 border border-stone-700 p-5 mb-5">
+        <div className="flex items-center gap-2 mb-3">
+          <Ruler className="w-5 h-5 text-amber-400" />
+          <h4 className={`font-display font-bold text-stone-50 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ជម្រៅក្រឡាកង់ ( Tread Depth )" : "Tread Depth (ជម្រៅក្រឡាកង់)"}
+          </h4>
+        </div>
+        <p className={`text-stone-300 text-sm mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "គ្រឡុកជ្រៅៗនៅលើផ្ទៃសំបកកង់ មានគោលដៅរុញទឹកចេញ ដើម្បីកុំឲ្យឡានរអិលនៅលើទឹកនៅពេលភ្លៀង។ នៅពេលជម្រៅគ្រឡុកសឹកនៅត្រឹម ១,៦ មិល្លីម៉ែត្រ — សំបកកង់ត្រូវបានគេហៅថា “ដាច់គ្រឡុក” ហើយវាគ្រោះថ្នាក់ខ្លាំងណាស់នៅពេលភ្លៀង។"
+            : "The deep grooves on the tread are designed to push water out from under the tire so the car doesn't slip in the rain. When tread depth wears down to 1.6 mm, the tire is called 'bald' — and is extremely dangerous on wet roads."}
+        </p>
+
+        {/* Tread visualization */}
+        <div className="rounded-lg bg-stone-950 p-4 mb-4 ff-asphalt-surface">
+          <svg viewBox="0 0 480 140" className="w-full h-auto" data-testid="tread-svg">
+            {/* tire side view block */}
+            <rect x="10" y="20" width="460" height="50" fill="#1c1917" stroke="#a8a29e" strokeWidth="1" />
+            {/* tread grooves whose depth depends on `tread` */}
+            {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+              const grooveDepth = (tread / 8) * 38; // px, max 38px deep
+              const x = 30 + i * 56;
+              return (
+                <rect key={i} x={x} y={70 - grooveDepth} width="22" height={grooveDepth} fill="#0a0a0a" />
+              );
+            })}
+            {/* depth scale on right */}
+            <line x1="478" y1="32" x2="478" y2="68" stroke="#a8a29e" strokeWidth="1" />
+            <text x="448" y="36" fill="#fbbf24" fontSize="10" fontFamily="monospace" textAnchor="end">
+              8mm
+            </text>
+            <text x="448" y="68" fill="#a8a29e" fontSize="10" fontFamily="monospace" textAnchor="end">
+              0mm
+            </text>
+            {/* legal line */}
+            <line x1="10" y1={70 - (1.6 / 8) * 38} x2="470" y2={70 - (1.6 / 8) * 38} stroke="#ef4444" strokeWidth="1.5" strokeDasharray="6 4" />
+            <text x="20" y={70 - (1.6 / 8) * 38 - 4} fill="#fca5a5" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} className={isKh ? "font-khmer" : ""}>
+              {isKh ? "ដែនកំណត់ស្របច្បាប់ · ១,៦ មម" : "legal limit · 1.6mm"}
+            </text>
+            {/* water + rain illustration */}
+            <CloudRainSvg x={120} y={88} bald={tread < 1.7} />
+            <CloudRainSvg x={260} y={88} bald={tread < 1.7} />
+            <CloudRainSvg x={400} y={88} bald={tread < 1.7} />
+            <text x="240" y="135" fill="#a8a29e" fontSize="10" fontFamily={isKh ? "inherit" : "monospace"} textAnchor="middle" className={isKh ? "font-khmer" : ""}>
+              {tread < 1.7
+                ? isKh
+                  ? "សំបកកង់រអិលលើទឹក →"
+                  : "tire skids on water →"
+                : isKh
+                ? "← គ្រឡុករុញទឹកចេញ ←"
+                : "← grooves push water out ←"}
+            </text>
+          </svg>
+        </div>
+
+        {/* Slider */}
+        <div className="flex items-center gap-4">
+          <span className="text-stone-400 text-xs font-mono">0mm</span>
+          <input
+            type="range"
+            min={0}
+            max={8}
+            step={0.1}
+            value={tread}
+            onChange={(e) => setTread(parseFloat(e.target.value))}
+            className="flex-1 accent-amber-500"
+            data-testid="tread-slider"
+            aria-label="tread depth"
+          />
+          <span className="text-stone-400 text-xs font-mono">8mm</span>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div className="text-stone-400 text-xs uppercase tracking-widest font-bold">
+              {isKh ? "ជម្រៅគ្រឡុក" : "Tread depth"}
+            </div>
+            <div className="text-3xl font-mono font-bold text-amber-300" data-testid="tread-readout">
+              {tread.toFixed(1)} mm
+            </div>
+          </div>
+          <div
+            className="px-4 py-3 rounded-lg border-2 font-bold uppercase tracking-widest text-sm"
+            style={{ background: status.bg, borderColor: status.border, color: status.color }}
+            data-testid="tread-status"
+          >
+            <span className={isKh ? "font-khmer tracking-normal normal-case" : ""}>
+              {isKh ? status.kh : status.en}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Age & Rot ── */}
+      <div className="rounded-xl bg-stone-900/60 border border-stone-700 p-5" data-testid="tire-age">
+        <div className="flex items-center gap-2 mb-3">
+          <CalendarClock className="w-5 h-5 text-amber-400" />
+          <h4 className={`font-display font-bold text-stone-50 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "អាយុ និងការប្រេះស្រាំ" : "Age & Rot"}
+          </h4>
+        </div>
+        <p className={`text-stone-300 text-sm mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "សូម្បីតែឡានដែលគេមិនបានបើកច្រើនក៏ដោយ កៅស៊ូក៏ស្ងួត និងប្រេះស្រាំតាមពេលវេលា — ពន្លឺថ្ងៃ កំដៅ និងអុកស៊ីសែនបំផ្លាញម៉ូលេគុលបន្តិចម្ដងៗ។"
+            : "Even if a car is rarely driven, the rubber dries out and cracks over time — sun, heat and oxygen slowly break down the molecules."}
+        </p>
+
+        {/* Year timeline */}
+        <div className="rounded-lg bg-stone-950 p-4">
+          <div className="flex items-end justify-between mb-2">
+            {[
+              { year: "1y", color: "#22c55e", labelEn: "new", labelKh: "ថ្មី" },
+              { year: "3y", color: "#22c55e", labelEn: "fine", labelKh: "ល្អ" },
+              { year: "5y", color: "#facc15", labelEn: "inspect", labelKh: "ត្រួតពិនិត្យ" },
+              { year: "6y", color: "#fb923c", labelEn: "replace", labelKh: "ត្រូវផ្លាស់" },
+              { year: "10y", color: "#ef4444", labelEn: "danger", labelKh: "គ្រោះថ្នាក់" },
+            ].map((t, i) => (
+              <div key={i} className="flex flex-col items-center gap-1 flex-1" data-testid={`age-tick-${t.year}`}>
+                <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-mono font-bold"
+                     style={{ borderColor: t.color, color: t.color }}>
+                  {t.year}
+                </div>
+                <span className={`text-[10px] uppercase tracking-widest font-bold ${isKh ? "font-khmer tracking-normal normal-case text-[11px]" : ""}`}
+                      style={{ color: t.color }}>
+                  {isKh ? t.labelKh : t.labelEn}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="h-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-amber-400 via-orange-500 to-rose-600" />
+        </div>
+
+        <div className={`mt-4 rounded-lg border-l-4 border-rose-500 bg-rose-500/10 p-4 text-sm text-stone-100 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          <span className="text-rose-300 font-bold">
+            {isKh ? "ច្បាប់ទូទៅ ៖ " : "Rule of thumb: "}
+          </span>
+          {isKh
+            ? "ផ្លាស់ប្តូរសំបកកង់រាល់ ៦ ឆ្នាំ — ទោះបីជាមើលទៅនៅល្អក៏ដោយ។ មើលថ្ងៃផលិត ( លេខ ៤ ខ្ទង់នៅលើជើងសំបក — ឧទាហរណ៍ “២១២៥” = សប្ដាហ៍ទី ២១ ឆ្នាំ ២០២៥ )។"
+            : "Replace tires every 6 years — even if they look fine. Check the date code (a 4-digit number on the sidewall — e.g. \"2125\" = week 21 of year 2025)."}
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+/* small helper for the tread visualization */
+function CloudRainSvg({ x, y, bald }: { x: number; y: number; bald: boolean }) {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <ellipse cx="0" cy="0" rx="20" ry="6" fill="#475569" />
+      <line x1="-10" y1="6" x2="-10" y2={bald ? 36 : 18} stroke="#60a5fa" strokeWidth="1.5" />
+      <line x1="0" y1="6" x2="0" y2={bald ? 36 : 18} stroke="#60a5fa" strokeWidth="1.5" />
+      <line x1="10" y1="6" x2="10" y2={bald ? 36 : 18} stroke="#60a5fa" strokeWidth="1.5" />
+    </g>
+  );
+}
 
 function ScopedStyles() {
   return (
