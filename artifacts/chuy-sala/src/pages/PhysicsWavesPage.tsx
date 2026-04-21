@@ -11,6 +11,9 @@ import {
   AudioLines,
   Lightbulb,
   Sparkles,
+  Glasses,
+  Minus,
+  Plus,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -178,6 +181,17 @@ export function PhysicsWavesPage() {
           icon={Eye}
         />
         <OpticsCards kh={kh} t={t} />
+
+        {/* ── 5. Physics of Glasses ────────────────────────────── */}
+        <div className="mt-10">
+          <SectionTitle
+            en="The Physics of Glasses — correcting vision"
+            kh="រូបវិទ្យានៃវ៉ែនតា — កែសម្រួលការមើលឃើញ"
+            numberLabel="05"
+            icon={Glasses}
+          />
+          <GlassesSubsection kh={kh} t={t} />
+        </div>
 
         {/* Back to hub */}
         <div className="mt-10 flex justify-center">
@@ -838,6 +852,471 @@ function RefractionSvg() {
       {/* "broken" caption */}
       <text x="172" y="92" fontSize="9" fill="#dc2626" fontFamily="monospace" fontWeight="bold">"BROKEN"</text>
       <line x1="170" y1="86" x2="148" y2="86" stroke="#dc2626" strokeWidth="1" strokeDasharray="2 2" />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// 5. The Physics of Glasses — clinical optometrist sub-section
+// ─────────────────────────────────────────────────────────────────────────
+// Aesthetic: clean clinical white-on-soft cards, light-blue tinted glass
+// lens shapes, glowing yellow/green neon light rays.
+// Reusable colours
+const RAY = "#facc15";          // glowing yellow light
+const RAY_FIX = "#22c55e";      // green ray after correction
+const LENS_FILL = "rgba(56, 189, 248, 0.18)";
+const LENS_STROKE = "#0ea5e9";
+const RETINA = "#be185d";
+
+function GlassesSubsection({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <div className="space-y-5">
+      {/* Intro */}
+      <p className={`text-sm sm:text-base text-foreground/80 leading-relaxed max-w-3xl ${kh ? "font-khmer leading-loose" : ""}`}>
+        {t(
+          "Your eye is a tiny camera. Light bends through the cornea and lens, and a clear image lands on the retina at the back. When the focus point is even slightly off, the world looks blurry — and a pair of glasses, just two carefully-shaped pieces of glass, can put it back in place.",
+          "ភ្នែករបស់អ្នកគឺជាកាមេរ៉ាតូចមួយ។ ពន្លឺបត់ឆ្លងកាត់ភ្នែកស (cornea) និងកញ្ចក់ភ្នែក (lens) ហើយរូបភាពច្បាស់លាស់ចុះនៅលើភ្នាសភ្នែក (retina) នៅខាងក្រោយ។ ពេលចំណុចផ្តោតបែកបន្តិច ពិភពលោកមើលទៅព្រិលៗ — ហើយវ៉ែនតាមួយគូ ដែលគ្រាន់តែជាកញ្ចក់រូបរាងសមរម្យពីរ អាចដាក់វាត្រឡប់មកវិញ។"
+        )}
+      </p>
+
+      {/* 5.1 Anatomy of focus — Normal eye */}
+      <ClinicalCard
+        tagEn="Step 1 · Anatomy"
+        tagKh="ជំហាន ១ · កាយវិភាគ"
+        titleEn="The anatomy of focus — a healthy eye"
+        titleKh="កាយវិភាគនៃការផ្តោត — ភ្នែកធម្មតា"
+        bodyEn="In a healthy eye, parallel light rays from a distant object pass through the cornea and the lens, which bend them inward. They meet at exactly one point — the fovea on the retina — and the brain reads a sharp image."
+        bodyKh="នៅក្នុងភ្នែកធម្មតា ពន្លឺពីវត្ថុឆ្ងាយឆ្លងកាត់ភ្នែកស និងកញ្ចក់ភ្នែក ដែលបត់វាចូលក្នុង។ ពន្លឺជួបគ្នានៅចំណុចតែមួយ — fovea នៅលើភ្នាសភ្នែក — ហើយខួរក្បាលអានរូបភាពច្បាស់។"
+      >
+        <NormalEyeSvg kh={kh} />
+      </ClinicalCard>
+
+      {/* 5.2 Two errors side-by-side */}
+      <div>
+        <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          {t("Step 2 · The two common errors", "ជំហាន ២ · កំហុសទូទៅទាំងពីរ")}
+        </div>
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+          <ErrorCard
+            colour="#2563eb"
+            tagEn="Refractive error · Myopia"
+            tagKh="កំហុសចំណាំងបែរ · ភ្នែកមីញ៉ូប"
+            titleEn="Myopia — Nearsightedness"
+            titleKh="ភ្នែកមីញ៉ូប — មើលឆ្ងាយមិនច្បាស់"
+            problemEn="The eyeball is slightly too long. Light from far-away objects converges before it reaches the retina, so the image lands short."
+            problemKh="ដួងភ្នែកវែងបន្តិច។ ពន្លឺពីវត្ថុឆ្ងាយជួបគ្នាមុនពេលឆ្ពោះដល់ភ្នាសភ្នែក ដូច្នេះរូបភាពធ្លាក់ខ្លី។"
+            tellEn="Distant boards look blurry; reading up close is fine."
+            tellKh="ក្តារនៅឆ្ងាយមើលទៅព្រិលៗ; អានជិតមើលឃើញធម្មតា។"
+          >
+            <MyopiaSvg kh={kh} />
+          </ErrorCard>
+
+          <ErrorCard
+            colour="#c026d3"
+            tagEn="Refractive error · Hyperopia"
+            tagKh="កំហុសចំណាំងបែរ · ភ្នែកឆ្ងាយ"
+            titleEn="Hyperopia — Farsightedness"
+            titleKh="ភ្នែកឆ្ងាយ — មើលជិតមិនច្បាស់"
+            problemEn="The eyeball is slightly too short. Light has not yet finished converging when it hits the retina, so the focus point falls behind it."
+            problemKh="ដួងភ្នែកខ្លីបន្តិច។ ពន្លឺមិនទាន់បានជួបគ្នាពេញលេញនៅពេលប៉ះភ្នាសភ្នែក ដូច្នេះចំណុចផ្តោតធ្លាក់នៅខាងក្រោយវា។"
+            tellEn="Reading a book up close looks blurry; far objects are easier."
+            tellKh="អានសៀវភៅជិតមើលទៅព្រិលៗ; វត្ថុឆ្ងាយមើលងាយជាង។"
+          >
+            <HyperopiaSvg kh={kh} />
+          </ErrorCard>
+        </div>
+      </div>
+
+      {/* 5.3 The lens solution */}
+      <div>
+        <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          {t("Step 3 · The refraction solution", "ជំហាន ៣ · ដំណោះស្រាយដោយការចំណាំងបែរ")}
+        </div>
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+          <SolutionCard
+            icon={Minus}
+            tagEn="Concave lens · diverging"
+            tagKh="ឡង់ទីផត · ផ្តាច់ពន្លឺ"
+            titleEn="Concave lens fixes Myopia"
+            titleKh="ឡង់ទីផតកែភ្នែកមីញ៉ូប"
+            bodyEn="A concave lens is thinner in the middle than at the edges. It spreads light rays outward before they enter the eye. By 'pre-diverging' the light, the eye's own lens then focuses it slightly later — exactly onto the retina."
+            bodyKh="ឡង់ទីផតគឺស្តើងនៅកណ្តាលជាងគែម។ វាផ្តាច់ពន្លឺឱ្យរាលចេញមុនពេលចូលភ្នែក។ ដោយ 'ផ្តាច់មុន' ពន្លឺ កញ្ចក់ភ្នែករបស់អ្នកផ្តោតវាបន្តិចក្រោយ — ត្រឹមត្រូវនៅលើភ្នាសភ្នែក។"
+          >
+            <ConcaveSvg kh={kh} />
+          </SolutionCard>
+
+          <SolutionCard
+            icon={Plus}
+            tagEn="Convex lens · converging"
+            tagKh="ឡង់ទីប៉ោង · បង្រួមពន្លឺ"
+            titleEn="Convex lens fixes Hyperopia"
+            titleKh="ឡង់ទីប៉ោងកែភ្នែកឆ្ងាយ"
+            bodyEn="A convex lens is thicker in the middle. It bends light rays inward, helping them start to converge before they reach the eye. The eye's own lens then completes the job — pulling the focal point forward onto the retina."
+            bodyKh="ឡង់ទីប៉ោងគឺក្រាស់នៅកណ្តាល។ វាបត់ពន្លឺចូលក្នុង ជួយឱ្យពួកវាចាប់ផ្តើមជួបគ្នាមុនឆ្ពោះដល់ភ្នែក។ កញ្ចក់ភ្នែកបញ្ចប់ការងារ — ទាញចំណុចផ្តោតមកមុខលើភ្នាសភ្នែក។"
+          >
+            <ConvexSvg kh={kh} />
+          </SolutionCard>
+        </div>
+      </div>
+
+      {/* Summary mini key */}
+      <article className="relative rounded-2xl border-2 border-indigo-300 bg-white/95 shadow-sm overflow-hidden">
+        <div className="p-4 sm:p-5">
+          <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {t("Optometrist's quick key", "សោរខ្លីរបស់អ្នកវែកតាភ្នែក")}
+          </div>
+          <ul className={`text-sm text-foreground/80 leading-relaxed space-y-1 ${kh ? "font-khmer leading-loose" : ""}`}>
+            <li className="flex items-start gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-yellow-400 mt-1.5 flex-shrink-0 shadow-[0_0_6px_rgba(250,204,21,0.9)]" />
+              <span>{t("Yellow rays = light from the world entering your eye.", "ពន្លឺពណ៌លឿង = ពន្លឺពីពិភពលោកចូលភ្នែក។")}</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0 shadow-[0_0_6px_rgba(34,197,94,0.9)]" />
+              <span>{t("Green rays = light after a corrective lens has bent it.", "ពន្លឺពណ៌បៃតង = ពន្លឺក្រោយពេលឡង់កែបានបត់វា។")}</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-pink-700 mt-1.5 flex-shrink-0" />
+              <span>{t("Pink line = the retina, the 'screen' rays must hit exactly.", "ខ្សែពណ៌ផ្កាឈូក = ភ្នាសភ្នែក 'អេក្រង់' ដែលពន្លឺត្រូវប៉ះត្រឹមត្រូវ។")}</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+// ── Card shells ──────────────────────────────────────────────────────────
+function ClinicalCard({
+  tagEn, tagKh, titleEn, titleKh, bodyEn, bodyKh, children,
+}: {
+  tagEn: string; tagKh: string; titleEn: string; titleKh: string;
+  bodyEn: string; bodyKh: string; children: React.ReactNode;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <article className="relative rounded-2xl border-2 border-indigo-300 bg-white/95 shadow-sm overflow-hidden">
+      <div className="p-4 sm:p-5 grid md:grid-cols-[minmax(0,1fr)_280px] gap-4 items-center">
+        <div>
+          <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {kh ? tagKh : tagEn}
+          </div>
+          <h3 className={`text-lg font-bold text-indigo-950 mb-2 ${kh ? "font-khmer" : ""}`}>
+            {kh ? titleKh : titleEn}
+          </h3>
+          <p className={`text-sm text-foreground/80 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            {kh ? bodyKh : bodyEn}
+          </p>
+        </div>
+        <div className="rounded-lg bg-slate-900 border border-indigo-200 p-3 flex items-center justify-center">
+          {children}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ErrorCard({
+  colour, tagEn, tagKh, titleEn, titleKh, problemEn, problemKh, tellEn, tellKh, children,
+}: {
+  colour: string;
+  tagEn: string; tagKh: string; titleEn: string; titleKh: string;
+  problemEn: string; problemKh: string; tellEn: string; tellKh: string;
+  children: React.ReactNode;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <article className="relative rounded-2xl border-2 bg-white/95 shadow-sm overflow-hidden flex flex-col" style={{ borderColor: colour }}>
+      <div className="p-4 sm:p-5 flex-1 flex flex-col">
+        <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`} style={{ color: colour }}>
+          {kh ? tagKh : tagEn}
+        </div>
+        <h4 className={`text-lg font-bold text-indigo-950 mb-2 ${kh ? "font-khmer" : ""}`}>
+          {kh ? titleKh : titleEn}
+        </h4>
+        <div className="rounded-lg bg-slate-900 border border-indigo-200 p-3 mb-3 flex items-center justify-center min-h-[150px]">
+          {children}
+        </div>
+        <p className={`text-sm text-foreground/80 leading-relaxed mb-2 ${kh ? "font-khmer leading-loose" : ""}`}>
+          {kh ? problemKh : problemEn}
+        </p>
+        <div className="mt-auto pt-2 border-t border-dashed border-slate-200">
+          <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-slate-500 mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {kh ? "សញ្ញាប្រាប់" : "Tell-tale sign"}
+          </div>
+          <p className={`text-sm text-foreground/75 italic ${kh ? "font-khmer not-italic" : ""}`}>
+            {kh ? tellKh : tellEn}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function SolutionCard({
+  icon: Icon, tagEn, tagKh, titleEn, titleKh, bodyEn, bodyKh, children,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  tagEn: string; tagKh: string; titleEn: string; titleKh: string;
+  bodyEn: string; bodyKh: string; children: React.ReactNode;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <article className="relative rounded-2xl border-2 border-emerald-400 bg-white/95 shadow-sm overflow-hidden flex flex-col">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Icon className="w-5 h-5" />
+          </div>
+          <div className="min-w-0">
+            <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-emerald-700 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {kh ? tagKh : tagEn}
+            </div>
+            <h4 className={`text-base sm:text-lg font-bold text-indigo-950 ${kh ? "font-khmer" : ""}`}>
+              {kh ? titleKh : titleEn}
+            </h4>
+          </div>
+        </div>
+        <div className="rounded-lg bg-slate-900 border border-indigo-200 p-3 mb-3 flex items-center justify-center min-h-[160px]">
+          {children}
+        </div>
+        <p className={`text-sm text-foreground/80 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+          {kh ? bodyKh : bodyEn}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+// ── SVG diagrams ─────────────────────────────────────────────────────────
+// Bilingual SVG label helper
+function L(en: string, kh: string, isKh: boolean): string {
+  return isKh ? kh : en;
+}
+
+function EyeShape({
+  cx, cy, rx, ry, retinaShift = 0,
+}: {
+  cx: number; cy: number; rx: number; ry: number; retinaShift?: number;
+}) {
+  return (
+    <g>
+      {/* eyeball */}
+      <ellipse cx={cx + retinaShift / 2} cy={cy} rx={rx + retinaShift / 2} ry={ry} fill="#0f172a" stroke="#cbd5e1" strokeWidth="1.2" />
+      {/* cornea bulge */}
+      <path d={`M ${cx - rx - 4} ${cy - 10} Q ${cx - rx - 12} ${cy} ${cx - rx - 4} ${cy + 10}`} fill="rgba(56,189,248,0.25)" stroke="#7dd3fc" strokeWidth="1.2" />
+      {/* lens (inner) */}
+      <ellipse cx={cx - rx + 8} cy={cy} rx="5" ry={ry * 0.55} fill="rgba(125,211,252,0.45)" stroke="#7dd3fc" strokeWidth="1" />
+      {/* retina arc on the back */}
+      <path
+        d={`M ${cx + rx + retinaShift - 2} ${cy - ry + 6} Q ${cx + rx + retinaShift + 4} ${cy} ${cx + rx + retinaShift - 2} ${cy + ry - 6}`}
+        fill="none"
+        stroke={RETINA}
+        strokeWidth="2.5"
+      />
+      {/* optic nerve stub */}
+      <path d={`M ${cx + rx + retinaShift - 2} ${cy + ry - 4} L ${cx + rx + retinaShift + 8} ${cy + ry + 6}`} stroke="#94a3b8" strokeWidth="1.5" />
+    </g>
+  );
+}
+
+function GlowingRay({
+  d, color = RAY, dashed = false,
+}: { d: string; color?: string; dashed?: boolean }) {
+  return (
+    <g style={{ filter: `drop-shadow(0 0 3px ${color})` }}>
+      <path d={d} stroke={color} strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray={dashed ? "3 3" : undefined} />
+    </g>
+  );
+}
+
+function NormalEyeSvg({ kh }: { kh: boolean }) {
+  // viewBox: 280 wide, 170 tall. Eye centre (170, 85), rx 50, ry 38.
+  const cx = 170, cy = 85, rx = 50, ry = 38;
+  const focusX = cx + rx - 4; // exactly on retina
+  return (
+    <svg viewBox="0 0 280 170" className="w-full h-auto" role="img" aria-label={kh ? "ភ្នែកធម្មតា" : "Healthy eye focusing light on the retina"}>
+      <defs>
+        <pattern id="eye-grid-1" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(125,211,252,0.07)" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="280" height="170" fill="url(#eye-grid-1)" />
+      {/* incoming parallel rays from far left */}
+      <GlowingRay d={`M 10 50 L ${cx - rx - 6} 50`} />
+      <GlowingRay d={`M 10 85 L ${cx - rx - 6} 85`} />
+      <GlowingRay d={`M 10 120 L ${cx - rx - 6} 120`} />
+      {/* converging rays inside the eye → all meet at focusX, cy on retina */}
+      <GlowingRay d={`M ${cx - rx - 6} 50 L ${focusX} ${cy}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 85 L ${focusX} ${cy}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 120 L ${focusX} ${cy}`} />
+      <EyeShape cx={cx} cy={cy} rx={rx} ry={ry} />
+      {/* focus point */}
+      <circle cx={focusX} cy={cy} r="3.5" fill={RAY} style={{ filter: `drop-shadow(0 0 5px ${RAY})` }} />
+      {/* labels */}
+      <text x={cx - rx - 14} y={20} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#7dd3fc" fontWeight="bold">{L("CORNEA", "ភ្នែកស", kh)}</text>
+      <text x={cx - rx + 8} y={155} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#7dd3fc" textAnchor="middle" fontWeight="bold">{L("LENS", "កញ្ចក់ភ្នែក", kh)}</text>
+      <text x={cx + rx + 6} y={20} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={RETINA} fontWeight="bold">{L("RETINA", "ភ្នាសភ្នែក", kh)}</text>
+      <text x={focusX + 6} y={cy + 3} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={RAY} fontWeight="bold">{L("SHARP FOCUS", "ផ្តោតច្បាស់", kh)}</text>
+    </svg>
+  );
+}
+
+function MyopiaSvg({ kh }: { kh: boolean }) {
+  // Eyeball is too long → focus point falls in front of retina.
+  const cx = 160, cy = 85, rx = 50, ry = 38;
+  const stretched = 14;            // extra length backwards
+  const focusX = cx + rx - 16;     // before retina
+  return (
+    <svg viewBox="0 0 290 170" className="w-full h-auto" role="img" aria-label={kh ? "ភ្នែកមីញ៉ូប" : "Myopic eye — focus falls in front of the retina"}>
+      <defs>
+        <pattern id="eye-grid-2" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(125,211,252,0.07)" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="290" height="170" fill="url(#eye-grid-2)" />
+      <GlowingRay d={`M 10 55 L ${cx - rx - 6} 55`} />
+      <GlowingRay d={`M 10 85 L ${cx - rx - 6} 85`} />
+      <GlowingRay d={`M 10 115 L ${cx - rx - 6} 115`} />
+      {/* converge early */}
+      <GlowingRay d={`M ${cx - rx - 6} 55 L ${focusX} ${cy}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 85 L ${focusX} ${cy}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 115 L ${focusX} ${cy}`} />
+      {/* and then diverge back out toward (and past) retina */}
+      <GlowingRay d={`M ${focusX} ${cy} L ${cx + rx + stretched - 2} ${cy - 14}`} dashed />
+      <GlowingRay d={`M ${focusX} ${cy} L ${cx + rx + stretched - 2} ${cy + 14}`} dashed />
+      <EyeShape cx={cx} cy={cy} rx={rx} ry={ry} retinaShift={stretched} />
+      {/* focus marker */}
+      <circle cx={focusX} cy={cy} r="3.5" fill={RAY} style={{ filter: `drop-shadow(0 0 5px ${RAY})` }} />
+      {/* problem caption */}
+      <text x={focusX} y={cy - 8} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle" fontWeight="bold">{L("FOCUS TOO EARLY", "ផ្តោតមុនពេល", kh)}</text>
+      <text x={cx + rx + stretched + 4} y={20} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={RETINA} fontWeight="bold">{L("RETINA", "ភ្នាសភ្នែក", kh)}</text>
+      <text x={20} y={155} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#94a3b8">{L("Eyeball too long", "ដួងភ្នែកវែងពេក", kh)}</text>
+    </svg>
+  );
+}
+
+function HyperopiaSvg({ kh }: { kh: boolean }) {
+  // Eyeball is too short → focus point would land behind retina.
+  const cx = 160, cy = 85, rx = 50, ry = 38;
+  const shortened = -10;   // shorter back
+  const retinaX = cx + rx + shortened - 2;
+  const focusX = cx + rx + 14; // would-be focus point past the back wall
+  return (
+    <svg viewBox="0 0 290 170" className="w-full h-auto" role="img" aria-label={kh ? "ភ្នែកឆ្ងាយ" : "Hyperopic eye — focus would fall behind the retina"}>
+      <defs>
+        <pattern id="eye-grid-3" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(125,211,252,0.07)" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="290" height="170" fill="url(#eye-grid-3)" />
+      <GlowingRay d={`M 10 60 L ${cx - rx - 6} 60`} />
+      <GlowingRay d={`M 10 85 L ${cx - rx - 6} 85`} />
+      <GlowingRay d={`M 10 110 L ${cx - rx - 6} 110`} />
+      {/* converging slowly — at the retina they're still well above/below the centre */}
+      <GlowingRay d={`M ${cx - rx - 6} 60 L ${retinaX} ${cy - 8}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 85 L ${retinaX} ${cy}`} />
+      <GlowingRay d={`M ${cx - rx - 6} 110 L ${retinaX} ${cy + 8}`} />
+      {/* dashed continuation past the eye showing where they would meet */}
+      <GlowingRay d={`M ${retinaX} ${cy - 8} L ${focusX} ${cy}`} dashed />
+      <GlowingRay d={`M ${retinaX} ${cy + 8} L ${focusX} ${cy}`} dashed />
+      <EyeShape cx={cx} cy={cy} rx={rx} ry={ry} retinaShift={shortened} />
+      {/* would-be focus point */}
+      <circle cx={focusX} cy={cy} r="3.5" fill="none" stroke={RAY} strokeWidth="1.5" strokeDasharray="2 2" />
+      <text x={focusX} y={cy - 8} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill="#facc15" textAnchor="middle" fontWeight="bold">{L("FOCUS TOO LATE", "ផ្តោតយឺតពេល", kh)}</text>
+      <text x={retinaX + 4} y={20} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={RETINA} fontWeight="bold">{L("RETINA", "ភ្នាសភ្នែក", kh)}</text>
+      <text x={20} y={155} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#94a3b8">{L("Eyeball too short", "ដួងភ្នែកខ្លីពេក", kh)}</text>
+    </svg>
+  );
+}
+
+// Concave lens (biconcave) — thin in the middle. Diverges parallel rays.
+function ConcaveSvg({ kh }: { kh: boolean }) {
+  const lensCx = 110, lensCy = 95;
+  // Lens path: two arcs curving inward
+  const lensPath = `M ${lensCx - 8} ${lensCy - 38} Q ${lensCx + 4} ${lensCy} ${lensCx - 8} ${lensCy + 38} L ${lensCx + 8} ${lensCy + 38} Q ${lensCx - 4} ${lensCy} ${lensCx + 8} ${lensCy - 38} Z`;
+  // Eye behind lens (myopic — elongated)
+  const cx = 240, cy = 95, rx = 40, ry = 32;
+  const stretched = 12;
+  // Retina is at cx + rx + stretched - 2 = 290.
+  // Pre-divergence pushes focus back so it lands EXACTLY on the retina.
+  const focusX = cx + rx + stretched - 2;
+  return (
+    <svg viewBox="0 0 360 190" className="w-full h-auto" role="img" aria-label={kh ? "ឡង់ទីផតកែភ្នែកមីញ៉ូប" : "Concave lens correcting myopia"}>
+      <defs>
+        <pattern id="eye-grid-4" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(125,211,252,0.07)" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="360" height="190" fill="url(#eye-grid-4)" />
+
+      {/* Incoming parallel yellow rays */}
+      <GlowingRay d={`M 6 60 L ${lensCx - 4} 60`} />
+      <GlowingRay d={`M 6 95 L ${lensCx - 4} 95`} />
+      <GlowingRay d={`M 6 130 L ${lensCx - 4} 130`} />
+
+      {/* Lens (light blue glass) */}
+      <path d={lensPath} fill={LENS_FILL} stroke={LENS_STROKE} strokeWidth="1.5" />
+      <text x={lensCx} y={lensCy + 56} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={LENS_STROKE} textAnchor="middle" fontWeight="bold">{L("CONCAVE", "ឡង់ទីផត", kh)}</text>
+
+      {/* Diverging green rays after the lens (spread further apart) */}
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 4} 60 L ${cx - rx - 6} 45`} />
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 4} 95 L ${cx - rx - 6} 95`} />
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 4} 130 L ${cx - rx - 6} 145`} />
+
+      {/* Inside the eye — eye's lens converges them, focus lands on retina */}
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 45 L ${focusX} ${cy}`} />
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 95 L ${focusX} ${cy}`} />
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 145 L ${focusX} ${cy}`} />
+
+      <EyeShape cx={cx} cy={cy} rx={rx} ry={ry} retinaShift={stretched} />
+      {/* corrected focus — exactly on retina */}
+      <circle cx={focusX} cy={cy} r="3.5" fill={RAY_FIX} style={{ filter: `drop-shadow(0 0 6px ${RAY_FIX})` }} />
+      <text x={focusX - 4} y={cy - 8} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={RAY_FIX} textAnchor="end" fontWeight="bold">{L("ON RETINA", "នៅលើភ្នាសភ្នែក", kh)}</text>
+    </svg>
+  );
+}
+
+// Convex lens (biconvex) — thick in the middle. Converges parallel rays.
+function ConvexSvg({ kh }: { kh: boolean }) {
+  const lensCx = 110, lensCy = 95;
+  const lensPath = `M ${lensCx} ${lensCy - 40} Q ${lensCx + 14} ${lensCy} ${lensCx} ${lensCy + 40} Q ${lensCx - 14} ${lensCy} ${lensCx} ${lensCy - 40} Z`;
+  const cx = 240, cy = 95, rx = 40, ry = 32;
+  const shortened = -8;
+  const retinaX = cx + rx + shortened - 2;
+  return (
+    <svg viewBox="0 0 360 190" className="w-full h-auto" role="img" aria-label={kh ? "ឡង់ទីប៉ោងកែភ្នែកឆ្ងាយ" : "Convex lens correcting hyperopia"}>
+      <defs>
+        <pattern id="eye-grid-5" width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(125,211,252,0.07)" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="360" height="190" fill="url(#eye-grid-5)" />
+
+      {/* Incoming parallel yellow rays */}
+      <GlowingRay d={`M 6 60 L ${lensCx - 6} 60`} />
+      <GlowingRay d={`M 6 95 L ${lensCx - 6} 95`} />
+      <GlowingRay d={`M 6 130 L ${lensCx - 6} 130`} />
+
+      {/* Lens */}
+      <path d={lensPath} fill={LENS_FILL} stroke={LENS_STROKE} strokeWidth="1.5" />
+      <text x={lensCx} y={lensCy + 58} fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={LENS_STROKE} textAnchor="middle" fontWeight="bold">{L("CONVEX", "ឡង់ទីប៉ោង", kh)}</text>
+
+      {/* Pre-converging green rays */}
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 6} 60 L ${cx - rx - 6} 78`} />
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 6} 95 L ${cx - rx - 6} 95`} />
+      <GlowingRay color={RAY_FIX} d={`M ${lensCx + 6} 130 L ${cx - rx - 6} 112`} />
+
+      {/* Inside eye — now finishes converging exactly on retina */}
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 78 L ${retinaX} ${cy}`} />
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 95 L ${retinaX} ${cy}`} />
+      <GlowingRay color={RAY_FIX} d={`M ${cx - rx - 6} 112 L ${retinaX} ${cy}`} />
+
+      <EyeShape cx={cx} cy={cy} rx={rx} ry={ry} retinaShift={shortened} />
+      <circle cx={retinaX} cy={cy} r="3.5" fill={RAY_FIX} style={{ filter: `drop-shadow(0 0 6px ${RAY_FIX})` }} />
+      <text x={retinaX - 4} y={cy - 8} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={RAY_FIX} textAnchor="end" fontWeight="bold">{L("ON RETINA", "នៅលើភ្នាសភ្នែក", kh)}</text>
     </svg>
   );
 }
