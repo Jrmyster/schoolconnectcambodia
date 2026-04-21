@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -477,6 +477,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Gamepad2,
         descEn: "Race a CPU against a GPU painting pixels, follow the Input → Update → Render game loop, and watch a 3D head get built from triangles, textures, and light.",
         descKh: "ប្រណាំង CPU ប្រឆាំងនឹង GPU ក្នុងការគូរភីកសែល ដើរតាមវដ្តហ្គេម និងមើលក្បាល 3D ត្រូវសាងសង់ពីត្រីកោណ វាយនភាព និងពន្លឺ។",
+      },
+      {
+        href: "/technology/radar",
+        labelEn: "Radar: Seeing with Radio Waves",
+        labelKh: "រ៉ាដា៖ ការមើលឃើញដោយរលកវិទ្យុ",
+        icon: RadarIcon,
+        descEn: "Decode the RADAR acronym, derive the echo distance formula d = c·t/2 with LaTeX, follow the WW2 Chain Home story, and see how Phnom Penh airport and weather stations use it today.",
+        descKh: "បកស្រាយអក្សរកាត់ RADAR ទាញយករូបមន្តចម្ងាយអេកូ d = c·t/2 ដោយ LaTeX ដើរតាមរឿង Chain Home សង្គ្រាមលោកលើកទីពីរ និងមើលរបៀបដែលអាកាសយានដ្ឋានភ្នំពេញ និងស្ថានីយអាកាសធាតុប្រើវាសព្វថ្ងៃ។",
       },
     ],
   },
