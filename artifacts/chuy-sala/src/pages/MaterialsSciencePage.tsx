@@ -25,6 +25,9 @@ import {
   AlertOctagon,
   Scissors,
   CheckCircle2,
+  Filter,
+  Sun,
+  AlertTriangle,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1106,6 +1109,108 @@ function PetWatererBlueprint({ kh }: { kh: boolean }) {
   );
 }
 
+function BioSandFilterBlueprint({ kh }: { kh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const titleId = `bp-biosand-${uid}`;
+  const stroke = "#a7f3d0", dim = "#5eead4";
+  // Inverted bottle: wide at top (cut bottom), neck pointing down
+  const layers = [
+    { y1: 32, y2: 56, fill: "#94a3b8", labelEn: "Gravel", labelKh: "ក្រួស", noteEn: "catches leaves", noteKh: "ចាប់ស្លឹកឈើ" },
+    { y1: 56, y2: 84, fill: "#fde68a", labelEn: "Fine sand", labelKh: "ខ្សាច់", noteEn: "mechanical", noteKh: "មេកានិច" },
+    { y1: 84, y2: 110, fill: "#1f2937", labelEn: "Charcoal", labelKh: "ធ្យូង", noteEn: "chemical", noteKh: "គីមី" },
+    { y1: 110, y2: 122, fill: "#fef3c7", labelEn: "Cloth", labelKh: "ក្រណាត់", noteEn: "barrier", noteKh: "ឧបសគ្គ" },
+  ];
+  return (
+    <BlueprintFrame titleId={titleId} label={kh ? "ផែនការតម្រងទឹកសន្សំសំចៃ" : "Bio-sand filter blueprint"}>
+      {/* dirty water arrow in */}
+      <text x="100" y="14" fontSize="7" fill="#7dd3fc" textAnchor="middle" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ទឹកកខ្វក់" : "dirty water"}
+      </text>
+      <path d="M 100 18 L 100 28" stroke="#7dd3fc" strokeWidth="1" />
+      <path d="M 96 26 L 100 30 L 104 26 Z" fill="#7dd3fc" />
+
+      {/* inverted bottle body — wide top, narrow neck at bottom */}
+      <path d="M 60 30 L 60 122 L 88 134 L 88 148 L 112 148 L 112 134 L 140 122 L 140 30 Z" fill="none" stroke={stroke} strokeWidth="1.5" />
+
+      {/* layers (clipped within wide section 30..122) */}
+      {layers.map((L) => (
+        <g key={L.labelEn}>
+          <rect x="61" y={L.y1} width="78" height={L.y2 - L.y1} fill={L.fill} fillOpacity="0.55" />
+          <line x1="61" y1={L.y2} x2="139" y2={L.y2} stroke={stroke} strokeDasharray="2 2" strokeWidth="0.6" />
+          <text x="146" y={(L.y1 + L.y2) / 2 + 2} fontSize="7" fill={stroke} fontFamily={kh ? "inherit" : "monospace"}>
+            {kh ? L.labelKh : L.labelEn}
+          </text>
+          <text x="146" y={(L.y1 + L.y2) / 2 + 10} fontSize="5.5" fill={dim} fontFamily={kh ? "inherit" : "monospace"}>
+            {kh ? L.noteKh : L.noteEn}
+          </text>
+        </g>
+      ))}
+
+      {/* clean water drip out */}
+      <text x="100" y="159" fontSize="7" fill="#7dd3fc" textAnchor="middle" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ទឹកស្អាត" : "clean water"}
+      </text>
+      <circle cx="100" cy="153" r="1.2" fill="#7dd3fc" />
+    </BlueprintFrame>
+  );
+}
+
+function SolarHeaterBlueprint({ kh }: { kh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const titleId = `bp-solar-${uid}`;
+  const stroke = "#a7f3d0", dim = "#5eead4";
+  return (
+    <BlueprintFrame titleId={titleId} label={kh ? "ផែនការគ្រឿងកម្ដៅទឹកដោយព្រះអាទិត្យ" : "Solar water heater blueprint"}>
+      {/* Sun + rays */}
+      <circle cx="34" cy="32" r="9" fill="none" stroke="#fbbf24" strokeWidth="1.2" />
+      <circle cx="34" cy="32" r="4" fill="#fbbf24" fillOpacity="0.4" />
+      {[0, 1, 2, 3, 4].map((i) => {
+        const x1 = 50 + i * 28, y1 = 24, x2 = 60 + i * 28, y2 = 60;
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#fbbf24" strokeWidth="0.9" strokeDasharray="3 2" />;
+      })}
+      <text x="48" y="20" fontSize="7" fill="#fbbf24" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ពន្លឺថ្ងៃ" : "sunlight"}
+      </text>
+
+      {/* Corrugated metal roof — slanted */}
+      <g>
+        <path d="M 20 130 L 180 70 L 184 78 L 24 138 Z" fill="#475569" />
+        {/* corrugations */}
+        {Array.from({ length: 14 }).map((_, i) => {
+          const t = i / 13;
+          const x1 = 20 + 160 * t;
+          const y1 = 130 - 60 * t;
+          const x2 = x1 + 4;
+          const y2 = y1 + 8;
+          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#cbd5e1" strokeWidth="0.5" opacity="0.7" />;
+        })}
+      </g>
+
+      {/* Black bottles laid horizontally on the slope */}
+      {[0, 1, 2].map((i) => {
+        const cx = 60 + i * 38;
+        const cy = 116 - i * 14.5;
+        return (
+          <g key={i} transform={`rotate(-20 ${cx} ${cy})`}>
+            <rect x={cx - 18} y={cy - 6} width="32" height="12" rx="2" fill="#0f172a" stroke={stroke} strokeWidth="1" />
+            <rect x={cx + 14} y={cy - 3} width="6" height="6" fill="#0f172a" stroke={stroke} strokeWidth="0.8" />
+            {/* heat squiggle */}
+            <path d={`M ${cx - 6} ${cy - 12} q 3 -3 6 0 t 6 0`} stroke="#fbbf24" strokeWidth="0.8" fill="none" />
+          </g>
+        );
+      })}
+
+      {/* labels */}
+      <text x="100" y="158" fontSize="7" fill={stroke} textAnchor="middle" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ដបពណ៌ខ្មៅស្រូបពន្លឺ → កម្ដៅ" : "black bottles absorb light → heat"}
+      </text>
+      <text x="186" y="146" fontSize="6" fill={dim} textAnchor="end" fontFamily={kh ? "inherit" : "monospace"}>
+        {kh ? "ដំបូលស័ង្កសីរលក" : "corrugated metal roof"}
+      </text>
+    </BlueprintFrame>
+  );
+}
+
 function BlueprintGallery({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
   const projects = [
     {
@@ -1165,7 +1270,65 @@ function BlueprintGallery({ kh, t }: { kh: boolean; t: (en: string, k: string) =
         "ទឹកហូរចេញតែនៅពេលសត្វផឹកធ្វើឱ្យកម្រិតធ្លាក់ — ចានពេញដដែលពេញមួយថ្ងៃ។",
       ],
     },
-  ];
+    {
+      key: "filter",
+      icon: Filter,
+      titleEn: "The Bio-Sand Filter",
+      titleKh: "ការចម្រោះទឹកសន្សំសំចៃ",
+      blurbEn: "A gravity-fed stack of gravel, sand and charcoal cleans muddy water in two ways at once: physically (sand traps dirt and microbes) and chemically (charcoal pores adsorb toxins, smells and bad tastes).",
+      blurbKh: "ដបបញ្ច្រាសដែលដាក់ជាន់ៗដោយក្រួស ខ្សាច់ និងធ្យូង ដំណើរការដោយកម្លាំងទំនាញផែនដី សម្អាតទឹកល្បាប់តាមពីរវិធីក្នុងពេលតែមួយ៖ ការចម្រោះមេកានិច (ខ្សាច់ចាប់សារធាតុកខ្វក់ និងបាក់តេរី) និងការចម្រោះគីមី (រន្ធតូចៗរបស់ធ្យូងស្រូបយកជាតិពុល ក្លិន និងរសជាតិអាក្រក់)។",
+      blueprint: <BioSandFilterBlueprint kh={kh} />,
+      stepsEn: [
+        "Cut the bottom off a clean 5 L PET bottle, remove the cap, and hang it neck-down on a frame.",
+        "Pack the layers from neck (bottom) up: a small wad of clean cotton/cloth, then 4 cm of crushed charcoal, 6 cm of fine washed sand, and 4 cm of small gravel on top.",
+        "Pour dirty water onto the gravel — let it drip slowly through into a clean container. Re-wash the layers every 2 weeks.",
+      ],
+      stepsKh: [
+        "កាត់បាតដប PET ៥ លីត្រស្អាត ដកគម្របចេញ ហើយព្យួរវាដោយបំពង់ចីបចុះក្រោមលើស៊ុម ដើម្បីឱ្យទឹកធ្លាក់ដោយកម្លាំងទំនាញ។",
+        "បង្ហាប់ស្រទាប់ពីបំពង់ចីប (ខាងក្រោម) ឡើងលើ៖ ដុំក្រណាត់សំឡីស្អាតមួយដុំតូច បន្ទាប់មកធ្យូងបុក ៤ ស.ម ខ្សាច់ល្អិតលាងស្អាត ៦ ស.ម និងក្រួសតូច ៤ ស.ម នៅខាងលើ។",
+        "ចាក់ទឹកកខ្វក់លើក្រួស — ទុកឱ្យទឹកស្រក់ស្រាលៗឆ្លងកាត់ចូលក្នុងធុងស្អាត។ លាងស្រទាប់ជាថ្មីរៀងរាល់ ២ សប្ដាហ៍។",
+      ],
+      toolsEn: "Tools: 5 L PET bottle, gravel, sand, charcoal, cloth",
+      toolsKh: "ឧបករណ៍៖ ដប PET ៥ លីត្រ ក្រួស ខ្សាច់ ធ្យូង ក្រណាត់",
+      scienceEn: "Science: mechanical filtration (sand) + chemical adsorption — toxins stick to the pore surfaces of the charcoal.",
+      scienceKh: "វិទ្យាសាស្ត្រ៖ ការចម្រោះមេកានិច (ខ្សាច់) + ការចម្រោះគីមីដោយអាដស័របស្យុង (ការស្រូបជាប់លើផ្ទៃ) — ជាតិពុលជាប់នឹងផ្ទៃរន្ធធ្យូង។",
+      warningEn: "Always boil filtered water before drinking to ensure 100% biological safety.",
+      warningKh: "តែងតែដាំទឹកដែលបានចម្រោះឱ្យពុះមុនផឹក ដើម្បីធានាសុវត្ថិភាពជីវសាស្ត្រ ១០០%។",
+    },
+    {
+      key: "solar",
+      icon: Sun,
+      titleEn: "The Solar Water Heater",
+      titleKh: "ការកម្ដៅទឹកដោយថាមពលព្រះអាទិត្យ",
+      blurbEn: "Black bottles laid on a hot metal roof give you free hot water for washing — no firewood, no electricity. The black surface absorbs every visible wavelength and the clear plastic traps the heat inside.",
+      blurbKh: "ដបពណ៌ខ្មៅដាក់នៅលើដំបូលស័ង្កសីរលកដែលក្ដៅផ្ដល់ឱ្យអ្នកនូវទឹកក្ដៅឥតគិតថ្លៃសម្រាប់លាង — គ្មានអុស គ្មានអគ្គិសនី។ ផ្ទៃខ្មៅស្រូបយករាល់រលកពន្លឺមើលឃើញ ហើយប្លាស្ទិកថ្លាឃុំកម្ដៅនៅខាងក្នុង (បាតុភូតផ្ទះកញ្ចក់)។",
+      blueprint: <SolarHeaterBlueprint kh={kh} />,
+      stepsEn: [
+        "Wash 4–8 clear PET bottles, fill them with water and screw the caps on tight.",
+        "Paint the outside of each bottle matte black (or push a coil of black hose through and refill with water).",
+        "Lay the bottles on a south-facing corrugated metal roof in the morning — by midday the water inside reaches 50–60 °C, hot enough for washing dishes, hands and clothes.",
+      ],
+      stepsKh: [
+        "លាងដប PET ថ្លា ៤–៨ បំពេញពួកវាដោយទឹក ហើយបង្គៀរគម្របឱ្យជាប់ល្អ។",
+        "លាបខាងក្រៅដបនីមួយៗដោយថ្នាំខ្មៅស្ងួត (ឬដាក់បំពង់ទឹកខ្មៅរុំជាបង្វិលនៅខាងក្នុង បន្ទាប់មកបំពេញទឹក)។",
+        "ដាក់ដបនៅលើដំបូលស័ង្កសីបែរទៅទិសខាងត្បូងពីព្រឹក — ដល់ពេលថ្ងៃត្រង់ ទឹកខាងក្នុងឡើងដល់ ៥០–៦០ °C ក្ដៅគ្រប់គ្រាន់សម្រាប់លាងចាន ដៃ និងសម្លៀកបំពាក់។",
+      ],
+      toolsEn: "Tools: PET bottles, matte black paint, sunny roof",
+      toolsKh: "ឧបករណ៍៖ ដប PET ថ្នាំខ្មៅស្ងួត ដំបូលមានពន្លឺថ្ងៃ",
+      scienceEn: "Science: black absorbs all visible wavelengths (albedo ≈ 0); the clear plastic traps re-radiated heat (greenhouse effect).",
+      scienceKh: "វិទ្យាសាស្ត្រ៖ ពណ៌ខ្មៅស្រូបយករាល់រលកពន្លឺមើលឃើញ (អាល់បេដូ ≈ ០); ប្លាស្ទិកថ្លាឃុំកម្ដៅដែលបញ្ចេញវិញ (បាតុភូតផ្ទះកញ្ចក់)។",
+    },
+  ] as Array<{
+    key: string;
+    icon: React.ComponentType<{ className?: string }>;
+    titleEn: string; titleKh: string;
+    blurbEn: string; blurbKh: string;
+    blueprint: React.ReactNode;
+    stepsEn: string[]; stepsKh: string[];
+    toolsEn?: string; toolsKh?: string;
+    scienceEn?: string; scienceKh?: string;
+    warningEn?: string; warningKh?: string;
+  }>;
 
   return (
     <div>
@@ -1175,47 +1338,78 @@ function BlueprintGallery({ kh, t }: { kh: boolean; t: (en: string, k: string) =
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {projects.map(({ key, icon: Icon, titleEn, titleKh, blurbEn, blurbKh, blueprint, stepsEn, stepsKh }) => (
-          <EcoCard key={key} className="p-4 sm:p-5 flex flex-col gap-3">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
-                <Icon className="w-5 h-5" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className={`font-bold text-slate-900 leading-snug ${kh ? "font-khmer text-base" : "text-base"}`}>
-                  {kh ? titleKh : titleEn}
-                </h4>
-                <div className={`text-[10px] uppercase tracking-widest text-emerald-700/80 font-mono mt-0.5 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
-                  {kh ? (key === "trap" ? "អន្ទាក់" : key === "float" ? "សុវត្ថិភាពទឹក" : "ការផ្ដល់ទឹកសត្វ") : `Project · ${key.toUpperCase()}`}
+        {projects.map((p) => {
+          const { key, icon: Icon, titleEn, titleKh, blurbEn, blurbKh, blueprint, stepsEn, stepsKh, toolsEn, toolsKh, scienceEn, scienceKh, warningEn, warningKh } = p;
+          const chipKh: Record<string, string> = {
+            trap: "អន្ទាក់",
+            float: "សុវត្ថិភាពទឹក",
+            pet: "ការផ្ដល់ទឹកសត្វ",
+            filter: "ទឹកស្អាត",
+            solar: "ថាមពលព្រះអាទិត្យ",
+          };
+          return (
+            <EcoCard key={key} className="p-4 sm:p-5 flex flex-col gap-3">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className={`font-bold text-slate-900 leading-snug ${kh ? "font-khmer text-base" : "text-base"}`}>
+                    {kh ? titleKh : titleEn}
+                  </h4>
+                  <div className={`text-[10px] uppercase tracking-widest text-emerald-700/80 font-mono mt-0.5 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                    {kh ? (chipKh[key] ?? "គម្រោង") : `Project · ${key.toUpperCase()}`}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {blueprint}
+              {blueprint}
 
-            <p className={`text-xs sm:text-sm text-slate-700 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
-              {kh ? blurbKh : blurbEn}
-            </p>
+              <p className={`text-xs sm:text-sm text-slate-700 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {kh ? blurbKh : blurbEn}
+              </p>
 
-            <ol className="space-y-1.5">
-              {(kh ? stepsKh : stepsEn).map((step, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-700 text-white text-[11px] font-bold flex items-center justify-center">
-                    {i + 1}
+              {scienceEn && (
+                <div className={`rounded-lg border border-emerald-700/30 bg-emerald-50/70 px-3 py-2 text-[11px] sm:text-xs text-emerald-900 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  <span className="font-bold">{kh ? scienceKh : scienceEn}</span>
+                </div>
+              )}
+
+              <ol className="space-y-1.5">
+                {(kh ? stepsKh : stepsEn).map((step, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-700 text-white text-[11px] font-bold flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <span className={`text-xs sm:text-sm text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                      {step}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              {warningEn && (
+                <div
+                  role="alert"
+                  className={`mt-1 flex items-start gap-2 rounded-lg border-2 border-red-400 bg-red-50 px-3 py-2 text-xs text-red-900 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+                >
+                  <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5 text-red-600" />
+                  <span>
+                    <span className="font-bold uppercase tracking-wider mr-1 text-[10px]">
+                      {t("Safety", "សុវត្ថិភាព")}:
+                    </span>
+                    {kh ? warningKh : warningEn}
                   </span>
-                  <span className={`text-xs sm:text-sm text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
-                    {step}
-                  </span>
-                </li>
-              ))}
-            </ol>
+                </div>
+              )}
 
-            <div className={`mt-auto pt-2 flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-slate-500 font-mono ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
-              <Scissors className="w-3 h-3" />
-              {t("Tools: scissors, string, water", "ឧបករណ៍៖ កន្ត្រៃ ខ្សែ ទឹក")}
-            </div>
-          </EcoCard>
-        ))}
+              <div className={`mt-auto pt-2 flex items-start gap-1.5 text-[10px] uppercase tracking-widest text-slate-500 font-mono ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                <Scissors className="w-3 h-3 flex-shrink-0 mt-0.5" />
+                <span>{kh ? (toolsKh ?? "ឧបករណ៍៖ កន្ត្រៃ ខ្សែ ទឹក") : (toolsEn ?? "Tools: scissors, string, water")}</span>
+              </div>
+            </EcoCard>
+          );
+        })}
       </div>
     </div>
   );
