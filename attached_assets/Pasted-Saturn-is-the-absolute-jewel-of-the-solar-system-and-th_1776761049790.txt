@@ -1,0 +1,38 @@
+Saturn is the absolute jewel of the solar system and the perfect way to introduce your students to the "Gas Giants."
+
+In General Semantics, Saturn offers one of the greatest "Map vs. Territory" lessons in all of astronomy. When we look at the "Map" (telescope images or textbook drawings), Saturn’s rings look like solid, smooth racetracks made of plastic or metal. But the "Territory" is wildly different: the rings are actually made of billions of floating, tumbling chunks of ice and rock, some as small as a grain of sand and others as big as a mountain.
+
+Here is the exact prompt to give the Replit agent to build this module, focusing on the rings, the strange physics of its density, and its most fascinating moon.
+
+The Replit Agent Prompt: The Ringed Giant
+Copy and paste this instruction to the Agent:
+
+"I want to add a new educational module called 'Saturn: The Lord of the Rings' (ភពសៅរ៍៖ ម្ចាស់រង្វង់ក្រវាត់) to the Space section, matching the layout style of the other planet pages. Please implement the following sections:
+
+1. The Gas Giant (ភពឧស្ម័នយក្ស):
+
+Explain that Saturn is the 6th planet from the Sun. Unlike Earth or Mars, it does not have a solid rocky surface. It is a massive ball of Hydrogen and Helium gas. If you tried to land a spaceship on Saturn, you would just sink into the crushing clouds.
+
+2. The Illusion of the Rings (ការបំភាន់នៃរង្វង់ក្រវាត់):
+
+Explain what the rings actually are: They are not solid! They are made of billions of pieces of ice, rock, and dust reflecting the Sun's light.
+
+Highlight the incredible scale: The rings are so wide they could fit the distance between the Earth and our Moon, but they are incredibly thin—in some places, only about 10 meters (the height of a 3-story building) thick.
+
+3. The Floating Planet (ភពដែលអណ្តែតទឹក):
+
+Explain Saturn's bizarre density. Even though Saturn is massive (you could fit over 700 Earths inside it), it is the least dense planet in the solar system.
+
+State the famous physics fact: If you could build a bathtub big enough to hold the entire solar system, Saturn is the only planet that would float like an apple, while Earth and rocks would sink to the bottom.
+
+4. Titan: The Alien Earth (ទីតាន៖ ផែនដីក្រៅភព):
+
+Briefly introduce Saturn's largest moon, Titan. Explain that it is the only moon in the solar system with a thick atmosphere. It has clouds, rain, rivers, and lakes—but it's so cold that the rivers are made of liquid methane (natural gas) instead of water!
+
+5. UI & Layout:
+
+Use a 'Gas Giant' aesthetic: swirling golden-yellows, pale creams, and deep space blacks.
+
+Create a simple visual comparison chart showing Earth vs. Saturn (Size, Day length, Density).
+
+Ensure all core concepts, headings, and scientific data are bilingual (English/Khmer)."

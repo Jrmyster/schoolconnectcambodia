@@ -11,6 +11,7 @@ import { MarsRoversModule } from "@/components/space/MarsRoversModule";
 import { MarsPlanetModule } from "@/components/space/MarsPlanetModule";
 import { VenusPlanetModule } from "@/components/space/VenusPlanetModule";
 import { MercuryPlanetModule } from "@/components/space/MercuryPlanetModule";
+import { EarthMoonModule } from "@/components/space/EarthMoonModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -372,6 +373,9 @@ export function SpacePage() {
 
         {/* ── Venus: The Greenhouse Warning ─────────────────────────────── */}
         <VenusPlanetModule />
+
+        {/* ── Earth & The Moon: Our Cosmic Home ─────────────────────────── */}
+        <EarthMoonModule />
 
         {/* ── Mars: Our Next-Door Neighbor ──────────────────────────────── */}
         <MarsPlanetModule />
