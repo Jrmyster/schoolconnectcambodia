@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -218,6 +218,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Wrench,
         descEn: "Inspect the Big Three (metals, polymers, ceramics & glass), pull and crush them in a live stress–strain workshop, and see why plastic waste is also a feedstock.",
         descKh: "ពិនិត្យក្រុមធំទាំងបី (លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់) ទាញ និងសង្កត់វាក្នុងសិក្ខាសាលាស្ត្រេស–បន្ទះផ្ទាល់ និងមើលហេតុអ្វីសំណល់ប្លាស្ទិកក៏ជាសម្ភារៈឆៅ។",
+      },
+      {
+        href: "/science/glaciology",
+        labelEn: "Glaciology: The Frozen Rivers",
+        labelKh: "ផ្ទាំងទឹកកក៖ ទន្លេដែលកក",
+        icon: Snowflake,
+        descEn: "Snow piled for thousands of years becomes a slow river of dense blue ice that grinds U-shaped valleys — and stores 70% of the world's fresh water. When it melts, the sea rises in Cambodia.",
+        descKh: "ព្រិលដែលគរជាច្រើនពាន់ឆ្នាំ ក្លាយជាទន្លេទឹកកកខៀវយឺតៗ ដែលកិនជ្រលងរាង U — ហើយរក្សាទុក ៧០% នៃទឹកសាបពិភពលោក។ ពេលវារលាយ ទឹកសមុទ្រឡើងខ្ពស់នៅប្រទេសកម្ពុជា។",
       },
       {
         href: "/science/architecture",
