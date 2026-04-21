@@ -19,6 +19,7 @@ import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
 import { ISSModule } from "@/components/space/ISSModule";
 import { SupernovaModule } from "@/components/space/SupernovaModule";
 import { BlackHoleModule } from "@/components/space/BlackHoleModule";
+import { NeutronStarModule } from "@/components/space/NeutronStarModule";
 import { HeatDeathModule } from "@/components/space/HeatDeathModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
@@ -408,6 +409,9 @@ export function SpacePage() {
 
         {/* ── Supernova: Death and Rebirth of Stars ─────────────────────── */}
         <SupernovaModule />
+
+        {/* ── Neutron Stars & Pulsars: The Cosmic Lighthouses ───────────── */}
+        <NeutronStarModule />
 
         {/* ── Black Holes: The End of Space and Time ────────────────────── */}
         <BlackHoleModule />
