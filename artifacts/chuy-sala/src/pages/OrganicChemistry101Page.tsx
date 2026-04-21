@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft, Hexagon, Atom, Move3d, RotateCw, Pill, Wheat, Recycle, Sparkles, Info,
+  FlaskConical, Beaker, TestTube, FlaskRound, Filter, Thermometer, Flame, Droplets, Eye, AlertTriangle,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -76,6 +77,9 @@ export function OrganicChemistry101Page() {
 
         {/* ── Section 3: Chemistry in Cambodia ────────────────── */}
         <RealWorldSection />
+
+        {/* ── Section 4: The Organic Lab — Tools & Glassware ──── */}
+        <OrganicLabSection />
       </div>
     </div>
   );
@@ -810,6 +814,677 @@ function SectionHeader({
           {kh ? titleKh : titleEn}
         </h2>
       </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 4: The Organic Lab — Tools & Glassware / ឧបករណ៍មន្ទីរពិសោធន៍សរីរាង្គ
+ * Clean-laboratory aesthetic: light grid, semi-transparent glass, neon green
+ * and bright blue liquids.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+const LIQUID_GREEN = "#22c55e";
+const LIQUID_BLUE = "#0ea5e9";
+const GLASS_OUTLINE = "#94a3b8";
+const GLASS_FILL = "rgba(226,232,240,0.45)";
+
+function OrganicLabSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  return (
+    <section className="rounded-3xl border-4 border-sky-200 bg-white/90 backdrop-blur shadow-md p-5 sm:p-8 mb-8">
+      <SectionHeader
+        icon={FlaskConical}
+        eyebrowEn="Module 05 · Section 04 · Lab Manual"
+        eyebrowKh="មុខវិជ្ជា ០៥ · ផ្នែក ០៤ · សៀវភៅណែនាំមន្ទីរពិសោធន៍"
+        titleEn="The Organic Lab — Tools & Glassware"
+        titleKh="ឧបករណ៍មន្ទីរពិសោធន៍សរីរាង្គ"
+      />
+
+      <p className={`text-base sm:text-lg text-slate-700 leading-relaxed mb-6 ${kh ? "font-khmer text-lg leading-loose" : ""}`}>
+        {t(
+          "Every shape in a chemist's lab has a reason. The wide-mouth beaker is built for stirring; the tall narrow cylinder is built for measuring. Learn the form, and the function becomes obvious.",
+          "រាល់រូបរាងនៅក្នុងមន្ទីរពិសោធន៍គីមីវិទូមានហេតុផល។ កែវបេស៊ែរមាត់ធំសង់ឡើងសម្រាប់កូរ ស៊ីឡាំងតូចខ្ពស់សង់ឡើងសម្រាប់វាស់។ យល់ដឹងពីទម្រង់ មុខងារនឹងច្បាស់ដោយខ្លួនឯង។",
+        )}
+      </p>
+
+      <GlasswareCatalog kh={kh} />
+      <DistillationDeepDive kh={kh} />
+      <PrecisionGoldenRule kh={kh} />
+    </section>
+  );
+}
+
+/* ── 4.1 The Glassware Catalog ───────────────────────────────────────────── */
+type GlassItem = {
+  id: string;
+  icon: React.ComponentType<{ className?: string }>;
+  nameEn: string;
+  nameKh: string;
+  formEn: string;
+  formKh: string;
+  functionEn: string;
+  functionKh: string;
+  warningEn?: string;
+  warningKh?: string;
+  liquid: "green" | "blue" | "none";
+  Diagram: React.FC<{ kh: boolean }>;
+};
+
+const GLASSWARE: GlassItem[] = [
+  {
+    id: "beaker",
+    icon: Beaker,
+    nameEn: "Beaker",
+    nameKh: "កែវបេស៊ែរ",
+    formEn: "Wide mouth, flat bottom, straight cylindrical sides with a small pouring spout.",
+    formKh: "មាត់ធំ បាតរាបស្មើ ជញ្ជាំងស៊ីឡាំងត្រង់ មានបបូរមាត់តូចមួយ។",
+    functionEn: "Holding, transferring, and rough mixing of liquids. The graduations on the side are for rough estimates only — never trust them for precise measurement.",
+    functionKh: "ផ្ទុក ផ្ទេរ និងលាយដុំទឹក។ កំណាត់នៅម្ខាងសម្រាប់តែការប៉ាន់ប្រមាណគួរសម — កុំទុកចិត្តវាសម្រាប់ការវាស់ច្បាស់លាស់ឡើយ។",
+    warningEn: "Volume reading is accurate only to about ±5 %.",
+    warningKh: "ការអានបរិមាណមានភាពត្រឹមត្រូវត្រឹមតែ ±៥ % ប៉ុណ្ណោះ។",
+    liquid: "green",
+    Diagram: BeakerSvg,
+  },
+  {
+    id: "erlenmeyer",
+    icon: FlaskConical,
+    nameEn: "Erlenmeyer Flask",
+    nameKh: "កែវរូបសាជី",
+    formEn: "Conical body with sloped sides narrowing to a small neck.",
+    formKh: "តួរូបសាជី ជញ្ជាំងជម្រាលតូចចូលរកករួមតូច។",
+    functionEn: "Designed so you can swirl liquids rapidly without splashing them out — the narrow neck is the splash guard. Perfect for titrations and mixing reactions.",
+    functionKh: "រចនាឡើងសម្រាប់ឱ្យអ្នកអាចកូរទឹករហ័សដោយមិនធ្វើឱ្យខ្ចាយចេញ — កតូចជាជញ្ជាំងការពារការខ្ចាយ។ ល្អឥតខ្ចោះសម្រាប់ការវាស់ត្រូត និងការលាយប្រតិកម្ម។",
+    liquid: "blue",
+    Diagram: ErlenmeyerSvg,
+  },
+  {
+    id: "cylinder",
+    icon: TestTube,
+    nameEn: "Graduated Cylinder",
+    nameKh: "ស៊ីឡាំងវាស់",
+    formEn: "Tall, narrow tube with a wide base, marked with finely-spaced volume lines.",
+    formKh: "បំពង់ខ្ពស់តូច មានគ្រឹះធំ បានសម្គាល់ដោយខ្សែវាស់បរិមាណល្អិតៗ។",
+    functionEn: "Precise volume measurement. The narrow column makes the liquid level rise sharply, so each marked line represents a small, accurate volume change.",
+    functionKh: "ការវាស់បរិមាណច្បាស់លាស់។ បំពង់តូចធ្វើឱ្យកម្រិតទឹកឡើងកាត់មុខ ដូច្នេះខ្សែនីមួយៗតំណាងឱ្យការប្រែប្រួលបរិមាណតូច និងត្រឹមត្រូវ។",
+    warningEn: "Read the bottom of the meniscus at eye level — see the Golden Rule below.",
+    warningKh: "អានផ្នែកខាងក្រោមនៃមេនីស្គុសនៅកម្រិតភ្នែក — សូមមើលច្បាប់មាសខាងក្រោម។",
+    liquid: "green",
+    Diagram: CylinderSvg,
+  },
+  {
+    id: "funnel",
+    icon: Filter,
+    nameEn: "Funnel & Filter Paper",
+    nameKh: "ចីវឡាវ និងក្រដាសចម្រោះ",
+    formEn: "Cone-shaped funnel with a long thin stem; a folded paper cone sits inside.",
+    formKh: "ចីវឡាវរូបសាជី មានដងវែងតូច; មានសាជីក្រដាសបត់នៅខាងក្នុង។",
+    functionEn: "Gravity filtration — separates an insoluble solid from a liquid. The liquid passes through the paper into the flask below; the solid stays trapped on the paper.",
+    functionKh: "ការចម្រោះដោយទំនាញ — បំបែកជាតិរឹងមិនរលាយចេញពីទឹក។ ទឹកឆ្លងកាត់ក្រដាសទៅក្នុងកែវខាងក្រោម; ជាតិរឹងជាប់នៅលើក្រដាស។",
+    liquid: "blue",
+    Diagram: FunnelSvg,
+  },
+];
+
+function GlasswareCatalog({ kh }: { kh: boolean }) {
+  const [openId, setOpenId] = useState<string>(GLASSWARE[0].id);
+  const open = GLASSWARE.find((g) => g.id === openId) ?? GLASSWARE[0];
+  const Diagram = open.Diagram;
+  return (
+    <div className="mb-8">
+      <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-sky-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {kh ? "៤.១ · កាតាឡុកកញ្ចក់ — ទម្រង់ទល់នឹងមុខងារ" : "4.1 · The Glassware Catalog — Form vs. Function"}
+      </div>
+
+      {/* Tool selector */}
+      <div role="group" aria-label={kh ? "ឧបករណ៍កញ្ចក់" : "Glassware items"} className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+        {GLASSWARE.map((g) => {
+          const Icon = g.icon;
+          const active = g.id === openId;
+          return (
+            <button
+              key={g.id}
+              type="button"
+              aria-pressed={active}
+              aria-controls={`glass-panel-${g.id}`}
+              onClick={() => setOpenId(g.id)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-left transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 ${
+                active
+                  ? "bg-gradient-to-br from-sky-50 to-emerald-50 border-sky-400 shadow-md"
+                  : "bg-white/70 border-slate-200 hover:border-sky-300 hover:bg-sky-50/40"
+              }`}
+            >
+              <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                active ? "bg-sky-500 text-white shadow" : "bg-slate-100 text-slate-600"
+              }`}>
+                <Icon className="w-5 h-5" />
+              </span>
+              <span className="min-w-0">
+                <span className={`block text-[10px] font-mono font-bold tracking-widest uppercase ${active ? "text-sky-700" : "text-slate-500"} ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
+                  {kh ? "ឧបករណ៍" : "Tool"}
+                </span>
+                <span className={`block text-sm font-bold leading-tight ${active ? "text-slate-900" : "text-slate-700"} ${kh ? "font-khmer text-base" : ""}`}>
+                  {kh ? g.nameKh : g.nameEn}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Detail panel */}
+      <div
+        id={`glass-panel-${open.id}`}
+        role="region"
+        aria-live="polite"
+        aria-label={kh ? `ព័ត៌មានលម្អិត៖ ${open.nameKh}` : `Details: ${open.nameEn}`}
+        className="grid md:grid-cols-[280px_minmax(0,1fr)] gap-5 rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-white via-sky-50/40 to-emerald-50/30 p-5 shadow-inner"
+      >
+        {/* Diagram tile with light grid */}
+        <div className="relative rounded-xl bg-white border border-slate-200 p-3 min-h-[220px] flex items-center justify-center overflow-hidden">
+          <LabGridBackdrop />
+          <div className="relative w-full">
+            <Diagram kh={kh} />
+          </div>
+        </div>
+        {/* Text */}
+        <div>
+          <h4 className={`font-display text-2xl font-extrabold text-slate-900 mb-1 ${kh ? "font-khmer" : ""}`}>
+            {kh ? open.nameKh : open.nameEn}
+          </h4>
+          <div className="space-y-3 text-sm sm:text-base">
+            <div>
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-emerald-700 mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {kh ? "ទម្រង់" : "Form"}
+              </div>
+              <p className={`text-slate-700 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {kh ? open.formKh : open.formEn}
+              </p>
+            </div>
+            <div>
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-sky-700 mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {kh ? "មុខងារ" : "Function"}
+              </div>
+              <p className={`text-slate-700 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {kh ? open.functionKh : open.functionEn}
+              </p>
+            </div>
+            {open.warningEn && (
+              <div className="rounded-lg border border-amber-300/70 bg-amber-50 p-2.5 flex gap-2 items-start">
+                <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                <p className={`text-xs sm:text-sm text-amber-900 leading-relaxed ${kh ? "font-khmer leading-loose text-sm" : ""}`}>
+                  {kh ? open.warningKh : open.warningEn}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LabGridBackdrop() {
+  const uid = useId().replace(/:/g, "");
+  const patId = `org-lab-grid-${uid}`;
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden>
+      <defs>
+        <pattern id={patId} width="14" height="14" patternUnits="userSpaceOnUse">
+          <path d="M 14 0 L 0 0 0 14" fill="none" stroke="rgba(14,165,233,0.10)" strokeWidth="0.6" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patId})`} />
+    </svg>
+  );
+}
+
+/* ── Glassware SVGs (clean lab style — semi-transparent glass + bright liquid) ─ */
+function GlassDefs({ id, color }: { id: string; color: string }) {
+  return (
+    <defs>
+      <linearGradient id={`liq-${id}`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={color} stopOpacity="0.95" />
+        <stop offset="100%" stopColor={color} stopOpacity="0.65" />
+      </linearGradient>
+      <filter id={`glow-${id}`}>
+        <feGaussianBlur stdDeviation="1.4" result="b" />
+        <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+  );
+}
+
+function BeakerSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 220 200" className="w-full h-auto max-h-[200px] mx-auto" role="img" aria-label={kh ? "កែវបេស៊ែរ" : "Beaker"}>
+      <GlassDefs id="bk" color={LIQUID_GREEN} />
+      {/* Spout */}
+      <path d="M 50 30 L 40 22 L 32 28" fill="none" stroke={GLASS_OUTLINE} strokeWidth="1.6" strokeLinecap="round" />
+      {/* Body — straight cylinder with flat bottom */}
+      <path d="M 40 30 L 40 170 Q 40 178 48 178 L 172 178 Q 180 178 180 170 L 180 30" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.8" strokeLinejoin="round" />
+      <line x1="40" y1="30" x2="180" y2="30" stroke={GLASS_OUTLINE} strokeWidth="1.6" />
+      {/* Liquid */}
+      <path d="M 42 90 L 42 170 Q 42 176 48 176 L 172 176 Q 178 176 178 170 L 178 90 Z" fill="url(#liq-bk)" filter="url(#glow-bk)" />
+      {/* Liquid surface highlight */}
+      <ellipse cx="110" cy="90" rx="68" ry="3" fill="rgba(255,255,255,0.6)" />
+      {/* Graduation marks — illustrative */}
+      {[110, 130, 150].map((y, i) => (
+        <g key={y}>
+          <line x1="40" y1={y} x2="55" y2={y} stroke={GLASS_OUTLINE} strokeWidth="1" />
+          <text x="60" y={y + 3} fontSize="9" fill="#475569" fontFamily="monospace">{`${(3 - i) * 100}`}</text>
+        </g>
+      ))}
+      <text x="110" y="195" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#64748b" textAnchor="middle">
+        {kh ? "បបូរមាត់ + បាតរាបស្មើ" : "Spout + flat bottom"}
+      </text>
+    </svg>
+  );
+}
+
+function ErlenmeyerSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 220 200" className="w-full h-auto max-h-[200px] mx-auto" role="img" aria-label={kh ? "កែវរូបសាជី" : "Erlenmeyer flask"}>
+      <GlassDefs id="er" color={LIQUID_BLUE} />
+      {/* Neck */}
+      <rect x="92" y="20" width="36" height="40" rx="2" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.8" />
+      {/* Conical body */}
+      <path d="M 92 60 L 35 175 Q 32 184 42 184 L 178 184 Q 188 184 185 175 L 128 60 Z" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* Liquid */}
+      <path d="M 70 120 L 38 180 Q 36 184 42 184 L 178 184 Q 184 184 182 180 L 150 120 Z" fill="url(#liq-er)" filter="url(#glow-er)" />
+      {/* Surface */}
+      <ellipse cx="110" cy="120" rx="40" ry="3" fill="rgba(255,255,255,0.6)" />
+      {/* Swirl arrows hinting at function */}
+      <path d="M 80 145 a 30 12 0 1 0 60 0" fill="none" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="3 2" markerEnd="url(#org-arrow)" />
+      <defs>
+        <marker id="org-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 0 L 8 4 L 0 8 z" fill="#0ea5e9" />
+        </marker>
+      </defs>
+      <text x="110" y="195" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#64748b" textAnchor="middle">
+        {kh ? "ជញ្ជាំងជម្រាល · ល្អសម្រាប់កូរ" : "Sloped sides · safe to swirl"}
+      </text>
+    </svg>
+  );
+}
+
+function CylinderSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 220 200" className="w-full h-auto max-h-[200px] mx-auto" role="img" aria-label={kh ? "ស៊ីឡាំងវាស់" : "Graduated cylinder"}>
+      <GlassDefs id="cy" color={LIQUID_GREEN} />
+      {/* Spout */}
+      <path d="M 92 18 L 88 12 L 84 14" fill="none" stroke={GLASS_OUTLINE} strokeWidth="1.5" strokeLinecap="round" />
+      {/* Tall narrow body */}
+      <path d="M 86 18 L 86 168 L 70 178 L 150 178 L 134 168 L 134 18 Z" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* Wide base */}
+      <ellipse cx="110" cy="178" rx="40" ry="6" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.6" />
+      {/* Liquid */}
+      <path d="M 86 80 L 86 168 L 70 178 L 150 178 L 134 168 L 134 80 Z" fill="url(#liq-cy)" filter="url(#glow-cy)" />
+      {/* Meniscus — concave curve at top */}
+      <path d="M 86 80 Q 110 88 134 80" fill="rgba(34,197,94,0.85)" stroke={LIQUID_GREEN} strokeWidth="1" />
+      {/* Many fine graduation marks */}
+      {Array.from({ length: 14 }).map((_, i) => {
+        const y = 30 + i * 10;
+        const long = i % 5 === 0;
+        return (
+          <g key={i}>
+            <line x1="134" y1={y} x2={long ? 152 : 144} y2={y} stroke={GLASS_OUTLINE} strokeWidth={long ? 1.2 : 0.8} />
+            {long && <text x="156" y={y + 3} fontSize="8" fill="#475569" fontFamily="monospace">{`${(14 - i) * 5}`}</text>}
+          </g>
+        );
+      })}
+      {/* Eye-level indicator on meniscus */}
+      <line x1="40" y1="84" x2="86" y2="84" stroke="#f59e0b" strokeWidth="1" strokeDasharray="2 2" />
+      <text x="38" y="80" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill="#b45309" textAnchor="end">
+        {kh ? "ភ្នែក →" : "EYE →"}
+      </text>
+      <text x="110" y="195" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#64748b" textAnchor="middle">
+        {kh ? "តូច + ខ្សែវាស់ច្រើន" : "Narrow + many marks"}
+      </text>
+    </svg>
+  );
+}
+
+function FunnelSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 220 200" className="w-full h-auto max-h-[200px] mx-auto" role="img" aria-label={kh ? "ចីវឡាវនិងក្រដាសចម្រោះ" : "Funnel and filter paper"}>
+      <GlassDefs id="fn" color={LIQUID_BLUE} />
+      {/* Mixture above */}
+      <path d="M 80 20 L 140 20 L 140 38 L 80 38 Z" fill="rgba(14,165,233,0.18)" stroke="#0ea5e9" strokeWidth="1" strokeDasharray="2 2" />
+      {/* Solid particles in mixture */}
+      <circle cx="92" cy="32" r="1.6" fill="#475569" />
+      <circle cx="100" cy="28" r="1.4" fill="#475569" />
+      <circle cx="118" cy="33" r="1.6" fill="#475569" />
+      <circle cx="128" cy="30" r="1.3" fill="#475569" />
+      {/* Funnel cone */}
+      <path d="M 50 50 L 170 50 L 120 110 L 110 110 L 100 110 Z" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.8" strokeLinejoin="round" />
+      {/* Filter paper inside */}
+      <path d="M 60 55 L 160 55 L 115 108 Z" fill="rgba(255,255,255,0.85)" stroke="#94a3b8" strokeWidth="0.8" strokeDasharray="2 2" />
+      {/* Solid stays trapped */}
+      <circle cx="100" cy="80" r="1.8" fill="#475569" />
+      <circle cx="115" cy="86" r="2" fill="#475569" />
+      <circle cx="125" cy="78" r="1.5" fill="#475569" />
+      {/* Stem */}
+      <rect x="105" y="110" width="10" height="40" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.6" />
+      {/* Drips */}
+      <ellipse cx="110" cy="155" rx="3" ry="4" fill={LIQUID_BLUE} />
+      <ellipse cx="110" cy="166" rx="2" ry="3" fill={LIQUID_BLUE} opacity="0.7" />
+      {/* Receiving flask (mini erlenmeyer) */}
+      <rect x="100" y="172" width="20" height="6" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.4" />
+      <path d="M 100 178 L 75 198 L 145 198 L 120 178 Z" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.6" />
+      <path d="M 87 188 L 78 196 L 142 196 L 133 188 Z" fill="url(#liq-fn)" />
+      <text x="110" y="14" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#64748b" textAnchor="middle">
+        {kh ? "ល្បាយ (រឹង + ទឹក)" : "MIXTURE (solid + liquid)"}
+      </text>
+    </svg>
+  );
+}
+
+/* ── 4.2 Distillation Deep Dive ──────────────────────────────────────────── */
+type DistillPart = {
+  id: string;
+  nameEn: string;
+  nameKh: string;
+  descEn: string;
+  descKh: string;
+};
+const DISTILL_PARTS: DistillPart[] = [
+  {
+    id: "heat",
+    nameEn: "Heat Source / Mantle",
+    nameKh: "ប្រភពកំដៅ",
+    descEn: "Provides controlled heat. A heating mantle wraps the round flask in cloth-covered wires and warms it evenly — safer than an open flame near volatile organic vapours.",
+    descKh: "ផ្តល់កំដៅគ្រប់គ្រងបាន។ ឧបករណ៍កម្តៅរុំកែវមូលដោយខ្សែស្បៃ ហើយកម្តៅវាស្មើៗ — សុវត្ថិភាពជាងភ្លើងបើកចំហនៅក្បែរចំហាយសរីរាង្គ។",
+  },
+  {
+    id: "flask",
+    nameEn: "Round-Bottom Flask",
+    nameKh: "កែវបាតមូល",
+    descEn: "Holds the starting liquid mixture. The round shape spreads heat evenly and handles the stress of vigorous boiling better than a flat-bottom flask, which is more prone to cracking under direct, uneven heating.",
+    descKh: "ផ្ទុកល្បាយទឹកដើម។ រូបមូលផ្សព្វផ្សាយកំដៅស្មើៗ និងទ្រាំសម្ពាធពេលរំពុះខ្លាំងបានល្អ — កែវបាតរាបស្មើងាយនឹងបែកជាងពេលកម្តៅផ្ទាល់មិនស្មើ។",
+  },
+  {
+    id: "thermo",
+    nameEn: "Thermometer",
+    nameKh: "តឺម៉ូម៉ែត្រ",
+    descEn: "Placed exactly at the Y-junction where vapour leaves toward the condenser. This is the only spot that reads the boiling point of the substance actually being collected — not the flask, not the bath.",
+    descKh: "ដាក់ឱ្យត្រូវនៅចំណុចបំបែក Y ដែលចំហាយចេញទៅឧបករណ៍ត្រជាក់។ នេះជាកន្លែងតែមួយគត់ដែលអានចំណុចរំពុះនៃសារធាតុដែលកំពុងប្រមូលបាន — មិនមែនកែវ មិនមែនអាងទឹកទេ។",
+  },
+  {
+    id: "condenser",
+    nameEn: "Condenser (cold water jacket)",
+    nameKh: "ឧបករណ៍ត្រជាក់ (ស្រោមទឹកត្រជាក់)",
+    descEn: "A glass tube inside a glass tube. Cold water flows through the outer jacket against the direction of vapour, pulling heat out so the vapour collapses back into liquid drops.",
+    descKh: "បំពង់កញ្ចក់ក្នុងបំពង់កញ្ចក់។ ទឹកត្រជាក់ហូរកាត់ស្រោមខាងក្រៅប្រឆាំងនឹងទិសចំហាយ ទាញកំដៅចេញដើម្បីឱ្យចំហាយប្រែទៅជាដំណក់ទឹកវិញ។",
+  },
+  {
+    id: "receive",
+    nameEn: "Receiving Flask",
+    nameKh: "កែវទទួល",
+    descEn: "Catches the purified liquid drop by drop. The collected liquid (the 'distillate') is the substance with the lowest boiling point in the original mixture.",
+    descKh: "ចាប់យកទឹកដែលបានចម្រាញ់រួចមួយដំណក់ម្តងៗ។ ទឹកដែលបានប្រមូល (ហៅថា 'ដិស្ទីលាត') គឺជាសារធាតុដែលមានចំណុចរំពុះទាបបំផុតក្នុងល្បាយដើម។",
+  },
+];
+
+function DistillationDeepDive({ kh }: { kh: boolean }) {
+  const [activeId, setActiveId] = useState<string>("heat");
+  const active = DISTILL_PARTS.find((p) => p.id === activeId) ?? DISTILL_PARTS[0];
+  return (
+    <div className="mb-8">
+      <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-sky-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {kh ? "៤.២ · ការសិក្សាស៊ីជម្រៅ — ការចម្រាញ់ (ឧបករណ៍ចម្រាញ់)" : "4.2 · Deep-Dive — Simple Distillation Apparatus"}
+      </div>
+
+      <div className="rounded-2xl border-2 border-sky-200 bg-white p-4 sm:p-5 shadow-inner">
+        <p className={`text-sm sm:text-base text-slate-700 leading-relaxed mb-4 ${kh ? "font-khmer leading-loose" : ""}`}>
+          {kh
+            ? "ការចម្រាញ់គឺជាដំណើរការរូបវិទ្យាសំខាន់បំផុតក្នុងគីមីសរីរាង្គ។ វាបំបែកទឹកដែលមានចំណុចរំពុះខុសគ្នា ដោយការរំពុះម្តងមួយ ហើយប្រមូលចំហាយឡើងវិញ។ ចុចលើផ្នែកនៃឧបករណ៍ ដើម្បីដឹងពីមុខងាររបស់វា។"
+            : "Distillation is the most important physical process in organic chemistry. It separates liquids of different boiling points by boiling one off and collecting the vapour. Click any part of the apparatus to learn its job."}
+        </p>
+
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-5 items-start">
+          {/* Apparatus diagram */}
+          <div className="relative rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 p-3 overflow-hidden">
+            <LabGridBackdrop />
+            <div className="relative">
+              <DistillationSvg activeId={activeId} setActiveId={setActiveId} kh={kh} />
+            </div>
+          </div>
+          {/* Parts list + active description */}
+          <div>
+            <div role="group" aria-label={kh ? "ផ្នែកនៃឧបករណ៍ចម្រាញ់" : "Distillation parts"} className="space-y-1.5 mb-3">
+              {DISTILL_PARTS.map((p, i) => {
+                const on = p.id === activeId;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setActiveId(p.id)}
+                    className={`w-full text-left px-3 py-2 rounded-lg border-2 flex items-center gap-2.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 ${
+                      on ? "border-sky-400 bg-sky-50 shadow" : "border-slate-200 bg-white/80 hover:border-sky-300 hover:bg-sky-50/40"
+                    }`}
+                  >
+                    <span className={`w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-mono font-bold flex-shrink-0 ${
+                      on ? "bg-sky-500 text-white" : "bg-slate-100 text-slate-600"
+                    }`}>{i + 1}</span>
+                    <span className={`text-sm font-semibold ${on ? "text-slate-900" : "text-slate-700"} ${kh ? "font-khmer text-base" : ""}`}>
+                      {kh ? p.nameKh : p.nameEn}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-3">
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-emerald-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {kh ? "ផ្នែកដែលបានជ្រើស" : "Selected part"}
+              </div>
+              <h5 className={`font-display text-base font-extrabold text-emerald-900 mb-1 ${kh ? "font-khmer" : ""}`}>
+                {kh ? active.nameKh : active.nameEn}
+              </h5>
+              <p className={`text-sm text-emerald-900/85 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {kh ? active.descKh : active.descEn}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DistillationSvg({
+  activeId, setActiveId, kh,
+}: { activeId: string; setActiveId: (id: string) => void; kh: boolean }) {
+  // Highlight helper
+  const isOn = (id: string) => activeId === id;
+  const hot = (id: string) =>
+    isOn(id) ? { stroke: "#f59e0b", strokeWidth: 2.4, filter: "drop-shadow(0 0 4px rgba(245,158,11,0.6))" } : { stroke: GLASS_OUTLINE, strokeWidth: 1.6 };
+
+  // Hotspot maker — invisible button overlay for keyboard/click
+  const Hotspot = ({ id, x, y, w, h, labelEn, labelKh }: {
+    id: string; x: number; y: number; w: number; h: number; labelEn: string; labelKh: string;
+  }) => (
+    <g
+      role="button"
+      tabIndex={0}
+      aria-label={kh ? labelKh : labelEn}
+      aria-pressed={isOn(id)}
+      onClick={() => setActiveId(id)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveId(id); } }}
+      className="organic-lab-hotspot"
+      style={{ cursor: "pointer" }}
+    >
+      <rect
+        x={x} y={y} width={w} height={h}
+        fill={isOn(id) ? "rgba(245,158,11,0.10)" : "transparent"}
+        stroke={isOn(id) ? "#f59e0b" : "transparent"}
+        strokeWidth="1.5"
+        strokeDasharray="4 3"
+        rx="6"
+      />
+    </g>
+  );
+
+  return (
+    <svg viewBox="0 0 480 260" className="w-full h-auto" role="group" aria-label={kh ? "ឧបករណ៍ចម្រាញ់ធម្មតា — ចុចលើផ្នែកនីមួយៗ" : "Simple distillation apparatus — click each part"}>
+      <style>{`.organic-lab-hotspot:focus-visible > rect { stroke: #2563eb; stroke-width: 2.4; stroke-dasharray: none; fill: rgba(37,99,235,0.10); }`}</style>
+      <GlassDefs id="d1" color={LIQUID_BLUE} />
+      {/* Heat source */}
+      <g style={hot("heat") as React.CSSProperties}>
+        <rect x="50" y="200" width="80" height="22" rx="4" fill="#1f2937" {...hot("heat")} />
+        {/* flames */}
+        <path d="M 70 200 q -4 -10 4 -16 q -2 8 6 0 q -2 12 -10 16 z" fill="#f97316" opacity="0.85" />
+        <path d="M 90 200 q -4 -12 6 -18 q -2 10 6 -2 q -2 14 -12 20 z" fill="#facc15" opacity="0.85" />
+        <path d="M 110 200 q -4 -10 4 -16 q -2 8 6 0 q -2 12 -10 16 z" fill="#f97316" opacity="0.85" />
+      </g>
+      <text x="90" y="240" fontSize="9" fill={isOn("heat") ? "#b45309" : "#475569"} fontFamily={kh ? "inherit" : "monospace"} textAnchor="middle">
+        {kh ? "ប្រភពកំដៅ" : "HEAT"}
+      </text>
+
+      {/* Round-bottom flask */}
+      <g>
+        <rect x="80" y="135" width="20" height="20" fill={GLASS_FILL} {...hot("flask")} />
+        <circle cx="90" cy="180" r="34" fill={GLASS_FILL} {...hot("flask")} />
+        {/* Liquid + bubbles */}
+        <path d="M 60 188 Q 90 220 120 188 Q 120 210 90 214 Q 60 210 60 188 Z" fill="url(#liq-d1)" />
+        <circle cx="80" cy="195" r="2" fill="#fff" opacity="0.7" />
+        <circle cx="100" cy="200" r="1.5" fill="#fff" opacity="0.7" />
+        <circle cx="92" cy="190" r="1.2" fill="#fff" opacity="0.7" />
+      </g>
+
+      {/* Vapour rising */}
+      <path d="M 90 145 Q 92 120 100 110 L 130 110" fill="none" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="3 3" />
+
+      {/* Y-junction with thermometer */}
+      <g>
+        <rect x="100" y="100" width="40" height="20" rx="3" fill={GLASS_FILL} stroke={GLASS_OUTLINE} strokeWidth="1.6" />
+        {/* Thermometer */}
+        <g style={hot("thermo") as React.CSSProperties}>
+          <line x1="120" y1="40" x2="120" y2="115" {...hot("thermo")} strokeLinecap="round" />
+          <circle cx="120" cy="40" r="6" fill="#ef4444" {...hot("thermo")} />
+          <circle cx="120" cy="115" r="4" fill="#ef4444" {...hot("thermo")} />
+          {/* tick marks */}
+          {[50, 60, 70, 80, 90, 100].map((y) => (
+            <line key={y} x1="124" y1={y} x2="128" y2={y} stroke={isOn("thermo") ? "#f59e0b" : "#94a3b8"} strokeWidth="1" />
+          ))}
+        </g>
+        <text x="138" y="50" fontSize="9" fill={isOn("thermo") ? "#b45309" : "#475569"} fontFamily={kh ? "inherit" : "monospace"}>
+          {kh ? "តឺម៉ូម៉ែត្រ" : "THERMOMETER"}
+        </text>
+      </g>
+
+      {/* Condenser — angled tube with cold water jacket */}
+      <g style={hot("condenser") as React.CSSProperties}>
+        {/* Outer jacket */}
+        <path d="M 140 110 L 320 175 L 310 195 L 130 130 Z" fill="rgba(14,165,233,0.18)" {...hot("condenser")} />
+        {/* Inner tube */}
+        <line x1="140" y1="120" x2="318" y2="185" {...hot("condenser")} />
+        {/* Cooling water in/out arrows */}
+        <path d="M 332 200 L 318 195 L 326 188" fill="none" stroke="#0ea5e9" strokeWidth="1.4" />
+        <text x="338" y="200" fontSize="8" fill="#0369a1" fontFamily={kh ? "inherit" : "monospace"}>
+          {kh ? "ទឹកត្រជាក់ចូល" : "WATER IN"}
+        </text>
+        <path d="M 122 113 L 136 118 L 128 124" fill="none" stroke="#0ea5e9" strokeWidth="1.4" />
+        <text x="76" y="116" fontSize="8" fill="#0369a1" fontFamily={kh ? "inherit" : "monospace"}>
+          {kh ? "ទឹកក្តៅចេញ" : "WATER OUT"}
+        </text>
+        {/* condensing droplets */}
+        {[0, 1, 2, 3].map((i) => (
+          <circle key={i} cx={180 + i * 32} cy={130 + i * 12} r="2" fill={LIQUID_BLUE} opacity="0.8" />
+        ))}
+      </g>
+
+      {/* Receiving flask */}
+      <g>
+        <rect x="324" y="180" width="14" height="14" fill={GLASS_FILL} {...hot("receive")} />
+        <path d="M 324 194 L 290 248 L 380 248 L 348 194 Z" fill={GLASS_FILL} {...hot("receive")} />
+        <path d="M 305 230 L 295 246 L 376 246 L 366 230 Z" fill="url(#liq-d1)" />
+      </g>
+
+      {/* Hotspots for click/keyboard */}
+      <Hotspot id="heat" x={42} y={196} w={96} h={36} labelEn="Heat source — provides controlled heat" labelKh="ប្រភពកំដៅ — ផ្តល់កំដៅគ្រប់គ្រងបាន" />
+      <Hotspot id="flask" x={56} y={140} w={68} h={56} labelEn="Round-bottom flask — holds the mixture" labelKh="កែវបាតមូល — ផ្ទុកល្បាយ" />
+      <Hotspot id="thermo" x={108} y={32} w={28} h={88} labelEn="Thermometer at the Y-junction" labelKh="តឺម៉ូម៉ែត្រនៅចំណុច Y" />
+      <Hotspot id="condenser" x={140} y={104} w={190} h={100} labelEn="Condenser — cold water jacket" labelKh="ឧបករណ៍ត្រជាក់ — ស្រោមទឹកត្រជាក់" />
+      <Hotspot id="receive" x={285} y={188} w={100} h={62} labelEn="Receiving flask — collects the distillate" labelKh="កែវទទួល — ប្រមូលដិស្ទីលាត" />
+    </svg>
+  );
+}
+
+/* ── 4.3 Golden Rule of Precision ────────────────────────────────────────── */
+function PrecisionGoldenRule({ kh }: { kh: boolean }) {
+  return (
+    <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-50 p-5 shadow-md">
+      <div className="flex items-start gap-4">
+        <div className="w-12 h-12 rounded-2xl bg-amber-400 text-white flex items-center justify-center shadow flex-shrink-0">
+          <Eye className="w-6 h-6" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-amber-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {kh ? "៤.៣ · ច្បាប់មាសនៃភាពច្បាស់លាស់" : "4.3 · The Golden Rule of Precision"}
+          </div>
+          <h4 className={`font-display text-xl sm:text-2xl font-extrabold text-amber-900 mb-2 ${kh ? "font-khmer leading-snug" : ""}`}>
+            {kh
+              ? "កុំវាស់បរិមាណច្បាស់លាស់ដោយកែវបេស៊ែរ។ អានផ្នែកខាងក្រោមនៃមេនីស្គុសនៅកម្រិតភ្នែកជានិច្ច។"
+              : "Never measure exact volumes with a beaker. Always read the bottom of the meniscus at eye level."}
+          </h4>
+          <p className={`text-sm sm:text-base text-amber-900/90 leading-relaxed mb-3 ${kh ? "font-khmer text-base leading-loose" : ""}`}>
+            {kh
+              ? "ទឹកនៅក្នុងបំពង់តូចបង្កើតផ្ទៃកោងហៅថា មេនីស្គុស។ ការលើកស៊ីឡាំងទៅកម្រិតភ្នែករបស់អ្នក ហើយអានចំណុចទាបនៃការកោងនោះ ផ្តល់ឱ្យអ្នកនូវការឆ្លើយត្រឹមត្រូវ។ ការមើលពីខាងលើនឹងធ្វើឱ្យអ្នកអានច្រើនពេក; ការមើលពីខាងក្រោមនឹងធ្វើឱ្យអ្នកអានតិចពេក។"
+              : "Liquid in a narrow tube curves up at the edges, forming a meniscus. Lifting the cylinder to your eye and reading the bottom of that curve gives the correct answer. Looking from above makes you read too high; looking from below makes you read too low."}
+          </p>
+          <MeniscusDiagram kh={kh} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MeniscusDiagram({ kh }: { kh: boolean }) {
+  const items: { key: "high" | "right" | "low"; eyeY: number; toneEn: string; toneKh: string; verdictEn: string; verdictKh: string; color: string }[] = [
+    { key: "high",  eyeY: 26, toneEn: "Eye too HIGH", toneKh: "ភ្នែកខ្ពស់ពេក",  verdictEn: "reads too much", verdictKh: "អានច្រើនពេក", color: "#ef4444" },
+    { key: "right", eyeY: 60, toneEn: "Eye AT LEVEL", toneKh: "ភ្នែកសមកម្រិត", verdictEn: "correct ✓",      verdictKh: "ត្រឹមត្រូវ ✓",  color: "#16a34a" },
+    { key: "low",   eyeY: 96, toneEn: "Eye too LOW",  toneKh: "ភ្នែកទាបពេក",   verdictEn: "reads too little", verdictKh: "អានតិចពេក",   color: "#ef4444" },
+  ];
+  return (
+    <div className="grid sm:grid-cols-3 gap-3">
+      {items.map((it) => {
+        const correct = it.key === "right";
+        return (
+          <div
+            key={it.key}
+            className={`rounded-xl border-2 p-3 bg-white ${correct ? "border-emerald-400 shadow" : "border-slate-200"}`}
+          >
+            <svg viewBox="0 0 200 130" className="w-full h-auto" role="img" aria-label={kh ? `${it.toneKh} — ${it.verdictKh}` : `${it.toneEn} — ${it.verdictEn}`}>
+              {/* Cylinder */}
+              <rect x="80" y="10" width="40" height="110" fill="rgba(226,232,240,0.45)" stroke={GLASS_OUTLINE} strokeWidth="1.5" />
+              {/* Liquid with meniscus */}
+              <rect x="80" y="62" width="40" height="58" fill="rgba(34,197,94,0.6)" />
+              <path d="M 80 62 Q 100 70 120 62" fill="rgba(34,197,94,0.85)" stroke={LIQUID_GREEN} strokeWidth="1" />
+              {/* Eye */}
+              <g>
+                <circle cx="40" cy={it.eyeY} r="6" fill={it.color} />
+                <circle cx="40" cy={it.eyeY} r="2.5" fill="#fff" />
+                <line x1="46" y1={it.eyeY} x2="78" y2={it.eyeY} stroke={it.color} strokeWidth="1.4" strokeDasharray="3 2" />
+              </g>
+              {/* Reading band shows where this eye perceives the level (approx: parallax) */}
+              <line x1="80" y1={it.eyeY === 60 ? 70 : it.eyeY === 26 ? 56 : 78} x2="120" y2={it.eyeY === 60 ? 70 : it.eyeY === 26 ? 56 : 78} stroke={it.color} strokeWidth="1.2" />
+              <text x="160" y={it.eyeY === 60 ? 73 : it.eyeY === 26 ? 59 : 81} fontSize="9" fill={it.color} fontFamily="monospace">{kh ? "អាន" : "READS"}</text>
+            </svg>
+            <div className="mt-1">
+              <div className={`text-[11px] font-mono font-bold uppercase tracking-wider mb-0.5 ${correct ? "text-emerald-700" : "text-slate-600"} ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {kh ? it.toneKh : it.toneEn}
+              </div>
+              <div className={`text-sm font-semibold ${correct ? "text-emerald-700" : "text-rose-600"} ${kh ? "font-khmer" : ""}`}>
+                {kh ? it.verdictKh : it.verdictEn}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
