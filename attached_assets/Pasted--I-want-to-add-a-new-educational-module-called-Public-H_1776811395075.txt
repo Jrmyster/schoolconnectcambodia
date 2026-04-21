@@ -1,0 +1,32 @@
+"I want to add a new educational module called 'Public Health: The Web of Well-Being' (សុខភាពសាធារណៈ៖ បណ្តាញនៃសុខុមាលភាព) to the Well-Being section. Please implement the following sections cleanly:
+
+1. The Invisible Math (រោគរាតត្បាត និងវ៉ាក់សាំង):
+
+Epidemiology: Explain that this is the science of acting like a 'disease detective,' tracking how sickness moves through a population to stop it before it spreads.
+
+Vaccines & Herd Immunity: Explain that a vaccine gives the immune system a 'wanted poster' of a virus so it knows how to fight it. Crucially, explain that getting vaccinated isn't just to protect yourself; if enough people are immune, the virus hits a 'dead end' and cannot reach the vulnerable. 
+
+
+2. The Chemical Trap (បារី និងមហារីក):
+
+Cigarettes: Explain exactly how smoking causes cancer. It isn't just 'bad for you'; the specific chemicals in tar actually break and mutate the DNA (the instruction manual) inside lung cells, causing those cells to multiply out of control. 
+
+ Comparison of healthy lung and Asthmatic lung 
+
+3. The Physical Cost of Stress (ឥទ្ធិពលនៃភាពតានតឹង និងវិសមភាព):
+
+Stress: Explain that when we are stressed, our brain releases a chemical called cortisol. In short bursts (like running from danger), it keeps us alive. But chronic, non-stop stress physically wears down the heart and immune system.
+
+Wealth Inequality: Connect stress to society. Explain that poverty is not just a lack of money; it forces the human body into a permanent state of high-stress survival mode. Severe wealth inequality directly damages the physical health of an entire community.
+
+4. The Foundation of Happiness (ទំនាក់ទំនង និងគ្រួសារ):
+
+Introduce the findings of the longest-running study on human happiness (The Harvard Study of Adult Development).
+
+State clearly: The data proves that wealth, fame, and genetic luck do not determine a long, healthy life. The single greatest protector of human health and happiness is the quality of our close relationships, friendships, and family ties. A strong social fabric actually reduces cortisol and heals the body!
+
+5. UI & Layout:
+
+Use a 'Community' aesthetic: warm sunrise oranges, calming medical blues, and soft, rounded UI borders.
+
+Ensure all core concepts, headings, and public health terminology are strictly bilingual (English/Khmer)."

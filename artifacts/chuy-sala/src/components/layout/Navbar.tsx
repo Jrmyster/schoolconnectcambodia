@@ -140,6 +140,14 @@ const NAV_GROUPS: NavGroup[] = [
     icon: Atom,
     items: [
       {
+        href: "/science/energy-future",
+        labelEn: "Renewable & Future Energies",
+        labelKh: "ថាមពលកកើតឡើងវិញ និងអនាគត",
+        icon: Zap,
+        descEn: "Powering Spaceship Earth — solar, wind, hydro, geothermal, nuclear fission, the thorium fuel cycle, piezoelectric floor tiles, and the speculative frontier of fusion and space-based solar.",
+        descKh: "ការផ្តល់ថាមពលដល់ផែនដី — ព្រះអាទិត្យ ខ្យល់ វារីអគ្គិសនី កម្ដៅផែនដី ប្រតិកម្មបំបែកនុយក្លេអ៊ែរ វដ្តឥន្ធនៈថូរីយ៉ូម ក្រឡាសម្ពាធ និងព្រំដែនអនាគតនៃការរលាយ និងថាមពលពីអវកាស។",
+      },
+      {
         href: "/chemistry",
         labelEn: "Chemistry Hub",
         labelKh: "មជ្ឈមណ្ឌលគីមីវិទ្យា",
