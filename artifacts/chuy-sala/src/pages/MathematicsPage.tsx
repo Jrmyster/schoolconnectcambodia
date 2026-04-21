@@ -16,6 +16,7 @@ import {
   Building2,
   Mountain,
 } from "lucide-react";
+import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -144,11 +145,28 @@ export default function MathematicsPage() {
         <ASTCQuadrantsCard isKh={isKh} />
       </Section>
 
-      {/* ── 5. Calculus ─────────────────────────────────────────────── */}
+      {/* ── 5. Trigonometric Identities ──────────────────────────────── */}
+      <Section
+        id="trig-identities"
+        eyebrowEn="05 · Master Keys"
+        eyebrowKh="០៥ · កូនសោរគន្លឹះ"
+        titleEn="Trigonometric Identities — the master keys"
+        titleKh="ឯកលក្ខណៈត្រីកោណមាត្រ — កូនសោរគន្លឹះ"
+        khTerm="ឯកលក្ខណៈត្រីកោណមាត្រ"
+        descEn={
+          "An identity is an equation that stays true for every angle θ you can plug in. Memorise these and the messiest trig problem usually collapses into a single line."
+        }
+        descKh="ឯកលក្ខណៈគឺជាសមីការដែលតែងតែពិត គ្រប់មុំ θ ទាំងអស់ដែលអ្នកជំនួស។ ចងចាំវាឲ្យបានច្បាស់ ហើយលំហាត់ត្រីកោណមាត្រស្មុគស្មាញបំផុត ជាធម្មតានឹងបង្រួមនៅសល់តែមួយជួរប៉ុណ្ណោះ។"
+        isKh={isKh}
+      >
+        <TrigIdentitiesCard isKh={isKh} />
+      </Section>
+
+      {/* ── 6. Calculus ─────────────────────────────────────────────── */}
       <Section
         id="calculus"
-        eyebrowEn="05 · Change"
-        eyebrowKh="០៥ · ការផ្លាស់ប្ដូរ"
+        eyebrowEn="06 · Change"
+        eyebrowKh="០៦ · ការផ្លាស់ប្ដូរ"
         titleEn="Calculus — the math of change"
         titleKh="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល — គណិតវិទ្យានៃការផ្លាស់ប្ដូរ"
         khTerm="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល"
@@ -162,11 +180,11 @@ export default function MathematicsPage() {
         <IntegralCard isKh={isKh} />
       </Section>
 
-      {/* ── 6. Sequences & Series ────────────────────────────────────── */}
+      {/* ── 7. Sequences & Series ────────────────────────────────────── */}
       <Section
         id="sequences-series"
-        eyebrowEn="06 · Infinity"
-        eyebrowKh="០៦ · អនន្ត"
+        eyebrowEn="07 · Infinity"
+        eyebrowKh="០៧ · អនន្ត"
         titleEn="Sequences & Series — the infinite staircase"
         titleKh="លំដាប់ និងស៊េរី — ជណ្តើរអនន្ត"
         khTerm="លំដាប់ និងស៊េរី"
@@ -2626,6 +2644,168 @@ function ASTCQuadrantsCard({ isKh }: { isKh: boolean }) {
 }
 
 function isIV(k: "I" | "II" | "III" | "IV") { return k === "IV"; }
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5. Trigonometric Identities — formula-sheet aesthetic
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * IdentityGroup — a single grouped panel of related formulas.
+ * Each tint maps to a soft, paper-like highlight so the four families can be
+ * visually scanned at a glance without overpowering the page.
+ */
+function IdentityGroup({
+  labelEn,
+  labelKh,
+  badge,
+  tint,
+  formulas,
+  isKh,
+}: {
+  labelEn: string;
+  labelKh: string;
+  badge: string;
+  tint: "sky" | "emerald" | "amber" | "violet";
+  formulas: string[];
+  isKh: boolean;
+}) {
+  const tintMap: Record<typeof tint, { border: string; bg: string; chipBg: string; chipText: string; chipBorder: string }> = {
+    sky:     { border: "border-sky-200",     bg: "bg-sky-50/70",     chipBg: "bg-sky-100",     chipText: "text-sky-800",     chipBorder: "border-sky-300" },
+    emerald: { border: "border-emerald-200", bg: "bg-emerald-50/70", chipBg: "bg-emerald-100", chipText: "text-emerald-800", chipBorder: "border-emerald-300" },
+    amber:   { border: "border-amber-200",   bg: "bg-amber-50/70",   chipBg: "bg-amber-100",   chipText: "text-amber-800",   chipBorder: "border-amber-300" },
+    violet:  { border: "border-violet-200",  bg: "bg-violet-50/70",  chipBg: "bg-violet-100",  chipText: "text-violet-800",  chipBorder: "border-violet-300" },
+  };
+  const c = tintMap[tint];
+  return (
+    <div
+      className={`rounded-xl border-2 ${c.border} ${c.bg} p-4 sm:p-5`}
+      data-testid={`identity-group-${tint}`}
+    >
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <span className={`inline-flex items-center justify-center min-w-7 h-7 px-2 rounded-md ${c.chipBg} border ${c.chipBorder} ${c.chipText} font-serif italic font-bold text-sm`}>
+          {badge}
+        </span>
+        <h4 className={`font-display font-bold text-base sm:text-lg text-slate-900 ${isKh ? "font-khmer leading-snug" : ""}`}>
+          {isKh ? labelKh : labelEn}
+        </h4>
+      </div>
+      <div className="space-y-2">
+        {formulas.map((f, i) => (
+          <div
+            key={i}
+            className="rounded-lg bg-white/80 border border-slate-200 px-3 py-3 overflow-x-auto text-center"
+          >
+            <BlockMath math={f} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TrigIdentitiesCard({ isKh }: { isKh: boolean }) {
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="trig-identities-card">
+      {/* ── Header ─────────────────────────────────────────────────────── */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-11 h-11 shrink-0 rounded-lg bg-blue-100 border-2 border-blue-300 flex items-center justify-center text-blue-800 font-serif italic font-bold text-lg">
+          ≡
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer leading-snug" : ""}`}>
+            {isKh ? "តើអ្វីទៅជាឯកលក្ខណៈ?" : "What is an identity?"}
+          </h3>
+          <p className={`text-sm text-slate-700 mt-1 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "ឯកលក្ខណៈគឺជាសមីការដែលតែងតែពិត គ្រប់មុំ θ ទាំងអស់ដែលអ្នកជំនួស។ វាគឺជាឧបករណ៍ដែលប្រើដើម្បីកាត់បន្ថយលំហាត់គណិតស្មុគស្មាញ ឲ្យក្លាយជាទម្រង់សាមញ្ញ។"
+              : "An identity is an equation that is always true, no matter what angle θ you plug into it. It is a tool used to simplify messy math problems."}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Section heading: Core ──────────────────────────────────────── */}
+      <div className={`mt-2 mb-3 text-[11px] uppercase tracking-widest font-bold text-blue-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+        {isKh ? "ឯកលក្ខណៈគោល" : "The core identities"}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <IdentityGroup
+          isKh={isKh}
+          tint="sky"
+          badge="1/x"
+          labelEn="Reciprocal Identities"
+          labelKh="ឯកលក្ខណៈចម្រាស"
+          formulas={[
+            String.raw`\csc \theta = \frac{1}{\sin \theta}`,
+            String.raw`\sec \theta = \frac{1}{\cos \theta}`,
+            String.raw`\cot \theta = \frac{1}{\tan \theta}`,
+          ]}
+        />
+        <IdentityGroup
+          isKh={isKh}
+          tint="emerald"
+          badge="÷"
+          labelEn="Quotient Identities"
+          labelKh="ឯកលក្ខណៈផលធៀប"
+          formulas={[
+            String.raw`\tan \theta = \frac{\sin \theta}{\cos \theta}`,
+            String.raw`\cot \theta = \frac{\cos \theta}{\sin \theta}`,
+          ]}
+        />
+        <div className="md:col-span-2">
+          <IdentityGroup
+            isKh={isKh}
+            tint="amber"
+            badge="△"
+            labelEn="Pythagorean Identities"
+            labelKh="ឯកលក្ខណៈពីតាក័រ"
+            formulas={[
+              String.raw`\sin^2 \theta + \cos^2 \theta = 1`,
+              String.raw`1 + \tan^2 \theta = \sec^2 \theta`,
+              String.raw`1 + \cot^2 \theta = \csc^2 \theta`,
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* ── Section heading: Double Angle ─────────────────────────────── */}
+      <div className={`mt-6 mb-3 text-[11px] uppercase tracking-widest font-bold text-violet-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+        {isKh ? "ឯកលក្ខណៈមុំឌុប" : "Double-angle identities"}
+        <span className={`ml-2 normal-case tracking-normal text-slate-500 font-normal italic ${isKh ? "font-khmer not-italic" : ""}`}>
+          {isKh ? "(ត្រៀមសម្រាប់ថ្នាក់ទី ១២ — Calculus)" : "(12th-grade calculus prep)"}
+        </span>
+      </div>
+
+      <IdentityGroup
+        isKh={isKh}
+        tint="violet"
+        badge="2θ"
+        labelEn="Double-Angle Identities"
+        labelKh="ឯកលក្ខណៈមុំឌុប"
+        formulas={[
+          String.raw`\sin(2\theta) = 2\sin\theta\cos\theta`,
+          String.raw`\cos(2\theta) = \cos^2\theta - \sin^2\theta`,
+        ]}
+      />
+
+      {/* ── Footer note ────────────────────────────────────────────────── */}
+      <div className={`mt-5 rounded-xl border-l-4 border-blue-700 bg-white/80 p-4 text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <span className={`block text-[10px] uppercase tracking-widest font-bold text-blue-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "របៀបប្រើ" : "How to use"}
+        </span>
+        {isKh ? (
+          <>
+            ពេលអ្នកជួបកន្សោមដូចជា <InlineMath math={String.raw`\frac{\sin\theta}{\cos\theta}`} /> ចូរជំនួសវាដោយ <InlineMath math={String.raw`\tan\theta`} />។ ពេលអ្នកឃើញ <InlineMath math={String.raw`1 - \sin^2\theta`} /> ចូរជំនួសវាដោយ <InlineMath math={String.raw`\cos^2\theta`} />។ កូនសោរទាំងនេះបង្រួមការងាររបស់អ្នកឲ្យឆាប់រហ័សជាងមុនច្រើនដង។
+          </>
+        ) : (
+          <>
+            Whenever you see something like <InlineMath math={String.raw`\frac{\sin\theta}{\cos\theta}`} />, replace it with <InlineMath math={String.raw`\tan\theta`} />. Whenever you spot <InlineMath math={String.raw`1 - \sin^2\theta`} />, swap it for <InlineMath math={String.raw`\cos^2\theta`} />. These keys collapse pages of work into a few lines.
+          </>
+        )}
+      </div>
+    </PaperCard>
+  );
+}
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Scoped styles
