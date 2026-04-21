@@ -1,0 +1,955 @@
+import { useMemo, useState } from "react";
+import { Link } from "wouter";
+import {
+  ArrowLeft,
+  Dna,
+  Microscope,
+  Cog,
+  Zap,
+  FlaskConical,
+  Thermometer,
+  HeartPulse,
+} from "lucide-react";
+import { useTranslation, useLanguageStore } from "@/store/use-language";
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * Module 09 · Biochemistry — ជីវគីមីវិទ្យា
+ * The chemical code of life. DNA, proteins, enzymes.
+ * Self-contained. No new dependencies. Custom SVGs only.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+export function BiochemistryPage() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-violet-50/40 py-8 sm:py-10 px-4 sm:px-6 relative overflow-hidden">
+      <CellBackdrop />
+
+      <div className="relative max-w-5xl mx-auto">
+        <Link
+          href="/chemistry"
+          className={`inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors mb-6 ${
+            kh ? "font-khmer" : ""
+          }`}
+          data-testid="link-back-to-chemistry"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          {t("Back to Chemistry Hub", "ត្រឡប់ទៅមជ្ឈមណ្ឌលគីមីវិទ្យា")}
+        </Link>
+
+        {/* ── Hero ──────────────────────────────────────────────── */}
+        <header className="text-center mb-10" data-testid="biochem-hero">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-violet-600 text-white shadow-lg mb-4">
+            <Dna className="w-9 h-9" strokeWidth={2.25} />
+          </div>
+          <div
+            className={`text-[11px] font-mono uppercase tracking-[0.25em] text-emerald-700 mb-1 ${
+              kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {t("Module 09 · Chemistry Hub", "មុខវិជ្ជា ០៩ · មជ្ឈមណ្ឌលគីមីវិទ្យា")}
+          </div>
+          <h1
+            className={`font-display text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 ${
+              kh ? "font-khmer leading-snug" : ""
+            }`}
+          >
+            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-violet-600 bg-clip-text text-transparent">
+              {t("Biochemistry", "ជីវគីមីវិទ្យា")}
+            </span>
+          </h1>
+          <p
+            className={`text-base sm:text-lg text-slate-600 max-w-2xl mx-auto ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "The chemical code of life. How lifeless atoms combine to build the DNA, proteins, and molecular machines that power your body and every living thing on Earth.",
+              "កូដគីមីនៃជីវិត។ របៀបដែលអាតូមឥតព្រលឹងផ្គុំគ្នាបង្កើត ឌីអិនអេ ប្រូតេអ៊ីន និងម៉ាស៊ីនម៉ូលេគុល ដែលផ្ដល់ថាមពលដល់រាងកាយ និងគ្រប់ជីវិតលើផែនដី។",
+            )}
+          </p>
+        </header>
+
+        <DnaSection />
+        <ProteinSection />
+        <EnzymeSection />
+
+        {/* Wrap-up */}
+        <section
+          className="rounded-3xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 via-white to-emerald-50 p-6 sm:p-8 shadow-sm"
+          data-testid="biochem-wrapup"
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-violet-600 text-white flex items-center justify-center shadow">
+              <HeartPulse className="w-6 h-6" />
+            </div>
+            <div>
+              <h3
+                className={`font-display text-xl sm:text-2xl font-bold text-slate-900 mb-2 ${
+                  kh ? "font-khmer leading-snug" : ""
+                }`}
+              >
+                {t(
+                  "You are chemistry that learned to read",
+                  "អ្នកគឺជាគីមីវិទ្យា ដែលរៀនអាន",
+                )}
+              </h3>
+              <p
+                className={`text-slate-700 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Every cell in your body is running a quiet factory: DNA hands out blueprints, proteins do the building, enzymes speed up every reaction — all in warm salt water at body temperature. Biochemistry is the bridge between dead matter and life.",
+                  "កោសិកានីមួយៗក្នុងរាងកាយរបស់អ្នកកំពុងដំណើរការរោងចក្រស្ងាត់មួយ៖ ឌីអិនអេចែកប្លង់ ប្រូតេអ៊ីនធ្វើការសាងសង់ អង់ស៊ីមបង្កើនល្បឿនរាល់ប្រតិកម្ម — ទាំងអស់នេះក្នុងទឹកអំបិលក្ដៅៗនៅសីតុណ្ហភាពរាងកាយ។ ជីវគីមីវិទ្យាគឺជាស្ពានរវាងសារធាតុគ្មានជីវិត និងជីវិត។",
+                )}
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * Background motif — subtle cell / molecule grid
+ * ══════════════════════════════════════════════════════════════════════════ */
+function CellBackdrop() {
+  return (
+    <div className="absolute inset-0 pointer-events-none opacity-[0.05]" aria-hidden>
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern id="cellpat" width="64" height="64" patternUnits="userSpaceOnUse">
+            <circle cx="32" cy="32" r="22" fill="none" stroke="#10b981" strokeWidth="1.2" />
+            <circle cx="32" cy="32" r="6" fill="#7c3aed" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cellpat)" />
+      </svg>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 1 — DNA: The Ultimate Map
+ * ══════════════════════════════════════════════════════════════════════════ */
+function DnaSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  // Toggle: show double helix or "ladder unzipped"
+  const [view, setView] = useState<"helix" | "ladder">("helix");
+
+  // Sample sequence the user can edit
+  const [seq, setSeq] = useState<string>("ATGCCTAGGCTAGCTAA");
+
+  const cleaned = useMemo(
+    () => seq.toUpperCase().replace(/[^ATCG]/g, "").slice(0, 24),
+    [seq],
+  );
+  const complement = useMemo(
+    () =>
+      cleaned
+        .split("")
+        .map((b) => ({ A: "T", T: "A", C: "G", G: "C" }[b] || ""))
+        .join(""),
+    [cleaned],
+  );
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-emerald-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="dna-section"
+    >
+      <SectionHeader
+        kh={kh}
+        eyebrow={t("01 · The Ultimate Map", "០១ · ប្លង់ចុងក្រោយបង្អស់")}
+        titleEn="DNA — the four-letter alphabet of life"
+        titleKh="ឌីអិនអេ — អក្សរបួនតួនៃជីវិត"
+        Icon={Dna}
+        accent="emerald"
+      />
+
+      <p
+        className={`text-slate-700 leading-relaxed mb-6 ${
+          kh ? "font-khmer text-lg leading-loose" : "text-base sm:text-lg"
+        }`}
+      >
+        {t(
+          "Inside every one of your ~30 trillion cells sits a tightly-coiled molecule called DNA — deoxyribonucleic acid. It is a chemical alphabet with only four letters: A, T, C, and G. The order of those letters is the blueprint for every living thing — your eye colour, the shape of a banana, the spots on a leopard.",
+          "នៅខាងក្នុងកោសិកានីមួយៗ ក្នុងចំណោម ៣០ ត្រីលានកោសិការបស់អ្នក មានម៉ូលេគុលមួយដែលរុំជិតៗហៅថា ឌីអិនអេ — អាស៊ីតដេអុកស៊ីរីបូនុយក្លេអ៊ីក។ វាជាអក្សរគីមីដែលមានតួអក្សរត្រឹមតែបួន៖ A, T, C និង G។ លំដាប់នៃតួអក្សរទាំងនោះ គឺជាប្លង់សម្រាប់រាល់ជីវិត — ពណ៌ភ្នែករបស់អ្នក រាងចេក អាចម៌លើតួខ្លាដំបង។",
+        )}
+      </p>
+
+      {/* Key facts */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        <FactCard
+          kh={kh}
+          headEn="4 letters"
+          headKh="៤ តួអក្សរ"
+          bodyEn="A · T · C · G — adenine, thymine, cytosine, guanine."
+          bodyKh="A · T · C · G — អាដេនីន ធីមីន ស៊ីតូស៊ីន ហ្គួនីន។"
+          tone="emerald"
+        />
+        <FactCard
+          kh={kh}
+          headEn="2 m of DNA / cell"
+          headKh="ឌីអិនអេ ២ ម៉ែត្រ ក្នុងមួយកោសិកា"
+          bodyEn="Coiled inside a nucleus only 0.000006 m across."
+          bodyKh="រុំនៅក្នុងស្នូលកោសិកាដែលធំត្រឹមតែ ០.០០០០០៦ ម៉ែត្រ។"
+          tone="teal"
+        />
+        <FactCard
+          kh={kh}
+          headEn="3.2 billion letters"
+          headKh="៣.២ ប៊ីលាន តួអក្សរ"
+          bodyEn="The full human genome — written in just A, T, C, G."
+          bodyKh="ហ្សែនមនុស្សពេញលេញ — សរសេរដោយ A, T, C, G ប៉ុណ្ណោះ។"
+          tone="violet"
+        />
+      </div>
+
+      {/* Toggle helix / ladder */}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
+        <span
+          className={`text-xs font-bold uppercase tracking-wider text-slate-500 mr-1 ${
+            kh ? "font-khmer normal-case tracking-normal" : ""
+          }`}
+        >
+          {t("View:", "មើល៖")}
+        </span>
+        <button
+          onClick={() => setView("helix")}
+          data-testid="dna-view-helix"
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+            view === "helix"
+              ? "bg-emerald-600 text-white shadow"
+              : "bg-emerald-50 text-emerald-800 hover:bg-emerald-100"
+          } ${kh ? "font-khmer" : ""}`}
+        >
+          {t("Double helix", "ខ្សែរុំទ្វេរ")}
+        </button>
+        <button
+          onClick={() => setView("ladder")}
+          data-testid="dna-view-ladder"
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+            view === "ladder"
+              ? "bg-violet-600 text-white shadow"
+              : "bg-violet-50 text-violet-800 hover:bg-violet-100"
+          } ${kh ? "font-khmer" : ""}`}
+        >
+          {t("Unzipped ladder", "ជណ្តើររំសាយ")}
+        </button>
+      </div>
+
+      <div
+        className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 sm:p-6"
+        data-testid="dna-viewer"
+      >
+        {view === "helix" ? <DoubleHelixSVG /> : <LadderSVG seq={cleaned} comp={complement} />}
+      </div>
+
+      {/* Sequence editor */}
+      <div className="mt-6">
+        <label
+          className={`block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 ${
+            kh ? "font-khmer normal-case tracking-normal" : ""
+          }`}
+        >
+          {t(
+            "Type a DNA sequence (only A, T, C, G):",
+            "វាយលំដាប់ ឌីអិនអេ (តែ A, T, C, G ប៉ុណ្ណោះ)៖",
+          )}
+        </label>
+        <input
+          value={seq}
+          onChange={(e) =>
+            setSeq(e.target.value.toUpperCase().replace(/[^ATCG]/g, "").slice(0, 24))
+          }
+          className="w-full font-mono tracking-[0.3em] text-base sm:text-lg uppercase rounded-xl border-2 border-emerald-200 focus:border-emerald-500 focus:outline-none px-4 py-3 bg-white"
+          data-testid="dna-sequence-input"
+          maxLength={24}
+        />
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <CodeStrand label={t("Your strand", "ខ្សែរបស់អ្នក")} seq={cleaned} color="emerald" testId="dna-strand-input" />
+          <CodeStrand
+            label={t("Pairs with (complement)", "ផ្គូផ្គងនឹង (បំពេញ)")}
+            seq={complement}
+            color="violet"
+            testId="dna-strand-complement"
+          />
+        </div>
+        <div
+          className={`mt-3 text-xs text-slate-600 ${kh ? "font-khmer leading-loose" : ""}`}
+        >
+          {t(
+            "The pairing rule: A always bonds to T, and C always bonds to G. That's how DNA copies itself perfectly when a cell divides.",
+            "ច្បាប់ផ្គូផ្គង៖ A ភ្ជាប់ជាមួយ T ជានិច្ច ហើយ C ភ្ជាប់ជាមួយ G ជានិច្ច។ នេះជាមូលហេតុដែល ឌីអិនអេ ចម្លងខ្លួនវាបានយ៉ាងល្អឥតខ្ចោះ ពេលកោសិកាបែងចែក។",
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── DNA helpers ─────────────────────────────────────────────────────────── */
+function CodeStrand({
+  label,
+  seq,
+  color,
+  testId,
+}: {
+  label: string;
+  seq: string;
+  color: "emerald" | "violet";
+  testId?: string;
+}) {
+  const baseColor: Record<string, string> = {
+    A: "bg-emerald-500",
+    T: "bg-amber-500",
+    C: "bg-sky-500",
+    G: "bg-rose-500",
+  };
+  const ring = color === "emerald" ? "ring-emerald-200" : "ring-violet-200";
+
+  return (
+    <div className={`rounded-xl bg-white border-2 ${ring} ring-2 p-3`} data-testid={testId}>
+      <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2">
+        {label}
+      </div>
+      <div className="flex flex-wrap gap-1">
+        {seq.split("").map((b, i) => (
+          <span
+            key={i}
+            className={`inline-flex items-center justify-center w-7 h-7 rounded-md text-white font-bold text-sm shadow-sm ${
+              baseColor[b] || "bg-slate-400"
+            }`}
+          >
+            {b}
+          </span>
+        ))}
+        {seq.length === 0 && (
+          <span className="text-slate-400 text-sm italic">—</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function DoubleHelixSVG() {
+  // Static double-helix illustration
+  const W = 480;
+  const H = 200;
+  const turns = 4;
+  const samples = 80;
+  const amp = 36;
+  const yMid = H / 2;
+  const path1: string[] = [];
+  const path2: string[] = [];
+  const rungs: { x: number; y1: number; y2: number; pair: [string, string] }[] = [];
+  const pairs: [string, string][] = [
+    ["A", "T"], ["T", "A"], ["C", "G"], ["G", "C"],
+    ["A", "T"], ["G", "C"], ["T", "A"], ["C", "G"],
+  ];
+
+  for (let i = 0; i <= samples; i++) {
+    const x = (i / samples) * W;
+    const phase = (i / samples) * Math.PI * 2 * turns;
+    const y1 = yMid + Math.sin(phase) * amp;
+    const y2 = yMid + Math.sin(phase + Math.PI) * amp;
+    path1.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)},${y1.toFixed(1)}`);
+    path2.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)},${y2.toFixed(1)}`);
+
+    if (i % 10 === 0 && i > 0 && i < samples) {
+      rungs.push({
+        x,
+        y1,
+        y2,
+        pair: pairs[(i / 10) % pairs.length],
+      });
+    }
+  }
+
+  const baseColor: Record<string, string> = {
+    A: "#10b981",
+    T: "#f59e0b",
+    C: "#0ea5e9",
+    G: "#f43f5e",
+  };
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" data-testid="dna-helix-svg">
+      {/* rungs first so strands sit on top */}
+      {rungs.map((r, idx) => (
+        <g key={idx}>
+          <line
+            x1={r.x}
+            x2={r.x}
+            y1={r.y1}
+            y2={r.y2}
+            stroke="#cbd5e1"
+            strokeWidth={2}
+          />
+          <circle cx={r.x} cy={r.y1} r={9} fill={baseColor[r.pair[0]]} />
+          <circle cx={r.x} cy={r.y2} r={9} fill={baseColor[r.pair[1]]} />
+          <text
+            x={r.x}
+            y={r.y1 + 3}
+            textAnchor="middle"
+            fontSize="10"
+            fontWeight="bold"
+            fill="white"
+            fontFamily="monospace"
+          >
+            {r.pair[0]}
+          </text>
+          <text
+            x={r.x}
+            y={r.y2 + 3}
+            textAnchor="middle"
+            fontSize="10"
+            fontWeight="bold"
+            fill="white"
+            fontFamily="monospace"
+          >
+            {r.pair[1]}
+          </text>
+        </g>
+      ))}
+      <path d={path1.join(" ")} stroke="#10b981" strokeWidth={4} fill="none" strokeLinecap="round" />
+      <path d={path2.join(" ")} stroke="#7c3aed" strokeWidth={4} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LadderSVG({ seq, comp }: { seq: string; comp: string }) {
+  const baseColor: Record<string, string> = {
+    A: "#10b981",
+    T: "#f59e0b",
+    C: "#0ea5e9",
+    G: "#f43f5e",
+  };
+  const len = Math.max(seq.length, 1);
+  const W = Math.max(360, len * 28 + 40);
+  const H = 130;
+  const yTop = 35;
+  const yBot = 95;
+  const gap = (W - 40) / Math.max(len, 1);
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" data-testid="dna-ladder-svg">
+      {/* Backbones */}
+      <line x1={20} x2={W - 20} y1={yTop} y2={yTop} stroke="#10b981" strokeWidth={4} strokeLinecap="round" />
+      <line x1={20} x2={W - 20} y1={yBot} y2={yBot} stroke="#7c3aed" strokeWidth={4} strokeLinecap="round" />
+      {seq.split("").map((b, i) => {
+        const cx = 20 + (i + 0.5) * gap;
+        const c = comp[i];
+        return (
+          <g key={i}>
+            <line x1={cx} x2={cx} y1={yTop} y2={yBot} stroke="#cbd5e1" strokeWidth={1.5} strokeDasharray="3 3" />
+            <circle cx={cx} cy={yTop} r={11} fill={baseColor[b] || "#94a3b8"} />
+            <text x={cx} y={yTop + 4} textAnchor="middle" fontSize="11" fontWeight="bold" fill="white" fontFamily="monospace">
+              {b}
+            </text>
+            <circle cx={cx} cy={yBot} r={11} fill={baseColor[c] || "#94a3b8"} />
+            <text x={cx} y={yBot + 4} textAnchor="middle" fontSize="11" fontWeight="bold" fill="white" fontFamily="monospace">
+              {c}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 2 — Proteins: Tiny Folding Machines
+ * ══════════════════════════════════════════════════════════════════════════ */
+function ProteinSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-violet-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="protein-section"
+    >
+      <SectionHeader
+        kh={kh}
+        eyebrow={t("02 · The Micro-Machines", "០២ · ម៉ាស៊ីនមីក្រូ")}
+        titleEn="Proteins — folding nano-machines"
+        titleKh="ប្រូតេអ៊ីន — ម៉ាស៊ីននាណូដែលបត់"
+        Icon={Cog}
+        accent="violet"
+      />
+
+      <p
+        className={`text-slate-700 leading-relaxed mb-6 ${
+          kh ? "font-khmer text-lg leading-loose" : "text-base sm:text-lg"
+        }`}
+      >
+        {t(
+          "When most people hear \"protein\" they think of food — chicken, beans, eggs. But proteins are not just fuel. They are the actual workers inside every cell. Each one is a long string of amino-acid beads that folds itself into a tiny, perfectly-shaped 3D machine. That shape decides what the machine does.",
+          "ពេលមនុស្សភាគច្រើនលឺពាក្យ \"ប្រូតេអ៊ីន\" គេគិតដល់អាហារ — សាច់មាន់ សណ្តែក ស៊ុត។ ប៉ុន្តែប្រូតេអ៊ីនមិនត្រឹមតែជាឥន្ធនៈទេ។ ពួកវាគឺជាកម្មករពិតប្រាកដនៅក្នុងកោសិកានីមួយៗ។ ប្រូតេអ៊ីននីមួយៗគឺជាខ្សែវែងមួយនៃអាស៊ីតអាមីណូ ដែលបត់ខ្លួនវាទៅជាម៉ាស៊ីន ៣D ដែលមានរូបរាងល្អឥតខ្ចោះ។ រូបរាងនោះគឺជាអ្វីដែលសម្រេចថា ម៉ាស៊ីនធ្វើអ្វី។",
+        )}
+      </p>
+
+      {/* From bead → folded machine */}
+      <div className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-white p-5 sm:p-6 mb-6" data-testid="protein-folding">
+        <div
+          className={`text-[10px] font-bold uppercase tracking-[0.25em] text-violet-700 mb-3 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {t("From string → to machine", "ពីខ្សែ → ទៅម៉ាស៊ីន")}
+        </div>
+        <ProteinFoldSVG />
+        <p
+          className={`mt-4 text-sm text-slate-700 ${
+            kh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {t(
+            "20 different amino acids, strung in any order, can fold into millions of different shapes — and shape is everything. A pump shape pumps. A scissor shape cuts. A gate shape opens and closes.",
+            "អាស៊ីតអាមីណូ ២០ ប្រភេទ ដែលរៀបតាមលំដាប់ផ្សេងៗ អាចបត់ទៅជារាងផ្សេងៗគ្នារាប់លាន — ហើយរូបរាងគឺសំខាន់បំផុត។ រាងដូចបូម គឺបូម។ រាងដូចកន្ត្រៃ គឺកាត់។ រាងដូចទ្វារ គឺបើកនិងបិទ។",
+          )}
+        </p>
+      </div>
+
+      {/* Job grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        <ProteinJobCard
+          kh={kh}
+          icon="🦾"
+          jobEn="Move muscles"
+          jobKh="ផ្លាស់ទីសាច់ដុំ"
+          exampleEn="Actin & myosin pull each other to bend your arm."
+          exampleKh="អាក់ទីន និងម៉ីយ៉ូស៊ីន ទាញគ្នាទៅវិញទៅមក ដើម្បីបត់ដៃរបស់អ្នក។"
+        />
+        <ProteinJobCard
+          kh={kh}
+          icon="🫁"
+          jobEn="Carry oxygen"
+          jobKh="ផ្ទុកអុកស៊ីសែន"
+          exampleEn="Hemoglobin in your blood grabs O₂ at the lungs and drops it at every cell."
+          exampleKh="ហេម៉ូក្លូប៊ីនក្នុងឈាម ចាប់យក O₂ នៅសួត ហើយដាក់នៅរាល់កោសិកា។"
+        />
+        <ProteinJobCard
+          kh={kh}
+          icon="🛡️"
+          jobEn="Defend you"
+          jobKh="ការពារអ្នក"
+          exampleEn="Antibodies are Y-shaped proteins that lock onto invading viruses."
+          exampleKh="អង់ទីករ គឺជាប្រូតេអ៊ីនរាង Y ដែលចាក់សោររាល់វីរុសឈ្លានពាន។"
+        />
+        <ProteinJobCard
+          kh={kh}
+          icon="🍚"
+          jobEn="Digest food"
+          jobKh="រំលាយអាហារ"
+          exampleEn="Amylase in your saliva starts cutting rice starch the moment you chew."
+          exampleKh="អាមីឡាស់ ក្នុងទឹកមាត់ ចាប់ផ្តើមកាត់ម្សៅអង្ករភ្លាមៗ ពេលអ្នកទំពារ។"
+        />
+      </div>
+
+      <div
+        className={`rounded-xl border-l-4 border-violet-500 bg-violet-50/70 p-4 text-sm text-slate-800 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
+        {t(
+          "DNA holds the recipe. Proteins are the cooks, the waiters, the builders, the security guards. Without proteins, DNA is just a library nobody reads.",
+          "ឌីអិនអេ កាន់រូបមន្ត។ ប្រូតេអ៊ីន គឺជាចុងភៅ អ្នកបម្រើ ជាងសំណង់ និងឆ្មាំសន្តិសុខ។ បើគ្មានប្រូតេអ៊ីន ឌីអិនអេគ្រាន់តែជាបណ្ណាល័យដែលគ្មាននរណាអាន។",
+        )}
+      </div>
+    </section>
+  );
+}
+
+function ProteinFoldSVG() {
+  // Three states: linear, partly folded, fully folded
+  return (
+    <svg viewBox="0 0 540 130" className="w-full h-auto">
+      {/* State 1: linear chain */}
+      <g transform="translate(10,20)">
+        <text x="0" y="-4" fontSize="10" fill="#6b7280" fontFamily="monospace">1. chain</text>
+        {Array.from({ length: 12 }).map((_, i) => (
+          <circle key={i} cx={i * 12 + 6} cy={50} r={5} fill={["#7c3aed", "#10b981", "#f59e0b", "#0ea5e9"][i % 4]} />
+        ))}
+        {Array.from({ length: 11 }).map((_, i) => (
+          <line key={i} x1={i * 12 + 6} y1={50} x2={(i + 1) * 12 + 6} y2={50} stroke="#94a3b8" strokeWidth={2} />
+        ))}
+      </g>
+      {/* arrow */}
+      <text x="170" y="75" fontSize="20" fill="#94a3b8">→</text>
+      {/* State 2: helix-like coil */}
+      <g transform="translate(195,15)">
+        <text x="0" y="0" fontSize="10" fill="#6b7280" fontFamily="monospace">2. folding</text>
+        {Array.from({ length: 12 }).map((_, i) => {
+          const t = i / 11;
+          const x = t * 90;
+          const y = 55 + Math.sin(t * Math.PI * 3) * 20;
+          return (
+            <circle key={i} cx={x} cy={y} r={5} fill={["#7c3aed", "#10b981", "#f59e0b", "#0ea5e9"][i % 4]} />
+          );
+        })}
+      </g>
+      {/* arrow */}
+      <text x="320" y="75" fontSize="20" fill="#94a3b8">→</text>
+      {/* State 3: globular machine */}
+      <g transform="translate(360,15)">
+        <text x="0" y="0" fontSize="10" fill="#6b7280" fontFamily="monospace">3. machine</text>
+        <ellipse cx="80" cy="60" rx="55" ry="40" fill="url(#globGrad)" stroke="#7c3aed" strokeWidth={2} />
+        {/* surface beads */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const ang = (i / 12) * Math.PI * 2;
+          const x = 80 + Math.cos(ang) * 48;
+          const y = 60 + Math.sin(ang) * 33;
+          return (
+            <circle key={i} cx={x} cy={y} r={4.5} fill={["#7c3aed", "#10b981", "#f59e0b", "#0ea5e9"][i % 4]} />
+          );
+        })}
+        {/* active site */}
+        <path d="M 95 50 Q 100 65 90 75" stroke="#dc2626" strokeWidth={2.5} fill="none" />
+        <text x="105" y="62" fontSize="9" fill="#dc2626" fontWeight="bold">site</text>
+      </g>
+      <defs>
+        <radialGradient id="globGrad" cx="0.4" cy="0.4">
+          <stop offset="0%" stopColor="#ede9fe" />
+          <stop offset="100%" stopColor="#c4b5fd" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+}
+
+function ProteinJobCard({
+  kh,
+  icon,
+  jobEn,
+  jobKh,
+  exampleEn,
+  exampleKh,
+}: {
+  kh: boolean;
+  icon: string;
+  jobEn: string;
+  jobKh: string;
+  exampleEn: string;
+  exampleKh: string;
+}) {
+  return (
+    <div className="rounded-xl border border-violet-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-2xl" aria-hidden>
+          {icon}
+        </span>
+        <span
+          className={`font-bold text-violet-900 ${
+            kh ? "font-khmer" : ""
+          }`}
+        >
+          {kh ? jobKh : jobEn}
+        </span>
+      </div>
+      <p
+        className={`text-sm text-slate-700 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
+        {kh ? exampleKh : exampleEn}
+      </p>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 3 — Enzymes: Frugal Catalysts
+ * ══════════════════════════════════════════════════════════════════════════ */
+function EnzymeSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  // Comparison: Lab vs Body
+  const compareRows: Array<{
+    en: { lab: string; body: string };
+    kh: { lab: string; body: string };
+    icon: typeof Thermometer;
+  }> = [
+    {
+      icon: Thermometer,
+      en: { lab: "200–500 °C heat", body: "37 °C body temperature" },
+      kh: { lab: "កំដៅ ២០០–៥០០ °C", body: "សីតុណ្ហភាពរាងកាយ ៣៧ °C" },
+    },
+    {
+      icon: Zap,
+      en: { lab: "High pressure (50+ atm)", body: "Normal pressure (1 atm)" },
+      kh: { lab: "សម្ពាធខ្ពស់ (៥០+ atm)", body: "សម្ពាធធម្មតា (១ atm)" },
+    },
+    {
+      icon: FlaskConical,
+      en: { lab: "Toxic acids & metals", body: "Just salt water" },
+      kh: { lab: "អាស៊ីត និងលោហៈពុល", body: "តែទឹកអំបិលប៉ុណ្ណោះ" },
+    },
+    {
+      icon: HeartPulse,
+      en: { lab: "Hours per reaction", body: "Millions of reactions / second" },
+      kh: { lab: "ច្រើនម៉ោងក្នុងមួយប្រតិកម្ម", body: "ប្រតិកម្មរាប់លានក្នុងមួយវិនាទី" },
+    },
+  ];
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-amber-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="enzyme-section"
+    >
+      <SectionHeader
+        kh={kh}
+        eyebrow={t("03 · Frugal Catalysts", "០៣ · កាតាលីករសន្សំសំចៃ")}
+        titleEn="Enzymes — chemistry at body temperature"
+        titleKh="អង់ស៊ីម — គីមីវិទ្យានៅសីតុណ្ហភាពរាងកាយ"
+        Icon={Microscope}
+        accent="amber"
+      />
+
+      <p
+        className={`text-slate-700 leading-relaxed mb-6 ${
+          kh ? "font-khmer text-lg leading-loose" : "text-base sm:text-lg"
+        }`}
+      >
+        {t(
+          "An enzyme is a special protein with one job: speed up a chemical reaction without being used up itself. The miracle is the conditions. To break starch into sugar, an industrial lab might need boiling acid and metal catalysts. Your saliva does the same thing — at body temperature, in plain water, in seconds. Enzymes are how life does extreme chemistry, gently.",
+          "អង់ស៊ីម គឺជាប្រូតេអ៊ីនពិសេសមួយ ដែលមានភារកិច្ចតែមួយ៖ បង្កើនល្បឿនប្រតិកម្មគីមី ដោយខ្លួនឯងមិនត្រូវប្រើអស់។ អព្ភូតហេតុនោះស្ថិតនៅលើលក្ខខណ្ឌ។ ដើម្បីបំបែកម្សៅទៅជាស្ករ មន្ទីរពិសោធន៍ឧស្សាហកម្មអាចត្រូវការអាស៊ីតរំពុះ និងកាតាលីករលោហៈ។ ទឹកមាត់របស់អ្នកធ្វើរឿងដូចគ្នា — នៅសីតុណ្ហភាពរាងកាយ ក្នុងទឹកធម្មតា ក្នុងរយៈពេលពីរបីវិនាទី។ អង់ស៊ីម គឺជារបៀបដែលជីវិតធ្វើគីមីវិទ្យាខ្លាំងក្លា ដោយស្រទន់។",
+        )}
+      </p>
+
+      {/* Lock & key SVG */}
+      <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-5 sm:p-6 mb-6" data-testid="enzyme-lock-key">
+        <div
+          className={`text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700 mb-3 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {t("Lock & key — substrate fits enzyme", "សោ និងកូនសោ — សារធាតុ-ផ្គុំ ត្រូវនឹងអង់ស៊ីម")}
+        </div>
+        <LockAndKeySVG />
+        <p
+          className={`mt-4 text-sm text-slate-700 ${
+            kh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {t(
+            "Each enzyme has a pocket whose shape exactly matches one molecule (the substrate). The molecule clicks in, the reaction happens, the product pops out — and the enzyme is ready for the next one.",
+            "អង់ស៊ីមនីមួយៗមានរន្ធមួយ ដែលរាងរបស់វាត្រូវនឹងម៉ូលេគុលតែមួយ (សារធាតុ-ផ្គុំ)។ ម៉ូលេគុលចូលក្នុងពីរបីដង ប្រតិកម្មកើតឡើង ផលិតផលចេញមក — ហើយអង់ស៊ីមត្រៀមខ្លួនសម្រាប់ម៉ូលេគុលបន្ទាប់។",
+          )}
+        </p>
+      </div>
+
+      {/* Lab vs body comparison */}
+      <div className="rounded-2xl border-2 border-amber-300 bg-amber-50/40 p-5" data-testid="enzyme-lab-vs-body">
+        <div
+          className={`text-center font-bold text-amber-900 mb-4 ${
+            kh ? "font-khmer" : ""
+          }`}
+        >
+          {t("Industrial lab vs. your body", "មន្ទីរពិសោធន៍ឧស្សាហកម្ម ធៀបនឹងរាងកាយរបស់អ្នក")}
+        </div>
+        <div className="grid grid-cols-[auto_1fr_1fr] gap-x-3 sm:gap-x-6 gap-y-3 items-center text-sm">
+          <div></div>
+          <div
+            className={`text-center text-xs font-bold uppercase tracking-wider text-rose-700 ${
+              kh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {t("Industrial lab", "មន្ទីរពិសោធន៍")}
+          </div>
+          <div
+            className={`text-center text-xs font-bold uppercase tracking-wider text-emerald-700 ${
+              kh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {t("Your body (with enzymes)", "រាងកាយរបស់អ្នក (មានអង់ស៊ីម)")}
+          </div>
+          {compareRows.map((row, i) => {
+            const Icon = row.icon;
+            return (
+              <ComparisonRow
+                key={i}
+                Icon={Icon}
+                lab={kh ? row.kh.lab : row.en.lab}
+                body={kh ? row.kh.body : row.en.body}
+                kh={kh}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ComparisonRow({
+  Icon,
+  lab,
+  body,
+  kh,
+}: {
+  Icon: typeof Thermometer;
+  lab: string;
+  body: string;
+  kh: boolean;
+}) {
+  return (
+    <div className="contents">
+      <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-white border border-amber-200 shadow-sm">
+        <Icon className="w-4 h-4 text-amber-700" />
+      </div>
+      <div className={`rounded-lg bg-rose-50 border border-rose-200 px-3 py-2 text-rose-900 text-center ${kh ? "font-khmer" : ""}`}>
+        {lab}
+      </div>
+      <div className={`rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2 text-emerald-900 text-center ${kh ? "font-khmer" : ""}`}>
+        {body}
+      </div>
+    </div>
+  );
+}
+
+function LockAndKeySVG() {
+  return (
+    <svg viewBox="0 0 480 140" className="w-full h-auto" data-testid="lock-key-svg">
+      {/* Substrate (left) */}
+      <g transform="translate(20,40)">
+        <rect x="0" y="0" width="55" height="40" rx="6" fill="#f59e0b" stroke="#b45309" strokeWidth={2} />
+        <text x="27" y="25" textAnchor="middle" fontSize="11" fontWeight="bold" fill="white" fontFamily="monospace">
+          starch
+        </text>
+        <text x="27" y="58" textAnchor="middle" fontSize="9" fill="#92400e">substrate</text>
+      </g>
+      {/* arrow */}
+      <text x="92" y="65" fontSize="22" fill="#94a3b8">→</text>
+      {/* Enzyme with pocket */}
+      <g transform="translate(125,15)">
+        <ellipse cx="90" cy="60" rx="80" ry="50" fill="#ede9fe" stroke="#7c3aed" strokeWidth={2.5} />
+        {/* Pocket */}
+        <path
+          d="M 50 60 Q 65 35 90 35 Q 115 35 130 60 Q 115 85 90 85 Q 65 85 50 60 Z"
+          fill="#fef3c7"
+          stroke="#7c3aed"
+          strokeWidth={1.5}
+          strokeDasharray="4 3"
+        />
+        <text x="90" y="63" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#7c3aed" fontFamily="monospace">
+          enzyme
+        </text>
+        <text x="90" y="115" textAnchor="middle" fontSize="9" fill="#5b21b6">amylase</text>
+      </g>
+      {/* arrow */}
+      <text x="318" y="65" fontSize="22" fill="#94a3b8">→</text>
+      {/* Products */}
+      <g transform="translate(355,40)">
+        <circle cx="20" cy="20" r="13" fill="#10b981" stroke="#065f46" strokeWidth={2} />
+        <text x="20" y="23" textAnchor="middle" fontSize="10" fontWeight="bold" fill="white" fontFamily="monospace">
+          glu
+        </text>
+        <circle cx="55" cy="20" r="13" fill="#10b981" stroke="#065f46" strokeWidth={2} />
+        <text x="55" y="23" textAnchor="middle" fontSize="10" fontWeight="bold" fill="white" fontFamily="monospace">
+          glu
+        </text>
+        <text x="40" y="58" textAnchor="middle" fontSize="9" fill="#065f46">2 × glucose</text>
+      </g>
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * Shared header / fact card
+ * ══════════════════════════════════════════════════════════════════════════ */
+function SectionHeader({
+  kh,
+  eyebrow,
+  titleEn,
+  titleKh,
+  Icon,
+  accent,
+}: {
+  kh: boolean;
+  eyebrow: string;
+  titleEn: string;
+  titleKh: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  accent: "emerald" | "violet" | "amber";
+}) {
+  const ring = {
+    emerald: "bg-emerald-600",
+    violet: "bg-violet-600",
+    amber: "bg-amber-600",
+  }[accent];
+  const text = {
+    emerald: "text-emerald-700",
+    violet: "text-violet-700",
+    amber: "text-amber-700",
+  }[accent];
+
+  return (
+    <div className="flex items-start gap-3 mb-4">
+      <div className={`flex-shrink-0 w-11 h-11 rounded-xl ${ring} text-white flex items-center justify-center shadow`}>
+        <Icon className="w-5 h-5" />
+      </div>
+      <div className="min-w-0">
+        <div
+          className={`text-[10px] font-bold uppercase tracking-[0.25em] ${text} mb-0.5 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {eyebrow}
+        </div>
+        <h2
+          className={`font-display text-xl sm:text-2xl font-extrabold text-slate-900 ${
+            kh ? "font-khmer leading-snug" : ""
+          }`}
+        >
+          {kh ? titleKh : titleEn}
+        </h2>
+      </div>
+    </div>
+  );
+}
+
+function FactCard({
+  kh,
+  headEn,
+  headKh,
+  bodyEn,
+  bodyKh,
+  tone,
+}: {
+  kh: boolean;
+  headEn: string;
+  headKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  tone: "emerald" | "teal" | "violet";
+}) {
+  const styles = {
+    emerald: "border-emerald-200 bg-emerald-50/60 text-emerald-900",
+    teal: "border-teal-200 bg-teal-50/60 text-teal-900",
+    violet: "border-violet-200 bg-violet-50/60 text-violet-900",
+  }[tone];
+
+  return (
+    <div className={`rounded-xl border ${styles} p-4`}>
+      <div className={`font-bold text-sm mb-1 ${kh ? "font-khmer" : ""}`}>
+        {kh ? headKh : headEn}
+      </div>
+      <div className={`text-xs text-slate-700 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {kh ? bodyKh : bodyEn}
+      </div>
+    </div>
+  );
+}

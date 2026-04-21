@@ -9,6 +9,7 @@ import {
   Gem,
   Sigma,
   FlaskRound,
+  Dna,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -245,6 +246,29 @@ const MODULES: Module[] = [
       title: "text-amber-900",
     },
   },
+  {
+    href: "/science/chemistry/biochemistry",
+    number: "09",
+    titleEn: "Biochemistry",
+    titleKh: "ជីវគីមីវិទ្យា",
+    blurbEn:
+      "Explore the chemical code of life. Learn how lifeless atoms combine to build the DNA, proteins, and molecular machines that power the human body and nature.",
+    blurbKh:
+      "ស្វែងយល់ពីកូដគីមីនៃជីវិត។ រៀនពីរបៀបដែលអាតូមឥតព្រលឹងផ្គុំគ្នាបង្កើត ឌីអិនអេ ប្រូតេអ៊ីន និងម៉ាស៊ីនម៉ូលេគុល ដែលផ្ដល់ថាមពលដល់រាងកាយមនុស្ស និងធម្មជាតិ។",
+    topicsEn: ["DNA & RNA", "Proteins", "Enzymes", "Metabolism"],
+    topicsKh: ["ឌីអិនអេ & អាអិនអេ", "ប្រូតេអ៊ីន", "អង់ស៊ីម", "មេតាបូលីសែម"],
+    icon: Dna,
+    accent: {
+      bgFrom: "from-emerald-50",
+      bgTo: "to-violet-50",
+      border: "border-emerald-300",
+      chip: "bg-violet-100 text-violet-800",
+      iconBg: "bg-gradient-to-br from-emerald-500 via-teal-600 to-violet-600",
+      btn: "bg-violet-700",
+      btnHover: "hover:bg-violet-800",
+      title: "text-emerald-900",
+    },
+  },
 ];
 
 export function ChemistryHubPage() {
@@ -273,8 +297,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Eight learning modules — from the tiniest atom to the lab instruments that name a single molecule out of trillions. Pick where you want to start.",
-              "មុខវិជ្ជារៀនប្រាំបី — ចាប់ពីអាតូមតូចបំផុត រហូតដល់ឧបករណ៍មន្ទីរពិសោធន៍ដែលស្គាល់ឈ្មោះម៉ូលេគុលមួយ ក្នុងចំណោមរាប់ត្រីលាន។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Nine learning modules — from the tiniest atom to the chemistry of life itself. Pick where you want to start.",
+              "មុខវិជ្ជារៀនប្រាំបួន — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៃជីវិតផ្ទាល់។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>
