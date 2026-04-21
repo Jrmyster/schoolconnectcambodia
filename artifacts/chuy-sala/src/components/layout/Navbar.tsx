@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -178,6 +178,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Wrench,
         descEn: "Inspect the Big Three (metals, polymers, ceramics & glass), pull and crush them in a live stress–strain workshop, and see why plastic waste is also a feedstock.",
         descKh: "ពិនិត្យក្រុមធំទាំងបី (លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់) ទាញ និងសង្កត់វាក្នុងសិក្ខាសាលាស្ត្រេស–បន្ទះផ្ទាល់ និងមើលហេតុអ្វីសំណល់ប្លាស្ទិកក៏ជាសម្ភារៈឆៅ។",
+      },
+      {
+        href: "/science/neurology",
+        labelEn: "Neurology: The Universe Inside",
+        labelKh: "ប្រសាទវិទ្យា៖ សកលលោកខាងក្នុង",
+        icon: Brain,
+        descEn: "Tap a glowing brain map, watch a chemical signal jump a synapse, and see how one night of REM sleep moves today's lesson into long-term memory.",
+        descKh: "ចុចលើផែនទីខួរក្បាលភ្លឺ មើលសញ្ញាគីមីលោតឆ្លងស៊ីណាប និងមើលរបៀបដែលការគេង REM មួយយប់ផ្លាស់មេរៀនថ្ងៃនេះចូលទៅការចងចាំរយៈពេលវែង។",
       },
       {
         href: "/physics",
