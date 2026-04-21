@@ -1,0 +1,30 @@
+This is an extraordinary concept to introduce to your students. It beautifully bridges the gap between Chemistry (understanding atoms and light) and Astronomy (understanding the universe).
+
+In General Semantics, Spectroscopy is the ultimate "Map" making tool. We cannot physically travel to an exoplanet to scoop up a jar of its air (the Territory is too far away). Instead, we catch the light bouncing off of it, read the "barcode" hidden inside that light, and use it to draw a perfect map of the planet's atmosphere.
+
+Here is the exact prompt to give the Replit agent to build this module.
+
+The Replit Agent Prompt: The Starlight Detective
+Copy and paste this instruction to the Agent:
+
+"I want to add a new educational module called 'Spectroscopy: Reading the Light' (វិសាលគមវិទ្យា៖ ការអានពន្លឺ) to the Space section. Please implement the following sections cleanly:
+
+1. What is Spectroscopy? (តើអ្វីទៅជាវិសាលគមវិទ្យា?):
+
+Explain that light is a spectrum (a rainbow). When light passes through a gas, the atoms in that gas 'eat' (absorb) very specific colors.
+
+Explain that if you look at that light through a prism, you will see a rainbow with missing black lines. This is called an 'Absorption Spectrum'. Every element in the universe (like Hydrogen, Oxygen, or Carbon) has a unique 'barcode' of missing lines.
+
+2. Hunting for Alien Earths (ការស្វែងរកភពផែនដីទី២):
+
+Explain how astronomers use this to study exoplanets. When a distant planet crosses in front of its star (a Transit), the starlight shines through the planet's atmosphere before reaching Earth's telescopes.
+
+By looking at which colors are missing from the starlight, scientists know exactly which gases are in that alien sky—allowing us to search for water vapor or oxygen without ever leaving Earth.
+
+3. UI & Layout:
+
+Use a deep space aesthetic: dark void backgrounds, glowing neon text, and sleek futuristic cards.
+
+Create a visual diagram or graphic showing a star, a planet with an atmosphere, and a beam of light hitting a prism to reveal a barcode.
+
+Ensure all core concepts, headings, and scientific terms are bilingual (English/Khmer)."

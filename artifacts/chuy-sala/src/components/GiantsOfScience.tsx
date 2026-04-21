@@ -13,6 +13,8 @@ import {
   Quote,
   Compass,
   Users,
+  Droplets,
+  BookOpen,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -305,6 +307,30 @@ const SCIENTISTS: Scientist[] = [
              kh: "ក្នុងសៀវភៅ The Theory of the Leisure Class (១៨៩៩) វេបឡែនបានអះអាងថាសេដ្ឋកិច្ចវិទ្យាមិនអាចយល់បានដោយគ្មានសង្គមវិទ្យា និងប្រវត្តិសាស្ត្រ៖ មនុស្សមិនគ្រាន់តែទិញអ្វីដែលមានប្រយោជន៍នោះទេ — ពួកគេទិញអ្វីដែលបង្ហាញពីឋានៈ។ គាត់បានបង្កើតពាក្យ 'ការប្រើប្រាស់បង្អួត' ដើម្បីពណ៌នាការចំណាយដែលរចនាឱ្យអ្នកដទៃឃើញ និង 'ការទំនេរបង្អួត' សម្រាប់ការគេចចេញពីការងារយ៉ាងបង្ហាញ។ ដោយចាត់ទុកសេដ្ឋកិច្ចជាស្ថាប័នសង្គមដែលវិវត្តន៍ និងត្រូវបានរូបរាងដោយទម្លាប់ ប្រពៃណី និងអំណាច គាត់បានបង្កើតនូវអ្វីដែលឥឡូវហៅថាសេដ្ឋកិច្ចវិទ្យាស្ថាប័ន ហើយបានផ្ដល់ឱ្យជំនាន់ៗនៃអ្នកវិទ្យាសាស្ត្រសង្គមនូវកែវយឹតមួយដ៏មុតចំពោះវិសមភាព។" },
     quote: { en: "Conspicuous consumption of valuable goods is a means of reputability to the gentleman of leisure.",
              kh: "ការប្រើប្រាស់ទំនិញដ៏មានតម្លៃជាបង្អួត គឺជាមធ្យោបាយនៃកិត្តិនាមសម្រាប់អភិជនទំនេរ។" },
+  },
+  {
+    id: "semmelweis", initials: "IS", field: "biology", alt: Droplets,
+    name:  { en: "Ignaz Semmelweis", kh: "អ៊ិកណាស សេមមែលវ៉ៃ" },
+    nationality: { en: "Hungarian", kh: "ហុងគ្រី" },
+    years: "1818–1865",
+    tag:   { en: "Pioneer of antiseptic procedures — the \"Saviour of Mothers.\" Empirical evidence over accepted belief.",
+             kh: "អ្នកត្រួសត្រាយផ្លូវផ្នែកអនាម័យ — \"អ្នកសង្គ្រោះម្ដាយ\"។ ភស្តុតាងជាក់ស្ដែងលើសជំនឿដែលទទួលយក។" },
+    bio:   { en: "Decades before anyone knew what bacteria were, Semmelweis noticed that mothers in the doctors' ward of a Vienna maternity hospital were dying from \"childbed fever\" at terrifying rates — far higher than mothers attended only by midwives. He realised the doctors were coming straight from autopsies and proved that simply washing hands with a chlorinated lime solution cut the death rate dramatically. His data was undeniable, but it contradicted the accepted beliefs of the medical establishment, and he was mocked and dismissed during his lifetime. He teaches us a hard lesson: sometimes the data shows us WHAT works long before we understand WHY — and accepted authority is not the same as truth.",
+             kh: "ជាច្រើនទសវត្សរ៍មុនពេលនរណាម្នាក់ដឹងថាបាក់តេរីជាអ្វី សេមមែលវ៉ៃបានកត់សំគាល់ថាម្ដាយនៅក្នុងបន្ទប់របស់វេជ្ជបណ្ឌិតនៃមន្ទីរពេទ្យសម្ភពទីក្រុង Vienna កំពុងស្លាប់ដោយ \"គ្រុនក្រោយសម្រាល\" ក្នុងអត្រាដ៏គួរឱ្យភ័យខ្លាច — ខ្ពស់ជាងម្ដាយដែលថែទាំដោយឆ្មបឆ្ងាយណាស់។ គាត់បានយល់ថាវេជ្ជបណ្ឌិតមកដោយផ្ទាល់ពីការវះកាត់សាកសព ហើយបានបង្ហាញថាគ្រាន់តែលាងដៃជាមួយសូលុយស្យុងកម្ទេចកំបោរក្លរ បានកាត់បន្ថយអត្រាមរណភាពយ៉ាងខ្លាំង។ ទិន្នន័យរបស់គាត់មិនអាចបដិសេធបាន ប៉ុន្តែវាផ្ទុយនឹងជំនឿដែលត្រូវបានទទួលយកនៃអ្នកជំនាញវេជ្ជសាស្ត្រ ហើយគាត់ត្រូវបានចំអកនិងបណ្ដេញចេញនៅពេលនៅរស់។ គាត់បង្រៀនយើងនូវមេរៀនមួយដ៏ពិបាក៖ ពេលខ្លះទិន្នន័យបង្ហាញយើងពី «អ្វី» ដែលដំណើរការ មុនពេលយើងយល់ថា «ហេតុអ្វី» — ហើយអំណាចដែលត្រូវបានទទួលយក មិនដូចគ្នានឹងការពិតទេ។" },
+    quote: { en: "When I look back upon the past, I can only dispel the sadness which falls upon me by gazing into that happy future when the infection will be banished.",
+             kh: "នៅពេលខ្ញុំក្រឡេកមើលអតីតកាល ខ្ញុំអាចបំបាត់ភាពកើតទុក្ខបានតែដោយសម្លឹងមើលអនាគតដ៏រីករាយ ដែលការឆ្លងនឹងត្រូវបានបណ្ដេញចេញ។" },
+  },
+  {
+    id: "kuhn", initials: "TK", field: "philosophy", alt: BookOpen,
+    name:  { en: "Thomas Kuhn", kh: "ថូម៉ាស គូន" },
+    nationality: { en: "American", kh: "អាមេរិក" },
+    years: "1922–1996",
+    tag:   { en: "Architect of the \"paradigm shift\" — author of The Structure of Scientific Revolutions.",
+             kh: "ស្ថាបត្យករនៃ \"បដិវត្តន៍គំនិត\" — អ្នកនិពន្ធសៀវភៅ The Structure of Scientific Revolutions។" },
+    bio:   { en: "Kuhn's 1962 book The Structure of Scientific Revolutions changed how we think about science itself. He showed that science doesn't just slowly accumulate facts in a straight line. Instead, it operates inside a \"paradigm\" — a shared set of rules, models and expectations — until anomalies (problems the rules can't explain) build up. When the pressure of those anomalies becomes too great, the field undergoes a sudden, sometimes painful \"paradigm shift\" to a new framework, like Newtonian mechanics giving way to relativity and quantum theory. Kuhn teaches us that scientific \"truth\" is a constantly evolving model — and that the scientific community must be brave enough to abandon old maps when new evidence breaks them.",
+             kh: "សៀវភៅរបស់គូនឆ្នាំ ១៩៦២ The Structure of Scientific Revolutions បានផ្លាស់ប្ដូររបៀបដែលយើងគិតអំពីវិទ្យាសាស្ត្រដោយខ្លួនឯង។ គាត់បានបង្ហាញថាវិទ្យាសាស្ត្រមិនគ្រាន់តែប្រមូលផ្ដុំការពិតយឺតៗតាមបន្ទាត់ត្រង់នោះទេ។ ផ្ទុយទៅវិញ វាដំណើរការនៅក្នុង \"គំនិត\" (paradigm) — សំណុំច្បាប់ គំរូ និងការរំពឹងទុករួម — រហូតដល់បាតុភូតមិនប្រក្រតី (បញ្ហាដែលច្បាប់មិនអាចពន្យល់) កើនឡើងច្រើន។ នៅពេលសម្ពាធនៃបាតុភូតទាំងនោះធ្ងន់ធ្ងរពេក វិស័យនោះឆ្លងកាត់ \"បដិវត្តន៍គំនិត\" ភ្លាមៗ ដែលជួនកាលឈឺចាប់ ទៅរកក្របខ័ណ្ឌថ្មី ដូចជាមេកានិករបស់ញូតុនបានបោះបង់ឱ្យរ៉ឺឡាទីវីតេ និងទ្រឹស្តីកង់ទិច។ គូនបង្រៀនយើងថា \"ការពិត\" វិទ្យាសាស្ត្រគឺជាគំរូដែលវិវត្តន៍ឥតឈប់ឈរ — ហើយសហគមន៍វិទ្យាសាស្ត្រត្រូវតែក្លាហានគ្រប់គ្រាន់ដើម្បីបោះបង់ផែនទីចាស់ នៅពេលភស្តុតាងថ្មីបំបែកវា។" },
+    quote: { en: "The successive transition from one paradigm to another via revolution is the usual developmental pattern of mature science.",
+             kh: "ការប្ដូរបន្តបន្ទាប់ពីគំនិតមួយទៅគំនិតមួយទៀតតាមរយៈបដិវត្តន៍ គឺជាគំរូអភិវឌ្ឍធម្មតានៃវិទ្យាសាស្ត្រដែលឈានដល់ភាពចាស់ទុំ។" },
   },
 ];
 
