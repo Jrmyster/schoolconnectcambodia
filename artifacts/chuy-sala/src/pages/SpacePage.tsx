@@ -10,6 +10,7 @@ import { JWSTModule } from "@/components/space/JWSTModule";
 import { MarsRoversModule } from "@/components/space/MarsRoversModule";
 import { MarsPlanetModule } from "@/components/space/MarsPlanetModule";
 import { VenusPlanetModule } from "@/components/space/VenusPlanetModule";
+import { MercuryPlanetModule } from "@/components/space/MercuryPlanetModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -365,6 +366,9 @@ export function SpacePage() {
 
         {/* ── JWST: The Cosmic Time Machine ─────────────────────────────── */}
         <JWSTModule />
+
+        {/* ── Mercury: The Planet of Extremes ───────────────────────────── */}
+        <MercuryPlanetModule />
 
         {/* ── Venus: The Greenhouse Warning ─────────────────────────────── */}
         <VenusPlanetModule />
