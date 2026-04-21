@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useId, useRef, useMemo } from "react";
 import {
   Fuel,
   Droplet,
@@ -18,6 +18,12 @@ import {
   Play,
   Pause,
   RotateCcw,
+  Construction,
+  ArrowDown,
+  Thermometer,
+  Heart,
+  Route,
+  Hammer,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -127,6 +133,21 @@ export default function FossilFuelsPage() {
         isKh={isKh}
       >
         <PriceBreakdown isKh={isKh} />
+      </Section>
+
+      {/* ── 5. Asphalt: the world's glue ──────────────────────────── */}
+      <Section
+        eyebrowEn="05 · Civil Engineering"
+        eyebrowKh="០៥ · វិស្វកម្មសំណង់ស៊ីវិល"
+        titleEn="Asphalt: The World's Glue"
+        titleKh="អាស្វាល់៖ កាវរបស់ពិភពលោក"
+        descEn="Look back at the distillation tower — at the very bottom, hotter than every other product, sits the heaviest residue: bitumen. We don't burn it. We mix it with stone and pour it across the planet to make 64 million kilometres of road. This is ancient sunlight in its most solid form."
+        descKh="មើលត្រឡប់ទៅប៉មចម្រាញ់វិញ — នៅបាតបង្អស់ ក្ដៅជាងផលិតផលផ្សេងទៀតទាំងអស់ មានសំណល់ដ៏ធ្ងន់៖ ប៊ីទុយម៉ែន។ យើងមិនដុតវាទេ។ យើងលាយវាជាមួយថ្ម ហើយចាក់នៅទូទាំងផែនដី បង្កើតផ្លូវប្រវែង ៦៤ លានគីឡូម៉ែត្រ។ នេះគឺជាពន្លឺថ្ងៃបុរាណក្នុងទម្រង់រឹងបំផុតរបស់វា។"
+        isKh={isKh}
+      >
+        <AsphaltOrigin isKh={isKh} />
+        <AsphaltRecipe isKh={isKh} />
+        <RoadwayDashboard isKh={isKh} />
       </Section>
 
       {/* ── Closing ─────────────────────────────────────────────── */}
@@ -1191,6 +1212,359 @@ function PriceBreakdown({ isKh }: { isKh: boolean }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+//  5a. Asphalt origin — link to fractional distillation tower bottom
+// ════════════════════════════════════════════════════════════════════════════
+
+function AsphaltOrigin({ isKh }: { isKh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const towerTitleId = `ff-asph-tower-t-${uid}`;
+  const arrowId = `ff-asph-arrow-${uid}`;
+  return (
+    <SteelCard className="p-5 sm:p-6 ff-asphalt-surface">
+      <CardHeader
+        icon={ArrowDown}
+        titleEn="The Origin — bottom of the barrel"
+        titleKh="ប្រភពដើម — បាតធុង"
+        isKh={isKh}
+      />
+
+      <div className="grid lg:grid-cols-[260px_1fr] gap-5 items-start">
+        {/* Mini distillation tower with bottom-residue highlight */}
+        <div className="bg-stone-950/80 rounded-lg border-2 border-amber-500/30 p-3">
+          <svg viewBox="0 0 220 280" className="w-full h-auto block" role="img" aria-labelledby={towerTitleId}>
+            <title id={towerTitleId}>{isKh ? "ប៉មចម្រាញ់ — សំណល់នៅបាត" : "Distillation tower — residue at the bottom"}</title>
+            {/* tower body */}
+            <rect x="70" y="20" width="80" height="220" rx="8" fill="#1c1917" stroke="#57534e" strokeWidth="1.5" />
+            {/* fraction bands top→bottom: cool → hot */}
+            {[
+              { y: 28,  c: "#fde68a", lblEn: "Gas",      lblKh: "ហ្គាស" },
+              { y: 60,  c: "#fbbf24", lblEn: "Gasoline", lblKh: "ប្រេងសាំង" },
+              { y: 92,  c: "#f59e0b", lblEn: "Kerosene", lblKh: "ប្រេងកាត" },
+              { y: 124, c: "#d97706", lblEn: "Diesel",   lblKh: "ម៉ាស៊ូត" },
+              { y: 156, c: "#b45309", lblEn: "Lubricant",lblKh: "ប្រេងរំអិល" },
+            ].map((f) => (
+              <g key={f.lblEn}>
+                <rect x="74" y={f.y} width="72" height="22" fill={f.c} opacity="0.55" />
+                <text x="158" y={f.y + 15} fontSize="9" fill="#a8a29e" fontFamily={isKh ? "inherit" : "monospace"}>
+                  {isKh ? f.lblKh : f.lblEn}
+                </text>
+              </g>
+            ))}
+            {/* bottom residue — bitumen — highlighted */}
+            <rect x="74" y="190" width="72" height="46" fill="#0c0a09" stroke="#fbbf24" strokeWidth="2" className="ff-pulse" />
+            <text x="110" y="216" fontSize="11" fontWeight="800" fill="#fbbf24" textAnchor="middle" fontFamily={isKh ? "inherit" : "sans-serif"}>
+              {isKh ? "ប៊ីទុយម៉ែន" : "BITUMEN"}
+            </text>
+            <text x="110" y="230" fontSize="9" fill="#fbbf24" textAnchor="middle" opacity="0.85">
+              ~400°C · C₃₀⁺
+            </text>
+            {/* arrow + caption */}
+            <line x1="44" y1="213" x2="68" y2="213" stroke="#fbbf24" strokeWidth="1.5" markerEnd={`url(#${arrowId})`} />
+            <defs>
+              <marker id={arrowId} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24" />
+              </marker>
+            </defs>
+            <text x="42" y="208" fontSize="9" fill="#fbbf24" textAnchor="end" fontFamily={isKh ? "inherit" : "sans-serif"}>
+              {isKh ? "សំណល់" : "residue"}
+            </text>
+            {/* heat scale */}
+            <text x="160" y="30"  fontSize="9" fill="#60a5fa">{isKh ? "ត្រជាក់" : "cool"} ↑</text>
+            <text x="160" y="248" fontSize="9" fill="#fbbf24">{isKh ? "ក្ដៅ" : "hot"} ↓</text>
+          </svg>
+        </div>
+
+        {/* Explanation */}
+        <div className="space-y-3">
+          <div className="bg-stone-900/70 border-l-4 border-yellow-400 rounded-r-lg p-4">
+            <p className={`text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "ត្រឡប់ទៅផ្នែកទី ០២ វិញ — ប៉មចម្រាញ់ដាច់ដោយផ្នែក។ បន្ទាប់ពី ហ្គាស ប្រេងសាំង ប្រេងកាត ម៉ាស៊ូត និងប្រេងរំអិលទាំងអស់ត្រូវបានពុះចេញ សំណល់ដ៏ឋិតល្អដែលនៅសល់នៅបាតប៉មគឺ ប៊ីទុយម៉ែន (ហៅផងដែរថា អាស្វាល)។ វាមិនពុះនៅសីតុណ្ហភាពធម្មតាទេ — យើងត្រូវចម្អិនវាដើម្បីឲ្យវាហូរ។"
+                : "Go back to Section 02 — the fractional distillation tower. After the gas, gasoline, kerosene, diesel and lubricating oils have all been boiled off, the heavy black residue left at the bottom is bitumen (also called asphalt). It will not boil at normal temperatures — we have to cook it just to make it pour."}
+            </p>
+          </div>
+
+          <div className="bg-yellow-400/10 border border-yellow-400/40 rounded-lg p-4">
+            <div className={`flex items-center gap-2 text-yellow-300 text-xs font-bold uppercase tracking-widest mb-2 ${isKh ? "font-khmer tracking-normal normal-case text-sm" : ""}`}>
+              <Sparkles className="w-3.5 h-3.5" />
+              {isKh ? "ពន្លឺថ្ងៃបុរាណ" : "Ancient Sunlight"}
+            </div>
+            <p className={`text-stone-200 text-sm ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "រាល់ផ្លូវកៅស៊ូដែលអ្នកដើរលើ គឺពន្លឺថ្ងៃដែលបានប្រមូលផ្ដុំដោយជីវិតសមុទ្រកាលពី ៣០០ លានឆ្នាំមុន — ដែលត្រូវបានចម្អិន ច្របាច់ និងផ្ដុំក្នុងទម្រង់រឹង និងប្រមូលផ្ដុំបំផុតរបស់វា។ ផ្លូវរបស់អ្នកគឺជាហ្វូស៊ីលដែលត្រូវបានរៀបចំឡើងវិញ។"
+                : "Every asphalt road you walk on is sunlight gathered by sea-life 300 million years ago — cooked, squeezed, and concentrated into its most solid, dense form. Your road is a re-arranged fossil."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5b. Asphalt recipe — composition + process
+// ════════════════════════════════════════════════════════════════════════════
+
+function AsphaltRecipe({ isKh }: { isKh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const mixTitleId = `ff-asph-mix-t-${uid}`;
+  // Donut chart: 8% bitumen / 92% aggregate (typical mid-range)
+  const BITUMEN = 8;
+  const AGGREGATE = 100 - BITUMEN;
+  const R = 70, C = 2 * Math.PI * R;
+  const bitumenLen = (BITUMEN / 100) * C;
+
+  return (
+    <SteelCard className="p-5 sm:p-6">
+      <CardHeader
+        icon={Layers}
+        titleEn="The Recipe — a road is not just oil"
+        titleKh="រូបមន្ត — ផ្លូវមួយមិនមែនមានតែប្រេងទេ"
+        isKh={isKh}
+      />
+
+      <div className="grid lg:grid-cols-2 gap-6 items-start">
+        {/* Donut + labels */}
+        <div className="bg-stone-950 rounded-lg border border-stone-700 p-4">
+          <div className="flex items-center justify-center">
+            <svg viewBox="0 0 200 200" className="w-56 h-56" role="img" aria-labelledby={mixTitleId}>
+              <title id={mixTitleId}>{isKh ? "សមាសភាពនៃល្បាយកៅស៊ូ" : "Composition of the asphalt mix"}</title>
+              {/* aggregate (large slice) */}
+              <circle cx="100" cy="100" r={R} fill="none" stroke="#a8a29e" strokeWidth="28" />
+              {/* bitumen (small slice) */}
+              <circle
+                cx="100" cy="100" r={R}
+                fill="none"
+                stroke="#fbbf24"
+                strokeWidth="28"
+                strokeDasharray={`${bitumenLen} ${C - bitumenLen}`}
+                strokeDashoffset={C / 4}
+                transform="rotate(-90 100 100)"
+              />
+              <text x="100" y="96" textAnchor="middle" fontSize="18" fontWeight="800" fill="#fbbf24" fontFamily={isKh ? "inherit" : "sans-serif"}>
+                {isKh ? "ផ្លូវ" : "ROAD"}
+              </text>
+              <text x="100" y="116" textAnchor="middle" fontSize="10" fill="#a8a29e">
+                {isKh ? "ល្បាយពេញ" : "by weight"}
+              </text>
+            </svg>
+          </div>
+
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center gap-3 bg-stone-900/70 border border-amber-500/40 rounded-lg p-3">
+              <span className="w-4 h-4 rounded-sm bg-amber-400 flex-shrink-0" />
+              <div className="flex-1">
+                <div className={`text-stone-100 text-sm font-bold ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "ប៊ីទុយម៉ែន (កាវចង)" : "Bitumen — the binder / glue"}
+                </div>
+                <div className="text-xs text-stone-400">5–10%</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-stone-900/70 border border-stone-600 rounded-lg p-3">
+              <span className="w-4 h-4 rounded-sm bg-stone-400 flex-shrink-0" />
+              <div className="flex-1">
+                <div className={`text-stone-100 text-sm font-bold ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "សារធាតុរឹង (ថ្មកំទេច ក្រួស ខ្សាច់)" : "Aggregate — crushed stone, gravel, sand"}
+                </div>
+                <div className="text-xs text-stone-400">90–95%</div>
+              </div>
+            </div>
+            <p className={`text-xs text-stone-400 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+              {isKh
+                ? "ប៊ីទុយម៉ែនគ្រាន់តែជាកាវ — រឿងធំបំផុតនៅក្រោមកង់របស់អ្នក គឺថ្ម។"
+                : "The bitumen is just the glue. The thing actually under your wheels is rock."}
+            </p>
+          </div>
+        </div>
+
+        {/* Process steps */}
+        <div className="space-y-3">
+          <div className={`text-xs uppercase tracking-widest text-yellow-400/90 font-bold ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+            {isKh ? "ដំណើរការចាក់ផ្លូវ" : "How a road is laid"}
+          </div>
+
+          {[
+            {
+              icon: Thermometer,
+              titleEn: "1. Heat the mix",
+              titleKh: "១. ដុតល្បាយ",
+              bodyEn: "Bitumen and aggregate are heated together to about 150 °C in a mixing plant. At this temperature the bitumen flows like thick honey and coats every stone.",
+              bodyKh: "ប៊ីទុយម៉ែន និងសារធាតុរឹងត្រូវបានដុតរួមគ្នាដល់ប្រហែល ១៥០ °C នៅរោងផលិត។ នៅសីតុណ្ហភាពនេះ ប៊ីទុយម៉ែនហូរដូចទឹកឃ្មុំក្រាស់ ហើយបិទគ្រប់គ្រាប់ថ្ម។",
+            },
+            {
+              icon: Truck,
+              titleEn: "2. Spread it hot",
+              titleKh: "២. ចាក់វាពេលក្ដៅ",
+              bodyEn: "A paver truck dumps the steaming mix and a screed pulls it flat behind it — a few centimetres thick across the full lane width.",
+              bodyKh: "ឡានចាក់ផ្លូវចាក់ល្បាយក្ដៅ ហើយបន្ទះទាញនៅខាងក្រោយវាធ្វើឲ្យរាបស្មើ — ប្រហែលពីរបីសង់ទីម៉ែត្រក្រាស់ពេញទទឹងគន្លង។",
+            },
+            {
+              icon: Hammer,
+              titleEn: "3. Compact with rollers",
+              titleKh: "៣. ច្របាច់ដោយរ៉ូល័រ",
+              bodyEn: "Heavy steel rollers pass over the hot surface again and again, squeezing out the air. The road cools and locks the stones together — strong enough to carry a 40-tonne truck.",
+              bodyKh: "រ៉ូល័រដែកធ្ងន់ៗរំកិលលើផ្ទៃក្ដៅជាច្រើនលើក រុញខ្យល់ចេញ។ ផ្លូវត្រជាក់ និងចាក់សោថ្មទាំងអស់ឲ្យជាប់គ្នា — រឹងមាំល្មមផ្ទុកឡានធុនធ្ងន់ ៤០ តោន។",
+            },
+          ].map(({ icon: Icon, titleEn, titleKh, bodyEn, bodyKh }) => (
+            <div key={titleEn} className="flex gap-3 bg-stone-900/70 rounded-lg border border-stone-700 p-3">
+              <div className="w-9 h-9 rounded-lg bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 flex items-center justify-center flex-shrink-0">
+                <Icon className="w-4 h-4" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className={`text-stone-100 text-sm font-bold mb-0.5 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? titleKh : titleEn}
+                </div>
+                <div className={`text-xs text-stone-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh ? bodyKh : bodyEn}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Roller animation */}
+          <div className="bg-stone-950 rounded-lg border border-stone-700 p-3 overflow-hidden relative">
+            <svg viewBox="0 0 300 70" className="w-full h-12 block" role="img" aria-label={isKh ? "រ៉ូល័រកំពុងច្របាច់ផ្លូវ" : "Roller compacting fresh asphalt"}>
+              {/* fresh asphalt strip */}
+              <rect x="0" y="40" width="300" height="22" fill="#27272a" />
+              <rect x="0" y="40" width="300" height="2"  fill="#3f3f46" />
+              {/* yellow caution dashes */}
+              {Array.from({ length: 10 }).map((_, i) => (
+                <rect key={i} x={10 + i * 30} y={50} width={14} height={3} fill="#fbbf24" opacity="0.7" />
+              ))}
+              {/* roller */}
+              <g className="ff-roll">
+                <circle cx="40" cy="36" r="20" fill="#1c1917" stroke="#fbbf24" strokeWidth="1.5" />
+                <circle cx="40" cy="36" r="14" fill="none" stroke="#57534e" strokeWidth="1" />
+                <line x1="40" y1="22" x2="40" y2="50" stroke="#57534e" strokeWidth="1" className="ff-spin-slow" style={{ transformOrigin: "40px 36px" }} />
+                <rect x="20" y="6" width="40" height="14" fill="#fbbf24" rx="2" />
+                <rect x="22" y="8" width="36" height="10" fill="#1c1917" rx="1" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5c. Global Roadway Dashboard
+// ════════════════════════════════════════════════════════════════════════════
+
+function RoadwayDashboard({ isKh }: { isKh: boolean }) {
+  const uid = useId().replace(/:/g, "");
+  const equatorTitleId = `ff-equator-t-${uid}`;
+  const EARTH_CIRC_KM = 40075;
+  const TOTAL_ROAD_KM = 64_000_000;
+  const wraps = Math.round(TOTAL_ROAD_KM / EARTH_CIRC_KM); // ~1597
+
+  return (
+    <SteelCard className="p-5 sm:p-6 ff-asphalt-surface">
+      <CardHeader
+        icon={Globe2}
+        titleEn="Global Roadway Dashboard"
+        titleKh="ផ្ទាំងព័ត៌មានផ្លូវសាកល"
+        isKh={isKh}
+      />
+
+      <div className="grid sm:grid-cols-3 gap-3 mb-5">
+        {/* Stat 1: total km */}
+        <div className="bg-stone-950 rounded-lg border-2 border-yellow-400/50 p-4 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-yellow-400/5 rounded-full blur-xl" />
+          <div className={`text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1 ${isKh ? "font-khmer tracking-normal normal-case text-xs" : ""}`}>
+            {isKh ? "ផ្លូវសាកលសរុប" : "Total Global Roads"}
+          </div>
+          <div className="font-display font-black text-3xl sm:text-4xl text-stone-50 tabular-nums leading-none">
+            64M
+          </div>
+          <div className={`text-xs text-stone-400 mt-1 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "គីឡូម៉ែត្រ (~៤០ លានម៉ាយ)" : "kilometres (~40 million miles)"}
+          </div>
+          <Route className="absolute bottom-2 right-2 w-7 h-7 text-yellow-400/20" />
+        </div>
+
+        {/* Stat 2: equator wraps */}
+        <div className="bg-stone-950 rounded-lg border-2 border-yellow-400/50 p-4 relative overflow-hidden">
+          <div className={`text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1 ${isKh ? "font-khmer tracking-normal normal-case text-xs" : ""}`}>
+            {isKh ? "រុំជុំវិញខ្សែអេក្វាទ័រ" : "Equator wraps"}
+          </div>
+          <div className="font-display font-black text-3xl sm:text-4xl text-stone-50 tabular-nums leading-none">
+            ~1,600×
+          </div>
+          <div className={`text-xs text-stone-400 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? "ខ្សែអេក្វាទ័រ = ៤០.០៧៥ គម" : "equator ≈ 40,075 km"}
+          </div>
+          <Globe2 className="absolute bottom-2 right-2 w-7 h-7 text-yellow-400/20" />
+        </div>
+
+        {/* Stat 3: circulatory metaphor */}
+        <div className="bg-stone-950 rounded-lg border-2 border-yellow-400/50 p-4 relative overflow-hidden">
+          <div className={`text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-1 ${isKh ? "font-khmer tracking-normal normal-case text-xs" : ""}`}>
+            {isKh ? "ប្រព័ន្ធ​ឈាមរត់" : "Circulatory system"}
+          </div>
+          <div className={`font-display font-black text-2xl sm:text-3xl text-stone-50 leading-tight ${isKh ? "font-khmer text-xl" : ""}`}>
+            {isKh ? "នៃអរិយធម៌" : "of civilisation"}
+          </div>
+          <div className={`text-xs text-stone-400 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? "អាហារ · ឱសថ · មនុស្ស" : "food · medicine · people"}
+          </div>
+          <Heart className="absolute bottom-2 right-2 w-7 h-7 text-red-400/30 ff-pulse" />
+        </div>
+      </div>
+
+      {/* Equator visual */}
+      <div className="bg-stone-950 rounded-lg border border-stone-700 p-4 mb-4">
+        <svg viewBox="0 0 600 140" className="w-full h-auto block" role="img" aria-labelledby={equatorTitleId}>
+          <title id={equatorTitleId}>{isKh ? "ផ្លូវរុំជុំវិញផែនដី ១.៦០០ ដង" : "Roads wrap the Earth's equator about 1,600 times"}</title>
+          {/* earth */}
+          <circle cx="90" cy="70" r="48" fill="#1e3a8a" />
+          <ellipse cx="90" cy="70" rx="48" ry="6" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+          <path d="M 60 50 Q 80 45 100 55 T 130 60 M 65 90 Q 90 85 115 92" stroke="#22c55e" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.85" />
+          <text x="90" y="135" textAnchor="middle" fontSize="10" fill="#a8a29e" fontFamily={isKh ? "inherit" : "sans-serif"}>
+            {isKh ? "ផែនដី" : "Earth"}
+          </text>
+
+          {/* coiled "rope" of road wrapping around — represented as nested ellipses */}
+          <g transform="translate(330,70)">
+            {Array.from({ length: 18 }).map((_, i) => (
+              <ellipse
+                key={i}
+                cx="0"
+                cy={-30 + i * 4}
+                rx={120 - i * 1.5}
+                ry={5 - i * 0.15}
+                fill="none"
+                stroke="#fbbf24"
+                strokeWidth="0.8"
+                opacity={0.25 + (i / 18) * 0.5}
+              />
+            ))}
+            <text x="0" y={-50} textAnchor="middle" fontSize="11" fontWeight="800" fill="#fbbf24" fontFamily={isKh ? "inherit" : "sans-serif"}>
+              {isKh ? "៦៤ លានគីឡូម៉ែត្រនៃកៅស៊ូ" : "64,000,000 km of asphalt"}
+            </text>
+            <text x="0" y={62} textAnchor="middle" fontSize="9" fill="#a8a29e">
+              {isKh ? "≈ ១.៦០០ ជុំ" : "≈ 1,600 wraps"}
+            </text>
+          </g>
+
+          {/* connector line */}
+          <line x1="138" y1="70" x2="200" y2="70" stroke="#fbbf24" strokeDasharray="4 3" strokeWidth="1" />
+        </svg>
+      </div>
+
+      <div className={`flex items-start gap-2 text-sm text-stone-200 bg-stone-900/70 border-l-4 border-red-400 rounded-r-lg p-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        <Heart className="w-4 h-4 mt-0.5 flex-shrink-0 text-red-400" />
+        <span>
+          {isKh
+            ? "ផ្លូវកៅស៊ូទាំង ៦៤ លានគីឡូម៉ែត្រនេះ គឺជា ប្រព័ន្ធឈាមរត់នៃអរិយធម៌មនុស្ស។ ពួកវាអនុញ្ញាតឲ្យអាហារទៅដល់ទីផ្សារ ឱសថទៅដល់មន្ទីរពេទ្យ និងសិស្សទៅដល់សាលា។ បើគ្មានកាវធ្ងន់ដែលដួលនៅបាតប៉មចម្រាញ់ ពិភពលោកសម័យទំនើបនឹងបាត់បង់ផ្លូវរត់ត្រឡប់របស់ខ្លួន។"
+            : "These 64 million kilometres of asphalt are the circulatory system of human civilisation. They let food reach markets, medicine reach hospitals, and students reach school. Without the heavy glue that drips out of the bottom of the refinery tower, the modern world loses its arteries."}
+        </span>
+      </div>
+    </SteelCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 //  Scoped styles
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -1228,8 +1602,25 @@ function ScopedStyles() {
       }
       .ff-flicker { animation: ff-flicker-kf 0.6s ease-in-out infinite; transform-origin: 50% 100%; }
 
+      /* Asphalt road-surface texture */
+      .ff-asphalt-surface {
+        background-color: #1c1917;
+        background-image:
+          radial-gradient(rgba(168,162,158,0.10) 1px, transparent 1.4px),
+          radial-gradient(rgba(120,113,108,0.08) 1px, transparent 1.4px),
+          linear-gradient(180deg, #1c1917 0%, #292524 100%);
+        background-size: 18px 18px, 11px 11px, 100% 100%;
+        background-position: 0 0, 6px 7px, 0 0;
+      }
+
+      @keyframes ff-roll-kf {
+        0%   { transform: translateX(-10px); }
+        100% { transform: translateX(260px); }
+      }
+      .ff-roll { animation: ff-roll-kf 6s linear infinite; }
+
       @media (prefers-reduced-motion: reduce) {
-        .ff-float, .ff-spin-slow, .ff-pulse, .ff-pulse-fast, .ff-flicker {
+        .ff-float, .ff-spin-slow, .ff-pulse, .ff-pulse-fast, .ff-flicker, .ff-roll {
           animation: none !important;
         }
       }
