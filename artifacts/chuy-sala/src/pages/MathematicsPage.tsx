@@ -143,6 +143,25 @@ export default function MathematicsPage() {
         <IntegralCard isKh={isKh} />
       </Section>
 
+      {/* ── 5. Sequences & Series ────────────────────────────────────── */}
+      <Section
+        id="sequences-series"
+        eyebrowEn="05 · Infinity"
+        eyebrowKh="០៥ · អនន្ត"
+        titleEn="Sequences & Series — the infinite staircase"
+        titleKh="លំដាប់ និងស៊េរី — ជណ្តើរអនន្ត"
+        khTerm="លំដាប់ និងស៊េរី"
+        descEn={
+          "Two ideas that look almost identical but behave very differently. A sequence is just a list of numbers; a series is what you get when you add them all up. Sometimes that infinite sum surprisingly settles on a finite answer — and sometimes it grows forever, even when each new term is tiny."
+        }
+        descKh="គំនិតពីរ ដែលមើលទៅស្រដៀងគ្នាស្ទើរទាំងស្រុង ប៉ុន្តែធ្វើអាកប្បកិរិយា ខុសគ្នាខ្លាំង។ លំដាប់ គ្រាន់តែជាបញ្ជីលេខ ប៉ុណ្ណោះ; ស៊េរី គឺជាអ្វីដែលអ្នកទទួលបាន ពេលអ្នកបូកលេខទាំងនោះទាំងអស់។ ពេលខ្លះផលបូកអនន្តនោះ ដោយគួរឱ្យភ្ញាក់ផ្អើល ឈរនៅលើចម្លើយកំណត់ — ហើយពេលខ្លះវាកើនរហូតគ្មានដែនកំណត់ ទោះបីតួនីមួយៗ ក្លាយជាតូចបំផុតក៏ដោយ។"
+        isKh={isKh}
+      >
+        <SequenceVsSeriesCard isKh={isKh} />
+        <ZenoParadoxCard isKh={isKh} />
+        <HarmonicTrapCard isKh={isKh} />
+      </Section>
+
       {/* ── Closing ──────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-600 text-sm italic">
         <span className={isKh ? "font-khmer not-italic" : "font-serif"}>
@@ -192,9 +211,16 @@ function Section({
   );
 }
 
-function PaperCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function PaperCard({
+  children,
+  className = "",
+  ...rest
+}: { children: React.ReactNode; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`bg-white/90 backdrop-blur-sm rounded-2xl border border-blue-200/70 shadow-[0_2px_24px_-12px_rgba(30,64,175,0.35)] ${className}`}>
+    <div
+      {...rest}
+      className={`bg-white/90 backdrop-blur-sm rounded-2xl border border-blue-200/70 shadow-[0_2px_24px_-12px_rgba(30,64,175,0.35)] ${className}`}
+    >
       {children}
     </div>
   );
@@ -1409,6 +1435,389 @@ function IntegralCard({ isKh }: { isKh: boolean }) {
             ? "ចំណាំ៖ derivative នៃចម្ងាយផ្ដល់ឲ្យអ្នកនូវល្បឿន ; integral នៃល្បឿនផ្ដល់ឲ្យអ្នកនូវចម្ងាយ។ វាគឺជា Fundamental Theorem of Calculus — ប្រតិបត្តិការទាំងពីរគឺជាមុខងារត្រឡប់នៃគ្នាទៅវិញទៅមក។"
             : "Notice: the derivative of distance gives you speed; the integral of speed gives you distance back. That's the Fundamental Theorem of Calculus — the two operations are inverses of each other."}
         </span>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5a. Sequences vs Series — the difference
+// ════════════════════════════════════════════════════════════════════════════
+
+function Frac({ n, d }: { n: React.ReactNode; d: React.ReactNode }) {
+  return (
+    <span className="inline-flex flex-col items-center align-middle leading-none mx-0.5 font-serif">
+      <span className="text-[0.78em] px-1">{n}</span>
+      <span className="border-t border-current w-full" />
+      <span className="text-[0.78em] px-1">{d}</span>
+    </span>
+  );
+}
+
+function SequenceVsSeriesCard({ isKh }: { isKh: boolean }) {
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="sequence-vs-series">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border border-blue-300 flex items-center justify-center flex-shrink-0">
+          <Sigma className="w-5 h-5 text-blue-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "លំដាប់ និងស៊េរី — តើខុសគ្នាដូចម្ដេច?" : "Sequence vs Series — what's the difference?"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ដូចគ្នានឹងលេខទាំងនោះ — ប៉ុន្តែសញ្ញារវាងពួកវា ផ្លាស់ប្តូរអ្វីៗគ្រប់យ៉ាង។ សញ្ញាក្បៀស (,) ផ្ដល់ឱ្យអ្នកនូវ លំដាប់។ សញ្ញាបូក (+) ផ្ដល់ឱ្យអ្នកនូវ ស៊េរី។"
+              : "Same numbers — but the symbols between them change everything. Commas (,) give you a sequence. Plus signs (+) give you a series."}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Sequence */}
+        <div className="rounded-xl border border-blue-200 bg-blue-50/40 p-5" data-testid="sequence-panel">
+          <div className={`text-[10px] uppercase tracking-widest font-bold text-blue-700 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+            {isKh ? "លំដាប់" : "Sequence · លំដាប់"}
+          </div>
+          <div className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "បញ្ជីលេខ ដែលបំបែកដោយសញ្ញាក្បៀស ហើយធ្វើតាមច្បាប់មួយ។"
+              : "A comma-separated list of numbers that follows a rule."}
+          </div>
+          <div className="rounded-lg bg-white border border-blue-200 px-4 py-4 text-center font-serif text-xl text-slate-900">
+            1<span className="text-blue-700 font-bold">,</span>{" "}
+            <Frac n="1" d="2" /><span className="text-blue-700 font-bold">,</span>{" "}
+            <Frac n="1" d="4" /><span className="text-blue-700 font-bold">,</span>{" "}
+            <Frac n="1" d="8" /><span className="text-blue-700 font-bold">,</span>{" "}
+            <span className="italic text-slate-600">…</span>
+          </div>
+          <div className={`mt-3 text-xs text-slate-600 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>ច្បាប់៖ តួនីមួយៗគឺ <I>a</I><sub>n</sub> = <Frac n="1" d={<>2<sup>n−1</sup></>} /> — ពាក់កណ្ដាលនៃតួមុន។</>
+            ) : (
+              <>Rule: each term is <I>a</I><sub>n</sub> = <Frac n="1" d={<>2<sup>n−1</sup></>} /> — half of the one before.</>
+            )}
+          </div>
+        </div>
+
+        {/* Series */}
+        <div className="rounded-xl border border-rose-200 bg-rose-50/40 p-5" data-testid="series-panel">
+          <div className={`text-[10px] uppercase tracking-widest font-bold text-rose-700 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+            {isKh ? "ស៊េរី" : "Series · ស៊េរី"}
+          </div>
+          <div className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "អ្វីដែលកើតឡើង ពេលអ្នកបូកលេខទាំងអស់ ក្នុងបញ្ជីរួមគ្នា។"
+              : "What happens when you add all the numbers in the list together."}
+          </div>
+          <div className="rounded-lg bg-white border border-rose-200 px-4 py-4 text-center font-serif text-xl text-slate-900">
+            1<span className="text-rose-700 font-bold"> + </span>
+            <Frac n="1" d="2" /><span className="text-rose-700 font-bold"> + </span>
+            <Frac n="1" d="4" /><span className="text-rose-700 font-bold"> + </span>
+            <Frac n="1" d="8" /><span className="text-rose-700 font-bold"> + </span>
+            <span className="italic text-slate-600">…</span>
+          </div>
+          <div className={`mt-3 text-xs text-slate-600 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>សរសេរក្នុងសញ្ញា Σ៖ <span className="font-serif italic text-base text-stone-900">∑<sub>n=0</sub><sup>∞</sup> <Frac n="1" d={<>2<sup>n</sup></>} /></span> — សួរសំណួរ៖ តើផលបូកនេះ មានចម្លើយកំណត់ដែរឬទេ?</>
+            ) : (
+              <>Written with sigma: <span className="font-serif italic text-base text-stone-900">∑<sub>n=0</sub><sup>∞</sup> <Frac n="1" d={<>2<sup>n</sup></>} /></span> — asks: does this sum settle on a finite answer?</>
+            )}
+          </div>
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5b. Zeno's Paradox — convergent geometric series
+// ════════════════════════════════════════════════════════════════════════════
+
+function ZenoParadoxCard({ isKh }: { isKh: boolean }) {
+  const [steps, setSteps] = useState(4);
+  const partial = 1 - Math.pow(0.5, steps);
+
+  // Walk to the wall: each step is half of the remaining distance.
+  const W = 480, H = 150;
+  const padX = 30;
+  const wallX = W - padX;
+  const startX = padX;
+  const length = wallX - startX;
+  // Person stands at startX + length * partial
+  const personX = startX + length * partial;
+
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="zeno-paradox">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center flex-shrink-0">
+          <TrendingUp className="w-5 h-5 text-emerald-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ទ្រឹស្ដីកាលវិភាគអនន្តរបស់ Zeno — ការរួម" : "Zeno's Paradox — convergence"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>តើអ្នកអាចបូកលេខអនន្តចំនួន ដើម្បីទទួលបានចម្លើយកំណត់ បានដោយរបៀបណា? ស្រមៃថា អ្នកដើរទៅជញ្ជាំង។ ដំបូង អ្នកដើរកន្លះផ្លូវ (<Frac n="1" d="2" />)។ បន្ទាប់មក កន្លះនៃផ្លូវដែលនៅសល់ (<Frac n="1" d="4" />)។ បន្ទាប់មក កន្លះម្ដងទៀត (<Frac n="1" d="8" />)។ អ្នកនឹងធ្វើការបោះជំហានចំនួនអនន្ត — ប៉ុន្តែ អ្នកនឹងមិនដើរលើសពីផ្លូវសរុប (<I>1</I>) ឡើយ។</>
+            ) : (
+              <>How can you add infinitely many numbers and still get a finite total? Imagine walking toward a wall. First you walk half the distance (<Frac n="1" d="2" />). Then half of what remains (<Frac n="1" d="4" />). Then half again (<Frac n="1" d="8" />). You take infinitely many steps — but you never walk further than the total distance (<I>1</I>).</>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
+        {/* Walking-toward-wall visual */}
+        <div className="bg-white rounded-xl border border-blue-200 p-3" data-testid="zeno-walk">
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block">
+            {/* Ground */}
+            <line x1={startX - 6} y1="105" x2={wallX + 6} y2="105" stroke="#0f172a" strokeWidth="1.5" />
+
+            {/* Wall */}
+            <rect x={wallX} y="40" width="14" height="65" fill="#475569" />
+            <text x={wallX + 7} y="125" textAnchor="middle" fontSize="10" fill="#475569" fontStyle="italic" fontFamily="serif">
+              <tspan className={isKh ? "font-khmer" : "italic"}>{isKh ? "ជញ្ជាំង" : "wall"}</tspan>
+            </text>
+
+            {/* Distance bracket */}
+            <line x1={startX} y1="20" x2={wallX} y2="20" stroke="#94a3b8" strokeWidth="1" />
+            <line x1={startX} y1="14" x2={startX} y2="26" stroke="#94a3b8" strokeWidth="1" />
+            <line x1={wallX}  y1="14" x2={wallX}  y2="26" stroke="#94a3b8" strokeWidth="1" />
+            <text x={(startX + wallX) / 2} y="13" textAnchor="middle" fontSize="11" fill="#475569" fontStyle="italic" fontFamily="serif">
+              <tspan className={isKh ? "font-khmer" : "italic"}>{isKh ? "ចម្ងាយ = ១" : "distance = 1"}</tspan>
+            </text>
+
+            {/* Each step bracket */}
+            {Array.from({ length: Math.min(steps, 6) }).map((_, i) => {
+              const startFrac = 1 - Math.pow(0.5, i);
+              const endFrac   = 1 - Math.pow(0.5, i + 1);
+              const x1 = startX + length * startFrac;
+              const x2 = startX + length * endFrac;
+              const colors = ["#1d4ed8", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2"];
+              const c = colors[i % colors.length];
+              const y = 138;
+              return (
+                <g key={i}>
+                  <line x1={x1} y1={y} x2={x2} y2={y} stroke={c} strokeWidth="2.5" />
+                  <line x1={x1} y1={y - 4} x2={x1} y2={y + 4} stroke={c} strokeWidth="2.5" />
+                  <line x1={x2} y1={y - 4} x2={x2} y2={y + 4} stroke={c} strokeWidth="2.5" />
+                </g>
+              );
+            })}
+
+            {/* Person — small stick figure */}
+            <g transform={`translate(${personX} 105)`} style={{ transition: "transform 350ms ease-out" }}>
+              <circle cx="0" cy="-30" r="6" fill="#0f172a" />
+              <line x1="0" y1="-24" x2="0" y2="-8" stroke="#0f172a" strokeWidth="2" />
+              <line x1="0" y1="-18" x2="-7" y2="-12" stroke="#0f172a" strokeWidth="2" />
+              <line x1="0" y1="-18" x2="7"  y2="-12" stroke="#0f172a" strokeWidth="2" />
+              <line x1="0" y1="-8"  x2="-5" y2="0"   stroke="#0f172a" strokeWidth="2" />
+              <line x1="0" y1="-8"  x2="5"  y2="0"   stroke="#0f172a" strokeWidth="2" />
+            </g>
+
+            {/* Position marker */}
+            <line x1={personX} y1="40" x2={personX} y2="105" stroke="#dc2626" strokeWidth="1" strokeDasharray="3 3" />
+          </svg>
+        </div>
+
+        {/* Stats + slider */}
+        <div className="space-y-3">
+          <CalcStat label={isKh ? "ចំនួនជំហាន" : "Steps taken"} value={`${steps}`} colour="slate" />
+          <CalcStat
+            label={isKh ? "ផលបូករហូតមកដល់" : "Sum so far"}
+            value={partial.toFixed(steps >= 6 ? 6 : 4)}
+            colour="blue"
+          />
+          <CalcStat
+            label={isKh ? "ដែនកំណត់ (n→∞)" : "Limit (n→∞)"}
+            value="1"
+            colour="rose"
+          />
+
+          <div>
+            <label className={`text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "បន្ថែមជំហាន" : "Add more steps"}
+            </label>
+            <input
+              type="range"
+              min={1} max={20} step={1}
+              value={steps}
+              onChange={(e) => setSteps(parseInt(e.target.value, 10))}
+              className="w-full accent-rose-600"
+              aria-label="Number of steps"
+              data-testid="zeno-steps-slider"
+            />
+          </div>
+
+          <div className="text-xs text-slate-700 italic font-serif p-3 bg-emerald-50/60 rounded-lg border border-emerald-200" data-testid="zeno-formula">
+            <div className="text-center text-base mb-1">
+              ∑<sub>n=1</sub><sup>∞</sup> <Frac n="1" d={<>2<sup>n</sup></>} /> = 1
+            </div>
+            <div className={`text-[11px] text-slate-600 not-italic text-center ${isKh ? "font-khmer leading-loose" : ""}`}>
+              {isKh ? "ផលបូករបស់ស៊េរី រួមមកជិតលេខ ១ ប៉ុន្តែមិនលើសពីវា" : "the sum converges toward 1 but never overshoots it"}
+            </div>
+          </div>
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5c. Harmonic Series — divergence trap
+// ════════════════════════════════════════════════════════════════════════════
+
+function HarmonicTrapCard({ isKh }: { isKh: boolean }) {
+  const [terms, setTerms] = useState(10);
+
+  const partial = useMemo(() => {
+    let s = 0;
+    for (let k = 1; k <= terms; k++) s += 1 / k;
+    return s;
+  }, [terms]);
+
+  // For a feel of "how long to reach 10/20/100", show milestones
+  const MILESTONES = [
+    { sum: 4,   terms: 31,                en: "to reach 4",   kh: "ដើម្បីឱ្យបាន ៤" },
+    { sum: 10,  terms: 12_367,            en: "to reach 10",  kh: "ដើម្បីឱ្យបាន ១០" },
+    { sum: 20,  terms: 272_400_600,       en: "to reach 20",  kh: "ដើម្បីឱ្យបាន ២០" },
+    { sum: 100, terms: 1.5e43,            en: "to reach 100", kh: "ដើម្បីឱ្យបាន ១០០" },
+  ];
+
+  const fmt = (n: number) =>
+    n >= 1e6 ? n.toExponential(1).replace("e+", " × 10^").replace("^0", "^") : n.toLocaleString();
+
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="harmonic-trap">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center flex-shrink-0">
+          <Mountain className="w-5 h-5 text-amber-700" />
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ស៊េរីអាម៉ូនិក — អន្ទាក់នៃអនន្ត" : "The Harmonic Series — the trap of infinity"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh ? (
+              <>មើលទៅស្រដៀងនឹងស៊េរីរបស់ Zeno ខ្លាំង — តួនីមួយៗ ក្លាយជាតូចជាងមុន។ ប៉ុន្តែលេខទាំងនេះ មិនតូចចុះ លឿនល្មមនោះទេ។ ស៊េរីនេះ ព្រែក ទៅអនន្ត — ផលបូករបស់វា កើនឡើងគ្មានដែនកំណត់ ទោះបីយឺតយ៉ាងណាក៏ដោយ។</>
+            ) : (
+              <>Looks a lot like Zeno's series — each term is smaller than the last. But these numbers don't shrink fast enough. This series <em className="font-serif">diverges</em> to infinity — its sum grows without limit, however slowly.</>
+            )}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
+        {/* Sigma + first terms */}
+        <div className="bg-white rounded-xl border border-amber-200 p-5" data-testid="harmonic-formula">
+          <div className="text-center font-serif text-2xl text-slate-900 mb-3">
+            ∑<sub>n=1</sub><sup>∞</sup> <Frac n="1" d="n" />{" "}
+            <span className="text-slate-500">=</span> 1
+            <span className="text-amber-700 font-bold"> + </span>
+            <Frac n="1" d="2" /><span className="text-amber-700 font-bold"> + </span>
+            <Frac n="1" d="3" /><span className="text-amber-700 font-bold"> + </span>
+            <Frac n="1" d="4" /><span className="text-amber-700 font-bold"> + </span>
+            <Frac n="1" d="5" /><span className="text-amber-700 font-bold"> + </span>
+            <span className="italic text-slate-600">…</span>{" "}
+            <span className="text-rose-600">→ ∞</span>
+          </div>
+
+          <div className={`mt-4 text-xs text-slate-600 italic font-serif text-center ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+            {isKh
+              ? "តួនីមួយៗតូចជាងមុន — ប៉ុន្តែផលបូកនៅតែបន្តកើនឡើង រហូតគ្មានទីបញ្ចប់។"
+              : "Each term is smaller than the last — but the sum keeps creeping upward, forever."}
+          </div>
+
+          {/* Milestone table */}
+          <div className="mt-4 rounded-lg border border-amber-200 overflow-hidden">
+            <table className="w-full text-xs">
+              <thead className="bg-amber-50">
+                <tr>
+                  <th className={`text-left px-3 py-2 font-bold text-amber-900 ${isKh ? "font-khmer" : ""}`}>
+                    {isKh ? "ដើម្បីឱ្យផលបូក…" : "To reach a sum of…"}
+                  </th>
+                  <th className={`text-right px-3 py-2 font-bold text-amber-900 ${isKh ? "font-khmer" : ""}`}>
+                    {isKh ? "តួដែលត្រូវការ" : "terms needed"}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="font-serif">
+                {MILESTONES.map((m) => (
+                  <tr key={m.sum} className="border-t border-amber-100">
+                    <td className="px-3 py-1.5 text-slate-700">{m.sum}</td>
+                    <td className="px-3 py-1.5 text-right tabular-nums text-slate-900 font-bold">{fmt(m.terms)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className={`bg-amber-50/60 px-3 py-2 text-[11px] text-amber-900 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+              {isKh
+                ? "ចំណាំ៖ ដើម្បីឱ្យផលបូកកើនពី ៩៩ ទៅ ១០០ អ្នកត្រូវការតួរាប់លានពាន់លានដង បន្ថែមទៀត — ប៉ុន្តែវាបន្តទៅ ជានិច្ច។"
+                : "Note: going from a sum of 99 to 100 takes more terms than there are atoms in many galaxies — but it always gets there."}
+            </div>
+          </div>
+        </div>
+
+        {/* Live partial sum */}
+        <div className="space-y-3">
+          <CalcStat label={isKh ? "ចំនួនតួ (n)" : "Number of terms (n)"} value={`${terms}`} colour="slate" />
+          <CalcStat
+            label={isKh ? "ផលបូកផ្នែក H_n" : "Partial sum H_n"}
+            value={partial.toFixed(4)}
+            colour="rose"
+          />
+          <div>
+            <label className={`text-xs font-bold text-slate-500 uppercase tracking-wider mb-1 block ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+              {isKh ? "បន្ថែមតួ" : "Add more terms"}
+            </label>
+            <input
+              type="range"
+              min={1} max={1000} step={1}
+              value={terms}
+              onChange={(e) => setTerms(parseInt(e.target.value, 10))}
+              className="w-full accent-rose-600"
+              aria-label="Number of terms"
+              data-testid="harmonic-terms-slider"
+            />
+            <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+              <span>1</span><span>500</span><span>1000</span>
+            </div>
+          </div>
+          <div className={`text-xs text-slate-700 p-3 bg-rose-50/60 rounded-lg border border-rose-200 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ជម្រុញរហូត ១០០០ តួ — ផលបូកនៅតែស្ថិតក្នុងចន្លោះតែជា ៧.៥ ប៉ុណ្ណោះ! ការព្រែករបស់វា យឺតមែន ប៉ុន្តែមានពិត។"
+              : "Push it all the way to 1000 terms — the sum is still only about 7.5! Its divergence is achingly slow, but absolutely real."}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 rounded-xl border border-blue-200 bg-blue-50/40 p-4" data-testid="convergence-vs-divergence">
+        <div className={`text-xs uppercase font-bold tracking-widest text-blue-800 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+          {isKh ? "ការរួម ប្រឆាំងនឹង ការព្រែក" : "Convergence vs Divergence"}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div>
+            <div className={`font-bold text-emerald-800 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "ការរួម" : "Convergence — ការរួម"}
+            </div>
+            <div className={`text-slate-700 ${isKh ? "font-khmer leading-loose" : ""}`}>
+              {isKh
+                ? "ផលបូកគឺឈរនៅលើលេខកំណត់មួយ។ ឧ. Zeno → 1។"
+                : "The sum settles on a finite number. e.g. Zeno → 1."}
+            </div>
+          </div>
+          <div>
+            <div className={`font-bold text-rose-800 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "ការព្រែក" : "Divergence — ការព្រែក"}
+            </div>
+            <div className={`text-slate-700 ${isKh ? "font-khmer leading-loose" : ""}`}>
+              {isKh
+                ? "ផលបូកកើនឡើងគ្មានដែនកំណត់។ ឧ. ហាម៉ូនិក → ∞។"
+                : "The sum grows without limit. e.g. Harmonic → ∞."}
+            </div>
+          </div>
+        </div>
       </div>
     </PaperCard>
   );
