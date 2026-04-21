@@ -1,0 +1,29 @@
+"I want to add a new advanced module called 'Module 08: Analytical Chemistry (គីមីវិភាគ និងឧបករណ៍)' to the Chemistry hub. Please implement the following sections to explain complex laboratory machines simply:
+
+1. The 'Separation Race' (Chromatography - ក្រូម៉ាតូក្រាម):
+
+Explain the general concept of Chromatography: It is like a race through an obstacle course. Different molecules run at different speeds, allowing scientists to separate mixtures.
+
+Gas Chromatography (GC): Explain that the mixture is turned into a gas and blown through a long, microscopic tube. Smaller, lighter molecules reach the end first.
+
+High-Performance Liquid Chromatography (HPLC): Explain that the mixture is pushed through a tightly packed tube of sand-like particles using high-pressure liquids. Used heavily in medicine to test drug purity.
+
+Ion Chromatography (IC): Explain that this specifically separates electrically charged atoms (ions). Mention its real-world use in Cambodia: testing drinking water for toxic heavy metals or measuring salt levels.
+
+2. The 'Molecule Scale' (Mass Spectrometry - ម៉ាសស្ប៉ិចត្រូម៉ែត):
+
+Explain Mass Spectrometry (MS). Scientists hit a molecule with electrons to break it into pieces, then use magnets to weigh the pieces. By looking at the puzzle pieces, they can figure out what the original molecule was.
+
+3. The 'Magnetic Singer' (Nuclear Magnetic Resonance - NMR):
+
+Explain NMR (using the analogy of an MRI for molecules). Strong magnetic fields make specific atoms (like Hydrogen) 'sing' at specific radio frequencies. Scientists listen to the 'song' to draw a perfect 3D map of a molecule.
+
+4. UI & Routing:
+
+Create a new module card on the main Chemistry page labeled 'Module 08'. Include the tags: 'Chromatography', 'Mass Spec', 'NMR', 'Lab Tech'.
+
+Route the new page to /science/chemistry/analytical.
+
+Update the main Navigation Header to include this link under the 'Science' -> 'Chemistry Hub' dropdown.
+
+Use a 'High-Tech Laboratory' aesthetic: clean silvers, glowing neon blues, and data-graph elements. Ensure all technical terms are bilingual (English/Khmer)."

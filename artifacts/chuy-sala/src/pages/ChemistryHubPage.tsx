@@ -8,6 +8,7 @@ import {
   Hexagon,
   Gem,
   Sigma,
+  FlaskRound,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -189,6 +190,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/science/chemistry/analytical",
+    number: "08",
+    titleEn: "Analytical Chemistry",
+    titleKh: "គីមីវិភាគ និងឧបករណ៍",
+    blurbEn:
+      "Inside the modern lab — the four machines that can name a single molecule out of trillions: chromatography, mass spec, and NMR.",
+    blurbKh:
+      "ខាងក្នុងមន្ទីរពិសោធន៍ទំនើប — ឧបករណ៍ដែលអាចស្គាល់ឈ្មោះម៉ូលេគុលមួយ ក្នុងចំណោមរាប់ត្រីលាន៖ ក្រូម៉ាតូក្រាម ម៉ាសស្ប៉ិច និង NMR។",
+    topicsEn: ["Chromatography", "Mass Spec", "NMR", "Lab Tech"],
+    topicsKh: ["ក្រូម៉ាតូក្រាម", "ម៉ាសស្ប៉ិច", "NMR", "ឧបករណ៍មន្ទីរពិសោធន៍"],
+    icon: FlaskRound,
+    accent: {
+      bgFrom: "from-slate-900",
+      bgTo: "to-cyan-950",
+      border: "border-cyan-700",
+      chip: "bg-cyan-900/60 text-cyan-100",
+      iconBg: "bg-gradient-to-br from-slate-700 to-cyan-700",
+      btn: "bg-cyan-700",
+      btnHover: "hover:bg-cyan-800",
+      title: "text-cyan-50",
+    },
+  },
+  {
     href: "/chemistry/real-world",
     number: "04",
     titleEn: "Chemistry in the Real World",
@@ -249,8 +273,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Seven learning modules — from the tiniest atom to the physics and calculus behind every reaction. Pick where you want to start.",
-              "មុខវិជ្ជារៀនប្រាំពីរ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់រូបវិទ្យា និងកាល់គុលនៅពីក្រោយរាល់ប្រតិកម្ម។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Eight learning modules — from the tiniest atom to the lab instruments that name a single molecule out of trillions. Pick where you want to start.",
+              "មុខវិជ្ជារៀនប្រាំបី — ចាប់ពីអាតូមតូចបំផុត រហូតដល់ឧបករណ៍មន្ទីរពិសោធន៍ដែលស្គាល់ឈ្មោះម៉ូលេគុលមួយ ក្នុងចំណោមរាប់ត្រីលាន។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>
