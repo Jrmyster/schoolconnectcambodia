@@ -25,6 +25,7 @@ import { AuthProvider } from "@/context/AuthContext";
 // Default exports
 const OceanographyPage          = lazy(() => import("@/pages/OceanographyPage"));
 const WeatherPage               = lazy(() => import("@/pages/WeatherPage"));
+const SnowPage                  = lazy(() => import("@/pages/SnowPage").then(m => ({ default: m.SnowPage })));
 const QuantumLimitPage          = lazy(() => import("@/pages/QuantumLimitPage"));
 const MagnetsPage               = lazy(() => import("@/pages/MagnetsPage"));
 const HvacPage                  = lazy(() => import("@/pages/HvacPage"));
@@ -181,6 +182,7 @@ function Router() {
             <Route path="/space" component={SpacePage} />
             <Route path="/oceanography" component={OceanographyPage} />
             <Route path="/weather" component={WeatherPage} />
+            <Route path="/weather/snow" component={SnowPage} />
             <Route path="/quantum-limit" component={QuantumLimitPage} />
             <Route path="/magnets" component={MagnetsPage} />
             <Route path="/hvac" component={HvacPage} />

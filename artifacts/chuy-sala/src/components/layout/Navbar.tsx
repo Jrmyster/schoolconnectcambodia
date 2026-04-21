@@ -335,6 +335,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Trap CO₂ and watch the Earth glow red, crash a cold front into a warm one to make rain, build lightning inside a cloud, and meet hurricanes and tornadoes.",
         descKh: "ស្ទះ CO₂ ហើយមើលផែនដីចាំងពន្លឺក្រហម ប៉ះផ្ទៃខ្យល់ត្រជាក់ និងក្ដៅឱ្យកើតភ្លៀង សាងសង់រន្ទះក្នុងពពក និងស្គាល់ខ្យល់ព្យុះធំ និងខ្យល់ព្យុះក្រឡុក។",
       },
+      {
+        href: "/weather/snow",
+        labelEn: "Snow: The Frozen Clouds",
+        labelKh: "ព្រិល៖ ពពកដែលកក",
+        icon: Snowflake,
+        descEn: "Snow is not frozen rain — it is water vapour that turns straight into a six-sided ice crystal around a tiny dust seed, and falls only where the air stays below 0 °C.",
+        descKh: "ព្រិលមិនមែនជាភ្លៀងដែលកកទេ — វាគឺជាចំហាយទឹកដែលប្ដូរទៅជាគ្រីស្តាល់ទឹកកកមានជ្រុង ៦ ដោយផ្ទាល់ជុំវិញគ្រាប់ធូលីតូចមួយ ហើយធ្លាក់តែនៅកន្លែងដែលខ្យល់ស្ថិតក្រោម 0°C។",
+      },
     ],
   },
   {
