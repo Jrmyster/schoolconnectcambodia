@@ -30,6 +30,12 @@ import {
   X,
   HelpCircle,
   Search,
+  Radio,
+  RadioTower,
+  Mic,
+  Speaker,
+  AudioLines,
+  Waves,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1763,6 +1769,9 @@ export function ElectricalSafetyPage() {
           </p>
         </div>
       </section>
+
+      {/* ── Section 7: Invisible Wires — How Radios Work ─────────────────── */}
+      <RadioSection kh={kh} t={t} />
     </div>
   );
 }
@@ -1978,6 +1987,608 @@ function BookIcon() {
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Section 7: Invisible Wires — How Radios Work
+// Retro-futuristic broadcast aesthetic — oscilloscope glow on dark slate.
+// ─────────────────────────────────────────────────────────────────────────
+const SCOPE_BG: React.CSSProperties = {
+  backgroundColor: "#020617",
+  backgroundImage:
+    "linear-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px), " +
+    "linear-gradient(90deg, rgba(34, 197, 94, 0.06) 1px, transparent 1px)",
+  backgroundSize: "24px 24px",
+};
+
+const SCOPE_GREEN = "#22d3ee"; // cyan-cyan, oscilloscope cathode
+const BROADCAST_AMBER = "#fbbf24";
+
+function RadioSection({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <section
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14 my-8 rounded-3xl overflow-hidden border border-cyan-500/20 shadow-2xl"
+      style={SCOPE_BG}
+    >
+      {/* Scanline overlay for retro CRT feel */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(34,211,238,1) 0, rgba(34,211,238,1) 1px, transparent 1px, transparent 4px)",
+        }}
+      />
+
+      {/* Header */}
+      <header className="relative text-center mb-10">
+        <div className={`inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.3em] uppercase text-cyan-400/80 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          <span className="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+          <span>{t("ON AIR · Section 07", "កំពុងផ្សាយ · ផ្នែក ០៧")}</span>
+        </div>
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/15 border-2 border-cyan-400/60 text-cyan-300 mb-4 shadow-[0_0_24px_rgba(34,211,238,0.4)]">
+          <Radio className="w-8 h-8" />
+        </div>
+        <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-50 ${kh ? "font-khmer leading-snug" : "font-display"}`}>
+          {t("Invisible Wires — How Radios Work", "ខ្សែដែលមើលមិនឃើញ — របៀបដែលវិទ្យុដំណើរការ")}
+        </h2>
+        <p className={`mt-3 text-sm sm:text-base text-cyan-100/70 max-w-2xl mx-auto leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+          {t(
+            "There is no cable between the radio in your kitchen and the studio in Phnom Penh. So how does the music get there? Follow a single song from a microphone, into the air as an invisible wave, and back out of a speaker — at the speed of light.",
+            "គ្មានខ្សែភ្ជាប់រវាងវិទ្យុក្នុងផ្ទះបាយរបស់អ្នកនិងស្ទូឌីយ៉ូក្នុងភ្នំពេញឡើយ។ ដូច្នេះតើបទចម្រៀងធ្វើដំណើរទៅទីនោះយ៉ាងដូចម្តេច? តាមដានបទតែមួយពីមីក្រូហ្វូន ចូលទៅក្នុងខ្យល់ជារលកមើលមិនឃើញ ហើយចេញពីឧបករណ៍បំពងសំឡេងវិញ — ល្បឿនពន្លឺ។"
+          )}
+        </p>
+      </header>
+
+      {/* 7.1 — Anatomy of a Broadcast */}
+      <BroadcastChain kh={kh} t={t} />
+
+      {/* 7.2 — AM vs FM */}
+      <ModulationCompare kh={kh} t={t} />
+
+      {/* 7.3 — Channels & tuning */}
+      <ChannelsCard kh={kh} t={t} />
+    </section>
+  );
+}
+
+// ── 7.1 The Anatomy of a Broadcast ───────────────────────────────────────
+function BroadcastChain({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
+  const steps: {
+    n: string;
+    nameEn: string; nameKh: string;
+    roleEn: string; roleKh: string;
+    descEn: string; descKh: string;
+    icon: React.ComponentType<{ className?: string }>;
+    diagram: React.ReactNode;
+  }[] = [
+    {
+      n: "01",
+      nameEn: "Microphone",
+      nameKh: "មីក្រូហ្វូន",
+      roleEn: "Sound → Electrical signal",
+      roleKh: "សំឡេង → សញ្ញាអគ្គិសនី",
+      descEn: "Your voice pushes air. The air pushes a tiny diaphragm in the microphone, and a coil and magnet inside turn that motion into a wobbly electrical voltage — a perfect electrical copy of your voice.",
+      descKh: "សំឡេងរបស់អ្នករុញខ្យល់។ ខ្យល់រុញសន្លឹកតូចមួយក្នុងមីក្រូហ្វូន ហើយរង្វិលនិងមេដែកខាងក្នុងបំលែងចលនានោះទៅជាវ៉ុលអគ្គិសនីញ័រៗ — ច្បាប់ចម្លងអគ្គិសនីដ៏ល្អឥតខ្ចោះនៃសំឡេងរបស់អ្នក។",
+      icon: Mic,
+      diagram: <SoundToSignalSvg kh={kh} />,
+    },
+    {
+      n: "02",
+      nameEn: "Transmitter & Carrier Wave",
+      nameKh: "ឧបករណ៍បញ្ជូននិងរលកដឹកជញ្ជូន",
+      roleEn: "Audio signal × high-frequency wave",
+      roleKh: "សញ្ញាសំឡេង × រលកប្រេកង់ខ្ពស់",
+      descEn: "The slow audio voltage is too weak to travel far on its own. The transmitter mixes it with a steady, very fast 'carrier wave' (millions of vibrations per second). The audio rides on the carrier — like a passenger on a fast bus.",
+      descKh: "វ៉ុលសំឡេងយឺតខ្សោយពេកមិនអាចធ្វើដំណើរឆ្ងាយដោយខ្លួនឯងបានទេ។ ឧបករណ៍បញ្ជូនលាយវាជាមួយ 'រលកដឹកជញ្ជូន' លឿនៗថេរ (រាប់លានដងក្នុងមួយវិនាទី)។ សំឡេងជិះលើរលកដឹកជញ្ជូន — ដូចជាអ្នកដំណើរលើឡានក្រុងលឿន។",
+      icon: AudioLines,
+      diagram: <CarrierMixSvg kh={kh} />,
+    },
+    {
+      n: "03",
+      nameEn: "Antenna — Broadcast",
+      nameKh: "អង់តែន — ផ្សាយ",
+      roleEn: "Electricity → Electromagnetic wave",
+      roleKh: "អគ្គិសនី → រលកអេឡិចត្រូម៉ាញេទិច",
+      descEn: "The mixed signal is sent up a tall metal antenna. As the current wiggles up and down, it launches an invisible electromagnetic wave outward in every direction — travelling at the speed of light, ~300,000 km/s.",
+      descKh: "សញ្ញាដែលបានលាយត្រូវបានបញ្ជូនឡើងលើអង់តែនលោហៈខ្ពស់។ នៅពេលដែលចរន្តញ័រឡើងចុះ វាបាញ់រលកអេឡិចត្រូម៉ាញេទិចមើលមិនឃើញចេញគ្រប់ទិសដៅ — ធ្វើដំណើរល្បឿនពន្លឺ ~៣០០,០០០ គ.ម/វិនាទី។",
+      icon: RadioTower,
+      diagram: <AntennaBroadcastSvg kh={kh} />,
+    },
+    {
+      n: "04",
+      nameEn: "Receiver",
+      nameKh: "អ្នកទទួល",
+      roleEn: "Wave → Speaker → Sound",
+      roleKh: "រលក → ឧបករណ៍បំពង → សំឡេង",
+      descEn: "Your radio's antenna catches the wave. Inside, a circuit removes the carrier and keeps only the original audio voltage. That voltage drives a speaker — pushing air, recreating the song.",
+      descKh: "អង់តែននៃវិទ្យុរបស់អ្នកចាប់រលក។ ខាងក្នុង សៀគ្វីដកចេញរលកដឹកជញ្ជូន ហើយរក្សាទុកតែវ៉ុលសំឡេងដើម។ វ៉ុលនោះបញ្ជាឧបករណ៍បំពងសំឡេង — រុញខ្យល់ បង្កើតបទចម្រៀងឡើងវិញ។",
+      icon: Speaker,
+      diagram: <ReceiverSvg kh={kh} />,
+    },
+  ];
+
+  return (
+    <div className="relative mb-12">
+      <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-amber-300/80 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("Step-by-step · The anatomy of a broadcast", "មួយជំហាន-ម្តងៗ · កាយវិភាគនៃការផ្សាយ")}
+      </div>
+
+      <ol className="relative space-y-4">
+        {steps.map((s, i) => {
+          const Icon = s.icon;
+          const isLast = i === steps.length - 1;
+          return (
+            <li key={s.n} className="relative">
+              <article className="relative rounded-2xl border border-cyan-400/30 bg-slate-950/70 shadow-lg overflow-hidden">
+                <div className="grid md:grid-cols-[80px_minmax(0,1fr)_280px] gap-4 p-4 sm:p-5 items-center">
+                  {/* Step badge */}
+                  <div className="flex md:flex-col items-center gap-2 md:gap-1">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border-2 border-cyan-400/70 text-cyan-300 flex items-center justify-center shadow-[0_0_14px_rgba(34,211,238,0.35)] flex-shrink-0">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <div className="text-[10px] font-mono font-bold tracking-[0.25em] text-cyan-400/80">{s.n}</div>
+                  </div>
+                  {/* Text */}
+                  <div className="min-w-0">
+                    <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-amber-300/80 mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      {kh ? s.roleKh : s.roleEn}
+                    </div>
+                    <h3 className={`text-lg font-bold text-cyan-50 mb-1.5 ${kh ? "font-khmer" : ""}`}>
+                      {kh ? s.nameKh : s.nameEn}
+                    </h3>
+                    <p className={`text-sm text-cyan-100/80 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                      {kh ? s.descKh : s.descEn}
+                    </p>
+                  </div>
+                  {/* Mini-scope diagram */}
+                  <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-2.5 flex items-center justify-center min-h-[120px]">
+                    {s.diagram}
+                  </div>
+                </div>
+              </article>
+              {/* arrow connector */}
+              {!isLast && (
+                <div aria-hidden="true" className="flex justify-center py-1">
+                  <div className="w-0.5 h-4 bg-gradient-to-b from-cyan-400/80 to-cyan-400/20" />
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
+}
+
+// ── 7.2 AM vs FM ─────────────────────────────────────────────────────────
+function ModulationCompare({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <div className="mb-12">
+      <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-amber-300/80 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("Two modulation methods · how we hide sound in a wave", "វិធីម៉ូឌុយឡេស៊ីយុងពីរ · របៀបយើងលាក់សំឡេងក្នុងរលក")}
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+        {/* AM */}
+        <article className="relative rounded-2xl border border-rose-400/40 bg-slate-950/70 shadow-lg overflow-hidden">
+          <div className="p-5">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-11 h-11 rounded-xl bg-rose-500/15 border-2 border-rose-400/60 text-rose-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_14px_rgba(244,63,94,0.4)]">
+                <Waves className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-rose-300 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                  {t("Amplitude Modulation", "ម៉ូឌុយឡាស៊ីយុងអាំភ្លីទុត")}
+                </div>
+                <h4 className={`text-lg font-bold text-cyan-50 ${kh ? "font-khmer" : ""}`}>AM</h4>
+              </div>
+            </div>
+            <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-3 mb-3 min-h-[150px] flex items-center justify-center">
+              <AmWaveSvg kh={kh} />
+            </div>
+            <p className={`text-sm text-cyan-100/85 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "The HEIGHT (amplitude) of the carrier wave changes to copy the audio. Tall peaks = loud, small peaks = quiet. The shape of the audio is traced along the top of the carrier.",
+                "កម្ពស់ (អាំភ្លីទុត) នៃរលកដឹកជញ្ជូនផ្លាស់ប្តូរដើម្បីចម្លងសំឡេង។ កំពូលខ្ពស់ = ខ្លាំង, កំពូលតូច = ស្ងាត់។ រូបរាងសំឡេងត្រូវបានគូរនៅខាងលើរលកដឹកជញ្ជូន។"
+              )}
+            </p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-2">
+                <div className={`font-mono font-bold text-emerald-300 mb-0.5 ${kh ? "font-khmer text-[11px]" : ""}`}>{t("PRO · Long range", "ល្អ · ចំងាយឆ្ងាយ")}</div>
+                <div className={`text-cyan-100/75 ${kh ? "font-khmer" : ""}`}>{t("Bounces off the upper atmosphere — reaches across provinces.", "លោតពីបរិយាកាសខាងលើ — ឈានដល់ឆ្លងខេត្ត។")}</div>
+              </div>
+              <div className="rounded-lg border border-rose-500/30 bg-rose-500/5 p-2">
+                <div className={`font-mono font-bold text-rose-300 mb-0.5 ${kh ? "font-khmer text-[11px]" : ""}`}>{t("CON · Static", "មិនល្អ · សំឡេងរំខាន")}</div>
+                <div className={`text-cyan-100/75 ${kh ? "font-khmer" : ""}`}>{t("Lightning, motors and storms add noise to the height — you hear crackles.", "រន្ទះ ម៉ាស៊ីន និងព្យុះបន្ថែមសំឡេងរំខានដល់កម្ពស់ — អ្នកឮសំឡេងប្រេះៗ។")}</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        {/* FM */}
+        <article className="relative rounded-2xl border border-cyan-400/40 bg-slate-950/70 shadow-lg overflow-hidden">
+          <div className="p-5">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-11 h-11 rounded-xl bg-cyan-500/15 border-2 border-cyan-400/60 text-cyan-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_14px_rgba(34,211,238,0.4)]">
+                <AudioLines className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-cyan-300 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                  {t("Frequency Modulation", "ម៉ូឌុយឡាស៊ីយុងប្រេកង់")}
+                </div>
+                <h4 className={`text-lg font-bold text-cyan-50 ${kh ? "font-khmer" : ""}`}>FM</h4>
+              </div>
+            </div>
+            <div className="rounded-lg border border-cyan-500/30 bg-black/60 p-3 mb-3 min-h-[150px] flex items-center justify-center">
+              <FmWaveSvg kh={kh} />
+            </div>
+            <p className={`text-sm text-cyan-100/85 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "The HEIGHT stays constant. Instead, the SPACING between the waves changes — squeezed close together for loud, spread far apart for quiet. The wave 'breathes' in time with the audio.",
+                "កម្ពស់នៅថេរ។ ផ្ទុយទៅវិញ ចំងាយរវាងរលកផ្លាស់ប្តូរ — បង្រួមជិតពេលខ្លាំង រាលឆ្ងាយពេលស្ងាត់។ រលក 'ដកដង្ហើម' តាមចង្វាក់សំឡេង។"
+              )}
+            </p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-2">
+                <div className={`font-mono font-bold text-emerald-300 mb-0.5 ${kh ? "font-khmer text-[11px]" : ""}`}>{t("PRO · Hi-fi sound", "ល្អ · សំឡេងច្បាស់")}</div>
+                <div className={`text-cyan-100/75 ${kh ? "font-khmer" : ""}`}>{t("Storms can't change spacing — music stays clean and full.", "ព្យុះមិនអាចផ្លាស់ប្តូរចំងាយ — តន្ត្រីនៅស្អាតពេញលេញ។")}</div>
+              </div>
+              <div className="rounded-lg border border-rose-500/30 bg-rose-500/5 p-2">
+                <div className={`font-mono font-bold text-rose-300 mb-0.5 ${kh ? "font-khmer text-[11px]" : ""}`}>{t("CON · Short range", "មិនល្អ · ចំងាយខ្លី")}</div>
+                <div className={`text-cyan-100/75 ${kh ? "font-khmer" : ""}`}>{t("Travels in straight lines, blocked by hills — typically only 50–80 km.", "ធ្វើដំណើរជាបន្ទាត់ត្រង់ ត្រូវបានទប់ដោយភ្នំ — ជាធម្មតាត្រឹម ៥០–៨០ គ.ម។")}</div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  );
+}
+
+// ── 7.3 Channels & Tuning ────────────────────────────────────────────────
+function ChannelsCard({ kh, t }: { kh: boolean; t: (en: string, kh: string) => string }) {
+  const stations: { label: string; freq: number; nameEn: string; nameKh: string }[] = [
+    { label: "92.5", freq: 92.5, nameEn: "Khmer Pop", nameKh: "ប៉ុបខ្មែរ" },
+    { label: "95.5", freq: 95.5, nameEn: "News", nameKh: "ព័ត៌មាន" },
+    { label: "97.5", freq: 97.5, nameEn: "Classical", nameKh: "ក្លាស៊ិច" },
+    { label: "99.5", freq: 99.5, nameEn: "Sports", nameKh: "កីឡា" },
+    { label: "102.5", freq: 102.5, nameEn: "Talk", nameKh: "សំណើ" },
+    { label: "105.5", freq: 105.5, nameEn: "Hits", nameKh: "បទពេញនិយម" },
+  ];
+  const [tuned, setTuned] = useState(1); // index of stations[]
+
+  return (
+    <div>
+      <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-amber-300/80 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("What is a 'channel'? · Frequencies & tuning", "តើ 'ឆានែល' ជាអ្វី? · ប្រេកង់ និងការបន្តុំ")}
+      </div>
+
+      <article className="relative rounded-2xl border border-amber-400/40 bg-slate-950/80 shadow-lg overflow-hidden">
+        <div className="p-5 sm:p-6 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-5 items-center">
+          {/* Text */}
+          <div>
+            <h3 className={`text-xl font-bold text-amber-100 mb-2 ${kh ? "font-khmer" : ""}`}>
+              {t("'95.5 FM' is a math instruction", "'95.5 FM' គឺជាការណែនាំគណិតវិទ្យា")}
+            </h3>
+            <p className={`text-sm sm:text-base text-cyan-100/85 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "When a station calls itself 95.5 FM, that number is its carrier-wave frequency: 95,500,000 vibrations per second — 95.5 megahertz (MHz). Every station in the world has its own number. Two stations sharing one number would crash into each other and you'd hear noise.",
+                "នៅពេលស្ថានីយមួយហៅខ្លួនឯងថា 95.5 FM លេខនោះគឺជាប្រេកង់រលកដឹកជញ្ជូនរបស់វា ៖ ៩៥,៥០០,០០០ ការញ័រក្នុងមួយវិនាទី — ៩៥.៥ មេហ្គាហឺត (MHz)។ រាល់ស្ថានីយក្នុងពិភពលោកមានលេខផ្ទាល់ខ្លួន។ ស្ថានីយពីរដែលប្រើលេខតែមួយនឹងបុកគ្នា ហើយអ្នកនឹងឮសំឡេងរំខាន។"
+              )}
+            </p>
+            <div className="rounded-xl border border-amber-400/30 bg-amber-400/5 p-3 mb-3">
+              <div className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-amber-300 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("Tuning · the magic of resonance", "ការបន្តុំ · មន្តស្នេហ៍នៃរេសូណង់")}
+              </div>
+              <p className={`text-sm text-cyan-100/85 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Hundreds of waves are crossing your kitchen right now — pop, news, taxi dispatch, military. When you 'tune' the dial, you adjust a tiny capacitor in your radio so its own circuit vibrates at exactly 95.5 MHz. It then resonates with that one wave and ignores all the others — like a glass that shatters only at the singer's exact note.",
+                  "រលករាប់រយកំពុងឆ្លងកាត់ផ្ទះបាយរបស់អ្នកនៅពេលនេះ — ប៉ុប ព័ត៌មាន ការបញ្ជូនតាក់ស៊ី យោធា។ នៅពេលអ្នក 'បន្តុំ' វិទ្យុ អ្នកកែឧបករណ៍ផ្ទុកអគ្គិសនីតូចមួយ ដើម្បីឱ្យសៀគ្វីរបស់វាញ័រនៅ ៩៥.៥ MHz ច្បាស់។ វារ៉េសូណង់ជាមួយរលកនោះតែមួយ ហើយមិនអើពើនឹងរលកដទៃទាំងអស់ — ដូចជាកែវដែលបែកនៅពេលចង្វាក់ច្បាស់របស់អ្នកចម្រៀងតែមួយ។"
+                )}
+              </p>
+            </div>
+            <div className={`text-xs text-cyan-300/70 font-mono ${kh ? "font-khmer text-sm" : ""}`}>
+              {t("Try it ↓ tap a station to retune the dial", "សាកល្បង ↓ ចុចលើស្ថានីយដើម្បីបន្តុំឡើងវិញ")}
+            </div>
+          </div>
+
+          {/* Tuner widget */}
+          <RadioTuner stations={stations} tuned={tuned} onTune={setTuned} kh={kh} t={t} />
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function RadioTuner({
+  stations, tuned, onTune, kh, t,
+}: {
+  stations: { label: string; freq: number; nameEn: string; nameKh: string }[];
+  tuned: number;
+  onTune: (i: number) => void;
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  const current = stations[tuned];
+  // Map frequency 90–108 MHz to 0–100% on the dial
+  const minF = 90, maxF = 108;
+  const pct = ((current.freq - minF) / (maxF - minF)) * 100;
+
+  return (
+    <div className="rounded-2xl border-2 border-amber-500/50 bg-gradient-to-b from-slate-900 to-black p-4 shadow-[0_0_24px_rgba(251,191,36,0.15)]">
+      {/* Display */}
+      <div className="rounded-lg bg-black border border-amber-500/40 p-3 mb-3 shadow-inner">
+        <div className={`text-[9px] font-mono tracking-[0.3em] uppercase text-amber-500/80 ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
+          {t("FM TUNER · NOW TUNED TO", "ឧបករណ៍បន្តុំ FM · បន្តុំទៅ")}
+        </div>
+        <div className="flex items-baseline gap-1 mt-0.5">
+          <span className="font-mono text-3xl sm:text-4xl font-bold text-amber-300 tabular-nums" style={{ textShadow: "0 0 12px rgba(252,211,77,0.7)" }}>
+            {current.label}
+          </span>
+          <span className="text-amber-300/80 font-mono text-sm">MHz</span>
+        </div>
+        <div className={`text-xs text-amber-200/80 mt-0.5 ${kh ? "font-khmer text-sm" : ""}`}>
+          {kh ? current.nameKh : current.nameEn}
+        </div>
+      </div>
+
+      {/* Dial */}
+      <div className="relative h-10 rounded-md bg-slate-950 border border-amber-500/30 overflow-hidden mb-3">
+        {/* tick marks */}
+        {Array.from({ length: 19 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px bg-amber-500/25"
+            style={{ left: `${(i / 18) * 100}%` }}
+          />
+        ))}
+        {/* range labels */}
+        <div className="absolute left-1.5 bottom-0.5 text-[9px] font-mono text-amber-500/70">90</div>
+        <div className="absolute right-1.5 bottom-0.5 text-[9px] font-mono text-amber-500/70">108</div>
+        {/* needle */}
+        <div
+          className="absolute top-0 bottom-0 w-0.5 bg-rose-400 transition-all duration-300"
+          style={{ left: `${pct}%`, boxShadow: "0 0 8px rgba(251,113,133,0.9)" }}
+        />
+      </div>
+
+      {/* Station buttons */}
+      <div className="grid grid-cols-3 gap-1.5">
+        {stations.map((s, i) => {
+          const isOn = i === tuned;
+          return (
+            <button
+              key={s.label}
+              type="button"
+              onClick={() => onTune(i)}
+              aria-pressed={isOn}
+              className={`px-2 py-1.5 rounded-md text-xs font-mono font-bold border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
+                isOn
+                  ? "bg-amber-400 text-slate-950 border-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.5)]"
+                  : "bg-slate-900 text-amber-300/70 border-amber-500/30 hover:border-amber-400 hover:text-amber-200"
+              }`}
+            >
+              {s.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Mini-scope SVGs (oscilloscope style — glowing cyan on black)
+// ─────────────────────────────────────────────────────────────────────────
+function ScopeGrid({ id }: { id: string }) {
+  return (
+    <>
+      <defs>
+        <pattern id={id} width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(34,211,238,0.12)" strokeWidth="0.6" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${id})`} />
+    </>
+  );
+}
+
+function GlowPath({ d, color = SCOPE_GREEN, w = 1.8 }: { d: string; color?: string; w?: number }) {
+  return (
+    <g style={{ filter: `drop-shadow(0 0 3px ${color})` }}>
+      <path d={d} stroke={color} strokeWidth={w} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+  );
+}
+
+// 7.1 step 01 — speech bubble + electrical wobble
+function SoundToSignalSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 240 110" className="w-full h-auto" role="img" aria-label={kh ? "សំឡេងទៅសញ្ញាអគ្គិសនី" : "Sound to electrical signal"}>
+      <ScopeGrid id="scope-mic" />
+      {/* mic body */}
+      <rect x="14" y="35" width="22" height="40" rx="11" fill="#1e293b" stroke={SCOPE_GREEN} strokeWidth="1.2" />
+      <rect x="22" y="75" width="6" height="14" fill="#1e293b" stroke={SCOPE_GREEN} strokeWidth="1" />
+      {/* sound waves entering */}
+      <GlowPath d="M 4 50 Q 8 55 4 60" color={BROADCAST_AMBER} w={1.2} />
+      <GlowPath d="M 0 45 Q 6 55 0 65" color={BROADCAST_AMBER} w={1.2} />
+      {/* arrow */}
+      <line x1="40" y1="55" x2="80" y2="55" stroke={SCOPE_GREEN} strokeWidth="1" strokeDasharray="2 2" />
+      {/* output: a low-frequency wobble representing audio voltage */}
+      <GlowPath d="M 84 55 C 92 30, 104 80, 116 50 S 140 25, 152 55 S 180 80, 196 50 S 220 35, 232 55" />
+      <text x="125" y="100" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN} textAnchor="middle">
+        {kh ? "សញ្ញាសំឡេងអគ្គិសនី" : "AUDIO VOLTAGE"}
+      </text>
+    </svg>
+  );
+}
+
+// 7.1 step 02 — slow audio + fast carrier → mixed
+function CarrierMixSvg({ kh }: { kh: boolean }) {
+  // Build a fast carrier whose amplitude follows a slow envelope (AM-style "mixed")
+  let mixed = "M 0 55 ";
+  for (let x = 0; x <= 240; x += 3) {
+    const env = 22 * Math.sin((x / 240) * Math.PI * 2);
+    const carrier = Math.sin(x * 0.55) * env;
+    mixed += `L ${x} ${55 - carrier} `;
+  }
+  return (
+    <svg viewBox="0 0 240 110" className="w-full h-auto" role="img" aria-label={kh ? "ការលាយរលក" : "Audio mixed onto carrier"}>
+      <ScopeGrid id="scope-mix" />
+      {/* slow audio (dim) */}
+      <GlowPath d="M 0 25 C 60 5, 120 45, 240 25" color={BROADCAST_AMBER} w={1} />
+      <text x="6" y="14" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={BROADCAST_AMBER}>
+        {kh ? "សំឡេង (យឺត)" : "AUDIO (slow)"}
+      </text>
+      {/* mixed (bright) */}
+      <GlowPath d={mixed} />
+      <text x="6" y="100" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN}>
+        {kh ? "ការលាយរួច" : "MIXED OUTPUT"}
+      </text>
+    </svg>
+  );
+}
+
+// 7.1 step 03 — antenna with concentric waves
+function AntennaBroadcastSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 240 130" className="w-full h-auto" role="img" aria-label={kh ? "អង់តែនផ្សាយ" : "Antenna broadcasting"}>
+      <ScopeGrid id="scope-ant" />
+      {/* ground */}
+      <line x1="0" y1="115" x2="240" y2="115" stroke={SCOPE_GREEN} strokeWidth="1" opacity="0.6" />
+      {/* antenna mast */}
+      <line x1="120" y1="115" x2="120" y2="35" stroke={SCOPE_GREEN} strokeWidth="2" />
+      {/* lattice */}
+      <path d="M 110 105 L 130 95 M 130 105 L 110 95 M 112 90 L 128 80 M 128 90 L 112 80 M 114 75 L 126 65 M 126 75 L 114 65 M 116 60 L 124 50 M 124 60 L 116 50" stroke={SCOPE_GREEN} strokeWidth="0.8" />
+      {/* tip light */}
+      <circle cx="120" cy="33" r="2.5" fill={BROADCAST_AMBER}>
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" />
+      </circle>
+      {/* radiating concentric arcs (animated) */}
+      {[0, 1, 2].map((i) => (
+        <circle
+          key={i}
+          cx="120"
+          cy="50"
+          r="20"
+          fill="none"
+          stroke={SCOPE_GREEN}
+          strokeWidth="1.2"
+          opacity="0.6"
+          style={{ filter: `drop-shadow(0 0 3px ${SCOPE_GREEN})` }}
+        >
+          <animate attributeName="r" values="20;90;20" dur="3.6s" begin={`${i * 1.2}s`} repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.7;0;0.7" dur="3.6s" begin={`${i * 1.2}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
+      <text x="120" y="128" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN} textAnchor="middle">
+        {kh ? "រលកអេឡិចត្រូម៉ាញេទិច" : "EM WAVE OUT"}
+      </text>
+    </svg>
+  );
+}
+
+// 7.1 step 04 — receiver: wave → speaker
+function ReceiverSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg viewBox="0 0 240 110" className="w-full h-auto" role="img" aria-label={kh ? "អ្នកទទួល" : "Receiver: wave → speaker"}>
+      <ScopeGrid id="scope-rx" />
+      {/* incoming mixed wave */}
+      <GlowPath d="M 0 55 C 12 30, 24 80, 36 55 S 60 25, 72 55 S 96 80, 108 55" w={1.4} />
+      {/* funnel shape (filter) */}
+      <path d="M 110 30 L 150 45 L 150 65 L 110 80 Z" fill="rgba(34,211,238,0.08)" stroke={SCOPE_GREEN} strokeWidth="1" />
+      <text x="130" y="55" fontSize="7" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN} textAnchor="middle">{kh ? "តម្រង" : "FILTER"}</text>
+      {/* recovered audio (slow) */}
+      <GlowPath d="M 152 55 C 168 30, 184 80, 200 55" color={BROADCAST_AMBER} w={1.6} />
+      {/* speaker */}
+      <path d="M 204 40 L 214 40 L 226 28 L 226 82 L 214 70 L 204 70 Z" fill="#1e293b" stroke={BROADCAST_AMBER} strokeWidth="1.2" />
+      {/* sound out */}
+      <GlowPath d="M 230 45 Q 234 55 230 65" color={BROADCAST_AMBER} w={1.2} />
+      <GlowPath d="M 234 40 Q 240 55 234 70" color={BROADCAST_AMBER} w={1.2} />
+      <text x="60" y="100" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN}>
+        {kh ? "រលកមកដល់" : "INCOMING"}
+      </text>
+      <text x="178" y="100" fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={BROADCAST_AMBER}>
+        {kh ? "សំឡេង!" : "SOUND!"}
+      </text>
+    </svg>
+  );
+}
+
+// 7.2 AM wave — constant frequency, varying amplitude
+function AmWaveSvg({ kh }: { kh: boolean }) {
+  // Carrier of constant high frequency, with envelope = amplitude varying along x
+  let path = "M 0 70 ";
+  let envTop = "M 0 70 ";
+  let envBot = "M 0 70 ";
+  for (let x = 0; x <= 320; x += 2) {
+    // Envelope stays strictly positive (5.6 → 28) so the carrier is never
+    // phase-inverted — pedagogically correct AM where only height changes.
+    const env = 28 * (0.2 + 0.8 * (0.5 + 0.5 * Math.sin((x / 320) * Math.PI * 2.2)));
+    const carrier = Math.sin(x * 0.6) * env;
+    path += `L ${x} ${70 - carrier} `;
+    envTop += `L ${x} ${70 - env} `;
+    envBot += `L ${x} ${70 + env} `;
+  }
+  return (
+    <svg viewBox="0 0 320 140" className="w-full h-auto" role="img" aria-label={kh ? "រលក AM" : "AM wave — varying amplitude"}>
+      <ScopeGrid id="scope-am" />
+      {/* envelope (audio shape) */}
+      <GlowPath d={envTop} color={BROADCAST_AMBER} w={1} />
+      <GlowPath d={envBot} color={BROADCAST_AMBER} w={1} />
+      {/* AM-modulated carrier */}
+      <GlowPath d={path} color="#f87171" w={1.6} />
+      {/* axis */}
+      <line x1="0" y1="70" x2="320" y2="70" stroke="rgba(34,211,238,0.4)" strokeWidth="0.6" strokeDasharray="2 3" />
+      <text x="6" y="14" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={BROADCAST_AMBER}>
+        {kh ? "ទម្រង់សំឡេង (កម្ពស់)" : "AUDIO ENVELOPE (HEIGHT)"}
+      </text>
+      <text x="6" y="132" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill="#f87171">
+        {kh ? "AM · កម្ពស់ផ្លាស់ប្តូរ" : "AM · amplitude varies"}
+      </text>
+    </svg>
+  );
+}
+
+// 7.2 FM wave — constant amplitude, varying frequency
+function FmWaveSvg({ kh }: { kh: boolean }) {
+  // FM: phase is integral of (carrier_freq + audio*sensitivity)
+  const A = 26;
+  let path = "M 0 70 ";
+  let phase = 0;
+  for (let x = 0; x <= 320; x += 1.5) {
+    // audio modulation signal — a slow sine
+    const audio = Math.sin((x / 320) * Math.PI * 2.2);
+    // Carrier baseline f_c stays safely above deviation k, so instantaneous
+    // frequency never approaches zero (range ≈ 0.30 → 0.80).
+    const instFreq = 0.55 + 0.25 * audio;
+    phase += instFreq * 1.5;
+    const y = 70 - A * Math.sin(phase);
+    path += `L ${x} ${y} `;
+  }
+  // The audio reference (so students see what's driving the squeezing)
+  let aud = "M 0 16 ";
+  for (let x = 0; x <= 320; x += 4) {
+    const audio = Math.sin((x / 320) * Math.PI * 2.2);
+    aud += `L ${x} ${16 - 8 * audio} `;
+  }
+  return (
+    <svg viewBox="0 0 320 140" className="w-full h-auto" role="img" aria-label={kh ? "រលក FM" : "FM wave — varying frequency"}>
+      <ScopeGrid id="scope-fm" />
+      {/* small audio reference at top */}
+      <GlowPath d={aud} color={BROADCAST_AMBER} w={1} />
+      {/* FM carrier */}
+      <GlowPath d={path} color={SCOPE_GREEN} w={1.6} />
+      <line x1="0" y1="70" x2="320" y2="70" stroke="rgba(34,211,238,0.4)" strokeWidth="0.6" strokeDasharray="2 3" />
+      <text x="6" y="34" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={BROADCAST_AMBER}>
+        {kh ? "ទម្រង់សំឡេង" : "AUDIO SHAPE"}
+      </text>
+      <text x="6" y="132" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN}>
+        {kh ? "FM · ចំងាយរវាងរលកផ្លាស់ប្តូរ" : "FM · spacing varies"}
+      </text>
     </svg>
   );
 }
