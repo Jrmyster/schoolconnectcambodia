@@ -12,6 +12,7 @@ import { MarsPlanetModule } from "@/components/space/MarsPlanetModule";
 import { VenusPlanetModule } from "@/components/space/VenusPlanetModule";
 import { MercuryPlanetModule } from "@/components/space/MercuryPlanetModule";
 import { EarthMoonModule } from "@/components/space/EarthMoonModule";
+import { SaturnPlanetModule } from "@/components/space/SaturnPlanetModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -379,6 +380,9 @@ export function SpacePage() {
 
         {/* ── Mars: Our Next-Door Neighbor ──────────────────────────────── */}
         <MarsPlanetModule />
+
+        {/* ── Saturn: The Lord of the Rings ─────────────────────────────── */}
+        <SaturnPlanetModule />
 
         {/* ── Mars Rovers: Robotic Mapmakers ────────────────────────────── */}
         <MarsRoversModule />
