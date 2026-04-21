@@ -12,6 +12,12 @@ import {
   Eye,
   ShieldCheck,
   HelpCircle,
+  Sigma,
+  Brain,
+  Globe2,
+  Sun,
+  BookOpen,
+  ArrowRight,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import SkepticsChallenge from "@/components/SkepticsChallenge";
@@ -583,6 +589,533 @@ function ToolboxSection({ onProgress }: { onProgress: (pts: number) => void }) {
   );
 }
 
+// ── Nature of Science: Laws vs. Theories ────────────────────────────────────
+
+function NatureOfScienceSection() {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section className="mb-12">
+      {/* Section header */}
+      <div className="flex items-center gap-3 mb-2">
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center"
+          style={{ background: "#eef2ff" }}
+        >
+          <BookOpen className="w-5 h-5" style={{ color: "#4338ca" }} />
+        </div>
+        <div>
+          <h2
+            className={`text-xl font-bold ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#111827" }}
+          >
+            {kh
+              ? "ធម្មជាតិវិទ្យាសាស្ត្រ៖ ច្បាប់ និងទ្រឹស្តី"
+              : "The Nature of Science: Laws vs. Theories"}
+          </h2>
+          <p
+            className={`text-sm ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#6b7280" }}
+          >
+            {kh
+              ? "យល់ដឹងពីភាពខុសគ្នារវាងច្បាប់ ទ្រឹស្តី និងរបៀបដែលវិទ្យាសាស្ត្រវិវត្ត"
+              : "Understand the difference between laws, theories, and how science evolves"}
+          </p>
+        </div>
+      </div>
+
+      {/* ── 1. The Great Misconception ── */}
+      <div
+        className="mt-5 rounded-2xl bg-white"
+        style={{ border: "2px solid #e5e7eb" }}
+      >
+        <div
+          className="px-5 py-4 rounded-t-2xl flex items-center gap-3"
+          style={{ background: "#fef3e2", borderBottom: "1px solid #fde7c4" }}
+        >
+          <AlertTriangle
+            className="w-5 h-5 flex-shrink-0"
+            style={{ color: "#d97706" }}
+          />
+          <h3
+            className={`text-base font-bold ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#92400e" }}
+          >
+            {kh
+              ? "១. ការយល់ច្រឡំធំ — ទ្រឹស្តី មិនក្លាយជាច្បាប់ឡើយ"
+              : "1. The Great Misconception — A Theory Never \"Becomes\" a Law"}
+          </h3>
+        </div>
+
+        <div className="p-5">
+          <p
+            className={`text-sm leading-relaxed mb-5 ${kh ? "font-khmer leading-loose" : ""}`}
+            style={{ color: "#374151" }}
+          >
+            {kh ? (
+              <>
+                សិស្សជាច្រើនគិតថា ទ្រឹស្តី “ឡើងតួនាទី” ក្លាយជាច្បាប់នៅពេលវាត្រូវបានបញ្ជាក់។ វា<strong>មិនពិតទេ</strong>។
+                ច្បាប់ និង​ទ្រឹស្តីគឺជា<strong>របស់ពីរផ្សេងគ្នា</strong> ហើយឆ្លើយនឹងសំណួរផ្សេងគ្នា។
+              </>
+            ) : (
+              <>
+                A common myth is that a theory gets "promoted" to a law once it has been
+                proven enough times. This is <strong>false</strong>. Laws and theories are{" "}
+                <strong>two different things</strong> that answer two different questions.
+              </>
+            )}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Law card */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#eff6ff",
+                border: "2px solid #bfdbfe",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "#1d4ed8" }}
+                >
+                  <Sigma className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div
+                    className="text-xs font-bold uppercase tracking-wide"
+                    style={{ color: "#1d4ed8" }}
+                  >
+                    {kh ? "ច្បាប់ (Law)" : "Law"}
+                  </div>
+                  <div
+                    className={`text-base font-bold ${kh ? "font-khmer" : ""}`}
+                    style={{ color: "#1e3a8a" }}
+                  >
+                    {kh ? "ច្បាប់វិទ្យាសាស្ត្រ" : "What nature does"}
+                  </div>
+                </div>
+              </div>
+              <p
+                className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#1e3a8a" }}
+              >
+                {kh ? (
+                  <>
+                    ច្បាប់<strong>ពិពណ៌នា</strong>ពី<strong>អ្វី</strong>ដែលធម្មជាតិធ្វើ
+                    ក្រោមលក្ខខណ្ឌជាក់លាក់ — ច្រើនតែជា<strong>សមីការគណិតវិទ្យា</strong>។
+                    ច្បាប់មិនប្រាប់យើងពី <em>មូលហេតុ</em> ទេ។
+                  </>
+                ) : (
+                  <>
+                    A law <strong>describes</strong> <strong>WHAT</strong> nature does
+                    under certain conditions — usually as a precise{" "}
+                    <strong>mathematical equation</strong>. A law does not tell us{" "}
+                    <em>why</em> it happens.
+                  </>
+                )}
+              </p>
+            </div>
+
+            {/* Theory card */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#f5f3ff",
+                border: "2px solid #ddd6fe",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: "#6d28d9" }}
+                >
+                  <Brain className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div
+                    className="text-xs font-bold uppercase tracking-wide"
+                    style={{ color: "#6d28d9" }}
+                  >
+                    {kh ? "ទ្រឹស្តី (Theory)" : "Theory"}
+                  </div>
+                  <div
+                    className={`text-base font-bold ${kh ? "font-khmer" : ""}`}
+                    style={{ color: "#4c1d95" }}
+                  >
+                    {kh ? "ហេតុអ្វីវាកើតឡើង" : "Why nature does it"}
+                  </div>
+                </div>
+              </div>
+              <p
+                className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#4c1d95" }}
+              >
+                {kh ? (
+                  <>
+                    ទ្រឹស្តី<strong>ពន្យល់</strong>ពី<strong>មូលហេតុ</strong>ដែលធម្មជាតិធ្វើបែបនេះ —
+                    វាជា<strong>យន្តការ</strong>ដែលគាំទ្រដោយភស្តុតាងរាប់ឆ្នាំ។ ទ្រឹស្តីមិនកម្រិត
+                    ទាបជាងច្បាប់ទេ — វាគ្រាន់តែឆ្លើយសំណួរមួយផ្សេង។
+                  </>
+                ) : (
+                  <>
+                    A theory <strong>explains</strong> <strong>WHY</strong> nature does it
+                    — the underlying <strong>mechanism</strong>, supported by years of
+                    evidence. A theory is not "lower" than a law; it just answers a
+                    different question.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 2. Real-World Example: Gravity ── */}
+      <div
+        className="mt-6 rounded-2xl bg-white"
+        style={{ border: "2px solid #e5e7eb" }}
+      >
+        <div
+          className="px-5 py-4 rounded-t-2xl flex items-center gap-3"
+          style={{ background: "#ecfdf5", borderBottom: "1px solid #bbf7d0" }}
+        >
+          <Globe2
+            className="w-5 h-5 flex-shrink-0"
+            style={{ color: "#047857" }}
+          />
+          <h3
+            className={`text-base font-bold ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#065f46" }}
+          >
+            {kh
+              ? "២. ឧទាហរណ៍ជាក់ស្ដែង៖ ទំនាញផែនដី"
+              : "2. Real-World Example: Gravity"}
+          </h3>
+        </div>
+
+        <div className="p-5">
+          <p
+            className={`text-sm leading-relaxed mb-5 ${kh ? "font-khmer leading-loose" : ""}`}
+            style={{ color: "#374151" }}
+          >
+            {kh ? (
+              <>
+                ស្រមៃថា ផ្លែស្វាយធ្លាក់ពីដើមឈើនៅក្នុងភូមិមួយក្នុងប្រទេសកម្ពុជា។
+                យើងអាចសួរសំណួរពីរផ្សេងគ្នាអំពីការធ្លាក់នេះ — មួយ <em>អ្វី</em> និងមួយទៀត <em>ហេតុអ្វី</em>។
+              </>
+            ) : (
+              <>
+                Imagine a mango falling from a tree in a Cambodian village. We can ask
+                two different questions about that fall — one about <em>what</em> happens,
+                and one about <em>why</em>.
+              </>
+            )}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Newton's Law */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#eff6ff",
+                border: "2px solid #bfdbfe",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Sigma
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "#1d4ed8" }}
+                />
+                <span
+                  className={`text-sm font-bold ${kh ? "font-khmer" : ""}`}
+                  style={{ color: "#1e3a8a" }}
+                >
+                  {kh
+                    ? "ច្បាប់របស់ Newton — ច្បាប់ទំនាញ"
+                    : "Newton's Law — The Law of Gravity"}
+                </span>
+              </div>
+              <p
+                className={`text-sm leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#1e3a8a" }}
+              >
+                {kh ? (
+                  <>
+                    ប្រសិនបើអ្នកទម្លាក់ផ្លែស្វាយពីដើមឈើនៅកម្ពុជា វានឹងធ្លាក់ទៅដី
+                    ដោយល្បឿនកើនឡើង <strong className="font-mono not-italic">9.8 m/s²</strong> ។
+                    ច្បាប់របស់ Newton អាច<strong>គណនាល្បឿន និងកម្លាំង</strong>បានច្បាស់ —
+                    ប៉ុន្តែ​វា<strong>មិនពន្យល់ពី <em>មូលហេតុ</em></strong>ដែលផ្លែស្វាយធ្លាក់ឡើយ។
+                  </>
+                ) : (
+                  <>
+                    If you drop a mango from a tree in Cambodia, it falls toward the
+                    ground at an accelerating rate of{" "}
+                    <strong className="font-mono not-italic">9.8 m/s²</strong>. Newton's
+                    Law of Gravity <strong>calculates the exact speed and force</strong>{" "}
+                    — but it <strong>does not explain <em>why</em></strong> the mango
+                    falls.
+                  </>
+                )}
+              </p>
+              <div
+                className="rounded-lg px-3 py-2 text-center font-mono text-sm"
+                style={{
+                  background: "white",
+                  border: "1px dashed #93c5fd",
+                  color: "#1e3a8a",
+                }}
+              >
+                F = G · (m₁ · m₂) / r²
+              </div>
+            </div>
+
+            {/* Einstein's Theory */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#f5f3ff",
+                border: "2px solid #ddd6fe",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Brain
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "#6d28d9" }}
+                />
+                <span
+                  className={`text-sm font-bold ${kh ? "font-khmer" : ""}`}
+                  style={{ color: "#4c1d95" }}
+                >
+                  {kh
+                    ? "ទ្រឹស្តីរបស់ Einstein — ទ្រឹស្តីសាមញ្ញនៃភាពទាក់ទង"
+                    : "Einstein's Theory — General Relativity"}
+                </span>
+              </div>
+              <p
+                className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#4c1d95" }}
+              >
+                {kh ? (
+                  <>
+                    ទ្រឹស្តីសាមញ្ញនៃភាពទាក់ទងរបស់ Einstein ពន្យល់<strong>មូលហេតុ</strong>ដែលផ្លែស្វាយធ្លាក់ —
+                    វត្ថុដែលមានម៉ាសច្រើនដូចជាផែនដី <strong>បត់សំពាធក្រណាត់ដែលមើលមិនឃើញនៃលំហ-វេលា</strong>{" "}
+                    (spacetime) ហើយ​ផ្លែស្វាយ​គ្រាន់តែ​ដើរ​តាម​ចំណោទ​នៃ​ការ​បត់​នោះ​ប៉ុណ្ណោះ។
+                  </>
+                ) : (
+                  <>
+                    Einstein's Theory of General Relativity explains <strong>why</strong>{" "}
+                    the mango falls — massive objects like the Earth{" "}
+                    <strong>warp the invisible fabric of spacetime</strong>, and the mango
+                    is just following the curve that warping creates.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+
+          {/* Bridge sentence */}
+          <div
+            className="mt-4 rounded-xl px-4 py-3 flex items-start gap-3"
+            style={{ background: "#f9fafb", border: "1px solid #e5e7eb" }}
+          >
+            <Lightbulb
+              className="w-5 h-5 flex-shrink-0 mt-0.5"
+              style={{ color: "#d97706" }}
+            />
+            <p
+              className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+              style={{ color: "#374151" }}
+            >
+              {kh ? (
+                <>
+                  <strong>ទាំងពីរ</strong>គឺ​ត្រឹមត្រូវ ហើយ​ត្រូវការ​គ្នាទៅវិញទៅមក —
+                  ច្បាប់​ឱ្យ​យើង <em>គណនា</em>បាន ខណៈ​ដែល​ទ្រឹស្តី​ឱ្យ​យើង <em>យល់</em>។
+                </>
+              ) : (
+                <>
+                  <strong>Both are correct</strong> and they need each other — the law
+                  lets us <em>calculate</em>, while the theory lets us <em>understand</em>.
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 3. Updating the Map ── */}
+      <div
+        className="mt-6 rounded-2xl bg-white"
+        style={{ border: "2px solid #e5e7eb" }}
+      >
+        <div
+          className="px-5 py-4 rounded-t-2xl flex items-center gap-3"
+          style={{ background: "#fef2f2", borderBottom: "1px solid #fecaca" }}
+        >
+          <RefreshCw
+            className="w-5 h-5 flex-shrink-0"
+            style={{ color: "#b91c1c" }}
+          />
+          <h3
+            className={`text-base font-bold ${kh ? "font-khmer" : ""}`}
+            style={{ color: "#991b1b" }}
+          >
+            {kh
+              ? "៣. ការផ្លាស់ប្ដូរការយល់ដឹង — ផែនទីដែលប្រសើរឡើង"
+              : "3. Updating the Map — Better and Better Models"}
+          </h3>
+        </div>
+
+        <div className="p-5">
+          <p
+            className={`text-sm leading-relaxed mb-5 ${kh ? "font-khmer leading-loose" : ""}`}
+            style={{ color: "#374151" }}
+          >
+            {kh ? (
+              <>
+                វិទ្យាសាស្ត្រ<strong>មិនមែនជាបញ្ជីនៃការពិតដាច់ខាតទេ</strong> —
+                វា​ជា​ដំណើរការ​នៃ​ការ​សាងសង់​ <strong>គំរូ​ប្រសើរឡើង​បន្តបន្ទាប់</strong>។
+                នៅពេលដែលភស្តុតាងថ្មីលេចឡើង គំរូ​ចាស់​អាច​ត្រូវ​ប្ដូរ — ហើយ​នេះ​ជា​ភាព​ខ្លាំង​របស់​វិទ្យាសាស្ត្រ
+                មិន​មែន​ជា​ភាព​ទន់ខ្សោយ​ឡើយ។
+              </>
+            ) : (
+              <>
+                Science is <strong>not a list of absolute truths</strong> — it is a
+                process of building <strong>better and better models</strong> of reality.
+                When new evidence appears, the old model can be updated. That is science's{" "}
+                <em>strength</em>, not a weakness.
+              </>
+            )}
+          </p>
+
+          {/* Geocentric → Heliocentric */}
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+            {/* Old: Geocentric */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#f3f4f6",
+                border: "2px solid #d1d5db",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Globe2
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "#6b7280" }}
+                />
+                <span
+                  className={`text-sm font-bold ${kh ? "font-khmer" : ""}`}
+                  style={{ color: "#374151" }}
+                >
+                  {kh
+                    ? "គំរូចាស់៖ ផែនដីជាមជ្ឈមណ្ឌល (Geocentric)"
+                    : "Old Model: Earth-Centered (Geocentric)"}
+                </span>
+              </div>
+              <p
+                className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#4b5563" }}
+              >
+                {kh
+                  ? "យើងធ្លាប់គិតថាផែនដីជាចំណុចកណ្ដាលនៃសកលលោក ព្រោះ​ការសង្កេតប្រចាំថ្ងៃហាក់​ដូច​ជា​បង្ហាញ​បែប​នេះ — ព្រះអាទិត្យ ព្រះច័ន្ទ និងផ្កាយ​ហាក់​បី​ដូចជា​វិល​ជុំវិញ​យើង។"
+                  : "We used to think Earth was the centre of the universe because everyday observation seemed to show it — the sun, moon, and stars all appeared to spin around us."}
+              </p>
+            </div>
+
+            {/* Arrow */}
+            <div className="hidden md:flex items-center justify-center px-1">
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center"
+                style={{ background: "#fef3e2" }}
+              >
+                <ArrowRight
+                  className="w-6 h-6"
+                  style={{ color: "#d97706" }}
+                />
+              </div>
+            </div>
+            <div
+              className="flex md:hidden items-center justify-center py-1"
+              aria-hidden="true"
+            >
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center"
+                style={{ background: "#fef3e2" }}
+              >
+                <ArrowRight
+                  className="w-5 h-5 rotate-90"
+                  style={{ color: "#d97706" }}
+                />
+              </div>
+            </div>
+
+            {/* New: Heliocentric */}
+            <div
+              className="rounded-xl p-4"
+              style={{
+                background: "#fffbeb",
+                border: "2px solid #fde68a",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Sun
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "#b45309" }}
+                />
+                <span
+                  className={`text-sm font-bold ${kh ? "font-khmer" : ""}`}
+                  style={{ color: "#78350f" }}
+                >
+                  {kh
+                    ? "គំរូថ្មី៖ ព្រះអាទិត្យជាមជ្ឈមណ្ឌល (Heliocentric)"
+                    : "New Model: Sun-Centered (Heliocentric)"}
+                </span>
+              </div>
+              <p
+                className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#92400e" }}
+              >
+                {kh
+                  ? "នៅពេលទូរទស្សន៍ផ្ដល់ឱ្យយើងនូវភស្តុតាងថ្មី យើង​ត្រូវ​ផ្លាស់​ប្ដូរ​គំរូ — ដាក់​ព្រះអាទិត្យ​នៅ​មជ្ឈមណ្ឌល ហើយ​ផែនដី​វិល​ជុំវិញ​វា។"
+                  : "When telescopes gave us new evidence, we had to update the model — placing the Sun at the centre, with the Earth orbiting around it."}
+              </p>
+            </div>
+          </div>
+
+          {/* Closing principle */}
+          <div
+            className="mt-5 rounded-xl px-4 py-3 flex items-start gap-3"
+            style={{ background: "#eef2ff", border: "1px solid #c7d2fe" }}
+          >
+            <Lightbulb
+              className="w-5 h-5 flex-shrink-0 mt-0.5"
+              style={{ color: "#4338ca" }}
+            />
+            <p
+              className={`text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+              style={{ color: "#312e81" }}
+            >
+              {kh ? (
+                <>
+                  <strong>គោលការណ៍សំខាន់៖</strong> វិទ្យាសាស្ត្រកាន់តែប្រសើរឡើង
+                  នៅពេលយើងរកឃើញ​ភស្តុតាង​ថ្មី​ដែល​បំបែក​ច្បាប់​ចាស់។
+                </>
+              ) : (
+                <>
+                  <strong>Key principle:</strong> science improves whenever we find new
+                  evidence that breaks our old rules.
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Main Page ───────────────────────────────────────────────────────────────
 
 export function ScientificLiteracyPage() {
@@ -656,6 +1189,8 @@ export function ScientificLiteracyPage() {
         <ScientificMethodSection onProgress={setMethodPts} />
         <FactOpinionSection onProgress={setQuizPts} />
         <ToolboxSection onProgress={setToolPts} />
+
+        <NatureOfScienceSection />
 
         <GiantsOfScience />
 
