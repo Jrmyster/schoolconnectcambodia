@@ -1,0 +1,39 @@
+"I want to add a new module called 'Module 06: Inorganic Chemistry 101' (គីមីវិទ្យាអសរីរាង្គ១០១) to the Chemistry hub. Please implement the following interactive sections:
+
+1. The 'Not-Carbon' World:
+
+Create an introductory section explaining the difference between Organic (carbon-based life/plastics) and Inorganic (metals, minerals, salts, and gases).
+
+2. The Science of Metals & Alloys (លោហៈ និងលោហៈធាតុផ្សំ):
+
+Explain that pure metals are often too soft or reactive to be useful, so humans mix them into Alloys.
+
+Create a visual comparison grid:
+
+Steel (ដែកថែប): Iron (Fe) + Carbon (C). Explain that adding a tiny bit of carbon makes iron incredibly strong, which is why it's used to build bridges and schools.
+
+Bronze (សំរឹទ្ធ): Copper (Cu) + Tin (Sn). Mention its historical importance in Cambodian history (like the statues of Angkor).
+
+Brass (លង្ហិន): Copper (Cu) + Zinc (Zn). Used in water valves and musical instruments because it doesn't rust easily.
+
+3. Salts & Crystals (អំបិល និងគ្រីស្តាល់):
+
+Break the misconception that 'salt' only means table salt. Define a chemical salt as the product of an Acid + Base reaction.
+
+Highlight Calcium Carbonate (CaCO3). Explain that this is limestone, which is crushed and baked to create Cement—the most common building material they see every day.
+
+4. Agriculture & Power (កសិកម្ម និងថាមពល):
+
+Highlight two vital inorganic chemicals used daily in rural areas:
+
+NPK Fertilizers (ជី NPK): Explain how Nitrogen, Phosphorus, and Potassium salts are added to soil to increase rice yields.
+
+Sulfuric Acid (អាស៊ីតស៊ុលហ្វួរីក - H2SO4): Explain that this highly corrosive liquid is what stores the electricity inside the heavy lead-acid batteries used for local solar power setups.
+
+5. UI & Routing:
+
+Create a new module card on the main Chemistry page styled similarly to the Organic Chemistry card. Include the tags: 'Metals & Alloys', 'Salts & Crystals', 'Fertilizers', and 'Battery Acid'.
+
+Route the new page to /science/chemistry/inorganic.
+
+Use an 'Earth & Industry' aesthetic: metallic silvers, rust oranges, and crystalline blues. Ensure all technical terms are bilingual (English/Khmer)."

@@ -73,6 +73,14 @@ const NAV_GROUPS: NavGroup[] = [
       },
       { href: "/english-writing",       labelEn: "English Writing",  labelKh: "ការសរសេរភាសាអង់គ្លេស", icon: PenLine },
       {
+        href: "/study-center/wildlife-explorer",
+        labelEn: "Wildlife Explorer: Zoo Animals",
+        labelKh: "ការរុករកសត្វព្រៃ៖ សត្វសួនសត្វ",
+        icon: Leaf,
+        descEn: "A bilingual flashcard deck of zoo animals with one-tap audio in English and Khmer — built for younger learners.",
+        descKh: "ឈុតកាតវាក្យសព្ទពីរភាសាអំពីសត្វសួនសត្វ ជាមួយសំឡេងចុចម្ដងបានភ្លាមៗជាភាសាអង់គ្លេស និងខ្មែរ — សម្រាប់អ្នករៀនវ័យក្មេង។",
+      },
+      {
         href: "/spelling-forge",
         labelEn: "The Spelling Forge",
         labelKh: "កម្មវិធីពិនិត្យអក្ខរាវិរុទ្ធ",
