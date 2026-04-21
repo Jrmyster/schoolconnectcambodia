@@ -5,7 +5,7 @@ import {
   Building2, Users, FileText,
   Sigma, Music, Plane, Bot, Camera, Magnet, Wrench, Fuel, Thermometer,
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
-  CheckCircle, Stethoscope,
+  CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -725,6 +725,37 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["សន្តិភាព", "វ័យជំទង់", "អារម្មណ៍", "ភាពតានតឹង", "សុខភាពផ្លូវចិត្ត", "សុខុមាលភាព", "មិត្តភាព"],
   },
   {
+    id: "human-engine",
+    href: "/human-engine",
+    icon: Dumbbell,
+    titleEn: "The Human Engine: Nutrition & Movement",
+    titleKh: "ម៉ាស៊ីនរាងកាយ៖ អាហារូបត្ថម្ភ និងចលនា",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "Macronutrients (carbs, protein, fat) with local examples, caloric balance, the science of cardio + hypertrophy, and the diseases caused by sitting too much.",
+    descKh: "សារធាតុចិញ្ចឹមម៉ាក្រូ (កាបូ ប្រូតេអុីន ខ្លាញ់) ជាមួយឧទាហរណ៍ក្នុងតំបន់ តុល្យភាពកាឡូរី វិទ្យាសាស្ត្រនៃកាឌីយ៉ូ + hypertrophy និងជំងឺដែលបណ្ដាលមកពីការអង្គុយច្រើនពេក។",
+    keywordsEn: [
+      "nutrition", "diet", "food", "eating", "healthy eating",
+      "macronutrients", "carbs", "carbohydrates", "protein", "fat", "fats",
+      "calories", "caloric", "weight loss", "weight gain",
+      "exercise", "fitness", "workout", "movement", "training",
+      "cardio", "cardiovascular", "running", "cycling", "bicycle ride",
+      "hypertrophy", "muscle", "muscles", "strength", "strength training", "resistance",
+      "bench press", "pull-ups", "push-ups", "squats", "gym",
+      "sedentary", "obesity", "obese", "heart disease", "cholesterol", "plaque",
+      "diabetes", "rust", "human engine", "body",
+    ],
+    keywordsKh: [
+      "អាហារូបត្ថម្ភ", "របបអាហារ", "អាហារ", "ការញុំា",
+      "សារធាតុចិញ្ចឹម", "កាបូអ៊ីដ្រាត", "ប្រូតេអុីន", "ខ្លាញ់",
+      "កាឡូរី", "ស្រកទម្ងន់", "ឡើងទម្ងន់",
+      "លំហាត់ប្រាណ", "ចលនា", "ហ្វឹកហាត់",
+      "សុខភាពបេះដូង", "ជិះកង់", "រត់",
+      "សាច់ដុំ", "កម្លាំង", "ការលូតលាស់សាច់ដុំ",
+      "ជំងឺធាត់", "ជំងឺបេះដូង", "កូឡេស្តេរ៉ុល", "ទឹកនោមផ្អែម",
+      "ច្រេះ", "ម៉ាស៊ីនរាងកាយ", "រាងកាយ",
+    ],
+  },
+  {
     id: "pathway-to-medicine",
     href: "/pathway-to-medicine",
     icon: HeartPulse,
@@ -757,6 +788,47 @@ export const SEARCH_INDEX: SearchEntry[] = [
   // the page AND smooth-scroll to the matching id (with a 6rem
   // sticky-nav offset applied globally via index.css).
   // ════════════════════════════════════════════════════════════════
+
+  // ── Human Engine sub-modules ────────────────────────────────────
+  {
+    id: "engine-fuel",
+    href: "/human-engine#fuel",
+    icon: Apple,
+    titleEn: "Macronutrients & Caloric Balance",
+    titleKh: "សារធាតុចិញ្ចឹមម៉ាក្រូ និងតុល្យភាពកាឡូរី",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "Carbs, proteins, and fats explained with local foods (rice, fish, nuts) — plus an interactive slider showing how eating more or less than you burn changes your weight.",
+    descKh: "កាបូអ៊ីដ្រាត ប្រូតេអុីន និងខ្លាញ់ ត្រូវបានពន្យល់ជាមួយអាហារក្នុងតំបន់ (បាយ ត្រី គ្រាប់) — បូករួមនឹងឧបករណ៍អន្តរកម្មបង្ហាញថាតើការញុំាច្រើន ឬតិចជាងអ្វីដែលអ្នកដុតប្ដូរទម្ងន់របស់អ្នកយ៉ាងដូចម្ដេច។",
+    keywordsEn: ["macronutrients", "macros", "carbs", "carbohydrates", "rice", "noodles", "protein", "fish", "chicken", "beans", "fat", "nuts", "cooking oil", "calories", "caloric balance", "deficit", "surplus", "weight loss", "weight gain"],
+    keywordsKh: ["សារធាតុចិញ្ចឹម", "កាបូអ៊ីដ្រាត", "បាយ", "មី", "ប្រូតេអុីន", "ត្រី", "សាច់មាន់", "សណ្ដែក", "ខ្លាញ់", "គ្រាប់", "ប្រេងចម្អិន", "កាឡូរី", "តុល្យភាព", "ស្រកទម្ងន់", "ឡើងទម្ងន់"],
+    type: "module",
+  },
+  {
+    id: "engine-movement",
+    href: "/human-engine#movement",
+    icon: Dumbbell,
+    titleEn: "Cardio vs Hypertrophy — How Exercise Works",
+    titleKh: "កាឌីយ៉ូ ទល់នឹង Hypertrophy — របៀបដែលលំហាត់ប្រាណដំណើរការ",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "Why an evening bicycle ride strengthens your heart and helps you study, and why lifting weights creates micro-tears that rebuild muscle thicker than before.",
+    descKh: "ហេតុអ្វីការជិះកង់ល្ងាចពង្រឹងបេះដូង និងជួយដល់ការសិក្សារបស់អ្នក និងហេតុអ្វីការលើកទម្ងន់បង្កើតការដាច់តូចៗដែលសាងសង់សាច់ដុំឲ្យក្រាស់ជាងមុន។",
+    keywordsEn: ["cardio", "cardiovascular", "heart muscle", "bicycle ride", "running", "jogging", "swimming", "hypertrophy", "muscle growth", "strength training", "resistance", "weights", "bench press", "pull-ups", "push-ups", "squat", "progressive overload", "micro-tears"],
+    keywordsKh: ["កាឌីយ៉ូ", "សុខភាពបេះដូង", "ជិះកង់", "រត់", "ហែលទឹក", "ការលូតលាស់សាច់ដុំ", "កម្លាំង", "ហ្វឹកហាត់ទប់ទល់", "ទម្ងន់", "Pull-up", "Push-up", "Squat"],
+    type: "module",
+  },
+  {
+    id: "engine-rust",
+    href: "/human-engine#rust",
+    icon: HeartCrack,
+    titleEn: "Sedentary Lifestyle — Obesity & Heart Disease",
+    titleKh: "របៀបរស់នៅអសកម្ម — ជំងឺធាត់ និងជំងឺបេះដូង",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "How chronic surplus and inactivity cause obesity, and how cholesterol plaque builds in arteries — exactly like rust in a pipe — until the heart fails.",
+    descKh: "របៀបដែលការលើសរ៉ាំរ៉ៃ និងភាពអសកម្មបណ្ដាលឲ្យធាត់ និងរបៀបដែលបន្ទះកូឡេស្តេរ៉ុលបង្គរនៅក្នុងសរសៃឈាម — ដូចច្រេះក្នុងបំពង់ — រហូតបេះដូងគាំង។",
+    keywordsEn: ["sedentary", "sitting", "inactive", "obesity", "obese", "fat", "weight gain", "diabetes", "heart disease", "cholesterol", "ldl", "plaque", "arteries", "heart attack", "stroke", "rust"],
+    keywordsKh: ["អសកម្ម", "អង្គុយ", "ជំងឺធាត់", "ឡើងទម្ងន់", "ទឹកនោមផ្អែម", "ជំងឺបេះដូង", "កូឡេស្តេរ៉ុល", "សរសៃឈាម", "ការគាំងបេះដូង", "ច្រេះ"],
+    type: "module",
+  },
 
   // ── Pathway to Medicine sub-modules ─────────────────────────────
   {

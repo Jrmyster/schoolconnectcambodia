@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -358,6 +358,14 @@ const NAV_GROUPS: NavGroup[] = [
     icon: Smile,
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
+      {
+        href: "/human-engine",
+        labelEn: "The Human Engine: Nutrition & Movement",
+        labelKh: "ម៉ាស៊ីនរាងកាយ៖ អាហារូបត្ថម្ភ និងចលនា",
+        icon: Dumbbell,
+        descEn: "How food fuels you, how exercise builds heart and muscle, and what 'rust' (sitting too much) does to your body over time.",
+        descKh: "របៀបដែលអាហារផ្ដល់ឥន្ធនៈដល់អ្នក របៀបដែលលំហាត់ប្រាណសាងសង់បេះដូង និងសាច់ដុំ និងអ្វីដែល 'ច្រេះ' (ការអង្គុយច្រើនពេក) ធ្វើដល់រាងកាយរបស់អ្នកតាមពេលវេលា។",
+      },
       {
         href: "/music-theory",
         labelEn: "Music Theory & The Art of Sound",
