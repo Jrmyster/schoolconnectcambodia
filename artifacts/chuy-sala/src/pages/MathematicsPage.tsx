@@ -125,11 +125,30 @@ export default function MathematicsPage() {
         <RightTriangle isKh={isKh} />
       </Section>
 
-      {/* ── 4. Calculus ─────────────────────────────────────────────── */}
+      {/* ── 4. The Unit Circle ───────────────────────────────────────── */}
+      <Section
+        id="unit-circle"
+        eyebrowEn="04 · Circles"
+        eyebrowKh="០៤ · រង្វង់"
+        titleEn="The Unit Circle — the heart of trigonometry"
+        titleKh="រង្វង់ឯកតា — បេះដូងនៃត្រីកោណមាត្រ"
+        khTerm="រង្វង់ឯកតា"
+        descEn={
+          "A single circle of radius 1, drawn on a sheet of graph paper, contains every value of sine, cosine, and tangent for every angle. Once you see this picture, trigonometry stops being a list of rules and becomes one continuous idea."
+        }
+        descKh="រង្វង់តែមួយដែលមានកាំ ១ គូរនៅលើក្រដាសក្រឡាចត្រង្គ មានតម្លៃរបស់ sine, cosine, និង tangent គ្រប់មុំទាំងអស់។ ពេលអ្នកឃើញរូបនេះ ត្រីកោណមាត្រលែងជាបញ្ជីច្បាប់ — វាក្លាយជាគំនិតបន្តតែមួយ។"
+        isKh={isKh}
+      >
+        <RadiusOfOneCard isKh={isKh} />
+        <DegreesVsRadiansCard isKh={isKh} />
+        <ASTCQuadrantsCard isKh={isKh} />
+      </Section>
+
+      {/* ── 5. Calculus ─────────────────────────────────────────────── */}
       <Section
         id="calculus"
-        eyebrowEn="04 · Change"
-        eyebrowKh="០៤ · ការផ្លាស់ប្ដូរ"
+        eyebrowEn="05 · Change"
+        eyebrowKh="០៥ · ការផ្លាស់ប្ដូរ"
         titleEn="Calculus — the math of change"
         titleKh="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល — គណិតវិទ្យានៃការផ្លាស់ប្ដូរ"
         khTerm="គណនាឌីផេរ៉ង់ស្យែល និងអាំងតេក្រាល"
@@ -143,11 +162,11 @@ export default function MathematicsPage() {
         <IntegralCard isKh={isKh} />
       </Section>
 
-      {/* ── 5. Sequences & Series ────────────────────────────────────── */}
+      {/* ── 6. Sequences & Series ────────────────────────────────────── */}
       <Section
         id="sequences-series"
-        eyebrowEn="05 · Infinity"
-        eyebrowKh="០៥ · អនន្ត"
+        eyebrowEn="06 · Infinity"
+        eyebrowKh="០៦ · អនន្ត"
         titleEn="Sequences & Series — the infinite staircase"
         titleKh="លំដាប់ និងស៊េរី — ជណ្តើរអនន្ត"
         khTerm="លំដាប់ និងស៊េរី"
@@ -1822,6 +1841,573 @@ function HarmonicTrapCard({ isKh }: { isKh: boolean }) {
     </PaperCard>
   );
 }
+
+// ════════════════════════════════════════════════════════════════════════════
+//  4. Unit Circle — drafting-paper aesthetic
+// ════════════════════════════════════════════════════════════════════════════
+
+/* Drafting-paper background reusable for unit-circle cards */
+function DraftingPaperBg() {
+  return (
+    <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden>
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern id="draft-grid-sm" width="12" height="12" patternUnits="userSpaceOnUse">
+            <path d="M 12 0 L 0 0 0 12" fill="none" stroke="#bfdbfe" strokeWidth="0.6" />
+          </pattern>
+          <pattern id="draft-grid-lg" width="60" height="60" patternUnits="userSpaceOnUse">
+            <rect width="60" height="60" fill="url(#draft-grid-sm)" />
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#60a5fa" strokeWidth="0.9" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#draft-grid-lg)" />
+      </svg>
+    </div>
+  );
+}
+
+/* ── Card 1: The Radius of One ─────────────────────────────────────────── */
+function RadiusOfOneCard({ isKh }: { isKh: boolean }) {
+  const [angle, setAngle] = useState<number>(50); // degrees
+  const rad = (angle * Math.PI) / 180;
+  const cosV = Math.cos(rad);
+  const sinV = Math.sin(rad);
+
+  // Drag handle
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const handlePointer = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!svgRef.current) return;
+    const pt = svgRef.current.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const ctm = svgRef.current.getScreenCTM();
+    if (!ctm) return;
+    const p = pt.matrixTransform(ctm.inverse());
+    const dx = p.x - 200;
+    const dy = -(p.y - 200);
+    let deg = (Math.atan2(dy, dx) * 180) / Math.PI;
+    if (deg < 0) deg += 360;
+    setAngle(deg);
+  };
+
+  // SVG pixel coords
+  const cx = 200;
+  const cy = 200;
+  const R = 140;
+  const px = cx + R * cosV;
+  const py = cy - R * sinV;
+
+  return (
+    <PaperCard className="p-5 sm:p-6 mb-6 relative overflow-hidden" data-testid="radius-of-one">
+      <DraftingPaperBg />
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 border-2 border-blue-300 flex items-center justify-center text-blue-800 font-bold font-serif italic">
+          r=1
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "កាំស្មើនឹង ១ — អាថ៌កំបាំងសំខាន់" : "The Radius of One — the core secret"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ពាក្យ \"ឯកតា\" ក្នុង \"រង្វង់ឯកតា\" មានន័យត្រឹមតែមួយ៖ កាំគឺពិតប្រាកដ ១។"
+              : "The word “Unit” in “Unit Circle” means one thing only: the radius is exactly 1."}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-5 items-start">
+        {/* Drafting drawing */}
+        <div className="rounded-xl border-2 border-slate-900/15 bg-white/80 backdrop-blur-sm p-3" data-testid="unit-circle-svg-wrap">
+          <svg
+            ref={svgRef}
+            viewBox="0 0 400 400"
+            className="w-full h-auto cursor-pointer touch-none select-none"
+            onPointerDown={handlePointer}
+            onPointerMove={(e) => {
+              if (e.buttons === 1) handlePointer(e);
+            }}
+            data-testid="unit-circle-svg"
+          >
+            {/* graph paper grid */}
+            <defs>
+              <pattern id="uc-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dbeafe" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#uc-grid)" />
+            {/* axes */}
+            <line x1="0" y1={cy} x2="400" y2={cy} stroke="#0f172a" strokeWidth="1.5" />
+            <line x1={cx} y1="0" x2={cx} y2="400" stroke="#0f172a" strokeWidth="1.5" />
+            {/* tick labels */}
+            <text x={cx + R + 8} y={cy - 6} fontSize="11" fill="#0f172a" fontFamily="serif" fontStyle="italic">x</text>
+            <text x={cx + 6} y={cy - R - 4} fontSize="11" fill="#0f172a" fontFamily="serif" fontStyle="italic">y</text>
+            <text x={cx + R - 4} y={cy + 14} fontSize="10" fill="#475569" fontFamily="serif">1</text>
+            <text x={cx - R - 12} y={cy + 14} fontSize="10" fill="#475569" fontFamily="serif">−1</text>
+            <text x={cx + 4} y={cy - R + 12} fontSize="10" fill="#475569" fontFamily="serif">1</text>
+            <text x={cx + 4} y={cy + R - 2} fontSize="10" fill="#475569" fontFamily="serif">−1</text>
+            {/* the unit circle */}
+            <circle cx={cx} cy={cy} r={R} fill="none" stroke="#0f172a" strokeWidth="2" />
+            {/* dropped lines (cos along x, sin along y) */}
+            <line x1={cx} y1={cy} x2={px} y2={cy} stroke="#dc2626" strokeWidth="2.5" />
+            <line x1={px} y1={cy} x2={px} y2={py} stroke="#16a34a" strokeWidth="2.5" />
+            {/* radius */}
+            <line x1={cx} y1={cy} x2={px} y2={py} stroke="#1e3a8a" strokeWidth="2" />
+            {/* arc for theta */}
+            <path
+              d={`M ${cx + 28} ${cy} A 28 28 0 ${angle > 180 ? 1 : 0} 0 ${cx + 28 * cosV} ${cy - 28 * sinV}`}
+              fill="none"
+              stroke="#7c3aed"
+              strokeWidth="1.5"
+            />
+            <text x={cx + 36 * Math.cos(rad / 2)} y={cy - 36 * Math.sin(rad / 2) + 4} fontSize="13" fontStyle="italic" fontFamily="serif" fill="#7c3aed">
+              θ
+            </text>
+            {/* point */}
+            <circle cx={px} cy={py} r="7" fill="white" stroke="#1e3a8a" strokeWidth="2" />
+            <circle cx={px} cy={py} r="3.5" fill="#1e3a8a" />
+            {/* point label */}
+            <text
+              x={px + (cosV >= 0 ? 12 : -12)}
+              y={py + (sinV >= 0 ? -10 : 18)}
+              textAnchor={cosV >= 0 ? "start" : "end"}
+              fontSize="12"
+              fontFamily="serif"
+              fontStyle="italic"
+              fill="#1e3a8a"
+            >
+              ({cosV.toFixed(2)}, {sinV.toFixed(2)})
+            </text>
+            {/* axis labels for cos/sin */}
+            <text x={(cx + px) / 2} y={cy + 16} textAnchor="middle" fontSize="11" fontStyle="italic" fontFamily="serif" fill="#dc2626">
+              cos θ
+            </text>
+            <text x={px + (cosV >= 0 ? 6 : -6)} y={(cy + py) / 2 + 4} textAnchor={cosV >= 0 ? "start" : "end"} fontSize="11" fontStyle="italic" fontFamily="serif" fill="#16a34a">
+              sin θ
+            </text>
+          </svg>
+        </div>
+
+        {/* Sidebar: stats + slider */}
+        <div className="lg:w-64 space-y-3">
+          <div className="rounded-xl border-2 border-blue-300 bg-blue-50/70 p-4 text-center">
+            <div className={`text-[10px] uppercase tracking-widest font-bold text-blue-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {isKh ? "មុំ θ" : "angle  θ"}
+            </div>
+            <div className="font-serif italic text-2xl text-slate-900" data-testid="uc-angle-display">
+              {Math.round(angle)}°
+            </div>
+            <div className="text-[11px] text-slate-500 mt-0.5 font-mono">
+              {(rad).toFixed(3)} rad
+            </div>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={360}
+            value={angle}
+            onChange={(e) => setAngle(parseInt(e.target.value, 10))}
+            className="w-full accent-blue-700"
+            data-testid="uc-angle-slider"
+          />
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded-lg border-2 border-rose-300 bg-rose-50/70 p-3 text-center">
+              <div className="text-[10px] uppercase tracking-widest font-bold text-rose-700">cos θ</div>
+              <div className="font-serif italic text-xl text-slate-900" data-testid="uc-cos">{cosV.toFixed(3)}</div>
+            </div>
+            <div className="rounded-lg border-2 border-emerald-300 bg-emerald-50/70 p-3 text-center">
+              <div className="text-[10px] uppercase tracking-widest font-bold text-emerald-700">sin θ</div>
+              <div className="font-serif italic text-xl text-slate-900" data-testid="uc-sin">{sinV.toFixed(3)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={`mt-5 rounded-xl border-l-4 border-blue-700 bg-white/80 p-4 ${isKh ? "font-khmer leading-loose" : ""}`} data-testid="uc-core-secret">
+        <div className={`text-[10px] uppercase tracking-widest font-bold text-blue-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "អាថ៌កំបាំងសំខាន់" : "The core secret"}
+        </div>
+        <div className="text-slate-800">
+          {isKh
+            ? "នៅលើរង្វង់ឯកតា កូអរដោនេនៃចំណុចនីមួយៗ គឺគ្រាន់តែជាអនុគមន៍ត្រីកោណមាត្រ៖"
+            : "On the unit circle, every point's coordinates are just the trigonometric functions:"}
+          <div className="text-center mt-2 font-serif italic text-lg sm:text-xl text-slate-900">
+            (x, y) = (cos θ, sin θ)
+          </div>
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+/* ── Card 2: Degrees vs Radians ────────────────────────────────────────── */
+function DegreesVsRadiansCard({ isKh }: { isKh: boolean }) {
+  const [unit, setUnit] = useState<"deg" | "rad">("deg");
+  // Single source of truth: angle stored in degrees. Radians derived.
+  const [deg, setDeg] = useState<number>(90);
+  const rad = (deg * Math.PI) / 180;
+
+  // wedge sweep from positive x axis
+  const cx = 130, cy = 130, R = 100;
+  const endX = cx + R * Math.cos(-rad);
+  const endY = cy + R * Math.sin(-rad);
+  const largeArc = deg > 180 ? 1 : 0;
+  const wedgePath = `M ${cx} ${cy} L ${cx + R} ${cy} A ${R} ${R} 0 ${largeArc} 0 ${endX} ${endY} Z`;
+
+  const reference = [
+    { d: 0, r: "0", fr: "0" },
+    { d: 30, r: "π/6", fr: "π / 6" },
+    { d: 45, r: "π/4", fr: "π / 4" },
+    { d: 60, r: "π/3", fr: "π / 3" },
+    { d: 90, r: "π/2", fr: "π / 2" },
+    { d: 180, r: "π", fr: "π" },
+    { d: 270, r: "3π/2", fr: "3π / 2" },
+    { d: 360, r: "2π", fr: "2π" },
+  ];
+
+  return (
+    <PaperCard className="p-5 sm:p-6 mb-6 relative overflow-hidden" data-testid="degrees-vs-radians">
+      <DraftingPaperBg />
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-violet-100 border-2 border-violet-300 flex items-center justify-center text-violet-800 font-serif italic font-bold">
+          π
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ដឺក្រេ និងរ៉ាដ្យង់ — វិធីពីរយ៉ាងវាស់ការបង្វិល" : "Degrees vs Radians — two ways to measure rotation"}
+          </h3>
+        </div>
+      </div>
+
+      {/* Two-column intro */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        <div className="rounded-xl border-2 border-amber-300 bg-amber-50/60 p-4" data-testid="degrees-explainer">
+          <div className={`text-[10px] uppercase tracking-widest font-bold text-amber-800 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? "ដឺក្រេ" : "Degrees"}
+          </div>
+          <div className="text-center font-serif italic text-2xl text-slate-900 mb-2">360°</div>
+          <p className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "ចែករង្វង់ជា ៣៦០ ផ្នែកតូចៗ។ លេខនេះបានមកពីប្រតិទិនសុរិយគតិបុរាណ — ប្រហែលជាចំនួនថ្ងៃក្នុងមួយឆ្នាំ។"
+              : "Slice the circle into 360 small pieces. The number comes from ancient solar calendars — roughly the number of days in a year."}
+          </p>
+        </div>
+        <div className="rounded-xl border-2 border-violet-300 bg-violet-50/60 p-4" data-testid="radians-explainer">
+          <div className={`text-[10px] uppercase tracking-widest font-bold text-violet-800 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? "រ៉ាដ្យង់" : "Radians"}
+          </div>
+          <div className="text-center font-serif italic text-2xl text-slate-900 mb-2">2π</div>
+          <p className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "វិធីវាស់ \"ធម្មជាតិ\" ជាង ផ្អែកលើប្រវែងកាំ រុំជុំវិញគែម។ កាំដែលរុំជុំវិញរង្វង់ទាំងមូល គឺ 2π ដង — ដូច្នេះរង្វង់ពេញ = 2π រ៉ាដ្យង់។"
+              : "A more “natural” measurement, based on the length of the radius wrapped around the edge. The radius wraps around the full circle 2π times — so a full circle = 2π radians."}
+          </p>
+        </div>
+      </div>
+
+      {/* Live converter */}
+      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5 items-start">
+        {/* Wedge SVG */}
+        <div className="rounded-xl border-2 border-slate-900/15 bg-white/80 p-3" data-testid="rad-wedge-wrap">
+          <svg viewBox="0 0 260 260" className="w-full max-w-[260px] h-auto">
+            <defs>
+              <pattern id="dr-grid" width="13" height="13" patternUnits="userSpaceOnUse">
+                <path d="M 13 0 L 0 0 0 13" fill="none" stroke="#dbeafe" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="260" height="260" fill="url(#dr-grid)" />
+            <line x1="0" y1={cy} x2="260" y2={cy} stroke="#0f172a" strokeWidth="1.2" />
+            <line x1={cx} y1="0" x2={cx} y2="260" stroke="#0f172a" strokeWidth="1.2" />
+            <circle cx={cx} cy={cy} r={R} fill="none" stroke="#0f172a" strokeWidth="2" />
+            <path d={wedgePath} fill="rgba(124,58,237,0.18)" stroke="#7c3aed" strokeWidth="1.5" />
+            <line x1={cx} y1={cy} x2={endX} y2={endY} stroke="#1e3a8a" strokeWidth="2" />
+            <text x={cx + 8} y={cy - 8} fontSize="12" fill="#7c3aed" fontFamily="serif" fontStyle="italic">
+              θ
+            </text>
+          </svg>
+        </div>
+
+        <div className="space-y-3">
+          {/* Unit toggle */}
+          <div className="flex items-center gap-2">
+            <span className={`text-xs font-bold uppercase tracking-wider text-slate-500 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {isKh ? "ឯកតា៖" : "Unit:"}
+            </span>
+            <button
+              onClick={() => setUnit("deg")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+                unit === "deg" ? "bg-amber-600 text-white shadow" : "bg-amber-50 text-amber-800 hover:bg-amber-100"
+              } ${isKh ? "font-khmer" : ""}`}
+              data-testid="unit-toggle-deg"
+            >
+              {isKh ? "ដឺក្រេ" : "Degrees"}
+            </button>
+            <button
+              onClick={() => setUnit("rad")}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition ${
+                unit === "rad" ? "bg-violet-600 text-white shadow" : "bg-violet-50 text-violet-800 hover:bg-violet-100"
+              } ${isKh ? "font-khmer" : ""}`}
+              data-testid="unit-toggle-rad"
+            >
+              {isKh ? "រ៉ាដ្យង់" : "Radians"}
+            </button>
+          </div>
+
+          {/* Slider */}
+          <input
+            type="range"
+            min={0}
+            max={360}
+            value={Math.round(deg)}
+            onChange={(e) => setDeg(parseInt(e.target.value, 10))}
+            className="w-full accent-violet-700"
+            data-testid="dr-angle-slider"
+          />
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-lg border-2 border-amber-300 bg-amber-50/70 p-3 text-center">
+              <div className="text-[10px] uppercase tracking-widest font-bold text-amber-800">degrees</div>
+              <div className="font-serif italic text-xl text-slate-900" data-testid="dr-deg-out">{Math.round(deg)}°</div>
+            </div>
+            <div className="rounded-lg border-2 border-violet-300 bg-violet-50/70 p-3 text-center">
+              <div className="text-[10px] uppercase tracking-widest font-bold text-violet-800">radians</div>
+              <div className="font-serif italic text-xl text-slate-900" data-testid="dr-rad-out">{rad.toFixed(3)}</div>
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 text-xs text-slate-700 font-serif italic text-center">
+            {Math.round(deg)}° × π / 180 = {rad.toFixed(3)} rad
+          </div>
+        </div>
+      </div>
+
+      {/* Reference table */}
+      <div className="mt-5 rounded-xl border-2 border-slate-900/10 bg-white/80 overflow-hidden" data-testid="dr-reference-table">
+        <div className={`px-4 py-2 bg-slate-100 border-b border-slate-200 text-[10px] uppercase tracking-widest font-bold text-slate-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "មុំសំខាន់ៗ" : "Common angles"}
+        </div>
+        <div className="grid grid-cols-4 sm:grid-cols-8 text-center text-xs">
+          {reference.map((r) => (
+            <div key={r.d} className="border-r border-b border-slate-200 last:border-r-0 py-2 px-1">
+              <div className="font-serif italic text-slate-900">{r.d}°</div>
+              <div className="text-slate-500 font-serif italic">{r.fr}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+/* ── Card 3: ASTC Quadrants ────────────────────────────────────────────── */
+function ASTCQuadrantsCard({ isKh }: { isKh: boolean }) {
+  type QuadKey = "I" | "II" | "III" | "IV";
+  const [hoverQ, setHoverQ] = useState<QuadKey | null>(null);
+
+  const quads: {
+    key: QuadKey;
+    letter: string;
+    posEn: string;
+    posKh: string;
+    explainEn: string;
+    explainKh: string;
+    range: string;
+    color: string;
+  }[] = [
+    {
+      key: "I",
+      letter: "A",
+      posEn: "All",
+      posKh: "ទាំងអស់",
+      explainEn: "sin, cos, tan all positive",
+      explainKh: "sin, cos, tan វិជ្ជមានទាំងអស់",
+      range: "0° – 90°",
+      color: "emerald",
+    },
+    {
+      key: "II",
+      letter: "S",
+      posEn: "Sine",
+      posKh: "Sine",
+      explainEn: "only sin positive  ·  cos, tan negative",
+      explainKh: "តែ sin វិជ្ជមាន  ·  cos, tan អវិជ្ជមាន",
+      range: "90° – 180°",
+      color: "amber",
+    },
+    {
+      key: "III",
+      letter: "T",
+      posEn: "Tangent",
+      posKh: "Tangent",
+      explainEn: "only tan positive  ·  sin, cos negative",
+      explainKh: "តែ tan វិជ្ជមាន  ·  sin, cos អវិជ្ជមាន",
+      range: "180° – 270°",
+      color: "rose",
+    },
+    {
+      key: "IV",
+      letter: "C",
+      posEn: "Cosine",
+      posKh: "Cosine",
+      explainEn: "only cos positive  ·  sin, tan negative",
+      explainKh: "តែ cos វិជ្ជមាន  ·  sin, tan អវិជ្ជមាន",
+      range: "270° – 360°",
+      color: "sky",
+    },
+  ];
+
+  const colorMap: Record<string, { border: string; bg: string; text: string; ring: string }> = {
+    emerald: { border: "border-emerald-400", bg: "bg-emerald-50", text: "text-emerald-800", ring: "ring-emerald-400" },
+    amber:   { border: "border-amber-400",   bg: "bg-amber-50",   text: "text-amber-800",   ring: "ring-amber-400" },
+    rose:    { border: "border-rose-400",    bg: "bg-rose-50",    text: "text-rose-800",    ring: "ring-rose-400" },
+    sky:     { border: "border-sky-400",     bg: "bg-sky-50",     text: "text-sky-800",     ring: "ring-sky-400" },
+  };
+
+  // Quadrant SVG positions (top row II,I  /  bottom row III,IV)
+  const cx = 200, cy = 200, R = 150;
+
+  return (
+    <PaperCard className="p-5 sm:p-6 relative overflow-hidden" data-testid="astc-quadrants">
+      <DraftingPaperBg />
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-emerald-100 border-2 border-emerald-300 flex items-center justify-center text-emerald-800 font-serif font-bold">
+          ASTC
+        </div>
+        <div>
+          <h3 className={`font-display font-bold text-xl text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ច្បាប់ ASTC — ច្បាប់ក្វាដ្រង់ទាំងបួន" : "The ASTC Rule — where each function is positive"}
+          </h3>
+          <p className={`text-sm text-slate-600 mt-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ដើម្បីចាំងាយ៖ All Students Take Calculus — A · S · T · C — ចាប់ផ្តើមពីក្វាដ្រង់ទី ១ បន្តច្រាសទ្រនិចនាឡិកា។"
+              : "A mnemonic to remember: All Students Take Calculus — A · S · T · C — starting in Quadrant I and going counter-clockwise."}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-5 items-start">
+        {/* Drafting-paper SVG */}
+        <div className="rounded-xl border-2 border-slate-900/15 bg-white/80 p-3" data-testid="astc-svg-wrap">
+          <svg viewBox="0 0 400 400" className="w-full max-w-[400px] h-auto">
+            <defs>
+              <pattern id="astc-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dbeafe" strokeWidth="0.8" />
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#astc-grid)" />
+            {/* axes */}
+            <line x1="0" y1={cy} x2="400" y2={cy} stroke="#0f172a" strokeWidth="1.5" />
+            <line x1={cx} y1="0" x2={cx} y2="400" stroke="#0f172a" strokeWidth="1.5" />
+            {/* circle */}
+            <circle cx={cx} cy={cy} r={R} fill="none" stroke="#0f172a" strokeWidth="2" />
+            {/* quadrant fills (clipped to circle) */}
+            {quads.map((q) => {
+              const isI = q.key === "I", isII = q.key === "II", isIII = q.key === "III";
+              const x1 = isI || isIV(q.key) ? cx : cx - R;
+              const y1 = isI || isII ? cy - R : cy;
+              const w = R, h = R;
+              const fillMap: Record<string, string> = {
+                emerald: "rgba(16,185,129,0.10)",
+                amber:   "rgba(245,158,11,0.10)",
+                rose:    "rgba(244,63,94,0.10)",
+                sky:     "rgba(14,165,233,0.10)",
+              };
+              const isHover = hoverQ === q.key;
+              return (
+                <g key={q.key}>
+                  <rect
+                    x={x1}
+                    y={y1}
+                    width={w}
+                    height={h}
+                    fill={fillMap[q.color]}
+                    opacity={isHover ? 1 : 0.6}
+                    style={{ transition: "opacity 0.2s" }}
+                    onMouseEnter={() => setHoverQ(q.key)}
+                    onMouseLeave={() => setHoverQ(null)}
+                    data-testid={`astc-quad-${q.key}`}
+                  />
+                </g>
+              );
+            })}
+            {/* big letters */}
+            {quads.map((q) => {
+              const lx = q.key === "I" || q.key === "IV" ? cx + R / 2 : cx - R / 2;
+              const ly = q.key === "I" || q.key === "II" ? cy - R / 2 : cy + R / 2;
+              const fillMap: Record<string, string> = {
+                emerald: "#047857",
+                amber:   "#b45309",
+                rose:    "#be123c",
+                sky:     "#0369a1",
+              };
+              return (
+                <g key={q.key} pointerEvents="none">
+                  <text x={lx} y={ly + 16} textAnchor="middle" fontSize="56" fontFamily="serif" fontWeight="bold" fill={fillMap[q.color]} opacity={hoverQ === null || hoverQ === q.key ? 1 : 0.35}>
+                    {q.letter}
+                  </text>
+                  <text x={lx} y={ly + 36} textAnchor="middle" fontSize="11" fontFamily="serif" fontStyle="italic" fill="#475569" opacity={hoverQ === null || hoverQ === q.key ? 1 : 0.35}>
+                    Q{q.key}
+                  </text>
+                </g>
+              );
+            })}
+            {/* axis labels */}
+            <text x={395} y={cy - 6} textAnchor="end" fontSize="11" fontStyle="italic" fontFamily="serif" fill="#0f172a">+x</text>
+            <text x={5} y={cy - 6} fontSize="11" fontStyle="italic" fontFamily="serif" fill="#0f172a">−x</text>
+            <text x={cx + 6} y={12} fontSize="11" fontStyle="italic" fontFamily="serif" fill="#0f172a">+y</text>
+            <text x={cx + 6} y={395} fontSize="11" fontStyle="italic" fontFamily="serif" fill="#0f172a">−y</text>
+            {/* angle markers */}
+            <text x={cx + R + 4} y={cy + 14} fontSize="10" fill="#475569" fontFamily="serif">0°</text>
+            <text x={cx + 4} y={cy - R - 4} fontSize="10" fill="#475569" fontFamily="serif">90°</text>
+            <text x={cx - R - 14} y={cy + 14} fontSize="10" fill="#475569" fontFamily="serif">180°</text>
+            <text x={cx + 4} y={cy + R + 14} fontSize="10" fill="#475569" fontFamily="serif">270°</text>
+          </svg>
+        </div>
+
+        {/* Quadrant cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {quads.map((q) => {
+            const c = colorMap[q.color];
+            const isHover = hoverQ === q.key;
+            return (
+              <div
+                key={q.key}
+                onMouseEnter={() => setHoverQ(q.key)}
+                onMouseLeave={() => setHoverQ(null)}
+                className={`rounded-xl border-2 ${c.border} ${c.bg} p-3 transition ${
+                  isHover ? `ring-2 ${c.ring} shadow-md` : ""
+                }`}
+                data-testid={`astc-card-${q.key}`}
+              >
+                <div className="flex items-baseline justify-between mb-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className={`font-serif font-bold text-2xl ${c.text}`}>{q.letter}</span>
+                    <span className="font-serif italic text-slate-700 text-sm">Q{q.key}</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-slate-500">{q.range}</span>
+                </div>
+                <div className={`font-bold text-sm ${c.text} ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? q.posKh : q.posEn}
+                </div>
+                <div className={`text-xs text-slate-700 mt-0.5 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                  {isKh ? q.explainKh : q.explainEn}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className={`mt-5 rounded-xl border-l-4 border-emerald-700 bg-white/80 p-4 text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh
+          ? "ហេតុអ្វីសំខាន់៖ កូអរដោនេនៃចំណុចលើរង្វង់ឯកតា គឺ (cos θ, sin θ)។ ពេលមុំ θ ផ្លាស់ប្ដូរក្វាដ្រង់ x ឬ y ក្លាយជាអវិជ្ជមាន — ដូច្នេះ cos ឬ sin ក៏ក្លាយជាអវិជ្ជមាន។ ASTC គឺគ្រាន់តែជារូបភាពនៃក្បួននោះ។"
+          : "Why it matters: a point on the unit circle is (cos θ, sin θ). When the angle moves into a different quadrant, x or y becomes negative — so cos or sin becomes negative too. ASTC is just a picture of that rule."}
+      </div>
+    </PaperCard>
+  );
+}
+
+function isIV(k: "I" | "II" | "III" | "IV") { return k === "IV"; }
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Scoped styles
