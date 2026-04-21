@@ -18,6 +18,7 @@ import { NeptunePlanetModule } from "@/components/space/NeptunePlanetModule";
 import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
 import { ISSModule } from "@/components/space/ISSModule";
 import { SupernovaModule } from "@/components/space/SupernovaModule";
+import { BlackHoleModule } from "@/components/space/BlackHoleModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
@@ -406,6 +407,9 @@ export function SpacePage() {
 
         {/* ── Supernova: Death and Rebirth of Stars ─────────────────────── */}
         <SupernovaModule />
+
+        {/* ── Black Holes: The End of Space and Time ────────────────────── */}
+        <BlackHoleModule />
 
         {/* ── Milky Way Galaxy Map ──────────────────────────────────────── */}
         <GalaxyMap />
