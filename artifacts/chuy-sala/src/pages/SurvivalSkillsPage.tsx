@@ -19,6 +19,7 @@ import {
   Mountain,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { DehydrationModule } from "@/components/widgets/DehydrationModule";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  SUR-01 · Survival Skills: Thriving in the Wild
@@ -142,6 +143,9 @@ export function SurvivalSkillsPage() {
         <SectionStop kh={kh} t={t} />
         <SectionRuleOfThrees kh={kh} t={t} />
         <SectionJungleSpecifics kh={kh} t={t} />
+
+        {/* SUR-02 — Dehydration: The Silent Threat (strictly bilingual, self-contained) */}
+        <DehydrationModule />
 
         {/* Closing */}
         <div
