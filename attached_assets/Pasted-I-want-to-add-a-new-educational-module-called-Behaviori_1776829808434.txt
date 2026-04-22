@@ -1,0 +1,29 @@
+I want to add a new educational module called 'Behaviorism: The Architecture of Action' (អាកប្បកិរិយាវិទ្យា៖ ស្ថាបត្យកម្មនៃសកម្មភាព) to the Study Center section. Please implement the following cleanly:
+
+1. The Blank Slate (ក្តារខៀនទទេ):
+
+Introduce the concept of Tabula Rasa (The Blank Slate). Explain the philosophy that humans are born with no built-in knowledge.
+
+Nature vs. Nurture (ធម្មជាតិ និងការចិញ្ចឹមបីបាច់): Break down the great debate. Does our DNA (Nature) decide who we become, or does our environment and upbringing (Nurture) shape our behavior?
+
+2. The Two Types of Conditioning (ប្រភេទនៃការផ្សារភ្ជាប់បញ្ញា):
+
+Classical Conditioning (ការផ្សារភ្ជាប់បែបបុរាណ): Explain Ivan Pavlov's discovery. It is learning by association. Explain the famous experiment: ringing a bell every time a dog is fed until the dog starts drooling just at the sound of the bell, even with no food around! 
+
+ The mechanics of the Pavlov's dog experiment - conditioned response in psychology. Classical conditioning or respondent conditioning for learning new stimulus. Made in vector. 
+
+Operant Conditioning (ការផ្សារភ្ជាប់តាមសកម្មភាព): Introduce B.F. Skinner. Explain that this is learning by consequences. If an action is rewarded, you do it more. If it is punished, you do it less. 
+
+ Skinner box and operant conditioning chamber experiment outline diagram 
+
+3. Culture as the Ultimate Environment (វប្បធម៌ជាបរិស្ថានជុំវិញ):
+
+Explain how culture scales these concepts up to an entire society.
+
+Use a local, relatable example: The traditional Cambodian greeting, the Sampeah (សំពះ). Explain that children are not born with a genetic instinct to press their hands together and bow. It is a beautiful behavior shaped completely by observing their environment and being positively reinforced by their family and culture.
+
+4. UI & Layout:
+
+Use a 'Psychology Lab' aesthetic: calm neutral grays, warm puzzle-piece yellows, and clear flow-chart style diagrams.
+
+Ensure all core concepts, headings, and psychological terms are strictly bilingual (English/Khmer)."

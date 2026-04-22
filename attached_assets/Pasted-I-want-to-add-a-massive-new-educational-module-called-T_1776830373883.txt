@@ -1,0 +1,38 @@
+I want to add a massive new educational module called 'The United States: History, Geography, and Culture' (សហរដ្ឋអាមេរិក៖ ប្រវត្តិសាស្ត្រ ភូមិសាស្ត្រ និងវប្បធម៌) to the Study Center. Because of the large amount of content, please use a Tabbed interface or Accordion menus to organize the following sections cleanly:
+
+1. Geography & Demographics (ភូមិសាស្ត្រ និងប្រជាសាស្ត្រ):
+
+The Land: Include a map of the 50 states. Detail the massive scale of the country, highlighting the Great Lakes (containing 21% of the world's surface fresh water) and the capital, Washington D.C. 
+
+
+The People: Display the current population (approx. 335 million) and list the top 3 largest cities (New York City, Los Angeles, Chicago).
+
+2. The Founding Story (ប្រវត្តិទូទៅ):
+
+Jamestown: The first permanent English settlement in 1607.
+
+The Revolutionary War: The 1776 rebellion against England to establish a nation without a king.
+
+The Blueprint: Explain the Constitution (the rulebook for the government) and the Bill of Rights (the first 10 amendments that guarantee individual freedoms like speech and religion).
+
+3. Cultural Holidays (ថ្ងៃឈប់សម្រាកវប្បធម៌):
+
+4th of July: Independence day, celebrated with fireworks and barbecues.
+
+Halloween: An autumn festival of costumes and community trick-or-treating.
+
+Thanksgiving: A harvest festival focused on gratitude and family meals (turkey).
+
+Christmas: A winter holiday blending religious traditions with cultural folklore (Santa Claus) and gift-giving.
+
+4. Landmarks & Leaders (តំបន់ប្រវត្តិសាស្ត្រ និងថ្នាក់ដឹកនាំ):
+
+Mount Rushmore: Explain this massive geological sculpture carving four presidents into a granite mountain.
+
+The Presidents List: Create a collapsible/scrollable list of all US Presidents (1 through 46+). For each, include a 1-sentence 'Notable Fact' (e.g., Abraham Lincoln: Led the nation through the Civil War and abolished slavery. Neil Armstrong moon landing during Nixon, etc.).
+
+5. UI & Layout:
+
+Use an 'Americana' aesthetic: navy blues, stark whites, and heritage reds, but keep the typography clean and academic.
+
+Ensure all core concepts, headings, state names, and historical terms are strictly bilingual (English/Khmer)."

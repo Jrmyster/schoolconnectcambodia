@@ -140,6 +140,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "The Social Operating System — zero-sum vs positive-sum games, the Space Race, the expanding circle of cooperation, the Resource-Based Economy thought experiment, and Cambodian Pravas Dai mutual aid.",
         descKh: "ប្រព័ន្ធប្រតិបត្តិការសង្គម — ហ្គេមផលសរុបសូន្យ ទល់នឹងវិជ្ជមាន ការប្រកួតប្រជែងអវកាស រង្វង់នៃកិច្ចសហប្រតិបត្តិការដែលពង្រីក សេដ្ឋកិច្ចផ្អែកលើធនធាន និងប្រវ៉ាស់ដៃខ្មែរ។",
       },
+      {
+        href: "/study-center/behaviorism",
+        labelEn: "Behaviorism: The Architecture of Action",
+        labelKh: "អាកប្បកិរិយាវិទ្យា៖ ស្ថាបត្យកម្មនៃសកម្មភាព",
+        icon: Brain,
+        descEn: "Tabula Rasa and the nature-vs-nurture debate, Pavlov's bell and Skinner's box, and how the Cambodian Sampeah is a beautiful example of culture conditioning a whole society.",
+        descKh: "Tabula Rasa និងការជជែកធម្មជាតិ-ទល់នឹង-ការចិញ្ចឹមបីបាច់ កណ្ដឹង Pavlov និងប្រអប់ Skinner និងរបៀបដែលសំពះជាឧទាហរណ៍ដ៏ស្រស់ស្អាតនៃវប្បធម៌កំពុងផ្សារភ្ជាប់សង្គមទាំងមូល។",
+      },
     ],
   },
   {
