@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
+import { ScientificNotationModule } from "@/components/widgets/ScientificNotationModule";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Mathematics: The Language of Logic — គណិតវិទ្យា៖ ភាសានៃតក្កវិជ្ជា
@@ -93,6 +94,11 @@ export default function MathematicsPage() {
       >
         <MentalMathTrainer isKh={isKh} />
       </Section>
+
+      {/* ── 1b. Scientific Notation (strictly bilingual self-contained) ── */}
+      <section id="scientific-notation" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 scroll-mt-24">
+        <ScientificNotationModule />
+      </section>
 
       {/* ── 2. Algebra ───────────────────────────────────────────────── */}
       <Section
