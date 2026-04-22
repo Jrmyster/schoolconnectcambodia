@@ -16,6 +16,7 @@ import { SaturnPlanetModule } from "@/components/space/SaturnPlanetModule";
 import { JupiterPlanetModule } from "@/components/space/JupiterPlanetModule";
 import { NeptunePlanetModule } from "@/components/space/NeptunePlanetModule";
 import { UranusPlanetModule } from "@/components/space/UranusPlanetModule";
+import { CelestialVocabularyModule } from "@/components/space/CelestialVocabularyModule";
 import { ISSModule } from "@/components/space/ISSModule";
 import { SupernovaModule } from "@/components/space/SupernovaModule";
 import { BlackHoleModule } from "@/components/space/BlackHoleModule";
@@ -364,6 +365,9 @@ export function SpacePage() {
             <SolarSystem3D kh={kh} />
           </Suspense>
         </section>
+
+        {/* ── Celestial Vocabulary Bank: Pronunciation TTS ──────────────── */}
+        <CelestialVocabularyModule />
 
         {/* ── The Sun: Our Local Star ───────────────────────────────────── */}
         <TheSunModule />
