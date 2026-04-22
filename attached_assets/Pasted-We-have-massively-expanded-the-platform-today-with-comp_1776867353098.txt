@@ -1,0 +1,29 @@
+We have massively expanded the platform today with complex grids, interactives, and deep routing. I need you to perform a 'Production Readiness Audit' specifically focused on Mobile Responsiveness and Progressive Web App (PWA) functionality. Please execute the following checklist and fix any issues:
+
+1. PWA & Offline Capabilities (ប្រព័ន្ធប្រតិបត្តិការក្រៅបណ្តាញ):
+
+Manifest Verification: Ensure manifest.json is correctly configured with a name ('Chouy Sala'), short_name, theme_color, background_color, display mode set to 'standalone', and high-resolution icons (192x192 and 512x512).
+
+Service Worker Setup: Audit the service worker registration. Implement a 'Cache-First' strategy for static assets (CSS, JS, Fonts, UI Icons) and a 'Stale-While-Revalidate' strategy for routing. If a student loses internet access on their phone, the core application shell and previously visited pages must still load without a 'No Internet' dinosaur screen.
+
+Installability: Ensure the 'Install App' button triggers the native browser beforeinstallprompt event correctly on Android devices.
+
+2. Mobile UI & Layout Integrity (ចំណុចប្រទាក់ទូរស័ព្ទ):
+
+Viewport & Scaling: Confirm the <meta name="viewport"> tag prevents user-scaling to make it feel like a native app (maximum-scale=1.0, user-scalable=no).
+
+Grid Collapse Validation: We added several dense visual layouts today (Automotive grids, Dinosaur timelines, Africa facts). Ensure all CSS Grids and Flexboxes cleanly stack into single columns on screens narrower than 768px. No horizontal scrolling should happen unless it is a specific, intentional carousel.
+
+Khmer Typography Space: Khmer script requires more vertical line-height than English to prevent the top and bottom vowels/subscripts from being cut off. Audit all new cards and buttons to ensure the CSS line-height accommodates bilingual text without clipping on small screens.
+
+3. Touch & Interaction Optimization:
+
+Touch Targets: Verify that all clickable elements (navigation links, interactive toggles, timeline sliders) have a minimum touch area of 44x44px.
+
+Hover Fallbacks: Many of our new interactives rely on 'hover' states (like the E-Prime decoder or the Glossary tooltips). Ensure there is a tap/click fallback for mobile users since phones do not have mice.
+
+4. Performance & Memory Management:
+
+Lazy Loading: With the massive amount of content added, ensure React components for distinct routes (like /technology/automotive or /science/geology) are using React.lazy() and Suspense so the initial app load on a slow 3G network remains blazing fast.
+
+Please provide a brief summary of the exact service worker updates and layout fixes you implement during this sweep.

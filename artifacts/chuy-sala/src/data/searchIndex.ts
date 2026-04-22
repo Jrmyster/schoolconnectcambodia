@@ -1,5 +1,5 @@
 import {
-  Atom, Beaker, Cpu, Dna, Mountain, ShieldAlert, Briefcase, BookOpen,
+  Atom, Beaker, Cpu, Dna, Mountain, ShieldAlert, Briefcase, BookOpen, Car,
   Pencil, GraduationCap, MapPin, Heart, Sparkles, Telescope, Calculator,
   Zap, Sun, Waves, Microscope, FlaskConical, Brain, Rocket, BookMarked,
   Building2, Users, FileText,
@@ -263,6 +263,20 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "រឿងរ៉ាវពីបណ្ឌិតបញ្ចប់ការសិក្សាដែលធ្លាប់ដើរផ្លូវដូចអ្នកសព្វថ្ងៃ។",
     keywordsEn: ["alumni", "graduates", "stories", "mentor", "role model"],
     keywordsKh: ["សិស្សចាស់", "បញ្ចប់ការសិក្សា", "រឿង"],
+  },
+
+  // ── AUTOMOTIVE ──────────────────────────────────────────
+  {
+    id: "automotive",
+    href: "/technology/automotive",
+    icon: Car,
+    titleEn: "How Cars Work — Automotive Engineering",
+    titleKh: "របៀបដែលឡានដំណើរការ — វិស្វកម្មយានយន្ត",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "From the 4-stroke 'suck-squeeze-bang-blow' engine to the 20,000-volt spark, turbochargers, the 'air pedal' throttle, mufflers, clutches, manual & automatic gearboxes, rack-and-pinion steering, and 15 Hz ABS brakes.",
+    descKh: "ចាប់ពីម៉ាស៊ីន ៤ ជំហាន «ស្រូប-ច្របាច់-ផ្ទុះ-បញ្ចេញ» ដល់ផ្គរ ២០,០០០ វ៉ុល ធួបូ «ឈ្នាន់ខ្យល់» បំពង់ស៊ីម៉ាំង អាំប្រាយ៉ា ប្រអប់លេខកា និងអូតូ ចង្កូត Rack-and-Pinion និងហ្វ្រាំង ABS ១៥ Hz។",
+    keywordsEn: ["car", "cars", "automotive", "engine", "piston", "4-stroke", "rotary", "wankel", "spark plug", "ignition", "throttle", "turbocharger", "turbo", "muffler", "clutch", "transmission", "manual", "automatic", "planetary gear", "steering", "rack and pinion", "abs", "brakes", "anti-lock", "vehicle"],
+    keywordsKh: ["ឡាន", "យានយន្ត", "ម៉ាស៊ីន", "ស៊ីឡាំង", "៤ ជំហាន", "រ៉ូតារី", "ប៊ូហ្គី", "បញ្ឆេះ", "ឈ្នាន់ស្ទុះ", "ធួបូ", "បំពង់ស៊ីម៉ាំង", "អាំប្រាយ៉ា", "ប្រអប់លេខ", "លេខកា", "លេខអូតូ", "ចង្កូត", "ហ្វ្រាំង", "ABS"],
   },
 
   // ── GEOLOGY ─────────────────────────────────────────────

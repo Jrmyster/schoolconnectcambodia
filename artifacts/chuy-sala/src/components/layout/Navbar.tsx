@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -591,6 +591,14 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "បច្ចេកវិទ្យា",
     icon: Cpu,
     items: [
+      {
+        href: "/technology/automotive",
+        labelEn: "How Cars Work",
+        labelKh: "របៀបដែលឡានដំណើរការ",
+        icon: Car,
+        descEn: "Lift the bonnet on a 4-stroke engine, a triangle-spinning rotary, the 20,000-volt spark plug, the 'air pedal' throttle, turbochargers, mufflers, the clutch, manual vs automatic gearboxes, rack-and-pinion steering, and ABS that pumps brakes 15 times a second.",
+        descKh: "បើកគម្របលើម៉ាស៊ីន ៤ ជំហាន រ៉ូតារីត្រីកោណវិល ផ្គរប៊ូហ្គី ២០,០០០ វ៉ុល «ឈ្នាន់ខ្យល់» ធួបូ បំពង់ស៊ីម៉ាំង អាំប្រាយ៉ា ប្រអប់លេខកា ទល់នឹងលេខអូតូ ចង្កូត Rack-and-Pinion និង ABS ដែលលោតហ្វ្រាំង ១៥ ដងក្នុងមួយវិនាទី។",
+      },
       {
         href: "/how-computers-work",
         labelEn: "How Computers Work",
