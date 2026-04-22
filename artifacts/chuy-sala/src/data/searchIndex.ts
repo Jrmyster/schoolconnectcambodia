@@ -7,7 +7,7 @@ import {
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
-  Cog, History, TrendingUp, Activity, Bug, Pill, Lock,
+  Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1413,6 +1413,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វិស្វកម្មក្នុងកម្រិតអូដ្ឋាតូម — នាណូប៉ូត ផ្លុំកាបូន និងម៉ាស៊ីនតូចៗ។",
     keywordsEn: ["nano", "nanotech", "nanotechnology", "nanobot", "carbon nanotube", "graphene", "miniature"],
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
+  },
+  {
+    id: "study-europe",
+    href: "/study-center/europe",
+    icon: Columns3,
+    titleEn: "Europe & The EU: 3000 Years of History",
+    titleKh: "អឺរ៉ុប និងសហភាពអឺរ៉ុប៖ ប្រវត្តិសាស្ត្រ ៣០០០ ឆ្នាំ",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Rome → Middle Ages & Renaissance → Industrial Revolution & World Wars → the European Union and the Schengen open-borders zone.",
+    descKh: "រ៉ូម → មជ្ឈិមសម័យ និងយុគរស់ឡើងវិញ → បដិវត្តន៍ឧស្សាហកម្ម និងសង្គ្រាមលោក → សហភាពអឺរ៉ុប និងតំបន់សិនជេនគ្មានព្រំដែន។",
+    keywordsEn: ["europe", "european union", "EU", "rome", "roman empire", "middle ages", "renaissance", "industrial revolution", "world war", "maastricht", "euro", "schengen", "history", "civics"],
+    keywordsKh: ["អឺរ៉ុប", "សហភាពអឺរ៉ុប", "រ៉ូម", "មជ្ឈិមសម័យ", "សង្គ្រាមលោក", "អឺរ៉ូ", "សិនជេន", "ប្រវត្តិសាស្ត្រ"],
   },
   {
     id: "sci-sky-blue",

@@ -1,0 +1,35 @@
+I want to add a new advanced educational module called 'CRISPR & Genetic Engineering: Editing the Code of Life' (CRISPR និងវិស្វកម្មហ្សែន៖ ការកែសម្រួលកូដនៃជីវិត) to the Biology, Genetics & Evolution section. Please implement the following cleanly:
+
+1. Routing & Navigation:
+
+Create a new component Crispr.jsx.
+
+Register a new route: /science/biology/crispr.
+
+Add a link to the Biology section navigation labeled 'Genetic Engineering (CRISPR)' with a DNA helix or microscope icon.
+
+2. Section 1: The Microscopic Scissors (កន្ត្រៃមីក្រូទស្សន៍):
+
+Explain the core concept of CRISPR-Cas9 using the 'Word Processor' analogy.
+
+Concept: Imagine DNA is a massive book containing the instructions for your body. CRISPR is like the 'Find and Replace' feature on a computer. It finds a specific 'word' (gene) and uses an enzyme (Cas9) acting as molecular scissors to cut it out.
+
+3. Section 2: GMO Plants & The Future of Food (រុក្ខជាតិបំប្លែងហ្សែន និងអនាគតនៃអាហារ):
+
+Explain Genetically Modified Organisms (GMOs).
+
+Give a real-world example: If a rice plant is dying from drought, scientists can find a gene in another plant that survives without water, and 'paste' that survival code into the rice plant's DNA.
+
+Bilingual Note: 'We can engineer crops to resist heat, pests, and flooding, creating abundance for a growing world. (យើងអាចកែច្នៃដំណាំឱ្យធន់នឹងកំដៅ សត្វល្អិត និងទឹកជំនន់ ដោយបង្កើតភាពសម្បូរបែបសម្រាប់ពិភពលោកដែលកំពុងលូតលាស់។)'
+
+4. Section 3: Curing the Incurable (ការព្យាបាលជំងឺដែលមិនអាចព្យាបាលបាន):
+
+Explain how CRISPR treats genetic diseases. Many diseases (like Sickle Cell Anemia) are caused by just one single 'typo' in billions of letters of DNA.
+
+If we can cut out the typo and paste in the correct letter, the disease is cured at the source—not just treated with medicine, but permanently erased from the body's map.
+
+5. UI & Layout:
+
+Use a 'Biolab' aesthetic: Deep greens and clean tech-whites. Include abstract visual representations of DNA strands breaking and reforming.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

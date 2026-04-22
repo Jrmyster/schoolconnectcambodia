@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
-  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3,
   Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
@@ -164,6 +164,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Compass,
         descEn: "The Map of Thinking — a 7-branch interactive compass plus a deep dive into Buddhist Philosophy and the Four Noble Truths.",
         descKh: "ផែនទីនៃការគិតមាន ៧ មែកធាងអន្តរកម្ម ព្រមទាំងការជ្រៅជ្រះអំពីពុទ្ធសាសនទស្សនវិជ្ជា និងអរិយសច្ច៤។",
+      },
+      {
+        href: "/study-center/europe",
+        labelEn: "Europe & The EU: 3000 Years of History",
+        labelKh: "អឺរ៉ុប និងសហភាពអឺរ៉ុប៖ ប្រវត្តិសាស្ត្រ ៣០០០ ឆ្នាំ",
+        icon: Columns3,
+        descEn: "A vertical timeline of Rome → Middle Ages & Renaissance → Industrial Revolution & World Wars → the EU peace experiment, plus fast facts on the 27-state union, the Euro, and the Schengen open-borders zone.",
+        descKh: "ពេលវេលាបញ្ឈរនៃរ៉ូម → មជ្ឈិមសម័យ និងយុគរស់ឡើងវិញ → បដិវត្តន៍ឧស្សាហកម្ម និងសង្គ្រាមលោក → ការពិសោធន៍សន្តិភាពនៃសហភាពអឺរ៉ុប ព្រមទាំងការពិតរហ័សអំពីសហភាព ២៧ រដ្ឋ រូបិយប័ណ្ណអឺរ៉ូ និងតំបន់សិនជេនគ្មានព្រំដែន។",
       },
       {
         href: "/philosophy/language",
