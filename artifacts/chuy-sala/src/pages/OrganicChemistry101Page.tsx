@@ -425,6 +425,107 @@ const MOLECULES: Molecule[] = [
       bonds,
     };
   })(),
+
+  /* ── Water H2O — bent 104.5° ────────────────────────────────────────── */
+  (() => {
+    // Bond length ~50; bend so the O sits at the top of the "V".
+    // Half-angle from vertical = 104.5° / 2 ≈ 52.25°.
+    const r = 55;
+    const half = (104.5 / 2) * (Math.PI / 180);
+    const dx = r * Math.sin(half);
+    const dy = r * Math.cos(half);
+    return {
+      id: "water",
+      formula: "H₂O",
+      nameEn: "Water",
+      nameKh: "ទឹក",
+      contextEn:
+        "The universal solvent. It is technically an 'inorganic' molecule, but it is the absolute foundation of all organic life on Earth.",
+      contextKh:
+        "សារធាតុរំលាយជាសកល ។ តាមបច្ចេកទេស វាជាម៉ូលេគុល \"អនីសរីរាង្គ\" ប៉ុន្តែវាជាមូលដ្ឋានដាច់ខាតនៃជីវិតសរីរាង្គទាំងអស់នៅលើផែនដី ។",
+      atoms: [
+        { el: "O", x: 0,    y: -dy / 2, z: 0 }, // 0 — central O
+        { el: "H", x: -dx,  y:  dy / 2, z: 0 }, // 1
+        { el: "H", x:  dx,  y:  dy / 2, z: 0 }, // 2
+      ],
+      bonds: [
+        { a: 0, b: 1 },
+        { a: 0, b: 2 },
+      ],
+    };
+  })(),
+
+  /* ── Carbon Dioxide CO2 — linear 180°, two C=O double bonds ─────────── */
+  {
+    id: "carbon-dioxide",
+    formula: "CO₂",
+    nameEn: "Carbon Dioxide",
+    nameKh: "កាបូនឌីអុកស៊ីត",
+    contextEn:
+      "The breath of the forest! This inorganic gas is what trees 'eat' out of the air to build solid organic wood and sugars.",
+    contextKh:
+      "ដង្ហើមនៃព្រៃឈើ ! ឧស្ម័នអនីសរីរាង្គនេះគឺជាអ្វីដែលដើមឈើ \"ស៊ី\"ពីខ្យល់ ដើម្បីសាងសង់ឈើ និងស្ករសរីរាង្គដ៏រឹង ។",
+    atoms: [
+      { el: "O", x: -75, y: 0, z: 0 }, // 0
+      { el: "C", x:   0, y: 0, z: 0 }, // 1 — central C
+      { el: "O", x:  75, y: 0, z: 0 }, // 2
+    ],
+    bonds: [
+      { a: 0, b: 1, order: 2 },
+      { a: 1, b: 2, order: 2 },
+    ],
+  },
+
+  /* ── Polyethylene (C2H4)n — short zigzag CH2 backbone ───────────────── */
+  (() => {
+    // 7 carbons in a zigzag along the x-axis, alternating ±y.
+    // Each carbon bears 2 hydrogens (one in +z, one in −z).
+    const N = 7;
+    const step = 38;       // x-spacing between consecutive carbons
+    const yAmp = 16;       // zigzag amplitude
+    const hZ = 28;         // hydrogen out-of-plane offset
+    const hY = 18;         // hydrogen y-offset (away from the chain bend)
+    const startX = -((N - 1) / 2) * step;
+
+    const atoms: Atom3D[] = [];
+    const bonds: Bond3D[] = [];
+
+    // Carbons 0..N-1
+    for (let i = 0; i < N; i++) {
+      const x = startX + i * step;
+      const y = i % 2 === 0 ? -yAmp : yAmp;
+      atoms.push({ el: "C", x, y, z: 0 });
+      if (i > 0) bonds.push({ a: i - 1, b: i });
+    }
+
+    // Two H per C (above and below the page plane). H y nudged opposite
+    // to the carbon's zigzag offset so bonds spread cleanly.
+    for (let i = 0; i < N; i++) {
+      const c = atoms[i];
+      const hYDir = c.y > 0 ? 1 : -1; // push H away from chain-side
+      const hUp: Atom3D   = { el: "H", x: c.x, y: c.y + hYDir * hY, z:  hZ };
+      const hDown: Atom3D = { el: "H", x: c.x, y: c.y + hYDir * hY, z: -hZ };
+      const upIdx = atoms.length;
+      atoms.push(hUp);
+      const downIdx = atoms.length;
+      atoms.push(hDown);
+      bonds.push({ a: i, b: upIdx });
+      bonds.push({ a: i, b: downIdx });
+    }
+
+    return {
+      id: "polyethylene",
+      formula: "(C₂H₄)ₙ",
+      nameEn: "Polyethylene",
+      nameKh: "ប៉ូលីអេទីឡែន",
+      contextEn:
+        "The most common plastic in the world. It is a massive, synthetic organic polymer used to make grocery bags, milk jugs, and many drink bottles. Because the carbon bonds are so strong, it takes hundreds of years to break down in nature, making upcycling incredibly important.",
+      contextKh:
+        "ប្លាស្ទិកដែលប្រើច្រើនបំផុតនៅលើពិភពលោក ។ វាជាប៉ូលីម៊ែរសរីរាង្គសំយោគដ៏ធំ ប្រើសម្រាប់ផលិតថង់ផ្សារ ដបទឹកដោះ និងដបភេសជ្ជៈជាច្រើន ។ ព្រោះតែចំណងកាបូនរឹងមាំខ្លាំង វាត្រូវការរាប់រយឆ្នាំដើម្បីរលាយក្នុងធម្មជាតិ ដូច្នេះការប្រើប្រាស់ឡើងវិញ (upcycling) គឺមានសារៈសំខាន់បំផុត ។",
+      atoms,
+      bonds,
+    };
+  })(),
 ];
 
 function MoleculeViewerSection() {
@@ -601,20 +702,36 @@ function Molecule3DViewer({ mol }: { mol: Molecule }) {
         aria-label={`3D model of ${mol.nameEn} — drag to rotate`}
       >
         <svg viewBox={`0 0 ${VIEW} ${VIEW}`} className="w-full h-full">
-          {/* Bonds (drawn by midpoint depth, behind atoms) */}
+          {/* Bonds (drawn by midpoint depth, behind atoms).
+              Multi-bonds (order 2 / 3) render as parallel offset lines. */}
           {mol.bonds.map((b, i) => {
             const a = projected[b.a], c = projected[b.b];
             const midZ = (a.z + c.z) / 2;
             const shade = depthShade(midZ);
+            const x1 = cx + a.x * SCALE, y1 = cy + a.y * SCALE;
+            const x2 = cx + c.x * SCALE, y2 = cy + c.y * SCALE;
+            const order = b.order ?? 1;
+            const dx = x2 - x1, dy = y2 - y1;
+            const len = Math.hypot(dx, dy) || 1;
+            const px = -dy / len, py = dx / len;
+            const sep = 5;
+            const offsets =
+              order === 2 ? [-sep / 2, sep / 2]
+              : order === 3 ? [-sep, 0, sep]
+              : [0];
             return (
-              <line
-                key={i}
-                x1={cx + a.x * SCALE} y1={cy + a.y * SCALE}
-                x2={cx + c.x * SCALE} y2={cy + c.y * SCALE}
-                stroke={`rgba(226,232,240,${shade})`}
-                strokeWidth={5 * shade}
-                strokeLinecap="round"
-              />
+              <g key={i}>
+                {offsets.map((o, k) => (
+                  <line
+                    key={k}
+                    x1={x1 + px * o} y1={y1 + py * o}
+                    x2={x2 + px * o} y2={y2 + py * o}
+                    stroke={`rgba(226,232,240,${shade})`}
+                    strokeWidth={(order > 1 ? 3.5 : 5) * shade}
+                    strokeLinecap="round"
+                  />
+                ))}
+              </g>
             );
           })}
 
