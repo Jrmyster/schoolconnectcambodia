@@ -24,6 +24,9 @@ import {
   Telescope,
   Leaf,
   Menu,
+  Palette,
+  Newspaper,
+  BookOpen,
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -200,8 +203,102 @@ const ERAS: Era[] = [
     ],
   },
   {
-    id: "industrial",
+    id: "renaissance",
     index: 2,
+    sectionId: "era-renaissance",
+    jumpLabel: { en: "1400–1600 CE", kh: "១៤០០–១៦០០ គ.ស." },
+    dateLabel: { en: "1400 CE — 1600 CE", kh: "១៤០០ — ១៦០០ គ.ស." },
+    title: {
+      en: "The European Renaissance: The Rebirth of Knowledge",
+      kh: "យុគសម័យរស់ឡើងវិញនៅអឺរ៉ុប៖ ការកើតឡើងវិញនៃចំណេះដឹង",
+    },
+    subtitle: {
+      en: "Escaping the Dark Ages",
+      kh: "ការរំដោះខ្លួនពីយុគសម័យងងឹត",
+    },
+    theme: { en: "Marble, Ink & Reason", kh: "ថ្មម៉ាប ទឹកខ្មៅ និងហេតុផល" },
+    description: {
+      en: "After the fall of Rome, much of Europe spent nearly a thousand years in what later writers called the 'Middle Ages' — a long stretch where daily life was strictly controlled by feudal lords, the Church, and inherited dogma. Most people never travelled more than a day's walk from their village, and books — copied by hand — were so rare that a single Bible could cost a year's wages. Then, beginning in the city-states of Italy in the 1400s, something extraordinary stirred. Scholars rediscovered the lost writings of Greece and Rome. A radical new idea spread: that human beings — not just kings or clergy — are capable of reasoning, creating, and understanding the universe for themselves. This idea was called Humanism (មនុស្សសាស្ត្រ), and it lit the fuse for everything that came after — modern science, modern art, modern democracy.",
+      kh: "បន្ទាប់ពីការដួលរលំនៃអាណាចក្ររ៉ូម៉ាំង ភាគច្រើននៃអឺរ៉ុបបានឆ្លងកាត់ស្ទើរតែមួយពាន់ឆ្នាំ ក្នុងអ្វីដែលអ្នកនិពន្ធក្រោយៗហៅថា «យុគសម័យកណ្តាល» — រយៈពេលវែងមួយដែលជីវភាពប្រចាំថ្ងៃត្រូវបានគ្រប់គ្រងយ៉ាងតឹងរ៉ឹងដោយម្ចាស់សក្តិភូមិ ព្រះវិហារ និងគោលលទ្ធិដែលទទួលមរតក។ មនុស្សភាគច្រើនមិនធ្លាប់ធ្វើដំណើរឆ្ងាយជាងការដើរមួយថ្ងៃពីភូមិរបស់ពួកគេទេ ហើយសៀវភៅ — ដែលចម្លងដោយដៃ — កម្រខ្លាំងណាស់ ដែលព្រះគម្ពីរមួយក្បាលអាចមានតម្លៃស្មើនឹងប្រាក់ឈ្នួលមួយឆ្នាំ។ បន្ទាប់មក ចាប់ផ្តើមនៅរដ្ឋទីក្រុងនៃប្រទេសអ៊ីតាលីក្នុងទសវត្សរ៍ ១៤០០ មានរឿងអស្ចារ្យមួយបានកើតឡើង។ អ្នកប្រាជ្ញបានរកឃើញឡើងវិញនូវសំណេរដែលបាត់បង់របស់ក្រិក និងរ៉ូម។ គំនិតថ្មីមួយដ៏រ៉ាឌីកាល់បានរីករាលដាល៖ ថាមនុស្ស — មិនមែនត្រឹមតែស្តេច ឬបព្ជិតទេ — មានសមត្ថភាពហេតុផល បង្កើត និងស្វែងយល់ពីសកលលោកដោយខ្លួនឯង។ គំនិតនេះត្រូវបានគេហៅថា មនុស្សសាស្ត្រ ហើយវាបានបញ្ឆេះបន្ទុះអ្វីៗដែលមកក្រោយ — វិទ្យាសាស្ត្រទំនើប សិល្បៈទំនើប លទ្ធិប្រជាធិបតេយ្យទំនើប។",
+    },
+    icon: BookOpen,
+    // Marble whites + parchment + soft gold — the "Classical Archive" palette.
+    gradientClass:
+      "bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200",
+    accent: {
+      badgeBg: "bg-stone-800",
+      badgeText: "text-amber-50",
+      cardRing: "ring-stone-400/60",
+      nodeBg: "bg-amber-50/80 hover:bg-stone-50 border-stone-400",
+      nodeHoverBg: "hover:bg-stone-50",
+      nodeText: "text-stone-900",
+    },
+    artifacts: [
+      {
+        id: "humanism",
+        icon: BrainCircuit,
+        title: {
+          en: "Humanism (មនុស្សសាស្ត្រ)",
+          kh: "មនុស្សសាស្ត្រ (Humanism)",
+        },
+        shortTag: {
+          en: "The mind unchained",
+          kh: "បញ្ញាដែលរំដោះចេញពីច្រវាក់",
+        },
+        body: {
+          en: "Humanism was the radical Renaissance idea that human beings — every one of us — are capable of reasoning, creating, and understanding the universe for ourselves. For a thousand years, Europe had been told that truth came only from kings and clergy and that ordinary people existed mainly to obey. Humanist scholars like Petrarch, Erasmus, and Pico della Mirandola argued the opposite: that a farmer's daughter and a peasant's son carry the same spark of reason as any cardinal, and that studying classical languages, history, philosophy, and the natural world was the path to becoming a complete human being.",
+          kh: "មនុស្សសាស្ត្រគឺជាគំនិតរ៉ាឌីកាល់នៃយុគសម័យរស់ឡើងវិញ ដែលថា មនុស្ស — យើងម្នាក់ៗ — មានសមត្ថភាពហេតុផល បង្កើត និងស្វែងយល់ពីសកលលោកដោយខ្លួនឯង។ អស់រយៈពេលមួយពាន់ឆ្នាំ អឺរ៉ុបត្រូវបានគេប្រាប់ថា សេចក្តីពិតមកពីស្តេច និងបព្ជិតតែប៉ុណ្ណោះ ហើយមនុស្សធម្មតាមានវត្តមានដើម្បីគោរពតាម។ អ្នកប្រាជ្ញមនុស្សសាស្ត្រដូចជា Petrarch, Erasmus និង Pico della Mirandola បានជំទាស់៖ ថាកូនស្រីរបស់កសិករ និងកូនប្រុសរបស់អ្នកស្រែ មានផ្កាភ្លើងហេតុផលដូចគ្នានឹងបព្ជិតធំណាមួយ ហើយការសិក្សាភាសាបុរាណ ប្រវត្តិសាស្ត្រ ទស្សនវិជ្ជា និងពិភពធម្មជាតិ គឺជាផ្លូវដើម្បីក្លាយជាមនុស្សពេញលេញម្នាក់។",
+        },
+        whyItMattered: {
+          en: "Humanism is the seed of every modern freedom — universal education, free inquiry, human rights, democracy. The simple claim that any human mind is worth developing is what eventually gave a student in Stung Treng, Phnom Penh, or São Paulo the right to learn whatever they wish.",
+          kh: "មនុស្សសាស្ត្រគឺជាគ្រាប់ពូជនៃសេរីភាពសម័យទំនើបទាំងអស់ — ការអប់រំជាសកល ការស្រាវជ្រាវសេរី សិទ្ធិមនុស្ស លទ្ធិប្រជាធិបតេយ្យ។ ការអះអាងដ៏សាមញ្ញថា ចិត្តមនុស្សណាមួយក៏សមនឹងអភិវឌ្ឍន៍ គឺជាអ្វីដែលទីបំផុតបានផ្តល់សិទ្ធិដល់និស្សិតម្នាក់នៅស្ទឹងត្រែង ភ្នំពេញ ឬ São Paulo ឲ្យរៀនអ្វីដែលគេចង់រៀន។",
+        },
+      },
+      {
+        id: "leonardo-perspective",
+        icon: Palette,
+        title: {
+          en: "Leonardo da Vinci & Linear Perspective",
+          kh: "Leonardo da Vinci និងមើលឃើញបញ្ឈរ (Linear Perspective)",
+        },
+        shortTag: {
+          en: "The Art of Reality (សិល្បៈនៃភាពពិត)",
+          kh: "សិល្បៈនៃភាពពិត",
+        },
+        body: {
+          en: "Renaissance art was not just about painting — it was the birth of applied geometry. Leonardo da Vinci (1452–1519) was the perfect example: not just an artist, but a scientist and engineer. He dissected human cadavers — cutting open bodies to see exactly how muscles, tendons, and bones worked — so that he could paint a hand or a smile with anatomical truth. He filled thousands of notebook pages with sketches of flying machines, river engineering, and circulating blood. Most revolutionary of all, he and his contemporaries used mathematics to invent Linear Perspective: a precise geometric method (vanishing points, horizon lines, and converging parallels) that made flat canvas paintings look perfectly three-dimensional for the first time in history.",
+          kh: "សិល្បៈនៃយុគសម័យរស់ឡើងវិញមិនមែនត្រឹមតែការគូរទេ — វាគឺជាកំណើតនៃធរណីមាត្រអនុវត្ត។ Leonardo da Vinci (១៤៥២–១៥១៩) គឺជាឧទាហរណ៍ល្អឥតខ្ចោះ៖ មិនមែនតែជាសិល្បករទេ ប៉ុន្តែជាអ្នកវិទ្យាសាស្ត្រ និងវិស្វករ។ គាត់បានកាត់សាកសពមនុស្ស — បើកសាច់ដុំដើម្បីមើលឲ្យឃើញច្បាស់ថា សាច់ដុំ សរសៃពួរ និងឆ្អឹង ដំណើរការយ៉ាងណា — ដើម្បីឲ្យគាត់អាចគូរដៃ ឬស្នាមញញឹមមួយ ដោយការពិតកាយវិភាគវិទ្យា។ គាត់បានបំពេញសៀវភៅកំណត់ត្រារាប់ពាន់ទំព័រ ដោយគំនូរម៉ាស៊ីនហោះ វិស្វកម្មទន្លេ និងចរន្តឈាម។ រឿងបដិវត្តន៍បំផុត គឺគាត់ និងសហសម័យរបស់គាត់បានប្រើគណិតវិទ្យាដើម្បីបង្កើត Linear Perspective៖ វិធីសាស្ត្រធរណីមាត្រដ៏ច្បាស់លាស់ (ចំណុចបាត់ បន្ទាត់ផ្ទៃមេឃ និងបន្ទាត់ស្របដែលប្រសព្វ) ដែលធ្វើឲ្យការគូរលើផ្ទាំងសំពត់រាបស្មើ មើលទៅជា ៣ វិមាត្រយ៉ាងល្អឥតខ្ចោះ ជាលើកដំបូងក្នុងប្រវត្តិសាស្ត្រ។",
+        },
+        whyItMattered: {
+          en: "When art borrows the tools of science, both grow stronger. Linear perspective is still taught in every architecture, engineering, animation, and video-game design school on Earth. Leonardo's habit — observe nature carefully, then represent it with mathematical precision — is the founding habit of every modern STEM discipline.",
+          kh: "ពេលដែលសិល្បៈខ្ចីឧបករណ៍របស់វិទ្យាសាស្ត្រ ទាំងពីរលូតលាស់រឹងមាំជាង។ Linear perspective នៅតែត្រូវបានបង្រៀននៅសាលាស្ថាបត្យកម្ម វិស្វកម្ម ចលនារូបភាព និងការរចនាហ្គេមវីដេអូគ្រប់ទីកន្លែងនៅលើផែនដី។ ទម្លាប់របស់ Leonardo — សង្កេតធម្មជាតិដោយយកចិត្តទុកដាក់ ហើយបន្ទាប់មកតំណាងវាដោយភាពច្បាស់លាស់នៃគណិតវិទ្យា — គឺជាទម្លាប់ស្ថាបនិកនៃគ្រប់មុខវិជ្ជា STEM ទំនើប។",
+        },
+      },
+      {
+        id: "printing-press",
+        icon: Newspaper,
+        title: {
+          en: "The Printing Press (ម៉ាស៊ីនបោះពុម្ព)",
+          kh: "ម៉ាស៊ីនបោះពុម្ព (Printing Press)",
+        },
+        shortTag: {
+          en: "The Information Explosion",
+          kh: "ការផ្ទុះឡើងនៃព័ត៌មាន",
+        },
+        body: {
+          en: "Around 1440, in the German city of Mainz, a goldsmith named Johannes Gutenberg invented something that historians often rank as the most important invention before the computer: the printing press with movable metal type. Each tiny letter could be cast from metal, arranged into a page, inked, pressed onto paper — and then re-arranged for the next page. Before Gutenberg, a single hand-copied Bible could cost a craftsman a year's wages and take a monk a year to produce. Within fifty years of his press, more than 20 million printed books were in circulation across Europe. The price of a book dropped so drastically that, for the first time in history, ordinary farmers, merchants, and women could finally afford to learn to read.",
+          kh: "ប្រហែលឆ្នាំ ១៤៤០ នៅទីក្រុងម៉ាញ់នៅអាល្លឺម៉ង់ ជាងមាសម្នាក់ឈ្មោះ Johannes Gutenberg បានបង្កើតអ្វីមួយដែលអ្នកប្រវត្តិសាស្ត្រច្រើនចាត់ទុកថាជាការបង្កើតសំខាន់បំផុតមុនកុំព្យូទ័រ៖ ម៉ាស៊ីនបោះពុម្ពដែលមានអក្សរដែកអាចផ្លាស់ទីបាន។ អក្សរតូចៗនីមួយៗអាចចាក់ចេញពីដែក រៀបជាទំព័រ លាបទឹកខ្មៅ ចុចលើក្រដាស — ហើយបន្ទាប់មករៀបឡើងវិញសម្រាប់ទំព័របន្ទាប់។ មុន Gutenberg ព្រះគម្ពីរមួយក្បាលដែលចម្លងដោយដៃ អាចស៊ីឈ្នួលជាងសិប្បកម្មមួយឆ្នាំ ហើយត្រូវចំណាយពេលព្រះសង្ឃមួយរូបមួយឆ្នាំដើម្បីផលិត។ ក្នុងរយៈពេលហាសិបឆ្នាំបន្ទាប់ពីម៉ាស៊ីនរបស់គាត់ សៀវភៅបោះពុម្ពជាង ២០ លានក្បាល បាននៅក្នុងចរាចរនៅទូទាំងអឺរ៉ុប។ តម្លៃនៃសៀវភៅបានធ្លាក់ចុះយ៉ាងខ្លាំង ដែលជាលើកដំបូងក្នុងប្រវត្តិសាស្ត្រ កសិករធម្មតា ឈ្មួញ និងស្ត្រី ទីបំផុតអាចមានលទ្ធភាពរៀនអាន។",
+        },
+        whyItMattered: {
+          en: "When books become cheap, ideas escape control. Within a generation, the printing press fueled the Protestant Reformation, the Scientific Revolution, and the spread of literacy itself — the foundation on which every later breakthrough, from Newton's physics to today's internet, was built.",
+          kh: "ពេលដែលសៀវភៅមានតម្លៃថោក គំនិតរត់គេចពីការគ្រប់គ្រង។ ក្នុងរយៈពេលមួយជំនាន់ ម៉ាស៊ីនបោះពុម្ពបានជំរុញការកែទម្រង់ Protestant បដិវត្តន៍វិទ្យាសាស្ត្រ និងការផ្សព្វផ្សាយចំណេះអក្សរ — មូលដ្ឋានគ្រឹះដែលគ្រប់ការច្នៃប្រឌិតបន្ទាប់ ពីរូបវិទ្យារបស់ Newton ដល់អ៊ីនធឺណិតបច្ចុប្បន្ននេះ ត្រូវបានសាងសង់លើ។",
+        },
+      },
+    ],
+  },
+  {
+    id: "industrial",
+    index: 3,
     sectionId: "era-industrial",
     jumpLabel: { en: "1700s–1900s", kh: "សតវត្សទី ១៨–១៩" },
     dateLabel: { en: "1700s — 1900s", kh: "សតវត្សទី ១៨ — ទី ១៩" },
@@ -256,7 +353,7 @@ const ERAS: Era[] = [
   },
   {
     id: "information-age",
-    index: 3,
+    index: 4,
     sectionId: "era-information-age",
     jumpLabel: { en: "1950–2026", kh: "១៩៥០–២០២៦" },
     dateLabel: { en: "1950 — 2026", kh: "១៩៥០ — ២០២៦" },
@@ -325,7 +422,7 @@ const ERAS: Era[] = [
   },
   {
     id: "horizon",
-    index: 4,
+    index: 5,
     sectionId: "era-horizon",
     jumpLabel: { en: "2026–2100", kh: "២០២៦–២១០០" },
     dateLabel: { en: "2026 — 2100", kh: "២០២៦ — ២១០០" },
@@ -504,8 +601,8 @@ export default function WorldHistoryPage() {
         </h1>
         <p className={`mt-3 text-base sm:text-lg text-slate-700 max-w-2xl ${kh ? "font-khmer leading-loose" : ""}`}>
           {t(
-            "Twelve thousand years of human invention, in five chapters. Scroll through the eras — and tap any artifact to learn how a single idea changed everything.",
-            "មួយម៉ឺនពីរពាន់ឆ្នាំនៃការច្នៃប្រឌិតរបស់មនុស្ស ក្នុងជំពូកប្រាំ។ រមូរតាមរយៈយុគសម័យ — ហើយចុចលើវត្ថុបុរាណណាមួយ ដើម្បីរៀនពីរបៀបដែលគំនិតតែមួយបានផ្លាស់ប្តូរអ្វីៗទាំងអស់។"
+            "Twelve thousand years of human invention, in six chapters. Scroll through the eras — and tap any artifact to learn how a single idea changed everything.",
+            "មួយម៉ឺនពីរពាន់ឆ្នាំនៃការច្នៃប្រឌិតរបស់មនុស្ស ក្នុងជំពូកប្រាំមួយ។ រមូរតាមរយៈយុគសម័យ — ហើយចុចលើវត្ថុបុរាណណាមួយ ដើម្បីរៀនពីរបៀបដែលគំនិតតែមួយបានផ្លាស់ប្តូរអ្វីៗទាំងអស់។"
           )}
         </p>
       </header>

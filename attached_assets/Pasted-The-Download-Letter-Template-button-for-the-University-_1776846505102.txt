@@ -1,0 +1,48 @@
+The 'Download Letter Template' button for the University Application Letter is currently serving a blank file. I want to replace this with an on-screen, editable 'Template Generator' so students can fill in their information before downloading. Please implement the following cleanly:
+
+1. The Editable UI (ចំណុចប្រទាក់ដែលអាចកែសម្រួលបាន):
+
+Instead of instantly downloading a file, clicking the button should open a clean modal or route to a new page titled 'University Application Letter Builder'.
+
+Create a split-screen or stacked layout:
+
+Left Side/Top: Input fields for the student's specific data (e.g., 'Student Name', 'High School Name', 'University Name', 'Program of Interest').
+
+Right Side/Bottom: A live-updating preview of the formal letter.
+
+2. The Letter Template Content (ទម្រង់លិខិត):
+
+Use this formal structure for the live preview, injecting the student's inputs where bracketed:
+
+[Student Name]
+[Student Address or High School]
+[Student Email / Phone]
+
+[Current Date]
+
+Admissions Office
+[University Name]
+
+Dear Admissions Committee,
+
+I am writing to express my strong interest in applying for the [Program of Interest] program at [University Name] for the upcoming academic year.
+
+As a student at [High School Name], I have developed a strong foundation in my studies and a deep passion for continuing my education. I am particularly drawn to your university because of its reputation for academic excellence and the opportunity it provides for students to grow both personally and professionally.
+
+During my time in high school, I have worked hard to maintain strong grades and participate in community activities. I believe that my dedication, resilience, and eagerness to learn make me a strong candidate for your program.
+
+I have attached my academic transcripts and required documents for your review. Thank you for your time and consideration. I look forward to the opportunity to contribute to [University Name].
+
+Sincerely,
+
+(Signature)
+
+[Student Name]
+
+3. The Download Functionality:
+
+Below the live preview, add a prominent button: 'Generate PDF (បង្កើតឯកសារ PDF)'.
+
+Use a lightweight client-side library like html2pdf.js, jspdf, or simply a styled window.print() function to allow the student to save their completed letter directly to their device as a perfectly formatted PDF.
+
+Ensure the printed version uses a clean, formal serif font (like Times New Roman) and hides all UI elements (like the input boxes and buttons)
