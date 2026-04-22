@@ -1,0 +1,27 @@
+I want to add a highly detailed new module called 'Authority & Conformity: The Science of Obedience' (អំណាច និងការស្របតាមសង្គម៖ វិទ្យាសាស្ត្រនៃការស្តាប់បង្គាប់) to the Sociology section. Please implement the following cleanly:
+
+1. The Need to Fit In (ការស្របតាមសង្គម):
+
+The Asch Experiment: Introduce Solomon Asch's famous line-length experiment. Explain that when a group of actors confidently gave the wrong answer about which drawn line was the longest, normal subjects would also give the wrong answer just to avoid standing out. It proves humans are wired to doubt their own eyes to avoid social isolation.
+
+2. The Milgram Experiment (ការពិសោធន៍របស់ Milgram):
+
+The Setup: Explain Stanley Milgram's 1961 experiment at Yale University. Subjects were told they were the 'Teacher' and had to deliver electric shocks to a 'Learner' (an actor) every time they answered a question incorrectly.
+
+The Pressure: Highlight that the shocks weren't real, but the 'Teacher' didn't know that. When the 'Learner' began to scream and beg them to stop, the scientist in the white coat simply said: 'The experiment requires that you continue.'
+
+3. The Terrifying Truth (ការពិតដ៏គួរឱ្យខ្លាច):
+
+The Results: Display the shocking data: 65% of ordinary, good people went all the way to the maximum 450-volt shock, simply because an authority figure told them to.
+
+The Agentic State (ស្ថានភាពធ្វើតាមបញ្ជា): Explain Milgram's theory. When humans submit to an authority figure, they shift into the 'Agentic State.' They view themselves merely as an instrument carrying out someone else's wishes, meaning they no longer feel personally responsible for their own actions.
+
+4. The Antidote: Critical Thinking (ដំណោះស្រាយ៖ ការគិតពិចារណា):
+
+Explain that society needs some obedience to function (stopping at red lights, following laws), but blind obedience is incredibly dangerous. The defense against it is critical thinking and moral courage—the willingness to be the only person in the room who says 'No.'
+
+5. UI & Layout:
+
+Use a 'Psychology Lab' aesthetic: clinical whites, stark chalkboard blacks, and high-contrast alert reds to highlight the danger of blind obedience.
+
+Ensure all core concepts, headings, and sociological terms are strictly bilingual (English/Khmer).
