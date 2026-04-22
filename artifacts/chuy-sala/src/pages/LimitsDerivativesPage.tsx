@@ -11,6 +11,12 @@ import {
   Divide,
   Link as LinkIcon,
   BookOpen,
+  Car,
+  Gauge,
+  Zap,
+  Activity,
+  Rocket,
+  Infinity as InfinityIcon,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
@@ -449,6 +455,9 @@ export function LimitsDerivativesPage() {
           </div>
         </Section>
 
+        {/* §5 — Higher-Order Derivatives */}
+        <HigherOrderSection isKh={isKh} />
+
         {/* Closing CTA */}
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Link
@@ -832,6 +841,288 @@ function ProofAccordion({
         <div className="px-5 pb-5 pt-1 border-t border-blue-100">{children}</div>
       )}
     </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  §5 — Higher-Order Derivatives: The Ladder of Motion
+//  ដេរីវេបន្តបន្ទាប់៖ ជណ្ដើរនៃចលនា
+// ════════════════════════════════════════════════════════════════════════════
+
+type CarRung = {
+  order: 1 | 2 | 3;
+  prime: string;          // f', f'', f'''
+  termEn: string;         // Velocity
+  termKh: string;         // ល្បឿន
+  analogyEn: string;      // The speed of the car.
+  analogyKh: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  unitEn: string;         // m/s
+  unitKh: string;         // ម៉ែត្រ/វិនាទី
+  flavorEn: string;       // longer note
+  flavorKh: string;
+};
+
+const CAR_LADDER: CarRung[] = [
+  {
+    order: 1,
+    prime: "f'(x)",
+    termEn: "Velocity",
+    termKh: "ល្បឿន",
+    analogyEn: "How fast the car is moving — the reading on your speedometer.",
+    analogyKh: "ល្បឿនដែលរថយន្តកំពុងធ្វើដំណើរ — តួលេខនៅលើនាឡិកាល្បឿន។",
+    Icon: Gauge,
+    unitEn: "m/s",
+    unitKh: "ម៉ែត្រ/វិនាទី",
+    flavorEn: "The first derivative tells you the slope of position — your moment-to-moment speed.",
+    flavorKh: "ដេរីវេទីមួយប្រាប់ពីជម្រាលនៃទីតាំង — ល្បឿនរបស់អ្នកនៅគ្រប់ពេលវេលា។",
+  },
+  {
+    order: 2,
+    prime: "f''(x)",
+    termEn: "Acceleration",
+    termKh: "ការបង្កើនល្បឿន",
+    analogyEn: "How hard you are pressing the gas pedal — the rate at which speed itself changes.",
+    analogyKh: "កម្រិតដែលអ្នកសង្កត់លើគ្រឿងប្រេង — អត្រាដែលល្បឿនកំពុងផ្លាស់ប្ដូរ។",
+    Icon: Zap,
+    unitEn: "m/s²",
+    unitKh: "ម៉ែត្រ/វិនាទី²",
+    flavorEn: "Press harder → bigger acceleration → you sink into the seat.",
+    flavorKh: "សង្កត់ខ្លាំង → ការបង្កើនល្បឿនធំ → អ្នកត្រូវរុញចូលទៅខ្នង។",
+  },
+  {
+    order: 3,
+    prime: "f'''(x)",
+    termEn: "Jerk",
+    termKh: "ការកន្ត្រាក់",
+    analogyEn: "How fast you are pushing the gas pedal itself. High jerk = a shaky, unpleasant ride.",
+    analogyKh: "ល្បឿនដែលអ្នកសង្កត់គ្រឿងប្រេង។ ការកន្ត្រាក់ខ្ពស់ = ការធ្វើដំណើរញ័រ មិនស្រួល។",
+    Icon: Activity,
+    unitEn: "m/s³",
+    unitKh: "ម៉ែត្រ/វិនាទី³",
+    flavorEn: "Engineers minimize jerk so elevators, trains, and roller coasters feel smooth.",
+    flavorKh: "វិស្វករកាត់បន្ថយការកន្ត្រាក់ ដើម្បីឲ្យជណ្ដើរយន្ត រថភ្លើង និងរថយន្តកម្សាន្ត មានអារម្មណ៍រលូន។",
+  },
+];
+
+type FunRung = {
+  order: number;
+  nameEn: string;
+  nameKh: string;
+};
+
+const FUN_LADDER: FunRung[] = [
+  { order: 4, nameEn: "Snap",    nameKh: "ស្នាប" },
+  { order: 5, nameEn: "Crackle", nameKh: "ក្រេកគ្ល៍" },
+  { order: 6, nameEn: "Pop",     nameKh: "ផប" },
+  { order: 7, nameEn: "Lock",    nameKh: "ឡុក" },
+  { order: 8, nameEn: "Drop",    nameKh: "ដ្រប" },
+];
+
+function HigherOrderSection({ isKh }: { isKh: boolean }) {
+  return (
+    <Section
+      isKh={isKh}
+      num={5}
+      eyebrowEn="Higher-Order Derivatives"
+      eyebrowKh="ដេរីវេបន្តបន្ទាប់"
+      titleEn="The Ladder of Motion"
+      titleKh="ជណ្ដើរនៃចលនា"
+      descEn="If the first derivative is the speed of a car, what does the second derivative mean? The third? You can keep differentiating a function over and over — and each new derivative tells you about the rate of change of the one below it. Climb the ladder."
+      descKh="បើដេរីវេទីមួយជាល្បឿនរថយន្ត តើដេរីវេទីពីរមានន័យដូចម្តេច? ទីបី? អ្នកអាចបន្តរកដេរីវេម្ដងហើយម្ដងទៀត — ហើយដេរីវេថ្មីនីមួយៗប្រាប់ពីអត្រាការផ្លាស់ប្ដូរនៃដេរីវេខាងក្រោម។ ឡើងជណ្ដើរ។"
+    >
+      {/* The car analogy ladder */}
+      <PaperCard className="p-5 sm:p-6 mb-6" testId="ladder-card">
+        <div className="flex items-center gap-2 mb-4">
+          <Car className="w-5 h-5 text-blue-700" />
+          <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ជណ្ដើរនៃចលនា — រថយន្តរបស់អ្នក" : "The Ladder of Motion — Your Car"}
+          </h3>
+        </div>
+        <ol className="space-y-3" data-testid="ladder-rungs">
+          {CAR_LADDER.map((rung) => (
+            <CarRungRow key={rung.order} rung={rung} isKh={isKh} />
+          ))}
+        </ol>
+      </PaperCard>
+
+      {/* The infinite series — fun names */}
+      <PaperCard className="p-5 sm:p-6 mb-6" testId="fun-names-card">
+        <div className="flex items-start sm:items-center gap-2 mb-3 flex-wrap">
+          <Rocket className="w-5 h-5 text-indigo-700 flex-shrink-0" />
+          <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ការបន្ត 'ឥតកំណត់' — ដេរីវេខ្ពស់ជាងនេះ" : "The 'Infinite' Series — Higher Orders (n ≥ 4)"}
+          </h3>
+        </div>
+        <p className={`text-sm text-slate-700 mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "យើងមិនត្រូវការដេរីវេទាំងនេះសម្រាប់បើករថយន្តទេ — ប៉ុន្តែវិស្វករប្រើវាដើម្បីរចនារថយន្តកម្សាន្តដ៏រលូន ផ្លូវដែករថភ្លើងលឿន និងផ្លូវហោះហើររបស់យានអវកាស។ ដើម្បីភាពសប្បាយ អ្នករូបវិទ្យាបានដាក់ឈ្មោះកំប្លែងឲ្យពួកវាដូចខាងក្រោម៖"
+            : "We don't need these derivatives to drive a car — but engineers use them to design smooth roller coasters, high-speed train tracks, and spacecraft trajectories. For fun, physicists gave them these playful names:"}
+        </p>
+        <ul className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3" data-testid="fun-names-list">
+          {FUN_LADDER.map((rung) => (
+            <li
+              key={rung.order}
+              data-testid={`fun-rung-${rung.order}`}
+              className="rounded-xl border-2 border-indigo-200 bg-gradient-to-br from-white to-indigo-50/60 p-3 text-center hover:shadow-md hover:-translate-y-0.5 transition-all"
+            >
+              <div className="text-[10px] font-mono font-bold tracking-widest text-indigo-700 mb-1">
+                {isKh ? `លំដាប់ ${toKh(rung.order)}` : `${rung.order}TH`}
+              </div>
+              <div className="text-slate-900 font-extrabold text-base sm:text-lg leading-tight">
+                {rung.nameEn}
+              </div>
+              {isKh && (
+                <div className="text-[11px] text-slate-600 font-khmer mt-0.5">
+                  {rung.nameKh}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </PaperCard>
+
+      {/* Notation card */}
+      <PaperCard className="p-5 sm:p-6" testId="notation-card">
+        <div className="flex items-center gap-2 mb-3">
+          <InfinityIcon className="w-5 h-5 text-blue-700" />
+          <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "សញ្ញាសរសេរ — ដេរីវេទី n" : "Notation — The nth Derivative"}
+          </h3>
+        </div>
+        <p className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? (
+            <>
+              ពេល <I>n</I> កាន់តែធំ យើងឈប់ប្រើសញ្ញាបន្ទាត់តូច (
+              <I>'''</I>) ហើយចាប់ផ្ដើមដាក់លេខក្នុងវង់ក្រចក ដើម្បីកុំឲ្យ "ផែនទី"
+              មើលច្របូកច្របល់៖
+            </>
+          ) : (
+            <>
+              As <I>n</I> grows, we stop using prime tick-marks (
+              <I>'''</I>) and start using a number in parentheses so the
+              "map" doesn't get messy:
+            </>
+          )}
+        </p>
+        <KatexBlock
+          testId="notation-formula"
+          math={String.raw`f^{(n)}(x) \;=\; \frac{d^{n}y}{dx^{n}}`}
+        />
+        <table
+          className="mt-4 w-full border-separate border-spacing-y-2"
+          data-testid="notation-table"
+        >
+          <caption className="sr-only">
+            {isKh
+              ? "តារាងសញ្ញាសរសេរសម្រាប់ដេរីវេទី ១ ដល់ទី ៤ — សញ្ញាបន្ទាត់តូច និងសញ្ញា Leibniz"
+              : "Notation table for the 1st through 4th derivative — prime and Leibniz forms"}
+          </caption>
+          <thead className="sr-only">
+            <tr>
+              <th scope="col">{isKh ? "លំដាប់" : "Order"}</th>
+              <th scope="col">{isKh ? "សញ្ញាបន្ទាត់តូច" : "Prime form"}</th>
+              <th scope="col">{isKh ? "សញ្ញា Leibniz" : "Leibniz form"}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { n: 1, prime: "f'(x)",    leibniz: String.raw`\frac{dy}{dx}` },
+              { n: 2, prime: "f''(x)",   leibniz: String.raw`\frac{d^{2}y}{dx^{2}}` },
+              { n: 3, prime: "f'''(x)",  leibniz: String.raw`\frac{d^{3}y}{dx^{3}}` },
+              { n: 4, prime: "f^{(4)}(x)", leibniz: String.raw`\frac{d^{4}y}{dx^{4}}` },
+            ].map((row) => (
+              <tr
+                key={row.n}
+                data-testid={`notation-row-${row.n}`}
+                className="bg-blue-50/40"
+              >
+                <th
+                  scope="row"
+                  className="rounded-l-lg border-y border-l border-blue-100 px-3 py-2 align-middle w-12"
+                >
+                  <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-blue-700 text-white font-mono font-bold text-xs">
+                    {isKh ? toKh(row.n) : row.n}
+                  </span>
+                </th>
+                <td className="border-y border-blue-100 px-2 py-2 align-middle">
+                  <div className="overflow-x-auto">
+                    <InlineMath math={row.prime} />
+                  </div>
+                </td>
+                <td className="rounded-r-lg border-y border-r border-blue-100 px-3 py-2 align-middle">
+                  <div className="flex items-center gap-3 overflow-x-auto">
+                    <span aria-hidden="true" className="text-slate-400">=</span>
+                    <InlineMath math={row.leibniz} />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className={`mt-4 text-xs text-slate-600 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+          {isKh
+            ? "កត់សម្គាល់៖ f⁽⁴⁾(x) មិនមែនជា f ទៅគុណនឹង 4 ទេ — វង់ក្រចកមានន័យថា «ដេរីវេទី ៤»។"
+            : "Note: f⁽⁴⁾(x) is NOT f raised to the power 4 — the parentheses mean \"the 4th derivative\"."}
+        </p>
+      </PaperCard>
+    </Section>
+  );
+}
+
+function CarRungRow({ rung, isKh }: { rung: CarRung; isKh: boolean }) {
+  const Icon = rung.Icon;
+  // Stepped indent so the ladder visually climbs.
+  const indent = ["", "sm:ml-6", "sm:ml-12"][rung.order - 1];
+  return (
+    <li
+      data-testid={`rung-${rung.order}`}
+      className={`relative rounded-xl border-2 border-blue-300 bg-white shadow-[0_2px_12px_-6px_rgba(30,64,175,0.4)] p-4 sm:p-5 transition-all hover:shadow-lg hover:border-blue-400 ${indent}`}
+    >
+      <div className="flex items-start gap-3 sm:gap-4">
+        {/* Order badge */}
+        <div className="flex flex-col items-center flex-shrink-0">
+          <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-700 text-white font-mono font-extrabold text-sm shadow-md">
+            {isKh ? toKh(rung.order) : rung.order}
+          </span>
+          <span className="mt-1 text-[9px] font-bold tracking-widest text-blue-700 font-mono">
+            {rung.order === 1 ? "1ST" : rung.order === 2 ? "2ND" : "3RD"}
+          </span>
+        </div>
+
+        {/* Body */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <Icon className="w-4 h-4 text-blue-700 flex-shrink-0" />
+            <h4
+              className={`text-base sm:text-lg font-extrabold text-slate-900 ${isKh ? "font-khmer" : ""}`}
+              data-testid={`rung-title-${rung.order}`}
+            >
+              {isKh ? rung.termKh : rung.termEn}
+            </h4>
+            <span className="opacity-50 text-slate-400">·</span>
+            <span className="text-sm">
+              <InlineMath math={rung.prime} />
+            </span>
+            <Tag isKh={isKh} en={rung.unitEn} kh={rung.unitKh} tone="blue" />
+          </div>
+
+          {/* Always show BOTH languages of the term (strict bilingual) */}
+          <div
+            className={`text-[11px] text-slate-500 mb-2 ${isKh ? "font-mono" : "font-khmer"}`}
+          >
+            {isKh ? `${rung.termEn} · ${rung.unitEn}` : `${rung.termKh} · ${rung.unitKh}`}
+          </div>
+
+          <p className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh ? rung.analogyKh : rung.analogyEn}
+          </p>
+          <p className={`mt-2 text-xs text-slate-600 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh ? rung.flavorKh : rung.flavorEn}
+          </p>
+        </div>
+      </div>
+    </li>
   );
 }
 
