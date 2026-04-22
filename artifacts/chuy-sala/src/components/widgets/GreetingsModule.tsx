@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Volume2, Sunrise, Sun, Moon, AlertTriangle, MessageCircle, Hand, Smile, Coffee } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakWord } from "@/lib/speech";
@@ -247,11 +248,73 @@ function TimeCard({
   warning?: { titleEn: string; titleKh: string; bodyEn: string; bodyKh: string };
 }) {
   const textBase = dark ? "text-white" : "text-slate-900";
-  const textMuted = dark ? "text-indigo-100/90" : "text-slate-700";
+  // Tracks whether THIS card is currently the one whose audio is playing.
+  // Used to pulse the speaker badge so the student visually connects the
+  // sound to the specific card they tapped.
+  const [speaking, setSpeaking] = useState(false);
+
+  // Safety: if the component unmounts mid-utterance, cancel so we don't leave
+  // queued speech orphaned in the global synthesis queue.
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  function speakPhrase() {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      // Browser doesn't support Web Speech (very rare on modern devices) —
+      // fall back to the project's shared helper, which handles its own gating.
+      speakWord(phrase);
+      return;
+    }
+    // ── CRITICAL: cancel any in-flight or queued utterance first.
+    //    This is what stops audio overlap when a student taps several cards
+    //    in rapid succession — the previous one is dropped immediately. ──
+    window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(phrase);
+    utter.lang = "en-US";
+    utter.rate = 0.85; // Slower so ESL learners can hear distinct vowels.
+    utter.onend = () => setSpeaking(false);
+    utter.onerror = () => setSpeaking(false);
+
+    setSpeaking(true);
+    window.speechSynthesis.speak(utter);
+  }
+
+  // Keyboard activation (Enter / Space) for the card-as-button.
+  function onKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      speakPhrase();
+    }
+  }
+
   return (
     <article
-      className={`relative rounded-2xl border-4 border-white bg-gradient-to-br ${gradient} p-5 sm:p-6 shadow-md ring-2 ${ring} hover:-translate-y-1 hover:shadow-xl transition-all duration-200 flex flex-col`}
+      role="button"
+      tabIndex={0}
+      onClick={speakPhrase}
+      onKeyDown={onKeyDown}
+      aria-label={`Listen to ${phrase}`}
+      aria-pressed={speaking}
+      className={`group relative rounded-2xl border-4 border-white bg-gradient-to-br ${gradient} p-5 sm:p-6 shadow-md ring-2 ${ring} cursor-pointer hover:-translate-y-1 hover:shadow-xl active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-amber-400 transition-all duration-200 flex flex-col ${speaking ? "tts-card-active shadow-2xl" : ""}`}
     >
+      {/* Local keyframes for the active/playing pulse on the speaker badge.
+          Scoped per-card render — Tailwind doesn't ship a custom-coloured
+          glow utility that adapts to the per-card accent palette. */}
+      <style>{`
+        @keyframes tts-pulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+          50%      { transform: scale(1.12); box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+        }
+        .tts-speaker-active { animation: tts-pulse 1.1s ease-in-out infinite; }
+        .tts-card-active { outline: 3px solid rgba(251, 191, 36, 0.9); outline-offset: 2px; }
+      `}</style>
+
       {/* Big icon hero */}
       <div className="flex items-center justify-center mb-3">
         <div
@@ -261,9 +324,15 @@ function TimeCard({
         </div>
       </div>
 
-      {/* The phrase */}
-      <div className={`text-center font-display font-extrabold text-2xl sm:text-3xl leading-tight ${textBase}`}>
-        "{phrase}"
+      {/* The phrase + speaker icon (audio affordance) */}
+      <div className={`text-center font-display font-extrabold text-2xl sm:text-3xl leading-tight ${textBase} flex items-center justify-center gap-2`}>
+        <span>"{phrase}"</span>
+        <span
+          aria-hidden
+          className={`inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full ${dark ? "bg-white/15 text-white" : "bg-white/80 text-slate-700"} shadow-inner ${speaking ? "tts-speaker-active" : "group-hover:scale-110 transition-transform"}`}
+        >
+          <Volume2 className="w-5 h-5" />
+        </span>
       </div>
       <div
         className={`text-center font-khmer text-base sm:text-lg italic mt-1 ${dark ? "text-indigo-100" : "text-slate-600"} ${kh ? "" : "opacity-80"}`}
