@@ -35,7 +35,18 @@ export function speakWord(word: string): void {
  * voice (e.g. an English voice mangling Khmer script) — instead we let the
  * caller display a "Audio not supported" tooltip.
  */
-export function speakText(text: string, lang: SpeakLang = "en-US"): SpeakResult {
+export type SpeakOptions = {
+  /** Called when the utterance finishes playing successfully. */
+  onEnd?: () => void;
+  /** Called when the utterance fails (synthesis error or interruption). */
+  onError?: () => void;
+};
+
+export function speakText(
+  text: string,
+  lang: SpeakLang = "en-US",
+  options: SpeakOptions = {}
+): SpeakResult {
   if (typeof window === "undefined") return { ok: false, reason: "no-window" };
   const synth = window.speechSynthesis;
   if (!synth || typeof window.SpeechSynthesisUtterance === "undefined") {
@@ -76,6 +87,15 @@ export function speakText(text: string, lang: SpeakLang = "en-US"): SpeakResult 
     if (enPreferred) utterance.voice = enPreferred;
   } else if (prefixMatch) {
     utterance.voice = prefixMatch;
+  }
+
+  // Lifecycle hooks — let callers sync UI state with real playback length
+  // instead of relying on a fixed-duration timer.
+  if (options.onEnd) {
+    utterance.addEventListener("end", () => options.onEnd?.());
+  }
+  if (options.onError) {
+    utterance.addEventListener("error", () => options.onError?.());
   }
 
   synth.speak(utterance);

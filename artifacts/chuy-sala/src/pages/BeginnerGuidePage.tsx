@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
-import { speakWord } from "@/lib/speech";
+import { speakText, speakWord } from "@/lib/speech";
 
 /* ──────────────────────────────────────────────────────────────────────
  * Beginner English & Math Guide
@@ -417,6 +417,57 @@ function PatternGuideSection({ kh }: { kh: boolean }) {
   const [ones, setOnes] = useState(5);
   const total = hundreds + tens + ones;
 
+  // Which hundreds card is currently being spoken — drives the glow / pulse.
+  const [playing, setPlaying] = useState<number | null>(null);
+  const playTimerRef = useRef<number | null>(null);
+
+  // Cancel any in-flight speech and the visual "playing" state on unmount.
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      if (playTimerRef.current !== null) {
+        window.clearTimeout(playTimerRef.current);
+      }
+    };
+  }, []);
+
+  function speakHundred(h: number) {
+    const word = numberToWords(h); // e.g. "Three hundred"
+
+    // Clear any pending fallback timer from the previous utterance.
+    if (playTimerRef.current !== null) {
+      window.clearTimeout(playTimerRef.current);
+      playTimerRef.current = null;
+    }
+
+    // Sync UI to actual utterance lifecycle. We only clear `playing` if the
+    // ended utterance is still the active one — otherwise a rapid second tap
+    // would have already moved `playing` to a new card and we mustn't undo it.
+    const clearIfStillActive = () => {
+      setPlaying((current) => (current === h ? null : current));
+    };
+
+    // speakText() internally calls speechSynthesis.cancel() before speaking,
+    // so rapid taps never overlap.
+    const result = speakText(word, "en-US", {
+      onEnd: clearIfStillActive,
+      onError: clearIfStillActive,
+    });
+    if (!result.ok) return;
+
+    setPlaying(h);
+
+    // Safety-net timer — covers browsers that occasionally drop `end` events
+    // (e.g. Safari background tabs). 3.5s is comfortably longer than any of
+    // the spoken phrases at rate 0.85.
+    playTimerRef.current = window.setTimeout(() => {
+      clearIfStillActive();
+      playTimerRef.current = null;
+    }, 3500);
+  }
+
   function reset() {
     setHundreds(0); setTens(0); setOnes(0);
   }
@@ -430,24 +481,55 @@ function PatternGuideSection({ kh }: { kh: boolean }) {
         accent="emerald"
       />
 
-      {/* Hundreds gallery */}
+      {/* Hundreds gallery — every card is a tappable pronunciation button */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 mb-8">
-        {HUNDREDS.map((h, idx) => (
-          <div
-            key={h}
-            className={`rounded-2xl border-4 border-white shadow-lg p-4 text-center text-white bg-gradient-to-br ${HUNDRED_PALETTES[idx]} transform hover:scale-105 transition-transform`}
-          >
-            <div className="font-display font-black text-4xl sm:text-5xl leading-none">{h}</div>
-            <div className="mt-2 font-bold text-sm sm:text-base">
-              {numberToWords(h)}
-            </div>
-            {kh && (
-              <div className="mt-1 font-khmer text-xs opacity-90">
-                {KH_TODO("(បកប្រែខ្មែរ)")}
+        {HUNDREDS.map((h, idx) => {
+          const word = numberToWords(h);
+          const isPlaying = playing === h;
+          return (
+            <button
+              key={h}
+              type="button"
+              onClick={() => speakHundred(h)}
+              aria-label={
+                kh
+                  ? KH_TODO(`ស្ដាប់ការបញ្ចេញសំឡេងនៃ ${word}`)
+                  : `Listen to the pronunciation of ${word}`
+              }
+              aria-pressed={isPlaying}
+              data-testid={`hundreds-card-${h}`}
+              className={`relative group rounded-2xl border-4 ${
+                isPlaying ? "border-white animate-pulse-glow" : "border-white"
+              } shadow-lg p-4 text-center text-white bg-gradient-to-br ${HUNDRED_PALETTES[idx]} transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 ${
+                isPlaying ? "scale-105 ring-4 ring-white/80 ring-offset-2 ring-offset-transparent" : ""
+              }`}
+            >
+              {/* Speaker icon — top-right corner */}
+              <span
+                aria-hidden="true"
+                className={`absolute top-2 right-2 inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-900/35 ring-1 ring-white/60 backdrop-blur-sm transition-all ${
+                  isPlaying
+                    ? "bg-white/95 ring-white scale-110"
+                    : "group-hover:bg-slate-900/55"
+                }`}
+              >
+                <Volume2
+                  className={`w-3.5 h-3.5 ${isPlaying ? "text-slate-800" : "text-white"}`}
+                />
+              </span>
+
+              <div className="font-display font-black text-4xl sm:text-5xl leading-none">
+                {h}
               </div>
-            )}
-          </div>
-        ))}
+              <div className="mt-2 font-bold text-sm sm:text-base">{word}</div>
+              {kh && (
+                <div className="mt-1 font-khmer text-xs opacity-90">
+                  {KH_TODO("(បកប្រែខ្មែរ)")}
+                </div>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* The pattern explainer */}
