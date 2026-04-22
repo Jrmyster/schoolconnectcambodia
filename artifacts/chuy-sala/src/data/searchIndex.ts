@@ -1415,6 +1415,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
   },
   {
+    id: "sci-dentistry",
+    href: "/science/dentistry",
+    icon: Stethoscope,
+    titleEn: "Dentistry & Orthodontics: Engineers of the Smile",
+    titleKh: "ទន្តសាស្ត្រ និងទន្តពេទ្យកែចង្កូម៖ វិស្វករនៃស្នាមញញឹម",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "Dentist vs Orthodontist, the three layers of a tooth (enamel, dentin, pulp), and Cambodia's 7+3-year DDS career pathway.",
+    descKh: "ទន្តពេទ្យ ធៀបនឹងទន្តពេទ្យកែចង្កូម ស្រទាប់ធ្មេញទាំងបី (កាចា ភ្លុក បណ្តូល) និងផ្លូវ DDS ៧+៣ ឆ្នាំនៅកម្ពុជា។",
+    keywordsEn: ["dentist", "dentistry", "orthodontist", "orthodontics", "tooth", "teeth", "enamel", "dentin", "pulp", "braces", "smile", "DDS", "oral health"],
+    keywordsKh: ["ទន្តពេទ្យ", "ទន្តសាស្ត្រ", "ធ្មេញ", "កែចង្កូម", "ខ្សែក្រុង", "កាចា", "ភ្លុក", "បណ្តូល", "ស្នាមញញឹម"],
+  },
+  {
     id: "phil-language-reality",
     href: "/philosophy/language",
     icon: Lock,

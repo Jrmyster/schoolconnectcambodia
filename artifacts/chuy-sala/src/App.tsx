@@ -42,6 +42,7 @@ const MassProductionPage        = lazy(() => import("@/pages/MassProductionPage"
 const ElectromagnetismPage      = lazy(() => import("@/pages/ElectromagnetismPage"));
 const HeisenbergPage            = lazy(() => import("@/pages/HeisenbergPage"));
 const LanguageRealityPage       = lazy(() => import("@/pages/LanguageRealityPage"));
+const DentistryPage             = lazy(() => import("@/pages/DentistryPage"));
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const TelevisionPage            = lazy(() => import("@/pages/TelevisionPage").then(m => ({ default: m.TelevisionPage })));
 const FutureIntelligencePage    = lazy(() => import("@/pages/FutureIntelligencePage").then(m => ({ default: m.FutureIntelligencePage })));
@@ -229,6 +230,7 @@ function Router() {
             <Route path="/science/electromagnetism" component={ElectromagnetismPage} />
             <Route path="/science/chemistry/heisenberg" component={HeisenbergPage} />
             <Route path="/philosophy/language" component={LanguageRealityPage} />
+            <Route path="/science/dentistry" component={DentistryPage} />
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/technology/television" component={TelevisionPage} />
             <Route path="/technology/future-intelligence" component={FutureIntelligencePage} />
