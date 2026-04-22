@@ -7,6 +7,7 @@ import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridg
 import { PunctuationChecker } from "@/components/widgets/PunctuationChecker";
 import { SentenceTrain } from "@/components/widgets/SentenceTrain";
 import { LocalMarketCounter } from "@/components/widgets/LocalMarketCounter";
+import { ComparativeSuperlativeModule } from "@/components/widgets/ComparativeSuperlativeModule";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -67,6 +68,11 @@ export function EnglishWritingPage() {
         {/* Punctuation Checker — Traffic Signs game */}
         <div className="mb-10">
           <PunctuationChecker />
+        </div>
+
+        {/* Comparing the World — Comparative & Superlative Adjectives lesson */}
+        <div className="mb-10">
+          <ComparativeSuperlativeModule />
         </div>
 
         {/* Quick tips strip */}
