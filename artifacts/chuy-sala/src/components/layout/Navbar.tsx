@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
-  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
   Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
@@ -465,6 +465,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Factory,
         descEn: "Follow a single grain of glucose from your bloodstream into the cell's power plant: snap it apart in glycolysis, watch the liver run it backward in gluconeogenesis to keep your brain alive, load electrons into NADH minecarts in the Krebs cycle, then ride them down the electron transport chain to spin the world's smallest turbine — ATP synthase, turning at 100 revs/sec inside every one of your 30 trillion cells.",
         descKh: "តាមដានគ្រាប់គ្លុយកូសតែមួយ ពីឈាមរបស់អ្នកចូលក្នុងរោងចក្រថាមពលកោសិកា ៖ បំបែកវានៅគ្លីកូលីស មើលថ្លើមដំណើរការវាបញ្ច្រាសនៅការបង្កើតគ្លុយកូសថ្មីដើម្បីរក្សាខួរក្បាលអ្នករស់ ផ្ទុកអេឡិចត្រុងចូលរទេះធ្យូង NADH នៅវដ្តក្រែប បន្ទាប់មកជិះវាចុះតាមខ្សែសង្វាក់ដឹកជញ្ជូនអេឡិចត្រុង ដើម្បីបង្វិលទួរប៊ីនតូចបំផុតនៅលើពិភពលោក — ATP synthase បង្វិល ១០០ ជុំ/វិនាទីនៅក្នុងកោសិកា ៣០ លានលានរបស់អ្នកនីមួយៗ។",
+      },
+      {
+        href: "/science/biology/crispr",
+        labelEn: "Genetic Engineering (CRISPR)",
+        labelKh: "វិស្វកម្មហ្សែន (CRISPR)",
+        icon: Dna,
+        descEn: "CRISPR-Cas9 as a 'find & replace' for the 3-billion-letter book of DNA — drought-proof rice, the first FDA-approved cure for sickle cell, and the ethics of editing life.",
+        descKh: "CRISPR-Cas9 ដូចជា «រកនិងជំនួស» សម្រាប់សៀវភៅ DNA ៣ ពាន់លានអក្សរ — ស្រូវធន់នឹងគ្រោះរាំងស្ងួត ការព្យាបាលដំបូងគេដែលអនុម័តដោយ FDA សម្រាប់ឈាមរូបអាក់ និងសីលធម៌នៃការកែសម្រួលជីវិត។",
       },
       {
         href: "/biology/botany",

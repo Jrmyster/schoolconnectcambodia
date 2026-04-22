@@ -7,7 +7,7 @@ import {
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
-  Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
+  Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3, Dna,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1413,6 +1413,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វិស្វកម្មក្នុងកម្រិតអូដ្ឋាតូម — នាណូប៉ូត ផ្លុំកាបូន និងម៉ាស៊ីនតូចៗ។",
     keywordsEn: ["nano", "nanotech", "nanotechnology", "nanobot", "carbon nanotube", "graphene", "miniature"],
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
+  },
+  {
+    id: "bio-crispr",
+    href: "/science/biology/crispr",
+    icon: Dna,
+    titleEn: "CRISPR & Genetic Engineering: Editing the Code of Life",
+    titleKh: "CRISPR និងវិស្វកម្មហ្សែន៖ ការកែសម្រួលកូដនៃជីវិត",
+    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    descEn: "CRISPR-Cas9 as molecular 'find & replace' for DNA — drought-proof crops, GMO basics, and the first FDA-approved cure for sickle cell anemia.",
+    descKh: "CRISPR-Cas9 ដូចជា «រកនិងជំនួស» នៃម៉ូលេគុលសម្រាប់ DNA — ដំណាំធន់នឹងគ្រោះរាំងស្ងួត គោលការណ៍ GMO និងការព្យាបាលដំបូងគេដែលអនុម័តដោយ FDA សម្រាប់ឈាមរូបអាក់។",
+    keywordsEn: ["crispr", "cas9", "gene", "genetic", "engineering", "dna", "gmo", "sickle cell", "casgevy", "doudna", "charpentier", "biology", "biotech", "genome", "drought", "rice"],
+    keywordsKh: ["ហ្សែន", "វិស្វកម្មហ្សែន", "ឈាមរូបអាក់", "ស្រូវ", "គ្រោះរាំងស្ងួត", "ជីវវិទ្យា", "បំប្លែងហ្សែន"],
   },
   {
     id: "study-europe",
