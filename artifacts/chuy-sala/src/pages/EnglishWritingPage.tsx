@@ -9,6 +9,7 @@ import { PunctuationChecker } from "@/components/widgets/PunctuationChecker";
 import { SentenceTrain } from "@/components/widgets/SentenceTrain";
 import { LocalMarketCounter } from "@/components/widgets/LocalMarketCounter";
 import { ComparativeSuperlativeModule } from "@/components/widgets/ComparativeSuperlativeModule";
+import { PronunciationAssistant } from "@/components/widgets/PronunciationAssistant";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -34,6 +35,11 @@ export function EnglishWritingPage() {
               ? "សាងសង់ជំនាញសរសេរភាសាអង់គ្លេសរបស់អ្នកម្ដងមួយប្រយោគ — ដោយប្រើឧបករណ៍សាមញ្ញ ច្បាស់លាស់ និងមានព័ត៌មានជាពីរភាសា។"
               : "Build your English writing skills one sentence at a time — with simple, clear, bilingual tools."}
           </p>
+        </div>
+
+        {/* Pronunciation Assistant — Web Speech API powered audio tool */}
+        <div className="mb-10">
+          <PronunciationAssistant />
         </div>
 
         {/* Grammar Toolbox — foundational primer on the 8 parts of speech */}
