@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { Users, ScrollText, Layers, Building2, Stethoscope, Eye, EyeOff, Sparkles } from "lucide-react";
+import {
+  Users, ScrollText, Layers, Building2, Stethoscope, Eye, EyeOff, Sparkles,
+  Hammer, Link2, Landmark, Lightbulb, Telescope, GraduationCap, Recycle, Map as MapIcon,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 interface Concept {
@@ -190,6 +194,9 @@ export function SociologyPortal() {
           </div>
         </div>
 
+        {/* PART 2.5 — Pioneers of Sociology */}
+        <PioneersOfSociology kh={kh} t={t} />
+
         {/* PART 3 — Veblen Spotlight */}
         <article className="mb-12 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-amber-50 border-2 border-amber-400/40 p-5 sm:p-8 shadow-2xl relative overflow-hidden">
           {/* Decorative spotlight glow */}
@@ -326,6 +333,268 @@ export function SociologyPortal() {
           </div>
         </article>
       </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- */
+/*  PIONEERS OF SOCIOLOGY — 7 thinker profile cards               */
+/* -------------------------------------------------------------- */
+
+interface Pioneer {
+  key: string;
+  initials: string;
+  Icon: LucideIcon;
+  nameEn: string;
+  nameKh: string;
+  era: string;            // e.g. "1818–1883" — neutral across languages
+  ideaEn: string;
+  ideaKh: string;
+  conceptEn: string;
+  conceptKh: string;
+  /** Soft pastel gradient for the avatar disc + card accent. */
+  accent: string;
+  /** Color tone for the "Big Idea" pill (light, warm). */
+  ideaTone: string;
+}
+
+const PIONEERS: Pioneer[] = [
+  {
+    key: "marx",
+    initials: "KM",
+    Icon: Hammer,
+    nameEn: "Karl Marx",
+    nameKh: "កាល់ ម៉ាក្ស",
+    era: "1818–1883",
+    ideaEn: "Class Conflict",
+    ideaKh: "ជម្លោះវណ្ណៈ",
+    conceptEn:
+      "Argued that society is driven by the struggle between the wealthy owners who control resources and the workers who provide the labor.",
+    conceptKh:
+      "បានអះអាងថា សង្គមត្រូវបានជំរុញដោយការតស៊ូរវាងម្ចាស់ដែលមានទ្រព្យដែលគ្រប់គ្រងធនធាន និងកម្មករដែលផ្តល់កម្លាំងពលកម្ម។",
+    accent: "from-rose-200 to-rose-400",
+    ideaTone: "bg-rose-50 border-rose-300 text-rose-900",
+  },
+  {
+    key: "durkheim",
+    initials: "ED",
+    Icon: Link2,
+    nameEn: "Émile Durkheim",
+    nameKh: "អេមីល ឌៀកខែម",
+    era: "1858–1917",
+    ideaEn: "Social Solidarity",
+    ideaKh: "សាមគ្គីភាពសង្គម",
+    conceptEn:
+      "Studied what keeps society from falling apart. He believed shared values, traditions, and institutions act as the 'glue' holding us together.",
+    conceptKh:
+      "បានសិក្សាអំពីអ្វីដែលរក្សាសង្គមមិនឱ្យបែកបាក់។ គាត់ជឿថាគុណតម្លៃ ប្រពៃណី និងស្ថាប័នរួមគ្នាដើរតួជា «កាវ» ដែលផ្សាភ្ជាប់យើងជាមួយគ្នា។",
+    accent: "from-amber-200 to-orange-300",
+    ideaTone: "bg-amber-50 border-amber-300 text-amber-900",
+  },
+  {
+    key: "weber",
+    initials: "MW",
+    Icon: Landmark,
+    nameEn: "Max Weber",
+    nameKh: "ម៉ាក់ស៍ វេប៊ឺ",
+    era: "1864–1920",
+    ideaEn: "Rationalization & Status",
+    ideaKh: "ហេតុផលនីយកម្ម និងឋានៈ",
+    conceptEn:
+      "Looked beyond just money, exploring how religious ideas, culture, and social status shape human behavior and the economy.",
+    conceptKh:
+      "បានសម្លឹងហួសពីប្រាក់ ដោយរុករករបៀបដែលគំនិតសាសនា វប្បធម៌ និងឋានៈសង្គម កំណត់ឥរិយាបថមនុស្ស និងសេដ្ឋកិច្ច។",
+    accent: "from-orange-200 to-amber-400",
+    ideaTone: "bg-orange-50 border-orange-300 text-orange-900",
+  },
+  {
+    key: "merton",
+    initials: "RM",
+    Icon: Lightbulb,
+    nameEn: "Robert K. Merton",
+    nameKh: "រ៉ូបឺត ខេ មឺតុន",
+    era: "1910–2003",
+    ideaEn: "Unintended Consequences",
+    ideaKh: "ផលវិបាកដែលមិនបានព្រាងទុក",
+    conceptEn:
+      "Pointed out that social actions often have hidden or accidental results (Latent Functions) that are different from their obvious goals.",
+    conceptKh:
+      "បានចង្អុលបង្ហាញថា សកម្មភាពសង្គមជារឿយៗមានលទ្ធផលលាក់កំបាំង ឬដោយចៃដន្យ (មុខងារលាក់) ដែលខុសពីគោលដៅជាក់ស្តែងរបស់ពួកវា។",
+    accent: "from-yellow-200 to-amber-300",
+    ideaTone: "bg-yellow-50 border-yellow-300 text-yellow-900",
+  },
+  {
+    key: "mills",
+    initials: "CM",
+    Icon: Telescope,
+    nameEn: "C. Wright Mills",
+    nameKh: "ស៊ី រ៉ាយ មីលស៍",
+    era: "1916–1962",
+    ideaEn: "The Sociological Imagination",
+    ideaKh: "ការស្រមើស្រមៃផ្នែកសង្គមវិទ្យា",
+    conceptEn:
+      "Taught us to see the connection between our private, personal struggles and the massive historical forces of the world.",
+    conceptKh:
+      "បានបង្រៀនយើងឱ្យមើលឃើញទំនាក់ទំនងរវាងការតស៊ូផ្ទាល់ខ្លួនរបស់យើង និងកម្លាំងប្រវត្តិសាស្រ្តដ៏ធំធេងនៃពិភពលោក។",
+    accent: "from-sky-200 to-cyan-300",
+    ideaTone: "bg-sky-50 border-sky-300 text-sky-900",
+  },
+  {
+    key: "bourdieu",
+    initials: "PB",
+    Icon: GraduationCap,
+    nameEn: "Pierre Bourdieu",
+    nameKh: "ព្យែរ បូរឌីយូ",
+    era: "1930–2002",
+    ideaEn: "Cultural Capital",
+    ideaKh: "ទុនវប្បធម៌",
+    conceptEn:
+      "Showed that knowing how to talk, dress, and appreciate art gives people an invisible advantage in life, just like having money.",
+    conceptKh:
+      "បានបង្ហាញថាការដឹងរបៀបនិយាយ ស្លៀកពាក់ និងពេញចិត្តសិល្បៈ ផ្តល់ឱ្យមនុស្សនូវអត្ថប្រយោជន៍ដែលមើលមិនឃើញក្នុងជីវិត ដូចជាការមានប្រាក់ដែរ។",
+    accent: "from-violet-200 to-fuchsia-300",
+    ideaTone: "bg-violet-50 border-violet-300 text-violet-900",
+  },
+  {
+    key: "giddens",
+    initials: "AG",
+    Icon: Recycle,
+    nameEn: "Anthony Giddens",
+    nameKh: "អាន់តូនី ហ្គីដដិនស៍",
+    era: "b. 1938",
+    ideaEn: "Structuration",
+    ideaKh: "រចនាសម្ព័ន្ធនីយកម្ម",
+    conceptEn:
+      "Argued that we are shaped by society's rules, but through our daily actions, we also have the power to change those rules.",
+    conceptKh:
+      "បានអះអាងថា យើងត្រូវបានបង្កើតឡើងដោយច្បាប់របស់សង្គម ប៉ុន្តែតាមរយៈសកម្មភាពប្រចាំថ្ងៃរបស់យើង យើងក៏មានអំណាចផ្លាស់ប្តូរច្បាប់ទាំងនោះផងដែរ។",
+    accent: "from-emerald-200 to-teal-300",
+    ideaTone: "bg-emerald-50 border-emerald-300 text-emerald-900",
+  },
+];
+
+function PioneersOfSociology({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section
+      className="mb-12"
+      aria-labelledby="pioneers-title"
+      data-testid="pioneers-of-sociology"
+    >
+      {/* Header */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-amber-200 to-orange-300 border border-orange-300/60 text-orange-900 shrink-0 shadow-sm">
+          <MapIcon className="w-5 h-5" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <div className={`text-[11px] font-mono uppercase tracking-[0.2em] text-orange-700 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {t("Founding Thinkers", "អ្នកគិតស្ថាបនិក")}
+          </div>
+          <h3
+            id="pioneers-title"
+            className={`text-lg sm:text-xl font-bold text-slate-900 leading-tight mt-0.5 ${kh ? "font-khmer leading-snug" : ""}`}
+          >
+            {kh
+              ? "អ្នកត្រួសត្រាយផ្លូវនៃសង្គមវិទ្យា"
+              : "The Pioneers of Sociology: Master Map Makers"}
+          </h3>
+          <p className={`mt-1 text-xs sm:text-sm text-slate-600 ${kh ? "font-khmer leading-relaxed" : ""}`}>
+            {t(
+              "Seven thinkers who drew the first maps of how society really works.",
+              "អ្នកគិតប្រាំពីរនាក់ដែលបានគូសផែនទីដំបូងអំពីរបៀបដែលសង្គមដំណើរការពិតប្រាកដ។"
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* Responsive grid: 1 / 2 / 3 / 4 columns */}
+      <ul
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 list-none p-0"
+        data-testid="pioneers-grid"
+      >
+        {PIONEERS.map((p, i) => {
+          const { Icon } = p;
+          return (
+            <li key={p.key}>
+              <article
+                className="group soc-card-up h-full rounded-2xl bg-white border border-orange-100 p-4 sm:p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 active:translate-y-0 transition-all duration-200 focus-within:ring-2 focus-within:ring-orange-300"
+                style={{ animationDelay: `${i * 70}ms` }}
+                data-testid={`pioneer-card-${p.key}`}
+                tabIndex={0}
+                aria-label={`${p.nameEn} — ${p.ideaEn}`}
+              >
+                {/* Avatar + name */}
+                <header className="flex items-start gap-3">
+                  {/* Minimalist portrait: gradient disc + initials + thematic icon badge */}
+                  <div className="relative shrink-0">
+                    <div
+                      className={`w-14 h-14 rounded-full bg-gradient-to-br ${p.accent} border-2 border-white shadow-md flex items-center justify-center font-display font-extrabold text-slate-900 text-lg tracking-tight`}
+                      aria-hidden="true"
+                    >
+                      {p.initials}
+                    </div>
+                    <div
+                      className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white border border-orange-200 shadow-sm flex items-center justify-center text-orange-700"
+                      aria-hidden="true"
+                    >
+                      <Icon className="w-3.5 h-3.5" strokeWidth={2.4} />
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <h4
+                      className={`text-base sm:text-lg font-bold text-slate-900 leading-tight ${kh ? "font-khmer" : ""}`}
+                      data-testid={`pioneer-name-${p.key}`}
+                    >
+                      {kh ? p.nameKh : p.nameEn}
+                    </h4>
+                    <p className={`mt-0.5 text-xs ${kh ? "text-slate-500" : "font-khmer text-slate-500"}`}>
+                      {kh ? p.nameEn : p.nameKh}
+                    </p>
+                    <p
+                      className="mt-1 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-slate-500"
+                      data-testid={`pioneer-era-${p.key}`}
+                    >
+                      {p.era}
+                    </p>
+                  </div>
+                </header>
+
+                {/* Big Idea pill — highlighted on hover */}
+                <div className="mt-4">
+                  <div className={`text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                    {t("Big Idea", "គំនិតធំ")}
+                  </div>
+                  <div
+                    className={`inline-block rounded-xl border-2 ${p.ideaTone} px-3 py-1.5 transition-all duration-200 group-hover:scale-[1.03] group-hover:shadow-md group-focus-within:scale-[1.03]`}
+                    data-testid={`pioneer-idea-${p.key}`}
+                  >
+                    <div className={`text-sm sm:text-base font-extrabold leading-tight ${kh ? "font-khmer" : "font-display"}`}>
+                      {kh ? p.ideaKh : p.ideaEn}
+                    </div>
+                    <div className={`text-[11px] opacity-75 leading-tight ${kh ? "" : "font-khmer"}`}>
+                      {kh ? p.ideaEn : p.ideaKh}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Concept */}
+                <p
+                  className={`mt-3 text-sm text-slate-700 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                  data-testid={`pioneer-concept-${p.key}`}
+                >
+                  {kh ? p.conceptKh : p.conceptEn}
+                </p>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

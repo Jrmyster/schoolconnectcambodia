@@ -1,0 +1,56 @@
+I need to expand the data array for the 'United States Cultural Holidays' component. Please add the following 6 new holidays to the database.
+
+Please ensure each object strictly follows the current schema: a seasonal tag, a date, a primary icon/graphic, an English title, and a bilingual description (English with Khmer translation). Keep the same rounded-card aesthetic and color-coding logic based on the season.
+
+Data Objects to Add:
+
+New Year's Eve (ថ្ងៃឆ្លងឆ្នាំសកល) - December 31:
+
+Tag: Winter • Every 31 December
+
+Icon Idea: A clock striking midnight or confetti.
+
+Description: Americans stay awake until midnight to count down the final seconds of the old year. It is usually celebrated with parties, music, and watching a giant glowing ball drop in New York City. (ជនជាតិអាមេរិកនៅចាំរហូតដល់ពាក់កណ្តាលអធ្រាត្រដើម្បីរាប់ថយក្រោយវិនាទីចុងក្រោយនៃឆ្នាំចាស់។ ជាទូទៅគេប្រារព្ធវាដោយមានពិធីជប់លៀង តន្ត្រី និងការទស្សនាការទម្លាក់បាល់ពន្លឺដ៏ធំនៅទីក្រុងញូវយ៉ក។)
+
+New Year's Day (ចូលឆ្នាំសកល) - January 1:
+
+Tag: Winter • Every 1 January
+
+Icon Idea: Fireworks or a calendar page.
+
+Description: A quiet day of rest after the late-night parties. Many people make 'resolutions'—promises to themselves to build better habits in the coming year. (ថ្ងៃសម្រាកដ៏ស្ងប់ស្ងាត់បន្ទាប់ពីពិធីជប់លៀងយប់ជ្រៅ។ មនុស្សជាច្រើនធ្វើ 'ការតាំងចិត្ត'—ការសន្យាចំពោះខ្លួនឯងដើម្បីបង្កើតទម្លាប់ល្អប្រសើរក្នុងឆ្នាំខាងមុខ។)
+
+Martin Luther King Jr. Day (ទិវារំលឹកខួបលោក Martin Luther King Jr.) - 3rd Monday in January:
+
+Tag: Winter • 3rd Monday in January
+
+Icon Idea: A peace sign or joined hands.
+
+Description: Honors the famous civil rights leader who fought for racial equality through non-violent protest. It is considered a national day of service, where Americans are encouraged to volunteer in their communities. (ផ្តល់កិត្តិយសដល់មេដឹកនាំសិទ្ធិស៊ីវិលដ៏ល្បីល្បាញ ដែលបានតស៊ូទាមទារសមភាពពូជសាសន៍តាមរយៈការតវ៉ាដោយសន្តិវិធី។)
+
+Valentine's Day (ទិវានៃក្តីស្រឡាញ់) - February 14:
+
+Tag: Winter • Every 14 February
+
+Icon Idea: A heart or a rose.
+
+Description: A day dedicated to romance and friendship. People exchange cards, chocolates, and flowers with those they love. In schools, young students often pass out small candy hearts to their classmates. (ថ្ងៃដែលឧទ្ទិសដល់មនោសញ្ចេតនា និងមិត្តភាព។ មនុស្សម្នាជូនកាត សូកូឡា និងផ្កាទៅកាន់អ្នកដែលពួកគេស្រឡាញ់។)
+
+Mother's Day (ទិវាមាតា) - 2nd Sunday in May:
+
+Tag: Spring • 2nd Sunday in May
+
+Icon Idea: A bouquet of flowers.
+
+Description: A special day to honor mothers and grandmothers. Families usually celebrate by cooking breakfast for their mothers or taking them out to a nice dinner so they don't have to work. (ថ្ងៃពិសេសដើម្បីផ្តល់កិត្តិយសដល់ម្តាយ និងជីដូន។ គ្រួសារជាច្រើនប្រារព្ធពិធីដោយចម្អិនអាហារពេលព្រឹកសម្រាប់ម្តាយរបស់ពួកគេ ឬនាំគាត់ទៅញ៉ាំអាហារពេលល្ងាច។)
+
+Father's Day (ទិវាបិតា) - 3rd Sunday in June:
+
+Tag: Summer • 3rd Sunday in June
+
+Icon Idea: A necktie or a tool.
+
+Description: A day to honor fathers and grandfathers. Typical gifts include tools, neckties, or outdoor equipment, and families often celebrate by grilling food outside. (ថ្ងៃផ្តល់កិត្តិយសដល់ឪពុក និងជីតា។ អំណោយជាទូទៅរួមមាន ឧបករណ៍ប្រើប្រាស់ ក្រវាត់ក ឬសម្ភារៈសម្រាប់ធ្វើសកម្មភាពក្រៅផ្ទះ។)
+
+UI Verification:
+Ensure the grid auto-balances so there are no awkward empty spaces on the final row, and ensure the color coding matches the respective seasons (e.g., icy blues/cool tones for the winter holidays, fresh greens for spring).
