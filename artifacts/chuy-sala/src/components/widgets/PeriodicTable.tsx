@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { Search, X, Filter, Grid3x3, List, Atom, Hash, Weight, Layers, Sparkles, RotateCcw } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Search, X, Filter, Grid3x3, List, Atom, Hash, Weight, Layers, Sparkles, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { ELEMENTS, CATEGORY_META, type Element, type ElementCategory } from "./periodic-data";
 import { BohrModel } from "./BohrModel";
@@ -10,6 +10,9 @@ type ViewMode = "grid" | "list";
 const LANTH_LABEL_CELL = { row: 6, col: 3 };
 const ACTIN_LABEL_CELL = { row: 7, col: 3 };
 
+const SPEECH_SUPPORTED =
+  typeof window !== "undefined" && "speechSynthesis" in window;
+
 export function PeriodicTable() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
@@ -18,6 +21,50 @@ export function PeriodicTable() {
   const [family, setFamily] = useState<FamilyFilter>("all");
   const [view, setView] = useState<ViewMode>("grid");
   const [selected, setSelected] = useState<Element | null>(null);
+  const [pronounceMode, setPronounceMode] = useState<boolean>(SPEECH_SUPPORTED);
+  const [speakingZ, setSpeakingZ] = useState<number | null>(null);
+
+  // Speak the English name of an element with rate 0.85 in en-US.
+  // Always cancel any in-flight utterance first so rapid clicks don't overlap.
+  const speak = useCallback((el: Element) => {
+    if (!SPEECH_SUPPORTED) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(el.nameEn);
+    utter.lang = "en-US";
+    utter.rate = 0.85;
+    utter.pitch = 1;
+    utter.volume = 1;
+    utter.onstart = () => setSpeakingZ(el.z);
+    utter.onend = () => setSpeakingZ((curr) => (curr === el.z ? null : curr));
+    utter.onerror = () => setSpeakingZ((curr) => (curr === el.z ? null : curr));
+    window.speechSynthesis.speak(utter);
+  }, []);
+
+  // Cancel any in-flight speech when the component unmounts or the mode is turned off.
+  useEffect(() => {
+    if (!SPEECH_SUPPORTED) return;
+    if (!pronounceMode) {
+      window.speechSynthesis.cancel();
+      setSpeakingZ(null);
+    }
+  }, [pronounceMode]);
+
+  useEffect(() => {
+    return () => {
+      if (SPEECH_SUPPORTED) window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const handlePick = useCallback(
+    (el: Element) => {
+      if (pronounceMode) {
+        speak(el);
+      } else {
+        setSelected(el);
+      }
+    },
+    [pronounceMode, speak],
+  );
 
   // Match by symbol (case-insensitive exact OR prefix), atomic number, or name (en/kh substring)
   const q = query.trim().toLowerCase();
@@ -178,7 +225,9 @@ export function PeriodicTable() {
             family={family}
             matchesQuery={matchesQuery}
             matchesFamily={matchesFamily}
-            onPick={setSelected}
+            onPick={handlePick}
+            pronounceMode={pronounceMode}
+            speakingZ={speakingZ}
           />
         ) : (
           <ListView
@@ -187,14 +236,50 @@ export function PeriodicTable() {
             family={family}
             matchesQuery={matchesQuery}
             matchesFamily={matchesFamily}
-            onPick={setSelected}
+            onPick={handlePick}
+            pronounceMode={pronounceMode}
+            speakingZ={speakingZ}
           />
         )}
 
         {/* Legend */}
         <div className="mt-5 pt-4 border-t border-border">
-          <div className={`text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
-            {kh ? "ការលាក់ពណ៌តាមប្រភេទ" : "Color Key — Categories"}
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <div className={`text-[10px] font-mono uppercase tracking-widest text-stone-500 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {kh ? "ការលាក់ពណ៌តាមប្រភេទ" : "Color Key — Categories"}
+            </div>
+            {SPEECH_SUPPORTED && (
+              <button
+                type="button"
+                onClick={() => setPronounceMode((v) => !v)}
+                role="switch"
+                aria-checked={pronounceMode}
+                aria-label={
+                  pronounceMode
+                    ? kh ? "បិទរបៀបបញ្ចេញសំឡេង" : "Turn off pronunciation mode"
+                    : kh ? "បើករបៀបបញ្ចេញសំឡេង" : "Turn on pronunciation mode"
+                }
+                title={
+                  pronounceMode
+                    ? kh ? "របៀបបញ្ចេញសំឡេង៖ បើក — ចុចធាតុដើម្បីស្ដាប់" : "Pronunciation Mode: ON — tap an element to listen"
+                    : kh ? "របៀបបញ្ចេញសំឡេង៖ បិទ — ចុចធាតុដើម្បីបើកព័ត៌មាន" : "Pronunciation Mode: OFF — tap an element to open info"
+                }
+                className={`flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold rounded-md border-2 transition ${
+                  pronounceMode
+                    ? "bg-primary text-white border-primary shadow-sm"
+                    : "bg-white text-stone-600 border-stone-200 hover:border-stone-300"
+                } ${kh ? "font-khmer" : ""}`}
+                data-testid="toggle-pronunciation"
+              >
+                {pronounceMode ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+                <span>
+                  {kh ? "របៀបបញ្ចេញសំឡេង" : "Pronunciation Mode"}
+                </span>
+                <span className={`ml-1 px-1.5 py-0.5 rounded text-[9px] font-mono ${pronounceMode ? "bg-white/25" : "bg-stone-100 text-stone-500"}`}>
+                  {pronounceMode ? (kh ? "បើក" : "ON") : (kh ? "បិទ" : "OFF")}
+                </span>
+              </button>
+            )}
           </div>
           <div className="flex flex-wrap gap-1.5">
             {(Object.keys(CATEGORY_META) as ElementCategory[]).map((cat) => {
@@ -222,7 +307,7 @@ export function PeriodicTable() {
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function GridView({
-  kh, query, family, matchesQuery, matchesFamily, onPick,
+  kh, query, family, matchesQuery, matchesFamily, onPick, pronounceMode, speakingZ,
 }: {
   kh: boolean;
   query: string;
@@ -230,6 +315,8 @@ function GridView({
   matchesQuery: (e: Element) => boolean;
   matchesFamily: (e: Element) => boolean;
   onPick: (e: Element) => void;
+  pronounceMode: boolean;
+  speakingZ: number | null;
 }) {
   const hasQuery = !!query;
 
@@ -263,6 +350,8 @@ function GridView({
                 dim={dim}
                 highlight={highlight}
                 onPick={onPick}
+                pronounceMode={pronounceMode}
+                speaking={speakingZ === el.z}
               />
             );
           })}
@@ -311,15 +400,31 @@ function GridView({
 }
 
 function ElementCell({
-  el, kh, dim, highlight, onPick,
-}: { el: Element; kh: boolean; dim: boolean; highlight: boolean; onPick: (e: Element) => void }) {
+  el, kh, dim, highlight, onPick, pronounceMode, speaking,
+}: {
+  el: Element;
+  kh: boolean;
+  dim: boolean;
+  highlight: boolean;
+  onPick: (e: Element) => void;
+  pronounceMode: boolean;
+  speaking: boolean;
+}) {
   const meta = CATEGORY_META[el.category];
-  const base = "relative flex flex-col items-center justify-center rounded-md border text-center transition-all duration-200 focus:outline-none";
+  const base = "relative flex flex-col items-center justify-center rounded-md border text-center transition-all duration-150 focus:outline-none active:scale-95 active:brightness-110";
+  const speakingState = "z-20 scale-110 ring-4 ring-sky-400 ring-offset-1 shadow-lg shadow-sky-300/50 animate-pulse";
   const state = dim
     ? "opacity-25 grayscale"
-    : highlight
-      ? `${meta.cell} ring-2 ${meta.ring} ring-offset-1 z-10 scale-105 shadow-md`
-      : `${meta.cell} hover:-translate-y-0.5 hover:shadow`;
+    : speaking
+      ? `${meta.cell} ${speakingState}`
+      : highlight
+        ? `${meta.cell} ring-2 ${meta.ring} ring-offset-1 z-10 scale-105 shadow-md`
+        : `${meta.cell} hover:-translate-y-0.5 hover:shadow`;
+  const ariaLabel = pronounceMode
+    ? kh
+      ? `ស្ដាប់ការបញ្ចេញសំឡេងនៃ ${el.nameEn}`
+      : `Listen to the pronunciation of ${el.nameEn}`
+    : `${el.symbol} ${el.nameEn}, atomic number ${el.z}`;
   return (
     <button
       type="button"
@@ -333,13 +438,20 @@ function ElementCell({
       disabled={dim}
       className={`${base} ${state}`}
       style={{ gridRow: el.period, gridColumn: el.group, minHeight: 50 }}
-      aria-label={`${el.symbol} ${el.nameEn}, atomic number ${el.z}`}
+      aria-label={ariaLabel}
+      aria-pressed={speaking || undefined}
+      data-speaking={speaking || undefined}
     >
       <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono opacity-70 leading-none">{el.z}</span>
       <span className="font-bold text-sm sm:text-base leading-none mt-1">{el.symbol}</span>
       <span className="text-[8px] sm:text-[9px] leading-tight mt-0.5 px-0.5 truncate w-full opacity-80">
         {el.nameEn}
       </span>
+      {speaking && (
+        <span className="absolute top-0.5 right-0.5 text-sky-700" aria-hidden="true">
+          <Volume2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+        </span>
+      )}
     </button>
   );
 }
@@ -347,7 +459,7 @@ function ElementCell({
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function ListView({
-  kh, query, family, matchesQuery, matchesFamily, onPick,
+  kh, query, family, matchesQuery, matchesFamily, onPick, pronounceMode, speakingZ,
 }: {
   kh: boolean;
   query: string;
@@ -355,6 +467,8 @@ function ListView({
   matchesQuery: (e: Element) => boolean;
   matchesFamily: (e: Element) => boolean;
   onPick: (e: Element) => void;
+  pronounceMode: boolean;
+  speakingZ: number | null;
 }) {
   const list = ELEMENTS.filter((e) => matchesFamily(e) && (query ? matchesQuery(e) : true));
   if (list.length === 0) {
@@ -370,12 +484,23 @@ function ListView({
     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
       {list.map((el) => {
         const meta = CATEGORY_META[el.category];
+        const speaking = speakingZ === el.z;
+        const ariaLabel = pronounceMode
+          ? kh ? `ស្ដាប់ការបញ្ចេញសំឡេងនៃ ${el.nameEn}` : `Listen to the pronunciation of ${el.nameEn}`
+          : `${el.symbol} ${el.nameEn}, atomic number ${el.z}`;
         return (
           <li key={el.z}>
             <button
               type="button"
               onClick={() => onPick(el)}
-              className={`w-full flex items-center gap-3 p-2.5 rounded-lg border text-left transition hover:shadow-md hover:-translate-y-0.5 ${meta.cell}`}
+              aria-label={ariaLabel}
+              aria-pressed={speaking || undefined}
+              data-speaking={speaking || undefined}
+              className={`relative w-full flex items-center gap-3 p-2.5 rounded-lg border text-left transition active:scale-[0.98] ${
+                speaking
+                  ? `${meta.cell} ring-4 ring-sky-400 ring-offset-1 shadow-lg shadow-sky-300/50 animate-pulse`
+                  : `hover:shadow-md hover:-translate-y-0.5 ${meta.cell}`
+              }`}
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-md bg-white/60 border border-current/10 flex flex-col items-center justify-center">
                 <span className="text-[9px] font-mono opacity-70 leading-none">{el.z}</span>
@@ -389,6 +514,9 @@ function ListView({
                   {kh ? `${el.nameEn} · ${meta.kh}` : `${meta.en} · ${el.mass}`}
                 </div>
               </div>
+              {speaking && (
+                <Volume2 className="w-4 h-4 text-sky-700 flex-shrink-0" aria-hidden="true" />
+              )}
             </button>
           </li>
         );
