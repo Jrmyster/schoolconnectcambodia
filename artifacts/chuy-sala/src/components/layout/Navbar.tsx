@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -121,6 +121,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Leaf,
         descEn: "A bilingual flashcard deck of zoo animals with one-tap audio in English and Khmer — built for younger learners.",
         descKh: "ឈុតកាតវាក្យសព្ទពីរភាសាអំពីសត្វសួនសត្វ ជាមួយសំឡេងចុចម្ដងបានភ្លាមៗជាភាសាអង់គ្លេស និងខ្មែរ — សម្រាប់អ្នករៀនវ័យក្មេង។",
+      },
+      {
+        href: "/study-center/dinosaur-extinction",
+        labelEn: "Dinosaurs & Extinction",
+        labelKh: "ឌីណូស័រ និងការផុតពូជ",
+        icon: Skull,
+        descEn: "Flip interactive fossil cards of T-Rex, Triceratops, Stegosaurus and Spinosaurus, then walk through the Chicxulub asteroid impact step by step — and meet the bird-like dinosaurs that survived.",
+        descKh: "ត្រឡប់កាតហ្វូស៊ីលអន្តរកម្មនៃ ទីរ៉ាណូសូរ៉ិច ទ្រីសេរ៉ាតូប ស្ទេហ្គោសូរ និងស្ពីណូសូរ បន្ទាប់មកដើរឆ្លងកាត់ការបុកទង្គិចនៃអាចម៍ផ្កាយឈីកស៊ូឡុបជាជំហានៗ — និងជួបឌីណូស័រស្រដៀងសត្វស្លាបដែលបានរស់រាន។",
       },
       {
         href: "/spelling-forge",
