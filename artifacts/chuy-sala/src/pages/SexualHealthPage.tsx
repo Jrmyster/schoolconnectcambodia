@@ -12,6 +12,12 @@ import {
   Users,
   Sparkles,
   ArrowRight,
+  Ear,
+  HeartHandshake,
+  MessageCircle,
+  ShieldCheck,
+  HandHeart,
+  Heart,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -137,6 +143,9 @@ export default function SexualHealthPage() {
         </div>
       </Section>
 
+      {/* ── Tool 1.5: Relationship Skills — warmer interlude ────────────── */}
+      <RelationshipSkillsSection isKh={isKh} />
+
       {/* ── Tool 2: Truth vs Myth ───────────────────────────────────────── */}
       <Section
         eyebrowEn="Truth vs. Myth"
@@ -214,6 +223,173 @@ export default function SexualHealthPage() {
         </p>
       </section>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Relationship Skills — soft, warmer interlude between clinical sections
+// ════════════════════════════════════════════════════════════════════════════
+
+type RelSkill = {
+  id: string;
+  nameEn: string;
+  nameKh: string;
+  conceptEn: string;
+  conceptKh: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  Watermark: React.ComponentType<{ className?: string }>;
+  tone: { ring: string; iconBg: string; iconText: string; chip: string };
+};
+
+const REL_SKILLS: RelSkill[] = [
+  {
+    id: "active-listening",
+    nameEn: "Active Listening",
+    nameKh: "ការស្តាប់ដោយយកចិត្តទុកដាក់",
+    conceptEn:
+      "True listening isn't just waiting for your turn to speak. It means paying attention to the emotion behind the words without immediately trying to 'fix' the problem.",
+    conceptKh:
+      "ការស្តាប់ពិតប្រាកដមិនមែនគ្រាន់តែរង់ចាំវេនរបស់អ្នកដើម្បីនិយាយនោះទេ។ វាមានន័យថាការយកចិត្តទុកដាក់ចំពោះអារម្មណ៍នៅពីក្រោយពាក្យសម្ដី ដោយមិនព្យាយាម 'ដោះស្រាយ' បញ្ហាភ្លាមៗឡើយ។",
+    Icon: Ear,
+    Watermark: Ear,
+    tone: { ring: "ring-rose-200/70", iconBg: "bg-rose-100", iconText: "text-rose-600", chip: "text-rose-700" },
+  },
+  {
+    id: "empathy",
+    nameEn: "Empathy & Compassion",
+    nameKh: "ការយល់ចិត្ត និងសេចក្តីមេត្តា",
+    conceptEn:
+      "The ability to step into someone else's shoes and understand their feelings, even if you don't agree with them. It means being a safe place for a friend.",
+    conceptKh:
+      "សមត្ថភាពក្នុងការដាក់ខ្លួនឯងក្នុងកាលៈទេសៈអ្នកដទៃ និងយល់ពីអារម្មណ៍របស់ពួកគេ ទោះបីជាអ្នកមិនយល់ស្របនឹងពួកគេក៏ដោយ។ វាមានន័យថាការក្លាយជាកន្លែងសុវត្ថិភាពសម្រាប់មិត្តភក្តិម្នាក់។",
+    Icon: HeartHandshake,
+    Watermark: HeartHandshake,
+    tone: { ring: "ring-amber-200/70", iconBg: "bg-amber-100", iconText: "text-amber-600", chip: "text-amber-700" },
+  },
+  {
+    id: "brave-communication",
+    nameEn: "Brave Communication",
+    nameKh: "ការទំនាក់ទំនងដោយភាពក្លាហាន",
+    conceptEn:
+      "Having the courage to respectfully say what you need, how you feel, and when you are hurt, instead of holding it inside and building resentment.",
+    conceptKh:
+      "មានភាពក្លាហានក្នុងការនិយាយដោយការគោរពនូវអ្វីដែលអ្នកត្រូវការ អារម្មណ៍របស់អ្នក និងនៅពេលដែលអ្នកឈឺចាប់ ជំនួសឱ្យការលាក់ទុកក្នុងចិត្ត និងបង្កើតការទាស់ទែង។",
+    Icon: MessageCircle,
+    Watermark: MessageCircle,
+    tone: { ring: "ring-violet-200/70", iconBg: "bg-violet-100", iconText: "text-violet-600", chip: "text-violet-700" },
+  },
+  {
+    id: "boundaries",
+    nameEn: "Respecting Boundaries",
+    nameKh: "ការគោរពព្រំដែន",
+    conceptEn:
+      "Understanding that 'No' is a complete sentence. A decent person always respects the physical and emotional limits set by others.",
+    conceptKh:
+      "ការយល់ថាពាក្យ 'ទេ' គឺជាប្រយោគពេញលេញ។ មនុស្សល្អតែងតែគោរពដែនកំណត់ផ្លូវកាយ និងផ្លូវចិត្តដែលអ្នកដទៃបានកំណត់។",
+    Icon: ShieldCheck,
+    Watermark: ShieldCheck,
+    tone: { ring: "ring-sky-200/70", iconBg: "bg-sky-100", iconText: "text-sky-600", chip: "text-sky-700" },
+  },
+  {
+    id: "selfless",
+    nameEn: "Selfless Thinking",
+    nameKh: "ការគិតពីអ្នកដទៃ",
+    conceptEn:
+      "Putting the well-being and comfort of your partner or friend on the same level as your own.",
+    conceptKh:
+      "ការចាត់ទុកសុខុមាលភាព និងភាពសុខស្រួលរបស់ដៃគូ ឬមិត្តភក្តិរបស់អ្នកស្មើនឹងខ្លួនអ្នកផ្ទាល់។",
+    Icon: HandHeart,
+    Watermark: HandHeart,
+    tone: { ring: "ring-emerald-200/70", iconBg: "bg-emerald-100", iconText: "text-emerald-600", chip: "text-emerald-700" },
+  },
+];
+
+const RELATIONSHIP_BG: React.CSSProperties = {
+  backgroundImage:
+    "linear-gradient(135deg, #fff1ec 0%, #fdf2f8 35%, #f3e8ff 100%)",
+};
+
+function RelationshipSkillsSection({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      data-testid="relationship-skills-section"
+      className="border-y border-rose-100/80"
+      style={RELATIONSHIP_BG}
+    >
+      <section
+        aria-labelledby="relationship-skills-heading"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      >
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-rose-200/80 shadow-sm mb-3">
+            <Heart className="w-6 h-6 text-rose-500" fill="currentColor" />
+          </div>
+          <div className={`text-[11px] font-bold uppercase tracking-[0.25em] text-rose-700 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {isKh ? "ជំនាញទំនាក់ទំនង" : "Relationship Skills"}
+          </div>
+          <h2
+            id="relationship-skills-heading"
+            className={`mt-1 font-display font-bold text-2xl sm:text-3xl text-slate-900 ${isKh ? "font-khmer leading-snug" : ""}`}
+          >
+            {isKh ? "បេះដូងនៃការផ្សារភ្ជាប់" : "The Heart of Connection"}
+            {isKh && (
+              <span className="block mt-1 text-base font-sans font-normal text-slate-600">
+                (The Heart of Connection)
+              </span>
+            )}
+          </h2>
+          <p className={`mt-3 text-sm text-slate-600 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "សុខភាពពិតប្រាកដមិនមែនគ្រាន់តែជារាងកាយឡើយ — វារួមបញ្ចូលផងដែរនូវរបៀបដែលយើងស្ដាប់ យល់ចិត្ត និងគោរពគ្នាទៅវិញទៅមក។"
+              : "Real health isn't only physical — it includes how we listen to, understand, and respect one another."}
+          </p>
+        </div>
+
+        {/* Pillar grid */}
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {REL_SKILLS.map((s) => (
+            <RelSkillCard key={s.id} s={s} isKh={isKh} />
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function RelSkillCard({ s, isKh }: { s: RelSkill; isKh: boolean }) {
+  const { Icon, Watermark, tone } = s;
+  return (
+    <li
+      data-testid={`rel-skill-${s.id}`}
+      className={`group relative overflow-hidden rounded-2xl bg-white/85 backdrop-blur-sm ring-1 ${tone.ring} shadow-sm hover:shadow-xl hover:-translate-y-1 hover:bg-white transition-all duration-300 p-5 sm:p-6`}
+    >
+      {/* Background watermark icon — decorative */}
+      <Watermark
+        aria-hidden
+        className={`pointer-events-none absolute -bottom-6 -right-6 w-32 h-32 ${tone.iconText} opacity-[0.06] group-hover:opacity-[0.10] group-hover:-rotate-6 transition-all duration-500`}
+      />
+
+      <div className="relative">
+        {/* Icon medallion */}
+        <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${tone.iconBg} ${tone.iconText} mb-3`}>
+          <Icon className="w-6 h-6" />
+        </div>
+
+        {/* Bilingual name */}
+        <h3 className={`font-display font-bold text-lg text-slate-900 leading-snug ${isKh ? "font-khmer" : ""}`}>
+          {isKh ? s.nameKh : s.nameEn}
+        </h3>
+        <div className={`mt-0.5 text-xs ${tone.chip} font-semibold ${isKh ? "font-sans" : "font-khmer"}`}>
+          {isKh ? s.nameEn : s.nameKh}
+        </div>
+
+        {/* Concept body */}
+        <p className={`mt-3 text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? s.conceptKh : s.conceptEn}
+        </p>
+      </div>
+    </li>
   );
 }
 

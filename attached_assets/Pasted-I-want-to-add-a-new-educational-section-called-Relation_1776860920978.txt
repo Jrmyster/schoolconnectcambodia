@@ -1,0 +1,36 @@
+I want to add a new educational section called 'Relationship Skills: The Heart of Connection' (ជំនាញទំនាក់ទំនង៖ បេះដូងនៃការផ្សារភ្ជាប់) below the Pathogen Profiles on the Sexual Health page. Please implement the following cleanly:
+
+1. The UI Layout (ចំណុចប្រទាក់ក្រាហ្វិក):
+
+Create a visually distinct section using warmer, softer background tones (e.g., very light peach or soft lavender) to separate it from the clinical/medical white and green used for the pathogen cards above.
+
+Use a grid of 'Pillar Cards' to represent the core relationship skills.
+
+2. The Bilingual Data Bank (ទិន្នន័យទ្វេភាសា):
+Populate the cards with the following skills, including the English name, Khmer translation, and a brief, relatable definition:
+
+Active Listening (ការស្តាប់ដោយយកចិត្តទុកដាក់):
+
+Concept: True listening isn't just waiting for your turn to speak. It means paying attention to the emotion behind the words without immediately trying to 'fix' the problem. (ការស្តាប់ពិតប្រាកដមិនមែនគ្រាន់តែរង់ចាំវេនរបស់អ្នកដើម្បីនិយាយនោះទេ។ វាមានន័យថាការយកចិត្តទុកដាក់ចំពោះអារម្មណ៍នៅពីក្រោយពាក្យសម្តី ដោយមិនចាំបាច់ព្យាយាម 'ដោះស្រាយ' បញ្ហាភ្លាមៗនោះទេ។)
+
+Empathy & Compassion (ការយល់ចិត្ត និងសេចក្តីមេត្តា):
+
+Concept: The ability to step into someone else's shoes and understand their feelings, even if you don't agree with them. It means being a safe place for a friend. (សមត្ថភាពក្នុងការដាក់ខ្លួនឯងក្នុងកាលៈទេសៈអ្នកដទៃ និងយល់ពីអារម្មណ៍របស់ពួកគេ ទោះបីជាអ្នកមិនយល់ស្របនឹងពួកគេក៏ដោយ។ វាមានន័យថាការធ្វើជាកន្លែងសុវត្ថិភាពសម្រាប់មិត្តភក្តិ។)
+
+Brave Communication (ការទំនាក់ទំនងដោយភាពក្លាហាន):
+
+Concept: Having the courage to respectfully say what you need, how you feel, and when you are hurt, instead of holding it inside and building resentment. (មានភាពក្លាហានក្នុងការនិយាយដោយការគោរពនូវអ្វីដែលអ្នកត្រូវការ អារម្មណ៍របស់អ្នក និងនៅពេលដែលអ្នកឈឺចាប់ ជំនួសឱ្យការលាក់ទុកក្នុងចិត្ត។)
+
+Respecting Boundaries (ការគោរពព្រំដែន):
+
+Concept: Understanding that 'No' is a complete sentence. A decent person always respects the physical and emotional limits set by others. (ការយល់ថាពាក្យ 'ទេ' គឺជាប្រយោគពេញលេញ។ មនុស្សល្អតែងតែគោរពដែនកំណត់ផ្លូវកាយ និងផ្លូវចិត្តដែលអ្នកដទៃបានកំណត់។)
+
+Selfless Thinking (ការគិតពីអ្នកដទៃ):
+
+Concept: Putting the well-being and comfort of your partner or friend on the same level as your own. (ការចាត់ទុកសុខុមាលភាព និងភាពសុខស្រួលរបស់ដៃគូ ឬមិត្តភក្តិរបស់អ្នកស្មើនឹងខ្លួនអ្នកផ្ទាល់។)
+
+3. Interactivity:
+
+Keep the cards clean, but perhaps add a subtle 'heart' or 'handshake' icon watermark in the background of the cards.
+
+Add a gentle hover effect that slightly lifts the card.
