@@ -1,8 +1,9 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft, Hexagon, Atom, Move3d, RotateCw, Pill, Wheat, Recycle, Sparkles, Info,
   FlaskConical, Beaker, TestTube, FlaskRound, Filter, Thermometer, Flame, Droplets, Eye, AlertTriangle,
+  Volume2,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { OrganicArchitecture3DModule } from "@/components/widgets/OrganicArchitecture3DModule";
@@ -1049,10 +1050,59 @@ const GLASSWARE: GlassItem[] = [
   },
 ];
 
+const SPEECH_SUPPORTED =
+  typeof window !== "undefined" &&
+  "speechSynthesis" in window &&
+  "SpeechSynthesisUtterance" in window;
+
 function GlasswareCatalog({ kh }: { kh: boolean }) {
   const [openId, setOpenId] = useState<string>(GLASSWARE[0].id);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  // Monotonic token so that late onend/onerror callbacks from a previous,
+  // already-cancelled utterance can never clear the speaking state of a newer one
+  // (e.g., when the user rapidly re-clicks the SAME tool button).
+  const utteranceToken = useRef(0);
   const open = GLASSWARE.find((g) => g.id === openId) ?? GLASSWARE[0];
   const Diagram = open.Diagram;
+
+  // Speak the English name. Always cancel any in-flight utterance first so
+  // rapid clicks across the four selectors never overlap.
+  const speak = useCallback((g: GlassItem) => {
+    if (!SPEECH_SUPPORTED) return;
+    window.speechSynthesis.cancel();
+    const myToken = ++utteranceToken.current;
+    const utter = new SpeechSynthesisUtterance(g.nameEn);
+    utter.lang = "en-US";
+    utter.rate = 0.85;
+    utter.pitch = 1;
+    utter.volume = 1;
+    utter.onstart = () => {
+      if (utteranceToken.current === myToken) setSpeakingId(g.id);
+    };
+    utter.onend = () => {
+      if (utteranceToken.current === myToken) setSpeakingId(null);
+    };
+    utter.onerror = () => {
+      if (utteranceToken.current === myToken) setSpeakingId(null);
+    };
+    window.speechSynthesis.speak(utter);
+  }, []);
+
+  // Cancel any in-flight speech on unmount.
+  useEffect(() => {
+    return () => {
+      if (SPEECH_SUPPORTED) window.speechSynthesis.cancel();
+    };
+  }, []);
+
+  const handleSelect = useCallback(
+    (g: GlassItem) => {
+      setOpenId(g.id);
+      speak(g);
+    },
+    [speak],
+  );
+
   return (
     <div className="mb-8">
       <div className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-sky-700 mb-3 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
@@ -1064,17 +1114,28 @@ function GlasswareCatalog({ kh }: { kh: boolean }) {
         {GLASSWARE.map((g) => {
           const Icon = g.icon;
           const active = g.id === openId;
+          const speaking = speakingId === g.id;
           return (
             <button
               key={g.id}
               type="button"
               aria-pressed={active}
               aria-controls={`glass-panel-${g.id}`}
-              onClick={() => setOpenId(g.id)}
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-left transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 ${
-                active
-                  ? "bg-gradient-to-br from-sky-50 to-emerald-50 border-sky-400 shadow-md"
-                  : "bg-white/70 border-slate-200 hover:border-sky-300 hover:bg-sky-50/40"
+              aria-label={
+                SPEECH_SUPPORTED
+                  ? kh
+                    ? `ស្ដាប់ការបញ្ចេញសំឡេងនៃ ${g.nameEn}`
+                    : `Listen to the pronunciation of ${g.nameEn}`
+                  : g.nameEn
+              }
+              data-speaking={speaking || undefined}
+              onClick={() => handleSelect(g)}
+              className={`relative flex items-center gap-2 px-3 py-2 rounded-xl border-2 text-left transition-all active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 ${
+                speaking
+                  ? "bg-gradient-to-br from-sky-50 to-emerald-50 border-sky-500 shadow-lg shadow-sky-300/50 ring-4 ring-sky-300/60 animate-pulse"
+                  : active
+                    ? "bg-gradient-to-br from-sky-50 to-emerald-50 border-sky-400 shadow-md"
+                    : "bg-white/70 border-slate-200 hover:border-sky-300 hover:bg-sky-50/40"
               }`}
             >
               <span className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${
@@ -1082,12 +1143,20 @@ function GlasswareCatalog({ kh }: { kh: boolean }) {
               }`}>
                 <Icon className="w-5 h-5" />
               </span>
-              <span className="min-w-0">
+              <span className="min-w-0 flex-1">
                 <span className={`block text-[10px] font-mono font-bold tracking-widest uppercase ${active ? "text-sky-700" : "text-slate-500"} ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
                   {kh ? "ឧបករណ៍" : "Tool"}
                 </span>
-                <span className={`block text-sm font-bold leading-tight ${active ? "text-slate-900" : "text-slate-700"} ${kh ? "font-khmer text-base" : ""}`}>
-                  {kh ? g.nameKh : g.nameEn}
+                <span className={`flex items-center gap-1.5 text-sm font-bold leading-tight ${active ? "text-slate-900" : "text-slate-700"} ${kh ? "font-khmer text-base" : ""}`}>
+                  <span className="truncate">{kh ? g.nameKh : g.nameEn}</span>
+                  {SPEECH_SUPPORTED && (
+                    <Volume2
+                      aria-hidden="true"
+                      className={`w-3.5 h-3.5 flex-shrink-0 transition-colors ${
+                        speaking ? "text-sky-600" : active ? "text-sky-500" : "text-slate-400"
+                      }`}
+                    />
+                  )}
                 </span>
               </span>
             </button>
