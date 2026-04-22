@@ -277,6 +277,25 @@ function DesktopView({
   );
   const [activeCareerIdx, setActiveCareerIdx] = useState<number>(0);
 
+  // React to *changes* in initialActiveMajorId — useState's initializer only
+  // fires once on mount, so without this effect the "Auto-select" button from
+  // the Career Matcher (which renders on the same page above us) would have
+  // no visible effect because we'd already be mounted with our default major.
+  // When the prop is cleared (e.g. user hit Reset / back-navigated past the
+  // ?major= query), fall back to the first major so the URL stays the source
+  // of truth.
+  useEffect(() => {
+    if (initialActiveMajorId && majors.some(m => m.id === initialActiveMajorId)) {
+      setActiveMajorId(initialActiveMajorId);
+      setActiveCareerIdx(0);
+    } else if (!initialActiveMajorId && firstWithCareers) {
+      setActiveMajorId(firstWithCareers.id);
+      setActiveCareerIdx(0);
+    }
+  // firstWithCareers is derived from majors; depending on majors is enough.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialActiveMajorId, majors]);
+
   const activeMajor  = majors.find(m => m.id === activeMajorId) ?? majors[0];
   const activeCareer = activeMajor?.careers[activeCareerIdx] ?? null;
 
@@ -454,6 +473,20 @@ function MobileView({
 
   const [openMajorId,  setOpenMajorId]  = useState<string | null>(initialActiveMajorId ?? null);
   const [openCareerId, setOpenCareerId] = useState<string | null>(null);
+
+  // Same rationale as DesktopView: react to prop changes after mount so the
+  // Career Matcher's "Auto-select" button can pop the right accordion open.
+  // When the prop is cleared (Reset / back-nav), collapse all accordions so
+  // the URL stays the source of truth for what's open.
+  useEffect(() => {
+    if (initialActiveMajorId && majors.some(m => m.id === initialActiveMajorId)) {
+      setOpenMajorId(initialActiveMajorId);
+      setOpenCareerId(null);
+    } else if (!initialActiveMajorId) {
+      setOpenMajorId(null);
+      setOpenCareerId(null);
+    }
+  }, [initialActiveMajorId, majors]);
 
   const toggleMajor = (id: string) => {
     setOpenMajorId(prev => (prev === id ? null : id));

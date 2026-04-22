@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useSearch } from "wouter";
+import { useSearch, useLocation } from "wouter";
 import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
@@ -72,25 +72,58 @@ export function LaunchpadPage() {
   const [pathwayMajorId, setPathwayMajorId] = useState("");
   const pathwaysRef = useRef<HTMLDivElement>(null);
   const search = useSearch();
+  const [, setLocation] = useLocation();
 
+  // Keep React state in lock-step with the URL — covers direct deep links
+  // (`/launchpad?major=…`), the in-page Auto-select button, AND back/forward
+  // navigation that strips the param. Cleanup the scroll timer if the URL
+  // changes again before it fires so a stale scroll doesn't fight a fresh one.
   useEffect(() => {
-    const params = new URLSearchParams(search);
-    const majorParam = params.get("major");
+    const majorParam = new URLSearchParams(search).get("major") ?? "";
     if (majorParam) {
-      handleNavigateToMajor(majorParam);
+      setPathwayMajorId(majorParam);
+      setPathwaySearch("");
+      const id = window.setTimeout(() => {
+        pathwaysRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+      return () => window.clearTimeout(id);
     }
+    // URL has no major → make sure local state matches (e.g. user pressed
+    // back after auto-selecting, or hit Reset which clears the param).
+    setPathwayMajorId("");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   function handleNavigateToMajor(majorId: string) {
-    setPathwayMajorId(majorId);
-    setPathwaySearch("");
-    setTimeout(() => {
-      pathwaysRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 200);
+    // Reflect the selection in the URL (`/launchpad?major=visual-arts`) so the
+    // pathway is deep-linkable and survives a refresh. The URL effect above
+    // then syncs React state and triggers the scroll — URL is single source of
+    // truth. We push (not replace) so browser Back returns to the previous
+    // selection like a user would expect.
+    const currentParams = new URLSearchParams(window.location.search);
+    if (currentParams.get("major") !== majorId) {
+      currentParams.set("major", majorId);
+      const path = window.location.pathname;
+      setLocation(`${path}?${currentParams.toString()}`);
+    } else {
+      // Same id re-clicked: URL won't change so the effect won't re-run.
+      // Manually re-scroll so the user still gets the visible jump.
+      setTimeout(() => {
+        pathwaysRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
   }
 
   function handlePathwaysReset() {
+    // Strip ?major= from the URL so refreshing or sharing the link doesn't
+    // re-apply a selection the user just cleared.
+    const currentParams = new URLSearchParams(window.location.search);
+    if (currentParams.has("major")) {
+      currentParams.delete("major");
+      const path = window.location.pathname;
+      const qs = currentParams.toString();
+      setLocation(qs ? `${path}?${qs}` : path, { replace: true });
+    }
     setPathwayMajorId("");
     setPathwaySearch("");
   }
