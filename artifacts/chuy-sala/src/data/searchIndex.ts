@@ -267,6 +267,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
 
   // ── GEOLOGY ─────────────────────────────────────────────
   {
+    id: "deep-time",
+    href: "/science/geology/deep-time",
+    icon: Mountain,
+    titleEn: "Deep Time: The Birth and Death of Earth",
+    titleKh: "ពេលវេលាដ៏ជ្រៅ៖ កំណើត និងទីបញ្ចប់នៃផែនដី",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "From a 4.54-billion-year-old magma ocean to the day the Sun cooks the planet, photosynthesis fails, and life finally ends.",
+    descKh: "ចាប់ពីសមុទ្រកម្អែភ្នំភ្លើងអាយុ ៤,៥៤ ពាន់លានឆ្នាំ រហូតដល់ថ្ងៃដែលព្រះអាទិត្យដុតភពផែនដី រស្មីសំយោគបរាជ័យ ហើយជីវិតបញ្ចប់ជាស្ថាពរ។",
+    keywordsEn: ["deep time", "hadean", "magma", "cambrian", "precambrian", "paleozoic", "mesozoic", "cenozoic", "dinosaur", "extinction", "future", "sun", "co2", "photosynthesis", "history of earth", "billion years"],
+    keywordsKh: ["ពេលវេលាដ៏ជ្រៅ", "ហាដៀន", "កម្អែ", "ខេមប្រៀន", "ប៉ាឡេអូ", "មេសូ", "សេណូ", "ដាយណូសូរ", "ផុតពូជ", "នាគត", "ព្រះអាទិត្យ", "រស្មីសំយោគ", "ប្រវត្តិផែនដី"],
+  },
+  {
     id: "geology",
     href: "/geology",
     icon: Mountain,

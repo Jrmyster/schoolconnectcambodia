@@ -507,6 +507,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
       },
       {
+        href: "/science/geology/deep-time",
+        labelEn: "Deep Time (4.5 Billion Years)",
+        labelKh: "ពេលវេលាដ៏ជ្រៅ (៤,៥ ពាន់លានឆ្នាំ)",
+        icon: Mountain,
+        descEn: "From a magma ocean Earth, through the Cambrian Explosion and dinosaurs, to the day the Sun grows so hot that plants suffocate and life ends.",
+        descKh: "ចាប់ពីផែនដីសមុទ្រកម្អែភ្នំភ្លើង តាមរយៈការផ្ទុះខេមប្រៀន និងដាយណូសូរ រហូតដល់ថ្ងៃដែលព្រះអាទិត្យក្ដៅខ្លាំងរហូតរុក្ខជាតិដាច់ខ្យល់ ហើយជីវិតបញ្ចប់។",
+      },
+      {
         href: "/geology/wonders",
         labelEn: "Geological Wonders: The Earth's Sculptures",
         labelKh: "អច្ឆរិយភូមិសាស្ត្រ៖ ចម្លាក់របស់ផែនដី",

@@ -1,0 +1,45 @@
+I want to add a massive new educational module called 'Automotive Engineering: The Anatomy of a Machine' (វិស្វកម្មយានយន្ត៖ កាយវិភាគសាស្ត្រនៃម៉ាស៊ីន) to the Technology section. Please implement the following cleanly using a card-based grid layout:
+
+1. Routing & Navigation:
+
+Create a new component AutomotiveTech.jsx.
+
+Register a new route: /technology/automotive.
+
+Add a link to the 'Technology' dropdown labeled 'How Cars Work'.
+
+2. The Heart (បេះដូងម៉ាស៊ីន):
+
+Internal Combustion Engine (ម៉ាស៊ីនចំហេះក្នុង): Explain the 4-stroke cycle (Suck, Squeeze, Bang, Blow / Intake, Compression, Power, Exhaust). It turns liquid gasoline into explosive pressure to push a piston.
+
+Rotary Engine (ម៉ាស៊ីនរ៉ូតារី): Explain how it differs from piston engines. Instead of pistons going up and down, a triangle-shaped rotor spins inside an oval chamber, doing all four strokes simultaneously.
+
+Ignition System (ប្រព័ន្ធបញ្ឆេះ): The spark plug is the lightning bolt. It uses a coil to turn the 12-volt battery into a 20,000-volt spark to ignite the compressed fuel perfectly on time.
+
+3. Power & Air (ថាមពល និងខ្យល់):
+
+Accelerator/Throttle (ឈ្នាន់ស្ទុះ): Explain that the gas pedal is actually an air pedal. Stepping on it opens a valve (throttle body) to let more air into the engine. The computer then adds more fuel to match the air, creating a bigger explosion.
+
+Turbocharger (ធួបូ): It is a fan powered by the exhaust gas leaving the engine. It forces extra compressed air into the engine, allowing for a much bigger explosion without needing a bigger engine block.
+
+Muffler (បំពង់ស៊ីម៉ាំង): The explosions in the engine are deafening. The muffler uses a maze of tubes with holes in them to bounce the sound waves into each other so they cancel each other out (destructive interference).
+
+4. The Drivetrain (ប្រព័ន្ធបញ្ជូនចលនា):
+
+The Clutch (អាំប្រាយ៉ា): The engine is always spinning, but the wheels need to stop. The clutch is a pair of high-friction plates that can physically disconnect the spinning engine from the transmission.
+
+Manual vs. Automatic Transmission (ប្រអប់លេខកា និងលេខអូតូ): >   * Manual: The driver uses the clutch to disconnect power and manually moves gears of different sizes to trade speed for torque (like gears on a bicycle).
+
+Automatic: Uses pressurized hydraulic fluid and a complex 'planetary gearset' to shift gears on its own based on the speed of the car.
+
+5. Control & Safety (ការគ្រប់គ្រង និងសុវត្ថិភាព):
+
+Steering Wheel (ចង្កូត): Uses a 'Rack and Pinion' gear. Turning the circular wheel spins a small gear (pinion) that slides a flat, toothed bar (rack) left or right to push the wheels.
+
+Anti-Lock Brakes / ABS (ប្រព័ន្ធហ្វ្រាំង ABS): If you slam on the brakes, the wheels lock up and the car slides out of control. ABS uses sensors to detect a slide and 'pumps' the brakes 15 times a second—faster than a human foot ever could—to keep the tires gripping the road.
+
+6. UI & Layout:
+
+Use a 'Garage/Blueprint' aesthetic: dark greys, metallic silver accents, and neon orange highlights.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer)
