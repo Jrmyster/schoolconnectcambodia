@@ -62,6 +62,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/launchpad", labelEn: "Scholarships", labelKh: "អាហារូបករណ៍", icon: BookOpen },
       { href: "/charities", labelEn: "Partners",      labelKh: "ដៃគូ",          icon: Handshake },
       { href: "/alumni",    labelEn: "Alumni",         labelKh: "រឿងជោគជ័យ",   icon: Star },
+      { href: "/reading-list", labelEn: "Reading List", labelKh: "បញ្ជីសៀវភៅអាន", icon: BookOpen },
     ],
   },
   {
@@ -98,7 +99,6 @@ const NAV_GROUPS: NavGroup[] = [
       },
       { href: "https://khmervoc.com",   labelEn: "Vocational Guide", labelKh: "មគ្គុទ្ទេសក៍វិជ្ជាជីវៈ", icon: Wrench, external: true },
       { href: "https://anatomykh.com",  labelEn: "Human Anatomy",    labelKh: "រូបកាយវិភាគវិទ្យា",      icon: PersonStanding, external: true },
-      { href: "/reading-list",          labelEn: "Reading List",      labelKh: "បញ្ជីសៀវភៅអាន",         icon: BookOpen },
       {
         href: "/study-center/linguistics",
         labelEn: "Linguistics: The Architecture of Thought",
