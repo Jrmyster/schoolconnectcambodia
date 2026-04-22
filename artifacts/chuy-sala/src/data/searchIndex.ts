@@ -1415,6 +1415,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
   },
   {
+    id: "sci-electromagnetism",
+    href: "/science/electromagnetism",
+    icon: Zap,
+    titleEn: "Electromagnetism: The Power of Fields",
+    titleKh: "អគ្គិសនីម៉ាញ៉េទិច៖ ថាមពលនៃដែន",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "Faraday's induction, Gauss's Law (∮ E·dA = Q/ε₀), and how the same idea drives motors, transformers, and MRI machines.",
+    descKh: "ការបណ្ដាលរបស់ហ្វារ៉ាដេយ ច្បាប់ហ្គោស និងរបៀបដែលគំនិតតែមួយដឹកនាំម៉ូទ័រ បំលែងតង់ស្យុង និង MRI។",
+    keywordsEn: ["electromagnetism", "faraday", "induction", "gauss", "gauss's law", "electric field", "flux", "motor", "transformer", "mri", "coil", "magnet", "voltage", "physics", "maxwell"],
+    keywordsKh: ["អគ្គិសនី", "ម៉ាញ៉េទិច", "ហ្វារ៉ាដេយ", "ហ្គោស", "ការបណ្ដាល", "ម៉ូទ័រ", "បំលែងតង់ស្យុង", "MRI", "មេដែក"],
+  },
+  {
     id: "tech-mass-production",
     href: "/technology/mass-production",
     icon: Factory,
