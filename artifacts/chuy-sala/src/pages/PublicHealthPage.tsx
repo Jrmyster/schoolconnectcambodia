@@ -21,6 +21,10 @@ import {
   Stethoscope,
   Sunrise,
   Syringe,
+  Droplet,
+  Hand,
+  Skull,
+  ShieldOff,
   Users,
   Wallet,
   Wind as WindIcon,
@@ -318,6 +322,7 @@ export function PublicHealthPage() {
         </header>
 
         <SectionInvisibleMath  k={k} t={t} />
+        <SectionSoap           k={k} t={t} />
         <SectionChemicalTrap   k={k} t={t} />
         <SectionStress         k={k} t={t} />
         <SectionHappiness      k={k} t={t} />
@@ -453,6 +458,426 @@ function SectionInvisibleMath({ k, t }: { k: boolean; t: T }) {
             accent={MED_BLUE}
           />
         </ConceptCard>
+      </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 01b — The Science of Soap: Microscopic Crowbars
+//                វិទ្យាសាស្ត្រនៃសាប៊ូ៖ ដងគាស់មីក្រូទស្សន៍
+// ════════════════════════════════════════════════════════════════════════════
+
+const AQUA = "#0ea5e9";       // soft aquatic blue
+const AQUA_DEEP = "#0c4a6e";  // deep ocean
+const AQUA_FOAM = "#e0f7fa";  // foam white
+const GREASE = "#fbbf24";     // grease / lipid yellow
+const GREASE_DEEP = "#b45309";
+
+// Tiny pin-shaped soap molecule SVG used everywhere in this section.
+function SoapMoleculePin({
+  size = 60,
+  showLabels = false,
+  k = false,
+}: { size?: number; showLabels?: boolean; k?: boolean }) {
+  const w = showLabels ? size * 3.2 : size * 2.6;
+  const h = size;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} className="overflow-visible">
+      {/* Hydrophilic head (loves water) */}
+      <circle cx={size / 2} cy={h / 2} r={size / 2.2} fill={AQUA} stroke={AQUA_DEEP} strokeWidth="1.5" />
+      <circle cx={size / 2 - 4} cy={h / 2 - 4} r={size / 8} fill="#bae6fd" opacity="0.9" />
+      {/* Lipophilic tail (loves fat) — zig-zag */}
+      <polyline
+        points={[
+          [size, h / 2],
+          [size + 14, h / 2 - 8],
+          [size + 28, h / 2 + 8],
+          [size + 42, h / 2 - 8],
+          [size + 56, h / 2 + 8],
+          [size + 70, h / 2 - 8],
+          [size + 84, h / 2 + 8],
+        ]
+          .map((p) => p.join(","))
+          .join(" ")}
+        fill="none"
+        stroke={GREASE_DEEP}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {showLabels && (
+        <>
+          <text x={size / 2} y={h - 4} textAnchor="middle" fontSize="9" fontFamily="monospace" fill={AQUA_DEEP}>
+            {k ? "ក្បាល" : "HEAD"}
+          </text>
+          <text x={size + 50} y={h - 4} textAnchor="middle" fontSize="9" fontFamily="monospace" fill={GREASE_DEEP}>
+            {k ? "កន្ទុយ" : "TAIL"}
+          </text>
+        </>
+      )}
+    </svg>
+  );
+}
+
+// Step 1 visual — a virus / "grease ball" with a fatty envelope, water beading off
+function GreaseBallSVG({ k }: { k: boolean }) {
+  return (
+    <svg viewBox="0 0 240 200" className="w-full h-auto max-w-[260px]" aria-hidden>
+      {/* Water droplet beading off (oil & water don't mix) */}
+      <g>
+        <ellipse cx="40" cy="50" rx="14" ry="18" fill={AQUA} opacity="0.85" />
+        <ellipse cx="36" cy="44" rx="4" ry="6" fill="#e0f2fe" opacity="0.8" />
+        <text x="40" y="86" textAnchor="middle" fontSize="9" fontFamily="monospace" fill={AQUA_DEEP}>
+          {k ? "ទឹក" : "H₂O"}
+        </text>
+        <path d="M 50 60 Q 80 70 100 90" stroke={AQUA} strokeWidth="2" fill="none" strokeDasharray="3 3" />
+        <text x="78" y="68" textAnchor="middle" fontSize="9" fontFamily="monospace" fill={AQUA_DEEP}>
+          {k ? "រំអិល" : "slips"}
+        </text>
+      </g>
+
+      {/* Virus with lipid envelope */}
+      <g transform="translate(160 110)">
+        {/* fatty envelope (yellow ring) */}
+        <circle cx="0" cy="0" r="55" fill={GREASE} opacity="0.35" stroke={GREASE_DEEP} strokeWidth="2" strokeDasharray="4 3" />
+        {/* spike proteins */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const a = (i / 12) * Math.PI * 2;
+          const x1 = Math.cos(a) * 52, y1 = Math.sin(a) * 52;
+          const x2 = Math.cos(a) * 64, y2 = Math.sin(a) * 64;
+          return (
+            <g key={i}>
+              <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={GREASE_DEEP} strokeWidth="2" />
+              <circle cx={x2} cy={y2} r="3.5" fill={GREASE_DEEP} />
+            </g>
+          );
+        })}
+        {/* RNA core */}
+        <circle cx="0" cy="0" r="22" fill="#7f1d1d" />
+        <path d="M -14 0 Q -7 -10 0 0 T 14 0" stroke="#fde68a" strokeWidth="2" fill="none" />
+        <text x="0" y="3" textAnchor="middle" fontSize="9" fontFamily="monospace" fill="#fde68a">RNA</text>
+      </g>
+
+      {/* Label */}
+      <text x="160" y="195" textAnchor="middle" fontSize="10" fontFamily="monospace" fill={GREASE_DEEP}>
+        {k ? "មេរោគ + ស្រោមខ្លាញ់" : "virus + lipid envelope"}
+      </text>
+    </svg>
+  );
+}
+
+// Step 3 visual — soap molecules drilling into the lipid envelope, tearing it open
+function DestructionSVG({ k }: { k: boolean }) {
+  // 6 soap pins arranged around a broken envelope, tails stabbing inward
+  const pins = Array.from({ length: 8 }).map((_, i) => {
+    const a = (i / 8) * Math.PI * 2;
+    return { angle: (a * 180) / Math.PI, x: 130 + Math.cos(a) * 90, y: 110 + Math.sin(a) * 90 };
+  });
+  return (
+    <svg viewBox="0 0 260 220" className="w-full h-auto max-w-[280px]" aria-hidden>
+      {/* Broken / fragmented envelope */}
+      <g transform="translate(130 110)">
+        {[0, 60, 120, 180, 240, 300].map((deg, i) => (
+          <path
+            key={i}
+            d="M -30 0 A 30 30 0 0 1 -10 -28 L -8 -22 A 24 24 0 0 0 -24 0 Z"
+            fill={GREASE}
+            opacity="0.55"
+            stroke={GREASE_DEEP}
+            strokeWidth="1.5"
+            transform={`rotate(${deg + i * 8}) translate(${4 + i} ${i * 2})`}
+          />
+        ))}
+        {/* Spilled RNA fragments */}
+        {[
+          [-6, -12], [10, -2], [-2, 14], [-18, 4], [16, 12],
+        ].map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} r="2.5" fill="#7f1d1d" />
+        ))}
+      </g>
+
+      {/* Soap molecules drilling in */}
+      {pins.map((p, i) => (
+        <g key={i} transform={`translate(${p.x} ${p.y}) rotate(${p.angle + 180})`}>
+          {/* head */}
+          <circle cx="0" cy="0" r="9" fill={AQUA} stroke={AQUA_DEEP} strokeWidth="1.2" />
+          {/* tail pointing inward */}
+          <polyline
+            points="9,0 16,-4 22,4 28,-4 34,4 40,-4 46,4"
+            fill="none"
+            stroke={GREASE_DEEP}
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </g>
+      ))}
+
+      {/* Label */}
+      <text x="130" y="210" textAnchor="middle" fontSize="10" fontFamily="monospace" fill={AQUA_DEEP}>
+        {k ? "កន្ទុយចាក់ → ស្រោមបែក" : "tails stab → envelope shatters"}
+      </text>
+    </svg>
+  );
+}
+
+function SectionSoap({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section
+      id="soap"
+      className="rounded-3xl p-6 sm:p-8 mb-10 border-2 shadow-sm relative overflow-hidden"
+      style={{
+        borderColor: `${AQUA}55`,
+        backgroundImage: `
+          radial-gradient(circle at 12% 10%, ${AQUA}22, transparent 55%),
+          radial-gradient(circle at 88% 90%, ${AQUA_FOAM}, transparent 60%),
+          linear-gradient(180deg, #f0f9ff 0%, #ffffff 60%, ${AQUA_FOAM} 100%)
+        `,
+      }}
+      data-testid="section-soap"
+    >
+      {/* Bubble decorations */}
+      <div className="absolute inset-0 pointer-events-none opacity-60">
+        {[
+          { l: "82%", t: "12%", s: 28 },
+          { l: "8%", t: "78%", s: 20 },
+          { l: "92%", t: "60%", s: 14 },
+          { l: "18%", t: "42%", s: 10 },
+        ].map((b, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              left: b.l, top: b.t, width: b.s, height: b.s,
+              background: `radial-gradient(circle at 30% 30%, #ffffff, ${AQUA_FOAM})`,
+              border: `1px solid ${AQUA}33`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative">
+        <SectionHeader
+          spec="01b"
+          en="The Science of Soap: Microscopic Crowbars"
+          kh="វិទ្យាសាស្ត្រនៃសាប៊ូ៖ ដងគាស់មីក្រូទស្សន៍"
+          k={k}
+          Icon={Hand}
+          accent={AQUA}
+        />
+
+        <p className={`text-sm text-slate-700 mb-6 max-w-3xl ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {t(
+            "Of all the public-health tools ever invented, the cheapest and most powerful is a 100-riel bar of soap. To understand why, we have to zoom in on the virus itself, and discover that soap doesn't 'wash' it away — it physically tears it apart.",
+            "ក្នុងចំណោមឧបករណ៍សុខភាពសាធារណៈទាំងអស់ដែលធ្លាប់បានបង្កើតមក របស់ដែលថោកបំផុត និងមានឥទ្ធិពលបំផុត គឺសាប៊ូដុំ ១០០ រៀល។ ដើម្បីយល់ពីហេតុផល យើងត្រូវពង្រីកមើលមេរោគដោយខ្លួនឯង ហើយរកឃើញថា សាប៊ូមិនមែនត្រឹមតែ «លាងជម្រះ» វាចោលនោះទេ — តាមពិតវាហែកវាដាច់ដោយរូបវន្ត។"
+          )}
+        </p>
+
+        {/* ── Step 1: The Grease Ball ─────────────────────────────────── */}
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <span className="font-mono text-[10px] uppercase tracking-widest rounded-full px-2.5 py-0.5 text-white" style={{ backgroundColor: GREASE_DEEP }}>
+              STEP 01
+            </span>
+            <h3 className={`font-bold text-lg ${k ? "font-khmer" : ""}`} style={{ color: SLATE }}>
+              {t("The Grease Ball", "ដុំខ្លាញ់")}
+            </h3>
+          </div>
+
+          <div
+            className="rounded-2xl bg-white border-2 p-5 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-5 items-center"
+            style={{ borderColor: `${GREASE_DEEP}33` }}
+          >
+            <div className="flex justify-center">
+              <GreaseBallSVG k={k} />
+            </div>
+            <div>
+              <div className={`font-mono text-[10px] uppercase tracking-widest mb-1 ${k ? "font-khmer normal-case tracking-normal" : ""}`} style={{ color: GREASE_DEEP }}>
+                {t("The hidden chemistry", "គីមីវិទ្យាដែលលាក់")}
+              </div>
+              <h4 className={`font-bold text-base sm:text-lg mb-2 ${k ? "font-khmer leading-snug" : "leading-tight"}`} style={{ color: SLATE }}>
+                {t(
+                  "Many viruses (flu, COVID-19) and bacteria are wrapped in fat.",
+                  "មេរោគជាច្រើន (ផ្តាសាយ COVID-19) និងបាក់តេរីត្រូវបានរុំដោយខ្លាញ់។"
+                )}
+              </h4>
+              <p className={`text-sm text-slate-700 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "On the outside of every flu and coronavirus particle there is a thin shell of fat called a lipid envelope. It carries the spike proteins the virus uses to attack your cells. Without that fatty shell, the virus is helpless.",
+                  "នៅលើផ្ទៃខាងក្រៅនៃរាល់ភាគល្អិតផ្តាសាយ និងកូរ៉ូណាវីរុស មានសំបកស្តើងនៃខ្លាញ់ហៅថា ស្រោមលីពីត។ វាផ្ទុកប្រូតេអ៊ីនរាងបន្លាដែលមេរោគប្រើដើម្បីវាយប្រហារកោសិការបស់អ្នក។ បើគ្មានសំបកខ្លាញ់នោះទេ មេរោគគ្មានកម្លាំងឡើយ។"
+                )}
+              </p>
+              <div
+                className="rounded-xl p-3 border-l-4 flex items-start gap-2"
+                style={{ borderLeftColor: AQUA, backgroundColor: `${AQUA}10` }}
+              >
+                <Droplet className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: AQUA_DEEP }} />
+                <p className={`text-xs sm:text-sm text-slate-800 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  <strong className={k ? "" : "font-bold"}>
+                    {t("Rule of chemistry: ", "ច្បាប់គីមីវិទ្យា ៖ ")}
+                  </strong>
+                  {t(
+                    "oil and water do not mix. Plain water just slides right over the viral fat without damaging it — that is why rinsing with water alone is not enough.",
+                    "ប្រេង និងទឹក មិនលាយចូលគ្នាទេ។ ទឹកសុទ្ធគ្រាន់តែរំអិលលើខ្លាញ់របស់មេរោគដោយមិនធ្វើឱ្យខូចវា — នេះហើយជាហេតុដែលការលាងដោយទឹកតែឯងគឺមិនគ្រប់គ្រាន់ទេ។"
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Step 2: What is a Surfactant? ──────────────────────────── */}
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <span className="font-mono text-[10px] uppercase tracking-widest rounded-full px-2.5 py-0.5 text-white" style={{ backgroundColor: AQUA }}>
+              STEP 02
+            </span>
+            <h3 className={`font-bold text-lg ${k ? "font-khmer" : ""}`} style={{ color: SLATE }}>
+              {t("What is a Surfactant?", "តើអ្វីទៅជាសារធាតុសាប៊ូ?")}
+            </h3>
+          </div>
+
+          <div
+            className="rounded-2xl bg-white border-2 p-5"
+            style={{ borderColor: `${AQUA}55` }}
+          >
+            <p className={`text-sm text-slate-700 mb-4 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "A soap molecule is a 'surfactant' — a tiny pin-shaped object with two completely opposite ends. That double personality is the entire secret.",
+                "ម៉ូលេគុលសាប៊ូ គឺជា «សារធាតុសាប៊ូ» — វត្ថុតូចមួយរាងម្ជុលដែលមានចុងពីរផ្ទុយគ្នាទាំងស្រុង។ បុគ្គលិកលក្ខណៈពីរនោះ គឺជាអាថ៌កំបាំងទាំងមូល។"
+              )}
+            </p>
+
+            {/* Big labelled pin */}
+            <div
+              className="rounded-2xl p-4 mb-4 flex items-center justify-center"
+              style={{ backgroundColor: AQUA_FOAM, border: `1px dashed ${AQUA}55` }}
+            >
+              <SoapMoleculePin size={70} showLabels k={k} />
+            </div>
+
+            {/* Two-end legend */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div
+                className="rounded-xl p-4 border-l-4"
+                style={{ borderLeftColor: AQUA, backgroundColor: `${AQUA}10` }}
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: AQUA }} />
+                  <span className={`font-mono text-[10px] uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`} style={{ color: AQUA_DEEP }}>
+                    {t("Hydrophilic head", "ក្បាលចូលចិត្តទឹក")}
+                  </span>
+                </div>
+                <p className={`text-xs sm:text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {t(
+                    "This round end loves water. It bonds to H₂O molecules instantly — that is the end you can rinse away under the tap.",
+                    "ចុងមូលនេះចូលចិត្តទឹក។ វាភ្ជាប់ទៅនឹងម៉ូលេគុល H₂O ភ្លាមៗ — នេះគឺជាចុងដែលអ្នកអាចលាងជម្រះចេញនៅក្រោមមាត់ទឹក។"
+                  )}
+                </p>
+              </div>
+              <div
+                className="rounded-xl p-4 border-l-4"
+                style={{ borderLeftColor: GREASE_DEEP, backgroundColor: `${GREASE}20` }}
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <svg width="22" height="10" className="flex-shrink-0">
+                    <polyline points="0,5 5,1 10,9 15,1 20,9" fill="none" stroke={GREASE_DEEP} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className={`font-mono text-[10px] uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`} style={{ color: GREASE_DEEP }}>
+                    {t("Lipophilic tail", "កន្ទុយចូលចិត្តខ្លាញ់")}
+                  </span>
+                </div>
+                <p className={`text-xs sm:text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {t(
+                    "This zig-zag end hates water but loves fat and oil. It will burrow into any greasy surface it can find — including the lipid envelope of a virus.",
+                    "ចុងហ្ស៊ីកហ្ស៊ែកនេះស្អប់ទឹក ប៉ុន្តែចូលចិត្តខ្លាញ់ និងប្រេង។ វានឹងជីកចូលក្នុងផ្ទៃខ្លាញ់ណាមួយដែលវារកឃើញ — រួមទាំងស្រោមលីពីតរបស់មេរោគផងដែរ។"
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Step 3: The Destruction ────────────────────────────────── */}
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3 flex-wrap">
+            <span className="font-mono text-[10px] uppercase tracking-widest rounded-full px-2.5 py-0.5 text-white" style={{ backgroundColor: AQUA_DEEP }}>
+              STEP 03
+            </span>
+            <h3 className={`font-bold text-lg ${k ? "font-khmer" : ""}`} style={{ color: SLATE }}>
+              {t("The Destruction", "ការបំផ្លាញ")}
+            </h3>
+          </div>
+
+          <div
+            className="rounded-2xl bg-white border-2 p-5 grid grid-cols-1 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-5 items-center"
+            style={{ borderColor: `${AQUA_DEEP}55` }}
+          >
+            <div>
+              <div className={`font-mono text-[10px] uppercase tracking-widest mb-1 ${k ? "font-khmer normal-case tracking-normal" : ""}`} style={{ color: AQUA_DEEP }}>
+                {t("The mechanical attack", "ការវាយប្រហារតាមរូបវន្ត")}
+              </div>
+              <h4 className={`font-bold text-base sm:text-lg mb-2 ${k ? "font-khmer leading-snug" : "leading-tight"}`} style={{ color: SLATE }}>
+                {t(
+                  "Soap molecules act like microscopic crowbars.",
+                  "ម៉ូលេគុលសាប៊ូដើរតួដូចជាដងគាស់មីក្រូទស្សន៍។"
+                )}
+              </h4>
+              <p className={`text-sm text-slate-700 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "When you rub your hands with soap, billions of those zig-zag tails stab into the fatty shell of every virus on your skin. They wedge themselves between the fat molecules and pry the envelope apart, like a crowbar opening a sealed crate. The virus is no longer 'sick' — it is structurally destroyed.",
+                  "នៅពេលអ្នកដុសដៃជាមួយសាប៊ូ កន្ទុយហ្ស៊ីកហ្ស៊ែករាប់ពាន់លានទាំងនោះចាក់ចូលក្នុងសំបកខ្លាញ់នៃរាល់មេរោគនៅលើស្បែករបស់អ្នក។ ពួកវាជ្រែករវាងម៉ូលេគុលខ្លាញ់ ហើយគាស់ស្រោមនោះឱ្យបែក ដូចជាដងគាស់បើកប្រអប់ដែលបិទជិត។ មេរោគមិនមែន «ឈឺ» ទៀតឡើយ — វាត្រូវបានបំផ្លាញតាមរចនាសម្ព័ន្ធ។"
+                )}
+              </p>
+              <p className={`text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "Then the hydrophilic heads grab onto the running water, and the dead viral fragments — wrapped up in soap — wash straight down the drain. Twenty seconds of scrubbing is enough.",
+                  "បន្ទាប់មក ក្បាលចូលចិត្តទឹកចាប់ផ្ទាល់នឹងទឹកដែលហូរ ហើយបំណែកមេរោគដែលបានស្លាប់ — រុំក្នុងសាប៊ូ — ត្រូវបានលាងជម្រះចូលក្នុងបំពង់លូ។ ការដុសរយៈពេល ២០ វិនាទីគឺគ្រប់គ្រាន់ហើយ។"
+                )}
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <DestructionSVG k={k} />
+            </div>
+          </div>
+        </div>
+
+        {/* ── Bilingual closing quote ────────────────────────────────── */}
+        <div
+          className="rounded-2xl p-5 border-l-4 shadow-sm"
+          style={{
+            borderLeftColor: AQUA_DEEP,
+            backgroundImage: `linear-gradient(135deg, ${AQUA_FOAM} 0%, #ffffff 100%)`,
+            border: `2px solid ${AQUA}33`,
+          }}
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: AQUA_DEEP, color: "#fff" }}
+            >
+              <ShieldOff className="w-5 h-5" />
+            </div>
+            <div>
+              <div className={`font-mono text-[10px] uppercase tracking-widest mb-1 ${k ? "font-khmer normal-case tracking-normal" : ""}`} style={{ color: AQUA_DEEP }}>
+                {t("The big idea", "គំនិតធំ")}
+              </div>
+              <p className={`text-base sm:text-lg font-bold mb-1 ${k ? "font-khmer leading-snug" : "leading-snug"}`} style={{ color: SLATE }}>
+                {t(
+                  "Soap doesn't just wash the virus away; it literally tears the virus apart.",
+                  "សាប៊ូមិនត្រឹមតែលាងជម្រះមេរោគប៉ុណ្ណោះទេ តាមពិតវាហែកមេរោគឱ្យបែកខ្ទេចតែម្តង។"
+                )}
+              </p>
+              <p className={`text-xs sm:text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "That is why a 100-riel bar of soap and twenty seconds of scrubbing is one of the most powerful pieces of medicine ever invented — for the cost of nothing, in any village, anywhere on Earth.",
+                  "នេះហើយជាមូលហេតុដែលសាប៊ូដុំ ១០០ រៀល និងការដុស ២០ វិនាទីគឺជាឱសថដ៏មានឥទ្ធិពលបំផុតមួយដែលធ្លាប់បានបង្កើតមក — ដោយចំណាយតែតិចតួច នៅក្នុងភូមិណាមួយ និងគ្រប់ទីកន្លែងលើផែនដី។"
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
