@@ -14,33 +14,84 @@ type Block = {
 
 const BLOCKS: Block[] = [
   // Subjects (blue)
-  { id: "s1", slot: "subject", en: "I",           kh: "ខ្ញុំ" },
-  { id: "s2", slot: "subject", en: "You",         kh: "អ្នក" },
-  { id: "s3", slot: "subject", en: "The cow",     kh: "គោ" },
-  { id: "s4", slot: "subject", en: "The boy",     kh: "ក្មេងប្រុស" },
-  { id: "s5", slot: "subject", en: "We",          kh: "ពួកយើង" },
-  { id: "s6", slot: "subject", en: "They",        kh: "ពួកគេ" },
-  { id: "s7", slot: "subject", en: "The teacher", kh: "គ្រូបង្រៀន" },
-  { id: "s8", slot: "subject", en: "The girl",    kh: "ក្មេងស្រី" },
+  { id: "s1",  slot: "subject", en: "I",           kh: "ខ្ញុំ" },
+  { id: "s2",  slot: "subject", en: "You",         kh: "អ្នក" },
+  { id: "s3",  slot: "subject", en: "The cow",     kh: "គោ" },
+  { id: "s4",  slot: "subject", en: "The boy",     kh: "ក្មេងប្រុស" },
+  { id: "s5",  slot: "subject", en: "We",          kh: "ពួកយើង" },
+  { id: "s6",  slot: "subject", en: "They",        kh: "ពួកគេ" },
+  { id: "s7",  slot: "subject", en: "The teacher", kh: "គ្រូបង្រៀន" },
+  { id: "s8",  slot: "subject", en: "The girl",    kh: "ក្មេងស្រី" },
+  // ── Third-person singular subjects — these trigger verb conjugation
+  //    via THIRD_PERSON_SINGULAR_SUBJECT_IDS below. ──
+  { id: "s9",  slot: "subject", en: "He",          kh: "គាត់" },
+  { id: "s10", slot: "subject", en: "She",         kh: "នាង" },
+  { id: "s11", slot: "subject", en: "It",          kh: "វា" },
+  { id: "s12", slot: "subject", en: "Jack",        kh: "ជេក" },
+  { id: "s13", slot: "subject", en: "Suzy",        kh: "ស៊ូស៊ី" },
   // Verbs (red)
-  { id: "v1", slot: "verb", en: "eat",    kh: "ញ៉ាំ" },
-  { id: "v2", slot: "verb", en: "see",    kh: "ឃើញ" },
-  { id: "v3", slot: "verb", en: "like",   kh: "ចូលចិត្ត" },
-  { id: "v4", slot: "verb", en: "walk",   kh: "ដើរ" },
-  { id: "v5", slot: "verb", en: "read",   kh: "អាន" },
-  { id: "v6", slot: "verb", en: "want",   kh: "ចង់បាន" },
-  { id: "v7", slot: "verb", en: "go to",  kh: "ទៅ" },
-  { id: "v8", slot: "verb", en: "play",   kh: "លេង" },
+  { id: "v1",  slot: "verb", en: "eat",    kh: "ញ៉ាំ" },
+  { id: "v2",  slot: "verb", en: "see",    kh: "ឃើញ" },
+  { id: "v3",  slot: "verb", en: "like",   kh: "ចូលចិត្ត" },
+  { id: "v4",  slot: "verb", en: "walk",   kh: "ដើរ" },
+  { id: "v5",  slot: "verb", en: "read",   kh: "អាន" },
+  { id: "v6",  slot: "verb", en: "want",   kh: "ចង់បាន" },
+  { id: "v7",  slot: "verb", en: "go to",  kh: "ទៅ" },
+  { id: "v8",  slot: "verb", en: "play",   kh: "លេង" },
+  { id: "v9",  slot: "verb", en: "drink",  kh: "ផឹក" },
+  { id: "v10", slot: "verb", en: "run",    kh: "រត់" },
+  { id: "v11", slot: "verb", en: "write",  kh: "សរសេរ" },
+  { id: "v12", slot: "verb", en: "buy",    kh: "ទិញ" },
   // Objects (green)
-  { id: "o1", slot: "object", en: "rice",       kh: "បាយ" },
-  { id: "o2", slot: "object", en: "water",      kh: "ទឹក" },
-  { id: "o3", slot: "object", en: "the dog",    kh: "ឆ្កែ" },
-  { id: "o4", slot: "object", en: "the school", kh: "សាលា" },
-  { id: "o5", slot: "object", en: "a book",     kh: "សៀវភៅ" },
-  { id: "o6", slot: "object", en: "the market", kh: "ផ្សារ" },
-  { id: "o7", slot: "object", en: "football",   kh: "បាល់ទាត់" },
-  { id: "o8", slot: "object", en: "an apple",   kh: "ផ្លែប៉ោម" },
+  { id: "o1",  slot: "object", en: "rice",       kh: "បាយ" },
+  { id: "o2",  slot: "object", en: "water",      kh: "ទឹក" },
+  { id: "o3",  slot: "object", en: "the dog",    kh: "ឆ្កែ" },
+  { id: "o4",  slot: "object", en: "the school", kh: "សាលា" },
+  { id: "o5",  slot: "object", en: "a book",     kh: "សៀវភៅ" },
+  { id: "o6",  slot: "object", en: "the market", kh: "ផ្សារ" },
+  { id: "o7",  slot: "object", en: "football",   kh: "បាល់ទាត់" },
+  { id: "o8",  slot: "object", en: "an apple",   kh: "ផ្លែប៉ោម" },
+  { id: "o9",  slot: "object", en: "milk",       kh: "ទឹកដោះគោ" },
+  { id: "o10", slot: "object", en: "a pen",      kh: "ប៊ិច" },
+  { id: "o11", slot: "object", en: "a shirt",    kh: "អាវ" },
+  { id: "o12", slot: "object", en: "a bicycle",  kh: "កង់" },
 ];
+
+/**
+ * Subject IDs that take third-person singular conjugation in English
+ * ("He eats", "Jack runs"). When one of these is placed in the subject car,
+ * the verb gets an automatic ending applied — see `conjugateVerb` below.
+ */
+const THIRD_PERSON_SINGULAR_SUBJECT_IDS = new Set([
+  "s9", "s10", "s11", "s12", "s13", // He, She, It, Jack, Suzy
+]);
+
+/**
+ * Verbs in our word bank whose 3rd-person-singular form is NOT just "+ s".
+ * Add new entries here whenever a non-regular verb is added to BLOCKS. We
+ * deliberately list "see" here too even though "sees" is regular, because
+ * the spec calls it out explicitly — keeping it in the table makes the
+ * intended behaviour obvious to future editors.
+ */
+const IRREGULAR_THIRD_PERSON: Record<string, string> = {
+  "go to": "goes to",
+  "see":   "sees",
+};
+
+/**
+ * Apply 3rd-person-singular conjugation if (and only if) the supplied
+ * subject block id is a 3PS pronoun/name. Khmer doesn't conjugate, so the
+ * caller only uses this for the English form.
+ */
+function conjugateVerb(verbEn: string, subjectBlockId: string | undefined): string {
+  if (!subjectBlockId || !THIRD_PERSON_SINGULAR_SUBJECT_IDS.has(subjectBlockId)) {
+    return verbEn;
+  }
+  if (IRREGULAR_THIRD_PERSON[verbEn]) {
+    return IRREGULAR_THIRD_PERSON[verbEn];
+  }
+  return verbEn + "s";
+}
 
 const SLOT_META: Record<Slot, { en: string; kh: string; subEn: string; subKh: string; color: string; ring: string; chip: string }> = {
   subject: {
@@ -170,8 +221,11 @@ export function SentenceTrain() {
     }
   }
 
+  // English preview applies 3rd-person-singular conjugation when the chosen
+  // subject demands it (He/She/It/Jack/Suzy → "eats", "goes to", …). Khmer
+  // doesn't conjugate, so its preview just concatenates the raw kh forms.
   const sentencePreview = allFilled
-    ? `${blockMap[placed.subject!].en} ${blockMap[placed.verb!].en} ${blockMap[placed.object!].en}.`
+    ? `${blockMap[placed.subject!].en} ${conjugateVerb(blockMap[placed.verb!].en, placed.subject)} ${blockMap[placed.object!].en}.`
     : "";
   const sentencePreviewKh = allFilled
     ? `${blockMap[placed.subject!].kh} ${blockMap[placed.verb!].kh} ${blockMap[placed.object!].kh}.`
@@ -327,7 +381,11 @@ export function SentenceTrain() {
                 >
                   {block ? (
                     <span className={`text-white font-extrabold text-sm sm:text-base text-center leading-tight drop-shadow ${kh ? "font-khmer text-xs sm:text-sm" : ""}`}>
-                      {kh ? block.kh : block.en}
+                      {kh
+                        ? block.kh
+                        : slot === "verb"
+                          ? conjugateVerb(block.en, placed.subject)
+                          : block.en}
                     </span>
                   ) : (
                     <span className={`text-white/90 text-[10px] sm:text-xs font-bold uppercase tracking-wide text-center leading-tight ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
