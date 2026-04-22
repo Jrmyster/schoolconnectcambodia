@@ -1,15 +1,30 @@
 /* Chouy Sala Service Worker
- * Strategy:
- *   - Pre-cache the app shell + key offline-friendly modules at install.
- *   - Stale-While-Revalidate for same-origin GET requests (HTML, JS, CSS, images, audio, fonts).
- *   - Navigations fall back to the cached app shell when offline so SPA routes still load.
- *   - API requests (/api/*) are network-only — they fail gracefully so the UI can show
- *     the bilingual "needs internet" message.
+ *
+ * Production-readiness sweep — strategy mix:
+ *
+ *   1. PRECACHE  — App shell + a small set of beginner-friendly modules are
+ *                   downloaded at install so the very first offline visit works.
+ *
+ *   2. CACHE-FIRST — Static, fingerprinted build assets (Vite hashed JS, CSS,
+ *                    fonts, icons, images). These never change once their hash
+ *                    is in the URL, so we serve from cache instantly and only
+ *                    revalidate in the background. This is what makes the site
+ *                    feel native on a 3G connection.
+ *
+ *   3. STALE-WHILE-REVALIDATE — HTML navigations (SPA routes). The student
+ *                    sees the previously-cached page immediately, while a
+ *                    fresh copy is fetched in the background for next time.
+ *                    If the network is offline, the cached shell is served.
+ *
+ *   4. NETWORK-ONLY — `/api/*` requests. The UI shows its own bilingual
+ *                    "needs internet" message when these fail.
  */
 
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL_CACHE = `chouy-sala-shell-${VERSION}`;
+const ASSET_CACHE = `chouy-sala-assets-${VERSION}`;
 const RUNTIME_CACHE = `chouy-sala-runtime-${VERSION}`;
+const KEEP = new Set([SHELL_CACHE, ASSET_CACHE, RUNTIME_CACHE]);
 
 // SW scope ends with a trailing slash; everything we precache is relative to it.
 const BASE = new URL("./", self.registration.scope).pathname;
@@ -20,9 +35,9 @@ const PRECACHE_URLS = [
   "manifest.webmanifest",
   "favicon.svg",
   "images/logo.png",
-  "icons/icon-192.svg",
-  "icons/icon-512.svg",
-  "icons/maskable-512.svg",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "icons/maskable-512.png",
   // Beginner-friendly modules called out for offline use:
   "english-writing",
   "finlit-intro",
@@ -30,11 +45,15 @@ const PRECACHE_URLS = [
   "world-history",
 ].map((p) => BASE + p);
 
+// File extensions we treat as immutable static assets (cache-first).
+const STATIC_ASSET_RE =
+  /\.(?:js|mjs|css|woff2?|ttf|otf|eot|png|jpg|jpeg|gif|webp|avif|svg|ico|map)$/i;
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(SHELL_CACHE);
-      // Use addAll with individual fetches so a single 404 doesn't abort install.
+      // Use individual fetches so a single 404 doesn't abort install.
       await Promise.all(
         PRECACHE_URLS.map(async (url) => {
           try {
@@ -54,10 +73,9 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
+      // Drop any cache from a prior version (chouy-sala-shell-v1, etc).
       await Promise.all(
-        keys
-          .filter((k) => k !== SHELL_CACHE && k !== RUNTIME_CACHE)
-          .map((k) => caches.delete(k)),
+        keys.filter((k) => !KEEP.has(k)).map((k) => caches.delete(k)),
       );
       await self.clients.claim();
     })(),
@@ -70,18 +88,51 @@ self.addEventListener("message", (event) => {
   }
 });
 
-function isCacheableSameOrigin(request) {
+function isSameOriginGet(request) {
   if (request.method !== "GET") return false;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return false;
-  // Don't try to cache API calls or websockets — they should hit the network.
-  if (url.pathname.startsWith(BASE + "api/")) return false;
-  if (url.pathname.includes("/api/")) return false;
-  return true;
+  return url.origin === self.location.origin;
 }
 
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
+function isApi(url) {
+  if (url.pathname.startsWith(BASE + "api/")) return true;
+  if (url.pathname.includes("/api/")) return true;
+  return false;
+}
+
+function isStaticAsset(url) {
+  return STATIC_ASSET_RE.test(url.pathname);
+}
+
+// ── Strategy: cache-first for hashed static assets ───────────────────────
+async function cacheFirst(request) {
+  const cache = await caches.open(ASSET_CACHE);
+  const cached = await cache.match(request);
+  if (cached) {
+    // Background revalidation — does not block the response.
+    fetch(request)
+      .then((res) => {
+        if (res && res.ok && res.type !== "opaque") {
+          cache.put(request, res.clone()).catch(() => {});
+        }
+      })
+      .catch(() => {});
+    return cached;
+  }
+  try {
+    const network = await fetch(request);
+    if (network && network.ok && network.type !== "opaque") {
+      cache.put(request, network.clone()).catch(() => {});
+    }
+    return network;
+  } catch {
+    return Response.error();
+  }
+}
+
+// ── Strategy: stale-while-revalidate for everything else (incl. navigations)
+async function staleWhileRevalidate(request, cacheName = RUNTIME_CACHE) {
+  const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
   const networkPromise = fetch(request)
     .then((response) => {
@@ -91,38 +142,72 @@ async function staleWhileRevalidate(request) {
       return response;
     })
     .catch(() => null);
-  // Return cached immediately if present; otherwise wait for the network.
   return cached || (await networkPromise) || Response.error();
 }
 
+// ── Navigations: SWR with shell fallback when offline ────────────────────
 async function handleNavigation(request) {
-  // Try the network first for fresh HTML; if offline, fall back to cached shell.
-  try {
-    const network = await fetch(request);
-    const cache = await caches.open(RUNTIME_CACHE);
-    cache.put(request, network.clone()).catch(() => {});
-    return network;
-  } catch {
-    const cache = await caches.open(SHELL_CACHE);
-    const shell = await cache.match(BASE) || await cache.match(BASE + "index.html");
-    if (shell) return shell;
-    const runtime = await caches.open(RUNTIME_CACHE);
-    const cachedRoute = await runtime.match(request);
-    if (cachedRoute) return cachedRoute;
-    return new Response(
-      "<!doctype html><meta charset='utf-8'><title>Offline</title><body style='font-family:system-ui;padding:2rem;color:#0f172a;background:#f8fafc'><h1>Offline</h1><p>This part of Chouy Sala is not yet cached. Please reconnect to the internet and try again.</p></body>",
-      { status: 503, headers: { "content-type": "text/html; charset=utf-8" } },
-    );
+  const cache = await caches.open(RUNTIME_CACHE);
+  const cached = await cache.match(request);
+  const networkPromise = fetch(request)
+    .then((res) => {
+      if (res && res.ok) cache.put(request, res.clone()).catch(() => {});
+      return res;
+    })
+    .catch(() => null);
+
+  // Serve cached HTML instantly when we have it (true SWR for routing).
+  if (cached) {
+    networkPromise.catch(() => {}); // fire-and-forget revalidation
+    return cached;
   }
+
+  // First-ever visit to this route — wait for the network.
+  const network = await networkPromise;
+  if (network) return network;
+
+  // Offline + never visited — fall back to the precached app shell so the SPA
+  // can render its own client-side route (or a friendly 404).
+  const shell = await caches.open(SHELL_CACHE);
+  const shellRes =
+    (await shell.match(BASE)) || (await shell.match(BASE + "index.html"));
+  if (shellRes) return shellRes;
+
+  return new Response(
+    "<!doctype html><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Offline</title>" +
+      "<body style='font-family:system-ui;padding:2rem;color:#0f172a;background:#f8fafc'>" +
+      "<h1>Offline · ក្រៅបណ្តាញ</h1>" +
+      "<p>This part of Chouy Sala has not been opened before, so it isn't cached for offline use yet.<br>" +
+      "Please reconnect to the internet and try again.</p>" +
+      "<p style='font-family:Hanuman,serif;line-height:1.85'>" +
+      "ផ្នែកនេះនៃ ជួយសាលា មិនទាន់ត្រូវបានបើកពីមុនទេ ដូច្នេះមិនទាន់ផ្ទុករួចសម្រាប់ប្រើក្រៅបណ្តាញ។ សូមភ្ជាប់អ៊ីនធឺណិតឡើងវិញហើយព្យាយាមម្ដងទៀត។" +
+      "</p></body>",
+    { status: 503, headers: { "content-type": "text/html; charset=utf-8" } },
+  );
 }
 
 self.addEventListener("fetch", (event) => {
   const { request } = event;
+
+  // SPA route changes (top-level HTML navigations) → SWR + shell fallback.
   if (request.mode === "navigate") {
     event.respondWith(handleNavigation(request));
     return;
   }
-  if (isCacheableSameOrigin(request)) {
-    event.respondWith(staleWhileRevalidate(request));
+
+  if (!isSameOriginGet(request)) return;
+
+  const url = new URL(request.url);
+
+  // API calls bypass the SW entirely — let them fail loudly when offline.
+  if (isApi(url)) return;
+
+  // Hashed static build artefacts → cache-first (fast, offline-resilient).
+  if (isStaticAsset(url)) {
+    event.respondWith(cacheFirst(request));
+    return;
   }
+
+  // Everything else same-origin → SWR.
+  event.respondWith(staleWhileRevalidate(request));
 });
