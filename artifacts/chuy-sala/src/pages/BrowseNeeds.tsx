@@ -3,7 +3,6 @@ import { useListNeeds, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Loader2, Search, SearchX, Heart, SlidersHorizontal, Share2, Copy, Check } from "lucide-react";
-import { SupportModal } from "@/components/SupportModal";
 import { DownloadGuideButton } from "@/components/DownloadGuideButton";
 
 const SHARE_TITLE =
@@ -129,7 +128,6 @@ export function BrowseNeeds() {
   const [province, setProvince] = useState<string>("");
   const [category, setCategory] = useState<NeedCategory | "">("");
   const [search, setSearch] = useState<string>("");
-  const [supportOpen, setSupportOpen] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
 
   const handleShare = (platform: SharePlatform) => {
@@ -284,40 +282,6 @@ export function BrowseNeeds() {
               "ជួយសាលាភ្ជាប់វិទ្យាល័យជនបទកម្ពុជាដោយផ្ទាល់ជាមួយអ្នកបរិច្ចាគ និងអង្គការ NGO ដោយមានតម្លាភាពពេញលេញអំពីទិសដៅនៃការចូលរួមចំណែករបស់គ្នា។"
             )}
           </p>
-
-          {/* Ways to Give */}
-          <h3 className={`text-xl font-bold text-foreground mb-6 ${language === "kh" ? "font-khmer" : "font-display"}`}>
-            {t("Ways to Give", "វិធីសាស្ត្របរិច្ចាគ")}
-          </h3>
-
-          <div className="bg-gradient-to-br from-primary/5 to-sky-50/60 border border-primary/20 rounded-3xl p-8 flex flex-col items-center gap-5 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-              <Heart className="w-7 h-7 text-primary fill-primary/20" />
-            </div>
-            <div>
-              <p className={`text-base font-semibold text-foreground mb-1 ${language === "kh" ? "font-khmer" : ""}`}>
-                {t(
-                  "100% of contributions fund hosting and digital resources for rural Cambodian schools.",
-                  "ការចូលរួម ១០០% ផ្ដល់មូលនិធិសម្រាប់ម៉ាស៊ីនបម្រើ និងធនធានឌីជីថលសម្រាប់សាលារៀននៅជនបទ។"
-                )}
-              </p>
-              <p className={`text-sm text-muted-foreground ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
-                {t(
-                  "Donate locally via KHQR or internationally via Ko-fi.",
-                  "បរិច្ចាគក្នុងស្រុកតាម KHQR ឬអន្តរជាតិតាម Ko-fi។"
-                )}
-              </p>
-            </div>
-            <button
-              onClick={() => setSupportOpen(true)}
-              className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-white font-bold shadow-md hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg transition-all active:scale-95 ${language === "kh" ? "font-khmer text-base" : "text-sm"}`}
-            >
-              <Heart className="w-4 h-4 fill-white/70" />
-              {t("Support Our Mission", "គាំទ្របេសកកម្មរបស់យើង")}
-            </button>
-          </div>
-
-          {supportOpen && <SupportModal onClose={() => setSupportOpen(false)} />}
 
           {/* Download Resource Guide */}
           <div className="mt-10 pt-10 border-t border-border flex flex-col items-center gap-3">

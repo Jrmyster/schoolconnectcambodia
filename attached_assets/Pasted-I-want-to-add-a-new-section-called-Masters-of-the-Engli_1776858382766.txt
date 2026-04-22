@@ -1,0 +1,30 @@
+I want to add a new section called 'Masters of the English Language' (កំពូលអ្នកប្រាជ្ញផ្នែកភាសាអង់គ្លេស) at the very bottom of the English Writing page. Please implement the following cleanly:
+
+1. The UI Layout (ចំណុចប្រទាក់ក្រាហ្វិក):
+
+Create a visually distinct footer section or a wide split-card layout (one side for Shakespeare, one side for Milton).
+
+Use a slightly more classical, elegant aesthetic for this specific section (perhaps a subtle parchment background or serif fonts for their quotes) to distinguish it from the modern grammar tools above it.
+
+2. The Bilingual Data Bank (ទិន្នន័យទ្វេភាសា):
+Populate the cards with the following information, translating the core concepts into accessible language for ESL students:
+
+William Shakespeare (វីលៀម សេកស្ពៀរ) — The Inventor of Words:
+
+The Big Idea: Shakespeare didn't just write plays; he literally invented over 1,700 words we use every day (like 'lonely', 'bedroom', and 'swagger') because the old English language wasn't big enough for his ideas. (សេកស្ពៀរមិនត្រឹមតែសរសេររឿងល្ខោនប៉ុណ្ណោះទេ គាត់បានបង្កើតពាក្យជាង ១៧០០ ម៉ាត់ដែលយើងប្រើប្រាស់សព្វថ្ងៃ ពីព្រោះភាសាអង់គ្លេសសម័យមុនមិនទូលំទូលាយគ្រប់គ្រាន់សម្រាប់គំនិតរបស់គាត់។)
+
+Famous Works: Romeo and Juliet, Hamlet, Macbeth.
+
+Famous Quote: 'To be, or not to be, that is the question.'
+
+John Milton (ចន មីលតុន) — The Epic Architect:
+
+The Big Idea: Milton went blind later in life, but he still wrote the greatest epic poem in the English language entirely from memory, exploring the ultimate cosmic battle between freedom, rebellion, and authority. (មីលតុនបានពិការភ្នែកនៅចុងបញ្ចប់នៃជីវិតរបស់គាត់ ប៉ុន្តែគាត់នៅតែអាចសរសេរកំណាព្យវីរកថាដ៏អស្ចារ្យបំផុតជាភាសាអង់គ្លេសដោយការចងចាំទាំងស្រុង ដែលស្វែងយល់ពីសមរភូមិរវាងសេរីភាព ការបះបោរ និងអំណាច។)
+
+Famous Works: Paradise Lost.
+
+Famous Quote: 'The mind is its own place, and in itself can make a heaven of hell, a hell of heaven.'
+
+3. Interactivity:
+
+Add a 'Quote Decoder' hover effect. When a user hovers over the famous quotes, show a tooltip that translates the old, poetic English into simple Modern English and Khmer so students can understand the exact meaning.

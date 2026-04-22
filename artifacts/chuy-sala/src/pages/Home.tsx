@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink, PersonStanding, Coffee } from "lucide-react";
+import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink, PersonStanding } from "lucide-react";
 import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
@@ -307,64 +307,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Support / Ko-fi CTA ─────────────────────────────────────────── */}
-      <section
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 mt-4"
-        data-testid="support-cta"
-        aria-labelledby="support-cta-heading"
-      >
-        <div className="relative overflow-hidden rounded-3xl border border-rose-200/70 bg-gradient-to-br from-rose-50 via-white to-amber-50 p-6 sm:p-8 shadow-sm">
-          {/* Soft decorative blobs */}
-          <div className="pointer-events-none absolute -top-16 -right-16 w-56 h-56 rounded-full bg-rose-200/40 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-12 w-56 h-56 rounded-full bg-amber-200/40 blur-3xl" />
-
-          <div className="relative flex flex-col sm:flex-row items-center gap-5 sm:gap-7 text-center sm:text-left">
-            {/* Heart icon medallion */}
-            <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-rose-200 shadow-sm flex items-center justify-center text-[#FF5E5B]">
-              <Heart className="w-7 h-7 sm:w-8 sm:h-8" fill="currentColor" />
-            </div>
-
-            {/* Message */}
-            <div className="flex-1 min-w-0">
-              <h2
-                id="support-cta-heading"
-                className={`text-lg sm:text-xl font-bold text-foreground mb-1 ${language === "kh" ? "font-khmer" : "font-display"}`}
-              >
-                {t(
-                  "Help keep this platform free for Cambodian students.",
-                  "ជួយគាំទ្រដើម្បីរក្សាវេទិកានេះឱ្យនៅឥតគិតថ្លៃសម្រាប់សិស្សកម្ពុជា។",
-                )}
-              </h2>
-              <p className={`text-muted-foreground text-sm leading-relaxed ${language === "kh" ? "font-khmer leading-loose" : ""}`}>
-                {t(
-                  "Every contribution helps us host bilingual lessons, host servers, and reach more rural classrooms.",
-                  "រាល់ការគាំទ្រនីមួយៗ ជួយយើងផ្ដល់មេរៀនពីរភាសា ថែទាំម៉ាស៊ីនមេ និងបន្តទៅដល់សាលារៀននៅជនបទកាន់តែច្រើន។",
-                )}
-              </p>
-            </div>
-
-            {/* Ko-fi button */}
-            <a
-              href="https://ko-fi.com/jrmyster"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="kofi-button"
-              aria-label={
-                language === "kh"
-                  ? "គាំទ្រគម្រោងនេះ នៅលើ Ko-fi (បើកនៅផ្ទាំងថ្មី)"
-                  : "Support this Project on Ko-fi (opens in a new tab)"
-              }
-              className="group inline-flex items-center gap-2 flex-shrink-0 rounded-full bg-[#FF5E5B] px-5 py-3 text-white font-semibold text-sm shadow-md hover:bg-[#ff4744] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5E5B] focus-visible:ring-offset-2"
-            >
-              <Coffee className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span className={language === "kh" ? "font-khmer" : ""}>
-                {t("Support this Project", "គាំទ្រគម្រោងនេះ")}
-              </span>
-              <ExternalLink className="w-3.5 h-3.5 opacity-80" aria-hidden />
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

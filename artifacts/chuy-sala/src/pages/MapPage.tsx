@@ -1,19 +1,16 @@
-import { useState } from "react";
 import { useListSchools, useListNeeds } from "@workspace/api-client-react";
 import { MapComponent } from "@/components/MapComponent";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { localizeProvince } from "@/lib/province-data";
 import { Link } from "wouter";
-import { Loader2, Map as MapIcon, ChevronRight, Heart, FlaskConical } from "lucide-react";
-import { SupportModal } from "@/components/SupportModal";
+import { Loader2, Map as MapIcon, ChevronRight, FlaskConical } from "lucide-react";
 
 const DEMO_PREFIX = "DEMO:";
 
 export function MapPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
-  const [supportOpen, setSupportOpen] = useState(false);
-  
+
   const { data: schools, isLoading: isLoadingSchools } = useListSchools();
   const { data: needs, isLoading: isLoadingNeeds } = useListNeeds();
 
@@ -83,20 +80,7 @@ export function MapPage() {
           )}
         </div>
 
-        {/* Support Button — sticky bottom of sidebar */}
-        <div className="p-4 border-t border-border bg-white">
-          <button
-            onClick={() => setSupportOpen(true)}
-            className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all active:scale-95 ${language === "kh" ? "font-khmer text-base" : "text-sm"}`}
-          >
-            <Heart className="w-4 h-4 fill-white/80" />
-            {t("Support the Project", "គាំទ្រគម្រោង")}
-          </button>
-        </div>
       </div>
-
-      {/* Support Modal */}
-      {supportOpen && <SupportModal onClose={() => setSupportOpen(false)} />}
 
       {/* Map Container */}
       <div className="flex-1 h-2/3 md:h-full relative z-0">
