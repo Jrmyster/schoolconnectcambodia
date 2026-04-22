@@ -116,8 +116,8 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factEn: "The raccoon has a black mask on its face and very clever paws.",
     factKh: "រ៉ាគូន មានស្នាមពណ៌ខ្មៅនៅលើមុខ ហើយជើងវាឆ្លាតខ្លាំង។", cardTint: TINTS[3] },
   { key: "elephant", nameEn: "Elephant", nameKh: "សត្វដំរី",     emoji: "🐘",
-    factEn: "The elephant is the largest land animal and uses its trunk to drink water.",
-    factKh: "សត្វដំរី ជាសត្វលើដីធំជាងគេ ហើយប្រើប្រមោយរបស់វា ដើម្បីផឹកទឹក។", cardTint: TINTS[0] },
+    factEn: "The largest land animal on Earth.",
+    factKh: "សត្វលើគោកធំជាងគេបំផុតនៅលើផែនដី។", cardTint: TINTS[0], class: "Mammal" },
 
   { key: "cat",      nameEn: "Cat",      nameKh: "សត្វឆ្មា",    emoji: "🐈",
     factEn: "The cat is a soft pet that loves to sleep and chase little toys.",
@@ -133,8 +133,8 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factKh: "សត្វទន្សាយ លោតដោយប្រើជើងក្រោយដ៏រឹងមាំ ហើយចូលចិត្តស៊ីការ៉ុត។", cardTint: TINTS[2] },
 
   { key: "tiger",    nameEn: "Tiger",    nameKh: "សត្វខ្លា",    emoji: "🐅",
-    factEn: "The tiger has orange fur with black stripes and is a powerful hunter.",
-    factKh: "សត្វខ្លា មានរោមពណ៌ទឹកក្រូច និងឆ្នូតពណ៌ខ្មៅ ហើយជាអ្នកប្រមាញ់ដ៏ខ្លាំង។", cardTint: TINTS[1] },
+    factEn: "No two tigers have the same stripes; they are unique like fingerprints.",
+    factKh: "គ្មានខ្លាពីរដែលមានឆ្នូតដូចគ្នាទេ ពួកវាមានលក្ខណៈពិសេសដូចស្នាមម្រាមដៃ។", cardTint: TINTS[1], class: "Mammal" },
   { key: "sheep",    nameEn: "Sheep",    nameKh: "សត្វចៀម",     emoji: "🐑",
     factEn: "The sheep has soft warm wool that we use to make clothes.",
     factKh: "សត្វចៀម មានរោមទន់និងកំដៅ ដែលយើងប្រើធ្វើសម្លៀកបំពាក់។", cardTint: TINTS[3] },
@@ -146,8 +146,8 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factKh: "សត្វស្លុត ជាសត្វយឺតបំផុត ហើយដេកភាគច្រើននៃថ្ងៃ នៅលើដើមឈើ។", cardTint: TINTS[2] },
 
   { key: "koala",    nameEn: "Koala",    nameKh: "កូឡា",         emoji: "🐨",
-    factEn: "The koala lives in Australia and loves to eat eucalyptus leaves.",
-    factKh: "កូឡា រស់នៅប្រទេសអូស្ត្រាលី ហើយចូលចិត្តស៊ីស្លឹកអ៊ុយកាលីប។", cardTint: TINTS[6] },
+    factEn: "Koalas sleep up to 22 hours a day because eucalyptus leaves are hard to digest.",
+    factKh: "ពួកវាគេងរហូតដល់ ២២ ម៉ោងក្នុងមួយថ្ងៃ ព្រោះស្លឹកអឺកាលីបទុសពិបាករំលាយ។", cardTint: TINTS[6], class: "Mammal" },
   { key: "deer",     nameEn: "Deer",     nameKh: "សត្វក្តាន់",  emoji: "🦌",
     factEn: "The deer has long thin legs and runs very fast through the forest.",
     factKh: "សត្វក្តាន់ មានជើងវែងស្តើង ហើយរត់លឿនណាស់ ឆ្លងកាត់ព្រៃ។", cardTint: TINTS[5] },
@@ -155,8 +155,8 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factEn: "The wolf lives with its family in a group called a pack.",
     factKh: "ឆ្កែចចក រស់នៅជាមួយគ្រួសាររបស់វា ក្នុងក្រុមហៅថា ហ្វូង។", cardTint: TINTS[3] },
   { key: "jaguar",   nameEn: "Jaguar",   nameKh: "ខ្លារខិន",    emoji: "🐆",
-    factEn: "The jaguar has spotted fur and is a strong swimmer that lives in the rainforest.",
-    factKh: "ខ្លារខិន មានរោមមានចំណុចៗ និងជាអ្នកហែលទឹកដ៏ខ្លាំង ដែលរស់នៅក្នុងព្រៃភ្លៀង។", cardTint: TINTS[1] },
+    factEn: "The apex predator of the Amazon rainforest.",
+    factKh: "សត្វរំពាដ៏ធំបំផុតនៃព្រៃអាម៉ាហ្សូន។", cardTint: TINTS[1], class: "Mammal" },
 
   { key: "hippo",    nameEn: "Hippo",    nameKh: "ដំរីទឹក",      emoji: "🦛",
     factEn: "The hippo is huge and spends most of the day in rivers to stay cool.",
@@ -165,11 +165,46 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factEn: "The zebra looks like a horse with black and white stripes all over its body.",
     factKh: "សេះបង្កង់ មើលទៅដូចសេះ ដែលមានឆ្នូតខ្មៅ និងសពេញខ្លួន។", cardTint: TINTS[3] },
   { key: "giraffe",  nameEn: "Giraffe",  nameKh: "សត្វកវែង",    emoji: "🦒",
-    factEn: "The giraffe has the longest neck of any animal so it can eat tall tree leaves.",
-    factKh: "សត្វកវែង មានកវែងជាងគេ ដូច្នេះវាអាចស៊ីស្លឹកឈើខ្ពស់ៗ បាន។", cardTint: TINTS[5] },
+    factEn: "Its long neck has the exact same number of bones as a human neck — seven!",
+    factKh: "កដ៏វែងរបស់វាមានចំនួនឆ្អឹងស្មើគ្នានឹងកមនុស្សដែរ គឺប្រាំពីរ!", cardTint: TINTS[5], class: "Mammal" },
   { key: "xerus",    nameEn: "Ground Squirrel", nameKh: "កំប្រុកដី", emoji: "🐿️",
     factEn: "The ground squirrel digs tunnels under the dry ground to make its home.",
     factKh: "កំប្រុកដី ជីករូងក្រោមដីស្ងួត ដើម្បីធ្វើជាផ្ទះ។", cardTint: TINTS[1] },
+
+  /* ── Expansion pack: 7 new animals (5 others updated above with new facts) ── */
+  // Birds
+  { key: "penguin",     nameEn: "Penguin",     nameKh: "ភេនឃ្វីន",       emoji: "🐧",
+    factEn: "A bird that cannot fly, but swims like a fish!",
+    factKh: "សត្វស្លាបដែលមិនអាចហោះហើរ ប៉ុន្តែហែលទឹកដូចត្រី!",
+    cardTint: TINTS[6], class: "Bird" },
+
+  // Reptiles
+  { key: "crocodile",   nameEn: "Crocodile",   nameKh: "សត្វក្រពើ",       emoji: "🐊",
+    factEn: "A cold-blooded predator that has survived since the time of the dinosaurs.",
+    factKh: "សត្វស៊ីសាច់ឈាមត្រជាក់ដែលរស់រានមានជីវិតតាំងពីសម័យដាយណូស័រ។",
+    cardTint: TINTS[7], class: "Reptile" },
+  { key: "turtle",      nameEn: "Turtle",      nameKh: "សត្វអណ្តើក",      emoji: "🐢",
+    factEn: "Its shell is actually part of its skeleton, grown out from its ribs.",
+    factKh: "ស្នូករបស់វាគឺជាផ្នែកនៃគ្រោងឆ្អឹង ដែលដុះចេញពីឆ្អឹងជំនីររបស់វា។",
+    cardTint: TINTS[6], class: "Reptile" },
+
+  // Mammals
+  { key: "polar_bear",  nameEn: "Polar Bear",  nameKh: "សត្វខ្លាឃ្មុំទឹកកក", emoji: "🐻‍❄️",
+    factEn: "Underneath their white fur, their skin is actually black to absorb heat.",
+    factKh: "នៅក្រោមរោមពណ៌សរបស់ពួកវា ស្បែកពិតជាមានពណ៌ខ្មៅដើម្បីស្រូបកំដៅ។",
+    cardTint: TINTS[3], class: "Mammal" },
+  { key: "orangutan",   nameEn: "Orangutan",   nameKh: "សត្វអូរ៉ង់អ៊ូតង់",  emoji: "🦧",
+    factEn: "Their name translates to 'Person of the Forest' in Malay.",
+    factKh: "ឈ្មោះរបស់ពួកវាប្រែថា 'មនុស្សព្រៃ' ជាភាសាម៉ាឡេ។",
+    cardTint: TINTS[5], class: "Mammal" },
+  { key: "gorilla",     nameEn: "Gorilla",     nameKh: "សត្វហ្គោរីឡា",    emoji: "🦍",
+    factEn: "Highly intelligent apes that share 98% of their DNA with humans.",
+    factKh: "សត្វស្វាដ៏ឆ្លាតវៃដែលមាន DNA ៩៨% ដូចមនុស្ស។",
+    cardTint: TINTS[3], class: "Mammal" },
+  { key: "rhinoceros",  nameEn: "Rhinoceros",  nameKh: "សត្វរមាស",        emoji: "🦏",
+    factEn: "Their horn is made of keratin — the exact same material as your fingernails!",
+    factKh: "ស្នែងរបស់វាធ្វើពីកេរ៉ាទីន ដែលជាសារធាតុដូចគ្នានឹងក្រចកដៃរបស់អ្នក!",
+    cardTint: TINTS[3], class: "Mammal" },
 ];
 
 // Apply the Vertebrate/Mammal default to every entry that doesn't override.
