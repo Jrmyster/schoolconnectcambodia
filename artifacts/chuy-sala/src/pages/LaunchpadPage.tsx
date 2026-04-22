@@ -10,6 +10,7 @@ import { CareerMatcher } from "@/components/CareerMatcher";
 import { CareerDiscoveryMatrix } from "@/components/CareerDiscoveryMatrix";
 import { DayInLifeGallery } from "@/components/DayInLifeGallery";
 import { ChoosePathCompare } from "@/components/ChoosePathCompare";
+import { LetterBuilder } from "@/components/LetterBuilder";
 
 type ScholarshipCard = {
   name: string;
@@ -64,6 +65,7 @@ export function LaunchpadPage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
   const [accordionOpen, setAccordionOpen] = useState(false);
+  const [letterBuilderOpen, setLetterBuilderOpen] = useState(false);
   const { openChat } = useChatStore();
 
   const [pathwaySearch,  setPathwaySearch]  = useState("");
@@ -445,24 +447,24 @@ export function LaunchpadPage() {
                   </ul>
                 </div>
 
-                {/* ── Download button ── */}
+                {/* ── Open the interactive Letter Builder ── */}
                 <div className="pt-1">
-                  <a
-                    href={`${import.meta.env.BASE_URL}School_Connect_Resource_Guide.pdf`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => setLetterBuilderOpen(true)}
+                    data-testid="button-open-letter-builder"
                     className={`inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm shadow-md
                       bg-gradient-to-r from-primary to-primary/80 text-white
                       hover:from-primary/90 hover:to-primary/70 hover:shadow-lg hover:-translate-y-0.5
                       active:scale-95 transition-all ${kh ? "font-khmer text-base" : ""}`}
                   >
-                    <Download className="w-4 h-4 flex-shrink-0" />
-                    {t("Download Letter Template (PDF)", "ទាញយកគំរូលិខិត (PDF)")}
-                  </a>
+                    <FileText className="w-4 h-4 flex-shrink-0" />
+                    {t("Open Letter Builder", "បើកកម្មវិធីបង្កើតលិខិត")}
+                  </button>
                   <p className={`mt-2 text-xs text-muted-foreground/60 ${kh ? "font-khmer" : ""}`}>
                     {t(
-                      "Includes a ready-to-fill template and a vocabulary list for academic writing.",
-                      "រួមបញ្ចូលគំរូលិខិតដែលត្រៀមបំពេញ និងបញ្ជីពាក្យសម្រាប់ការសរសេរ​នៅ​បរិបទ​វិទ្យាសាស្ត្រ។"
+                      "Fill in your details, see the letter update live, then save it as a PDF.",
+                      "បំពេញព័ត៌មានរបស់អ្នក មើលលិខិតផ្លាស់ប្តូរភ្លាមៗ ហើយរក្សាទុកជា PDF។",
                     )}
                   </p>
                 </div>
@@ -611,6 +613,13 @@ export function LaunchpadPage() {
         </div>
 
       </div>
+
+      {/* University Application Letter Builder — modal opened from the
+          "Open Letter Builder" button in the writing-tips accordion. */}
+      <LetterBuilder
+        open={letterBuilderOpen}
+        onOpenChange={setLetterBuilderOpen}
+      />
     </div>
   );
 }
