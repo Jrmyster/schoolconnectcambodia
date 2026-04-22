@@ -476,8 +476,9 @@ export function LimitsDerivativesPage() {
             </p>
           </Link>
           <Link
-            href="/mathematics"
+            href="/mathematics/integrals"
             className={`group rounded-2xl border border-blue-200 bg-blue-700 text-white p-5 hover:bg-blue-800 transition-colors ${isKh ? "font-khmer" : ""}`}
+            data-testid="cta-integrals"
           >
             <div className="flex items-center gap-2 text-blue-100 text-xs font-bold tracking-widest uppercase mb-2">
               {isKh ? "ទៅបន្តមេរៀន" : "Continue exploring"}
@@ -485,8 +486,8 @@ export function LimitsDerivativesPage() {
             </div>
             <p className="text-white text-sm leading-relaxed">
               {isKh
-                ? "មកមើលលំដាប់ និងស៊េរី — ដែលលីមីតបង្ហាញម្តងទៀត ដើម្បីបញ្ជាក់ថា ផលបូកអនន្តអាចមានចម្លើយកំណត់។"
-                : "Head into Sequences & Series — where limits return to show that infinite sums can quietly settle on finite answers."}
+                ? "ឆ្លងទៅអាំងតេក្រាល — ផ្នែកម្ខាងទៀតនៃគណនាឌីផេរ៉ង់ស្យែល ដែលប្រមូលផ្ដុំបំណែកតូចៗរាប់មិនអស់ឲ្យក្លាយជាផ្ទៃ ឬចម្ងាយសរុប។"
+                : "Cross over to Integrals — calculus' other half, where uncountably many tiny pieces gather into a total area or distance."}
             </p>
           </Link>
         </div>

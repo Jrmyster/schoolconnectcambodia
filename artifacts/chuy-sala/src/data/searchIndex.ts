@@ -1364,6 +1364,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["limits", "derivative", "derivatives", "calculus", "slope", "tangent", "differentiation", "math"],
     keywordsKh: ["លីមីត", "ដេរីវេ", "Calculus", "ជម្រាល", "គណិតវិទ្យា"],
   },
+  {
+    id: "math-integrals",
+    href: "/mathematics/integrals",
+    icon: Sigma,
+    titleEn: "Integrals: The Sum of the Parts",
+    titleKh: "អាំងតេក្រាល៖ ផលបូកនៃផ្នែកនានា",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "Indefinite vs. definite integrals, the '+ C' mystery, and area under a curve.",
+    descKh: "អាំងតេក្រាលមិនកំណត់ និងកំណត់ អាថ៌កំបាំង « + C » និងផ្ទៃក្រោមខ្សែកោង។",
+    keywordsEn: ["integral", "integrals", "integration", "antiderivative", "area under curve", "definite", "indefinite", "calculus", "math", "+C", "plus c"],
+    keywordsKh: ["អាំងតេក្រាល", "អាំងតេក្រាលកំណត់", "អាំងតេក្រាលមិនកំណត់", "ផ្ទៃក្រោមខ្សែកោង", "Calculus", "គណិតវិទ្យា"],
+  },
 
   // ── TECHNOLOGY EXTRAS ─────────────────────────────────────────────
   {

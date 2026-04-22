@@ -205,6 +205,27 @@ export default function MathematicsPage() {
               : "Where does the derivative actually come from? Open up the difference quotient, L'Hôpital's cheat code, and the four shortcut rules (power, product, quotient, chain) — with proofs."}
           </p>
         </a>
+        <a
+          href="/mathematics/integrals"
+          className={`group block rounded-2xl border border-indigo-300 bg-indigo-700 hover:bg-indigo-800 text-white p-5 transition-colors no-underline ${isKh ? "font-khmer" : ""}`}
+          data-testid="link-integrals"
+        >
+          <div className="flex items-center gap-2 text-indigo-100 text-xs font-bold tracking-widest uppercase mb-2">
+            <Sparkles className="w-3 h-3" />
+            {isKh ? "មេរៀនបន្ត" : "Continue deeper"}
+            <span className="font-mono opacity-70">· MTH-CALC-INTEGRALS-01</span>
+          </div>
+          <h3 className={`text-xl font-bold mb-1 ${isKh ? "leading-loose" : ""}`}>
+            {isKh
+              ? "អាំងតេក្រាល ៖ ផលបូកនៃផ្នែកនានា →"
+              : "Integrals: The Sum of the Parts →"}
+          </h3>
+          <p className={`text-sm text-indigo-50 ${isKh ? "leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "ផែនទីពីរប្រភេទ — អាំងតេក្រាលមិនកំណត់ និងកំណត់ — រួមនឹងអាថ៌កំបាំងនៃ « + C » និងឧទាហរណ៍រថយន្តដែលបំប្លែងល្បឿនទៅជាចម្ងាយ។"
+              : "Two kinds of map — indefinite and definite integrals — plus the '+ C' mystery and a car analogy that turns speed into total distance."}
+          </p>
+        </a>
       </Section>
 
       {/* ── 7. Sequences & Series ────────────────────────────────────── */}
