@@ -343,9 +343,12 @@ function FallbackSphere() {
 function GlobeMesh({
   era,
   spinning,
+  children,
 }: {
   era: EraDef;
   spinning: boolean;
+  /** Anything that should rotate WITH the Earth — region pins, labels, etc. */
+  children?: ReactNode;
 }) {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -374,6 +377,11 @@ function GlobeMesh({
           depthWrite={false}
         />
       </mesh>
+
+      {/* Anything passed as children lives INSIDE the rotating group, so it
+          inherits the Earth's rotation.y — region pins stay glued to their
+          real-world latitude/longitude as the planet spins. */}
+      {children}
     </group>
   );
 }
@@ -446,29 +454,31 @@ function Scene({
       <ambientLight intensity={0.55} />
       <directionalLight position={[5, 3, 5]} intensity={0.9} />
 
-      <GlobeMesh era={era} spinning={spinning} />
-
-      {REGIONS.map((region) => (
-        <RegionPin
-          key={region.id}
-          region={region}
-          hovered={hoveredRegion === region.id}
-          active={false}
-          onPointerDown={(e) => {
-            e.stopPropagation();
-            onRegionClick(region.id);
-          }}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            document.body.style.cursor = "pointer";
-            onRegionHover(region.id);
-          }}
-          onPointerOut={() => {
-            document.body.style.cursor = "";
-            onRegionHover(null);
-          }}
-        />
-      ))}
+      <GlobeMesh era={era} spinning={spinning}>
+        {/* Pins are children of the rotating group, so they spin with Earth
+            and stay locked to their real-world latitude/longitude. */}
+        {REGIONS.map((region) => (
+          <RegionPin
+            key={region.id}
+            region={region}
+            hovered={hoveredRegion === region.id}
+            active={false}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              onRegionClick(region.id);
+            }}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              document.body.style.cursor = "pointer";
+              onRegionHover(region.id);
+            }}
+            onPointerOut={() => {
+              document.body.style.cursor = "";
+              onRegionHover(null);
+            }}
+          />
+        ))}
+      </GlobeMesh>
 
       <OrbitControls
         enablePan={false}
