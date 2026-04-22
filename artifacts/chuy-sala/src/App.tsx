@@ -38,6 +38,7 @@ const NanotechnologyPage        = lazy(() => import("@/pages/NanotechnologyPage"
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const BehaviorismPage           = lazy(() => import("@/pages/BehaviorismPage").then(m => ({ default: m.BehaviorismPage })));
 const UnitedStatesPage          = lazy(() => import("@/pages/UnitedStatesPage").then(m => ({ default: m.UnitedStatesPage })));
+const GlobalConflictsPage       = lazy(() => import("@/pages/GlobalConflictsPage").then(m => ({ default: m.GlobalConflictsPage })));
 const TrainsRailwaysPage        = lazy(() => import("@/pages/TrainsRailwaysPage").then(m => ({ default: m.TrainsRailwaysPage })));
 const LinguisticsPage           = lazy(() => import("@/pages/LinguisticsPage").then(m => ({ default: m.LinguisticsPage })));
 const CambodiaPage              = lazy(() => import("@/pages/CambodiaPage").then(m => ({ default: m.CambodiaPage })));
@@ -209,6 +210,7 @@ function Router() {
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/study-center/behaviorism" component={BehaviorismPage} />
             <Route path="/study-center/united-states" component={UnitedStatesPage} />
+            <Route path="/study-center/global-conflicts" component={GlobalConflictsPage} />
             <Route path="/science/trains-railways" component={TrainsRailwaysPage} />
             <Route path="/study-center/linguistics" component={LinguisticsPage} />
             <Route path="/cambodia" component={CambodiaPage} />

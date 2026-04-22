@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -155,6 +155,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Flag,
         descEn: "Tabbed deep-dive: 50 states map and Great Lakes, the Founding Story (Jamestown to Bill of Rights), four major cultural holidays, Mount Rushmore, and a searchable list of all 46 presidents.",
         descKh: "ការសិក្សាជ្រៅតាមផ្ទាំង ៖ ផែនទី ៥០ រដ្ឋ និងស្រះធំ ប្រវត្តិបង្កើត (Jamestown ដល់សិទ្ធិមូលដ្ឋាន) ថ្ងៃឈប់សម្រាកវប្បធម៌ធំៗ ៤ ភ្នំ Rushmore និងបញ្ជីប្រធានាធិបតី ៤៦ នាក់ដែលអាចស្វែងរក។",
+      },
+      {
+        href: "/study-center/global-conflicts",
+        labelEn: "Global Conflicts & The Atomic Age",
+        labelKh: "ជម្លោះសកល និងយុគសម័យបរមាណូ",
+        icon: Radiation,
+        descEn: "World War I and the trenches, World War II's two theaters, the Manhattan Project and E=mc², the Cold War's Mutually Assured Destruction, and the spread of nuclear weapons from 1945 to today.",
+        descKh: "សង្គ្រាមលោកលើកទី ១ និងលំហដី សង្គ្រាមលោកលើកទី ២ និងរោងមហោស្រព ២ គម្រោងម៉ាន់ហាតាន់ និង E=mc² សង្គ្រាមត្រជាក់ និង MAD និងការរីករាលនុយក្លេអ៊ែរពីឆ្នាំ ១៩៤៥ ដល់សព្វថ្ងៃ។",
       },
     ],
   },
