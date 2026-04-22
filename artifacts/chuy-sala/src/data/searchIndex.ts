@@ -7,7 +7,7 @@ import {
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages,
-  Cog, History, TrendingUp, Activity, Bug,
+  Cog, History, TrendingUp, Activity, Bug, Pill,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1335,6 +1335,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "រចនាសម្ព័ន្ធសត្វល្អិត (៣-២-៦-២) វិស្វករខ្នាតតូចក្នុងស្រុក — ស្រមោចត្បាញ ដង្កូវនាង មមាចទឹកធំ — និងហេតុអ្វីបានជាមូសគឺជាសត្វមហន្តរាយបំផុត។",
     keywordsEn: ["entomology", "insect", "insects", "bug", "bugs", "ant", "ants", "weaver ants", "silkworm", "mosquito", "tarantula", "water bug", "anatomy", "biology", "cambodia"],
     keywordsKh: ["បាណកសាស្ត្រ", "សត្វល្អិត", "ស្រមោច", "ដង្កូវនាង", "មូស", "កម្ពុជា"],
+  },
+  {
+    id: "science-pharmacology",
+    href: "/science/pharmacology",
+    icon: Pill,
+    titleEn: "Pharmacology & Pharmacy",
+    titleKh: "ឱសថសាស្ត្រ និង ឱសថស្ថាន",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "How drugs work — pharmacokinetics (ADME: absorption, distribution, metabolism, excretion) vs pharmacodynamics (the lock-and-key receptor model) — plus a 4-step roadmap to becoming a licensed pharmacist in Cambodia.",
+    descKh: "របៀបដែលថ្នាំដំណើរការ — ឱសថចលនសាស្ត្រ (ADME៖ ស្រូបយក ចែកចាយ រំលាយ បញ្ចេញ) ធៀបនឹងឱសថរលកសាស្ត្រ (គំរូសោ-កូនសោ) — និងផ្លូវបួនជំហានឆ្ពោះទៅកាន់ឱសថការីមានអាជ្ញាប័ណ្ណនៅកម្ពុជា។",
+    keywordsEn: ["pharmacology", "pharmacy", "pharmacist", "drug", "drugs", "medicine", "medication", "ADME", "pharmacokinetics", "pharmacodynamics", "receptor", "BPharm", "career", "internship", "licensing", "chemistry", "biology"],
+    keywordsKh: ["ឱសថសាស្ត្រ", "ឱសថស្ថាន", "ឱសថការី", "ថ្នាំ", "ថ្នាំពេទ្យ", "វេជ្ជសាស្ត្រ", "អាជីព", "សាកលវិទ្យាល័យ", "កម្មសិក្សា", "អាជ្ញាប័ណ្ណ"],
   },
 
   // ── PHYSICS EXTRAS ────────────────────────────────────────────────

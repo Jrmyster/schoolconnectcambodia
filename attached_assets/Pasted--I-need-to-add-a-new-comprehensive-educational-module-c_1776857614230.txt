@@ -1,0 +1,35 @@
+"I need to add a new comprehensive educational module called 'Pharmacology: The Science of Medicine' (ឱសថសាស្ត្រ៖ វិទ្យាសាស្ត្រនៃថ្នាំពេទ្យ). This should be a dedicated page under the 'Science' dropdown menu. Please implement the following cleanly:
+
+1. Routing & Navigation (ការកំណត់ផ្លូវ):
+
+Create a new component Pharmacology.jsx (or .tsx).
+
+Register a new route: /science/pharmacology.
+
+Add a link to the 'Science' dropdown in the top navigation labeled 'Pharmacology & Pharmacy' with a relevant icon (e.g., a medical cross or a pill).
+
+2. Section 1: The Two Halves of Pharmacology (ផ្នែកទាំងពីរនៃឱសថសាស្ត្រ):
+
+Create a side-by-side comparison UI explaining the two main concepts of how drugs work:
+
+Pharmacokinetics (ឱសថចលនសាស្ត្រ): What the body does to the drug. (Absorption, Distribution, Metabolism, Excretion).
+
+Pharmacodynamics (ឱសថរលកសាស្ត្រ): What the drug does to the body. (The 'Lock and Key' model where drugs bind to receptors to change cell behavior).
+
+3. Section 2: The Pathway to Becoming a Pharmacist (ផ្លូវឆ្ពោះទៅកាន់អាជីពជាឱសថការី):
+
+Below the science section, create a vertical or horizontal 'Timeline' or 'Roadmap' UI detailing the specific educational steps:
+
+Step 1: High School (វិទ្យាល័យ) - You must focus heavily on Chemistry, Biology, and Mathematics. Good grades here are essential for university admission.
+
+Step 2: University (សាកលវិទ្យាល័យ) - Complete a Bachelor of Pharmacy (BPharm). In Cambodia, this is an intensive 5-year degree requiring both classroom study and laboratory work.
+
+Step 3: Clinical Internship (ការចុះកម្មសិក្សា) - Work under the supervision of experienced pharmacists in hospitals or community pharmacies to gain real-world experience.
+
+Step 4: Licensing & Career (អាជ្ញាប័ណ្ណ និងអាជីព) - Pass the national exams to become a licensed pharmacist. You can work in a hospital, own a community pharmacy, or work in medicine manufacturing.
+
+4. UI & Layout:
+
+Use a 'Clinical / Health' aesthetic: clean whites, soft medical blues, and sterile greens. Ensure the timeline is highly visual, perhaps using connecting lines and step numbers.
+
+Ensure all core concepts, headings, and steps are strictly bilingual (English/Khmer)."

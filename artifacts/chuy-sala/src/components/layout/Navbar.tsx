@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -235,6 +235,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Bug,
         descEn: "The 3-2-6-2 anatomy rule, the local engineers (weaver ants, silkworms, giant water bugs), and why the mosquito is the deadliest animal on Earth.",
         descKh: "ច្បាប់រចនាសម្ព័ន្ធ ៣-២-៦-២ វិស្វករក្នុងស្រុក (ស្រមោចត្បាញ ដង្កូវនាង មមាចទឹកធំ) និងហេតុអ្វីបានជាមូសគឺជាសត្វមហន្តរាយបំផុតលើផែនដី។",
+      },
+      {
+        href: "/science/pharmacology",
+        labelEn: "Pharmacology & Pharmacy",
+        labelKh: "ឱសថសាស្ត្រ និង ឱសថស្ថាន",
+        icon: Pill,
+        descEn: "How medicines work — pharmacokinetics (what the body does to the drug) vs pharmacodynamics (the lock-and-key model) — plus the 4-step roadmap to becoming a licensed pharmacist in Cambodia.",
+        descKh: "របៀបដែលថ្នាំដំណើរការ — ឱសថចលនសាស្ត្រ (អ្វីដែលរាងកាយធ្វើចំពោះថ្នាំ) ធៀបនឹង ឱសថរលកសាស្ត្រ (គំរូសោ-កូនសោ) — និងផ្លូវបួនជំហានឆ្ពោះទៅកាន់ឱសថការីមានអាជ្ញាប័ណ្ណនៅកម្ពុជា។",
       },
       {
         href: "/chemistry",
