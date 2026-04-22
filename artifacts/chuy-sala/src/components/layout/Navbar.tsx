@@ -301,6 +301,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: FlaskRound,
       },
       {
+        href: "/science/chemistry/heisenberg",
+        labelEn: "9. Quantum Uncertainty (Heisenberg)",
+        labelKh: "៩. ភាពមិនប្រាកដប្រជាកង់ទិច (ហៃសិនបឺគ)",
+        icon: Atom,
+        descEn: "The camera analogy for fast cars and electrons, the Δx·Δp ≥ h/4π inequality unpacked, and why a water buffalo is too heavy for the universe to be unsure of.",
+        descKh: "ការប្រៀបធៀបម៉ាស៊ីនថតសម្រាប់ឡានលឿន និងអេឡិចត្រុង វិសមភាព Δx·Δp ≥ h/4π ត្រូវបានបំបែក និងហេតុអ្វីបានជាក្របីមួយធ្ងន់ពេក សកលលោកមិនអាចមិនច្បាស់បាន។",
+      },
+      {
         href: "/quantum-limit",
         labelEn: "The Quantum Limit: Max Planck's Discovery",
         labelKh: "ដែនកំណត់កង់ទិច៖ ការរកឃើញរបស់ Max Planck",

@@ -1415,6 +1415,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
   },
   {
+    id: "sci-heisenberg",
+    href: "/science/chemistry/heisenberg",
+    icon: Atom,
+    titleEn: "Heisenberg Uncertainty Principle",
+    titleKh: "គោលការណ៍ភាពមិនប្រាកដប្រជារបស់ហៃសិនបឺគ",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "Why nature forbids knowing position and momentum at once: the camera analogy, Δx·Δp ≥ h/4π, and the classical-world limit.",
+    descKh: "ហេតុអ្វីបានជាធម្មជាតិហាមដឹងទីតាំង និងសន្ទុះក្នុងពេលតែមួយ៖ ការប្រៀបធៀបម៉ាស៊ីនថត Δx·Δp ≥ h/4π និងដែនកំណត់ពិភពធម្មតា។",
+    keywordsEn: ["heisenberg", "uncertainty principle", "quantum", "position", "momentum", "planck", "delta x", "delta p", "blurry", "wave function", "physics", "chemistry"],
+    keywordsKh: ["ហៃសិនបឺគ", "ភាពមិនប្រាកដប្រជា", "កង់ទិច", "ផ្លង់", "សន្ទុះ", "ទីតាំង", "អេឡិចត្រុង"],
+  },
+  {
     id: "sci-electromagnetism",
     href: "/science/electromagnetism",
     icon: Zap,
