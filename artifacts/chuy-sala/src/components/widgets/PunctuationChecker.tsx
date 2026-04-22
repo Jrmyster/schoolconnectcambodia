@@ -162,6 +162,111 @@ const CHALLENGES: Challenge[] = [
     hintEn: "Complete thought — close it with a Stop.",
     hintKh: "គំនិតពេញលេញ — បិទវាដោយសញ្ញាឈប់។",
   },
+
+  /* ── Expansion pack: 11 additional bilingual challenges ────────────── */
+  // List — comma, comma, period
+  {
+    id: "rice-fish-water",
+    partsEn: ["I bought rice", " fish", " and water", ""],
+    partsKh: ["ខ្ញុំបានទិញបាយ", " ត្រី", " និងទឹក", ""],
+    slots: [{ expected: "," }, { expected: "," }, { expected: "." }],
+    hintEn: "List of three items — separate with commas, end with a Stop.",
+    hintKh: "បញ្ជីវត្ថុបីយ៉ាង — បំបែកដោយសញ្ញាក្បៀស ហើយបញ្ចប់ដោយសញ្ញាខណ្ឌ។",
+  },
+  // Two independent clauses joined — semicolon, period
+  {
+    id: "sun-shade",
+    partsEn: ["The sun is very hot", " we should rest in the shade", ""],
+    partsKh: ["ព្រះអាទិត្យក្តៅខ្លាំងណាស់", " យើងគួរតែសម្រាកនៅក្រោមម្លប់", ""],
+    slots: [{ expected: ";" }, { expected: "." }],
+    hintEn: "Two complete thoughts joined together — link them with the Super Comma.",
+    hintKh: "គំនិតពេញលេញពីរត្រូវភ្ជាប់គ្នា — ប្រើសញ្ញាក្បៀសខ្លាំង។",
+  },
+  // Introductory clause — comma, period
+  {
+    id: "before-football",
+    partsEn: ["Before we play football", " we must finish our homework", ""],
+    partsKh: ["មុនពេលយើងលេងបាល់ទាត់", " យើងត្រូវតែធ្វើកិច្ចការផ្ទះឱ្យរួចរាល់", ""],
+    slots: [{ expected: "," }, { expected: "." }],
+    hintEn: "An opening clause needs a small pause before the main idea.",
+    hintKh: "ឃ្លាបើកត្រូវការការផ្អាកតិចតួចមុនគំនិតមេ។",
+  },
+  // Two independent clauses — semicolon, period
+  {
+    id: "sophak-teacher",
+    partsEn: ["Sophak is an English teacher", " he also grows rice", ""],
+    partsKh: ["សុភ័ក្រ្តគឺជាគ្រូបង្រៀនភាសាអង់គ្លេស", " គាត់ក៏ដាំស្រូវផងដែរ", ""],
+    slots: [{ expected: ";" }, { expected: "." }],
+    hintEn: "Two related complete sentences — bind them with the Super Comma.",
+    hintKh: "ប្រយោគពេញលេញពីរពាក់ព័ន្ធ — ភ្ជាប់ដោយសញ្ញាបញ្ឈប់ខ្លាំង។",
+  },
+  // Simple sentence — period only
+  {
+    id: "buffalo-sleeping",
+    partsEn: ["The water buffalo is sleeping", ""],
+    partsKh: ["សត្វក្របីកំពុងដេក", ""],
+    slots: [{ expected: "." }],
+    hintEn: "One complete thought — close it with a Stop.",
+    hintKh: "គំនិតពេញលេញមួយ — បិទវាដោយសញ្ញាឈប់។",
+  },
+  // List — comma, comma, period
+  {
+    id: "mother-fruit",
+    partsEn: ["My mother sells mangoes", " bananas", " and papayas", ""],
+    partsKh: ["ម្តាយរបស់ខ្ញុំលក់ស្វាយ", " ចេក", " និងល្ហុង", ""],
+    slots: [{ expected: "," }, { expected: "," }, { expected: "." }],
+    hintEn: "Three items in a list — commas between, period at the end.",
+    hintKh: "បីវត្ថុក្នុងបញ្ជី — សញ្ញាក្បៀសរវាង សញ្ញាខណ្ឌចុងបញ្ចប់។",
+  },
+  // Two independent clauses — semicolon, period
+  {
+    id: "english-math",
+    partsEn: ["I like learning English", " my brother likes learning math", ""],
+    partsKh: ["ខ្ញុំចូលចិត្តរៀនភាសាអង់គ្លេស", " បងប្រុសរបស់ខ្ញុំចូលចិត្តរៀនគណិតវិទ្យា", ""],
+    slots: [{ expected: ";" }, { expected: "." }],
+    hintEn: "Two related sentences — the Super Comma is stronger than a comma.",
+    hintKh: "ប្រយោគពាក់ព័ន្ធពីរ — សញ្ញាក្បៀសខ្លាំងមានកម្លាំងជាងសញ្ញាក្បៀស។",
+  },
+  // Introductory clause — comma, period
+  {
+    id: "rain-stops",
+    partsEn: ["When the rain stops", " we will ride our bicycles", ""],
+    partsKh: ["នៅពេលភ្លៀងរាំង", " យើងនឹងជិះកង់របស់យើង", ""],
+    slots: [{ expected: "," }, { expected: "." }],
+    hintEn: "An opening 'when' clause needs a comma before the main thought.",
+    hintKh: "ឃ្លាបើក 'នៅពេល' ត្រូវការសញ្ញាក្បៀសមុនគំនិតមេ។",
+  },
+  // Simple sentence — period only
+  {
+    id: "pagoda-beautiful",
+    partsEn: ["The pagoda is very beautiful", ""],
+    partsKh: ["វត្តនេះស្រស់ស្អាតណាស់", ""],
+    slots: [{ expected: "." }],
+    hintEn: "Complete thought — finish with a Stop.",
+    hintKh: "គំនិតពេញលេញ — បញ្ចប់ដោយសញ្ញាឈប់។",
+  },
+  // Conjunctive adverb — semicolon, comma, period (with heavy-word trap)
+  {
+    id: "exam-however-passed",
+    partsEn: ["The exam was difficult", " however", " I passed", ""],
+    partsKh: ["ការប្រឡងគឺពិបាក", " ទោះយ៉ាងណាក៏ដោយ", " ខ្ញុំប្រឡងជាប់", ""],
+    slots: [
+      { expected: ";", trapBefore: "however" },
+      { expected: "," },
+      { expected: "." },
+    ],
+    hintEn: "Heavy word coming — the Super Comma holds it up, then a comma after.",
+    hintKh: "ពាក្យធ្ងន់នៅខាងមុខ — សញ្ញាក្បៀសខ្លាំងទប់វា បន្ទាប់មកសញ្ញាក្បៀស។",
+  },
+  // Introductory phrase — comma, period
+  {
+    id: "morning-rice-pork",
+    partsEn: ["In the morning", " I eat rice and pork", ""],
+    partsKh: ["នៅពេលព្រឹក", " ខ្ញុំញ៉ាំបាយស្រូប", ""],
+    slots: [{ expected: "," }, { expected: "." }],
+    hintEn: "Opening time-phrase — a small pause leads into the sentence.",
+    hintKh: "ឃ្លាបើកអំពីពេលវេលា — ការផ្អាកតូចនាំទៅរកប្រយោគ។",
+  },
 ];
 
 /* ══════════════════════════════════════════════════════════════════════ */
