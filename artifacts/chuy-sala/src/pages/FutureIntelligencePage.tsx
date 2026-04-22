@@ -21,7 +21,18 @@ import {
   Atom,
   Database,
   Terminal,
+  Orbit,
+  Sun,
+  Flame,
+  Wheat as WheatIcon,
+  Lightbulb,
+  Play,
+  Pause,
+  RotateCcw,
+  AlertTriangle,
+  Telescope,
 } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import type React from "react";
 
@@ -137,7 +148,7 @@ function Panel({
 //  Page
 // ════════════════════════════════════════════════════════════════════════════
 
-type TabId = "intelligence" | "software" | "economy";
+type TabId = "intelligence" | "software" | "economy" | "kardashev";
 
 export function FutureIntelligencePage() {
   const t = useTranslation();
@@ -160,6 +171,7 @@ export function FutureIntelligencePage() {
     { id: "intelligence", en: "Ladder of Intelligence", kh: "ជណ្ដើរនៃបញ្ញា",       Icon: BrainCircuit, accent: CYAN },
     { id: "software",     en: "Anatomy of Software",    kh: "រូបសាស្ត្រនៃកម្មវិធី", Icon: Code2,        accent: VIOLET },
     { id: "economy",      en: "AI-Managed Economy",     kh: "សេដ្ឋកិច្ចគ្រប់គ្រងដោយ AI", Icon: Globe,    accent: LIME },
+    { id: "kardashev",    en: "Kardashev Scale",        kh: "មាត្រដ្ឋានខាដាសេវ",        Icon: Telescope,    accent: MAGENTA },
   ];
 
   return (
@@ -274,6 +286,13 @@ export function FutureIntelligencePage() {
         {tab === "economy" && (
           <div role="tabpanel" id="panel-economy" aria-labelledby="tab-economy">
             <ManagedEconomy k={k} />
+          </div>
+        )}
+
+        {/* PANEL · KARDASHEV */}
+        {tab === "kardashev" && (
+          <div role="tabpanel" id="panel-kardashev" aria-labelledby="tab-kardashev">
+            <KardashevScale k={k} />
           </div>
         )}
 
@@ -977,3 +996,771 @@ function DistributionFlow({ k }: { k: boolean }) {
 // keep unused-helper warning quiet for shared icon imports referenced only in one chapter
 const _iconKeep: React.ComponentType[] = [Calculator];
 void _iconKeep;
+
+/* ════════════════════════════════════════════════════════════════════════════
+ *  KARDASHEV SCALE — Measuring Cosmic Civilizations
+ *  មាត្រដ្ឋានខាដាសេវ — ការវាស់វែងអរិយធម៌ចក្រវាល
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+const KAR_DEEP   = "#03030a";
+const KAR_NEON_B = "#60a5fa";   // glowing stellar blue
+const KAR_NEON_P = "#c084fc";   // nebula purple
+const KAR_GOLD   = "#fcd34d";
+
+function KardashevScale({ k }: { k: boolean }) {
+  return (
+    <div className="space-y-8">
+      {/* ── HERO STRIP ─────────────────────────────────────── */}
+      <div
+        className="relative rounded-2xl overflow-hidden border p-6 sm:p-8"
+        style={{
+          backgroundColor: KAR_DEEP,
+          borderColor: `${KAR_NEON_P}66`,
+          boxShadow: `inset 0 0 60px -10px ${KAR_NEON_P}44, 0 0 40px -16px ${KAR_NEON_B}88`,
+        }}
+      >
+        <StarField />
+        <div className="relative">
+          <div
+            className={`flex items-center gap-2 text-[11px] mb-2 ${
+              k ? "font-khmer" : "font-mono uppercase tracking-[0.3em]"
+            }`}
+            style={{ color: KAR_NEON_P }}
+          >
+            <Telescope className="w-3.5 h-3.5" />
+            <span>{k ? "ខាដាសេវ · ១៩៦៤" : "Kardashev · 1964"}</span>
+            <span style={{ color: INK_SOFT }}>·</span>
+            <span style={{ color: INK_SOFT }}>TECH-FUTURE-K1</span>
+          </div>
+          <h2
+            className={`text-2xl sm:text-3xl font-extrabold leading-tight max-w-3xl ${
+              k ? "font-khmer leading-loose" : ""
+            }`}
+            style={{
+              color: INK,
+              textShadow: `0 0 18px ${KAR_NEON_B}aa, 0 0 38px ${KAR_NEON_P}66`,
+            }}
+          >
+            {k
+              ? "មាត្រដ្ឋានខាដាសេវ៖ ការវាស់វែងអរិយធម៌ចក្រវាល"
+              : "The Kardashev Scale: Measuring Cosmic Civilizations"}
+          </h2>
+          <p
+            className={`mt-3 text-sm sm:text-base max-w-3xl ${
+              k ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+            style={{ color: INK_SOFT }}
+          >
+            {k
+              ? "មិនមែនវាស់ភាពជឿនលឿនដោយនយោបាយ ឬសិល្បៈ — តែតាមរយៈរូបវិទ្យាសុទ្ធសាធ៖ តើពួកគេអាចគ្រប់គ្រងថាមពលបានប៉ុន្មានដោយសុវត្ថិភាព?"
+              : "Not measured by politics or art — but by raw physics: how much energy can they safely command?"}
+          </p>
+        </div>
+      </div>
+
+      {/* ── SECTION 1 · The Energy Ruler ───────────────────── */}
+      <Panel accent={KAR_NEON_B}>
+        <H2
+          k={k}
+          en="The Energy Ruler"
+          kh="បន្ទាត់វាស់ថាមពល"
+          Icon={Gauge}
+          accent={KAR_NEON_B}
+        />
+        <P
+          k={k}
+          en="In 1964 the Soviet astronomer Nikolai Kardashev asked a question no one had asked before: if we ever meet aliens, or look at our own future selves a thousand years from now, what's the fairest way to compare civilizations? Not by their poetry, not by their flags, not even by their politics — those are too local. Kardashev's answer was beautifully simple. Measure them by physics. Measure them by the one thing every civilization needs and every civilization spends — energy."
+          kh="នៅឆ្នាំ ១៩៦៤ តារាវិទូសូវៀត Nikolai Kardashev បានសួរសំណួរថ្មី ៖ ប្រសិនបើយើងជួបជនបរទេស ឬមើលខ្លួនយើងផ្ទាល់នៅអនាគត តើវិធីយុត្តិធម៌បំផុតប្រៀបធៀបអរិយធម៌ជាអ្វី? មិនមែនកំណាព្យ ទង់ជាតិ ឬនយោបាយទេ — ទាំងអស់នោះតូចចង្អៀតពេក។ ចម្លើយរបស់ខាដាសេវគឺសាមញ្ញដ៏ស្រស់ស្អាត ៖ វាស់តាមរូបវិទ្យា — តាមអ្វីមួយដែលគ្រប់អរិយធម៌ត្រូវការ និងគ្រប់អរិយធម៌ចំណាយ — ថាមពល។"
+        />
+        <p
+          className={`mt-4 text-xs italic ${
+            k ? "font-khmer leading-loose" : ""
+          }`}
+          style={{ color: KAR_NEON_B }}
+        >
+          {k
+            ? "« មិនមែនអ្វីដែលអ្នកគិត — តែអ្វីដែលអ្នកអាចបញ្ចេញនិងគ្រប់គ្រងបាន។ »"
+            : "“Not what you think — but what you can release and command.”"}
+        </p>
+      </Panel>
+
+      {/* ── SECTION 2 · The Three Types ─────────────────────── */}
+      <div>
+        <H2
+          k={k}
+          en="The Three Types"
+          kh="ប្រភេទទាំងបី"
+          Icon={Crown}
+          accent={KAR_NEON_P}
+        />
+        <div className="space-y-5">
+          <CivTier
+            k={k}
+            tier="I"
+            tierKh="១"
+            offset={0}
+            accent={KAR_NEON_B}
+            titleEn="The Planetary Master"
+            titleKh="ម្ចាស់ភព"
+            energyEn="≈ 10¹⁶ watts (all sunlight hitting Earth)"
+            energyKh="≈ ១០¹⁶ វ៉ាត់ (ពន្លឺព្រះអាទិត្យទាំងអស់ប៉ះផែនដី)"
+            descEn="A civilization that harnesses 100% of the energy hitting its planet from its parent star. They control the weather, mine the oceans, and use clean fusion power."
+            descKh="អរិយធម៌ដែលប្រើថាមពល ១០០% ដែលប៉ះផែនដីខ្លួនពីព្រះអាទិត្យមេ។ ពួកគេគ្រប់គ្រងអាកាសធាតុ ជីករករទឹក និងប្រើថាមពលហ្វូស្យុងស្អាត។"
+            statusEn="Humanity is currently only Type ≈ 0.73 — we still dig up dead plants (coal, oil) and burn them for heat."
+            statusKh="មនុស្សជាតិបច្ចុប្បន្នស្ថិតនៅប្រភេទ ≈ ០.៧៣ — យើងនៅតែជីករុក្ខជាតិស្លាប់ (ធ្យូងថ្ម ប្រេង) ហើយដុតវាដើម្បីយកកំដៅ។"
+            Visual={TierIVisual}
+          />
+          <CivTier
+            k={k}
+            tier="II"
+            tierKh="២"
+            offset={32}
+            accent={KAR_NEON_P}
+            titleEn="The Stellar Master"
+            titleKh="ម្ចាស់តារា"
+            energyEn="≈ 10²⁶ watts (the entire output of a star)"
+            energyKh="≈ ១០²⁶ វ៉ាត់ (ផលិតផលទាំងមូលនៃតារាមួយ)"
+            descEn="A civilization that captures 100% of the energy radiated by an entire star. The classic blueprint is the Dyson Sphere — a vast swarm of solar collectors built to enclose the Sun and harvest every photon."
+            descKh="អរិយធម៌ដែលចាប់យក ១០០% នៃថាមពលដែលតារាទាំងមូលផ្សាយ។ គំនូសប្លង់បុរាណគឺ Dyson Sphere — ហ្វូងធំសម្បើមនៃផ្ទាំងសូឡាដែលសង់ឡោមព័ទ្ធព្រះអាទិត្យ ហើយប្រមូលគ្រាប់ពន្លឺនីមួយៗ។"
+            statusEn="A Type II would never know an energy shortage in the lifetime of its star — about 5 billion more years for our Sun."
+            statusKh="ប្រភេទ ២ នឹងមិនដែលដឹងពីខ្វះថាមពលក្នុងអាយុកាលនៃតារារបស់ខ្លួនទេ — ប្រហែល ៥ ពាន់លានឆ្នាំទៀតសម្រាប់ព្រះអាទិត្យរបស់យើង។"
+            Visual={TierIIVisual}
+            badgeEn="Dyson Sphere"
+            badgeKh="ស្វ៊ែរដាយសុន"
+          />
+          <CivTier
+            k={k}
+            tier="III"
+            tierKh="៣"
+            offset={64}
+            accent={KAR_GOLD}
+            titleEn="The Galactic Master"
+            titleKh="ម្ចាស់កាឡាក់ស៊ី"
+            energyEn="≈ 10³⁶ watts (the energy of an entire galaxy)"
+            energyKh="≈ ១០³⁶ វ៉ាត់ (ថាមពលនៃកាឡាក់ស៊ីទាំងមូល)"
+            descEn="A civilization that has spread across the stars and harnesses the energy of an entire galaxy — including the colossal power of supermassive black holes at galactic cores."
+            descKh="អរិយធម៌ដែលបានរីករាលដាលឆ្លងកាត់តារា ហើយប្រើថាមពលនៃកាឡាក់ស៊ីទាំងមូល — រួមទាំងថាមពលដ៏សម្បើមនៃរន្ធខ្មៅធំៗនៅចំកណ្ដាលកាឡាក់ស៊ី។"
+            statusEn="From this height, the leap from Type II to Type III dwarfs every prior leap. We may already have detected hints — vast galaxies that are strangely dim in visible light, but glow in waste heat."
+            statusKh="ពីកំពូលនេះ ការលោតពីប្រភេទ ២ ទៅប្រភេទ ៣ ធំជាងការលោតមុនៗទាំងអស់។ យើងប្រហែលជាបានរកឃើញដាន — កាឡាក់ស៊ីធំដែលងងឹតក្នុងពន្លឺមើលឃើញ ប៉ុន្តែភ្លឺនៅក្នុងកំដៅខ្ជះខ្ជាយ។"
+            Visual={TierIIIVisual}
+          />
+        </div>
+      </div>
+
+      {/* ── SECTION 3 · The Great Transition ─────────────────── */}
+      <Panel accent={ROSE}>
+        <H2
+          k={k}
+          en="The Great Transition"
+          kh="ការផ្លាស់ប្តូរដ៏អស្ចារ្យ"
+          Icon={AlertTriangle}
+          accent={ROSE}
+        />
+        <P
+          k={k}
+          en="Moving from Type 0 to Type I is the single most dangerous moment in the life of any species. By the time a civilization is powerful enough to cross that line, it has already invented technologies that can destroy it — nuclear weapons, runaway climate change, engineered plagues, hostile artificial intelligence. But it does not yet have the wisdom, the planetary energy grid, or the political coordination to save itself. The window is narrow. Many civilizations may have entered it. We do not know how many came out the other side."
+          kh="ការផ្លាស់ប្ដូរពីប្រភេទ ០ ទៅប្រភេទ ១ គឺជាពេលគ្រោះថ្នាក់បំផុតក្នុងជីវិតនៃប្រភេទណាមួយ។ នៅពេលអរិយធម៌មានកម្លាំងគ្រប់គ្រាន់ឆ្លងកាត់បន្ទាត់នោះ វាបានបង្កើតបច្ចេកវិទ្យាដែលអាចបំផ្លាញខ្លួនរួចហើយ — អាវុធនុយក្លេអ៊ែរ ការប្រែប្រួលអាកាសធាតុ ជំងឺរាតត្បាត និងបញ្ញាសិប្បនិម្មិតអរិសក។ ប៉ុន្តែវាមិនទាន់មានវិចារណញាណ បណ្ដាញថាមពលផែនដី ឬការសម្របសម្រួលនយោបាយដើម្បីសង្គ្រោះខ្លួនទេ។ បង្អួចគឺតូចចង្អៀត។"
+        />
+        <div
+          className="mt-5 rounded-xl border-l-4 px-4 py-4"
+          style={{
+            backgroundColor: `${ROSE}11`,
+            borderColor: ROSE,
+          }}
+        >
+          <p
+            className={`text-sm font-semibold ${
+              k ? "font-khmer leading-loose" : ""
+            }`}
+            style={{ color: INK }}
+          >
+            {k
+              ? "« ការរស់រានមានជីវិតពីការលោតផ្លោះទៅកាន់អរិយធម៌ប្រភេទទី ១ គឺជាការសាកល្បងដ៏ធំបំផុតនៃបញ្ញារបស់មនុស្ស។ »"
+              : "“Surviving the leap to a Type I civilization is the ultimate test of human intelligence.”"}
+          </p>
+          <p
+            className={`mt-2 text-xs italic ${
+              k ? "" : "font-khmer leading-loose"
+            }`}
+            style={{ color: INK_SOFT }}
+          >
+            {k
+              ? "(Surviving the leap to a Type I civilization is the ultimate test of human intelligence.)"
+              : "(ការរស់រានមានជីវិតពីការលោតផ្លោះទៅកាន់អរិយធម៌ប្រភេទទី ១ គឺជាការសាកល្បងដ៏ធំបំផុតនៃបញ្ញារបស់មនុស្ស។)"}
+          </p>
+        </div>
+      </Panel>
+
+      {/* ── SECTION 4 · Civilization Tracker ─────────────────── */}
+      <Panel accent={KAR_GOLD}>
+        <H2
+          k={k}
+          en="Civilization Tracker"
+          kh="ឧបករណ៍តាមដានអរិយធម៌"
+          Icon={Gauge}
+          accent={KAR_GOLD}
+        />
+        <P
+          k={k}
+          en="Drag the marker — or press play — to watch humanity creep along the energy ruler from the campfire (≈ 0.10) to roughly where we sit today (≈ 0.73)."
+          kh="អូសសញ្ញាសម្គាល់ — ឬចុច Play — ដើម្បីមើលមនុស្សជាតិវិវត្តតាមបន្ទាត់ថាមពល ពីភ្លើងបោះជំរុំ (≈ ០.១០) ទៅជាប្រហែលកន្លែងដែលយើងស្ថិតនៅសព្វថ្ងៃ (≈ ០.៧៣)។"
+        />
+        <CivilizationTracker k={k} />
+      </Panel>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+ *  Tier card with staircase offset
+ * ───────────────────────────────────────────────────────────────────────── */
+
+function CivTier({
+  k,
+  tier,
+  tierKh,
+  offset,
+  accent,
+  titleEn,
+  titleKh,
+  energyEn,
+  energyKh,
+  descEn,
+  descKh,
+  statusEn,
+  statusKh,
+  Visual,
+  badgeEn,
+  badgeKh,
+}: {
+  k: boolean;
+  tier: string;
+  tierKh: string;
+  offset: number;
+  accent: string;
+  titleEn: string;
+  titleKh: string;
+  energyEn: string;
+  energyKh: string;
+  descEn: string;
+  descKh: string;
+  statusEn: string;
+  statusKh: string;
+  Visual: React.ComponentType<{ accent: string }>;
+  badgeEn?: string;
+  badgeKh?: string;
+}) {
+  return (
+    <div style={{ marginLeft: offset }} className="relative">
+      {/* riser line on the left to suggest a staircase */}
+      <div
+        aria-hidden
+        className="absolute -left-3 top-2 bottom-2 w-[2px] rounded-full"
+        style={{
+          background: `linear-gradient(180deg, ${accent}88, ${accent}11)`,
+          boxShadow: `0 0 12px ${accent}66`,
+        }}
+      />
+      <div
+        className="rounded-2xl border p-5 sm:p-6 grid sm:grid-cols-[180px_1fr] gap-5 items-center"
+        style={{
+          backgroundColor: PANEL_2,
+          borderColor: `${accent}66`,
+          boxShadow: `inset 0 0 0 1px ${accent}11, 0 0 36px -16px ${accent}aa`,
+        }}
+      >
+        {/* Visual */}
+        <div
+          className="aspect-square w-full max-w-[180px] mx-auto rounded-xl flex items-center justify-center overflow-hidden"
+          style={{
+            backgroundColor: KAR_DEEP,
+            border: `1px solid ${accent}44`,
+            boxShadow: `inset 0 0 30px ${accent}22`,
+          }}
+        >
+          <Visual accent={accent} />
+        </div>
+
+        {/* Body */}
+        <div>
+          <div className="flex items-center flex-wrap gap-2 mb-1">
+            <span
+              className="font-mono text-[11px] tracking-widest px-2 py-0.5 rounded-full border"
+              style={{ color: accent, borderColor: `${accent}66` }}
+            >
+              {k ? `ប្រភេទ ${tierKh}` : `TYPE ${tier}`}
+            </span>
+            {badgeEn && (
+              <span
+                className={`text-[11px] px-2 py-0.5 rounded-full ${
+                  k ? "font-khmer" : "font-mono uppercase tracking-widest"
+                }`}
+                style={{
+                  backgroundColor: `${accent}22`,
+                  color: accent,
+                  border: `1px solid ${accent}55`,
+                }}
+              >
+                {k ? badgeKh : badgeEn}
+              </span>
+            )}
+            <span
+              className={`ml-auto text-[11px] ${
+                k ? "font-khmer" : "font-mono"
+              }`}
+              style={{ color: INK_SOFT }}
+            >
+              {k ? energyKh : energyEn}
+            </span>
+          </div>
+
+          <h3
+            className={`text-lg sm:text-xl font-bold mb-2 ${
+              k ? "font-khmer" : ""
+            }`}
+            style={{ color: INK, textShadow: `0 0 14px ${accent}66` }}
+          >
+            {k ? titleKh : titleEn}
+          </h3>
+
+          <p
+            className={`text-sm ${
+              k ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+            style={{ color: INK_SOFT }}
+          >
+            {k ? descKh : descEn}
+          </p>
+
+          <p
+            className={`mt-3 text-xs ${
+              k ? "font-khmer leading-loose" : "italic leading-relaxed"
+            }`}
+            style={{ color: accent }}
+          >
+            {k ? statusKh : statusEn}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+ *  Tier visuals — pure SVG
+ * ───────────────────────────────────────────────────────────────────────── */
+
+function TierIVisual({ accent }: { accent: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className="w-full h-full">
+      <defs>
+        <radialGradient id="kar1-sun" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={KAR_GOLD} />
+          <stop offset="60%" stopColor={KAR_GOLD} stopOpacity="0.7" />
+          <stop offset="100%" stopColor={KAR_GOLD} stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="kar1-earth" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stopColor="#bfdbfe" />
+          <stop offset="60%" stopColor="#1d4ed8" />
+          <stop offset="100%" stopColor="#0c1e5e" />
+        </radialGradient>
+      </defs>
+      {/* sun top-right */}
+      <circle cx="92" cy="22" r="14" fill="url(#kar1-sun)" />
+      <circle cx="92" cy="22" r="7" fill={KAR_GOLD} />
+      {/* energy rays toward earth */}
+      {[0, 1, 2, 3].map((i) => (
+        <line
+          key={i}
+          x1={88 - i * 4}
+          y1={28 + i * 3}
+          x2={64 - i * 4}
+          y2={62 + i * 3}
+          stroke={KAR_GOLD}
+          strokeOpacity="0.55"
+          strokeWidth="1"
+          strokeDasharray="2 2"
+        />
+      ))}
+      {/* earth */}
+      <circle cx="48" cy="78" r="26" fill="url(#kar1-earth)" stroke={accent} strokeWidth="0.8" />
+      {/* simple continents */}
+      <path
+        d="M30 72 q8 -6 16 -2 q6 4 14 0 M28 86 q10 4 22 -2 q6 -2 12 2"
+        fill="none"
+        stroke="#84cc16"
+        strokeWidth="1.4"
+        strokeOpacity="0.7"
+      />
+      {/* capture ring around earth */}
+      <ellipse
+        cx="48"
+        cy="78"
+        rx="32"
+        ry="9"
+        fill="none"
+        stroke={accent}
+        strokeWidth="1.2"
+        strokeDasharray="3 2"
+        opacity="0.7"
+      />
+    </svg>
+  );
+}
+
+function TierIIVisual({ accent }: { accent: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className="w-full h-full">
+      <defs>
+        <radialGradient id="kar2-star" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#fff7c2" />
+          <stop offset="50%" stopColor={KAR_GOLD} />
+          <stop offset="100%" stopColor={KAR_GOLD} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      {/* central star */}
+      <circle cx="60" cy="60" r="22" fill="url(#kar2-star)" />
+      <circle cx="60" cy="60" r="10" fill="#fef3c7" />
+      {/* dyson swarm — concentric arcs of solar collectors */}
+      {[34, 42, 50].map((r, i) => (
+        <g key={i}>
+          <ellipse
+            cx="60"
+            cy="60"
+            rx={r}
+            ry={r * 0.85}
+            fill="none"
+            stroke={accent}
+            strokeOpacity="0.45"
+            strokeWidth="0.8"
+            transform={`rotate(${i * 28} 60 60)`}
+          />
+          {Array.from({ length: 12 }).map((_, j) => {
+            const ang = (j / 12) * Math.PI * 2 + i * 0.2;
+            const x = 60 + Math.cos(ang) * r;
+            const y = 60 + Math.sin(ang) * r * 0.85;
+            return (
+              <rect
+                key={j}
+                x={x - 1.6}
+                y={y - 1.1}
+                width="3.2"
+                height="2.2"
+                fill={accent}
+                opacity={0.7 + (j % 3) * 0.1}
+                transform={`rotate(${(ang * 180) / Math.PI + 90} ${x} ${y})`}
+              />
+            );
+          })}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function TierIIIVisual({ accent }: { accent: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className="w-full h-full">
+      <defs>
+        <radialGradient id="kar3-core" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#000" />
+          <stop offset="40%" stopColor="#1e1b4b" />
+          <stop offset="100%" stopColor={KAR_NEON_P} stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="kar3-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor={accent} stopOpacity="0.55" />
+          <stop offset="60%" stopColor={KAR_NEON_P} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={KAR_NEON_P} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      {/* halo */}
+      <circle cx="60" cy="60" r="55" fill="url(#kar3-glow)" />
+      {/* spiral arms */}
+      {[0, 1].map((arm) => (
+        <g key={arm} transform={`rotate(${arm * 180} 60 60)`}>
+          {Array.from({ length: 28 }).map((_, i) => {
+            const t = i / 28;
+            const angle = t * Math.PI * 2.2;
+            const r = 8 + t * 44;
+            const x = 60 + Math.cos(angle) * r;
+            const y = 60 + Math.sin(angle) * r;
+            return (
+              <circle
+                key={i}
+                cx={x}
+                cy={y}
+                r={1.4 + (1 - t) * 1.6}
+                fill={i % 5 === 0 ? KAR_GOLD : "#fff"}
+                opacity={0.45 + (1 - t) * 0.5}
+              />
+            );
+          })}
+        </g>
+      ))}
+      {/* black hole core with accretion ring */}
+      <circle cx="60" cy="60" r="14" fill="url(#kar3-core)" />
+      <ellipse
+        cx="60"
+        cy="60"
+        rx="16"
+        ry="4"
+        fill="none"
+        stroke={KAR_GOLD}
+        strokeWidth="1.4"
+        opacity="0.85"
+      />
+      <circle cx="60" cy="60" r="6" fill="#000" />
+    </svg>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+ *  Civilization Tracker — interactive slider + auto-play animation
+ * ───────────────────────────────────────────────────────────────────────── */
+
+const CIV_MILESTONES: { v: number; en: string; kh: string; Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }> }[] = [
+  { v: 0.10, en: "Fire & Wood",    kh: "ភ្លើង និងឧស",            Icon: Flame },
+  { v: 0.30, en: "Agriculture",    kh: "កសិកម្ម",                Icon: WheatIcon },
+  { v: 0.55, en: "Steam & Coal",   kh: "ចំហាយ និងធ្យូងថ្ម",        Icon: Atom },
+  { v: 0.68, en: "Electric Grid",  kh: "បណ្ដាញអគ្គិសនី",          Icon: Lightbulb },
+  { v: 0.73, en: "Today",          kh: "សព្វថ្ងៃ",                Icon: Sun },
+  { v: 1.00, en: "Type I Goal",    kh: "គោលដៅប្រភេទ ១",          Icon: Orbit },
+];
+
+function CivilizationTracker({ k }: { k: boolean }) {
+  const [val, setVal] = useState(0.73);
+  const [playing, setPlaying] = useState(false);
+  const rafRef = useRef<number | null>(null);
+  const tStart = useRef(0);
+
+  // Animate from 0.10 → 0.73 over ~5 seconds when playing.
+  useEffect(() => {
+    if (!playing) return;
+    const FROM = 0.10;
+    const TO = 0.73;
+    const DUR = 5000;
+    tStart.current = performance.now();
+    setVal(FROM);
+
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - tStart.current) / DUR);
+      // ease-in-out for "slowly creeping"
+      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      setVal(FROM + (TO - FROM) * eased);
+      if (p < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setPlaying(false);
+      }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [playing]);
+
+  const pct = Math.max(0, Math.min(1, val)) * 100;
+  const active = [...CIV_MILESTONES].reverse().find((m) => val >= m.v - 0.001) ?? CIV_MILESTONES[0];
+  const display = val.toFixed(2);
+  const displayKh = display.replace(/[0-9]/g, (d) => "០១២៣៤៥៦៧៨៩"[Number(d)]);
+
+  return (
+    <div className="mt-5">
+      {/* Read-out */}
+      <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
+        <div className="flex items-center gap-3">
+          <active.Icon className="w-5 h-5" style={{ color: KAR_GOLD }} />
+          <div>
+            <div
+              className={`text-base font-bold ${k ? "font-khmer" : ""}`}
+              style={{ color: INK }}
+            >
+              {k ? active.kh : active.en}
+            </div>
+            <div
+              className={`text-[11px] ${k ? "font-khmer" : "font-mono uppercase tracking-widest"}`}
+              style={{ color: INK_SOFT }}
+            >
+              {k
+                ? `ប្រភេទ ${displayKh}`
+                : `TYPE ${display}`}
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setPlaying((p) => !p)}
+            className={`tap-target inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold ${k ? "font-khmer" : ""}`}
+            style={{
+              backgroundColor: playing ? `${ROSE}22` : `${KAR_GOLD}22`,
+              borderColor: playing ? ROSE : KAR_GOLD,
+              color: playing ? ROSE : KAR_GOLD,
+            }}
+            aria-label={playing ? (k ? "ផ្អាក" : "Pause") : (k ? "ចាក់" : "Play")}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+            {playing ? (k ? "ផ្អាក" : "Pause") : (k ? "ចាក់" : "Play")}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setPlaying(false);
+              setVal(0.10);
+            }}
+            className={`tap-target inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold ${k ? "font-khmer" : ""}`}
+            style={{
+              backgroundColor: `${INK_SOFT}11`,
+              borderColor: `${INK_SOFT}55`,
+              color: INK_SOFT,
+            }}
+            aria-label={k ? "កំណត់ឡើងវិញ" : "Reset"}
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            {k ? "ដំបូង" : "Reset"}
+          </button>
+        </div>
+      </div>
+
+      {/* Bar */}
+      <div className="relative h-12">
+        <div
+          className="absolute inset-y-3 left-0 right-0 rounded-full overflow-hidden"
+          style={{
+            backgroundColor: KAR_DEEP,
+            border: `1px solid ${KAR_NEON_P}55`,
+          }}
+        >
+          <div
+            className="h-full rounded-full transition-[width] duration-150"
+            style={{
+              width: `${pct}%`,
+              background: `linear-gradient(90deg, ${KAR_NEON_B} 0%, ${KAR_NEON_P} 60%, ${KAR_GOLD} 100%)`,
+              boxShadow: `0 0 22px ${KAR_NEON_P}cc`,
+            }}
+          />
+        </div>
+
+        {/* Milestone ticks */}
+        {CIV_MILESTONES.map((m) => (
+          <div
+            key={m.v}
+            className="absolute top-0 bottom-0 flex flex-col items-center"
+            style={{ left: `${m.v * 100}%`, transform: "translateX(-50%)" }}
+          >
+            <div
+              className="w-[1px] h-3"
+              style={{ backgroundColor: val >= m.v ? KAR_GOLD : `${INK_SOFT}66` }}
+            />
+            <div
+              className="w-[1px] flex-1"
+              style={{ backgroundColor: `${INK_SOFT}33` }}
+            />
+            <div
+              className="w-[1px] h-3"
+              style={{ backgroundColor: val >= m.v ? KAR_GOLD : `${INK_SOFT}66` }}
+            />
+          </div>
+        ))}
+
+        {/* Range input on top — invisible, controls the marker */}
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={val}
+          onChange={(e) => {
+            setPlaying(false);
+            setVal(Number(e.target.value));
+          }}
+          aria-label={k ? "ឧបករណ៍តាមដានអរិយធម៌" : "Civilization Tracker"}
+          className="absolute inset-0 w-full opacity-0 cursor-pointer"
+          style={{ height: "100%" }}
+        />
+      </div>
+
+      {/* Milestone labels */}
+      <div className="relative mt-2 h-10">
+        {CIV_MILESTONES.map((m) => {
+          const reached = val >= m.v - 0.001;
+          return (
+            <div
+              key={m.v}
+              className="absolute top-0 text-center"
+              style={{
+                left: `${m.v * 100}%`,
+                transform: "translateX(-50%)",
+                width: 78,
+              }}
+            >
+              <div
+                className={`text-[10px] leading-tight ${
+                  k ? "font-khmer" : "font-mono uppercase tracking-wider"
+                }`}
+                style={{
+                  color: reached ? KAR_GOLD : INK_SOFT,
+                  textShadow: reached ? `0 0 8px ${KAR_GOLD}88` : "none",
+                }}
+              >
+                {k ? m.kh : m.en}
+              </div>
+              <div
+                className="text-[10px] font-mono mt-0.5"
+                style={{ color: reached ? KAR_GOLD : `${INK_SOFT}88` }}
+              >
+                {k
+                  ? m.v.toFixed(2).replace(/[0-9]/g, (d) => "០១២៣៤៥៦៧៨៩"[Number(d)])
+                  : m.v.toFixed(2)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+ *  Hero starfield (deterministic, no flicker on re-render)
+ * ───────────────────────────────────────────────────────────────────────── */
+
+function StarField() {
+  // Pre-computed deterministic "random" starfield so it never re-shuffles
+  // on language toggle and stays still under the text.
+  const stars = Array.from({ length: 60 }).map((_, i) => {
+    const x = ((i * 73) % 100);
+    const y = ((i * 137) % 100);
+    const r = 0.4 + ((i * 11) % 10) / 12;
+    const o = 0.25 + ((i * 17) % 50) / 100;
+    return { x, y, r, o, key: i };
+  });
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <radialGradient id="kar-nebula" cx="78%" cy="22%" r="60%">
+          <stop offset="0%" stopColor={KAR_NEON_P} stopOpacity="0.35" />
+          <stop offset="60%" stopColor={KAR_NEON_B} stopOpacity="0.08" />
+          <stop offset="100%" stopColor={KAR_NEON_B} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="100" height="100" fill="url(#kar-nebula)" />
+      {stars.map((s) => (
+        <circle
+          key={s.key}
+          cx={s.x}
+          cy={s.y}
+          r={s.r * 0.4}
+          fill="#fff"
+          opacity={s.o}
+        />
+      ))}
+    </svg>
+  );
+}
+
