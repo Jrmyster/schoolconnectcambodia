@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Compass, X, Sparkles } from "lucide-react";
+import { Compass, X, Sparkles, AlertTriangle, RotateCcw } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type BranchKey =
@@ -438,6 +438,9 @@ function BranchCard({
         </p>
       </div>
 
+      {/* Logic-only sub-section: Logical Fallacies */}
+      {branch.key === "logic" && <LogicalFallacies kh={kh} />}
+
       {/* Real-world Cambodian example */}
       <div className="mt-4 rounded-xl bg-slate-800/60 border border-amber-300/20 p-4">
         <div className={`inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] font-bold text-emerald-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
@@ -448,6 +451,210 @@ function BranchCard({
         </p>
       </div>
     </article>
+  );
+}
+
+/* -------------------------------------------------------------- */
+/*  LOGICAL FALLACIES — sub-section shown only inside Logic card  */
+/* -------------------------------------------------------------- */
+
+type Fallacy = {
+  key: string;
+  nameEn: string;
+  nameKh: string;
+  defEn: string;
+  defKh: string;
+  exampleEn: string;
+  exampleKh: string;
+};
+
+const FALLACIES: Fallacy[] = [
+  {
+    key: "ad-hominem",
+    nameEn: "Ad Hominem",
+    nameKh: "ការវាយប្រហារបុគ្គល",
+    defEn: "Attacking the person making the argument instead of the argument itself.",
+    defKh: "ការវាយប្រហារបុគ្គលដែលលើកអំណះអំណាង ជំនួសឱ្យការវែកញែកលើអំណះអំណាងនោះផ្ទាល់។",
+    exampleEn:
+      "“You didn't go to university, so your idea about the farm is wrong.”",
+    exampleKh:
+      "«អ្នកមិនបានរៀននៅសាកលវិទ្យាល័យទេ ដូច្នេះគំនិតរបស់អ្នកអំពីកសិដ្ឋានគឺខុស។»",
+  },
+  {
+    key: "strawman",
+    nameEn: "Strawman",
+    nameKh: "ការបង្កើតអំណះអំណាងក្លែងក្លាយ",
+    defEn:
+      "Twisting someone's words to make them easier to attack, like building a scarecrow just to knock it down.",
+    defKh:
+      "ការបង្ខូចពាក្យរបស់នរណាម្នាក់ ដើម្បីឱ្យងាយវាយប្រហារ ដូចជាការសាងសង់រូបឆ្មាំស្រូវ ដើម្បីយកមកវាយផ្ដួល។",
+    exampleEn:
+      "Person A: “We should eat less sugar.” Person B: “So you want us to starve and never eat anything sweet again?!”",
+    exampleKh:
+      "មនុស្ស ក៖ «យើងគួរញ៉ាំស្ករតិច។» មនុស្ស ខ៖ «ដូច្នេះអ្នកចង់ឱ្យពួកយើងអត់ឃ្លាន ហើយមិនបរិភោគរបស់ផ្អែមអ្វីទៀតឬ?!»",
+  },
+  {
+    key: "red-herring",
+    nameEn: "Red Herring",
+    nameKh: "ការបង្វែរប្រធានបទ",
+    defEn:
+      "Throwing a distraction into the argument to completely change the subject.",
+    defKh:
+      "ការបោះការរំខានចូលក្នុងការវែកញែក ដើម្បីប្ដូរប្រធានបទទាំងស្រុង។",
+    exampleEn:
+      "“I know I forgot to do my homework, but look at how messy the classroom is! We need to clean it.”",
+    exampleKh:
+      "«ខ្ញុំដឹងថាខ្ញុំភ្លេចធ្វើកិច្ចការផ្ទះ ប៉ុន្តែមើលថ្នាក់រៀននេះកខ្វក់ប៉ុណ្ណា! យើងត្រូវសម្អាតវា។»",
+  },
+  {
+    key: "false-dilemma",
+    nameEn: "False Dilemma",
+    nameKh: "ជម្រើសស-ខ្មៅ",
+    defEn:
+      "Pretending there are only two extreme choices when there are actually many options in the middle.",
+    defKh:
+      "ការធ្វើពុតថាមានជម្រើសខ្លាំងតែពីរប៉ុណ្ណោះ ខណៈដែលតាមពិតមានជម្រើសជាច្រើននៅចន្លោះ។",
+    exampleEn:
+      "“Either you buy me this new phone, or you don't love me.”",
+    exampleKh:
+      "«ឬអ្នកទិញទូរស័ព្ទថ្មីនេះឱ្យខ្ញុំ ឬក៏អ្នកមិនស្រឡាញ់ខ្ញុំ។»",
+  },
+];
+
+function LogicalFallacies({ kh }: { kh: boolean }) {
+  const [flipped, setFlipped] = useState<string | null>(null);
+
+  return (
+    <section
+      className="mt-5"
+      aria-labelledby="logical-fallacies-title"
+      data-testid="logical-fallacies"
+    >
+      <div className="flex items-center gap-2 mb-3">
+        <div className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-yellow-400/20 border border-yellow-400/50 text-yellow-300">
+          <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <div
+            id="logical-fallacies-title"
+            className={`text-sm sm:text-base font-bold text-yellow-100 leading-tight ${kh ? "font-khmer" : ""}`}
+          >
+            {kh
+              ? "កំហុសតក្កវិជ្ជា៖ អន្ទាក់នៃការវែកញែក"
+              : "Logical Fallacies: Traps in Reasoning"}
+          </div>
+          <div className={`text-[11px] text-yellow-200/60 mt-0.5 ${kh ? "font-khmer" : ""}`}>
+            {kh
+              ? "ចុចលើកាតនីមួយៗ ដើម្បីបង្ហាញនិយមន័យ និងឧទាហរណ៍។"
+              : "Tap any card to reveal the definition and example."}
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal scroll row */}
+      <div
+        className="-mx-1 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:thin] [scrollbar-color:rgba(252,211,77,0.5)_transparent]"
+        data-testid="logical-fallacies-scroll"
+      >
+        <ul className="flex gap-3 px-1 list-none p-0 m-0">
+          {FALLACIES.map((f) => {
+            const isFlipped = flipped === f.key;
+            return (
+              <li
+                key={f.key}
+                className="snap-start shrink-0 w-[80%] sm:w-[18rem]"
+              >
+                <button
+                  type="button"
+                  onClick={() => setFlipped((cur) => (cur === f.key ? null : f.key))}
+                  aria-pressed={isFlipped}
+                  aria-label={
+                    isFlipped
+                      ? (kh ? `បិទ ${f.nameKh}` : `Hide details for ${f.nameEn}`)
+                      : (kh ? `បង្ហាញ ${f.nameKh}` : `Show details for ${f.nameEn}`)
+                  }
+                  className={`group relative w-full text-left rounded-2xl border-2 border-yellow-400/50 bg-gradient-to-br from-yellow-500/10 via-amber-500/5 to-orange-500/10 hover:from-yellow-500/20 hover:to-orange-500/15 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 p-4 min-h-[10rem] sm:min-h-[11rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 overflow-hidden`}
+                  data-testid={`fallacy-card-${f.key}`}
+                  data-flipped={isFlipped ? "true" : "false"}
+                >
+                  {/* Cautionary stripe */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-x-0 top-0 h-1 bg-[repeating-linear-gradient(45deg,#facc15_0,#facc15_8px,#0b1026_8px,#0b1026_16px)] opacity-70"
+                  />
+
+                  {/* FRONT face — name only */}
+                  <div
+                    className={`flex flex-col h-full transition-all duration-300 ${isFlipped ? "opacity-0 -translate-y-2 pointer-events-none absolute inset-4" : "opacity-100 translate-y-0"}`}
+                    aria-hidden={isFlipped}
+                  >
+                    <div className="flex items-start gap-2 mb-2">
+                      <AlertTriangle className="w-5 h-5 text-yellow-300 shrink-0 mt-0.5" aria-hidden="true" />
+                      <div className="min-w-0">
+                        <div
+                          className="font-display font-extrabold text-lg sm:text-xl text-yellow-100 leading-tight"
+                          data-testid={`fallacy-name-en-${f.key}`}
+                        >
+                          {f.nameEn}
+                        </div>
+                        <div
+                          className="font-khmer text-sm text-yellow-200/85 leading-tight mt-0.5"
+                          data-testid={`fallacy-name-kh-${f.key}`}
+                        >
+                          {f.nameKh}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`mt-auto pt-2 inline-flex items-center gap-1 self-start text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-yellow-300/80 group-hover:text-yellow-200 transition-colors ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <RotateCcw className="w-3 h-3" aria-hidden="true" />
+                      <span>{kh ? "បង្ហាញព័ត៌មានលម្អិត" : "Reveal the trap"}</span>
+                    </div>
+                  </div>
+
+                  {/* BACK face — definition + example */}
+                  <div
+                    className={`flex flex-col h-full transition-all duration-300 ${isFlipped ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none absolute inset-4"}`}
+                    aria-hidden={!isFlipped}
+                  >
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <AlertTriangle className="w-4 h-4 text-yellow-300 shrink-0" aria-hidden="true" />
+                      <div className={`font-display font-extrabold text-sm text-yellow-100 leading-tight ${kh ? "font-khmer" : ""}`}>
+                        {kh ? f.nameKh : f.nameEn}
+                      </div>
+                    </div>
+
+                    <p
+                      className={`text-[12px] sm:text-xs text-amber-50/90 leading-snug ${kh ? "font-khmer leading-relaxed" : ""}`}
+                      data-testid={`fallacy-definition-${f.key}`}
+                    >
+                      {kh ? f.defKh : f.defEn}
+                    </p>
+
+                    <div className="mt-2 rounded-lg bg-slate-900/60 border border-yellow-400/30 p-2">
+                      <div className={`text-[9px] uppercase tracking-[0.2em] font-bold text-yellow-300/80 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-[10px]" : ""}`}>
+                        {kh ? "ឧទាហរណ៍" : "Example"}
+                      </div>
+                      <p
+                        className={`text-[12px] sm:text-xs italic text-amber-50/85 leading-snug ${kh ? "font-khmer not-italic leading-relaxed" : ""}`}
+                        data-testid={`fallacy-example-${f.key}`}
+                      >
+                        {kh ? f.exampleKh : f.exampleEn}
+                      </p>
+                    </div>
+
+                    <div className={`mt-auto pt-1.5 inline-flex items-center gap-1 self-start text-[10px] font-bold uppercase tracking-wider text-yellow-300/70 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <RotateCcw className="w-3 h-3" aria-hidden="true" />
+                      <span>{kh ? "បង្វិលត្រឡប់" : "Flip back"}</span>
+                    </div>
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 }
 

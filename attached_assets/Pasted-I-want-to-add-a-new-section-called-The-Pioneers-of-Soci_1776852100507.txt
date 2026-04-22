@@ -1,0 +1,58 @@
+I want to add a new section called 'The Pioneers of Sociology: Master Map Makers' (អ្នកត្រួសត្រាយផ្លូវនៃសង្គមវិទ្យា) directly below the 'What Students Should Know' cards on the Sociology page. Please implement the following cleanly:
+
+1. The UI Layout (ចំណុចប្រទាក់ក្រាហ្វិក):
+
+Create a visually appealing grid or a horizontal scrolling row of 'Profile Cards'.
+
+Each card should have a minimalist portrait/avatar icon representing the thinker, their name, their era, and their 'Big Idea'.
+
+2. The Bilingual Data Bank (ទិន្នន័យទ្វេភាសា):
+Populate the cards with the following sociologists, translating the core concepts into simple, accessible language for students:
+
+Karl Marx (កាល់ ម៉ាក្ស):
+
+The Big Idea: Class Conflict (ជម្លោះវណ្ណៈ)
+
+Concept: Argued that society is driven by the struggle between the wealthy owners who control resources and the workers who provide the labor.
+
+Émile Durkheim (អេមីល ឌៀកខែម):
+
+The Big Idea: Social Solidarity (សាមគ្គីភាពសង្គម)
+
+Concept: Studied what keeps society from falling apart. He believed shared values, traditions, and institutions act as the 'glue' holding us together.
+
+Max Weber (ម៉ាក់ស៍ វេប៊ឺ):
+
+The Big Idea: Rationalization & Status (ហេតុផលនីយកម្ម និងឋានៈ)
+
+Concept: Looked beyond just money, exploring how religious ideas, culture, and social status shape human behavior and the economy.
+
+Robert K. Merton (រ៉ូបឺត ខេ មឺតុន):
+
+The Big Idea: Unintended Consequences (ផលវិបាកដែលមិនបានព្រាងទុក)
+
+Concept: Pointed out that social actions often have hidden or accidental results (Latent Functions) that are different from their obvious goals.
+
+C. Wright Mills (ស៊ី រ៉ាយ មីលស៍):
+
+The Big Idea: The Sociological Imagination (ការស្រមើស្រមៃផ្នែកសង្គមវិទ្យា)
+
+Concept: Taught us to see the connection between our private, personal struggles and the massive historical forces of the world.
+
+Pierre Bourdieu (ព្យែរ បូរឌីយូ):
+
+The Big Idea: Cultural Capital (ទុនវប្បធម៌)
+
+Concept: Showed that knowing how to talk, dress, and appreciate art gives people an invisible advantage in life, just like having money.
+
+Anthony Giddens (អាន់តូនី ហ្គីដដិនស៍):
+
+The Big Idea: Structuration (រចនាសម្ព័ន្ធនីយកម្ម)
+
+Concept: Argued that we are shaped by society's rules, but through our daily actions, we also have the power to change those rules.
+
+3. Interactivity & Styling:
+
+Maintain the warm, pastel aesthetic of the current page.
+
+Add a hover/tap effect to the cards that slightly elevates them and highlights their 'Big Idea' text.
