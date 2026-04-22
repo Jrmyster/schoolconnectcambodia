@@ -1,0 +1,33 @@
+I want to add a new educational module called 'Languages of the World: The Human Tapestry' (ភាសានៅជុំវិញពិភពលោក៖ ផ្ទាំងគំនូរនៃមនុស្សជាតិ) to the Study Center (perhaps under the Linguistics section). Please implement the following cleanly:
+
+1. The Global Count (ចំនួនភាសាសរុបនៅលើពិភពលោក):
+
+Detail the massive scale: There are roughly 7,100 living languages spoken on Earth today.
+
+Highlight an extreme example: Explain that the island nation of Papua New Guinea is the most linguistically diverse place on the planet, with over 800 completely different languages spoken in just one country!
+
+2. The Most and Least Common (ភាសាដែលមានអ្នកនិយាយច្រើនជាងគេ និងតិចជាងគេ):
+
+The Giants: List the most spoken languages by total speakers (English, Mandarin Chinese, Hindi, Spanish).
+
+The Endangered: Explain the tragic reality that a language dies roughly every two weeks. When the last elderly speaker of an isolated tribal language passes away, a unique way of thinking about the world is lost forever.
+
+3. Alphabets vs. Abugidas (អក្ខរក្រម និងអប៊ូហ្គីដា):
+
+Clarify that not all writing systems are 'Alphabets' (like English, where consonants and vowels are separate blocks).
+
+Logograms: Explain Chinese characters (Hanzi), where a single symbol represents an entire word or idea, not just a sound.
+
+Abugidas: Highlight the Khmer script! Explain that Khmer (and many Indian scripts) are Abugidas—the consonant is the main base, and the vowels are attached around it like modifiers. Mention the proud fact that Khmer holds the Guinness World Record for the longest alphabet in the world (74 letters)!
+
+4. Language Relatives and Strangers (ភាសាដែលមានទំនាក់ទំនង និងភាសាដាច់ស្រយាល):
+
+Similarities: Explain Language Families. Spanish and Italian are incredibly similar because they are both 'daughters' of Latin.
+
+Differences: Introduce 'Language Isolates' like Basque (spoken in Spain). It is completely unrelated to any other language on Earth; its origins are a total mystery to scientists!
+
+5. UI & Layout:
+
+Use a 'Global Atlas' aesthetic: parchment textures, meridian lines, and deep ink blues.
+
+Ensure all core concepts, headings, and linguistic terms are strictly bilingual (English/Khmer)
