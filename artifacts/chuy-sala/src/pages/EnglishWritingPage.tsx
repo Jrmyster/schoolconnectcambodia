@@ -1,6 +1,7 @@
 import { PenLine, BookOpenCheck, Sparkles, Languages } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { ParagraphBuilder } from "@/components/widgets/ParagraphBuilder";
+import { GrammarToolbox } from "@/components/widgets/GrammarToolbox";
 import { GreetingsModule } from "@/components/widgets/GreetingsModule";
 import { VocabularyModule } from "@/components/widgets/VocabularyModule";
 import { ConnectingWordsBridge } from "@/components/widgets/ConnectingWordsBridge";
@@ -33,6 +34,11 @@ export function EnglishWritingPage() {
               ? "សាងសង់ជំនាញសរសេរភាសាអង់គ្លេសរបស់អ្នកម្ដងមួយប្រយោគ — ដោយប្រើឧបករណ៍សាមញ្ញ ច្បាស់លាស់ និងមានព័ត៌មានជាពីរភាសា។"
               : "Build your English writing skills one sentence at a time — with simple, clear, bilingual tools."}
           </p>
+        </div>
+
+        {/* Grammar Toolbox — foundational primer on the 8 parts of speech */}
+        <div className="mb-10">
+          <GrammarToolbox />
         </div>
 
         {/* The main builder */}
