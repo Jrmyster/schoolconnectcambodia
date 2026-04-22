@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -360,6 +360,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Leaf,
         descEn: "Cells, genetics, evolution and the Mekong's living web — bilingual & interactive.",
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
+      },
+      {
+        href: "/biology/cellular-power-plant",
+        labelEn: "Biochemistry: The Cellular Power Plant",
+        labelKh: "ជីវគីមីវិទ្យា ៖ រោងចក្រថាមពលកោសិកា",
+        icon: Factory,
+        descEn: "Follow a single grain of glucose from your bloodstream into the cell's power plant: snap it apart in glycolysis, watch the liver run it backward in gluconeogenesis to keep your brain alive, load electrons into NADH minecarts in the Krebs cycle, then ride them down the electron transport chain to spin the world's smallest turbine — ATP synthase, turning at 100 revs/sec inside every one of your 30 trillion cells.",
+        descKh: "តាមដានគ្រាប់គ្លុយកូសតែមួយ ពីឈាមរបស់អ្នកចូលក្នុងរោងចក្រថាមពលកោសិកា ៖ បំបែកវានៅគ្លីកូលីស មើលថ្លើមដំណើរការវាបញ្ច្រាសនៅការបង្កើតគ្លុយកូសថ្មីដើម្បីរក្សាខួរក្បាលអ្នករស់ ផ្ទុកអេឡិចត្រុងចូលរទេះធ្យូង NADH នៅវដ្តក្រែប បន្ទាប់មកជិះវាចុះតាមខ្សែសង្វាក់ដឹកជញ្ជូនអេឡិចត្រុង ដើម្បីបង្វិលទួរប៊ីនតូចបំផុតនៅលើពិភពលោក — ATP synthase បង្វិល ១០០ ជុំ/វិនាទីនៅក្នុងកោសិកា ៣០ លានលានរបស់អ្នកនីមួយៗ។",
       },
       {
         href: "/biology/botany",
