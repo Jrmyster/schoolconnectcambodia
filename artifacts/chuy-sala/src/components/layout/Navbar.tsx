@@ -30,7 +30,40 @@ type NavGroup = {
   labelKh: string;
   icon: ComponentType<{ className?: string; style?: React.CSSProperties }>;
   items: NavItem[];
+  /**
+   * Optional URL prefix(es) that scope the "active" highlight for this
+   * dropdown. When set, the dropdown is highlighted ONLY when the current
+   * pathname matches one of these prefixes (with a clean `/` boundary).
+   * When omitted, we fall back to per-item matching.
+   *
+   * Use this for groups (like Well-being) that contain cross-cutting links
+   * to pages that conceptually live elsewhere (e.g. /science, /music-theory),
+   * to prevent the dropdown from lighting up on those unrelated pages.
+   */
+  basePaths?: string[];
 };
+
+// ── Active-state matching ─────────────────────────────────────────────────────
+// Returns true if `location` is exactly `prefix` or sits underneath it
+// (next char is `/`). Prevents `/well-being-other` from matching `/well-being`.
+function pathMatchesPrefix(location: string, prefix: string): boolean {
+  if (!prefix || prefix === "/") return location === "/";
+  return location === prefix || location.startsWith(prefix + "/");
+}
+
+function isItemActive(location: string, item: NavItem): boolean {
+  // External links (https://…) can never match an in-app pathname.
+  if (item.external) return false;
+  if (!item.href.startsWith("/")) return false;
+  return pathMatchesPrefix(location, item.href);
+}
+
+function isGroupActiveFor(location: string, group: NavGroup): boolean {
+  if (group.basePaths && group.basePaths.length > 0) {
+    return group.basePaths.some((bp) => pathMatchesPrefix(location, bp));
+  }
+  return group.items.some((item) => isItemActive(location, item));
+}
 
 // ── Groups ─────────────────────────────────────────────────────────────────────
 
@@ -556,6 +589,11 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Well-being",
     labelKh: "សុខុមាលភាព",
     icon: Smile,
+    // Only highlight this dropdown when the URL is actually under /well-being.
+    // The items list also contains cross-cutting links to /science, /sanctuary,
+    // /music-theory, /human-engine, /electrical-safety, /sexual-health, etc.,
+    // so per-item matching used to light Well-being up on those pages too.
+    basePaths: ["/well-being"],
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       {
@@ -645,11 +683,13 @@ function DropdownGroup({
   const kh = language === "kh";
   const hasDescriptions = group.items.some((item) => item.descEn || item.descKh);
 
-  const isGroupActive = group.items.some(
-    (item) =>
-      location === item.href ||
-      (item.href !== "/" && location.startsWith(item.href))
-  );
+  const isGroupActive = isGroupActiveFor(location, group);
+
+  // Close the dropdown automatically whenever the route changes — guarantees
+  // any "stuck" hover/focus state from the previous panel is dropped.
+  useEffect(() => {
+    setOpen(false);
+  }, [location]);
 
   // Close on outside click
   useEffect(() => {
@@ -707,10 +747,7 @@ function DropdownGroup({
           }}
         >
           {group.items.map((item) => {
-            const isActive =
-              !item.external &&
-              (location === item.href ||
-                (item.href !== "/" && location.startsWith(item.href)));
+            const isActive = isItemActive(location, item);
 
             const hasDesc = !!(item.descEn || item.descKh);
             const sharedStyle: React.CSSProperties = {
@@ -1019,11 +1056,7 @@ export function Navbar() {
             </div>
 
             {NAV_GROUPS.map((group) => {
-              const isGroupActive = group.items.some(
-                (item) =>
-                  location === item.href ||
-                  (item.href !== "/" && location.startsWith(item.href))
-              );
+              const isGroupActive = isGroupActiveFor(location, group);
               const isExpanded = mobileExpanded === group.labelEn;
 
               return (
@@ -1053,10 +1086,7 @@ export function Navbar() {
                       className="nav-dropdown-scroll ml-4 mt-0.5 mb-1 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3 max-h-[60vh] overflow-y-auto overscroll-contain"
                     >
                       {group.items.map((item) => {
-                        const isActive =
-                          !item.external &&
-                          (location === item.href ||
-                            (item.href !== "/" && location.startsWith(item.href)));
+                        const isActive = isItemActive(location, item);
 
                         const itemHasDesc = !!(item.descEn || item.descKh);
                         const mobileItemClass = `flex ${itemHasDesc ? "items-start" : "items-center"} gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
