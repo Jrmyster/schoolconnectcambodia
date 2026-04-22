@@ -7,7 +7,7 @@ import {
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages,
-  Cog, History, TrendingUp, Activity,
+  Cog, History, TrendingUp, Activity, Bug,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1323,6 +1323,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "ព្រះអាទិត្យ ខ្យល់ ទឹក នុយក្លេអ៊ែរ ហ៊ីដ្រូសែន និង fusion — ផ្លូវហួសប្រេងឥន្ធនៈ។",
     keywordsEn: ["renewable", "renewables", "solar", "wind", "hydro", "nuclear", "hydrogen", "fusion", "clean energy", "future energy", "green"],
     keywordsKh: ["ថាមពលកកើតឡើងវិញ", "ព្រះអាទិត្យ", "ខ្យល់", "នុយក្លេអ៊ែរ", "អនាគត"],
+  },
+  {
+    id: "science-entomology",
+    href: "/science/entomology",
+    icon: Bug,
+    titleEn: "Entomology: The Micro-Engineers of Cambodia",
+    titleKh: "បាណកសាស្ត្រ៖ វិស្វករខ្នាតតូចនៃប្រទេសកម្ពុជា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "Insect anatomy (3-2-6-2), local micro-engineers — weaver ants, silkworms, giant water bugs — and why the mosquito is Earth's deadliest animal.",
+    descKh: "រចនាសម្ព័ន្ធសត្វល្អិត (៣-២-៦-២) វិស្វករខ្នាតតូចក្នុងស្រុក — ស្រមោចត្បាញ ដង្កូវនាង មមាចទឹកធំ — និងហេតុអ្វីបានជាមូសគឺជាសត្វមហន្តរាយបំផុត។",
+    keywordsEn: ["entomology", "insect", "insects", "bug", "bugs", "ant", "ants", "weaver ants", "silkworm", "mosquito", "tarantula", "water bug", "anatomy", "biology", "cambodia"],
+    keywordsKh: ["បាណកសាស្ត្រ", "សត្វល្អិត", "ស្រមោច", "ដង្កូវនាង", "មូស", "កម្ពុជា"],
   },
 
   // ── PHYSICS EXTRAS ────────────────────────────────────────────────

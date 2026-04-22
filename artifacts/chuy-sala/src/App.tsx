@@ -125,6 +125,7 @@ const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePag
 const ArchitectureStrengthPage  = lazy(() => import("@/pages/ArchitectureStrengthPage").then(m => ({ default: m.ArchitectureStrengthPage })));
 const GlaciologyPage             = lazy(() => import("@/pages/GlaciologyPage").then(m => ({ default: m.GlaciologyPage })));
 const NeurologyPage             = lazy(() => import("@/pages/NeurologyPage").then(m => ({ default: m.NeurologyPage })));
+const EntomologyPage            = lazy(() => import("@/pages/EntomologyPage").then(m => ({ default: m.EntomologyPage })));
 const ImpactReportPage          = lazy(() => import("@/pages/ImpactReportPage").then(m => ({ default: m.ImpactReportPage })));
 const PhilosophyPage            = lazy(() => import("@/pages/PhilosophyPage").then(m => ({ default: m.PhilosophyPage })));
 const SociologyPage             = lazy(() => import("@/pages/SociologyPage").then(m => ({ default: m.SociologyPage })));
@@ -228,6 +229,7 @@ function Router() {
             <Route path="/study-center/united-states" component={UnitedStatesPage} />
             <Route path="/study-center/global-conflicts" component={GlobalConflictsPage} />
             <Route path="/science/trains-railways" component={TrainsRailwaysPage} />
+            <Route path="/science/entomology" component={EntomologyPage} />
             <Route path="/study-center/linguistics" component={LinguisticsPage} />
             <Route path="/cambodia" component={CambodiaPage} />
             <Route path="/science/energy-future" component={EnergyFuturePage} />
