@@ -141,6 +141,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "វិទ្យាសាស្ត្រនៃសង្គម — គោលគំនិតសំខាន់ៗ កែវយឹត Veblen លើការប្រើប្រាស់បង្ហាញឈ្មោះ និងអ្វីដែលអ្នកសង្គមវិទ្យាធ្វើពិតប្រាកដ។",
       },
       {
+        href: "/study-center/authority-conformity",
+        labelEn: "Authority & Conformity: The Science of Obedience",
+        labelKh: "អំណាច និងការស្របតាមសង្គម ៖ វិទ្យាសាស្ត្រនៃការស្តាប់បង្គាប់",
+        icon: Zap,
+        descEn: "Solomon Asch's line-length experiment shows ~37 % of normal people will deny what their eyes see to fit in with a confident group. Stanley Milgram's 1961 Yale experiment shows that 65 % of ordinary, decent adults will keep pressing a 450-volt shock switch as long as a man in a white coat says 'the experiment requires that you continue.' This module unpacks both, explains Milgram's 'Agentic State' theory of how the moral switch flips, and gives a 5-question critical-thinking kit as the antidote to blind obedience.",
+        descKh: "ការពិសោធន៍បន្ទាត់របស់ Solomon Asch បង្ហាញថា មនុស្សធម្មតា ~៣៧% នឹងបដិសេធអ្វីដែលភ្នែករបស់ខ្លួនឃើញ ដើម្បីស្របជាមួយក្រុមដែលប្រកបដោយទំនុកចិត្ត។ ការពិសោធន៍ឆ្នាំ ១៩៦១ របស់ Stanley Milgram នៅ Yale បង្ហាញថា មនុស្សពេញវ័យធម្មតាល្អៗ ៦៥% នឹងបន្តចុចស្វិចតង់ស្យុង ៤៥០ វុល តរាប់បុរសស្លៀកអាវពណ៌សនិយាយថា «ការពិសោធន៍ទាមទារឲ្យអ្នកបន្ត»។ មុខវិជ្ជានេះពន្យល់ការពិសោធន៍ទាំងពីរ ទ្រឹស្ដី «ស្ថានភាពធ្វើតាមបញ្ជា» របស់ Milgram និងផ្ដល់ឧបករណ៍គិតពិចារណា ៥ សំណួរជាដំណោះស្រាយប្រឆាំងការស្តាប់បង្គាប់ងងឹត។",
+      },
+      {
         href: "/study-center/competition-cooperation",
         labelEn: "Competition vs. Cooperation",
         labelKh: "ការប្រកួតប្រជែង និងកិច្ចសហប្រតិបត្តិការ",
