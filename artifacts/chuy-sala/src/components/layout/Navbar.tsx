@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -106,6 +106,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: ScrollText,
         descEn: "The three pillars of word science (linguistics, semantics, etymology), the 'map is not the territory' insight, and the pioneers — Sir William Jones who linked Sanskrit to Latin, and Lord Monboddo who dared to argue language was invented by humans.",
         descKh: "សសរស្តម្ភទាំងបីនៃវិទ្យាសាស្ត្រពាក្យ (ភាសាវិទ្យា អត្ថន័យវិទ្យា និរុត្តិវិទ្យា) ការយល់ឃើញថា «ផែនទីមិនមែនជាទឹកដី» និងអ្នកត្រួសត្រាយផ្លូវ — លោក Sir William Jones ដែលបានភ្ជាប់សំស្ក្រឹតទៅឡាតាំង និងលោក Lord Monboddo ដែលហ៊ានអះអាងថាភាសាត្រូវបានបង្កើតឡើងដោយមនុស្ស។",
+      },
+      {
+        href: "/study-center/languages",
+        labelEn: "Languages of the World: The Human Tapestry",
+        labelKh: "ភាសានៅជុំវិញពិភពលោក៖ ផ្ទាំងគំនូរនៃមនុស្សជាតិ",
+        icon: LanguagesIcon,
+        descEn: "About 7,100 living languages on Earth, why Papua New Guinea alone has 800+ of them, the four giant tongues, the quiet emergency of one language dying every two weeks, the three different kinds of writing system humans invented (alphabet, logogram, abugida — including our own Khmer with the world's longest alphabet), and why Spanish and Italian feel like cousins while Basque has no relatives at all.",
+        descKh: "ភាសារស់ប្រហែល ៧,១០០ នៅលើផែនដី ហេតុអ្វីប៉ាពួញូហ្គីណេតែឯងមានជាង ៨០០ ភាសាយក្សបួន បញ្ហាបន្ទាន់ស្ងាត់នៃភាសាមួយស្លាប់រៀងរាល់ ២ សប្ដាហ៍ ប្រព័ន្ធសរសេរបីផ្សេងគ្នាដែលមនុស្សបង្កើត (អក្ខរក្រម ឡូហ្គូក្រាម អប៊ូហ្គីដា — រួមទាំងភាសាខ្មែររបស់យើងដែលមានអក្ខរក្រមវែងបំផុតលើពិភពលោក) និងហេតុអ្វីអេស្ប៉ាញ និងអ៊ីតាលីមានអារម្មណ៍ដូចបងប្អូនជីដូនមួយ ខណៈពេលដែលបាស្ក៍គ្មានសាច់ញាតិទាល់តែសោះ។",
       },
       { href: "/world-history",         labelEn: "World History",     labelKh: "ប្រវត្តិសាស្ត្រពិភពលោក",  icon: Library },
       {
