@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Volume2, Trees, Sparkles, Search, RotateCcw, X,
-  ChevronDown, ChevronUp, BookOpen,
+  ChevronDown, ChevronUp, BookOpen, Bug,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
@@ -15,7 +15,8 @@ type Tint = { bg: string; border: string; accent: string };
 type Phylum = "Vertebrate" | "Invertebrate";
 type AnimalClass =
   | "Mammal" | "Bird" | "Fish" | "Reptile" | "Amphibian"
-  | "Insect" | "Arachnid" | "Crustacean" | "Mollusk" | "Annelid" | "Cnidarian";
+  | "Insect" | "Arachnid" | "Crustacean" | "Mollusk" | "Annelid" | "Cnidarian"
+  | "Chilopoda" | "Echinoderm";
 
 type Animal = {
   key: string;
@@ -43,7 +44,9 @@ const CLASS_LABELS: Record<AnimalClass, { en: string; kh: string }> = {
   Crustacean: { en: "Crustaceans", kh: "សត្វពួកបង្កង" },
   Mollusk:    { en: "Mollusks",    kh: "សត្វពួកខ្យង" },
   Annelid:    { en: "Annelids",    kh: "ដង្កូវ" },
-  Cnidarian:  { en: "Cnidarians",  kh: "សត្វពួកមេអំបៅសមុទ្រ" },
+  Cnidarian:  { en: "Cnidarians",  kh: "សត្វពួកខ្ទាម" },
+  Chilopoda:  { en: "Centipedes",  kh: "សត្វក្អែប" },
+  Echinoderm: { en: "Echinoderms", kh: "សត្វសមុទ្របន្លា" },
 };
 
 const PHYLUM_OF: Record<AnimalClass, Phylum> = {
@@ -51,6 +54,7 @@ const PHYLUM_OF: Record<AnimalClass, Phylum> = {
   Reptile: "Vertebrate", Amphibian: "Vertebrate",
   Insect: "Invertebrate", Arachnid: "Invertebrate", Crustacean: "Invertebrate",
   Mollusk: "Invertebrate", Annelid: "Invertebrate", Cnidarian: "Invertebrate",
+  Chilopoda: "Invertebrate", Echinoderm: "Invertebrate",
 };
 
 type FilterKey = "all" | "phylum:Vertebrate" | "phylum:Invertebrate" | `class:${AnimalClass}`;
@@ -59,7 +63,7 @@ type FilterKey = "all" | "phylum:Vertebrate" | "phylum:Invertebrate" | `class:${
 const FILTER_PILLS: Array<{ key: FilterKey; en: string; kh: string }> = [
   { key: "all",                  en: "All",          kh: "ទាំងអស់" },
   { key: "phylum:Vertebrate",    en: "Vertebrates",  kh: "សត្វមានឆ្អឹងកង" },
-  { key: "phylum:Invertebrate",  en: "Invertebrates", kh: "សត្វឥតឆ្អឹងកង" },
+  { key: "phylum:Invertebrate",  en: "Invertebrates", kh: "សត្វគ្មានឆ្អឹងកង" },
   { key: "class:Mammal",         en: CLASS_LABELS.Mammal.en,     kh: CLASS_LABELS.Mammal.kh },
   { key: "class:Bird",           en: CLASS_LABELS.Bird.en,       kh: CLASS_LABELS.Bird.kh },
   { key: "class:Fish",           en: CLASS_LABELS.Fish.en,       kh: CLASS_LABELS.Fish.kh },
@@ -205,6 +209,144 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factEn: "Their horn is made of keratin — the exact same material as your fingernails!",
     factKh: "ស្នែងរបស់វាធ្វើពីកេរ៉ាទីន ដែលជាសារធាតុដូចគ្នានឹងក្រចកដៃរបស់អ្នក!",
     cardTint: TINTS[3], class: "Mammal" },
+
+  /* ─── INVERTEBRATES · សត្វគ្មានឆ្អឹងកង · 30 species ─────────────── */
+
+  // Insects · សត្វល្អិត
+  { key: "honey_bee",       nameEn: "Honey Bee",        nameKh: "សត្វឃ្មុំ",            emoji: "🐝",
+    factEn: "Bees are the world's most important pollinators. One out of every three bites of food we eat depends on them!",
+    factKh: "សត្វឃ្មុំគឺជាអ្នកនាំលំអងដ៏សំខាន់បំផុតនៅលើពិភពលោក។ អាហារមួយម៉ាត់ក្នុងចំណោមអាហារបីម៉ាត់ដែលយើងញ៉ាំគឺអាស្រ័យលើពួកវា!",
+    cardTint: TINTS[1], class: "Insect" },
+  { key: "monarch_butterfly", nameEn: "Monarch Butterfly", nameKh: "មេអំបៅម៉ូណាក", emoji: "🦋",
+    factEn: "Each year monarchs migrate up to 4,000 km — farther than any other insect on Earth.",
+    factKh: "ជារៀងរាល់ឆ្នាំ មេអំបៅម៉ូណាកធ្វើដំណើរផ្លាស់លំនៅរហូតដល់ ៤០០០ គីឡូម៉ែត្រ — ឆ្ងាយជាងសត្វល្អិតផ្សេងទៀតលើផែនដី។",
+    cardTint: TINTS[5], class: "Insect" },
+  { key: "stag_beetle",     nameEn: "Stag Beetle",      nameKh: "កន្ទួងស្នែង",         emoji: "🪲",
+    factEn: "Beetles are the largest group of animals on Earth — about one in every four animal species is a beetle.",
+    factKh: "កន្ទួងគឺជាក្រុមសត្វធំជាងគេនៅលើផែនដី — សត្វប្រហែលមួយប្រភេទក្នុងចំណោមបួន គឺជាកន្ទួង។",
+    cardTint: TINTS[3], class: "Insect" },
+  { key: "leafcutter_ant",  nameEn: "Leaf-cutter Ant",  nameKh: "ស្រមោចកាត់ស្លឹក",     emoji: "🐜",
+    factEn: "They don't eat the leaves — they grow underground gardens of fungus on them, and eat the fungus.",
+    factKh: "ពួកវាមិនស៊ីស្លឹកឈើទេ — ពួកវាដាំសួនផ្សិតនៅក្រោមដីលើស្លឹកឈើ ហើយស៊ីផ្សិតវិញ។",
+    cardTint: TINTS[2], class: "Insect" },
+  { key: "dragonfly",       nameEn: "Dragonfly",        nameKh: "កន្ទុយតោ",            emoji: "🪰",
+    factEn: "Dragonflies catch their prey in the air with a 95% success rate — better than any other hunter on the planet.",
+    factKh: "កន្ទុយតោចាប់ចំណីរបស់វានៅក្នុងអាកាសដោយជោគជ័យ ៩៥% — ល្អជាងអ្នកប្រមាញ់ដទៃទៀតនៅលើភពផែនដី។",
+    cardTint: TINTS[6], class: "Insect" },
+  { key: "praying_mantis",  nameEn: "Praying Mantis",   nameKh: "ប៉ូមព្រះ",              emoji: "🦗",
+    factEn: "The praying mantis is the only insect that can turn its head 180° to look behind itself.",
+    factKh: "ប៉ូមព្រះ គឺជាសត្វល្អិតតែមួយគត់ដែលអាចបង្វិលក្បាលបាន ១៨០° ដើម្បីក្រឡេកមើលក្រោយខ្លួន។",
+    cardTint: TINTS[2], class: "Insect" },
+  { key: "firefly",         nameEn: "Firefly",          nameKh: "សត្វអំពិលអំពែក",      emoji: "✨",
+    factEn: "Fireflies make cold light in their bellies — 100% of the energy becomes light, with no heat wasted.",
+    factKh: "សត្វអំពិលអំពែកបង្កើតពន្លឺត្រជាក់នៅក្នុងពោះរបស់ពួកវា — ថាមពល ១០០% ប្រែទៅជាពន្លឺ ដោយគ្មានកំដៅខ្ជះខ្ជាយ។",
+    cardTint: TINTS[4], class: "Insect" },
+  { key: "ladybug",         nameEn: "Ladybug",          nameKh: "កន្ទួងពណ៌ក្រហម",      emoji: "🐞",
+    factEn: "A single ladybug can eat more than 5,000 plant-eating aphids in its lifetime, protecting farmers' crops.",
+    factKh: "កន្ទួងពណ៌ក្រហមមួយក្បាលអាចស៊ីសត្វល្អិតបំផ្លាញដំណាំជាង ៥០០០ ក្នុងអាយុជីវិតរបស់វា ការពារដំណាំរបស់កសិករ។",
+    cardTint: TINTS[5], class: "Insect" },
+  { key: "cicada",          nameEn: "Cicada",           nameKh: "ទំពាស់",               emoji: "🦟",
+    factEn: "Some cicadas live underground for 17 years before climbing up to sing for just a few weeks.",
+    factKh: "ទំពាស់ខ្លះរស់នៅក្រោមដីដល់ ១៧ ឆ្នាំ មុនពេលឡើងលើដើម្បីស្រែកច្រៀងតែប៉ុន្មានសប្ដាហ៍។",
+    cardTint: TINTS[7], class: "Insect" },
+  { key: "termite",         nameEn: "Termite",          nameKh: "កណ្ដៀរ",               emoji: "🐛",
+    factEn: "Termites build mounds with natural air-conditioning — engineers in Africa have copied the design for buildings.",
+    factKh: "កណ្ដៀរសាងសង់សំបុករបស់វាជាមួយម៉ាស៊ីនត្រជាក់ធម្មជាតិ — វិស្វករនៅអាហ្វ្រិកបានចម្លងប្លង់នេះសម្រាប់សាងសង់អគារ។",
+    cardTint: TINTS[3], class: "Insect" },
+
+  // Mollusks · សត្វពួកខ្យង
+  { key: "octopus",         nameEn: "Octopus",          nameKh: "មឹកយក្ស",              emoji: "🐙",
+    factEn: "An octopus has three hearts, blue blood, and a brain that is distributed throughout its eight arms.",
+    factKh: "មឹកយក្សមានបេះដូងបី ឈាមពណ៌ខៀវ និងខួរក្បាលដែលចែកចាយពាសពេញដៃទាំងប្រាំបីរបស់វា។",
+    cardTint: TINTS[6], class: "Mollusk" },
+  { key: "giant_squid",     nameEn: "Giant Squid",      nameKh: "មឹកព្រលឹង",            emoji: "🦑",
+    factEn: "Giant squid have the largest eyes in the animal kingdom — the size of a soccer ball — to spot predators in the dark deep sea.",
+    factKh: "មឹកព្រលឹងមានភ្នែកធំជាងគេក្នុងពិភពសត្វ — ធំស្មើនឹងបាល់ទាត់ — ដើម្បីសម្គាល់ឃើញសត្វរំពានៅសមុទ្រជ្រៅងងឹត។",
+    cardTint: TINTS[6], class: "Mollusk" },
+  { key: "garden_snail",    nameEn: "Garden Snail",     nameKh: "ខ្យងសួន",              emoji: "🐌",
+    factEn: "A snail's shell grows with it for life. If the shell breaks, the snail can slowly repair it on its own.",
+    factKh: "សំបករបស់ខ្យងលូតលាស់ជាមួយវាពេញមួយជីវិត។ បើសំបកបាក់ ខ្យងអាចជួសជុលវាយ៉ាងយឺតៗដោយខ្លួនឯង។",
+    cardTint: TINTS[2], class: "Mollusk" },
+  { key: "nautilus",        nameEn: "Nautilus",         nameKh: "ខ្យងណូទីលូស",          emoji: "🐚",
+    factEn: "Nautiluses are 'living fossils' — their spiral shell design has barely changed in 500 million years.",
+    factKh: "ខ្យងណូទីលូសគឺជា 'បាតុភូតរស់' — រូបរាងសំបកវង់របស់វាស្ទើរតែមិនមានការផ្លាស់ប្ដូរអស់រយៈពេល ៥០០ លានឆ្នាំ។",
+    cardTint: TINTS[6], class: "Mollusk" },
+  { key: "nudibranch",      nameEn: "Sea Slug (Nudibranch)", nameKh: "ខ្យងសមុទ្រឥតស្នូក", emoji: "🪸",
+    factEn: "Sea slugs are the rainbow of the ocean — they steal toxins from their food to make themselves poisonous to predators.",
+    factKh: "ខ្យងសមុទ្រគឺជាឥន្ទធនូនៃមហាសមុទ្រ — ពួកវាលួចជាតិពុលពីចំណីរបស់វាដើម្បីធ្វើខ្លួនមានជាតិពុលប្រឆាំងសត្វរំពា។",
+    cardTint: TINTS[5], class: "Mollusk" },
+
+  // Crustaceans · សត្វពួកបង្កង
+  { key: "mantis_shrimp",   nameEn: "Mantis Shrimp",    nameKh: "បង្កៀបសេះ",            emoji: "🦐",
+    factEn: "They can punch with the speed of a bullet, creating a shockwave underwater that boils the water around their strike.",
+    factKh: "ពួកវាអាចដាល់ក្នុងល្បឿនស្មើនឹងគ្រាប់កាំភ្លើង ដែលបង្កើតជារលកសង្កត់នៅក្រោមទឹកដែលធ្វើឱ្យទឹកនៅជុំវិញកន្លែងដែលពួកវាវាយនោះពុះ។",
+    cardTint: TINTS[4], class: "Crustacean" },
+  { key: "coconut_crab",    nameEn: "Coconut Crab",     nameKh: "ក្ដាមដូង",              emoji: "🦀",
+    factEn: "The coconut crab is the world's largest land arthropod and is strong enough to crack open a coconut with its claws.",
+    factKh: "ក្ដាមដូងគឺជាសត្វមានសន្ធាក់រស់នៅលើគោកធំជាងគេបំផុតក្នុងពិភពលោក ហើយរឹងមាំគ្រប់គ្រាន់ដើម្បីបំបែកដូងដោយប្រើដង្កៀបរបស់វា។",
+    cardTint: TINTS[5], class: "Crustacean" },
+  { key: "lobster",         nameEn: "Lobster",          nameKh: "បង្កងសមុទ្រ",          emoji: "🦞",
+    factEn: "Lobsters never really stop growing and can live for over 100 years if they avoid predators and traps.",
+    factKh: "បង្កងសមុទ្រមិនដែលឈប់លូតលាស់ទេ ហើយអាចរស់នៅជាង ១០០ ឆ្នាំ បើពួកវាគេចផុតពីសត្វរំពា និងអន្ទាក់។",
+    cardTint: TINTS[5], class: "Crustacean" },
+  { key: "hermit_crab",     nameEn: "Hermit Crab",      nameKh: "ក្ដាមសំបក",            emoji: "🦀",
+    factEn: "Hermit crabs borrow empty shells from snails for protection. When they grow too big, they line up by size and trade shells.",
+    factKh: "ក្ដាមសំបកខ្ចីសំបកទំនេររបស់ខ្យងសម្រាប់ការពារខ្លួន។ ពេលពួកវាធំពេក ពួកវាតម្រៀបជួរតាមទំហំ ហើយផ្លាស់ប្ដូរសំបកគ្នា។",
+    cardTint: TINTS[1], class: "Crustacean" },
+  { key: "krill",           nameEn: "Krill",            nameKh: "បង្កងតូចគ្រឹល",       emoji: "🦐",
+    factEn: "Krill are tiny, but together they form the largest animal mass on Earth and feed the giant blue whales of the ocean.",
+    factKh: "បង្កងតូចគ្រឹលមានរូបតូច ប៉ុន្តែរួមគ្នាពួកវាបង្កើតជាម៉ាស្សសត្វធំជាងគេនៅលើផែនដី ហើយជាចំណីរបស់ត្រីបាឡែនខៀវយក្សក្នុងមហាសមុទ្រ។",
+    cardTint: TINTS[6], class: "Crustacean" },
+
+  // Arachnids · សត្វពីងពាង
+  { key: "jumping_spider",  nameEn: "Jumping Spider",   nameKh: "ពីងពាងលោត",           emoji: "🕷️",
+    factEn: "They have excellent vision with four pairs of eyes and can jump up to 50 times their own body length to catch prey.",
+    factKh: "ពួកវាមានគំហើញច្បាស់ល្អជាមួយនឹងភ្នែកបួនគូ ហើយអាចលោតបានចម្ងាយឆ្ងាយជាងប្រវែងដងខ្លួនរបស់ពួកវាដល់ទៅ ៥០ ដងដើម្បីចាប់ចំណី។",
+    cardTint: TINTS[3], class: "Arachnid" },
+  { key: "tarantula",       nameEn: "Tarantula",        nameKh: "ពីងពាងតារ៉ានទូឡា",   emoji: "🕸️",
+    factEn: "Tarantulas can live more than 25 years, and instead of biting they often flick tiny itchy hairs at attackers.",
+    factKh: "ពីងពាងតារ៉ានទូឡាអាចរស់ជាង ២៥ ឆ្នាំ ហើយជំនួសឱ្យការខាំ ពួកវាជាញឹកញាប់បាញ់រោមតូចៗដែលរមាស់ទៅលើអ្នកវាយប្រហារ។",
+    cardTint: TINTS[3], class: "Arachnid" },
+  { key: "emperor_scorpion", nameEn: "Emperor Scorpion", nameKh: "ខ្ទួយអធិរាជ",         emoji: "🦂",
+    factEn: "All scorpions glow bright blue-green under ultraviolet light — even fossils 300 million years old still shine.",
+    factKh: "ខ្ទួយទាំងអស់ភ្លឺពណ៌ខៀវ-បៃតងភ្លឺក្រោមពន្លឺអ៊ុលត្រាវីយូឡេ — សូម្បីតែបាតុភូតរស់អាយុ ៣០០ លានឆ្នាំក៏នៅតែភ្លឺដែរ។",
+    cardTint: TINTS[7], class: "Arachnid" },
+  { key: "black_widow",     nameEn: "Black Widow Spider", nameKh: "ពីងពាងមេម៉ាយខ្មៅ", emoji: "🕷️",
+    factEn: "Drop for drop, black widow venom is 15 times stronger than a rattlesnake's, but the spider injects only a tiny amount.",
+    factKh: "តំណក់ត្រូវនឹងតំណក់ ពិសរបស់ពីងពាងមេម៉ាយខ្មៅខ្លាំងជាងពិសពស់វែកដល់ទៅ ១៥ ដង ប៉ុន្តែពីងពាងបាញ់ចូលតែបរិមាណតិចប៉ុណ្ណោះ។",
+    cardTint: TINTS[3], class: "Arachnid" },
+
+  // Cnidarians · សត្វខ្ទាម
+  { key: "box_jellyfish",   nameEn: "Box Jellyfish",    nameKh: "សត្វខ្ទាមប្រអប់",      emoji: "🪼",
+    factEn: "The box jellyfish has 24 eyes and is one of the most venomous animals on Earth — yet it has no brain at all.",
+    factKh: "សត្វខ្ទាមប្រអប់មានភ្នែក ២៤ ហើយជាសត្វមានជាតិពុលខ្លាំងបំផុតមួយនៅលើផែនដី — តែវាមិនមានខួរក្បាលសោះ។",
+    cardTint: TINTS[6], class: "Cnidarian" },
+  { key: "moon_jellyfish",  nameEn: "Moon Jellyfish",   nameKh: "សត្វខ្ទាមព្រះច័ន្ទ",  emoji: "🌙",
+    factEn: "Moon jellyfish are 95% water and have no heart, no bones, and no brain — just a simple nerve net.",
+    factKh: "សត្វខ្ទាមព្រះច័ន្ទផ្សំឡើងពីទឹក ៩៥% ហើយគ្មានបេះដូង គ្មានឆ្អឹង និងគ្មានខួរក្បាល — មានតែបណ្ដាញសរសៃប្រសាទសាមញ្ញ។",
+    cardTint: TINTS[6], class: "Cnidarian" },
+  { key: "sea_anemone",     nameEn: "Sea Anemone",      nameKh: "ផ្កាសមុទ្រ",            emoji: "🌸",
+    factEn: "Sea anemones look like flowers but are actually hungry animals — clownfish hide inside their stinging tentacles for safety.",
+    factKh: "ផ្កាសមុទ្រមើលទៅដូចផ្កា ប៉ុន្តែពិតជាសត្វស្រេកឃ្លាន — ត្រីកំប្លែង (ត្រីនេម៉ូ) លាក់ខ្លួននៅខាងក្នុងក្រលៀនជាតិចាក់របស់ពួកវាដើម្បីសុវត្ថិភាព។",
+    cardTint: TINTS[5], class: "Cnidarian" },
+
+  // Annelids · ដង្កូវ
+  { key: "earthworm",       nameEn: "Earthworm",        nameKh: "ដង្កូវដី",             emoji: "🪱",
+    factEn: "Earthworms are silent farmers — they swallow soil, digest it, and leave behind richer earth that helps plants grow.",
+    factKh: "ដង្កូវដីគឺជាកសិករស្ងាត់ៗ — ពួកវាលេបដី រំលាយវា ហើយទុកដីដែលមានជីជាតិច្រើនជាងមុនដែលជួយឱ្យរុក្ខជាតិលូតលាស់។",
+    cardTint: TINTS[3], class: "Annelid" },
+
+  // Chilopoda · សត្វក្អែប
+  { key: "giant_centipede", nameEn: "Giant Centipede",  nameKh: "ក្អែប",                emoji: "🐛",
+    factEn: "Despite the name 'centipede' meaning 100 legs, they always have an odd number of leg pairs, so they never have exactly 100 legs.",
+    factKh: "ទោះបីជាឈ្មោះ 'ក្អែប' (centipede) មានន័យថាជើង ១០០ ក៏ដោយ ក៏ពួកវាតែងតែមានចំនួនគូជើងសេស ដូច្នេះពួកវាមិនដែលមានជើង ១០០ គត់នោះទេ។",
+    cardTint: TINTS[7], class: "Chilopoda" },
+
+  // Echinoderms · សត្វសមុទ្របន្លា
+  { key: "starfish",        nameEn: "Starfish",         nameKh: "ផ្កាយសមុទ្រ",          emoji: "⭐",
+    factEn: "If a starfish loses an arm, it can grow it back — and from a single arm a brand-new starfish can sometimes regrow.",
+    factKh: "បើផ្កាយសមុទ្របាត់ដៃមួយ វាអាចដុះវាមកវិញ — ហើយពីដៃតែមួយ ពេលខ្លះផ្កាយសមុទ្រថ្មីទាំងស្រុងអាចលូតលាស់ឡើងវិញបាន។",
+    cardTint: TINTS[4], class: "Echinoderm" },
 ];
 
 // Apply the Vertebrate/Mammal default to every entry that doesn't override.
@@ -423,7 +565,7 @@ export default function WildlifeExplorerPage() {
     vertebrateDescEn: "Animals with a backbone",
     vertebrateDescKh: "សត្វដែលមានឆ្អឹងកង",
     invertebrateEn: "Invertebrates",
-    invertebrateKh: "សត្វឥតឆ្អឹងកង",
+    invertebrateKh: "សត្វគ្មានឆ្អឹងកង",
     invertebrateDescEn: "Animals without a backbone",
     invertebrateDescKh: "សត្វដែលគ្មានឆ្អឹងកង",
     warmBloodedEn: "Warm-blooded",
@@ -709,7 +851,7 @@ export default function WildlifeExplorerPage() {
                   data-active={active ? "true" : "false"}
                 >
                   {isVert   && <SpineIcon className="w-3.5 h-3.5" />}
-                  {isInvert && <NoSpineIcon className="w-3.5 h-3.5" />}
+                  {isInvert && <Bug className="w-3.5 h-3.5" />}
                   <span className={isKh ? "font-khmer" : ""}>{isKh ? pill.kh : pill.en}</span>
                   <span className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-[10px] font-bold ${active ? "bg-white/25 text-white" : "bg-emerald-100 text-emerald-800"}`}>
                     {count}
