@@ -7,16 +7,21 @@ import {
   Calendar,
   ChevronDown,
   ChevronRight,
+  Clock,
   Crown,
   Droplets,
   Drumstick,
   Feather,
   Flag,
+  Flower2,
   Ghost,
   Globe2,
+  HandHeart,
+  Heart,
   LandPlot,
   Landmark,
   Mountain,
+  PartyPopper,
   Scale,
   Scroll,
   Search,
@@ -29,6 +34,7 @@ import {
   Trophy,
   Users,
   Vote,
+  Wrench,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1196,6 +1202,96 @@ function HolidaysTab({ k, t: _t }: { k: boolean; t: T }) {
       visualKind: "turkey" as const,
     },
     {
+      key: "nye",
+      Icon: PartyPopper,
+      enName: "New Year's Eve · December 31",
+      khName: "ថ្ងៃឆ្លងឆ្នាំសកល · ៣១ ធ្នូ",
+      enWhen: "Winter · every 31 December",
+      khWhen: "រដូវរងា · រាល់ថ្ងៃទី ៣១ ធ្នូ",
+      enBody:
+        "Americans stay awake until midnight to count down the final seconds of the old year. It is usually celebrated with parties, music, and watching a giant glowing ball drop in New York City.",
+      khBody:
+        "ជនជាតិអាមេរិកនៅចាំរហូតដល់ពាក់កណ្តាលអធ្រាត្រដើម្បីរាប់ថយក្រោយវិនាទីចុងក្រោយនៃឆ្នាំចាស់។ ជាទូទៅគេប្រារព្ធពិធីដោយការជប់លៀង តន្ត្រី និងការមើលគ្រាប់បាល់ភ្លឺធំមួយធ្លាក់ចុះក្នុងទីក្រុង New York។",
+      bg: "linear-gradient(135deg,#0c1e3e,#1e3a8a)",
+      accent: "#fbbf24",
+      visualKind: "midnight" as const,
+    },
+    {
+      key: "newyearday",
+      Icon: Clock,
+      enName: "New Year's Day · January 1",
+      khName: "ចូលឆ្នាំសកល · ១ មករា",
+      enWhen: "Winter · every 1 January",
+      khWhen: "រដូវរងា · រាល់ថ្ងៃទី ១ មករា",
+      enBody:
+        "A quiet day of rest after the late-night parties. Many people make 'resolutions' — promises to themselves to build better habits in the coming year.",
+      khBody:
+        "ថ្ងៃសម្រាកដ៏ស្ងប់ស្ងាត់បន្ទាប់ពីពិធីជប់លៀងយប់ជ្រៅ។ មនុស្សជាច្រើនធ្វើ «ការតាំងចិត្ត» — ការសន្យាចំពោះខ្លួនឯងដើម្បីបង្កើតទម្លាប់ល្អៗក្នុងឆ្នាំបន្ទាប់។",
+      bg: "linear-gradient(135deg,#dbeafe,#93c5fd)",
+      accent: NAVY,
+      visualKind: "newyearday" as const,
+    },
+    {
+      key: "mlk",
+      Icon: HandHeart,
+      enName: "Martin Luther King Jr. Day · 3rd Monday in January",
+      khName: "ទិវារំលឹកខួបលោក Martin Luther King Jr. · ថ្ងៃច័ន្ទទី ៣ នៃខែមករា",
+      enWhen: "Winter · 3rd Monday in January",
+      khWhen: "រដូវរងា · ថ្ងៃច័ន្ទទី ៣ នៃខែមករា",
+      enBody:
+        "Honors the famous civil rights leader who fought for racial equality through non-violent protest. It is considered a national day of service, where Americans are encouraged to volunteer in their communities.",
+      khBody:
+        "ផ្តល់កិត្តិយសដល់មេដឹកនាំសិទ្ធិស៊ីវិលដ៏ល្បីល្បាញ ដែលបានតស៊ូទាមទារសមភាពពូជសាសន៍តាមរយៈការតវ៉ាដោយអហិង្សា។ វាត្រូវបានចាត់ទុកជាទិវាបម្រើជាតិមួយ ដែលជនជាតិអាមេរិកត្រូវបានលើកទឹកចិត្តឱ្យធ្វើជាស្ម័គ្រចិត្តក្នុងសហគមន៍របស់ពួកគេ។",
+      bg: "linear-gradient(135deg,#e0e7ff,#a5b4fc)",
+      accent: "#4338ca",
+      visualKind: "peace" as const,
+    },
+    {
+      key: "valentines",
+      Icon: Heart,
+      enName: "Valentine's Day · February 14",
+      khName: "ទិវានៃក្តីស្រឡាញ់ · ១៤ កុម្ភៈ",
+      enWhen: "Winter · every 14 February",
+      khWhen: "រដូវរងា · រាល់ថ្ងៃទី ១៤ កុម្ភៈ",
+      enBody:
+        "A day dedicated to romance and friendship. People exchange cards, chocolates, and flowers with those they love. In schools, young students often pass out small candy hearts to their classmates.",
+      khBody:
+        "ថ្ងៃដែលឧទ្ទិសដល់មនោសញ្ចេតនា និងមិត្តភាព។ មនុស្សម្នាជូនកាត សូកូឡា និងផ្កាទៅកាន់អ្នកដែលពួកគេស្រឡាញ់។ នៅសាលារៀន សិស្សតូចៗច្រើនតែចែកស្ករគ្រាប់រាងបេះដូងតូចៗដល់មិត្តរួមថ្នាក់របស់ពួកគេ។",
+      bg: "linear-gradient(135deg,#fce7f3,#fbcfe8)",
+      accent: "#e11d48",
+      visualKind: "heart" as const,
+    },
+    {
+      key: "mothers",
+      Icon: Flower2,
+      enName: "Mother's Day · 2nd Sunday in May",
+      khName: "ទិវាមាតា · ថ្ងៃអាទិត្យទី ២ នៃខែឧសភា",
+      enWhen: "Spring · 2nd Sunday in May",
+      khWhen: "រដូវផ្ការីក · ថ្ងៃអាទិត្យទី ២ នៃខែឧសភា",
+      enBody:
+        "A special day to honor mothers and grandmothers. Families usually celebrate by cooking breakfast for their mothers or taking them out to a nice dinner so they don't have to work.",
+      khBody:
+        "ថ្ងៃពិសេសដើម្បីផ្តល់កិត្តិយសដល់ម្តាយ និងជីដូន។ គ្រួសារជាច្រើនប្រារព្ធពិធីដោយចម្អិនអាហារពេលព្រឹកសម្រាប់ម្តាយរបស់ពួកគេ ឬនាំពួកគាត់ទៅញ៉ាំអាហារពេលល្ងាចនៅខាងក្រៅ ដើម្បីកុំឱ្យពួកគាត់ត្រូវធ្វើការ។",
+      bg: "linear-gradient(135deg,#dcfce7,#bbf7d0)",
+      accent: "#db2777",
+      visualKind: "bouquet" as const,
+    },
+    {
+      key: "fathers",
+      Icon: Wrench,
+      enName: "Father's Day · 3rd Sunday in June",
+      khName: "ទិវាបិតា · ថ្ងៃអាទិត្យទី ៣ នៃខែមិថុនា",
+      enWhen: "Summer · 3rd Sunday in June",
+      khWhen: "រដូវក្ដៅ · ថ្ងៃអាទិត្យទី ៣ នៃខែមិថុនា",
+      enBody:
+        "A day to honor fathers and grandfathers. Typical gifts include tools, neckties, or outdoor equipment, and families often celebrate by grilling food outside.",
+      khBody:
+        "ថ្ងៃផ្តល់កិត្តិយសដល់ឪពុក និងជីតា។ អំណោយជាទូទៅរួមមាន ឧបករណ៍ប្រើប្រាស់ ក្រវាត់ក ឬសម្ភារៈសម្រាប់ធ្វើសកម្មភាពក្រៅផ្ទះ ហើយគ្រួសារជាច្រើនប្រារព្ធពិធីដោយដុតបំពងអាហារនៅខាងក្រៅ។",
+      bg: "linear-gradient(135deg,#fef9c3,#fde047)",
+      accent: NAVY,
+      visualKind: "tie" as const,
+    },
+    {
       key: "christmas",
       Icon: TreePine,
       enName: "Christmas · December 25",
@@ -1250,7 +1346,19 @@ function HolidaysTab({ k, t: _t }: { k: boolean; t: T }) {
   );
 }
 
-function HolidayVisual({ kind }: { kind: "fireworks" | "pumpkin" | "turkey" | "tree" }) {
+type HolidayVisualKind =
+  | "fireworks"
+  | "pumpkin"
+  | "turkey"
+  | "tree"
+  | "midnight"
+  | "newyearday"
+  | "peace"
+  | "heart"
+  | "bouquet"
+  | "tie";
+
+function HolidayVisual({ kind }: { kind: HolidayVisualKind }) {
   if (kind === "fireworks") {
     return (
       <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
@@ -1343,7 +1451,7 @@ function HolidayVisual({ kind }: { kind: "fireworks" | "pumpkin" | "turkey" | "t
       </svg>
     );
   }
-  // tree
+  if (kind === "tree") {
   return (
     <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
       {/* falling snow */}
@@ -1370,6 +1478,242 @@ function HolidayVisual({ kind }: { kind: "fireworks" | "pumpkin" | "turkey" | "t
       <circle cx="180" cy="96" r="2" fill={GOLD} />
     </svg>
   );
+  }
+
+  if (kind === "midnight") {
+    // Times Square ball drop on a dark sky with confetti
+    const confetti = ["#fbbf24", "#f87171", "#60a5fa", "#34d399", "#f472b6", "#fde047"];
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* twinkling stars */}
+        {Array.from({ length: 22 }).map((_, i) => (
+          <circle
+            key={`s-${i}`}
+            cx={(i * 29) % 320}
+            cy={(i * 19) % 60 + 4}
+            r={i % 3 === 0 ? 1.6 : 1}
+            fill="#ffffff"
+            opacity={i % 2 === 0 ? 0.9 : 0.55}
+          />
+        ))}
+        {/* drop pole */}
+        <line x1="160" y1="6" x2="160" y2="40" stroke="#fde68a" strokeWidth="1.5" />
+        {/* glowing ball */}
+        <circle cx="160" cy="56" r="22" fill="#fde68a" opacity="0.35" />
+        <circle cx="160" cy="56" r="16" fill="#fbbf24" />
+        <circle cx="155" cy="51" r="4" fill="#fef3c7" opacity="0.8" />
+        {/* faceted lines on the ball */}
+        <line x1="144" y1="56" x2="176" y2="56" stroke="#b45309" strokeWidth="0.6" opacity="0.6" />
+        <line x1="160" y1="40" x2="160" y2="72" stroke="#b45309" strokeWidth="0.6" opacity="0.6" />
+        {/* confetti rectangles */}
+        {Array.from({ length: 26 }).map((_, i) => {
+          const x = (i * 43) % 320;
+          const y = 80 + ((i * 17) % 40);
+          const rot = (i * 31) % 90;
+          return (
+            <rect
+              key={`c-${i}`}
+              x={x}
+              y={y}
+              width="4"
+              height="8"
+              fill={confetti[i % confetti.length]}
+              transform={`rotate(${rot} ${x + 2} ${y + 4})`}
+            />
+          );
+        })}
+      </svg>
+    );
+  }
+
+  if (kind === "newyearday") {
+    // Calendar page flipped to Jan 1 with a sunrise
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* horizon */}
+        <rect x="0" y="92" width="320" height="38" fill="#bfdbfe" />
+        {/* sunrise */}
+        <circle cx="60" cy="92" r="28" fill="#fde68a" />
+        <circle cx="60" cy="92" r="20" fill="#fbbf24" />
+        {Array.from({ length: 7 }).map((_, i) => (
+          <line
+            key={i}
+            x1="60"
+            y1="92"
+            x2={60 + Math.cos((i / 6) * Math.PI - Math.PI) * 42}
+            y2={92 + Math.sin((i / 6) * Math.PI - Math.PI) * 42}
+            stroke="#f59e0b"
+            strokeWidth="1.2"
+            opacity="0.7"
+          />
+        ))}
+        {/* calendar body */}
+        <rect x="180" y="22" width="110" height="92" rx="6" fill="#ffffff" stroke={NAVY} strokeWidth="2" />
+        {/* header band */}
+        <rect x="180" y="22" width="110" height="22" rx="6" fill={RED} />
+        <rect x="180" y="38" width="110" height="6" fill={RED} />
+        {/* binding rings */}
+        <circle cx="200" cy="22" r="3" fill={GOLD} />
+        <circle cx="270" cy="22" r="3" fill={GOLD} />
+        {/* JAN label */}
+        <text x="235" y="38" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="700" fontFamily="sans-serif">
+          JAN
+        </text>
+        {/* big "1" */}
+        <text x="235" y="92" textAnchor="middle" fill={NAVY} fontSize="44" fontWeight="800" fontFamily="serif">
+          1
+        </text>
+      </svg>
+    );
+  }
+
+  if (kind === "peace") {
+    // Two clasped hands forming a circle of equality with a dove above
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* soft halo */}
+        <circle cx="160" cy="78" r="44" fill="#ffffff" opacity="0.45" />
+        {/* dove silhouette */}
+        <path
+          d="M150 28 Q158 18 172 22 Q176 14 184 18 Q186 24 180 28 Q188 30 188 36 Q176 40 168 36 Q162 42 152 38 Q144 38 144 32 Q146 28 150 28 Z"
+          fill="#ffffff"
+          stroke={NAVY}
+          strokeWidth="1.2"
+        />
+        {/* olive branch in beak */}
+        <line x1="184" y1="22" x2="200" y2="16" stroke="#15803d" strokeWidth="1.5" />
+        <ellipse cx="196" cy="17" rx="3" ry="1.5" fill="#15803d" />
+        <ellipse cx="200" cy="14" rx="3" ry="1.5" fill="#15803d" />
+        {/* left forearm (lighter skin tone) */}
+        <path d="M70 110 Q90 90 130 86 L150 100 L130 116 Z" fill="#fcd9b6" stroke={NAVY_DEEP} strokeWidth="1.2" />
+        {/* right forearm (deeper skin tone) */}
+        <path d="M250 110 Q230 90 190 86 L170 100 L190 116 Z" fill="#8b5a2b" stroke={NAVY_DEEP} strokeWidth="1.2" />
+        {/* clasp/handshake center */}
+        <ellipse cx="160" cy="100" rx="22" ry="12" fill="#b08968" stroke={NAVY_DEEP} strokeWidth="1.2" />
+        {/* thumb highlight */}
+        <path d="M150 92 Q160 88 170 92" stroke="#ffffff" strokeWidth="1.2" fill="none" opacity="0.7" />
+      </svg>
+    );
+  }
+
+  if (kind === "heart") {
+    // Layered hearts with floating petals
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* small floating hearts */}
+        {[
+          { x: 40, y: 30, s: 0.6, c: "#fb7185" },
+          { x: 80, y: 90, s: 0.5, c: "#f472b6" },
+          { x: 250, y: 28, s: 0.55, c: "#f472b6" },
+          { x: 280, y: 84, s: 0.65, c: "#fb7185" },
+          { x: 220, y: 100, s: 0.45, c: "#fda4af" },
+          { x: 60, y: 60, s: 0.4, c: "#fda4af" },
+        ].map((h, i) => (
+          <path
+            key={i}
+            d="M0 -6 C 6 -14, 16 -8, 0 8 C -16 -8, -6 -14, 0 -6 Z"
+            fill={h.c}
+            opacity="0.85"
+            transform={`translate(${h.x} ${h.y}) scale(${h.s})`}
+          />
+        ))}
+        {/* big heart shadow */}
+        <path
+          d="M160 108 C 110 70, 90 40, 130 30 C 148 28, 158 42, 160 50 C 162 42, 172 28, 190 30 C 230 40, 210 70, 160 108 Z"
+          fill="#9f1239"
+          opacity="0.25"
+          transform="translate(4 4)"
+        />
+        {/* big heart */}
+        <path
+          d="M160 108 C 110 70, 90 40, 130 30 C 148 28, 158 42, 160 50 C 162 42, 172 28, 190 30 C 230 40, 210 70, 160 108 Z"
+          fill="#e11d48"
+          stroke="#9f1239"
+          strokeWidth="1.5"
+        />
+        {/* sparkle */}
+        <path d="M148 56 L152 60 L148 64 L144 60 Z" fill="#ffffff" opacity="0.85" />
+      </svg>
+    );
+  }
+
+  if (kind === "bouquet") {
+    // Bouquet of flowers wrapped in paper
+    const petalColors = ["#ec4899", "#f472b6", "#fb7185", "#a78bfa", "#fde047"];
+    const flowers = [
+      { cx: 130, cy: 50, color: petalColors[0] },
+      { cx: 160, cy: 38, color: petalColors[1] },
+      { cx: 190, cy: 50, color: petalColors[2] },
+      { cx: 145, cy: 64, color: petalColors[3] },
+      { cx: 175, cy: 64, color: petalColors[4] },
+    ];
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* leaves */}
+        <path d="M130 78 Q108 86 100 110" stroke="#15803d" strokeWidth="2" fill="none" />
+        <path d="M190 78 Q212 86 220 110" stroke="#15803d" strokeWidth="2" fill="none" />
+        <ellipse cx="108" cy="98" rx="8" ry="3" fill="#15803d" transform="rotate(-30 108 98)" />
+        <ellipse cx="212" cy="98" rx="8" ry="3" fill="#15803d" transform="rotate(30 212 98)" />
+        {/* stems gathered */}
+        {flowers.map((f, i) => (
+          <line key={`st-${i}`} x1={f.cx} y1={f.cy + 6} x2="160" y2="92" stroke="#15803d" strokeWidth="1.6" />
+        ))}
+        {/* paper wrap */}
+        <path d="M118 92 L160 78 L202 92 L186 122 L134 122 Z" fill="#fce7f3" stroke="#db2777" strokeWidth="1.5" />
+        <path d="M160 78 L160 122" stroke="#db2777" strokeWidth="1" opacity="0.6" />
+        {/* ribbon */}
+        <rect x="138" y="100" width="44" height="8" fill="#db2777" />
+        <polygon points="138,100 130,96 130,112 138,108" fill="#db2777" />
+        <polygon points="182,100 190,96 190,112 182,108" fill="#db2777" />
+        {/* flowers (5 petals each) */}
+        {flowers.map((f, i) => (
+          <g key={`fl-${i}`}>
+            {Array.from({ length: 5 }).map((_, p) => {
+              const a = (p / 5) * Math.PI * 2 - Math.PI / 2;
+              return (
+                <circle
+                  key={p}
+                  cx={f.cx + Math.cos(a) * 7}
+                  cy={f.cy + Math.sin(a) * 7}
+                  r="6"
+                  fill={f.color}
+                />
+              );
+            })}
+            <circle cx={f.cx} cy={f.cy} r="3.5" fill="#fde047" stroke="#a16207" strokeWidth="0.6" />
+          </g>
+        ))}
+      </svg>
+    );
+  }
+
+  if (kind === "tie") {
+    // Necktie centered on a dress shirt collar
+    return (
+      <svg viewBox="0 0 320 130" className="w-full h-full" aria-hidden="true">
+        {/* shirt body */}
+        <path d="M40 130 L40 80 Q160 60 280 80 L280 130 Z" fill="#ffffff" stroke={NAVY} strokeWidth="1.5" />
+        {/* buttons */}
+        <circle cx="160" cy="118" r="2" fill={NAVY} />
+        {/* left collar */}
+        <polygon points="100,60 160,72 132,108 110,90" fill="#ffffff" stroke={NAVY} strokeWidth="1.5" />
+        {/* right collar */}
+        <polygon points="220,60 160,72 188,108 210,90" fill="#ffffff" stroke={NAVY} strokeWidth="1.5" />
+        {/* tie knot */}
+        <polygon points="148,72 172,72 178,86 142,86" fill={RED} stroke={NAVY_DEEP} strokeWidth="1" />
+        {/* tie body */}
+        <polygon points="142,86 178,86 168,124 152,124" fill={RED} stroke={NAVY_DEEP} strokeWidth="1" />
+        {/* tip */}
+        <polygon points="152,124 168,124 160,134" fill={RED} stroke={NAVY_DEEP} strokeWidth="1" />
+        {/* diagonal stripes */}
+        <line x1="146" y1="92" x2="174" y2="98" stroke={GOLD} strokeWidth="1.5" />
+        <line x1="148" y1="106" x2="172" y2="112" stroke={GOLD} strokeWidth="1.5" />
+        <line x1="151" y1="118" x2="169" y2="122" stroke={GOLD} strokeWidth="1.5" />
+      </svg>
+    );
+  }
+
+  return null;
 }
 
 // ════════════════════════════════════════════════════════════════════════════
