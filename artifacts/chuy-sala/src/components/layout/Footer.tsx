@@ -69,15 +69,9 @@ export function Footer() {
         
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-secondary/50 space-y-4">
           <p>© {new Date().getFullYear()} Chouy Sala. {t("All rights reserved.", "រក្សាសិទ្ធិគ្រប់យ៉ាង។")}</p>
-          <div className="max-w-2xl mx-auto text-xs text-secondary/40 leading-relaxed space-y-1">
+          <div className="max-w-2xl mx-auto text-xs text-secondary/40 leading-relaxed">
             <p className="font-semibold text-secondary/50">
               {t("Funding & Privacy Policy", "គោលការណ៍មូលនិធិ និងភាពឯកជន")}
-            </p>
-            <p>
-              {t(
-                "This project is managed by a Peace Corps Volunteer. Donations are used solely for server hosting and resource development.",
-                "គម្រោងនេះត្រូវបានគ្រប់គ្រងដោយអ្នកស្ម័គ្រចិត្ត Peace Corps ។ ការបរិច្ចាគត្រូវបានប្រើប្រាស់សម្រាប់តែការបង្ហោះម៉ាស៊ីនមេ និងការអភិវឌ្ឍន៍ធនធានប៉ុណ្ណោះ។"
-              )}
             </p>
           </div>
           <div className="max-w-2xl mx-auto text-xs text-secondary/40 leading-relaxed border-t border-white/10 pt-6 mt-2">
