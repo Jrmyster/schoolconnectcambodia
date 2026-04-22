@@ -1451,6 +1451,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["អឺរ៉ុប", "សហភាពអឺរ៉ុប", "រ៉ូម", "មជ្ឈិមសម័យ", "សង្គ្រាមលោក", "អឺរ៉ូ", "សិនជេន", "ប្រវត្តិសាស្ត្រ"],
   },
   {
+    id: "study-africa",
+    href: "/study-center/africa",
+    icon: Globe,
+    titleEn: "Africa & The AU: The Giant Continent",
+    titleKh: "អាហ្វ្រិក និងសហភាពអាហ្វ្រិក៖ ទ្វីបដ៏ធំល្វឹងល្វើយ",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Mediterranean Sea & the Sahara (almost the size of the USA), 1.4 billion people across 54 countries with megacities Cairo, Lagos & Johannesburg, and the African Union — 55 nations bound together.",
+    descKh: "សមុទ្រមេឌីទែរ៉ាណេ និងវាលខ្សាច់សាហារ៉ា (ស្ទើរតែស្មើនឹងសហរដ្ឋអាមេរិក) ប្រជាជន ១,៤ ពាន់លាននាក់នៅក្នុង ៥៤ ប្រទេសជាមួយទីក្រុងធំៗកៃរ៉ូ ឡាកូស និងចូហានណេសបឺក និងសហភាពអាហ្វ្រិក — ៥៥ ប្រជាជាតិដែលត្រូវបានចងភ្ជាប់គ្នា។",
+    keywordsEn: ["africa", "african union", "AU", "OAU", "sahara", "sahara desert", "mediterranean", "cairo", "lagos", "johannesburg", "egypt", "nigeria", "south africa", "nile", "AfCFTA", "geography", "civics", "continent"],
+    keywordsKh: ["អាហ្វ្រិក", "សហភាពអាហ្វ្រិក", "សាហារ៉ា", "មេឌីទែរ៉ាណេ", "កៃរ៉ូ", "ឡាកូស", "ចូហានណេសបឺក", "នីហ្សេរីយ៉ា", "អេហ្ស៊ីប", "ភូមិសាស្ត្រ"],
+  },
+  {
     id: "sci-sky-blue",
     href: "/science/weather/sky-color",
     icon: Sun,

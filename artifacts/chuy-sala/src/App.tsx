@@ -46,6 +46,7 @@ const LanguageRealityPage       = lazy(() => import("@/pages/LanguageRealityPage
 const DentistryPage             = lazy(() => import("@/pages/DentistryPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
 const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage"));
+const AfricaGeographyPage       = lazy(() => import("@/pages/AfricaGeographyPage").then(m => ({ default: m.AfricaGeographyPage })));
 const CrisprPage                = lazy(() => import("@/pages/CrisprPage"));
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const TelevisionPage            = lazy(() => import("@/pages/TelevisionPage").then(m => ({ default: m.TelevisionPage })));
@@ -238,6 +239,7 @@ function Router() {
             <Route path="/science/dentistry" component={DentistryPage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
             <Route path="/study-center/europe" component={EuropeHistoryPage} />
+            <Route path="/study-center/africa" component={AfricaGeographyPage} />
             <Route path="/science/biology/crispr" component={CrisprPage} />
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/technology/television" component={TelevisionPage} />

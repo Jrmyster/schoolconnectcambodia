@@ -174,6 +174,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ពេលវេលាបញ្ឈរនៃរ៉ូម → មជ្ឈិមសម័យ និងយុគរស់ឡើងវិញ → បដិវត្តន៍ឧស្សាហកម្ម និងសង្គ្រាមលោក → ការពិសោធន៍សន្តិភាពនៃសហភាពអឺរ៉ុប ព្រមទាំងការពិតរហ័សអំពីសហភាព ២៧ រដ្ឋ រូបិយប័ណ្ណអឺរ៉ូ និងតំបន់សិនជេនគ្មានព្រំដែន។",
       },
       {
+        href: "/study-center/africa",
+        labelEn: "Africa & The AU: The Giant Continent",
+        labelKh: "អាហ្វ្រិក និងសហភាពអាហ្វ្រិក៖ ទ្វីបដ៏ធំល្វឹងល្វើយ",
+        icon: Globe,
+        descEn: "The world's second-largest continent in three lessons: a Mediterranean-Sahara geography of extremes (the Sahara is almost the size of the USA!), 1.4 billion people across 54 countries with megacities Cairo, Lagos & Johannesburg, and the African Union — 55 nations bound by one peace-and-trade experiment.",
+        descKh: "ទ្វីបធំទីពីរនៃពិភពលោកក្នុងមេរៀនបី ៖ ភូមិសាស្ត្រ​មេឌីទែរ៉ាណេ-សាហារ៉ានៃភាពអស្ចារ្យ (សាហារ៉ាស្ទើរតែស្មើនឹងសហរដ្ឋអាមេរិក!) ប្រជាជន ១,៤ ពាន់លាននាក់នៅក្នុង ៥៤ ប្រទេស ដោយមានទីក្រុងធំៗកៃរ៉ូ ឡាកូស និងចូហានណេសបឺក និងសហភាពអាហ្វ្រិក — ៥៥ ប្រជាជាតិដែលត្រូវបានចងភ្ជាប់ដោយការពិសោធន៍សន្តិភាព និងពាណិជ្ជកម្មមួយ។",
+      },
+      {
         href: "/philosophy/language",
         labelEn: "Language & Reality: Escaping the 'Is' Trap",
         labelKh: "ភាសា និងការពិត៖ ការគេចចេញពីអន្ទាក់នៃពាក្យ 'គឺ'",
