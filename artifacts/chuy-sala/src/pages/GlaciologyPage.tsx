@@ -10,6 +10,11 @@ import {
   Ruler,
   Globe2,
   Waves,
+  Wind,
+  Thermometer,
+  AlertTriangle,
+  Activity,
+  Map as MapIcon,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -120,6 +125,7 @@ export function GlaciologyPage() {
         <WhatIsAGlacier kh={kh} t={t} />
         <MountainCarvers kh={kh} t={t} />
         <ClimateConnection kh={kh} t={t} />
+        <GlobalIceSection kh={kh} t={t} />
 
         {/* Closing */}
         <div
@@ -833,5 +839,461 @@ function SeaLevelDiagram({
         {kh ? "ដីទាប · ចម្ការ + ភូមិ" : "LOW LAND · FARMS + VILLAGES"}
       </text>
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 04 — Global Ice: The Breathing Planet
+//               ទឹកកកសកល៖ ភពផែនដីដែលកំពុងដកដង្ហើម
+// ════════════════════════════════════════════════════════════════════════════
+
+function GlobalIceSection({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section className="mb-10" data-testid="section-global-ice">
+      <SectionHeader
+        spec="04"
+        en="Global Ice: The Breathing Planet"
+        kh="ទឹកកកសកល៖ ភពផែនដីដែលកំពុងដកដង្ហើម"
+        kh_={kh}
+      />
+
+      {/* ───────────────── Sub-section 1 · The Two Poles ─────────────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-cyan-300 p-5 sm:p-7 shadow-sm mb-5"
+        style={CARD_BG}
+        data-testid="two-poles-card"
+      >
+        <CornerMarks subtle />
+        <div className="mb-4">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan-700 bg-cyan-50 border border-cyan-300 rounded px-2 py-0.5">
+            04 · A
+          </span>
+          <h3 className={`mt-3 text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer leading-loose" : ""}`}>
+            {t("The Two Poles", "ប៉ូលទាំងពីរ")}
+          </h3>
+          <p className={`mt-1 text-sm text-slate-700 max-w-3xl ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {t(
+              "Both ends of the planet are frozen — but in two completely different ways. One is land hidden under ice; the other is ice floating on water.",
+              "ចុងទាំងពីរនៃភពផែនដីត្រូវបានកក — ប៉ុន្តែតាមរបៀបពីរយ៉ាងខុសគ្នាស្រឡះ។ មួយជាដីត្រូវកប់នៅក្រោមទឹកកក ; មួយទៀតជាទឹកកកអណ្តែតលើទឹកសមុទ្រ។"
+            )}
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          {/* Antarctica · South Pole */}
+          <div
+            className="relative rounded-xl bg-slate-900 text-slate-100 p-5 overflow-hidden"
+            data-testid="pole-south"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 75% 15%, rgba(125, 211, 252, 0.18), transparent 55%)," +
+                "linear-gradient(rgba(125, 211, 252, 0.10) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(125, 211, 252, 0.10) 1px, transparent 1px)",
+              backgroundSize: "auto, 28px 28px, 28px 28px",
+            }}
+          >
+            <CornerMarks />
+            <div className="relative">
+              <div className={`flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-300/80 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                <Compass className="w-3.5 h-3.5" /> {t("SOUTH POLE", "ប៉ូលខាងត្បូង")}
+              </div>
+              <h4 className={`text-xl font-bold leading-tight ${kh ? "font-khmer" : ""}`}>
+                {t("Antarctica", "អង់តាក់ទិក")}
+                {!kh && <span className="ml-2 font-khmer text-sm font-normal text-cyan-200/80">(អង់តាក់ទិក)</span>}
+              </h4>
+              <div className="mt-3"><AntarcticaSVG /></div>
+              <p className={`mt-3 text-[13px] text-slate-200 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                <strong className="text-cyan-200">{t("Land under ice. ", "ដីនៅក្រោមទឹកកក។ ")}</strong>
+                {t(
+                  "Antarctica is a massive rocky continent — bigger than Europe — covered by an ice sheet roughly two miles (3 km) thick. It is the coldest, driest, windiest place on Earth.",
+                  "អង់តាក់ទិកគឺជាទ្វីបថ្មដ៏ធំសម្បើម — ធំជាងទ្វីបអឺរ៉ុប — ដែលត្រូវគ្របដោយផ្ទាំងទឹកកកក្រាស់ប្រហែលពីរម៉ាយ (៣ គីឡូម៉ែត្រ)។ វាគឺជាកន្លែងត្រជាក់បំផុត ស្ងួតបំផុត និងមានខ្យល់បក់ខ្លាំងបំផុតនៅលើផែនដី។"
+                )}
+              </p>
+
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                <PoleStat icon={<Thermometer className="w-3 h-3" />} labelEn="Coldest" labelKh="ត្រជាក់" value="-89 °C" kh={kh} />
+                <PoleStat icon={<Mountain className="w-3 h-3" />} labelEn="Ice depth" labelKh="ជម្រៅទឹកកក" value="≈ 3 km" valueKh="≈ ៣ គម" kh={kh} />
+                <PoleStat icon={<Wind className="w-3 h-3" />} labelEn="Winds" labelKh="ខ្យល់" value="320 km/h" valueKh="៣២០ គម/ម៉" kh={kh} />
+              </div>
+            </div>
+          </div>
+
+          {/* The Arctic · North Pole */}
+          <div
+            className="relative rounded-xl bg-slate-900 text-slate-100 p-5 overflow-hidden"
+            data-testid="pole-north"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 25% 15%, rgba(96, 165, 250, 0.20), transparent 55%)," +
+                "linear-gradient(rgba(125, 211, 252, 0.10) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(125, 211, 252, 0.10) 1px, transparent 1px)",
+              backgroundSize: "auto, 28px 28px, 28px 28px",
+            }}
+          >
+            <CornerMarks />
+            <div className="relative">
+              <div className={`flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-300/80 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                <Compass className="w-3.5 h-3.5" /> {t("NORTH POLE", "ប៉ូលខាងជើង")}
+              </div>
+              <h4 className={`text-xl font-bold leading-tight ${kh ? "font-khmer" : ""}`}>
+                {t("The Arctic", "តំបន់អាកទិក")}
+                {!kh && <span className="ml-2 font-khmer text-sm font-normal text-cyan-200/80">(តំបន់អាកទិក)</span>}
+              </h4>
+              <div className="mt-3"><ArcticSVG /></div>
+              <p className={`mt-3 text-[13px] text-slate-200 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                <strong className="text-cyan-200">{t("No land at all. ", "គ្មានដីសោះឡើយ។ ")}</strong>
+                {t(
+                  "There is no land at the North Pole — it is a frozen ocean, a giant raft of sea-ice floating on water, ringed by the landmasses of northern Canada, Siberia (Russia), and Greenland.",
+                  "គ្មានដីនៅប៉ូលខាងជើងទេ — វាជាមហាសមុទ្រដែលកក សំពៅទឹកកកសមុទ្រដ៏ធំ ដែលអណ្តែតលើទឹក ហ៊ុំព័ទ្ធដោយដីនៃប្រទេសកាណាដាខាងជើង ស៊ីបេរី (រុស្ស៊ី) និងហ្គ្រីនលែន។"
+                )}
+              </p>
+
+              <div className="mt-3 rounded-md border border-cyan-500/40 bg-cyan-500/10 p-2.5">
+                <div className={`text-[10px] font-mono uppercase tracking-widest text-cyan-300/80 mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                  {t("Highlight · Greenland", "សំខាន់ · ហ្គ្រីនលែន")}
+                </div>
+                <p className={`text-[12px] text-slate-100 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {t(
+                    "Greenland holds the second-largest ice sheet in the world — almost three times the size of Cambodia, frozen solid.",
+                    "ហ្គ្រីនលែនកាន់កាប់ផ្ទាំងទឹកកកធំទីពីរនៅលើពិភពលោក — ស្ទើរតែបីដងធំជាងប្រទេសកម្ពុជា ដែលកករឹង។"
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ───────────────── Sub-section 2 · The Annual Heartbeat ──────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-sky-300 p-5 sm:p-7 shadow-sm mb-5"
+        style={CARD_BG}
+        data-testid="heartbeat-card"
+      >
+        <CornerMarks subtle />
+        <div className="mb-4 flex items-start gap-3">
+          <div className="w-10 h-10 rounded-lg bg-sky-100 border border-sky-300 text-sky-700 flex items-center justify-center flex-shrink-0">
+            <Activity className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-sky-700 bg-sky-50 border border-sky-300 rounded px-2 py-0.5">
+              04 · B
+            </span>
+            <h3 className={`mt-2 text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t("The Annual Heartbeat", "ចង្វាក់បេះដូងប្រចាំឆ្នាំ")}
+            </h3>
+          </div>
+        </div>
+
+        <p className={`text-foreground text-sm sm:text-base mb-4 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {t(
+            "Every year, the planet's ice expands and contracts in a slow steady rhythm — like one giant breath. During the Northern Hemisphere's winter, the Arctic ice sheet grows massively into the ocean; during its summer, it melts back. At the exact same time, the Southern Hemisphere is doing the opposite — when the North contracts, the South expands.",
+            "ជារៀងរាល់ឆ្នាំ ទឹកកករបស់ភពផែនដីរីកធំ និងរួមតូចតាមចង្វាក់ដ៏រឹងមាំយឺតៗ — ដូចជាការដកដង្ហើមធំមួយ។ កំឡុងរដូវរងារនៃអឌ្ឍគោលខាងជើង ផ្ទាំងទឹកកកអាកទិករីកធំចូលមហាសមុទ្រ ; កំឡុងរដូវក្ដៅរបស់វា វាត្រឡប់រលាយវិញ។ ក្នុងពេលដំណាលគ្នា អឌ្ឍគោលខាងត្បូងធ្វើផ្ទុយ — ពេលខាងជើងរួមតូច ខាងត្បូងរីកធំ។"
+          )}
+        </p>
+
+        <BreathingDiagram kh={kh} t={t} />
+
+        <div className="mt-5 rounded-xl border-2 border-cyan-400 bg-gradient-to-br from-slate-900 to-cyan-950 p-4 text-center">
+          <p className="text-base font-display italic text-cyan-100">
+            “The Earth breathes ice: expanding in the dark winter, contracting in the summer sun.”
+          </p>
+          <p className="mt-2 text-base font-khmer font-bold text-cyan-100 leading-loose">
+            « ផែនដីដកដង្ហើមជាទឹកកក ៖ រីកធំនៅរដូវរងាដ៏ងងឹត និងរួមតូចនៅរដូវក្ដៅ។ »
+          </p>
+        </div>
+      </div>
+
+      {/* ───────────────── Sub-section 3 · Climate Change ────────────────── */}
+      <div
+        className="relative rounded-2xl border-2 border-rose-400 p-5 sm:p-7 shadow-sm bg-rose-50/40"
+        data-testid="climate-warning-card"
+      >
+        {/* warning corner marks in rose */}
+        <span aria-hidden className="pointer-events-none absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-rose-400" />
+        <span aria-hidden className="pointer-events-none absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-rose-400" />
+        <span aria-hidden className="pointer-events-none absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-rose-400" />
+        <span aria-hidden className="pointer-events-none absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-rose-400" />
+
+        <div className="flex items-start gap-3 mb-4">
+          <div className="w-11 h-11 rounded-lg bg-rose-600 text-white flex items-center justify-center flex-shrink-0 shadow">
+            <AlertTriangle className="w-6 h-6" />
+          </div>
+          <div>
+            <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-rose-800 bg-rose-100 border border-rose-300 rounded px-2 py-0.5">
+              04 · C · WARNING
+            </span>
+            <h3 className={`mt-2 text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t("Climate Change & The Melting Map", "ការប្រែប្រួលអាកាសធាតុ និងផែនទីដែលកំពុងរលាយ")}
+            </h3>
+          </div>
+        </div>
+
+        <p className={`text-slate-800 text-sm sm:text-base mb-4 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {t(
+            "The annual heartbeat still beats — ice still expands every winter and contracts every summer. But beneath that rhythm, something more dangerous is happening: the total volume of old, thick, multi-year ice is disappearing rapidly. Greenhouse gases trapped in the atmosphere are warming it year after year, so each summer melt is bigger than the previous winter's freeze. The ice is losing the race.",
+            "ចង្វាក់បេះដូងប្រចាំឆ្នាំនៅតែដំណើរការ — ទឹកកកនៅតែរីកធំជារៀងរាល់រដូវរងារ ហើយរួមតូចជារៀងរាល់រដូវក្ដៅ។ ប៉ុន្តែនៅក្រោមចង្វាក់នោះ មានរឿងគ្រោះថ្នាក់ជាងកើតឡើង ៖ បរិមាណសរុបនៃទឹកកកចាស់ ក្រាស់ និងច្រើនឆ្នាំ កំពុងបាត់បង់យ៉ាងលឿន។ ឧស្ម័នផ្ទះកញ្ចក់ដែលជាប់នៅក្នុងបរិយាកាស កំពុងធ្វើឱ្យវាក្ដៅឡើងពីឆ្នាំមួយទៅឆ្នាំមួយ ដូច្នេះការរលាយរដូវក្ដៅនីមួយៗ ធំជាងការកករដូវរងារមុន។ ទឹកកកកំពុងចាញ់ការប្រណាំង។"
+          )}
+        </p>
+
+        <VolumeLossDiagram kh={kh} t={t} />
+
+        <div className="mt-4 grid md:grid-cols-2 gap-3">
+          <div className="rounded-lg border border-rose-300 bg-white p-3 flex items-start gap-2">
+            <MapIcon className="w-4 h-4 text-rose-700 flex-shrink-0 mt-0.5" />
+            <p className={`text-[13px] text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <strong className="text-rose-800">{t("Siberia & Canada: ", "ស៊ីបេរី និងកាណាដា ៖ ")}</strong>
+              {t(
+                "Glaciers and sea-ice are retreating every decade. The frozen ground beneath them — called permafrost — is thawing for the first time in thousands of years.",
+                "ផ្ទាំងទឹកកក និងទឹកកកសមុទ្រកំពុងថយទៅក្រោយជារៀងរាល់ទសវត្សរ៍។ ដីដែលកកនៅពីក្រោម — ហៅថា Permafrost — កំពុងរលាយជាលើកដំបូងក្នុងរយៈពេលរាប់ពាន់ឆ្នាំ។"
+              )}
+            </p>
+          </div>
+          <div className="rounded-lg border border-rose-300 bg-white p-3 flex items-start gap-2">
+            <Droplets className="w-4 h-4 text-rose-700 flex-shrink-0 mt-0.5" />
+            <p className={`text-[13px] text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <strong className="text-rose-800">{t("The cost: ", "ការខាតបង់ ៖ ")}</strong>
+              {t(
+                "Thawing permafrost releases methane — a gas 25 times more warming than CO₂. Melted ice raises sea level. The system is feeding itself.",
+                "Permafrost ដែលរលាយ បញ្ចេញឧស្ម័នមេតាន — ឧស្ម័នមួយដែលធ្វើឱ្យក្ដៅជា CO₂ ចំនួន ២៥ ដង។ ទឹកកកដែលរលាយ លើកកម្ពស់ទឹកសមុទ្រ។ ប្រព័ន្ធនេះកំពុងផ្តល់ចំណីដល់ខ្លួនវា។"
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Pole stat pill (used inside dark pole cards)
+function PoleStat({
+  icon, labelEn, labelKh, value, valueKh, kh,
+}: {
+  icon: React.ReactNode;
+  labelEn: string; labelKh: string;
+  value: string; valueKh?: string;
+  kh: boolean;
+}) {
+  return (
+    <div className="rounded-md border border-cyan-500/40 bg-cyan-500/10 px-2 py-1.5">
+      <div className={`flex items-center gap-1 text-[9px] font-mono uppercase tracking-widest text-cyan-300/90 ${kh ? "font-khmer normal-case tracking-normal text-[10px]" : ""}`}>
+        {icon}
+        <span>{kh ? labelKh : labelEn}</span>
+      </div>
+      <div className={`text-sm font-bold text-white ${kh && valueKh ? "font-khmer leading-loose" : "font-mono"}`}>
+        {kh && valueKh ? valueKh : value}
+      </div>
+    </div>
+  );
+}
+
+// ─── Antarctica diagram: rocky continent buried under thick ice cap
+function AntarcticaSVG() {
+  return (
+    <svg viewBox="0 0 320 130" className="w-full h-auto rounded-md border border-cyan-500/30 bg-slate-950" aria-hidden>
+      {/* sky */}
+      <defs>
+        <linearGradient id="ant-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#0c4a6e" />
+          <stop offset="1" stopColor="#082f49" />
+        </linearGradient>
+      </defs>
+      <rect width="320" height="130" fill="url(#ant-sky)" />
+      {/* faint stars */}
+      {[20, 60, 110, 160, 220, 280].map((x, i) => (
+        <circle key={i} cx={x} cy={10 + (i % 3) * 8} r="0.9" fill="#a5f3fc" opacity="0.6" />
+      ))}
+      {/* ice cap dome */}
+      <path d="M 0 110 Q 80 35, 160 30 T 320 100 L 320 130 L 0 130 Z" fill="#a5f3fc" />
+      <path d="M 0 110 Q 80 35, 160 30 T 320 100 L 320 130 L 0 130 Z" fill="url(#ant-stripes)" opacity="0.6" />
+      <defs>
+        <pattern id="ant-stripes" width="24" height="24" patternUnits="userSpaceOnUse">
+          <path d="M 0 24 L 24 0" stroke="#bae6fd" strokeWidth="0.6" />
+        </pattern>
+      </defs>
+      {/* rocky continent silhouette beneath */}
+      <path d="M 30 128 Q 90 95, 160 100 T 290 128 Z" fill="#57534e" />
+      {/* ice depth arrow */}
+      <line x1="160" y1="30" x2="160" y2="100" stroke="#0ea5e9" strokeWidth="1.2" strokeDasharray="4 3" />
+      <text x="166" y="68" fontSize="9" fontFamily="monospace" fill="#7dd3fc" fontWeight="bold">≈ 3 km ice</text>
+      {/* rock label */}
+      <text x="160" y="122" textAnchor="middle" fontSize="9" fontFamily="monospace" fill="#fbbf24" fontWeight="bold">ROCK</text>
+    </svg>
+  );
+}
+
+// ─── Arctic diagram: floating sea-ice ringed by continents (no land in middle)
+function ArcticSVG() {
+  return (
+    <svg viewBox="0 0 320 130" className="w-full h-auto rounded-md border border-cyan-500/30 bg-slate-950" aria-hidden>
+      {/* dark ocean */}
+      <rect width="320" height="130" fill="#0c4a6e" />
+      {/* surrounding land masses (top: Russia/Siberia, left: Canada, right: Greenland) */}
+      <path d="M 0 0 L 320 0 L 320 22 Q 250 28, 200 22 T 100 24 T 0 22 Z" fill="#15803d" />
+      <text x="160" y="14" textAnchor="middle" fontSize="9" fontFamily="monospace" fill="#fff" fontWeight="bold">SIBERIA · RUSSIA</text>
+      <path d="M 0 30 L 0 130 L 32 130 Q 28 90, 36 60 T 30 30 Z" fill="#15803d" />
+      <text x="16" y="80" fontSize="9" fontFamily="monospace" fill="#fff" fontWeight="bold" transform="rotate(-90 16 80)">CANADA</text>
+      <path d="M 320 40 L 320 130 L 286 130 Q 290 100, 282 70 T 286 40 Z" fill="#15803d" />
+      <text x="304" y="92" fontSize="9" fontFamily="monospace" fill="#fff" fontWeight="bold" transform="rotate(90 304 92)">GREENLAND</text>
+      {/* floating sea-ice plates */}
+      {[
+        { cx: 100, cy: 70, r: 16 },
+        { cx: 140, cy: 55, r: 22 },
+        { cx: 180, cy: 80, r: 26 },
+        { cx: 220, cy: 60, r: 18 },
+        { cx: 130, cy: 95, r: 14 },
+        { cx: 200, cy: 105, r: 12 },
+        { cx: 245, cy: 95, r: 14 },
+      ].map((p, i) => (
+        <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#e0f2fe" stroke="#bae6fd" strokeWidth="0.8" />
+      ))}
+      {/* central dot at the pole */}
+      <circle cx="170" cy="78" r="2.5" fill="#f43f5e" />
+      <text x="176" y="82" fontSize="9" fontFamily="monospace" fill="#fda4af" fontWeight="bold">N pole · no land</text>
+      {/* ocean wave hint */}
+      <path d="M 50 118 q 10 -3 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" stroke="#38bdf8" strokeWidth="0.8" fill="none" opacity="0.6" />
+    </svg>
+  );
+}
+
+// ─── Annual breathing diagram: two-year sine waves, North & South 180° offset
+function BreathingDiagram({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  // Build a 24-month sine wave over [40 .. 580] x range, amplitude 26 around y=80
+  const w = 620, h = 170;
+  const padX = 40, padY = 30;
+  const months = 24;
+  const points = (offset: number) =>
+    Array.from({ length: months + 1 }, (_, i) => {
+      const x = padX + (i / months) * (w - 2 * padX);
+      const y = padY + 50 - 30 * Math.cos(((i + offset) / 12) * Math.PI);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(" ");
+  // Vertical season bands (winter dark, summer light)
+  const bands: Array<{ x: number; w: number; fill: string }> = [];
+  for (let i = 0; i < months; i += 6) {
+    const x = padX + (i / months) * (w - 2 * padX);
+    const bw = (6 / months) * (w - 2 * padX);
+    bands.push({ x, w: bw, fill: i % 12 === 0 ? "#082f49" : "#bae6fd" });
+  }
+
+  return (
+    <div className="rounded-xl bg-slate-900 p-4 text-slate-100" data-testid="breathing-diagram">
+      <div className={`text-[10px] font-mono uppercase tracking-widest text-cyan-300/80 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("ICE EXTENT · 24-MONTH CYCLE", "បរិមាណទឹកកក · វដ្ដ ២៤ ខែ")}
+      </div>
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto" aria-hidden>
+        {/* season bands */}
+        {bands.map((b, i) => (
+          <rect key={i} x={b.x} y={padY} width={b.w} height={h - 2 * padY} fill={b.fill} opacity="0.18" />
+        ))}
+        {/* axes */}
+        <line x1={padX} y1={h - padY} x2={w - padX} y2={h - padY} stroke="#475569" strokeWidth="1" />
+        <line x1={padX} y1={padY} x2={padX} y2={h - padY} stroke="#475569" strokeWidth="1" />
+        {/* y axis labels */}
+        <text x={padX - 4} y={padY + 6} fontSize="9" fontFamily="monospace" fill="#94a3b8" textAnchor="end">{t("max", "អតិ")}</text>
+        <text x={padX - 4} y={h - padY} fontSize="9" fontFamily="monospace" fill="#94a3b8" textAnchor="end">{t("min", "អប្ប")}</text>
+        {/* Northern Hemisphere line (cyan) */}
+        <polyline points={points(0)} fill="none" stroke="#22d3ee" strokeWidth="2.4" />
+        {/* Southern Hemisphere line (rose) — offset by 6 months */}
+        <polyline points={points(6)} fill="none" stroke="#fb7185" strokeWidth="2.4" />
+
+        {/* Month markers */}
+        {["Jan", "Jul", "Jan", "Jul", "Jan"].map((m, i) => {
+          const x = padX + ((i * 6) / months) * (w - 2 * padX);
+          return (
+            <g key={i}>
+              <line x1={x} y1={h - padY} x2={x} y2={h - padY + 4} stroke="#475569" strokeWidth="1" />
+              <text x={x} y={h - padY + 14} textAnchor="middle" fontSize="9" fontFamily="monospace" fill="#94a3b8">{m}</text>
+            </g>
+          );
+        })}
+
+        {/* legend */}
+        <g transform={`translate(${padX + 10} ${padY + 4})`}>
+          <rect x="0" y="0" width="180" height="18" rx="3" fill="#0f172a" stroke="#334155" />
+          <line x1="6" y1="9" x2="22" y2="9" stroke="#22d3ee" strokeWidth="2.4" />
+          <text x="26" y="12" fontSize="9" fontFamily="monospace" fill="#cffafe">{t("Arctic (N)", "អាកទិក (N)")}</text>
+          <line x1="96" y1="9" x2="112" y2="9" stroke="#fb7185" strokeWidth="2.4" />
+          <text x="116" y="12" fontSize="9" fontFamily="monospace" fill="#fecdd3">{t("Antarctic (S)", "អង់តាក់ទិក (S)")}</text>
+        </g>
+      </svg>
+      <div className={`mt-2 text-center text-[11px] text-slate-400 ${kh ? "font-khmer leading-loose" : "font-mono uppercase tracking-widest"}`}>
+        {t(
+          "Two hemispheres, opposite seasons — one global breath",
+          "អឌ្ឍគោលពីរ រដូវផ្ទុយគ្នា — ការដកដង្ហើមសកលតែមួយ"
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Volume-loss diagram: shrinking ice volume bars over decades
+function VolumeLossDiagram({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  const decades: Array<{ year: string; vol: number }> = [
+    { year: "1980", vol: 100 },
+    { year: "1990", vol: 92 },
+    { year: "2000", vol: 78 },
+    { year: "2010", vol: 60 },
+    { year: "2020", vol: 42 },
+  ];
+  const w = 620, h = 170;
+  const padX = 40, padY = 24;
+  const barW = (w - 2 * padX) / decades.length - 14;
+
+  return (
+    <div className="rounded-xl bg-slate-900 p-4 text-slate-100" data-testid="volume-loss-diagram">
+      <div className={`text-[10px] font-mono uppercase tracking-widest text-rose-300/80 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("OLD MULTI-YEAR ICE VOLUME · ARCTIC SUMMER MIN", "បរិមាណទឹកកកចាស់ច្រើនឆ្នាំ · អតិបរមារដូវក្ដៅអាកទិក")}
+      </div>
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-auto" aria-hidden>
+        {/* axes */}
+        <line x1={padX} y1={h - padY} x2={w - padX} y2={h - padY} stroke="#475569" strokeWidth="1" />
+        <line x1={padX} y1={padY} x2={padX} y2={h - padY} stroke="#475569" strokeWidth="1" />
+        {/* baseline reference (1980) */}
+        <line x1={padX} y1={padY} x2={w - padX} y2={padY} stroke="#22d3ee" strokeWidth="0.9" strokeDasharray="3 3" opacity="0.6" />
+        <text x={w - padX - 4} y={padY - 4} fontSize="9" fontFamily="monospace" fill="#67e8f9" textAnchor="end">
+          {t("1980 baseline · 100%", "មូលដ្ឋាន ១៩៨០ · ១០០%")}
+        </text>
+
+        {decades.map((d, i) => {
+          const x = padX + 14 + i * ((w - 2 * padX) / decades.length);
+          const barH = ((h - 2 * padY) * d.vol) / 100;
+          const y = h - padY - barH;
+          const isLatest = i === decades.length - 1;
+          return (
+            <g key={d.year}>
+              {/* "lost" ghost bar */}
+              <rect x={x} y={padY} width={barW} height={h - 2 * padY} fill="#0c4a6e" opacity="0.4" rx="2" />
+              {/* current bar */}
+              <rect x={x} y={y} width={barW} height={barH} fill={isLatest ? "#fb7185" : "#22d3ee"} opacity={isLatest ? 0.95 : 0.85} rx="2" />
+              {/* value */}
+              <text x={x + barW / 2} y={y - 4} textAnchor="middle" fontSize="10" fontFamily="monospace" fill="#fff" fontWeight="bold">
+                {d.vol}%
+              </text>
+              {/* year */}
+              <text x={x + barW / 2} y={h - padY + 14} textAnchor="middle" fontSize="9" fontFamily="monospace" fill="#94a3b8">
+                {d.year}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+      <div className={`mt-2 text-center text-[11px] text-rose-200 ${kh ? "font-khmer leading-loose" : "font-mono uppercase tracking-widest"}`}>
+        {t(
+          "The annual breath continues — but the lungs are shrinking",
+          "ការដកដង្ហើមប្រចាំឆ្នាំនៅតែបន្ត — ប៉ុន្តែសួតកំពុងតូចទៅៗ"
+        )}
+      </div>
+    </div>
   );
 }
