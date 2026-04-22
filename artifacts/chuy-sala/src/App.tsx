@@ -38,6 +38,7 @@ const IntegralsPage             = lazy(() => import("@/pages/IntegralsPage").the
 const SurvivalSkillsPage        = lazy(() => import("@/pages/SurvivalSkillsPage").then(m => ({ default: m.SurvivalSkillsPage })));
 const NanotechnologyPage        = lazy(() => import("@/pages/NanotechnologyPage").then(m => ({ default: m.NanotechnologyPage })));
 const RadioTechPage             = lazy(() => import("@/pages/RadioTechPage"));
+const MassProductionPage        = lazy(() => import("@/pages/MassProductionPage"));
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const TelevisionPage            = lazy(() => import("@/pages/TelevisionPage").then(m => ({ default: m.TelevisionPage })));
 const FutureIntelligencePage    = lazy(() => import("@/pages/FutureIntelligencePage").then(m => ({ default: m.FutureIntelligencePage })));
@@ -221,6 +222,7 @@ function Router() {
             <Route path="/well-being/survival-skills" component={SurvivalSkillsPage} />
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/technology/radio" component={RadioTechPage} />
+            <Route path="/technology/mass-production" component={MassProductionPage} />
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/technology/television" component={TelevisionPage} />
             <Route path="/technology/future-intelligence" component={FutureIntelligencePage} />

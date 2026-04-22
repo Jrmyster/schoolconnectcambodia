@@ -584,6 +584,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ដាក់រលកវិទ្យុលើវិសាលគមអេឡិចត្រូម៉ាញ៉េទិច ដើរតាមវដ្តឧបករណ៍បញ្ជូន–ឧបករណ៍ទទួល ពីមីក្រូ DJ ដល់ឧបករណ៍បំពងសំឡេងរបស់អ្នក ជួប Marconi និង Tesla និងប្រៀបធៀប AM (ឆ្ងាយ សំឡេងរំខានច្រើន) ទល់នឹង FM (ខ្លី សំឡេងច្បាស់ដូចគ្រីស្តាល់)។",
       },
       {
+        href: "/technology/mass-production",
+        labelEn: "Mass Production & Automation: From Hands to Robots",
+        labelKh: "ការផលិតទ្រង់ទ្រាយធំ និងស្វ័យប្រវត្តិកម្ម៖ ពីដៃទៅរ៉ូបូត",
+        icon: Factory,
+        descEn: "Walk a vertical timeline from cottage industry through Eli Whitney's interchangeable parts to Henry Ford's moving assembly line ($825 → $260 Model T), climb the power ladder from muscle to steam to electricity to robotics, and unpack why scaling up makes prices fall.",
+        descKh: "ដើរតាមប្រវត្តិបញ្ឈរ ពីសិប្បកម្មតាមផ្ទះ ឆ្លងគ្រឿងបន្លាស់ដែលអាចផ្លាស់ប្តូរបានរបស់ Eli Whitney ដល់ខ្សែសង្វាក់ផលិតកម្មចល័តរបស់ Henry Ford (Model T ៨២៥ ➜ ២៦០ ដុល្លារ) ឡើងជណ្ដើរថាមពលពីសាច់ដុំទៅចំហាយ ទៅអគ្គិសនី ទៅរ៉ូបូត និងពន្យល់ហេតុអ្វីបានជាការផលិតធំធ្វើឱ្យតម្លៃធ្លាក់។",
+      },
+      {
         href: "/technology/radar",
         labelEn: "Radar: Seeing with Radio Waves",
         labelKh: "រ៉ាដា៖ ការមើលឃើញដោយរលកវិទ្យុ",

@@ -6,7 +6,7 @@ import {
   Sigma, Music, Plane, Bot, Camera, Magnet, Wrench, Fuel, Thermometer,
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
-  Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio,
+  Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -1413,6 +1413,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វិស្វកម្មក្នុងកម្រិតអូដ្ឋាតូម — នាណូប៉ូត ផ្លុំកាបូន និងម៉ាស៊ីនតូចៗ។",
     keywordsEn: ["nano", "nanotech", "nanotechnology", "nanobot", "carbon nanotube", "graphene", "miniature"],
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
+  },
+  {
+    id: "tech-mass-production",
+    href: "/technology/mass-production",
+    icon: Factory,
+    titleEn: "Mass Production & Automation",
+    titleKh: "ការផលិតទ្រង់ទ្រាយធំ",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "Cottage industry → Whitney's interchangeable parts → Ford's assembly line; the power ladder; and why scaling up cuts prices.",
+    descKh: "សិប្បកម្មតាមផ្ទះ → គ្រឿងបន្លាស់របស់ Whitney → ខ្សែសង្វាក់របស់ Ford; ជណ្ដើរថាមពល; និងហេតុអ្វីការផលិតធំបន្ថយតម្លៃ។",
+    keywordsEn: ["mass production", "automation", "factory", "assembly line", "ford", "whitney", "interchangeable parts", "model t", "robotics", "industrial revolution", "economies of scale", "manufacturing"],
+    keywordsKh: ["រោងចក្រ", "ខ្សែសង្វាក់", "រ៉ូបូត", "ស្វ័យប្រវត្តិកម្ម", "ការផលិត", "Ford", "Whitney"],
   },
   {
     id: "tech-radio",
