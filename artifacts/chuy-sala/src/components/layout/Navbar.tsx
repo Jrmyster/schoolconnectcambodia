@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -164,6 +164,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Compass,
         descEn: "The Map of Thinking — a 7-branch interactive compass plus a deep dive into Buddhist Philosophy and the Four Noble Truths.",
         descKh: "ផែនទីនៃការគិតមាន ៧ មែកធាងអន្តរកម្ម ព្រមទាំងការជ្រៅជ្រះអំពីពុទ្ធសាសនទស្សនវិជ្ជា និងអរិយសច្ច៤។",
+      },
+      {
+        href: "/philosophy/language",
+        labelEn: "Language & Reality: Escaping the 'Is' Trap",
+        labelKh: "ភាសា និងការពិត៖ ការគេចចេញពីអន្ទាក់នៃពាក្យ 'គឺ'",
+        icon: Lock,
+        descEn: "Aristotelian language locks the world with the verb 'is'. Korzybski's Non-Aristotelian language (E-Prime) replaces it with action, perspective, and time — and gives us a translation matrix from rigid verdicts to honest observations.",
+        descKh: "ភាសាអារីស្តូតចាក់សោពិភពលោកដោយប្រើពាក្យ 'គឺ'។ ភាសាមិនមែនអារីស្តូតរបស់ Korzybski (E-Prime) ជំនួសវាដោយសកម្មភាព ទស្សនវិស័យ និងពេលវេលា — និងផ្តល់ឱ្យយើងនូវម៉ាទ្រីសបកប្រែពីការវិនិច្ឆ័យដាច់ខាត ទៅជាការសង្កេតស្មោះត្រង់។",
       },
       {
         href: "/study-center/sociology",

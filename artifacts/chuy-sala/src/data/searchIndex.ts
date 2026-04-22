@@ -7,7 +7,7 @@ import {
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
-  Cog, History, TrendingUp, Activity, Bug, Pill,
+  Cog, History, TrendingUp, Activity, Bug, Pill, Lock,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1413,6 +1413,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វិស្វកម្មក្នុងកម្រិតអូដ្ឋាតូម — នាណូប៉ូត ផ្លុំកាបូន និងម៉ាស៊ីនតូចៗ។",
     keywordsEn: ["nano", "nanotech", "nanotechnology", "nanobot", "carbon nanotube", "graphene", "miniature"],
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
+  },
+  {
+    id: "phil-language-reality",
+    href: "/philosophy/language",
+    icon: Lock,
+    titleEn: "Language & Reality: Escaping the 'Is' Trap",
+    titleKh: "ភាសា និងការពិត៖ ការគេចចេញពីអន្ទាក់នៃពាក្យ 'គឺ'",
+    categoryEn: "Philosophy", categoryKh: "ទស្សនវិជ្ជា",
+    descEn: "Aristotelian vs Non-Aristotelian language, the 'is' of identity, E-Prime, and a translation matrix for everyday verdicts.",
+    descKh: "ភាសាអារីស្តូត ធៀបនឹងភាសាមិនមែនអារីស្តូត 'គឺ' នៃអត្តសញ្ញាណ E-Prime និងម៉ាទ្រីសបកប្រែសម្រាប់ការវិនិច្ឆ័យប្រចាំថ្ងៃ។",
+    keywordsEn: ["language", "reality", "aristotle", "korzybski", "general semantics", "e-prime", "is", "identity", "map territory", "philosophy", "linguistics"],
+    keywordsKh: ["ភាសា", "ការពិត", "អារីស្តូត", "ទស្សនវិជ្ជា", "អត្ថន័យវិទ្យា", "អត្តសញ្ញាណ"],
   },
   {
     id: "sci-heisenberg",

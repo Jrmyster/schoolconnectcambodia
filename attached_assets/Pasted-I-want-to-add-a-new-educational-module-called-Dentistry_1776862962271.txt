@@ -1,0 +1,45 @@
+I want to add a new educational module called 'Dentistry & Orthodontics: Engineers of the Smile' (ទន្តសាស្ត្រ និងទន្តពេទ្យកែចង្កូម៖ វិស្វករនៃស្នាមញញឹម) to the Science section. Please implement the following cleanly:
+
+1. Routing & Navigation (ការកំណត់ផ្លូវ):
+
+Create a new component Dentistry.jsx.
+
+Register a new route: /science/dentistry.
+
+Add a link to the 'Science' dropdown labeled 'Dentistry & Orthodontics' with a tooth icon.
+
+2. Section 1: The Generalist vs. The Engineer (អ្នកឯកទេសទូទៅ និងវិស្វករ):
+
+Create a side-by-side comparison UI explaining the difference between the two professions:
+
+The Dentist (ទន្តពេទ្យ): The family doctor for your mouth. They focus on overall oral health: filling cavities, cleaning teeth, treating gum disease, and extracting wisdom teeth.
+
+The Orthodontist (ទន្តពេទ្យកែចង្កូម): The biomechanical engineer. They are dentists who went back to school for extra years to specialize strictly in the alignment of the jaw and teeth using braces, elastics, and aligners. Rule of thumb: All orthodontists are dentists, but not all dentists are orthodontists.
+
+3. Section 2: The Anatomy of a Tooth (កាយវិភាគសាស្ត្រនៃធ្មេញ):
+
+Build a visual cross-section of a tooth highlighting three main layers:
+
+Enamel (កាចាធ្មេញ): The hard, white outer shield. It is the hardest substance in the human body, even harder than bone!
+
+Dentin (ភ្លុកធ្មេញ): The softer, yellow layer underneath. If decay reaches here, your tooth becomes sensitive to cold and sweet foods.
+
+Pulp (បណ្តូលធ្មេញ): The living heart of the tooth, containing the nerves and blood vessels. If decay reaches here, it causes extreme pain.
+
+4. Section 3: The Career Pathway (ផ្លូវឆ្ពោះទៅកាន់អាជីពជាទន្តពេទ្យ):
+
+Below the science section, create a vertical 'Timeline' UI detailing the specific educational steps in Cambodia:
+
+Step 1: High School (វិទ្យាល័យ) - Excel in Biology, Chemistry, and Physics.
+
+Step 2: University Degree (សាកលវិទ្យាល័យ) - Complete a Doctor of Dental Surgery (DDS) degree. In Cambodia, this is an intensive 7-year program.
+
+Step 3: Licensing (អាជ្ញាប័ណ្ណ) - Pass the national exam to become a general dentist.
+
+Step 4: Orthodontic Specialization (ការសិក្សាឯកទេសកែចង្កូម) - To become an Orthodontist, you must complete an additional 3 years of rigorous residency training focused purely on facial bone mechanics.
+
+5. UI & Layout:
+
+Use a 'Clinical' aesthetic: clean whites, hygienic soft blues, and mint greens.
+
+Ensure all core concepts, headings, and steps are strictly bilingual (English/Khmer).
