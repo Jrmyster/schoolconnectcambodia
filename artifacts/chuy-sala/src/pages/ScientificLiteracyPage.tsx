@@ -23,6 +23,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
 import SkepticsChallenge from "@/components/SkepticsChallenge";
 import { GiantsOfScience } from "@/components/GiantsOfScience";
 import { ScientificTimeline } from "@/components/ScientificTimeline";
+import { EntomologyModule } from "@/components/widgets/EntomologyModule";
 
 // ── Scientific Method Data ──────────────────────────────────────────────────
 
@@ -1191,6 +1192,9 @@ export function ScientificLiteracyPage() {
         <ToolboxSection onProgress={setToolPts} />
 
         <NatureOfScienceSection />
+
+        {/* SCI-04 — Entomology: The Micro-Engineers of Cambodia (strict bilingual) */}
+        <EntomologyModule />
 
         <GiantsOfScience />
 
