@@ -5,6 +5,7 @@ import {
   FlaskConical, Beaker, TestTube, FlaskRound, Filter, Thermometer, Flame, Droplets, Eye, AlertTriangle,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { OrganicArchitecture3DModule } from "@/components/widgets/OrganicArchitecture3DModule";
 
 /* ══════════════════════════════════════════════════════════════════════════
  * Organic Chemistry 101 — គីមីសរីរាង្គមូលដ្ឋាន
@@ -74,6 +75,9 @@ export function OrganicChemistry101Page() {
 
         {/* ── Section 2: 3D Molecule Viewer ────────────────────── */}
         <MoleculeViewerSection />
+
+        {/* ── Section 2b: 3D Architecture (Isomers, Stereo, Chirality) ─ */}
+        <OrganicArchitecture3DModule />
 
         {/* ── Section 3: Chemistry in Cambodia ────────────────── */}
         <RealWorldSection />
