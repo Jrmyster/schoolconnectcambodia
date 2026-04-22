@@ -32,6 +32,7 @@ const HvacPage                  = lazy(() => import("@/pages/HvacPage"));
 const AviationPage              = lazy(() => import("@/pages/AviationPage"));
 const MusicTheoryPage           = lazy(() => import("@/pages/MusicTheoryPage"));
 const MathematicsPage           = lazy(() => import("@/pages/MathematicsPage"));
+const GeometryPage              = lazy(() => import("@/pages/GeometryPage"));
 const LogarithmsPage            = lazy(() => import("@/pages/LogarithmsPage").then(m => ({ default: m.LogarithmsPage })));
 const LimitsDerivativesPage     = lazy(() => import("@/pages/LimitsDerivativesPage").then(m => ({ default: m.LimitsDerivativesPage })));
 const IntegralsPage             = lazy(() => import("@/pages/IntegralsPage").then(m => ({ default: m.IntegralsPage })));
@@ -227,6 +228,7 @@ function Router() {
             <Route path="/aviation" component={AviationPage} />
             <Route path="/music-theory" component={MusicTheoryPage} />
             <Route path="/mathematics" component={MathematicsPage} />
+            <Route path="/mathematics/geometry" component={GeometryPage} />
             <Route path="/mathematics/logarithms" component={LogarithmsPage} />
             <Route path="/mathematics/limits-derivatives" component={LimitsDerivativesPage} />
             <Route path="/mathematics/integrals" component={IntegralsPage} />

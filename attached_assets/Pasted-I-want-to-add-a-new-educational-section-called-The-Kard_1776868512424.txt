@@ -1,0 +1,31 @@
+I want to add a new educational section called 'The Kardashev Scale: Measuring Cosmic Civilizations' (មាត្រដ្ឋានខាដាសេវ៖ ការវាស់វែងអរិយធម៌ចក្រវាល) to the 'Future of Intelligence & Economy' page. Please implement the following cleanly:
+
+1. The UI Layout (ចំណុចប្រទាក់ក្រាហ្វិក):
+
+Create a visually distinct section below the AI concepts.
+
+Use a 'Deep Space' aesthetic: dark void backgrounds with glowing neon blues and purples to represent stellar energy.
+
+Build a vertical 'Staircase' or 'Tiered' card layout for the three civilization types.
+
+2. Section 1: The Energy Ruler (បន្ទាត់វាស់ថាមពល):
+
+Explain the core concept proposed by Nikolai Kardashev in 1964: We shouldn't measure how advanced aliens or future humans are by their politics or art, but by raw physics. How much energy can they safely control?
+
+3. Section 2: The Three Types (ប្រភេទទាំងបី):
+
+Type I: The Planetary Master (ម្ចាស់ភព): A civilization that harnesses 100% of the energy hitting its planet from its parent star. They control the weather, mine the oceans, and use fusion power. Note: Humanity is currently only a Type 0.73! We still dig up dead plants (coal/oil) to burn for heat.
+
+Type II: The Stellar Master (ម្ចាស់តារា): A civilization that harnesses 100% of the energy output of a star. Introduce the concept of a Dyson Sphere (ស្វ៊ែរដាយសុន)—a massive swarm of solar panels built to completely enclose the Sun and capture all its light.
+
+Type III: The Galactic Master (ម្ចាស់កាឡាក់ស៊ី): A civilization that has spread across the stars and harnesses the energy of an entire galaxy, including the power of supermassive black holes.
+
+4. Section 3: The Great Transition (ការផ្លាស់ប្តូរដ៏អស្ចារ្យ):
+
+Explain why moving from Type 0 to Type I is the most dangerous time for any species. We have the technology to destroy ourselves (nuclear weapons, climate change), but we don't yet have the wisdom or the energy grid to save ourselves.
+
+Bilingual Note: 'Surviving the leap to a Type I civilization is the ultimate test of human intelligence. (ការរស់រានមានជីវិតពីការលោតផ្លោះទៅកាន់អរិយធម៌ប្រភេទទី ១ គឺជាការសាកល្បងដ៏ធំបំផុតនៃបញ្ញារបស់មនុស្ស។)'
+
+5. Interactivity:
+
+Include an interactive 'Civilization Tracker' bar that shows humanity slowly creeping from 0.1 (fire/wood) up toward 0.73 (modern day).

@@ -902,6 +902,34 @@ export const SEARCH_INDEX: SearchEntry[] = [
 
   // ── Mathematics sub-modules ──────────────────────────────────────
   {
+    id: "math-geometry",
+    href: "/mathematics/geometry",
+    icon: Sigma,
+    titleEn: "Geometry — Mapping the Physical World",
+    titleKh: "ធរណីមាត្រ — ការគូសផែនទីពិភពរូបវន្ត",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "Euclidean (flat) vs Non-Euclidean (curved) geometry, the Pythagorean theorem with a 3-4-5 right triangle, and a talking dictionary of 8 basic shapes (Circle, Square, Triangle, Rectangle, Sphere, Cube, Cylinder, Pyramid) for ESL pronunciation practice.",
+    descKh: "ធរណីមាត្រអឺគ្លីត (រាបស្មើ) ទល់នឹងមិនមែនអឺគ្លីត (កោង), ទ្រឹស្តីបទពីតាក័រជាមួយត្រីកោណកែង ៣-៤-៥ និងវចនានុក្រមនិយាយរូបរាង ៨ មូលដ្ឋាន (រង្វង់, ការ៉េ, ត្រីកោណ, ចតុកោណកែង, ស្វ៊ែរ, គូប, ស៊ីឡាំង, ពីរ៉ាមីត)។",
+    keywordsEn: [
+      "geometry", "euclidean", "non-euclidean", "non euclidean", "flat", "curved",
+      "pythagoras", "pythagorean", "pythagorean theorem", "right triangle", "hypotenuse",
+      "a squared plus b squared", "a^2+b^2=c^2",
+      "shapes", "shape", "circle", "square", "triangle", "rectangle",
+      "sphere", "cube", "cylinder", "pyramid",
+      "2d", "3d", "parallel lines", "longitude", "globe",
+      "speech", "pronunciation", "speak", "say it",
+    ],
+    keywordsKh: [
+      "ធរណីមាត្រ", "ធរណីមាត្រអឺគ្លីត", "ធរណីមាត្រមិនមែនអឺគ្លីត",
+      "រាបស្មើ", "កោង", "ផែនដី", "ប៉ូល",
+      "ពីតាក័រ", "ទ្រឹស្តីបទពីតាក័រ", "ត្រីកោណកែង", "អ៊ីប៉ូតេនុស",
+      "រូបរាង", "រង្វង់", "ការ៉េ", "ត្រីកោណ", "ចតុកោណកែង",
+      "ស្វ៊ែរ", "គូប", "ស៊ីឡាំង", "ពីរ៉ាមីត",
+      "បញ្ចេញសំឡេង", "និយាយ", "សំឡេង",
+    ],
+    type: "module",
+  },
+  {
     id: "math-arithmetic",
     href: "/mathematics#arithmetic",
     icon: Calculator,

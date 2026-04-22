@@ -373,6 +373,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ដំណើរ ៥ ផ្នែក៖ Trainer គណិតក្នុងក្បាល ១០ វិនាទី, ល្បែងជញ្ជីងពិជគណិត, ត្រីកោណកែងអូសបាន និងក្រាហ្វិកឡានដែលពន្យល់ derivative និង integral។",
       },
       {
+        href: "/mathematics/geometry",
+        labelEn: "Geometry & Space",
+        labelKh: "ធរណីមាត្រ និងលំហ",
+        icon: Sigma,
+        descEn: "Euclidean (flat) vs Non-Euclidean (curved) geometry, the Pythagorean theorem with a 3-4-5 right triangle, and a talking dictionary of 8 basic shapes for ESL pronunciation practice.",
+        descKh: "ធរណីមាត្រអឺគ្លីត (រាបស្មើ) ទល់នឹងមិនមែនអឺគ្លីត (កោង), ទ្រឹស្តីបទពីតាក័រជាមួយត្រីកោណកែង ៣-៤-៥ និងវចនានុក្រមនិយាយរូបរាង ៨ មូលដ្ឋានសម្រាប់ហ្វឹកហាត់ការនិយាយ។",
+      },
+      {
         href: "/mathematics/logarithms",
         labelEn: "Logarithms: The Scale of Nature",
         labelKh: "លោការីត៖ រង្វាស់នៃធម្មជាតិ",
