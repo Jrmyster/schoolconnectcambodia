@@ -1,0 +1,33 @@
+We have added a significant amount of new content and routing today. I need you to perform a comprehensive 'Master Audit' of the entire application to ensure structural integrity, secure routing, and flawless mobile responsiveness. Please execute the following checklist and fix any issues you find:
+
+1. The Routing & Link Security Audit:
+
+Broken Link Check: Scan the entire project for any broken <Link> tags or href attributes. Ensure every link in the top navigation, sidebar, and footer successfully resolves to an active component.
+
+New Route Verification: Confirm that recently added routes are properly registered in the main router (e.g., /screener, /science/entomology, /science/pharmacology).
+
+Catch-All (404) Setup: Ensure there is a secure * (Catch-All) route that gracefully redirects users to a friendly '404 - Page Not Found' screen if they type an invalid URL, rather than crashing the app or showing a blank white screen.
+
+2. Mobile UI & Responsiveness Optimization:
+
+Grid Collapse Validation: We added several complex grids today (Sociologists, US Holidays, The Periodic Table, Animal Classifications). Ensure that on mobile screens (max-width: 768px), these grids gracefully collapse into single columns or horizontally scrollable rows without breaking the page width.
+
+Touch Target Sizing: Ensure all interactive elements, particularly the new Web Speech API audio buttons (🔊) and the Grammar X-Ray tooltips, have a minimum touch target size of 44x44px so they are easily clickable on a phone screen.
+
+Bilingual Text Overflow: Khmer text often renders taller and wider than English text. Audit the newly added UI cards (especially the Philosophy Fallacies and Pharmacology steps) to ensure the text does not overflow its container or overlap adjacent elements on small screens.
+
+3. Global State & Interaction Cleanup:
+
+Active Navigation State: Verify the fix we applied to the navigation bar. Ensure the 'active' highlight strictly matches the current URL path without any 'ghost selections'.
+
+Speech API Overlap: Test the window.speechSynthesis implementations across the Glassware and Periodic Table sections to ensure rapid clicking strictly cancels previous audio and does not cause browser memory leaks.
+
+Search Index Integrity: Do a final validation that the global search array includes the newest pages and that the case-insensitive filtering logic operates without throwing errors.
+
+4. Console Warnings & Build Prep:
+
+Clear out any lingering console.log statements used for debugging.
+
+Resolve any React 'missing key' warnings in our mapped arrays (e.g., the parts of speech list or the animal classification arrays).
+
+Please output a brief summary of what specific bugs or layout issues were caught and fixed during this audit.
