@@ -1,0 +1,47 @@
+I want to add a new comprehensive educational module called 'Africa & The AU: The Giant Continent' (អាហ្វ្រិក និងសហភាពអាហ្វ្រិក៖ ទ្វីបដ៏ធំល្វឹងល្វើយ) to the Study Center section. Please implement the following cleanly:
+
+1. Routing & Navigation (ការកំណត់ផ្លូវ):
+
+Create a new component AfricaGeography.jsx.
+
+Register a new route: /study-center/africa.
+
+Add a link to the 'Study Center' dropdown labeled 'Africa & The AU' with a globe or map icon.
+
+2. Section 1: The Geography of Extremes (ភូមិសាស្ត្រនៃភាពអស្ចារ្យ):
+
+Create a visual layout explaining two massive geographical features:
+
+The Mediterranean Sea (សមុទ្រមេឌីទែរ៉ាណេ): The northern border of Africa, acting as the historical bridge and barrier between Africa and Europe.
+
+The Sahara Desert (វាលខ្សាច់សាហារ៉ា): The largest hot desert in the world. Add a mind-blowing 'Scale Fact': The Sahara Desert alone is almost the exact same size as the entire United States or China!
+
+3. Section 2: Demographics & Megacities (ប្រជាសាស្ត្រ និងទីក្រុងធំៗ):
+
+Create a 'Fast Facts' grid showcasing the human scale of the continent:
+
+Population: Over 1.4 billion people (the youngest, fastest-growing population on Earth).
+
+Countries: 54 fully recognized independent nations.
+
+Megacities: Highlight three major economic hubs with brief bilingual descriptions:
+
+Cairo, Egypt (កៃរ៉ូ, អេហ្ស៊ីប): The ancient gateway on the Nile.
+
+Lagos, Nigeria (ឡាកូស, នីហ្សេរីយ៉ា): The booming tech and financial capital of West Africa.
+
+Johannesburg, South Africa (ចូហានណេសបឺក, អាហ្វ្រិកខាងត្បូង): The economic engine of the south.
+
+4. Section 3: The African Union (សហភាពអាហ្វ្រិក):
+
+Introduce the AU (established in 2002, replacing the OAU).
+
+Explain its mission: Just like ASEAN or the EU, the AU's goal is to promote peace, integrate the economies of its 55 member states, and amplify the voice of Africa on the global stage.
+
+Bilingual Note: 'A united continent is stronger than 54 divided nations. (ទ្វីបដែលរួបរួមគ្នាគឺខ្លាំងជាងប្រជាជាតិចំនួន ៥៤ ដែលបែកបាក់គ្នា។)'
+
+5. UI & Layout:
+
+Use a vibrant, earthy aesthetic: warm terracotta, rich savanna golds, and deep greens, distinct from the blue/gold of the EU page.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer)

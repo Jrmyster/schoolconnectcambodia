@@ -1400,6 +1400,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["integral", "integrals", "integration", "antiderivative", "area under curve", "definite", "indefinite", "calculus", "math", "+C", "plus c"],
     keywordsKh: ["អាំងតេក្រាល", "អាំងតេក្រាលកំណត់", "អាំងតេក្រាលមិនកំណត់", "ផ្ទៃក្រោមខ្សែកោង", "Calculus", "គណិតវិទ្យា"],
   },
+  {
+    id: "math-advanced",
+    href: "/mathematics/advanced",
+    icon: Sigma,
+    titleEn: "Calculus III & Linear Algebra",
+    titleKh: "Calculus III និងពីជគណិតលីនេអ៊ែរ",
+    categoryEn: "Mathematics", categoryKh: "គណិតវិទ្យា",
+    descEn: "Partial derivatives as a mountain climber freezing one direction, plus vectors and matrices as machines that stretch, squash, and rotate the grid.",
+    descKh: "ដេរីវេដោយផ្នែកពន្យល់ជាអ្នកឡើងភ្នំដែលកក់ទិសមួយ ព្រមទាំងវ៉ិចទ័រ និងម៉ាទ្រីសជាម៉ាស៊ីនដែលទាញ សង្កត់ និងបង្វិលក្រឡា។",
+    keywordsEn: ["partial", "derivative", "derivatives", "calculus iii", "calc 3", "multivariable", "multi-variable", "linear algebra", "vector", "vectors", "matrix", "matrices", "transformation", "gradient", "math"],
+    keywordsKh: ["ដេរីវេដោយផ្នែក", "ពីជគណិតលីនេអ៊ែរ", "វ៉ិចទ័រ", "ម៉ាទ្រីស", "អថេរច្រើន", "Calculus", "គណិតវិទ្យា"],
+  },
 
   // ── TECHNOLOGY EXTRAS ─────────────────────────────────────────────
   {
