@@ -1,0 +1,56 @@
+I need to expand the data array for the 'Wildlife Explorer' component. Please add the following 12 new animals to the database.
+
+Please ensure each object strictly follows the current schema, including an appropriate 3D graphic/emoji, English name, Khmer translation, a short bilingual fun fact, and the new biological classification tags (phylum and class) we recently added.
+
+Data Objects to Add:
+
+Elephant (ដំរី): >    * Class: Mammal (Vertebrate)
+
+Fact: The largest land animal on Earth. (សត្វលើគោកធំជាងគេបំផុតនៅលើផែនដី។)
+
+Penguin (ភេនឃ្វីន): >    * Class: Bird (Vertebrate)
+
+Fact: A bird that cannot fly, but swims like a fish! (សត្វស្លាបដែលមិនអាចហោះហើរ ប៉ុន្តែហែលទឹកដូចត្រី!)
+
+Giraffe (សត្វកវែង): >    * Class: Mammal (Vertebrate)
+
+Fact: Its long neck has the exact same number of bones as a human neck—seven! (កដ៏វែងរបស់វាមានចំនួនឆ្អឹងស្មើគ្នានឹងកមនុស្សដែរ គឺប្រាំពីរ!)
+
+Polar Bear (ខ្លាឃ្មុំទឹកកក): >    * Class: Mammal (Vertebrate)
+
+Fact: Underneath their white fur, their skin is actually black to absorb heat. (នៅក្រោមរោមពណ៌សរបស់ពួកវា ស្បែកពិតជាមានពណ៌ខ្មៅដើម្បីស្រូបកំដៅ។)
+
+Crocodile (ក្រពើ): >    * Class: Reptile (Vertebrate)
+
+Fact: A cold-blooded predator that has survived since the time of the dinosaurs. (សត្វស៊ីសាច់ឈាមត្រជាក់ដែលរស់រានមានជីវិតតាំងពីសម័យដាយណូស័រ។)
+
+Orangutan (អូរ៉ង់អ៊ូតង់): >    * Class: Mammal (Vertebrate)
+
+Fact: Their name translates to 'Person of the Forest' in Malay. (ឈ្មោះរបស់ពួកវាប្រែថា 'មនុស្សព្រៃ' ជាភាសាម៉ាឡេ។)
+
+Jaguar (ខ្លាចាហ្កា): >    * Class: Mammal (Vertebrate)
+
+Fact: The apex predator of the Amazon rainforest. (សត្វរំពាដ៏ធំបំផុតនៃព្រៃអាម៉ាហ្សូន។)
+
+Gorilla (ហ្គោរីឡា): >    * Class: Mammal (Vertebrate)
+
+Fact: Highly intelligent apes that share 98% of their DNA with humans. (សត្វស្វាដ៏ឆ្លាតវៃដែលមាន DNA ៩៨% ដូចមនុស្ស។)
+
+Koala (កូឡា): >    * Class: Mammal (Vertebrate)
+
+Fact: They sleep up to 22 hours a day because eucalyptus leaves are hard to digest. (ពួកវាគេងរហូតដល់ ២២ ម៉ោងក្នុងមួយថ្ងៃ ព្រោះស្លឹកអឺកាលីបទុសពិបាករំលាយ។)
+
+Tiger (ខ្លាធំ): >    * Class: Mammal (Vertebrate)
+
+Fact: No two tigers have the same stripes; they are unique like fingerprints. (គ្មានខ្លាពីរដែលមានឆ្នូតដូចគ្នាទេ ពួកវាមានលក្ខណៈពិសេសដូចស្នាមម្រាមដៃ។)
+
+Rhinoceros (រមាស): >    * Class: Mammal (Vertebrate)
+
+Fact: Their horn is made of keratin, the exact same material as your fingernails! (ស្នែងរបស់វាធ្វើពីកេរ៉ាទីន ដែលជាសារធាតុដូចគ្នានឹងក្រចកដៃរបស់អ្នក!)
+
+Turtle (អណ្តើក): >    * Class: Reptile (Vertebrate)
+
+Fact: Its shell is actually part of its skeleton, grown out from its ribs. (ស្នូករបស់វាគឺជាផ្នែកនៃគ្រោងឆ្អឹង ដែលដុះចេញពីឆ្អឹងជំនីររបស់វា។)
+
+UI Verification:
+Ensure that the newly added biological filter buttons (Mammals, Birds, Reptiles) successfully filter this expanded array, so clicking 'Reptiles' only shows the Crocodile and Turtle.

@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { Volume2, Trees, Sparkles, Search, RotateCcw, X } from "lucide-react";
+import {
+  Volume2, Trees, Sparkles, Search, RotateCcw, X,
+  ChevronDown, ChevronUp, BookOpen,
+} from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
   speakText,
@@ -8,6 +11,11 @@ import {
 } from "@/lib/speech";
 
 type Tint = { bg: string; border: string; accent: string };
+
+type Phylum = "Vertebrate" | "Invertebrate";
+type AnimalClass =
+  | "Mammal" | "Bird" | "Fish" | "Reptile" | "Amphibian"
+  | "Insect" | "Arachnid" | "Crustacean" | "Mollusk" | "Annelid" | "Cnidarian";
 
 type Animal = {
   key: string;
@@ -18,7 +26,50 @@ type Animal = {
   factKh: string;
   imageUrl?: string;
   cardTint: Tint;
+  phylum: Phylum;
+  class: AnimalClass;
 };
+
+// Bilingual labels for each biological class — used by both the Learn panel
+// and the filter pills so they stay perfectly in sync.
+const CLASS_LABELS: Record<AnimalClass, { en: string; kh: string }> = {
+  Mammal:     { en: "Mammals",     kh: "ថនិកសត្វ" },
+  Bird:       { en: "Birds",       kh: "សត្វស្លាប" },
+  Fish:       { en: "Fish",        kh: "សត្វត្រី" },
+  Reptile:    { en: "Reptiles",    kh: "សត្វលូន" },
+  Amphibian:  { en: "Amphibians",  kh: "សត្វក្រឡើត" },
+  Insect:     { en: "Insects",     kh: "សត្វល្អិត" },
+  Arachnid:   { en: "Arachnids",   kh: "សត្វពីងពាង" },
+  Crustacean: { en: "Crustaceans", kh: "សត្វពួកបង្កង" },
+  Mollusk:    { en: "Mollusks",    kh: "សត្វពួកខ្យង" },
+  Annelid:    { en: "Annelids",    kh: "ដង្កូវ" },
+  Cnidarian:  { en: "Cnidarians",  kh: "សត្វពួកមេអំបៅសមុទ្រ" },
+};
+
+const PHYLUM_OF: Record<AnimalClass, Phylum> = {
+  Mammal: "Vertebrate", Bird: "Vertebrate", Fish: "Vertebrate",
+  Reptile: "Vertebrate", Amphibian: "Vertebrate",
+  Insect: "Invertebrate", Arachnid: "Invertebrate", Crustacean: "Invertebrate",
+  Mollusk: "Invertebrate", Annelid: "Invertebrate", Cnidarian: "Invertebrate",
+};
+
+type FilterKey = "all" | "phylum:Vertebrate" | "phylum:Invertebrate" | `class:${AnimalClass}`;
+
+// Pills shown below the search — order matches the Learn panel's branches.
+const FILTER_PILLS: Array<{ key: FilterKey; en: string; kh: string }> = [
+  { key: "all",                  en: "All",          kh: "ទាំងអស់" },
+  { key: "phylum:Vertebrate",    en: "Vertebrates",  kh: "សត្វមានឆ្អឹងកង" },
+  { key: "phylum:Invertebrate",  en: "Invertebrates", kh: "សត្វឥតឆ្អឹងកង" },
+  { key: "class:Mammal",         en: CLASS_LABELS.Mammal.en,     kh: CLASS_LABELS.Mammal.kh },
+  { key: "class:Bird",           en: CLASS_LABELS.Bird.en,       kh: CLASS_LABELS.Bird.kh },
+  { key: "class:Fish",           en: CLASS_LABELS.Fish.en,       kh: CLASS_LABELS.Fish.kh },
+  { key: "class:Reptile",        en: CLASS_LABELS.Reptile.en,    kh: CLASS_LABELS.Reptile.kh },
+  { key: "class:Amphibian",      en: CLASS_LABELS.Amphibian.en,  kh: CLASS_LABELS.Amphibian.kh },
+  { key: "class:Insect",         en: CLASS_LABELS.Insect.en,     kh: CLASS_LABELS.Insect.kh },
+  { key: "class:Arachnid",       en: CLASS_LABELS.Arachnid.en,   kh: CLASS_LABELS.Arachnid.kh },
+  { key: "class:Crustacean",     en: CLASS_LABELS.Crustacean.en, kh: CLASS_LABELS.Crustacean.kh },
+  { key: "class:Mollusk",        en: CLASS_LABELS.Mollusk.en,    kh: CLASS_LABELS.Mollusk.kh },
+];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Safari palette — cycled across cards for friendly visual variety.
@@ -35,7 +86,13 @@ const TINTS: Tint[] = [
   { bg: "bg-green-50",   border: "border-green-300",   accent: "bg-green-100"   },
 ];
 
-const ANIMALS: Animal[] = [
+// Raw entries — `phylum` and `class` may be omitted, in which case they
+// default to Vertebrate/Mammal. This lets future entries override per-row
+// without editing every existing animal.
+type AnimalSeed = Omit<Animal, "phylum" | "class"> &
+  Partial<Pick<Animal, "phylum" | "class">>;
+
+const ANIMALS_RAW: AnimalSeed[] = [
   { key: "donkey",   nameEn: "Donkey",   nameKh: "សត្វលា",      emoji: "🫏",
     factEn: "The donkey is a strong farm animal that loves to carry heavy loads.",
     factKh: "សត្វលា ជាសត្វចិញ្ចឹមដ៏រឹងមាំ ដែលចូលចិត្តដឹកអីវ៉ាន់ធ្ងន់។", cardTint: TINTS[0] },
@@ -115,6 +172,12 @@ const ANIMALS: Animal[] = [
     factKh: "កំប្រុកដី ជីករូងក្រោមដីស្ងួត ដើម្បីធ្វើជាផ្ទះ។", cardTint: TINTS[1] },
 ];
 
+// Apply the Vertebrate/Mammal default to every entry that doesn't override.
+const ANIMALS: Animal[] = ANIMALS_RAW.map((a) => {
+  const cls: AnimalClass = a.class ?? "Mammal";
+  return { ...a, class: cls, phylum: a.phylum ?? PHYLUM_OF[cls] };
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Inline SVG flags — emoji flags don't render on Windows or older Android.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -152,6 +215,61 @@ function FlagKH({ className = "w-5 h-3.5" }: { className?: string }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Backbone iconography — small inline SVGs used in the Learn panel.
+// SpineIcon: a vertical column of 5 vertebrae circles, suggesting a backbone.
+// NoSpineIcon: same spine with a diagonal red strike-through.
+// ─────────────────────────────────────────────────────────────────────────────
+function SpineIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" role="img">
+      <g fill="currentColor">
+        <ellipse cx="12" cy="3.5"  rx="3.5" ry="2" />
+        <ellipse cx="12" cy="8"    rx="3.5" ry="2" />
+        <ellipse cx="12" cy="12.5" rx="3.5" ry="2" />
+        <ellipse cx="12" cy="17"   rx="3.5" ry="2" />
+        <ellipse cx="12" cy="21.5" rx="3.5" ry="2" />
+      </g>
+    </svg>
+  );
+}
+
+function NoSpineIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true" role="img">
+      <g fill="currentColor" opacity="0.55">
+        <ellipse cx="12" cy="3.5"  rx="3.5" ry="2" />
+        <ellipse cx="12" cy="8"    rx="3.5" ry="2" />
+        <ellipse cx="12" cy="12.5" rx="3.5" ry="2" />
+        <ellipse cx="12" cy="17"   rx="3.5" ry="2" />
+        <ellipse cx="12" cy="21.5" rx="3.5" ry="2" />
+      </g>
+      {/* Strike-through */}
+      <line x1="3" y1="22" x2="21" y2="2" stroke="#dc2626" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// Bilingual chip used inside the Learn panel sub-groups (Mammals, Birds, …).
+function ClassChip({
+  cls, isKh, variant = "sky",
+}: { cls: AnimalClass; isKh: boolean; variant?: "sky" | "mint" }) {
+  const tone =
+    variant === "mint"
+      ? "bg-white border-emerald-300 text-emerald-900"
+      : "bg-white border-sky-300 text-sky-900";
+  return (
+    <li className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[11px] sm:text-xs font-bold ${tone}`}>
+      <span className={isKh ? "font-khmer" : ""}>
+        {isKh ? CLASS_LABELS[cls].kh : CLASS_LABELS[cls].en}
+      </span>
+      <span className={`opacity-60 ${!isKh ? "font-khmer" : ""}`}>
+        · {!isKh ? CLASS_LABELS[cls].kh : CLASS_LABELS[cls].en}
+      </span>
+    </li>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Page
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -163,6 +281,8 @@ export default function WildlifeExplorerPage() {
   const [khmerVoiceReady, setKhmerVoiceReady] = useState<boolean>(true);
   const [flippedKey, setFlippedKey] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [learnOpen, setLearnOpen] = useState<boolean>(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -192,27 +312,49 @@ export default function WildlifeExplorerPage() {
     }
   }
 
-  // Promote-to-top search: matching cards rise to the top, the rest stay in
-  // their original order below. Empty query → original order.
+  // Apply the classification filter first (Vertebrates, Mammals, etc.).
+  const filteredAnimals = useMemo(() => {
+    if (activeFilter === "all") return ANIMALS;
+    if (activeFilter.startsWith("phylum:")) {
+      const ph = activeFilter.slice("phylum:".length) as Phylum;
+      return ANIMALS.filter((a) => a.phylum === ph);
+    }
+    const cls = activeFilter.slice("class:".length) as AnimalClass;
+    return ANIMALS.filter((a) => a.class === cls);
+  }, [activeFilter]);
+
+  // Then apply promote-to-top search within that filtered set.
   const orderedAnimals = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return ANIMALS;
+    if (!q) return filteredAnimals;
     const matches: Animal[] = [];
     const rest: Animal[] = [];
-    for (const a of ANIMALS) {
+    for (const a of filteredAnimals) {
       const haystack = `${a.nameEn} ${a.nameKh} ${a.key}`.toLowerCase();
       if (haystack.includes(q)) matches.push(a); else rest.push(a);
     }
     return [...matches, ...rest];
-  }, [query]);
+  }, [query, filteredAnimals]);
 
   const matchCount = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return 0;
-    return ANIMALS.filter((a) =>
+    return filteredAnimals.filter((a) =>
       `${a.nameEn} ${a.nameKh} ${a.key}`.toLowerCase().includes(q),
     ).length;
-  }, [query]);
+  }, [query, filteredAnimals]);
+
+  // Counts shown on each filter pill — based on the full dataset, not the
+  // current filter (so users always see how many animals each branch holds).
+  const filterCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: ANIMALS.length };
+    counts["phylum:Vertebrate"] = ANIMALS.filter((a) => a.phylum === "Vertebrate").length;
+    counts["phylum:Invertebrate"] = ANIMALS.filter((a) => a.phylum === "Invertebrate").length;
+    for (const cls of Object.keys(CLASS_LABELS) as AnimalClass[]) {
+      counts[`class:${cls}`] = ANIMALS.filter((a) => a.class === cls).length;
+    }
+    return counts;
+  }, []);
 
   const t = useMemo(() => ({
     eyebrowEn: "Study Center · Vocabulary",
@@ -232,6 +374,38 @@ export default function WildlifeExplorerPage() {
     resultsHintKh: (n: number) => `សត្វ ${n} ត្រូវលើកមកកំពូល`,
     flipHintEn: "Tap the picture to flip back",
     flipHintKh: "ចុចលើរូបភាព ដើម្បីបង្វិលត្រឡប់",
+    // Learn panel
+    learnTitleEn: "Learn: Animal Classes",
+    learnTitleKh: "សិក្សា៖ ប្រភេទសត្វ",
+    learnSubtitleEn: "Two big branches of the animal kingdom",
+    learnSubtitleKh: "សាខាធំៗ ពីរនៃពពួកសត្វ",
+    learnExpandEn: "Show",
+    learnExpandKh: "បង្ហាញ",
+    learnCollapseEn: "Hide",
+    learnCollapseKh: "បិទ",
+    vertebrateEn: "Vertebrates",
+    vertebrateKh: "សត្វមានឆ្អឹងកង",
+    vertebrateDescEn: "Animals with a backbone",
+    vertebrateDescKh: "សត្វដែលមានឆ្អឹងកង",
+    invertebrateEn: "Invertebrates",
+    invertebrateKh: "សត្វឥតឆ្អឹងកង",
+    invertebrateDescEn: "Animals without a backbone",
+    invertebrateDescKh: "សត្វដែលគ្មានឆ្អឹងកង",
+    warmBloodedEn: "Warm-blooded",
+    warmBloodedKh: "មានឈាមក្តៅ",
+    coldBloodedEn: "Cold-blooded",
+    coldBloodedKh: "មានឈាមត្រជាក់",
+    arthropodsEn: "Arthropods",
+    arthropodsKh: "សត្វជើងភ្ជាប់",
+    otherInvertEn: "Other",
+    otherInvertKh: "ផ្សេងៗ",
+    // Filter
+    filterByEn: "Filter by classification",
+    filterByKh: "ច្រោះតាមការចាត់ថ្នាក់",
+    noMatchEn: "No animals in this group yet.",
+    noMatchKh: "មិនទាន់មានសត្វ ក្នុងក្រុមនេះទេ។",
+    clearFilterEn: "Show all animals",
+    clearFilterKh: "បង្ហាញសត្វទាំងអស់",
   }), []);
 
   return (
@@ -258,6 +432,147 @@ export default function WildlifeExplorerPage() {
           <p className={`mt-3 max-w-2xl text-base sm:text-lg text-emerald-900/80 ${isKh ? "font-khmer" : ""}`}>
             {isKh ? t.leadKh : t.leadEn}
           </p>
+        </div>
+      </section>
+
+      {/* Learn: Animal Classes — collapsible educational header */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-4" aria-labelledby="learn-panel-title">
+        <div className="max-w-5xl mx-auto">
+          <div className="rounded-3xl border-2 border-emerald-200 bg-white/85 shadow-sm overflow-hidden">
+            {/* Header row — always visible, click anywhere to toggle */}
+            <button
+              type="button"
+              onClick={() => setLearnOpen((o) => !o)}
+              aria-expanded={learnOpen}
+              aria-controls="learn-panel-body"
+              className="w-full flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-4 text-left bg-gradient-to-r from-sky-50 via-white to-emerald-50 hover:from-sky-100 hover:to-emerald-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+              data-testid="learn-panel-toggle"
+            >
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 shrink-0">
+                <BookOpen className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h2
+                  id="learn-panel-title"
+                  className={`font-display font-extrabold text-base sm:text-lg text-emerald-900 leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}
+                >
+                  {isKh ? t.learnTitleKh : t.learnTitleEn}
+                </h2>
+                <p className={`text-xs sm:text-sm text-emerald-800/75 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? t.learnSubtitleKh : t.learnSubtitleEn}
+                </p>
+              </div>
+              <span className={`hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-emerald-300 text-emerald-800 text-xs font-bold ${isKh ? "font-khmer" : ""}`}>
+                {learnOpen ? (isKh ? t.learnCollapseKh : t.learnCollapseEn) : (isKh ? t.learnExpandKh : t.learnExpandEn)}
+              </span>
+              {learnOpen
+                ? <ChevronUp   className="w-5 h-5 text-emerald-700 shrink-0" aria-hidden="true" />
+                : <ChevronDown className="w-5 h-5 text-emerald-700 shrink-0" aria-hidden="true" />}
+            </button>
+
+            {/* Body — Vertebrate vs Invertebrate, side-by-side on >=md, stacked on mobile */}
+            {learnOpen && (
+              <div id="learn-panel-body" className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 p-3 sm:p-4">
+                {/* VERTEBRATES — cool blue */}
+                <div
+                  className="rounded-2xl border-2 border-sky-300 bg-sky-50 p-4"
+                  data-testid="learn-vertebrate"
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white border-2 border-sky-300 text-sky-700 shrink-0">
+                      <SpineIcon className="w-6 h-6" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className={`font-display font-extrabold text-lg text-sky-900 leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}>
+                        {isKh ? t.vertebrateKh : t.vertebrateEn}
+                      </h3>
+                      <p className={`text-xs sm:text-sm text-sky-800/85 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+                        {isKh ? t.vertebrateDescKh : t.vertebrateDescEn}
+                      </p>
+                      <p className={`text-[11px] sm:text-xs text-sky-700/70 mt-0.5 ${!isKh ? "font-khmer" : ""}`}>
+                        {!isKh ? t.vertebrateKh : t.vertebrateEn}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Warm-blooded sub-group */}
+                  <div className="rounded-xl bg-white/70 border border-sky-200 p-2.5 mb-2">
+                    <div className={`text-[11px] font-bold uppercase tracking-wider text-sky-800/80 mb-1.5 flex items-center gap-1.5 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <span aria-hidden="true">🔥</span>
+                      <span>{isKh ? t.warmBloodedKh : t.warmBloodedEn}</span>
+                    </div>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0">
+                      {(["Mammal", "Bird"] as AnimalClass[]).map((c) => (
+                        <ClassChip key={c} cls={c} isKh={isKh} />
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Cold-blooded sub-group */}
+                  <div className="rounded-xl bg-white/70 border border-sky-200 p-2.5">
+                    <div className={`text-[11px] font-bold uppercase tracking-wider text-sky-800/80 mb-1.5 flex items-center gap-1.5 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <span aria-hidden="true">❄️</span>
+                      <span>{isKh ? t.coldBloodedKh : t.coldBloodedEn}</span>
+                    </div>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0">
+                      {(["Fish", "Reptile", "Amphibian"] as AnimalClass[]).map((c) => (
+                        <ClassChip key={c} cls={c} isKh={isKh} />
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* INVERTEBRATES — soft mint */}
+                <div
+                  className="rounded-2xl border-2 border-emerald-300 bg-emerald-50 p-4"
+                  data-testid="learn-invertebrate"
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white border-2 border-emerald-300 text-emerald-700 shrink-0">
+                      <NoSpineIcon className="w-6 h-6" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className={`font-display font-extrabold text-lg text-emerald-900 leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}>
+                        {isKh ? t.invertebrateKh : t.invertebrateEn}
+                      </h3>
+                      <p className={`text-xs sm:text-sm text-emerald-800/85 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+                        {isKh ? t.invertebrateDescKh : t.invertebrateDescEn}
+                      </p>
+                      <p className={`text-[11px] sm:text-xs text-emerald-700/70 mt-0.5 ${!isKh ? "font-khmer" : ""}`}>
+                        {!isKh ? t.invertebrateKh : t.invertebrateEn}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Arthropods sub-group */}
+                  <div className="rounded-xl bg-white/70 border border-emerald-200 p-2.5 mb-2">
+                    <div className={`text-[11px] font-bold uppercase tracking-wider text-emerald-800/80 mb-1.5 flex items-center gap-1.5 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <span aria-hidden="true">🦀</span>
+                      <span>{isKh ? t.arthropodsKh : t.arthropodsEn}</span>
+                    </div>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0">
+                      {(["Insect", "Arachnid", "Crustacean"] as AnimalClass[]).map((c) => (
+                        <ClassChip key={c} cls={c} isKh={isKh} variant="mint" />
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Other invertebrates */}
+                  <div className="rounded-xl bg-white/70 border border-emerald-200 p-2.5">
+                    <div className={`text-[11px] font-bold uppercase tracking-wider text-emerald-800/80 mb-1.5 flex items-center gap-1.5 ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                      <span aria-hidden="true">🐌</span>
+                      <span>{isKh ? t.otherInvertKh : t.otherInvertEn}</span>
+                    </div>
+                    <ul className="flex flex-wrap gap-1.5 list-none p-0">
+                      {(["Mollusk", "Annelid", "Cnidarian"] as AnimalClass[]).map((c) => (
+                        <ClassChip key={c} cls={c} isKh={isKh} variant="mint" />
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
@@ -305,9 +620,93 @@ export default function WildlifeExplorerPage() {
         </div>
       </section>
 
+      {/* Filter pills — biological classification */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-4" aria-labelledby="filter-pills-label">
+        <div className="max-w-5xl mx-auto">
+          <div
+            id="filter-pills-label"
+            className={`text-[11px] font-bold uppercase tracking-wider text-emerald-800/70 mb-2 text-center ${isKh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+          >
+            {isKh ? t.filterByKh : t.filterByEn}
+          </div>
+          <div
+            className="flex flex-wrap justify-center gap-1.5 sm:gap-2"
+            role="group"
+            aria-label={isKh ? t.filterByKh : t.filterByEn}
+            data-testid="wildlife-filter-pills"
+          >
+            {FILTER_PILLS.map((pill) => {
+              const count = filterCounts[pill.key] ?? 0;
+              const active = activeFilter === pill.key;
+              const empty = count === 0;
+              const isPhylum = pill.key.startsWith("phylum:");
+              const isVert = pill.key === "phylum:Vertebrate";
+              const isInvert = pill.key === "phylum:Invertebrate";
+
+              // Color-coded by branch — sky for vertebrates, mint for invertebrates,
+              // amber for "All", neutral for class chips.
+              const activeClass = isVert
+                ? "bg-sky-600 text-white border-sky-700"
+                : isInvert
+                  ? "bg-emerald-600 text-white border-emerald-700"
+                  : pill.key === "all"
+                    ? "bg-amber-500 text-white border-amber-600"
+                    : "bg-emerald-700 text-white border-emerald-800";
+
+              const idleClass = empty
+                ? "bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed"
+                : isVert
+                  ? "bg-white text-sky-900 border-sky-300 hover:bg-sky-50 hover:border-sky-500"
+                  : isInvert
+                    ? "bg-white text-emerald-900 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-500"
+                    : "bg-white text-emerald-900 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-400";
+
+              return (
+                <button
+                  key={pill.key}
+                  type="button"
+                  onClick={() => { if (!empty) setActiveFilter(pill.key); }}
+                  disabled={empty && !active}
+                  aria-pressed={active}
+                  aria-label={`${isKh ? pill.kh : pill.en} (${count})`}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 text-xs sm:text-sm font-bold transition active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${active ? activeClass : idleClass} ${isPhylum ? "ring-1 ring-inset" : ""}`}
+                  data-testid={`filter-pill-${pill.key.replace(":", "-")}`}
+                  data-active={active ? "true" : "false"}
+                >
+                  {isVert   && <SpineIcon className="w-3.5 h-3.5" />}
+                  {isInvert && <NoSpineIcon className="w-3.5 h-3.5" />}
+                  <span className={isKh ? "font-khmer" : ""}>{isKh ? pill.kh : pill.en}</span>
+                  <span className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-[10px] font-bold ${active ? "bg-white/25 text-white" : "bg-emerald-100 text-emerald-800"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Flashcard grid */}
       <section className="px-4 sm:px-6 lg:px-8 pb-16">
         <div className="max-w-6xl mx-auto">
+          {orderedAnimals.length === 0 ? (
+            <div
+              className="rounded-3xl border-2 border-dashed border-emerald-300 bg-white/70 p-8 text-center"
+              data-testid="wildlife-empty-state"
+            >
+              <p className={`text-emerald-900 font-bold ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? t.noMatchKh : t.noMatchEn}
+              </p>
+              <button
+                type="button"
+                onClick={() => setActiveFilter("all")}
+                className={`mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-600 text-white text-sm font-bold shadow-sm hover:bg-emerald-700 active:scale-95 transition ${isKh ? "font-khmer" : ""}`}
+                data-testid="wildlife-empty-clear"
+              >
+                {isKh ? t.clearFilterKh : t.clearFilterEn}
+              </button>
+            </div>
+          ) : (
           <ul
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 list-none p-0"
             aria-label={isKh ? "កាតវាក្យសព្ទសត្វព្រៃ" : "Wildlife vocabulary cards"}
@@ -428,6 +827,7 @@ export default function WildlifeExplorerPage() {
               );
             })}
           </ul>
+          )}
 
           <div className={`mt-8 max-w-2xl mx-auto text-center text-sm text-emerald-900/70 flex items-center justify-center gap-2 ${isKh ? "font-khmer" : ""}`}>
             <Sparkles className="w-4 h-4 text-emerald-600" aria-hidden="true" />
