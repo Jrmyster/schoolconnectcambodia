@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -574,6 +574,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Gamepad2,
         descEn: "Race a CPU against a GPU painting pixels, follow the Input → Update → Render game loop, and watch a 3D head get built from triangles, textures, and light.",
         descKh: "ប្រណាំង CPU ប្រឆាំងនឹង GPU ក្នុងការគូរភីកសែល ដើរតាមវដ្តហ្គេម និងមើលក្បាល 3D ត្រូវសាងសង់ពីត្រីកោណ វាយនភាព និងពន្លឺ។",
+      },
+      {
+        href: "/technology/radio",
+        labelEn: "Radio & Waves: Catching Invisible Signals",
+        labelKh: "វិទ្យុ និងរលក៖ ការចាប់យកសញ្ញាអរូបិយ",
+        icon: Radio,
+        descEn: "Place radio waves on the electromagnetic spectrum, follow the transmitter–receiver loop from a DJ's microphone to your speaker, meet Marconi & Tesla, and compare AM (long range, more static) vs FM (short range, crystal clear).",
+        descKh: "ដាក់រលកវិទ្យុលើវិសាលគមអេឡិចត្រូម៉ាញ៉េទិច ដើរតាមវដ្តឧបករណ៍បញ្ជូន–ឧបករណ៍ទទួល ពីមីក្រូ DJ ដល់ឧបករណ៍បំពងសំឡេងរបស់អ្នក ជួប Marconi និង Tesla និងប្រៀបធៀប AM (ឆ្ងាយ សំឡេងរំខានច្រើន) ទល់នឹង FM (ខ្លី សំឡេងច្បាស់ដូចគ្រីស្តាល់)។",
       },
       {
         href: "/technology/radar",

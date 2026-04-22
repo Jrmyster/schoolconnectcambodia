@@ -1,0 +1,45 @@
+I want to add a new educational module called 'Radio Technology: Catching Invisible Waves' (បច្ចេកវិទ្យាវិទ្យុ៖ ការចាប់យករលកអរូបិយ) to the Technology section. Please implement the following cleanly:
+
+1. Routing & Navigation:
+
+Create a new component RadioTech.jsx (or .tsx).
+
+Register a new route: /technology/radio.
+
+Add a link to the 'Technology' dropdown in the top navigation labeled 'Radio & Waves' with a radio or antenna icon.
+
+2. Section 1: The Electromagnetic Spectrum (វិសាលគមអេឡិចត្រូម៉ាញ៉េទិច):
+
+Create a visual UI (like a horizontal bar chart) showing the Electromagnetic Spectrum.
+
+Highlight that Radio Waves are at the very bottom: they have the lowest frequency and the longest wavelength (some as big as buildings!). This is why they can travel through walls and across cities.
+
+Bilingual Note: 'Radio waves are a type of invisible light. (រលកវិទ្យុគឺជាប្រភេទពន្លឺដែលមើលមិនឃើញ។)'
+
+3. Section 2: Transmitters & Receivers (ឧបករណ៍បញ្ជូន និងឧបករណ៍ទទួល):
+
+Explain the core loop:
+
+Transmitter (អ្នកបញ្ជូន): Takes a sound (like a DJ speaking), turns it into an electrical signal, and pushes it up an antenna to create a radio wave.
+
+Receiver (អ្នកទទួល): The antenna on your radio catches that specific wave, and turns the electricity back into sound through a speaker.
+
+Add a brief history box: Mention Guglielmo Marconi (and Nikola Tesla) developing the first long-distance radio communication in the late 1890s.
+
+4. Section 3: AM vs. FM (ការប្រៀបធៀប AM និង FM):
+
+Create a side-by-side comparison card explaining how we 'hide' music inside a wave (Modulation).
+
+AM (Amplitude Modulation / ការកែប្រែអំព្លីទុត): We change the height of the wave to match the sound.
+
+Pros/Cons: Travels very far (over mountains), but gets static/interference easily from thunderstorms.
+
+FM (Frequency Modulation / ការកែប្រែប្រេកង់): We change the speed/spacing of the wave to match the sound.
+
+Pros/Cons: Shorter distance, but the sound quality is incredibly clear.
+
+5. UI & Layout:
+
+Maintain a clean, technical aesthetic. Use dynamic wave graphics or icons if possible.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

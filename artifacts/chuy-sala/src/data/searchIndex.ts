@@ -6,7 +6,7 @@ import {
   Sigma, Music, Plane, Bot, Camera, Magnet, Wrench, Fuel, Thermometer,
   Gamepad2, HeartPulse, Leaf, Library, Compass, CloudRain, Shield, Bike,
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
-  Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages,
+  Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio,
   Cog, History, TrendingUp, Activity, Bug, Pill,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -1413,6 +1413,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វិស្វកម្មក្នុងកម្រិតអូដ្ឋាតូម — នាណូប៉ូត ផ្លុំកាបូន និងម៉ាស៊ីនតូចៗ។",
     keywordsEn: ["nano", "nanotech", "nanotechnology", "nanobot", "carbon nanotube", "graphene", "miniature"],
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
+  },
+  {
+    id: "tech-radio",
+    href: "/technology/radio",
+    icon: Radio,
+    titleEn: "Radio & Waves",
+    titleKh: "វិទ្យុ និងរលក",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "Radio waves on the EM spectrum, transmitter–receiver loop, Marconi & Tesla, and AM vs FM modulation.",
+    descKh: "រលកវិទ្យុលើវិសាលគម EM វដ្តឧបករណ៍បញ្ជូន–ឧបករណ៍ទទួល Marconi និង Tesla និង AM ទល់នឹង FM។",
+    keywordsEn: ["radio", "waves", "am", "fm", "modulation", "antenna", "transmitter", "receiver", "marconi", "tesla", "frequency", "wavelength", "electromagnetic", "spectrum", "broadcast"],
+    keywordsKh: ["វិទ្យុ", "រលក", "ប្រេកង់", "អង់តែន", "ឧបករណ៍បញ្ជូន", "ឧបករណ៍ទទួល", "AM", "FM"],
   },
   {
     id: "tech-radar",
