@@ -15,6 +15,12 @@ import {
   Sparkles,
   Building2,
   Mountain,
+  BarChart3,
+  Users,
+  Target,
+  FlaskConical,
+  CheckCircle2,
+  AlertTriangle,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
@@ -245,6 +251,25 @@ export default function MathematicsPage() {
         <SequenceVsSeriesCard isKh={isKh} />
         <ZenoParadoxCard isKh={isKh} />
         <HarmonicTrapCard isKh={isKh} />
+      </Section>
+
+      {/* ── 8. Statistics ────────────────────────────────────────────── */}
+      <Section
+        id="statistics"
+        eyebrowEn="08 · Truth in Data"
+        eyebrowKh="០៨ · ការពិតក្នុងទិន្នន័យ"
+        titleEn="Statistics — finding truth in data"
+        titleKh="ស្ថិតិ — ការស្វែងរកការពិតក្នុងទិន្នន័យ"
+        khTerm="ស្ថិតិ"
+        descEn={
+          "Statistics is the art of squeezing a story out of a pile of numbers — what is normal, how spread out things are, and whether a result is real or just a lucky accident. It is the language scientists, doctors, and economists all share when they argue about evidence."
+        }
+        descKh="ស្ថិតិគឺជាសិល្បៈនៃការច្របាច់រឿងមួយចេញពីគំនរលេខ — អ្វីដែលធម្មតា លាតសន្ធឹងប៉ុណ្ណា និងថាតើលទ្ធផលមួយពិត ឬគ្រាន់តែជាគ្រោះល្អដោយចៃដន្យ។ វាគឺជាភាសាដែលអ្នកវិទ្យាសាស្ត្រ វេជ្ជបណ្ឌិត និងអ្នកសេដ្ឋកិច្ច ប្រើរួមគ្នា ពេលពួកគេឈ្លោះគ្នាពីភ័ស្តុតាង។"
+        isKh={isKh}
+      >
+        <FindingTheMiddleCard isKh={isKh} />
+        <StandardDeviationCard isKh={isKh} />
+        <PValueCard isKh={isKh} />
       </Section>
 
       {/* ── Closing ──────────────────────────────────────────────────── */}
@@ -2869,5 +2894,400 @@ function ScopedStyles() {
         color: transparent;
       }
     `}</style>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  8. Statistics — Finding the Middle / Spread / P-Value
+// ════════════════════════════════════════════════════════════════════════════
+
+function StatChip({ label, value, color = "blue" }: { label: string; value: string; color?: "blue" | "amber" | "rose" | "emerald" }) {
+  const colors = {
+    blue:    { bg: "bg-blue-50",    bd: "border-blue-300",    tx: "text-blue-700" },
+    amber:   { bg: "bg-amber-50",   bd: "border-amber-300",   tx: "text-amber-700" },
+    rose:    { bg: "bg-rose-50",    bd: "border-rose-300",    tx: "text-rose-700" },
+    emerald: { bg: "bg-emerald-50", bd: "border-emerald-300", tx: "text-emerald-700" },
+  }[color];
+  return (
+    <div className={`inline-flex items-baseline gap-1.5 rounded-md border px-2 py-1 text-xs font-mono ${colors.bg} ${colors.bd} ${colors.tx}`}>
+      <span className="opacity-70">{label}</span>
+      <span className="font-bold">{value}</span>
+    </div>
+  );
+}
+
+// ─── Section 1: Finding the Middle ─────────────────────────────────────────
+
+function FindingTheMiddleCard({ isKh }: { isKh: boolean }) {
+  // Worked example: heights of 7 students (cm)
+  const heights = [142, 148, 150, 152, 152, 158, 165];
+  const sorted = [...heights].sort((a, b) => a - b);
+  const N = heights.length;
+  const sum = heights.reduce((a, b) => a + b, 0);
+  const mean = sum / N;
+  const median = sorted[Math.floor(N / 2)];
+  const mode = 152; // appears twice
+
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="stats-middle">
+      <div className="flex items-center gap-2 mb-2 text-blue-700 text-xs font-bold uppercase tracking-widest">
+        <Target className="w-3.5 h-3.5" />
+        <span className={isKh ? "font-khmer normal-case tracking-normal" : ""}>
+          {isKh ? "មេរៀនរង ៨.១" : "Sub-lesson 8.1"}
+        </span>
+      </div>
+      <h3 className={`font-display font-bold text-xl sm:text-2xl text-slate-900 mb-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh ? "ការស្វែងរកចំណុចកណ្តាល" : "Finding the Middle"}
+        {!isKh && <span className="ml-2 font-khmer text-sm font-normal text-slate-500">(ការស្វែងរកចំណុចកណ្តាល)</span>}
+      </h3>
+      <p className={`text-sm text-slate-700 mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "នៅពេលអ្នកមានគំនរលេខមួយ សំណួរទីមួយគឺតែងតែ ៖ « តើលេខមួយណាជាតំណាងពួកគេទាំងអស់? » ស្ថិតិមានបី «M» ដើម្បីឆ្លើយ ៖ Mean, Median, Mode។"
+          : "When you have a pile of numbers, the first question is always: \"which one number stands in for them all?\" Statistics has three different M's that answer this — Mean, Median, and Mode."}
+      </p>
+
+      {/* Worked dataset strip */}
+      <div className="mb-5 rounded-xl border border-blue-200 bg-blue-50/40 p-3">
+        <div className={`text-[11px] font-bold uppercase tracking-widest text-blue-700 mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "សំណាក ៖ កំពស់សិស្ស ៧ នាក់ (សម)" : "Sample · 7 students' heights (cm)"}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {sorted.map((h, i) => (
+            <span
+              key={i}
+              className={`inline-flex items-center justify-center w-12 h-12 rounded-lg font-mono font-bold text-sm ${
+                h === mode ? "bg-rose-100 border-2 border-rose-400 text-rose-800" : "bg-white border border-blue-300 text-blue-900"
+              }`}
+            >
+              {h}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* MEAN */}
+        <div className="rounded-xl border border-blue-300 bg-white p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-blue-600 text-white font-bold text-sm">M</span>
+            <h4 className={`font-bold text-lg text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "មធ្យមនព្វន្ធ" : "Mean"}
+            </h4>
+          </div>
+          <div className={`text-[11px] font-mono uppercase tracking-widest text-blue-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? "« លេខចែករំលែក »" : "the \"sharing\" number"}
+          </div>
+          <p className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "បូកអ្វីៗទាំងអស់ ហើយចែកស្មើៗគ្នា — ដូចជាប្រសិនបើមនុស្សគ្រប់គ្នាឲ្យកំពស់របស់ខ្លួនទៅគំនរ ហើយចែកវិញឲ្យស្មើៗគ្នា។"
+              : "Add everything up and divide it evenly — as if everyone threw their height into a pile and shared it back out equally."}
+          </p>
+          <div className="rounded-md bg-blue-50 border border-blue-200 p-2 text-center">
+            <BlockMath math="\mu = \frac{\sum x_i}{N}" />
+          </div>
+          <div className="mt-3 text-xs text-slate-700 space-y-1">
+            <div className={isKh ? "font-khmer leading-loose" : ""}>
+              <strong>{isKh ? "គណនា ៖ " : "Compute: "}</strong>
+              <span className="font-mono">({sum}) ÷ {N} = <strong className="text-blue-800">{mean.toFixed(2)} cm</strong></span>
+            </div>
+          </div>
+        </div>
+
+        {/* MEDIAN */}
+        <div className="rounded-xl border border-emerald-300 bg-white p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-emerald-600 text-white font-bold text-sm">M</span>
+            <h4 className={`font-bold text-lg text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "ម៉េដ្យាន" : "Median"}
+            </h4>
+          </div>
+          <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? "« លេខតម្រៀបជួរ »" : "the \"line-up\" number"}
+          </div>
+          <p className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "តម្រៀបមនុស្សគ្រប់គ្នាពីទាបទៅខ្ពស់ ហើយជ្រើសរើសអ្នកដែលឈរនៅកណ្តាលច្បាស់។ មិនរងឥទ្ធិពលដោយលេខខ្លាំងនៅចុងទាំងសងខាងឡើយ។"
+              : "Put everyone in order from shortest to tallest, and pick the person standing exactly in the middle. Extreme values at either end can't pull it around."}
+          </p>
+          <div className="rounded-md bg-emerald-50 border border-emerald-200 p-2 text-center text-xs font-mono">
+            {sorted.map((h, i) => (
+              <span
+                key={i}
+                className={`inline-block mx-0.5 px-1.5 py-0.5 rounded ${
+                  i === Math.floor(N / 2) ? "bg-emerald-600 text-white font-bold" : "text-emerald-900"
+                }`}
+              >
+                {h}
+              </span>
+            ))}
+          </div>
+          <div className="mt-3 text-xs text-slate-700">
+            <strong>{isKh ? "មនុស្សកណ្តាល ៖ " : "Middle person: "}</strong>
+            <span className="font-mono"><strong className="text-emerald-800">{median} cm</strong></span>
+          </div>
+        </div>
+
+        {/* MODE */}
+        <div className="rounded-xl border border-rose-300 bg-white p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-md bg-rose-600 text-white font-bold text-sm">M</span>
+            <h4 className={`font-bold text-lg text-slate-900 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "ម៉ូដ" : "Mode"}
+            </h4>
+          </div>
+          <div className={`text-[11px] font-mono uppercase tracking-widest text-rose-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? "« លេខពេញនិយម »" : "the \"popular\" number"}
+          </div>
+          <p className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "តម្លៃដែលលេចឡើងច្រើនជាងគេ។ មានប្រយោជន៍សម្រាប់របស់ដែលមិនមែនជាលេខផងដែរ — ដូចជា « ពណ៌ដែលគេលក់ដាច់បំផុត » ឬ « ទំហំស្បែកជើងពេញនិយមបំផុត »។"
+              : "The value that shows up the most often. Useful for non-numbers too — \"the most common shirt size,\" \"the bestselling colour.\""}
+          </p>
+          <div className="rounded-md bg-rose-50 border border-rose-200 p-2 text-center">
+            <span className="font-mono text-sm">
+              152 <strong className="text-rose-700">×2</strong> &nbsp; · &nbsp;
+              <span className="opacity-60">others ×1</span>
+            </span>
+          </div>
+          <div className="mt-3 text-xs text-slate-700">
+            <strong>{isKh ? "តម្លៃពេញនិយម ៖ " : "Most common: "}</strong>
+            <span className="font-mono"><strong className="text-rose-800">{mode} cm</strong></span>
+          </div>
+        </div>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ─── Section 2: Standard Deviation ─────────────────────────────────────────
+
+function StandardDeviationCard({ isKh }: { isKh: boolean }) {
+  const A = [70, 70, 70];
+  const B = [100, 40, 70];
+  const meanA = A.reduce((a, b) => a + b, 0) / A.length;
+  const meanB = B.reduce((a, b) => a + b, 0) / B.length;
+  const sdA = Math.sqrt(A.reduce((s, x) => s + (x - meanA) ** 2, 0) / A.length);
+  const sdB = Math.sqrt(B.reduce((s, x) => s + (x - meanB) ** 2, 0) / B.length);
+
+  function ScoreBar({
+    scores, mean, sd, label, color,
+  }: { scores: number[]; mean: number; sd: number; label: string; color: "emerald" | "rose" }) {
+    const tone = color === "emerald"
+      ? { bd: "border-emerald-300", bg: "bg-emerald-50", chip: "bg-emerald-600", text: "text-emerald-800", soft: "bg-emerald-100" }
+      : { bd: "border-rose-300",    bg: "bg-rose-50",    chip: "bg-rose-600",    text: "text-rose-800",    soft: "bg-rose-100" };
+    return (
+      <div className={`rounded-xl border ${tone.bd} ${tone.bg} p-4`}>
+        <div className="flex items-center justify-between mb-2 flex-wrap gap-1">
+          <h5 className={`font-bold text-slate-900 ${isKh ? "font-khmer" : ""}`}>{label}</h5>
+          <span className={`text-[11px] font-mono uppercase tracking-widest ${tone.text}`}>
+            μ = {mean.toFixed(0)} · σ = {sd.toFixed(1)}
+          </span>
+        </div>
+
+        {/* number axis 0-100 */}
+        <div className="relative h-14 mb-2">
+          <div className="absolute inset-x-0 bottom-3 h-px bg-slate-300" />
+          {[0, 25, 50, 75, 100].map((t) => (
+            <div key={t} className="absolute bottom-2 -translate-x-1/2 text-[9px] font-mono text-slate-500" style={{ left: `${t}%` }}>
+              <div className="w-px h-2 bg-slate-300 mx-auto mb-0.5" />
+              {t}
+            </div>
+          ))}
+          {/* mean marker */}
+          <div className="absolute top-0 bottom-3 w-px bg-slate-700/40" style={{ left: `${mean}%` }}>
+            <div className="absolute -top-0 -translate-x-1/2 text-[9px] font-mono text-slate-700 whitespace-nowrap">μ</div>
+          </div>
+          {/* score dots */}
+          {scores.map((s, i) => (
+            <div
+              key={i}
+              className={`absolute top-5 -translate-x-1/2 w-6 h-6 rounded-full ${tone.chip} text-white text-[10px] font-mono font-bold flex items-center justify-center shadow`}
+              style={{ left: `${s}%` }}
+              title={`${s}%`}
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+
+        <div className={`text-xs text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {color === "emerald"
+            ? (isKh
+                ? "ពិន្ទុទាំងបីចង់ឋិតនៅជិតមធ្យម → គម្លាតស្តង់ដារតូច → សិស្សដែលមានស្ថេរភាព។"
+                : "All three scores cluster tightly around the mean → low standard deviation → a consistent student.")
+            : (isKh
+                ? "ពិន្ទុទាំងបីលោតទៅឆ្ងាយពីមធ្យម → គម្លាតស្តង់ដារធំ → លទ្ធផលច្របូកច្របល់។"
+                : "Scores leap far away from the mean → high standard deviation → chaotic, unpredictable performance.")}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="stats-spread">
+      <div className="flex items-center gap-2 mb-2 text-blue-700 text-xs font-bold uppercase tracking-widest">
+        <BarChart3 className="w-3.5 h-3.5" />
+        <span className={isKh ? "font-khmer normal-case tracking-normal" : ""}>
+          {isKh ? "មេរៀនរង ៨.២" : "Sub-lesson 8.2"}
+        </span>
+      </div>
+      <h3 className={`font-display font-bold text-xl sm:text-2xl text-slate-900 mb-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh ? "គម្លាតស្តង់ដារ" : "Standard Deviation"}
+        {!isKh && <span className="ml-2 font-khmer text-sm font-normal text-slate-500">(គម្លាតស្តង់ដារ)</span>}
+      </h3>
+      <p className={`text-sm text-slate-700 mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "មធ្យម ប្រាប់អ្នកពីមជ្ឈមណ្ឌល។ គម្លាតស្តង់ដារ ប្រាប់អ្នកពី «កម្រិតលាតសន្ធឹង» — តើភាគច្រើននៃពិន្ទុ ឋិតនៅជិត ឬឆ្ងាយ ពីមធ្យម។"
+          : "The mean tells you the centre. Standard deviation tells you the spread — how far away most of the data points usually sit from that centre."}
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        <ScoreBar
+          scores={A}
+          mean={meanA}
+          sd={sdA}
+          label={isKh ? "សិស្ស A ៖ [70, 70, 70]" : "Student A · [70, 70, 70]"}
+          color="emerald"
+        />
+        <ScoreBar
+          scores={B}
+          mean={meanB}
+          sd={sdB}
+          label={isKh ? "សិស្ស B ៖ [100, 40, 70]" : "Student B · [100, 40, 70]"}
+          color="rose"
+        />
+      </div>
+
+      <div className="rounded-xl border border-amber-300 bg-amber-50/60 p-4 mb-5">
+        <div className="flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 mt-0.5 text-amber-700 flex-shrink-0" />
+          <p className={`text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            <strong>{isKh ? "មេរៀនធំ ៖ " : "The big lesson: "}</strong>
+            {isKh
+              ? "សិស្សទាំងពីរមានមធ្យមដូចគ្នា ៧០% — ប៉ុន្តែដំណើររបស់ពួកគេខុសគ្នាទាំងស្រុង។ មធ្យមតែឯងអាចបោកអ្នកបាន។ គម្លាតស្តង់ដារទើបបង្ហាញរឿងពិត។"
+              : "Both students have the exact same mean of 70%, yet their journeys are completely different. The mean alone can lie to you. Standard deviation tells you the rest of the story."}
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-blue-300 bg-white p-4">
+        <div className={`text-[11px] font-bold uppercase tracking-widest text-blue-700 mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "រូបមន្តផ្លូវការ" : "The formal equation"}
+        </div>
+        <div className="text-center">
+          <BlockMath math="\sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{N}}" />
+        </div>
+        <p className={`text-xs sm:text-sm text-slate-700 mt-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? (
+            <>
+              មើលបែបនេះ ៖ សម្រាប់សិស្ស A គម្លាតពីមធ្យមគឺ <span className="font-mono">[0, 0, 0]</span> → <InlineMath math="\sigma = 0" />។
+              សម្រាប់សិស្ស B គឺ <span className="font-mono">[+30, −30, 0]</span> → <InlineMath math="\sigma \approx 24.5" />។
+              តួ <InlineMath math="(x_i - \mu)^2" /> គ្រាន់តែសួរថា «តើលេខនេះឋិតឆ្ងាយពីមធ្យមប៉ុណ្ណា?» — ហើយការដក root មកវិញ យកវាត្រឡប់ទៅឯកតាដើម។
+            </>
+          ) : (
+            <>
+              Read it like this: for Student A the gaps from the mean are <span className="font-mono">[0, 0, 0]</span> → <InlineMath math="\sigma = 0" />.
+              For Student B they are <span className="font-mono">[+30, −30, 0]</span> → <InlineMath math="\sigma \approx 24.5" />.
+              The <InlineMath math="(x_i - \mu)^2" /> piece is just asking "how far is this point from the average?" — and the square root brings the answer back into the original units.
+            </>
+          )}
+        </p>
+      </div>
+    </PaperCard>
+  );
+}
+
+// ─── Section 3: P-Value ────────────────────────────────────────────────────
+
+function PValueCard({ isKh }: { isKh: boolean }) {
+  return (
+    <PaperCard className="p-5 sm:p-6" data-testid="stats-pvalue">
+      <div className="flex items-center gap-2 mb-2 text-blue-700 text-xs font-bold uppercase tracking-widest">
+        <FlaskConical className="w-3.5 h-3.5" />
+        <span className={isKh ? "font-khmer normal-case tracking-normal" : ""}>
+          {isKh ? "មេរៀនរង ៨.៣" : "Sub-lesson 8.3"}
+        </span>
+      </div>
+      <h3 className={`font-display font-bold text-xl sm:text-2xl text-slate-900 mb-1 ${isKh ? "font-khmer leading-loose" : ""}`}>
+        {isKh ? "តម្លៃ P-Value — ការសាកល្បងភាពចៃដន្យ" : "The P-Value — the \"Fluke Test\""}
+        {!isKh && <span className="ml-2 font-khmer text-sm font-normal text-slate-500">(តម្លៃ P-Value)</span>}
+      </h3>
+      <p className={`text-sm text-slate-700 mb-5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "ឧបមាថា អ្នកវិទ្យាសាស្ត្រសាកល្បងថ្នាំថ្មីមួយ ហើយអ្នកជំងឺមានអារម្មណ៍ប្រសើរឡើង។ មុនពេលប្រកាសជោគជ័យ ពួកគេត្រូវឆ្លើយសំណួរមួយ ៖ « តើថ្នាំពិតជាដំណើរការមែន ឬក៏គ្រាន់តែជាគ្រោះល្អមួយ ? » នោះហើយជាការងាររបស់ p-value។"
+          : "Imagine scientists test a new medicine and patients feel better. Before celebrating, they must answer one question: did the medicine actually work, or was this just a lucky coincidence? That is exactly the job of the p-value."}
+      </p>
+
+      {/* Two-result split */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        {/* p < 0.05 — REAL */}
+        <div className="rounded-xl border-2 border-emerald-400 bg-emerald-50/70 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle2 className="w-5 h-5 text-emerald-700" />
+            <span className="font-mono text-emerald-800 font-bold">
+              <InlineMath math="p < 0.05" />
+            </span>
+            <span className={`text-xs uppercase tracking-widest font-bold text-emerald-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {isKh ? "ពិត" : "Real"}
+            </span>
+          </div>
+          <p className={`text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "មានឱកាសតិចជាង ៥% ដែលលទ្ធផលនេះកើតឡើងដោយចៃដន្យសុទ្ធសាធ។ យើងហៅវាថា « មានសារៈសំខាន់តាមស្ថិតិ » — ទិន្នន័យហាក់ដូចជាពិត។"
+              : "There is less than a 5% chance this result happened by pure luck. We call this 'statistically significant' — the data looks real."}
+          </p>
+        </div>
+
+        {/* p >= 0.05 — FLUKE */}
+        <div className="rounded-xl border-2 border-rose-300 bg-rose-50/60 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <AlertTriangle className="w-5 h-5 text-rose-700" />
+            <span className="font-mono text-rose-800 font-bold">
+              <InlineMath math="p \geq 0.05" />
+            </span>
+            <span className={`text-xs uppercase tracking-widest font-bold text-rose-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {isKh ? "ប្រហែលជាគ្រោះល្អ" : "Could be a fluke"}
+            </span>
+          </div>
+          <p className={`text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "ឱកាសសម្រាប់ការចៃដន្យធំពេក។ យើងមិនអាចសន្និដ្ឋានថាថ្នាំដំណើរការទេ — ត្រូវការការសាកល្បងបន្ថែម ដោយប្រើគំរូកាន់តែធំ។"
+              : "Too much room for coincidence. We cannot conclude the medicine works — more trials with bigger samples are needed."}
+          </p>
+        </div>
+      </div>
+
+      {/* The 5% bar visualization */}
+      <div className="rounded-xl border border-blue-300 bg-white p-4 mb-5">
+        <div className={`text-[11px] font-bold uppercase tracking-widest text-blue-700 mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "តើ ៥% មានន័យដូចម្តេច ?" : "What does 5% look like?"}
+        </div>
+        <div className="relative h-7 rounded-md overflow-hidden border border-slate-300 bg-slate-100">
+          <div className="absolute inset-y-0 left-0 bg-emerald-400" style={{ width: "95%" }} />
+          <div className="absolute inset-y-0 right-0 bg-rose-500" style={{ width: "5%" }} />
+          <div className="absolute inset-0 flex items-center justify-between px-2 text-[10px] font-mono font-bold text-white">
+            <span>{isKh ? "៩៥% — ពិតប្រាកដ" : "95% — confident it's real"}</span>
+            <span>{isKh ? "៥%" : "5%"}</span>
+          </div>
+        </div>
+        <p className={`text-xs text-slate-600 mt-2 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "បន្ទាត់ក្រហមតូចគឺជាគ្រោះល្អ ៖ ប្រសិនបើអ្នកពិសោធន៍ ២០ ដង តាមរយៈការចៃដន្យសុទ្ធសាធ មានតែមួយដងប៉ុណ្ណោះ ដែលអាចបង្ហាញលទ្ធផលបោកបញ្ឆោតបែបនេះ។"
+            : "The thin red sliver is the fluke: out of every 20 random experiments, only 1 would produce a misleading result this strong by chance alone."}
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-amber-300 bg-amber-50/60 p-4">
+        <div className="flex items-start gap-2">
+          <Info className="w-4 h-4 mt-0.5 text-amber-700 flex-shrink-0" />
+          <p className={`text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            <strong>{isKh ? "ការប្រើពិតៗ ៖ " : "In real life: "}</strong>
+            {isKh
+              ? "FDA នៅអាមេរិក EMA នៅអឺរ៉ុប និងស្ទើរគ្រប់ទស្សនាវដ្តីវិទ្យាសាស្ត្ររបស់ពិភពលោក ទាមទារ p < 0.05 មុននឹងព្រមជឿថ្នាំ ការព្យាបាល ឬការរកឃើញវិទ្យាសាស្ត្រមួយ។"
+              : "The FDA in America, the EMA in Europe, and almost every scientific journal in the world require p < 0.05 before they will believe a drug, a treatment, or a discovery."}
+          </p>
+        </div>
+      </div>
+    </PaperCard>
   );
 }
