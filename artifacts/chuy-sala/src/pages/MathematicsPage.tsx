@@ -178,6 +178,27 @@ export default function MathematicsPage() {
       >
         <DerivativeCard isKh={isKh} />
         <IntegralCard isKh={isKh} />
+        <a
+          href="/mathematics/limits-derivatives"
+          className={`group block rounded-2xl border border-blue-300 bg-blue-700 hover:bg-blue-800 text-white p-5 transition-colors no-underline ${isKh ? "font-khmer" : ""}`}
+          data-testid="link-limits-derivatives"
+        >
+          <div className="flex items-center gap-2 text-blue-100 text-xs font-bold tracking-widest uppercase mb-2">
+            <Sparkles className="w-3 h-3" />
+            {isKh ? "មេរៀនបន្ត" : "Continue deeper"}
+            <span className="font-mono opacity-70">· MTH-CALC-RULES-01</span>
+          </div>
+          <h3 className={`text-xl font-bold mb-1 ${isKh ? "leading-loose" : ""}`}>
+            {isKh
+              ? "ច្បាប់នៃការផ្លាស់ប្ដូរ ៖ លីមីត និងដេរីវេ →"
+              : "The Rules of Change: Limits & Derivatives →"}
+          </h3>
+          <p className={`text-sm text-blue-50 ${isKh ? "leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "តើដេរីវេកើតពីណា ? ស្វែងយល់ពីផលធៀបនៃភាពខុសគ្នា ច្បាប់ L'Hôpital និងច្បាប់កាត់បួន (ស្វ័យគុណ ផលគុណ ផលចែក បណ្ដាក់) ជាមួយការសម្រាយបញ្ជាក់។"
+              : "Where does the derivative actually come from? Open up the difference quotient, L'Hôpital's cheat code, and the four shortcut rules (power, product, quotient, chain) — with proofs."}
+          </p>
+        </a>
       </Section>
 
       {/* ── 7. Sequences & Series ────────────────────────────────────── */}
