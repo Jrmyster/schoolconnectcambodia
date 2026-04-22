@@ -1,0 +1,45 @@
+I want to add a new comprehensive educational module called 'Europe & The EU: 3000 Years of History' (អឺរ៉ុប និងសហភាពអឺរ៉ុប៖ ប្រវត្តិសាស្ត្រ៣០០០ឆ្នាំ) to the Study Center section. Please implement the following cleanly:
+
+1. Routing & Navigation (ការកំណត់ផ្លូវ):
+
+Create a new component EuropeHistory.jsx.
+
+Register a new route: /study-center/europe.
+
+Add a link to the 'Study Center' dropdown labeled 'Europe & The EU' with a globe or classical column icon.
+
+2. Section 1: A Quick History of Europe (ប្រវត្តិសាស្ត្រសង្ខេបនៃទ្វីបអឺរ៉ុប):
+
+Create a vertical timeline UI outlining the last 3000 years in four major eras:
+
+The Roman Empire (ចក្រភពរ៉ូម - approx. 27 BC to 476 AD): They built the roads, laws, and architecture that shaped the continent.
+
+The Middle Ages & Renaissance (មជ្ឈិមសម័យ និងយុគសម័យនៃការរស់ឡើងវិញ - 500s to 1600s): Castles, kings, and eventually a massive explosion of art, science, and exploration.
+
+The Industrial Revolution & World Wars (បដិវត្តន៍ឧស្សាហកម្ម និងសង្គ្រាមលោក - 1700s to 1945): Europe invented machines that changed the world, but also fought two devastating wars that nearly destroyed the continent.
+
+3. Section 2: The European Union (សហភាពអឺរ៉ុប):
+
+Introduce the EU as the solution to the World Wars. Former enemies decided that if they traded together, they wouldn't fight each other.
+
+Create a 'Fast Facts' grid with the following data:
+
+Created: Officially formed by the Maastricht Treaty in 1993 (though its economic roots started in the 1950s).
+
+Population: Around 448 million people.
+
+Members: 27 independent countries acting as a team.
+
+The Currency: The Euro (€) — used by 20 of the member countries.
+
+4. Section 3: The 'Schengen Area' (តំបន់គ្មានព្រំដែន):
+
+Add an 'Interesting Fact' callout box about the open borders. Explain that a person can drive from Portugal to Poland, crossing multiple countries, without ever stopping at a border checkpoint or showing a passport.
+
+Bilingual Note: 'The EU is like a highly advanced version of ASEAN, where countries share laws, money, and open borders. (សហភាពអឺរ៉ុបប្រៀបដូចជាទម្រង់ដ៏ជឿនលឿននៃអាស៊ាន ដែលបណ្តាប្រទេសនានាចែករំលែកច្បាប់ រូបិយប័ណ្ណ និងបើកចំហព្រំដែន។)'
+
+5. UI & Layout:
+
+Use a sophisticated, 'Museum' aesthetic: deep blues (like the EU flag) and warm gold accents.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

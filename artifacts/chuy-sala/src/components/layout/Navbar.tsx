@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
-  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun,
   Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
@@ -535,6 +535,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Snowflake,
         descEn: "Snow is not frozen rain — it is water vapour that turns straight into a six-sided ice crystal around a tiny dust seed, and falls only where the air stays below 0 °C.",
         descKh: "ព្រិលមិនមែនជាភ្លៀងដែលកកទេ — វាគឺជាចំហាយទឹកដែលប្ដូរទៅជាគ្រីស្តាល់ទឹកកកមានជ្រុង ៦ ដោយផ្ទាល់ជុំវិញគ្រាប់ធូលីតូចមួយ ហើយធ្លាក់តែនៅកន្លែងដែលខ្យល់ស្ថិតក្រោម 0°C។",
+      },
+      {
+        href: "/science/weather/sky-color",
+        labelEn: "Why is the Sky Blue? — Rayleigh Scattering",
+        labelKh: "ហេតុអ្វីបានជាមេឃមានពណ៌ខៀវ? — ការបែកខ្ចាត់ខ្ចាយរ៉េឡេ",
+        icon: Sun,
+        descEn: "White sunlight is a hidden rainbow. Run it through Earth's nitrogen-and-oxygen obstacle course, derive Rayleigh's I ∝ 1/λ⁴ law, and discover why the sky is blue at noon and red at sunset.",
+        descKh: "ពន្លឺព្រះអាទិត្យពណ៌សគឺជាឥន្ធនូលាក់។ បញ្ជូនវាកាត់ទីលានឧបសគ្គអាសូត-អុកស៊ីសែននៃផែនដី ទាញច្បាប់ I ∝ 1/λ⁴ របស់រ៉េឡេ និងរកឃើញហេតុអ្វីមេឃមានពណ៌ខៀវនៅថ្ងៃត្រង់ និងពណ៌ក្រហមនៅពេលថ្ងៃលិច។",
       },
     ],
   },

@@ -1415,6 +1415,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["ណាណូ", "ណាណូបច្ចេកវិទ្យា", "កាបូន"],
   },
   {
+    id: "sci-sky-blue",
+    href: "/science/weather/sky-color",
+    icon: Sun,
+    titleEn: "Why is the Sky Blue? — Rayleigh Scattering",
+    titleKh: "ហេតុអ្វីបានជាមេឃមានពណ៌ខៀវ? — ការបែកខ្ចាត់ខ្ចាយរ៉េឡេ",
+    categoryEn: "Weather", categoryKh: "អាកាសធាតុ",
+    descEn: "Sunlight is a hidden rainbow. Lord Rayleigh's I ∝ 1/λ⁴ law explains why the sky is blue at noon and red at sunset.",
+    descKh: "ពន្លឺព្រះអាទិត្យគឺជាឥន្ធនូលាក់។ ច្បាប់ I ∝ 1/λ⁴ របស់រ៉េឡេពន្យល់ហេតុអ្វីមេឃមានពណ៌ខៀវនៅថ្ងៃត្រង់ និងពណ៌ក្រហមនៅពេលថ្ងៃលិច។",
+    keywordsEn: ["sky", "blue", "sunset", "rayleigh", "scattering", "wavelength", "lambda", "atmosphere", "sunlight", "rainbow", "prism", "newton", "optics", "red sky"],
+    keywordsKh: ["មេឃ", "ខៀវ", "ថ្ងៃលិច", "រ៉េឡេ", "បែកខ្ចាត់ខ្ចាយ", "ជំហានរលក", "បរិយាកាស", "ពន្លឺ", "ឥន្ធនូ"],
+  },
+  {
     id: "sci-dentistry",
     href: "/science/dentistry",
     icon: Stethoscope,
