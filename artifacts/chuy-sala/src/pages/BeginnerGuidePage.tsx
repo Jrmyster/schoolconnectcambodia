@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
+  CalendarDays, Star,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText, speakWord } from "@/lib/speech";
@@ -104,12 +105,13 @@ function numberToKhmerWords(n: number): string {
 export default function BeginnerGuidePage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern">("alphabet");
+  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days">("alphabet");
 
   const tabs: { id: typeof tab; en: string; kh: string; icon: typeof BookOpen; color: string }[] = [
-    { id: "alphabet", en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen, color: "bg-rose-500" },
-    { id: "numbers",  en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,     color: "bg-sky-500" },
-    { id: "pattern",  en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,  color: "bg-emerald-500" },
+    { id: "alphabet", en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,     color: "bg-rose-500" },
+    { id: "numbers",  en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,         color: "bg-sky-500" },
+    { id: "pattern",  en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,      color: "bg-emerald-500" },
+    { id: "days",     en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays, color: "bg-indigo-500" },
   ];
 
   return (
@@ -175,6 +177,7 @@ export default function BeginnerGuidePage() {
         {tab === "alphabet" && <AlphabetSection kh={kh} />}
         {tab === "numbers" && <NumbersGridSection kh={kh} />}
         {tab === "pattern" && <PatternGuideSection kh={kh} />}
+        {tab === "days" && <DaysOfWeekSection kh={kh} />}
       </section>
     </div>
   );
@@ -680,11 +683,12 @@ function PickerColumn({
 
 function SectionHeader({
   kh, en, khText, accent,
-}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" }) {
+}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" | "indigo" }) {
   const palette = {
     rose:    "from-rose-100 to-pink-100 border-rose-300 text-rose-800",
     sky:     "from-sky-100 to-cyan-100 border-sky-300 text-sky-800",
     emerald: "from-emerald-100 to-teal-100 border-emerald-300 text-emerald-800",
+    indigo:  "from-indigo-100 to-violet-100 border-indigo-300 text-indigo-800",
   }[accent];
   return (
     <div className={`mb-5 rounded-2xl border-2 bg-gradient-to-r ${palette} px-5 py-4 flex items-start gap-3`}>
@@ -694,6 +698,217 @@ function SectionHeader({
           {kh ? khText : en}
         </div>
         {kh && <div className="text-xs italic opacity-70 mt-0.5">{en}</div>}
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────── */
+/* SECTION 4 — Days of the Week (ថ្ងៃនៃសប្តាហ៍)                       */
+/* ──────────────────────────────────────────────────────────────────── */
+
+/**
+ * Index matches `Date.prototype.getDay()` — 0 = Sunday … 6 = Saturday.
+ * Each day gets its own vibrant gradient to anchor visual memory.
+ */
+const DAYS_OF_WEEK = [
+  { en: "Sunday",    kh: "ថ្ងៃអាទិត្យ", emoji: "☀️", gradient: "from-rose-400 via-pink-500 to-fuchsia-500" },
+  { en: "Monday",    kh: "ថ្ងៃច័ន្ទ",   emoji: "🌙", gradient: "from-amber-400 via-orange-500 to-rose-500" },
+  { en: "Tuesday",   kh: "ថ្ងៃអង្គារ",  emoji: "🔥", gradient: "from-red-400 via-rose-500 to-pink-600" },
+  { en: "Wednesday", kh: "ថ្ងៃពុធ",    emoji: "🌿", gradient: "from-emerald-400 via-green-500 to-teal-600" },
+  { en: "Thursday",  kh: "ថ្ងៃព្រហស្បតិ៍", emoji: "🌟", gradient: "from-yellow-400 via-amber-500 to-orange-500" },
+  { en: "Friday",    kh: "ថ្ងៃសុក្រ",   emoji: "💎", gradient: "from-sky-400 via-cyan-500 to-blue-600" },
+  { en: "Saturday",  kh: "ថ្ងៃសៅរ៍",   emoji: "🪐", gradient: "from-indigo-400 via-violet-500 to-purple-600" },
+] as const;
+
+function DaysOfWeekSection({ kh }: { kh: boolean }) {
+  // Today's index in the user's LOCAL timezone (0 = Sun … 6 = Sat). Recomputed
+  // automatically whenever the local date rolls over so a page left open
+  // across midnight still highlights the correct day in the morning.
+  const [todayIdx, setTodayIdx] = useState<number>(() => new Date().getDay());
+
+  useEffect(() => {
+    let intervalId: number | null = null;
+    // Schedule a one-shot timeout to fire at the next local midnight, then
+    // switch to a steady 24h interval. This avoids drift from setInterval(24h)
+    // started at an arbitrary time of day.
+    const now = new Date();
+    const nextMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1,
+      0, 0, 5 // 5s past midnight to dodge clock-skew edge cases
+    );
+    const msUntilMidnight = Math.max(1000, nextMidnight.getTime() - now.getTime());
+
+    const timeoutId = window.setTimeout(() => {
+      setTodayIdx(new Date().getDay());
+      intervalId = window.setInterval(() => {
+        setTodayIdx(new Date().getDay());
+      }, 24 * 60 * 60 * 1000);
+    }, msUntilMidnight);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId !== null) window.clearInterval(intervalId);
+    };
+  }, []);
+
+  // Which day card is currently being spoken — drives the glow/pulse state.
+  const [playing, setPlaying] = useState<number | null>(null);
+  const playTimerRef = useRef<number | null>(null);
+
+  // Cancel any in-flight speech and the visual playing state on unmount.
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      if (playTimerRef.current !== null) {
+        window.clearTimeout(playTimerRef.current);
+      }
+    };
+  }, []);
+
+  function speakDay(idx: number) {
+    const day = DAYS_OF_WEEK[idx];
+
+    if (playTimerRef.current !== null) {
+      window.clearTimeout(playTimerRef.current);
+      playTimerRef.current = null;
+    }
+
+    // Only clear `playing` if the ended utterance is still the active one —
+    // a rapid second tap will have already advanced it.
+    const clearIfStillActive = () => {
+      setPlaying((current) => (current === idx ? null : current));
+    };
+
+    // speakText() internally calls speechSynthesis.cancel() before speaking,
+    // so rapid taps never overlap. Rate is set inside speakText() (~0.85),
+    // intentionally slowed for ESL learners on tricky phonetics like
+    // "Wednesday" and "Thursday".
+    const result = speakText(day.en, "en-US", {
+      onEnd: clearIfStillActive,
+      onError: clearIfStillActive,
+    });
+    if (!result.ok) return;
+
+    setPlaying(idx);
+
+    // Safety-net timer for browsers that occasionally drop `end` events.
+    playTimerRef.current = window.setTimeout(() => {
+      clearIfStillActive();
+      playTimerRef.current = null;
+    }, 3500);
+  }
+
+  return (
+    <div>
+      <SectionHeader
+        kh={kh}
+        en="Tap a day to hear it spoken — today is highlighted!"
+        khText={KH_TODO("ប៉ះថ្ងៃណាមួយដើម្បីស្ដាប់ការបញ្ចេញសំឡេង — ថ្ងៃនេះត្រូវបានបន្លិច!")}
+        accent="indigo"
+      />
+
+      {/* 7-card grid:
+          - mobile: 2 columns (compact, scrolls vertically)
+          - tablet: 4 columns
+          - desktop: 7 columns (one full week in a row) */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+        {DAYS_OF_WEEK.map((day, idx) => {
+          const isPlaying = playing === idx;
+          const isToday = todayIdx === idx;
+          return (
+            <button
+              key={day.en}
+              type="button"
+              onClick={() => speakDay(idx)}
+              aria-label={
+                // Always include both languages so screen readers configured
+                // in either English OR Khmer announce the matching day name.
+                `Listen to the pronunciation of ${day.en} / ${day.kh}${
+                  isToday ? ` — Today / ${KH_TODO("ថ្ងៃនេះ")}` : ""
+                }`
+              }
+              aria-pressed={isPlaying}
+              aria-current={isToday ? "date" : undefined}
+              data-testid={`day-card-${day.en.toLowerCase()}`}
+              className={`relative group rounded-2xl border-4 shadow-lg p-4 text-center text-white bg-gradient-to-br ${day.gradient} transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 ${
+                isToday
+                  ? "border-yellow-300 ring-4 ring-yellow-300/70 ring-offset-2 ring-offset-transparent"
+                  : "border-white"
+              } ${
+                isPlaying
+                  ? "scale-105 ring-4 ring-white/80 ring-offset-2 ring-offset-transparent animate-pulse-glow"
+                  : ""
+              }`}
+            >
+              {/* Speaker icon — top-right corner */}
+              <span
+                aria-hidden="true"
+                className={`absolute top-2 right-2 inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-900/35 ring-1 ring-white/60 backdrop-blur-sm transition-all ${
+                  isPlaying
+                    ? "bg-white/95 ring-white scale-110"
+                    : "group-hover:bg-slate-900/55"
+                }`}
+              >
+                <Volume2
+                  className={`w-3.5 h-3.5 ${isPlaying ? "text-slate-800" : "text-white"}`}
+                />
+              </span>
+
+              {/* "Today / ថ្ងៃនេះ" badge — top-left corner, only on the matching card.
+                  Always shows both languages so learners always see both forms. */}
+              {isToday && (
+                <span
+                  className="absolute top-2 left-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-300 text-slate-900 text-[10px] font-extrabold tracking-wider shadow"
+                  data-testid={`day-card-${day.en.toLowerCase()}-today-badge`}
+                >
+                  <Star className="w-3 h-3 fill-current" aria-hidden />
+                  <span className="uppercase">Today</span>
+                  <span className="font-khmer normal-case tracking-normal text-xs">
+                    {KH_TODO("ថ្ងៃនេះ")}
+                  </span>
+                </span>
+              )}
+
+              {/* Emoji visual */}
+              <div className="text-4xl sm:text-5xl mt-4 mb-1" aria-hidden>
+                {day.emoji}
+              </div>
+
+              {/* English day name — drop-shadow keeps white text legible
+                  even on the bright yellow/orange Thursday gradient. */}
+              <div className="font-display font-extrabold text-xl sm:text-2xl leading-tight [text-shadow:0_2px_4px_rgba(0,0,0,0.45)]">
+                {day.en}
+              </div>
+
+              {/* Khmer translation — always shown so learners get the bridge.
+                  Uses the same shadow as the English name so contrast is
+                  consistent across both lines on bright gradients. */}
+              <div className="font-khmer text-sm sm:text-base mt-1 text-white leading-relaxed [text-shadow:0_2px_4px_rgba(0,0,0,0.45)]">
+                {day.kh}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Helpful caption that names today's date in plain language */}
+      <div className="mt-6 text-center">
+        <div
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-indigo-200 text-indigo-800 font-bold shadow-sm ${
+            kh ? "font-khmer" : ""
+          }`}
+          data-testid="days-today-caption"
+        >
+          <CalendarDays className="w-4 h-4" />
+          {kh
+            ? KH_TODO(`ថ្ងៃនេះគឺ ${DAYS_OF_WEEK[todayIdx].kh}`)
+            : `Today is ${DAYS_OF_WEEK[todayIdx].en}`}
+        </div>
       </div>
     </div>
   );
