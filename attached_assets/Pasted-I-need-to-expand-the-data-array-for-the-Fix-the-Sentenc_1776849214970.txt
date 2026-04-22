@@ -1,0 +1,74 @@
+I need to expand the data array for the 'Fix the Sentence' interactive activity within the Punctuation Checker. Please append the following 11 new sentence objects to the existing question bank.
+
+Please ensure the data structure matches the existing format, defining the text fragments and the exact target punctuation marks required to complete the sentence successfully.
+
+New Data Objects to Add (Bilingual Context):
+
+(List - Commas & Period):
+
+Text: I bought rice [ , ] fish [ , ] and water [ . ]
+
+Translation: ខ្ញុំបានទិញបាយ ត្រី និងទឹក។
+
+(Two Independent Clauses - Semicolon & Period):
+
+Text: The sun is very hot [ ; ] we should rest in the shade [ . ]
+
+Translation: ព្រះអាទិត្យក្តៅខ្លាំងណាស់ យើងគួរតែសម្រាកនៅក្រោមម្លប់។
+
+(Introductory Clause - Comma & Period):
+
+Text: Before we play football [ , ] we must finish our homework [ . ]
+
+Translation: មុនពេលយើងលេងបាល់ទាត់ យើងត្រូវតែធ្វើកិច្ចការផ្ទះឱ្យរួចរាល់។
+
+(Two Independent Clauses - Semicolon & Period):
+
+Text: Sophak is an English teacher [ ; ] he also grows rice [ . ]
+
+Translation: សុភ័ក្រ្តគឺជាគ្រូបង្រៀនភាសាអង់គ្លេស គាត់ក៏ដាំស្រូវផងដែរ។
+
+(Simple Sentence - Period):
+
+Text: The water buffalo is sleeping [ . ]
+
+Translation: សត្វក្របីកំពុងដេក។
+
+(List - Commas & Period):
+
+Text: My mother sells mangoes [ , ] bananas [ , ] and papayas [ . ]
+
+Translation: ម្តាយរបស់ខ្ញុំលក់ស្វាយ ចេក និងល្ហុង។
+
+(Two Independent Clauses - Semicolon & Period):
+
+Text: I like learning English [ ; ] my brother likes learning math [ . ]
+
+Translation: ខ្ញុំចូលចិត្តរៀនភាសាអង់គ្លេស បងប្រុសរបស់ខ្ញុំចូលចិត្តរៀនគណិតវិទ្យា។
+
+(Introductory Clause - Comma & Period):
+
+Text: When the rain stops [ , ] we will ride our bicycles [ . ]
+
+Translation: នៅពេលភ្លៀងរាំង យើងនឹងជិះកង់របស់យើង។
+
+(Simple Sentence - Period):
+
+Text: The pagoda is very beautiful [ . ]
+
+Translation: វត្តនេះស្រស់ស្អាតណាស់។
+
+(Conjunctive Adverb - Semicolon, Comma & Period):
+
+Text: The exam was difficult [ ; ] however [ , ] I passed [ . ]
+
+Translation: ការប្រឡងគឺពិបាក ទោះយ៉ាងណាក៏ដោយ ខ្ញុំប្រឡងជាប់។
+
+(Introductory Phrase - Comma & Period):
+
+Text: In the morning [ , ] I eat rice and pork [ . ]
+
+Translation: នៅពេលព្រឹក ខ្ញុំញ៉ាំបាយស្រូប។
+
+UI Verification:
+Ensure that the UI dynamically renders empty 'drop zones' or 'tap boxes' wherever a bracketed punctuation mark is indicated in the data above, and validates correctly when the student applies the 'Slow Down' (,), 'Stop' (.), or 'Super Comma' (;)

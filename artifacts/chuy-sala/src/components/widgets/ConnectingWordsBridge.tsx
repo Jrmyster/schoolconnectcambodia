@@ -149,6 +149,48 @@ const PAIRS: Pair[] = [
   { leftEn: "Wash the rice carefully",    leftKh: "លាងអង្ករឱ្យបានស្អាត",
     rightEn: "put it in the rice cooker", rightKh: "ដាក់វាក្នុងឆ្នាំងដាំបាយ",
     answer: "then" },
+
+  /* ── Expansion pack: 10 additional bilingual sentence pairs ────────── */
+  // Contrast — but
+  { leftEn: "He likes to play football", leftKh: "គាត់ចូលចិត្តលេងបាល់ទាត់",
+    rightEn: "he doesn't have a ball",   rightKh: "គាត់មិនមានបាល់ទេ",
+    answer: "but" },
+  // Addition — and
+  { leftEn: "We went to the market",     leftKh: "ពួកយើងបានទៅផ្សារ",
+    rightEn: "we bought fresh mangoes",  rightKh: "ពួកយើងបានទិញស្វាយស្រស់",
+    answer: "and" },
+  // Effect — so
+  { leftEn: "The sun was very hot",      leftKh: "ព្រះអាទិត្យក្តៅខ្លាំងណាស់",
+    rightEn: "we drank a lot of water",  rightKh: "ពួកយើងបានផឹកទឹកច្រើន",
+    answer: "so" },
+  // Cause — because
+  { leftEn: "She studied hard for the test",       leftKh: "នាងបានខិតខំរៀនសម្រាប់ប្រឡង",
+    rightEn: "she wants to go to university",      rightKh: "នាងចង់ទៅរៀននៅសាកលវិទ្យាល័យ",
+    answer: "because" },
+  // Sequence — and then
+  { leftEn: "I finished my homework",             leftKh: "ខ្ញុំបានធ្វើកិច្ចការផ្ទះរួចរាល់",
+    rightEn: "I rode my bicycle to school",       rightKh: "ខ្ញុំបានជិះកង់ទៅសាលារៀន",
+    answer: "and then" },
+  // Sequence — and then
+  { leftEn: "They planted the rice seeds",        leftKh: "ពួកគេបានសាបព្រោះគ្រាប់ស្រូវ",
+    rightEn: "they waited for the rain",          rightKh: "ពួកគេបានរង់ចាំភ្លៀង",
+    answer: "and then" },
+  // Cause — because
+  { leftEn: "The classroom was dark",             leftKh: "ថ្នាក់រៀនងងឹត",
+    rightEn: "there was no electricity",          rightKh: "គ្មានអគ្គិសនី",
+    answer: "because" },
+  // Contrast — but
+  { leftEn: "I want to buy a new book",           leftKh: "ខ្ញុំចង់ទិញសៀវភៅថ្មី",
+    rightEn: "I don't have enough money",         rightKh: "ខ្ញុំមិនមានលុយគ្រប់គ្រាន់ទេ",
+    answer: "but" },
+  // Addition — and
+  { leftEn: "We cleaned the whiteboard",          leftKh: "ពួកយើងបានលុបក្តារខៀន",
+    rightEn: "we swept the floor",                rightKh: "ពួកយើងបានបោសសម្អាតឥដ្ឋ",
+    answer: "and" },
+  // Effect — so
+  { leftEn: "The river is full of water",         leftKh: "ទន្លេពោរពេញដោយទឹក",
+    rightEn: "the farmers are very happy",        rightKh: "កសិករសប្បាយចិត្តខ្លាំងណាស់",
+    answer: "so" },
 ];
 
 /* Pick 2 distractors from OTHER categories to make a 3-stone choice set. */
