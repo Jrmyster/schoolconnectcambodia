@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -525,6 +525,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Tv,
         descEn: "Why a screen has no white, no yellow, and no orange — only red, green, and blue. Mix RGB live, dissect a CRT electron gun, peel back the six layers of an LCD, and learn the simple maths behind HD and 4K.",
         descKh: "ហេតុអ្វីអេក្រង់គ្មានពណ៌ស គ្មានពណ៌លឿង គ្មានពណ៌ទឹកក្រូច — មានតែក្រហម បៃតង និងខៀវ។ លាយ RGB ផ្ទាល់ កាត់មើល CRT បកស្រាយ ៦ ស្រទាប់នៃ LCD និងរៀនគណិតវិទ្យាសាមញ្ញនៅពីក្រោយ HD និង 4K។",
+      },
+      {
+        href: "/technology/future-intelligence",
+        labelEn: "The Future of Intelligence & Economy",
+        labelKh: "អនាគតនៃបញ្ញា និងសេដ្ឋកិច្ច",
+        icon: BrainCircuit,
+        descEn: "Climb the three rungs of the AI ladder (narrow AI today, human-level AGI tomorrow, the super-intelligent ASI singularity), peek at the if/then logic behind every program written in Python, JavaScript, and C++, and ask whether a planet-wide AI 'World Game' could one day feed everyone without money or competition.",
+        descKh: "ឡើងជណ្ដើរ AI ទាំងបី (AI តូចចង្អៀតថ្ងៃនេះ AGI កម្រិតមនុស្សថ្ងៃស្អែក និង ASI ឯកឧត្តមឆ្លាតខ្ពស់) មើលតក្កវិជ្ជាប្រសិនបើ/នោះនៅពីក្រោយកម្មវិធីគ្រប់ប្រភេទដែលសរសេរក្នុង Python, JavaScript, និង C++ និងសួរថា តើ 'ហ្គេមពិភពលោក' AI ពេញផែនដី អាចចិញ្ចឹមមនុស្សគ្រប់គ្នាដោយគ្មានលុយ ឬការប្រកួតប្រជែងបានទេ ?",
       },
     ],
   },

@@ -37,6 +37,7 @@ const SurvivalSkillsPage        = lazy(() => import("@/pages/SurvivalSkillsPage"
 const NanotechnologyPage        = lazy(() => import("@/pages/NanotechnologyPage").then(m => ({ default: m.NanotechnologyPage })));
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const TelevisionPage            = lazy(() => import("@/pages/TelevisionPage").then(m => ({ default: m.TelevisionPage })));
+const FutureIntelligencePage    = lazy(() => import("@/pages/FutureIntelligencePage").then(m => ({ default: m.FutureIntelligencePage })));
 const LanguagesWorldPage        = lazy(() => import("@/pages/LanguagesWorldPage").then(m => ({ default: m.LanguagesWorldPage })));
 const BehaviorismPage           = lazy(() => import("@/pages/BehaviorismPage").then(m => ({ default: m.BehaviorismPage })));
 const UnitedStatesPage          = lazy(() => import("@/pages/UnitedStatesPage").then(m => ({ default: m.UnitedStatesPage })));
@@ -211,6 +212,7 @@ function Router() {
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/technology/television" component={TelevisionPage} />
+            <Route path="/technology/future-intelligence" component={FutureIntelligencePage} />
             <Route path="/study-center/languages" component={LanguagesWorldPage} />
             <Route path="/study-center/behaviorism" component={BehaviorismPage} />
             <Route path="/study-center/united-states" component={UnitedStatesPage} />

@@ -1,0 +1,29 @@
+want to add a comprehensive new module called 'The Future of Intelligence & Economy' (អនាគតនៃបញ្ញា និងសេដ្ឋកិច្ច) to the Technology section. Please implement the following sections cleanly, using a tabbed or vertical-timeline layout:
+
+1. The Ladder of Intelligence (ជណ្ដើរនៃបញ្ញា):
+
+Artificial Intelligence (AI): Explain that this is 'Narrow AI.' It is a specialist, like a calculator or a chess program, that is brilliant at one specific task but doesn't know anything else.
+
+Artificial General Intelligence (AGI): Define this as the 'Human Level.' This is an AI that could learn any task a human can do—writing a poem, diagnosing a disease, or teaching a class.
+
+Artificial Super Intelligence (ASI): Introduce the Technological Singularity. This is an intelligence that surpasses all human minds combined, capable of solving problems in physics or medicine that we cannot even comprehend yet.
+
+2. The Anatomy of Software (រូបសាស្ត្រនៃកម្មវិធី):
+
+How Software Works: Explain that software is just a long list of logical instructions (If/Then).
+
+The Languages of Code: Briefly introduce the 'Grammar' of computers. Mention Python (the language of AI), JavaScript (the language of the web), and C++ (the language of speed). Explain that coding is just a way for humans to translate their thoughts into a language a machine can 'read.'
+
+3. The AI-Managed Economy (សេដ្ឋកិច្ចដែលគ្រប់គ្រងដោយ AI):
+
+Introduce the concept of a Resource-Based Economy.
+
+Explain how an advanced AI 'World Game' could manage the planet's resources. Instead of using money and competition, the AI uses real-time data to track every bag of rice, every liter of water, and every kilowatt of solar power.
+
+Automated Distribution: Explain that AI can calculate the most efficient way to distribute these resources to everyone on Earth, ensuring no one goes hungry while minimizing waste and protecting the environment.
+
+4. UI & Layout:
+
+Use a 'Futuristic/Singularity' aesthetic: deep obsidian blacks, circuit-board glows, and neural-network background animations.
+
+Ensure all core concepts, headings, and technological terms are strictly bilingual (English/Khmer)
