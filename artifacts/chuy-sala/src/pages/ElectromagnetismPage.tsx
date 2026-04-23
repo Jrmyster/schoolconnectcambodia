@@ -12,6 +12,11 @@ import {
   Sparkles,
   Info,
   CircleDot,
+  Sigma,
+  Atom,
+  Compass,
+  Waves,
+  Radio,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
@@ -21,8 +26,9 @@ import { useLanguageStore } from "@/store/use-language";
 //           អគ្គិសនីម៉ាញ៉េទិច៖ ថាមពលនៃដែន
 //
 //  1. Michael Faraday — The Father of Induction
-//  2. Gauss's Law — The Invisible Net (with KaTeX)
-//  3. Applications: Motors, Transformers, MRI
+//  2. James Clerk Maxwell — The Mathematical Map (4 equations)
+//  3. Gauss's Law — The Invisible Net (with KaTeX)
+//  4. Applications: Motors, Transformers, MRI
 //
 //  Aesthetic: Scientific Lab — clean off-white, slate text,
 //  indigo+amber accents, blueprint grid, vector field diagrams.
@@ -91,9 +97,24 @@ export default function ElectromagnetismPage() {
         <BilingualQuote isKh={isKh} />
       </Section>
 
-      {/* ── Section 2: Gauss's Law ────────────────────────────────────── */}
+      {/* ── Section 2: Maxwell's Equations ─────────────────────────────── */}
       <Section
         spec="02"
+        Icon={Sigma}
+        eyebrowEn="James Clerk Maxwell — The Mathematical Map"
+        eyebrowKh="ជេមស៍ ក្លឺក ម៉ាក់ស្វែល — ផែនទីគណិតវិទ្យា"
+        titleEn="Four equations that translated Faraday's experiments into pure mathematics"
+        titleKh="សមីការទាំងបួន ដែលប្តូរពិសោធន៍របស់ហ្វារ៉ាដេយឱ្យទៅជាគណិតវិទ្យាសុទ្ធ"
+        descEn="Faraday discovered how magnets and electricity interact in the real world, but he didn't know the math. Maxwell translated Faraday's physical experiments into four elegant mathematical equations. These four rules govern everything from the lightbulb in your house to the Wi-Fi on your phone."
+        descKh="ហ្វារ៉ាដេយរកឃើញពីរបៀបដែលមេដែក និងអគ្គិសនី ប្រាស្រ័យទាក់ទងគ្នាក្នុងពិភពពិត ប៉ុន្តែគាត់មិនស្គាល់គណិតវិទ្យានៃវាទេ។ ម៉ាក់ស្វែលបានបកប្រែពិសោធន៍រូបវន្តរបស់ហ្វារ៉ាដេយ ឱ្យទៅជាសមីការគណិតវិទ្យាដ៏ស្រស់ស្អាតចំនួនបួន។ ច្បាប់ទាំងបួននេះ គ្រប់គ្រងគ្រប់យ៉ាង ពីអំពូលភ្លើងនៅក្នុងផ្ទះរបស់អ្នក ដល់ Wi-Fi លើទូរស័ព្ទរបស់អ្នក។"
+        isKh={isKh}
+      >
+        <MaxwellEquationsGrid isKh={isKh} />
+      </Section>
+
+      {/* ── Section 3: Gauss's Law ────────────────────────────────────── */}
+      <Section
+        spec="03"
         Icon={CircleDot}
         eyebrowEn="Gauss's Law — The Invisible Net"
         eyebrowKh="ច្បាប់ហ្គោស — សំណាញ់អរូបិយ"
@@ -107,9 +128,9 @@ export default function ElectromagnetismPage() {
         <GaussFormula isKh={isKh} />
       </Section>
 
-      {/* ── Section 3: Applications ───────────────────────────────────── */}
+      {/* ── Section 4: Applications ───────────────────────────────────── */}
       <Section
-        spec="03"
+        spec="04"
         Icon={Cog}
         eyebrowEn="Applications"
         eyebrowKh="ការអនុវត្តជាក់ស្តែង"
@@ -170,6 +191,266 @@ function Section({
       </p>
       <div className="space-y-5">{children}</div>
     </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 2 · Maxwell's Four Equations (2x2 grid of equation cards)
+// ════════════════════════════════════════════════════════════════════════════
+
+type MaxwellCard = {
+  num: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  accent: "amber" | "indigo" | "emerald" | "rose";
+  nameEn: string;
+  nameKh: string;
+  math: string;
+  conceptEn: string;
+  conceptKh: string;
+  plainEn: string;
+  plainKh: string;
+};
+
+const MAXWELL_EQUATIONS: MaxwellCard[] = [
+  {
+    num: "I",
+    Icon: Atom,
+    accent: "amber",
+    nameEn: "Gauss's Law for Electricity",
+    nameKh: "ច្បាប់ហ្គោសសម្រាប់អគ្គិសនី",
+    math: String.raw`\nabla \cdot \mathbf{E} = \dfrac{\rho}{\varepsilon_0}`,
+    conceptEn:
+      "Charges create electric fields. A single electron sits like a spider in a web, pushing or pulling every other charge around it.",
+    conceptKh:
+      "បន្ទុកបង្កើតដែនអគ្គិសនី។ អេឡិចត្រុងតែមួយ អង្គុយដូចពីងពាងនៅក្នុងសំណាញ់ ដោយរុញ ឬទាញរាល់បន្ទុកដទៃនៅជុំវិញ។",
+    plainEn: "Charges → electric fields",
+    plainKh: "បន្ទុក → ដែនអគ្គិសនី",
+  },
+  {
+    num: "II",
+    Icon: Magnet,
+    accent: "indigo",
+    nameEn: "Gauss's Law for Magnetism",
+    nameKh: "ច្បាប់ហ្គោសសម្រាប់ម៉ាញេទិច",
+    math: String.raw`\nabla \cdot \mathbf{B} = 0`,
+    conceptEn:
+      "You cannot isolate a magnetic pole. Snap a magnet in half and you do not get a lonely North and a lonely South — you get two smaller magnets, each with its own North and South.",
+    conceptKh:
+      "អ្នកមិនអាចបំបែកប៉ូលម៉ាញេទិចតែមួយដាច់ដោយឡែកបានទេ។ ប្រសិនបើអ្នកកាត់មេដែកជាពីរ អ្នកនឹងមិនទទួលបានប៉ូលខាងជើង និងប៉ូលខាងត្បូងដាច់ៗគ្នាទេ — អ្នកនឹងទទួលបានមេដែកតូចពីរ ដែលនីមួយៗមានប៉ូលខាងជើង និងប៉ូលខាងត្បូងផ្ទាល់ខ្លួន។",
+    plainEn: "No isolated magnetic pole exists",
+    plainKh: "គ្មានប៉ូលម៉ាញេទិចឯកោឡើយ",
+  },
+  {
+    num: "III",
+    Icon: Waves,
+    accent: "emerald",
+    nameEn: "Faraday's Law of Induction",
+    nameKh: "ច្បាប់ហ្វារ៉ាដេយនៃអាំងឌុចស្យុង",
+    math: String.raw`\nabla \times \mathbf{E} = -\dfrac{\partial \mathbf{B}}{\partial t}`,
+    conceptEn:
+      "A changing magnetic field creates an electric field. This is the math that proves spinning a magnet inside a coil of wire creates electricity — the rule behind every power plant on Earth.",
+    conceptKh:
+      "ដែនម៉ាញេទិចដែលផ្លាស់ប្តូរ បង្កើតដែនអគ្គិសនី។ នេះគឺគណិតវិទ្យាដែលបញ្ជាក់ថា ការបង្វិលមេដែកនៅខាងក្នុងកង់ខ្សែភ្លើង បង្កើតអគ្គិសនី — ជាច្បាប់នៅពីក្រោយរោងចក្រផលិតថាមពលគ្រប់ទីកន្លែងលើផែនដី។",
+    plainEn: "Changing magnetic field → electric field",
+    plainKh: "ដែនម៉ាញេទិចផ្លាស់ប្តូរ → ដែនអគ្គិសនី",
+  },
+  {
+    num: "IV",
+    Icon: Radio,
+    accent: "rose",
+    nameEn: "Ampère–Maxwell Law",
+    nameKh: "ច្បាប់អំពែរ-ម៉ាក់ស្វែល",
+    math: String.raw`\nabla \times \mathbf{B} = \mu_0\mathbf{J} + \mu_0\varepsilon_0\,\dfrac{\partial \mathbf{E}}{\partial t}`,
+    conceptEn:
+      "A flowing electric current — OR a changing electric field — creates a magnetic field. This is exactly how electromagnets work, and the second half of the equation is what gave us radio waves, light, and Wi-Fi.",
+    conceptKh:
+      "ចរន្តអគ្គិសនីដែលហូរ — ឬដែនអគ្គិសនីដែលផ្លាស់ប្តូរ — បង្កើតដែនម៉ាញេទិច។ នេះគឺពិតជាវិធីដែលអេឡិចត្រូម៉ាញេទិចដំណើរការ ហើយផ្នែកទីពីរនៃសមីការ គឺជាអ្វីដែលផ្តល់ឱ្យយើងនូវរលកវិទ្យុ ពន្លឺ និង Wi-Fi។",
+    plainEn: "Current OR changing E → magnetic field",
+    plainKh: "ចរន្ត ឬ E ផ្លាស់ប្តូរ → ដែនម៉ាញេទិច",
+  },
+];
+
+const MAXWELL_TONES: Record<
+  MaxwellCard["accent"],
+  { ring: string; text: string; chip: string; glow: string; numBg: string }
+> = {
+  amber: {
+    ring: "ring-amber-400/30",
+    text: "text-amber-300",
+    chip: "bg-amber-500/15 text-amber-200 border-amber-400/40",
+    glow: "shadow-[0_0_40px_rgba(245,158,11,0.10)]",
+    numBg: "bg-amber-500/20 text-amber-200 ring-amber-400/40",
+  },
+  indigo: {
+    ring: "ring-indigo-400/30",
+    text: "text-indigo-300",
+    chip: "bg-indigo-500/15 text-indigo-200 border-indigo-400/40",
+    glow: "shadow-[0_0_40px_rgba(99,102,241,0.12)]",
+    numBg: "bg-indigo-500/20 text-indigo-200 ring-indigo-400/40",
+  },
+  emerald: {
+    ring: "ring-emerald-400/30",
+    text: "text-emerald-300",
+    chip: "bg-emerald-500/15 text-emerald-200 border-emerald-400/40",
+    glow: "shadow-[0_0_40px_rgba(16,185,129,0.10)]",
+    numBg: "bg-emerald-500/20 text-emerald-200 ring-emerald-400/40",
+  },
+  rose: {
+    ring: "ring-rose-400/30",
+    text: "text-rose-300",
+    chip: "bg-rose-500/15 text-rose-200 border-rose-400/40",
+    glow: "shadow-[0_0_40px_rgba(244,63,94,0.10)]",
+    numBg: "bg-rose-500/20 text-rose-200 ring-rose-400/40",
+  },
+};
+
+function MaxwellEquationsGrid({ isKh }: { isKh: boolean }) {
+  return (
+    <div>
+      {/* Maxwell portrait card */}
+      <div className="rounded-2xl border-2 border-indigo-400/40 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white p-5 sm:p-6 mb-5 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-30 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 70% at 90% 50%, rgba(245,158,11,0.18), transparent 60%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative flex items-start gap-4">
+          <div className="shrink-0 w-12 h-12 rounded-xl bg-amber-500/20 ring-1 ring-amber-400/50 flex items-center justify-center">
+            <Compass className="w-6 h-6 text-amber-300" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div
+              className={`text-[10px] font-mono uppercase tracking-[0.25em] text-amber-300 mb-1 ${
+                isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {isKh ? "ស្កុតឡែន · ១៨៦៥" : "Scotland · 1865"}
+            </div>
+            <h3
+              className={`font-display font-bold text-lg sm:text-xl text-white mb-1 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "ជេមស៍ ក្លឺក ម៉ាក់ស្វែល" : "James Clerk Maxwell"}
+            </h3>
+            <p
+              className={`text-sm text-slate-300 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "ហ្វារ៉ាដេយ ផ្តល់ការសង្កេត។ ម៉ាក់ស្វែល ផ្តល់សមីការ។ បួនបន្ទាត់ខាងក្រោម ពន្យល់ពីការងាររបស់រាល់ឧបករណ៍អគ្គិសនី និងសញ្ញាគ្មានខ្សែមួយ ដែលអ្នកប៉ះពាល់នៅថ្ងៃនេះ។"
+                : "Faraday gave us the experiments. Maxwell gave us the equations. The four lines below explain every electrical device and every wireless signal you will touch today."}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 2x2 grid of equation cards */}
+      <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+        {MAXWELL_EQUATIONS.map((eq) => (
+          <MaxwellCardView key={eq.num} eq={eq} isKh={isKh} />
+        ))}
+      </div>
+
+      {/* Synthesis footer */}
+      <div className="mt-5 rounded-2xl border-2 border-amber-400/40 bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white p-4 sm:p-5">
+        <div className="flex items-start gap-3">
+          <Sparkles className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
+          <p
+            className={`text-sm sm:text-base text-slate-200 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                ផ្គុំទាំងបួនរួមគ្នា ហើយអ្នកនឹងទទួលបាន{" "}
+                <span className="text-amber-300 font-semibold">
+                  រលកអេឡិចត្រូម៉ាញេទិច
+                </span>{" "}
+                — ដែនអគ្គិសនី និងម៉ាញេទិច ដែលបង្កើតគ្នាទៅវិញទៅមកអស់កល្បជានិច្ច ហោះកាត់លំហដោយល្បឿន{" "}
+                <InlineMath math="c" /> ។ នោះគឺពន្លឺ វិទ្យុ មីក្រូវ៉េវ និង Wi-Fi ទាំងអស់។
+              </>
+            ) : (
+              <>
+                Combine all four and you discover{" "}
+                <span className="text-amber-300 font-semibold">
+                  electromagnetic waves
+                </span>{" "}
+                — electric and magnetic fields creating each other forever, flying
+                through space at the speed{" "}
+                <InlineMath math="c" />. That is light, radio, microwaves, and
+                every Wi-Fi signal in the world.
+              </>
+            )}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MaxwellCardView({ eq, isKh }: { eq: MaxwellCard; isKh: boolean }) {
+  const T = MAXWELL_TONES[eq.accent];
+  const { Icon } = eq;
+  return (
+    <article
+      className={`relative rounded-2xl border-2 border-slate-700/70 ring-1 ${T.ring} bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white p-5 ${T.glow} flex flex-col`}
+    >
+      {/* Header row: Roman numeral + icon + name */}
+      <header className="flex items-start gap-3 mb-3">
+        <span
+          className={`shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg font-mono font-bold text-base ring-1 ${T.numBg}`}
+          aria-hidden
+        >
+          {eq.num}
+        </span>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <Icon className={`w-4 h-4 ${T.text}`} />
+            <span
+              className={`text-[10px] font-mono uppercase tracking-[0.2em] ${T.text} ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {isKh ? "សមីការ" : "Equation"} {eq.num}
+            </span>
+          </div>
+          <h4
+            className={`font-display font-bold text-white text-base sm:text-lg leading-snug ${
+              isKh ? "font-khmer" : ""
+            }`}
+          >
+            {isKh ? eq.nameKh : eq.nameEn}
+          </h4>
+        </div>
+      </header>
+
+      {/* The equation — centered, prominent, dark-card friendly */}
+      <div
+        className="rounded-xl bg-slate-950/80 border border-slate-700/60 ring-1 ring-white/5 px-4 py-5 my-2 text-white text-center text-lg sm:text-xl overflow-x-auto"
+        aria-label={`${eq.nameEn} equation`}
+      >
+        <BlockMath math={eq.math} />
+      </div>
+
+      {/* Plain-language summary chip */}
+      <div className={`mt-2 inline-flex self-start items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-mono border ${T.chip}`}>
+        <span className={isKh ? "font-khmer" : ""}>{isKh ? eq.plainKh : eq.plainEn}</span>
+      </div>
+
+      {/* Concept */}
+      <p
+        className={`mt-3 text-sm text-slate-200 ${
+          isKh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
+        {isKh ? eq.conceptKh : eq.conceptEn}
+      </p>
+    </article>
   );
 }
 
