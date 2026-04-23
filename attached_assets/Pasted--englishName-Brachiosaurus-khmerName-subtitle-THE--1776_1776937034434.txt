@@ -1,0 +1,83 @@
+[
+  {
+    "englishName": "Brachiosaurus",
+    "khmerName": "ប្រាគីអូសូረስ",
+    "subtitle": "THE LONG-NECKED TITAN",
+    "description": "One of the tallest animals to ever walk the Earth. It used its massive neck to eat leaves from the tops of trees, much like a modern giraffe. (សត្វដ៏ខ្ពស់បំផុតមួយដែលធ្លាប់ដើរលើផែនដី។ វាប្រើកដ៏ធំរបស់វាដើម្បីស៊ីស្លឹកឈើពីលើកំពូលដើមឈើ ដូចសត្វកវែងសម័យទំនើបដែរ។)",
+    "length": "22 m (72 ft)",
+    "weight": "40,000 kg",
+    "lived": "154–153 million years ago",
+    "diet": "Herbivore"
+  },
+  {
+    "englishName": "Velociraptor",
+    "khmerName": "វេល៉ូស៊ីរ៉ាបទ័រ",
+    "subtitle": "THE FEATHERED HUNTER",
+    "description": "Much smaller than movies show—about the size of a large turkey. It was fully covered in feathers and hunted in packs using a large, curved toe claw. (មានទំហំតូចជាងអ្វីដែលភាពយន្តបង្ហាញ ពោលគឺប្រហែលទំហំមាន់តួគីធំមួយ។ វាមានរោមពេញខ្លួន ហើយបរបាញ់ជាហ្វូងដោយប្រើក្រចកជើងកោងដ៏ធំ។)",
+    "length": "2 m (6.5 ft)",
+    "weight": "15 kg",
+    "lived": "75–71 million years ago",
+    "diet": "Carnivore"
+  },
+  {
+    "englishName": "Ankylosaurus",
+    "khmerName": "អង់គីឡូសូረስ",
+    "subtitle": "THE LIVING FORTRESS",
+    "description": "Covered in thick, bony armor plates from its head to its tail. It defended itself by swinging a massive bone club at the end of its tail. (គ្របដណ្តប់ដោយបន្ទះពាសដែកឆ្អឹងក្រាស់ពីក្បាលដល់កន្ទុយ។ វាការពារខ្លួនដោយគ្រវីដុំឆ្អឹងដ៏ធំនៅចុងកន្ទុយរបស់វា។)",
+    "length": "8 m (26 ft)",
+    "weight": "8,000 kg",
+    "lived": "68–66 million years ago",
+    "diet": "Herbivore"
+  },
+  {
+    "englishName": "Parasaurolophus",
+    "khmerName": "ប៉ារ៉ាសូរ៉ូឡូហ្វឺស",
+    "subtitle": "THE CRESTED SINGER",
+    "description": "Famous for the long, hollow bony crest on its head. Scientists believe it used this crest like a trumpet to make loud, echoing sounds to communicate. (ល្បីល្បាញដោយសារឆ្អឹងក្បាលវែងប្រហោង។ អ្នកវិទ្យាសាស្ត្រជឿថាវាប្រើប្រាស់វាដូចជាត្រែដើម្បីបង្កើតសំឡេងបន្លឺឡើងយ៉ាងខ្លាំងដើម្បីទំនាក់ទំនង។)",
+    "length": "10 m (33 ft)",
+    "weight": "2,500 kg",
+    "lived": "76–73 million years ago",
+    "diet": "Herbivore"
+  },
+  {
+    "englishName": "Archaeopteryx",
+    "khmerName": "អាគីអុបទើរីក",
+    "subtitle": "THE FIRST BIRD",
+    "description": "The crucial 'missing link' between dinosaurs and modern birds. It had sharp teeth and a long bony tail like a dinosaur, but fully developed flight feathers. (ចំណុចភ្ជាប់ដ៏សំខាន់រវាងឌីណូស័រ និងសត្វបក្សីសម័យទំនើប។ វាមានធ្មេញមុតស្រួច និងកន្ទុយឆ្អឹងវែងដូចឌីណូស័រ ប៉ុន្តែមានរោមសម្រាប់ហោះហើរពេញលេញ។)",
+    "length": "0.5 m (1.6 ft)",
+    "weight": "1 kg",
+    "lived": "150 million years ago",
+    "diet": "Carnivore"
+  },
+  {
+    "englishName": "Allosaurus",
+    "khmerName": "អាឡូសូረስ",
+    "subtitle": "THE JURASSIC LION",
+    "description": "The top predator of the Jurassic period, living millions of years before the T-Rex. It hunted massive plant-eaters by using its jaw like a hatchet. (អ្នកប្រមាញ់កំពូលនៃសម័យយូរ៉ាស៊ីក ដែលរស់នៅរាប់លានឆ្នាំមុន T-Rex។ វាបរបាញ់សត្វស៊ីរុក្ខជាតិដ៏ធំដោយប្រើថ្គាមរបស់វាដូចជាពូថៅ។)",
+    "length": "9 m (30 ft)",
+    "weight": "2,000 kg",
+    "lived": "155–145 million years ago",
+    "diet": "Carnivore"
+  },
+  {
+    "englishName": "Pachycephalosaurus",
+    "khmerName": "ប៉ាគីសេហ្វាឡូសូረስ",
+    "subtitle": "THE BONE-HEADED BRAWLER",
+    "description": "Known for having a skull that was up to 10 inches thick. They likely used their reinforced heads to ram into each other during fights for dominance. (ល្បីថាម៉ាកលលាដ៍ក្បាលមានកម្រាស់រហូតដល់ ១០ អ៊ីញ។ ពួកវាទំនងជាប្រើក្បាលដ៏រឹងមាំរបស់ពួកវាដើម្បីបុកគ្នាអំឡុងពេលប្រយុទ្ធដណ្តើមអំណាច។)",
+    "length": "4.5 m (15 ft)",
+    "weight": "450 kg",
+    "lived": "70–66 million years ago",
+    "diet": "Herbivore"
+  },
+  {
+    "englishName": "Diplodocus",
+    "khmerName": "ឌីប្លូដូកឹស",
+    "subtitle": "THE WHIP-TAILED GIANT",
+    "description": "One of the longest animals ever discovered. Its tail was so long and thin that it could crack it like a whip to scare away predators, breaking the sound barrier. (សត្វដ៏វែងបំផុតមួយដែលមិនធ្លាប់រកឃើញ។ កន្ទុយរបស់វាវែង និងស្តើង ដែលវាអាចវាយដូចរំពាត់ដើម្បីបណ្តេញសត្រូវ ដោយបំបែករបាំងសំឡេង។)",
+    "length": "27 m (89 ft)",
+    "weight": "15,000 kg",
+    "lived": "154–152 million years ago",
+    "diet": "Herbivore"
+  }
+]
+```"
