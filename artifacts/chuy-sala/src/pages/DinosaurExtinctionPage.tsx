@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import {
-  ArrowLeft, Bone, Skull, Mountain, Flame, CloudFog, Soup, Bird, Sparkles,
+  ArrowLeft, Bone, Skull, Mountain, Flame, CloudFog, Soup, Bird, Sparkles, Volume2,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { speakWord } from "@/lib/speech";
 
 /* ─────────────────────────────────────────────────────────────────────
  * Dinosaurs & The Great Extinction · ឌីណូស័រ និងការផុតពូជដ៏ធំ
@@ -303,6 +304,55 @@ const DINOSAURS: Dino[] = [
   },
 ];
 
+/* ─── Era + scale metadata ─────────────────────────────────────────── *
+ *  Stored in a side-table (rather than mutating each entry) so the
+ *  big DINOSAURS array stays focused on display copy. Keyed by `key`.
+ * ──────────────────────────────────────────────────────────────────── */
+
+type Era = "Jurassic" | "Cretaceous";
+type SilhouetteKey =
+  | "theropod"      // big bipedal predator
+  | "sauropod"      // long-necked giant quadruped
+  | "quadruped"     // low four-legged armored / horned / plated
+  | "smallBiped"    // small bipedal (raptor / pachy)
+  | "hadrosaur"     // bipedal duck-billed with crest
+  | "bird";         // small feathered
+
+type DinoMeta = { era: Era; lengthM: number; silhouette: SilhouetteKey };
+
+const DINO_META: Record<string, DinoMeta> = {
+  trex:               { era: "Cretaceous", lengthM: 12,   silhouette: "theropod"   },
+  triceratops:        { era: "Cretaceous", lengthM: 9,    silhouette: "quadruped"  },
+  stegosaurus:        { era: "Jurassic",   lengthM: 9,    silhouette: "quadruped"  },
+  spinosaurus:        { era: "Cretaceous", lengthM: 15,   silhouette: "theropod"   },
+  brachiosaurus:      { era: "Jurassic",   lengthM: 22,   silhouette: "sauropod"   },
+  velociraptor:       { era: "Cretaceous", lengthM: 2,    silhouette: "smallBiped" },
+  ankylosaurus:       { era: "Cretaceous", lengthM: 8,    silhouette: "quadruped"  },
+  parasaurolophus:    { era: "Cretaceous", lengthM: 10,   silhouette: "hadrosaur"  },
+  archaeopteryx:      { era: "Jurassic",   lengthM: 0.5,  silhouette: "bird"       },
+  allosaurus:         { era: "Jurassic",   lengthM: 9,    silhouette: "theropod"   },
+  pachycephalosaurus: { era: "Cretaceous", lengthM: 4.5,  silhouette: "smallBiped" },
+  diplodocus:         { era: "Jurassic",   lengthM: 27,   silhouette: "sauropod"   },
+};
+
+/* Each silhouette path is drawn within a 100 × 50 viewBox where x=0..100
+ * spans the full body length and y=50 sits on the ground line. Uniform
+ * scaling keeps body proportions intact at any size. */
+const SILHOUETTE_PATHS: Record<SilhouetteKey, string> = {
+  theropod:
+    "M0 50 L10 44 L18 36 L28 26 L34 18 L36 8 L42 4 L48 4 L48 12 L42 18 L48 24 L60 28 L74 32 L88 36 L100 38 L100 50 Z",
+  sauropod:
+    "M0 50 L10 44 L24 40 L40 38 L56 38 L66 36 L70 30 L72 22 L74 12 L76 4 L80 4 L80 14 L78 22 L82 30 L88 36 L96 40 L100 42 L100 50 Z",
+  quadruped:
+    "M0 50 L8 42 L16 36 L26 30 L36 26 L46 24 L56 24 L66 24 L76 26 L84 30 L92 36 L100 42 L100 50 Z",
+  smallBiped:
+    "M2 50 L10 44 L18 38 L28 30 L36 22 L38 16 L42 12 L48 14 L46 20 L42 24 L50 28 L62 32 L78 36 L92 38 L100 40 L100 50 Z",
+  hadrosaur:
+    "M0 50 L10 44 L20 36 L30 28 L36 20 L40 12 L42 4 L48 0 L52 6 L48 12 L46 18 L52 22 L62 26 L76 30 L88 34 L100 38 L100 50 Z",
+  bird:
+    "M10 50 L18 42 L26 34 L32 28 L36 22 L40 14 L42 6 L46 6 L46 12 L52 12 L58 8 L66 10 L72 14 L78 18 L70 22 L62 24 L56 26 L62 30 L68 34 L72 40 L70 46 L66 50 Z",
+};
+
 type TimelineStep = {
   key: string;
   Icon: typeof Mountain;
@@ -358,8 +408,22 @@ export default function DinosaurExtinctionPage() {
   const language = useLanguageStore((s) => s.language);
   const isKh = language === "kh";
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
+  const [eraFilter, setEraFilter] = useState<"all" | Era>("all");
 
   const toggle = (k: string) => setFlipped((f) => ({ ...f, [k]: !f[k] }));
+
+  const filteredDinos = useMemo(
+    () =>
+      eraFilter === "all"
+        ? DINOSAURS
+        : DINOSAURS.filter((d) => DINO_META[d.key]?.era === eraFilter),
+    [eraFilter]
+  );
+
+  const handleSpeak = (e: React.MouseEvent | React.KeyboardEvent, name: string) => {
+    e.stopPropagation();
+    speakWord(name);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-stone-950 text-stone-100">
@@ -414,15 +478,69 @@ export default function DinosaurExtinctionPage() {
           subKh="ចុចលើកាតដើម្បីត្រឡប់ហ្វូស៊ីល និងជួបឌីណូស័ររស់។"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
-          {DINOSAURS.map((d) => {
+        {/* Animation keyframes for the era-filter card fade-in */}
+        <style>{`@keyframes fadeInScale {
+          from { opacity: 0; transform: scale(0.94); }
+          to   { opacity: 1; transform: scale(1); }
+        }`}</style>
+
+        {/* Era filter row */}
+        <div
+          className="mt-6 flex flex-wrap gap-2"
+          role="group"
+          aria-label={isKh ? "ត្រងតាមសម័យកាល" : "Filter by era"}
+          data-testid="filter-era-row"
+        >
+          {([
+            { key: "all",         labelEn: "All",        labelKh: "ទាំងអស់" },
+            { key: "Jurassic",    labelEn: "Jurassic",   labelKh: "យូរ៉ាស៊ីក" },
+            { key: "Cretaceous",  labelEn: "Cretaceous", labelKh: "ក្រេតាសេក" },
+          ] as const).map((opt) => {
+            const active = eraFilter === opt.key;
+            const count =
+              opt.key === "all"
+                ? DINOSAURS.length
+                : DINOSAURS.filter((d) => DINO_META[d.key]?.era === opt.key).length;
+            return (
+              <button
+                key={opt.key}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setEraFilter(opt.key)}
+                data-testid={`filter-era-${opt.key.toLowerCase()}`}
+                className={`px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all
+                  ${active
+                    ? "bg-amber-400 border-amber-300 text-stone-950 shadow-lg shadow-amber-500/30"
+                    : "bg-stone-900/60 border-stone-700 text-stone-300 hover:border-amber-500/60 hover:text-amber-200"}`}
+              >
+                <span>{opt.labelEn}</span>
+                <span className={`font-khmer ml-1.5 ${active ? "text-stone-800" : "text-stone-400"}`}>
+                  / {opt.labelKh}
+                </span>
+                <span className={`ml-2 inline-flex items-center justify-center min-w-[1.5rem] px-1.5 rounded-full text-[10px] font-mono
+                  ${active ? "bg-stone-900/20 text-stone-900" : "bg-stone-800 text-stone-400"}`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6"
+          data-testid="grid-fossil-cards"
+        >
+          {filteredDinos.map((d) => {
             const isFlipped = !!flipped[d.key];
+            const meta = DINO_META[d.key];
             return (
               <button
                 key={d.key}
                 onClick={() => toggle(d.key)}
-                className={`group relative h-80 [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl text-left`}
+                className={`group relative h-[22rem] [perspective:1000px] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl text-left
+                  motion-safe:animate-[fadeInScale_0.4s_ease-out_both]`}
                 data-testid={`card-fossil-${d.key}`}
+                data-era={meta?.era ?? ""}
                 data-flipped={isFlipped ? "true" : "false"}
                 aria-pressed={isFlipped}
               >
@@ -437,16 +555,39 @@ export default function DinosaurExtinctionPage() {
                   >
                     <div className="flex items-center justify-between">
                       <Bone className="w-5 h-5 text-stone-400" />
-                      <span className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold">
-                        {isKh ? "ហ្វូស៊ីល" : "Fossil"}
+                      <span className="flex items-center gap-2">
+                        {meta && (
+                          <span
+                            className={`text-[9px] uppercase tracking-widest font-bold px-1.5 py-0.5 rounded
+                              ${meta.era === "Jurassic"
+                                ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"
+                                : "bg-rose-500/15 text-rose-300 border border-rose-500/30"}`}
+                          >
+                            {meta.era}
+                          </span>
+                        )}
+                        <span className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold">
+                          {isKh ? "ហ្វូស៊ីល" : "Fossil"}
+                        </span>
                       </span>
                     </div>
                     <div className="flex-1 flex items-center justify-center text-7xl opacity-90 group-hover:scale-110 transition-transform">
                       🦴
                     </div>
                     <div className="text-center">
-                      <div className="text-stone-100 font-bold text-lg leading-tight">
-                        {d.nameEn}
+                      <div className="flex items-center justify-center gap-1.5">
+                        <div className="text-stone-100 font-bold text-lg leading-tight">
+                          {d.nameEn}
+                        </div>
+                        <SpeakerButton
+                          name={d.nameEn}
+                          onSpeak={handleSpeak}
+                          ariaLabel={
+                            isKh
+                              ? `បញ្ចេញសំឡេង ${d.nameEn}`
+                              : `Pronounce ${d.nameEn}`
+                          }
+                        />
                       </div>
                       <div className="font-khmer text-amber-200/90 text-base mt-1">
                         {d.nameKh}
@@ -459,7 +600,7 @@ export default function DinosaurExtinctionPage() {
 
                   {/* Back · Living dinosaur */}
                   <div
-                    className={`absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-gradient-to-br from-slate-800 to-stone-900 border-2 ${d.accent} shadow-lg shadow-black/40 p-5 flex flex-col overflow-hidden`}
+                    className={`absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-gradient-to-br from-slate-800 to-stone-900 border-2 ${d.accent} shadow-lg shadow-black/40 p-4 flex flex-col overflow-hidden`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-3xl">{d.emoji}</span>
@@ -468,8 +609,19 @@ export default function DinosaurExtinctionPage() {
                       </span>
                     </div>
                     <div>
-                      <div className="text-stone-50 font-bold text-base leading-tight">
-                        {d.nameEn}
+                      <div className="flex items-center gap-1.5">
+                        <div className="text-stone-50 font-bold text-base leading-tight">
+                          {d.nameEn}
+                        </div>
+                        <SpeakerButton
+                          name={d.nameEn}
+                          onSpeak={handleSpeak}
+                          ariaLabel={
+                            isKh
+                              ? `បញ្ចេញសំឡេង ${d.nameEn}`
+                              : `Pronounce ${d.nameEn}`
+                          }
+                        />
                       </div>
                       <div className="font-khmer text-amber-200/90 text-sm">
                         {d.nameKh}
@@ -478,23 +630,44 @@ export default function DinosaurExtinctionPage() {
                         {isKh ? d.roleKh : d.roleEn}
                       </div>
                     </div>
-                    <p className={`mt-2 text-xs text-stone-300 leading-relaxed ${isKh ? "font-khmer" : ""}`}>
+                    <p className={`mt-1.5 text-[11px] text-stone-300 leading-snug line-clamp-3 ${isKh ? "font-khmer" : ""}`}>
                       {isKh ? d.factKh : d.factEn}
                     </p>
-                    <ul className="mt-auto pt-2 border-t border-stone-700/60 space-y-0.5 text-[11px]">
-                      {(isKh ? d.statsKh : d.statsEn).map((s) => (
+                    <ul className="mt-1.5 pt-1.5 border-t border-stone-700/60 space-y-0.5 text-[10.5px]">
+                      {(isKh ? d.statsKh : d.statsEn).slice(0, 3).map((s) => (
                         <li key={s.label} className="flex justify-between gap-2">
                           <span className={`text-stone-400 ${isKh ? "font-khmer" : ""}`}>{s.label}</span>
                           <span className={`text-stone-100 font-semibold text-right ${isKh ? "font-khmer" : ""}`}>{s.value}</span>
                         </li>
                       ))}
                     </ul>
+
+                    {/* Visual scale reference */}
+                    {meta && (
+                      <div className="mt-1.5 pt-1.5 border-t border-stone-700/60">
+                        <div className={`text-[9px] uppercase tracking-widest text-amber-300/80 mb-0.5 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                          {isKh ? "មាត្រដ្ឋានប្រៀបធៀប" : "Scale vs human"}
+                        </div>
+                        <ScaleSVG
+                          dinoLengthM={meta.lengthM}
+                          silhouette={meta.silhouette}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </button>
             );
           })}
         </div>
+        {/* Empty-state guard (shouldn't trigger, but be safe) */}
+        {filteredDinos.length === 0 && (
+          <p className="mt-6 text-stone-400 text-center text-sm">
+            {isKh
+              ? "មិនមានឌីណូស័រនៅក្នុងការជ្រើសរើសនេះទេ។"
+              : "No dinosaurs in this filter."}
+          </p>
+        )}
       </section>
 
       {/* ── Section 2 · Asteroid Timeline ──────────────────────────── */}
@@ -613,6 +786,124 @@ export default function DinosaurExtinctionPage() {
 }
 
 /* ─── Helpers ─────────────────────────────────────────────────────── */
+
+/* Speaker button — nested inside a parent <button>, so it must NOT be a
+ * <button> itself (invalid HTML). Uses role="button" + keyboard handler. */
+function SpeakerButton({
+  name, onSpeak, ariaLabel,
+}: {
+  name: string;
+  onSpeak: (e: React.MouseEvent | React.KeyboardEvent, name: string) => void;
+  ariaLabel: string;
+}) {
+  return (
+    <span
+      role="button"
+      tabIndex={0}
+      aria-label={ariaLabel}
+      data-testid={`speak-${name.toLowerCase().replace(/\s+/g, "-")}`}
+      onClick={(e) => onSpeak(e, name)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSpeak(e, name);
+        }
+      }}
+      className="inline-flex items-center justify-center w-7 h-7 rounded-full
+        bg-amber-400/10 hover:bg-amber-400/30 active:scale-95 text-amber-300
+        border border-amber-400/40 transition cursor-pointer
+        focus:outline-none focus:ring-2 focus:ring-amber-400"
+    >
+      <Volume2 className="w-3.5 h-3.5" aria-hidden />
+    </span>
+  );
+}
+
+/* Visual scale reference — human (1.7 m) drawn to scale next to the dino.
+ * Both share a single ground line; the SVG width is auto, the height is
+ * fixed so cards stay aligned. */
+function ScaleSVG({
+  dinoLengthM, silhouette,
+}: { dinoLengthM: number; silhouette: SilhouetteKey }) {
+  const HUMAN_M = 1.7;
+  const W = 240;
+  const GROUND_Y = 56;
+  const PAD = 4;
+
+  // Choose a scale that lets both human and dino fit. We allow a 1m gap
+  // between them, and the dino takes its full real-world length. We also
+  // cap the scale by the available vertical space so the 1.7m human
+  // silhouette never gets clipped (matters for tiny dinos like
+  // Archaeopteryx 0.5m where the horizontal scale would otherwise blow up).
+  const realWidth = Math.max(dinoLengthM + HUMAN_M + 1, 4);
+  const pxPerMByWidth = (W - PAD * 2) / realWidth;
+  const pxPerMByHeight = (GROUND_Y - 4) / HUMAN_M;
+  const pxPerM = Math.min(pxPerMByWidth, pxPerMByHeight);
+
+  const humanH = HUMAN_M * pxPerM;
+  const dinoLen = Math.max(dinoLengthM * pxPerM, 12);
+  const dinoScale = dinoLen / 100; // silhouettes are drawn in a 100×50 viewBox
+  const dinoH = 50 * dinoScale;
+  const humanW = humanH * 0.32;
+
+  const humanX = PAD;
+  const humanY = GROUND_Y - humanH;
+  const dinoX = PAD + humanW + 6;
+  const dinoY = GROUND_Y - dinoH;
+
+  return (
+    <svg
+      viewBox={`0 0 ${W} ${GROUND_Y + 4}`}
+      className="w-full h-12"
+      aria-label={`Scale: human 1.7 m vs dinosaur ${dinoLengthM} m long`}
+      data-testid={`scale-${silhouette}`}
+    >
+      {/* Ground line */}
+      <line
+        x1="0" y1={GROUND_Y} x2={W} y2={GROUND_Y}
+        stroke="rgba(251,191,36,0.45)" strokeWidth="0.7" strokeDasharray="2 2"
+      />
+      {/* Human silhouette */}
+      <g transform={`translate(${humanX} ${humanY})`} fill="rgb(229,231,235)">
+        {/* head */}
+        <circle cx={humanW * 0.5} cy={humanH * 0.09} r={Math.max(humanH * 0.09, 1.2)} />
+        {/* body */}
+        <rect x={humanW * 0.32} y={humanH * 0.18} width={humanW * 0.36} height={humanH * 0.42} rx={humanW * 0.08} />
+        {/* arms */}
+        <rect x={humanW * 0.12} y={humanH * 0.22} width={humanW * 0.18} height={humanH * 0.34} rx={humanW * 0.06} />
+        <rect x={humanW * 0.70} y={humanH * 0.22} width={humanW * 0.18} height={humanH * 0.34} rx={humanW * 0.06} />
+        {/* legs */}
+        <rect x={humanW * 0.30} y={humanH * 0.58} width={humanW * 0.16} height={humanH * 0.42} rx={humanW * 0.06} />
+        <rect x={humanW * 0.54} y={humanH * 0.58} width={humanW * 0.16} height={humanH * 0.42} rx={humanW * 0.06} />
+      </g>
+      {/* Dino silhouette */}
+      <g transform={`translate(${dinoX} ${dinoY}) scale(${dinoScale})`}>
+        <path d={SILHOUETTE_PATHS[silhouette]} fill="rgb(251,191,36)" />
+      </g>
+      {/* Length label */}
+      <text
+        x={dinoX + dinoLen / 2}
+        y={GROUND_Y + 3}
+        textAnchor="middle"
+        fontSize="6"
+        fontFamily="ui-monospace, monospace"
+        fill="rgb(217,119,6)"
+      >
+        {dinoLengthM} m
+      </text>
+      <text
+        x={humanX + humanW / 2}
+        y={GROUND_Y + 3}
+        textAnchor="middle"
+        fontSize="6"
+        fontFamily="ui-monospace, monospace"
+        fill="rgb(156,163,175)"
+      >
+        1.7 m
+      </text>
+    </svg>
+  );
+}
 
 function SectionHeading({
   en, kh, subEn, subKh, tone = "default",
