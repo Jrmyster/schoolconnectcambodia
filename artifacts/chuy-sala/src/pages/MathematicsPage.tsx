@@ -15,6 +15,9 @@ import {
   Sparkles,
   Building2,
   Mountain,
+  Circle,
+  Infinity as InfinityIcon,
+  Ruler,
   BarChart3,
   Users,
   Target,
@@ -136,6 +139,7 @@ export default function MathematicsPage() {
         isKh={isKh}
       >
         <RightTriangle isKh={isKh} />
+        <MagicOfPiCards isKh={isKh} />
       </Section>
 
       {/* ── 4. The Unit Circle ───────────────────────────────────────── */}
@@ -1245,6 +1249,288 @@ function RealWorldCard({
         {isKh ? bodyKh : bodyEn}
       </p>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  3b. The Magic of Pi & Circles (3 cards: definition, irrationality, 2π)
+// ════════════════════════════════════════════════════════════════════════════
+
+function MagicOfPiCards({ isKh }: { isKh: boolean }) {
+  return (
+    <PaperCard className="p-5 sm:p-6 mt-6" data-testid="pi-and-circles-card">
+      {/* Section header */}
+      <header className="mb-5 pb-4 border-b border-blue-100">
+        <div
+          className={`flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-blue-700 mb-1 ${
+            isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          <Circle className="w-3.5 h-3.5" />
+          {isKh ? "ផ្នែកបន្ថែម · រង្វង់" : "Bonus · Circles"}
+        </div>
+        <h3
+          className={`font-display font-bold text-slate-900 text-xl sm:text-2xl leading-snug ${
+            isKh ? "font-khmer" : ""
+          }`}
+        >
+          {isKh
+            ? "មន្តអាគមនៃ ផៃ និងរង្វង់"
+            : "The Magic of Pi & Circles"}
+        </h3>
+        <p
+          className={`mt-2 text-sm sm:text-base text-slate-600 ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "ត្រីកោណពន្យល់ពីមុំ។ រង្វង់ពន្យល់ពីការបង្វិល។ ហើយលេខតូចមួយ — π — ដែលពន្យល់ពីរង្វង់ទាំងមូលនៅក្នុងសកលលោក។"
+            : "Triangles explain angles. Circles explain rotation. And one tiny number — π — explains every circle in the universe."}
+        </p>
+      </header>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+        {/* ── Card 1: What is Pi? ─────────────────────────────────── */}
+        <article className="bg-blue-50/70 rounded-xl border border-blue-200 p-4 sm:p-5 flex flex-col">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white font-mono font-bold text-sm">1</span>
+            <Ruler className="w-4 h-4 text-blue-700" />
+            <div
+              className={`text-[10px] font-mono uppercase tracking-[0.2em] text-blue-700 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {isKh ? "និយមន័យ" : "Definition"}
+            </div>
+          </div>
+          <h4
+            className={`font-display font-bold text-slate-900 text-base sm:text-lg mb-2 ${
+              isKh ? "font-khmer" : ""
+            }`}
+          >
+            {isKh ? "តើ ផៃ ជាអ្វី?" : "What is Pi?"}
+          </h4>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                <InlineMath math={String.raw`\pi`} /> គឺគ្រាន់តែជាសមាមាត្រមួយ។ ប្រសិនបើអ្នកយក
+                អង្កត់ផ្ចិត (ទទឹង) របស់រង្វង់<strong>ណាមួយ</strong>នៅក្នុងសកលលោក ហើយរុំវាជុំវិញគែមខាងក្រៅ (បរិមាត្រ) វានឹងសមដាក់ច្បាស់ៗ <strong>៣ ដង</strong> បូកនិងបំណែកតូចមួយទៀត។
+              </>
+            ) : (
+              <>
+                <InlineMath math={String.raw`\pi`} /> is just a ratio. If you take the
+                diameter (width) of <strong>any</strong> circle in the universe
+                and wrap it around the outside edge (circumference), it will
+                always fit exactly <strong>3 times</strong> &hellip; plus a tiny
+                little extra piece.
+              </>
+            )}
+          </p>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? "សមាមាត្រនោះគឺពិតប្រាកដ៖" : "That ratio is exactly:"}{" "}
+            <span className="font-mono font-bold text-blue-700">3.14159…</span>
+          </p>
+
+          <div className="rounded-lg bg-white border border-blue-200 px-4 py-4 text-center mt-auto">
+            <BlockMath math={String.raw`C = \pi\, d`} />
+            <div
+              className={`mt-1 text-[11px] text-slate-500 ${
+                isKh ? "font-khmer text-xs" : ""
+              }`}
+            >
+              {isKh
+                ? "បរិមាត្រ = ផៃ × អង្កត់ផ្ចិត"
+                : "circumference = π × diameter"}
+            </div>
+          </div>
+        </article>
+
+        {/* ── Card 2: The Never-Ending Number ─────────────────────── */}
+        <article className="bg-blue-50/70 rounded-xl border border-blue-200 p-4 sm:p-5 flex flex-col">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white font-mono font-bold text-sm">2</span>
+            <InfinityIcon className="w-4 h-4 text-blue-700" />
+            <div
+              className={`text-[10px] font-mono uppercase tracking-[0.2em] text-blue-700 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {isKh ? "អនន្ត" : "Infinity"}
+            </div>
+          </div>
+          <h4
+            className={`font-display font-bold text-slate-900 text-base sm:text-lg mb-2 ${
+              isKh ? "font-khmer" : ""
+            }`}
+          >
+            {isKh ? "ចំនួនអសនិទាន — លេខគ្មានទីបញ្ចប់" : "The Never-Ending Number"}
+          </h4>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                <InlineMath math={String.raw`\pi`} /> គឺជា <strong>ចំនួនអសនិទាន</strong>។ វាមិនអាចសរសេរជាប្រភាគធម្មតាដ៏ល្អឥតខ្ចោះណាមួយឡើយ។ ខ្ទង់ទសភាគរបស់វាបន្តរហូតដល់អនន្តភាព ដោយមិនដែលធ្វើម្តងទៀតនូវលំនាំណាមួយឡើយ។
+              </>
+            ) : (
+              <>
+                <InlineMath math={String.raw`\pi`} /> is an{" "}
+                <strong>irrational number</strong>. It cannot be written as a
+                perfect simple fraction. The decimal points go on forever to
+                infinity without ever repeating a pattern.
+              </>
+            )}
+          </p>
+
+          {/* Decimal-tape visualization */}
+          <div className="rounded-lg bg-white border border-blue-200 p-3 mb-3 overflow-hidden">
+            <div
+              className={`text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500 mb-1 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {isKh ? "៥០ ខ្ទង់ដំបូង" : "First 50 digits"}
+            </div>
+            <p className="font-mono text-xs sm:text-sm text-slate-800 leading-relaxed break-all">
+              3.14159265358979323846264338327950288419716939937510
+              <span className="text-slate-400">…</span>
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 mt-auto">
+            <div
+              className={`flex items-start gap-2 text-sm text-amber-900 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <p>
+                <span className="font-bold">
+                  {isKh ? "ការពិតគួរឱ្យភ្ញាក់ផ្អើល៖ " : "Mind-blowing fact: "}
+                </span>
+                {isKh
+                  ? "កុំព្យូទ័រខ្លាំងបានគណនា π ដល់រាប់ពាន់ពាន់លានខ្ទង់ — ហើយយើងនៅតែមិនទាន់រកឃើញចុងបញ្ចប់ទេ!"
+                  : "Supercomputers have calculated π to trillions of digits — and we still haven't found the end!"}
+              </p>
+            </div>
+          </div>
+        </article>
+
+        {/* ── Card 3: Why is a Circle 2π? ─────────────────────────── */}
+        <article className="bg-blue-50/70 rounded-xl border border-blue-200 p-4 sm:p-5 flex flex-col">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white font-mono font-bold text-sm">3</span>
+            <Circle className="w-4 h-4 text-blue-700" />
+            <div
+              className={`text-[10px] font-mono uppercase tracking-[0.2em] text-blue-700 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              {isKh ? "រ៉ាដ្យង់" : "Radians"}
+            </div>
+          </div>
+          <h4
+            className={`font-display font-bold text-slate-900 text-base sm:text-lg mb-2 ${
+              isKh ? "font-khmer" : ""
+            }`}
+          >
+            {isKh ? (
+              <>ហេតុអ្វីរង្វង់ស្មើនឹង <InlineMath math={String.raw`2\pi`} /> ?</>
+            ) : (
+              <>Why is a circle <InlineMath math={String.raw`2\pi`} /> ?</>
+            )}
+          </h4>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                ជំនួសឱ្យការវាស់ដោយប្រើអង្កត់ផ្ចិត គណិតវិទូចូលចិត្តប្រើ <strong>កាំ</strong> (កន្លះទទឹង) ព្រោះវាភ្ជាប់ចំណុចកណ្តាលទៅគែម។
+              </>
+            ) : (
+              <>
+                Instead of measuring with the diameter, mathematicians prefer
+                using the <strong>radius</strong> (half the width) because it
+                connects the center to the edge.
+              </>
+            )}
+          </p>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                ប្រសិនបើអ្នកយកកាំ ហើយរុំវាជុំវិញខាងក្រៅ វាសមដាក់ច្បាស់ៗ{" "}
+                <InlineMath math={String.raw`2\pi`} /> ដង (ប្រហែល <span className="font-mono">៦.២៨</span> ដង)។ នេះហើយជាមូលហេតុដែលការផ្លាស់ទីពេញរង្វង់មួយស្មើនឹង <InlineMath math={String.raw`2\pi`} /> រ៉ាដ្យង់។
+              </>
+            ) : (
+              <>
+                If you take the radius and wrap it around the outside, it fits
+                exactly <InlineMath math={String.raw`2\pi`} /> times (about{" "}
+                <span className="font-mono">6.28</span> times). This is why
+                moving in a full circle is <InlineMath math={String.raw`2\pi`} /> radians.
+              </>
+            )}
+          </p>
+
+          {/* Mini SVG: radius wrapping a circle */}
+          <div className="rounded-lg bg-white border border-blue-200 p-3 mb-3 not-prose">
+            <svg viewBox="0 0 200 120" className="w-full h-auto" role="img" aria-label={isKh ? "កាំរុំជុំវិញរង្វង់ ២π ដង" : "Radius wraps the circle 2π times"}>
+              <circle cx="70" cy="60" r="40" fill="none" stroke="#1d4ed8" strokeWidth="2" />
+              {/* radius line */}
+              <line x1="70" y1="60" x2="110" y2="60" stroke="#1d4ed8" strokeWidth="2.5" />
+              <text x="80" y="55" fontFamily="serif" fontStyle="italic" fontSize="11" fill="#1d4ed8">r</text>
+              <circle cx="70" cy="60" r="2.5" fill="#1d4ed8" />
+              {/* arrow + label */}
+              <path d="M 125 60 L 150 60" stroke="#475569" strokeWidth="1.5" markerEnd="url(#piarr)" />
+              <defs>
+                <marker id="piarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
+                </marker>
+              </defs>
+              <text x="155" y="58" fontFamily="serif" fontSize="13" fill="#0f172a">
+                ≈ 6.28 ×
+              </text>
+              <text x="155" y="76" fontFamily="serif" fontStyle="italic" fontSize="11" fill="#475569">
+                {isKh ? "រុំជុំវិញ" : "around"}
+              </text>
+            </svg>
+          </div>
+
+          <div className="rounded-lg bg-white border border-blue-200 px-4 py-4 text-center mt-auto">
+            <BlockMath math={String.raw`C = 2\pi\, r`} />
+            <div
+              className={`mt-1 text-[11px] text-slate-500 ${
+                isKh ? "font-khmer text-xs" : ""
+              }`}
+            >
+              {isKh
+                ? "បរិមាត្រ = ២ × ផៃ × កាំ"
+                : "circumference = 2 × π × radius"}
+            </div>
+          </div>
+        </article>
+      </div>
+    </PaperCard>
   );
 }
 
