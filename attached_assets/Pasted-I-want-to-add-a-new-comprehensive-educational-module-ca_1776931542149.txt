@@ -1,0 +1,43 @@
+I want to add a new comprehensive educational module called 'The Roman Empire: Rise, Rule, and Ruin' (ចក្រភពរ៉ូម៖ ការកកើត ការគ្រប់គ្រង និងការដួលរលំ) to the World History section. Please implement the following cleanly:
+
+1. Routing & Navigation:
+
+Create a new component RomanEmpire.jsx.
+
+Register a new route: /study-center/history/roman-empire.
+
+Add a link to the 'World History' dropdown labeled 'The Roman Empire' with a classical column or gladiator helmet icon.
+
+2. Section 1: Forging the Empire (ការបង្កើតចក្រភព):
+
+Explain that Rome didn't start as an empire; it started as a small republic. Through military discipline and brilliant engineering (roads, aqueducts, and concrete), they conquered the entire Mediterranean world.
+
+Key Concept: Explain that the Romans built over 400,000 kilometers of roads. This wasn't just for travel; it was how they moved their armies and enforced their laws instantly across the map.
+
+3. Section 2: Prominent Emperors (អធិរាជលេចធ្លោ):
+
+Create a horizontal scroll or grid of 'Emperor Profile Cards' with bilingual stats:
+
+Augustus (អូហ្គូស្ទុស): The First Emperor. He ended the republic and started a 200-year period of peace known as the Pax Romana.
+
+Trajan (ត្រាចាន): The Conqueror. Under his rule, the physical territory of the empire reached its absolute maximum size.
+
+Marcus Aurelius (ម៉ាកុស អូរ៉េលៀស): The Philosopher King. A brilliant thinker who ruled during a devastating plague and wrote a famous diary on Stoicism.
+
+Constantine (កុងស្តង់ទីន): The Changer. He stopped the persecution of Christians and moved the capital away from Rome.
+
+4. Section 3: The Great Split (ការបំបែកដ៏ធំ):
+
+Explain that by 395 CE, the empire was too big to protect from invading tribes.
+
+It officially split into two separate maps:
+
+The Western Roman Empire (Rome): This half collapsed and fell into the 'Dark Ages' shortly after.
+
+The Eastern Roman Empire (Byzantium/Constantinople): This half survived and stayed rich and powerful for another 1,000 years!
+
+5. UI & Layout:
+
+Use a 'Classical Antiquity' aesthetic: marble whites, imperial purples, and gold accents.
+
+Ensure all core concepts, headings, and names are strictly bilingual (English/Khmer).

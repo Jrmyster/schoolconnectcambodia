@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -505,6 +505,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Dna,
         descEn: "CRISPR-Cas9 as a 'find & replace' for the 3-billion-letter book of DNA — drought-proof rice, the first FDA-approved cure for sickle cell, and the ethics of editing life.",
         descKh: "CRISPR-Cas9 ដូចជា «រកនិងជំនួស» សម្រាប់សៀវភៅ DNA ៣ ពាន់លានអក្សរ — ស្រូវធន់នឹងគ្រោះរាំងស្ងួត ការព្យាបាលដំបូងគេដែលអនុម័តដោយ FDA សម្រាប់ឈាមរូបអាក់ និងសីលធម៌នៃការកែសម្រួលជីវិត។",
+      },
+      {
+        href: "/science/biology/cell-division",
+        labelEn: "Cell Division",
+        labelKh: "ការបែងចែកកោសិកា",
+        icon: Split,
+        descEn: "Mitosis vs. Meiosis — how a cell with 46 chromosomes either makes two perfect clones (growth & healing) or four genetically unique cells with 23 each (sperm & egg, with DNA crossing over to mix mum and dad).",
+        descKh: "មីតូស និង​មេយ៉ូស — របៀប​ដែល​កោសិកា​មាន ៤៦ ក្រូម៉ូសូម​បង្កើត​ច្បាប់​ចម្លង​ដូច​គ្នា​ពីរ (ការ​លូតលាស់ & ការ​ព្យាបាល) ឬ​កោសិកា​ខុស​គ្នា​ផ្នែក​ហ្សែន​បួន​មាន ២៣ នីមួយ​ៗ (មេជីវិត & ស៊ុត ដោយ​ DNA ឆ្លង​កាត់​លាយ​ម្តាយ​នឹង​ឪពុក)។",
       },
       {
         href: "/biology/botany",
