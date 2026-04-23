@@ -27,8 +27,9 @@ import { useLanguageStore } from "@/store/use-language";
 //
 //  1. Michael Faraday — The Father of Induction
 //  2. James Clerk Maxwell — The Mathematical Map (4 equations)
-//  3. Gauss's Law — The Invisible Net (with KaTeX)
-//  4. Applications: Motors, Transformers, MRI
+//  3. Transformers — Taming the Power (with KaTeX V_p/V_s = N_p/N_s)
+//  4. Gauss's Law — The Invisible Net (with KaTeX)
+//  5. Applications: Motors, Transformers, MRI
 //
 //  Aesthetic: Scientific Lab — clean off-white, slate text,
 //  indigo+amber accents, blueprint grid, vector field diagrams.
@@ -112,9 +113,24 @@ export default function ElectromagnetismPage() {
         <MaxwellEquationsGrid isKh={isKh} />
       </Section>
 
-      {/* ── Section 3: Gauss's Law ────────────────────────────────────── */}
+      {/* ── Section 3: Transformers ───────────────────────────────────── */}
       <Section
         spec="03"
+        Icon={Plug}
+        eyebrowEn="Transformers — Taming the Power"
+        eyebrowKh="ត្រង់ស្វ័រមឺរ — ការគ្រប់គ្រងថាមពល"
+        titleEn="How the humming gray box on a power pole keeps your electronics alive"
+        titleKh="តើប្រអប់ប្រផេះរោទ៍លើបង្គោលភ្លើង រក្សាជីវិតឧបករណ៍អេឡិចត្រូនិករបស់អ្នកយ៉ាងម៉េច"
+        descEn="Power plants push electricity at incredibly high pressures (voltage) so it can travel across the country without losing energy. But if that raw power hit your house, it would melt your electronics. We use Faraday's Law to safely 'step down' that pressure before it enters your home."
+        descKh="រោងចក្រផលិតថាមពលរុញអគ្គិសនីក្រោមសម្ពាធ (តង់ស្យុង) ខ្ពស់មិនគួរឱ្យជឿ ដើម្បីឱ្យវាអាចធ្វើដំណើរឆ្លងកាត់ប្រទេសដោយមិនបាត់បង់ថាមពល។ ប៉ុន្តែប្រសិនបើថាមពលឆៅនោះវាយចូលផ្ទះរបស់អ្នកដោយផ្ទាល់ វានឹងធ្វើឱ្យឧបករណ៍អេឡិចត្រូនិករបស់អ្នករលាយ។ យើងប្រើច្បាប់របស់ហ្វារ៉ាដេយ ដើម្បី 'បន្ថយ' សម្ពាធនោះដោយសុវត្ថិភាព មុនពេលវាចូលក្នុងផ្ទះរបស់អ្នក។"
+        isKh={isKh}
+      >
+        <TransformersSection isKh={isKh} />
+      </Section>
+
+      {/* ── Section 4: Gauss's Law ────────────────────────────────────── */}
+      <Section
+        spec="04"
         Icon={CircleDot}
         eyebrowEn="Gauss's Law — The Invisible Net"
         eyebrowKh="ច្បាប់ហ្គោស — សំណាញ់អរូបិយ"
@@ -128,9 +144,9 @@ export default function ElectromagnetismPage() {
         <GaussFormula isKh={isKh} />
       </Section>
 
-      {/* ── Section 4: Applications ───────────────────────────────────── */}
+      {/* ── Section 5: Applications ───────────────────────────────────── */}
       <Section
-        spec="04"
+        spec="05"
         Icon={Cog}
         eyebrowEn="Applications"
         eyebrowKh="ការអនុវត្តជាក់ស្តែង"
@@ -455,6 +471,251 @@ function MaxwellCardView({ eq, isKh }: { eq: MaxwellCard; isKh: boolean }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+//  Section 3 · Transformers — The Magic of the Gap + Step-Down Math
+// ════════════════════════════════════════════════════════════════════════════
+
+function TransformersSection({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
+      {/* ── Card 1: The Magic of the Gap ──────────────────────────── */}
+      <article className="rounded-2xl border-2 border-slate-700/70 ring-1 ring-amber-400/30 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white p-5 sm:p-6 shadow-[0_0_40px_rgba(245,158,11,0.10)] flex flex-col">
+        <header className="flex items-start gap-3 mb-3">
+          <span
+            className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg font-mono font-bold text-base ring-1 bg-amber-500/20 text-amber-200 ring-amber-400/40"
+            aria-hidden
+          >
+            1
+          </span>
+          <div className="flex-1 min-w-0">
+            <div
+              className={`flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-amber-300 mb-0.5 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              <Magnet className="w-3.5 h-3.5" />
+              {isKh ? "មន្តអាគមនៃគម្លាត" : "The Magic of the Gap"}
+            </div>
+            <h3
+              className={`font-display font-bold text-white text-base sm:text-lg leading-snug ${
+                isKh ? "font-khmer" : ""
+              }`}
+            >
+              {isKh
+                ? "ខ្សែភ្លើងពីរ ដែលមិនប៉ះគ្នាសោះ"
+                : "Two wires that never touch each other"}
+            </h3>
+          </div>
+        </header>
+
+        <p
+          className={`text-sm text-slate-200 mb-4 ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "នៅខាងក្នុងប្រអប់រោទ៍លើបង្គោលភ្លើង មានរបុំខ្សែភ្លើងដាច់ពីគ្នាពីរ រុំជុំវិញចិញ្ចៀនដែក។ មួយយកថាមពលចូល មួយទៀតបញ្ចេញថាមពលចេញទៅផ្ទះរបស់អ្នក។"
+            : "Inside the humming boxes on power poles, there are two separate coils of wire wrapped around the same iron ring. One coil takes power in; the other sends power out toward your house."}
+        </p>
+
+        {/* Mini transformer diagram (SVG) */}
+        <div className="rounded-xl bg-slate-950/80 border border-slate-700/60 ring-1 ring-white/5 p-4 mb-4 not-prose">
+          <svg
+            viewBox="0 0 360 160"
+            className="w-full h-auto"
+            role="img"
+            aria-label={
+              isKh
+                ? "ដ្យាក្រាមត្រង់ស្វ័រមឺរ៖ របុំបឋម ខ្នូរដែក និងរបុំទុតិយ"
+                : "Transformer diagram: primary coil, iron core, and secondary coil"
+            }
+          >
+            {/* Iron core (gray rectangle frame) */}
+            <rect
+              x="120" y="30" width="120" height="100"
+              fill="none" stroke="#94a3b8" strokeWidth="6" rx="4"
+            />
+            <text
+              x="180" y="80" textAnchor="middle"
+              fontFamily={isKh ? "sans-serif" : "monospace"} fontSize={isKh ? 10 : 9}
+              fill="#94a3b8" letterSpacing={isKh ? 0 : 2}
+            >
+              {isKh ? "ខ្នូរដែក" : "IRON CORE"}
+            </text>
+
+            {/* Primary coil (left, amber) — 5 loops */}
+            {[40, 60, 80, 100, 120].map((x, i) => (
+              <ellipse
+                key={`p-${i}`}
+                cx={x} cy="80" rx="14" ry="40"
+                fill="none" stroke="#f59e0b" strokeWidth="2.5"
+              />
+            ))}
+            {/* Secondary coil (right, indigo) — 3 loops (fewer = step down) */}
+            {[240, 270, 300].map((x, i) => (
+              <ellipse
+                key={`s-${i}`}
+                cx={x} cy="80" rx="14" ry="40"
+                fill="none" stroke="#a5b4fc" strokeWidth="2.5"
+              />
+            ))}
+
+            {/* Labels */}
+            <text x="80" y="20" textAnchor="middle" fontFamily={isKh ? "sans-serif" : "monospace"} fontSize="10" fill="#fbbf24">
+              {isKh ? "បឋម (Vp)" : "PRIMARY (Vp)"}
+            </text>
+            <text x="80" y="150" textAnchor="middle" fontFamily="sans-serif" fontSize="10" fill="#fcd34d">
+              {isKh ? "តង់ស្យុងខ្ពស់ចូល" : "high voltage in"}
+            </text>
+            <text x="270" y="20" textAnchor="middle" fontFamily={isKh ? "sans-serif" : "monospace"} fontSize="10" fill="#a5b4fc">
+              {isKh ? "ទុតិយ (Vs)" : "SECONDARY (Vs)"}
+            </text>
+            <text x="270" y="150" textAnchor="middle" fontFamily="sans-serif" fontSize="10" fill="#c7d2fe">
+              {isKh ? "តង់ស្យុងទាបចេញ" : "low voltage out"}
+            </text>
+
+            {/* Magnetic field arrow through core */}
+            <line
+              x1="140" y1="80" x2="220" y2="80"
+              stroke="#f1f5f9" strokeWidth="1.5"
+              strokeDasharray="4 4" markerEnd="url(#arr)"
+            />
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#f1f5f9" />
+              </marker>
+            </defs>
+            <text x="180" y="72" textAnchor="middle" fontFamily={isKh ? "sans-serif" : "monospace"} fontSize="9" fill="#f1f5f9">
+              {isKh ? "ដែន B" : "B-field"}
+            </text>
+          </svg>
+        </div>
+
+        <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-3 mt-auto">
+          <div
+            className={`flex items-start gap-2 text-sm text-amber-100 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+            <p>
+              <span className="font-bold text-amber-200">
+                {isKh ? "ចំណុចសំខាន់៖ " : "Crucial point: "}
+              </span>
+              {isKh
+                ? "ខ្សែទាំងពីរ មិនដែលប៉ះគ្នាឡើយ។ ខ្សែទីមួយ (បឋម) បង្កើតដែនម៉ាញេទិចប្រែប្រួលក្នុងដែក។ ខ្សែទីពីរ (ទុតិយ) 'អារម្មណ៍' ដែនម៉ាញេទិចនោះ ហើយប្រែវាឡើងវិញទៅជាអគ្គិសនី — ច្បាប់របស់ហ្វារ៉ាដេយដោយផ្ទាល់!"
+                : "The two wires never touch. The first wire (Primary) creates a fluctuating magnetic field in the iron. The second wire (Secondary) 'feels' that magnetic field and turns it back into electricity — Faraday's Law in action!"}
+            </p>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Card 2: The Math of Coils ─────────────────────────────── */}
+      <article className="rounded-2xl border-2 border-slate-700/70 ring-1 ring-indigo-400/30 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white p-5 sm:p-6 shadow-[0_0_40px_rgba(99,102,241,0.12)] flex flex-col">
+        <header className="flex items-start gap-3 mb-3">
+          <span
+            className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg font-mono font-bold text-base ring-1 bg-indigo-500/20 text-indigo-200 ring-indigo-400/40"
+            aria-hidden
+          >
+            2
+          </span>
+          <div className="flex-1 min-w-0">
+            <div
+              className={`flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-indigo-300 mb-0.5 ${
+                isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+              }`}
+            >
+              <Sigma className="w-3.5 h-3.5" />
+              {isKh ? "គណិតវិទ្យានៃរបុំខ្សែភ្លើង" : "The Math of Coils"}
+            </div>
+            <h3
+              className={`font-display font-bold text-white text-base sm:text-lg leading-snug ${
+                isKh ? "font-khmer" : ""
+              }`}
+            >
+              {isKh ? "ការ 'បន្ថយ' តង់ស្យុង" : "The 'step-down' ratio"}
+            </h3>
+          </div>
+        </header>
+
+        <p
+          className={`text-sm text-slate-200 mb-4 ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "តង់ស្យុងធ្លាក់ចុះ ឬឡើង អាស្រ័យលើចំនួនដងដែលខ្សែភ្លើងត្រូវបានរុំជុំវិញខ្នូរដែក។ ប្រសិនបើរបុំទីពីរ (ទុតិយ) មានចំនួនរបុំតិចជាងទីមួយ (បឋម) — តង់ស្យុងធ្លាក់ចុះ!"
+            : "The voltage drops (or rises) based on the number of times the wire is wrapped around the iron core. If the second coil (Secondary) has fewer wraps than the first (Primary) — the voltage drops!"}
+        </p>
+
+        {/* The Transformer Equation — center stage */}
+        <div
+          className="rounded-xl bg-slate-950/80 border border-slate-700/60 ring-1 ring-indigo-400/20 px-4 py-5 my-1 text-white text-center text-lg sm:text-2xl overflow-x-auto"
+          aria-label="Transformer equation"
+        >
+          <BlockMath math={String.raw`\dfrac{V_p}{V_s} \;=\; \dfrac{N_p}{N_s}`} />
+        </div>
+
+        {/* Symbol legend */}
+        <ul
+          className={`mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-xs text-slate-300 ${
+            isKh ? "font-khmer text-[13px] leading-loose" : ""
+          }`}
+        >
+          <li className="flex items-baseline gap-2">
+            <span className="text-indigo-300"><InlineMath math="V_p" /></span>
+            <span>{isKh ? "តង់ស្យុងបឋម (ចូល)" : "Primary voltage (in)"}</span>
+          </li>
+          <li className="flex items-baseline gap-2">
+            <span className="text-indigo-300"><InlineMath math="V_s" /></span>
+            <span>{isKh ? "តង់ស្យុងទុតិយ (ចេញ)" : "Secondary voltage (out)"}</span>
+          </li>
+          <li className="flex items-baseline gap-2">
+            <span className="text-indigo-300"><InlineMath math="N_p" /></span>
+            <span>{isKh ? "ចំនួនរបុំខ្សែបឋម" : "Number of primary coils"}</span>
+          </li>
+          <li className="flex items-baseline gap-2">
+            <span className="text-indigo-300"><InlineMath math="N_s" /></span>
+            <span>{isKh ? "ចំនួនរបុំខ្សែទុតិយ" : "Number of secondary coils"}</span>
+          </li>
+        </ul>
+
+        {/* Worked example chip */}
+        <div className="mt-4 rounded-lg border border-indigo-400/40 bg-indigo-500/10 p-3 mt-auto">
+          <div
+            className={`text-[10px] font-mono uppercase tracking-[0.2em] text-indigo-300 mb-1 ${
+              isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+            }`}
+          >
+            {isKh ? "ឧទាហរណ៍" : "Worked example"}
+          </div>
+          <p
+            className={`text-sm text-indigo-100 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh ? (
+              <>
+                ខ្សែខ្ពស់តង់ស្យុងនាំ <span className="font-mono">22 000 V</span> ចូលប្រអប់ដែលមានរបុំ{" "}
+                <InlineMath math="N_p = 100" /> រួម។ ប្រសិនបើ <InlineMath math="N_s = 1" />, ផ្ទះរបស់អ្នកនឹងទទួល
+                <span className="font-mono"> 220 V</span> — សុវត្ថិភាពសម្រាប់ដោតភ្លើង។
+              </>
+            ) : (
+              <>
+                A high-tension line carries{" "}
+                <span className="font-mono">22,000&nbsp;V</span> into a box with{" "}
+                <InlineMath math="N_p = 100" /> primary loops. With{" "}
+                <InlineMath math="N_s = 1" /> secondary loop, your house receives{" "}
+                <span className="font-mono">220&nbsp;V</span> — safe enough to plug into a lamp.
+              </>
+            )}
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 //  Section 1 · Faraday Profile + Induction Diagram + Quote
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -648,7 +909,7 @@ function BilingualQuote({ isKh: _isKh }: { isKh: boolean }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  Section 2 · Gauss's Law — Net diagram + Formula
+//  Section 4 · Gauss's Law — Net diagram + Formula
 // ════════════════════════════════════════════════════════════════════════════
 
 function GaussNet({ isKh }: { isKh: boolean }) {
@@ -846,7 +1107,7 @@ function SymRow({ sym, en, kh, isKh }: { sym: string; en: string; kh: string; is
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  Section 3 · Applications
+//  Section 5 · Applications
 // ════════════════════════════════════════════════════════════════════════════
 
 type App = {
