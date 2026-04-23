@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import {
   ArrowLeft, Hexagon, Atom, Move3d, RotateCw, Pill, Wheat, Recycle, Sparkles, Info,
   FlaskConical, Beaker, TestTube, FlaskRound, Filter, Thermometer, Flame, Droplets, Eye, AlertTriangle,
-  Volume2,
+  Volume2, Replace, Scissors, Zap, Hourglass,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { OrganicArchitecture3DModule } from "@/components/widgets/OrganicArchitecture3DModule";
@@ -74,16 +74,19 @@ export function OrganicChemistry101Page() {
         {/* ── Section 1: Carbon — The Master Builder ───────────── */}
         <CarbonSection />
 
-        {/* ── Section 2: 3D Molecule Viewer ────────────────────── */}
+        {/* ── Section 2: Reaction Mechanisms — The Moving Puzzle ─ */}
+        <ReactionMechanismsSection />
+
+        {/* ── Section 3: 3D Molecule Viewer ────────────────────── */}
         <MoleculeViewerSection />
 
-        {/* ── Section 2b: 3D Architecture (Isomers, Stereo, Chirality) ─ */}
+        {/* ── Section 3b: 3D Architecture (Isomers, Stereo, Chirality) ─ */}
         <OrganicArchitecture3DModule />
 
-        {/* ── Section 3: Chemistry in Cambodia ────────────────── */}
+        {/* ── Section 4: Chemistry in Cambodia ────────────────── */}
         <RealWorldSection />
 
-        {/* ── Section 4: The Organic Lab — Tools & Glassware ──── */}
+        {/* ── Section 5: The Organic Lab — Tools & Glassware ──── */}
         <OrganicLabSection />
       </div>
     </div>
@@ -529,6 +532,352 @@ const MOLECULES: Molecule[] = [
   })(),
 ];
 
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 2: Reaction Mechanisms — The Moving Puzzle
+ * ប្រតិកម្មគីមី — ល្បែងផ្គុំផ្លាស់ប្តូរ
+ * ══════════════════════════════════════════════════════════════════════════ */
+function ReactionMechanismsSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section className="rounded-3xl border-4 border-teal-200 bg-white/80 backdrop-blur shadow-md p-5 sm:p-8 mb-8">
+      <SectionHeader
+        icon={Replace}
+        eyebrowEn="Section 2"
+        eyebrowKh="ផ្នែកទី ២"
+        titleEn="Reaction Mechanisms: The Moving Puzzle"
+        titleKh="ប្រតិកម្មគីមី៖ ល្បែងផ្គុំផ្លាស់ប្តូរ"
+      />
+
+      <p
+        className={`text-base sm:text-lg text-slate-700 leading-relaxed mb-6 max-w-3xl ${
+          kh ? "font-khmer text-lg leading-loose" : ""
+        }`}
+      >
+        {t(
+          "Carbon molecules are not frozen statues — they react. A 'mechanism' is the story of how a reaction actually happens, atom by atom. Two of the most important stories are Substitution and Elimination, and each comes in two flavors: a one-step crash and a two-step waiting game.",
+          "ម៉ូលេគុលកាបូនមិនមែនជារូបចម្លាក់ស្ថិតស្ថេរទេ — ពួកវាប្រតិកម្ម។ 'យន្តការ' (mechanism) គឺជារឿងអំពីរបៀបដែលប្រតិកម្មកើតឡើងពិតប្រាកដ អាតូមម្តងមួយៗ។ រឿងសំខាន់បំផុតពីរគឺ ការជំនួស និង ការបំបាត់ ហើយនីមួយៗមានពីរប្រភេទ៖ ការប៉ះទង្គិចមួយជំហាន និង ល្បែងរង់ចាំពីរជំហាន។",
+        )}
+      </p>
+
+      {/* ── Card 1: Substitution Reactions ──────────────────────── */}
+      <MechanismCard
+        kh={kh}
+        tone="emerald"
+        icon={Replace}
+        labelEn="Card 1 · Substitution"
+        labelKh="កាត ១ · ការជំនួស"
+        titleEn="Substitution Reactions (SN1 vs SN2)"
+        titleKh="ប្រតិកម្មជំនួស (SN1 ទល់នឹង SN2)"
+        introEn="'Substitution' means swapping one piece of a molecule for another. A new player walks in, kicks the old player off the carbon, and takes its place."
+        introKh="'ការជំនួស' មានន័យថា ប្តូរបំណែកមួយនៃម៉ូលេគុលជាមួយបំណែកថ្មីមួយ។ អ្នកលេងថ្មីចូលមក ទាត់អ្នកលេងចាស់ចេញពីកាបូន ហើយចូលកាន់កាប់កន្លែង។"
+      >
+        <SubMechanismCard
+          tone="sky"
+          icon={Zap}
+          tagEn="ONE-STEP · CRASH"
+          tagKh="មួយជំហាន · ប៉ះទង្គិច"
+          nameEn="SN2 — The Backside Attack"
+          nameKh="SN2 — ការវាយលុកពីខាងក្រោយ"
+          bodyEn="A new attacker (Nu⁻) crashes into the carbon from the back, instantly popping the old leaving group (X) off the front. Everything happens in one single, explosive step. Because the attacker needs room to swing, SN2 only works on a 'skinny' (uncrowded) carbon."
+          bodyKh="អ្នកវាយលុកថ្មី (Nu⁻) បុកចូលកាបូនពីខាងក្រោយ ហើយធ្វើឲ្យក្រុមចាកចេញចាស់ (X) លោតចេញពីខាងមុខភ្លាមៗ។ អ្វីៗកើតឡើងក្នុងជំហានតែមួយ។ ដោយសារអ្នកវាយលុកត្រូវការកន្លែង SN2 ដំណើរការតែលើកាបូន 'ស្តើង' (មិនច្រើនក្រុម)។"
+          diagram="Nu⁻  +  C—X   →   Nu—C   +  X⁻"
+          captionEn="One-step: bond forms and bond breaks at the same instant."
+          captionKh="មួយជំហាន៖ ចំណងថ្មីកើត និងចំណងចាស់បាក់ ក្នុងពេលតែមួយ។"
+          kh={kh}
+        />
+        <SubMechanismCard
+          tone="amber"
+          icon={Hourglass}
+          tagEn="TWO-STEP · WAITING GAME"
+          tagKh="ពីរជំហាន · ល្បែងរង់ចាំ"
+          nameEn="SN1 — The Two-Step Waiting Game"
+          nameKh="SN1 — ល្បែងរង់ចាំពីរជំហាន"
+          bodyEn={
+            "First, the old leaving group (X) drops off all by itself, leaving behind a highly unstable Carbocation (a carbon with a +1 charge). Then, in a second step, the new attacker (Nu) walks in and attaches. SN1 needs a 'bulky' carbon (lots of neighbors) to stabilize that nervous carbocation while it waits."
+          }
+          bodyKh="ដំបូង ក្រុមចាកចេញ (X) ដាច់ចេញដោយខ្លួនឯង ទុកនៅពីក្រោយនូវ កាបូកាត្យុង (Carbocation) ដ៏អស្ថិរភាព (កាបូនមានបន្ទុក +1)។ បន្ទាប់មកក្នុងជំហានទីពីរ អ្នកវាយលុកថ្មី (Nu) ចូលមកភ្ជាប់។ SN1 ត្រូវការកាបូន 'ធំ' (មានអ្នកជិតខាងច្រើន) ដើម្បីធ្វើឲ្យកាបូកាត្យុងស្ថិតស្ថេរក្នុងពេលរង់ចាំ។"
+          diagram={
+            "Step 1:   C—X         →   C⁺   +  X⁻\n" +
+            "Step 2:   C⁺   +  Nu  →   C—Nu"
+          }
+          captionEn="Two-step: leave first, then attack. The carbocation is the unstable rest stop in the middle."
+          captionKh="ពីរជំហាន៖ ចាកចេញមុន រួចទើបវាយលុក។ កាបូកាត្យុងគឺជាកន្លែងសម្រាកអស្ថិរភាពនៅកណ្តាល។"
+          kh={kh}
+        />
+      </MechanismCard>
+
+      {/* ── Card 2: Elimination Reactions ───────────────────────── */}
+      <div className="mt-6">
+        <MechanismCard
+          kh={kh}
+          tone="rose"
+          icon={Scissors}
+          labelEn="Card 2 · Elimination"
+          labelKh="កាត ២ · ការបំបាត់"
+          titleEn="Elimination Reactions (E1 vs E2)"
+          titleKh="ប្រតិកម្មបំបាត់ (E1 ទល់នឹង E2)"
+          introEn={
+            "'Elimination' means stealing atoms away from the carbon chain to force it to fold into a new Double Bond (C=C). Instead of swapping in a new piece, the molecule loses two pieces and forms a brand-new bond between two carbons."
+          }
+          introKh="'ការបំបាត់' មានន័យថា លួចអាតូមចេញពីខ្សែកាបូនដើម្បីបង្ខំឲ្យវាបង្កើតជា ចំណងទ្វេ ថ្មី (C=C)។ ជំនួសឲ្យការដាក់បំណែកថ្មីចូល ម៉ូលេគុលបាត់បង់បំណែកពីរ ហើយបង្កើតចំណងថ្មីរវាងកាបូនពីរ។"
+        >
+          <SubMechanismCard
+            tone="sky"
+            icon={Zap}
+            tagEn="ONE-STEP · STEAL"
+            tagKh="មួយជំហាន · លួច"
+            nameEn="E2 — The One-Step Steal"
+            nameKh="E2 — ការលួចមួយជំហាន"
+            bodyEn="A strong base steals a hydrogen atom from one carbon at the exact same instant that the leaving group (X) pops off the next carbon. The freed electrons snap together into a brand-new double bond — all in one synchronized motion."
+            bodyKh="បាសខ្លាំងលួចអាតូមអ៊ីដ្រូសែនពីកាបូនមួយ នៅពេលតែមួយដែលក្រុមចាកចេញ (X) លោតចេញពីកាបូនបន្ទាប់។ អេឡិចត្រុងដែលមានសេរីភាពភ្ជាប់គ្នាជាចំណងទ្វេថ្មីក្រាស់ — ក្នុងចលនាសមកាលកម្មតែមួយ។"
+            diagram={
+              "B⁻  H—C—C—X   →   B—H  +  C=C  +  X⁻\n" +
+              "         ↑                ↑\n" +
+              "    base steals H    new double bond"
+            }
+            captionEn="One-step: H leaves, X leaves, and the double bond forms — all together."
+            captionKh="មួយជំហាន៖ H ចេញ X ចេញ ហើយចំណងទ្វេកើត — ទាំងអស់ព្រមគ្នា។"
+            kh={kh}
+          />
+          <SubMechanismCard
+            tone="amber"
+            icon={Hourglass}
+            tagEn="TWO-STEP · STEAL"
+            tagKh="ពីរជំហាន · លួច"
+            nameEn="E1 — The Two-Step Steal"
+            nameKh="E1 — ការលួចពីរជំហាន"
+            bodyEn="Just like SN1, the leaving group (X) drops off first, creating an unstable Carbocation. In step two, a weak base wanders by and steals a hydrogen from the neighbor carbon, which lets the leftover electrons fall into place as a double bond."
+            bodyKh="ដូចគ្នានឹង SN1 ដែរ ក្រុមចាកចេញ (X) ដាច់ចេញមុន បង្កើតកាបូកាត្យុងអស្ថិរភាព។ ក្នុងជំហានទីពីរ បាសខ្សោយដើរកាត់ ហើយលួចអាតូមអ៊ីដ្រូសែនពីកាបូនជិតខាង ដែលអនុញ្ញាតឲ្យអេឡិចត្រុងដែលនៅសល់ធ្លាក់ចូលជាចំណងទ្វេ។"
+            diagram={
+              "Step 1:   H—C—C—X       →   H—C—C⁺   +  X⁻\n" +
+              "Step 2:   H—C—C⁺  +  B  →   C=C      +  B—H"
+            }
+            captionEn="Two-step: leave first, then steal. Same carbocation pit-stop as SN1."
+            captionKh="ពីរជំហាន៖ ចាកចេញមុន រួចទើបលួច។ ឈប់ត្រង់កាបូកាត្យុងដូច SN1 ដែរ។"
+            kh={kh}
+          />
+        </MechanismCard>
+      </div>
+
+      {/* Quick-look cheat-sheet */}
+      <div className="mt-6 rounded-2xl border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-emerald-50 p-4 sm:p-5">
+        <div
+          className={`text-[10px] font-bold uppercase tracking-[0.25em] text-teal-700 mb-2 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {t("Quick comparison", "ការប្រៀបធៀបរហ័ស")}
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr className="text-left text-slate-600">
+                <th className={`py-2 pr-3 font-semibold ${kh ? "font-khmer" : ""}`}>
+                  {t("Mechanism", "យន្តការ")}
+                </th>
+                <th className={`py-2 pr-3 font-semibold ${kh ? "font-khmer" : ""}`}>
+                  {t("Steps", "ជំហាន")}
+                </th>
+                <th className={`py-2 pr-3 font-semibold ${kh ? "font-khmer" : ""}`}>
+                  {t("Likes carbon that is…", "ស្រឡាញ់កាបូនបែប…")}
+                </th>
+                <th className={`py-2 font-semibold ${kh ? "font-khmer" : ""}`}>
+                  {t("Result", "លទ្ធផល")}
+                </th>
+              </tr>
+            </thead>
+            <tbody className={`text-slate-700 ${kh ? "font-khmer" : ""}`}>
+              <tr className="border-t border-teal-200/70">
+                <td className="py-2 pr-3 font-mono font-bold text-emerald-700">SN2</td>
+                <td className="py-2 pr-3">{t("1", "១")}</td>
+                <td className="py-2 pr-3">{t("skinny", "ស្តើង")}</td>
+                <td className="py-2">{t("swap (new piece in)", "ជំនួស (បំណែកថ្មីចូល)")}</td>
+              </tr>
+              <tr className="border-t border-teal-200/70">
+                <td className="py-2 pr-3 font-mono font-bold text-emerald-700">SN1</td>
+                <td className="py-2 pr-3">{t("2", "២")}</td>
+                <td className="py-2 pr-3">{t("bulky", "ធំ")}</td>
+                <td className="py-2">{t("swap (via carbocation)", "ជំនួស (តាមរយៈកាបូកាត្យុង)")}</td>
+              </tr>
+              <tr className="border-t border-teal-200/70">
+                <td className="py-2 pr-3 font-mono font-bold text-rose-700">E2</td>
+                <td className="py-2 pr-3">{t("1", "១")}</td>
+                <td className="py-2 pr-3">{t("any", "ណាមួយ")}</td>
+                <td className="py-2">{t("new double bond C=C", "ចំណងទ្វេថ្មី C=C")}</td>
+              </tr>
+              <tr className="border-t border-teal-200/70">
+                <td className="py-2 pr-3 font-mono font-bold text-rose-700">E1</td>
+                <td className="py-2 pr-3">{t("2", "២")}</td>
+                <td className="py-2 pr-3">{t("bulky", "ធំ")}</td>
+                <td className="py-2">{t("new double bond C=C", "ចំណងទ្វេថ្មី C=C")}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Mechanism outer card (one per family) ─────────────────────────────── */
+type MechTone = "emerald" | "rose";
+const MECH_TONES: Record<MechTone, { border: string; chip: string; iconBg: string; eyebrow: string }> = {
+  emerald: {
+    border: "border-emerald-200",
+    chip: "bg-emerald-100 text-emerald-800",
+    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+    eyebrow: "text-emerald-700",
+  },
+  rose: {
+    border: "border-rose-200",
+    chip: "bg-rose-100 text-rose-800",
+    iconBg: "bg-gradient-to-br from-rose-500 to-pink-600",
+    eyebrow: "text-rose-700",
+  },
+};
+
+function MechanismCard({
+  kh,
+  tone,
+  icon: Icon,
+  labelEn,
+  labelKh,
+  titleEn,
+  titleKh,
+  introEn,
+  introKh,
+  children,
+}: {
+  kh: boolean;
+  tone: MechTone;
+  icon: React.ComponentType<{ className?: string }>;
+  labelEn: string;
+  labelKh: string;
+  titleEn: string;
+  titleKh: string;
+  introEn: string;
+  introKh: string;
+  children: React.ReactNode;
+}) {
+  const T = MECH_TONES[tone];
+  return (
+    <article className={`rounded-2xl border-2 ${T.border} bg-white shadow-sm p-5 sm:p-6`}>
+      <header className="flex items-start gap-3 mb-3">
+        <div className={`shrink-0 w-11 h-11 rounded-xl ${T.iconBg} text-white shadow flex items-center justify-center`}>
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div
+            className={`text-[10px] font-bold uppercase tracking-[0.25em] ${T.eyebrow} mb-1 ${
+              kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {kh ? labelKh : labelEn}
+          </div>
+          <h3 className={`font-display text-xl sm:text-2xl font-extrabold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+            {kh ? titleKh : titleEn}
+          </h3>
+        </div>
+      </header>
+      <p
+        className={`text-sm sm:text-base text-slate-700 leading-relaxed mb-4 ${
+          kh ? "font-khmer text-base leading-loose" : ""
+        }`}
+      >
+        {kh ? introKh : introEn}
+      </p>
+      <div className="grid md:grid-cols-2 gap-4">{children}</div>
+    </article>
+  );
+}
+
+/* ── Sub-mechanism card (SN1 / SN2 / E1 / E2) ──────────────────────────── */
+type SubTone = "sky" | "amber";
+const SUB_TONES: Record<SubTone, { border: string; bg: string; chip: string; ring: string; tagText: string }> = {
+  sky: {
+    border: "border-sky-200",
+    bg: "bg-gradient-to-br from-sky-50 to-cyan-50",
+    chip: "bg-sky-600 text-white",
+    ring: "ring-sky-300/60",
+    tagText: "text-sky-800 bg-sky-100",
+  },
+  amber: {
+    border: "border-amber-200",
+    bg: "bg-gradient-to-br from-amber-50 to-orange-50",
+    chip: "bg-amber-600 text-white",
+    ring: "ring-amber-300/60",
+    tagText: "text-amber-800 bg-amber-100",
+  },
+};
+
+function SubMechanismCard({
+  kh,
+  tone,
+  icon: Icon,
+  tagEn,
+  tagKh,
+  nameEn,
+  nameKh,
+  bodyEn,
+  bodyKh,
+  diagram,
+  captionEn,
+  captionKh,
+}: {
+  kh: boolean;
+  tone: SubTone;
+  icon: React.ComponentType<{ className?: string }>;
+  tagEn: string;
+  tagKh: string;
+  nameEn: string;
+  nameKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  diagram: string;
+  captionEn: string;
+  captionKh: string;
+}) {
+  const S = SUB_TONES[tone];
+  return (
+    <div className={`rounded-xl border-2 ${S.border} ${S.bg} p-4 flex flex-col`}>
+      <div className="flex items-center gap-2 mb-2">
+        <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg ${S.chip} shadow-sm ring-1 ${S.ring}`}>
+          <Icon className="w-3.5 h-3.5" />
+        </span>
+        <span
+          className={`text-[10px] font-bold uppercase tracking-[0.2em] px-2 py-0.5 rounded-full ${S.tagText} ${
+            kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+          }`}
+        >
+          {kh ? tagKh : tagEn}
+        </span>
+      </div>
+      <h4 className={`font-bold text-slate-900 text-base sm:text-lg mb-2 ${kh ? "font-khmer" : ""}`}>
+        {kh ? nameKh : nameEn}
+      </h4>
+      <p className={`text-sm text-slate-700 leading-relaxed mb-3 ${kh ? "font-khmer text-base leading-loose" : ""}`}>
+        {kh ? bodyKh : bodyEn}
+      </p>
+      <pre
+        className="rounded-lg bg-slate-900 text-emerald-200 text-[11px] sm:text-xs font-mono p-3 overflow-x-auto whitespace-pre leading-relaxed shadow-inner"
+        aria-label={kh ? "ដ្យាក្រាមប្រតិកម្ម" : "Reaction diagram"}
+      >
+        {diagram}
+      </pre>
+      <p
+        className={`text-[11px] sm:text-xs text-slate-600 italic mt-2 ${
+          kh ? "font-khmer not-italic leading-loose" : ""
+        }`}
+      >
+        {kh ? captionKh : captionEn}
+      </p>
+    </div>
+  );
+}
+
 function MoleculeViewerSection() {
   const t = useTranslation();
   const { language } = useLanguageStore();
@@ -540,8 +889,8 @@ function MoleculeViewerSection() {
     <section className="rounded-3xl border-4 border-cyan-200 bg-white/80 backdrop-blur shadow-md p-5 sm:p-8 mb-8">
       <SectionHeader
         icon={Move3d}
-        eyebrowEn="Section 2"
-        eyebrowKh="ផ្នែកទី ២"
+        eyebrowEn="Section 3"
+        eyebrowKh="ផ្នែកទី ៣"
         titleEn="Spin a Molecule in 3D"
         titleKh="បង្វិលម៉ូលេគុលក្នុង ៣D"
       />
@@ -811,8 +1160,8 @@ function RealWorldSection() {
     <section className="rounded-3xl border-4 border-amber-200 bg-white/80 backdrop-blur shadow-md p-5 sm:p-8 mb-8">
       <SectionHeader
         icon={Sparkles}
-        eyebrowEn="Section 3"
-        eyebrowKh="ផ្នែកទី ៣"
+        eyebrowEn="Section 4"
+        eyebrowKh="ផ្នែកទី ៤"
         titleEn="Chemistry in Cambodia"
         titleKh="គីមីវិទ្យានៅកម្ពុជា"
       />
@@ -959,8 +1308,8 @@ function OrganicLabSection() {
     <section className="rounded-3xl border-4 border-sky-200 bg-white/90 backdrop-blur shadow-md p-5 sm:p-8 mb-8">
       <SectionHeader
         icon={FlaskConical}
-        eyebrowEn="Module 05 · Section 04 · Lab Manual"
-        eyebrowKh="មុខវិជ្ជា ០៥ · ផ្នែក ០៤ · សៀវភៅណែនាំមន្ទីរពិសោធន៍"
+        eyebrowEn="Module 05 · Section 05 · Lab Manual"
+        eyebrowKh="មុខវិជ្ជា ០៥ · ផ្នែក ០៥ · សៀវភៅណែនាំមន្ទីរពិសោធន៍"
         titleEn="The Organic Lab — Tools & Glassware"
         titleKh="ឧបករណ៍មន្ទីរពិសោធន៍សរីរាង្គ"
       />
