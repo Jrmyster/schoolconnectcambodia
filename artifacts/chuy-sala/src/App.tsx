@@ -52,6 +52,7 @@ const AfricaGeographyPage       = lazy(() => import("@/pages/AfricaGeographyPage
 const CrisprPage                = lazy(() => import("@/pages/CrisprPage"));
 const CellDivisionPage          = lazy(() => import("@/pages/CellDivisionPage"));
 const RomanEmpirePage           = lazy(() => import("@/pages/RomanEmpirePage"));
+const TwentiethCenturyMusicPage = lazy(() => import("@/pages/TwentiethCenturyMusicPage"));
 const RadarPage                 = lazy(() => import("@/pages/RadarPage").then(m => ({ default: m.RadarPage })));
 const TelevisionPage            = lazy(() => import("@/pages/TelevisionPage").then(m => ({ default: m.TelevisionPage })));
 const FutureIntelligencePage    = lazy(() => import("@/pages/FutureIntelligencePage").then(m => ({ default: m.FutureIntelligencePage })));
@@ -252,6 +253,7 @@ function Router() {
             <Route path="/science/biology/crispr" component={CrisprPage} />
             <Route path="/science/biology/cell-division" component={CellDivisionPage} />
             <Route path="/study-center/history/roman-empire" component={RomanEmpirePage} />
+            <Route path="/music/20th-century" component={TwentiethCenturyMusicPage} />
             <Route path="/technology/radar" component={RadarPage} />
             <Route path="/technology/television" component={TelevisionPage} />
             <Route path="/technology/future-intelligence" component={FutureIntelligencePage} />

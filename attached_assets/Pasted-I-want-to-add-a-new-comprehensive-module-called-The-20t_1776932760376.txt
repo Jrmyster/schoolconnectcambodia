@@ -1,0 +1,35 @@
+I want to add a new comprehensive module called 'The 20th Century: The Electric Revolution' (សតវត្សទី២០៖ បដិវត្តន៍អគ្គិសនី) to the Music Theory & The Art of Sound page. Please implement the following cleanly:
+
+1. Routing & Navigation:
+
+Create a new component TwentiethCenturyMusic.jsx.
+
+Register a new route: /music/20th-century.
+
+Add a link to the 'Music Theory' section navigation labeled '20th Century Genres'.
+
+2. Section 1: The Acoustic Roots (ប្រភពដើមនៃសូរស័ព្ទ):
+
+The Blues (តន្ត្រីប៊្លូស៍): Born in the American South from the hardship of African Americans. Explain that it uses a specific 12-bar chord structure and focuses on raw, emotional storytelling.
+
+Jazz (ចង្វាក់ហ្សាស): The art of breaking the rules. Introduce improvisation—where musicians don't read sheet music, but 'talk' to each other with their instruments in real-time, heavily featuring brass, pianos, and syncopated rhythms.
+
+3. Section 2: The Amplified Rebellion (ការបះបោរដោយប្រើឧបករណ៍បំពងសំឡេង):
+
+Rock and Roll (រ៉ុកអេនរ៉ូល): Electricity changes everything. The electric guitar takes center stage. It was the sound of youth rebellion in the 1950s and 60s, driven by a heavy backbeat.
+
+Heavy Metal (តន្ត្រីមេតាល់): Rock pushed to the absolute extreme. Explain the concept of distortion (pushing an amplifier so hard the soundwave literally breaks), characterized by lightning-fast guitar solos and aggressive drumming.
+
+4. Section 3: The Rhythmic Word (ពាក្យពេចន៍ និងចង្វាក់):
+
+Hip-Hop & Rap (ហ៊ីបហប និងរ៉េប): Born in the Bronx, New York in the 1970s.
+
+Crucial Distinction: Explain that 'Hip-Hop' is the culture and the music, while 'Rap' is the specific vocal technique of speaking rhythmically over a beat.
+
+The New Instrument: Highlight that DJs turned the turntable (a machine meant to just play music) into a brand new instrument by scratching and looping drum breaks.
+
+5. UI & Layout:
+
+Use a 'Vintage Vinyl / Amplifier' aesthetic: warm glowing ambers, deep vinyl blacks, and metallic silver borders.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

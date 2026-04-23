@@ -132,6 +132,7 @@ const CATEGORY_RULES: CategoryRule[] = [
       "/study-center/behaviorism",
       "/world-history",
       "/study-center/history",
+      "/music",
       "/pathway-to-medicine",
       "/human-engine",
       "/well-being",

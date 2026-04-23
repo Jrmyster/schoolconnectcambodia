@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -787,6 +787,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Music,
         descEn: "An interactive journey through instrument families, chords with jobs, the magic of voice leading, polyrhythms, and a re-harmonized Twinkle Twinkle — with audio at every step.",
         descKh: "ដំណើរអន្តរកម្មកាត់គ្រួសារឧបករណ៍ភ្លេង, chord ដែលមានការងារ, voice leading, polyrhythm, និង Twinkle Twinkle ដែលបានរៀបចំឡើងវិញ — មានសំឡេងគ្រប់ជំហាន។",
+      },
+      {
+        href: "/music/20th-century",
+        labelEn: "20th Century Genres",
+        labelKh: "ចង្វាក់​ភ្លេង​សតវត្ស​ទី ២០",
+        icon: Disc3,
+        descEn: "The Electric Revolution — how blues and jazz turned into rock and metal once amplifiers were invented, then how DJs in the Bronx made the turntable itself a brand-new instrument and started hip-hop & rap.",
+        descKh: "បដិវត្តន៍​អគ្គិសនី — របៀប​ដែល​ប៊្លូស និង​ហ្សាស​ប្រែ​ក្លាយ​ជា​រ៉ុក និង​មេតាល់​ពេល​បំពង​សំឡេង​ត្រូវ​បាន​បង្កើត ​បន្ទាប់​មក​របៀប​ដែល​ឌី​ជេ​នៅ Bronx បាន​ធ្វើ​ឱ្យ​ម៉ាស៊ីន​បង្វិល​ថាស​ក្លាយ​ជា​ឧបករណ៍​ភ្លេង​ថ្មី ហើយ​ចាប់​ផ្តើម​ហ៊ីបហប និង​រ៉េប។",
       },
       { href: "/science",            labelEn: "Scientific Literacy",    labelKh: "ចំណេះដឹងវិទ្យាសាស្ត្រ",  icon: FlaskConical },
       { href: "/electrical-safety",  labelEn: "Electrical Safety",      labelKh: "សុវត្ថិភាពអគ្គិសនី",      icon: Zap },
