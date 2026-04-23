@@ -1282,44 +1282,68 @@ export function Navbar() {
               </Link>
             )}
 
-            {/* Auth row */}
-            <div className="border-t border-border mt-2 pt-2">
+            {/* ── Account section ───────────────────────────────────
+             * Always visible in the mobile drawer so students never lose
+             * access to Sign In / Profile / Sign Out / Install App on
+             * small screens (where the desktop auth row is hidden).
+             * ──────────────────────────────────────────────────────── */}
+            <div
+              data-testid="mobile-auth-section"
+              className="mt-3 pt-3 border-t-2 border-primary/15"
+            >
+              <div className={`px-2 mb-2 text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {kh ? "គណនី" : "Account"}
+              </div>
+
               {user ? (
-                <div className="flex flex-col gap-1.5 px-1">
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary/10">
+                <div className="flex flex-col gap-2 px-1">
+                  {/* Logged-in chip showing the school / email */}
+                  <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-primary/10 border border-primary/20">
                     <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className={`text-sm font-semibold text-primary truncate ${kh ? "font-khmer" : ""}`}>
                       {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
                     </span>
                   </div>
+
+                  {/* Profile — full width, centered, prominent */}
                   <Link
                     href="/profile"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-primary hover:bg-primary/10 text-sm transition-all"
+                    data-testid="mobile-profile-link"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-bold bg-primary text-primary-foreground text-base shadow-md active:scale-[0.98] transition"
                   >
                     <User className="w-5 h-5" />
-                    <span className={kh ? "font-khmer" : ""}>{kh ? "ប្រូហ្វាយ" : "My Profile"}</span>
+                    <span className={kh ? "font-khmer" : ""}>{kh ? "ប្រូហ្វាយរបស់ខ្ញុំ" : "My Profile"}</span>
                   </Link>
+
+                  {/* Sign out — full width, centered, secondary */}
                   <button
                     type="button"
                     onClick={() => { logout(); setMobileOpen(false); }}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-destructive hover:bg-destructive/10 text-sm transition-all"
+                    data-testid="mobile-signout-button"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-destructive border-2 border-destructive/30 bg-destructive/5 hover:bg-destructive/10 text-sm transition active:scale-[0.98]"
                   >
                     <LogOut className="w-5 h-5" />
                     {t("Sign out", "ចេញ")}
                   </button>
                 </div>
               ) : (
+                /* Sign In — flagship full-width thumb-friendly primary button */
                 <Link
                   href="/login"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold bg-primary text-primary-foreground text-base"
+                  data-testid="mobile-signin-link"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-2xl font-bold bg-primary text-primary-foreground text-base shadow-lg shadow-primary/30 active:scale-[0.98] transition"
                 >
                   <LogIn className="w-5 h-5" />
                   {t("Sign In", "ចូលគណនី")}
                 </Link>
               )}
-              <InstallAppButton variant="full" className="w-full" />
+
+              {/* Install App — always available, full-width */}
+              <div className="mt-2" data-testid="mobile-install-app">
+                <InstallAppButton variant="full" className="w-full" />
+              </div>
             </div>
           </nav>
         </div>
