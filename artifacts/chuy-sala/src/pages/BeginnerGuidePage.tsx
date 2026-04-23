@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
-  CalendarDays, Star,
+  CalendarDays, Star, CalendarRange, Sun, CheckCircle2,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText, speakWord } from "@/lib/speech";
@@ -105,13 +105,14 @@ function numberToKhmerWords(n: number): string {
 export default function BeginnerGuidePage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days">("alphabet");
+  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days" | "months">("alphabet");
 
   const tabs: { id: typeof tab; en: string; kh: string; icon: typeof BookOpen; color: string }[] = [
-    { id: "alphabet", en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,     color: "bg-rose-500" },
-    { id: "numbers",  en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,         color: "bg-sky-500" },
-    { id: "pattern",  en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,      color: "bg-emerald-500" },
-    { id: "days",     en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays, color: "bg-indigo-500" },
+    { id: "alphabet", en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,      color: "bg-rose-500" },
+    { id: "numbers",  en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,          color: "bg-sky-500" },
+    { id: "pattern",  en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,       color: "bg-emerald-500" },
+    { id: "days",     en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays,  color: "bg-indigo-500" },
+    { id: "months",   en: "Months of the Year",  kh: KH_TODO("ខែនៃឆ្នាំ"),         icon: CalendarRange, color: "bg-fuchsia-500" },
   ];
 
   return (
@@ -178,6 +179,7 @@ export default function BeginnerGuidePage() {
         {tab === "numbers" && <NumbersGridSection kh={kh} />}
         {tab === "pattern" && <PatternGuideSection kh={kh} />}
         {tab === "days" && <DaysOfWeekSection kh={kh} />}
+        {tab === "months" && <MonthsOfYearSection kh={kh} />}
       </section>
     </div>
   );
@@ -683,12 +685,13 @@ function PickerColumn({
 
 function SectionHeader({
   kh, en, khText, accent,
-}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" | "indigo" }) {
+}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" | "indigo" | "fuchsia" }) {
   const palette = {
     rose:    "from-rose-100 to-pink-100 border-rose-300 text-rose-800",
     sky:     "from-sky-100 to-cyan-100 border-sky-300 text-sky-800",
     emerald: "from-emerald-100 to-teal-100 border-emerald-300 text-emerald-800",
     indigo:  "from-indigo-100 to-violet-100 border-indigo-300 text-indigo-800",
+    fuchsia: "from-fuchsia-100 to-pink-100 border-fuchsia-300 text-fuchsia-800",
   }[accent];
   return (
     <div className={`mb-5 rounded-2xl border-2 bg-gradient-to-r ${palette} px-5 py-4 flex items-start gap-3`}>
@@ -908,6 +911,260 @@ function DaysOfWeekSection({ kh }: { kh: boolean }) {
           {kh
             ? KH_TODO(`ថ្ងៃនេះគឺ ${DAYS_OF_WEEK[todayIdx].kh}`)
             : `Today is ${DAYS_OF_WEEK[todayIdx].en}`}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────── */
+/* SECTION 5 — Months of the Year (ខែនៃឆ្នាំ)                          */
+/* ──────────────────────────────────────────────────────────────────── */
+
+/**
+ * Index matches `Date.prototype.getMonth()` — 0 = January … 11 = December.
+ * Each month gets its own vibrant gradient to anchor visual memory, just
+ * like the Days of the Week tab.
+ */
+const MONTHS_OF_YEAR = [
+  { en: "January",   kh: "មករា",    emoji: "❄️", gradient: "from-sky-400 via-cyan-500 to-blue-600" },
+  { en: "February",  kh: "កុម្ភៈ",   emoji: "💖", gradient: "from-pink-400 via-rose-500 to-red-500" },
+  { en: "March",     kh: "មីនា",    emoji: "🌷", gradient: "from-emerald-400 via-green-500 to-teal-500" },
+  { en: "April",     kh: "មេសា",    emoji: "🌧️", gradient: "from-teal-400 via-cyan-500 to-sky-600" },
+  { en: "May",       kh: "ឧសភា",    emoji: "🌸", gradient: "from-fuchsia-400 via-pink-500 to-rose-500" },
+  { en: "June",      kh: "មិថុនា",   emoji: "☀️", gradient: "from-amber-400 via-orange-500 to-rose-500" },
+  { en: "July",      kh: "កក្កដា",   emoji: "🎆", gradient: "from-red-400 via-rose-500 to-pink-600" },
+  { en: "August",    kh: "សីហា",    emoji: "🏖️", gradient: "from-yellow-400 via-amber-500 to-orange-500" },
+  { en: "September", kh: "កញ្ញា",    emoji: "🍂", gradient: "from-orange-400 via-amber-500 to-yellow-500" },
+  { en: "October",   kh: "តុលា",    emoji: "🎃", gradient: "from-orange-500 via-red-500 to-rose-600" },
+  { en: "November",  kh: "វិច្ឆិកា",  emoji: "🍁", gradient: "from-amber-500 via-orange-600 to-red-600" },
+  { en: "December",  kh: "ធ្នូ",     emoji: "🎄", gradient: "from-emerald-500 via-green-600 to-teal-700" },
+] as const;
+
+function MonthsOfYearSection({ kh }: { kh: boolean }) {
+  // Current month in the user's LOCAL timezone (0 = Jan … 11 = Dec). Recomputed
+  // automatically whenever the local date rolls over so a page left open
+  // across a month boundary still highlights the correct month.
+  const [thisMonthIdx, setThisMonthIdx] = useState<number>(() => new Date().getMonth());
+
+  useEffect(() => {
+    let intervalId: number | null = null;
+    const now = new Date();
+    // Schedule a one-shot timeout to fire shortly after the next local
+    // midnight, then poll once per day. A daily poll is enough to catch the
+    // month boundary — we don't need to land exactly on the 1st.
+    const nextMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1,
+      0, 0, 5, // 5s past midnight to dodge clock-skew edge cases
+    );
+    const msUntilMidnight = Math.max(1000, nextMidnight.getTime() - now.getTime());
+
+    const timeoutId = window.setTimeout(() => {
+      setThisMonthIdx(new Date().getMonth());
+      intervalId = window.setInterval(() => {
+        setThisMonthIdx(new Date().getMonth());
+      }, 24 * 60 * 60 * 1000);
+    }, msUntilMidnight);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId !== null) window.clearInterval(intervalId);
+    };
+  }, []);
+
+  // Which month card is currently being spoken — drives the glow/pulse state.
+  const [playing, setPlaying] = useState<number | null>(null);
+  const playTimerRef = useRef<number | null>(null);
+
+  // Cancel any in-flight speech and the visual playing state on unmount.
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      if (playTimerRef.current !== null) {
+        window.clearTimeout(playTimerRef.current);
+      }
+    };
+  }, []);
+
+  function speakMonth(idx: number) {
+    const month = MONTHS_OF_YEAR[idx];
+
+    if (playTimerRef.current !== null) {
+      window.clearTimeout(playTimerRef.current);
+      playTimerRef.current = null;
+    }
+
+    // Only clear `playing` if the ended utterance is still the active one —
+    // a rapid second tap will have already advanced it.
+    const clearIfStillActive = () => {
+      setPlaying((current) => (current === idx ? null : current));
+    };
+
+    const result = speakText(month.en, "en-US", {
+      onEnd: clearIfStillActive,
+      onError: clearIfStillActive,
+    });
+    if (!result.ok) return;
+
+    setPlaying(idx);
+
+    // Safety-net timer for browsers that occasionally drop `end` events.
+    playTimerRef.current = window.setTimeout(() => {
+      clearIfStillActive();
+      playTimerRef.current = null;
+    }, 3500);
+  }
+
+  const TIME_FACTS = [
+    { Icon: Sun,           en: "1 Year = 12 Months",  kh: KH_TODO("១ ឆ្នាំ = ១២ ខែ"),     accent: "from-amber-100 to-amber-200 border-amber-300 text-amber-800" },
+    { Icon: CalendarRange, en: "1 Year = 52 Weeks",   kh: KH_TODO("១ ឆ្នាំ = ៥២ សប្តាហ៍"), accent: "from-sky-100 to-sky-200 border-sky-300 text-sky-800" },
+    { Icon: CheckCircle2,  en: "1 Year = 365 Days",   kh: KH_TODO("១ ឆ្នាំ = ៣៦៥ ថ្ងៃ"),  accent: "from-emerald-100 to-emerald-200 border-emerald-300 text-emerald-800" },
+  ] as const;
+
+  return (
+    <div>
+      <SectionHeader
+        kh={kh}
+        en="Tap a month to hear it spoken — this month is highlighted!"
+        khText={KH_TODO("ប៉ះខែណាមួយដើម្បីស្ដាប់ការបញ្ចេញសំឡេង — ខែនេះត្រូវបានបន្លិច!")}
+        accent="fuchsia"
+      />
+
+      {/* Time-Facts banner — soft, friendly, bilingual. Stacks on mobile,
+          fans into 3 columns from sm-up. */}
+      <div
+        className="mb-6 rounded-3xl border-4 border-amber-200 bg-gradient-to-br from-amber-50 via-rose-50 to-sky-50 p-4 sm:p-5 shadow-sm"
+        data-testid="months-time-facts-banner"
+      >
+        <div
+          className={`text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-500 mb-3 ${
+            kh ? "font-khmer normal-case tracking-normal text-sm sm:text-base" : ""
+          }`}
+        >
+          {kh ? KH_TODO("ការពិតអំពីពេលវេលា") : "Time Facts"}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {TIME_FACTS.map((fact) => (
+            <div
+              key={fact.en}
+              className={`flex items-center gap-3 rounded-2xl bg-gradient-to-br ${fact.accent} border-2 px-4 py-3 shadow-sm`}
+            >
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/70 ring-2 ring-white shadow-inner shrink-0">
+                <fact.Icon className="w-5 h-5" />
+              </span>
+              <div className="min-w-0">
+                <div className="font-display font-extrabold text-lg sm:text-xl leading-tight">
+                  {fact.en}
+                </div>
+                <div className="font-khmer text-sm sm:text-base leading-relaxed opacity-90">
+                  {fact.kh}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 12-card grid:
+          - mobile: 2 columns
+          - tablet: 3 columns
+          - desktop: 4 columns
+          - xl: 6 columns (two full half-years per row) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
+        {MONTHS_OF_YEAR.map((month, idx) => {
+          const isPlaying = playing === idx;
+          const isThisMonth = thisMonthIdx === idx;
+          return (
+            <button
+              key={month.en}
+              type="button"
+              onClick={() => speakMonth(idx)}
+              aria-label={
+                `Listen to the pronunciation of ${month.en} / ${month.kh}${
+                  isThisMonth ? ` — This month / ${KH_TODO("ខែនេះ")}` : ""
+                }`
+              }
+              aria-pressed={isPlaying}
+              aria-current={isThisMonth ? "date" : undefined}
+              data-testid={`month-card-${month.en.toLowerCase()}`}
+              className={`relative group rounded-2xl border-4 shadow-lg p-4 text-center text-white bg-gradient-to-br ${month.gradient} transform hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 ${
+                isThisMonth
+                  ? "border-yellow-300 ring-4 ring-yellow-300/70 ring-offset-2 ring-offset-transparent"
+                  : "border-white"
+              } ${
+                isPlaying
+                  ? "scale-105 ring-4 ring-white/80 ring-offset-2 ring-offset-transparent animate-pulse-glow"
+                  : ""
+              }`}
+            >
+              {/* Speaker icon — top-right corner */}
+              <span
+                aria-hidden="true"
+                className={`absolute top-2 right-2 inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-900/35 ring-1 ring-white/60 backdrop-blur-sm transition-all ${
+                  isPlaying
+                    ? "bg-white/95 ring-white scale-110"
+                    : "group-hover:bg-slate-900/55"
+                }`}
+              >
+                <Volume2
+                  className={`w-3.5 h-3.5 ${isPlaying ? "text-slate-800" : "text-white"}`}
+                />
+              </span>
+
+              {/* "This month / ខែនេះ" badge — top-left corner, only on the matching card. */}
+              {isThisMonth && (
+                <span
+                  className="absolute top-2 left-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-300 text-slate-900 text-[10px] font-extrabold tracking-wider shadow"
+                  data-testid={`month-card-${month.en.toLowerCase()}-this-month-badge`}
+                >
+                  <Star className="w-3 h-3 fill-current" aria-hidden />
+                  <span className="uppercase">This Month</span>
+                  <span className="font-khmer normal-case tracking-normal text-xs">
+                    {KH_TODO("ខែនេះ")}
+                  </span>
+                </span>
+              )}
+
+              {/* Month-number chip — small visual anchor (1..12) */}
+              <div className="mt-3 inline-flex items-center justify-center min-w-[1.75rem] h-6 px-1.5 rounded-md bg-slate-900/30 ring-1 ring-white/40 font-mono text-[11px] font-bold text-white/95">
+                {idx + 1}
+              </div>
+
+              {/* Emoji visual */}
+              <div className="text-4xl sm:text-5xl mt-1 mb-1" aria-hidden>
+                {month.emoji}
+              </div>
+
+              {/* English month name */}
+              <div className="font-display font-extrabold text-lg sm:text-xl leading-tight [text-shadow:0_2px_4px_rgba(0,0,0,0.45)]">
+                {month.en}
+              </div>
+
+              {/* Khmer translation */}
+              <div className="font-khmer text-sm sm:text-base mt-1 text-white leading-relaxed [text-shadow:0_2px_4px_rgba(0,0,0,0.45)]">
+                {month.kh}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Helpful caption that names the current month in plain language */}
+      <div className="mt-6 text-center">
+        <div
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-fuchsia-200 text-fuchsia-800 font-bold shadow-sm ${
+            kh ? "font-khmer" : ""
+          }`}
+          data-testid="months-this-month-caption"
+        >
+          <CalendarRange className="w-4 h-4" />
+          {kh
+            ? KH_TODO(`ខែនេះគឺ ${MONTHS_OF_YEAR[thisMonthIdx].kh}`)
+            : `This month is ${MONTHS_OF_YEAR[thisMonthIdx].en}`}
         </div>
       </div>
     </div>
