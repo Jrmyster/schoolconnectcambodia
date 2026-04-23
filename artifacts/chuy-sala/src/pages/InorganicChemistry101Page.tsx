@@ -9,7 +9,11 @@ import {
   Sparkles,
   Building2,
   FlaskConical,
+  Box,
+  Calculator,
+  HelpCircle,
 } from "lucide-react";
+import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -79,13 +83,16 @@ export function InorganicChemistry101Page() {
         {/* ── Section 1: The Not-Carbon World ─────────────────── */}
         <NotCarbonSection />
 
-        {/* ── Section 2: Metals & Alloys ──────────────────────── */}
+        {/* ── Section 2: Crystal Lattices & Solid Structures ──── */}
+        <CrystalLatticesSection />
+
+        {/* ── Section 3: Metals & Alloys ──────────────────────── */}
         <MetalsAlloysSection />
 
-        {/* ── Section 3: Salts & Crystals ─────────────────────── */}
+        {/* ── Section 4: Salts & Crystals ─────────────────────── */}
         <SaltsCrystalsSection />
 
-        {/* ── Section 4: Agriculture & Power ──────────────────── */}
+        {/* ── Section 5: Agriculture & Power ──────────────────── */}
         <AgriPowerSection />
 
         {/* Footer note */}
@@ -210,7 +217,384 @@ function NotCarbonSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 2 — Metals & Alloys                                            */
+/*  Section 2 — Crystal Lattices & Solid Structures                        */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+function CrystalLatticesSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  // Three cubic structures, drawn as lightweight CSS atom-cluster diagrams.
+  const cubics = [
+    {
+      key: "sc",
+      labelEn: "Simple Cubic (SC)",
+      labelKh: "គូប​សាមញ្ញ (SC)",
+      packing: "52%",
+      blurbEn: "Atoms only at the 8 corners of the cube. Lots of empty space inside.",
+      blurbKh: "អាតូមនៅត្រឹមតែជ្រុងទាំង ៨ នៃគូប។ មានចន្លោះទទេច្រើននៅខាងក្នុង។",
+      ringClass: "ring-slate-300",
+      bgClass: "from-slate-50 to-slate-100",
+      // 8 corners only
+      atoms: [
+        [10, 10], [90, 10], [10, 90], [90, 90],
+        [25, 25], [75, 25], [25, 75], [75, 75],
+      ] as [number, number][],
+    },
+    {
+      key: "bcc",
+      labelEn: "Body-Centered Cubic (BCC)",
+      labelKh: "គូបកណ្តាលកាយ (BCC)",
+      packing: "68%",
+      blurbEn:
+        "Atoms at the 8 corners + 1 atom trapped in the dead centre of the cube.",
+      blurbKh:
+        "អាតូមនៅជ្រុងទាំង ៨ + អាតូម ១ ជាប់នៅចំកណ្តាលគូប។",
+      ringClass: "ring-zinc-400",
+      bgClass: "from-zinc-50 to-slate-100",
+      // 8 corners + 1 centre
+      atoms: [
+        [10, 10], [90, 10], [10, 90], [90, 90],
+        [25, 25], [75, 25], [25, 75], [75, 75],
+        [50, 50],
+      ] as [number, number][],
+    },
+    {
+      key: "fcc",
+      labelEn: "Face-Centered Cubic (FCC)",
+      labelKh: "គូបកណ្តាលផ្ទៃ (FCC)",
+      packing: "74%",
+      blurbEn:
+        "Atoms at the 8 corners + 1 atom embedded in each of the 6 faces. Very tightly packed.",
+      blurbKh:
+        "អាតូមនៅជ្រុងទាំង ៨ + អាតូម ១ បង្កប់នៅផ្ទៃនីមួយៗក្នុងចំនួនផ្ទៃទាំង ៦ នៃគូប។ វេចខ្ចប់តឹងណែនបំផុត។",
+      ringClass: "ring-orange-300",
+      bgClass: "from-orange-50 to-amber-50",
+      // 8 corners + 6 face centres (front/back/top/bottom/left/right projected to 2D)
+      atoms: [
+        [10, 10], [90, 10], [10, 90], [90, 90],
+        [25, 25], [75, 25], [25, 75], [75, 75],
+        [50, 18], [50, 82], [18, 50], [82, 50],
+        [37, 50], [63, 50],
+      ] as [number, number][],
+    },
+  ];
+
+  return (
+    <section
+      aria-labelledby="crystal-lattices-heading"
+      className="mb-12 rounded-3xl bg-white border-2 border-slate-200 shadow-sm overflow-hidden"
+    >
+      <header className="px-5 sm:px-7 pt-6 pb-4 border-b border-slate-100 bg-gradient-to-r from-sky-50 via-slate-50 to-white">
+        <div className="flex items-center gap-3 mb-1">
+          <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-sky-700 to-indigo-700 text-white shadow-sm">
+            <Box className="w-5 h-5" />
+          </span>
+          <h2
+            id="crystal-lattices-heading"
+            className={`text-xl sm:text-2xl font-bold text-slate-900 ${
+              kh ? "font-khmer" : ""
+            }`}
+          >
+            {t(
+              "2. Crystal Lattices & Solid Structures",
+              "២. បណ្តាញគ្រីស្តាល់ និងរចនាសម្ព័ន្ធរឹង",
+            )}
+          </h2>
+        </div>
+        <p
+          className={`text-sm text-slate-600 ${kh ? "font-khmer leading-loose" : ""}`}
+        >
+          {t(
+            "Metals and minerals aren't random piles of atoms — they're highly organised 3D grids. Let's zoom in.",
+            "លោហៈ និងសារធាតុរ៉ែ មិនមែនជាគំនរអាតូមដោយចៃដន្យទេ — ពួកវាជាបណ្តាញ ៣ វិមាត្រដែលរៀបចំយ៉ាងម៉ត់ចត់។ តោះពង្រីកមើល។",
+          )}
+        </p>
+      </header>
+
+      <div className="p-5 sm:p-7 space-y-5 sm:space-y-6">
+        {/* ─── Card 1 — The Unit Cell ───────────────────────── */}
+        <article
+          data-testid="card-unit-cell"
+          className="rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-sky-50/70 to-white p-5 sm:p-6 shadow-sm"
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sky-700 text-white shadow-sm">
+              <Box className="w-4 h-4" />
+            </span>
+            <h3
+              className={`text-lg sm:text-xl font-bold text-sky-900 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              {t("The Unit Cell", "កោសិកាឯកតា")}
+            </h3>
+          </div>
+
+          <p
+            className={`text-sm text-slate-700 mb-4 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "The smallest repeating piece of a crystal's 3D grid is called the Unit Cell. Stack millions of identical unit cells together and you get a piece of metal or a mineral crystal.",
+              "បំណែកតូចបំផុតដែលធ្វើឡើងម្តងហើយម្តងទៀតនៃបណ្តាញ ៣ វិមាត្ររបស់គ្រីស្តាល់ ហៅថា កោសិកាឯកតា។ តម្រួតកោសិកាឯកតាដូចគ្នារាប់លានចូលគ្នា អ្នកនឹងទទួលបានដុំលោហៈ ឬគ្រីស្តាល់សារធាតុរ៉ែមួយ។",
+            )}
+          </p>
+
+          {/* Two key concepts side-by-side */}
+          <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-5">
+            <div className="rounded-xl bg-white border border-sky-200 p-4">
+              <div
+                className={`text-xs font-mono uppercase tracking-wider text-sky-700 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Coordination Number", "ចំនួនកូអរដោនេ")}
+              </div>
+              <p
+                className={`text-sm text-slate-700 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "How many direct neighbours a single atom is touching.",
+                  "ចំនួនអ្នកជិតខាងផ្ទាល់ដែលអាតូមមួយប៉ះជាមួយ។",
+                )}
+              </p>
+            </div>
+            <div className="rounded-xl bg-white border border-sky-200 p-4">
+              <div
+                className={`text-xs font-mono uppercase tracking-wider text-sky-700 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Packing Efficiency", "ប្រសិទ្ធភាពនៃការវេចខ្ចប់")}
+              </div>
+              <p
+                className={`text-sm text-slate-700 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "How much of the cell is filled with solid atoms vs. empty space.",
+                  "ផ្នែកប៉ុន្មាននៃកោសិកាដែលត្រូវបានបំពេញដោយអាតូមរឹង ធៀបនឹងចន្លោះទទេ។",
+                )}
+              </p>
+            </div>
+          </div>
+
+          {/* Three cubic structures */}
+          <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
+            {cubics.map((c) => (
+              <div
+                key={c.key}
+                data-testid={`cubic-${c.key}`}
+                className="rounded-xl bg-white border-2 border-slate-200 p-3 sm:p-4 shadow-sm"
+              >
+                {/* Mini diagram */}
+                <div
+                  className={`relative aspect-square rounded-lg bg-gradient-to-br ${c.bgClass} ring-1 ${c.ringClass} mb-3 overflow-hidden`}
+                  role="img"
+                  aria-label={`${c.labelEn} diagram`}
+                >
+                  {/* Cube outline (just for visual scaffolding) */}
+                  <div className="absolute inset-[12%] border-2 border-slate-400/50 rounded-sm" />
+                  <div className="absolute inset-[27%] border-2 border-slate-400/30 rounded-sm" />
+                  {/* Atoms */}
+                  {c.atoms.map(([x, y], i) => (
+                    <span
+                      key={i}
+                      aria-hidden="true"
+                      className="absolute w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 ring-1 ring-white shadow"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <div
+                  className={`text-sm font-bold text-slate-900 mb-1 ${
+                    kh ? "font-khmer" : ""
+                  }`}
+                >
+                  {t(c.labelEn, c.labelKh)}
+                </div>
+                <div className="inline-block px-2 py-0.5 rounded-md bg-orange-100 text-[11px] font-mono font-bold text-orange-800 mb-2">
+                  {c.packing} {t("packing", "វេចខ្ចប់")}
+                </div>
+                <p
+                  className={`text-xs text-slate-600 ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {t(c.blurbEn, c.blurbKh)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        {/* ─── Card 2 — The Math of Density ─────────────────── */}
+        <article
+          data-testid="card-density-math"
+          className="rounded-2xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/70 to-white p-5 sm:p-6 shadow-sm"
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-700 text-white shadow-sm">
+              <Calculator className="w-4 h-4" />
+            </span>
+            <h3
+              className={`text-lg sm:text-xl font-bold text-indigo-900 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              {t("The Math of Density", "គណិតវិទ្យានៃដង់ស៊ីតេ")}
+            </h3>
+          </div>
+
+          <p
+            className={`text-sm text-slate-700 mb-4 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "Because we know exactly how atoms pack together inside a unit cell, we can calculate the exact density of a metal — without ever touching it!",
+              "ដោយយើងដឹងច្បាស់អំពីរបៀបដែលអាតូមវេចខ្ចប់គ្នាក្នុងកោសិកាឯកតា យើងអាចគណនាដង់ស៊ីតេពិតប្រាកដនៃលោហៈ — ដោយមិនបាច់ប៉ះវាសោះ!",
+            )}
+          </p>
+
+          {/* The formula */}
+          <div className="rounded-xl bg-white border-2 border-indigo-200 p-5 mb-4 flex items-center justify-center">
+            <div className="text-indigo-900 text-xl sm:text-2xl">
+              <BlockMath
+                math={String.raw`\rho = \frac{z \cdot M}{N_A \cdot a^3}`}
+              />
+            </div>
+          </div>
+
+          {/* Variable key */}
+          <div
+            className={`text-xs font-mono uppercase tracking-wider text-indigo-700 mb-2 ${
+              kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {t("Variable key", "តារាងអថេរ")}
+          </div>
+          <ul className="space-y-2">
+            {[
+              {
+                sym: String.raw`\rho`,
+                en: "Density of the metal",
+                kh: "ដង់ស៊ីតេនៃលោហៈ",
+              },
+              {
+                sym: "z",
+                en: "Number of atoms per unit cell",
+                kh: "ចំនួនអាតូមក្នុងមួយកោសិកាឯកតា",
+              },
+              {
+                sym: "M",
+                en: "Molar mass (g/mol)",
+                kh: "ម៉ាសម៉ូល (g/mol)",
+              },
+              {
+                sym: "N_A",
+                en: "Avogadro's number (≈ 6.022 × 10²³)",
+                kh: "លេខអាវ៉ូហ្គាដ្រូ (≈ 6.022 × 10²³)",
+              },
+              {
+                sym: "a^3",
+                en: "Volume of the unit cell",
+                kh: "មាឌនៃកោសិកាឯកតា",
+              },
+            ].map((row, i) => (
+              <li
+                key={i}
+                className="flex items-baseline gap-3 rounded-lg bg-white border border-indigo-100 px-3 py-2"
+              >
+                <span className="inline-flex items-center justify-center min-w-[2.5rem] text-indigo-900 text-base">
+                  <InlineMath math={row.sym} />
+                </span>
+                <span
+                  className={`text-sm text-slate-700 ${
+                    kh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {t(row.en, row.kh)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        {/* ─── Card 3 — The Diamond Enigma ──────────────────── */}
+        <article
+          data-testid="card-diamond-enigma"
+          className="rounded-2xl border-2 border-orange-300 bg-gradient-to-br from-orange-50/70 to-amber-50/70 p-5 sm:p-6 shadow-sm"
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-orange-600 to-amber-700 text-white shadow-sm">
+              <Gem className="w-4 h-4" />
+            </span>
+            <h3
+              className={`text-lg sm:text-xl font-bold text-orange-900 ${
+                kh ? "font-khmer" : ""
+              }`}
+            >
+              {t("The Diamond Enigma", "អាថ៌កំបាំងពេជ្រ")}
+            </h3>
+          </div>
+
+          {/* The question */}
+          <div className="rounded-xl bg-white border border-orange-200 px-4 py-3 mb-4 flex items-start gap-2.5">
+            <HelpCircle className="w-5 h-5 text-orange-700 flex-shrink-0 mt-0.5" />
+            <p
+              className={`text-sm font-semibold text-orange-900 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Why is a diamond so hard?",
+                "ហេតុអ្វីបានជាពេជ្ររឹងម៉ាំខ្លាំងម្ល៉េះ?",
+              )}
+            </p>
+          </div>
+
+          <p
+            className={`text-sm text-slate-700 mb-3 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            <strong>{t("The Tetrahedral Lattice", "បណ្តាញតេត្រាអែត")}.</strong>{" "}
+            {t(
+              "Unlike metals — where atoms just pack together like oranges in a box — a diamond uses a Network Covalent structure. Every single carbon atom is bolted to four other carbon atoms in a rigid 3D pyramid (tetrahedron) shape.",
+              "មិនដូចលោហៈ — ដែលអាតូមគ្រាន់តែវេចខ្ចប់គ្នាដូចជាក្រូចនៅក្នុងប្រអប់ — ពេជ្រប្រើរចនាសម្ព័ន្ធកូវ៉ាឡង់បណ្តាញ។ អាតូមកាបូននីមួយៗត្រូវបានភ្ជាប់ទៅអាតូមកាបូនបួនផ្សេងទៀត ក្នុងទម្រង់ពីរ៉ាមីត ៣ វិមាត្រដ៏រឹងមាំ (តេត្រាអែត)។",
+            )}
+          </p>
+
+          <p
+            className={`text-sm text-slate-700 ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "To break a diamond, you have to break millions of real chemical bonds at the exact same time — that's why it's the hardest natural material on Earth.",
+              "ដើម្បីបំបែកពេជ្រ អ្នកត្រូវបំបែកចំណងគីមីពិតរាប់លាន ក្នុងពេលតែមួយ — នោះហើយជាហេតុដែលវាជាសារធាតុធម្មជាតិដែលរឹងបំផុតនៅលើផែនដី។",
+            )}
+          </p>
+        </article>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Section 3 — Metals & Alloys                                            */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 type Alloy = {
@@ -297,8 +681,8 @@ function MetalsAlloysSection() {
             }`}
           >
             {t(
-              "2. The Science of Metals & Alloys",
-              "២. វិទ្យាសាស្ត្រនៃលោហៈ និងលោហៈធាតុផ្សំ",
+              "3. The Science of Metals & Alloys",
+              "៣. វិទ្យាសាស្ត្រនៃលោហៈ និងលោហៈធាតុផ្សំ",
             )}
           </h2>
         </div>
@@ -373,7 +757,7 @@ function MetalsAlloysSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 3 — Salts & Crystals                                           */
+/*  Section 4 — Salts & Crystals                                           */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function SaltsCrystalsSection() {
@@ -397,7 +781,7 @@ function SaltsCrystalsSection() {
               kh ? "font-khmer" : ""
             }`}
           >
-            {t("3. Salts & Crystals", "៣. អំបិល និងគ្រីស្តាល់")}
+            {t("4. Salts & Crystals", "៤. អំបិល និងគ្រីស្តាល់")}
           </h2>
         </div>
         <p
@@ -537,7 +921,7 @@ function SaltsCrystalsSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 4 — Agriculture & Power                                        */
+/*  Section 5 — Agriculture & Power                                        */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function AgriPowerSection() {
@@ -561,7 +945,7 @@ function AgriPowerSection() {
               kh ? "font-khmer" : ""
             }`}
           >
-            {t("4. Agriculture & Power", "៤. កសិកម្ម និងថាមពល")}
+            {t("5. Agriculture & Power", "៥. កសិកម្ម និងថាមពល")}
           </h2>
         </div>
         <p
