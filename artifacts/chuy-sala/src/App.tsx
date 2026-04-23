@@ -14,6 +14,7 @@ import { AdminRoute } from "@/components/AdminRoute";
 import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
 import { MascotCheer } from "@/components/MascotCheer";
 import { BackToTop } from "@/components/BackToTop";
+import { RouteScopedErrorBoundary } from "@/components/RouteErrorBoundary";
 
 // Auth
 import { AuthProvider } from "@/context/AuthContext";
@@ -203,6 +204,7 @@ function Router() {
       <Navbar />
       <HeatSafetyAlert />
       <main className="flex-grow">
+        <RouteScopedErrorBoundary>
         <Suspense fallback={<PageLoading />}>
           <Switch>
             <Route path="/" component={Home} />
@@ -338,6 +340,7 @@ function Router() {
             <Route component={NotFound} />
           </Switch>
         </Suspense>
+        </RouteScopedErrorBoundary>
       </main>
       <Footer />
     </div>
