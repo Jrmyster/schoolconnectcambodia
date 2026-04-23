@@ -11,7 +11,12 @@ import {
   CloudFog,
   Calculator,
   GraduationCap,
+  Zap,
+  Waves,
+  Box,
+  Sparkles,
 } from "lucide-react";
+import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -82,13 +87,16 @@ export function PhysicalChemistry101Page() {
         {/* ── Section 1: Math Meets Matter (Intro) ─────────────── */}
         <IntroSection />
 
-        {/* ── Section 2: P-Chem 1 — Macroscopic ────────────────── */}
+        {/* ── Section 2: The Quantum Revolution ────────────────── */}
+        <QuantumRevolutionSection />
+
+        {/* ── Section 3: P-Chem 1 — Macroscopic ────────────────── */}
         <MacroSection />
 
-        {/* ── Section 3: P-Chem 2 — Microscopic ────────────────── */}
+        {/* ── Section 4: P-Chem 2 — Microscopic ────────────────── */}
         <MicroSection />
 
-        {/* ── Section 4: Careers & Impact ──────────────────────── */}
+        {/* ── Section 5: Careers & Impact ──────────────────────── */}
         <CareersSection />
 
         <p
@@ -228,7 +236,7 @@ function ChalkCard({
           </h3>
           {(termEn || termKh) && (
             <p className={`text-[11px] ${c.text} font-mono opacity-90`}>
-              {kh ? termEn : termKh}
+              {kh ? termKh : termEn}
             </p>
           )}
         </div>
@@ -308,7 +316,206 @@ function IntroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 2 — Macroscopic: Thermo & Kinetics                             */
+/*  Section 2 — The Quantum Revolution                                     */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+function QuantumRevolutionSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <Panel
+      id="quantum-revolution"
+      icon={Sparkles}
+      title={{ en: "2. The Quantum Revolution", kh: "២. បដិវត្តន៍កង់ទិច" }}
+      subtitle={{
+        en: "Around 1900, classical physics broke. Four discoveries rewrote the rulebook of the universe — and gave birth to quantum mechanics.",
+        kh: "ប្រហែលឆ្នាំ ១៩០០ រូបវិទ្យាបុរាណបានបាក់បែក។ ការរកឃើញទាំង ៤ បានសរសេរច្បាប់នៃសកលលោកឡើងវិញ — ហើយផ្តល់កំណើតដល់មេកានិចកង់ទិច។",
+      }}
+    >
+      <div className="space-y-4 sm:space-y-5">
+        {/* ── Card 1 — The Map Breaks (UV Catastrophe) ────────────── */}
+        <ChalkCard
+          title="The Map Breaks"
+          khTitle="ផែនទីបាក់បែក"
+          termEn="Black-Body Radiation · Ultraviolet Catastrophe"
+          termKh="វិទ្យុសកម្មអង្គធាតុខ្មៅ · មហន្តរាយអ៊ុលត្រាវីយូឡេ"
+          icon={Flame}
+          accent="amber"
+        >
+          <p>
+            {t(
+              "Classical physics predicted that any heated object — a stove, a star — should pour out an infinite amount of invisible, high-energy ultraviolet light as it got hotter. Reality refused to play along. Real stoves and real stars do not unleash an infinite UV death-ray.",
+              "រូបវិទ្យាបុរាណបានព្យាករថា វត្ថុដែលត្រូវបានកម្តៅ — ចង្ក្រាន ឬផ្កាយ — គួរតែបញ្ចេញពន្លឺអ៊ុលត្រាវីយូឡេថាមពលខ្ពស់ដែលមើលមិនឃើញគ្មានកំណត់ ខណៈពេលដែលវាកាន់តែក្តៅ។ ប៉ុន្តែតាមការពិត វាមិនដូច្នោះទេ។ ចង្ក្រាន និងផ្កាយពិតមិនបញ្ចេញកាំរស្មីអ៊ុលត្រាវីយូឡេគ្មានកំណត់ដូចព្យាករនោះឡើយ។",
+            )}
+          </p>
+          <p>
+            <strong className="text-amber-200">
+              {t("Max Planck's solution", "ដំណោះស្រាយរបស់ ម៉ាក់ ប្លែង")}:
+            </strong>{" "}
+            {t(
+              "Energy is not a smooth continuous wave. It comes in tiny indivisible chunks — physical packets called Quanta. This single idea shattered classical physics.",
+              "ថាមពលមិនមែនជារលករលូនបន្តបន្ទាប់ទេ។ វាមកជាបំណែកតូចៗមិនអាចបំបែកបាន — កញ្ចប់រូបវន្តហៅថា កង់តា (Quanta)។ គំនិតមួយនេះបានបំបែករូបវិទ្យាបុរាណ។",
+            )}
+          </p>
+        </ChalkCard>
+
+        {/* ── Card 2 — Light is a Bullet (Photoelectric Effect) ──── */}
+        <ChalkCard
+          title="Light is a Bullet"
+          khTitle="ពន្លឺគឺជាគ្រាប់កាំភ្លើង"
+          termEn="The Photoelectric Effect"
+          termKh="បាតុភូតហ្វូតូអគ្គិសនី"
+          icon={Zap}
+          accent="sky"
+        >
+          <p>
+            {t(
+              "Shine a brilliant red lamp on a metal plate — nothing happens, no matter how bright you turn it up. Now shine a faint blue or ultraviolet beam on the same plate, and electrons come flying off it!",
+              "បំភ្លឺពន្លឺក្រហមភ្លឺៗទៅលើបន្ទះលោហៈ — គ្មានអ្វីកើតឡើងទេ មិនថាអ្នកបញ្ចេញពន្លឺខ្លាំងប៉ុណ្ណាក៏ដោយ។ ឥឡូវបំភ្លឺកាំរស្មីខៀវ ឬអ៊ុលត្រាវីយូឡេខ្សោយទៅលើបន្ទះតែមួយនោះ — អេឡិចត្រុងហោះចេញ!",
+            )}
+          </p>
+          <p>
+            <strong className="text-sky-200">
+              {t("Einstein's Nobel-prize insight", "ការយល់ឃើញឈ្នះពានរង្វាន់ណូបែលរបស់ Einstein")}:
+            </strong>{" "}
+            {t(
+              "Light is not just a wave. It also acts like a stream of particles — photons — that hit the metal like microscopic bullets. The energy of each bullet depends on its frequency, not the brightness.",
+              "ពន្លឺមិនមែនត្រឹមតែជារលកទេ។ វាក៏ប្រព្រឹត្តដូចជាកំណាត់នៃភាគល្អិត — ហ្វូតុង — ដែលបុកលោហៈដូចជាគ្រាប់កាំភ្លើងតូចៗ។ ថាមពលនៃគ្រាប់នីមួយៗអាស្រ័យលើប្រេកង់របស់វា មិនមែនលើភាពភ្លឺ។",
+            )}
+          </p>
+          <div className="rounded-xl bg-emerald-950/60 border border-sky-400/30 px-4 py-3 not-prose flex items-center justify-center">
+            <div className="text-sky-100 text-lg sm:text-xl">
+              <BlockMath math={String.raw`E = h\nu`} />
+            </div>
+          </div>
+          <p className="text-xs text-emerald-100/75 font-mono">
+            <InlineMath math="E" /> ={" "}
+            {t("photon energy", "ថាមពលហ្វូតុង")} ·{" "}
+            <InlineMath math="h" /> ={" "}
+            {t("Planck's constant", "ថេររបស់ ប្លែង")} ·{" "}
+            <InlineMath math={String.raw`\nu`} /> ={" "}
+            {t("frequency of the light", "ប្រេកង់នៃពន្លឺ")}
+          </p>
+        </ChalkCard>
+
+        {/* ── Card 3 — Matter is a Wave (de Broglie) ─────────────── */}
+        <ChalkCard
+          title="Matter is a Wave"
+          khTitle="សារធាតុគឺជារលក"
+          termEn="Wave–Particle Duality · de Broglie"
+          termKh="ភាពជាទ្វេរនៃរលក-ភាគល្អិត"
+          icon={Waves}
+          accent="violet"
+        >
+          <p>
+            {t(
+              "If light (a wave) can also act like a solid particle, Louis de Broglie asked the daring reverse question: can a solid particle — an electron, a baseball, you — also act like a wave?",
+              "បើពន្លឺ (រលក) អាចប្រព្រឹត្តដូចជាភាគល្អិតរឹង តើ Louis de Broglie បានសួរសំណួរបញ្ច្រាសដ៏ក្លាហាន៖ តើភាគល្អិតរឹង — អេឡិចត្រុង បាល់ ឬអ្នក — អាចប្រព្រឹត្តដូចជារលកដែរទេ?",
+            )}
+          </p>
+          <p>
+            <strong className="text-violet-200">
+              {t("The math said yes", "គណិតវិទ្យាបានឆ្លើយថា បាទ")}.
+            </strong>{" "}
+            {t(
+              "Every piece of matter has a wavelength. For a baseball, the wavelength is impossibly small — that's why we never notice. For an electron, it is enormous compared to its size — which is exactly why atoms work the way they do.",
+              "សារធាតុគ្រប់បំណែកមានរលកប្រវែង។ សម្រាប់បាល់មួយ រលកប្រវែងគឺតូចណាស់ដែលមិនអាចមើលឃើញ — នោះហើយជាហេតុដែលយើងមិនដឹង។ សម្រាប់អេឡិចត្រុង វាធំធេងបើធៀបនឹងទំហំរបស់វា — ជាមូលហេតុដែលអាតូមដំណើរការបែបនេះ។",
+            )}
+          </p>
+          <div className="rounded-xl bg-emerald-950/60 border border-violet-400/30 px-4 py-3 not-prose flex items-center justify-center">
+            <div className="text-violet-100 text-lg sm:text-xl">
+              <BlockMath math={String.raw`\lambda = \frac{h}{p}`} />
+            </div>
+          </div>
+          <p className="text-xs text-emerald-100/75 font-mono">
+            <InlineMath math={String.raw`\lambda`} /> ={" "}
+            {t("wavelength of matter", "រលកប្រវែងនៃសារធាតុ")} ·{" "}
+            <InlineMath math="h" /> ={" "}
+            {t("Planck's constant", "ថេររបស់ ប្លែង")} ·{" "}
+            <InlineMath math="p" /> ={" "}
+            {t("momentum (mass × velocity)", "ម៉ូម៉ង់ (ម៉ាស × ល្បឿន)")}
+          </p>
+        </ChalkCard>
+
+        {/* ── Card 4 — Particle in a Box (Quantization) ─────────── */}
+        <ChalkCard
+          title="The Ultimate Math Model"
+          khTitle="គំរូគណិតវិទ្យាដ៏ចុងក្រោយ"
+          termEn="Particle in a Box"
+          termKh="ភាគល្អិតក្នុងប្រអប់"
+          icon={Box}
+          accent="rose"
+        >
+          <p>
+            {t(
+              "This is the founding thought-experiment of physical chemistry. Trap a wavy electron inside a tiny box and let the math run.",
+              "នេះគឺជាការពិសោធន៍គំនិតស្ថាបនានៃគីមីរូបវិទ្យា។ ចាក់សោអេឡិចត្រុងរលករលៃក្នុងប្រអប់តូចមួយ ហើយឲ្យគណិតវិទ្យាដំណើរការ។",
+            )}
+          </p>
+          <p>
+            <strong className="text-rose-200">
+              {t("The shocking result", "លទ្ធផលគួរឱ្យភ្ញាក់ផ្អើល")}:
+            </strong>{" "}
+            {t(
+              "The electron cannot just sit still, and it cannot have any energy it likes. It is allowed only highly specific 'quantized' energy levels — like standing on the rungs of a ladder, but never anywhere in between.",
+              "អេឡិចត្រុងមិនអាចគ្រាន់តែអង្គុយស្ងៀមបានទេ ហើយក៏មិនអាចមានថាមពលណាមួយតាមចិត្តដែរ។ វាត្រូវបានអនុញ្ញាតឲ្យមានតែកម្រិតថាមពលជាក់លាក់ខ្ពស់ដែលហៅថា 'កង់តានីហ្ស៍' (quantized) — ដូចជាឈរនៅលើជណ្តើរ ប៉ុន្តែមិនអាចឈរនៅចន្លោះណាមួយបានទេ។",
+            )}
+          </p>
+
+          {/* Mini "energy ladder" visual */}
+          <div
+            className="rounded-xl bg-emerald-950/60 border border-rose-400/30 p-4 not-prose"
+            role="img"
+            aria-label={t(
+              "Quantized energy levels diagram",
+              "ដ្យាក្រាមកម្រិតថាមពលកង់តានីហ្ស៍",
+            )}
+          >
+            <div className="space-y-1.5">
+              {[
+                { label: "n = 4", energy: "16 E₁", width: "100%" },
+                { label: "n = 3", energy: "9 E₁", width: "78%" },
+                { label: "n = 2", energy: "4 E₁", width: "55%" },
+                { label: "n = 1", energy: "1 E₁", width: "32%" },
+              ].map((row) => (
+                <div
+                  key={row.label}
+                  className="flex items-center gap-3"
+                >
+                  <span className="font-mono text-[11px] text-rose-200/80 w-12 flex-shrink-0">
+                    {row.label}
+                  </span>
+                  <span
+                    className="h-1.5 rounded-full bg-gradient-to-r from-rose-400 to-rose-200 shadow-[0_0_8px_rgba(251,113,133,0.5)]"
+                    style={{ width: row.width }}
+                  />
+                  <span className="font-mono text-[11px] text-rose-100/70 ml-auto">
+                    {row.energy}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p
+              className={`text-[11px] text-emerald-100/65 mt-3 italic ${
+                kh ? "font-khmer not-italic leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Energy can sit on rung 1, 2, 3 … but never between rungs.",
+                "ថាមពលអាចឈរនៅកម្រិត ១ ២ ៣ … ប៉ុន្តែមិនដែលនៅចន្លោះកម្រិតទេ។",
+              )}
+            </p>
+          </div>
+        </ChalkCard>
+      </div>
+    </Panel>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Section 3 — Macroscopic: Thermo & Kinetics                             */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function MacroSection() {
@@ -321,8 +528,8 @@ function MacroSection() {
       id="macro"
       icon={Flame}
       title={{
-        en: "2. P-Chem 1 — The Macroscopic World",
-        kh: "២. គីមីរូបវិទ្យា ១ — ពិភពម៉ាក្រូ",
+        en: "3. P-Chem 1 — The Macroscopic World",
+        kh: "៣. គីមីរូបវិទ្យា ១ — ពិភពម៉ាក្រូ",
       }}
       subtitle={{
         en: "Heat, energy, and speed — the rules that govern any reaction big enough to see.",
@@ -430,7 +637,7 @@ function MacroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 3 — Microscopic: Quantum & Spectroscopy                        */
+/*  Section 4 — Microscopic: Quantum & Spectroscopy                        */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function MicroSection() {
@@ -443,8 +650,8 @@ function MicroSection() {
       id="micro"
       icon={Atom}
       title={{
-        en: "3. P-Chem 2 — The Microscopic World",
-        kh: "៣. គីមីរូបវិទ្យា ២ — ពិភពមីក្រូ",
+        en: "4. P-Chem 2 — The Microscopic World",
+        kh: "៤. គីមីរូបវិទ្យា ២ — ពិភពមីក្រូ",
       }}
       subtitle={{
         en: "Zoom into a single atom and the rules of everyday physics break down. Welcome to the quantum world.",
@@ -550,7 +757,7 @@ function MicroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 4 — Careers & Real-World Impact                                */
+/*  Section 5 — Careers & Real-World Impact                                */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function CareersSection() {
@@ -619,8 +826,8 @@ function CareersSection() {
       id="careers"
       icon={GraduationCap}
       title={{
-        en: "4. Careers & Impact",
-        kh: "៤. អាជីព និងផលប៉ះពាល់",
+        en: "5. Careers & Impact",
+        kh: "៥. អាជីព និងផលប៉ះពាល់",
       }}
       subtitle={{
         en: "Why study P-Chem? Because it powers some of the most important technology of our century.",
