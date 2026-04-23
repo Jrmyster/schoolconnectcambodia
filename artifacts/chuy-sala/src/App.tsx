@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 // Components (eager — needed on every page or for the shell)
 import { Navbar } from "@/components/layout/Navbar";
+import { RouteTracker } from "@/components/RouteTracker";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
 import { PWAStatusBar } from "@/components/PWAStatusBar";
@@ -194,6 +195,7 @@ function Router() {
   return (
     <div className="flex flex-col min-h-screen">
       <ScrollToTop />
+      <RouteTracker />
       <PWAStatusBar />
       <Navbar />
       <HeatSafetyAlert />

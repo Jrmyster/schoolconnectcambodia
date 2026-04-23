@@ -3,50 +3,25 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useListNeeds } from "@workspace/api-client-react";
-import { useSavedCareers } from "@/hooks/use-saved-careers";
+import { StudentDashboard } from "./StudentDashboard";
 import {
-  Award,
-  BookOpen,
-  Compass,
+  Eye,
+  EyeOff,
   Inbox,
   MapPin,
-  MessageSquare,
   Package,
   Send,
   Sparkles,
-  Eye,
-  EyeOff,
-  Search,
-  Rocket,
-  Banknote,
-  Share2,
-  Lock,
 } from "lucide-react";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-interface Badge {
-  id: number;
-  challengeId: string;
-  earnedAt: string;
-}
-interface Achievement {
-  id: number;
-  userId: number;
-  badgeType: string;
-  awardedAt: string;
-}
-interface BookEntry {
-  id: number;
-  title: string;
-  author: string;
-  recommendedBy: string;
-  review: string | null;
-  category: string;
-  createdAt: string;
-  likeCount: number;
-  isFeatured?: boolean;
-}
+/* ─── Dashboard dispatcher ────────────────────────────────────────
+ * Routed at /dashboard. Login.tsx and the registration flow both
+ * navigate here on success. We forward to the role-appropriate view:
+ *   - student → personalised Student Dashboard (separate file)
+ *   - school  → School Dashboard (defined below)
+ * ────────────────────────────────────────────────────────────────── */
 
 export function Dashboard() {
   const { user, loading } = useAuth();
@@ -65,272 +40,6 @@ export function Dashboard() {
   }
 
   return user.role === "school" ? <SchoolDashboard /> : <StudentDashboard />;
-}
-
-/* ─── Student Dashboard (The Learner Map) ─────────────────────────── */
-
-function StudentDashboard() {
-  const { user } = useAuth();
-  const t = useTranslation();
-  const { language } = useLanguageStore();
-  const kh = language === "kh";
-
-  const displayName = user?.email.split("@")[0] ?? "";
-
-  const [badges, setBadges] = useState<Badge[] | null>(null);
-  const [achievements, setAchievements] = useState<Achievement[] | null>(null);
-  const [books, setBooks] = useState<BookEntry[] | null>(null);
-  const { data: savedCareers } = useSavedCareers();
-
-  useEffect(() => {
-    fetch(`${BASE}/api/badges`, { credentials: "include" })
-      .then((r) => (r.ok ? r.json() : []))
-      .then(setBadges)
-      .catch(() => setBadges([]));
-    fetch(`${BASE}/api/achievements`, { credentials: "include" })
-      .then((r) => (r.ok ? r.json() : []))
-      .then(setAchievements)
-      .catch(() => setAchievements([]));
-    fetch(`${BASE}/api/books`, { credentials: "include" })
-      .then((r) => (r.ok ? r.json() : []))
-      .then((b: BookEntry[]) => setBooks(b.slice(0, 3)))
-      .catch(() => setBooks([]));
-  }, []);
-
-  const lastSaved =
-    savedCareers && savedCareers.length > 0
-      ? [...savedCareers].sort((a, b) => b.savedAt.localeCompare(a.savedAt))[0]
-      : null;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8">
-        {/* Greeting */}
-        <header className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A6EA8]/10 text-[#1A6EA8] text-xs font-bold">
-            <Compass className="w-3.5 h-3.5" />
-            {t("Learner Dashboard", "ផ្ទាំងគ្រប់គ្រងសិស្ស")}
-          </div>
-          <h1
-            className={`text-3xl md:text-4xl font-bold text-[#0E4870] ${
-              kh ? "font-khmer leading-relaxed" : "font-display"
-            }`}
-          >
-            {kh
-              ? `សូមស្វាគមន៍ត្រឡប់មកវិញ ${displayName}! ត្រៀមរៀនថ្ងៃនេះហើយឬនៅ?`
-              : `Welcome back, ${displayName}! Ready to learn today?`}
-          </h1>
-        </header>
-
-        {/* My Achievements */}
-        <MyAchievements
-          achievements={achievements}
-          kh={kh}
-          t={t}
-        />
-
-        {/* Progress: Badges (Skeptic Challenge raw completions) */}
-        <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-amber-500" />
-              <h2
-                className={`font-bold text-foreground text-lg ${
-                  kh ? "font-khmer" : "font-display"
-                }`}
-              >
-                {t("Skeptic Challenges", "បញ្ហាប្រឈមអ្នកគិតវិភាគ")}
-              </h2>
-            </div>
-            <span className="text-xs text-muted-foreground">
-              {t(
-                `${badges?.length ?? 0} earned`,
-                `ទទួលបាន ${badges?.length ?? 0}`,
-              )}
-            </span>
-          </div>
-
-          {badges === null ? (
-            <div className="h-20 animate-pulse bg-sky-50 rounded-xl" />
-          ) : badges.length === 0 ? (
-            <div className="text-center py-6">
-              <p
-                className={`text-sm text-muted-foreground mb-3 ${
-                  kh ? "font-khmer" : ""
-                }`}
-              >
-                {t(
-                  "No badges yet — try the Skeptic's Challenge!",
-                  "មិនទាន់មានស្លាកសញ្ញាទេ — សាកល្បងបញ្ហាប្រឈមអ្នកគិតវិភាគ!",
-                )}
-              </p>
-              <Link
-                href="/safety"
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1A6EA8] text-white font-bold text-sm hover:bg-[#155A8A] transition-colors ${
-                  kh ? "font-khmer text-base" : ""
-                }`}
-              >
-                {t("Take a Challenge", "ចាប់ផ្ដើមបញ្ហាប្រឈម")}
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-              {badges.map((b) => (
-                <div
-                  key={b.id}
-                  className="aspect-square rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200 border border-amber-300 flex flex-col items-center justify-center p-3 text-center"
-                  title={b.challengeId}
-                >
-                  <Award className="w-8 h-8 text-amber-600 mb-1" />
-                  <span className="text-[10px] font-bold text-amber-900 line-clamp-2 break-words">
-                    {b.challengeId}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Last Viewed: Future Pathways */}
-        <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
-          <div className="flex items-center gap-2 mb-3">
-            <Compass className="w-5 h-5 text-[#1A6EA8]" />
-            <h2
-              className={`font-bold text-foreground text-lg ${
-                kh ? "font-khmer" : "font-display"
-              }`}
-            >
-              {t("Future Pathways", "ផ្លូវអនាគត")}
-            </h2>
-          </div>
-          {lastSaved ? (
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
-              <div>
-                <p
-                  className={`text-xs text-muted-foreground ${
-                    kh ? "font-khmer" : ""
-                  }`}
-                >
-                  {t("Last saved career", "មុខរបរដែលរក្សាទុកចុងក្រោយ")}
-                </p>
-                <p className={`font-bold ${kh ? "font-khmer" : ""}`}>
-                  {lastSaved.careerKey.replace(/-/g, " ")}{" "}
-                  <span className="text-muted-foreground font-normal text-sm">
-                    · {lastSaved.majorKey.replace(/-/g, " ")}
-                  </span>
-                </p>
-              </div>
-              <Link
-                href="/launchpad"
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1A6EA8] text-white font-bold text-sm hover:bg-[#155A8A] transition-colors min-h-[44px] ${
-                  kh ? "font-khmer text-base" : ""
-                }`}
-              >
-                {t("Continue Exploring", "បន្តស្វែងយល់")}
-              </Link>
-            </div>
-          ) : (
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <p
-                className={`text-sm text-muted-foreground ${
-                  kh ? "font-khmer" : ""
-                }`}
-              >
-                {t(
-                  "You haven't saved a pathway yet.",
-                  "អ្នកមិនទាន់រក្សាទុកផ្លូវអាជីពទេ។",
-                )}
-              </p>
-              <Link
-                href="/launchpad"
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1A6EA8] text-white font-bold text-sm hover:bg-[#155A8A] transition-colors min-h-[44px] ${
-                  kh ? "font-khmer text-base" : ""
-                }`}
-              >
-                {t("Browse Future Pathways", "មើលផ្លូវអនាគត")}
-              </Link>
-            </div>
-          )}
-        </section>
-
-        {/* Community Feed: Reading List */}
-        <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-emerald-600" />
-              <h2
-                className={`font-bold text-foreground text-lg ${
-                  kh ? "font-khmer" : "font-display"
-                }`}
-              >
-                {t("Community Reading Feed", "ព័ត៌មានសហគមន៍សៀវភៅ")}
-              </h2>
-            </div>
-            <Link
-              href="/reading-list"
-              className={`text-sm font-bold text-[#1A6EA8] hover:underline ${
-                kh ? "font-khmer" : ""
-              }`}
-            >
-              {t("View all", "មើលទាំងអស់")}
-            </Link>
-          </div>
-
-          {books === null ? (
-            <div className="space-y-2">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="h-16 bg-emerald-50 rounded-xl animate-pulse"
-                />
-              ))}
-            </div>
-          ) : books.length === 0 ? (
-            <p
-              className={`text-sm text-muted-foreground text-center py-4 ${
-                kh ? "font-khmer" : ""
-              }`}
-            >
-              {t(
-                "No book recommendations yet — be the first to share one!",
-                "មិនទាន់មានសៀវភៅណែនាំទេ — ត្រូវជាអ្នកដំបូងដែលចែករំលែក!",
-              )}
-            </p>
-          ) : (
-            <ul className="space-y-3">
-              {books.map((b) => (
-                <li
-                  key={b.id}
-                  className="flex items-start gap-3 p-3 rounded-xl border border-emerald-100 bg-emerald-50/40 hover:bg-emerald-50 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-emerald-100 flex-shrink-0 flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-bold text-foreground truncate">
-                      {b.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {b.author} ·{" "}
-                      <span className={kh ? "font-khmer" : ""}>
-                        {t(
-                          `recommended by ${b.recommendedBy}`,
-                          `ណែនាំដោយ ${b.recommendedBy}`,
-                        )}
-                      </span>
-                    </p>
-                  </div>
-                  <span className="text-xs text-emerald-700 font-bold flex-shrink-0">
-                    ♥ {b.likeCount}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </div>
-    </div>
-  );
 }
 
 /* ─── School Dashboard (The Resource Map) ─────────────────────────── */
@@ -358,7 +67,6 @@ function SchoolDashboard() {
     completed: needs?.filter((n: any) => n.status === "completed").length ?? 0,
   };
 
-  // Map visibility
   const [hideFromMap, setHideFromMap] = useState<boolean>(false);
   const [savingVis, setSavingVis] = useState(false);
   const [visError, setVisError] = useState<string | null>(null);
@@ -402,7 +110,6 @@ function SchoolDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8">
-        {/* Greeting */}
         <header className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1A6EA8]/10 text-[#1A6EA8] text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5" />
@@ -430,7 +137,7 @@ function SchoolDashboard() {
           )}
         </header>
 
-        {/* Active Requests Summary */}
+        {/* Active Requests */}
         <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
@@ -454,24 +161,9 @@ function SchoolDashboard() {
           </div>
 
           <div className="grid grid-cols-3 gap-3 mb-4">
-            <SummaryStat
-              label={t("Pending", "កំពុងរង់ចាំ")}
-              value={summary.active}
-              color="amber"
-              kh={kh}
-            />
-            <SummaryStat
-              label={t("Funded", "បានឧបត្ថម្ភ")}
-              value={summary.funded}
-              color="emerald"
-              kh={kh}
-            />
-            <SummaryStat
-              label={t("Completed", "បានបញ្ចប់")}
-              value={summary.completed}
-              color="sky"
-              kh={kh}
-            />
+            <SummaryStat label={t("Pending", "កំពុងរង់ចាំ")} value={summary.active} color="amber" kh={kh} />
+            <SummaryStat label={t("Funded", "បានឧបត្ថម្ភ")} value={summary.funded} color="emerald" kh={kh} />
+            <SummaryStat label={t("Completed", "បានបញ្ចប់")} value={summary.completed} color="sky" kh={kh} />
           </div>
 
           {needs && needs.length > 0 && (
@@ -489,15 +181,15 @@ function SchoolDashboard() {
                       n.status === "active"
                         ? "bg-amber-100 text-amber-700"
                         : n.status === "funded"
-                        ? "bg-emerald-100 text-emerald-700"
-                        : "bg-sky-100 text-sky-700"
+                          ? "bg-emerald-100 text-emerald-700"
+                          : "bg-sky-100 text-sky-700"
                     } ${kh ? "font-khmer" : ""}`}
                   >
                     {n.status === "active"
                       ? t("Pending", "កំពុងរង់ចាំ")
                       : n.status === "funded"
-                      ? t("Funded", "បានឧបត្ថម្ភ")
-                      : t("Completed", "បានបញ្ចប់")}
+                        ? t("Funded", "បានឧបត្ថម្ភ")
+                        : t("Completed", "បានបញ្ចប់")}
                   </span>
                 </li>
               ))}
@@ -521,19 +213,11 @@ function SchoolDashboard() {
         <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
           <div className="flex items-center gap-2 mb-4">
             <Inbox className="w-5 h-5 text-[#1A6EA8]" />
-            <h2
-              className={`font-bold text-foreground text-lg ${
-                kh ? "font-khmer" : "font-display"
-              }`}
-            >
+            <h2 className={`font-bold text-foreground text-lg ${kh ? "font-khmer" : "font-display"}`}>
               {t("Messaging Inbox", "ប្រអប់សារ")}
             </h2>
           </div>
-          <p
-            className={`text-sm text-muted-foreground mb-4 ${
-              kh ? "font-khmer" : ""
-            }`}
-          >
+          <p className={`text-sm text-muted-foreground mb-4 ${kh ? "font-khmer" : ""}`}>
             {t(
               "Quick links to connect with other school administrators and partners.",
               "តំណភ្ជាប់រហ័សដើម្បីទាក់ទងជាមួយអ្នកគ្រប់គ្រងសាលាដទៃ និងដៃគូ។",
@@ -571,23 +255,15 @@ function SchoolDashboard() {
           </div>
         </section>
 
-        {/* Map Status Toggle */}
+        {/* Map Status */}
         <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
           <div className="flex items-center gap-2 mb-2">
             <MapPin className="w-5 h-5 text-[#1A6EA8]" />
-            <h2
-              className={`font-bold text-foreground text-lg ${
-                kh ? "font-khmer" : "font-display"
-              }`}
-            >
+            <h2 className={`font-bold text-foreground text-lg ${kh ? "font-khmer" : "font-display"}`}>
               {t("Map Status", "ស្ថានភាពផែនទី")}
             </h2>
           </div>
-          <p
-            className={`text-sm text-muted-foreground mb-4 ${
-              kh ? "font-khmer" : ""
-            }`}
-          >
+          <p className={`text-sm text-muted-foreground mb-4 ${kh ? "font-khmer" : ""}`}>
             {t(
               "Choose whether your school appears on the public map for donors and visitors.",
               "ជ្រើសរើសថាតើសាលារបស់អ្នកត្រូវបង្ហាញនៅលើផែនទីសាធារណៈ សម្រាប់ម្ចាស់ឧបត្ថម្ភ និងភ្ញៀវឬទេ។",
@@ -607,20 +283,10 @@ function SchoolDashboard() {
                     ? t("Hidden from public map", "បានលាក់ពីផែនទីសាធារណៈ")
                     : t("Visible on public map", "បង្ហាញនៅលើផែនទីសាធារណៈ")}
                 </p>
-                <p
-                  className={`text-xs text-muted-foreground ${
-                    kh ? "font-khmer" : ""
-                  }`}
-                >
+                <p className={`text-xs text-muted-foreground ${kh ? "font-khmer" : ""}`}>
                   {hideFromMap
-                    ? t(
-                        "Donors will not see your school marker.",
-                        "ម្ចាស់ឧបត្ថម្ភនឹងមិនឃើញសញ្ញាសាលារបស់អ្នកទេ។",
-                      )
-                    : t(
-                        "Your school is currently shown to all visitors.",
-                        "សាលារបស់អ្នកកំពុងបង្ហាញដល់ភ្ញៀវទាំងអស់។",
-                      )}
+                    ? t("Donors will not see your school marker.", "ម្ចាស់ឧបត្ថម្ភនឹងមិនឃើញសញ្ញាសាលារបស់អ្នកទេ។")
+                    : t("Your school is currently shown to all visitors.", "សាលារបស់អ្នកកំពុងបង្ហាញដល់ភ្ញៀវទាំងអស់។")}
                 </p>
               </div>
             </div>
@@ -638,184 +304,18 @@ function SchoolDashboard() {
               {savingVis
                 ? t("Saving…", "កំពុងរក្សាទុក…")
                 : hideFromMap
-                ? t("Show on map", "បង្ហាញលើផែនទី")
-                : t("Hide from map", "លាក់ពីផែនទី")}
+                  ? t("Show on map", "បង្ហាញលើផែនទី")
+                  : t("Hide from map", "លាក់ពីផែនទី")}
             </button>
           </div>
-          {visError && (
-            <p className="text-xs text-red-600 mt-2">{visError}</p>
-          )}
+          {visError && <p className="text-xs text-red-600 mt-2">{visError}</p>}
         </section>
       </div>
     </div>
   );
 }
 
-/* ─── My Achievements (4 progress badges) ─────────────────────────── */
-
-interface AchievementDef {
-  type: string;
-  icon: typeof Award;
-  titleEn: string;
-  titleKh: string;
-  descEn: string;
-  descKh: string;
-  color: string; // tailwind classes for the earned tile
-}
-
-const ACHIEVEMENT_DEFS: AchievementDef[] = [
-  {
-    type: "truth-seeker",
-    icon: Search,
-    titleEn: "Truth Seeker",
-    titleKh: "ស្វែងរកការពិត",
-    descEn: "Awarded for completing all 15 entries in the Skeptic's Challenge.",
-    descKh: "ទទួលបានដោយបញ្ចប់បញ្ហាទាំង ១៥ នៅក្នុងបញ្ហាប្រឈមអ្នកគិតវិភាគ។",
-    color: "from-amber-100 to-amber-200 border-amber-300 text-amber-700",
-  },
-  {
-    type: "galactic-explorer",
-    icon: Rocket,
-    titleEn: "Galactic Explorer",
-    titleKh: "អ្នករុករកកាឡាក់ស៊ី",
-    descEn: "Awarded for visiting and interacting with the Astronomy resources.",
-    descKh: "ទទួលបានដោយចូលមើល និងធ្វើអន្តរកម្មជាមួយធនធានតារាសាស្ត្រ។",
-    color: "from-indigo-100 to-purple-200 border-indigo-300 text-indigo-700",
-  },
-  {
-    type: "financial-wizard",
-    icon: Banknote,
-    titleEn: "Financial Wizard",
-    titleKh: "អ្នកជំនាញហិរញ្ញវត្ថុ",
-    descEn: "Awarded for finishing the Financial Literacy intro module.",
-    descKh: "ទទួលបានដោយបញ្ចប់មេរៀនណែនាំចំណេះដឹងហិរញ្ញវត្ថុ។",
-    color: "from-emerald-100 to-emerald-200 border-emerald-300 text-emerald-700",
-  },
-  {
-    type: "knowledge-sharer",
-    icon: Share2,
-    titleEn: "Knowledge Sharer",
-    titleKh: "អ្នកចែករំលែកចំណេះដឹង",
-    descEn: "Awarded for posting 3 book recommendations in the Reading List forum.",
-    descKh: "ទទួលបានដោយបង្ហោះការណែនាំសៀវភៅចំនួន ៣ ក្នុងវេទិកាបញ្ជីសៀវភៅ។",
-    color: "from-rose-100 to-pink-200 border-rose-300 text-rose-700",
-  },
-];
-
-function MyAchievements({
-  achievements,
-  kh,
-  t,
-}: {
-  achievements: Achievement[] | null;
-  kh: boolean;
-  t: ReturnType<typeof useTranslation>;
-}) {
-  const earnedMap = new Map<string, Achievement>();
-  (achievements ?? []).forEach((a) => earnedMap.set(a.badgeType, a));
-  const earnedCount = ACHIEVEMENT_DEFS.filter((d) => earnedMap.has(d.type)).length;
-
-  return (
-    <section className="bg-white rounded-3xl border border-sky-100 shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-amber-500" />
-          <h2
-            className={`font-bold text-foreground text-lg ${
-              kh ? "font-khmer" : "font-display"
-            }`}
-          >
-            {t("My Achievements", "សមិទ្ធផលរបស់ខ្ញុំ")}
-          </h2>
-        </div>
-        <span className={`text-xs text-muted-foreground ${kh ? "font-khmer" : ""}`}>
-          {t(
-            `${earnedCount} of ${ACHIEVEMENT_DEFS.length} earned`,
-            `ទទួលបាន ${earnedCount} ក្នុងចំណោម ${ACHIEVEMENT_DEFS.length}`,
-          )}
-        </span>
-      </div>
-
-      {achievements === null ? (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="aspect-square rounded-2xl bg-sky-50 animate-pulse" />
-          ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {ACHIEVEMENT_DEFS.map((def) => {
-            const earned = earnedMap.get(def.type);
-            const Icon = def.icon;
-            const title = kh ? def.titleKh : def.titleEn;
-            const description = kh ? def.descKh : def.descEn;
-            const tooltip = `${def.titleEn} — ${def.descEn}\n${def.titleKh} — ${def.descKh}`;
-
-            return (
-              <div
-                key={def.type}
-                title={tooltip}
-                aria-label={tooltip}
-                className={`group relative aspect-square rounded-2xl border p-3 flex flex-col items-center justify-center text-center transition-all ${
-                  earned
-                    ? `bg-gradient-to-br ${def.color} hover:-translate-y-0.5 hover:shadow-md`
-                    : "bg-gray-100 border-gray-200 text-gray-400 opacity-70 grayscale"
-                }`}
-              >
-                {/* Lock indicator on unearned */}
-                {!earned && (
-                  <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center">
-                    <Lock className="w-3 h-3 text-gray-600" />
-                  </div>
-                )}
-                <Icon
-                  className={`w-8 h-8 mb-1.5 ${
-                    earned ? "" : "text-gray-400"
-                  }`}
-                />
-                <span
-                  className={`text-[11px] font-bold leading-tight line-clamp-2 break-words ${
-                    kh ? "font-khmer text-xs" : ""
-                  }`}
-                >
-                  {title}
-                </span>
-                {earned && (
-                  <span
-                    className={`text-[9px] mt-1 opacity-80 ${
-                      kh ? "font-khmer" : ""
-                    }`}
-                  >
-                    {new Date(earned.awardedAt).toLocaleDateString(
-                      kh ? "km-KH" : "en-US",
-                      { year: "numeric", month: "short", day: "numeric" },
-                    )}
-                  </span>
-                )}
-
-                {/* Hover tooltip (shows on hover, supplements native title) */}
-                <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                  <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg">
-                    <p className="font-bold">
-                      {kh ? def.titleKh : def.titleEn}
-                    </p>
-                    <p
-                      className={`mt-1 text-gray-200 leading-snug ${
-                        kh ? "font-khmer leading-relaxed" : ""
-                      }`}
-                    >
-                      {description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </section>
-  );
-}
+/* ─── Helpers ─────────────────────────────────────────────────────── */
 
 function SummaryStat({
   label,
