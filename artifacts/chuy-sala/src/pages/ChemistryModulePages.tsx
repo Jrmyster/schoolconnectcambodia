@@ -14,7 +14,10 @@ import {
   Puzzle,
   ChefHat,
   Droplets,
+  Flame,
+  Zap,
 } from "lucide-react";
+import { BlockMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 // ── Shared layout helpers ──────────────────────────────────────────────────────
@@ -577,7 +580,140 @@ export function ChemistryReactionsPage() {
         </div>
       </Section>
 
-      {/* ── 3. Interactive Calculator ─────────────────────────── */}
+      {/* ── 3. Enthalpy & Entropy ─────────────────────────────── */}
+      <Section
+        titleEn="Enthalpy & Entropy"
+        titleKh="អង់តាល់ពី និង អង់ត្រូប៉ី"
+      >
+        <div className="flex items-start gap-3 not-prose mb-4">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Flame className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0 pt-1 space-y-3">
+            <P
+              en={
+                <>
+                  <strong>Enthalpy (H) — Heat Energy.</strong> Enthalpy is all
+                  about heat. <strong>Exothermic</strong> reactions release
+                  heat (like burning wood for a fire).{" "}
+                  <strong>Endothermic</strong> reactions absorb heat (like an
+                  ice pack getting cold). Nature prefers releasing heat.
+                </>
+              }
+              kh={
+                <>
+                  <strong>អង់តាល់ពី (H) — ថាមពលកម្ដៅ។</strong>{" "}
+                  អង់តាល់ពីនិយាយអំពីកម្ដៅ។ ប្រតិកម្ម{" "}
+                  <strong>អុកសូទែម៉ិក</strong> បញ្ចេញកម្ដៅ
+                  (ដូចជាការដុតឧស)។ ប្រតិកម្ម{" "}
+                  <strong>អង់ដូទែម៉ិក</strong> ស្រូបយកកម្ដៅ
+                  (ដូចជាថង់ទឹកកក)។ ធម្មជាតិចូលចិត្តបញ្ចេញកម្ដៅ។
+                </>
+              }
+            />
+            <P
+              en={
+                <>
+                  <strong>Entropy (S) — Chaos / Disorder.</strong> Entropy is
+                  all about chaos. The universe naturally moves from order to
+                  disorder — think of a clean bedroom that slowly becomes
+                  messy on its own over time. Nature prefers high entropy.
+                </>
+              }
+              kh={
+                <>
+                  <strong>
+                    អង់ត្រូប៉ី (S) — ភាពគ្មានសណ្តាប់ធ្នាប់។
+                  </strong>{" "}
+                  អង់ត្រូប៉ីនិយាយអំពីភាពច្របូកច្របល់។
+                  សកលលោកធម្មតាផ្លាស់ប្តូរពីសណ្តាប់ធ្នាប់ ទៅជាគ្មានសណ្តាប់ធ្នាប់ —
+                  ស្រមៃមើលបន្ទប់គេងស្អាតមួយ ដែលបន្តិចម្តងៗក្លាយជារញ៉េរញ៉ៃដោយខ្លួនឯងតាមពេលវេលា។
+                  ធម្មជាតិចូលចិត្តអង់ត្រូប៉ីខ្ពស់។
+                </>
+              }
+            />
+          </div>
+        </div>
+      </Section>
+
+      {/* ── 4. Gibbs Free Energy ──────────────────────────────── */}
+      <Section
+        titleEn="Gibbs Free Energy"
+        titleKh="ថាមពលសេរីហ្គីប"
+      >
+        <div className="flex items-start gap-3 not-prose mb-4">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Zap className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0 pt-1 space-y-3">
+            <P
+              en={
+                <>
+                  <strong>The Decider.</strong> Josiah Willard Gibbs combined
+                  Enthalpy and Entropy into a single master equation to answer
+                  one big question: <em>Will this reaction happen on its own
+                  (spontaneously)?</em>
+                </>
+              }
+              kh={
+                <>
+                  <strong>អ្នកសម្រេចចិត្ត។</strong> Josiah Willard Gibbs
+                  បានបញ្ចូលអង់តាល់ពី និងអង់ត្រូប៉ី
+                  ទៅក្នុងសមីការមេតែមួយ ដើម្បីឆ្លើយសំណួរដ៏សំខាន់មួយ៖{" "}
+                  <em>
+                    តើប្រតិកម្មនេះនឹងកើតឡើងដោយខ្លួនឯង (កើតឡើងដោយឯកឯង) ឬទេ?
+                  </em>
+                </>
+              }
+            />
+          </div>
+        </div>
+
+        {/* The Math — Gibbs equation */}
+        <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 not-prose flex items-center justify-center mb-4">
+          <div className="text-emerald-900 text-xl sm:text-2xl">
+            <BlockMath math={String.raw`\Delta G = \Delta H - T\Delta S`} />
+          </div>
+        </div>
+
+        {/* The Rule */}
+        <BList
+          itemsEn={[
+            <span>
+              <strong>If ΔG is negative</strong> — the reaction is{" "}
+              <strong>spontaneous</strong>. It rolls down the hill all by
+              itself, no push needed.
+            </span>,
+            <span>
+              <strong>If ΔG is positive</strong> — the reaction is{" "}
+              <strong>non-spontaneous</strong>. You have to push it up the
+              hill (add energy) to make it happen.
+            </span>,
+            <span>
+              <strong>Spontaneous vs. Non-spontaneous</strong> —{" "}
+              កើតឡើងដោយឯកឯង ទល់នឹង មិនកើតឡើងដោយឯកឯង.
+            </span>,
+          ]}
+          itemsKh={[
+            <span>
+              <strong>បើ ΔG អវិជ្ជមាន</strong> — ប្រតិកម្ម{" "}
+              <strong>កើតឡើងដោយឯកឯង</strong>។
+              វារមៀលចុះពីលើភ្នំដោយខ្លួនឯង ដោយមិនត្រូវការការរុញច្រាន។
+            </span>,
+            <span>
+              <strong>បើ ΔG វិជ្ជមាន</strong> — ប្រតិកម្ម{" "}
+              <strong>មិនកើតឡើងដោយឯកឯង</strong>។
+              អ្នកត្រូវរុញវាឡើងលើភ្នំ (បន្ថែមថាមពល) ដើម្បីឱ្យវាកើតឡើង។
+            </span>,
+            <span>
+              <strong>កើតឡើងដោយឯកឯង ទល់នឹង មិនកើតឡើងដោយឯកឯង</strong> —
+              Spontaneous vs. Non-spontaneous.
+            </span>,
+          ]}
+        />
+      </Section>
+
+      {/* ── 5. Interactive Calculator ─────────────────────────── */}
       <MolecularWeightCalculator />
 
       {/* ── 4. Acids and Bases ────────────────────────────────── */}
