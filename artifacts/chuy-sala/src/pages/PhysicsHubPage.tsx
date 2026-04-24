@@ -19,6 +19,7 @@ import {
   HeartPulse,
   Droplets,
   Wrench,
+  Orbit,
 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
@@ -181,6 +182,39 @@ export const PHYSICS_MODULES: PhysicsModule[] = [
       glow: "shadow-indigo-200/40",
     },
   },
+  {
+    slug: "gyroscopes",
+    number: "06",
+    code: "M-06",
+    titleEn: "Gyroscopes & Angular Momentum",
+    titleKh: "ហ្គីរ៉ូស្កុប និងម៉ូម៉ង់ប្រដាប់រង្វិល",
+    blurbEn:
+      "Discover the magic of spin — how a fast-spinning wheel resists tipping, holds a bicycle upright, and even steers space stations without fuel.",
+    blurbKh:
+      "ស្វែងយល់ពីមន្តអាគមនៃការវិល — របៀបដែលកង់វិលលឿនទប់ទល់ការផ្អៀង រក្សាកង់ឱ្យឈរត្រង់ និងសូម្បីបត់បែនស្ថានីយ៍អវកាសដោយគ្មានឥន្ធនៈ។",
+    topicsEn: [
+      "Angular Momentum",
+      "Spinning Top",
+      "Bicycle Stability",
+      "Spacecraft CMGs",
+    ],
+    topicsKh: [
+      "ម៉ូម៉ង់ប្រដាប់រង្វិល",
+      "ស្បឹនវិល",
+      "ស្ថេរភាពកង់",
+      "CMG យានអវកាស",
+    ],
+    icon: Orbit,
+    accent: {
+      border: "border-cyan-300",
+      chipBorder: "border-cyan-300/80",
+      chipText: "text-cyan-800",
+      iconBg: "bg-cyan-700",
+      title: "text-cyan-900",
+      code: "text-cyan-700",
+      glow: "shadow-cyan-200/40",
+    },
+  },
 ];
 
 // Inline SVG blueprint grid — used as background image via data URI.
@@ -267,7 +301,7 @@ export function PhysicsHubPage() {
                   kh ? "font-khmer text-xs" : ""
                 }`}
               >
-                <span>{t("MODULES: 04", "មុខវិជ្ជា៖ ០៤")}</span>
+                <span>{t("MODULES: 06", "មុខវិជ្ជា៖ ០៦")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("LANG: EN / ខ្មែរ", "ភាសា៖ EN / ខ្មែរ")}</span>
                 <span className="opacity-40">|</span>
