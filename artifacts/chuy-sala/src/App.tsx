@@ -120,6 +120,7 @@ const UniversitiesPage          = lazy(() => import("@/pages/UniversitiesPage").
 const BridgesPage               = lazy(() => import("@/pages/BridgesPage").then(m => ({ default: m.BridgesPage })));
 const PlumbingSewersPage        = lazy(() => import("@/pages/PlumbingSewersPage").then(m => ({ default: m.PlumbingSewersPage })));
 const PumpsPage                 = lazy(() => import("@/pages/PumpsPage").then(m => ({ default: m.PumpsPage })));
+const VexillologyPage           = lazy(() => import("@/pages/VexillologyPage").then(m => ({ default: m.VexillologyPage })));
 const SubmitStoryPage           = lazy(() => import("@/pages/SubmitStoryPage").then(m => ({ default: m.SubmitStoryPage })));
 const SubmitNeedPage            = lazy(() => import("@/pages/SubmitNeedPage").then(m => ({ default: m.SubmitNeedPage })));
 const SpacePage                 = lazy(() => import("@/pages/SpacePage").then(m => ({ default: m.SpacePage })));
@@ -243,6 +244,7 @@ function Router() {
             <Route path="/technology/bridges" component={BridgesPage} />
             <Route path="/technology/plumbing" component={PlumbingSewersPage} />
             <Route path="/technology/pumps" component={PumpsPage} />
+            <Route path="/study-center/flags" component={VexillologyPage} />
             <Route path="/submit-story" component={SubmitStoryPage} />
             <Route path="/submit-need" component={SubmitNeedPage} />
             <Route path="/space" component={SpacePage} />

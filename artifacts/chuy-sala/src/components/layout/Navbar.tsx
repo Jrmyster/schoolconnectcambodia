@@ -238,6 +238,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ស្ពានដីដ៏ធំពីប្រទេសមិកស៊ិកដល់អាហ្សង់ទីនក្នុងមេរៀនបី ៖ ប្រជាជនជាង ៦៥០ លាននាក់នៅក្នុង ២៧ ប្រទេស ជាមួយនឹងបេតិកភណ្ឌនៃអរិយធម៌ពីរ៉ាមីត ម៉ាយ៉ា អាស្ទែក និងអាំងកា; ជួរភ្នំអង់ដេស — ជួរភ្នំវែងបំផុតលើផែនដី — និងព្រៃអាម៉ាហ្សូន ព្រៃភ្លៀងធំបំផុតនៃភពផែនដី និង 'សួតនៃផែនដី'; និងស្នាដៃវិស្វកម្មនៃព្រែកជីកប៉ាណាម៉ា ដែលព្រែករូបទឹកយក្សលើកកប៉ាល់ដឹកទំនិញ ៥០,០០០ តោន ឆ្លងលើភ្នំដោយប្រើតែទំនាញ។",
       },
       {
+        href: "/study-center/flags",
+        labelEn: "Global Flags & Vexillology",
+        labelKh: "ទង់ជាតិពិភពលោក និងវ៉ិចស៊ីឡូឡូជី",
+        icon: Flag,
+        descEn: "Vexillology: The Language of Flags — the scientific study of every flag in the world. Learn the 5 Basic Rules of Good Flag Design (keep it simple, meaningful symbolism, 2–3 colours, no lettering, be distinctive) and see how Cambodia proudly breaks Rule #4 by putting Angkor Wat on its flag — making it the most uniquely recognizable flag on Earth. Then browse a live, searchable gallery of all 190+ countries pulled straight from the REST Countries API: filter by continent, search by name, and explore every flag, capital, and region on the planet.",
+        descKh: "វ៉ិចស៊ីឡូឡូជី ៖ ភាសានៃទង់ជាតិ — ការសិក្សាបែបវិទ្យាសាស្ត្រអំពីទង់ជាតិទាំងអស់នៅលើពិភពលោក។ រៀនច្បាប់មូលដ្ឋានទាំង ៥ នៃការរចនាទង់ជាតិល្អ (សាមញ្ញ និមិត្តរូបជ្រាលជ្រៅ ពណ៌មូលដ្ឋាន ២-៣ គ្មានអក្សរ មានលក្ខណៈប្លែកពីគេ) ហើយឃើញរបៀបដែលកម្ពុជាបានបំបែកច្បាប់ទី ៤ ដោយមោទនភាព ដោយដាក់ប្រាសាទអង្គរវត្តលើទង់ជាតិ — ធ្វើឱ្យវាក្លាយជាទង់ជាតិដែលមានលក្ខណៈប្លែកមិនអាចយល់ច្រឡំបាននៅលើផែនដី។ បន្ទាប់មកស្វែងរកនៅក្នុងវិចិត្រសាលផ្ទាល់នៃប្រទេសជាង ១៩០ ដែលទាញមកដោយផ្ទាល់ពី REST Countries API ៖ ច្រោះតាមទ្វីប ស្វែងរកតាមឈ្មោះ និងស្វែងយល់រាល់ទង់ជាតិ រាជធានី និងតំបន់នៅលើភពផែនដី។",
+      },
+      {
         href: "/study-center/coordinates",
         labelEn: "Reading Coordinates: Latitude & Longitude",
         labelKh: "ការអានកូអរដោនេ៖ រយៈទទឹង និងរយៈបណ្តោយ",
