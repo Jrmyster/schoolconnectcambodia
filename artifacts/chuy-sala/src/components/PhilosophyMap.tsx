@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Compass, X, Sparkles, AlertTriangle, RotateCcw } from "lucide-react";
+import { Compass, X, Sparkles, AlertTriangle, RotateCcw, Brain, Atom, PenTool, HelpCircle, Activity } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type BranchKey =
@@ -441,6 +441,9 @@ function BranchCard({
       {/* Logic-only sub-section: Logical Fallacies */}
       {branch.key === "logic" && <LogicalFallacies kh={kh} />}
 
+      {/* Mind-only sub-section: Free Will vs. Determinism */}
+      {branch.key === "mind" && <FreeWillVsDeterminism kh={kh} />}
+
       {/* Real-world Cambodian example */}
       <div className="mt-4 rounded-xl bg-slate-800/60 border border-amber-300/20 p-4">
         <div className={`inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] font-bold text-emerald-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
@@ -654,6 +657,252 @@ function LogicalFallacies({ kh }: { kh: boolean }) {
           })}
         </ul>
       </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- */
+/*  FREE WILL vs DETERMINISM — sub-section shown only inside Mind */
+/*                                                                */
+/*  A philosophical duel between two glowing pillars:             */
+/*    · warm human orange  → "The Feeling of Free Will"           */
+/*    · cold calculating blue → "The Hard Wall of Physics"        */
+/*  followed by a third reconciling card on the neuroscience      */
+/*  of decision-making.                                           */
+/* -------------------------------------------------------------- */
+
+function FreeWillVsDeterminism({ kh }: { kh: boolean }) {
+  return (
+    <section
+      className="mt-6"
+      aria-labelledby="free-will-vs-determinism-title"
+      data-testid="free-will-vs-determinism"
+    >
+      {/* Section header */}
+      <div className="flex items-center gap-2 mb-3">
+        <div className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-orange-400/30 to-cyan-400/30 border border-fuchsia-300/50 text-fuchsia-200 shadow-[0_0_12px_-2px_rgba(217,70,239,0.45)]">
+          <Brain className="w-4 h-4" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <div
+            id="free-will-vs-determinism-title"
+            className={`text-sm sm:text-base font-bold text-fuchsia-100 leading-tight ${kh ? "font-khmer" : ""}`}
+          >
+            {kh
+              ? "ឆន្ទៈសេរី ទល់នឹង ទ្រឹស្ដីកំណត់និយម"
+              : "Free Will vs. Determinism"}
+          </div>
+          <div className={`text-[11px] text-fuchsia-200/60 mt-0.5 ${kh ? "font-khmer" : ""}`}>
+            {kh
+              ? "(Free Will vs. Determinism) — សំណួរដ៏ជ្រាលជ្រៅបំផុតមួយនៅក្នុងទស្សនវិជ្ជានៃចិត្ត។"
+              : "ឆន្ទៈសេរី ទល់នឹង ទ្រឹស្ដីកំណត់និយម — one of the deepest questions in the philosophy of mind."}
+          </div>
+        </div>
+      </div>
+
+      {/* Framing question banner */}
+      <div
+        className="relative mb-5 rounded-xl border border-fuchsia-400/40 bg-gradient-to-r from-orange-500/10 via-fuchsia-500/10 to-cyan-500/10 p-4 sm:p-5 overflow-hidden"
+        data-testid="framing-question"
+      >
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at left, rgba(251,146,60,0.20), transparent 55%), radial-gradient(ellipse at right, rgba(34,211,238,0.20), transparent 55%)",
+          }}
+        />
+        <div className="relative">
+          <div className={`inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] font-bold text-fuchsia-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            <HelpCircle className="w-3.5 h-3.5" aria-hidden="true" />
+            {kh ? "សំណួរគោល" : "The Framing Question"}
+          </div>
+          <p
+            className={`text-lg sm:text-xl font-semibold text-amber-50 leading-snug ${kh ? "font-khmer leading-relaxed" : "italic"}`}
+          >
+            “{kh
+              ? "តើអ្នកជាអ្នកនិពន្ធនៃការជ្រើសរើសរបស់អ្នក ឬគ្រាន់តែជាប្រតិកម្មគីមីប៉ុណ្ណោះ?"
+              : "Are you the author of your choices, or just a chemical reaction?"}”
+          </p>
+          <p className={`mt-1 text-xs ${kh ? "text-fuchsia-200/55" : "font-khmer text-fuchsia-200/55"}`}>
+            {kh
+              ? "“Are you the author of your choices, or just a chemical reaction?”"
+              : "“តើអ្នកជាអ្នកនិពន្ធនៃការជ្រើសរើសរបស់អ្នក ឬគ្រាន់តែជាប្រតិកម្មគីមីប៉ុណ្ណោះ?”"}
+          </p>
+        </div>
+      </div>
+
+      {/* The two duelling pillars */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Card 1 — The Feeling of Free Will (warm human orange) */}
+        <article
+          data-testid="card-free-will"
+          className="relative rounded-2xl border-2 border-orange-400/55 bg-gradient-to-br from-orange-500/15 via-amber-500/10 to-rose-500/10 p-4 sm:p-5 shadow-[0_0_28px_-10px_rgba(251,146,60,0.55)] overflow-hidden"
+        >
+          {/* Top accent stripe */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-400 via-amber-300 to-rose-400"
+          />
+          {/* Soft glow halo */}
+          <div
+            aria-hidden
+            className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-50 blur-2xl pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,146,60,0.55), transparent 65%)" }}
+          />
+
+          <div className="relative">
+            <div className="flex items-start gap-2.5 mb-3">
+              <div className="shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 border border-orange-200/60 shadow-[0_0_18px_-4px_rgba(251,146,60,0.7)] flex items-center justify-center">
+                <PenTool className="w-4.5 h-4.5 text-slate-900" aria-hidden="true" strokeWidth={2.4} />
+              </div>
+              <div className="min-w-0">
+                <div className={`font-display font-extrabold text-lg sm:text-xl text-orange-100 leading-tight ${kh ? "font-khmer" : ""}`}>
+                  {kh ? "អារម្មណ៍នៃឆន្ទៈសេរី" : "The Feeling of Free Will"}
+                </div>
+                <div className={`text-xs text-orange-200/70 mt-0.5 ${kh ? "" : "font-khmer"}`}>
+                  {kh ? "(The Feeling of Free Will)" : "អារម្មណ៍នៃឆន្ទៈសេរី"}
+                </div>
+              </div>
+            </div>
+
+            <div className={`text-[10px] uppercase tracking-[0.22em] font-bold text-orange-300/90 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {kh ? "គំនិតគោល" : "The Concept"}
+            </div>
+            <p className={`text-sm sm:text-[15px] text-amber-50/95 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+              {kh
+                ? "ឆន្ទៈសេរីគឺជាអារម្មណ៍ដ៏ជ្រាលជ្រៅ និងមិនអាចបដិសេធបាន ដែលថា នៅពេលនេះ អ្នកអាចជ្រើសរើសលើកដៃឆ្វេង ឬដៃស្ដាំរបស់អ្នក។ វាគឺជាជំនឿដែលថា អនាគតមិនទាន់ត្រូវបានសរសេរ — ហើយអ្នកគឺជាអ្នកកាន់ប៊ិច។"
+                : "Free Will is the deep, undeniable feeling that right now, you could choose to raise your left hand, or your right hand. It is the belief that the future is unwritten — and that you are the one holding the pen."}
+            </p>
+          </div>
+        </article>
+
+        {/* Card 2 — The Hard Wall of Physics (cold calculating blue) */}
+        <article
+          data-testid="card-physics-wall"
+          className="relative rounded-2xl border-2 border-cyan-400/55 bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-indigo-600/15 p-4 sm:p-5 shadow-[0_0_28px_-10px_rgba(34,211,238,0.55)] overflow-hidden"
+        >
+          {/* Top accent stripe */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400"
+          />
+          {/* Soft glow halo */}
+          <div
+            aria-hidden
+            className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-50 blur-2xl pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(34,211,238,0.55), transparent 65%)" }}
+          />
+
+          <div className="relative">
+            <div className="flex items-start gap-2.5 mb-3">
+              <div className="shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 border border-cyan-200/60 shadow-[0_0_18px_-4px_rgba(34,211,238,0.7)] flex items-center justify-center">
+                <Atom className="w-4.5 h-4.5 text-slate-900" aria-hidden="true" strokeWidth={2.4} />
+              </div>
+              <div className="min-w-0">
+                <div className={`font-display font-extrabold text-lg sm:text-xl text-cyan-100 leading-tight ${kh ? "font-khmer" : ""}`}>
+                  {kh ? "ជញ្ជាំងដ៏រឹងមាំនៃរូបវិទ្យា" : "The Hard Wall of Physics"}
+                </div>
+                <div className={`text-xs text-cyan-200/70 mt-0.5 ${kh ? "" : "font-khmer"}`}>
+                  {kh ? "(The Hard Wall of Physics)" : "ជញ្ជាំងដ៏រឹងមាំនៃរូបវិទ្យា"}
+                </div>
+              </div>
+            </div>
+
+            {/* Sub-block: Determinism */}
+            <div className={`text-[10px] uppercase tracking-[0.22em] font-bold text-cyan-300/90 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {kh ? "ទ្រឹស្ដីកំណត់និយម" : "Determinism"}
+              <span className={`ml-2 normal-case tracking-normal text-cyan-200/55 font-normal ${kh ? "" : "font-khmer"}`}>
+                {kh ? "(Determinism)" : "ទ្រឹស្ដីកំណត់និយម"}
+              </span>
+            </div>
+            <p className={`text-sm sm:text-[15px] text-amber-50/95 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+              {kh
+                ? "សកលលោកដំណើរការយ៉ាងតឹងរ៉ឹងលើមូលហេតុ និងផល។ បើអ្នកទម្លាក់ដុំថ្ម ទំនាញទាញវាចុះក្រោម។ ដុំថ្មគ្មានជម្រើសទេ។"
+                : "The universe runs strictly on cause and effect. If you drop a rock, gravity pulls it down. The rock has no choice."}
+            </p>
+
+            {/* Sub-block: Brain is physical */}
+            <div className={`mt-3.5 text-[10px] uppercase tracking-[0.22em] font-bold text-cyan-300/90 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              {kh ? "ខួរក្បាលគឺជារូបវន្ត" : "The Brain is Physical"}
+              <span className={`ml-2 normal-case tracking-normal text-cyan-200/55 font-normal ${kh ? "" : "font-khmer"}`}>
+                {kh ? "(The Brain is Physical)" : "ខួរក្បាលគឺជារូបវន្ត"}
+              </span>
+            </div>
+            <p className={`text-sm sm:text-[15px] text-amber-50/95 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+              {kh
+                ? "ខួរក្បាលរបស់អ្នកផ្សំឡើងពីអាតូម។ អាតូមទាំងនោះត្រូវគោរពច្បាប់រូបវិទ្យាដូចគ្នាបេះបិទនឹងដុំថ្មដែរ។ ដូច្នេះ រាល់សញ្ញាអគ្គិសនី និងការបញ្ចេញសារធាតុគីមីនៅក្នុងក្បាលរបស់អ្នក គឺត្រូវបានបង្កឡើងដោយព្រឹត្តិការណ៍រូបវន្តពីមុន — រហូតដល់ Big Bang។"
+                : "Your brain is made of atoms. Those atoms must obey the exact same laws of physics as the rock. Therefore, every electrical signal and chemical release in your head was caused by a previous physical event — stretching all the way back to the Big Bang."}
+            </p>
+          </div>
+        </article>
+      </div>
+
+      {/* Card 3 — The Neuroscience of 'Deciding' (synthesis, full width) */}
+      <article
+        data-testid="card-neuroscience"
+        className="relative mt-4 rounded-2xl border-2 border-fuchsia-400/55 bg-gradient-to-br from-fuchsia-500/12 via-violet-600/10 to-indigo-700/15 p-4 sm:p-5 shadow-[0_0_30px_-10px_rgba(217,70,239,0.55)] overflow-hidden"
+      >
+        {/* Top accent stripe */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-fuchsia-400 via-purple-300 to-violet-500"
+        />
+        {/* Twin glow halos — orange on left, blue on right (the pillars meeting) */}
+        <div
+          aria-hidden
+          className="absolute -top-10 -left-10 w-40 h-40 rounded-full opacity-40 blur-2xl pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(251,146,60,0.45), transparent 65%)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full opacity-40 blur-2xl pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(34,211,238,0.45), transparent 65%)" }}
+        />
+
+        <div className="relative">
+          <div className="flex items-start gap-2.5 mb-3">
+            <div className="shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-fuchsia-400 to-violet-600 border border-fuchsia-200/60 shadow-[0_0_18px_-4px_rgba(217,70,239,0.7)] flex items-center justify-center">
+              <Brain className="w-4.5 h-4.5 text-slate-900" aria-hidden="true" strokeWidth={2.4} />
+            </div>
+            <div className="min-w-0">
+              <div className={`font-display font-extrabold text-lg sm:text-xl text-fuchsia-100 leading-tight ${kh ? "font-khmer" : ""}`}>
+                {kh ? "សរសៃប្រសាទវិទ្យានៃការសម្រេចចិត្ត" : "The Neuroscience of ‘Deciding’"}
+              </div>
+              <div className={`text-xs text-fuchsia-200/70 mt-0.5 ${kh ? "" : "font-khmer"}`}>
+                {kh ? "(The Neuroscience of ‘Deciding’)" : "សរសៃប្រសាទវិទ្យានៃការសម្រេចចិត្ត"}
+              </div>
+            </div>
+          </div>
+
+          {/* The fMRI finding */}
+          <div className="flex items-start gap-2 mb-3">
+            <Activity className="w-4 h-4 mt-0.5 text-fuchsia-300 shrink-0" aria-hidden="true" />
+            <p className={`text-sm sm:text-[15px] text-amber-50/95 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+              {kh
+                ? "ម៉ាស៊ីនស្កេនខួរក្បាលសម័យទំនើប (fMRI) បានបង្ហាញថា ខួរក្បាលរូបវន្តដែលនៅក្រោមស្មារតី ពិតជាចាប់ផ្ដើម 'ការជ្រើសរើស' រហូតដល់ច្រើនវិនាទី មុនពេលស្មារតីដឹងខ្លួនពីវាទៅទៀត។"
+                : "Modern brain scanners (fMRI) have shown that the subconscious, physical brain actually initiates a ‘choice’ up to several seconds before the conscious mind is even aware of it."}
+            </p>
+          </div>
+
+          {/* The conclusion sub-block — distinct nested panel */}
+          <div className="rounded-xl bg-slate-900/55 border border-fuchsia-300/30 p-3.5">
+            <div className={`inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.22em] font-bold text-fuchsia-300 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+              {kh ? "សេចក្ដីសន្និដ្ឋាន" : "The Conclusion"}
+              <span className={`ml-1.5 normal-case tracking-normal text-fuchsia-200/55 font-normal ${kh ? "" : "font-khmer"}`}>
+                {kh ? "(The Conclusion)" : "សេចក្ដីសន្និដ្ឋាន"}
+              </span>
+            </div>
+            <p className={`text-sm sm:text-[15px] text-amber-50/95 leading-relaxed ${kh ? "font-khmer leading-loose" : "italic"}`}>
+              {kh
+                ? "វិទ្យាសាស្ត្រលើកឡើងថា ខួរក្បាលរបស់អ្នកធ្វើការសម្រេចចិត្តតាមរបៀបគណិតវិទ្យា បន្ទាប់មកព្រាង 'ផែនទី' មួយទៅកាន់ស្មារតីដឹងខ្លួនរបស់អ្នក — ធ្វើឱ្យអ្នកមានអារម្មណ៍ភ័ន្តច្រឡំថា អ្នកបានជ្រើសរើសនៅពេលនោះដោយខ្លួនឯង។"
+                : "Science suggests your brain makes the decision mathematically, and then projects a ‘Map’ to your conscious mind — making you falsely feel like you made the choice in the moment."}
+            </p>
+          </div>
+        </div>
+      </article>
     </section>
   );
 }

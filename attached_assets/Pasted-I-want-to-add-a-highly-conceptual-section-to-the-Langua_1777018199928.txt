@@ -1,0 +1,27 @@
+I want to add a highly conceptual section to the 'Language & Reality' page, directly below the 'Two ways to wear the spectacles' section. This module will cover Korzybski's concepts of Infinite Abstraction and the Structural Differential. Please implement the following cleanly, matching the existing aesthetic (dark teal header, white background, mint/yellow card accents):
+
+1. Card 1: The Animal Limit (ដែនកំណត់របស់សត្វ):
+
+The Concept: Explain that animals absolutely abstract reality, but they hit a hard ceiling. A dog senses the subatomic physical world and abstracts it into an 'Object' (like a bone). It can even learn a sound associated with it. But a dog cannot write a philosophical essay about the concept of bones. Their Map is locked to the physical Territory.
+
+2. Card 2: Infinite Human Abstraction (ការអរូបីកម្មគ្មានទីបញ្ចប់របស់មនុស្ស):
+
+The Superpower: Humans can label a label. We see a specific physical animal (Object), we call it 'Bessie' (Label 1), we classify it as a 'Cow' (Label 2), then 'Livestock' (Label 3), then 'Agricultural Asset' (Label 4).
+
+The Danger: Explain that the higher we go up the ladder, the further away we get from the physical Territory. Most human arguments happen because we get stuck fighting in the clouds of High Abstraction (e.g., arguing about 'Capitalism') instead of pointing at the physical realities on the ground.
+
+3. Card 3: The Structural Differential (ម៉ូដែលរចនាសម្ព័ន្ធប្លែកគ្នា):
+
+The Physical Model: Explain that Alfred Korzybski actually built a 3D physical model to teach this.
+
+The Parabola (The Event): The top piece is a parabola with infinite holes, representing the infinite, swirling atoms of the physical universe.
+
+The Disc (The Object): Strings connect the Parabola to a solid round Disc. This is our nervous system filtering the atoms into a physical object we can see and touch.
+
+The Hanging Strings (What we leave out): Crucially, highlight that many strings from the Parabola do not connect to the Disc. They hang loose. This represents the characteristics of reality our senses simply cannot pick up. Every time we abstract, we lose details. The Map is always smaller than the Territory!
+
+4. Formatting & UI:
+
+Keep the typography crisp and readable. Use a mint green accent for Card 3 to tie it into the 'Non-Aristotelian' styling.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
