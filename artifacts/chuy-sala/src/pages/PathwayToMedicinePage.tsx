@@ -34,6 +34,10 @@ import {
   Smile,
   Zap,
   Droplet,
+  MapPin,
+  Globe2,
+  Trophy,
+  Award,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -134,6 +138,9 @@ export default function PathwayToMedicinePage() {
       >
         <SpecialtyDeck isKh={isKh} />
       </Section>
+
+      {/* ── Section 3: Universities (Global & Local) ─────────────────── */}
+      <UniversitiesSection isKh={isKh} />
 
       {/* ── Closing ─────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-600 text-sm italic">
@@ -1045,6 +1052,323 @@ function Field({
       <p className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
         {isKh ? valueKh : valueEn}
       </p>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  3. Universities — Global & Local side-by-side directory
+//     សាកលវិទ្យាល័យវេជ្ជសាស្ត្រ៖ សកលលោក និងក្នុងស្រុក
+// ════════════════════════════════════════════════════════════════════════════
+
+type LocalUniversity = {
+  en: string;
+  kh: string;
+  abbr?: string;
+  noteEn?: string;
+  noteKh?: string;
+};
+
+const LOCAL_UNIVERSITIES: LocalUniversity[] = [
+  {
+    en: "University of Health Sciences",
+    kh: "សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល",
+    abbr: "UHS",
+    noteEn: "The oldest state medical school",
+    noteKh: "សាកលវិទ្យាល័យពេទ្យរដ្ឋចាស់ជាងគេ",
+  },
+  {
+    en: "International University",
+    kh: "សាកលវិទ្យាល័យអន្តរជាតិ",
+    abbr: "IU",
+  },
+  {
+    en: "University of Puthisastra",
+    kh: "សាកលវិទ្យាល័យពុទ្ធិសាស្ត្រ",
+    abbr: "UP",
+  },
+  {
+    en: "Norton University",
+    kh: "សាកលវិទ្យាល័យន័រតុន",
+    noteEn: "Faculty of Health Sciences",
+    noteKh: "មហាវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល",
+  },
+];
+
+type GlobalUniversity = {
+  name: string;
+  country: string;
+  countryKh: string;
+  flag: string;
+  abbr?: string;
+};
+
+const GLOBAL_UNIVERSITIES: GlobalUniversity[] = [
+  { name: "Harvard University",                            country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "University of Oxford",                          country: "UK",        countryKh: "ចក្រភពអង់គ្លេស", flag: "🇬🇧" },
+  { name: "Stanford University",                           country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "Johns Hopkins University",                      country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "University of Cambridge",                       country: "UK",        countryKh: "ចក្រភពអង់គ្លេស", flag: "🇬🇧" },
+  { name: "University of California, San Francisco",       country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸", abbr: "UCSF" },
+  { name: "Imperial College London",                       country: "UK",        countryKh: "ចក្រភពអង់គ្លេស", flag: "🇬🇧" },
+  { name: "University College London",                     country: "UK",        countryKh: "ចក្រភពអង់គ្លេស", flag: "🇬🇧", abbr: "UCL" },
+  { name: "Karolinska Institutet",                         country: "Sweden",    countryKh: "ស៊ុយអែត",         flag: "🇸🇪" },
+  { name: "Yale University",                               country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "Massachusetts Institute of Technology",         country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸", abbr: "MIT" },
+  { name: "University of California, Los Angeles",         country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸", abbr: "UCLA" },
+  { name: "University of Pennsylvania",                    country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "University of Toronto",                         country: "Canada",    countryKh: "កាណាដា",           flag: "🇨🇦" },
+  { name: "King's College London",                         country: "UK",        countryKh: "ចក្រភពអង់គ្លេស", flag: "🇬🇧" },
+  { name: "Duke University",                               country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "Columbia University",                           country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "National University of Singapore",              country: "Singapore", countryKh: "សិង្ហបុរី",        flag: "🇸🇬", abbr: "NUS" },
+  { name: "University of Michigan-Ann Arbor",              country: "USA",       countryKh: "សហរដ្ឋអាមេរិក", flag: "🇺🇸" },
+  { name: "University of Sydney",                          country: "Australia", countryKh: "អូស្ត្រាលី",       flag: "🇦🇺" },
+];
+
+function UniversitiesSection({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="universities"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24"
+      data-testid="section-universities"
+    >
+      {/* eyebrow — bilingual */}
+      <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-sky-700 mb-2 flex-wrap">
+        <Sparkles className="w-3 h-3" />
+        <span>03 · Universities</span>
+        <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">
+          ០៣ · សាកលវិទ្យាល័យ
+        </span>
+      </div>
+
+      {/* title — bilingual (always BOTH languages) */}
+      <h2 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 mb-2 leading-tight">
+        <span className={isKh ? "font-khmer leading-loose block" : "block"}>
+          {isKh
+            ? "សាកលវិទ្យាល័យវេជ្ជសាស្ត្រ៖ សកលលោក និងក្នុងស្រុក"
+            : "Medical Universities: Global & Local"}
+        </span>
+        <span
+          className={`block text-base sm:text-lg font-normal mt-1 text-slate-600 ${isKh ? "" : "font-khmer"}`}
+        >
+          {isKh
+            ? "Medical Universities: Global & Local"
+            : "សាកលវិទ្យាល័យវេជ្ជសាស្ត្រ៖ សកលលោក និងក្នុងស្រុក"}
+        </span>
+      </h2>
+
+      <p
+        className={`text-slate-700 text-sm max-w-3xl mb-6 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {isKh
+          ? "ផ្លូវដូចគ្នា ជម្រើសផ្សេងគ្នា។ សាកលវិទ្យាល័យនៅកម្ពុជាបង្រៀនអ្នកឱ្យបម្រើភូមិរបស់អ្នកបានភ្លាមៗ — ខណៈពេលដែលសាកលវិទ្យាល័យកំពូលលើពិភពលោក ផ្ដល់ឱកាសសម្រាប់ការស្រាវជ្រាវ និងការអនុវត្តជាន់ខ្ពស់។ ពីរវិធីពិតប្រាកដទាំងពីរ ដើម្បីក្លាយជាគ្រូពេទ្យដ៏អស្ចារ្យ។"
+          : "Same path, different doors. Cambodian medical schools train you to serve your village immediately — while the world's top schools open doors to research and advanced practice. Both are real, honourable ways to become a great doctor."}
+      </p>
+
+      {/* The split-screen comparison.
+          Mobile  (< md / <768px): single vertical stack.
+          Desktop (>= md / 768px): two equal columns side-by-side. */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <LocalPanel isKh={isKh} />
+        <GlobalPanel isKh={isKh} />
+      </div>
+    </section>
+  );
+}
+
+function LocalPanel({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="rounded-3xl border-2 border-amber-300 bg-gradient-to-b from-amber-50 to-orange-50 shadow-sm overflow-hidden h-full flex flex-col"
+      data-testid="panel-local-universities"
+    >
+      {/* Panel header */}
+      <header className="p-5 sm:p-6 border-b-2 border-amber-200/70 bg-amber-100/40">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-11 h-11 rounded-2xl bg-white shadow-sm flex items-center justify-center">
+            <MapPin className="w-5 h-5 text-amber-700" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-amber-800 mb-1 flex flex-wrap items-baseline gap-x-2">
+              <span>Cambodia</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">
+                កម្ពុជា
+              </span>
+            </div>
+            <h3 className="leading-tight">
+              <span
+                className={`font-display font-bold text-xl text-amber-900 ${isKh ? "font-khmer leading-loose" : ""}`}
+              >
+                {isKh ? "សាកលវិទ្យាល័យក្នុងស្រុក" : "The Local Territory"}
+              </span>
+              <span
+                className={`block text-sm font-normal mt-0.5 text-amber-800/80 ${isKh ? "" : "font-khmer"}`}
+              >
+                {isKh ? "The Local Territory" : "សាកលវិទ្យាល័យក្នុងស្រុក"}
+              </span>
+            </h3>
+            <p className={`mt-2 text-xs text-amber-900/80 ${isKh ? "font-khmer leading-loose" : ""}`}>
+              {isKh
+                ? "សាកលវិទ្យាល័យពេទ្យដែលទទួលស្គាល់ ៤ កន្លែង — ជម្រើសរបស់អ្នកនៅផ្ទះ។"
+                : "4 accredited medical schools — your options at home."}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      {/* List */}
+      <ul className="p-4 sm:p-5 space-y-3 flex-1">
+        {LOCAL_UNIVERSITIES.map((u, idx) => (
+          <li
+            key={u.en}
+            className="rounded-2xl border border-amber-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+            data-testid={`local-university-${idx}`}
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-mono font-bold text-sm">
+                {idx + 1}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <span
+                    className={`font-display font-bold text-sm sm:text-base text-slate-900 ${isKh ? "font-khmer leading-loose" : ""}`}
+                  >
+                    {isKh ? u.kh : u.en}
+                  </span>
+                  {u.abbr && (
+                    <span className="font-mono text-[10px] font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-amber-200 text-amber-900">
+                      {u.abbr}
+                    </span>
+                  )}
+                </div>
+                <div
+                  className={`text-xs text-slate-600 mt-0.5 ${isKh ? "" : "font-khmer"}`}
+                >
+                  {isKh ? u.en : u.kh}
+                </div>
+                {(u.noteEn || u.noteKh) && (
+                  <div className="mt-1.5 text-xs text-amber-800">
+                    {u.noteEn && (
+                      <div className="italic">{u.noteEn}</div>
+                    )}
+                    {u.noteKh && (
+                      <div className="font-khmer leading-loose">{u.noteKh}</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function GlobalPanel({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="rounded-3xl border-2 border-slate-700 bg-gradient-to-b from-slate-900 to-slate-800 text-white shadow-md overflow-hidden h-full flex flex-col"
+      data-testid="panel-global-universities"
+    >
+      {/* Panel header */}
+      <header className="p-5 sm:p-6 border-b border-slate-700/80 bg-slate-900/60">
+        <div className="flex items-start gap-3">
+          <div
+            className="flex-shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm"
+            style={{ backgroundColor: "#fde68a" }}
+          >
+            <Trophy className="w-5 h-5" style={{ color: "#92400e" }} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] uppercase tracking-[0.2em] font-bold mb-1 flex flex-wrap items-baseline gap-x-2" style={{ color: "#fde68a" }}>
+              <span>Worldwide</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">
+                ទូទាំងពិភពលោក
+              </span>
+            </div>
+            <h3 className="leading-tight">
+              <span
+                className={`font-display font-bold text-xl ${isKh ? "font-khmer leading-loose" : ""}`}
+                style={{ color: "#fef3c7" }}
+              >
+                {isKh ? "កំពូលសាកលវិទ្យាល័យវេជ្ជសាស្ត្រពិភពលោក" : "The Global Horizon"}
+              </span>
+              <span
+                className={`block text-sm font-normal mt-0.5 text-slate-300 ${isKh ? "" : "font-khmer"}`}
+              >
+                {isKh ? "The Global Horizon" : "កំពូលសាកលវិទ្យាល័យវេជ្ជសាស្ត្រពិភពលោក"}
+              </span>
+            </h3>
+            <p className={`mt-2 text-xs text-slate-300 ${isKh ? "font-khmer leading-loose" : ""}`}>
+              {isKh
+                ? "សាកលវិទ្យាល័យវេជ្ជសាស្ត្រកំពូល ២០ លើពិភពលោក — សម្រាប់អាហារូបករណ៍ និងការស្រាវជ្រាវ។"
+                : "The world's Top 20 medical schools — for scholarships and research."}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      {/* List */}
+      <ol className="p-4 sm:p-5 space-y-2 flex-1">
+        {GLOBAL_UNIVERSITIES.map((u, idx) => (
+          <li
+            key={u.name}
+            className="rounded-xl border border-slate-700 bg-slate-800/60 hover:bg-slate-800 transition-colors p-3"
+            data-testid={`global-university-${idx}`}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-mono font-bold text-xs"
+                style={{
+                  backgroundColor: idx < 3 ? "#fde68a" : "#1e293b",
+                  color: idx < 3 ? "#78350f" : "#fde68a",
+                  border: idx < 3 ? "none" : "1px solid #fde68a55",
+                }}
+              >
+                {idx + 1}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <span className="font-display font-semibold text-sm text-white truncate">
+                    {u.name}
+                  </span>
+                  {u.abbr && (
+                    <span
+                      className="font-mono text-[10px] font-bold tracking-wider px-1.5 py-0.5 rounded-full"
+                      style={{ backgroundColor: "#fde68a", color: "#78350f" }}
+                    >
+                      {u.abbr}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="flex-shrink-0 inline-flex items-center gap-1.5 text-slate-300">
+                <span className="text-base leading-none" aria-hidden="true">{u.flag}</span>
+                <div className="text-right leading-tight">
+                  <div className="text-[10px] font-bold uppercase tracking-wider">
+                    {u.country}
+                  </div>
+                  <div className="font-khmer text-[0.65rem] leading-snug opacity-80">
+                    {u.countryKh}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {/* footer accent */}
+      <div className="px-5 py-3 border-t border-slate-700/80 bg-slate-900/60 flex items-center gap-2">
+        <Award className="w-4 h-4" style={{ color: "#fde68a" }} />
+        <span className={`text-[11px] text-slate-300 ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh
+            ? "ការដាក់ចំណាត់ថ្នាក់ផ្អែកលើលក្ខណៈសម្បត្តិអាហារូបករណ៍សកល។"
+            : "Rankings reflect global academic standing."}
+        </span>
+      </div>
     </div>
   );
 }
