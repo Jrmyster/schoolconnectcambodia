@@ -65,21 +65,24 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
     if (onNavigate) onNavigate();
     inputRef.current?.blur();
 
-    // Split path and #hash so wouter routes the path while we manually scroll
-    // to the in-page anchor with sticky-header offset.
+    // Extract the in-page anchor (if any) so we can scroll to it after
+    // the destination page mounts, with sticky-header offset.
     const hashIdx = href.indexOf("#");
-    const path = hashIdx === -1 ? href : href.slice(0, hashIdx);
     const hash = hashIdx === -1 ? "" : href.slice(hashIdx + 1);
 
     requestAnimationFrame(() => {
-      navigate(path);
+      // Pass the full href (path + hash) so the URL bar reflects the hash.
+      // Destination pages can then read window.location.hash on mount to
+      // open conditional sub-sections (e.g. PhilosophyMap's Mind branch).
+      navigate(href);
       if (!hash) {
         // Top of page on plain navigation
         window.scrollTo({ top: 0, behavior: "auto" });
         return;
       }
       // Wait for the destination page to mount, then scroll to the anchor.
-      // We retry briefly because heavy pages may take a moment to render.
+      // We retry briefly because heavy pages may take a moment to render
+      // or to expand a conditionally-rendered section that contains the anchor.
       let tries = 0;
       const tryScroll = () => {
         const el = document.getElementById(hash);
@@ -87,7 +90,7 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
           el.scrollIntoView({ behavior: "smooth", block: "start" });
           return;
         }
-        if (tries++ < 20) setTimeout(tryScroll, 60);
+        if (tries++ < 30) setTimeout(tryScroll, 80);
       };
       setTimeout(tryScroll, 50);
     });

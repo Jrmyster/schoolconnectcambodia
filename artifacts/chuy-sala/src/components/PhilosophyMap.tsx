@@ -180,6 +180,39 @@ export function PhilosophyMap() {
     return () => window.removeEventListener("keydown", onKey);
   }, [active]);
 
+  // Deep-link support: if the URL hash points to a section that lives inside
+  // a specific branch (e.g. /study-center/philosophy#free-will-vs-determinism-title
+  // from the global search), open that branch and scroll to the target.
+  // Listens to both initial mount AND hashchange events so the deep-link
+  // works even when the user is already on the Philosophy page.
+  useEffect(() => {
+    let timeoutId: number | undefined;
+
+    function checkAndOpen() {
+      const hash = window.location.hash.slice(1);
+      if (!hash || !hash.startsWith("free-will-vs-determinism")) return;
+      setActiveKey("mind");
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          el.scrollIntoView({
+            behavior: prefersReduced ? "auto" : "smooth",
+            block: "start",
+          });
+        }
+      }, 80);
+    }
+
+    checkAndOpen();
+    window.addEventListener("hashchange", checkAndOpen);
+    return () => {
+      window.removeEventListener("hashchange", checkAndOpen);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <section
       aria-labelledby="philosophy-map-title"

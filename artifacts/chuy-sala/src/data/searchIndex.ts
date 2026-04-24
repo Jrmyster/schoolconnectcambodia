@@ -8,7 +8,7 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake,
+  Skull, Volume2, HeartHandshake, Flag, Droplets,
 } from "lucide-react";
 import type { ComponentType } from "react";
 
@@ -1789,6 +1789,77 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "ប្រូតេអ៊ីន អង់ស៊ីម DNA និងគីមីនៃជីវិត។",
     keywordsEn: ["biochemistry", "biochem", "protein", "enzyme", "dna", "rna", "amino acid", "metabolism", "molecular biology"],
     keywordsKh: ["ជីវគីមី", "ប្រូតេអ៊ីន", "អង់ស៊ីម", "DNA"],
+  },
+
+  // ── DISPROVEN SCIENCE / HISTORY OF SCIENCE ───────────────────
+  {
+    id: "disproven-theories",
+    href: "/science/disproven-theories",
+    icon: Skull,
+    titleEn: "Disproven Theories: How Science Corrects Itself",
+    titleKh: "ទ្រឹស្ដីដែលត្រូវបានបដិសេធ៖ របៀបដែលវិទ្យាសាស្ត្រកែតម្រូវខ្លួនឯង",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
+    descEn: "Thomas Kuhn's Paradigm Shift, Spontaneous Generation (mice from rags), the Phlogiston theory of fire, geocentrism, and the great ideas science once believed — and then abandoned.",
+    descKh: "ការផ្លាស់ប្តូរគំរូរបស់ថូម៉ាស គូន ការបង្កើតដោយខ្លួនឯង (កណ្តុរចេញពីសម្លៀកបំពាក់ចាស់) ទ្រឹស្ដី Phlogiston នៃភ្លើង ផែនដីជាមជ្ឈមណ្ឌល និងគំនិតធំៗដែលវិទ្យាសាស្ត្រធ្លាប់ជឿ — ហើយបន្ទាប់មកបោះបង់ចោល។",
+    keywordsEn: ["disproven", "disproved", "wrong", "kuhn", "thomas kuhn", "paradigm", "paradigm shift", "scientific revolution", "spontaneous generation", "phlogiston", "geocentric", "geocentrism", "flat earth", "miasma", "luminiferous aether", "ether", "history of science", "philosophy of science", "pseudoscience", "debunked"],
+    keywordsKh: ["បដិសេធ", "ខុស", "គូន", "ការផ្លាស់ប្តូរគំរូ", "បដិវត្តន៍វិទ្យាសាស្ត្រ", "ទ្រឹស្ដី", "ប្រវត្តិវិទ្យាសាស្ត្រ", "Phlogiston", "ការបង្កើតដោយខ្លួនឯង"],
+  },
+
+  // ── PHILOSOPHY OF MIND — Free Will vs. Determinism (deep link) ──
+  {
+    id: "philosophy-free-will-determinism",
+    href: "/study-center/philosophy#free-will-vs-determinism-title",
+    icon: Brain,
+    titleEn: "Free Will vs. Determinism",
+    titleKh: "ឆន្ទៈសេរី ទល់នឹង ទ្រឹស្ដីកំណត់និយម",
+    categoryEn: "Philosophy", categoryKh: "ទស្សនវិជ្ជា",
+    descEn: "Philosophy of Mind: a duel between the warm human feeling that 'I choose' and the cold physics view that every choice was already written by atoms — plus what neuroscience (Libet's experiment) actually says about consciousness and decision.",
+    descKh: "ទស្សនវិជ្ជានៃចិត្ត៖ ការប្រកួតរវាងអារម្មណ៍មនុស្សដ៏កក់ក្តៅថា «ខ្ញុំជ្រើសរើស» និងទស្សនៈរូបវិទ្យាដ៏ត្រជាក់ថា គ្រប់ការជ្រើសរើសត្រូវបានសរសេររួចហើយដោយអូដ្ឋាតូម — ព្រមទាំងអ្វីដែលប្រសាទវិទ្យា (ការពិសោធន៍ Libet) និយាយពិតៗអំពីស្មារតី និងការសម្រេចចិត្ត។",
+    keywordsEn: ["free will", "freewill", "determinism", "philosophy of mind", "consciousness", "choice", "libet", "compatibilism", "agency", "neuroscience", "mind", "brain", "self", "soul", "decision", "fate"],
+    keywordsKh: ["ឆន្ទៈសេរី", "ទ្រឹស្ដីកំណត់និយម", "ទស្សនវិជ្ជានៃចិត្ត", "ស្មារតី", "ចិត្ត", "ខួរក្បាល", "ជ្រើសរើស", "សម្រេចចិត្ត", "វាសនា"],
+    type: "module",
+  },
+
+  // ── TECHNOLOGY — PUMPS & FLUID DYNAMICS ─────────────────────
+  {
+    id: "tech-pumps",
+    href: "/technology/pumps",
+    icon: Droplets,
+    titleEn: "Pumps & Fluid Dynamics",
+    titleKh: "ស្នប់ និងថាមវន្តនៃវត្ថុរាវ",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "Three eras of moving water against gravity: the 2,000-year-old Archimedes Screw from ancient Greece, the hand pump that uses atmospheric vacuum to push water up a well, and the modern centrifugal pump with its spinning impeller.",
+    descKh: "បីយុគនៃការផ្លាស់ប្តូរទឹកប្រឆាំងនឹងទំនាញ៖ ស្នប់អង្កាញ់របស់អាកាមេដចាស់ ២,០០០ ឆ្នាំពីប្រទេសក្រិកបុរាណ ស្នប់ដៃដែលប្រើខ្យល់សុញ្ញកាសដើម្បីរុញទឹកឡើងពីអណ្តូង និងស្នប់ចង្វាក់ទំនើបជាមួយអ៊ីម៉ៃឡឺបង្វិល។",
+    keywordsEn: ["pump", "pumps", "fluid", "fluids", "fluid dynamics", "hydraulics", "water", "irrigation", "well", "archimedes", "archimedes screw", "screw pump", "hand pump", "vacuum", "atmospheric pressure", "centrifugal", "centrifugal pump", "impeller", "positive displacement", "engineering", "technology"],
+    keywordsKh: ["ស្នប់", "ទឹក", "ស្រោចស្រព", "អណ្តូង", "អាកាមេដ", "អង្កាញ់", "សុញ្ញកាស", "ចង្វាក់", "អ៊ីម៉ៃឡឺ", "ថាមវន្តវត្ថុរាវ", "វិស្វកម្ម"],
+  },
+
+  // ── GEOGRAPHY — CENTRAL & SOUTH AMERICA ─────────────────────
+  {
+    id: "geography-latin-america",
+    href: "/geography/latin-america",
+    icon: Mountain,
+    titleEn: "South & Central America: The Connected Continents",
+    titleKh: "អាមេរិកខាងត្បូង និងកណ្តាល៖ ទ្វីបដែលតភ្ជាប់គ្នា",
+    categoryEn: "Geography", categoryKh: "ភូមិសាស្ត្រ",
+    descEn: "650+ million people across 27 countries from Mexico to Argentina: the Maya, Aztec, and Inca pyramid civilizations; the Andes (the longest mountain range on Earth) and the Amazon rainforest (the 'Lungs of the Earth'); and the engineering marvel of the Panama Canal where gravity-powered locks lift 50,000-ton ships over the mountains.",
+    descKh: "ប្រជាជនជាង ៦៥០ លាននាក់នៅក្នុង ២៧ ប្រទេសពីមិកស៊ិកដល់អាហ្សង់ទីន៖ អរិយធម៌ពីរ៉ាមីត ម៉ាយ៉ា អាស្ទែក និងអាំងកា; ជួរភ្នំអង់ដេស (ជួរភ្នំវែងបំផុតលើផែនដី) និងព្រៃភ្លៀងអាម៉ាហ្សូន («សួតនៃផែនដី»); និងស្នាដៃវិស្វកម្មនៃព្រែកជីកប៉ាណាម៉ា ដែលរូបទឹកជំរុញដោយទំនាញលើកកប៉ាល់ ៥០,០០០ តោន ឆ្លងលើភ្នំ។",
+    keywordsEn: ["latin america", "south america", "central america", "geography", "continent", "andes", "amazon", "amazon rainforest", "panama", "panama canal", "maya", "mayan", "aztec", "inca", "pyramid", "mexico", "brazil", "argentina", "peru", "rainforest", "mountain", "canal", "lock", "engineering", "civilization"],
+    keywordsKh: ["អាមេរិកឡាទីន", "អាមេរិកខាងត្បូង", "អាមេរិកកណ្តាល", "ភូមិសាស្ត្រ", "ទ្វីប", "អង់ដេស", "អាម៉ាហ្សូន", "ប៉ាណាម៉ា", "ព្រែកជីកប៉ាណាម៉ា", "ម៉ាយ៉ា", "អាស្ទែក", "អាំងកា", "ពីរ៉ាមីត", "មិកស៊ិក", "ប្រេស៊ីល", "អាហ្សង់ទីន", "ព្រៃភ្លៀង", "ភ្នំ", "ព្រែកជីក", "អរិយធម៌"],
+  },
+
+  // ── STUDY CENTER — VEXILLOLOGY (LIVE FLAG GALLERY) ──────────
+  {
+    id: "study-center-vexillology",
+    href: "/study-center/flags",
+    icon: Flag,
+    titleEn: "Global Flags & Vexillology",
+    titleKh: "ទង់ជាតិពិភពលោក និងវ៉ិចស៊ីឡូឡូជី",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Vexillology — the scientific study of flags. Learn the 5 Basic Rules of Good Flag Design (simple, meaningful, 2–3 colours, no lettering, distinctive) and discover how Cambodia proudly breaks Rule #4 with Angkor Wat. Then browse a live searchable gallery of every country flag in the world, filterable by continent.",
+    descKh: "វ៉ិចស៊ីឡូឡូជី — ការសិក្សាបែបវិទ្យាសាស្ត្រអំពីទង់ជាតិ។ រៀនច្បាប់មូលដ្ឋានទាំង ៥ នៃការរចនាទង់ជាតិល្អ (សាមញ្ញ មានន័យ ពណ៌ ២–៣ គ្មានអក្សរ ប្លែកពីគេ) ហើយស្វែងយល់ពីរបៀបដែលកម្ពុជាបានបំបែកច្បាប់ទី ៤ ដោយមោទនភាពជាមួយប្រាសាទអង្គរវត្ត។ បន្ទាប់មកស្វែងរកនៅក្នុងវិចិត្រសាលផ្ទាល់នៃទង់ជាតិគ្រប់ប្រទេសនៅលើពិភពលោក ដែលអាចច្រោះតាមទ្វីប។",
+    keywordsEn: ["flag", "flags", "vexillology", "country flag", "national flag", "world flags", "cambodia flag", "angkor wat", "flag design", "rules of flag design", "country", "countries", "nation", "nations", "continent", "rest countries", "global flags"],
+    keywordsKh: ["ទង់ជាតិ", "ទង់", "វ៉ិចស៊ីឡូឡូជី", "ទង់ជាតិកម្ពុជា", "អង្គរវត្ត", "ប្រាសាទអង្គរវត្ត", "ការរចនាទង់ជាតិ", "ប្រទេស", "ជាតិ", "ទ្វីប", "ទង់ជាតិពិភពលោក"],
   },
 ];
 
