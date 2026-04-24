@@ -1,0 +1,33 @@
+I want to add a new geography and navigation module called 'Latitude & Longitude: The Invisible Grid' (រយៈទទឹង និងរយៈបណ្តោយ៖ ក្រឡាចត្រង្គដែលមើលមិនឃើញ). Please implement the following cleanly using a card-based layout with a navigational/cartographic aesthetic:
+
+1. Routing & Navigation:
+
+Create a new component Coordinates.jsx.
+
+Add a link in the Geography/Survival navigation labeled 'Reading Coordinates' with a compass or globe icon.
+
+2. Card 1: Latitude — The Ladder (រយៈទទឹង — ជណ្ដើរ):
+
+Explain that Latitude lines run flat across the Earth, parallel to the Equator (ខ្សែអេក្វាទ័រ).
+
+The Equator is the exact middle belt of the Earth (0°). If you climb up the 'ladder' toward the North Pole, the numbers go up to 90°N. If you climb down toward the South Pole, they go to 90°S.
+
+3. Card 2: Longitude — The Slices (រយៈបណ្តោយ — ចំណិត):
+
+Explain that Longitude lines run up and down, slicing the Earth from pole to pole like pieces of an orange.
+
+The starting point is the Prime Meridian (ខ្សែមេដ្យានទីសូន្យ), which is an invisible line humans decided to draw straight through Greenwich, England (0°). From there, you measure how far East or West you are.
+
+4. Card 3: The History & The Clock Problem (ប្រវត្តិសាស្ត្រ និងបញ្ហានាឡិកា):
+
+The Origin: The Greek mathematician Eratosthenes invented the grid system over 2,200 years ago. Calculating latitude (North/South) was easy—sailors just measured the height of the sun or the North Star.
+
+The Longitude Problem: Calculating East/West was nearly impossible at sea because the Earth is constantly spinning. To know your longitude, you have to know exactly what time it is back at the Prime Meridian.
+
+The Solution: It wasn't until the 1700s that a clockmaker named John Harrison invented the 'Marine Chronometer'—a clock that could keep perfect time on a rocking ship. Because the Earth spins 15 degrees every hour, knowing the exact time finally allowed humans to map the world!
+
+5. UI & Layout:
+
+Use a deep ocean blue and parchment white color scheme to mimic old maritime maps.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

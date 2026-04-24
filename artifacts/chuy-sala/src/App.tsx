@@ -112,6 +112,7 @@ const AlumniPage                = lazy(() => import("@/pages/AlumniPage").then(m
 const SafetyPage                = lazy(() => import("@/pages/SafetyPage").then(m => ({ default: m.SafetyPage })));
 const ExamPrepPage              = lazy(() => import("@/pages/ExamPrepPage").then(m => ({ default: m.ExamPrepPage })));
 const EnglishWritingPage        = lazy(() => import("@/pages/EnglishWritingPage").then(m => ({ default: m.EnglishWritingPage })));
+const PublicSpeakingPage        = lazy(() => import("@/pages/PublicSpeakingPage").then(m => ({ default: m.PublicSpeakingPage })));
 const SubmitStoryPage           = lazy(() => import("@/pages/SubmitStoryPage").then(m => ({ default: m.SubmitStoryPage })));
 const SubmitNeedPage            = lazy(() => import("@/pages/SubmitNeedPage").then(m => ({ default: m.SubmitNeedPage })));
 const SpacePage                 = lazy(() => import("@/pages/SpacePage").then(m => ({ default: m.SpacePage })));
@@ -229,6 +230,7 @@ function Router() {
             <Route path="/safety" component={SafetyPage} />
             <Route path="/exam-prep" component={ExamPrepPage} />
             <Route path="/english-writing" component={EnglishWritingPage} />
+            <Route path="/english-writing/public-speaking" component={PublicSpeakingPage} />
             <Route path="/submit-story" component={SubmitStoryPage} />
             <Route path="/submit-need" component={SubmitNeedPage} />
             <Route path="/space" component={SpacePage} />

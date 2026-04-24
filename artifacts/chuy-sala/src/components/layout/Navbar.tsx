@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -122,6 +122,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ការពិតពិបាក ៤ ដែលប្រែឆមាសទីមួយរបស់អ្នកពីការភ័យស្លន់ស្លោទៅជាគម្រោង៖ ការបំភាន់នៃពេលវេលាទំនេរ គម្រោងកម្មវិធីសិក្សាគឺជាច្បាប់ ម៉ោងពិគ្រោះយោបល់ និងការនឹករលឹកផ្ទះ។",
       },
       { href: "/english-writing",       labelEn: "English Writing",  labelKh: "ការសរសេរភាសាអង់គ្លេស", icon: PenLine },
+      {
+        href: "/english-writing/public-speaking",
+        labelEn: "How to Give a Presentation",
+        labelKh: "របៀបធ្វើការបង្ហាញ",
+        icon: Presentation,
+        descEn: "Public Speaking & Presentations — three rules to walk onto a stage and own the room: YOU are the presentation (the 6×6 slide rule), the classic three-part structure (Hook → Rule of Three → Call to Action), and body language and voice (eye contact + speak 20% louder & 20% slower).",
+        descKh: "ការនិយាយជាសាធារណៈ និងការបង្ហាញ — ច្បាប់បីដើម្បីដើរចូលឆាក និងគ្រប់គ្រងបន្ទប់៖ អ្នកគឺជាការបង្ហាញ (ច្បាប់ស្លាយ ៦×៦), រចនាសម្ព័ន្ធបុរាណបីផ្នែក (ការទាក់ទាញ → ច្បាប់នៃចំណុចបី → ការសន្និដ្ឋាន), និងកាយវិការនិងសំឡេង (សម្លឹងភ្នែក + និយាយខ្លាំងជាង ២០% និងយឺតជាង ២០%)។",
+      },
       {
         href: "/study-center/wildlife-explorer",
         labelEn: "Wildlife Explorer: Zoo Animals",
