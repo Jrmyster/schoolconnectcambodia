@@ -1,0 +1,39 @@
+I want to add a new comprehensive module called 'Vexillology: The Language of Flags' (វ៉ិចស៊ីឡូឡូជី៖ ភាសានៃទង់ជាតិ) to the Study Center. Please implement the following cleanly using a highly visual, gallery-style layout (crisp whites, gallery greys, and vibrant flag colors):
+
+1. Routing & Navigation:
+
+Create a new component Vexillology.jsx.
+
+Register a new route (e.g., /study-center/flags).
+
+Add a navigation link labeled 'Global Flags & Vexillology' with a waving flag icon.
+
+2. The Introduction: What is a Flag? (តើទង់ជាតិគឺជាអ្វី?):
+
+Define Vexillology as the scientific study of the history, symbolism, and usage of flags.
+
+Briefly introduce the '5 Basic Rules of Good Flag Design': 1. Keep it simple (សាមញ្ញ). 2. Use meaningful symbolism (អត្ថន័យជ្រាលជ្រៅ). 3. Use 2-3 basic colors (ពណ៌មូលដ្ឋាន). 4. No lettering or seals (គ្មានអក្សរ ឬត្រា). 5. Be distinctive (មានលក្ខណៈប្លែកពីគេ).
+
+Note: Mention that Cambodia proudly breaks Rule 4 by featuring a highly detailed building (Angkor Wat), making it uniquely recognizable!
+
+3. The Global API Fetch (ទិន្នន័យពិភពលោក):
+
+We need to display every country without hardcoding them. Use the native fetch API inside a useEffect hook to pull data from the free REST Countries API: https://restcountries.com/v3.1/all?fields=name,flags,region,capital
+
+While the data is loading, display a sleek loading skeleton.
+
+4. The Interactive Gallery Grid (វិចិត្រសាលអន្តរកម្ម):
+
+Map over the fetched data to create a responsive grid of 'Flag Cards'.
+
+Each card must display the high-resolution flag image, the country's common English name, its capital city, and its region.
+
+Add a functional 'Search Bar' at the top so users can instantly filter the 190+ countries by typing a name.
+
+Add a 'Filter by Continent' dropdown to help students narrow down the massive list.
+
+5. UI & Formatting:
+
+Ensure the grid collapses cleanly on mobile devices. Give the flag images a subtle drop-shadow so white flags (like Japan or South Korea) don't disappear into the background.
+
+Ensure all core UI elements, headings, and instructions are strictly bilingual (English/Khmer).

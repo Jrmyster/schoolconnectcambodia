@@ -1,0 +1,33 @@
+I want to add a new comprehensive module called 'Pumps: Defying Gravity' (ម៉ាស៊ីនបូមទឹក៖ ការប្រឆាំងនឹងទំនាញផែនដី) to the 'Technology' dropdown. Please implement the following cleanly using a card-based layout with an industrial, fluid-dynamics aesthetic (deep water blues, steel greys, and brass accents):
+
+1. Routing & Navigation:
+
+Create a new component Pumps.jsx.
+
+Register a new route: /technology/pumps.
+
+Add a link in the Technology navigation labeled 'Pumps & Fluid Dynamics' with a water pump or spinning impeller icon.
+
+2. Card 1: The Ancient Screw (វីសសម័យបុរាណ):
+
+The History: Introduce the Archimedes Screw (វីសអាគីម៉ែត), invented over 2,000 years ago in ancient Greece.
+
+How it works: It is simply a massive screw inside a hollow pipe. When the bottom is placed in water and you turn the handle, the water gets trapped in the threads of the screw and is physically carried up to the top. It is the ultimate piece of frugal engineering that is still used today to move water and grain.
+
+3. Card 2: Hand Pumps & The Vacuum (ស្នប់ដៃ និងសុញ្ញកាស):
+
+Positive Displacement: Explain how the classic village hand pump works.
+
+The Science: When you push the handle down, a piston pulls up inside the pipe. This removes the air, creating an empty vacuum. The heavy atmospheric pressure pushing down on the well water outside the pipe literally forces the water up into the empty space! You aren't pulling the water; the atmosphere is pushing it.
+
+4. Card 3: Modern Centrifugal Pumps (ម៉ាស៊ីនបូមទឹកប្រើកម្លាំងចោល):
+
+The Spinner: Explain the noisy, motorized pumps used in modern agriculture and cities.
+
+How it works: Inside the metal casing is a spinning fan called an 'Impeller'. It spins incredibly fast, grabbing the water and throwing it outward against the walls using centrifugal force. This massive outward pressure violently forces the water up and out of the exit pipe.
+
+5. Formatting & UI:
+
+Keep the styling consistent with the other structural engineering pages (like the Bridges and Sewers pages).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer)

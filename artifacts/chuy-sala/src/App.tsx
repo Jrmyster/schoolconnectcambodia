@@ -119,6 +119,7 @@ const PublicSpeakingPage        = lazy(() => import("@/pages/PublicSpeakingPage"
 const UniversitiesPage          = lazy(() => import("@/pages/UniversitiesPage").then(m => ({ default: m.UniversitiesPage })));
 const BridgesPage               = lazy(() => import("@/pages/BridgesPage").then(m => ({ default: m.BridgesPage })));
 const PlumbingSewersPage        = lazy(() => import("@/pages/PlumbingSewersPage").then(m => ({ default: m.PlumbingSewersPage })));
+const PumpsPage                 = lazy(() => import("@/pages/PumpsPage").then(m => ({ default: m.PumpsPage })));
 const SubmitStoryPage           = lazy(() => import("@/pages/SubmitStoryPage").then(m => ({ default: m.SubmitStoryPage })));
 const SubmitNeedPage            = lazy(() => import("@/pages/SubmitNeedPage").then(m => ({ default: m.SubmitNeedPage })));
 const SpacePage                 = lazy(() => import("@/pages/SpacePage").then(m => ({ default: m.SpacePage })));
@@ -241,6 +242,7 @@ function Router() {
             <Route path="/launchpad/universities" component={UniversitiesPage} />
             <Route path="/technology/bridges" component={BridgesPage} />
             <Route path="/technology/plumbing" component={PlumbingSewersPage} />
+            <Route path="/technology/pumps" component={PumpsPage} />
             <Route path="/submit-story" component={SubmitStoryPage} />
             <Route path="/submit-need" component={SubmitNeedPage} />
             <Route path="/space" component={SpacePage} />

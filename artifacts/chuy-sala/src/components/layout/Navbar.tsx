@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -798,6 +798,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Droplets,
         descEn: "Sewers & Plumbing: The Invisible City — the second city beneath every street in four cards: the P-Trap miracle (a tiny puddle of water that blocks toxic, explosive, smelly methane gas from your sink), the gravity engine (no motors — pipes built at a precise 1–2 % slope so water and solids flow together), flood control vs. waste (sanitary sewers to a treatment plant vs. storm drains straight to the river — kept separate so monsoon rains don't flood the streets with raw sewage), and cleaning the underground (CCTV pipe-crawling robots looking for cracks + the Fatberg phenomenon: 130-tonne rock-hard blockages of cooking oil and wet wipes blasted apart with high-pressure water jets).",
         descKh: "ប្រព័ន្ធលូ និងទុយោទឹក ៖ ទីក្រុងដែលមើលមិនឃើញ — ទីក្រុងទីពីរនៅក្រោមផ្លូវក្នុងកាតបួន ៖ អព្ភូតហេតុនៃបំពង់ U (ទឹកបន្តិចបន្តួចដែលបាំងឧស្ម័នមេតានពុល ផ្ទុះបាន និងស្អុយពីស៊ីង), ម៉ាស៊ីនទំនាញផែនដី (មិនប្រើម៉ូទ័រ — ទុយោសង់ដោយជម្រាល ១–២ % ច្បាស់លាស់ ដើម្បីឲ្យទឹក និងកាកសំណល់ហូរជាមួយគ្នា), ការគ្រប់គ្រងទឹកជំនន់ ទល់នឹងកាកសំណល់ (លូកាកសំណល់ទៅរោងចក្រសម្អាត ទល់នឹងលូទឹកភ្លៀងដែលហូរទៅទន្លេដោយផ្ទាល់ — បំបែកដាច់ពីគ្នាដើម្បីកុំឲ្យភ្លៀងវស្សាធ្វើឲ្យទឹកលូលិចផ្លូវ), និងការសម្អាតក្រោមដី (រ៉ូបូតកាមេរ៉ាវារក្នុងទុយោដើម្បីរកប្រេះ + បាតុភូត Fatberg ៖ ការស្ទះធ្ងន់ ១៣០ តោនរឹងដូចថ្មពីប្រេងចម្អិន និងក្រដាស់ជូតសើម ដែលត្រូវបាញ់បំផ្លាញដោយទឹកសម្ពាធខ្ពស់)។",
+      },
+      {
+        href: "/technology/pumps",
+        labelEn: "Pumps & Fluid Dynamics",
+        labelKh: "ម៉ាស៊ីនបូមទឹក និងឌីណាមិកអង្គធាតុរាវ",
+        icon: Fan,
+        descEn: "Pumps: Defying Gravity — 2,000 years of inventions that push water uphill in three cards: the Archimedes Screw (an ancient Greek hand-cranked spiral that physically carries water up its threads — still used today on farms and in sewage), the village hand pump (a piston creates a vacuum and the heavy atmosphere outside literally pushes water up — you aren't pulling, the air is pushing), and the modern centrifugal pump (a motorized impeller spinning incredibly fast hurls water outward by centrifugal force, the design behind rice-field irrigation, city water-towers, fire-trucks, washing machines, and car radiators).",
+        descKh: "ម៉ាស៊ីនបូមទឹក ៖ ការប្រឆាំងនឹងទំនាញផែនដី — ការបង្កើត ២,០០០ ឆ្នាំដែលរុញទឹកឡើងលើក្នុងកាតបី ៖ វីសអាគីម៉ែត (រង្វិលស្ប៊ីរ៉ាល់ក្រិចបុរាណដំណើរការដោយដៃ ដែលដឹកទឹកឡើងតាមខ្សែវីសដោយផ្ទាល់ — នៅប្រើសព្វថ្ងៃនៅកសិដ្ឋាន និងលូកាកសំណល់), ស្នប់ដៃក្នុងភូមិ (ភីស្តុងបង្កើតសុញ្ញកាស ហើយបរិយាកាសដ៏ធ្ងន់ខាងក្រៅច្រានទឹកឡើងពិតៗ — អ្នកមិនបានទាញទេ ខ្យល់កំពុងច្រាន), និងម៉ាស៊ីនបូមកម្លាំងចោលទំនើប (អ៊ំផេលឺដំណើរការដោយម៉ូទ័រវិលលឿនមិនធម្មតា គ្រវែងទឹកចេញក្រៅដោយកម្លាំងចោល ការរចនាដែលនៅពីក្រោយការស្រោចស្រែ ប្រាសាទទឹកទីក្រុង រថពន្លត់អគ្គិភ័យ ម៉ាស៊ីនបោកគក់ និងរ៉ាដ្យាទ័ររថយន្ត)។",
       },
       {
         href: "/technology/television",
