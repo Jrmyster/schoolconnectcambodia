@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -755,6 +755,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Unlink,
         descEn: "The invisible injury — how laws, economies, and healthcare systems can quietly harm people by blocking basic needs (Johan Galtung, 1969).",
         descKh: "របួសដែលមើលមិនឃើញ — របៀបដែលច្បាប់ សេដ្ឋកិច្ច និងប្រព័ន្ធថែទាំសុខភាពអាចធ្វើបាបមនុស្សដោយស្ងាត់ៗ តាមរយៈការរារាំងតម្រូវការមូលដ្ឋាន (Johan Galtung, ១៩៦៩)។",
+      },
+      {
+        href: "/well-being/abundance-vs-scarcity",
+        labelEn: "Abundance vs. Scarcity",
+        labelKh: "ភាពសម្បូរបែប និងភាពខ្សត់ខ្សោយ",
+        icon: Gauge,
+        descEn: "The architecture of behavior — how scarcity narrows the brain into 'tunnel vision' while abundance unlocks creativity, cooperation, and long-term thinking; and why 'greed' is a symptom of the system, not a human trait.",
+        descKh: "ស្ថាបត្យកម្មនៃអាកប្បកិរិយា — របៀបដែលភាពខ្សត់ខ្សោយបង្រួមខួរក្បាលទៅជា 'ចក្ខុវិស័យចង្អៀត' ខណៈដែលភាពសម្បូរបែបបើកការច្នៃប្រឌិត ការសហការ និងការគិតរយៈពេលវែង។ ហើយ 'ភាពលោភលន់' គឺជារោគសញ្ញានៃប្រព័ន្ធ មិនមែនជាលក្ខណៈរបស់មនុស្សទេ។",
       },
       {
         href: "/well-being/public-health",
