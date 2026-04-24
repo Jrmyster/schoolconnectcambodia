@@ -17,6 +17,13 @@ import {
   Bed,
   Megaphone,
   Mountain,
+  Sun,
+  Sunrise,
+  Star,
+  MoveUp,
+  RefreshCw,
+  Umbrella,
+  Clock,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { DehydrationModule } from "@/components/widgets/DehydrationModule";
@@ -143,6 +150,9 @@ export function SurvivalSkillsPage() {
         <SectionStop kh={kh} t={t} />
         <SectionRuleOfThrees kh={kh} t={t} />
         <SectionJungleSpecifics kh={kh} t={t} />
+
+        {/* SUR-04 — Celestial Navigation: Reading the Sky (strictly bilingual) */}
+        <SectionCelestialNavigation />
 
         {/* SUR-02 — Dehydration: The Silent Threat (strictly bilingual, self-contained) */}
         <DehydrationModule />
@@ -679,6 +689,602 @@ function SectionHeader({
       </h2>
       <Compass className="w-4 h-4 text-amber-400/70 ml-1" aria-hidden="true" />
       <div className="flex-1 border-t border-dashed border-amber-700/50" />
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 04 — Celestial Navigation: Reading the Sky
+//                ការនាំផ្លូវដោយផ្កាយ៖ ការអានមេឃ
+//
+//  Three cards (strictly bilingual EN+KH throughout):
+//   1. The Sun Clock           — sun/daylight theme (warm amber/parchment)
+//   2. Finding Polaris         — dark navy starlight theme
+//   3. The Center of the Wheel — dark navy starlight theme
+// ════════════════════════════════════════════════════════════════════════════
+
+const STAR_BG: React.CSSProperties = {
+  backgroundColor: "#0b1530",
+  backgroundImage:
+    "radial-gradient(1.2px 1.2px at 12% 22%, rgba(255,255,255,0.85), transparent 60%)," +
+    "radial-gradient(1px 1px at 28% 60%, rgba(255,255,255,0.65), transparent 60%)," +
+    "radial-gradient(1.4px 1.4px at 47% 18%, rgba(255,255,255,0.9), transparent 60%)," +
+    "radial-gradient(1px 1px at 60% 75%, rgba(255,255,255,0.6), transparent 60%)," +
+    "radial-gradient(1.6px 1.6px at 75% 30%, rgba(255,255,255,0.95), transparent 60%)," +
+    "radial-gradient(1px 1px at 88% 65%, rgba(255,255,255,0.55), transparent 60%)," +
+    "radial-gradient(1.2px 1.2px at 22% 85%, rgba(255,255,255,0.7), transparent 60%)," +
+    "radial-gradient(1px 1px at 92% 12%, rgba(255,255,255,0.6), transparent 60%)," +
+    "linear-gradient(180deg, #0b1530 0%, #0f1f48 60%, #1e293b 100%)",
+};
+
+const SUN_BG: React.CSSProperties = {
+  backgroundColor: "#fff7ed",
+  backgroundImage:
+    "radial-gradient(circle at 80% 12%, rgba(251, 191, 36, 0.45), transparent 55%)," +
+    "radial-gradient(circle at 10% 90%, rgba(217, 119, 6, 0.18), transparent 55%)," +
+    "linear-gradient(180deg, #fff7ed 0%, #fef3c7 100%)",
+};
+
+function SectionCelestialNavigation() {
+  return (
+    <section className="mb-10" data-testid="section-celestial">
+      {/* Bilingual section header — both languages always present */}
+      <div className="mb-4 flex items-center gap-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-amber-300 bg-emerald-900/80 border border-amber-600/60 rounded px-2 py-0.5">
+          SEC-04
+        </span>
+        <div className="flex-1 min-w-0">
+          <h2 className="text-xl sm:text-2xl font-bold text-amber-50 leading-tight">
+            <span className="block">Celestial Navigation: Reading the Sky</span>
+            <span className="block font-khmer text-base sm:text-lg leading-loose mt-0.5 text-amber-200/85">
+              ការនាំផ្លូវដោយផ្កាយ៖ ការអានមេឃ
+            </span>
+          </h2>
+        </div>
+        <Star className="w-4 h-4 text-amber-400/70 ml-1" aria-hidden="true" />
+      </div>
+
+      {/* Bilingual intro paragraph */}
+      <div className="mb-5 space-y-1.5">
+        <p className="text-sm text-amber-50/85 leading-relaxed">
+          When you're lost without a compass or a phone, the sky becomes your map. The sun tells you direction by day, and the stars tell you direction by night — for free, anywhere on Earth.
+        </p>
+        <p className="text-sm text-amber-50/85 font-khmer leading-loose">
+          ពេលអ្នកវង្វេងផ្លូវដោយគ្មានត្រីវិស័យ ឬទូរស័ព្ទ មេឃក្លាយជាផែនទីរបស់អ្នក។ ព្រះអាទិត្យប្រាប់ទិសនៅពេលថ្ងៃ ហើយផ្កាយប្រាប់ទិសនៅពេលយប់ — ដោយឥតគិតថ្លៃ គ្រប់ទីកន្លែងលើផែនដី។
+        </p>
+      </div>
+
+      {/* Three cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <SunClockCard />
+        <PolarisCard />
+        <WheelCenterCard />
+      </div>
+    </section>
+  );
+}
+
+// ── Card 1: The Sun Clock — sun/daylight theme ───────────────────────────────
+
+function SunClockCard() {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-amber-500 p-5 shadow-md flex flex-col"
+      style={SUN_BG}
+      data-testid="celestial-sun-clock"
+    >
+      <CornerMarks subtle />
+
+      {/* Header */}
+      <header className="mb-3">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-amber-100 border-2 border-amber-500 text-amber-700 flex items-center justify-center">
+            <Sun className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-amber-700 mb-1 flex-wrap">
+              <span>Card · 01</span>
+              <span className="opacity-50">/</span>
+              <span>By Day</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">ពេលថ្ងៃ</span>
+            </div>
+            <h3 className="font-bold text-lg text-amber-900 leading-tight">
+              <span className="block">The Sun Clock</span>
+              <span className="block font-khmer text-base leading-loose mt-0.5 text-orange-800">
+                នាឡិកាព្រះអាទិត្យ
+              </span>
+            </h3>
+          </div>
+        </div>
+      </header>
+
+      {/* Subsection: The Path */}
+      <SunSubBlock
+        labelEn="The Path"
+        labelKh="ផ្លូវ"
+        icon={Sunrise}
+      >
+        <p className="text-sm text-amber-950 leading-relaxed">
+          The sun always rises in the <strong>East</strong> and sets in the <strong>West</strong>. When the sun is at its highest point straight overhead, it is <strong>solar noon</strong>.
+        </p>
+        <p className="text-sm text-amber-950 font-khmer leading-loose mt-1">
+          ព្រះអាទិត្យតែងតែរះនៅ <strong>ខាងកើត</strong> ហើយលិចនៅ <strong>ខាងលិច</strong>។ នៅពេលដែលព្រះអាទិត្យឡើងដល់ចំណុចខ្ពស់បំផុតស្មើពីលើក្បាល នោះគឺ <strong>ពេលថ្ងៃត្រង់ព្រះអាទិត្យ</strong>។
+        </p>
+
+        {/* Sun-arc visual */}
+        <SunArcDiagram />
+      </SunSubBlock>
+
+      {/* Subsection: The Hand Method */}
+      <SunSubBlock
+        labelEn="The Hand Method"
+        labelKh="វិធីប្រើដៃ"
+        icon={Hand}
+      >
+        <p className="text-sm text-amber-950 leading-relaxed">
+          To know how much daylight is left before sunset, hold your hand out straight with your fingers horizontal between the sun and the horizon.
+        </p>
+        <p className="text-sm text-amber-950 font-khmer leading-loose mt-1">
+          ដើម្បីដឹងថាមានពន្លឺថ្ងៃប៉ុន្មាននៅសល់មុនព្រះអាទិត្យលិច សូមលូកដៃរបស់អ្នកត្រង់ ដោយម្រាមដៃផ្ដេក នៅចន្លោះព្រះអាទិត្យ និងជើងមេឃ។
+        </p>
+
+        {/* Hand-method visual */}
+        <HandMethodDiagram />
+
+        {/* The rule callout */}
+        <div className="mt-3 rounded-lg border-2 border-orange-500 bg-orange-100 p-3">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-orange-800 mb-1 flex flex-wrap gap-x-2">
+            <span>The Rule</span>
+            <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">ច្បាប់</span>
+          </div>
+          <p className="text-sm font-bold text-orange-950">
+            Every finger width = about <strong>15 minutes</strong> of daylight.
+          </p>
+          <p className="text-sm font-bold text-orange-950 font-khmer leading-loose">
+            ទទឹងម្រាមដៃនីមួយៗ = ប្រហែល <strong>១៥ នាទី</strong> នៃពន្លឺថ្ងៃ។
+          </p>
+          <p className="text-sm font-bold text-orange-900 mt-1 italic flex items-start gap-1.5">
+            <Clock className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+            A full hand (4 fingers) = exactly <strong className="ml-1">1 hour</strong> to build a shelter!
+          </p>
+          <p className="text-sm font-bold text-orange-900 font-khmer leading-loose not-italic">
+            ដៃពេញ (៤ ម្រាម) = មាន <strong>១ ម៉ោង</strong> គត់ ដើម្បីសង់ជម្រក!
+          </p>
+        </div>
+      </SunSubBlock>
+    </article>
+  );
+}
+
+// ── Card 2: Finding Polaris — dark navy starlight ────────────────────────────
+
+function PolarisCard() {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-indigo-500/60 p-5 shadow-md flex flex-col text-amber-50"
+      style={STAR_BG}
+      data-testid="celestial-polaris"
+    >
+      <CornerMarksDark />
+
+      {/* Header */}
+      <header className="mb-3">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-indigo-500/20 border-2 border-indigo-300/60 text-amber-100 flex items-center justify-center">
+            <Star className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-indigo-200 mb-1 flex-wrap">
+              <span>Card · 02</span>
+              <span className="opacity-50">/</span>
+              <span>By Night</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">ពេលយប់</span>
+            </div>
+            <h3 className="font-bold text-lg text-amber-100 leading-tight">
+              <span className="block">Finding Polaris</span>
+              <span className="block font-khmer text-base leading-loose mt-0.5 text-amber-200/90">
+                ការស្វែងរកផ្កាយខាងជើង
+              </span>
+            </h3>
+          </div>
+        </div>
+      </header>
+
+      {/* Subsection: The North Star */}
+      <StarSubBlock
+        labelEn="The North Star"
+        labelKh="ផ្កាយខាងជើង"
+        icon={Star}
+      >
+        <p className="text-sm text-amber-50 leading-relaxed">
+          <strong>Polaris</strong> (The North Star) is the most important star for navigation in the Northern Hemisphere — including all of Cambodia.
+        </p>
+        <p className="text-sm text-amber-50 font-khmer leading-loose mt-1">
+          <strong>ផ្កាយប៉ូឡារីស (Polaris)</strong> គឺជាផ្កាយដ៏សំខាន់បំផុតសម្រាប់ការនាំផ្លូវនៅអឌ្ឍគោលខាងជើង — រាប់ទាំងប្រទេសកម្ពុជាទាំងមូលផងដែរ។
+        </p>
+      </StarSubBlock>
+
+      {/* Subsection: The Pointer Stars */}
+      <StarSubBlock
+        labelEn="The Pointer Stars"
+        labelKh="ផ្កាយចង្អុល"
+        icon={MoveUp}
+      >
+        <p className="text-sm text-amber-50 leading-relaxed">
+          Look for the <strong>Big Dipper</strong> — a constellation shaped like a giant spoon. Take the two stars at the very front edge of the spoon's bowl and draw an imaginary line straight up. The first bright star that line hits is <strong>Polaris</strong>.
+        </p>
+        <p className="text-sm text-amber-50 font-khmer leading-loose mt-1">
+          រកមើល <strong>ផ្កាយវែកធំ (Big Dipper)</strong> — ក្រុមផ្កាយដែលមានរូបរាងដូចស្លាបព្រាដ៏ធំមួយ។ យកផ្កាយពីរនៅគែមមុខបង្អស់នៃធុងស្លាបព្រា ហើយគូរបន្ទាត់ស្រមើស្រមៃត្រង់ឡើងលើ។ ផ្កាយភ្លឺដំបូងដែលបន្ទាត់នោះប៉ះ គឺ <strong>ផ្កាយប៉ូឡារីស</strong>។
+        </p>
+
+        {/* Big Dipper → Polaris diagram */}
+        <BigDipperDiagram />
+      </StarSubBlock>
+    </article>
+  );
+}
+
+// ── Card 3: The Center of the Wheel — dark navy starlight ────────────────────
+
+function WheelCenterCard() {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-cyan-400/50 p-5 shadow-md flex flex-col text-amber-50"
+      style={STAR_BG}
+      data-testid="celestial-wheel-center"
+    >
+      <CornerMarksDark />
+
+      {/* Header */}
+      <header className="mb-3">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-cyan-500/20 border-2 border-cyan-300/60 text-amber-100 flex items-center justify-center">
+            <RefreshCw className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-cyan-200 mb-1 flex-wrap">
+              <span>Card · 03</span>
+              <span className="opacity-50">/</span>
+              <span>Why It Works</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">មូលហេតុ</span>
+            </div>
+            <h3 className="font-bold text-lg text-amber-100 leading-tight">
+              <span className="block">The Center of the Wheel</span>
+              <span className="block font-khmer text-base leading-loose mt-0.5 text-amber-200/90">
+                ចំណុចកណ្តាលនៃកង់
+              </span>
+            </h3>
+          </div>
+        </div>
+      </header>
+
+      {/* Why it never moves */}
+      <StarSubBlock
+        labelEn="Why It Never Moves"
+        labelKh="មូលហេតុដែលវាមិនផ្លាស់ទី"
+        icon={Star}
+      >
+        <p className="text-sm text-amber-50 leading-relaxed">
+          Throughout the night, all the stars seem to slowly move across the sky. But Polaris stands perfectly still. Why? Because Polaris happens to sit almost exactly above the Earth's <strong>North Pole</strong> (the axis of rotation).
+        </p>
+        <p className="text-sm text-amber-50 font-khmer leading-loose mt-1">
+          ពេញមួយយប់ ផ្កាយទាំងអស់ហាក់ដូចជាផ្លាស់ទីយឺតៗឆ្លងកាត់មេឃ។ ប៉ុន្តែផ្កាយប៉ូឡារីសឈរនឹងយ៉ាងឥតសល់ប្រលែះ។ ហេតុអ្វី? ដោយសារតែផ្កាយប៉ូឡារីសស្ថិតស្ថេរនៅពីលើ <strong>ប៉ូលខាងជើង</strong> នៃផែនដី (អ័ក្សបង្វិល) ស្ទើរតែពិតប្រាកដ។
+        </p>
+
+        {/* Spinning sky visual */}
+        <SkyWheelDiagram />
+      </StarSubBlock>
+
+      {/* The umbrella analogy */}
+      <StarSubBlock
+        labelEn="The Umbrella Analogy"
+        labelKh="ការប្រៀបធៀបនឹងឆ័ត្រ"
+        icon={Umbrella}
+      >
+        <p className="text-sm text-amber-50 leading-relaxed italic">
+          Imagine looking straight up at the center of a spinning umbrella — the edges blur, but the exact center stays completely still.
+        </p>
+        <p className="text-sm text-amber-50 font-khmer leading-loose not-italic mt-1">
+          ស្រមៃថា អ្នកសម្លឹងត្រង់ឡើងលើ ទៅចំណុចកណ្ដាលនៃឆ័ត្រមួយដែលកំពុងបង្វិល — គែមឆ័ត្រគ្មានរូបច្បាស់ ប៉ុន្តែចំណុចកណ្ដាលពិតប្រាកដនៅតែឈរនឹងទាំងស្រុង។
+        </p>
+
+        <div className="mt-3 rounded-lg border-2 border-cyan-400/60 bg-cyan-500/10 p-3">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-cyan-200 mb-1 flex flex-wrap gap-x-2">
+            <span>The Payoff</span>
+            <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">លទ្ធផល</span>
+          </div>
+          <p className="text-sm font-bold text-amber-50">
+            If you walk toward Polaris, you are walking <strong className="text-cyan-200">True North</strong>.
+          </p>
+          <p className="text-sm font-bold text-amber-50 font-khmer leading-loose">
+            ប្រសិនបើអ្នកដើរទៅកាន់ផ្កាយប៉ូឡារីស អ្នកកំពុងដើរទៅ <strong className="text-cyan-200">ខាងជើងពិត</strong>។
+          </p>
+        </div>
+      </StarSubBlock>
+    </article>
+  );
+}
+
+// ── Helper sub-block for Sun (Card 1) — warm parchment ───────────────────────
+
+function SunSubBlock({
+  labelEn,
+  labelKh,
+  icon: Icon,
+  children,
+}: {
+  labelEn: string;
+  labelKh: string;
+  icon: typeof Sun;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="mb-3 rounded-lg bg-amber-50/80 border border-amber-300 p-3">
+      <div className="flex items-center gap-2 mb-1.5">
+        <Icon className="w-3.5 h-3.5 text-amber-700" aria-hidden="true" />
+        <div className="text-[11px] font-mono uppercase tracking-widest text-amber-800 flex flex-wrap gap-x-2">
+          <span>{labelEn}</span>
+          <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">{labelKh}</span>
+        </div>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+// ── Helper sub-block for Stars (Cards 2/3) — dark navy ───────────────────────
+
+function StarSubBlock({
+  labelEn,
+  labelKh,
+  icon: Icon,
+  children,
+}: {
+  labelEn: string;
+  labelKh: string;
+  icon: typeof Star;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="mb-3 rounded-lg bg-indigo-950/40 border border-indigo-400/30 p-3">
+      <div className="flex items-center gap-2 mb-1.5">
+        <Icon className="w-3.5 h-3.5 text-amber-200" aria-hidden="true" />
+        <div className="text-[11px] font-mono uppercase tracking-widest text-amber-200 flex flex-wrap gap-x-2">
+          <span>{labelEn}</span>
+          <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">{labelKh}</span>
+        </div>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+// ── Corner marks for dark cards ──────────────────────────────────────────────
+
+function CornerMarksDark() {
+  return (
+    <div className="contents">
+      <span aria-hidden="true" className="pointer-events-none absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-amber-300/40" />
+      <span aria-hidden="true" className="pointer-events-none absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-amber-300/40" />
+      <span aria-hidden="true" className="pointer-events-none absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-amber-300/40" />
+      <span aria-hidden="true" className="pointer-events-none absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-amber-300/40" />
+    </div>
+  );
+}
+
+// ── Diagram: Sun arc East → noon → West ──────────────────────────────────────
+
+function SunArcDiagram() {
+  return (
+    <div
+      className="mt-3 relative w-full h-24 rounded-lg bg-gradient-to-b from-sky-200 to-amber-100 border border-amber-300 overflow-hidden"
+      aria-hidden="true"
+    >
+      {/* horizon */}
+      <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-emerald-700 to-emerald-500" />
+      {/* arc */}
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 96" preserveAspectRatio="none">
+        <path
+          d="M 18 78 Q 100 -14 182 78"
+          fill="none"
+          stroke="#f59e0b"
+          strokeWidth="1.2"
+          strokeDasharray="3 3"
+        />
+      </svg>
+      {/* sun at noon (top) */}
+      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-amber-400 shadow-lg shadow-amber-300/60 ring-2 ring-amber-200" />
+      {/* East/West labels */}
+      <div className="absolute bottom-4 left-2 text-[10px] font-mono font-bold text-amber-900">
+        E · កើត
+      </div>
+      <div className="absolute bottom-4 right-2 text-[10px] font-mono font-bold text-amber-900 text-right">
+        W · លិច
+      </div>
+      <div className="absolute top-1 right-2 flex flex-col items-end text-[9px] font-mono font-bold text-amber-700 leading-tight">
+        <span>NOON</span>
+        <span className="font-khmer text-[0.6rem]">ថ្ងៃត្រង់</span>
+      </div>
+    </div>
+  );
+}
+
+// ── Diagram: Hand-method (4 fingers above horizon = 1 hour) ──────────────────
+
+function HandMethodDiagram() {
+  return (
+    <div
+      className="mt-3 relative w-full h-32 rounded-lg bg-gradient-to-b from-orange-200 via-amber-100 to-emerald-100 border border-amber-400 overflow-hidden"
+      aria-hidden="true"
+    >
+      {/* horizon line */}
+      <div className="absolute bottom-3 left-0 right-0 h-px bg-emerald-700" />
+      <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-emerald-700 to-emerald-500" />
+
+      {/* Sun positioned above horizon */}
+      <div className="absolute right-6 top-3 w-7 h-7 rounded-full bg-amber-400 shadow-lg shadow-amber-300/60 ring-2 ring-amber-200" />
+
+      {/* Stack of 4 finger bands between sun and horizon */}
+      <div className="absolute right-6 top-10 w-7 flex flex-col gap-[2px]">
+        {[1, 2, 3, 4].map((n) => (
+          <div
+            key={n}
+            className="h-3.5 rounded-sm bg-orange-300/80 border border-orange-500 flex items-center justify-center"
+          >
+            <span className="text-[8px] font-mono font-bold text-orange-900 leading-none">15m</span>
+          </div>
+        ))}
+      </div>
+
+      {/* total label on the left */}
+      <div className="absolute left-3 top-3 text-amber-900">
+        <div className="text-[10px] font-mono font-bold uppercase tracking-widest leading-tight">
+          4 fingers
+        </div>
+        <div className="text-[10px] font-khmer leading-tight opacity-90">
+          ៤ ម្រាមដៃ
+        </div>
+        <div className="mt-1 text-base font-bold leading-none">= 1h</div>
+        <div className="text-[10px] font-khmer leading-tight opacity-90 mt-0.5">
+          = ១ ម៉ោង
+        </div>
+      </div>
+
+      {/* horizon labels */}
+      <div className="absolute bottom-4 right-2 text-[9px] font-mono font-bold text-emerald-900 text-right">
+        Horizon · ជើងមេឃ
+      </div>
+    </div>
+  );
+}
+
+// ── Diagram: Big Dipper → pointer line → Polaris ─────────────────────────────
+
+function BigDipperDiagram() {
+  return (
+    <div
+      className="mt-3 relative w-full h-36 rounded-lg overflow-hidden border border-indigo-400/40"
+      style={{ backgroundColor: "#020617" }}
+      aria-hidden="true"
+    >
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 240 144">
+        {/* Faint background stars */}
+        {[
+          [22, 18], [45, 35], [70, 110], [120, 105], [185, 25], [205, 70], [225, 130], [15, 95],
+        ].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="0.6" fill="#94a3b8" opacity="0.55" />
+        ))}
+
+        {/* Big Dipper — 7 stars: bowl (4) + handle (3) */}
+        {/* Bowl */}
+        <g>
+          {/* front-edge stars (the two pointers) */}
+          <circle cx="55" cy="105" r="2.4" fill="#fef3c7" />
+          <circle cx="75" cy="115" r="2.4" fill="#fef3c7" />
+          {/* back-edge stars of bowl */}
+          <circle cx="62" cy="80" r="2" fill="#fef3c7" />
+          <circle cx="82" cy="90" r="2" fill="#fef3c7" />
+          {/* Handle (3 stars curving to right) */}
+          <circle cx="105" cy="92" r="2" fill="#fef3c7" />
+          <circle cx="128" cy="100" r="2" fill="#fef3c7" />
+          <circle cx="148" cy="115" r="2" fill="#fef3c7" />
+          {/* Connect bowl + handle */}
+          <path
+            d="M 55 105 L 62 80 L 82 90 L 75 115 Z"
+            fill="none"
+            stroke="#fef3c7"
+            strokeWidth="0.6"
+            opacity="0.55"
+          />
+          <path
+            d="M 82 90 L 105 92 L 128 100 L 148 115"
+            fill="none"
+            stroke="#fef3c7"
+            strokeWidth="0.6"
+            opacity="0.55"
+          />
+        </g>
+
+        {/* Pointer line: straight up from front-edge (avg of 55,105 and 75,115) → Polaris */}
+        <path
+          d="M 65 110 L 65 22"
+          fill="none"
+          stroke="#fbbf24"
+          strokeWidth="1.2"
+          strokeDasharray="3 3"
+        />
+        {/* Arrowhead */}
+        <path d="M 60 28 L 65 18 L 70 28 Z" fill="#fbbf24" />
+
+        {/* Polaris — bright glowing star with rays */}
+        <g>
+          <circle cx="65" cy="20" r="6" fill="#fef3c7" opacity="0.25" />
+          <circle cx="65" cy="20" r="3" fill="#fde68a" />
+          <line x1="65" y1="10" x2="65" y2="30" stroke="#fde68a" strokeWidth="0.6" />
+          <line x1="55" y1="20" x2="75" y2="20" stroke="#fde68a" strokeWidth="0.6" />
+        </g>
+      </svg>
+
+      {/* Labels */}
+      <div className="absolute bottom-1 left-2 text-[9px] font-mono font-bold text-amber-100 leading-tight">
+        <div>Big Dipper</div>
+        <div className="font-khmer text-[0.6rem] opacity-90">ផ្កាយវែកធំ</div>
+      </div>
+      <div className="absolute top-1 left-16 text-[9px] font-mono font-bold text-amber-200 leading-tight">
+        <div>POLARIS ★</div>
+        <div className="font-khmer text-[0.6rem] opacity-90">ផ្កាយខាងជើង</div>
+      </div>
+    </div>
+  );
+}
+
+// ── Diagram: Spinning sky wheel — Polaris at center ──────────────────────────
+
+function SkyWheelDiagram() {
+  return (
+    <div
+      className="mt-3 relative w-full h-32 rounded-lg overflow-hidden border border-cyan-400/40 flex items-center justify-center"
+      style={{ backgroundColor: "#020617" }}
+      aria-hidden="true"
+    >
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 128" preserveAspectRatio="xMidYMid meet">
+        {/* Concentric circles representing star trails around Polaris */}
+        {[18, 30, 44, 58].map((r, i) => (
+          <circle
+            key={r}
+            cx="100"
+            cy="64"
+            r={r}
+            fill="none"
+            stroke="#67e8f9"
+            strokeWidth="0.6"
+            strokeDasharray="2 4"
+            opacity={0.35 - i * 0.05}
+          />
+        ))}
+        {/* Star dots along trails */}
+        {[
+          [82, 64], [118, 64], [100, 46], [100, 82],
+          [70, 64], [130, 64], [100, 34], [100, 94],
+          [56, 64], [144, 64],
+        ].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="1" fill="#94a3b8" opacity="0.7" />
+        ))}
+        {/* Polaris in center — glowing */}
+        <circle cx="100" cy="64" r="8" fill="#fde68a" opacity="0.18" />
+        <circle cx="100" cy="64" r="4" fill="#fde68a" />
+        <line x1="100" y1="50" x2="100" y2="78" stroke="#fde68a" strokeWidth="0.6" />
+        <line x1="86" y1="64" x2="114" y2="64" stroke="#fde68a" strokeWidth="0.6" />
+      </svg>
+      {/* Center label */}
+      <div className="absolute top-2 right-2 text-right text-[9px] font-mono font-bold text-amber-200 leading-tight">
+        <div>POLARIS = STILL</div>
+        <div className="font-khmer text-[0.6rem] opacity-90">ប៉ូឡារីស = នឹង</div>
+      </div>
+      <div className="absolute bottom-2 left-2 text-[9px] font-mono font-bold text-cyan-200 leading-tight">
+        <div>Sky spins around it</div>
+        <div className="font-khmer text-[0.6rem] opacity-90">មេឃបង្វិលជុំវិញ</div>
+      </div>
     </div>
   );
 }
