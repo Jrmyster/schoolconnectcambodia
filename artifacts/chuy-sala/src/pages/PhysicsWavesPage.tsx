@@ -19,6 +19,8 @@ import {
   Diamond,
   Droplet,
   Wind,
+  Sun,
+  Filter,
 } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
@@ -161,6 +163,9 @@ export function PhysicsWavesPage() {
 
         {/* Frequency & Wavelength */}
         <FrequencyWavelengthCard kh={kh} t={t} />
+
+        {/* ── 1b. Polarization — Taming the Light ──────────────── */}
+        <PolarizationSubsection />
 
         {/* ── 2. Nature of Sound ───────────────────────────────── */}
         <SectionTitle
@@ -1625,5 +1630,399 @@ function SnellKeyRow({
         </div>
       </div>
     </li>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// 1b · Polarization — Taming the Light · ប៉ូលកម្ម៖ ការគ្រប់គ្រងពន្លឺ
+//
+//   Three strictly-bilingual cards in a 3-col grid (1-col on mobile), placed
+//   directly below the Wave Basics section. Same blueprint aesthetic as the
+//   rest of the page (white CARD_BG, indigo-300 borders, CornerMarks subtle,
+//   indigo→violet gradient icon chips, indigo-700 mono labels).
+//
+//   Card 1 — The Chaotic Sun: unpolarized light vibrates in every direction
+//            at once.
+//   Card 2 — The Microscopic Picket Fence: a polarizing filter only lets one
+//            direction of vibration through.
+//   Card 3 — How Sunglasses Work: glare is horizontally polarized; vertical
+//            lenses block it.
+// ════════════════════════════════════════════════════════════════════════════
+
+function PolarizationSubsection() {
+  return (
+    <div id="polarization" className="mt-8 mb-2 scroll-mt-24">
+      {/* Sub-heading bar — same blueprint look as RefractionMath sub-section */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-indigo-100 border-2 border-indigo-300 px-3 py-1.5 text-[10px] font-mono font-bold tracking-[0.25em] text-indigo-700">
+          <span>01 · POLARIZATION</span>
+          <span className="font-khmer normal-case tracking-normal text-[0.7rem]">បន្ថែម · ប៉ូលកម្ម</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg sm:text-xl font-bold text-indigo-950 leading-tight">
+            Polarization: Taming the Light
+          </h2>
+          <h3 className="font-khmer text-base sm:text-lg font-bold text-indigo-900 leading-loose">
+            ប៉ូលកម្ម៖ ការគ្រប់គ្រងពន្លឺ
+          </h3>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-4 sm:gap-5 mb-6">
+        <ChaoticSunCard />
+        <PicketFenceCard />
+        <SunglassesPolCard />
+      </div>
+    </div>
+  );
+}
+
+// ── Card 1 · The Chaotic Sun ──────────────────────────────────────────────
+function ChaoticSunCard() {
+  return (
+    <article
+      data-testid="card-chaotic-sun"
+      className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden flex flex-col"
+      style={CARD_BG}
+    >
+      <CornerMarks subtle />
+      <div className="relative p-5 sm:p-6 flex-1 flex flex-col gap-3.5">
+        {/* Header */}
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Sun className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 flex flex-wrap gap-x-2">
+              <span>Card 01 · Unpolarized</span>
+              <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">កាត ០១ · មិនប៉ូល</span>
+            </div>
+            <h3 className="text-lg font-bold text-indigo-950 leading-tight">
+              The Chaotic Sun
+            </h3>
+            <h4 className="font-khmer text-base font-bold text-indigo-900 leading-loose">
+              ព្រះអាទិត្យដ៏ច្របូកច្របល់
+            </h4>
+          </div>
+        </div>
+
+        {/* SVG visual */}
+        <div className="rounded-lg bg-indigo-50/60 border border-indigo-200 p-3 flex items-center justify-center min-h-[150px]">
+          <ChaoticSunSvg />
+        </div>
+
+        {/* Body — bilingual */}
+        <div className="space-y-2">
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            Light is a <strong>transverse wave</strong> — it wiggles up and down. But light from the sun or a lightbulb wiggles in <strong>every direction at once</strong>: up, down, left, right, and diagonally — all at the exact same time.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            ពន្លឺ​ គឺ​ជា​<strong>រលក​ឆ្លង​កាត់</strong> — វា​ញ័រ​ឡើង​-​ចុះ។ ប៉ុន្តែ​ពន្លឺ​ពី​ព្រះអាទិត្យ ឬ​អំពូល​ភ្លើង ញ័រ​ <strong>គ្រប់​ទិស​ដៅ​ក្នុង​ពេល​ដំណាល​គ្នា</strong> ៖ ឡើង ចុះ ឆ្វេង ស្ដាំ និង​ទ្រេត — ទាំង​អស់​នេះ​ក្នុង​ពេល​ដំណាល​គ្នា។
+          </p>
+        </div>
+
+        {/* "This is" callout — bilingual */}
+        <div className="mt-auto rounded-md border-l-4 border-l-amber-600 bg-amber-50/70 border border-amber-200 p-2.5 text-xs text-foreground/90 leading-relaxed">
+          <div className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-amber-700 mb-0.5 flex flex-wrap gap-x-2">
+            <span>This is</span>
+            <span className="font-khmer normal-case tracking-normal text-[11px] text-amber-800">នេះ​គឺ​ជា</span>
+          </div>
+          <div className="text-sm font-bold text-indigo-950">
+            “Unpolarized” light
+          </div>
+          <div className="font-khmer text-sm font-bold text-indigo-900 leading-loose">
+            ពន្លឺ​ “មិន​ប៉ូល”
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── Card 2 · The Microscopic Picket Fence ─────────────────────────────────
+function PicketFenceCard() {
+  return (
+    <article
+      data-testid="card-picket-fence"
+      className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden flex flex-col"
+      style={CARD_BG}
+    >
+      <CornerMarks subtle />
+      <div className="relative p-5 sm:p-6 flex-1 flex flex-col gap-3.5">
+        {/* Header */}
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Filter className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 flex flex-wrap gap-x-2">
+              <span>Card 02 · The Filter</span>
+              <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">កាត ០២ · តម្រង</span>
+            </div>
+            <h3 className="text-lg font-bold text-indigo-950 leading-tight">
+              The Microscopic Picket Fence
+            </h3>
+            <h4 className="font-khmer text-base font-bold text-indigo-900 leading-loose">
+              របង​ការ​ពារ​ដ៏​តូច​ល្អិត
+            </h4>
+          </div>
+        </div>
+
+        {/* SVG visual */}
+        <div className="rounded-lg bg-indigo-50/60 border border-indigo-200 p-3 flex items-center justify-center min-h-[150px]">
+          <PicketFenceSvg />
+        </div>
+
+        {/* Body — bilingual */}
+        <div className="space-y-2">
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            A <strong>polarizing filter</strong> acts like a <strong>microscopic picket fence</strong>. If a light wave is vibrating <strong>vertically</strong>, it slips right through the gaps. But if a wave is vibrating <strong>horizontally</strong>, it hits the wooden slats and is <strong>blocked</strong>.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            <strong>តម្រង​ប៉ូល</strong> ដំណើរ​ការ​ដូច​ជា <strong>របង​ដ៏​តូច​ល្អិត</strong> ម្យ៉ាង។ បើ​រលក​ពន្លឺ​ញ័រ <strong>បញ្ឈរ</strong> វា​អាច​រំលង​ចូល​តាម​ចន្លោះ​បាន។ ប៉ុន្តែ​បើ​វា​ញ័រ <strong>ផ្ដេក</strong> វា​នឹង​ប៉ះ​នឹង​បន្ទះ​ឈើ ហើយ​ត្រូវ​បាន <strong>ខ្ទប់</strong> ទាំង​ស្រុង។
+          </p>
+        </div>
+
+        {/* "Result" callout — bilingual */}
+        <div className="mt-auto rounded-md border-l-4 border-l-indigo-600 bg-indigo-50/60 border border-indigo-200 p-2.5 text-xs text-foreground/90 leading-relaxed">
+          <div className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-indigo-700 mb-0.5 flex flex-wrap gap-x-2">
+            <span>The result</span>
+            <span className="font-khmer normal-case tracking-normal text-[11px] text-indigo-800">លទ្ធផល</span>
+          </div>
+          <div className="text-sm font-bold text-indigo-950">
+            Light vibrating in <em>only one</em> direction
+          </div>
+          <div className="font-khmer text-sm font-bold text-indigo-900 leading-loose">
+            ពន្លឺ​ដែល​ញ័រ​តែ​ទៅ​ <em>ទិស​ដៅ​មួយ</em> ប៉ុណ្ណោះ — ហៅ​ថា “ពន្លឺ​ប៉ូល”
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── Card 3 · How Sunglasses Work ──────────────────────────────────────────
+function SunglassesPolCard() {
+  return (
+    <article
+      data-testid="card-sunglasses-polarization"
+      className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden flex flex-col"
+      style={CARD_BG}
+    >
+      <CornerMarks subtle />
+      <div className="relative p-5 sm:p-6 flex-1 flex flex-col gap-3.5">
+        {/* Header */}
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Glasses className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 flex flex-wrap gap-x-2">
+              <span>Card 03 · The Application</span>
+              <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">កាត ០៣ · ការ​អនុវត្ត</span>
+            </div>
+            <h3 className="text-lg font-bold text-indigo-950 leading-tight">
+              How Sunglasses Work
+            </h3>
+            <h4 className="font-khmer text-base font-bold text-indigo-900 leading-loose">
+              របៀប​ដែល​វ៉ែនតា​ការពារ​ពន្លឺ​ព្រះអាទិត្យ​ដំណើរ​ការ
+            </h4>
+          </div>
+        </div>
+
+        {/* SVG visual */}
+        <div className="rounded-lg bg-indigo-50/60 border border-indigo-200 p-3 flex items-center justify-center min-h-[150px]">
+          <SunglassesPolSvg />
+        </div>
+
+        {/* Body — bilingual */}
+        <div className="space-y-2">
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            When sunlight bounces off a flat surface — like a wet road or a flooded rice field — the reflection becomes <strong>horizontally polarized</strong>. We call this harsh reflection <strong>“glare”</strong>.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            នៅ​ពេល​ពន្លឺ​ព្រះ​អាទិត្យ​ជះ​ត្រឡប់​ពី​លើ​ផ្ទៃ​រាប​ស្មើ — ដូច​ជា​ផ្លូវ​ដែល​សើម ឬ​ទឹក​ក្នុង​ស្រែ​លិច — ការ​ជះ​ត្រឡប់​នោះ​ក្លាយ​ជា​ <strong>ប៉ូល​ផ្ដេក</strong>។ យើង​ហៅ​ការ​ជះ​ត្រឡប់​ដ៏​ខ្លាំង​នេះ​ថា <strong>“ពន្លឺ​ចាំង​ភ្នែក”</strong>។
+          </p>
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            High-quality sunglasses have <strong>vertical</strong> polarizing filters built into the lenses. Because the lenses are vertical and the glare is horizontal, the glasses <strong>completely block the glare</strong> while letting the rest of the safe light through.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            វ៉ែនតា​គុណភាព​ខ្ពស់​មាន​តម្រង​ប៉ូល <strong>បញ្ឈរ</strong> ដាក់​បញ្ចូល​ក្នុង​កែវ។ ដោយ​ហេតុ​ថា​កែវ​ប៉ូល​បញ្ឈរ ហើយ​ពន្លឺ​ចាំង​ភ្នែក​គឺ​ផ្ដេក វ៉ែនតា​នឹង <strong>ខ្ទប់​ពន្លឺ​ចាំង​ភ្នែក​ទាំង​ស្រុង</strong> ខណៈ​ដែល​ពន្លឺ​សុវត្ថិភាព​ផ្សេង​ទៀត​នៅ​តែ​អាច​ឆ្លង​កាត់​បាន។
+          </p>
+        </div>
+
+        {/* Punchline — bilingual */}
+        <div className="mt-auto rounded-md border-l-4 border-l-violet-600 bg-violet-50/60 border border-violet-200 p-2.5 text-xs text-foreground/90 leading-relaxed flex items-start gap-2">
+          <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-violet-700" aria-hidden="true" />
+          <span>
+            <strong>Vertical lens + horizontal glare = no glare.</strong> That's why polarized sunglasses are perfect for driving and fishing.
+            <br />
+            <span className="font-khmer leading-loose">
+              <strong>កែវ​បញ្ឈរ + ពន្លឺ​ចាំង​ភ្នែក​ផ្ដេក = គ្មាន​ពន្លឺ​ចាំង​ភ្នែក។</strong> នោះ​ហើយ​ជា​មូល​ហេតុ​ដែល​វ៉ែនតា​ប៉ូល​ល្អ​ឥត​ខ្ចោះ​សម្រាប់​ការ​បើក​បរ និង​ការ​នេសាទ។
+            </span>
+          </span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── SVG · Chaotic Sun (unpolarized: arrows in 8 directions) ───────────────
+function ChaoticSunSvg() {
+  // 8 evenly-spaced double-headed arrows radiating from a central sun
+  const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+  return (
+    <svg viewBox="0 0 220 140" className="w-full h-auto max-h-[140px]" role="img" aria-label="Unpolarized light vibrating in all directions">
+      {/* central sun */}
+      <circle cx="110" cy="70" r="14" fill="#fbbf24" stroke="#b45309" strokeWidth="2" />
+      <circle cx="110" cy="70" r="6" fill="#f59e0b" />
+      {/* radiating arrows */}
+      {angles.map((deg) => {
+        const rad = (deg * Math.PI) / 180;
+        const r1 = 18;
+        const r2 = 56;
+        const x1 = 110 + Math.cos(rad) * r1;
+        const y1 = 70 + Math.sin(rad) * r1;
+        const x2 = 110 + Math.cos(rad) * r2;
+        const y2 = 70 + Math.sin(rad) * r2;
+        return (
+          <line
+            key={deg}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="#7c3aed"
+            strokeWidth="2"
+            strokeLinecap="round"
+            markerStart="url(#chaoticArrow)"
+            markerEnd="url(#chaoticArrow)"
+          />
+        );
+      })}
+      <defs>
+        <marker id="chaoticArrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 z" fill="#7c3aed" />
+        </marker>
+      </defs>
+      {/* bilingual labels */}
+      <text x="110" y="128" fontSize="9" fill="#4338ca" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
+        ALL DIRECTIONS · គ្រប់​ទិស​ដៅ
+      </text>
+    </svg>
+  );
+}
+
+// ── SVG · Picket Fence (vertical wave passes, horizontal wave blocked) ────
+function PicketFenceSvg() {
+  return (
+    <svg viewBox="0 0 220 150" className="w-full h-auto max-h-[150px]" role="img" aria-label="Polarizing filter blocks horizontal light, passes vertical light">
+      {/* picket fence (vertical slats) in the middle */}
+      <g>
+        {[100, 110, 120, 130, 140].map((x) => (
+          <rect key={x} x={x} y="20" width="4" height="110" fill="#92400e" stroke="#451a03" strokeWidth="1" rx="1" />
+        ))}
+        {/* horizontal cross-bars to look fence-like */}
+        <rect x="98" y="35" width="46" height="3" fill="#451a03" />
+        <rect x="98" y="115" width="46" height="3" fill="#451a03" />
+      </g>
+
+      {/* TOP ROW · vertical wave PASSES through ✓ */}
+      {/* incoming vertical wave (left of fence) */}
+      <g stroke="#16a34a" strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M 10 45 q 8 -10 16 0 q 8 10 16 0 q 8 -10 16 0 q 8 10 16 0" />
+      </g>
+      <line x1="74" y1="45" x2="98" y2="45" stroke="#16a34a" strokeWidth="2" markerEnd="url(#pkArrow)" />
+      {/* outgoing vertical wave (right of fence) */}
+      <g stroke="#16a34a" strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M 148 45 q 8 -10 16 0 q 8 10 16 0 q 8 -10 16 0" />
+      </g>
+      <line x1="196" y1="45" x2="212" y2="45" stroke="#16a34a" strokeWidth="2" markerEnd="url(#pkArrow)" />
+      <text x="55" y="14" fontSize="8" fill="#15803d" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        VERTICAL ✓ · បញ្ឈរ ✓
+      </text>
+
+      {/* BOTTOM ROW · horizontal wave is BLOCKED ✗ */}
+      {/* incoming horizontal wave (left of fence) */}
+      <g stroke="#dc2626" strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M 10 100 q 8 10 16 0 q 8 -10 16 0 q 8 10 16 0 q 8 -10 16 0" />
+      </g>
+      <line x1="74" y1="100" x2="94" y2="100" stroke="#dc2626" strokeWidth="2" />
+      {/* big red X right at the fence */}
+      <g stroke="#dc2626" strokeWidth="3" strokeLinecap="round">
+        <line x1="86" y1="92" x2="98" y2="108" />
+        <line x1="98" y1="92" x2="86" y2="108" />
+      </g>
+      <text x="55" y="146" fontSize="8" fill="#b91c1c" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        HORIZONTAL ✗ · ផ្ដេក ✗
+      </text>
+
+      <defs>
+        <marker id="pkArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 z" fill="#16a34a" />
+        </marker>
+      </defs>
+
+      {/* fence label */}
+      <text x="121" y="146" fontSize="8" fill="#78350f" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        FILTER · តម្រង
+      </text>
+    </svg>
+  );
+}
+
+// ── SVG · Sunglasses (horizontal glare blocked by vertical lens) ──────────
+function SunglassesPolSvg() {
+  return (
+    <svg viewBox="0 0 220 150" className="w-full h-auto max-h-[150px]" role="img" aria-label="Sunglasses with vertical filter blocking horizontally polarized glare">
+      {/* surface (wet road / rice field) */}
+      <rect x="8" y="118" width="100" height="18" fill="#bae6fd" stroke="#0284c7" strokeWidth="1" rx="2" />
+      <text x="58" y="146" fontSize="8" fill="#075985" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        WET SURFACE · ផ្ទៃ​សើម
+      </text>
+
+      {/* incoming sun ray */}
+      <line x1="14" y1="14" x2="48" y2="118" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" markerEnd="url(#sgArrowOrange)" />
+      <circle cx="14" cy="14" r="4" fill="#fbbf24" stroke="#b45309" strokeWidth="1" />
+
+      {/* horizontal glare reflecting toward the lens (with horizontal-wiggle decoration) */}
+      <g stroke="#dc2626" strokeWidth="2" fill="none" strokeLinecap="round">
+        <path d="M 50 116 q 6 -6 12 0 q 6 6 12 0 q 6 -6 12 0 q 6 6 12 0 q 6 -6 12 0 q 6 6 12 0" />
+      </g>
+      <line x1="122" y1="113" x2="138" y2="106" stroke="#dc2626" strokeWidth="2" markerEnd="url(#sgArrowRed)" />
+      <text x="92" y="96" fontSize="8" fill="#b91c1c" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        GLARE ⇢ HORIZONTAL · ពន្លឺ​ចាំង​ភ្នែក
+      </text>
+
+      {/* the vertical-bar lens that blocks it */}
+      <g>
+        <rect x="142" y="68" width="56" height="48" fill="#ede9fe" stroke="#6d28d9" strokeWidth="2" rx="4" />
+        {/* vertical filter bars inside the lens */}
+        {[150, 158, 166, 174, 182, 190].map((x) => (
+          <line key={x} x1={x} y1="73" x2={x} y2="111" stroke="#6d28d9" strokeWidth="1.5" />
+        ))}
+      </g>
+      <text x="170" y="62" fontSize="8" fill="#5b21b6" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        VERTICAL LENS · កែវ​បញ្ឈរ
+      </text>
+
+      {/* big red X on the lens to show "blocked" */}
+      <g stroke="#dc2626" strokeWidth="3" strokeLinecap="round">
+        <line x1="158" y1="80" x2="182" y2="104" />
+        <line x1="182" y1="80" x2="158" y2="104" />
+      </g>
+      <text x="170" y="130" fontSize="8" fill="#b91c1c" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        BLOCKED · ខ្ទប់
+      </text>
+
+      <defs>
+        <marker id="sgArrowOrange" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 z" fill="#f59e0b" />
+        </marker>
+        <marker id="sgArrowRed" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 z" fill="#dc2626" />
+        </marker>
+      </defs>
+    </svg>
   );
 }

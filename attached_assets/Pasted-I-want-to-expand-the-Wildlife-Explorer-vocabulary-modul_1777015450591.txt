@@ -1,0 +1,35 @@
+I want to expand the 'Wildlife Explorer' vocabulary module by adding a new dataset of Australian animals. Please append these to the existing animal data array. They must perfectly inherit the current UI, including the flip-card 'fun fact' behavior, the classification tags, and the bilingual English/Khmer Text-to-Speech audio buttons.
+
+Please add the following animals, ensuring their 'classification' matches the existing filter categories (Mammals, Birds, Reptiles) so the category counts update automatically:
+
+1. The Marsupials & Mammals (ថនិកសត្វ):
+
+Koala (កូឡា) - Classification: Mammal. Fun Fact: Koalas sleep up to 22 hours a day because their diet of eucalyptus leaves is toxic and takes a lot of energy to digest!
+
+Kangaroo (កង់ហ្គូរូ) - Classification: Mammal. Fun Fact: A kangaroo cannot walk backwards, and they use their heavy tail as a fifth leg for balance.
+
+Wombat (វ៉ុមបាត) - Classification: Mammal. Fun Fact: Wombats produce cube-shaped poop to stop it from rolling away off rocks to mark their territory.
+
+Tasmanian Devil (បិសាចតាសម៉ានី) - Classification: Mammal. Fun Fact: They have one of the strongest bites per body mass of any land predator.
+
+Quokka (ក្វូកា) - Classification: Mammal. Fun Fact: Known as the 'happiest animal in the world' because their face looks like it is permanently smiling.
+
+Wallaby (វ៉ាឡាប៊ី) - Classification: Mammal. Fun Fact: Wallabies are essentially miniature kangaroos, adapted to live in more rugged, rocky terrain.
+
+Bilby (ប៊ីលប៊ី) - Classification: Mammal. Fun Fact: They are desert-dwelling marsupials with rabbit-like ears that help release body heat to keep them cool.
+
+2. The Birds (បក្សី):
+
+Emu (សត្វអេមូ) - Classification: Bird. Fun Fact: Emus are the second-tallest birds on Earth, they cannot fly, but they can sprint at 50 km/h!
+
+Cassowary (សត្វកាសូវារី) - Classification: Bird. Fun Fact: Often called the world's most dangerous bird, they have a dinosaur-like helmet on their head and dagger-like claws.
+
+Kookaburra (គូកាប៊ូរ៉ា) - Classification: Bird. Fun Fact: Their call sounds exactly like loud, echoing human laughter.
+
+3. The Reptiles (សត្វល្មូន):
+
+Frilled-neck Lizard (បង្គួយកពន្លា) - Classification: Reptile. Fun Fact: When threatened, it opens its mouth wide and flares out a massive umbrella of skin around its neck to look terrifying!
+
+4. UI Updates:
+
+If possible, add a new optional filter pill at the top next to 'All' and 'Vertebrates' called 'Region: Australia (តំបន់៖ អូស្ត្រាលី)'. When clicked, it should isolate only these new animals.
