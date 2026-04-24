@@ -93,6 +93,14 @@ const NAV_GROUPS: NavGroup[] = [
     icon: Library,
     items: [
       { href: "/launchpad", labelEn: "Scholarships", labelKh: "អាហារូបករណ៍", icon: BookOpen },
+      {
+        href: "/launchpad/universities",
+        labelEn: "Universities in Cambodia",
+        labelKh: "សាកលវិទ្យាល័យនៅកម្ពុជា",
+        icon: Building2,
+        descEn: "Where to Apply — a directory of the top 5 national public universities in Cambodia and what they are famous for teaching: RUPP (science, humanities, IT, foreign languages), ITC / Sala Techno (engineering, architecture, computer science), RUA (agronomy, veterinary medicine, food science), RULE (law, public administration, finance), and NUM (business, accounting, entrepreneurship). Each card links out to the university's official website and Facebook page.",
+        descKh: "កន្លែងដែលត្រូវដាក់ពាក្យ — បញ្ជីសាកលវិទ្យាល័យសាធារណៈជាតិកំពូលទាំង ៥ នៅកម្ពុជា និងអ្វីដែលពួកគេល្បីល្បាញក្នុងការបង្រៀន ៖ RUPP (វិទ្យាសាស្ត្រ មនុស្សសាស្ត្រ បច្ចេកវិទ្យាព័ត៌មាន ភាសាបរទេស), ITC / សាលាតិចណូ (វិស្វកម្ម ស្ថាបត្យកម្ម វិទ្យាសាស្ត្រកុំព្យូទ័រ), RUA (កសិកម្ម វេជ្ជសាស្ត្រសត្វ វិទ្យាសាស្ត្រអាហារ), RULE (នីតិសាស្ត្រ រដ្ឋបាលសាធារណៈ ហិរញ្ញវត្ថុ), និង NUM (ពាណិជ្ជកម្ម គណនេយ្យ សហគ្រិនភាព)។ កាតនីមួយៗភ្ជាប់ទៅគេហទំព័រផ្លូវការ និងទំព័រ Facebook របស់សាកលវិទ្យាល័យ។",
+      },
       { href: "/charities", labelEn: "Partners",      labelKh: "ដៃគូ",          icon: Handshake },
       { href: "/alumni",    labelEn: "Alumni",         labelKh: "រឿងជោគជ័យ",   icon: Star },
       { href: "/reading-list", labelEn: "Reading List", labelKh: "បញ្ជីសៀវភៅអាន", icon: BookOpen },

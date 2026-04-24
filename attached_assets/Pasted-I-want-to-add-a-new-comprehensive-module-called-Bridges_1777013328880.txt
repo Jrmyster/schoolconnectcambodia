@@ -1,0 +1,41 @@
+I want to add a new comprehensive module called 'Bridges: Defying Gravity' (ស្ពាន៖ ការប្រឆាំងនឹងទំនាញផែនដី) to the 'Technology' section. Please implement the following cleanly using a card-based layout with a sleek, structural/blueprint aesthetic (steels, concrete greys, and sky blues):
+
+1. Routing & Navigation:
+
+Create a new component Bridges.jsx.
+
+Register a new route: /technology/bridges.
+
+Add a link in the Technology navigation labeled 'Bridge Engineering' with a bridge or arch icon.
+
+2. Card 1: The Ancient Arch (ស្ពានរាងធ្នូសម័យបុរាណ):
+
+How it works: Explain that ancient builders (like the Romans or the builders of Angkor) used stone. Stone is incredibly strong when squeezed (Compression / កម្លាំងសង្កត់) but weak when pulled.
+
+An arch takes all the weight on top of the bridge and pushes it down and outward into the ground.
+
+3. Card 2: Modern Steel & Cables (ដែក និងខ្សែកាបទំនើប):
+
+How it works: Modern bridges use steel cables, which are incredibly strong when pulled (Tension / កម្លាំងទាញ).
+
+Cable-Stayed (ស្ពានខ្សែកាបអុបទិក): The cables run directly from a tall tower to the road deck. Provide a local example: The Tsubasa Bridge (ស្ពានអ្នកលឿង) crossing the Mekong River is a massive cable-stayed bridge!
+
+Suspension (ស្ពានព្យួរ): A massive main cable is draped between two towers, and smaller cables hang down to hold the road.
+
+4. Card 3: The Global Giants (ស្ពានយក្សលើពិភពលោក):
+
+Highlight the extremes of human engineering.
+
+Longest Bridge: The Danyang–Kunshan Grand Bridge in China. It is an astonishing 164 kilometers long, carrying high-speed trains over water and rice paddies.
+
+Tallest Bridge: The Millau Viaduct in France. Its highest tower is 343 meters tall—taller than the Eiffel Tower!
+
+5. Card 4: When Bridges Fail (នៅពេលស្ពានបាក់ស្រុត):
+
+The Tacoma Narrows Disaster: Teenagers love extreme physics. Explain the concept of Resonance (រ៉េសូណង់). In 1940, a bridge in the US was built without proper aerodynamics. A steady 64 km/h wind hit the bridge at its exact natural frequency, causing the solid steel to twist and ripple like a wet noodle until it tore itself apart.
+
+6. UI & Layout:
+
+Keep the styling consistent with the tech section.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
