@@ -103,6 +103,38 @@ export function Footer() {
               </span>
             )}
           </div>
+
+          {/* ── Reflective sign-off quote ─────────────────────────────── */}
+          <div
+            data-testid="footer-fresco-quote"
+            className="max-w-2xl mx-auto pt-8 mt-4 text-center"
+          >
+            {/* Subtle decorative divider — soft cyan thread */}
+            <div
+              className="flex items-center justify-center gap-3 mb-6"
+              aria-hidden="true"
+            >
+              <span className="h-px w-12 bg-cyan-400/25" />
+              <span className="h-1 w-1 rounded-full bg-cyan-400/40" />
+              <span className="h-px w-12 bg-cyan-400/25" />
+            </div>
+
+            {/* English quote */}
+            <blockquote className="italic text-secondary/70 text-sm sm:text-base leading-relaxed font-light">
+              &ldquo;Is there intelligent life on Earth? We believe, no, not yet.&rdquo;
+            </blockquote>
+            <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-secondary/50">
+              &mdash; Jacque Fresco
+            </p>
+
+            {/* Khmer translation — slightly smaller, more muted */}
+            <p className="font-khmer text-xs text-secondary/45 leading-loose mt-5 max-w-xl mx-auto">
+              &ldquo;តើមានជីវិតដ៏ឆ្លាតវៃនៅលើផែនដីដែរឬទេ? យើងជឿថា ទេ មិនទាន់មាននៅឡើយទេ។&rdquo;
+            </p>
+            <p className="font-khmer text-[11px] text-secondary/35 mt-1">
+              &mdash; ហ្សាក់ ហ្វ្រេស្កូ (Jacque Fresco)
+            </p>
+          </div>
         </div>
       </div>
     </footer>
