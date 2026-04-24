@@ -1,0 +1,69 @@
+I want to expand the 'Pathway to Medicine' module by adding a new directory of universities. Please implement a side-by-side comparison section titled 'Medical Universities: Global & Local (សាកលវិទ្យាល័យវេជ្ជសាស្ត្រ៖ សកលលោក និងក្នុងស្រុក)'.
+
+Please implement the following cleanly:
+
+1. The Local Territory (សាកលវិទ្យាល័យក្នុងស្រុក):
+
+Create a dedicated card or list displaying the top accredited medical schools in Cambodia. Use this data:
+
+University of Health Sciences (សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល) - The oldest state medical school.
+
+International University (សាកលវិទ្យាល័យអន្តរជាតិ - IU)
+
+University of Puthisastra (សាកលវិទ្យាល័យពុទ្ធិសាស្ត្រ - UP)
+
+Norton University - Faculty of Health Sciences (សាកលវិទ្យាល័យន័រតុន)
+
+2. The Global Horizon (កំពូលសាកលវិទ្យាល័យវេជ្ជសាស្ត្រពិភពលោក):
+
+Create a second card or list next to it displaying the Top 20 medical schools in the world. Use this data:
+
+Harvard University (USA)
+
+University of Oxford (UK)
+
+Stanford University (USA)
+
+Johns Hopkins University (USA)
+
+University of Cambridge (UK)
+
+University of California, San Francisco - UCSF (USA)
+
+Imperial College London (UK)
+
+University College London - UCL (UK)
+
+Karolinska Institutet (Sweden)
+
+Yale University (USA)
+
+Massachusetts Institute of Technology - MIT (USA)
+
+University of California, Los Angeles - UCLA (USA)
+
+University of Pennsylvania (USA)
+
+University of Toronto (Canada)
+
+King's College London (UK)
+
+Duke University (USA)
+
+Columbia University (USA)
+
+National University of Singapore - NUS (Singapore)
+
+University of Michigan-Ann Arbor (USA)
+
+University of Sydney (Australia)
+
+3. UI, Layout & Mobile Responsiveness:
+
+Use a clean split-screen or CSS Grid side-by-side card layout on desktop displays.
+
+Crucial: Ensure the CSS forces the grid to collapse into a single vertical stack on mobile screens (max-width: 768px) so the text remains readable on phones.
+
+Give the Cambodian list a warm, accessible highlight color, and the Global list a prestigious, aspirational color (like deep navy or gold).
+
+Ensure all section headings are strictly bilingual (English/Khmer).

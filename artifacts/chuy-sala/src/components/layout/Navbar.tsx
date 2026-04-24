@@ -113,6 +113,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "The 10–15-year journey from high-school biology to becoming a doctor — plus an interactive guide to choosing your specialty.",
         descKh: "ដំណើរ ១០–១៥ ឆ្នាំពីជីវវិទ្យាវិទ្យាល័យ ដល់ការក្លាយជាវេជ្ជបណ្ឌិត — ព្រមទាំងមគ្គុទ្ទេសក៍អន្តរកម្មសម្រាប់ជ្រើសរើសឯកទេសរបស់អ្នក។",
       },
+      {
+        href: "/future-hub/university-guide",
+        labelEn: "University Survival Guide",
+        labelKh: "មគ្គុទ្ទេសក៍សម្រាប់និស្សិតឆ្នាំទី១",
+        icon: GraduationCap,
+        descEn: "Four hard truths that turn your first semester from a panic into a plan: the illusion of free time, the syllabus is the law, office hours, and homesickness.",
+        descKh: "ការពិតពិបាក ៤ ដែលប្រែឆមាសទីមួយរបស់អ្នកពីការភ័យស្លន់ស្លោទៅជាគម្រោង៖ ការបំភាន់នៃពេលវេលាទំនេរ គម្រោងកម្មវិធីសិក្សាគឺជាច្បាប់ ម៉ោងពិគ្រោះយោបល់ និងការនឹករលឹកផ្ទះ។",
+      },
       { href: "/english-writing",       labelEn: "English Writing",  labelKh: "ការសរសេរភាសាអង់គ្លេស", icon: PenLine },
       {
         href: "/study-center/wildlife-explorer",
