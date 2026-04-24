@@ -1,0 +1,39 @@
+I want to add a new comprehensive module called 'Sewers & Plumbing: The Invisible City' (ប្រព័ន្ធលូ និងទុយោទឹក៖ ទីក្រុងដែលមើលមិនឃើញ) to the 'Technology' section. Please implement the following cleanly using a card-based layout with a subterranean aesthetic (slate greys, clean water blues, and industrial pipe accents):
+
+1. Routing & Navigation:
+
+Create a new component PlumbingSewers.jsx.
+
+Register a new route: /technology/plumbing.
+
+Add a link in the Technology navigation labeled 'City Plumbing & Sewers' with a water drop or pipe icon.
+
+2. Card 1: The P-Trap Miracle (អព្ភូតហេតុនៃបំពង់រាងអក្សរ U):
+
+The Problem: Sewers are full of toxic, explosive, and terrible-smelling methane gas. Why doesn't that gas come up through our toilets and sinks?
+
+The Solution: Explain the 'P-Trap' (or U-bend). Every drain has a curved pipe underneath it. After water drains, a small pool of clean water gets trapped in the curve. This simple puddle acts as an impenetrable physical shield, completely blocking the invisible sewer gas from entering the house!
+
+3. Card 2: The Gravity Engine (ម៉ាស៊ីនទំនាញផែនដី):
+
+Explain that most sewer systems don't use electricity or motors to move waste. They rely entirely on gravity.
+
+Engineers build pipes at a very specific, gentle slope (about 1 to 2 percent). If it's too flat, the waste stops moving. If it's too steep, the water runs away too fast and leaves the solid waste behind.
+
+4. Card 3: Flood Control vs. Waste (ការគ្រប់គ្រងទឹកជំនន់ ទល់នឹង កាកសំណល់):
+
+Explain the difference between 'Sanitary Sewers' (which carry human waste to a treatment plant) and 'Storm Drains' (which carry rainwater directly to a river or ocean).
+
+Discuss how modern cities keep these separate to prevent raw sewage from flooding the streets during heavy monsoon rains.
+
+5. Card 4: Cleaning the Underground (ការសម្អាតក្រោមដី):
+
+Detail how cities maintain these massive networks. Since humans can't fit in small pipes, engineers use high-tech remote-controlled robots with cameras to inspect for cracks.
+
+Mention the 'Fatberg' phenomenon—massive, rock-hard blockages caused when people pour cooking oil and flush wet wipes down the drain, requiring high-pressure water jets to destroy.
+
+6. UI & Layout:
+
+Keep the styling consistent with the other structural engineering pages.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

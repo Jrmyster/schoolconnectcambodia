@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -766,6 +766,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: RadarIcon,
         descEn: "Decode the RADAR acronym, derive the echo distance formula d = c·t/2 with LaTeX, follow the WW2 Chain Home story, and see how Phnom Penh airport and weather stations use it today.",
         descKh: "បកស្រាយអក្សរកាត់ RADAR ទាញយករូបមន្តចម្ងាយអេកូ d = c·t/2 ដោយ LaTeX ដើរតាមរឿង Chain Home សង្គ្រាមលោកលើកទីពីរ និងមើលរបៀបដែលអាកាសយានដ្ឋានភ្នំពេញ និងស្ថានីយអាកាសធាតុប្រើវាសព្វថ្ងៃ។",
+      },
+      {
+        href: "/technology/bridges",
+        labelEn: "Bridge Engineering",
+        labelKh: "វិស្វកម្មស្ពាន",
+        icon: Construction,
+        descEn: "Bridges: Defying Gravity — 2,000 years of engineering in four cards: the ancient stone arch (compression — Romans & Angkor), modern steel & cables (tension — cable-stayed Tsubasa Bridge over the Mekong + classic suspension bridges), the global giants (164-km Danyang–Kunshan in China, 343-m Millau Viaduct taller than the Eiffel Tower), and when bridges fail (the 1940 Tacoma Narrows disaster — 64 km/h wind + resonance turning solid steel into a wet noodle).",
+        descKh: "ស្ពាន ៖ ការប្រឆាំងនឹងទំនាញផែនដី — វិស្វកម្ម ២,០០០ ឆ្នាំក្នុងកាតបួន ៖ ស្ពានធ្នូថ្មសម័យបុរាណ (កម្លាំងសង្កត់ — ជនជាតិរ៉ូម៉ាំង និងអង្គរ), ដែក និងខ្សែកាបទំនើប (កម្លាំងទាញ — ស្ពានខ្សែកាបអុបទិកអ្នកលឿងឆ្លងទន្លេមេគង្គ + ស្ពានព្យួរបុរាណ), ស្ពានយក្សលើពិភពលោក (ដាន់យ៉ាង–គុនសាន ១៦៤ គម នៅចិន, មីយ៉ូ ៣៤៣ ម៉ែត្រខ្ពស់ជាងប៉មអេហ្វែល), និងនៅពេលស្ពានបាក់ស្រុត (គ្រោះមហន្តរាយ Tacoma Narrows ឆ្នាំ ១៩៤០ — ខ្យល់ ៦៤ គម/ម៉ោង + រ៉េសូណង់បំប្លែងដែករឹងមាំទៅជាមីសើម)។",
       },
       {
         href: "/technology/television",
