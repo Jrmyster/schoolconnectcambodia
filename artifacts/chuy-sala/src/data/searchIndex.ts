@@ -8,28 +8,15 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake, Flag, Droplets,
+  Skull, Volume2, HeartHandshake,
 } from "lucide-react";
-import type { ComponentType } from "react";
+import Fuse from "fuse.js";
+import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
+import type { SearchEntry } from "./searchTypes";
 
-export type SearchEntry = {
-  id: string;
-  /** Route path. May optionally include a `#hash` for in-page anchors. */
-  href: string;
-  icon: ComponentType<{ className?: string }>;
-  titleEn: string;
-  titleKh: string;
-  categoryEn: string;
-  categoryKh: string;
-  descEn: string;
-  descKh: string;
-  /** English synonyms / alternate phrasings */
-  keywordsEn: string[];
-  /** Khmer synonyms */
-  keywordsKh: string[];
-  /** "page" for top-level pages, "module" for in-page sections (deep links). */
-  type?: "page" | "module";
-};
+// Re-export the type so existing consumers (e.g. GlobalSearch) keep working
+// without a churny rename across the codebase.
+export type { SearchEntry } from "./searchTypes";
 
 /**
  * Master search index for Chouy Sala.
@@ -1791,129 +1778,93 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["ជីវគីមី", "ប្រូតេអ៊ីន", "អង់ស៊ីម", "DNA"],
   },
 
-  // ── DISPROVEN SCIENCE / HISTORY OF SCIENCE ───────────────────
-  {
-    id: "disproven-theories",
-    href: "/science/disproven-theories",
-    icon: Skull,
-    titleEn: "Disproven Theories: How Science Corrects Itself",
-    titleKh: "ទ្រឹស្ដីដែលត្រូវបានបដិសេធ៖ របៀបដែលវិទ្យាសាស្ត្រកែតម្រូវខ្លួនឯង",
-    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
-    descEn: "Thomas Kuhn's Paradigm Shift, Spontaneous Generation (mice from rags), the Phlogiston theory of fire, geocentrism, and the great ideas science once believed — and then abandoned.",
-    descKh: "ការផ្លាស់ប្តូរគំរូរបស់ថូម៉ាស គូន ការបង្កើតដោយខ្លួនឯង (កណ្តុរចេញពីសម្លៀកបំពាក់ចាស់) ទ្រឹស្ដី Phlogiston នៃភ្លើង ផែនដីជាមជ្ឈមណ្ឌល និងគំនិតធំៗដែលវិទ្យាសាស្ត្រធ្លាប់ជឿ — ហើយបន្ទាប់មកបោះបង់ចោល។",
-    keywordsEn: ["disproven", "disproved", "wrong", "kuhn", "thomas kuhn", "paradigm", "paradigm shift", "scientific revolution", "spontaneous generation", "phlogiston", "geocentric", "geocentrism", "flat earth", "miasma", "luminiferous aether", "ether", "history of science", "philosophy of science", "pseudoscience", "debunked"],
-    keywordsKh: ["បដិសេធ", "ខុស", "គូន", "ការផ្លាស់ប្តូរគំរូ", "បដិវត្តន៍វិទ្យាសាស្ត្រ", "ទ្រឹស្ដី", "ប្រវត្តិវិទ្យាសាស្ត្រ", "Phlogiston", "ការបង្កើតដោយខ្លួនឯង"],
-  },
-
-  // ── PHILOSOPHY OF MIND — Free Will vs. Determinism (deep link) ──
-  {
-    id: "philosophy-free-will-determinism",
-    href: "/study-center/philosophy#free-will-vs-determinism-title",
-    icon: Brain,
-    titleEn: "Free Will vs. Determinism",
-    titleKh: "ឆន្ទៈសេរី ទល់នឹង ទ្រឹស្ដីកំណត់និយម",
-    categoryEn: "Philosophy", categoryKh: "ទស្សនវិជ្ជា",
-    descEn: "Philosophy of Mind: a duel between the warm human feeling that 'I choose' and the cold physics view that every choice was already written by atoms — plus what neuroscience (Libet's experiment) actually says about consciousness and decision.",
-    descKh: "ទស្សនវិជ្ជានៃចិត្ត៖ ការប្រកួតរវាងអារម្មណ៍មនុស្សដ៏កក់ក្តៅថា «ខ្ញុំជ្រើសរើស» និងទស្សនៈរូបវិទ្យាដ៏ត្រជាក់ថា គ្រប់ការជ្រើសរើសត្រូវបានសរសេររួចហើយដោយអូដ្ឋាតូម — ព្រមទាំងអ្វីដែលប្រសាទវិទ្យា (ការពិសោធន៍ Libet) និយាយពិតៗអំពីស្មារតី និងការសម្រេចចិត្ត។",
-    keywordsEn: ["free will", "freewill", "determinism", "philosophy of mind", "consciousness", "choice", "libet", "compatibilism", "agency", "neuroscience", "mind", "brain", "self", "soul", "decision", "fate"],
-    keywordsKh: ["ឆន្ទៈសេរី", "ទ្រឹស្ដីកំណត់និយម", "ទស្សនវិជ្ជានៃចិត្ត", "ស្មារតី", "ចិត្ត", "ខួរក្បាល", "ជ្រើសរើស", "សម្រេចចិត្ត", "វាសនា"],
-    type: "module",
-  },
-
-  // ── TECHNOLOGY — PUMPS & FLUID DYNAMICS ─────────────────────
-  {
-    id: "tech-pumps",
-    href: "/technology/pumps",
-    icon: Droplets,
-    titleEn: "Pumps & Fluid Dynamics",
-    titleKh: "ស្នប់ និងថាមវន្តនៃវត្ថុរាវ",
-    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
-    descEn: "Three eras of moving water against gravity: the 2,000-year-old Archimedes Screw from ancient Greece, the hand pump that uses atmospheric vacuum to push water up a well, and the modern centrifugal pump with its spinning impeller.",
-    descKh: "បីយុគនៃការផ្លាស់ប្តូរទឹកប្រឆាំងនឹងទំនាញ៖ ស្នប់អង្កាញ់របស់អាកាមេដចាស់ ២,០០០ ឆ្នាំពីប្រទេសក្រិកបុរាណ ស្នប់ដៃដែលប្រើខ្យល់សុញ្ញកាសដើម្បីរុញទឹកឡើងពីអណ្តូង និងស្នប់ចង្វាក់ទំនើបជាមួយអ៊ីម៉ៃឡឺបង្វិល។",
-    keywordsEn: ["pump", "pumps", "fluid", "fluids", "fluid dynamics", "hydraulics", "water", "irrigation", "well", "archimedes", "archimedes screw", "screw pump", "hand pump", "vacuum", "atmospheric pressure", "centrifugal", "centrifugal pump", "impeller", "positive displacement", "engineering", "technology"],
-    keywordsKh: ["ស្នប់", "ទឹក", "ស្រោចស្រព", "អណ្តូង", "អាកាមេដ", "អង្កាញ់", "សុញ្ញកាស", "ចង្វាក់", "អ៊ីម៉ៃឡឺ", "ថាមវន្តវត្ថុរាវ", "វិស្វកម្ម"],
-  },
-
-  // ── GEOGRAPHY — CENTRAL & SOUTH AMERICA ─────────────────────
-  {
-    id: "geography-latin-america",
-    href: "/geography/latin-america",
-    icon: Mountain,
-    titleEn: "South & Central America: The Connected Continents",
-    titleKh: "អាមេរិកខាងត្បូង និងកណ្តាល៖ ទ្វីបដែលតភ្ជាប់គ្នា",
-    categoryEn: "Geography", categoryKh: "ភូមិសាស្ត្រ",
-    descEn: "650+ million people across 27 countries from Mexico to Argentina: the Maya, Aztec, and Inca pyramid civilizations; the Andes (the longest mountain range on Earth) and the Amazon rainforest (the 'Lungs of the Earth'); and the engineering marvel of the Panama Canal where gravity-powered locks lift 50,000-ton ships over the mountains.",
-    descKh: "ប្រជាជនជាង ៦៥០ លាននាក់នៅក្នុង ២៧ ប្រទេសពីមិកស៊ិកដល់អាហ្សង់ទីន៖ អរិយធម៌ពីរ៉ាមីត ម៉ាយ៉ា អាស្ទែក និងអាំងកា; ជួរភ្នំអង់ដេស (ជួរភ្នំវែងបំផុតលើផែនដី) និងព្រៃភ្លៀងអាម៉ាហ្សូន («សួតនៃផែនដី»); និងស្នាដៃវិស្វកម្មនៃព្រែកជីកប៉ាណាម៉ា ដែលរូបទឹកជំរុញដោយទំនាញលើកកប៉ាល់ ៥០,០០០ តោន ឆ្លងលើភ្នំ។",
-    keywordsEn: ["latin america", "south america", "central america", "geography", "continent", "andes", "amazon", "amazon rainforest", "panama", "panama canal", "maya", "mayan", "aztec", "inca", "pyramid", "mexico", "brazil", "argentina", "peru", "rainforest", "mountain", "canal", "lock", "engineering", "civilization"],
-    keywordsKh: ["អាមេរិកឡាទីន", "អាមេរិកខាងត្បូង", "អាមេរិកកណ្តាល", "ភូមិសាស្ត្រ", "ទ្វីប", "អង់ដេស", "អាម៉ាហ្សូន", "ប៉ាណាម៉ា", "ព្រែកជីកប៉ាណាម៉ា", "ម៉ាយ៉ា", "អាស្ទែក", "អាំងកា", "ពីរ៉ាមីត", "មិកស៊ិក", "ប្រេស៊ីល", "អាហ្សង់ទីន", "ព្រៃភ្លៀង", "ភ្នំ", "ព្រែកជីក", "អរិយធម៌"],
-  },
-
-  // ── STUDY CENTER — VEXILLOLOGY (LIVE FLAG GALLERY) ──────────
-  {
-    id: "study-center-vexillology",
-    href: "/study-center/flags",
-    icon: Flag,
-    titleEn: "Global Flags & Vexillology",
-    titleKh: "ទង់ជាតិពិភពលោក និងវ៉ិចស៊ីឡូឡូជី",
-    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
-    descEn: "Vexillology — the scientific study of flags. Learn the 5 Basic Rules of Good Flag Design (simple, meaningful, 2–3 colours, no lettering, distinctive) and discover how Cambodia proudly breaks Rule #4 with Angkor Wat. Then browse a live searchable gallery of every country flag in the world, filterable by continent.",
-    descKh: "វ៉ិចស៊ីឡូឡូជី — ការសិក្សាបែបវិទ្យាសាស្ត្រអំពីទង់ជាតិ។ រៀនច្បាប់មូលដ្ឋានទាំង ៥ នៃការរចនាទង់ជាតិល្អ (សាមញ្ញ មានន័យ ពណ៌ ២–៣ គ្មានអក្សរ ប្លែកពីគេ) ហើយស្វែងយល់ពីរបៀបដែលកម្ពុជាបានបំបែកច្បាប់ទី ៤ ដោយមោទនភាពជាមួយប្រាសាទអង្គរវត្ត។ បន្ទាប់មកស្វែងរកនៅក្នុងវិចិត្រសាលផ្ទាល់នៃទង់ជាតិគ្រប់ប្រទេសនៅលើពិភពលោក ដែលអាចច្រោះតាមទ្វីប។",
-    keywordsEn: ["flag", "flags", "vexillology", "country flag", "national flag", "world flags", "cambodia flag", "angkor wat", "flag design", "rules of flag design", "country", "countries", "nation", "nations", "continent", "rest countries", "global flags"],
-    keywordsKh: ["ទង់ជាតិ", "ទង់", "វ៉ិចស៊ីឡូឡូជី", "ទង់ជាតិកម្ពុជា", "អង្គរវត្ត", "ប្រាសាទអង្គរវត្ត", "ការរចនាទង់ជាតិ", "ប្រទេស", "ជាតិ", "ទ្វីប", "ទង់ជាតិពិភពលោក"],
-  },
 ];
 
-/* ──────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────
+ * MERGED INDEX + FUZZY SEARCH
+ *
+ * `SEARCH_INDEX` above is the original, manually-curated list.
+ * `AUTO_SEARCH_ENTRIES` is everything discovered from `*.search.ts`
+ * files co-located next to their pages (see searchAutoIndex.ts).
+ *
+ * `ALL_SEARCH_ENTRIES` is what the search actually runs against.
+ * New pages should prefer the co-located pattern; the manual list
+ * stays here for entries that haven't been migrated yet.
+ * ──────────────────────────────────────────────────────────────────── */
+
+export const ALL_SEARCH_ENTRIES: SearchEntry[] = [
+  ...SEARCH_INDEX,
+  ...AUTO_SEARCH_ENTRIES,
+];
+
+// Dev-time integrity check: catch duplicate IDs across the manual list and
+// auto-discovered *.search.ts files before they cause duplicate or
+// ambiguous search results in production.
+if (import.meta.env.DEV) {
+  const seen = new Map<string, number>();
+  for (const e of ALL_SEARCH_ENTRIES) {
+    seen.set(e.id, (seen.get(e.id) ?? 0) + 1);
+  }
+  const dupes = [...seen.entries()].filter(([, n]) => n > 1).map(([id]) => id);
+  if (dupes.length > 0) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `[searchIndex] Duplicate entry id(s) detected — please rename or remove: ${dupes.join(", ")}`,
+    );
+  }
+}
+
+const fuse = new Fuse(ALL_SEARCH_ENTRIES, {
+  keys: [
+    { name: "titleEn", weight: 3 },
+    { name: "titleKh", weight: 3 },
+    { name: "keywordsEn", weight: 2.5 },
+    { name: "keywordsKh", weight: 2.5 },
+    { name: "categoryEn", weight: 0.5 },
+    { name: "categoryKh", weight: 0.5 },
+    { name: "descEn", weight: 1 },
+    { name: "descKh", weight: 1 },
+  ],
+  threshold: 0.35,       // 0 = exact, 1 = match anything; 0.35 keeps typo tolerance while cutting noisy desc matches
+  ignoreLocation: true,  // matches anywhere in the field, not just the start
+  minMatchCharLength: 2,
+  includeScore: true,
+});
 
 export type ScoredEntry = { entry: SearchEntry; score: number };
 
 /**
- * Search the index. Case-insensitive. Works in both English and Khmer.
- * Scoring rewards: title prefix > exact keyword > title contains > keyword contains > category contains > desc contains.
+ * Search the index with fuse.js (fuzzy, typo-tolerant, Unicode-safe).
+ * Works for both English and Khmer queries.
  */
 export function searchIndex(rawQuery: string, limit = 8): ScoredEntry[] {
-  const q = rawQuery.trim().toLowerCase();
+  const q = rawQuery.trim();
   if (q.length < 1) return [];
-
-  const results: ScoredEntry[] = [];
-
-  for (const entry of SEARCH_INDEX) {
-    const titleEn = entry.titleEn.toLowerCase();
-    const titleKh = entry.titleKh.toLowerCase();
-    const descEn = entry.descEn.toLowerCase();
-    const descKh = entry.descKh.toLowerCase();
-    const catEn = entry.categoryEn.toLowerCase();
-    const catKh = entry.categoryKh.toLowerCase();
-
-    let score = 0;
-
-    if (titleEn.startsWith(q) || titleKh.startsWith(q)) score += 100;
-    else if (titleEn.includes(q) || titleKh.includes(q)) score += 50;
-
-    for (const kw of entry.keywordsEn) {
-      const k = kw.toLowerCase();
-      if (k === q) score += 80;
-      else if (k.startsWith(q)) score += 40;
-      else if (k.includes(q) || q.includes(k)) score += 20;
-    }
-    for (const kw of entry.keywordsKh) {
-      const k = kw.toLowerCase();
-      if (k === q) score += 80;
-      else if (k.startsWith(q)) score += 40;
-      else if (k.includes(q) || q.includes(k)) score += 20;
-    }
-
-    if (catEn.includes(q) || catKh.includes(q)) score += 15;
-    if (descEn.includes(q) || descKh.includes(q)) score += 8;
-
-    if (score > 0) results.push({ entry, score });
-  }
-
-  results.sort((a, b) => b.score - a.score || a.entry.titleEn.localeCompare(b.entry.titleEn));
-  return results.slice(0, limit);
+  return fuse
+    .search(q, { limit })
+    // fuse score is 0 = perfect, 1 = no match — invert so callers see
+    // a familiar "higher is better" number.
+    .map((r) => ({ entry: r.item, score: 1 - (r.score ?? 0) }));
 }
 
 /** A few popular suggestions to show when the search is empty. */
 export const POPULAR_IDS = ["tech-how-computers-work", "launchpad", "biology-genetics-explorer", "physics", "english-writing", "geology"];
-export const POPULAR_ENTRIES: SearchEntry[] =
-  POPULAR_IDS.map((id) => SEARCH_INDEX.find((e) => e.id === id)!).filter(Boolean);
+
+const _resolvedPopular = POPULAR_IDS.map((id) => ({
+  id,
+  entry: ALL_SEARCH_ENTRIES.find((e) => e.id === id),
+}));
+
+if (import.meta.env.DEV) {
+  const missing = _resolvedPopular.filter((r) => !r.entry).map((r) => r.id);
+  if (missing.length > 0) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `[searchIndex] POPULAR_IDS not found in index — these will silently disappear from suggestions: ${missing.join(", ")}`,
+    );
+  }
+}
+
+export const POPULAR_ENTRIES: SearchEntry[] = _resolvedPopular
+  .map((r) => r.entry)
+  .filter((e): e is SearchEntry => e !== undefined);
