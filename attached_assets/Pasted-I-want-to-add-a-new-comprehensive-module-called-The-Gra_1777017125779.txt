@@ -1,0 +1,69 @@
+I want to add a new comprehensive module called 'The Graveyard of Bad Maps: Disproven Science' (ទីបញ្ចុះសពនៃផែនទីខុស៖ វិទ្យាសាស្ត្រដែលត្រូវបានច្រានចោល) to the 'Science' dropdown. Please implement the following cleanly using a 'Historical Archive' aesthetic (sepia tones, parchment whites, and dark slate greys):
+
+1. Routing & Navigation:
+
+Create a new component DisprovenTheories.jsx.
+
+Register a new route: /science/disproven-theories.
+
+Add a link in the Science navigation labeled 'Disproven Theories' with an hourglass or broken compass icon.
+
+2. The Introduction: The Paradigm Shift (ការផ្លាស់ប្តូរគំរូ):
+
+Introduce the philosopher Thomas Kuhn and his book, The Structure of Scientific Revolutions.
+
+Explain the concept of a 'Paradigm Shift': When an old scientific model (a Map) cannot explain new discoveries, the entire system breaks down, and science must completely rebuild its understanding of the universe.
+
+3. The Museum Grid (ក្រឡាចត្រង្គសារមន្ទីរ):
+
+Create a responsive grid of historical cards. Each card must contain the name of the theory, what it was, and how it was disproven. Ensure all text is strictly bilingual (English/Khmer).
+
+The Four Elements (ធាតុទាំងបួន): >   * The Belief: Everything is made of just Earth, Wind, Fire, and Water.
+
+The Truth: The Periodic Table proved there are over 100 fundamental elements, and fire isn't an element at all—it's a chemical reaction.
+
+Spontaneous Generation (កំណើតឯកឯង): >   * The Belief: Living things can magically appear from dead things (e.g., maggots grow from rotting meat).
+
+The Truth: Louis Pasteur proved that microscopic eggs and bacteria are always present in the air.
+
+Luminiferous Aether (អេទែរពន្លឺ): >   * The Belief: Space is filled with an invisible fluid called 'Aether' that allows light to travel.
+
+The Truth: The Michelson-Morley experiment and Einstein's Relativity proved space is a vacuum and light is a self-propagating electromagnetic wave.
+
+Humoral Theory (ទ្រឹស្ដីនៃសារធាតុរាវក្នុងខ្លួន - Medicine): >   * The Belief: Sickness is caused by an imbalance of four liquids in the body (blood, phlegm, yellow bile, black bile).
+
+The Truth: Germ Theory proved that microscopic pathogens (bacteria/viruses) cause disease.
+
+Phlogiston Theory (ទ្រឹស្ដីផ្លូជីស្ដុន - Chemistry): >   * The Belief: Things burn because they contain an invisible fire-element called 'Phlogiston' that is released into the air.
+
+The Truth: Antoine Lavoisier proved that burning is actually 'oxidation'—a material grabbing Oxygen from the air.
+
+Geocentrism (ទ្រឹស្ដីផែនដីជាចំណុចកណ្តាល - Astronomy): >   * The Belief: The Earth is the exact center of the universe, and the sun spins around us.
+
+The Truth: Copernicus and Galileo proved the Earth is just one of many planets orbiting the Sun.
+
+Phrenology (ទ្រឹស្ដីទម្រង់លលាដ៍ក្បាល - Psychology): >   * The Belief: You can tell how smart or criminal a person is by measuring the bumps on their skull.
+
+The Truth: Neuroscience proved that brain function is distributed in neural networks, and skull bumps mean absolutely nothing.
+
+Martian Canals (ប្រឡាយលើភពអង្គារ - Astronomy): >   * The Belief: Telescopes showed straight lines on Mars, leading scientists to believe an alien civilization built water canals.
+
+The Truth: Better telescopes and satellites proved they were just optical illusions caused by dust and low resolution.
+
+Static Universe (សកលលោកនៅស្ងៀម - Cosmology): >   * The Belief: The universe has always existed at the exact same size and will never change.
+
+The Truth: Edwin Hubble proved the universe is rapidly expanding outward from a Big Bang.
+
+Terra Australis (ទ្វីបភាគខាងត្បូងដែលមិនស្គាល់ - Geography): >   * The Belief: There must be a massive, hidden continent at the bottom of the world to 'balance' the weight of Europe and Asia.
+
+The Truth: Explorers mapped the oceans and found Antarctica, proving the Earth doesn't need to be symmetrically balanced.
+
+Telegony (ទ្រឹស្ដីតេឡេហ្គោនី - Biology): >   * The Belief: Offspring can inherit the physical traits of a mother's previous partners.
+
+The Truth: Mendelian genetics and DNA mapping proved that traits come strictly from the sperm and egg that physically combine.
+
+4. Formatting & UI:
+
+Give each card a 'Status: Disproven' stamp or visual indicator.
+
+Ensure it is fully responsive for mobile devices.

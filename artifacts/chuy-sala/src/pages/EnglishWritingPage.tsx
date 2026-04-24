@@ -11,6 +11,7 @@ import { LocalMarketCounter } from "@/components/widgets/LocalMarketCounter";
 import { ComparativeSuperlativeModule } from "@/components/widgets/ComparativeSuperlativeModule";
 import { PronunciationAssistant } from "@/components/widgets/PronunciationAssistant";
 import { FamilyVocabularyModule } from "@/components/widgets/FamilyVocabularyModule";
+import { WaterVerbsModule } from "@/components/widgets/WaterVerbsModule";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -76,6 +77,11 @@ export function EnglishWritingPage() {
         {/* Family & Relatives — bilingual ESL vocabulary with audio */}
         <div className="mb-10">
           <FamilyVocabularyModule />
+        </div>
+
+        {/* Water Actions — bilingual ESL vocabulary on liquid action verbs */}
+        <div className="mb-10">
+          <WaterVerbsModule />
         </div>
 
         {/* Connecting Words — Bridge Builder game */}
