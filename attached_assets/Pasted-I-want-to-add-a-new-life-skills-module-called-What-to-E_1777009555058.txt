@@ -1,0 +1,39 @@
+I want to add a new life-skills module called 'What to Expect at University: The Freshman Guide' (អ្វីដែលត្រូវរំពឹងនៅសាកលវិទ្យាល័យ៖ មគ្គុទ្ទេសក៍សម្រាប់និស្សិតឆ្នាំទី១) to the Career & Future Hub. Please implement the following cleanly using a card-based layout:
+
+1. Routing & Navigation:
+
+Create a new component UniversityExpectations.jsx.
+
+Register a new route: /future-hub/university-guide.
+
+Add a link in the Future Hub navigation labeled 'University Survival Guide' with a graduation cap or campus building icon.
+
+2. Card 1: The Illusion of Free Time (ការបំភាន់នៃពេលវេលាទំនេរ):
+
+The Reality: In high school, you are in class 7 hours a day. At university, you might only be in class 3 hours a day.
+
+The Trap: It feels like you have infinite free time, but university requires 2 to 3 hours of independent reading and studying for every 1 hour you spend in a lecture hall. You are now your own manager.
+
+3. Card 2: The Syllabus is the Law (គម្រោងកម្មវិធីសិក្សាគឺជាច្បាប់):
+
+Explain what a Syllabus (Syllabus/គម្រោងកម្មវិធីសិក្សា) is.
+
+In high school, teachers remind you when homework is due. At university, the professor hands you a Syllabus on Day 1 with every due date for the next 4 months. They will never remind you. If you miss a deadline, you fail the assignment.
+
+4. Card 3: Office Hours & Asking for Help (ម៉ោងពិគ្រោះយោបល់ និងការសុំជំនួយ):
+
+Explain that professors can seem intimidating, but they host 'Office Hours' specifically to help students.
+
+Asking for help is not a sign of weakness; it is a sign of a serious, dedicated student.
+
+5. Card 4: Homesickness & Culture Shock (ការនឹករលឹកផ្ទះ និងការតក់ស្លុតវប្បធម៌):
+
+Acknowledge the emotional toll. Moving away from your family, your village, and your friends is incredibly difficult.
+
+Reassure them that feeling lonely or overwhelmed during the first semester is 100% normal and that every other freshman is feeling the exact same way.
+
+6. UI & Layout:
+
+Use a calm, reassuring aesthetic: soft blues, warm whites, and clean typography.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
