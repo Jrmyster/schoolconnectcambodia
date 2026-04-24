@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -748,6 +748,14 @@ const NAV_GROUPS: NavGroup[] = [
     basePaths: ["/well-being"],
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
+      {
+        href: "/well-being/sanctuary/structural-violence",
+        labelEn: "Structural Violence",
+        labelKh: "អំពើហិង្សាជារចនាសម្ព័ន្ធ",
+        icon: Unlink,
+        descEn: "The invisible injury — how laws, economies, and healthcare systems can quietly harm people by blocking basic needs (Johan Galtung, 1969).",
+        descKh: "របួសដែលមើលមិនឃើញ — របៀបដែលច្បាប់ សេដ្ឋកិច្ច និងប្រព័ន្ធថែទាំសុខភាពអាចធ្វើបាបមនុស្សដោយស្ងាត់ៗ តាមរយៈការរារាំងតម្រូវការមូលដ្ឋាន (Johan Galtung, ១៩៦៩)។",
+      },
       {
         href: "/well-being/public-health",
         labelEn: "Public Health: The Web of Well-Being",

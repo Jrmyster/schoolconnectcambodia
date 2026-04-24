@@ -103,6 +103,7 @@ const SchoolProfile             = lazy(() => import("@/pages/SchoolProfile").the
 const CharityDirectory          = lazy(() => import("@/pages/CharityDirectory").then(m => ({ default: m.CharityDirectory })));
 const LaunchpadPage             = lazy(() => import("@/pages/LaunchpadPage").then(m => ({ default: m.LaunchpadPage })));
 const SanctuaryPage             = lazy(() => import("@/pages/SanctuaryPage").then(m => ({ default: m.SanctuaryPage })));
+const StructuralViolencePage    = lazy(() => import("@/pages/StructuralViolence").then(m => ({ default: m.StructuralViolence })));
 const AlumniPage                = lazy(() => import("@/pages/AlumniPage").then(m => ({ default: m.AlumniPage })));
 const SafetyPage                = lazy(() => import("@/pages/SafetyPage").then(m => ({ default: m.SafetyPage })));
 const ExamPrepPage              = lazy(() => import("@/pages/ExamPrepPage").then(m => ({ default: m.ExamPrepPage })));
@@ -273,6 +274,7 @@ function Router() {
             <Route path="/cambodia" component={CambodiaPage} />
             <Route path="/science/energy-future" component={EnergyFuturePage} />
             <Route path="/well-being/public-health" component={PublicHealthPage} />
+            <Route path="/well-being/sanctuary/structural-violence" component={StructuralViolencePage} />
             <Route path="/study-center/competition-cooperation" component={CompetitionCooperationPage} />
             <Route path="/biology/botany" component={BotanyPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
