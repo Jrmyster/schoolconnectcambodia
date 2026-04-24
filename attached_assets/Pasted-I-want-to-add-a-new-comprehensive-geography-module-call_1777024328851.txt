@@ -1,0 +1,37 @@
+I want to add a new comprehensive geography module called 'Central & South America: The Connected Continents' (ទ្វីបដែលតភ្ជាប់គ្នា៖ អាមេរិកកណ្តាល និងអាមេរិកខាងត្បូង) to the Geography/Science section. Please implement the following cleanly using a visually engaging, card-based layout with a vibrant, topographical aesthetic (jungle greens, mountain stone, and deep ocean blues):
+
+1. Routing & Navigation:
+
+Create a new component LatinAmerica.jsx.
+
+Register a new route (e.g., /geography/latin-america).
+
+Add a navigation link labeled 'South & Central America' with a mountain or rainforest icon.
+
+2. Card 1: The Scale and The People (ទំហំ និងប្រជាជន):
+
+Explain that this massive region connects North America to the freezing Southern Ocean.
+
+Population & Countries: Mention that there are over 650 million people living across 27 countries (from Mexico in Central America down to Argentina and Chile in South America).
+
+History: Briefly highlight that long before Europeans arrived, this land was home to brilliant ancient civilizations—like the Maya, Aztecs, and Incas—who built massive stone pyramids in the jungle, very similar to the Khmer Empire's Angkor Wat!
+
+3. Card 2: The Andes & The Amazon (ជួរភ្នំអង់ដេស និងព្រៃអាម៉ាហ្សូន):
+
+Explain how the physical Territory dictates the climate.
+
+The Andes: The longest continuous mountain range in the world runs down the entire western edge. It acts like a massive physical wall, blocking weather.
+
+The Amazon: Because the mountains trap the wet air, it creates the Amazon basin—the largest rainforest on Earth. Call it the 'Lungs of the Earth' (សួតនៃផែនដី) because its millions of trees produce roughly 20% of the world's oxygen while trapping deadly carbon dioxide.
+
+4. Card 3: The Panama Canal (ព្រែកជីកប៉ាណាម៉ា):
+
+The Engineering Marvel: Connect this to our previous lessons on 'Pumps and Water Mechanics'. Panama is a tiny strip of land connecting Central and South America.
+
+Instead of sailing ships an extra 13,000 kilometers around the dangerous bottom of South America, engineers dug a trench through the mountains. Because the mountains are higher than the ocean, the canal uses a system of massive 'Water Locks'—essentially giant water elevators—to lift 50,000-ton cargo ships over the mountains using nothing but gravity and water pressure.
+
+5. UI & Layout:
+
+Use rich jungle greens and ocean blues.
+
+Ensure all core concepts, historical names, and headings are strictly bilingual (English/Khmer).

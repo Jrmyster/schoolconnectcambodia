@@ -230,6 +230,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ទ្វីបធំបំផុតលើផែនដីក្នុងមេរៀន​បីដ៏រស់រវើក ៖ ប្រជាជន ៤,៧ ពាន់លាននាក់ នៅក្នុង ៤៨ ប្រទេស (៦០% នៃមនុស្សជាតិទាំងមូល), ប្រភពដើមនៃអរិយធម៌ដែលកសិកម្ម ទីក្រុង និងការសរសេរត្រូវបានបង្កើតរាប់ពាន់ឆ្នាំមុនចក្រភពរ៉ូម, និងចំណុចកំពូលរូបវន្តនៃផែនដី — ភ្នំអេវឺរ៉េស +៨,៨៤៨ ម៉ែត្រ និងសមុទ្រមរណៈ −៤៣០ ម៉ែត្រក្រោមកម្រិតទឹកសមុទ្រ។",
       },
       {
+        href: "/geography/latin-america",
+        labelEn: "South & Central America: The Connected Continents",
+        labelKh: "អាមេរិកខាងត្បូង និងកណ្តាល៖ ទ្វីបដែលតភ្ជាប់គ្នា",
+        icon: Mountain,
+        descEn: "A massive land bridge from Mexico to Argentina in three lessons: 650+ million people across 27 countries with the legacy of the Maya, Aztec & Inca pyramid civilizations; the Andes — the longest mountain range on Earth — and the Amazon, the planet's largest rainforest and 'Lungs of the Earth'; and the engineering marvel of the Panama Canal, where giant water locks lift 50,000-ton cargo ships over the mountains using only gravity.",
+        descKh: "ស្ពានដីដ៏ធំពីប្រទេសមិកស៊ិកដល់អាហ្សង់ទីនក្នុងមេរៀនបី ៖ ប្រជាជនជាង ៦៥០ លាននាក់នៅក្នុង ២៧ ប្រទេស ជាមួយនឹងបេតិកភណ្ឌនៃអរិយធម៌ពីរ៉ាមីត ម៉ាយ៉ា អាស្ទែក និងអាំងកា; ជួរភ្នំអង់ដេស — ជួរភ្នំវែងបំផុតលើផែនដី — និងព្រៃអាម៉ាហ្សូន ព្រៃភ្លៀងធំបំផុតនៃភពផែនដី និង 'សួតនៃផែនដី'; និងស្នាដៃវិស្វកម្មនៃព្រែកជីកប៉ាណាម៉ា ដែលព្រែករូបទឹកយក្សលើកកប៉ាល់ដឹកទំនិញ ៥០,០០០ តោន ឆ្លងលើភ្នំដោយប្រើតែទំនាញ។",
+      },
+      {
         href: "/study-center/coordinates",
         labelEn: "Reading Coordinates: Latitude & Longitude",
         labelKh: "ការអានកូអរដោនេ៖ រយៈទទឹង និងរយៈបណ្តោយ",
