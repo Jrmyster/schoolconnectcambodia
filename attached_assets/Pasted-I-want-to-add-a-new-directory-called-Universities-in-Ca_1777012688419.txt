@@ -1,0 +1,47 @@
+I want to add a new directory called 'Universities in Cambodia: Where to Apply' (សាកលវិទ្យាល័យនៅកម្ពុជា៖ កន្លែងដែលត្រូវដាក់ពាក្យ) to the 'Scholarships' section in the Career & Future Hub. Please implement the following cleanly using a responsive, card-based layout:
+
+1. Section Header:
+
+Add a brief introduction: 'Finding the right scholarship starts with choosing the right university. Here are the top national institutions in Cambodia and what they are famous for teaching.'
+
+2. The University Grid (ក្រឡាចត្រង្គសាកលវិទ្យាល័យ):
+
+Create a grid of clean, distinct cards for each major public university. Each card should feature the bilingual name and a short description of their specialty.
+
+Card 1: Royal University of Phnom Penh - RUPP (សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ)
+
+Focus: Science, Humanities, IT, and Foreign Languages (IFL).
+
+Detail: The oldest and largest public university in Cambodia. The best choice for students wanting to study languages, STEM, or social sciences.
+
+Card 2: Institute of Technology of Cambodia - ITC (វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា)
+
+Focus: Engineering, Architecture, and Computer Science.
+
+Detail: Also known as 'Sala Techno'. The premier destination for students who want to build the future, offering rigorous math and engineering programs.
+
+Card 3: Royal University of Agriculture - RUA (សាកលវិទ្យាល័យភូមិន្ទកសិកម្ម)
+
+Focus: Agronomy, Veterinary Medicine, and Food Science.
+
+Detail: Perfect for students who want to modernize farming, improve crop yields, or work with animals to elevate Cambodia's agricultural economy.
+
+Card 4: Royal University of Law and Economics - RULE (សាកលវិទ្យាល័យភូមិន្ទនីតិសាស្ត្រ និងវិទ្យាសាស្ត្រសេដ្ឋកិច្ច)
+
+Focus: Law, Public Administration, and Finance.
+
+Detail: The top destination for future lawyers, judges, and government administrators.
+
+Card 5: National University of Management - NUM (សាកលវិទ្យាល័យជាតិគ្រប់គ្រង)
+
+Focus: Business, Accounting, and Entrepreneurship.
+
+Detail: Focused on the modern economy, perfect for students who want to start their own businesses or work in international finance.
+
+3. Formatting & UI:
+
+Use an 'Aspirational' aesthetic: crisp whites, gold accents, and deep academic blues.
+
+Add an external link icon to each card so users know they can click out to the university's official website or Facebook page.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

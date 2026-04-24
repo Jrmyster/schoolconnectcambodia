@@ -222,6 +222,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ទ្វីបធំបំផុតលើផែនដីក្នុងមេរៀន​បីដ៏រស់រវើក ៖ ប្រជាជន ៤,៧ ពាន់លាននាក់ នៅក្នុង ៤៨ ប្រទេស (៦០% នៃមនុស្សជាតិទាំងមូល), ប្រភពដើមនៃអរិយធម៌ដែលកសិកម្ម ទីក្រុង និងការសរសេរត្រូវបានបង្កើតរាប់ពាន់ឆ្នាំមុនចក្រភពរ៉ូម, និងចំណុចកំពូលរូបវន្តនៃផែនដី — ភ្នំអេវឺរ៉េស +៨,៨៤៨ ម៉ែត្រ និងសមុទ្រមរណៈ −៤៣០ ម៉ែត្រក្រោមកម្រិតទឹកសមុទ្រ។",
       },
       {
+        href: "/study-center/coordinates",
+        labelEn: "Reading Coordinates: Latitude & Longitude",
+        labelKh: "ការអានកូអរដោនេ៖ រយៈទទឹង និងរយៈបណ្តោយ",
+        icon: Compass,
+        descEn: "The invisible grid humans drew over the planet: latitude lines as a flat ladder from the Equator (0°) up to 90°N or down to 90°S; longitude lines as orange-slice meridians measured East/West from the Prime Meridian through Greenwich (0°); and the 2,200-year history from Eratosthenes to John Harrison's 1700s Marine Chronometer that finally solved the longitude problem (the Earth spins 15° every hour).",
+        descKh: "ក្រឡា​ចត្រង្គ​ដែល​មើល​មិន​ឃើញ​ដែល​មនុស្ស​បាន​គូរ​លើ​ភពផែនដី ៖ ខ្សែ​រយៈ​ទទឹង​ជា​ជណ្ដើរ​ផ្ដេក​ពី​ខ្សែ​អេក្វាទ័រ (០°) ឡើង​ដល់ ៩០°N ឬ​ចុះ​ដល់ ៩០°S; ខ្សែ​រយៈ​បណ្តោយ​ជា​ចំណិត​ក្រូច​ឆ្មារ​វាស់​ខាង​កើត/លិច ពី​ខ្សែ​មេដ្យាន​ទី​សូន្យ​ឆ្លង​កាត់​ហ្គ្រីនវិច (០°); និង​ប្រវត្តិ​សាស្ត្រ ២,២០០ ឆ្នាំ​ពី​អេរ៉ាតូស្ថែន ដល់​នាឡិកា​សមុទ្រ​របស់​ចន ហារីសុន​នៅ​សតវត្សរ៍​ទី ១៨ ដែល​បាន​ដោះស្រាយ​បញ្ហា​រយៈ​បណ្តោយ​ជា​ស្ថាពរ (ផែនដី​បង្វិល ១៥° ក្នុង​មួយ​ម៉ោង)។",
+      },
+      {
         href: "/philosophy/language",
         labelEn: "Language & Reality: Escaping the 'Is' Trap",
         labelKh: "ភាសា និងការពិត៖ ការគេចចេញពីអន្ទាក់នៃពាក្យ 'គឺ'",
