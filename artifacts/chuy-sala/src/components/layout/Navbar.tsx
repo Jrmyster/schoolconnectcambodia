@@ -5,7 +5,7 @@ import {
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
   Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass,
 } from "lucide-react";
-import { useState, useRef, useEffect, ComponentType } from "react";
+import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
 import { NotificationBell } from "@/components/NotificationBell";
@@ -928,6 +928,7 @@ function DropdownGroup({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const panelId = useId();
   const kh = language === "kh";
   const hasDescriptions = group.items.some((item) => item.descEn || item.descKh);
 
@@ -939,7 +940,7 @@ function DropdownGroup({
     setOpen(false);
   }, [location]);
 
-  // Close on outside click
+  // Close on outside click + Escape (matches mobile-menu behaviour)
   useEffect(() => {
     if (!open) return;
     function onDown(e: MouseEvent) {
@@ -947,16 +948,27 @@ function DropdownGroup({
         setOpen(false);
       }
     }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
     document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   return (
     <div ref={ref} style={{ position: "relative" }}>
-      {/* Trigger button */}
+      {/* Trigger button — uses disclosure (button + aria-expanded) semantics
+          rather than role="menu", per WAI-ARIA APG guidance for site nav. */}
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-label={kh ? group.labelKh : group.labelEn}
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap select-none transition-colors duration-150
           ${isGroupActive
             ? "bg-primary/10 text-primary"
@@ -976,6 +988,8 @@ function DropdownGroup({
       {/* Dropdown panel — rendered with inline styles to guarantee visibility */}
       {open && (
         <div
+          id={panelId}
+          aria-label={kh ? group.labelKh : group.labelEn}
           className="nav-dropdown-scroll"
           style={{
             position: "absolute",
