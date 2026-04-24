@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass,
 } from "lucide-react";
 import { useState, useRef, useEffect, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -300,6 +300,14 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "វិទ្យាសាស្ត្រ",
     icon: Atom,
     items: [
+      {
+        href: "/science/disproven-theories",
+        labelEn: "Disproven Theories",
+        labelKh: "ទ្រឹស្ដីដែលត្រូវបានច្រានចោល",
+        icon: Hourglass,
+        descEn: "The Graveyard of Bad Maps — eleven once-respected scientific theories (Four Elements, Phlogiston, Aether, Geocentrism, Phrenology, Martian Canals…) that were eventually shattered by new evidence, framed by Thomas Kuhn's idea of the paradigm shift.",
+        descKh: "ទីបញ្ចុះសពនៃផែនទីខុស — ទ្រឹស្ដីវិទ្យាសាស្ត្រដែលធ្លាប់ត្រូវបានគោរពចំនួន ១១ (ធាតុបួន ផ្លូជីស្ដុន អេទែរ ផែនដីជាចំណុចកណ្តាល លលាដ៍ក្បាល ប្រឡាយលើភពអង្គារ…) ដែលត្រូវបានបំបែកដោយភស្តុតាងថ្មី តាមរយៈគំនិតការផ្លាស់ប្តូរគំរូរបស់ Thomas Kuhn។",
+      },
       {
         href: "/science/energy-future",
         labelEn: "Renewable & Future Energies",

@@ -113,6 +113,7 @@ const AlumniPage                = lazy(() => import("@/pages/AlumniPage").then(m
 const SafetyPage                = lazy(() => import("@/pages/SafetyPage").then(m => ({ default: m.SafetyPage })));
 const ExamPrepPage              = lazy(() => import("@/pages/ExamPrepPage").then(m => ({ default: m.ExamPrepPage })));
 const EnglishWritingPage        = lazy(() => import("@/pages/EnglishWritingPage").then(m => ({ default: m.EnglishWritingPage })));
+const DisprovenTheoriesPage     = lazy(() => import("@/pages/DisprovenTheoriesPage").then(m => ({ default: m.DisprovenTheoriesPage })));
 const PublicSpeakingPage        = lazy(() => import("@/pages/PublicSpeakingPage").then(m => ({ default: m.PublicSpeakingPage })));
 const UniversitiesPage          = lazy(() => import("@/pages/UniversitiesPage").then(m => ({ default: m.UniversitiesPage })));
 const BridgesPage               = lazy(() => import("@/pages/BridgesPage").then(m => ({ default: m.BridgesPage })));
@@ -345,6 +346,7 @@ function Router() {
             <Route path="/science/architecture" component={ArchitectureStrengthPage} />
             <Route path="/science/glaciology" component={GlaciologyPage} />
             <Route path="/science/neurology" component={NeurologyPage} />
+            <Route path="/science/disproven-theories" component={DisprovenTheoriesPage} />
             <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
             <Route path="/biology" component={BiologyHubPage} />
             <Route path="/geology" component={GeologyHubPage} />
