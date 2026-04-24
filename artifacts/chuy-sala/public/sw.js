@@ -20,7 +20,11 @@
  *                    "needs internet" message when these fail.
  */
 
-const VERSION = "v2";
+// Bump this on every release to invalidate the previous version's caches.
+// v3 = navigation strategy switched from stale-while-revalidate to
+//      network-first (fixes white-screen-of-death from stale index.html
+//      pointing at evicted JS chunks after a redeploy).
+const VERSION = "v3";
 const SHELL_CACHE = `chouy-sala-shell-${VERSION}`;
 const ASSET_CACHE = `chouy-sala-assets-${VERSION}`;
 const RUNTIME_CACHE = `chouy-sala-runtime-${VERSION}`;
@@ -145,29 +149,42 @@ async function staleWhileRevalidate(request, cacheName = RUNTIME_CACHE) {
   return cached || (await networkPromise) || Response.error();
 }
 
-// ── Navigations: SWR with shell fallback when offline ────────────────────
+// ── Navigations: NETWORK-FIRST with shell fallback when offline ─────────
+//
+// IMPORTANT: this MUST be network-first for HTML navigations, not
+// stale-while-revalidate. SWR caused a "white screen of death" on the
+// initial visit after a deploy: the SW served the OLD cached index.html,
+// whose <script src="/assets/main-OLDHASH.js"> referenced bundle hashes
+// that were no longer on the server. If the matching old chunk had been
+// evicted from the asset cache, the script tag failed → React never
+// mounted → blank screen. A manual hard refresh bypassed the SW and
+// "fixed" it; that was the smoking gun.
+//
+// Network-first sidesteps the entire class of stale-HTML bugs while
+// preserving full offline support: when the network fails (truly offline,
+// or transient), we fall back to whatever HTML we previously cached, and
+// finally to the precached app shell so the SPA can still render.
 async function handleNavigation(request) {
   const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
-  const networkPromise = fetch(request)
-    .then((res) => {
-      if (res && res.ok) cache.put(request, res.clone()).catch(() => {});
-      return res;
-    })
-    .catch(() => null);
 
-  // Serve cached HTML instantly when we have it (true SWR for routing).
-  if (cached) {
-    networkPromise.catch(() => {}); // fire-and-forget revalidation
-    return cached;
+  try {
+    const network = await fetch(request);
+    // Only cache successful responses. We deliberately accept 200–299;
+    // serving a cached error page later would be worse than a fresh one.
+    if (network && network.ok) {
+      cache.put(request, network.clone()).catch(() => {});
+      return network;
+    }
+    // Non-OK from the network (e.g. 5xx) — still try cache, then shell.
+  } catch {
+    // True network failure → fall through to cache.
   }
 
-  // First-ever visit to this route — wait for the network.
-  const network = await networkPromise;
-  if (network) return network;
+  const cached = await cache.match(request);
+  if (cached) return cached;
 
-  // Offline + never visited — fall back to the precached app shell so the SPA
-  // can render its own client-side route (or a friendly 404).
+  // Offline + never visited this route before — fall back to the precached
+  // app shell so the SPA can render its own client-side route (or 404).
   const shell = await caches.open(SHELL_CACHE);
   const shellRes =
     (await shell.match(BASE)) || (await shell.match(BASE + "index.html"));
