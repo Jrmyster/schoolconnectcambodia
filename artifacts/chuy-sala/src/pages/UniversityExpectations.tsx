@@ -229,13 +229,13 @@ export function UniversityExpectations() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 relative z-10">
           <Link
-            href="/study-center"
+            href="/launchpad"
             className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-6 transition-colors"
-            data-testid="link-back-study-center"
+            data-testid="link-back-launchpad"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className={k ? "font-khmer text-base" : ""}>
-              {t("Back to Study Center", "ត្រឡប់ទៅមជ្ឈមណ្ឌលសិក្សា")}
+              {t("Back to LaunchPad", "ត្រឡប់ទៅផ្ទាំង LaunchPad")}
             </span>
           </Link>
 
@@ -296,14 +296,14 @@ export function UniversityExpectations() {
           style={{ borderColor: SLATE_BORDER }}
         >
           <Link
-            href="/study-center"
+            href="/launchpad"
             className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
             style={{ color: SKY_DEEP }}
-            data-testid="link-footer-study-center"
+            data-testid="link-footer-launchpad"
           >
             <ArrowLeft className="w-4 h-4" />
             <span className={k ? "font-khmer text-base" : ""}>
-              {t("Back to Study Center", "ត្រឡប់ទៅមជ្ឈមណ្ឌលសិក្សា")}
+              {t("Back to LaunchPad", "ត្រឡប់ទៅផ្ទាំង LaunchPad")}
             </span>
           </Link>
           <Link

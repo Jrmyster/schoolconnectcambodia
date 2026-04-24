@@ -418,8 +418,8 @@ function CradleOfCivilizationCard() {
           </ul>
         </div>
 
-        {/* Where: Mesopotamia + Indus Valley */}
-        <div className="grid grid-cols-2 gap-2">
+        {/* Where: Mesopotamia + Indus Valley — stack on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <PlaceTag
             en="Mesopotamia"
             kh="មេសូប៉ូតាមៀ"

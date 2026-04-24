@@ -470,8 +470,8 @@ function GravityEngineCard() {
       {/* Three-state slope diagram */}
       <SlopeDiagram />
 
-      {/* Goldilocks trio */}
-      <div className="grid grid-cols-3 gap-2">
+      {/* Goldilocks trio — stack on mobile, three across from sm and up */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <SlopeTile
           tone="rose"
           icon="🟦"

@@ -1744,7 +1744,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   // ── CHEMISTRY 101 SERIES ──────────────────────────────────────────
   {
     id: "chemistry-inorganic-101",
-    href: "/chemistry/inorganic-101",
+    href: "/science/chemistry/inorganic",
     icon: FlaskConical,
     titleEn: "Inorganic Chemistry 101",
     titleKh: "គីមីវិទ្យាអសរីរាង្គ ១០១",
@@ -1756,7 +1756,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   },
   {
     id: "chemistry-physical-101",
-    href: "/chemistry/physical-101",
+    href: "/science/chemistry/physical",
     icon: Atom,
     titleEn: "Physical Chemistry 101",
     titleKh: "គីមីវិទ្យារូបវិទ្យា ១០១",
@@ -1768,7 +1768,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   },
   {
     id: "chemistry-analytical",
-    href: "/chemistry/analytical",
+    href: "/science/chemistry/analytical",
     icon: Microscope,
     titleEn: "Analytical Chemistry 101",
     titleKh: "គីមីវិទ្យាវិភាគ ១០១",
@@ -1780,7 +1780,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
   },
   {
     id: "chemistry-biochemistry",
-    href: "/chemistry/biochemistry",
+    href: "/science/chemistry/biochemistry",
     icon: Dna,
     titleEn: "Biochemistry",
     titleKh: "ជីវគីមី",

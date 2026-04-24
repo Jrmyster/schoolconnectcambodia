@@ -368,6 +368,12 @@ export function SentenceTrain() {
                 onClick={() => onSlotClick(slot)}
                 onDragOver={onDragOver}
                 onDrop={(e) => onDropSlot(e, slot)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSlotClick(slot);
+                  }
+                }}
                 role="button"
                 tabIndex={0}
                 aria-label={`${meta.en} car`}

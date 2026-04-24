@@ -327,13 +327,9 @@ function Router() {
             <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
             <Route path="/science/chemistry/inorganic" component={InorganicChemistry101Page} />
-            <Route path="/chemistry/inorganic-101" component={InorganicChemistry101Page} />
             <Route path="/science/chemistry/physical" component={PhysicalChemistry101Page} />
-            <Route path="/chemistry/physical-101" component={PhysicalChemistry101Page} />
             <Route path="/science/chemistry/analytical" component={AnalyticalChemistry101Page} />
-            <Route path="/chemistry/analytical" component={AnalyticalChemistry101Page} />
             <Route path="/science/chemistry/biochemistry" component={BiochemistryPage} />
-            <Route path="/chemistry/biochemistry" component={BiochemistryPage} />
             <Route path="/fun-lab" component={FunLabPage} />
             <Route path="/physics" component={PhysicsHubPage} />
             <Route path="/physics/motion" component={PhysicsMotionPage} />

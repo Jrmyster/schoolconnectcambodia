@@ -135,7 +135,7 @@ function FateOfStarsPanel({ lang }: { lang: Lang }) {
           {isKh ? "ពន្លឺទាំងអស់ បិទម្តងមួយៗ" : "The lights, switched off one by one"}
         </h4>
 
-        <div className="grid grid-cols-4 gap-3 mb-4" aria-hidden>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4" aria-hidden>
           {[
             { lit: 4, label: { en: "Today", kh: "ថ្ងៃនេះ" } },
             { lit: 3, label: { en: "+1B yrs", kh: "+១ ប៊ី ឆ្នាំ" } },

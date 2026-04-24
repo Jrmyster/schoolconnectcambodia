@@ -452,8 +452,8 @@ function FrequencyWavelengthCard({ kh, t }: { kh: boolean; t: (en: string, kh: s
             )}
           </p>
 
-          {/* Comparison grid */}
-          <div className="grid grid-cols-2 gap-3 mt-3">
+          {/* Comparison grid — stack on mobile so each card stays readable */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
             <div className="rounded-lg bg-indigo-50/60 border border-indigo-200 p-3">
               <div className={`text-[10px] font-mono uppercase tracking-widest text-indigo-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
                 {t("Low frequency", "ប្រេកង់ទាប")}

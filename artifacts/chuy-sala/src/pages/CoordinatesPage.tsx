@@ -470,8 +470,8 @@ function LongitudeCard() {
         />
       </div>
 
-      {/* East / West */}
-      <div className="grid grid-cols-2 gap-2">
+      {/* East / West — stack on mobile so descriptions stay readable */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <DirectionTile
           dir="W"
           chipClass="bg-rose-700 text-rose-50"
