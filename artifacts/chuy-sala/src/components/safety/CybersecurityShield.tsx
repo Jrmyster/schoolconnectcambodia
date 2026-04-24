@@ -838,7 +838,6 @@ function FootprintPacket({
       fill="#ef4444"
       style={{
         offsetPath: `path("${path}")`,
-        // @ts-expect-error — non-standard but well-supported alias
         WebkitOffsetPath: `path("${path}")`,
         animation: `shieldPacket 1.4s ease-in ${delay}s infinite`,
         filter: "drop-shadow(0 0 6px #ef4444)",

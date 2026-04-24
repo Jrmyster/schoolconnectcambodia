@@ -1010,8 +1010,9 @@ function HigherOrderSection({ isKh }: { isKh: boolean }) {
           testId="notation-formula"
           math={String.raw`f^{(n)}(x) \;=\; \frac{d^{n}y}{dx^{n}}`}
         />
+        <div className="mt-4 overflow-x-auto">
         <table
-          className="mt-4 w-full border-separate border-spacing-y-2"
+          className="w-full border-separate border-spacing-y-2"
           data-testid="notation-table"
         >
           <caption className="sr-only">
@@ -1061,6 +1062,7 @@ function HigherOrderSection({ isKh }: { isKh: boolean }) {
             ))}
           </tbody>
         </table>
+        </div>
         <p className={`mt-4 text-xs text-slate-600 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
           {isKh
             ? "កត់សម្គាល់៖ f⁽⁴⁾(x) មិនមែនជា f ទៅគុណនឹង 4 ទេ — វង់ក្រចកមានន័យថា «ដេរីវេទី ៤»។"

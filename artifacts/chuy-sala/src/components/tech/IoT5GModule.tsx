@@ -372,7 +372,6 @@ function FlowPacket({
       fill={color}
       style={{
         offsetPath: `path("${path}")`,
-        // @ts-expect-error — non-standard but well-supported alias
         WebkitOffsetPath: `path("${path}")`,
         animation: `iotPacket 1.2s ease-in ${delay}s infinite`,
         filter: `drop-shadow(0 0 6px ${color})`,

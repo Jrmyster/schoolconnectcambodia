@@ -203,6 +203,7 @@ export function CareerMatcher({ onNavigateToMajor, onResetPathways }: CareerMatc
       const timer = setTimeout(() => runAnalyse(store.preScores!), 400);
       return () => clearTimeout(timer);
     }
+    return undefined;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

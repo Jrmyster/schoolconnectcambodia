@@ -2126,8 +2126,8 @@ function HarmonicTrapCard({ isKh }: { isKh: boolean }) {
           </div>
 
           {/* Milestone table */}
-          <div className="mt-4 rounded-lg border border-amber-200 overflow-hidden">
-            <table className="w-full text-xs">
+          <div className="mt-4 rounded-lg border border-amber-200 overflow-x-auto">
+            <table className="w-full text-xs min-w-[320px]">
               <thead className="bg-amber-50">
                 <tr>
                   <th className={`text-left px-3 py-2 font-bold text-amber-900 ${isKh ? "font-khmer" : ""}`}>
