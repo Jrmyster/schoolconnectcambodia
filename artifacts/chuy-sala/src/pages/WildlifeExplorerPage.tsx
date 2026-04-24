@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Volume2, Trees, Sparkles, Search, RotateCcw, X,
-  ChevronDown, ChevronUp, BookOpen, Bug,
+  ChevronDown, ChevronUp, BookOpen, Bug, MapPin,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
@@ -18,6 +18,8 @@ type AnimalClass =
   | "Insect" | "Arachnid" | "Crustacean" | "Mollusk" | "Annelid" | "Cnidarian"
   | "Chilopoda" | "Echinoderm";
 
+type Region = "Australia";
+
 type Animal = {
   key: string;
   nameEn: string;
@@ -29,6 +31,7 @@ type Animal = {
   cardTint: Tint;
   phylum: Phylum;
   class: AnimalClass;
+  region?: Region;
 };
 
 // Bilingual labels for each biological class — used by both the Learn panel
@@ -57,12 +60,18 @@ const PHYLUM_OF: Record<AnimalClass, Phylum> = {
   Chilopoda: "Invertebrate", Echinoderm: "Invertebrate",
 };
 
-type FilterKey = "all" | "phylum:Vertebrate" | "phylum:Invertebrate" | `class:${AnimalClass}`;
+type FilterKey =
+  | "all"
+  | "phylum:Vertebrate"
+  | "phylum:Invertebrate"
+  | "region:Australia"
+  | `class:${AnimalClass}`;
 
 // Pills shown below the search — order matches the Learn panel's branches.
 const FILTER_PILLS: Array<{ key: FilterKey; en: string; kh: string }> = [
   { key: "all",                  en: "All",          kh: "ទាំងអស់" },
   { key: "phylum:Vertebrate",    en: "Vertebrates",  kh: "សត្វមានឆ្អឹងកង" },
+  { key: "region:Australia",     en: "Region: Australia", kh: "តំបន់៖ អូស្ត្រាលី" },
   { key: "phylum:Invertebrate",  en: "Invertebrates", kh: "សត្វគ្មានឆ្អឹងកង" },
   { key: "class:Mammal",         en: CLASS_LABELS.Mammal.en,     kh: CLASS_LABELS.Mammal.kh },
   { key: "class:Bird",           en: CLASS_LABELS.Bird.en,       kh: CLASS_LABELS.Bird.kh },
@@ -150,8 +159,9 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factKh: "សត្វស្លុត ជាសត្វយឺតបំផុត ហើយដេកភាគច្រើននៃថ្ងៃ នៅលើដើមឈើ។", cardTint: TINTS[2] },
 
   { key: "koala",    nameEn: "Koala",    nameKh: "កូឡា",         emoji: "🐨",
-    factEn: "Koalas sleep up to 22 hours a day because eucalyptus leaves are hard to digest.",
-    factKh: "ពួកវាគេងរហូតដល់ ២២ ម៉ោងក្នុងមួយថ្ងៃ ព្រោះស្លឹកអឺកាលីបទុសពិបាករំលាយ។", cardTint: TINTS[6], class: "Mammal" },
+    factEn: "Koalas sleep up to 22 hours a day because their diet of eucalyptus leaves is toxic and takes a lot of energy to digest!",
+    factKh: "កូឡាគេងរហូតដល់ ២២ ម៉ោងក្នុងមួយថ្ងៃ ព្រោះអាហាររបស់ពួកវា ដែលជាស្លឹកអឺកាលីបទុស មានជាតិពុល និងត្រូវការថាមពលច្រើនដើម្បីរំលាយ!",
+    cardTint: TINTS[6], class: "Mammal", region: "Australia" },
   { key: "deer",     nameEn: "Deer",     nameKh: "សត្វក្តាន់",  emoji: "🦌",
     factEn: "The deer has long thin legs and runs very fast through the forest.",
     factKh: "សត្វក្តាន់ មានជើងវែងស្តើង ហើយរត់លឿនណាស់ ឆ្លងកាត់ព្រៃ។", cardTint: TINTS[5] },
@@ -461,6 +471,55 @@ const ANIMALS_RAW: AnimalSeed[] = [
     factEn: "If a starfish loses an arm, it can grow it back — and from a single arm a brand-new starfish can sometimes regrow.",
     factKh: "បើផ្កាយសមុទ្របាត់ដៃមួយ វាអាចដុះវាមកវិញ — ហើយពីដៃតែមួយ ពេលខ្លះផ្កាយសមុទ្រថ្មីទាំងស្រុងអាចលូតលាស់ឡើងវិញបាន។",
     cardTint: TINTS[4], class: "Echinoderm" },
+
+  /* ─── REGION: AUSTRALIA · តំបន់៖ អូស្ត្រាលី ─── */
+  /* Marsupials and unique animals from the Land Down Under. */
+
+  // Mammals · ថនិកសត្វ  (Koala already included above with region tag.)
+  { key: "kangaroo",        nameEn: "Kangaroo",         nameKh: "កង់ហ្គូរូ",            emoji: "🦘",
+    factEn: "A kangaroo cannot walk backwards, and they use their heavy tail as a fifth leg for balance.",
+    factKh: "កង់ហ្គូរូមិនអាចដើរថយក្រោយបានទេ ហើយពួកវាប្រើកន្ទុយធ្ងន់របស់វាជាជើងទីប្រាំសម្រាប់ការទ្រនាប់។",
+    cardTint: TINTS[5], class: "Mammal", region: "Australia" },
+  { key: "wombat",          nameEn: "Wombat",           nameKh: "វ៉ុមបាត",              emoji: "🐻",
+    factEn: "Wombats produce cube-shaped poop to stop it from rolling away off rocks, so they can use it to mark their territory.",
+    factKh: "សត្វវ៉ុមបាតបញ្ចេញលាមកមានរូបរាងជាគូប ដើម្បីការពារកុំឱ្យវារំកិលធ្លាក់ពីលើថ្ម ដូច្នេះពួកវាអាចប្រើវាសម្រាប់សម្គាល់ដែនកំណើតរបស់ខ្លួន។",
+    cardTint: TINTS[3], class: "Mammal", region: "Australia" },
+  { key: "tasmanian_devil", nameEn: "Tasmanian Devil",  nameKh: "បិសាចតាសម៉ានី",        emoji: "😈",
+    factEn: "They have one of the strongest bites per body mass of any land predator on Earth.",
+    factKh: "ពួកវាមានកម្លាំងខាំខ្លាំងបំផុតមួយធៀបនឹងទម្ងន់រាងកាយ ក្នុងចំណោមសត្វរំពាលើគោកទាំងអស់នៅលើផែនដី។",
+    cardTint: TINTS[7], class: "Mammal", region: "Australia" },
+  { key: "quokka",          nameEn: "Quokka",           nameKh: "ក្វូកា",               emoji: "🐹",
+    factEn: "Known as the 'happiest animal in the world' because their face looks like it is permanently smiling.",
+    factKh: "ត្រូវបានគេស្គាល់ថាជា 'សត្វរីករាយបំផុតនៅលើពិភពលោក' ព្រោះមុខរបស់វាមើលទៅដូចជាញញឹមជានិច្ច។",
+    cardTint: TINTS[4], class: "Mammal", region: "Australia" },
+  { key: "wallaby",         nameEn: "Wallaby",          nameKh: "វ៉ាឡាប៊ី",             emoji: "🦘",
+    factEn: "Wallabies are essentially miniature kangaroos, adapted to live in more rugged, rocky terrain.",
+    factKh: "សត្វវ៉ាឡាប៊ីសំខាន់ៗគឺជាកង់ហ្គូរូខ្នាតតូច ដែលបានសម្របខ្លួនរស់នៅក្នុងតំបន់ដ៏រដិបរដុបនិងមានថ្មច្រើន។",
+    cardTint: TINTS[5], class: "Mammal", region: "Australia" },
+  { key: "bilby",           nameEn: "Bilby",            nameKh: "ប៊ីលប៊ី",              emoji: "🐰",
+    factEn: "They are desert-dwelling marsupials with rabbit-like ears that help release body heat to keep them cool.",
+    factKh: "ពួកវាជាសត្វបំបៅកូនដោយដាក់ក្នុងថង់ ដែលរស់នៅវាលខ្សាច់ ហើយមានត្រចៀកដូចទន្សាយ ដែលជួយបញ្ចេញកំដៅរាងកាយ ដើម្បីរក្សាខ្លួនឱ្យត្រជាក់។",
+    cardTint: TINTS[1], class: "Mammal", region: "Australia" },
+
+  // Birds · សត្វស្លាប
+  { key: "emu",             nameEn: "Emu",              nameKh: "សត្វអេមូ",             emoji: "🦃",
+    factEn: "Emus are the second-tallest birds on Earth — they cannot fly, but they can sprint at 50 km/h!",
+    factKh: "សត្វអេមូជាបក្សីខ្ពស់ជាងគេទីពីរនៅលើផែនដី — ពួកវាមិនអាចហោះបានទេ ប៉ុន្តែពួកវាអាចរត់លឿនរហូតដល់ ៥០ គីឡូម៉ែត្រក្នុងមួយម៉ោង!",
+    cardTint: TINTS[3], class: "Bird", region: "Australia" },
+  { key: "cassowary",       nameEn: "Cassowary",        nameKh: "សត្វកាសូវារី",          emoji: "🦤",
+    factEn: "Often called the world's most dangerous bird, they have a dinosaur-like helmet on their head and dagger-like claws.",
+    factKh: "ច្រើនតែត្រូវបានគេហៅថាជាបក្សីដ៏គ្រោះថ្នាក់បំផុតនៅលើពិភពលោក ពួកវាមានមួកកំបោរលើក្បាលដូចដាយណូស័រ និងក្រចកដូចកាំបិត។",
+    cardTint: TINTS[0], class: "Bird", region: "Australia" },
+  { key: "kookaburra",      nameEn: "Kookaburra",       nameKh: "គូកាប៊ូរ៉ា",            emoji: "🦜",
+    factEn: "Their call sounds exactly like loud, echoing human laughter.",
+    factKh: "សំឡេងហៅរបស់ពួកវាស្តាប់ទៅដូចសំណើចមនុស្សដែលលឺខ្លាំងនិងបន្លឺឡើងវិញយ៉ាងពិតប្រាកដ។",
+    cardTint: TINTS[2], class: "Bird", region: "Australia" },
+
+  // Reptiles · សត្វលូន
+  { key: "frilled_neck_lizard", nameEn: "Frilled-neck Lizard", nameKh: "បង្គួយកពន្លា",   emoji: "🦎",
+    factEn: "When threatened, it opens its mouth wide and flares out a massive umbrella of skin around its neck to look terrifying!",
+    factKh: "ពេលត្រូវបានគំរាមកំហែង វាបើកមាត់ធំៗ ហើយផ្ទុះស្បែកដ៏ធំសម្បើមដូចឆ័ត្រនៅជុំវិញកររបស់វា ដើម្បីមើលទៅគួរឱ្យខ្លាច!",
+    cardTint: TINTS[7], class: "Reptile", region: "Australia" },
 ];
 
 // Apply the Vertebrate/Mammal default to every entry that doesn't override.
@@ -610,6 +669,10 @@ export default function WildlifeExplorerPage() {
       const ph = activeFilter.slice("phylum:".length) as Phylum;
       return ANIMALS.filter((a) => a.phylum === ph);
     }
+    if (activeFilter.startsWith("region:")) {
+      const region = activeFilter.slice("region:".length) as Region;
+      return ANIMALS.filter((a) => a.region === region);
+    }
     const cls = activeFilter.slice("class:".length) as AnimalClass;
     return ANIMALS.filter((a) => a.class === cls);
   }, [activeFilter]);
@@ -641,6 +704,7 @@ export default function WildlifeExplorerPage() {
     const counts: Record<string, number> = { all: ANIMALS.length };
     counts["phylum:Vertebrate"] = ANIMALS.filter((a) => a.phylum === "Vertebrate").length;
     counts["phylum:Invertebrate"] = ANIMALS.filter((a) => a.phylum === "Invertebrate").length;
+    counts["region:Australia"] = ANIMALS.filter((a) => a.region === "Australia").length;
     for (const cls of Object.keys(CLASS_LABELS) as AnimalClass[]) {
       counts[`class:${cls}`] = ANIMALS.filter((a) => a.class === cls).length;
     }
@@ -933,16 +997,19 @@ export default function WildlifeExplorerPage() {
               const isPhylum = pill.key.startsWith("phylum:");
               const isVert = pill.key === "phylum:Vertebrate";
               const isInvert = pill.key === "phylum:Invertebrate";
+              const isRegion = pill.key.startsWith("region:");
 
               // Color-coded by branch — sky for vertebrates, mint for invertebrates,
-              // amber for "All", neutral for class chips.
+              // amber for "All", rose for region pills, neutral for class chips.
               const activeClass = isVert
                 ? "bg-sky-600 text-white border-sky-700"
                 : isInvert
                   ? "bg-emerald-600 text-white border-emerald-700"
-                  : pill.key === "all"
-                    ? "bg-amber-500 text-white border-amber-600"
-                    : "bg-emerald-700 text-white border-emerald-800";
+                  : isRegion
+                    ? "bg-rose-600 text-white border-rose-700"
+                    : pill.key === "all"
+                      ? "bg-amber-500 text-white border-amber-600"
+                      : "bg-emerald-700 text-white border-emerald-800";
 
               const idleClass = empty
                 ? "bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed"
@@ -950,7 +1017,9 @@ export default function WildlifeExplorerPage() {
                   ? "bg-white text-sky-900 border-sky-300 hover:bg-sky-50 hover:border-sky-500"
                   : isInvert
                     ? "bg-white text-emerald-900 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-500"
-                    : "bg-white text-emerald-900 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-400";
+                    : isRegion
+                      ? "bg-white text-rose-900 border-rose-300 hover:bg-rose-50 hover:border-rose-500"
+                      : "bg-white text-emerald-900 border-emerald-200 hover:bg-emerald-50 hover:border-emerald-400";
 
               return (
                 <button
@@ -960,12 +1029,13 @@ export default function WildlifeExplorerPage() {
                   disabled={empty && !active}
                   aria-pressed={active}
                   aria-label={`${isKh ? pill.kh : pill.en} (${count})`}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 text-xs sm:text-sm font-bold transition active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${active ? activeClass : idleClass} ${isPhylum ? "ring-1 ring-inset" : ""}`}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 text-xs sm:text-sm font-bold transition active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${active ? activeClass : idleClass} ${isPhylum || isRegion ? "ring-1 ring-inset" : ""}`}
                   data-testid={`filter-pill-${pill.key.replace(":", "-")}`}
                   data-active={active ? "true" : "false"}
                 >
                   {isVert   && <SpineIcon className="w-3.5 h-3.5" />}
                   {isInvert && <Bug className="w-3.5 h-3.5" />}
+                  {isRegion && <MapPin className="w-3.5 h-3.5" />}
                   <span className={isKh ? "font-khmer" : ""}>{isKh ? pill.kh : pill.en}</span>
                   <span className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1 rounded-full text-[10px] font-bold ${active ? "bg-white/25 text-white" : "bg-emerald-100 text-emerald-800"}`}>
                     {count}
