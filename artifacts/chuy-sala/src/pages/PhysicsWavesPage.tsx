@@ -14,7 +14,14 @@ import {
   Glasses,
   Minus,
   Plus,
+  Gauge,
+  FunctionSquare,
+  Diamond,
+  Droplet,
+  Wind,
 } from "lucide-react";
+import { BlockMath, InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 // ── Cool blueprint surface ────────────────────────────────────────────────
@@ -181,6 +188,9 @@ export function PhysicsWavesPage() {
           icon={Eye}
         />
         <OpticsCards kh={kh} t={t} />
+
+        {/* ── 4b. The mathematics of refraction ─────────────────── */}
+        <RefractionMathSubsection />
 
         {/* ── 5. Physics of Glasses ────────────────────────────── */}
         <div className="mt-10">
@@ -1318,5 +1328,302 @@ function ConvexSvg({ kh }: { kh: boolean }) {
       <circle cx={retinaX} cy={cy} r="3.5" fill={RAY_FIX} style={{ filter: `drop-shadow(0 0 6px ${RAY_FIX})` }} />
       <text x={retinaX - 4} y={cy - 8} fontSize="8" fontFamily={kh ? "inherit" : "monospace"} fill={RAY_FIX} textAnchor="end" fontWeight="bold">{L("ON RETINA", "នៅលើភ្នាសភ្នែក", kh)}</text>
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// 4b · The Mathematics of Refraction · គណិតវិទ្យានៃការចំណាំងបែរ
+//
+//   Two strictly-bilingual cards in a 2-col grid, placed directly below the
+//   reflection / refraction visual cards. Matches the existing blueprint
+//   aesthetic exactly (white CARD_BG, indigo-300 borders, CornerMarks subtle,
+//   indigo→violet gradient icon chips, indigo-700 mono labels).
+//
+//   Card 1 — The Speed Limit of Light: introduces the index of refraction n
+//            with three example materials (air, water, diamond).
+//   Card 2 — Snell's Law: KaTeX block formula + bilingual symbol key.
+// ════════════════════════════════════════════════════════════════════════════
+
+function RefractionMathSubsection() {
+  return (
+    <div id="refraction-math" className="mt-6 mb-2 scroll-mt-24">
+      {/* Sub-heading bar — same blueprint look but smaller / "·" continuation marker */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex-shrink-0 inline-flex items-center gap-2 rounded-lg bg-indigo-100 border-2 border-indigo-300 px-3 py-1.5 text-[10px] font-mono font-bold tracking-[0.25em] text-indigo-700">
+          <span>04 · MATH</span>
+          <span className="font-khmer normal-case tracking-normal text-[0.7rem]">បន្ថែម · គណិត</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg sm:text-xl font-bold text-indigo-950 leading-tight">
+            The Mathematics of Refraction
+          </h2>
+          <h3 className="font-khmer text-base sm:text-lg font-bold text-indigo-900 leading-loose">
+            គណិតវិទ្យានៃការចំណាំងបែរ
+          </h3>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+        <SpeedLimitOfLightCard />
+        <SnellsLawCard />
+      </div>
+    </div>
+  );
+}
+
+// ── Card 1 · The Speed Limit of Light ─────────────────────────────────────
+function SpeedLimitOfLightCard() {
+  return (
+    <article
+      data-testid="card-speed-limit-light"
+      className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden flex flex-col"
+      style={CARD_BG}
+    >
+      <CornerMarks subtle />
+      <div className="relative p-5 sm:p-6 flex-1 flex flex-col gap-4">
+        {/* Header */}
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Gauge className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 flex flex-wrap gap-x-2">
+              <span>Card 01 · The Concept</span>
+              <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">កាត ០១ · គំនិត</span>
+            </div>
+            <h3 className="text-lg font-bold text-indigo-950 leading-tight">
+              The Speed Limit of Light
+            </h3>
+            <h4 className="font-khmer text-base font-bold text-indigo-900 leading-loose">
+              ល្បឿនកំណត់នៃពន្លឺ
+            </h4>
+          </div>
+        </div>
+
+        {/* Why light bends */}
+        <div className="space-y-2">
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            <strong>Why does light bend?</strong> Light travels at <strong>300,000&nbsp;km/s</strong> in a vacuum — but it <strong>slows down</strong> when it hits physical matter like water or glass. That change in speed is what makes it bend.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            <strong>ហេតុ​អ្វី​ពន្លឺ​បត់​បែន ?</strong> ពន្លឺ​ធ្វើ​ដំណើរ​ដោយ​ល្បឿន <strong>៣០០,០០០ គម/វិនាទី</strong> ក្នុង​សុញ្ញកាស — ប៉ុន្តែ​វា <strong>ដំណើរ​ការ​យឺត​ចុះ</strong> នៅ​ពេល​ប៉ះ​នឹង​វត្ថុ​ដូច​ជា​ទឹក ឬ​កែវ។ ការ​ផ្លាស់​ប្ដូរ​ល្បឿន​នេះ​ហើយ​ដែល​ធ្វើ​ឲ្យ​វា​បត់​បែន។
+          </p>
+        </div>
+
+        {/* Index of refraction definition */}
+        <div className="rounded-xl border-2 border-indigo-300 bg-indigo-50/80 p-3.5 space-y-2">
+          <div className="flex items-center gap-2">
+            <FunctionSquare className="w-5 h-5 text-indigo-700" aria-hidden="true" />
+            <div className="leading-tight">
+              <div className="text-sm font-bold text-indigo-950 flex flex-wrap items-baseline gap-x-1.5">
+                <span>Index of Refraction</span>
+                <span className="text-base"><InlineMath math="n" /></span>
+              </div>
+              <div className="font-khmer text-sm font-bold text-indigo-900 leading-loose">
+                សន្ទស្សន៍​នៃ​ការ​ចំណាំង​បែរ <InlineMath math="n" />
+              </div>
+            </div>
+          </div>
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            A simple number that tells you <strong>how much a material slows light down</strong> compared to a vacuum.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            ជា​លេខ​ងាយ​ៗ​មួយ​ដែល​ប្រាប់​អ្នក​ថា <strong>វត្ថុ​ធាតុ​មួយ​ធ្វើ​ឲ្យ​ពន្លឺ​ដំណើរ​ការ​យឺត​ប៉ុណ្ណា</strong> ធៀប​នឹង​សុញ្ញកាស។
+          </p>
+        </div>
+
+        {/* Three example materials */}
+        <div className="grid grid-cols-3 gap-2.5">
+          <NTile
+            Icon={Wind}
+            tone="sky"
+            nameEn="Air"
+            nameKh="ខ្យល់"
+            value="1.0"
+          />
+          <NTile
+            Icon={Droplet}
+            tone="cyan"
+            nameEn="Water"
+            nameKh="ទឹក"
+            value="1.33"
+          />
+          <NTile
+            Icon={Diamond}
+            tone="violet"
+            nameEn="Diamond"
+            nameKh="ពេជ្រ"
+            value="2.42"
+          />
+        </div>
+
+        {/* Punchline */}
+        <div className="rounded-md border-l-4 border-l-indigo-600 bg-indigo-50/60 border border-indigo-200 p-2.5 text-xs text-foreground/90 leading-relaxed flex items-start gap-2">
+          <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-700" aria-hidden="true" />
+          <span>
+            <strong>The higher the number, the slower the light — and the sharper the bend!</strong>
+            <br />
+            <span className="font-khmer leading-loose">
+              <strong>លេខ​កាន់​តែ​ខ្ពស់ ពន្លឺ​កាន់​តែ​យឺត — ហើយ​ការ​បត់​បែន​កាន់​តែ​ខ្លាំង !</strong>
+            </span>
+          </span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function NTile({
+  Icon,
+  tone,
+  nameEn,
+  nameKh,
+  value,
+}: {
+  Icon: typeof Gauge;
+  tone: "sky" | "cyan" | "violet";
+  nameEn: string;
+  nameKh: string;
+  value: string;
+}) {
+  const palette =
+    tone === "sky"
+      ? "border-sky-300 bg-sky-50 text-sky-900"
+      : tone === "cyan"
+        ? "border-cyan-300 bg-cyan-50 text-cyan-900"
+        : "border-violet-300 bg-violet-50 text-violet-900";
+  return (
+    <div className={`rounded-lg border-2 ${palette} p-2 flex flex-col items-center text-center gap-1`}>
+      <Icon className="w-4 h-4" aria-hidden="true" />
+      <div className="text-xs font-bold leading-tight">{nameEn}</div>
+      <div className="font-khmer text-xs font-bold leading-loose">{nameKh}</div>
+      <div className="font-mono text-sm font-bold mt-0.5 flex items-baseline gap-1">
+        <InlineMath math="n \\approx" />
+        <span>{value}</span>
+      </div>
+    </div>
+  );
+}
+
+// ── Card 2 · Snell's Law ──────────────────────────────────────────────────
+function SnellsLawCard() {
+  return (
+    <article
+      data-testid="card-snells-law"
+      className="relative rounded-2xl border-2 border-indigo-300 shadow-sm overflow-hidden flex flex-col"
+      style={CARD_BG}
+    >
+      <CornerMarks subtle />
+      <div className="relative p-5 sm:p-6 flex-1 flex flex-col gap-4">
+        {/* Header */}
+        <div className="flex items-start gap-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white flex items-center justify-center flex-shrink-0 shadow-sm">
+            <Sigma className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 flex flex-wrap gap-x-2">
+              <span>Card 02 · The Formula</span>
+              <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">កាត ០២ · រូបមន្ត</span>
+            </div>
+            <h3 className="text-lg font-bold text-indigo-950 leading-tight">
+              Snell's Law
+            </h3>
+            <h4 className="font-khmer text-base font-bold text-indigo-900 leading-loose">
+              ច្បាប់​ស្នែល
+            </h4>
+          </div>
+        </div>
+
+        {/* Historical hook */}
+        <div className="space-y-2">
+          <p className="text-sm text-foreground/85 leading-relaxed">
+            In <strong>1621</strong>, the Dutch astronomer <strong>Willebrord Snellius</strong> figured out the exact mathematical equation that predicts how much light will bend when crossing from one material into another.
+          </p>
+          <p className="text-sm font-khmer text-foreground/85 leading-loose">
+            នៅ​ឆ្នាំ <strong>១៦២១</strong> តារាសាស្ត្រ​ហូឡង់​ឈ្មោះ <strong>Willebrord Snellius</strong> បាន​រក​ឃើញ​សមីការ​គណិត​វិទ្យា​ដ៏​ច្បាស់​លាស់ ដែល​ទស្សន៍​ទាយ​ថា​ពន្លឺ​នឹង​បត់​បែន​ប៉ុណ្ណា​នៅ​ពេល​ឆ្លង​កាត់​ពី​វត្ថុ​ធាតុ​មួយ​ទៅ​មួយ​ទៀត។
+          </p>
+        </div>
+
+        {/* The formula — KaTeX block */}
+        <div className="rounded-xl border-2 border-indigo-400 bg-white p-4 shadow-inner relative">
+          <div className="absolute top-2 left-2 text-[9px] font-mono font-bold tracking-widest text-indigo-500/80">
+            FORMULA · រូបមន្ត
+          </div>
+          <div className="flex items-center justify-center min-h-[64px] py-3 text-indigo-950 text-xl">
+            <BlockMath math={String.raw`n_{1} \, \sin(\theta_{1}) \;=\; n_{2} \, \sin(\theta_{2})`} />
+          </div>
+        </div>
+
+        {/* Bilingual symbol key */}
+        <div className="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-3.5">
+          <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-indigo-700 mb-2 flex flex-wrap gap-x-2">
+            <span>Key — what each symbol means</span>
+            <span className="font-khmer normal-case tracking-normal text-xs text-indigo-800">សោ — អត្ថន័យនៃនិមិត្តសញ្ញានីមួយៗ</span>
+          </div>
+          <ul className="space-y-2.5">
+            <SnellKeyRow
+              symbol="n_{1}"
+              en="Index of refraction of the first material"
+              kh="សន្ទស្សន៍​នៃ​វត្ថុ​ធាតុ​ទី​១"
+            />
+            <SnellKeyRow
+              symbol={String.raw`\theta_{1}`}
+              en="Angle in · the angle of incidence"
+              kh="មុំ​ធ្លាក់ · មុំ​ដែល​ពន្លឺ​ចូល"
+            />
+            <SnellKeyRow
+              symbol="n_{2}"
+              en="Index of refraction of the second material"
+              kh="សន្ទស្សន៍​នៃ​វត្ថុ​ធាតុ​ទី​២"
+            />
+            <SnellKeyRow
+              symbol={String.raw`\theta_{2}`}
+              en="Angle out · the angle of refraction"
+              kh="មុំ​ចំណាំង​បែរ · មុំ​ដែល​ពន្លឺ​ចេញ"
+            />
+          </ul>
+        </div>
+
+        {/* Tiny worked-example hint */}
+        <div className="rounded-md border-l-4 border-l-violet-600 bg-violet-50/60 border border-violet-200 p-2.5 text-xs text-foreground/90 leading-relaxed flex items-start gap-2">
+          <Lightbulb className="w-4 h-4 mt-0.5 flex-shrink-0 text-violet-700" aria-hidden="true" />
+          <span>
+            Plug in the four numbers and Snell's Law tells you the <strong>exact</strong> angle the ray bends — the same equation that lets engineers design <strong>camera lenses</strong>, <strong>fibre-optic cables</strong>, and your own <strong>eyeglasses</strong>.
+            <br />
+            <span className="font-khmer leading-loose">
+              ដាក់​លេខ​ទាំង​បួន​នេះ​ចូល ច្បាប់​ស្នែល​នឹង​ប្រាប់​អ្នក​នូវ​មុំ <strong>ច្បាស់​លាស់</strong> ដែល​ពន្លឺ​បត់ — សមីការ​ដដែល​នេះ​ហើយ​ដែល​អនុញ្ញាត​ឲ្យ​វិស្វករ​រចនា <strong>កែវ​ថត​រូប</strong> <strong>ខ្សែ​អុបទិក​ហ្វាយប័រ</strong> និង <strong>វ៉ែនតា</strong> របស់​អ្នក​ផ្ទាល់។
+            </span>
+          </span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function SnellKeyRow({
+  symbol,
+  en,
+  kh,
+}: {
+  symbol: string;
+  en: string;
+  kh: string;
+}) {
+  return (
+    <li className="flex items-start gap-3">
+      <div className="flex-shrink-0 w-12 h-12 rounded-md bg-white border-2 border-indigo-300 flex items-center justify-center text-indigo-950 text-lg shadow-sm">
+        <InlineMath math={symbol} />
+      </div>
+      <div className="min-w-0 flex-1 pt-0.5">
+        <div className="text-sm text-foreground/90 leading-snug">
+          <span className="text-indigo-700 font-mono mr-1.5">=</span>
+          {en}
+        </div>
+        <div className="text-sm font-khmer text-foreground/90 leading-loose">
+          <span className="text-indigo-700 font-mono mr-1.5">=</span>
+          {kh}
+        </div>
+      </div>
+    </li>
   );
 }
