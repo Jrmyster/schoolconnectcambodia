@@ -7,6 +7,12 @@ import {
   RotateCcw,
   Wind,
   Info,
+  Compass,
+  Globe2,
+  Navigation,
+  Flame,
+  Shield,
+  MapPin,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -130,6 +136,9 @@ export default function MagnetsPage() {
       >
         <FieldVisualizer isKh={isKh} />
       </Section>
+
+      {/* ── Tool 4: The Planetary Magnet (How Compasses Work) ────────── */}
+      <PlanetaryMagnetSection isKh={isKh} />
 
       {/* ── Closing ──────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-400 text-sm">
@@ -787,3 +796,432 @@ function ScopedStyles() {
   );
 }
 
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tool 4: The Planetary Magnet — How Compasses Work
+//          មេដែកនៃភពផែនដី៖ របៀបដែលត្រីវិស័យដំណើរការ
+// ════════════════════════════════════════════════════════════════════════════
+
+function PlanetaryMagnetSection({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10"
+      data-testid="section-planetary-magnet"
+    >
+      {/* Eyebrow — strictly bilingual */}
+      <div className="text-xs font-bold tracking-widest uppercase text-cyan-400 mb-2 flex flex-wrap items-baseline gap-x-2">
+        <Compass className="w-3 h-3 inline-block" />
+        <span>Earth's Magnetic Field</span>
+        <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">
+          ដែនមេដែករបស់ផែនដី
+        </span>
+      </div>
+
+      {/* Title — strictly bilingual (both languages stacked) */}
+      <h2 className="font-display font-bold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+        <span className={isKh ? "font-khmer leading-loose block" : "block"}>
+          {isKh
+            ? "មេដែកនៃភពផែនដី៖ របៀបដែលត្រីវិស័យដំណើរការ"
+            : "The Planetary Magnet: How Compasses Work"}
+        </span>
+        <span
+          className={`block text-base sm:text-lg font-normal mt-1 text-slate-400 ${isKh ? "" : "font-khmer"}`}
+        >
+          {isKh
+            ? "The Planetary Magnet: How Compasses Work"
+            : "មេដែកនៃភពផែនដី៖ របៀបដែលត្រីវិស័យដំណើរការ"}
+        </span>
+      </h2>
+
+      <p
+        className={`text-slate-300 text-sm max-w-3xl mb-6 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {isKh
+          ? "ឆ្ងល់ទេថា ហេតុអ្វីត្រីវិស័យតែងតែចង្អុលទៅខាងជើង? ចម្លើយគឺថា ផែនដីខ្លួនវាគឺជាមេដែកដ៏ធំសម្បើម។ ខាងក្រោមនេះគឺជាដំណើរការនៅបីដំណាក់កាល៖ ពីម្ជុលដ៏តូច រហូតដល់ខឿនលោហៈរលាយរបស់ផែនដី និងភាពមិននឹងនរនៃប៉ូលដោយខ្លួនវា។"
+          : "Ever wondered why a compass needle always points north? The answer is that the Earth itself is one giant magnet. Here's the story in three steps — from the tiny needle to the planet's molten metal core, and the surprising fact that the pole itself is not standing still."}
+      </p>
+
+      {/* Three cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <PlanetaryCard
+          index={1}
+          accent="red"
+          icon={Compass}
+          titleEn="The Floating Needle"
+          titleKh="ម្ជុលអណ្តែត"
+          taglineEn="A tiny magnet, free to spin."
+          taglineKh="មេដែកតូចមួយ ដែលអាចបង្វិលដោយសេរី។"
+        >
+          <BilingualBlock
+            en="A compass is just a tiny, lightweight magnet balanced on a pin so it can spin freely in any direction."
+            kh="ត្រីវិស័យគឺគ្រាន់តែជាមេដែកតូច ស្រាល ដែលដាក់ស្មើនៅលើគ្នឹះ ដើម្បីឱ្យវាអាចបង្វិលដោយសេរីទៅទិសណាមួយក៏បាន។"
+          />
+          <Rule
+            ruleEn="Opposite magnetic poles attract."
+            ruleKh="ប៉ូលមេដែកផ្ទុយគ្នាទាញគ្នា។"
+            accent="red"
+          />
+          <BilingualBlock
+            en="Because of this rule, the 'North' end of the compass needle is physically pulled toward the magnetic pole at the top of the Earth."
+            kh="ដោយសារតែច្បាប់នេះ ចុង 'ខាងជើង' នៃម្ជុលត្រីវិស័យត្រូវបានទាញទៅប៉ូលមេដែកនៅផ្នែកខាងលើនៃផែនដីដោយរូបវ័ន្ត។"
+          />
+          {/* Visual: spinning needle on a pin */}
+          <NeedleDiagram />
+        </PlanetaryCard>
+
+        <PlanetaryCard
+          index={2}
+          accent="amber"
+          icon={Globe2}
+          titleEn="The Earth is a Giant Magnet"
+          titleKh="ផែនដីគឺជាមេដែកដ៏ធំ"
+          taglineEn="Spinning iron makes an invisible shield."
+          taglineKh="ដែករលាយដែលបង្វិល បង្កើតជាខែលដែលមើលមិនឃើញ។"
+        >
+          <BilingualBlock
+            en="Deep inside the planet, there is an ocean of liquid iron spinning around a solid iron core."
+            kh="នៅខាងក្នុងដ៏ជ្រៅរបស់ភពនេះ មានសមុទ្រដ៏ធំនៃដែករលាយ កំពុងបង្វិលជុំវិញខឿនដែករឹង។"
+          />
+          <BilingualBlock
+            en="That swirling liquid metal creates a massive, invisible magnetic shield that reaches out into space and protects every living thing on Earth from the sun's harmful radiation."
+            kh="លោហៈរលាយដែលងាករនោះ បង្កើតជាខែលមេដែកដ៏ធំ ដែលមើលមិនឃើញ ហើយវាបាញ់ចេញទៅក្នុងលំហអវកាស ការពារភាវៈរស់នៅលើផែនដីពីកាំរស្មីព្រះអាទិត្យដ៏គ្រោះថ្នាក់។"
+          />
+          <KeyTerm
+            termEn="Magnetosphere"
+            termKh="ដែនមេដែក (Magnetosphere)"
+            defEn="Earth's invisible magnetic shield."
+            defKh="ខែលមេដែកដែលមើលមិនឃើញរបស់ផែនដី។"
+            icon={Shield}
+            accent="amber"
+          />
+          <CoreDiagram />
+        </PlanetaryCard>
+
+        <PlanetaryCard
+          index={3}
+          accent="cyan"
+          icon={Navigation}
+          titleEn="The Wandering Pole"
+          titleKh="ប៉ូលដែលផ្លាស់ទី"
+          taglineEn="True North vs Magnetic North."
+          taglineKh="ខាងជើងពិត ទល់នឹង ខាងជើងមេដែក។"
+        >
+          <BilingualBlock
+            en="There is a critical difference between True North and Magnetic North — and confusing them can get an explorer very lost."
+            kh="មានភាពខុសគ្នាសំខាន់រវាង ខាងជើងពិត និង ខាងជើងមេដែក — ហើយការច្រឡំវាអាចធ្វើឱ្យអ្នកសាកសួរវង្វេងផ្លូវយ៉ាងធ្ងន់ធ្ងរ។"
+          />
+          <NorthCompare />
+          <Rule
+            ruleEn="Magnetic North moves several kilometers every year!"
+            ruleKh="ខាងជើងមេដែកផ្លាស់ទីច្រើនគីឡូម៉ែត្ររៀងរាល់ឆ្នាំ!"
+            accent="cyan"
+          />
+          <BilingualBlock
+            en="Because the liquid iron inside the Earth is constantly sloshing around, Magnetic North never sits still — it drifts. The geographic North Pole, on the other hand, never moves."
+            kh="ដោយសារតែដែករលាយនៅខាងក្នុងផែនដី តែងតែងាករឥតឈប់ឈរ ខាងជើងមេដែកមិនដែលនៅនឹងទេ — វាតែងតែលូននោះ។ ផ្ទុយទៅវិញ ប៉ូលខាងជើងភូមិសាស្ត្រ មិនដែលផ្លាស់ទីឡើយ។"
+          />
+        </PlanetaryCard>
+      </div>
+    </section>
+  );
+}
+
+// ── Card shell ───────────────────────────────────────────────────────────────
+
+const PLANETARY_ACCENT = {
+  red: {
+    border: "border-rose-500/40",
+    glow: "shadow-rose-500/10",
+    pillBg: "bg-rose-500/15",
+    pillText: "text-rose-300",
+    iconBg: "bg-gradient-to-br from-rose-500/30 to-rose-700/30",
+    iconText: "text-rose-300",
+    title: "text-rose-200",
+  },
+  amber: {
+    border: "border-amber-500/40",
+    glow: "shadow-amber-500/10",
+    pillBg: "bg-amber-500/15",
+    pillText: "text-amber-300",
+    iconBg: "bg-gradient-to-br from-amber-500/30 to-orange-700/30",
+    iconText: "text-amber-300",
+    title: "text-amber-200",
+  },
+  cyan: {
+    border: "border-cyan-500/40",
+    glow: "shadow-cyan-500/10",
+    pillBg: "bg-cyan-500/15",
+    pillText: "text-cyan-300",
+    iconBg: "bg-gradient-to-br from-cyan-500/30 to-sky-700/30",
+    iconText: "text-cyan-300",
+    title: "text-cyan-200",
+  },
+} as const;
+
+function PlanetaryCard({
+  index,
+  accent,
+  icon: Icon,
+  titleEn,
+  titleKh,
+  taglineEn,
+  taglineKh,
+  children,
+}: {
+  index: number;
+  accent: keyof typeof PLANETARY_ACCENT;
+  icon: typeof Compass;
+  titleEn: string;
+  titleKh: string;
+  taglineEn: string;
+  taglineKh: string;
+  children: React.ReactNode;
+}) {
+  const a = PLANETARY_ACCENT[accent];
+  return (
+    <article
+      className={`relative rounded-2xl border ${a.border} ${a.glow} bg-slate-900/60 backdrop-blur-sm shadow-lg overflow-hidden flex flex-col`}
+      data-testid={`planetary-card-${index}`}
+    >
+      {/* header */}
+      <header className="p-5 border-b border-slate-700/60">
+        <div className="flex items-start gap-3">
+          <div
+            className={`flex-shrink-0 w-11 h-11 rounded-xl ${a.iconBg} border border-slate-700/60 flex items-center justify-center`}
+          >
+            <Icon className={`w-5 h-5 ${a.iconText}`} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className={`inline-flex items-center gap-2 ${a.pillBg} ${a.pillText} text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-1.5`}
+            >
+              <span>Card · {String(index).padStart(2, "0")}</span>
+            </div>
+            <h3 className={`font-display font-bold text-lg leading-tight ${a.title}`}>
+              <span className="block">{titleEn}</span>
+              <span className="block font-khmer text-base font-bold leading-loose mt-0.5 text-white">
+                {titleKh}
+              </span>
+            </h3>
+          </div>
+        </div>
+        {/* tagline — both languages */}
+        <p className="mt-3 text-xs text-slate-400 italic">{taglineEn}</p>
+        <p className="text-xs text-slate-400 font-khmer leading-loose">{taglineKh}</p>
+      </header>
+
+      {/* body */}
+      <div className="p-5 space-y-4 flex-1">{children}</div>
+    </article>
+  );
+}
+
+// ── Bilingual paragraph block (always renders BOTH) ──────────────────────────
+
+function BilingualBlock({ en, kh }: { en: string; kh: string }) {
+  return (
+    <div className="space-y-1.5">
+      <p className="text-sm text-slate-200 leading-relaxed">{en}</p>
+      <p className="text-sm text-slate-300 font-khmer leading-loose">{kh}</p>
+    </div>
+  );
+}
+
+// ── Rule callout (highlighted physical law) ──────────────────────────────────
+
+function Rule({
+  ruleEn,
+  ruleKh,
+  accent,
+}: {
+  ruleEn: string;
+  ruleKh: string;
+  accent: keyof typeof PLANETARY_ACCENT;
+}) {
+  const a = PLANETARY_ACCENT[accent];
+  return (
+    <div
+      className={`rounded-lg border-l-4 ${a.border} ${a.pillBg} px-3 py-2`}
+    >
+      <div className={`text-[10px] font-mono font-bold uppercase tracking-widest ${a.pillText} mb-1 flex flex-wrap gap-x-2`}>
+        <span>The Rule</span>
+        <span className="font-khmer normal-case tracking-normal text-[0.7rem] opacity-80">
+          ច្បាប់
+        </span>
+      </div>
+      <p className="text-sm font-bold text-white">{ruleEn}</p>
+      <p className="text-sm font-bold text-white font-khmer leading-loose">{ruleKh}</p>
+    </div>
+  );
+}
+
+// ── Key term definition (bilingual) ──────────────────────────────────────────
+
+function KeyTerm({
+  termEn,
+  termKh,
+  defEn,
+  defKh,
+  icon: Icon,
+  accent,
+}: {
+  termEn: string;
+  termKh: string;
+  defEn: string;
+  defKh: string;
+  icon: typeof Shield;
+  accent: keyof typeof PLANETARY_ACCENT;
+}) {
+  const a = PLANETARY_ACCENT[accent];
+  return (
+    <div className="rounded-lg border border-slate-700 bg-slate-800/60 p-3">
+      <div className="flex items-start gap-2">
+        <Icon className={`w-4 h-4 mt-0.5 flex-shrink-0 ${a.iconText}`} />
+        <div className="min-w-0">
+          <div className="font-bold text-sm text-white">{termEn}</div>
+          <div className="font-bold text-sm text-white font-khmer leading-loose">
+            {termKh}
+          </div>
+          <div className="mt-1 text-xs text-slate-400">{defEn}</div>
+          <div className="text-xs text-slate-400 font-khmer leading-loose">{defKh}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Card 1 visual: floating needle balanced on a pin ─────────────────────────
+
+function NeedleDiagram() {
+  return (
+    <div
+      className="relative w-full h-32 rounded-xl bg-slate-950/60 border border-slate-700 overflow-hidden flex items-center justify-center"
+      aria-hidden="true"
+    >
+      {/* compass face hint */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20">
+        <div className="w-24 h-24 rounded-full border-2 border-slate-500" />
+      </div>
+      {/* spinning needle */}
+      <div className="relative w-32 h-32 flex items-center justify-center pm-needle-spin">
+        {/* North half (red) */}
+        <div
+          className="absolute top-3 left-1/2 -translate-x-1/2 w-1.5 h-12 rounded-t-full"
+          style={{ background: "linear-gradient(180deg, #f43f5e 0%, #be123c 100%)" }}
+        />
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold text-rose-400">
+          N
+        </div>
+        {/* South half (silver/blue) */}
+        <div
+          className="absolute bottom-3 left-1/2 -translate-x-1/2 w-1.5 h-12 rounded-b-full"
+          style={{ background: "linear-gradient(0deg, #94a3b8 0%, #475569 100%)" }}
+        />
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold text-slate-400">
+          S
+        </div>
+        {/* center pivot */}
+        <div className="absolute w-2.5 h-2.5 rounded-full bg-cyan-300 ring-2 ring-cyan-500/50 z-10" />
+      </div>
+    </div>
+  );
+}
+
+// ── Card 2 visual: cross-section of Earth showing core ───────────────────────
+
+function CoreDiagram() {
+  return (
+    <div
+      className="relative w-full h-32 rounded-xl bg-slate-950/60 border border-slate-700 overflow-hidden flex items-center justify-center"
+      aria-hidden="true"
+    >
+      {/* magnetosphere arcs */}
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 128" preserveAspectRatio="xMidYMid meet">
+        {[0, 1, 2].map((i) => (
+          <ellipse
+            key={i}
+            cx="100"
+            cy="64"
+            rx={50 + i * 18}
+            ry={28 + i * 8}
+            fill="none"
+            stroke="#fbbf24"
+            strokeWidth="0.6"
+            opacity={0.55 - i * 0.12}
+          />
+        ))}
+      </svg>
+      {/* Earth */}
+      <div className="relative w-20 h-20 rounded-full overflow-hidden ring-1 ring-slate-600 shadow-lg">
+        {/* mantle (outer earth) */}
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{ background: "radial-gradient(circle at 35% 35%, #1e3a8a 0%, #0c4a6e 60%, #082f49 100%)" }}
+        />
+        {/* outer liquid iron (amber) */}
+        <div
+          className="absolute inset-3 rounded-full pm-core-spin"
+          style={{ background: "radial-gradient(circle at 50% 50%, #fbbf24 0%, #d97706 70%, #92400e 100%)" }}
+        />
+        {/* solid inner core */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full"
+          style={{ background: "radial-gradient(circle, #fef3c7 0%, #f59e0b 100%)" }}
+        />
+        {/* flame icon hint */}
+        <div className="absolute top-1 right-1">
+          <Flame className="w-3 h-3 text-amber-300/70" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Card 3 visual: True North vs Magnetic North compare ──────────────────────
+
+function NorthCompare() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {/* True North */}
+      <div className="rounded-lg border border-slate-700 bg-slate-800/60 p-3">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-300">
+            True North
+          </div>
+        </div>
+        <div className="text-[10px] font-khmer text-emerald-200 mb-1.5 leading-loose">
+          ខាងជើងពិត
+        </div>
+        <p className="text-xs text-slate-200 leading-relaxed">
+          The geographic top of the map where Earth spins on its axis.
+          <span className="block mt-1 font-bold text-emerald-300">It never moves.</span>
+        </p>
+        <p className="text-xs text-slate-300 font-khmer leading-loose mt-1">
+          ផ្នែកខាងលើនៃផែនទីភូមិសាស្ត្រ ដែលផែនដីបង្វិលលើអ័ក្ស។
+          <span className="block mt-1 font-bold text-emerald-300">វាមិនដែលផ្លាស់ទីទេ។</span>
+        </p>
+      </div>
+      {/* Magnetic North */}
+      <div className="rounded-lg border border-cyan-500/40 bg-cyan-500/10 p-3">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <Compass className="w-3.5 h-3.5 text-cyan-300" />
+          <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-cyan-300">
+            Magnetic North
+          </div>
+        </div>
+        <div className="text-[10px] font-khmer text-cyan-200 mb-1.5 leading-loose">
+          ខាងជើងមេដែក
+        </div>
+        <p className="text-xs text-slate-200 leading-relaxed">
+          Where the compass actually points.
+          <span className="block mt-1 font-bold text-cyan-300">It drifts every year.</span>
+        </p>
+        <p className="text-xs text-slate-300 font-khmer leading-loose mt-1">
+          កន្លែងដែលត្រីវិស័យចង្អុលពិតប្រាកដ។
+          <span className="block mt-1 font-bold text-cyan-300">វាលូនរៀងរាល់ឆ្នាំ។</span>
+        </p>
+      </div>
+    </div>
+  );
+}
