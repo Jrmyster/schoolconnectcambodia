@@ -660,7 +660,7 @@ function Lane({
   label: string;
   subLabel: string;
   accent: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   pos: number;
   braking: boolean;
   outcome: "safe" | "crash" | null;

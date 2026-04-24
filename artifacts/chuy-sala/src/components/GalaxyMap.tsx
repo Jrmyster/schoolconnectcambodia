@@ -208,15 +208,11 @@ function GalaxyParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={PARTICLE_COUNT}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={PARTICLE_COUNT}
-          array={colors}
-          itemSize={3}
+          args={[colors, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -242,7 +238,11 @@ function EarthMarker() {
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
     if (dotRef.current)  dotRef.current.scale.setScalar(0.8 + 0.35 * Math.sin(t * 2.2));
-    if (ringRef.current) ringRef.current.material.opacity = 0.35 + 0.35 * Math.sin(t * 2.2 + 1);
+    if (ringRef.current) {
+      // ringRef is a <mesh> with a single <meshBasicMaterial> (not an array),
+      // so we narrow Mesh.material (Material | Material[]) to a single Material.
+      (ringRef.current.material as THREE.Material).opacity = 0.35 + 0.35 * Math.sin(t * 2.2 + 1);
+    }
   });
 
   // Orion Spur — arm 0 (branchAngle=0), radius=2.6, SPIN_FACTOR=1.5:
@@ -288,9 +288,7 @@ function BackgroundStars() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={1200}
-          array={positions}
-          itemSize={3}
+          args={[positions, 3]}
         />
       </bufferGeometry>
       <pointsMaterial size={0.012} color="#aaccff" transparent opacity={0.35} depthWrite={false} />
@@ -314,7 +312,10 @@ function GalaxyScene() {
         autoRotate={false}
         minPolarAngle={Math.PI * 0.1}
         maxPolarAngle={Math.PI * 0.65}
-        touches={{ ONE: 2, TWO: 512 } as unknown as import("three").Touch}
+        // ONE = 2 = THREE.TOUCH.DOLLY_ROTATE (one-finger dolly+rotate);
+        // TWO = 512 is intentionally outside the THREE.TOUCH enum range to
+        // disable the default two-finger gesture for this viewer.
+        touches={{ ONE: 2, TWO: 512 } as unknown as { ONE: import("three").TOUCH; TWO: import("three").TOUCH }}
       />
     </>
   );

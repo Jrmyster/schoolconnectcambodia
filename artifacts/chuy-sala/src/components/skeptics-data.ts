@@ -467,7 +467,7 @@ export const CHALLENGES: Challenge[] = [
       },
     },
     correctChecklist: { peer_reviewed: true, sample_size: true, conflict: false },
-  },,
+  },
   {
     id: "blood-color",
     number: "#12",
