@@ -140,6 +140,45 @@ export default function PathwayToMedicinePage() {
         <SpecialtyDeck isKh={isKh} />
       </Section>
 
+      {/* ── Featured Module: MCAT Preparation ────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <Link
+          href="/pathway-to-medicine/mcat"
+          className="group block relative overflow-hidden rounded-2xl bg-white border border-emerald-200 shadow-[0_20px_60px_-25px_rgba(22,163,74,0.4)] hover:shadow-[0_25px_70px_-15px_rgba(22,163,74,0.55)] transition-shadow"
+          data-testid="link-mcat-module"
+        >
+          {/* Soft study-blue & focus-green ambient glow */}
+          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-emerald-100/70 blur-3xl pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-20 -left-12 w-72 h-72 rounded-full bg-sky-100/80 blur-3xl pointer-events-none" aria-hidden="true" />
+
+          <div className="relative p-6 sm:p-8 grid sm:grid-cols-[auto,1fr,auto] items-center gap-5">
+            <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-100 to-emerald-100 border border-emerald-300/60 text-emerald-700 shadow-sm">
+              <Brain className="w-8 h-8" aria-hidden="true" />
+            </div>
+
+            <div>
+              <div className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase text-emerald-700 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+                <Sparkles className="w-3 h-3" aria-hidden="true" />
+                {isKh ? "ម៉ូឌុលត្រៀមប្រឡង · MCAT" : "Featured Module · MCAT Preparation"}
+              </div>
+              <h3 className={`text-slate-900 font-display font-bold text-xl sm:text-2xl mb-1.5 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                {isKh ? "ការប្រឡង MCAT៖ ម៉ារ៉ាតុងវេជ្ជសាស្ត្រ" : "The MCAT: The Medical Marathon"}
+              </h3>
+              <p className={`text-slate-700 text-sm max-w-2xl ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "ការប្រឡងរយៈពេល ៧.៥ ម៉ោងដែលកំណត់ការចូលរៀននៅសាកលវិទ្យាល័យពេទ្យអាមេរិក កាណាដា និងអូស្ត្រាលី — របៀបដែលវាសាងសង់ឡើង វិធីសាស្ត្រសិក្សាដ៏ត្រឹមត្រូវ និងពេលវេលា ៣០០–៥០០ ម៉ោងនៃការត្រៀម។"
+                  : "The 7.5-hour exam that decides admission to medical schools in the US, Canada and Australia — how the test is built, the right way to study (active recall), and the 300–500 hour preparation timeline."}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-emerald-700 group-hover:text-emerald-800 group-hover:translate-x-1 transition-transform text-sm font-semibold">
+              <span className={isKh ? "font-khmer" : ""}>{isKh ? "បើកម៉ូឌុល" : "Open module"}</span>
+              <ChevronRight className="w-4 h-4" aria-hidden="true" />
+            </div>
+          </div>
+        </Link>
+      </section>
+
       {/* ── Featured Deep-Dive: Radiology ────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Link

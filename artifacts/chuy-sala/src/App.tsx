@@ -79,6 +79,7 @@ const GeologicalWondersPage      = lazy(() => import("@/pages/GeologicalWondersP
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
 const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
 const RadiologyPage              = lazy(() => import("@/pages/RadiologyPage"));
+const MCATPrepPage               = lazy(() => import("@/pages/MCATPrepPage"));
 const HumanEnginePage           = lazy(() => import("@/pages/HumanEnginePage"));
 const WildlifeExplorerPage      = lazy(() => import("@/pages/WildlifeExplorerPage"));
 const DinosaurExtinctionPage    = lazy(() => import("@/pages/DinosaurExtinctionPage"));
@@ -316,6 +317,7 @@ function Router() {
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
             <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/pathway-to-medicine/radiology" component={RadiologyPage} />
+            <Route path="/pathway-to-medicine/mcat" component={MCATPrepPage} />
             <Route path="/human-engine" component={HumanEnginePage} />
             <Route path="/study-center/wildlife-explorer" component={WildlifeExplorerPage} />
             <Route path="/study-center/dinosaur-extinction" component={DinosaurExtinctionPage} />
