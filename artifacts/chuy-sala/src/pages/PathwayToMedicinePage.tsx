@@ -1,4 +1,5 @@
 import { useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { Link } from "wouter";
 import {
   Stethoscope,
   Heart,
@@ -138,6 +139,45 @@ export default function PathwayToMedicinePage() {
       >
         <SpecialtyDeck isKh={isKh} />
       </Section>
+
+      {/* ── Featured Deep-Dive: Radiology ────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <Link
+          href="/pathway-to-medicine/radiology"
+          className="group block relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-950 to-sky-950 border border-cyan-500/30 shadow-[0_20px_60px_-20px_rgba(34,211,238,0.35)] hover:shadow-[0_25px_70px_-15px_rgba(34,211,238,0.5)] transition-shadow"
+          data-testid="link-radiology-module"
+        >
+          {/* Soft X-ray glow */}
+          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-cyan-500/20 blur-3xl pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-20 -left-12 w-72 h-72 rounded-full bg-sky-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
+
+          <div className="relative p-6 sm:p-8 grid sm:grid-cols-[auto,1fr,auto] items-center gap-5">
+            <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 shadow-[0_0_30px_rgba(34,211,238,0.4)]">
+              <ScanLine className="w-8 h-8" />
+            </div>
+
+            <div>
+              <div className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase text-cyan-300 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
+                <Sparkles className="w-3 h-3" />
+                {isKh ? "ម៉ូឌុលឯកទេសដ៏ជ្រៅ · វិទ្យុសាស្ត្រ" : "Featured Deep-Dive · Radiology"}
+              </div>
+              <h3 className={`text-white font-display font-bold text-xl sm:text-2xl mb-1.5 ${isKh ? "font-khmer leading-loose" : ""}`}>
+                {isKh ? "វិទ្យុសកម្មសាស្ត្រ៖ ការមើលឃើញអ្វីដែលមើលមិនឃើញ" : "Radiology: Seeing the Invisible"}
+              </h3>
+              <p className={`text-slate-300 text-sm max-w-2xl ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "ភ្នែកទាំងបីនៃវេជ្ជសាស្ត្រ — កាំរស្មីអ៊ិច អេកូសាស្ត្រ និងម៉ាស៊ីន MRI/CT — និងរបៀបដែលបញ្ញាសិប្បនិម្មិតកំពុងផ្លាស់ប្ដូរវិស័យនេះ។"
+                  : "The three eyes of medicine — X-rays, ultrasound, and MRI/CT — and how AI is changing what radiologists can see."}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-cyan-300 group-hover:text-cyan-200 group-hover:translate-x-1 transition-transform text-sm font-semibold">
+              <span className={isKh ? "font-khmer" : ""}>{isKh ? "បើកម៉ូឌុល" : "Open module"}</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+        </Link>
+      </section>
 
       {/* ── Section 3: Universities (Global & Local) ─────────────────── */}
       <UniversitiesSection isKh={isKh} />

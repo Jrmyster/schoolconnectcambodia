@@ -1,0 +1,33 @@
+I want to add a new medical specialty module called 'Radiology: Seeing the Invisible' (វិទ្យុសកម្មសាស្ត្រ៖ ការមើលឃើញអ្វីដែលមើលមិនឃើញ) to the 'Pathway to Medicine' section. Please implement the following cleanly using a card-based layout with a clinical, high-tech aesthetic (deep blacks, clinical whites, and glowing X-ray blues):
+
+1. Routing & Navigation:
+
+Add a link or tab in the Pathway to Medicine section labeled 'Radiology' with an X-ray or brain scan icon.
+
+2. Card 1: The Medical Detective (អ្នកស៊ើបអង្កេតវេជ្ជសាស្ត្រ):
+
+The Role: Explain that a Radiologist is often called the 'Doctor's Doctor.' When a patient is sick but the cause is hidden, other doctors send them to the radiologist.
+
+The Job: Radiologists don't just press the button on the camera; they are highly trained medical detectives who analyze complex images to find hidden tumors, internal bleeding, or microscopic bone fractures.
+
+3. Card 2: The Three Eyes of Medicine (ភ្នែកទាំងបីនៃវេជ្ជសាស្ត្រ):
+
+Break down the three main technologies they use to map the body:
+
+X-Rays (កាំរស្មីអ៊ិច): Uses high-energy light that passes through soft skin but gets blocked by dense objects. Perfect for finding broken bones.
+
+Ultrasound (អេកូសាស្ត្រ): Uses high-frequency sound waves that bounce back like a bat's echolocation. Safe and perfect for looking at moving things, like a baby in the womb or a beating heart.
+
+MRI & CT Scans (ម៉ាស៊ីន MRI និង CT): Uses powerful magnets or spinning X-rays to take thousands of pictures and build a 3D slice-by-slice model of the brain or organs.
+
+4. Card 3: The Pathway & The Future (ផ្លូវឆ្ពោះទៅមុខ និងអនាគត):
+
+The Training: Explain that becoming a radiologist requires medical school followed by several years of specialized residency just to learn how to 'read' the images.
+
+AI in Radiology: Note that this is the most technologically advanced field in medicine. Radiologists today are actively using Artificial Intelligence to help spot tiny cancers earlier than the human eye ever could.
+
+5. UI & Layout:
+
+Keep the styling consistent with the career sections.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer)
