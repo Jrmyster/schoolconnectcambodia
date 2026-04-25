@@ -309,6 +309,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "World War I and the trenches, World War II's two theaters, the Manhattan Project and E=mc², the Cold War's Mutually Assured Destruction, and the spread of nuclear weapons from 1945 to today.",
         descKh: "សង្គ្រាមលោកលើកទី ១ និងលំហដី សង្គ្រាមលោកលើកទី ២ និងរោងមហោស្រព ២ គម្រោងម៉ាន់ហាតាន់ និង E=mc² សង្គ្រាមត្រជាក់ និង MAD និងការរីករាលនុយក្លេអ៊ែរពីឆ្នាំ ១៩៤៥ ដល់សព្វថ្ងៃ។",
       },
+      {
+        href: "/study-center/entrepreneurship",
+        labelEn: "Entrepreneurship & Innovation",
+        labelKh: "សហគ្រិនភាព និងនវានុវត្តន៍",
+        icon: Rocket,
+        descEn: "Entrepreneurship: Building the Future — what an entrepreneur really is (a problem solver, not a salesman), why money is the byproduct of creating value, why tenacity beats raw talent, and why a single individual with a better idea can replace whole inefficient systems.",
+        descKh: "សហគ្រិនភាព៖ ការកសាងអនាគត — តើសហគ្រិនពិតប្រាកដជាអ្វី (អ្នកដោះស្រាយបញ្ហា មិនមែនអ្នកលក់) ហេតុអ្វីប្រាក់គឺជាផលបន្ទាប់បន្សំនៃការបង្កើតតម្លៃ ហេតុអ្វីភាពអត់ធ្មត់ឈ្នះទេពកោសល្យ និងហេតុអ្វីបុគ្គលម្នាក់ដែលមានគំនិតល្អជាង អាចជំនួសប្រព័ន្ធគ្មានប្រសិទ្ធភាពទាំងមូល។",
+      },
     ],
   },
   {

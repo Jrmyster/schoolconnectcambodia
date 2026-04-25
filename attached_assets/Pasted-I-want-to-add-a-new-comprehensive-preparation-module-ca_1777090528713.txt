@@ -1,0 +1,31 @@
+I want to add a new comprehensive preparation module called 'The MCAT: The Medical Marathon' (ការប្រឡង MCAT៖ ម៉ារ៉ាតុងវេជ្ជសាស្ត្រ) to the 'Pathway to Medicine' section. Please implement the following cleanly using a structured, highly organized aesthetic (clinical whites, study-focused blues, and focus-driven greens):
+
+1. Routing & Navigation:
+
+Add a link or tab in the Pathway to Medicine section labeled 'MCAT Preparation' with a brain, stopwatch, or checklist icon.
+
+2. Card 1: The Anatomy of the Test (រចនាសម្ព័ន្ធនៃការប្រឡង):
+
+What is it? Explain that the MCAT is not a standard memory test. It is a 7.5-hour exam required for medical schools (primarily in the US/Canada, but globally recognized as the gold standard of medical reasoning).
+
+The Sections: It tests Biology, Chemistry, Physics, Psychology, Sociology, and Critical Reading (CARS). It tests your ability to read a complex scientific passage you have never seen before and solve problems using critical thinking.
+
+3. Card 2: How to Study (វិធីសាស្ត្រសិក្សាដ៏ត្រឹមត្រូវ):
+
+Passive vs. Active: Warn students against 'Passive Reading' (just reading textbooks and highlighting). The brain forgets this immediately.
+
+Active Recall (ការរំលឹកសកម្ម): The only way to survive is through 'Active Recall'—forcing the brain to retrieve information using spaced repetition flashcards (like Anki) and taking thousands of practice questions.
+
+The Marathon Training: You must take full-length, 7-hour practice tests to build the physical brain endurance required so you don't fall asleep halfway through the real exam.
+
+4. Card 3: The Timeline (ពេលវេលាប្រឡង):
+
+When to take it: Explain that undergraduate students typically take the MCAT during their Junior (3rd) year of university, after they have completed their core science prerequisites (Biology, General Chemistry, Organic Chemistry, and Physics).
+
+Preparation Time: A student needs 300 to 500 hours of dedicated study time (about 3–6 months of treating studying like a part-time job) before walking into the testing center.
+
+5. UI & Layout:
+
+Keep the styling crisp and authoritative.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer)

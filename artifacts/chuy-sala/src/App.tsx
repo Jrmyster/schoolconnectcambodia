@@ -161,6 +161,7 @@ const PhysicsGyroscopesPage     = lazy(() => import("@/pages/PhysicsGyroscopesPa
 const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
 const RecyclingSciencePage      = lazy(() => import("@/pages/RecyclingSciencePage"));
+const EntrepreneurshipPage      = lazy(() => import("@/pages/EntrepreneurshipPage"));
 const ArchitectureStrengthPage  = lazy(() => import("@/pages/ArchitectureStrengthPage").then(m => ({ default: m.ArchitectureStrengthPage })));
 const GlaciologyPage             = lazy(() => import("@/pages/GlaciologyPage").then(m => ({ default: m.GlaciologyPage })));
 const NeurologyPage             = lazy(() => import("@/pages/NeurologyPage").then(m => ({ default: m.NeurologyPage })));
@@ -294,6 +295,7 @@ function Router() {
             <Route path="/study-center/behaviorism" component={BehaviorismPage} />
             <Route path="/study-center/united-states" component={UnitedStatesPage} />
             <Route path="/study-center/global-conflicts" component={GlobalConflictsPage} />
+            <Route path="/study-center/entrepreneurship" component={EntrepreneurshipPage} />
             <Route path="/science/trains-railways" component={TrainsRailwaysPage} />
             <Route path="/science/entomology" component={EntomologyPage} />
             <Route path="/science/pharmacology" component={PharmacologyPage} />
