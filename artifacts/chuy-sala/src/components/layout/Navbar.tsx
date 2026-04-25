@@ -111,6 +111,14 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "មជ្ឈមណ្ឌលសិក្សា",
     icon: FlaskConical,
     items: [
+      {
+        href: "/beginner-guide",
+        labelEn: "English & Math Starter",
+        labelKh: "មូលដ្ឋានគ្រឹះអង់គ្លេស និងគណិតវិទ្យា",
+        icon: Sparkles,
+        descEn: "Foundational starter for primary-school learners — alphabet A–Z with pictures, numbers 1–100, and a 100–1,000 number-builder.",
+        descKh: "មូលដ្ឋានគ្រឹះសម្រាប់សិស្សបឋមសិក្សា — អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០។",
+      },
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
       {
