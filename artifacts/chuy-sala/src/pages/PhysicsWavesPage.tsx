@@ -11,6 +11,7 @@ import {
   AudioLines,
   Lightbulb,
   Sparkles,
+  Atom,
   Glasses,
   Minus,
   Plus,
@@ -208,8 +209,47 @@ export function PhysicsWavesPage() {
           <GlassesSubsection kh={kh} t={t} />
         </div>
 
+        {/* Featured Deep-Dive: The Double-Slit Experiment */}
+        <div className="mt-10">
+          <Link
+            href="/physics/waves/double-slit"
+            data-testid="link-double-slit-module"
+            className="group block relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 via-black to-emerald-950 border border-emerald-400/30 shadow-[0_20px_60px_-20px_rgba(16,185,129,0.40)] hover:shadow-[0_25px_70px_-15px_rgba(16,185,129,0.55)] transition-shadow"
+          >
+            <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
+            <div className="absolute -bottom-20 -left-12 w-72 h-72 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" aria-hidden="true" />
+            <div className="relative p-6 sm:p-8 grid sm:grid-cols-[auto,1fr,auto] items-center gap-5">
+              <div className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 shadow-[0_0_30px_rgba(16,185,129,0.45)]">
+                <Atom className="w-8 h-8" />
+              </div>
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase text-emerald-300 mb-2">
+                  <Sparkles className="w-3 h-3" />
+                  {t("Featured Deep-Dive · Quantum Physics", "សិក្សាស៊ីជម្រៅ · រូបវិទ្យាកង់ទិច")}
+                </div>
+                <h3 className={`text-white font-display font-bold text-xl sm:text-2xl mb-1.5`}>
+                  {t(
+                    "The Double-Slit Experiment: Reality is Broken",
+                    "ការពិសោធន៍ចន្លោះពីរ៖ ភាពពិតត្រូវបានបំបែក",
+                  )}
+                </h3>
+                <p className={`text-slate-300 text-sm max-w-2xl`}>
+                  {t(
+                    "Why a single electron can go through two slits at once — and why the universe stops doing so the moment we look.",
+                    "ហេតុអ្វីបានជាអេឡិចត្រុងតែមួយអាចឆ្លងកាត់ចន្លោះពីរក្នុងពេលតែមួយ — ហើយហេតុអ្វីសកលលោកឈប់ធ្វើដូចនេះ ភ្លាមនៅពេលយើងមើល។",
+                  )}
+                </p>
+              </div>
+              <div className="flex items-center gap-1.5 text-emerald-300 group-hover:text-emerald-200 group-hover:translate-x-1 transition-transform text-sm font-semibold">
+                <span>{t("Open module", "បើកម៉ូឌុល")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </Link>
+        </div>
+
         {/* Back to hub */}
-        <div className="mt-10 flex justify-center">
+        <div className="mt-8 flex justify-center">
           <Link
             href="/physics"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-indigo-700 text-white text-sm font-bold shadow hover:bg-indigo-800 transition-colors"

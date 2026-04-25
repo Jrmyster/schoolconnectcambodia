@@ -155,6 +155,7 @@ const PhysicsMotionPage         = lazy(() => import("@/pages/PhysicsMotionPage")
 const PhysicsForcesPage         = lazy(() => import("@/pages/PhysicsForcesPage").then(m => ({ default: m.PhysicsForcesPage })));
 const PhysicsEnergyPage         = lazy(() => import("@/pages/PhysicsEnergyPage").then(m => ({ default: m.PhysicsEnergyPage })));
 const PhysicsWavesPage          = lazy(() => import("@/pages/PhysicsWavesPage").then(m => ({ default: m.PhysicsWavesPage })));
+const DoubleSlitPage            = lazy(() => import("@/pages/DoubleSlitPage"));
 const PhysicsGyroscopesPage     = lazy(() => import("@/pages/PhysicsGyroscopesPage").then(m => ({ default: m.PhysicsGyroscopesPage })));
 const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
@@ -344,6 +345,7 @@ function Router() {
             <Route path="/physics/forces" component={PhysicsForcesPage} />
             <Route path="/physics/energy" component={PhysicsEnergyPage} />
             <Route path="/physics/waves" component={PhysicsWavesPage} />
+            <Route path="/physics/waves/double-slit" component={DoubleSlitPage} />
             <Route path="/physics/simple-machines" component={SimpleMachinesPage} />
             <Route path="/physics/gyroscopes" component={PhysicsGyroscopesPage} />
             <Route path="/science/materials" component={MaterialsSciencePage} />

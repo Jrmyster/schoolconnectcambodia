@@ -1,0 +1,29 @@
+I want to add a new comprehensive module called 'The Science of Addiction: Hijacking the Brain' (វិទ្យាសាស្ត្រនៃការញៀន៖ ការលួចបញ្ជាខួរក្បាល) to the 'Public Health and Well-being' page. Please implement the following cleanly using a medical-educational aesthetic (clean whites, anatomical reds, and neural blues):
+
+1. Routing & Navigation:
+
+Create a new component AddictionScience.jsx.
+
+Add a link in the Public Health navigation labeled 'The Science of Addiction' with a brain or chemical structure icon.
+
+2. Card 1: The Survival Reward (រង្វាន់សម្រាប់ការរស់រានមានជីវិត):
+
+Dopamine (ដូប៉ាមីន): Explain that the brain has a built-in reward system. When a human does something essential for survival (like eating a good meal or drinking water), the brain releases a chemical called Dopamine. It makes us feel good and tells the brain: 'Remember how you did that? Do it again.'
+
+3. Card 2: The Chemical Hijack (ការលួចបញ្ជាដោយសារធាតុគីមី):
+
+Nicotine & Drugs: Explain that drugs like nicotine (in cigarettes) are chemical imposters. They cross into the brain and artificially force a massive, unnatural flood of dopamine—far more than food or water ever could.
+
+Tolerance (ភាពស៊ាំ): To protect itself from this unnatural flood, the brain physically removes some of its own dopamine receptors. The Map changes. Now, the person needs the drug just to feel 'normal,' and natural joys (like eating or hanging out with friends) no longer feel good because the receptors are gone.
+
+4. Card 3: The Stress Trigger (កត្តាជំរុញពីភាពតានតឹង):
+
+Cortisol vs. Dopamine: Explain the biological link between stress and relapse. When a person experiences stress (exams, poverty, family issues), the brain is flooded with the stress hormone cortisol.
+
+The Panic: The brain feels terrible and desperately searches its memory for the fastest way to feel okay again. It remembers the massive dopamine spike from the cigarette or drug. Stress literally tricks the survival system into demanding the addictive substance as a cure for the pain.
+
+5. Formatting & UI:
+
+Keep the styling empathetic and clinical. Use bolding to emphasize key terms like Dopamine and Tolerance.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
