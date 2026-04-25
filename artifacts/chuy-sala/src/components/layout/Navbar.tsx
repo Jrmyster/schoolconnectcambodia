@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame, Lightbulb,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame, Lightbulb, Sprout,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -899,6 +899,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: HeartPulse,
         descEn: "How disease detectives stop outbreaks, why vaccines protect even the people who can't get them, what cigarette smoke really does to DNA, how chronic stress and inequality damage the heart, and the 85-year Harvard finding that close relationships are the strongest medicine ever measured.",
         descKh: "របៀបដែលអ្នកស៊ើបអង្កេតជំងឺ ឈប់ការផ្ទុះ ហេតុអ្វីវ៉ាក់សាំងការពារសូម្បីតែមនុស្សដែលមិនអាចទទួលវា អ្វីដែលផ្សែងបារីពិតជាធ្វើទៅលើ DNA របៀបដែលភាពតានតឹង និងវិសមភាពបំផ្លាញបេះដូង និងការរកឃើញ ៨៥ ឆ្នាំរបស់ហាវ៉ាដ ដែលថាទំនាក់ទំនងជិតស្និទ្ធគឺជាឱសថខ្លាំងបំផុត។",
+      },
+      {
+        href: "/well-being/family-development",
+        labelEn: "Parenting & Development",
+        labelKh: "ការចិញ្ចឹមបីបាច់ និងការវិវត្ត",
+        icon: Sprout,
+        descEn: "From seed to society — Diana Baumrind's three parenting styles (authoritative, authoritarian, permissive), the science of pregnancy from HCG to the three trimesters and the three stages of labor, and the early milestones of babies and toddlers including a gentle introduction to early signs of autism.",
+        descKh: "ពីគ្រាប់ពូជទៅសង្គម — រចនាប័ទ្មចិញ្ចឹមកូនទាំងបីរបស់ Diana Baumrind (មានតុល្យភាព តឹងរ៉ឹងជ្រុល ធូររលុងជ្រុល) វិទ្យាសាស្ត្រនៃការមានផ្ទៃពោះពី HCG ដល់ត្រីមាសទាំងបី និងដំណាក់កាលឈឺពោះសម្រាលទាំងបី និងដំណាក់កាលសំខាន់ៗដំបូងរបស់ទារក និងកុមារតូច រួមទាំងការណែនាំថ្នមៗអំពីសញ្ញាដំបូងនៃអូទីសឹម។",
       },
       {
         href: "/well-being/survival-skills",
