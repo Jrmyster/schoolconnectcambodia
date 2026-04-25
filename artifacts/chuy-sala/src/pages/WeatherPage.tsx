@@ -11,6 +11,13 @@ import {
   Sparkles,
   Waves,
   Cloud,
+  Activity,
+  Droplets,
+  Sprout,
+  ArrowLeft,
+  ArrowRight,
+  ArrowLeftRight,
+  AlertTriangle,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -96,6 +103,19 @@ export default function WeatherPage() {
           bgClass="from-sky-950/40 via-sky-900/10 to-orange-950/20"
         >
           <GreenhouseEffectSim isKh={isKh} />
+        </Section>
+
+        {/* ── Tool 1b: The Ocean's Pulse — El Niño & La Niña ────── */}
+        <Section
+          icon={<Activity className="w-3.5 h-3.5" />}
+          en="The Ocean's Pulse: El Niño & La Niña"
+          kh="ចង្វាក់បេះដូងមហាសមុទ្រ៖ អែលនីណូ និងឡានីណា"
+          descEn="Half a world away, deep in the Pacific Ocean, a slow giant breathes in and out every few years. When it inhales, Cambodia's fields dry up. When it exhales, our rivers overflow. The whole story is wind, warm water, and the long arm of the Pacific reaching across to us."
+          descKh="នៅឆ្ងាយពាក់កណ្ដាលផែនដី នៅបាតមហាសមុទ្រប៉ាស៊ីហ្វិក យក្សយឺតមួយដកដង្ហើមចេញចូលរៀងរាល់ពីរបីឆ្នាំម្ដង។ ពេលវាស្រូបចូល ស្រែចម្ការកម្ពុជាស្ងួត។ ពេលវាដកចេញ ទន្លេយើងហៀរលើច។ សាច់រឿងទាំងមូល គឺខ្យល់ ទឹកក្ដៅ និងដៃវែងនៃមហាសមុទ្រប៉ាស៊ីហ្វិកដែលឈោងមកដល់យើង។"
+          isKh={isKh}
+          bgClass="from-sky-950/40 via-slate-900/30 to-rose-950/20"
+        >
+          <OceansPulseENSO isKh={isKh} />
         </Section>
 
         {/* ── Tool 2: Fronts & Wind ──────────────────────────────── */}
@@ -935,6 +955,386 @@ function ExtremeWeather({ isKh }: { isKh: boolean }) {
               ? "💨 ខ្យល់នៅខាងក្នុងអាចលឿនជិត ៥០០ គីឡូម៉ែត្រ/ម៉ោង — លឿនជាងឡានប្រណាំងលើផ្លូវហាយវេច្រើនដង។"
               : "💨 Wind inside can spin close to 500 km/h — several times faster than a race car on a highway."}
           </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tool 1b: The Ocean's Pulse — El Niño & La Niña (ENSO)
+//  Three explanatory cards: Normal Engine, El Niño (drought), La Niña (flood),
+//  plus a Cambodia-impact footer. No simulation — pure didactic schematic.
+// ════════════════════════════════════════════════════════════════════════════
+
+function OceansPulseENSO({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="p-4 sm:p-6 lg:p-7" data-testid="enso-module">
+      {/* Three-card grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* ── Card 1: The Normal Engine ───────────────────────────── */}
+        <ENSOPhaseCard
+          isKh={isKh}
+          testId="enso-card-normal"
+          phaseLabelEn="Phase · Normal"
+          phaseLabelKh="ដំណាក់កាល · ធម្មតា"
+          titleEn="The Normal Engine"
+          titleKh="ម៉ាស៊ីនអាកាសធាតុធម្មតា"
+          accent="sky"
+          diagram={<ENSODiagram phase="normal" isKh={isKh} />}
+          subBlocks={[
+            {
+              labelEn: "The Trade Winds",
+              labelKh: "ខ្យល់ពាណិជ្ជកម្ម",
+              icon: <Wind className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "Normally, strong steady winds called the Trade Winds blow across the Pacific Ocean from South America toward Asia. They never stop, year after year, like a slow river of air.",
+              kh: "ជាធម្មតា ខ្យល់ខ្លាំង និងនឹងនរហៅថា ខ្យល់ពាណិជ្ជកម្ម (Trade Winds) បក់ឆ្លងកាត់មហាសមុទ្រប៉ាស៊ីហ្វិក ពីអាមេរិកខាងត្បូងទៅអាស៊ី។ វាមិនឈប់ឡើយ ឆ្នាំហើយឆ្នាំ ដូចជាទន្លេខ្យល់យឺតៗមួយ។",
+            },
+            {
+              labelEn: "The Warm Pool",
+              labelKh: "អាងទឹកក្ដៅ",
+              icon: <Waves className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "These winds act like a giant broom, slowly pushing the warm surface water of the Pacific toward Southeast Asia. That warm water evaporates into the sky and becomes the heavy, reliable monsoon rains that Cambodia depends on for its rice.",
+              kh: "ខ្យល់ទាំងនេះធ្វើដូចអំបោសយក្ស រុញទឹកក្ដៅនៅផ្ទៃខាងលើនៃប៉ាស៊ីហ្វិកយ៉ាងយឺតៗមកអាស៊ីអាគ្នេយ៍។ ទឹកក្ដៅនោះហួតឡើងលើមេឃ ហើយក្លាយជាភ្លៀងមូសុងធ្ងន់ៗ និងទុកចិត្តបាន ដែលកម្ពុជាពឹងផ្អែកសម្រាប់ស្រូវ។",
+            },
+          ]}
+        />
+
+        {/* ── Card 2: El Niño — Drought ───────────────────────────── */}
+        <ENSOPhaseCard
+          isKh={isKh}
+          testId="enso-card-elnino"
+          phaseLabelEn="Phase · El Niño"
+          phaseLabelKh="ដំណាក់កាល · អែលនីណូ"
+          titleEn="El Niño — The Drought Bringer"
+          titleKh="អែលនីណូ៖ គ្រោះរាំងស្ងួត"
+          accent="amber"
+          diagram={<ENSODiagram phase="elnino" isKh={isKh} />}
+          subBlocks={[
+            {
+              labelEn: "The Wind Fails",
+              labelKh: "ខ្យល់ចុះខ្សោយ",
+              icon: <Wind className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "Every few years, for reasons we still do not fully understand, the Trade Winds suddenly weaken — or stop entirely. The sky's giant broom is put down, and the great push of warm water toward Asia stops.",
+              kh: "រៀងរាល់ពីរបីឆ្នាំម្ដង សម្រាប់ហេតុផលដែលយើងនៅមិនទាន់យល់ច្បាស់ ខ្យល់ពាណិជ្ជកម្មចុះខ្សោយភ្លាមៗ — ឬឈប់បក់ទាំងស្រុង។ អំបោសយក្សលើមេឃត្រូវបានដាក់ចុះ ហើយការរុញទឹកក្ដៅធំៗមកអាស៊ីត្រូវបញ្ឈប់។",
+            },
+            {
+              labelEn: "The Slosh Back",
+              labelKh: "ការច្រាសត្រឡប់",
+              icon: <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "Without the wind holding it back, all that warm water — which had been piled up against Asia for years — slowly sloshes backward across the Pacific toward South America. The storm clouds that lived above it slowly drift away with the water.",
+              kh: "ដោយគ្មានខ្យល់ទប់វាទេ ទឹកក្ដៅទាំងអស់នោះ — ដែលបានកកកុញនៅជាប់នឹងអាស៊ីអស់រយៈពេលជាច្រើនឆ្នាំ — ច្រាសត្រឡប់ឆ្លងកាត់មហាសមុទ្រប៉ាស៊ីហ្វិកយ៉ាងយឺតៗ ទៅអាមេរិកខាងត្បូងវិញ។ ពពករន្ទះដែលរស់នៅខាងលើវា ក៏រសាត់ចេញតាមទឹកនោះដែរ។",
+            },
+            {
+              labelEn: "The Impact on Cambodia",
+              labelKh: "ឥទ្ធិពលលើកម្ពុជា",
+              icon: <Sun className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "Because the warm water and the rain clouds have moved away from us, Southeast Asia is left dry and exposed. We get severe heatwaves, devastating droughts, failing rice crops, and a Tonle Sap that does not rise the way it should — fewer fish, less water for everyone.",
+              kh: "ដោយសារទឹកក្ដៅ និងពពកភ្លៀងបានរសាត់ចេញពីយើង អាស៊ីអាគ្នេយ៍ត្រូវនៅសល់ស្ងួត និងគ្មានការការពារ។ យើងទទួលបានរលកកម្ដៅធ្ងន់ធ្ងរ គ្រោះរាំងស្ងួតបំផ្លិចបំផ្លាញ ស្រូវខូច និងទន្លេសាបដែលមិនកើនឡើងតាមរបៀបដែលគួរ — មានត្រីតិច និងទឹកតិចសម្រាប់មនុស្សគ្រប់គ្នា។",
+            },
+          ]}
+        />
+
+        {/* ── Card 3: La Niña — Flood ──────────────────────────── */}
+        <ENSOPhaseCard
+          isKh={isKh}
+          testId="enso-card-lanina"
+          phaseLabelEn="Phase · La Niña"
+          phaseLabelKh="ដំណាក់កាល · ឡានីណា"
+          titleEn="La Niña — The Flood Bringer"
+          titleKh="ឡានីណា៖ ទឹកជំនន់"
+          accent="indigo"
+          diagram={<ENSODiagram phase="lanina" isKh={isKh} />}
+          subBlocks={[
+            {
+              labelEn: "The Overdrive",
+              labelKh: "ខ្យល់បក់ខ្លាំងជ្រុល",
+              icon: <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "Sometimes the exact opposite happens. The Trade Winds become hyper-aggressive — much stronger than usual. The giant broom sweeps faster, and the warm water is pushed against Asia with extra force.",
+              kh: "ពេលខ្លះ រឿងផ្ទុយពិតប្រាកដកើតឡើង។ ខ្យល់ពាណិជ្ជកម្មក្លាយជាគំហុកខ្លាំងក្លា — ខ្លាំងជាងធម្មតាច្រើន។ អំបោសយក្សអូសបោសលឿនជាង ហើយទឹកក្ដៅត្រូវបានរុញមកជាប់នឹងអាស៊ីដោយកម្លាំងបន្ថែម។",
+            },
+            {
+              labelEn: "The Impact on Cambodia",
+              labelKh: "ឥទ្ធិពលលើកម្ពុជា",
+              icon: <CloudRain className="w-3.5 h-3.5" aria-hidden="true" />,
+              en: "All that extra warm water supercharges the evaporation engine. The result is extreme, prolonged monsoon rains, widespread flooding, swollen rivers, and more typhoons spinning out of the sea — homes, roads, and rice paddies all in the water.",
+              kh: "ទឹកក្ដៅបន្ថែមទាំងអស់នោះបង្កើនការហួតយ៉ាងខ្លាំងពេក។ លទ្ធផលគឺ ភ្លៀងមូសុងធ្ងន់ និងយូរអង្វែង ទឹកជំនន់រាលដាល ទន្លេហៀរលើច និងខ្យល់ព្យុះត្រូពិច (តៃហ្វុង) កើនឡើងពីសមុទ្រ — ផ្ទះ ផ្លូវ និងស្រែស្រូវ ទាំងអស់ក្នុងទឹក។",
+            },
+          ]}
+        />
+      </div>
+
+      {/* Cambodia · Why this matters footer */}
+      <div
+        className="mt-6 rounded-2xl border border-sky-300/20 bg-gradient-to-r from-sky-950/50 via-slate-900/50 to-rose-950/30 p-4"
+        data-testid="enso-cambodia-impact"
+      >
+        <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <AlertTriangle
+            className="w-4 h-4 text-amber-300/90 flex-shrink-0"
+            aria-hidden="true"
+          />
+          <div
+            className={`text-[11px] font-mono uppercase tracking-widest text-amber-200/90 ${
+              isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {isKh
+              ? "សារៈសំខាន់សម្រាប់កម្ពុជា"
+              : "Why this matters for Cambodia"}
+          </div>
+        </div>
+        <p
+          className={`text-white/75 text-sm ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "ស្រែ ទន្លេសាប និងគ្រួសារកសិករនៅកម្ពុជា មិនត្រឹមតែអាស្រ័យលើភ្លៀងនៅទីនេះទេ។ ពួកគេអាស្រ័យលើខ្យល់នៅលើមហាសមុទ្រឆ្ងាយរាប់ពាន់គីឡូម៉ែត្រ។ ការយល់ដឹងពីអែលនីណូ និងឡានីណា គឺជាជំហានដំបូងសម្រាប់ការត្រៀមខ្លួន — ការសន្សំទឹក ការជ្រើសរើសពូជស្រូវ និងការការពារភូមិនៅពេលដែលឆ្នាំបន្ទាប់នាំមកនូវភាពតានតឹង។"
+            : "Cambodian rice fields, the Tonle Sap, and farming families do not depend only on the rain that falls here. They depend on winds blowing over an ocean thousands of kilometres away. Understanding El Niño and La Niña is the first step toward preparation — saving water, choosing rice varieties, and protecting villages when the next year brings stress."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── ENSO Phase Card ────────────────────────────────────────────────────────
+
+type ENSOAccent = "sky" | "amber" | "indigo";
+
+const ENSO_ACCENT: Record<
+  ENSOAccent,
+  { border: string; chip: string; chipText: string; title: string; subLabel: string }
+> = {
+  sky: {
+    border: "border-sky-300/25",
+    chip: "bg-sky-400/12 border-sky-300/30",
+    chipText: "text-sky-200",
+    title: "text-sky-100",
+    subLabel: "text-sky-300/90",
+  },
+  amber: {
+    border: "border-amber-300/25",
+    chip: "bg-amber-400/12 border-amber-300/30",
+    chipText: "text-amber-200",
+    title: "text-amber-100",
+    subLabel: "text-amber-300/90",
+  },
+  indigo: {
+    border: "border-indigo-300/25",
+    chip: "bg-indigo-400/12 border-indigo-300/30",
+    chipText: "text-indigo-200",
+    title: "text-indigo-100",
+    subLabel: "text-indigo-300/90",
+  },
+};
+
+function ENSOPhaseCard({
+  isKh,
+  testId,
+  phaseLabelEn,
+  phaseLabelKh,
+  titleEn,
+  titleKh,
+  accent,
+  diagram,
+  subBlocks,
+}: {
+  isKh: boolean;
+  testId: string;
+  phaseLabelEn: string;
+  phaseLabelKh: string;
+  titleEn: string;
+  titleKh: string;
+  accent: ENSOAccent;
+  diagram: React.ReactNode;
+  subBlocks: {
+    labelEn: string;
+    labelKh: string;
+    icon: React.ReactNode;
+    en: string;
+    kh: string;
+  }[];
+}) {
+  const a = ENSO_ACCENT[accent];
+  return (
+    <div
+      className={`rounded-2xl border ${a.border} bg-slate-950/50 backdrop-blur-sm overflow-hidden flex flex-col`}
+      data-testid={testId}
+    >
+      {/* Header */}
+      <div className="p-4 pb-3">
+        <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase ${a.chip} ${a.chipText} ${
+              isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""
+            }`}
+          >
+            {isKh ? phaseLabelKh : phaseLabelEn}
+          </span>
+        </div>
+        <h3
+          className={`text-lg sm:text-xl font-bold leading-tight ${a.title} ${
+            isKh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {isKh ? titleKh : titleEn}
+        </h3>
+      </div>
+
+      {/* Pacific schematic strip */}
+      <div className="px-4">{diagram}</div>
+
+      {/* Sub-blocks */}
+      <div className="p-4 pt-3 space-y-3 flex-1">
+        {subBlocks.map((sb, i) => (
+          <div key={i}>
+            <div
+              className={`flex items-center gap-1.5 mb-1 text-[11px] font-mono uppercase tracking-widest ${a.subLabel} ${
+                isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              <span aria-hidden="true">{sb.icon}</span>
+              <span>{isKh ? sb.labelKh : sb.labelEn}</span>
+            </div>
+            <p
+              className={`text-white/75 text-sm ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh ? sb.kh : sb.en}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── ENSO schematic diagram ────────────────────────────────────────────────
+//  Tiny didactic strip: [Asia/Cambodia] — Pacific Ocean — [South America]
+//  Arrows depict the wind / warm-water direction for each phase.
+
+function ENSODiagram({
+  phase,
+  isKh,
+}: {
+  phase: "normal" | "elnino" | "lanina";
+  isKh: boolean;
+}) {
+  const oceanGradient =
+    phase === "elnino"
+      ? "linear-gradient(90deg, #422006 0%, #78350f 30%, #1e3a8a 70%, #1e40af 100%)"
+      : phase === "lanina"
+      ? "linear-gradient(90deg, #1e3a8a 0%, #1e40af 25%, #1e3a8a 60%, #312e81 100%)"
+      : "linear-gradient(90deg, #1e3a8a 0%, #1e40af 30%, #1d4ed8 60%, #1e3a8a 100%)";
+
+  // Asia weather (left side): rainy normal, drought El Niño, flood La Niña
+  const asia =
+    phase === "normal" ? (
+      <div className="flex items-center gap-1">
+        <CloudRain className="w-4 h-4 text-sky-200" aria-hidden="true" />
+        <Sprout className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />
+      </div>
+    ) : phase === "elnino" ? (
+      <div className="flex items-center gap-1">
+        <Sun className="w-4 h-4 text-amber-300" aria-hidden="true" />
+        <Flame className="w-3.5 h-3.5 text-rose-400" aria-hidden="true" />
+      </div>
+    ) : (
+      <div className="flex items-center gap-1">
+        <CloudRain className="w-4 h-4 text-indigo-200" aria-hidden="true" />
+        <Droplets className="w-3.5 h-3.5 text-sky-300" aria-hidden="true" />
+      </div>
+    );
+
+  // South America weather (right side)
+  const samer =
+    phase === "normal" ? (
+      <Sun className="w-4 h-4 text-amber-200/70" aria-hidden="true" />
+    ) : phase === "elnino" ? (
+      <CloudRain className="w-4 h-4 text-sky-200" aria-hidden="true" />
+    ) : (
+      <Sun className="w-4 h-4 text-amber-300" aria-hidden="true" />
+    );
+
+  // Centre arrow group
+  const arrows = (() => {
+    if (phase === "normal") {
+      return (
+        <div
+          className="flex items-center gap-0.5 text-sky-200"
+          aria-label={isKh ? "ខ្យល់ពាណិជ្ជកម្មបក់ទៅអាស៊ី" : "Trade Winds blow toward Asia"}
+        >
+          <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+          <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+          <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+        </div>
+      );
+    }
+    if (phase === "elnino") {
+      return (
+        <div
+          className="flex items-center gap-0.5 text-amber-300/90"
+          aria-label={isKh ? "ខ្យល់ខ្សោយ ទឹកក្ដៅច្រាសត្រឡប់" : "Winds weak, warm water sloshes back"}
+        >
+          <ArrowLeftRight className="w-4 h-4" aria-hidden="true" />
+        </div>
+      );
+    }
+    return (
+      <div
+        className="flex items-center gap-0.5 text-indigo-200"
+        aria-label={isKh ? "ខ្យល់ខ្លាំងជាងធម្មតា" : "Trade Winds in overdrive"}
+      >
+        <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+        <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+        <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+        <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+        <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+      </div>
+    );
+  })();
+
+  return (
+    <div
+      className="rounded-xl border border-white/10 overflow-hidden"
+      style={{ background: oceanGradient }}
+      data-testid={`enso-diagram-${phase}`}
+    >
+      <div className="grid grid-cols-3 items-center px-3 py-2 gap-2">
+        {/* Asia / Cambodia */}
+        <div className="flex flex-col items-start gap-1">
+          {asia}
+          <div
+            className={`text-[10px] font-mono uppercase tracking-widest text-white/80 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {isKh ? "អាស៊ី · កម្ពុជា" : "Asia · KH"}
+          </div>
+        </div>
+        {/* Pacific arrows */}
+        <div className="flex flex-col items-center gap-1">
+          {arrows}
+          <div
+            className={`text-[10px] font-mono uppercase tracking-widest text-white/65 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {isKh ? "ប៉ាស៊ីហ្វិក" : "Pacific"}
+          </div>
+        </div>
+        {/* South America */}
+        <div className="flex flex-col items-end gap-1">
+          {samer}
+          <div
+            className={`text-[10px] font-mono uppercase tracking-widest text-white/80 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {isKh ? "អាមេរិកខាងត្បូង" : "S. America"}
+          </div>
         </div>
       </div>
     </div>

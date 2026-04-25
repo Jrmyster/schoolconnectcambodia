@@ -1,0 +1,45 @@
+I want to add a new comprehensive module called 'Family & Development: From Seed to Society' (គ្រួសារ និងការលូតលាស់៖ ពីគ្រាប់ពូជទៅសង្គម) to the 'Well-Being' section. Please implement the following using a warm, nurturing, and clinical aesthetic (soft creams, terracotta oranges, and organic leaf greens):
+
+1. Routing & Navigation:
+
+Create a new component FamilyDevelopment.jsx.
+
+Register a new route: /well-being/family-development.
+
+Add a link in the Well-Being navigation labeled 'Parenting & Development' with a family or growing-plant icon.
+
+2. Card 1: The Three Parenting Styles (រចនាប័ទ្មនៃការចិញ្ចឹមបីបាច់):
+
+Use a comparison grid to explain Diana Baumrind’s framework:
+
+Authoritative (មានតុល្យភាព): High warmth, clear rules. Focuses on 'why' behind the rules. Outcome: High self-esteem and independence.
+
+Authoritarian (តឹងរ៉ឹងជ្រុល): High rules, low warmth. Focuses on 'Obedience.' Outcome: High anxiety, lower social confidence.
+
+Permissive (ធូររលុងជ្រុល): High warmth, no rules. Acts like a friend. Outcome: Struggles with self-discipline and authority.
+
+3. Card 2: The Journey of Pregnancy (ដំណើរនៃការពពោះ):
+
+Detection: Explain the science of the HCG hormone and early signs (missed periods, nausea).
+
+The Trimesters (ត្រីមាស): >   * 1st: Critical organ formation.
+
+2nd: The 'Golden Period'—growth and energy.
+
+3rd: Final development and physical pressure on the mother.
+
+Labor (ការឈឺពោះសម្រាល): Explain the mechanics of contractions and the three stages of delivery (Dilation, Birth, and Placenta).
+
+4. Card 3: Baby & Toddler Milestones (ការវិវត្តរបស់ទារក និងកុមារ):
+
+Physical: Walking usually begins between 9–15 months.
+
+Language: First words around 12 months; simple sentences by 24 months.
+
+Neurodiversity (Signs of Autism): Educate parents on early signs to watch for (no eye contact, delayed speech, or repetitive behaviors) so they can seek early support.
+
+5. Formatting & UI:
+
+Keep the styling soft and accessible. Use clean icons for milestones (e.g., a tiny shoe for walking, a speech bubble for talking).
+
+Ensure all core concepts, medical terms, and headings are strictly bilingual (English/Khmer).
