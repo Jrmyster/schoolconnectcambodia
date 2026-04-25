@@ -2,6 +2,7 @@ import { useState, useId } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
+  ArrowRight,
   FlaskConical,
   Hammer,
   Wrench,
@@ -189,6 +190,76 @@ export function MaterialsSciencePage() {
           <BurnVsUpcycle kh={kh} t={t} />
           <PetBottleProperties kh={kh} t={t} />
           <BlueprintGallery kh={kh} t={t} />
+        </div>
+
+        {/* Featured Deep-Dive: Recycling & Energy */}
+        <div className="mt-12">
+          <Link
+            href="/science/materials/recycling"
+            data-testid="link-recycling-module"
+            className="group block relative overflow-hidden rounded-2xl bg-white border shadow-sm hover:shadow-md transition-shadow"
+            style={{ borderColor: "rgba(21, 128, 61, 0.4)" }}
+          >
+            {/* corner marks */}
+            <span aria-hidden="true" className="pointer-events-none absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-emerald-700/60" />
+            <span aria-hidden="true" className="pointer-events-none absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-emerald-700/60" />
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-emerald-700/60" />
+            <span aria-hidden="true" className="pointer-events-none absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-emerald-700/60" />
+
+            <div
+              className="absolute -top-16 -right-10 w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              style={{ backgroundColor: "rgba(21, 128, 61, 0.12)" }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute -bottom-16 -left-10 w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              style={{ backgroundColor: "rgba(2, 132, 199, 0.10)" }}
+              aria-hidden="true"
+            />
+
+            <div className="relative p-6 sm:p-8 grid sm:grid-cols-[auto,1fr,auto] items-center gap-5">
+              <div
+                className="hidden sm:flex items-center justify-center w-16 h-16 rounded-xl"
+                style={{
+                  backgroundColor: "rgba(21, 128, 61, 0.12)",
+                  border: "1px solid rgba(21, 128, 61, 0.5)",
+                  color: "#14532d",
+                }}
+              >
+                <Recycle className="w-8 h-8" />
+              </div>
+              <div>
+                <div
+                  className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase mb-2 font-mono ${kh ? "font-khmer tracking-normal normal-case" : ""}`}
+                  style={{ color: "#14532d" }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  {t("Featured Deep-Dive · Recycling & Energy", "សិក្សាស៊ីជម្រៅ · ការកែច្នៃ & ថាមពល")}
+                </div>
+                <h3
+                  className={`font-display font-bold text-xl sm:text-2xl mb-1.5 text-slate-800 ${kh ? "font-khmer leading-loose" : ""}`}
+                >
+                  {t(
+                    "Recycling: The Energy Economics of Trash",
+                    "ការកែច្នៃឡើងវិញ៖ សេដ្ឋកិច្ចថាមពលនៃសំរាម",
+                  )}
+                </h3>
+                <p className={`text-sm text-slate-700 max-w-2xl ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {t(
+                    "Why aluminum recycling saves 95% of the energy, how Edjai waste-pickers run Cambodia's recycling network, and the 3-step pathway to starting a recycling business.",
+                    "ហេតុអ្វីការកែច្នៃអាលុយមីញ៉ូមសន្សំថាមពល ៩៥% របៀបដែលអេតចាយដំណើរការបណ្ដាញកែច្នៃរបស់កម្ពុជា និងមាគ៌ា ៣ ជំហានឆ្ពោះទៅរកការចាប់ផ្ដើមអាជីវកម្មកែច្នៃ។",
+                  )}
+                </p>
+              </div>
+              <div
+                className={`flex items-center gap-1.5 group-hover:translate-x-1 transition-transform text-sm font-semibold font-mono uppercase tracking-wider ${kh ? "font-khmer normal-case tracking-normal" : ""}`}
+                style={{ color: "#14532d" }}
+              >
+                <span>{t("Open module", "បើកម៉ូឌុល")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </Link>
         </div>
 
         {/* footer crumbs */}
