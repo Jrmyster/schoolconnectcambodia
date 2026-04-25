@@ -348,6 +348,70 @@ export function PublicHealthPage() {
           </p>
         </div>
 
+        {/* Featured Deep-Dive: The Science of Addiction */}
+        <div className="mt-10">
+          <Link
+            href="/well-being/addiction-science"
+            data-testid="link-addiction-science-module"
+            className="group block relative overflow-hidden rounded-3xl bg-white border shadow-sm hover:shadow-md transition-shadow"
+            style={{ borderColor: `${MED_BLUE}33` }}
+          >
+            <div
+              className="absolute -top-16 -right-10 w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              style={{ backgroundColor: `${MED_BLUE}22` }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute -bottom-16 -left-10 w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              style={{ backgroundColor: `${ROSE}1a` }}
+              aria-hidden="true"
+            />
+            <div className="relative p-6 sm:p-8 grid sm:grid-cols-[auto,1fr,auto] items-center gap-5">
+              <div
+                className="hidden sm:flex items-center justify-center w-16 h-16 rounded-2xl"
+                style={{
+                  backgroundColor: `${MED_BLUE}1a`,
+                  border: `1px solid ${MED_BLUE}55`,
+                  color: MED_BLUE_DEEP,
+                }}
+              >
+                <Brain className="w-8 h-8" />
+              </div>
+              <div>
+                <div
+                  className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase mb-2 ${k ? "font-khmer tracking-normal normal-case" : ""}`}
+                  style={{ color: MED_BLUE_DEEP }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  {t("Featured Deep-Dive · Neuroscience", "សិក្សាស៊ីជម្រៅ · ប្រសាទវិទ្យា")}
+                </div>
+                <h3
+                  className={`font-display font-bold text-xl sm:text-2xl mb-1.5 ${k ? "font-khmer leading-loose" : ""}`}
+                  style={{ color: SLATE }}
+                >
+                  {t(
+                    "The Science of Addiction: Hijacking the Brain",
+                    "វិទ្យាសាស្ត្រនៃការញៀន៖ ការលួចបញ្ជាខួរក្បាល",
+                  )}
+                </h3>
+                <p className={`text-sm text-slate-700 max-w-2xl ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {t(
+                    "Dopamine, tolerance, cortisol — why addiction is a measurable change inside the brain, not a moral failing.",
+                    "ដូប៉ាមីន ភាពស៊ាំ កូទីសុល — ហេតុអ្វីការញៀនជាការផ្លាស់ប្ដូរអាចវាស់បាននៅក្នុងខួរក្បាល មិនមែនជាការខុសផ្នែកសីលធម៌ទេ។",
+                  )}
+                </p>
+              </div>
+              <div
+                className={`flex items-center gap-1.5 group-hover:translate-x-1 transition-transform text-sm font-semibold ${k ? "font-khmer" : ""}`}
+                style={{ color: MED_BLUE_DEEP }}
+              >
+                <span>{t("Open module", "បើកម៉ូឌុល")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </Link>
+        </div>
+
         <div className="mt-8 flex justify-center">
           <Link
             href="/"

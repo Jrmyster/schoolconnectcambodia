@@ -1,0 +1,39 @@
+I want to add a new comprehensive module called 'Recycling: The Energy Economics of Trash' (ការកែច្នៃឡើងវិញ៖ សេដ្ឋកិច្ចថាមពលនៃសំរាម) to the 'Materials Science' page. Please implement the following cleanly using a rugged, industrial aesthetic (metallic silvers, glass blues, and eco-greens):
+
+1. Routing & Navigation:
+
+Create a new component RecyclingScience.jsx.
+
+Add a link in the Materials Science navigation labeled 'Recycling & Energy' with a recycling arrows icon.
+
+2. Card 1: The Energy Cheat Code (រូបមន្តសន្សំថាមពល):
+
+Explain the core concept: Extracting raw metals from rocks (mining) requires melting stones at massive temperatures. Recycling skips the mining phase entirely.
+
+Aluminum (អាលុយមីញ៉ូម): Highlight that recycling an aluminum can saves 95% of the energy compared to making a new one from bauxite ore. It is infinitely recyclable.
+
+Steel & Iron (ដែក និងដែកថែប): Recycling steel saves roughly 60% to 70% of the energy. A recycled car frame can become the steel rebar holding up a new school building.
+
+Glass (កញ្ចក់): Saves about 30% of energy, but like metal, it never loses its quality. A glass bottle can be melted and reformed forever.
+
+Plastic (ប្លាស្ទិក): Explain that plastic is the hardest. It degrades every time it is melted (downcycling), but recycling it still saves roughly 80% of energy compared to pumping raw petroleum out of the ground.
+
+3. Card 2: The Edjai Ecosystem (ប្រព័ន្ធអេកូឡូស៊ីអេតចាយ):
+
+Explain how recycling currently works in Cambodia. The informal sector of waste pickers (Edjai) are actually the frontline environmental engineers of the country. They collect, sort, and sell materials to larger depots, which often export the raw scrap to neighboring countries for heavy melting.
+
+4. Card 3: Starting a Recycling Business in Cambodia (ការចាប់ផ្តើមអាជីវកម្មកែច្នៃនៅកម្ពុជា):
+
+Frame this as an entrepreneurial pathway for 12th-grade students.
+
+Step 1: Collection Logistics: You need a network of collection carts and a central warehouse.
+
+Step 2: Sorting and Cleaning (The Value Add): Mixed plastic is worthless. Sorted, washed, and shredded Type-1 PET plastic is a global commodity. The business makes money by doing the hard work of organizing the chaos.
+
+Step 3: Baling & Shipping: Using a hydraulic press to crush the material into massive cubes (bales) to be sold to domestic manufacturing plants or shipped internationally.
+
+5. Formatting & UI:
+
+Keep the layout modular so students can easily compare the energy savings of each material.
+
+Ensure all core concepts, material names, and headings are strictly bilingual (English/Khmer)
