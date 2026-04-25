@@ -1,0 +1,41 @@
+I want to add a new comprehensive module called 'Welding: The Science of Fusion' (ការផ្សារដែក៖ វិទ្យាសាស្ត្រនៃការរំលាយបញ្ចូលគ្នា) to the 'Technology' dropdown. Please implement the following cleanly using a rugged, industrial aesthetic (dark steel backgrounds, glowing amber accents, and blueprint grid patterns):
+
+1. Routing & Navigation:
+
+Create a new component WeldingScience.jsx.
+
+Register a new route: /technology/welding.
+
+Add a link in the Technology navigation labeled 'Welding & Metallurgy' with a torch or spark icon.
+
+2. Card 1: How Welding Works (របៀបដែលការផ្សារដំណើរការ):
+
+The Concept: Explain that welding is not gluing. It is the use of extreme heat to melt two base metals together so they become one.
+
+The Science: When the metal cools, the atoms of both pieces interlock, creating a joint that is often stronger than the original metal itself.
+
+3. Card 2: The Welding Torch & Gases (ក្បាលផ្សារ និងឧស្ម័ន):
+
+Oxy-Acetylene (អុកស៊ីអាសេទីឡែន): Explain how a gas torch works. It mixes Oxygen and Acetylene gas. When lit, this creates a flame that reaches over 3,000°C—hot enough to melt almost any metal.
+
+Arc Welding & Shielding Gas: Explain that electric welding uses an arc of electricity to create heat. It uses 'Shielding Gases' like Argon or CO2 to push away the air. If Oxygen from the air touches the hot liquid metal, it will create bubbles and make the weld weak (Oxidation).
+
+4. Card 3: The Metals (ប្រភេទលោហៈ):
+
+Steel (ដែក): The most common metal for welding due to its strength and abundance.
+
+Aluminum (អាលុយមីញ៉ូម): Much harder to weld because it conducts heat away quickly and melts at a lower temperature.
+
+Stainless Steel (ដែកអ៊ីណុក): Requires specialized gas and care to prevent it from losing its rust-resistant properties.
+
+5. Card 4: How to Weld (របៀបផ្សារ):
+
+Preparation: Cleaning the metal is 90% of the work. You must remove the 'Map' of rust and paint to reach the true 'Territory' of the metal.
+
+The Pool: The welder creates a 'puddle' of liquid metal and slowly moves it along the joint, adding a 'filler rod' to strengthen the connection.
+
+6. Formatting & UI:
+
+Keep the styling industrial and high-contrast.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

@@ -832,6 +832,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ហេតុអ្វីអេក្រង់គ្មានពណ៌ស គ្មានពណ៌លឿង គ្មានពណ៌ទឹកក្រូច — មានតែក្រហម បៃតង និងខៀវ។ លាយ RGB ផ្ទាល់ កាត់មើល CRT បកស្រាយ ៦ ស្រទាប់នៃ LCD និងរៀនគណិតវិទ្យាសាមញ្ញនៅពីក្រោយ HD និង 4K។",
       },
       {
+        href: "/technology/locks",
+        labelEn: "Locks & Locksmithing",
+        labelKh: "សោរ និងជំនាញសោរ",
+        icon: Lock,
+        descEn: "Crack open the world's most common lock — the pin tumbler. See the shear line that physically blocks the cylinder, watch a key act as a mechanical password whose teeth align five or six pins to a single line, and meet the locksmiths who blend micro-mechanics, metalworking, and electronics to design and defeat physical security.",
+        descKh: "បើកមើលសោរដែលប្រើច្រើនបំផុតនៅលើពិភពលោក — សោរម្ជុលកន្លាស់។ មើលខ្សែបន្ទាត់កាត់ដែលបិទស៊ីឡាំងដោយរូបវិទ្យា មើលកូនសោរដើរតួជាពាក្យសម្ងាត់មេកានិចដែលធ្មេញរបស់វាតម្រឹមម្ជុល ៥ ឬ ៦ ឱ្យត្រង់នឹងខ្សែបន្ទាត់តែមួយ និងស្គាល់ជាងសោរដែលលាយបញ្ចូលគ្នានូវមីក្រូ-មេកានិច ការងារលោហៈ និងអេឡិចត្រូនិក ដើម្បីរចនា និងវាយឆ្លងសុវត្ថិភាពរូបវន្ត។",
+      },
+      {
         href: "/technology/future-intelligence",
         labelEn: "The Future of Intelligence & Economy",
         labelKh: "អនាគតនៃបញ្ញា និងសេដ្ឋកិច្ច",

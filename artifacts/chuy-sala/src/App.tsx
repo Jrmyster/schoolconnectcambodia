@@ -151,6 +151,7 @@ const BiologyHubPage            = lazy(() => import("@/pages/BiologyHubPage").th
 const GeologyHubPage            = lazy(() => import("@/pages/GeologyHubPage").then(m => ({ default: m.GeologyHubPage })));
 const DeepTimePage              = lazy(() => import("@/pages/DeepTimePage").then(m => ({ default: m.DeepTimePage })));
 const AutomotiveTechPage        = lazy(() => import("@/pages/AutomotiveTechPage").then(m => ({ default: m.AutomotiveTechPage })));
+const LockMechanicsPage         = lazy(() => import("@/pages/LockMechanicsPage"));
 const DisasterPrepPage          = lazy(() => import("@/pages/DisasterPrepPage").then(m => ({ default: m.DisasterPrepPage })));
 const HowComputersWorkPage      = lazy(() => import("@/pages/HowComputersWorkPage").then(m => ({ default: m.HowComputersWorkPage })));
 const PhysicsMotionPage         = lazy(() => import("@/pages/PhysicsMotionPage").then(m => ({ default: m.PhysicsMotionPage })));
@@ -314,6 +315,7 @@ function Router() {
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />
+            <Route path="/technology/locks" component={LockMechanicsPage} />
             <Route path="/art-of-learning" component={ArtOfLearningPage} />
             <Route path="/pathway-to-medicine" component={PathwayToMedicinePage} />
             <Route path="/pathway-to-medicine/radiology" component={RadiologyPage} />
