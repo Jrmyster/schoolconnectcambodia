@@ -1,0 +1,37 @@
+I want to add a new comprehensive section called 'The Hidden War: Landmines & Demining' (សង្គ្រាមដែលលាក់កំបាំង៖ គ្រាប់មីន និងការបោសសម្អាត) to the 'Cambodia: The Heart of Southeast Asia' page. Please implement the following cleanly using a respectful, educational aesthetic (earthy browns, safety greens, and alert oranges):
+
+1. Routing & Navigation:
+
+Create a new component DeminingHistory.jsx.
+
+Integrate this as a major section on the Cambodia page, accessible via a tab or scroll-link labeled 'The Hidden War'.
+
+2. Card 1: The K5 Belt & The Scale (ខ្សែក្រវាត់ K5 និងទំហំនៃបញ្ហា):
+
+The History: Explain that during the decades of conflict in the 1970s and 80s, an estimated 4 to 6 million landmines were planted in Cambodia.
+
+The Location: Highlight the 'K5 Belt', a massive, densely mined defensive line running along the entire Cambodian-Thai border.
+
+The Tragedy of Time: Explain that landmines do not know when a war ends. Because many were made with plastic casings, they do not rust. They can wait in the dirt for 50 years for a farmer or a child to step on them.
+
+3. Card 2: The Anatomy of a Mine (កាយវិភាគវិទ្យានៃគ្រាប់មីន):
+
+How it works: Keep the engineering simple. An anti-personnel mine has a 'Pressure Plate'. It is designed with a specific weight threshold (usually around 5 to 10 kilograms). When someone steps on it, a spring is compressed, releasing a firing pin that strikes a detonator, igniting the main explosive charge (TNT).
+
+4. Card 3: The Clearers (អ្នកបោសសម្អាត):
+
+Highlight the organizations working daily to clear the land: CMAC (Cambodian Mine Action Centre), The HALO Trust, and MAG (Mines Advisory Group). Mention that these deminers are national heroes, walking into danger every day so others can walk safely.
+
+5. Card 4: Frugal Engineering: The Hero Rats (កណ្តុរវីរបុរសនៃអង្គការ APOPO):
+
+The Problem with Metal Detectors: A metal detector finds metal, not explosives. Deminers waste hours digging up old nails, tin cans, and shrapnel.
+
+The APOPO Solution: Explain how the NGO APOPO trains African Giant Pouched Rats.
+
+The Science: The rats have an incredible sense of smell and are trained to sniff out the chemical compound of TNT directly. Furthermore, a rat only weighs about 1.2 kilograms—far below the 5kg pressure threshold required to trigger the mine! They can run safely across a minefield, find the exact location of the TNT, and scratch the dirt to alert the human handlers.
+
+6. Formatting & UI:
+
+Use clear, respectful imagery (no graphic content, focus on the deminers, the rats, and the safe land).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

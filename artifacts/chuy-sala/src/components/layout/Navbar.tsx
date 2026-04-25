@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame, Lightbulb,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -846,6 +846,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Flame,
         descEn: "Welding is not glue — it is controlled fire. A 3,000 °C oxy-acetylene flame and a 10,000 °C electric arc melt two metals into one piece, often stronger than the original. Learn why a single bubble of oxygen ruins a joint, why aluminum melts away in a heartbeat, and walk through the four-stage cycle every clean weld follows.",
         descKh: "ការផ្សារមិនមែនជាការបិទកាវទេ — វាជាភ្លើងគ្រប់គ្រងបាន។ អណ្ដាតភ្លើងអុកស៊ី-អាសេទីឡែន ៣,០០០ °C និងធ្នូអគ្គិសនី ១០,០០០ °C រំលាយលោហៈពីរក្លាយជាបំណែកតែមួយ ដែលជារឿយៗមាំជាងលោហៈដើម។ រៀនមូលហេតុដែលពពុះអុកស៊ីហ្សែនតែមួយបំផ្លាញចំណុចតភ្ជាប់ មូលហេតុដែលអាលុយមីញ៉ូមរលាយក្នុងភ្លែត និងដើរតាមវដ្តដំណាក់កាលទាំងបួននៃការផ្សារស្អាតៗ។",
+      },
+      {
+        href: "/technology/inventions",
+        labelEn: "The Great Inventions",
+        labelKh: "ការច្នៃប្រឌិតដ៏អស្ចារ្យ",
+        icon: Lightbulb,
+        descEn: "Eighteen inventions that built the modern world, grouped into five families — the foundations of civilization (fire, agriculture, the wheel, writing), China's four great inventions (paper, movable type, gunpowder, the compass), the information age (printing press, telephone, radio & TV), energy & transport (electricity, automobile, airplane), and modern science & industry (vaccines, sewing machine, transistor, internet). Filter by category and study one branch at a time.",
+        descKh: "ការច្នៃប្រឌិតដប់ប្រាំបី ដែលបានសាងសង់ពិភពលោកទំនើប រៀបជាគ្រួសារប្រាំ — មូលដ្ឋានគ្រឹះនៃអរិយធម៌ (ភ្លើង កសិកម្ម កង់ អក្សរសិល្ប៍) ការច្នៃប្រឌិតអស្ចារ្យទាំងបួនរបស់ចិន (ក្រដាស តួអក្សរផ្លាស់ទីបាន ដីកាំភ្លើង ត្រីវិស័យ) យុគព័ត៌មាន (ម៉ាស៊ីនបោះពុម្ព ទូរស័ព្ទ វិទ្យុ និងទូរទស្សន៍) ថាមពល និងការដឹកជញ្ជូន (អគ្គិសនី រថយន្ត យន្តហោះ) និងវិទ្យាសាស្ត្រ និងឧស្សាហកម្មទំនើប (វ៉ាក់សាំង ម៉ាស៊ីនដេរ ត្រង់ស៊ីស្ទ័រ អ៊ីនធឺណែត)។ ច្រោះតាមប្រភេទ និងសិក្សាមែកធាងម្ដងមួយ។",
       },
       {
         href: "/technology/future-intelligence",
