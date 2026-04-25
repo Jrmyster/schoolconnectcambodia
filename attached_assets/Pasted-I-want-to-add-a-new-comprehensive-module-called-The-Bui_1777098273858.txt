@@ -1,0 +1,67 @@
+I want to add a new comprehensive module called 'The Builders of Reality: Most Important Inventions in History' (អ្នកកសាងភាពពិត៖ ការច្នៃប្រឌិតដ៏សំខាន់បំផុតក្នុងប្រវត្តិសាស្ត្រ) to the 'Technology' dropdown. Please implement the following cleanly using a 'Historical Archive' aesthetic (bronze accents, parchment whites, and deep architectural blues):
+
+1. Routing & Navigation:
+
+Create a new component GreatInventions.jsx.
+
+Register a new route: /technology/inventions.
+
+Add a link in the Technology navigation labeled 'The Great Inventions' with a lightbulb or gear icon.
+
+2. The Data Structure:
+
+Create an internal data array of these inventions grouped by categories. Display them using a responsive masonry grid or a tabbed layout based on these 5 categories:
+
+Category 1: The Foundations of Civilization (មូលដ្ឋានគ្រឹះនៃអរិយធម៌):
+
+Fire Control: Crucial for cooking, heat, and early metal manipulation.
+
+Agriculture: Enabled permanent settlements and ended the nomadic hunter-gatherer era.
+
+The Wheel (c. 3500 BC): Revolutionized transportation, pottery, and mechanics.
+
+Written Language (c. 2900 BC): Allowed the permanent storage and transmission of knowledge across time.
+
+Category 2: The Four Great Inventions of China (ការច្នៃប្រឌិតដ៏អស្ចារ្យទាំងបួនរបស់ចិន):
+
+Papermaking: Created a cheap, lightweight medium for information.
+
+Printing (Movable Type): Allowed rapid reproduction of texts.
+
+Gunpowder: Forever altered the engineering of warfare and mining.
+
+The Compass (c. 206 BC): Transformed global seafaring and trade by mapping the invisible magnetic poles.
+
+Category 3: Information and Communication (ព័ត៌មាន និងទំនាក់ទំនង):
+
+The Printing Press (1440s): Gutenberg’s machine accelerated the scientific revolution.
+
+The Telephone (1876): Defeated geography by allowing instant voice communication.
+
+Radio and Television: Transformed global mass communication.
+
+Category 4: Energy and Transportation (ថាមពល និងការដឹកជញ្ជូន):
+
+Electricity (Late 19th Century): The ultimate utility that reshaped the modern world and conquered the night.
+
+The Automobile (1885): Revolutionized personal mobility and urban design.
+
+The Airplane (1903): Shrank the planet by mastering the physics of lift.
+
+Category 5: Modern Science & Industry (វិទ្យាសាស្ត្រ និងឧស្សាហកម្មទំនើប):
+
+Vaccines & Antibiotics: Conquered the invisible biological territory, doubling human lifespans.
+
+The Sewing Machine: Sparked the industrial revolution in textiles and freed millions of hours of manual labor.
+
+The Transistor (1947): The microscopic foundation of all modern computers.
+
+The Internet: The ultimate global nervous system connecting all human knowledge.
+
+3. UI & Formatting:
+
+Each card should have the Name of the invention, the Date (if applicable), and its profound impact on humanity.
+
+Ensure all core concepts, categories, and descriptions are strictly bilingual (English/Khmer).
+
+Add a 'Category Filter' at the top so students can sort the massive list easily.

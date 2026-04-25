@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -838,6 +838,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Lock,
         descEn: "Crack open the world's most common lock — the pin tumbler. See the shear line that physically blocks the cylinder, watch a key act as a mechanical password whose teeth align five or six pins to a single line, and meet the locksmiths who blend micro-mechanics, metalworking, and electronics to design and defeat physical security.",
         descKh: "បើកមើលសោរដែលប្រើច្រើនបំផុតនៅលើពិភពលោក — សោរម្ជុលកន្លាស់។ មើលខ្សែបន្ទាត់កាត់ដែលបិទស៊ីឡាំងដោយរូបវិទ្យា មើលកូនសោរដើរតួជាពាក្យសម្ងាត់មេកានិចដែលធ្មេញរបស់វាតម្រឹមម្ជុល ៥ ឬ ៦ ឱ្យត្រង់នឹងខ្សែបន្ទាត់តែមួយ និងស្គាល់ជាងសោរដែលលាយបញ្ចូលគ្នានូវមីក្រូ-មេកានិច ការងារលោហៈ និងអេឡិចត្រូនិក ដើម្បីរចនា និងវាយឆ្លងសុវត្ថិភាពរូបវន្ត។",
+      },
+      {
+        href: "/technology/welding",
+        labelEn: "Welding & Metallurgy",
+        labelKh: "ការផ្សារដែក និងលោហធាតុ",
+        icon: Flame,
+        descEn: "Welding is not glue — it is controlled fire. A 3,000 °C oxy-acetylene flame and a 10,000 °C electric arc melt two metals into one piece, often stronger than the original. Learn why a single bubble of oxygen ruins a joint, why aluminum melts away in a heartbeat, and walk through the four-stage cycle every clean weld follows.",
+        descKh: "ការផ្សារមិនមែនជាការបិទកាវទេ — វាជាភ្លើងគ្រប់គ្រងបាន។ អណ្ដាតភ្លើងអុកស៊ី-អាសេទីឡែន ៣,០០០ °C និងធ្នូអគ្គិសនី ១០,០០០ °C រំលាយលោហៈពីរក្លាយជាបំណែកតែមួយ ដែលជារឿយៗមាំជាងលោហៈដើម។ រៀនមូលហេតុដែលពពុះអុកស៊ីហ្សែនតែមួយបំផ្លាញចំណុចតភ្ជាប់ មូលហេតុដែលអាលុយមីញ៉ូមរលាយក្នុងភ្លែត និងដើរតាមវដ្តដំណាក់កាលទាំងបួននៃការផ្សារស្អាតៗ។",
       },
       {
         href: "/technology/future-intelligence",
