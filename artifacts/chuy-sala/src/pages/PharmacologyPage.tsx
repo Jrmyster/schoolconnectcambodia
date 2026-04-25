@@ -18,6 +18,7 @@ import {
   HeartPulse,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import PharmacyDirectory from "@/components/PharmacyDirectory";
 
 /* ══════════════════════════════════════════════════════════════════════════
  * Pharmacology: The Science of Medicine
@@ -665,6 +666,9 @@ export function PharmacologyPage() {
             ))}
           </ol>
         </section>
+
+        {/* §3 Pharmacy Schools Directory */}
+        <PharmacyDirectory />
 
         {/* Closing banner */}
         <div
