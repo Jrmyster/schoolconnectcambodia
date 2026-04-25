@@ -35,6 +35,11 @@ import {
   Users,
   Vote,
   Wrench,
+  Gavel,
+  Signature,
+  Ban,
+  RefreshCw,
+  CheckCircle2,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1097,7 +1102,456 @@ function FoundingTab({ k, t }: { k: boolean; t: T }) {
           </div>
         </div>
       </div>
+
+      {/* The Machinery of Law: Checks and Balances */}
+      <MachineryOfLaw k={k} t={t} />
     </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  The Machinery of Law · Checks and Balances
+//  យន្តការនៃច្បាប់ · ការត្រួតពិនិត្យ និងតុល្យភាពអំណាច
+// ════════════════════════════════════════════════════════════════════════════
+
+function MachineryOfLaw({ k, t }: { k: boolean; t: T }) {
+  return (
+    <div
+      className="rounded-3xl border-2 p-5 sm:p-6"
+      style={{
+        borderColor: `${NAVY}55`,
+        backgroundColor: PARCHMENT,
+        backgroundImage:
+          "radial-gradient(circle at 100% 0%, rgba(10, 36, 99, 0.06), transparent 35%)," +
+          "radial-gradient(circle at 0% 100%, rgba(185, 28, 28, 0.05), transparent 35%)",
+      }}
+      data-testid="machinery-of-law"
+    >
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-5">
+        <div
+          className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: NAVY_SOFT, border: `1px solid ${NAVY}55` }}
+        >
+          <Gavel className="w-5 h-5" style={{ color: NAVY_DEEP }} />
+        </div>
+        <div>
+          <h3 className={`font-bold text-lg sm:text-xl ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+            {t("The Machinery of Law: Checks and Balances", "យន្តការនៃច្បាប់ ៖ ការត្រួតពិនិត្យ និងតុល្យភាពអំណាច")}
+          </h3>
+          <div className={`text-[11px] ${k ? "font-khmer" : "font-mono uppercase tracking-widest"}`} style={{ color: RED }}>
+            {t("How an idea becomes a law — and how the people stay in charge", "របៀបដែលគំនិតមួយក្លាយជាច្បាប់ — និងរបៀបដែលប្រជាជននៅជាអ្នកមានអំណាច")}
+          </div>
+        </div>
+      </div>
+
+      {/* Card 1: Three Engines of Power */}
+      <ThreeEnginesCard k={k} />
+
+      {/* Card 2: How a Bill Becomes a Law */}
+      <BillBecomesLawCard k={k} t={t} />
+
+      {/* Card 3: The Ultimate Override */}
+      <UltimateOverrideCard k={k} t={t} />
+    </div>
+  );
+}
+
+// ── Card 1: The Three Engines of Power ──────────────────────────────────────
+
+function ThreeEnginesCard({ k }: { k: boolean }) {
+  const engines = [
+    {
+      id: "legislative",
+      Icon: Scroll,
+      color: RED,
+      colorDeep: RED_DEEP,
+      enRole: "Legislative",
+      khRole: "នីតិប្បញ្ញត្តិ",
+      enWho: "Congress · House + Senate",
+      khWho: "សភា · សភាតំណាងរាស្ត្រ + ព្រឹទ្ធសភា",
+      enNickname: "The Architects",
+      khNickname: "ស្ថាបត្យករ",
+      enJob: "They debate, write, and propose the laws. The House and the Senate must both agree on the exact text before it can leave Congress at all.",
+      khJob: "ពួកគេពិភាក្សា សរសេរ និងស្នើច្បាប់។ សភាតំណាងរាស្ត្រ និងព្រឹទ្ធសភាត្រូវឯកភាពលើអត្ថបទពិតប្រាកដ មុនពេលវាអាចចេញពីសភាបាន។",
+    },
+    {
+      id: "executive",
+      Icon: Crown,
+      color: NAVY,
+      colorDeep: NAVY_DEEP,
+      enRole: "Executive",
+      khRole: "នីតិប្រតិបត្តិ",
+      enWho: "President",
+      khWho: "ប្រធានាធិបតី",
+      enNickname: "The Operators",
+      khNickname: "អ្នកប្រតិបត្តិ",
+      enJob: "They sign the laws into action, enforce them, command the military, and run the government agencies that put the laws into effect every day.",
+      khJob: "ពួកគេចុះហត្ថលេខាលើច្បាប់ឲ្យចូលជាធរមាន អនុវត្តច្បាប់ បញ្ជាកងទ័ព និងគ្រប់គ្រងទីភ្នាក់ងាររដ្ឋាភិបាល ដែលដាក់ច្បាប់ឲ្យដំណើរការរាល់ថ្ងៃ។",
+    },
+    {
+      id: "judicial",
+      Icon: Gavel,
+      color: GOLD,
+      colorDeep: "#7c5b00",
+      enRole: "Judicial",
+      khRole: "តុលាការ",
+      enWho: "Supreme Court",
+      khWho: "តុលាការកំពូល",
+      enNickname: "The Referees",
+      khNickname: "អាជ្ញាកណ្ដាល",
+      enJob: "They measure each new law against the Constitution. If a law breaks the rules of the Blueprint itself, the Court can strike it down — even if Congress and the President both agreed on it.",
+      khJob: "ពួកគេវាស់ច្បាប់ថ្មីនីមួយៗធៀបនឹងរដ្ឋធម្មនុញ្ញ។ បើច្បាប់មួយបំពានច្បាប់នៃផែនការគ្រឹះ តុលាការអាចទម្លាក់វាបាន — ទោះបីសភា និងប្រធានាធិបតីបានព្រមលើវាក៏ដោយ។",
+    },
+  ];
+
+  return (
+    <div
+      className="rounded-2xl border bg-white p-4 sm:p-5 mb-4"
+      style={{ borderColor: `${NAVY}33` }}
+      data-testid="mol-card-engines"
+    >
+      <CardHeader
+        k={k}
+        chipEn="Card 01 · Three Engines"
+        chipKh="កាត ០១ · អំណាចទាំងបី"
+        enTitle="The Three Engines of Power"
+        khTitle="អំណាចទាំងបី"
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {engines.map((e) => (
+          <div
+            key={e.id}
+            className="rounded-xl border-2 p-3 sm:p-4 flex flex-col gap-2"
+            style={{ borderColor: `${e.color}55`, backgroundColor: "#ffffff" }}
+            data-testid={`engine-${e.id}`}
+          >
+            <div className="flex items-center gap-2">
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: `${e.color}18`, border: `1px solid ${e.color}55` }}
+              >
+                <e.Icon className="w-4 h-4" style={{ color: e.colorDeep }} />
+              </div>
+              <div className="min-w-0">
+                <div
+                  className={`text-[10px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+                  style={{ color: e.colorDeep }}
+                >
+                  {k ? e.khRole : e.enRole}
+                </div>
+                <div className={`text-sm font-bold ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+                  {k ? e.khNickname : e.enNickname}
+                </div>
+              </div>
+            </div>
+            <div className={`text-[11px] ${k ? "font-khmer leading-loose" : "font-mono"}`} style={{ color: e.color }}>
+              {k ? e.khWho : e.enWho}
+            </div>
+            <p className={`text-sm ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK_SOFT }}>
+              {k ? e.khJob : e.enJob}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Card 2: How a Bill Becomes a Law ────────────────────────────────────────
+
+function BillBecomesLawCard({ k, t }: { k: boolean; t: T }) {
+  return (
+    <div
+      className="rounded-2xl border bg-white p-4 sm:p-5 mb-4"
+      style={{ borderColor: `${NAVY}33` }}
+      data-testid="mol-card-bill"
+    >
+      <CardHeader
+        k={k}
+        chipEn="Card 02 · The Process"
+        chipKh="កាត ០២ · ដំណើរការ"
+        enTitle="How a Bill Becomes a Law"
+        khTitle="ដំណើរការអនុម័តច្បាប់"
+      />
+
+      <p className={`text-sm mb-4 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK_SOFT }}>
+        {t(
+          "Every law in the country starts as just an idea on a piece of paper — called a 'Bill'. To survive, it has to pass through three doors.",
+          "ច្បាប់នីមួយៗក្នុងប្រទេសចាប់ផ្ដើមពីគ្រាន់តែជាគំនិតមួយលើក្រដាស — ហៅថា «សេចក្ដីព្រាងច្បាប់» (Bill)។ ដើម្បីរស់រាន វាត្រូវឆ្លងកាត់ទ្វារបី។"
+        )}
+      </p>
+
+      {/* Flow chart */}
+      <div className="space-y-2" data-testid="bill-flow">
+        {/* Step 1 */}
+        <FlowStep
+          n={1}
+          color={RED}
+          Icon={Scroll}
+          enLabel="The Proposal"
+          khLabel="ការស្នើ"
+          enText="A member of Congress writes the idea down as a Bill and introduces it."
+          khText="សមាជិកសភាម្នាក់សរសេរគំនិតនោះជាសេចក្ដីព្រាងច្បាប់ និងដាក់បង្ហាញ។"
+          k={k}
+          testId="bill-step-1"
+        />
+        <FlowArrow />
+        {/* Step 2 */}
+        <FlowStep
+          n={2}
+          color={RED}
+          Icon={Vote}
+          enLabel="Both Chambers"
+          khLabel="សភាទាំងពីរ"
+          enText="The Bill must pass BOTH the House and the Senate, with a simple majority — over 50% — in each chamber."
+          khText="សេចក្ដីព្រាងច្បាប់ត្រូវឆ្លងកាត់ ទាំងសភាតំណាងរាស្ត្រ និងព្រឹទ្ធសភា ជាមួយសំឡេងភាគច្រើន — លើសពី ៥០ ភាគរយ — នៅក្នុងសភានីមួយៗ។"
+          k={k}
+          testId="bill-step-2"
+          chip={k ? "≥ ៥០%" : "≥ 50%"}
+        />
+        <FlowArrow />
+        {/* Step 3 — President’s desk */}
+        <div
+          className="rounded-xl border-2 p-3 sm:p-4"
+          style={{ borderColor: `${NAVY}55`, backgroundColor: "#f8f9ff" }}
+          data-testid="bill-step-3"
+        >
+          <div className="flex items-center gap-2 mb-2 flex-wrap">
+            <div
+              className={`w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 ${k ? "font-khmer" : "font-mono"}`}
+              style={{ backgroundColor: NAVY_DEEP }}
+            >
+              {k ? toKhNum(3) : "3"}
+            </div>
+            <Crown className="w-4 h-4" style={{ color: NAVY }} />
+            <div className={`text-sm font-bold ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+              {t("The President's Desk", "តុរបស់ប្រធានាធិបតី")}
+            </div>
+          </div>
+          <p className={`text-sm mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK_SOFT }}>
+            {t(
+              "If the Bill passes Congress, it travels to the White House. The President has exactly two choices:",
+              "បើសេចក្ដីព្រាងច្បាប់ឆ្លងកាត់សភា វាធ្វើដំណើរទៅសេតវិមាន។ ប្រធានាធិបតីមានជម្រើសពិតប្រាកដពីរ ៖"
+            )}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {/* Sign */}
+            <div
+              className="rounded-lg border-2 p-3"
+              style={{ borderColor: `${NAVY}55`, backgroundColor: NAVY_SOFT }}
+              data-testid="bill-choice-sign"
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <Signature className="w-4 h-4" style={{ color: NAVY_DEEP }} />
+                <div
+                  className={`text-[11px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+                  style={{ color: NAVY_DEEP }}
+                >
+                  {t("Sign it", "ចុះហត្ថលេខា")}
+                </div>
+                <CheckCircle2 className="w-3.5 h-3.5 ml-auto" style={{ color: NAVY }} />
+              </div>
+              <p className={`text-[13px] ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK }}>
+                {t(
+                  "It immediately becomes a permanent Law of the United States.",
+                  "វាក្លាយទៅជាច្បាប់អចិន្ត្រៃយ៍នៃសហរដ្ឋអាមេរិកភ្លាមៗ។"
+                )}
+              </p>
+            </div>
+            {/* Veto */}
+            <div
+              className="rounded-lg border-2 p-3"
+              style={{ borderColor: `${RED}66`, backgroundColor: "#fef2f2" }}
+              data-testid="bill-choice-veto"
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <Ban className="w-4 h-4" style={{ color: RED_DEEP }} />
+                <div
+                  className={`text-[11px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+                  style={{ color: RED_DEEP }}
+                >
+                  {t("Veto it", "វេតូ · បដិសេធ")}
+                </div>
+                <span
+                  className="ml-auto inline-block rounded-sm border-2 px-1.5 py-0.5 font-mono text-[10px] font-extrabold rotate-[-6deg]"
+                  style={{ borderColor: RED_DEEP, color: RED_DEEP, backgroundColor: "#ffffff" }}
+                  aria-hidden="true"
+                >
+                  NO
+                </span>
+              </div>
+              <p className={`text-[13px] ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK }}>
+                {t(
+                  "The President stamps 'NO' on the Bill and sends it back to Congress.",
+                  "ប្រធានាធិបតីបោះត្រា «NO» លើសេចក្ដីព្រាងច្បាប់ ហើយផ្ញើវាត្រឡប់ទៅសភាវិញ។"
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FlowStep({
+  n, color, Icon, enLabel, khLabel, enText, khText, k, testId, chip,
+}: {
+  n: number;
+  color: string;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  enLabel: string; khLabel: string;
+  enText: string; khText: string;
+  k: boolean;
+  testId: string;
+  chip?: string;
+}) {
+  return (
+    <div
+      className="rounded-xl border-2 p-3 flex items-start gap-3"
+      style={{ borderColor: `${color}55`, backgroundColor: "#ffffff" }}
+      data-testid={testId}
+    >
+      <div
+        className="w-7 h-7 rounded-full flex items-center justify-center text-white font-mono text-xs font-bold flex-shrink-0"
+        style={{ backgroundColor: color }}
+      >
+        {k ? toKhNum(n) : String(n)}
+      </div>
+      <Icon className="w-4 h-4 mt-1 flex-shrink-0" style={{ color }} />
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className={`text-sm font-bold ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+            {k ? khLabel : enLabel}
+          </div>
+          {chip && (
+            <span
+              className="font-mono text-[11px] font-bold rounded px-1.5 py-0.5 border"
+              style={{ color, borderColor: `${color}66`, backgroundColor: "#fff7ed" }}
+            >
+              {chip}
+            </span>
+          )}
+        </div>
+        <p className={`text-[13px] mt-1 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK_SOFT }}>
+          {k ? khText : enText}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function FlowArrow() {
+  return (
+    <div className="flex items-center justify-center" aria-hidden="true">
+      <ChevronDown className="w-5 h-5" style={{ color: `${NAVY}66` }} />
+    </div>
+  );
+}
+
+// ── Card 3: The Ultimate Override ──────────────────────────────────────────
+
+function UltimateOverrideCard({ k, t }: { k: boolean; t: T }) {
+  return (
+    <div
+      className="rounded-2xl border-2 p-4 sm:p-5"
+      style={{
+        borderColor: `${RED}66`,
+        backgroundImage:
+          `linear-gradient(135deg, ${PARCHMENT} 0%, #ffffff 60%, ${NAVY_SOFT} 100%)`,
+      }}
+      data-testid="mol-card-override"
+    >
+      <CardHeader
+        k={k}
+        chipEn="Card 03 · The Override"
+        chipKh="កាត ០៣ · ការទម្លាក់សិទ្ធិ"
+        enTitle="The Ultimate Override"
+        khTitle="ការទម្លាក់សិទ្ធិវេតូ"
+      />
+
+      <p className={`text-sm mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`} style={{ color: INK }}>
+        {t(
+          "A Veto is not the end of the story. The Constitution gives Congress one final chance to answer back. If they can gather a massive two-thirds supermajority — in BOTH the House and the Senate — they can override the President. The Bill becomes a Law anyway.",
+          "ការវេតូមិនមែនជាចុងបញ្ចប់នៃរឿងនោះទេ។ រដ្ឋធម្មនុញ្ញផ្ដល់ឲ្យសភានូវឱកាសចុងក្រោយមួយ ដើម្បីឆ្លើយតបវិញ។ បើពួកគេអាចប្រមូលសម្លេងភាគច្រើនពិសេសពីរភាគបី — ទាំងនៅសភាតំណាងរាស្ត្រ និងព្រឹទ្ធសភា — ពួកគេអាចទម្លាក់សិទ្ធិវេតូរបស់ប្រធានាធិបតីបាន។ សេចក្ដីព្រាងច្បាប់ក្លាយជាច្បាប់ដដែល។"
+        )}
+      </p>
+
+      {/* Mini override flow */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-stretch mb-4" data-testid="override-flow">
+        <div
+          className="rounded-lg border-2 p-3 text-center"
+          style={{ borderColor: `${RED}66`, backgroundColor: "#fef2f2" }}
+        >
+          <Ban className="w-5 h-5 mx-auto mb-1" style={{ color: RED_DEEP }} />
+          <div className={`text-xs font-bold ${k ? "font-khmer" : ""}`} style={{ color: RED_DEEP }}>
+            {t("President vetoes", "ប្រធានាធិបតីវេតូ")}
+          </div>
+        </div>
+        <div
+          className="rounded-lg border-2 p-3 text-center"
+          style={{ borderColor: `${NAVY}66`, backgroundColor: NAVY_SOFT }}
+        >
+          <RefreshCw className="w-5 h-5 mx-auto mb-1" style={{ color: NAVY_DEEP }} />
+          <div className={`text-xs font-bold ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+            {t("Congress re-votes", "សភាបោះឆ្នោតឡើងវិញ")}
+          </div>
+          <div
+            className={`mt-1 inline-block text-[11px] font-extrabold rounded px-1.5 py-0.5 border ${k ? "font-khmer" : "font-mono"}`}
+            style={{ color: RED_DEEP, borderColor: `${RED_DEEP}66`, backgroundColor: "#ffffff" }}
+            data-testid="supermajority-chip"
+          >
+            {k ? "២⁄៣ នៃសំឡេង" : "2⁄3 majority"}
+          </div>
+        </div>
+        <div
+          className="rounded-lg border-2 p-3 text-center"
+          style={{ borderColor: `${GOLD}66`, backgroundColor: GOLD_SOFT }}
+        >
+          <CheckCircle2 className="w-5 h-5 mx-auto mb-1" style={{ color: "#7c5b00" }} />
+          <div className={`text-xs font-bold ${k ? "font-khmer" : ""}`} style={{ color: "#7c5b00" }}>
+            {t("Bill becomes Law", "សេចក្ដីព្រាងក្លាយជាច្បាប់")}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="rounded-lg border-l-4 p-3 flex items-start gap-2"
+        style={{ borderLeftColor: NAVY_DEEP, backgroundColor: "#ffffff" }}
+      >
+        <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: NAVY }} />
+        <p className={`text-sm italic ${k ? "font-khmer not-italic leading-loose" : "leading-relaxed"}`} style={{ color: NAVY_DEEP }}>
+          {t(
+            "This is the heart of the system. It proves, in writing, that the shared power of the people — speaking through their elected Congress — outranks the single power of one President.",
+            "នេះគឺជាបេះដូងនៃប្រព័ន្ធ។ វាបង្ហាញយ៉ាងជាក់លាក់ថា អំណាចរួមរបស់ប្រជាជន — និយាយតាមរយៈសភាដែលត្រូវបានបោះឆ្នោតរបស់ពួកគេ — មានឋានៈខ្ពស់ជាងអំណាចរបស់ប្រធានាធិបតីតែម្នាក់។"
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function CardHeader({
+  k, chipEn, chipKh, enTitle, khTitle,
+}: {
+  k: boolean;
+  chipEn: string; chipKh: string;
+  enTitle: string; khTitle: string;
+}) {
+  return (
+    <div className="mb-3">
+      <div
+        className={`inline-block text-[10px] font-mono uppercase tracking-[0.25em] rounded px-1.5 py-0.5 border mb-1 ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+        style={{ color: NAVY_DEEP, borderColor: `${NAVY}55`, backgroundColor: NAVY_SOFT }}
+      >
+        {k ? chipKh : chipEn}
+      </div>
+      <h4 className={`text-base sm:text-lg font-bold ${k ? "font-khmer" : ""}`} style={{ color: NAVY_DEEP }}>
+        {k ? khTitle : enTitle}
+      </h4>
+    </div>
   );
 }
 

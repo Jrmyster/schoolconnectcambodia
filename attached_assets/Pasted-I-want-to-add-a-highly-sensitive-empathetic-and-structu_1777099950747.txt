@@ -1,0 +1,39 @@
+I want to add a highly sensitive, empathetic, and structurally focused module called 'The Disease of Poverty: Obstetric Fistula' (ជំងឺនៃភាពក្រីក្រ៖ រហែកសាច់ដុំទ្វារមាសពេលសម្រាល) to the 'Public Health' page. Please implement the following cleanly using a respectful, medical-humanitarian aesthetic (soft maternal pinks, clinical whites, and deeply empathetic typography):
+
+1. Routing & Placement:
+
+Create a new component ObstetricFistula.jsx.
+
+Place this directly under the Epidemiology and Vaccines sections on the Public Health page, perhaps under a sub-heading for 'Maternal & Structural Health'.
+
+2. Card 1: The Mechanical Injury (របួសផ្នែកមេកានិច):
+
+What it is: Explain clearly and scientifically that an obstetric fistula is a hole between the birth canal and the bladder or rectum.
+
+The Cause: It is caused by prolonged, obstructed labor (sometimes lasting days) without medical intervention. The intense physical pressure of the baby’s head against the mother's pelvis cuts off blood flow, causing the soft tissue to die and create a hole, leaving the woman incontinent.
+
+3. Card 2: A Measure of Absolute Poverty (រង្វាស់នៃភាពក្រីក្រតោកយ៉ាក):
+
+The Preventable Tragedy: Emphasize that obstetric fistula is 100% preventable and 100% curable. It has been entirely eradicated in wealthy countries for over a century because of the Cesarean section (C-section).
+
+Structural Violence: Explain that this injury is the ultimate sign of absolute poverty. It only happens to women who live too far from a hospital, lack money for transport, or live in areas with broken healthcare systems.
+
+4. Card 3: Maternal Mortality in Cambodia & The World (អត្រាមរណៈមាតានៅកម្ពុជា និងពិភពលោក):
+
+The Near-Miss: Explain that fistula is often called a 'near-miss' for maternal mortality. For every woman who survives with a fistula, many others die in childbirth.
+
+The Progress: Note that Cambodia has made incredible strides in reducing maternal mortality over the last two decades by building rural health centers and training midwives, but remote populations still face severe risks.
+
+5. Card 4: The Social Toll & The Cure (ផលប៉ះពាល់សង្គម និងការព្យាបាល):
+
+Isolation: Explain the psychological tragedy: because of the uncontrollable leaking of waste, women with fistula are often abandoned by their husbands and pushed out of their villages due to the smell and stigma.
+
+The Surgery: Highlight the hope. A relatively simple surgery costing roughly $400 to $600 can completely close the hole and give a woman her life back.
+
+Call to Action: Include a highly visible, styled button linking to The Fistula Foundation (https://fistulafoundation.org/), explaining that students or visitors can directly fund these life-saving surgeries.
+
+6. Formatting & UI:
+
+Keep the styling incredibly respectful. Do not use graphic medical imagery; rely on clean typography, icons (like a mother and child silhouette, or a hospital cross), and warm colors.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
