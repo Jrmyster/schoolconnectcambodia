@@ -29,6 +29,7 @@ import {
   Wheat,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import CambodiaHiddenWarSection from "@/pages/sections/CambodiaHiddenWarSection";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  CAM-01 · Cambodia: The Heart of Southeast Asia
@@ -223,11 +224,34 @@ export function CambodiaPage() {
           </div>
         </header>
 
+        {/* In-page jump link to the new sensitive section */}
+        <div className="mb-6 flex justify-center">
+          <a
+            href="#hidden-war"
+            data-testid="hidden-war-jump"
+            className={`group inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 text-sm font-bold shadow-sm hover:shadow-md transition-all ${k ? "font-khmer" : "font-serif"}`}
+            style={{
+              borderColor: "#7c2d12",
+              backgroundColor: "#fff7ed",
+              color: "#3f1d10",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ backgroundColor: "#ea580c" }}
+            />
+            {t("Jump to: The Hidden War", "លោតទៅ ៖ សង្គ្រាមដែលលាក់កំបាំង")}
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          </a>
+        </div>
+
         <SectionGeography  k={k} t={t} />
         <SectionWildlife   k={k} t={t} />
         <SectionEmpire     k={k} t={t} />
         <SectionLangRelEcon k={k} t={t} />
         <SectionThinkers   k={k} t={t} />
+        <CambodiaHiddenWarSection k={k} t={t} />
 
         {/* Closing */}
         <div

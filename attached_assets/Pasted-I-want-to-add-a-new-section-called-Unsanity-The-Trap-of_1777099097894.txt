@@ -1,0 +1,37 @@
+I want to add a new section called 'Unsanity: The Trap of Normalcy' (ភាពមិនសមហេតុផល៖ អន្ទាក់នៃភាពធម្មតា) to the 'Language & Reality' page. Please implement the following cleanly, maintaining the existing philosophical aesthetic (dark greens, teals, and soft whites):
+
+1. Routing & Placement:
+
+Integrate this directly below 'The Two Systems of Thought' on the current Language & Reality component.
+
+2. Card 1: The Three States of Mind (ស្ថានភាពទាំងបីនៃគំនិត):
+
+Define the difference clearly:
+
+Insanity (ភាពឆ្កួតលីលា): A biological or medical breakdown of the brain. The physical 'hardware' is broken.
+
+Sanity (ភាពសមហេតុផល): The Map perfectly matches the Territory. A person observes the world accurately, adjusts their beliefs when facts change, and uses flexible language.
+
+Unsanity (ភាពមិនសមហេតុផល): The physical hardware is fine, but the 'software' (language) is corrupted. An unsane person confuses their internal Map with the external Territory. They react to words as if they were physical objects.
+
+3. Card 2: Symptoms of Unsanity (រោគសញ្ញានៃភាពមិនសមហេតុផល):
+
+Explain how 'normal' people act unsanely every day:
+
+The 'Is' of Identity: Saying 'I am a failure' instead of 'I failed that specific math test yesterday.' They lock their entire identity into one permanent word.
+
+Confusing Facts with Guesses: Seeing a friend walk past without saying hello, and instantly assuming 'They hate me' (a guess), rather than 'They didn't see me' (a possibility).
+
+All-ness: Believing that because you know one thing about a person or a group, you know everything about them.
+
+4. Card 3: The Cure for Unsanity (វិធីព្យាបាល):
+
+How to return to Sanity: Use 'Mental Post-it Notes' (Indexing and Dating).
+
+Instead of 'Technology is bad', use 'Technology(social media) in Year(2026) is causing anxiety.' Pinning language down to specific times and places breaks the illusion of permanent, absolute labels.
+
+5. Formatting & UI:
+
+Use clear, contrasting icons (e.g., a locked padlock for Unsanity, an open eye for Sanity).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
