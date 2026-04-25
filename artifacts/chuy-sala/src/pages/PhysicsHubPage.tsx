@@ -20,6 +20,8 @@ import {
   Droplets,
   Wrench,
   Orbit,
+  FlaskConical,
+  Sparkles,
 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";
@@ -329,6 +331,56 @@ export function PhysicsHubPage() {
             <ModuleCard key={m.slug} module={m} kh={kh} t={t} />
           ))}
         </div>
+
+        {/* ── Hands-on Frugal Lab nav card ──────────────────────── */}
+        <Link
+          href="/physics/frugal-lab"
+          data-testid="card-frugal-physics-lab"
+          className="group block mt-6 rounded-2xl border-2 border-yellow-400 bg-gradient-to-r from-sky-900 to-sky-800 hover:from-sky-800 hover:to-sky-700 transition-colors text-white shadow-lg overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-30 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(253, 224, 71, 0.18) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(253, 224, 71, 0.18) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-5 sm:px-7 py-6 sm:py-7 flex items-center gap-5">
+            <div className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-yellow-400 text-sky-900 flex items-center justify-center border-2 border-yellow-300 shadow-md group-hover:rotate-6 transition-transform">
+              <FlaskConical className="w-7 h-7 sm:w-8 sm:h-8" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-yellow-300 mb-1 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" aria-hidden />
+                <span>{t("Hands-on", "ពិសោធន៍ដោយខ្លួនឯង")}</span>
+              </div>
+              <h2 className="font-display text-xl sm:text-2xl font-bold leading-tight">
+                Try It At Home!{" "}
+                <span className="font-khmer text-lg sm:text-xl text-yellow-300/95 leading-loose">
+                  (សាកល្បងនៅផ្ទះ!)
+                </span>
+              </h2>
+              <p
+                className={`mt-1 text-sm sm:text-base text-sky-100/90 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Three real physics experiments using only things from your kitchen — air pressure, refraction, and balance.",
+                  "ការពិសោធន៍រូបវិទ្យាពិតៗបី ដោយប្រើតែវត្ថុពីផ្ទះបាយរបស់អ្នក — សម្ពាធខ្យល់ ការច្រាល និងតុល្យភាព។",
+                )}
+              </p>
+            </div>
+            <ArrowRight className="w-6 h-6 text-yellow-300 flex-shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden />
+          </div>
+        </Link>
 
         {/* ── Footer ───────────────────────────────────────────── */}
         <p

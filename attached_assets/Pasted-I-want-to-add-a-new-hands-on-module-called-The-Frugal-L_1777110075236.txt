@@ -1,0 +1,39 @@
+I want to add a new hands-on module called 'The Frugal Lab: Physics at Home' (បន្ទប់ពិសោធន៍សន្សំសំចៃ៖ រូបវិទ្យានៅផ្ទះ) to the 'Physics Hub'. Please implement the following cleanly using a bright, engaging, and highly readable step-by-step aesthetic (blueprint blues, vibrant yellow accents, and clean white cards):
+
+1. Routing & Navigation:
+
+Create a new component FrugalPhysicsLab.jsx.
+
+Register a new route within the Physics Hub hierarchy.
+
+Add a navigation card on the main Physics page labeled 'Try It At Home! (សាកល្បងនៅផ្ទះ!)' with a beaker or home icon.
+
+2. Experiment 1: The Crushed Bottle (ដបទឹកដែលត្រូវកម្ទេច) — Air Pressure:
+
+The Setup: You need an empty plastic water bottle and a little bit of very hot water.
+
+The Steps: Pour a small amount of hot water into the bottle. Shake it around for 10 seconds so the hot steam fills the bottle. Quickly screw the cap on completely tight. Now, pour cold water over the outside of the bottle.
+
+The Physics: The cold water rapidly cools the steam inside, turning it back into a few drops of liquid water. This creates a partial vacuum inside the bottle. The atmospheric pressure from the outside air is now far stronger than the pressure inside, so the invisible air physically crushes the bottle in front of your eyes.
+
+3. Experiment 2: The Reversing Arrow (ព្រួញប្តូរទិសដៅ) — Refraction:
+
+The Setup: You need a clear, round glass of water, a piece of paper, and a marker.
+
+The Steps: Draw a thick arrow pointing to the LEFT on the paper. Stand the paper up behind the empty glass. Now, slowly pour water into the glass and watch the arrow.
+
+The Physics: When the water fills the glass, it turns the glass into a cylindrical convex lens. Light bends (refracts) when it moves from the air, through the glass, through the water, and back out. This bending causes the image of the arrow to flip horizontally, making it look like it is pointing to the RIGHT.
+
+4. Experiment 3: The Balancing Forks (សមរក្សាតុល្យភាព) — Center of Mass:
+
+The Setup: You need two identical metal forks, a toothpick, and a glass.
+
+The Steps: Interlock the prongs of the two forks together so they are stuck. Push the toothpick through the middle of the interlocking prongs. Carefully balance the tip of the toothpick on the rim of the glass. The heavy forks will hover perfectly in the air.
+
+The Physics: Every object has a 'Center of Mass'—the exact point where weight is perfectly distributed. By angling the heavy handles of the forks backward and downward, you moved the center of mass to the exact tip of the toothpick, locking it into the gravitational pull of the earth.
+
+5. Formatting & UI:
+
+Use clear numbered steps and bolding for the 'Physics' explanations.
+
+Ensure all core concepts, headings, and instructions are strictly bilingual (English/Khmer).

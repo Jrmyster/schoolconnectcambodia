@@ -163,6 +163,7 @@ const PhysicsEnergyPage         = lazy(() => import("@/pages/PhysicsEnergyPage")
 const PhysicsWavesPage          = lazy(() => import("@/pages/PhysicsWavesPage").then(m => ({ default: m.PhysicsWavesPage })));
 const DoubleSlitPage            = lazy(() => import("@/pages/DoubleSlitPage"));
 const PhysicsGyroscopesPage     = lazy(() => import("@/pages/PhysicsGyroscopesPage").then(m => ({ default: m.PhysicsGyroscopesPage })));
+const FrugalPhysicsLab          = lazy(() => import("@/pages/FrugalPhysicsLab").then(m => ({ default: m.FrugalPhysicsLab })));
 const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
 const RecyclingSciencePage      = lazy(() => import("@/pages/RecyclingSciencePage"));
@@ -363,6 +364,7 @@ function Router() {
             <Route path="/physics/waves/double-slit" component={DoubleSlitPage} />
             <Route path="/physics/simple-machines" component={SimpleMachinesPage} />
             <Route path="/physics/gyroscopes" component={PhysicsGyroscopesPage} />
+            <Route path="/physics/frugal-lab" component={FrugalPhysicsLab} />
             <Route path="/science/materials" component={MaterialsSciencePage} />
             <Route path="/science/materials/recycling" component={RecyclingSciencePage} />
             <Route path="/science/architecture" component={ArchitectureStrengthPage} />
