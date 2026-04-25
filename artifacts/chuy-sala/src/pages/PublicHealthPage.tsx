@@ -30,6 +30,7 @@ import {
   Wind as WindIcon,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { ObstetricFistula } from "@/pages/sections/ObstetricFistula";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  PHL-01 · Public Health: The Web of Well-Being
@@ -322,6 +323,7 @@ export function PublicHealthPage() {
         </header>
 
         <SectionInvisibleMath  k={k} t={t} />
+        <ObstetricFistula      k={k} t={t} />
         <SectionSoap           k={k} t={t} />
         <SectionChemicalTrap   k={k} t={t} />
         <SectionStress         k={k} t={t} />
