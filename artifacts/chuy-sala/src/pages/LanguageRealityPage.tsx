@@ -17,6 +17,12 @@ import {
   Layers,
   Atom,
   AlertTriangle,
+  Cpu,
+  Brain,
+  Calendar,
+  Tag,
+  StickyNote,
+  HelpCircle,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -104,9 +110,23 @@ export default function LanguageRealityPage() {
         <TwoSystems isKh={isKh} />
       </Section>
 
-      {/* ── Section 2: Infinite Abstraction & The Structural Differential ── */}
+      {/* ── Section 2: Unsanity — The Trap of Normalcy ────────────────── */}
       <Section
         spec="02"
+        eyebrowEn="Unsanity · The Trap of Normalcy"
+        eyebrowKh="ភាពមិនសមហេតុផល · អន្ទាក់នៃភាពធម្មតា"
+        titleEn="Three states of mind — and the one that hides in plain sight"
+        titleKh="ស្ថានភាពទាំងបីនៃគំនិត — និងស្ថានភាពដែលលាក់ខ្លួននៅទីដែលមើលឃើញ"
+        descEn="Korzybski observed that most people are not insane — their brains work perfectly well — and yet they react to the world as if their words were the world. He gave this hidden state its own name: 'unsanity'. It is the trap that makes a friend's silent walk-by feel like proof of hatred, and a single failed test feel like proof of being a failure."
+        descKh="លោក Korzybski បានសង្កេតឃើញថា មនុស្សភាគច្រើនមិនមែនឆ្កួតលីលាទេ — ខួរក្បាលរបស់ពួកគេដំណើរការបានយ៉ាងល្អ — ប៉ុន្តែពួកគេប្រតិកម្មចំពោះពិភពលោក ហាក់ដូចជាពាក្យរបស់ពួកគេជាពិភពលោកនោះ។ លោកបានដាក់ឈ្មោះស្ថានភាពលាក់កំបាំងនេះថា «ភាពមិនសមហេតុផល» (unsanity)។ វាជាអន្ទាក់ដែលធ្វើឲ្យការដើរកាត់ស្ងាត់ៗរបស់មិត្តភក្តិមួយ មានអារម្មណ៍ដូចជាភស្តុតាងនៃការស្អប់ ហើយការប្រឡងធ្លាក់តែមួយ មានអារម្មណ៍ដូចជាភស្តុតាងនៃការក្លាយជាមនុស្សបរាជ័យ។"
+        isKh={isKh}
+      >
+        <Unsanity isKh={isKh} />
+      </Section>
+
+      {/* ── Section 3: Infinite Abstraction & The Structural Differential ── */}
+      <Section
+        spec="03"
         eyebrowEn="Infinite Abstraction · The Structural Differential"
         eyebrowKh="ការអរូបីកម្មគ្មានទីបញ្ចប់ · ម៉ូដែលរចនាសម្ព័ន្ធប្លែកគ្នា"
         titleEn="Why humans build skyscrapers of meaning — and how Korzybski drew the blueprint"
@@ -118,9 +138,9 @@ export default function LanguageRealityPage() {
         <InfiniteAbstraction isKh={isKh} />
       </Section>
 
-      {/* ── Section 3: The Translation Matrix ─────────────────────────── */}
+      {/* ── Section 4: The Translation Matrix ─────────────────────────── */}
       <Section
-        spec="03"
+        spec="04"
         eyebrowEn="The Translation Matrix"
         eyebrowKh="ម៉ាទ្រីសបកប្រែ"
         titleEn="From locked sentences to honest observations"
@@ -329,7 +349,329 @@ function SystemCard({
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  Section 2 · Translation Matrix
+//  Section 2 · Unsanity — The Trap of Normalcy
+// ════════════════════════════════════════════════════════════════════════════
+
+function Unsanity({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="space-y-5" data-testid="unsanity-block">
+      <ThreeStatesCard isKh={isKh} />
+      <SymptomsCard isKh={isKh} />
+      <CureCard isKh={isKh} />
+    </div>
+  );
+}
+
+// ── Card 1: Three states of mind ────────────────────────────────────────────
+
+function ThreeStatesCard({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="rounded-2xl border border-stone-300 bg-white shadow-sm overflow-hidden"
+      data-testid="unsanity-card-states"
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-stone-200 bg-gradient-to-r from-stone-900 via-stone-800 to-teal-950 text-stone-100">
+        <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-teal-300 mb-1">
+          <Brain className="w-3.5 h-3.5" />
+          {isKh ? "កាត ០១ · ស្ថានភាពទាំងបី" : "Card 01 · Three States"}
+        </div>
+        <h3 className={`font-display font-bold text-xl sm:text-2xl ${isKh ? "font-khmer leading-snug" : ""}`}>
+          {isKh ? "ស្ថានភាពទាំងបីនៃគំនិត" : "The Three States of Mind"}
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-stone-200">
+        {/* Insanity */}
+        <StateBlock
+          testId="state-insanity"
+          Icon={Cpu}
+          tone="rust"
+          labelEn="INSANITY"
+          labelKh="ភាពឆ្កួតលីលា"
+          khTrans="(insanity)"
+          headlineEn="Hardware broken"
+          headlineKh="ហាដវែរខូច"
+          bodyEn="A biological or medical breakdown of the brain itself. The physical 'hardware' that runs perception and memory is genuinely damaged — by injury, disease, or chemistry. This is the rarest of the three states."
+          bodyKh="ការខូចខាតផ្នែកជីវសាស្ត្រ ឬផ្នែកវេជ្ជសាស្ត្រនៃខួរក្បាលផ្ទាល់។ «ហាដវែរ» រូបវ័ន្តដែលដំណើរការការយល់ឃើញ និងការចងចាំ ត្រូវបានខូចខាតពិតប្រាកដ — ដោយរបួស ជំងឺ ឬគីមី។ នេះគឺជាស្ថានភាពកម្រជាងគេបំផុតក្នុងចំណោមទាំងបី។"
+          isKh={isKh}
+        />
+        {/* Sanity */}
+        <StateBlock
+          testId="state-sanity"
+          Icon={Eye}
+          tone="teal"
+          labelEn="SANITY"
+          labelKh="ភាពសមហេតុផល"
+          khTrans="(sanity)"
+          headlineEn="Map matches Territory"
+          headlineKh="ផែនទីត្រូវនឹងទឹកដី"
+          bodyEn="A person observes the world accurately, updates their beliefs when the facts change, and uses flexible language: 'right now', 'to me', 'in this case'. Their map keeps being redrawn to match the territory."
+          bodyKh="មនុស្សសង្កេតឃើញពិភពលោកយ៉ាងត្រឹមត្រូវ កែប្រែជំនឿរបស់ពួកគេពេលការពិតប្រែប្រួល និងប្រើភាសាដែលបត់បែនបាន ៖ «ពេលនេះ» «សម្រាប់ខ្ញុំ» «ក្នុងករណីនេះ»។ ផែនទីរបស់ពួកគេត្រូវបានគូរឡើងវិញឥតឈប់ឈរ ដើម្បីត្រូវនឹងទឹកដី។"
+          isKh={isKh}
+        />
+        {/* Unsanity */}
+        <StateBlock
+          testId="state-unsanity"
+          Icon={Lock}
+          tone="navy"
+          labelEn="UNSANITY"
+          labelKh="ភាពមិនសមហេតុផល"
+          khTrans="(unsanity)"
+          headlineEn="Software corrupted"
+          headlineKh="សូហ្វវែរខូច"
+          bodyEn="The hardware is fine — but the software, our language, is corrupted. The unsane person confuses the internal map with the external territory and reacts to words as if they were physical objects. Most 'normal' people live here every single day without knowing it."
+          bodyKh="ហាដវែរមិនអីទេ — ប៉ុន្តែសូហ្វវែរ គឺភាសារបស់យើង ត្រូវបានខូច។ មនុស្សមិនសមហេតុផលច្រឡំផែនទីខាងក្នុង ជាមួយទឹកដីខាងក្រៅ ហើយប្រតិកម្មចំពោះពាក្យ ហាក់ដូចជាពាក្យទាំងនោះជាវត្ថុរូបវ័ន្ត។ មនុស្ស «ធម្មតា» ភាគច្រើនរស់នៅទីនេះរាល់ថ្ងៃ ដោយមិនដឹងខ្លួន។"
+          isKh={isKh}
+        />
+      </div>
+    </div>
+  );
+}
+
+function StateBlock({
+  testId, Icon, tone, labelEn, labelKh, khTrans, headlineEn, headlineKh, bodyEn, bodyKh, isKh,
+}: {
+  testId: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  tone: "rust" | "teal" | "navy";
+  labelEn: string; labelKh: string; khTrans: string;
+  headlineEn: string; headlineKh: string;
+  bodyEn: string; bodyKh: string;
+  isKh: boolean;
+}) {
+  const palette = {
+    rust:  { badge: "bg-amber-700/10 text-amber-800 border-amber-700/30", icon: "text-amber-700", ring: "ring-amber-700/30" },
+    teal:  { badge: "bg-teal-600/10 text-teal-700 border-teal-500/40",    icon: "text-teal-700",  ring: "ring-teal-500/40" },
+    navy:  { badge: "bg-stone-900/10 text-stone-800 border-stone-800/40", icon: "text-stone-800", ring: "ring-stone-800/40" },
+  }[tone];
+  return (
+    <div className="p-5 sm:p-6 flex flex-col gap-3" data-testid={testId}>
+      <div className="flex items-center gap-3">
+        <div className={`w-10 h-10 rounded-lg bg-white border ring-1 ${palette.ring} flex items-center justify-center shadow-sm`}>
+          <Icon className={`w-5 h-5 ${palette.icon}`} />
+        </div>
+        <div>
+          <span className={`inline-block text-[10px] font-mono uppercase tracking-[0.2em] rounded px-1.5 py-0.5 border ${palette.badge}`}>
+            {labelEn}
+          </span>
+          <div className={`mt-1 text-sm text-stone-700 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? labelKh : <>{labelKh} <span className="text-stone-400">{khTrans}</span></>}
+          </div>
+        </div>
+      </div>
+      <div className={`text-sm font-bold text-stone-900 ${isKh ? "font-khmer" : ""}`}>
+        {isKh ? headlineKh : headlineEn}
+      </div>
+      <p className={`text-sm text-stone-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+// ── Card 2: Symptoms of Unsanity ────────────────────────────────────────────
+
+function SymptomsCard({ isKh }: { isKh: boolean }) {
+  const symptoms = [
+    {
+      id: "is-of-identity",
+      Icon: Tag,
+      enLabel: "The 'Is' of Identity",
+      khLabel: "«គឺ» នៃអត្តសញ្ញាណ",
+      enWrong: "I am a failure.",
+      khWrong: "ខ្ញុំ គឺ ជាមនុស្សបរាជ័យ។",
+      enRight: "I failed that specific math test yesterday.",
+      khRight: "ខ្ញុំបានធ្លាក់ការប្រឡងគណិតវិទ្យាជាក់លាក់នោះ កាលពីម្សិលមិញ។",
+      enExplain: "The wrong sentence locks an entire identity into one permanent word. The right sentence describes one event, in one moment, in one subject — a problem that can be studied for next time.",
+      khExplain: "ប្រយោគខុសចាក់សោអត្តសញ្ញាណទាំងមូលឲ្យជាប់ក្នុងពាក្យអចិន្ត្រៃយ៍មួយ។ ប្រយោគត្រឹមត្រូវពណ៌នាព្រឹត្តិការណ៍មួយ ក្នុងពេលមួយ ក្នុងមុខវិជ្ជាមួយ — បញ្ហាដែលអាចសិក្សាបានសម្រាប់លើកក្រោយ។",
+    },
+    {
+      id: "facts-vs-guesses",
+      Icon: HelpCircle,
+      enLabel: "Confusing Facts with Guesses",
+      khLabel: "ច្រឡំការពិតជាមួយការទាយ",
+      enWrong: "She walked past me without saying hello — she hates me.",
+      khWrong: "នាងបានដើរកាត់ខ្ញុំដោយមិននិយាយជម្រាបសួរ — នាងស្អប់ខ្ញុំ។",
+      enRight: "She walked past me without saying hello — maybe she didn't see me.",
+      khRight: "នាងបានដើរកាត់ខ្ញុំដោយមិននិយាយជម្រាបសួរ — ប្រហែលជានាងមិនបានឃើញខ្ញុំ។",
+      enExplain: "The fact: a silent walk-by. The guess: an entire emotion behind it. Unsanity quietly turns the guess into the fact and reacts to it the rest of the day.",
+      khExplain: "ការពិត ៖ ការដើរកាត់ស្ងាត់។ ការទាយ ៖ អារម្មណ៍ទាំងមូលនៅពីក្រោយវា។ ភាពមិនសមហេតុផលបង្វែរការទាយឲ្យក្លាយជាការពិតយ៉ាងស្ងៀមៗ ហើយប្រតិកម្មចំពោះវាពេញមួយថ្ងៃនៅសល់។",
+    },
+    {
+      id: "all-ness",
+      Icon: Layers,
+      enLabel: "All-ness",
+      khLabel: "ភាពទាំងអស់ (All-ness)",
+      enWrong: "I read one news article about that country — I know what it is like.",
+      khWrong: "ខ្ញុំបានអានអត្ថបទព័ត៌មានមួយអំពីប្រទេសនោះ — ខ្ញុំដឹងថាវាជាបែបណា។",
+      enRight: "I read one news article about that country — I know one tiny corner of one moment of it.",
+      khRight: "ខ្ញុំបានអានអត្ថបទព័ត៌មានមួយអំពីប្រទេសនោះ — ខ្ញុំដឹងតែជ្រុងតូចមួយនៃពេលវេលាមួយប៉ុណ្ណោះ។",
+      enExplain: "Believing that because you know one thing about a person, a country, or a group, you know everything about them. The map covers a single street; the territory contains a whole city.",
+      khExplain: "ការជឿថា ដោយសារតែអ្នកដឹងរឿងមួយអំពីបុគ្គល ប្រទេស ឬក្រុមមួយ អ្នកដឹងគ្រប់យ៉ាងអំពីពួកគេ។ ផែនទីគ្របដណ្ដប់ផ្លូវតែមួយ ឯទឹកដីផ្ទុកទីក្រុងទាំងមូល។",
+    },
+  ];
+
+  return (
+    <div
+      className="rounded-2xl border border-stone-300 bg-white shadow-sm overflow-hidden"
+      data-testid="unsanity-card-symptoms"
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-stone-200 bg-gradient-to-r from-amber-900/10 via-stone-100 to-stone-50">
+        <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-amber-800 mb-1">
+          <AlertTriangle className="w-3.5 h-3.5" />
+          {isKh ? "កាត ០២ · ការឃ្លាំមើល" : "Card 02 · Diagnosis"}
+        </div>
+        <h3 className={`font-display font-bold text-xl sm:text-2xl text-stone-900 ${isKh ? "font-khmer leading-snug" : ""}`}>
+          {isKh ? "រោគសញ្ញានៃភាពមិនសមហេតុផល" : "Symptoms of Unsanity"}
+        </h3>
+        <p className={`mt-1 text-sm text-stone-600 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "សូមមើលបីវិធីដែលមនុស្ស «ធម្មតា» ប្រព្រឹត្តដោយមិនសមហេតុផលរាល់ថ្ងៃ ដោយមិនកត់សម្គាល់។"
+            : "Three ways 'normal' people behave unsanely every day without noticing."}
+        </p>
+      </div>
+
+      <div className="divide-y divide-stone-200">
+        {symptoms.map((s) => (
+          <div key={s.id} className="px-5 sm:px-6 py-5" data-testid={`symptom-${s.id}`}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-9 h-9 rounded-md bg-amber-100/60 ring-1 ring-amber-700/30 flex items-center justify-center">
+                <s.Icon className="w-4 h-4 text-amber-800" />
+              </div>
+              <div className={`font-bold text-stone-900 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? s.khLabel : s.enLabel}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Wrong */}
+              <div className="rounded-lg border-2 border-amber-700/40 bg-amber-50/60 p-3">
+                <div className={`text-[10px] font-mono uppercase tracking-widest text-amber-800 mb-1 flex items-center gap-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  <Lock className="w-3 h-3" />
+                  {isKh ? "ភាពមិនសមហេតុផល" : "UNSANE"}
+                </div>
+                <div className={`text-sm text-stone-900 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+                  &ldquo;{isKh ? s.khWrong : s.enWrong}&rdquo;
+                </div>
+              </div>
+              {/* Right */}
+              <div className="rounded-lg border-2 border-teal-500/50 bg-teal-50/60 p-3">
+                <div className={`text-[10px] font-mono uppercase tracking-widest text-teal-700 mb-1 flex items-center gap-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  <Eye className="w-3 h-3" />
+                  {isKh ? "ភាពសមហេតុផល" : "SANE"}
+                </div>
+                <div className={`text-sm text-stone-900 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+                  &ldquo;{isKh ? s.khRight : s.enRight}&rdquo;
+                </div>
+              </div>
+            </div>
+
+            <p className={`mt-3 text-sm text-stone-600 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh ? s.khExplain : s.enExplain}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Card 3: The Cure — Indexing & Dating ────────────────────────────────────
+
+function CureCard({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="rounded-2xl border border-teal-500/40 bg-gradient-to-br from-teal-50 via-white to-stone-50 shadow-sm overflow-hidden"
+      data-testid="unsanity-card-cure"
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-teal-200 bg-gradient-to-r from-teal-900 via-teal-800 to-stone-900 text-stone-100">
+        <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-teal-300 mb-1">
+          <StickyNote className="w-3.5 h-3.5" />
+          {isKh ? "កាត ០៣ · វិធីព្យាបាល" : "Card 03 · The Cure"}
+        </div>
+        <h3 className={`font-display font-bold text-xl sm:text-2xl ${isKh ? "font-khmer leading-snug" : ""}`}>
+          {isKh ? "វិធីព្យាបាល ៖ ត្រឡប់ទៅកាន់ភាពសមហេតុផល" : "The Cure: Returning to Sanity"}
+        </h3>
+      </div>
+
+      <div className="p-5 sm:p-6 space-y-4">
+        <p className={`text-sm sm:text-base text-stone-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "ចម្លើយរបស់លោក Korzybski គឺសាមញ្ញគួរឲ្យភ្ញាក់ផ្អើល ៖ បិទ «ក្រដាសកត់ត្រាផ្លូវចិត្ត» តូចៗមួយចំនួនទៅលើពាក្យរបស់យើង។ វិធីសាស្ត្រនេះមានឈ្មោះថា ការដាក់លិបិក្រម (Indexing) និងការដាក់កាលបរិច្ឆេទ (Dating)។ វិធីសាស្ត្រដ៏សាមញ្ញនេះ ដក់នូវភាសារបស់យើងមកកាន់ពេលជាក់លាក់ និងកន្លែងជាក់លាក់ — ហើយដោយធ្វើបែបនេះ បំបែកការបោកបញ្ឆោតនៃស្លាកអចិន្ត្រៃយ៍ ដាច់ខាត។"
+            : "Korzybski's answer is surprisingly simple: stick a few small 'mental Post-it notes' onto our words. The technique is called Indexing and Dating. It pins our language down to a specific time and a specific case — and by doing that, breaks the illusion of permanent, absolute labels."}
+        </p>
+
+        <div className="rounded-xl border-2 border-dashed border-teal-500/50 bg-white p-4">
+          <div className={`text-[10px] font-mono uppercase tracking-[0.25em] text-teal-700 mb-3 flex items-center gap-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            <StickyNote className="w-3.5 h-3.5" />
+            {isKh ? "ឧទាហរណ៍ផ្ទាល់" : "Live example"}
+          </div>
+
+          {/* Before */}
+          <div className="flex items-start gap-3 mb-3" data-testid="cure-before">
+            <div className="w-7 h-7 rounded-md bg-amber-100/70 ring-1 ring-amber-700/30 flex items-center justify-center flex-shrink-0">
+              <Lock className="w-3.5 h-3.5 text-amber-800" />
+            </div>
+            <div className="flex-1">
+              <div className={`text-[10px] font-mono uppercase tracking-widest text-amber-800 mb-0.5 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "មុន ៖ ស្លាកអចិន្ត្រៃយ៍" : "Before · permanent label"}
+              </div>
+              <div className={`text-base text-stone-900 italic ${isKh ? "font-khmer not-italic leading-loose" : ""}`}>
+                &ldquo;{isKh ? "បច្ចេកវិទ្យា គឺ មិនល្អ។" : "Technology is bad."}&rdquo;
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-stone-500 my-2 ml-2">
+            <ArrowRight className="w-4 h-4" />
+            <span className={`text-xs ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "បន្ថែម «ក្រដាសកត់ត្រាផ្លូវចិត្ត» ៖ ប្រភេទណា? ពេលណា?" : "Add 'mental Post-it notes': which kind? when?"}
+            </span>
+          </div>
+
+          {/* After */}
+          <div className="flex items-start gap-3" data-testid="cure-after">
+            <div className="w-7 h-7 rounded-md bg-teal-100 ring-1 ring-teal-500/40 flex items-center justify-center flex-shrink-0">
+              <Eye className="w-3.5 h-3.5 text-teal-700" />
+            </div>
+            <div className="flex-1">
+              <div className={`text-[10px] font-mono uppercase tracking-widest text-teal-700 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {isKh ? "ក្រោយ ៖ ដាក់លិបិក្រម + កាលបរិច្ឆេទ" : "After · indexed + dated"}
+              </div>
+              <div className={`text-base text-stone-900 ${isKh ? "font-khmer leading-loose" : "italic"}`}>
+                &ldquo;{isKh
+                  ? "បច្ចេកវិទ្យា(បណ្ដាញសង្គម) ក្នុងឆ្នាំ(២០២៦) កំពុងបង្កការថប់បារម្ភ។"
+                  : "Technology(social media) in Year(2026) is causing anxiety."}&rdquo;
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-teal-100 text-teal-800 border border-teal-500/40">
+                  <Tag className="w-3 h-3" />
+                  {isKh ? "លិបិក្រម ៖ បណ្ដាញសង្គម" : "INDEX: social media"}
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2 py-0.5 rounded bg-teal-100 text-teal-800 border border-teal-500/40">
+                  <Calendar className="w-3 h-3" />
+                  {isKh ? "កាលបរិច្ឆេទ ៖ ២០២៦" : "DATE: 2026"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-teal-500/30 bg-teal-50/50 p-3 flex items-start gap-2">
+          <Sparkles className="w-4 h-4 text-teal-700 mt-0.5 flex-shrink-0" />
+          <p className={`text-sm text-stone-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "កុំនិយាយអំពី «បច្ចេកវិទ្យា»។ និយាយអំពី បច្ចេកវិទ្យា(មួយណា) នៅឆ្នាំ(មួយណា) សម្រាប់(នរណា)។ ផែនទីរបស់អ្នក ប្រសើរឡើងភ្លាមៗ — ហើយព្រលឹងរបស់អ្នកក៏ស្ងប់ស្ងាត់ដែរ។"
+              : "Don't talk about 'technology'. Talk about technology(which one) in year(which one) for(whom). Your map gets sharper instantly — and your mind gets quieter with it."}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 3 · Translation Matrix
 // ════════════════════════════════════════════════════════════════════════════
 
 type Pair = {

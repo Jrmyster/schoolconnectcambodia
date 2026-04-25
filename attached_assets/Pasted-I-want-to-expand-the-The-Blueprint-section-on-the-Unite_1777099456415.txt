@@ -1,0 +1,35 @@
+I want to expand the 'The Blueprint' section on the United States page by adding a detailed module called 'The Machinery of Law: Checks and Balances' (យន្តការនៃច្បាប់៖ ការត្រួតពិនិត្យ និងតុល្យភាពអំណាច). Please implement the following cleanly using a historical, structured aesthetic (parchment backgrounds, navy blues, and patriotic reds):
+
+1. Routing & Placement:
+
+Integrate this directly below the existing 'Constitution & Bill of Rights' cards on the US page.
+
+2. Card 1: The Three Engines of Power (អំណាចទាំងបី):
+
+Detail the specific roles of the three branches:
+
+Legislative (Congress/នីតិប្បញ្ញត្តិ): The Architects. They debate, write, and propose the laws. Composed of the House and the Senate.
+
+Executive (President/នីតិប្រតិបត្តិ): The Operators. They sign the laws, enforce them, and run the military and government agencies.
+
+Judicial (Supreme Court/តុលាការ): The Referees. They measure the new laws against the Constitution. If a law breaks the rules of the Blueprint, they strike it down.
+
+3. Card 2: How a Bill Becomes a Law (ដំណើរការអនុម័តច្បាប់):
+
+The Proposal: A law starts as an idea (a 'Bill') in Congress. It must pass both the House and the Senate with a simple majority (over 50%).
+
+The President's Desk: If it passes Congress, it travels to the President. The President has two choices:
+
+Sign it (ចុះហត្ថលេខា): It immediately becomes a permanent Law.
+
+Veto it (វេតូ/បដិសេធ): The President stamps 'NO' and sends it back to Congress.
+
+4. Card 3: The Ultimate Override (ការទម្លាក់សិទ្ធិវេតូ):
+
+Explain that a Veto is not absolute. If the President vetoes a bill, Congress gets one final chance. If they can gather a massive 2/3 supermajority vote in both houses, they override the President. The bill becomes a law anyway. This proves that ultimately, the shared power of the people outranks the single power of the President.
+
+5. Formatting & UI:
+
+Use clean flow-chart style icons (e.g., a scroll for a Bill, a pen for a Signature, a gavel for the Court).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
