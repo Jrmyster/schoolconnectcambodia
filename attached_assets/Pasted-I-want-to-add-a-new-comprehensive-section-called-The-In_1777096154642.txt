@@ -1,0 +1,63 @@
+I want to add a new comprehensive section called 'The Invisible Enemy: Viruses & Handwashing' (សត្រូវដែលមើលមិនឃើញ៖ វីរុស និងការលាងដៃ) to the 'Public Health' page. Please implement the following cleanly using a clean, clinical aesthetic (sterile whites, microscopic blues, and alert reds):
+
+1. Routing & Navigation:
+
+Create a new component ViralPathogens.jsx.
+
+Integrate this directly below the existing Epidemiology or Vaccines sections on the Public Health page.
+
+2. The Science of Soap (វិទ្យាសាស្ត្រនៃសាប៊ូ):
+
+Explain why we wash our hands. Don't just say 'it gets rid of germs.' Explain the chemistry.
+
+The Lipid Envelope: Many dangerous viruses (like the Flu and COVID-19) are protected by an oily outer shell (a lipid bilayer).
+
+The Chemical Weapon: Soap molecules are amphiphilic—one end loves water, and the other end loves oil. When you wash your hands, the oil-loving end of the soap acts like a microscopic crowbar. It stabs into the virus's oily shell, violently tears the virus apart, and then the water-loving end washes the dead pieces down the drain. Water alone cannot do this!
+
+3. The Rogues Gallery (បញ្ជីវីរុសទូទៅ):
+
+Create a categorized, responsive grid of cards displaying the most common human viruses. Use this exact data and ensure headings are bilingual (English/Khmer):
+
+Respiratory Viruses (វីរុសផ្លូវដង្ហើម):
+
+Influenza A & B: Causes the seasonal flu.
+
+SARS-CoV-2: Causes COVID-19.
+
+Rhinovirus: The primary cause of the common cold.
+
+Respiratory Syncytial Virus (RSV): Causes severe respiratory infections, especially dangerous for children and the elderly.
+
+Adenovirus: Causes respiratory issues, conjunctivitis (pink eye), or fever.
+
+Gastrointestinal and Liver Viruses (វីរុសក្រពះពោះវៀន និងថ្លើម):
+
+Norovirus: Causes highly contagious viral gastroenteritis ('stomach flu').
+
+Rotavirus: A very common cause of severe diarrhea in children.
+
+Hepatitis A, B, C, D, and E: Viruses that cause inflammation and damage to the liver.
+
+Common Skin and Systemic Viruses (វីរុសស្បែក និងប្រព័ន្ធរាងកាយ):
+
+Herpes Simplex Virus (HSV-1 & HSV-2): Causes oral and genital herpes.
+
+Varicella-Zoster Virus (VZV): Causes chickenpox in children and shingles in adults.
+
+Human Papillomavirus (HPV): Causes warts and is directly linked to certain cancers.
+
+Epstein-Barr Virus (EBV): Causes infectious mononucleosis.
+
+Blood-Borne and Other Viruses (វីរុសក្នុងឈាម និងផ្សេងៗ):
+
+HIV (Human Immunodeficiency Virus): Attacks the immune system and causes AIDS.
+
+Dengue/Zika Virus: Dangerous mosquito-borne viruses prevalent in tropical climates.
+
+Rabies Virus: A fatal virus transmitted by animal bites that attacks the central nervous system.
+
+4. Formatting & UI:
+
+Use clear, distinct icons for each category (e.g., lungs for respiratory, a stomach for GI, a mosquito for blood-borne).
+
+Ensure the layout collapses neatly on mobile devices.
