@@ -715,6 +715,143 @@ const PUZZLES: Array<{
     explainEn: "“its” = belonging to it (no apostrophe!). “it's” = it is. “its'” isn't a word.",
     explainKh: "“its” = ជា​របស់​វា (គ្មាន apostrophe!)។ “it's” = it is។ “its'” មិនមែន​ជា​ពាក្យ​ទេ។",
   },
+  // ── 17 new homophone puzzles appended below to bring the total to 25 ──────
+  {
+    sentenceEn: "The dog wagged ___ tail.",
+    sentenceKh: "ឆ្កែ​បាន​គ្រវី​កន្ទុយ​របស់ ___។",
+    options: ["its", "it's"],
+    answer: "its",
+    explainEn: "“its” shows possession (the tail belongs to the dog). “it's” always means “it is”.",
+    explainKh: "“its” បង្ហាញ​ភាព​ជា​ម្ចាស់ (កន្ទុយ​ជា​របស់​ឆ្កែ)។ “it's” ជានិច្ច​មាន​ន័យ​ថា “it is”។",
+  },
+  {
+    sentenceEn: "Put the books over ___ on the table.",
+    sentenceKh: "ដាក់​សៀវភៅ ___ លើ​តុ។",
+    options: ["their", "there", "they're"],
+    answer: "there",
+    explainEn: "“there” points to a place. “their” shows possession, “they're” = they are.",
+    explainKh: "“there” ចង្អុល​ទៅ​កន្លែង។ “their” បង្ហាញ​ភាព​ជា​ម្ចាស់, “they're” = they are។",
+  },
+  {
+    sentenceEn: "___ going to the market later.",
+    sentenceKh: "___ កំពុង​នឹង​ទៅ​ផ្សារ​នៅ​ពេល​ក្រោយ។",
+    options: ["their", "there", "they're"],
+    answer: "they're",
+    explainEn: "“they're” = they are. The sentence needs a subject + verb (“they are going”).",
+    explainKh: "“they're” = they are។ ប្រយោគ​ត្រូវការ​ប្រធាន + កិរិយា (“they are going”)។",
+  },
+  {
+    sentenceEn: "Can you ___ the birds singing?",
+    sentenceKh: "តើ​អ្នក​អាច ___ បក្សី​ច្រៀង​ទេ?",
+    options: ["hear", "here"],
+    answer: "hear",
+    explainEn: "“hear” means to listen with your ears. “here” is a place — this spot.",
+    explainKh: "“hear” មាន​ន័យ​ថា ស្ដាប់​ដោយ​ត្រចៀក។ “here” ជា​ទី​កន្លែង — ត្រង់​នេះ។",
+  },
+  {
+    sentenceEn: "Please ___ your name on the paper.",
+    sentenceKh: "សូម ___ ឈ្មោះ​របស់​អ្នក​លើ​ក្រដាស។",
+    options: ["right", "write"],
+    answer: "write",
+    explainEn: "“write” means to put words on paper. “right” means correct or the opposite of left.",
+    explainKh: "“write” មាន​ន័យ​ថា សរសេរ​ពាក្យ​លើ​ក្រដាស។ “right” មាន​ន័យ​ថា ត្រឹមត្រូវ ឬ​ផ្ទុយ​ពី​ឆ្វេង។",
+  },
+  {
+    sentenceEn: "The boat will set ___ tomorrow.",
+    sentenceKh: "ទូក​នឹង​ចេញ ___ ថ្ងៃ​ស្អែក។",
+    options: ["sail", "sale"],
+    answer: "sail",
+    explainEn: "“sail” is the cloth that catches the wind on a boat (and the action of sailing). “sale” means a discount.",
+    explainKh: "“sail” គឺ​ជា​ក្ដារ​បាញ់​ខ្យល់​នៅ​លើ​ទូក (ហើយ​ជា​សកម្មភាព​ជិះ​ទូក)។ “sale” មាន​ន័យ​ថា លក់​បញ្ចុះ​តម្លៃ។",
+  },
+  {
+    sentenceEn: "I would like a ___ of cake.",
+    sentenceKh: "ខ្ញុំ​ចង់​បាន​នំ​មួយ ___។",
+    options: ["piece", "peace"],
+    answer: "piece",
+    explainEn: "A “piece” is a portion — like a slice of cake. “peace” means calm or no war.",
+    explainKh: "“piece” គឺ​ជា​ចំណែក — ដូច​ជា​ចំណិត​នំ។ “peace” មាន​ន័យ​ថា សន្តិភាព។",
+  },
+  {
+    sentenceEn: "She has been sick and feels very ___.",
+    sentenceKh: "នាង​បាន​ឈឺ​ហើយ​មាន​អារម្មណ៍​ ___ ខ្លាំង​ណាស់។",
+    options: ["week", "weak"],
+    answer: "weak",
+    explainEn: "“weak” = not strong. “week” = 7 days.",
+    explainKh: "“weak” = មិន​រឹង​មាំ។ “week” = ៧ ថ្ងៃ។",
+  },
+  {
+    sentenceEn: "We need to ___ at the library at noon.",
+    sentenceKh: "យើង​ត្រូវ ___ នៅ​បណ្ណាល័យ​នៅ​ថ្ងៃ​ត្រង់។",
+    options: ["meet", "meat"],
+    answer: "meet",
+    explainEn: "“meet” means to come together. “meat” is food from animals.",
+    explainKh: "“meet” មាន​ន័យ​ថា ជួប​គ្នា។ “meat” ជា​សាច់ — អាហារ​ពី​សត្វ។",
+  },
+  {
+    sentenceEn: "He dug a deep ___ in the dirt.",
+    sentenceKh: "គាត់​បាន​ជីក ___ ដ៏​ជ្រៅ​មួយ​នៅ​ក្នុង​ដី។",
+    options: ["whole", "hole"],
+    answer: "hole",
+    explainEn: "A “hole” is an empty space dug into the ground. “whole” means complete or all of something.",
+    explainKh: "“hole” គឺ​ជា​រន្ធ​នៅ​ក្នុង​ដី។ “whole” មាន​ន័យ​ថា ទាំង​មូល ឬ​ពេញ។",
+  },
+  {
+    sentenceEn: "Did you ___ the new movie yet?",
+    sentenceKh: "តើ​អ្នក​បាន ___ ភាពយន្ត​ថ្មី​ហើយ​ឬ​នៅ?",
+    options: ["sea", "see"],
+    answer: "see",
+    explainEn: "“see” = to look at with your eyes. “sea” is a large body of salt water.",
+    explainKh: "“see” = មើល​ឃើញ​ដោយ​ភ្នែក។ “sea” គឺ​ជា​សមុទ្រ — ទឹក​ប្រៃ​ដ៏​ធំ​មួយ។",
+  },
+  {
+    sentenceEn: "I need to ___ some rice at the store.",
+    sentenceKh: "ខ្ញុំ​ត្រូវ ___ អង្ករ​នៅ​ហាង។",
+    options: ["by", "buy", "bye"],
+    answer: "buy",
+    explainEn: "“buy” = to purchase with money. “by” = next to or how. “bye” = goodbye.",
+    explainKh: "“buy” = ទិញ​ជាមួយ​លុយ។ “by” = នៅ​ក្បែរ ឬ​មធ្យោបាយ។ “bye” = លាហើយ។",
+  },
+  {
+    sentenceEn: "The ___ shines brightly today.",
+    sentenceKh: "___ ភ្លឺ​ខ្លាំង​នៅ​ថ្ងៃ​នេះ។",
+    options: ["sun", "son"],
+    answer: "sun",
+    explainEn: "The “sun” is the bright star in the sky. A “son” is a male child.",
+    explainKh: "“sun” គឺ​ជា​ព្រះ​អាទិត្យ — ផ្កាយ​ភ្លឺ​នៅ​លើ​មេឃ។ “son” គឺ​ជា​កូន​ប្រុស។",
+  },
+  {
+    sentenceEn: "I have ___ brothers and one sister.",
+    sentenceKh: "ខ្ញុំ​មាន​បង​ប្អូន​ប្រុស ___ នាក់ និង​ប្អូន​ស្រី​ម្នាក់។",
+    options: ["to", "too", "two"],
+    answer: "two",
+    explainEn: "“two” is the number 2. “to” shows direction, “too” means also/very.",
+    explainKh: "“two” ជា​លេខ ២។ “to” បង្ហាញ​ទិសដៅ, “too” មាន​ន័យ​ថា ផងដែរ/ខ្លាំង។",
+  },
+  {
+    sentenceEn: "Is that ___ bicycle?",
+    sentenceKh: "តើ​នោះ​ជា​កង់​របស់ ___ ទេ?",
+    options: ["your", "you're"],
+    answer: "your",
+    explainEn: "“your” shows possession (the bike belongs to you). “you're” = you are.",
+    explainKh: "“your” បង្ហាញ​ភាព​ជា​ម្ចាស់ (កង់​ជា​របស់​អ្នក)។ “you're” = you are។",
+  },
+  {
+    sentenceEn: "I think ___ going to be a great student.",
+    sentenceKh: "ខ្ញុំ​គិត​ថា ___ នឹង​ក្លាយ​ជា​សិស្ស​ដ៏​អស្ចារ្យ​ម្នាក់។",
+    options: ["your", "you're"],
+    answer: "you're",
+    explainEn: "“you're” = you are. The sentence needs a subject + verb (“you are going”).",
+    explainKh: "“you're” = you are។ ប្រយោគ​ត្រូវការ​ប្រធាន + កិរិយា (“you are going”)។",
+  },
+  {
+    sentenceEn: "The sky is very ___ today.",
+    sentenceKh: "មេឃ ___ ខ្លាំង​នៅ​ថ្ងៃ​នេះ។",
+    options: ["blue", "blew"],
+    answer: "blue",
+    explainEn: "“blue” is a color. “blew” is the past tense of “blow” (the wind blew).",
+    explainKh: "“blue” គឺ​ជា​ពណ៌​ខៀវ។ “blew” គឺ​ជា​អតីតកាល​នៃ “blow” (ខ្យល់​បាន​បក់)។",
+  },
 ];
 
 function TrickyWords({ isKh }: { isKh: boolean }) {
@@ -725,6 +862,18 @@ function TrickyWords({ isKh }: { isKh: boolean }) {
   const cur = PUZZLES[idx];
   const isAnswered = picked !== null;
   const isRight = picked === cur.answer;
+
+  // Shuffle the option buttons so the correct answer isn't always in the same
+  // position. Stable per question (recomputes only when `idx` changes).
+  const shuffledOptions = useMemo(() => {
+    const arr = [...cur.options];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx]);
 
   const pick = (opt: string) => {
     if (isAnswered) return; // lock once chosen
@@ -798,7 +947,7 @@ function TrickyWords({ isKh }: { isKh: boolean }) {
 
         {/* Options */}
         <div className="flex flex-wrap gap-3 mb-5">
-          {cur.options.map((opt) => {
+          {shuffledOptions.map((opt) => {
             const isCorrectOpt = opt === cur.answer;
             const isPickedOpt = opt === picked;
             const styles = !isAnswered
