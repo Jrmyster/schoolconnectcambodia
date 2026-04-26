@@ -1070,6 +1070,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Two-section vocabulary — animals at home and on the farm, then wildlife from across the world. Tap a card to hear the English name.",
         descKh: "វាក្យសព្ទពីរផ្នែក — សត្វនៅផ្ទះ និងនៅកសិដ្ឋាន រួចសត្វព្រៃពីជុំវិញពិភពលោក។ ប៉ះកាតដើម្បីស្ដាប់ឈ្មោះជាភាសាអង់គ្លេស។",
       },
+      {
+        href: "/for-kids/feelings",
+        labelEn: "My Feelings",
+        labelKh: "អារម្មណ៍របស់ខ្ញុំ",
+        icon: Smile,
+        descEn: "Big-emoji feelings vocabulary — happy, sad, angry, scared, tired, hungry. Tap a face to hear the English word and learn to talk about emotions.",
+        descKh: "វាក្យសព្ទអារម្មណ៍ដែលមានរូបធំៗ — សប្បាយចិត្ត ពិបាកចិត្ត ខឹង ភ័យខ្លាច អស់កម្លាំង ឃ្លាន។ ប៉ះមុខដើម្បីស្ដាប់ពាក្យអង់គ្លេស ហើយរៀននិយាយពីអារម្មណ៍។",
+      },
     ],
   },
 ];
