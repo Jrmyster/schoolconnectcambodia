@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, Fan, Flame, Lightbulb, Sprout, Blocks,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -1061,6 +1061,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sun,
         descEn: "Tap-to-hear vocabulary cards for everyday actions — wake up, wash hands, brush teeth, eat, play, sleep — with bilingual health tips.",
         descKh: "កាតវាក្យសព្ទចុចស្ដាប់សម្រាប់សកម្មភាពប្រចាំថ្ងៃ — ភ្ញាក់ពីដេក លាងដៃ ដុសធ្មេញ ញ៉ាំ លេង ដេក — មានគន្លឹះសុខភាពពីរភាសា។",
+      },
+      {
+        href: "/for-kids/animals",
+        labelEn: "Animals: Near & Far",
+        labelKh: "សត្វ៖ ជិត និងឆ្ងាយ",
+        icon: PawPrint,
+        descEn: "Two-section vocabulary — animals at home and on the farm, then wildlife from across the world. Tap a card to hear the English name.",
+        descKh: "វាក្យសព្ទពីរផ្នែក — សត្វនៅផ្ទះ និងនៅកសិដ្ឋាន រួចសត្វព្រៃពីជុំវិញពិភពលោក។ ប៉ះកាតដើម្បីស្ដាប់ឈ្មោះជាភាសាអង់គ្លេស។",
       },
     ],
   },
