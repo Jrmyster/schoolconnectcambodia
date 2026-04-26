@@ -429,6 +429,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: FlaskRound,
       },
       {
+        href: "/science/chemical-engineering",
+        labelEn: "Chemical Engineering",
+        labelKh: "វិស្វកម្មគីមី",
+        icon: Factory,
+        descEn: "From a glass test tube to a multi-ton steel factory — the three pillars (Mass · Energy · Reactions), the four core university classes, and how chemical engineers deliver clean water, safe food, vaccines, and biofuels at the scale of a province.",
+        descKh: "ពីបំពង់សាកល្បងកញ្ចក់ ទៅរោងចក្រដែករាប់តោន — សសរស្តម្ភបី (ម៉ាស · ថាមពល · ប្រតិកម្ម) មុខវិជ្ជាស្នូលបួននៅសាកលវិទ្យាល័យ និងរបៀបដែលវិស្វករគីមីផ្តល់ទឹកស្អាត ស្បៀងសុវត្ថិភាព វ៉ាក់សាំង និងឥន្ធនៈជីវសាស្ត្រ ក្នុងមាត្រដ្ឋានខេត្ត។",
+      },
+      {
         href: "/science/chemistry/heisenberg",
         labelEn: "9. Quantum Uncertainty (Heisenberg)",
         labelKh: "៩. ភាពមិនប្រាកដប្រជាកង់ទិច (ហៃសិនបឺគ)",
