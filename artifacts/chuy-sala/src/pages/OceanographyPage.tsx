@@ -3,6 +3,7 @@ import {
   Waves,
   Fish,
   Droplets,
+  Droplet,
   Sun,
   Moon,
   Eye,
@@ -12,6 +13,9 @@ import {
   Sparkles,
   Thermometer,
   ArrowRight,
+  Briefcase,
+  Leaf,
+  Mountain,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -139,6 +143,21 @@ export default function OceanographyPage() {
           descKh="កម្ពុជាមានឆ្នេរសមុទ្របណ្តោយ ៤៤៣ គីឡូម៉ែត្រនៅឈូងសមុទ្រថៃ។ ព្រៃកោងកាង និងផ្កាថ្មសមុទ្រកំពុងបំពេញការងារសំខាន់បំផុតនៅឆ្នេរនោះ — ការពារត្រី ឆ្នេរ និងគ្រួសាររបស់យើងពីព្យុះ។"
         >
           <CambodianCoastSpotlight isKh={isKh} />
+        </Section>
+
+        {/* ── Wave divider transitioning from salt sea → fresh water ─ */}
+        <FreshwaterDivider isKh={isKh} />
+
+        {/* ── Tool 5: Limnology, Lake Dynamics & Career Paths ───── */}
+        <Section
+          icon={<Droplet className="w-3.5 h-3.5" />}
+          en="Inland Waters & Career Paths"
+          kh="ទឹកសាបដីគោក និងផ្លូវអាជីព"
+          isKh={isKh}
+          descEn="The salty sea is only half the water story on Earth. Lakes, rivers and wetlands hold the freshwater that we drink and grow rice with — and a whole science is dedicated to understanding them. Below: what that science is, how a lake actually works, and the jobs young Cambodians can build inside the field."
+          descKh="សមុទ្រប្រៃគ្រាន់តែជាពាក់កណ្តាលនៃរឿងទឹកនៅលើផែនដីប៉ុណ្ណោះ។ បឹង ទន្លេ និងតំបន់ដីសើម ផ្ទុកនូវទឹកសាបដែលយើងផឹក និងដាំស្រូវ — ហើយមានវិទ្យាសាស្ត្រទាំងមូលឧទ្ទិសដល់ការយល់ដឹងអំពីពួកវា។ ខាងក្រោម៖ វិទ្យាសាស្ត្រនោះជាអ្វី តើបឹងដំណើរការយ៉ាងណាពិតៗ និងការងារដែលយុវជនកម្ពុជាអាចកសាងនៅក្នុងវិស័យនេះ។"
+        >
+          <LimnologyAndCareers isKh={isKh} />
         </Section>
 
         {/* ── Closing strip ───────────────────────────────────────── */}
@@ -1206,6 +1225,541 @@ function DriftingFishField() {
           </svg>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Wave divider — visual transition from salt sea zones to fresh water
+// ════════════════════════════════════════════════════════════════════════════
+
+function FreshwaterDivider({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 mb-10"
+      data-testid="freshwater-divider"
+    >
+      <div className="relative h-20 flex items-center justify-center">
+        {/* Twin wavy lines fading in from both edges */}
+        <svg
+          viewBox="0 0 800 80"
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+          aria-hidden
+        >
+          <defs>
+            <linearGradient id="ocean-divider-grad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stopColor="#22d3ee" stopOpacity="0" />
+              <stop offset="0.25" stopColor="#22d3ee" stopOpacity="0.55" />
+              <stop offset="0.75" stopColor="#22d3ee" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#22d3ee" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="ocean-divider-grad2" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stopColor="#7dd3fc" stopOpacity="0" />
+              <stop offset="0.5" stopColor="#7dd3fc" stopOpacity="0.4" />
+              <stop offset="1" stopColor="#7dd3fc" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 0 36 Q 80 18 160 36 T 320 36 T 480 36 T 640 36 T 800 36"
+            fill="none"
+            stroke="url(#ocean-divider-grad)"
+            strokeWidth="2"
+          />
+          <path
+            d="M 0 50 Q 80 64 160 50 T 320 50 T 480 50 T 640 50 T 800 50"
+            fill="none"
+            stroke="url(#ocean-divider-grad2)"
+            strokeWidth="1.5"
+          />
+        </svg>
+
+        {/* Centered label pill */}
+        <div className="relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-300/35 bg-[#001428]/85 backdrop-blur-sm shadow-md shadow-cyan-500/10">
+          <Droplet className="w-3.5 h-3.5 text-cyan-300" />
+          <span
+            className={`text-[10px] font-bold tracking-[0.18em] uppercase text-cyan-200 ${
+              isKh ? "font-khmer normal-case tracking-normal text-xs" : ""
+            }`}
+          >
+            {isKh
+              ? "ពីសមុទ្រប្រៃ ទៅកាន់ទឹកសាប"
+              : "From Salt Sea to Fresh Water"}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tool 5: Limnology, Lake Dynamics & Career Paths in Water Sciences
+// ════════════════════════════════════════════════════════════════════════════
+
+function LimnologyAndCareers({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="p-5 sm:p-6 space-y-6">
+      {/* ── Top row: Limnology + Lake Dynamics side-by-side ───── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        {/* CARD 1 — Limnology */}
+        <article
+          className="rounded-2xl border border-cyan-400/25 bg-gradient-to-b from-[#022c44]/80 to-[#001a2e]/80 overflow-hidden flex flex-col"
+          data-testid="card-limnology"
+        >
+          <div className="aspect-[16/9] bg-gradient-to-b from-[#0c4a6e] via-[#075985] to-[#022c44] relative">
+            {/* Stylised Cambodia map: Tonle Sap lake + Mekong river */}
+            <svg viewBox="0 0 320 180" className="w-full h-full" aria-hidden="true">
+              <defs>
+                <linearGradient id="ocean-lim-water" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#7dd3fc" />
+                  <stop offset="1" stopColor="#0ea5e9" />
+                </linearGradient>
+                <linearGradient id="ocean-lim-land" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#365314" />
+                  <stop offset="1" stopColor="#1a2e05" />
+                </linearGradient>
+              </defs>
+
+              {/* Land mass (rough Cambodia-like silhouette) */}
+              <path
+                d="M 40 30 Q 80 18 140 26 Q 210 22 270 38 Q 295 60 285 100 Q 275 145 230 158 Q 170 168 110 158 Q 55 150 35 110 Q 28 70 40 30 Z"
+                fill="url(#ocean-lim-land)"
+                stroke="#22c55e"
+                strokeWidth="0.6"
+                opacity="0.85"
+              />
+
+              {/* Tonle Sap — large blue lake (oblong, NW of centre) */}
+              <ellipse
+                cx="135"
+                cy="78"
+                rx="42"
+                ry="20"
+                fill="url(#ocean-lim-water)"
+                transform="rotate(-25 135 78)"
+                stroke="#bae6fd"
+                strokeWidth="0.8"
+              />
+              <text
+                x="135"
+                y="82"
+                textAnchor="middle"
+                fontSize="8"
+                fontWeight="700"
+                fill="#001428"
+                transform="rotate(-25 135 82)"
+              >
+                Tonle Sap
+              </text>
+
+              {/* Mekong river — winding from north into the south */}
+              <path
+                d="M 180 20 Q 195 50 188 80 Q 180 100 200 120 Q 220 140 215 160"
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 180 20 Q 195 50 188 80 Q 180 100 200 120 Q 220 140 215 160"
+                fill="none"
+                stroke="#bae6fd"
+                strokeWidth="1"
+                strokeLinecap="round"
+                opacity="0.6"
+              />
+              <text
+                x="222"
+                y="98"
+                fontSize="7"
+                fontWeight="700"
+                fill="#bae6fd"
+              >
+                Mekong
+              </text>
+
+              {/* Tonle Sap river link → Mekong */}
+              <path
+                d="M 168 78 Q 180 80 188 82"
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+
+              {/* Wetlands stipple (small fresh-water marshes) */}
+              {[[80, 130], [110, 138], [240, 60], [255, 130]].map(
+                ([cx, cy], i) => (
+                  <g key={i} opacity="0.7">
+                    <circle cx={cx} cy={cy} r="4" fill="#0ea5e9" />
+                    <circle cx={cx + 6} cy={cy + 2} r="2.5" fill="#38bdf8" />
+                    <circle cx={cx - 4} cy={cy + 3} r="2" fill="#7dd3fc" />
+                  </g>
+                ),
+              )}
+
+              {/* Compass / cardinal direction marker */}
+              <g transform="translate(280 28)">
+                <circle r="9" fill="#001428" stroke="#22d3ee" strokeWidth="0.8" />
+                <text textAnchor="middle" y="-2" fontSize="6" fontWeight="700" fill="#22d3ee">N</text>
+                <line x1="0" y1="-7" x2="0" y2="-9" stroke="#22d3ee" strokeWidth="1" />
+              </g>
+            </svg>
+          </div>
+          <div className="p-5 flex-1 flex flex-col">
+            <div className="flex items-center gap-2 mb-1">
+              <Droplet className="w-4 h-4 text-cyan-300 shrink-0" />
+              <h4
+                className={`font-display font-bold text-white text-base leading-snug ${
+                  isKh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {isKh
+                  ? "ទន្លេសាស្ត្រ៖ វិទ្យាសាស្ត្រនៃទឹកសាប"
+                  : "Limnology — The Science of Inland Waters"}
+              </h4>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-cyan-300/75 mb-3">
+              <span className="uppercase tracking-[0.18em] font-bold">Limnology</span>
+              <span className="opacity-60">·</span>
+              <span className="font-khmer text-xs">ទន្លេសាស្ត្រ</span>
+            </div>
+            <p
+              className={`text-cyan-100/80 text-sm mb-3 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "ខណៈដែលមហាសមុទ្រវិទ្យាសិក្សាសមុទ្រប្រៃ ទន្លេសាស្ត្រផ្តោតលើប្រព័ន្ធអេកូឡូស៊ីទឹកសាបនៃផែនដី — បឹង ទន្លេ តំបន់ដីសើម និងទឹកក្រោមដី។ វាសិក្សាពីរបៀបដែលទឹកហូរ អ្វីដែលរស់នៅក្នុងវា និងអ្វីដែលរក្សាវាឱ្យស្អាត។"
+                : "While oceanography studies the salty seas, limnology focuses on Earth's freshwater ecosystems — lakes, rivers, wetlands and groundwater. It looks at how water moves, what lives inside it, and what keeps it clean."}
+            </p>
+            <div className="rounded-xl bg-cyan-500/10 border border-cyan-400/30 px-3 py-2 mt-auto">
+              <p
+                className={`text-cyan-100/85 text-xs ${
+                  isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                }`}
+              >
+                {isKh
+                  ? "🇰🇭 ទន្លេសាស្ត្រគឺជារបៀបដែលអ្នកវិទ្យាសាស្ត្រយល់ដឹង និងការពារប្រព័ន្ធទឹកសាបដ៏ធំៗ ដូចជាបឹងទន្លេសាប និងទន្លេមេគង្គ — ដែលផ្តល់អាហារ និងទឹកស្អាតដល់ប្រជាជនកម្ពុជារាប់លាននាក់ជារៀងរាល់ថ្ងៃ។"
+                  : "🇰🇭 Limnology is how scientists understand and protect huge freshwater systems like the Tonle Sap lake and the Mekong river — which feed and water millions of Cambodians every single day."}
+              </p>
+            </div>
+          </div>
+        </article>
+
+        {/* CARD 2 — Dynamics of a Lake */}
+        <article
+          className="rounded-2xl border border-sky-400/25 bg-gradient-to-b from-[#0a1f3a]/80 to-[#001229]/80 overflow-hidden flex flex-col"
+          data-testid="card-lake-dynamics"
+        >
+          <div className="aspect-[16/9] bg-gradient-to-b from-[#bae6fd] via-[#075985] to-[#001229] relative">
+            {/* Cross-section: watershed → thermal layers → mixing */}
+            <svg viewBox="0 0 320 180" className="w-full h-full" aria-hidden="true">
+              <defs>
+                <linearGradient id="ocean-lake-warm" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#fbbf24" stopOpacity="0.75" />
+                  <stop offset="1" stopColor="#0ea5e9" stopOpacity="0.6" />
+                </linearGradient>
+                <linearGradient id="ocean-lake-cold" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#1d4ed8" />
+                  <stop offset="1" stopColor="#0c1e3f" />
+                </linearGradient>
+              </defs>
+
+              {/* Sky */}
+              <rect x="0" y="0" width="320" height="40" fill="#bae6fd" opacity="0.3" />
+              <circle cx="40" cy="22" r="9" fill="#fde047" />
+
+              {/* Mountain / watershed (left side) */}
+              <polygon points="0,80 60,18 110,80" fill="#1f2937" />
+              <polygon points="0,80 60,18 110,80" fill="#22c55e" opacity="0.35" />
+              {/* Snow cap */}
+              <polygon points="50,30 60,18 70,30 65,34 55,34" fill="#f8fafc" />
+
+              {/* Mountain on right */}
+              <polygon points="220,80 270,32 320,80" fill="#1f2937" />
+              <polygon points="220,80 270,32 320,80" fill="#22c55e" opacity="0.35" />
+
+              {/* Rain droplets feeding the watershed */}
+              {[[20, 30], [35, 45], [80, 38], [95, 52], [240, 30], [260, 50], [290, 38]].map(
+                ([cx, cy], i) => (
+                  <ellipse key={i} cx={cx} cy={cy} rx="1.2" ry="3" fill="#bae6fd" opacity="0.8" />
+                ),
+              )}
+
+              {/* Lake basin floor */}
+              <path
+                d="M 0 80 L 110 80 Q 160 175 210 80 L 320 80 L 320 180 L 0 180 Z"
+                fill="#1f1300"
+              />
+
+              {/* Warm epilimnion (top warm layer) */}
+              <path
+                d="M 0 80 L 110 80 Q 160 110 210 80 L 320 80 L 320 110 L 0 110 Z"
+                fill="url(#ocean-lake-warm)"
+              />
+
+              {/* Thermocline (transition band) */}
+              <path
+                d="M 0 110 L 110 110 Q 160 130 210 110 L 320 110 L 320 124 L 0 124 Z"
+                fill="#fb923c"
+                opacity="0.45"
+              />
+
+              {/* Cold hypolimnion (bottom cold layer) */}
+              <path
+                d="M 0 124 L 110 124 Q 160 165 210 124 L 320 124 L 320 175 L 0 175 Z"
+                fill="url(#ocean-lake-cold)"
+              />
+
+              {/* Seasonal mixing arrows (vertical loops) */}
+              <g stroke="#fde047" strokeWidth="1.4" fill="none" opacity="0.85">
+                <path d="M 145 96 Q 140 130 150 158" />
+                <polygon points="148,154 150,160 153,154" fill="#fde047" />
+                <path d="M 175 158 Q 180 130 170 96" />
+                <polygon points="172,100 170,94 168,100" fill="#fde047" />
+              </g>
+
+              {/* Layer labels */}
+              <g fontSize="7" fontWeight="700" fill="#001428">
+                <text x="8" y="98">
+                  Warm
+                </text>
+                <text x="8" y="120" fill="#fff">
+                  Mix
+                </text>
+                <text x="8" y="142" fill="#bae6fd">
+                  Cold
+                </text>
+              </g>
+
+              {/* Watershed label */}
+              <text x="62" y="78" textAnchor="middle" fontSize="6" fontWeight="700" fill="#fde047">
+                Watershed
+              </text>
+
+              {/* A small fish in the warm layer + one in cold layer */}
+              <g>
+                <ellipse cx="80" cy="100" rx="5" ry="2.4" fill="#fde047" />
+                <polygon points="85,100 90,97 90,103" fill="#fde047" />
+                <ellipse cx="240" cy="148" rx="5" ry="2.4" fill="#bae6fd" />
+                <polygon points="235,148 230,145 230,151" fill="#bae6fd" />
+              </g>
+            </svg>
+          </div>
+          <div className="p-5 flex-1 flex flex-col">
+            <div className="flex items-center gap-2 mb-1">
+              <Mountain className="w-4 h-4 text-sky-300 shrink-0" />
+              <h4
+                className={`font-display font-bold text-white text-base leading-snug ${
+                  isKh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {isKh ? "ចលនានៃបឹង" : "The Dynamics of a Lake"}
+              </h4>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-sky-300/75 mb-3">
+              <span className="uppercase tracking-[0.18em] font-bold">
+                Lake Dynamics
+              </span>
+              <span className="opacity-60">·</span>
+              <span className="font-khmer text-xs">ចលនានៃបឹង</span>
+            </div>
+            <p
+              className={`text-sky-100/80 text-sm mb-3 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "ដូចគ្នានឹងមហាសមុទ្រដែលមានតំបន់ពន្លឺ បឹងក៏មានចលនាលក្ខណៈរូបវន្តដែរ។ ពួកវាមានដែនដីប្រមូលទឹក (កន្លែងដែលទឹកភ្លៀងហូរចូលគ្នា) ស្រទាប់កម្ដៅ (ទឹកក្តៅនៅខាងលើ ត្រជាក់នៅខាងក្រោម) និងវដ្តតាមរដូវដែលអាហារូបត្ថម្ភលាយឡំចូលគ្នា ផ្តល់អាហារដល់ត្រី និងរុក្ខជាតិ។"
+                : "Just like the ocean has light zones, lakes have physical dynamics. They have a watershed (where rain collects), thermal layers (warm water on top, cold below), and seasonal cycles where everything mixes — bringing nutrients back up to feed fish and plants."}
+            </p>
+            <div className="grid grid-cols-3 gap-2 mt-auto">
+              {[
+                {
+                  en: "Watershed",
+                  kh: "ដែនប្រមូលទឹក",
+                  color: "#22c55e",
+                  bg: "rgba(34,197,94,0.12)",
+                  border: "rgba(34,197,94,0.35)",
+                },
+                {
+                  en: "Thermal layers",
+                  kh: "ស្រទាប់កម្ដៅ",
+                  color: "#fbbf24",
+                  bg: "rgba(251,191,36,0.12)",
+                  border: "rgba(251,191,36,0.35)",
+                },
+                {
+                  en: "Seasonal mix",
+                  kh: "ការលាយតាមរដូវ",
+                  color: "#38bdf8",
+                  bg: "rgba(56,189,248,0.12)",
+                  border: "rgba(56,189,248,0.35)",
+                },
+              ].map((t) => (
+                <div
+                  key={t.en}
+                  className="rounded-lg px-2 py-1.5 text-center border"
+                  style={{ backgroundColor: t.bg, borderColor: t.border }}
+                >
+                  <div
+                    className={`text-[10px] font-bold leading-tight ${
+                      isKh ? "font-khmer text-[11px]" : ""
+                    }`}
+                    style={{ color: t.color }}
+                  >
+                    {isKh ? t.kh : t.en}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+      </div>
+
+      {/* ── CARD 3: Career Paths in Water Sciences ──────────────── */}
+      <article
+        className="rounded-2xl border border-teal-400/25 bg-gradient-to-b from-[#012e2e]/80 to-[#001f29]/80 overflow-hidden"
+        data-testid="card-careers"
+      >
+        <div className="px-5 py-4 border-b border-teal-400/15 flex items-center gap-2">
+          <Briefcase className="w-4 h-4 text-teal-300 shrink-0" />
+          <h4
+            className={`font-display font-bold text-white text-base leading-snug ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {isKh
+              ? "អាជីពក្នុងវិទ្យាសាស្ត្រទឹក"
+              : "Career Paths in Water Sciences"}
+          </h4>
+          <span className="ml-auto hidden sm:flex items-center gap-1.5 text-[10px] text-teal-300/75">
+            <span className="uppercase tracking-[0.18em] font-bold">
+              3 Careers
+            </span>
+            <span className="opacity-60">·</span>
+            <span className="font-khmer text-xs">៣ អាជីព</span>
+          </span>
+        </div>
+
+        <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* HYDROLOGIST */}
+          <div
+            className="rounded-xl border border-cyan-400/30 bg-cyan-500/5 p-4 flex flex-col"
+            data-testid="career-hydrologist"
+          >
+            <div className="w-10 h-10 rounded-lg bg-cyan-400/20 border border-cyan-400/40 flex items-center justify-center mb-3">
+              <Droplets className="w-5 h-5 text-cyan-300" />
+            </div>
+            <h5
+              className={`font-display font-bold text-white text-sm mb-0.5 ${
+                isKh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {isKh ? "អ្នកជំនាញធនធានទឹក" : "Hydrologist"}
+            </h5>
+            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-cyan-300/75 mb-2">
+              <span className="uppercase tracking-[0.18em] font-bold">
+                Hydrologist
+              </span>
+              <span className="opacity-60">·</span>
+              <span className="font-khmer text-xs">អ្នកជំនាញធនធានទឹក</span>
+            </div>
+            <p
+              className={`text-cyan-100/75 text-xs ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "សិក្សាពីរបៀបដែលទឹកធ្វើដំណើរលើដី និងក្រោមដី។ ពួកគេជួយរៀបចំប្រព័ន្ធត្រងទឹក និងគ្រប់គ្រងហានិភ័យទឹកជំនន់ក្នុងរដូវវស្សា។"
+                : "Studies how water moves across the land and underground. Helps engineer water filtration systems and manage flood risks during the monsoon."}
+            </p>
+          </div>
+
+          {/* MARINE BIOLOGIST / AQUATIC ECOLOGIST */}
+          <div
+            className="rounded-xl border border-emerald-400/30 bg-emerald-500/5 p-4 flex flex-col"
+            data-testid="career-marine-biologist"
+          >
+            <div className="w-10 h-10 rounded-lg bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center mb-3">
+              <Fish className="w-5 h-5 text-emerald-300" />
+            </div>
+            <h5
+              className={`font-display font-bold text-white text-sm mb-0.5 ${
+                isKh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {isKh
+                ? "អ្នកជីវវិទ្យាទឹក / អេកូឡូស៊ី"
+                : "Marine Biologist / Aquatic Ecologist"}
+            </h5>
+            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-emerald-300/75 mb-2">
+              <span className="uppercase tracking-[0.18em] font-bold">
+                Aquatic Ecologist
+              </span>
+              <span className="opacity-60">·</span>
+              <span className="font-khmer text-xs">អ្នកជីវវិទ្យាទឹក</span>
+            </div>
+            <p
+              className={`text-emerald-100/75 text-xs ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "សិក្សាពីសត្វ និងរុក្ខជាតិដែលរស់នៅក្នុងទឹក។ ពួកគេតាមដានចំនួនត្រី និងការពារប្រភេទសត្វដែលជិតផុតពូជ ដូចជាផ្សោតទន្លេមេគង្គជាដើម។"
+                : "Studies the living organisms inside the water. They track fish populations and protect endangered species — like the Mekong river dolphin."}
+            </p>
+          </div>
+
+          {/* ENVIRONMENTAL ENGINEER */}
+          <div
+            className="rounded-xl border border-teal-400/30 bg-teal-500/5 p-4 flex flex-col"
+            data-testid="career-environmental-engineer"
+          >
+            <div className="w-10 h-10 rounded-lg bg-teal-400/20 border border-teal-400/40 flex items-center justify-center mb-3">
+              <Leaf className="w-5 h-5 text-teal-300" />
+            </div>
+            <h5
+              className={`font-display font-bold text-white text-sm mb-0.5 ${
+                isKh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {isKh ? "វិស្វករបរិស្ថាន" : "Environmental Engineer"}
+            </h5>
+            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-teal-300/75 mb-2">
+              <span className="uppercase tracking-[0.18em] font-bold">
+                Environmental Engineer
+              </span>
+              <span className="opacity-60">·</span>
+              <span className="font-khmer text-xs">វិស្វករបរិស្ថាន</span>
+            </div>
+            <p
+              className={`text-teal-100/75 text-xs ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "បង្កើតបច្ចេកវិទ្យាសម្អាតទឹកកខ្វក់ កសាងទំនប់វារីអគ្គិសនីប្រកបដោយចីរភាព និងការពារទីជម្រកធម្មជាតិពីសំណល់ឧស្សាហកម្ម។"
+                : "Designs technologies to clean polluted water, build sustainable dams, and protect natural habitats from industrial waste."}
+            </p>
+          </div>
+        </div>
+
+        {/* Footer call-to-action strip */}
+        <div className="border-t border-teal-400/15 px-5 py-3 bg-teal-500/5">
+          <p
+            className={`text-teal-100/80 text-xs flex items-center gap-2 ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-teal-300 shrink-0" />
+            {isKh
+              ? "កម្ពុជាត្រូវការអ្នកជំនាញវ័យក្មេងទាំងបីប្រភេទនេះ ដើម្បីការពារទន្លេមេគង្គ បឹងទន្លេសាប និងទឹកស្អាតសម្រាប់មនុស្សជំនាន់ក្រោយ។"
+              : "Cambodia needs young experts in all three of these fields to protect the Mekong, the Tonle Sap, and clean water for the next generation."}
+          </p>
+        </div>
+      </article>
     </div>
   );
 }
