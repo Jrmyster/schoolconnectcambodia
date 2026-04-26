@@ -1,0 +1,31 @@
+I want to add a new comprehensive module called 'The Human Spacecraft: Spacesuit Engineering' (យានអវកាសរាងមនុស្ស៖ វិស្វកម្មសម្លៀកបំពាក់អវកាស) to the 'Explore the Universe' page. Please implement the following cleanly using a deep space aesthetic (void blacks, lunar greys, and high-tech blue accents):
+
+1. Routing & Placement:
+
+Create a new component SpacesuitEngineering.jsx.
+
+Integrate this directly below the 'Cosmic Ruler' section on the Cosmos page.
+
+2. Card 1: The Vacuum & Pressure (សុញ្ញកាស និងសម្ពាធ):
+
+The Problem: Explain that space is a vacuum (there is no air). Without atmospheric pressure pushing against our bodies, the water inside our blood and tissues would instantly turn to gas and boil, even at normal body temperatures.
+
+The Solution: The 'Pressure Bladder'. Explain that the inner layer of a spacesuit is basically a human-shaped balloon inflated with oxygen. It mimics the heavy pressure of Earth's invisible ocean of air so the astronaut's body functions normally.
+
+3. Card 2: Extreme Temperature Control (ការគ្រប់គ្រងសីតុណ្ហភាពខ្លាំង):
+
+The Problem: In space, if you step into the sunlight, temperatures hit 120°C (boiling). Step into the shadow, and it drops to -150°C (freezing).
+
+The Solution: The 'Liquid Cooling and Ventilation Garment'. Astronauts wear a suit woven with miles of tiny plastic pipes pumping cool water across their skin to keep them from overheating from their own body heat and the sun. The outer white layers reflect solar radiation and insulate against the extreme cold.
+
+4. Card 3: Micrometeoroids (អាចម៍ផ្កាយតូចៗ):
+
+The Problem: Space is full of tiny rocks and paint chips traveling at 28,000 kilometers per hour. Even a speck of dust at that speed can shoot straight through a human body like a bullet.
+
+The Solution: The 'Thermal Micrometeoroid Garment'. The outermost layers of the suit are engineered with Kevlar (the same material used in bulletproof vests) and specialized fabrics to catch and shatter high-speed impacts before they pierce the pressure balloon.
+
+5. Formatting & UI:
+
+Use clear iconography for each layer (a pressure gauge, a thermometer, and a shield).
+
+Ensure all core concepts, engineering terms, and headings are strictly bilingual (English/Khmer).
