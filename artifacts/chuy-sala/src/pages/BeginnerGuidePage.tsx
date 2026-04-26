@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
-  CalendarDays, Star, CalendarRange, Sun, CheckCircle2,
+  CalendarDays, Star, CalendarRange, Sun, CheckCircle2, HelpCircle,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText, speakWord } from "@/lib/speech";
@@ -105,14 +105,15 @@ function numberToKhmerWords(n: number): string {
 export default function BeginnerGuidePage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days" | "months">("alphabet");
+  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days" | "months" | "questions">("alphabet");
 
   const tabs: { id: typeof tab; en: string; kh: string; icon: typeof BookOpen; color: string }[] = [
-    { id: "alphabet", en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,      color: "bg-rose-500" },
-    { id: "numbers",  en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,          color: "bg-sky-500" },
-    { id: "pattern",  en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,       color: "bg-emerald-500" },
-    { id: "days",     en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays,  color: "bg-indigo-500" },
-    { id: "months",   en: "Months of the Year",  kh: KH_TODO("ខែនៃឆ្នាំ"),         icon: CalendarRange, color: "bg-fuchsia-500" },
+    { id: "alphabet",  en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,      color: "bg-rose-500" },
+    { id: "numbers",   en: "Numbers 1 to 100",    kh: KH_TODO("លេខ ១ ដល់ ១០០"),    icon: Hash,          color: "bg-sky-500" },
+    { id: "pattern",   en: "100 to 1,000",        kh: KH_TODO("១០០ ដល់ ១,០០០"),    icon: Layers3,       color: "bg-emerald-500" },
+    { id: "days",      en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays,  color: "bg-indigo-500" },
+    { id: "months",    en: "Months of the Year",  kh: KH_TODO("ខែនៃឆ្នាំ"),         icon: CalendarRange, color: "bg-fuchsia-500" },
+    { id: "questions", en: "Question Words",      kh: KH_TODO("ពាក្យសួរ"),          icon: HelpCircle,    color: "bg-violet-500" },
   ];
 
   return (
@@ -180,6 +181,7 @@ export default function BeginnerGuidePage() {
         {tab === "pattern" && <PatternGuideSection kh={kh} />}
         {tab === "days" && <DaysOfWeekSection kh={kh} />}
         {tab === "months" && <MonthsOfYearSection kh={kh} />}
+        {tab === "questions" && <QuestionWordsGallery kh={kh} />}
       </section>
     </div>
   );
@@ -685,13 +687,14 @@ function PickerColumn({
 
 function SectionHeader({
   kh, en, khText, accent,
-}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" | "indigo" | "fuchsia" }) {
+}: { kh: boolean; en: string; khText: string; accent: "rose" | "sky" | "emerald" | "indigo" | "fuchsia" | "violet" }) {
   const palette = {
     rose:    "from-rose-100 to-pink-100 border-rose-300 text-rose-800",
     sky:     "from-sky-100 to-cyan-100 border-sky-300 text-sky-800",
     emerald: "from-emerald-100 to-teal-100 border-emerald-300 text-emerald-800",
     indigo:  "from-indigo-100 to-violet-100 border-indigo-300 text-indigo-800",
     fuchsia: "from-fuchsia-100 to-pink-100 border-fuchsia-300 text-fuchsia-800",
+    violet:  "from-violet-100 to-purple-100 border-violet-300 text-violet-800",
   }[accent];
   return (
     <div className={`mb-5 rounded-2xl border-2 bg-gradient-to-r ${palette} px-5 py-4 flex items-start gap-3`}>
@@ -1165,6 +1168,247 @@ function MonthsOfYearSection({ kh }: { kh: boolean }) {
           {kh
             ? KH_TODO(`ខែនេះគឺ ${MONTHS_OF_YEAR[thisMonthIdx].kh}`)
             : `This month is ${MONTHS_OF_YEAR[thisMonthIdx].en}`}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────── */
+/* SECTION 6 — Question Words (ពាក្យសួរ): The 5 Ws                     */
+/* ──────────────────────────────────────────────────────────────────── */
+
+type QuestionWord = {
+  id: string;
+  word: string;
+  wordKh: string;
+  roleEn: string;
+  roleKh: string;
+  emoji: string;
+  exampleEn: string;
+  exampleKh: string;
+  answerEn: string;
+  answerKh: string;
+  palette: string;
+  ringColor: string;
+  badgeColor: string;
+};
+
+const QUESTION_WORDS: QuestionWord[] = [
+  {
+    id: "who",
+    word: "Who",
+    wordKh: KH_TODO("នរណា"),
+    roleEn: "The Person",
+    roleKh: KH_TODO("មនុស្ស"),
+    emoji: "🧑‍🤝‍🧑",
+    exampleEn: "Who is that?",
+    exampleKh: KH_TODO("តើនោះជានរណា?"),
+    answerEn: "It is my friend.",
+    answerKh: KH_TODO("គាត់គឺជាមិត្តរបស់ខ្ញុំ។"),
+    palette: "from-rose-100 to-pink-200 border-rose-300 text-rose-700",
+    ringColor: "ring-rose-400",
+    badgeColor: "bg-rose-500",
+  },
+  {
+    id: "what",
+    word: "What",
+    wordKh: KH_TODO("អ្វី"),
+    roleEn: "The Thing",
+    roleKh: KH_TODO("វត្ថុ"),
+    emoji: "📦",
+    exampleEn: "What is this?",
+    exampleKh: KH_TODO("តើនេះគឺជាអ្វី?"),
+    answerEn: "It is a book.",
+    answerKh: KH_TODO("វាគឺជាសៀវភៅ។"),
+    palette: "from-amber-100 to-yellow-200 border-amber-300 text-amber-700",
+    ringColor: "ring-amber-400",
+    badgeColor: "bg-amber-500",
+  },
+  {
+    id: "when",
+    word: "When",
+    wordKh: KH_TODO("នៅពេលណា"),
+    roleEn: "The Time",
+    roleKh: KH_TODO("ពេលវេលា"),
+    emoji: "⏰",
+    exampleEn: "When is school?",
+    exampleKh: KH_TODO("តើសាលារៀនចាប់ផ្តើមនៅពេលណា?"),
+    answerEn: "School is at 7:00 AM.",
+    answerKh: KH_TODO("នៅម៉ោង ៧ ព្រឹក។"),
+    palette: "from-emerald-100 to-teal-200 border-emerald-300 text-emerald-700",
+    ringColor: "ring-emerald-400",
+    badgeColor: "bg-emerald-500",
+  },
+  {
+    id: "where",
+    word: "Where",
+    wordKh: KH_TODO("នៅឯណា"),
+    roleEn: "The Place",
+    roleKh: KH_TODO("ទីកន្លែង"),
+    emoji: "🏠",
+    exampleEn: "Where are you?",
+    exampleKh: KH_TODO("តើអ្នកនៅឯណា?"),
+    answerEn: "I am at home.",
+    answerKh: KH_TODO("ខ្ញុំនៅផ្ទះ។"),
+    palette: "from-sky-100 to-blue-200 border-sky-300 text-sky-700",
+    ringColor: "ring-sky-400",
+    badgeColor: "bg-sky-500",
+  },
+  {
+    id: "why",
+    word: "Why",
+    wordKh: KH_TODO("ហេតុអ្វី"),
+    roleEn: "The Reason",
+    roleKh: KH_TODO("មូលហេតុ"),
+    emoji: "💡",
+    exampleEn: "Why are you happy?",
+    exampleKh: KH_TODO("ហេតុអ្វីបានជាអ្នកសប្បាយចិត្ត?"),
+    answerEn: "Because I am learning!",
+    answerKh: KH_TODO("ពីព្រោះខ្ញុំកំពុងរៀន!"),
+    palette: "from-violet-100 to-purple-200 border-violet-300 text-violet-700",
+    ringColor: "ring-violet-400",
+    badgeColor: "bg-violet-500",
+  },
+];
+
+function QuestionWordsGallery({ kh }: { kh: boolean }) {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  return (
+    <div data-testid="question-words-gallery">
+      <SectionHeader
+        kh={kh}
+        en="Tap a card to see the question and a friendly answer!"
+        khText={KH_TODO("ប៉ះកាតណាមួយ ដើម្បីឃើញសំណួរ និងចម្លើយ!")}
+        accent="violet"
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        {QUESTION_WORDS.map((q) => {
+          const isOpen = selected === q.id;
+          const toggle = () => setSelected(isOpen ? null : q.id);
+          return (
+            <div
+              key={q.id}
+              role="button"
+              tabIndex={0}
+              onClick={toggle}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggle();
+                }
+              }}
+              aria-pressed={isOpen}
+              aria-label={`${q.word} — ${q.roleEn}. Tap to ${isOpen ? "hide" : "see"} the example sentence.`}
+              data-testid={`question-word-${q.id}`}
+              className={`group relative rounded-3xl border-4 bg-gradient-to-br ${q.palette} p-5 sm:p-6 text-center shadow-md hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 ${
+                isOpen ? `ring-4 ring-offset-2 ${q.ringColor} -translate-y-1 scale-[1.02]` : ""
+              }`}
+            >
+              {/* Role badge (The Person, The Thing, …) */}
+              <div
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${q.badgeColor} text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider shadow-sm ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <HelpCircle className="w-3.5 h-3.5" aria-hidden />
+                {kh ? q.roleKh : q.roleEn}
+              </div>
+
+              {/* Big emoji */}
+              <div
+                className="text-6xl sm:text-7xl my-3 sm:my-4 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+                aria-hidden
+              >
+                {q.emoji}
+              </div>
+
+              {/* English word — large */}
+              <div className="font-display font-black text-4xl sm:text-5xl leading-none">
+                {q.word}
+              </div>
+
+              {/* Khmer translation */}
+              <div className="font-khmer text-base sm:text-lg text-slate-700 mt-1.5">
+                {q.wordKh}
+              </div>
+
+              {/* Play button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  speakWord(q.word);
+                }}
+                className={`mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/85 border-2 border-current font-bold text-xs sm:text-sm hover:bg-white active:scale-95 transition-all ${
+                  kh ? "font-khmer" : ""
+                }`}
+                aria-label={`Play audio for ${q.word}`}
+                data-testid={`question-word-${q.id}-play`}
+              >
+                <Volume2 className="w-3.5 h-3.5" />
+                {kh ? KH_TODO("ស្ដាប់") : "Play"}
+              </button>
+
+              {/* Revealed example sentence */}
+              {isOpen && (
+                <div
+                  className="mt-4 rounded-2xl bg-white/85 border-2 border-current/40 p-3 sm:p-4 text-left animate-in fade-in zoom-in-95 duration-200"
+                  data-testid={`question-word-${q.id}-example`}
+                >
+                  {/* English Q + A */}
+                  <p className="text-sm sm:text-base font-bold text-slate-800 leading-snug">
+                    <span className="opacity-70">Q:</span> {q.exampleEn}
+                  </p>
+                  <p className="text-sm sm:text-base text-slate-700 leading-snug mt-1">
+                    <span className="opacity-70 font-bold">A:</span> {q.answerEn}
+                  </p>
+                  {/* Khmer Q + A */}
+                  <div className="mt-2 pt-2 border-t border-current/20">
+                    <p className="font-khmer text-sm sm:text-base text-slate-700 leading-loose">
+                      <span className="opacity-70 font-bold">សួរ៖</span> {q.exampleKh}
+                    </p>
+                    <p className="font-khmer text-sm sm:text-base text-slate-700 leading-loose mt-0.5">
+                      <span className="opacity-70 font-bold">ឆ្លើយ៖</span> {q.answerKh}
+                    </p>
+                  </div>
+
+                  {/* Speak the full example */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      speakText(`${q.exampleEn} ${q.answerEn}`);
+                    }}
+                    className={`mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 border-current font-bold text-xs hover:bg-slate-50 active:scale-95 transition-all ${
+                      kh ? "font-khmer" : ""
+                    }`}
+                    aria-label={`Play full sentence for ${q.word}`}
+                  >
+                    <Volume2 className="w-3.5 h-3.5" />
+                    {kh ? KH_TODO("ស្តាប់ប្រយោគ") : "Play sentence"}
+                  </button>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Friendly recap caption */}
+      <div className="mt-6 flex justify-center">
+        <div
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-violet-200 text-violet-800 font-bold shadow-sm ${
+            kh ? "font-khmer" : ""
+          }`}
+          data-testid="question-words-recap"
+        >
+          <HelpCircle className="w-4 h-4" />
+          {kh
+            ? KH_TODO("៥ ពាក្យសួរសំខាន់៖ នរណា · អ្វី · នៅពេលណា · នៅឯណា · ហេតុអ្វី")
+            : "5 big question words: Who · What · When · Where · Why"}
         </div>
       </div>
     </div>
