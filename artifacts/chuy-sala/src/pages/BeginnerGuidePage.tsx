@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
-  CalendarDays, Star, CalendarRange, Sun, CheckCircle2, HelpCircle,
+  CalendarDays, Star, CalendarRange, Sun, CheckCircle2, HelpCircle, Palette,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText, speakWord } from "@/lib/speech";
@@ -105,7 +105,7 @@ function numberToKhmerWords(n: number): string {
 export default function BeginnerGuidePage() {
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days" | "months" | "questions">("alphabet");
+  const [tab, setTab] = useState<"alphabet" | "numbers" | "pattern" | "days" | "months" | "questions" | "colors">("alphabet");
 
   const tabs: { id: typeof tab; en: string; kh: string; icon: typeof BookOpen; color: string }[] = [
     { id: "alphabet",  en: "Alphabet A–Z",        kh: KH_TODO("អក្ខរក្រម A–Z"),     icon: BookOpen,      color: "bg-rose-500" },
@@ -114,6 +114,7 @@ export default function BeginnerGuidePage() {
     { id: "days",      en: "Days of the Week",    kh: KH_TODO("ថ្ងៃនៃសប្តាហ៍"),     icon: CalendarDays,  color: "bg-indigo-500" },
     { id: "months",    en: "Months of the Year",  kh: KH_TODO("ខែនៃឆ្នាំ"),         icon: CalendarRange, color: "bg-fuchsia-500" },
     { id: "questions", en: "Question Words",      kh: KH_TODO("ពាក្យសួរ"),          icon: HelpCircle,    color: "bg-violet-500" },
+    { id: "colors",    en: "Colors",              kh: KH_TODO("ពណ៌"),               icon: Palette,       color: "bg-pink-500" },
   ];
 
   return (
@@ -182,6 +183,7 @@ export default function BeginnerGuidePage() {
         {tab === "days" && <DaysOfWeekSection kh={kh} />}
         {tab === "months" && <MonthsOfYearSection kh={kh} />}
         {tab === "questions" && <QuestionWordsGallery kh={kh} />}
+        {tab === "colors" && <ColorsGallery kh={kh} />}
       </section>
     </div>
   );
@@ -1409,6 +1411,149 @@ function QuestionWordsGallery({ kh }: { kh: boolean }) {
           {kh
             ? KH_TODO("៥ ពាក្យសួរសំខាន់៖ នរណា · អ្វី · នៅពេលណា · នៅឯណា · ហេតុអ្វី")
             : "5 big question words: Who · What · When · Where · Why"}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────── */
+/* SECTION 7 — Colors: The Visual World (ពណ៌)                          */
+/* ──────────────────────────────────────────────────────────────────── */
+
+type ColorWord = {
+  id: string;
+  name: string;
+  nameKh: string;
+  /** Background color of the card — must be the actual color it represents. */
+  bg: string;
+  /** Foreground (text) color picked for legibility against the background. */
+  fg: "light" | "dark";
+  /** Border color (slightly darker tone of the background, for definition). */
+  border: string;
+  /** Decorative emoji shown in the corner of the card. */
+  emoji: string;
+  /** Tailwind ring color used when the card is focused/selected. */
+  ringClass: string;
+};
+
+const COLOR_WORDS: ColorWord[] = [
+  { id: "red",    name: "Red",    nameKh: KH_TODO("ក្រហម"),    bg: "#ef4444", fg: "light", border: "#b91c1c", emoji: "🍎", ringClass: "focus-visible:ring-red-300" },
+  { id: "blue",   name: "Blue",   nameKh: KH_TODO("ខៀវ"),     bg: "#2563eb", fg: "light", border: "#1d4ed8", emoji: "🌊", ringClass: "focus-visible:ring-blue-300" },
+  { id: "yellow", name: "Yellow", nameKh: KH_TODO("លឿង"),     bg: "#facc15", fg: "dark",  border: "#ca8a04", emoji: "☀️", ringClass: "focus-visible:ring-yellow-300" },
+  { id: "green",  name: "Green",  nameKh: KH_TODO("បៃតង"),    bg: "#22c55e", fg: "light", border: "#15803d", emoji: "🌿", ringClass: "focus-visible:ring-green-300" },
+  { id: "orange", name: "Orange", nameKh: KH_TODO("ទឹកក្រូច"), bg: "#f97316", fg: "light", border: "#c2410c", emoji: "🍊", ringClass: "focus-visible:ring-orange-300" },
+  { id: "purple", name: "Purple", nameKh: KH_TODO("ស្វាយ"),    bg: "#a855f7", fg: "light", border: "#7e22ce", emoji: "🍇", ringClass: "focus-visible:ring-purple-300" },
+  { id: "pink",   name: "Pink",   nameKh: KH_TODO("ផ្កាឈូក"),  bg: "#ec4899", fg: "light", border: "#be185d", emoji: "🌸", ringClass: "focus-visible:ring-pink-300" },
+  { id: "brown",  name: "Brown",  nameKh: KH_TODO("ត្នោត"),    bg: "#92400e", fg: "light", border: "#78350f", emoji: "🪵", ringClass: "focus-visible:ring-amber-300" },
+  { id: "black",  name: "Black",  nameKh: KH_TODO("ខ្មៅ"),     bg: "#18181b", fg: "light", border: "#000000", emoji: "🌑", ringClass: "focus-visible:ring-zinc-300" },
+  { id: "white",  name: "White",  nameKh: KH_TODO("ស"),        bg: "#ffffff", fg: "dark",  border: "#cbd5e1", emoji: "☁️", ringClass: "focus-visible:ring-slate-300" },
+];
+
+function ColorsGallery({ kh }: { kh: boolean }) {
+  return (
+    <div data-testid="colors-gallery">
+      <SectionHeader
+        kh={kh}
+        en="Tap a color card to hear its name!"
+        khText={KH_TODO("ប៉ះកាតពណ៌ ដើម្បីស្តាប់ឈ្មោះវា!")}
+        accent="fuchsia"
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+        {COLOR_WORDS.map((c) => {
+          const isLight = c.fg === "light";
+          /* Foreground (text) color */
+          const textPrimary = isLight ? "#ffffff" : "#0f172a";   // slate-900 for dark text
+          const textSecondary = isLight ? "rgba(255,255,255,0.85)" : "rgba(15,23,42,0.75)";
+          /* Translucent surface for the play button */
+          const buttonBg = isLight ? "rgba(255,255,255,0.18)" : "rgba(15,23,42,0.06)";
+          const buttonBorder = isLight ? "rgba(255,255,255,0.55)" : "rgba(15,23,42,0.35)";
+
+          return (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => speakWord(c.name)}
+              aria-label={`${c.name} color${kh ? ` (${c.nameKh})` : ""}. Tap to hear the name.`}
+              data-testid={`color-card-${c.id}`}
+              className={`group relative overflow-hidden rounded-3xl border-4 p-5 sm:p-6 text-center shadow-md hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-4 ${c.ringClass}`}
+              style={{
+                backgroundColor: c.bg,
+                borderColor: c.border,
+                color: textPrimary,
+                /* A soft lift shadow tinted with the card's own color */
+                boxShadow: `0 6px 18px -8px ${c.border}`,
+              }}
+            >
+              {/* Decorative emoji in the corner */}
+              <span
+                aria-hidden
+                className="absolute top-2 right-2 text-2xl sm:text-3xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+              >
+                {c.emoji}
+              </span>
+
+              {/* Color swatch dot — inner ring shows pure color even if background is busy */}
+              <span
+                aria-hidden
+                className="inline-block w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 mt-2 mb-3"
+                style={{
+                  backgroundColor: c.bg,
+                  borderColor: isLight ? "rgba(255,255,255,0.7)" : "rgba(15,23,42,0.25)",
+                  boxShadow: "inset 0 0 0 2px rgba(0,0,0,0.06)",
+                }}
+              />
+
+              {/* English name — large bold */}
+              <div
+                className="font-display font-black text-3xl sm:text-4xl leading-none"
+                style={{ color: textPrimary }}
+                data-testid={`color-card-${c.id}-name`}
+              >
+                {c.name}
+              </div>
+
+              {/* Khmer translation */}
+              <div
+                className="font-khmer text-base sm:text-lg mt-1.5"
+                style={{ color: textSecondary }}
+                data-testid={`color-card-${c.id}-name-kh`}
+              >
+                {c.nameKh}
+              </div>
+
+              {/* Play button — visually styled but is a span (the whole card is the button) */}
+              <span
+                className={`mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-2 font-bold text-xs sm:text-sm transition-all group-hover:scale-105 ${
+                  kh ? "font-khmer" : ""
+                }`}
+                style={{
+                  backgroundColor: buttonBg,
+                  borderColor: buttonBorder,
+                  color: textPrimary,
+                }}
+              >
+                <Volume2 className="w-3.5 h-3.5" aria-hidden />
+                {kh ? KH_TODO("ស្ដាប់") : "Play"}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Friendly recap caption */}
+      <div className="mt-6 flex justify-center">
+        <div
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-pink-200 text-pink-800 font-bold shadow-sm ${
+            kh ? "font-khmer" : ""
+          }`}
+          data-testid="colors-recap"
+        >
+          <Palette className="w-4 h-4" />
+          {kh
+            ? KH_TODO("១០ ពណ៌សំខាន់ — ពិភពលោកដ៏ស្រស់ស្អាត!")
+            : "10 colors — the bright, beautiful world!"}
         </div>
       </div>
     </div>
