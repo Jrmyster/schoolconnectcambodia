@@ -1,0 +1,41 @@
+I want to populate the information cards for five branches within 'The Map of Thinking' (Epistemology, Metaphysics, Ethics, Aesthetics, and Axiology). When a user taps a star on the compass, the bottom detail card should display a classic 'Thought Experiment' to challenge their perspective. Please implement the following cleanly, ensuring all core concepts are strictly bilingual (English/Khmer):
+
+1. Epistemology (ញាណវិទ្យា): The Study of Knowledge
+
+Concept: The Rumor vs. The Truth.
+
+Content: Explain the difference between 'believing' something and 'knowing' something. Introduce the concept of evidence. If the whole village believes it will rain tomorrow because of a feeling, is that knowledge? What if a meteorologist looks at a satellite map?
+
+The Question: 'How do you know that the color blue you see is the exact same color blue that your friend sees?'
+
+2. Metaphysics (អភិធម្មវិជ្ជា): The Study of Reality
+
+Concept: Identity & Impermanence (Anicca / អនិច្ចា).
+
+Content: Introduce 'The Ship of Theseus'. Imagine a famous old wooden boat. Over 10 years, every single piece of rotting wood is replaced with a new piece of wood until none of the original wood remains.
+
+The Question: 'Is it still the same boat? If the cells in your human body constantly replace themselves, are you the same person you were five years ago?'
+
+3. Ethics (សីលធម៌): The Study of Moral Action
+
+Concept: Intention vs. Outcome.
+
+Content: Introduce a variation of the Trolley Problem. Imagine a train is out of control. It is heading toward five workers on the track. You can pull a lever to switch the train to a different track, but there is one worker on that track.
+
+The Question: 'Is it more ethical to do nothing and let five people die, or to actively pull the lever and be responsible for the death of one person? Does the intention matter, or only the math?'
+
+4. Aesthetics (សោភ័ណវិទ្យា): The Study of Beauty
+
+Concept: The Math of Beauty.
+
+Content: Explain that beauty might not just be a feeling; it might be math. Introduce 'Symmetry' and 'The Golden Ratio' found in nature (like the spiral of a snail shell or the petals of a lotus flower).
+
+The Question: 'Why do humans universally find the symmetrical towers of Angkor Wat beautiful? Is beauty something we decide, or is it a rule written into the universe?'
+
+5. Axiology (តម្លៃវិទ្យា): The Study of Value
+
+Concept: Instrumental vs. Intrinsic Value.
+
+Content: Explain the difference between valuing something for what it does (Instrumental) versus valuing something just because it exists (Intrinsic). A smartphone is valuable because it connects us (instrumental).
+
+The Question: 'Does a forest have value if no human ever cuts down its trees to build a house? Are human beings the only things that give the universe value?

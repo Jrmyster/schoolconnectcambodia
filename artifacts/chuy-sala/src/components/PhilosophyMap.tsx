@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Compass, X, Sparkles, AlertTriangle, RotateCcw, Brain, Atom, PenTool, HelpCircle, Activity } from "lucide-react";
+import { Compass, X, Sparkles, AlertTriangle, RotateCcw, Brain, Atom, PenTool, HelpCircle, Activity, FlaskConical, Quote } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
 type BranchKey =
@@ -10,6 +10,18 @@ type BranchKey =
   | "aesthetics"
   | "axiology"
   | "mind";
+
+interface ThoughtExperiment {
+  /** Short, punchy concept title (e.g. "The Rumor vs. The Truth"). */
+  conceptEn: string;
+  conceptKh: string;
+  /** The set-up — a paragraph describing the experiment / scenario. */
+  contentEn: string;
+  contentKh: string;
+  /** The challenging "gotcha" question put to the reader. */
+  questionEn: string;
+  questionKh: string;
+}
 
 interface Branch {
   key: BranchKey;
@@ -24,6 +36,9 @@ interface Branch {
   exampleTitleKh: string;
   exampleEn: string;    // Cambodian-context real-world example
   exampleKh: string;
+  /** Optional classic "Thought Experiment" rendered between the Core
+      Question and the Real-World example, only on branches that have one. */
+  thoughtExperiment?: ThoughtExperiment;
   /** Soft accent gradient for the active card border + node ring. */
   accent: string;
 }
@@ -44,6 +59,18 @@ const BRANCHES: Branch[] = [
       "Your friend says it will rain tomorrow because their grandmother dreamed of fish. Another friend looks at the weather app. Whose 'knowledge' should you trust, and why?",
     exampleKh:
       "មិត្តម្នាក់និយាយថាស្អែកនឹងភ្លៀងព្រោះយាយរបស់គេយល់សុបិនឃើញត្រី។ មិត្តម្នាក់ទៀតមើលកម្មវិធីព្យាករអាកាសធាតុ។ តើ «ចំណេះដឹង» របស់អ្នកណាដែលអ្នកគួរទុកចិត្ត ហើយហេតុអ្វី?",
+    thoughtExperiment: {
+      conceptEn: "The Rumor vs. The Truth",
+      conceptKh: "ពាក្យចចាមអារ៉ាម ទល់នឹងសេចក្ដីពិត",
+      contentEn:
+        "There is a difference between believing something and knowing something. Knowing requires evidence. If the whole village believes it will rain tomorrow because of a feeling, is that real knowledge? What if a meteorologist looks at a satellite map and sees storm clouds approaching — is that something different?",
+      contentKh:
+        "មានភាពខុសគ្នារវាង «ការជឿ» នឹងអ្វីមួយ និង «ការដឹង» នូវអ្វីមួយ។ ការដឹងត្រូវការភស្តុតាង។ បើភូមិទាំងមូលជឿថាស្អែកនឹងភ្លៀង ដោយសារតែអារម្មណ៍ — តើនោះជាចំណេះដឹងពិតមែនទេ? ចុះប្រសិនបើអ្នកព្យាករអាកាសធាតុមើលផែនទីផ្កាយរណប ហើយឃើញពពកព្យុះកំពុងខិតចូលមក — តើនោះជាអ្វីផ្សេងពីគ្នាទេ?",
+      questionEn:
+        "How do you know that the colour blue you see is the exact same colour blue that your friend sees?",
+      questionKh:
+        "តើអ្នកដឹងយ៉ាងម៉េចថា ពណ៌ខៀវដែលអ្នកមើលឃើញ គឺជាពណ៌ខៀវដូចគ្នាបេះបិទនឹងពណ៌ដែលមិត្តរបស់អ្នកមើលឃើញ?",
+    },
     accent: "from-amber-300 via-yellow-200 to-amber-500",
   },
   {
@@ -78,6 +105,18 @@ const BRANCHES: Branch[] = [
       "When you sleep and dream of walking through Angkor Wat, was that experience 'real'? What about numbers — does the number 7 exist somewhere, or only in our minds?",
     exampleKh:
       "ពេលអ្នកដេកលក់ ហើយយល់សុបិនថាដើរក្នុងអង្គរវត្ត តើបទពិសោធន៍នោះ «ពិត» ទេ? ចុះលេខ — តើលេខ 7 មានកន្លែងណាមួយ ឬមានតែក្នុងគំនិតយើងប៉ុណ្ណោះ?",
+    thoughtExperiment: {
+      conceptEn: "Identity & Impermanence (Anicca)",
+      conceptKh: "អត្តសញ្ញាណ និងភាពមិនទៀង (អនិច្ចា)",
+      contentEn:
+        "Imagine a famous old wooden boat — the Ship of Theseus. Over ten years, every single piece of rotting wood is replaced with a new piece, plank by plank, until none of the original wood remains.",
+      contentKh:
+        "ស្រមៃមើលនាវាឈើចាស់ដ៏ល្បីមួយ — នាវាថេសេសុស។ ក្នុងរយៈពេលដប់ឆ្នាំ ឈើនីមួយៗដែលរលួយ ត្រូវបានជំនួសដោយឈើថ្មី បន្ទះម្ដងៗ រហូតដល់គ្មានឈើដើមនៅសល់ឡើយ។",
+      questionEn:
+        "Is it still the same boat? And if the cells in your human body constantly replace themselves, are you the same person you were five years ago?",
+      questionKh:
+        "តើវានៅតែជានាវាដដែលទេ? ហើយបើកោសិកានៅក្នុងរាងកាយរបស់អ្នកជំនួសខ្លួនឯងជានិច្ច តើអ្នកនៅតែជាមនុស្សដដែលដូចកាលពីប្រាំឆ្នាំមុនទេ?",
+    },
     accent: "from-indigo-300 via-violet-200 to-indigo-500",
   },
   {
@@ -95,6 +134,18 @@ const BRANCHES: Branch[] = [
       "If you find a wallet with $50 in cash at Phsar Thmei market, what should you do — and why? Does it matter whether anyone is watching?",
     exampleKh:
       "បើអ្នករកឃើញកាបូបមួយដែលមានលុយ $50 នៅផ្សារធំថ្មី តើអ្នកគួរធ្វើដូចម្តេច — ហើយហេតុអ្វី? តើវាសំខាន់ទេថា មាននរណាមើលឃើញឬអត់?",
+    thoughtExperiment: {
+      conceptEn: "Intention vs. Outcome (The Trolley Problem)",
+      conceptKh: "ចេតនា ទល់នឹងលទ្ធផល (បញ្ហារទេះភ្លើង)",
+      contentEn:
+        "Imagine a runaway train is out of control. It is heading straight toward five workers tied to the track. You are standing next to a lever — you can pull it to switch the train onto a different track. But there is one worker tied to that other track.",
+      contentKh:
+        "ស្រមៃថា មានរថភ្លើងមួយលែងគ្រប់គ្រងបាន។ វាកំពុងធ្វើដំណើរត្រង់ៗទៅរកកម្មករប្រាំនាក់ដែលត្រូវបានចងនៅលើផ្លូវ។ អ្នកឈរនៅជាប់នឹងដងភ្ជាប់មួយ — អ្នកអាចទាញវា ដើម្បីប្ដូរទិសរថភ្លើងទៅផ្លូវមួយផ្សេងទៀត។ ប៉ុន្តែនៅលើផ្លូវនោះមានកម្មករម្នាក់ក៏ត្រូវបានចងដែរ។",
+      questionEn:
+        "Is it more ethical to do nothing and let five people die, or to actively pull the lever and become responsible for the death of one person? Does the intention matter — or only the math?",
+      questionKh:
+        "តើអ្វីមានសីលធម៌ជាង — ការឈរស្ងៀមហើយទុកឱ្យមនុស្សប្រាំនាក់ស្លាប់ ឬការទាញដងហើយទទួលខុសត្រូវចំពោះការស្លាប់របស់មនុស្សម្នាក់? តើចេតនាសំខាន់ — ឬគ្រាន់តែលេខគណិតវិទ្យាប៉ុណ្ណោះ?",
+    },
     accent: "from-emerald-300 via-green-200 to-emerald-500",
   },
   {
@@ -112,6 +163,18 @@ const BRANCHES: Branch[] = [
       "An apsara dance, a sunset over Tonle Sap, and a perfectly arranged plate of amok — all are called 'beautiful'. Do they share something in common, or is beauty only in the eye of the beholder?",
     exampleKh:
       "របាំអប្សរា ថ្ងៃលិចលើបឹងទន្លេសាប និងចានអាម៉ុករៀបយ៉ាងស្រស់ស្អាត — ទាំងអស់នេះយើងហៅថា «ស្រស់ស្អាត»។ តើពួកគេមានអ្វីដូចគ្នាទេ ឬសោភ័ណភាពមាននៅក្នុងភ្នែករបស់អ្នកមើលតែប៉ុណ្ណោះ?",
+    thoughtExperiment: {
+      conceptEn: "The Math of Beauty",
+      conceptKh: "គណិតវិទ្យានៃសោភ័ណភាព",
+      contentEn:
+        "Beauty might not just be a feeling — it might be mathematics. Look at Symmetry and the Golden Ratio (φ ≈ 1.618), which appear everywhere in nature: the spiral of a snail shell, the petals of a lotus flower, the perfectly balanced towers of Angkor Wat.",
+      contentKh:
+        "សោភ័ណភាពប្រហែលជាមិនមែនគ្រាន់តែជាអារម្មណ៍ទេ — វាប្រហែលជាគណិតវិទ្យា។ សូមមើលនូវ «តុល្យភាពទ្រនិច» និង «សមាមាត្រមាស» (φ ≈ ១,៦១៨) ដែលមាននៅគ្រប់ទីកន្លែងក្នុងធម្មជាតិ៖ វង់ខ្យង ស្លឹកផ្ការាជទុំ និងប្រាសាទអង្គរវត្តដែលមានតុល្យភាពយ៉ាងល្អឥតខ្ចោះ។",
+      questionEn:
+        "Why do humans almost universally find the symmetrical towers of Angkor Wat beautiful? Is beauty something we decide — or is it a rule already written into the universe?",
+      questionKh:
+        "ហេតុអ្វីបានជាមនុស្សស្ទើរតែគ្រប់រូបយល់ឃើញថា ប្រាសាទអង្គរវត្តដែលមានតុល្យភាពនោះស្រស់ស្អាត? តើសោភ័ណភាពជាអ្វីដែលយើងសម្រេចចិត្តខ្លួនឯង — ឬជាច្បាប់ដែលត្រូវបានសរសេររួចហើយនៅក្នុងសកលលោក?",
+    },
     accent: "from-rose-300 via-pink-200 to-rose-500",
   },
   {
@@ -129,6 +192,18 @@ const BRANCHES: Branch[] = [
       "Your family can either spend savings sending you to university or buy a tractor that doubles the rice harvest. Both have value. How do we decide which kind of value matters more?",
     exampleKh:
       "គ្រួសារអ្នកអាចប្រើប្រាក់សន្សំដើម្បីបញ្ជូនអ្នកទៅសាកលវិទ្យាល័យ ឬទិញត្រាក់ទ័រដែលបង្កើនបង្គូរស្រូវទ្វេដង។ ទាំងពីរមានគុណតម្លៃ។ តើយើងសម្រេចចិត្តយ៉ាងម៉េចថាគុណតម្លៃប្រភេទណាសំខាន់ជាង?",
+    thoughtExperiment: {
+      conceptEn: "Instrumental vs. Intrinsic Value",
+      conceptKh: "តម្លៃឧបករណ៍ ទល់នឹងតម្លៃក្នុងខ្លួន",
+      contentEn:
+        "There is a difference between valuing something for what it does (instrumental value) and valuing it just because it exists (intrinsic value). A smartphone is valuable because it connects us — that is instrumental. The love between a mother and her child has value just because it exists — that is intrinsic.",
+      contentKh:
+        "មានភាពខុសគ្នារវាងការឱ្យតម្លៃវត្ថុមួយ ដោយព្រោះអ្វីដែលវាធ្វើបាន (តម្លៃឧបករណ៍) និងការឱ្យតម្លៃវត្ថុមួយ ដោយព្រោះតែវាមាន (តម្លៃក្នុងខ្លួន)។ ទូរស័ព្ទស្មាតហ្វូនមានតម្លៃ ព្រោះវាភ្ជាប់យើងជាមួយគ្នា — នោះជាតម្លៃឧបករណ៍។ សេចក្ដីស្រឡាញ់រវាងម្ដាយនិងកូនមានតម្លៃ ដោយព្រោះតែវាមានវត្តមាន — នោះជាតម្លៃក្នុងខ្លួន។",
+      questionEn:
+        "Does a forest have value if no human ever cuts down its trees to build a house? Are human beings the only things that give the universe value?",
+      questionKh:
+        "តើព្រៃឈើមានតម្លៃទេ ប្រសិនបើគ្មានមនុស្សណាម្នាក់កាប់ដើមឈើរបស់វា ដើម្បីសាងសង់ផ្ទះ? តើមនុស្សគឺជារបស់តែមួយគត់ដែលផ្ដល់តម្លៃដល់សកលលោកទេ?",
+    },
     accent: "from-orange-300 via-amber-200 to-orange-500",
   },
   {
@@ -476,6 +551,16 @@ function BranchCard({
 
       {/* Mind-only sub-section: Free Will vs. Determinism */}
       {branch.key === "mind" && <FreeWillVsDeterminism kh={kh} />}
+
+      {/* Classic "Thought Experiment" — only branches that have one */}
+      {branch.thoughtExperiment && (
+        <ThoughtExperimentBlock
+          experiment={branch.thoughtExperiment}
+          accent={branch.accent}
+          branchKey={branch.key}
+          kh={kh}
+        />
+      )}
 
       {/* Real-world Cambodian example */}
       <div className="mt-4 rounded-xl bg-slate-800/60 border border-amber-300/20 p-4">
@@ -959,5 +1044,119 @@ function CornerFlourish({ className = "" }: { className?: string }) {
       <circle cx="14" cy="14" r="2" fill="currentColor" />
       <path d="M30 8 L34 4 M30 8 L26 4" strokeLinecap="round" />
     </svg>
+  );
+}
+
+/* -------------------------------------------------------------- */
+/*  THOUGHT EXPERIMENT — classic philosophical "gotcha"           */
+/*  Rendered inside BranchCard between the Core Question and the  */
+/*  Real-World Cambodian example. Indigo/violet accent so it is   */
+/*  visually distinct from the amber Core Question callout.       */
+/* -------------------------------------------------------------- */
+
+function ThoughtExperimentBlock({
+  experiment,
+  accent,
+  branchKey,
+  kh,
+}: {
+  experiment: ThoughtExperiment;
+  accent: string;
+  branchKey: BranchKey;
+  kh: boolean;
+}) {
+  return (
+    <section
+      className="mt-5 rounded-xl border border-violet-300/40 bg-gradient-to-br from-indigo-950/70 via-violet-950/55 to-slate-900/70 p-4 sm:p-5 shadow-[0_8px_24px_-12px_rgba(139,92,246,0.4)]"
+      aria-labelledby={`thought-experiment-${branchKey}-title`}
+      data-testid={`thought-experiment-${branchKey}`}
+    >
+      {/* Eyebrow */}
+      <div className="flex items-center gap-2 mb-2.5">
+        <div
+          className={`inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br ${accent} border border-amber-200/60 text-slate-900`}
+          aria-hidden="true"
+        >
+          <FlaskConical className="w-4 h-4" strokeWidth={2.4} />
+        </div>
+        <div
+          className={`text-[10px] uppercase tracking-[0.25em] font-bold text-violet-200 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          {kh ? "ការពិសោធគំនិត" : "Thought Experiment"}
+        </div>
+      </div>
+
+      {/* Concept title */}
+      <h4
+        id={`thought-experiment-${branchKey}-title`}
+        className={`text-lg sm:text-xl font-bold text-amber-50 leading-snug ${
+          kh ? "font-khmer leading-relaxed" : "font-display"
+        }`}
+        data-testid={`thought-experiment-${branchKey}-concept`}
+      >
+        {kh ? experiment.conceptKh : experiment.conceptEn}
+      </h4>
+      <p
+        className={`mt-0.5 text-xs ${
+          kh ? "text-amber-200/55" : "font-khmer text-amber-200/55 leading-loose"
+        }`}
+      >
+        {kh ? experiment.conceptEn : experiment.conceptKh}
+      </p>
+
+      {/* Set-up paragraph */}
+      <p
+        className={`mt-3 text-sm sm:text-base text-amber-50/90 leading-relaxed ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {kh ? experiment.contentKh : experiment.contentEn}
+      </p>
+      <p
+        className={`mt-2 text-xs leading-relaxed ${
+          kh ? "text-amber-200/55" : "font-khmer text-amber-200/55 leading-loose"
+        }`}
+      >
+        {kh ? experiment.contentEn : experiment.contentKh}
+      </p>
+
+      {/* The Question — nested callout */}
+      <div className="mt-4 rounded-lg border-l-4 border-violet-300/80 bg-violet-400/10 p-3 sm:p-4">
+        <div className="flex items-start gap-2">
+          <Quote
+            className="w-4 h-4 text-violet-200/80 flex-shrink-0 mt-1 -scale-x-100"
+            aria-hidden="true"
+          />
+          <div className="min-w-0">
+            <div
+              className={`text-[10px] uppercase tracking-[0.25em] font-bold text-violet-200/90 mb-1 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {kh ? "សំណួរ" : "The Question"}
+            </div>
+            <p
+              className={`text-sm sm:text-base font-semibold text-amber-50 leading-snug ${
+                kh ? "font-khmer leading-relaxed" : "italic"
+              }`}
+              data-testid={`thought-experiment-${branchKey}-question`}
+            >
+              “{kh ? experiment.questionKh : experiment.questionEn}”
+            </p>
+            <p
+              className={`mt-1 text-xs leading-relaxed ${
+                kh
+                  ? "text-amber-200/55"
+                  : "font-khmer text-amber-200/55 leading-loose"
+              }`}
+            >
+              {kh ? experiment.questionEn : experiment.questionKh}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
