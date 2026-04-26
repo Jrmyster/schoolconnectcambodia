@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -1077,6 +1077,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Smile,
         descEn: "Big-emoji feelings vocabulary — happy, sad, angry, scared, tired, hungry. Tap a face to hear the English word and learn to talk about emotions.",
         descKh: "វាក្យសព្ទអារម្មណ៍ដែលមានរូបធំៗ — សប្បាយចិត្ត ពិបាកចិត្ត ខឹង ភ័យខ្លាច អស់កម្លាំង ឃ្លាន។ ប៉ះមុខដើម្បីស្ដាប់ពាក្យអង់គ្លេស ហើយរៀននិយាយពីអារម្មណ៍។",
+      },
+      {
+        href: "/kids/science",
+        labelEn: "Science for Kids",
+        labelKh: "វិទ្យាសាស្ត្រសម្រាប់កុមារ",
+        icon: Search,
+        descEn: "The world around us — three picture-card modules covering the water cycle, plant life, and the states of matter. Tap any card to hear the English word.",
+        descKh: "ពិភពលោកជុំវិញយើង — បីផ្នែកនៃកាតរូបភាព៖ វដ្តទឹក ជីវិតរុក្ខជាតិ និងស្ថានភាពនៃរូបធាតុ។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
       },
     ],
   },
