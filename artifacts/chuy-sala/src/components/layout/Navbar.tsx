@@ -635,6 +635,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
       },
       {
+        href: "/science/geology",
+        labelEn: "Mountains & Volcanoes",
+        labelKh: "ភ្នំ និងភ្នំភ្លើង",
+        icon: Flame,
+        descEn: "Magma vs. lava, the convection-current 'engine' of the planet, the sleeping Yellowstone supervolcano, and how the Himalayas, Andes, and Rockies were each built by a different tectonic story.",
+        descKh: "ម៉ាកម៉ានិងកម្អែលភ្នំភ្លើង «ម៉ាស៊ីន» ចរន្តកម្តៅរបស់ភពផែនដី ភ្នំភ្លើងយក្សយ៉ូឡូស្តូនដែលកំពុងដេក និងរបៀបដែលហិមាល័យ អង់ដេស និងរ៉ូគី សាងសង់ឡើងដោយរឿងតិចតូនិកផ្សេងៗគ្នា។",
+      },
+      {
         href: "/science/geology/deep-time",
         labelEn: "Deep Time (4.5 Billion Years)",
         labelKh: "ពេលវេលាដ៏ជ្រៅ (៤,៥ ពាន់លានឆ្នាំ)",
