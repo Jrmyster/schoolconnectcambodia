@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame, Lightbulb, Sprout,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplets, Hourglass, Fan, Flame, Lightbulb, Sprout, Blocks,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -111,14 +111,6 @@ const NAV_GROUPS: NavGroup[] = [
     labelKh: "មជ្ឈមណ្ឌលសិក្សា",
     icon: FlaskConical,
     items: [
-      {
-        href: "/beginner-guide",
-        labelEn: "English & Math Starter",
-        labelKh: "មូលដ្ឋានគ្រឹះអង់គ្លេស និងគណិតវិទ្យា",
-        icon: Sparkles,
-        descEn: "Foundational starter for primary-school learners — alphabet A–Z with pictures, numbers 1–100, and a 100–1,000 number-builder.",
-        descKh: "មូលដ្ឋានគ្រឹះសម្រាប់សិស្សបឋមសិក្សា — អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០។",
-      },
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
       {
@@ -999,6 +991,21 @@ const NAV_GROUPS: NavGroup[] = [
         external: true,
         descEn: "Learn to manage Earth's resources so that 100% of humanity can thrive.",
         descKh: "រៀនគ្រប់គ្រងធនធានរបស់ផែនដី ដើម្បីឱ្យមនុស្សជាតិ ១០០% អាចរីកចម្រើន។",
+      },
+    ],
+  },
+  {
+    labelEn: "For Kids (សម្រាប់កុមារ)",
+    labelKh: "សម្រាប់កុមារ (For Kids)",
+    icon: Blocks,
+    items: [
+      {
+        href: "/beginner-guide",
+        labelEn: "English & Math Starter",
+        labelKh: "មូលដ្ឋានគ្រឹះអង់គ្លេស និងគណិតវិទ្យា",
+        icon: Sparkles,
+        descEn: "Foundational starter for primary-school learners — alphabet A–Z with pictures, numbers 1–100, and a 100–1,000 number-builder.",
+        descKh: "មូលដ្ឋានគ្រឹះសម្រាប់សិស្សបឋមសិក្សា — អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០។",
       },
     ],
   },
