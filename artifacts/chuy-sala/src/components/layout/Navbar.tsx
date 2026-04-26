@@ -1094,6 +1094,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Places & people — picture cards for the village (school, market, farm, pagoda, hospital) and the helpers who care for us (teacher, farmer, doctor, monk). Tap any card to hear the English word.",
         descKh: "ទីកន្លែង និងមនុស្ស — កាតរូបភាពអំពីភូមិ (សាលារៀន ផ្សារ កសិដ្ឋាន វត្ត មន្ទីរពេទ្យ) និងអ្នកជួយយើង (គ្រូបង្រៀន កសិករ គ្រូពេទ្យ ព្រះសង្ឃ)។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
       },
+      {
+        href: "/kids/electronics",
+        labelEn: "Power & Light",
+        labelKh: "ថាមពល និងពន្លឺ",
+        icon: Lightbulb,
+        descEn: "Basic electronics — picture cards for power sources (battery, solar panel, plug) and circuit parts (wire, switch, lightbulb, motor). Tap any card to hear the English word.",
+        descKh: "អេឡិចត្រូនិកមូលដ្ឋាន — កាតរូបភាពពីប្រភពថាមពល (ថ្ម ផ្ទាំងសូឡា ព្រីភ្លើង) និងគ្រឿងសៀគ្វី (ខ្សែភ្លើង កុងតាក់ អំពូល ម៉ូទ័រ)។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
+      },
     ],
   },
 ];
