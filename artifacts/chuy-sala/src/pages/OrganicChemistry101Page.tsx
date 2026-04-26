@@ -329,6 +329,14 @@ type Molecule = {
   contextKh: string;
   atoms: Atom3D[];
   bonds: Bond3D[];
+  // Optional richer info-card fields (used by molecules that need a longer
+  // formal title plus a science-breakdown / disclaimer block, e.g. TNT).
+  cardTitleEn?: string;
+  cardTitleKh?: string;
+  scienceEn?: string;
+  scienceKh?: string;
+  disclaimerEn?: string;
+  disclaimerKh?: string;
 };
 
 /* Build atom positions for our three molecules. Coordinates are in arbitrary
@@ -526,6 +534,134 @@ const MOLECULES: Molecule[] = [
         "The most common plastic in the world. It is a massive, synthetic organic polymer used to make grocery bags, milk jugs, and many drink bottles. Because the carbon bonds are so strong, it takes hundreds of years to break down in nature, making upcycling incredibly important.",
       contextKh:
         "ប្លាស្ទិកដែលប្រើច្រើនបំផុតនៅលើពិភពលោក ។ វាជាប៉ូលីម៊ែរសរីរាង្គសំយោគដ៏ធំ ប្រើសម្រាប់ផលិតថង់ផ្សារ ដបទឹកដោះ និងដបភេសជ្ជៈជាច្រើន ។ ព្រោះតែចំណងកាបូនរឹងមាំខ្លាំង វាត្រូវការរាប់រយឆ្នាំដើម្បីរលាយក្នុងធម្មជាតិ ដូច្នេះការប្រើប្រាស់ឡើងវិញ (upcycling) គឺមានសារៈសំខាន់បំផុត ។",
+      atoms,
+      bonds,
+    };
+  })(),
+
+  /* ── 2,4,6-Trinitrotoluene (TNT) C7H5N3O6 ──────────────────────────────
+   * Aromatic toluene ring (CH3 at C1) with three NO2 groups at C2, C4, C6.
+   * Built procedurally so the ring stays planar, NO2 groups splay outward,
+   * and the methyl sits cleanly above C1. Element palette already includes
+   * N (blue), O (red), C (dark grey), H (off-white).
+   * ──────────────────────────────────────────────────────────────────── */
+  (() => {
+    const R = 56; // benzene ring radius
+    // C1 at the top (90°), then clockwise: C2 (30°), C3 (-30°), C4 (-90°),
+    // C5 (-150°), C6 (150°). C1 bears CH3; C2, C4, C6 bear NO2; C3, C5 bear H.
+    const ringAnglesDeg = [90, 30, -30, -90, -150, 150];
+    const ringAngles = ringAnglesDeg.map((d) => (d * Math.PI) / 180);
+    const ringPos: Atom3D[] = ringAngles.map((a) => ({
+      el: "C",
+      x: R * Math.cos(a),
+      y: R * Math.sin(a),
+      z: 0,
+    }));
+
+    const atoms: Atom3D[] = [...ringPos]; // indices 0..5  (C1..C6)
+
+    // Methyl carbon (C7) above C1, then 3 H's around it (tetrahedral-ish).
+    const c1 = ringPos[0];
+    const c7: Atom3D = { el: "C", x: c1.x, y: c1.y + 36, z: 0 }; // index 6
+    atoms.push(c7);
+    atoms.push({ el: "H", x: c7.x,      y: c7.y + 22, z: 0 });   // 7
+    atoms.push({ el: "H", x: c7.x - 22, y: c7.y + 8,  z: 16 });  // 8
+    atoms.push({ el: "H", x: c7.x + 22, y: c7.y + 8,  z: -16 }); // 9
+
+    // Ring H's pointing radially outward from C3 (idx 2) and C5 (idx 4).
+    const dCH = 28;
+    const c3 = ringPos[2];
+    atoms.push({
+      el: "H",
+      x: c3.x + dCH * Math.cos(ringAngles[2]),
+      y: c3.y + dCH * Math.sin(ringAngles[2]),
+      z: 0,
+    }); // 10
+    const c5 = ringPos[4];
+    atoms.push({
+      el: "H",
+      x: c5.x + dCH * Math.cos(ringAngles[4]),
+      y: c5.y + dCH * Math.sin(ringAngles[4]),
+      z: 0,
+    }); // 11
+
+    // Three NO2 groups on C2 (idx 1), C4 (idx 3), C6 (idx 5).
+    // For each: N pointing radially out, then two O's splayed ±36° in plane.
+    const nitroIdxStarts: number[] = [];
+    const nitroTargets = [1, 3, 5];
+    const dCN = 32;
+    const dNO = 26;
+    const splay = Math.PI / 5; // 36°
+    nitroTargets.forEach((ringIdx, t) => {
+      const a = ringAngles[ringIdx];
+      const cx = ringPos[ringIdx].x;
+      const cy = ringPos[ringIdx].y;
+      // Subtle alternating z-offset for depth cue while staying near-planar.
+      const zN = t === 0 ? 8 : t === 2 ? -8 : 0;
+      const nx = cx + dCN * Math.cos(a);
+      const ny = cy + dCN * Math.sin(a);
+      const nIdx = atoms.length;
+      nitroIdxStarts.push(nIdx);
+      atoms.push({ el: "N", x: nx, y: ny, z: zN });
+      atoms.push({
+        el: "O",
+        x: nx + dNO * Math.cos(a + splay),
+        y: ny + dNO * Math.sin(a + splay),
+        z: zN + 6,
+      });
+      atoms.push({
+        el: "O",
+        x: nx + dNO * Math.cos(a - splay),
+        y: ny + dNO * Math.sin(a - splay),
+        z: zN - 6,
+      });
+    });
+
+    const bonds: Bond3D[] = [
+      // Aromatic Kekulé ring: alternating single/double bonds.
+      { a: 0, b: 1 },
+      { a: 1, b: 2, order: 2 },
+      { a: 2, b: 3 },
+      { a: 3, b: 4, order: 2 },
+      { a: 4, b: 5 },
+      { a: 5, b: 0, order: 2 },
+      // Methyl group on C1.
+      { a: 0, b: 6 },
+      { a: 6, b: 7 }, { a: 6, b: 8 }, { a: 6, b: 9 },
+      // Ring hydrogens.
+      { a: 2, b: 10 },
+      { a: 4, b: 11 },
+      // Three NO2 groups: each ring-C → N (single), then N=O (double) and N–O (single).
+      { a: 1, b: nitroIdxStarts[0] },
+      { a: nitroIdxStarts[0], b: nitroIdxStarts[0] + 1, order: 2 },
+      { a: nitroIdxStarts[0], b: nitroIdxStarts[0] + 2 },
+      { a: 3, b: nitroIdxStarts[1] },
+      { a: nitroIdxStarts[1], b: nitroIdxStarts[1] + 1, order: 2 },
+      { a: nitroIdxStarts[1], b: nitroIdxStarts[1] + 2 },
+      { a: 5, b: nitroIdxStarts[2] },
+      { a: nitroIdxStarts[2], b: nitroIdxStarts[2] + 1, order: 2 },
+      { a: nitroIdxStarts[2], b: nitroIdxStarts[2] + 2 },
+    ];
+
+    return {
+      id: "tnt",
+      formula: "C₇H₅N₃O₆",
+      nameEn: "TNT",
+      nameKh: "TNT",
+      cardTitleEn: "2,4,6-Trinitrotoluene (TNT)",
+      cardTitleKh: "ត្រីនីត្រូតូលុយអ៊ែន ២,៤,៦ (TNT)",
+      contextEn:
+        "A classic textbook explosive: a stable yellow solid that releases enormous energy when its rigid bonds suddenly rearrange.",
+      contextKh:
+        "ឧទាហរណ៍ផ្ទុះបុរាណក្នុងសៀវភៅសិក្សា៖ សារធាតុរឹងពណ៌លឿងស្ថិតស្ថេរ ដែលបញ្ចេញថាមពលដ៏ធំសម្បើមនៅពេលចំណងរឹងរបស់វាប្តូររចនាសម្ព័ន្ធភ្លាមៗ។",
+      scienceEn:
+        "Notice the red oxygen atoms packed tightly around the edge. This molecule is like a compressed spring. When triggered, the chemical bonds break, and the solid structure instantly recombines into carbon dioxide, water, and nitrogen gas. The sudden expansion of these gases from a solid state is what creates a shockwave.",
+      scienceKh:
+        "សូមកត់សម្គាល់អាតូមអុកស៊ីសែនពណ៌ក្រហមដែលប្រមូលផ្តុំគ្នាយ៉ាងតឹងណែននៅជុំវិញ។ ម៉ូលេគុលនេះប្រៀបដូចជាទម្រង់ស្ព្រីងដែលត្រូវគេសង្កត់។ នៅពេលមានការឆក់ អេឡិចត្រុងផ្តាច់ចំណងគីមី ហើយរចនាសម្ព័ន្ធរឹងនេះប្រែក្លាយទៅជាឧស្ម័នកាបូនឌីអុកស៊ីត ទឹក និងអាសូតភ្លាមៗ។ ការរីកមាឌយ៉ាងកំហុកនៃឧស្ម័នទាំងនេះពីសភាពរឹង បង្កើតបានជារលកសំពាធយ៉ាងខ្លាំង។",
+      disclaimerEn:
+        "Note: TNT and Dynamite are chemically different. Dynamite (invented by Alfred Nobel in 1867) is nitroglycerin absorbed into a stabilizer such as sawdust. TNT is a separate compound, far more stable to handle, and has been produced industrially since 1902.",
+      disclaimerKh:
+        "ចំណាំ៖ TNT និងឌីណាម៉ាយខុសគ្នាខាងគីមី។ ឌីណាម៉ាយ (ច្នៃប្រឌិតដោយលោក Alfred Nobel ឆ្នាំ ១៨៦៧) គឺនីត្រូក្លីសេរីនដែលជ្រាបក្នុងសារធាតុធ្វើឱ្យស្ថិតស្ថេរ ដូចជាកម្ទេចឈើ។ TNT ជាសមាសធាតុដាច់ដោយឡែក ដោះស្រាយបានស្ថិតស្ថេរជាង ហើយផលិតក្នុងឧស្សាហកម្មតាំងពីឆ្នាំ ១៩០២។",
       atoms,
       bonds,
     };
@@ -910,6 +1046,7 @@ function MoleculeViewerSection() {
               key={m.id}
               role="tab"
               aria-selected={isActive}
+              data-testid={`molecule-button-${m.id}`}
               onClick={() => setActiveId(m.id)}
               className={`px-3 sm:px-4 py-2 rounded-xl border-2 font-bold text-sm sm:text-base transition active:scale-95 ${
                 isActive
@@ -929,19 +1066,56 @@ function MoleculeViewerSection() {
         <Molecule3DViewer key={active.id} mol={active} />
 
         {/* Context card */}
-        <div className="rounded-2xl border-4 border-emerald-200 bg-gradient-to-br from-emerald-50 to-cyan-50 p-5 flex flex-col">
+        <div
+          data-testid="molecule-context-card"
+          className="rounded-2xl border-4 border-emerald-200 bg-gradient-to-br from-emerald-50 to-cyan-50 p-5 flex flex-col"
+        >
           <div className={`text-[10px] font-bold uppercase tracking-[0.25em] text-emerald-700 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
             {t("In your daily life", "ក្នុងជីវភាពប្រចាំថ្ងៃរបស់អ្នក")}
           </div>
           <h3 className={`font-display text-2xl sm:text-3xl font-extrabold text-emerald-900 mb-1 ${kh ? "font-khmer" : ""}`}>
-            {kh ? active.nameKh : active.nameEn}
+            <span data-testid="molecule-card-title">
+              {kh
+                ? (active.cardTitleKh ?? active.nameKh)
+                : (active.cardTitleEn ?? active.nameEn)}
+            </span>
             <span className="ml-2 text-base sm:text-lg font-mono text-emerald-700/80">{active.formula}</span>
           </h3>
-          <p className={`text-base text-emerald-900/90 leading-relaxed flex-1 ${kh ? "font-khmer text-lg leading-loose" : ""}`}>
+          <p className={`text-base text-emerald-900/90 leading-relaxed ${kh ? "font-khmer text-lg leading-loose" : ""} ${active.scienceEn ? "" : "flex-1"}`}>
             {kh ? active.contextKh : active.contextEn}
           </p>
+
+          {/* Optional Science Breakdown — for molecules that need a deeper bilingual explainer (e.g. TNT). */}
+          {active.scienceEn && active.scienceKh && (
+            <div
+              data-testid="molecule-science-breakdown"
+              className="mt-4 rounded-xl border-2 border-amber-300/70 bg-amber-50/80 p-4"
+            >
+              <div className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-amber-800 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                <Zap className="w-3.5 h-3.5" aria-hidden />
+                {t("Science Breakdown", "ការពន្យល់បែបវិទ្យាសាស្ត្រ")}
+              </div>
+              <p className={`text-sm sm:text-base text-amber-950 leading-relaxed ${kh ? "font-khmer text-base sm:text-lg leading-loose" : ""}`}>
+                {kh ? active.scienceKh : active.scienceEn}
+              </p>
+            </div>
+          )}
+
+          {/* Optional disclaimer — used by TNT to clarify TNT ≠ Dynamite. */}
+          {active.disclaimerEn && active.disclaimerKh && (
+            <div
+              data-testid="molecule-disclaimer"
+              className="mt-3 flex items-start gap-2 rounded-xl border border-slate-300 bg-white/70 p-3 text-xs sm:text-sm text-slate-700"
+            >
+              <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-600" aria-hidden />
+              <span className={kh ? "font-khmer text-sm sm:text-base leading-loose" : "leading-relaxed"}>
+                {kh ? active.disclaimerKh : active.disclaimerEn}
+              </span>
+            </div>
+          )}
+
           <div className="mt-4 flex items-start gap-2 text-xs sm:text-sm text-slate-600">
-            <Info className="w-4 h-4 mt-0.5 flex-shrink-0 text-cyan-600" />
+            <Info className="w-4 h-4 mt-0.5 flex-shrink-0 text-cyan-600" aria-hidden />
             <span className={kh ? "font-khmer text-sm sm:text-base" : ""}>
               {t(
                 "Color guide: dark gray = carbon (C), light = hydrogen (H), red = oxygen (O), blue = nitrogen (N).",

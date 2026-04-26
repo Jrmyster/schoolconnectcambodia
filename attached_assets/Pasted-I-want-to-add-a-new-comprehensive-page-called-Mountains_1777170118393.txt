@@ -1,0 +1,41 @@
+I want to add a new comprehensive page called 'Mountains & Volcanoes: The Earth’s Crust' (ភ្នំ និងភ្នំភ្លើង៖ សំបកផែនដី) to the 'Science' dropdown. Please implement the following using a rugged, geological aesthetic (deep magma reds, granite greys, and snowy whites):
+
+1. Routing & Navigation:
+
+Create a new component GeologyHub.jsx.
+
+Register the route: /science/geology.
+
+Add a link in the 'Science' dropdown labeled 'Mountains & Volcanoes' with a mountain or flame icon.
+
+2. Card 1: Magma vs. Lava (ម៉ាកម៉ា និងកម្អែលភ្នំភ្លើង):
+
+The Distinction: Explain that they are the same substance, just in different locations. Magma is molten rock stored beneath the Earth's surface. Lava is molten rock that has broken through the surface.
+
+Composition: Detail that both are made of a hot 'soup' of silicate minerals and dissolved gases (like water vapor and carbon dioxide) under immense pressure.
+
+3. Card 2: The Engine: Convection Currents (ចរន្តកម្តៅក្នុងផែនដី):
+
+How it works: Explain the 'Boiling Pot' analogy. The Earth's core is incredibly hot. This heat causes the liquid mantle to rise, cool near the crust, and sink back down.
+
+The Result: This constant circular motion acts like a conveyor belt, dragging the tectonic plates along with it, causing them to crash together (creating mountains) or pull apart (creating volcanoes).
+
+4. Card 3: The Sleeping Giant: Yellowstone (យក្សដែលកំពុងដេក៖ យ៉ូឡូស្តូន):
+
+The Supervolcano: Explain that Yellowstone National Park in the US isn't just a park; it sits on top of a massive 'Hotspot.'
+
+The Scale: Unlike a normal cone-shaped volcano, Yellowstone is a 'Caldera'—a giant crater formed by a previous massive eruption. If it erupted today, it would cover half of North America in ash.
+
+5. Card 4: Giants of the World (ភ្នំយក្សៗនៅលើពិភពលោក):
+
+The Himalayas (Asia): Created by two continents (India and Asia) crashing together. Home to Mt. Everest.
+
+The Andes (South America): The longest mountain range, created by an ocean plate sliding under a continental plate (subduction).
+
+The Rockies (North America): A massive range formed by intense tectonic activity millions of years ago.
+
+6. Formatting & UI:
+
+Use high-contrast headings and clear diagrams for the convection currents.
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
