@@ -901,6 +901,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ការផ្សារមិនមែនជាការបិទកាវទេ — វាជាភ្លើងគ្រប់គ្រងបាន។ អណ្ដាតភ្លើងអុកស៊ី-អាសេទីឡែន ៣,០០០ °C និងធ្នូអគ្គិសនី ១០,០០០ °C រំលាយលោហៈពីរក្លាយជាបំណែកតែមួយ ដែលជារឿយៗមាំជាងលោហៈដើម។ រៀនមូលហេតុដែលពពុះអុកស៊ីហ្សែនតែមួយបំផ្លាញចំណុចតភ្ជាប់ មូលហេតុដែលអាលុយមីញ៉ូមរលាយក្នុងភ្លែត និងដើរតាមវដ្តដំណាក់កាលទាំងបួននៃការផ្សារស្អាតៗ។",
       },
       {
+        href: "/technology/electrostatic-precipitators",
+        labelEn: "Electrostatic Precipitators",
+        labelKh: "ឧបករណ៍ចាប់ភាគល្អិតដោយអគ្គិសនីស្ទិត",
+        icon: Factory,
+        descEn: "How a 100-year-old invention cleans the air over factory chimneys without using a physical filter. Meet Frederick Cottrell's 1907 idea — a wall of high-voltage electricity that shocks fly ash and soot with a negative charge, then yanks the now-charged dust sideways onto positively charged collector plates. The dirt sticks; only clean gas escapes. Still the global standard at up to 99% efficiency in coal plants, cement kilns, metal smelters, and chemical works.",
+        descKh: "របៀប​ដែល​ការ​ច្នៃ​ប្រឌិត​អាយុ ១០០ ឆ្នាំ​សម្អាត​ខ្យល់​ខាង​លើ​បំពង់​ផ្សែង​រោងចក្រ​ដោយ​មិន​ប្រើ​តម្រង​រូបវន្ត។ ស្គាល់​គំនិត​ឆ្នាំ ១៩០៧ របស់ Frederick Cottrell — ជញ្ជាំង​អគ្គិសនី​វ៉ុល​ខ្ពស់​ដែល​ឆក់​ផេះ​ថ្ម និង​ផ្សែង​ខ្មៅ​ឱ្យ​ផ្ទុក​បន្ទុក​អវិជ្ជមាន រួច​ទាញ​ភាគ​ល្អិត​មាន​បន្ទុក​នោះ​ទៅ​ផ្ទាំង​ប្រមូល​បន្ទុក​វិជ្ជមាន។ ភាគ​ល្អិត​ជាប់ មាន​តែ​ឧស្ម័ន​ស្អាត​ប៉ុណ្ណោះ​ចេញ។ នៅ​ជា​ស្តង់ដារ​សកល​ដោយ​មាន​ប្រសិទ្ធភាព​រហូត​ដល់ ៩៩% នៅ​រោងចក្រ​ធ្យូង​ថ្ម ឡ​ស៊ីម៉ងត៍ រោងចក្រ​លោហៈ និង​រោងចក្រ​គីមី។",
+      },
+      {
         href: "/technology/inventions",
         labelEn: "The Great Inventions",
         labelKh: "ការច្នៃប្រឌិតដ៏អស្ចារ្យ",

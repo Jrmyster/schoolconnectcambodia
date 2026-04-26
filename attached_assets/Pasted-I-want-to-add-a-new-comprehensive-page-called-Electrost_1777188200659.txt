@@ -1,0 +1,33 @@
+I want to add a new comprehensive page called 'Electrostatic Precipitators: Cleaning the Air' (ឧបករណ៍ចាប់ភាគល្អិតដោយអគ្គិសនីស្ទិត៖ ការសម្អាតខ្យល់) to the 'Technology' dropdown. Please implement the following cleanly using a high-tech industrial aesthetic (electric purples, steely greys, and clean air blues):
+
+1. Routing & Navigation:
+
+Create a new component ElectrostaticPrecipitator.jsx.
+
+Register the route: /technology/electrostatic-precipitators.
+
+Add a link in the 'Technology' dropdown labeled 'Electrostatic Precipitators' with a factory or lightning bolt icon.
+
+2. Card 1: The Smoke Problem (បញ្ហាផ្សែង):
+
+The Issue: Explain that industrial 'smoke' isn't just gas; it is filled with tiny, harmful solid particles like fly ash and toxic soot. If released, these cause severe respiratory problems for local communities.
+
+The Challenge: These particles are so fine that traditional physical filters (like a sieve or a net) would get clogged almost immediately by the massive volume of exhaust.
+
+3. Card 2: The Cottrell Invention (ការច្នៃប្រឌិតរបស់ Cottrell):
+
+The Mechanism: Explain the genius of Frederick Gardner Cottrell. Instead of a physical net, he used a wall of electricity.
+
+How it Works: Dirty gas is pushed through a chamber. High-voltage wires (discharge electrodes) shock the ash particles, giving them a negative electric charge (ionization). The particles are then powerfully attracted to positively charged metal collector plates on the walls. The dirt sticks to the walls, and only clean gas escapes out the chimney.
+
+4. Card 3: Real-World Applications (ការប្រើប្រាស់ក្នុងពិភពពិត):
+
+The Impact: Mention that this 100-year-old technology is still the global standard. It operates at up to 99% efficiency.
+
+Industries: It is crucial for coal power plants, cement factories, metallurgical fumes, and removing sulfuric acid mist from chemical plants.
+
+5. Formatting & UI:
+
+Use clear iconography (a factory chimney, a high-voltage warning sign, and a clean leaf).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).
