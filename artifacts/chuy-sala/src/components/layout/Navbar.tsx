@@ -25,11 +25,35 @@ type NavItem = {
   descKh?: string;
 };
 
+// ── Semantic category color system ────────────────────────────────────────────
+// Each top-level dropdown owns a category color. The trigger pill uses a soft
+// tinted bg + bold colored text by default, then fills with the solid vibrant
+// color and switches text to white on hover / when the dropdown is open or its
+// section is the current route. Class strings are static literals so Tailwind's
+// content scanner picks them up at build time.
+type NavGroupColor = "slate" | "orange" | "violet" | "blue" | "cyan" | "lime" | "emerald";
+
+const COLOR_THEMES: Record<NavGroupColor, { default: string; active: string }> = {
+  slate:   { default: "bg-slate-500/10 text-slate-700 hover:bg-slate-700 hover:text-white",       active: "bg-slate-700 text-white shadow-md shadow-slate-900/15" },
+  orange:  { default: "bg-orange-500/15 text-orange-700 hover:bg-orange-600 hover:text-white",    active: "bg-orange-600 text-white shadow-md shadow-orange-700/25" },
+  violet:  { default: "bg-violet-500/10 text-violet-700 hover:bg-violet-600 hover:text-white",    active: "bg-violet-600 text-white shadow-md shadow-violet-700/25" },
+  blue:    { default: "bg-blue-500/10 text-blue-700 hover:bg-blue-600 hover:text-white",          active: "bg-blue-600 text-white shadow-md shadow-blue-700/25" },
+  cyan:    { default: "bg-cyan-500/15 text-cyan-800 hover:bg-cyan-700 hover:text-white",          active: "bg-cyan-700 text-white shadow-md shadow-cyan-800/25" },
+  lime:    { default: "bg-lime-500/20 text-lime-800 hover:bg-lime-700 hover:text-white",          active: "bg-lime-700 text-white shadow-md shadow-lime-800/25" },
+  emerald: { default: "bg-emerald-500/10 text-emerald-700 hover:bg-emerald-700 hover:text-white", active: "bg-emerald-700 text-white shadow-md shadow-emerald-800/25" },
+};
+
 type NavGroup = {
   labelEn: string;
   labelKh: string;
   icon: ComponentType<{ className?: string; style?: React.CSSProperties }>;
   items: NavItem[];
+  /**
+   * Semantic category color for this top-level dropdown. Drives the pill's
+   * default tinted background, default text color, and the solid hover/active
+   * fill. Defaults to "slate" if omitted.
+   */
+  color?: NavGroupColor;
   /**
    * Optional URL prefix(es) that scope the "active" highlight for this
    * dropdown. When set, the dropdown is highlighted ONLY when the current
@@ -72,6 +96,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Explore",
     labelKh: "រុករក",
     icon: Compass,
+    color: "slate",
     items: [
       { href: "/",          labelEn: "Home",        labelKh: "ទំព័រដើម",  icon: Heart },
       { href: "/map",       labelEn: "Map",          labelKh: "ផែនទី",     icon: Map },
@@ -91,6 +116,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Resources",
     labelKh: "ធនធាន",
     icon: Library,
+    color: "violet",
     items: [
       { href: "/launchpad", labelEn: "Scholarships", labelKh: "អាហារូបករណ៍", icon: BookOpen },
       {
@@ -110,6 +136,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Study Center",
     labelKh: "មជ្ឈមណ្ឌលសិក្សា",
     icon: FlaskConical,
+    color: "blue",
     items: [
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
@@ -331,6 +358,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Science",
     labelKh: "វិទ្យាសាស្ត្រ",
     icon: Atom,
+    color: "cyan",
     items: [
       {
         href: "/science/disproven-theories",
@@ -726,6 +754,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Technology",
     labelKh: "បច្ចេកវិទ្យា",
     icon: Cpu,
+    color: "lime",
     items: [
       {
         href: "/technology/automotive",
@@ -893,6 +922,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "Well-being",
     labelKh: "សុខុមាលភាព",
     icon: Smile,
+    color: "emerald",
     // Only highlight this dropdown when the URL is actually under /well-being.
     // The items list also contains cross-cutting links to /science, /sanctuary,
     // /music-theory, /human-engine, /electrical-safety, /sexual-health, etc.,
@@ -998,6 +1028,7 @@ const NAV_GROUPS: NavGroup[] = [
     labelEn: "For Kids (សម្រាប់កុមារ)",
     labelKh: "សម្រាប់កុមារ (For Kids)",
     icon: Blocks,
+    color: "orange",
     items: [
       {
         href: "/beginner-guide",
@@ -1036,6 +1067,10 @@ function DropdownGroup({
   const hasDescriptions = group.items.some((item) => item.descEn || item.descKh);
 
   const isGroupActive = isGroupActiveFor(location, group);
+  const theme = COLOR_THEMES[group.color ?? "slate"] ?? COLOR_THEMES.slate;
+  // The pill turns "vibrant" (solid fill + white text) when the dropdown is
+  // open OR the user is currently on a page that belongs to this group.
+  const pillStateClasses = open || isGroupActive ? theme.active : theme.default;
 
   // Close the dropdown automatically whenever the route changes — guarantees
   // any "stuck" hover/focus state from the previous panel is dropped.
@@ -1072,18 +1107,14 @@ function DropdownGroup({
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={kh ? group.labelKh : group.labelEn}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap select-none transition-colors duration-150
-          ${isGroupActive
-            ? "bg-primary/10 text-primary"
-            : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
-          }`}
+        className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-bold whitespace-nowrap select-none border border-transparent transition-all duration-200 ease-out hover:scale-105 hover:-translate-y-0.5 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-current/40 ${pillStateClasses}`}
       >
-        <group.icon className="w-3.5 h-3.5 flex-shrink-0" aria-hidden />
+        <group.icon className="w-4 h-4 flex-shrink-0" aria-hidden />
         <span className={kh ? "font-khmer text-sm" : ""}>
           {kh ? group.labelKh : group.labelEn}
         </span>
         <ChevronDown
-          className="w-3.5 h-3.5 opacity-50 flex-shrink-0 transition-transform duration-150"
+          className="w-3.5 h-3.5 flex-shrink-0 transition-transform duration-200"
           style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
         />
       </button>
