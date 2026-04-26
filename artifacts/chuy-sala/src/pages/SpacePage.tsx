@@ -24,6 +24,7 @@ import { NeutronStarModule } from "@/components/space/NeutronStarModule";
 import { HeatDeathModule } from "@/components/space/HeatDeathModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { CosmicScaleModule } from "@/components/space/CosmicScaleModule";
+import { SpacesuitEngineeringModule } from "@/components/space/SpacesuitEngineeringModule";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
 
@@ -302,6 +303,9 @@ export function SpacePage() {
 
         {/* ── Cosmic Ruler: Measuring the Galaxy ────────────────────────── */}
         <CosmicScaleModule />
+
+        {/* ── The Human Spacecraft: Spacesuit Engineering ───────────────── */}
+        <SpacesuitEngineeringModule />
 
         {/* ── Mission Cards ─────────────────────────────────────────────── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
