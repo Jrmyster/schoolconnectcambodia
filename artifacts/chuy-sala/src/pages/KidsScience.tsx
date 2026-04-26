@@ -5,21 +5,24 @@ import {
   Volume2,
   Sparkles,
   Search,
-  Droplets,
   Sprout,
   Atom,
+  Move,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText } from "@/lib/speech";
 
 /* ──────────────────────────────────────────────────────────────────────
- * SCIENCE FOR KIDS — The World Around Us
- * វិទ្យាសាស្ត្រសម្រាប់កុមារ
+ * SCIENCE FOR KIDS — The Three Branches of Science
+ * វិទ្យាសាស្ត្រសម្រាប់កុមារ — បីផ្នែកនៃវិទ្យាសាស្ត្រ
  *
  * Audience: Cambodian primary-school ESL learners
  * Pattern: Reuses the established kids aesthetic (pastel cards, rounded
  *          edges, big emoji, bilingual content, Play-to-hear English).
- *          Three grouped modules with bilingual section headings.
+ *          Three colour-coded branches:
+ *            • Biology   — green   — life sciences
+ *            • Chemistry — purple  — what things are made of
+ *            • Physics   — blue    — how things move
  * ────────────────────────────────────────────────────────────────────── */
 
 type ScienceCard = {
@@ -37,68 +40,84 @@ type ScienceCard = {
 };
 
 type ScienceModule = {
-  id: "water" | "plants" | "matter";
+  id: "biology" | "chemistry" | "physics";
   testid: string;
   gridTestid: string;
   headingId: string;
-  titleEn: string;
-  titleKh: string;
+  /** Branch name (e.g. "Biology") — appears as the bold prefix. */
+  branchEn: string;
+  branchKh: string;
+  /** Tagline (e.g. "The Study of Life!") — appears after the colon. */
+  taglineEn: string;
+  taglineKh: string;
   subtitleEn: string;
   subtitleKh: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
-  iconAccent: string; // Tailwind text color for the heading icon
+  iconAccent: string; // Tailwind text/bg/border color for the heading icon
   cards: ScienceCard[];
 };
 
 const MODULES: ScienceModule[] = [
+  /* ── Branch 1: BIOLOGY (green) ───────────────────────────────────── */
   {
-    id: "water",
-    testid: "section-water",
-    gridTestid: "grid-water",
-    headingId: "heading-water",
-    titleEn: "The Water Cycle",
-    titleKh: "វដ្តទឹក",
-    subtitleEn: "How water travels around the world.",
-    subtitleKh: "តើទឹកធ្វើដំណើរជុំវិញពិភពលោកយ៉ាងដូចម្ដេច។",
-    icon: Droplets,
-    iconAccent: "text-sky-600 bg-sky-100 border-sky-200",
-    cards: [
-      { id: "rain",  en: "Rain",  kh: "ភ្លៀង",        emoji: "🌧️", palette: "from-sky-100 via-blue-100 to-indigo-100",     accent: "blue"   },
-      { id: "cloud", en: "Cloud", kh: "ពពក",           emoji: "☁️", palette: "from-slate-100 via-sky-100 to-blue-100",      accent: "slate"  },
-      { id: "sun",   en: "Sun",   kh: "ព្រះអាទិត្យ",  emoji: "☀️", palette: "from-yellow-100 via-amber-100 to-orange-100", accent: "yellow" },
-      { id: "river", en: "River", kh: "ទន្លេ",          emoji: "🌊", palette: "from-cyan-100 via-teal-100 to-blue-100",      accent: "cyan"   },
-    ],
-  },
-  {
-    id: "plants",
-    testid: "section-plants",
-    gridTestid: "grid-plants",
-    headingId: "heading-plants",
-    titleEn: "Plant Life",
-    titleKh: "ជីវិតរុក្ខជាតិ",
-    subtitleEn: "How a tiny seed grows into a mighty tree.",
-    subtitleKh: "តើគ្រាប់ពូជតូចលូតលាស់ក្លាយជាដើមឈើធំយ៉ាងដូចម្ដេច។",
+    id: "biology",
+    testid: "section-biology",
+    gridTestid: "grid-biology",
+    headingId: "heading-biology",
+    branchEn: "Biology",
+    branchKh: "ជីវវិទ្យា",
+    taglineEn: "The Study of Life!",
+    taglineKh: "ការសិក្សាអំពីជីវិត!",
+    subtitleEn: "From a tiny seed to a mighty tree, and every animal in between.",
+    subtitleKh: "ពីគ្រាប់ពូជតូចមួយ ដល់ដើមឈើធំ និងសត្វគ្រប់ប្រភេទនៅចន្លោះ។",
     icon: Sprout,
     iconAccent: "text-green-600 bg-green-100 border-green-200",
     cards: [
-      { id: "seed", en: "Seed", kh: "គ្រាប់ពូជ", emoji: "🌱", palette: "from-lime-100 via-green-100 to-emerald-100",  accent: "green"  },
-      { id: "root", en: "Root", kh: "ឫស",          emoji: "🪢", palette: "from-amber-100 via-orange-100 to-yellow-100", accent: "amber"  },
-      { id: "leaf", en: "Leaf", kh: "ស្លឹក",       emoji: "🍃", palette: "from-green-100 via-lime-100 to-emerald-100",  accent: "lime"   },
-      { id: "tree", en: "Tree", kh: "ដើមឈើ",     emoji: "🌳", palette: "from-emerald-100 via-green-100 to-teal-100",  accent: "emerald"},
+      // Plant Life — moved from previous structure
+      { id: "seed", en: "Seed", kh: "គ្រាប់ពូជ", emoji: "🌱", palette: "from-lime-100 via-green-100 to-emerald-100",  accent: "green"   },
+      { id: "root", en: "Root", kh: "ឫស",          emoji: "🪢", palette: "from-amber-100 via-orange-100 to-yellow-100", accent: "amber"   },
+      { id: "leaf", en: "Leaf", kh: "ស្លឹក",       emoji: "🍃", palette: "from-green-100 via-lime-100 to-emerald-100",  accent: "lime"    },
+      { id: "tree", en: "Tree", kh: "ដើមឈើ",     emoji: "🌳", palette: "from-emerald-100 via-green-100 to-teal-100",  accent: "emerald" },
+      // New cards
+      {
+        id: "animal",
+        en: "Animal",
+        kh: "សត្វ",
+        emoji: "🐸",
+        subEn: "They breathe and move!",
+        subKh: "ពួកវាដកដង្ហើម និងផ្លាស់ទី!",
+        palette: "from-emerald-100 via-teal-100 to-green-100",
+        accent: "teal",
+      },
+      {
+        id: "human",
+        en: "Human",
+        kh: "មនុស្ស",
+        emoji: "🙋🏽‍♀️",
+        subEn: "That is you!",
+        subKh: "នោះគឺជាអ្នក!",
+        palette: "from-rose-100 via-pink-100 to-orange-100",
+        accent: "rose",
+      },
     ],
   },
+
+  /* ── Branch 2: CHEMISTRY (purple) ────────────────────────────────── */
   {
-    id: "matter",
-    testid: "section-matter",
-    gridTestid: "grid-matter",
-    headingId: "heading-matter",
-    titleEn: "States of Matter",
-    titleKh: "ស្ថានភាពនៃរូបធាតុ",
-    subtitleEn: "Solid, liquid, gas — the three faces of water.",
-    subtitleKh: "រឹង រាវ ឧស្ម័ន — បីទម្រង់នៃទឹក។",
+    id: "chemistry",
+    testid: "section-chemistry",
+    gridTestid: "grid-chemistry",
+    headingId: "heading-chemistry",
+    branchEn: "Chemistry",
+    branchKh: "គីមីវិទ្យា",
+    taglineEn: "What things are made of!",
+    taglineKh: "តើវត្ថុធ្វើពីអ្វី!",
+    subtitleEn: "Solid, liquid, gas — and what happens when we mix them together.",
+    subtitleKh: "រឹង រាវ ឧស្ម័ន — និងអ្វីដែលកើតឡើង នៅពេលយើងលាយវាបញ្ចូលគ្នា។",
     icon: Atom,
-    iconAccent: "text-violet-600 bg-violet-100 border-violet-200",
+    iconAccent: "text-purple-600 bg-purple-100 border-purple-200",
     cards: [
+      // States of Matter — moved from previous structure
       {
         id: "solid",
         en: "Solid / Ice",
@@ -129,6 +148,83 @@ const MODULES: ScienceModule[] = [
         palette: "from-violet-100 via-purple-100 to-fuchsia-100",
         accent: "violet",
       },
+      // New cards
+      {
+        id: "mix",
+        en: "Mix",
+        kh: "លាយ",
+        emoji: "🥣",
+        subEn: "Putting things together!",
+        subKh: "ដាក់របស់ចូលគ្នា!",
+        palette: "from-purple-100 via-violet-100 to-fuchsia-100",
+        accent: "purple",
+      },
+      {
+        id: "bubbles",
+        en: "Bubbles",
+        kh: "ពពុះ",
+        emoji: "🫧",
+        subEn: "A chemical reaction!",
+        subKh: "ប្រតិកម្មគីមី!",
+        palette: "from-fuchsia-100 via-pink-100 to-purple-100",
+        accent: "fuchsia",
+      },
+    ],
+  },
+
+  /* ── Branch 3: PHYSICS (blue) ────────────────────────────────────── */
+  {
+    id: "physics",
+    testid: "section-physics",
+    gridTestid: "grid-physics",
+    headingId: "heading-physics",
+    branchEn: "Physics",
+    branchKh: "រូបវិទ្យា",
+    taglineEn: "How things move!",
+    taglineKh: "របៀបដែលវត្ថុផ្លាស់ទី!",
+    subtitleEn:
+      "Pushes, pulls, and gravity — even the weather is driven by motion and heat.",
+    subtitleKh:
+      "ការរុញ ការទាញ និងទំនាញផែនដី — សូម្បីតែអាកាសធាតុក៏ដំណើរការដោយការផ្លាស់ទី និងកំដៅ។",
+    icon: Move,
+    iconAccent: "text-blue-600 bg-blue-100 border-blue-200",
+    cards: [
+      // Water Cycle — moved here (driven by heat & gravity)
+      { id: "rain",  en: "Rain",  kh: "ភ្លៀង",        emoji: "🌧️", palette: "from-sky-100 via-blue-100 to-indigo-100",     accent: "blue"   },
+      { id: "cloud", en: "Cloud", kh: "ពពក",           emoji: "☁️", palette: "from-slate-100 via-sky-100 to-blue-100",      accent: "slate"  },
+      { id: "sun",   en: "Sun",   kh: "ព្រះអាទិត្យ",  emoji: "☀️", palette: "from-yellow-100 via-amber-100 to-orange-100", accent: "yellow" },
+      { id: "river", en: "River", kh: "ទន្លេ",          emoji: "🌊", palette: "from-cyan-100 via-teal-100 to-blue-100",      accent: "cyan"   },
+      // New cards
+      {
+        id: "push",
+        en: "Push",
+        kh: "រុញ",
+        emoji: "🖐️",
+        subEn: "Moving it away!",
+        subKh: "ធ្វើឲ្យវាផ្លាស់ទីទៅឆ្ងាយ!",
+        palette: "from-indigo-100 via-blue-100 to-sky-100",
+        accent: "indigo",
+      },
+      {
+        id: "pull",
+        en: "Pull",
+        kh: "ទាញ",
+        emoji: "🪢",
+        subEn: "Bringing it closer!",
+        subKh: "យកវាមកជិត!",
+        palette: "from-sky-100 via-blue-100 to-indigo-100",
+        accent: "sky",
+      },
+      {
+        id: "gravity",
+        en: "Gravity",
+        kh: "ទំនាញផែនដី",
+        emoji: "🍎",
+        subEn: "What makes things fall!",
+        subKh: "អ្វីដែលធ្វើឱ្យវត្ថុធ្លាក់ចុះ!",
+        palette: "from-red-100 via-rose-100 to-pink-100",
+        accent: "red",
+      },
     ],
   },
 ];
@@ -152,7 +248,14 @@ const ACCENT_STYLES: Record<
   amber:   { border: "border-amber-300",   ring: "focus-visible:ring-amber-400",   play: "bg-amber-500 hover:bg-amber-600 text-white"     },
   lime:    { border: "border-lime-300",    ring: "focus-visible:ring-lime-400",    play: "bg-lime-500 hover:bg-lime-600 text-white"       },
   emerald: { border: "border-emerald-300", ring: "focus-visible:ring-emerald-400", play: "bg-emerald-500 hover:bg-emerald-600 text-white" },
+  teal:    { border: "border-teal-300",    ring: "focus-visible:ring-teal-400",    play: "bg-teal-500 hover:bg-teal-600 text-white"       },
+  rose:    { border: "border-rose-300",    ring: "focus-visible:ring-rose-400",    play: "bg-rose-500 hover:bg-rose-600 text-white"       },
   violet:  { border: "border-violet-300",  ring: "focus-visible:ring-violet-400",  play: "bg-violet-500 hover:bg-violet-600 text-white"   },
+  purple:  { border: "border-purple-300",  ring: "focus-visible:ring-purple-400",  play: "bg-purple-500 hover:bg-purple-600 text-white"   },
+  fuchsia: { border: "border-fuchsia-300", ring: "focus-visible:ring-fuchsia-400", play: "bg-fuchsia-500 hover:bg-fuchsia-600 text-white" },
+  indigo:  { border: "border-indigo-300",  ring: "focus-visible:ring-indigo-400",  play: "bg-indigo-500 hover:bg-indigo-600 text-white"   },
+  sky:     { border: "border-sky-300",     ring: "focus-visible:ring-sky-400",     play: "bg-sky-500 hover:bg-sky-600 text-white"         },
+  red:     { border: "border-red-300",     ring: "focus-visible:ring-red-400",     play: "bg-red-500 hover:bg-red-600 text-white"         },
 };
 
 /* ────────────────────────────────────────────────────────────────────── */
@@ -177,7 +280,7 @@ function ScienceModuleSection({
       aria-labelledby={m.headingId}
       className="mt-12 first:mt-0"
     >
-      {/* Bilingual section header */}
+      {/* Bilingual section header — branch name + tagline (e.g. "Biology: The Study of Life!") */}
       <div className="flex items-start gap-4">
         <div
           className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl border-2 ${m.iconAccent}`}
@@ -191,9 +294,13 @@ function ScienceModuleSection({
             className="font-display font-black text-2xl sm:text-3xl text-slate-900"
           >
             {kh ? (
-              <span className="font-khmer leading-snug">{m.titleKh}</span>
+              <span className="font-khmer leading-snug">
+                {m.branchKh}៖ {m.taglineKh}
+              </span>
             ) : (
-              m.titleEn
+              <>
+                {m.branchEn}: {m.taglineEn}
+              </>
             )}
           </h2>
           <p
@@ -201,7 +308,9 @@ function ScienceModuleSection({
               kh ? "" : "font-khmer leading-loose"
             }`}
           >
-            {kh ? m.titleEn : m.titleKh}
+            {kh
+              ? `${m.branchEn}: ${m.taglineEn}`
+              : `${m.branchKh}៖ ${m.taglineKh}`}
           </p>
         </div>
       </div>
@@ -218,7 +327,7 @@ function ScienceModuleSection({
         {kh ? m.subtitleEn : m.subtitleKh}
       </p>
 
-      {/* Card grid */}
+      {/* Card grid — 1 col on mobile, 2 on tablet, up to 4 on desktop */}
       <div
         className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
         data-testid={m.gridTestid}
@@ -250,12 +359,10 @@ function ScienceModuleSection({
                 {c.kh}
               </div>
 
-              {/* Optional sub-note (used by States of Matter) */}
+              {/* Optional sub-note */}
               {c.subEn && c.subKh && (
                 <div className="mt-3 px-3 py-2 rounded-xl bg-white/70 border border-white/80 text-sm">
-                  <div className="italic text-slate-700">
-                    “{c.subEn}”
-                  </div>
+                  <div className="italic text-slate-700">“{c.subEn}”</div>
                   <div className="mt-0.5 font-khmer text-xs text-slate-500 leading-loose">
                     “{c.subKh}”
                   </div>
@@ -318,7 +425,7 @@ export default function KidsScience() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-green-50 to-violet-50 pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-purple-50 to-blue-50 pb-16">
       {/* ── Back link ────────────────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
         <Link
@@ -346,7 +453,7 @@ export default function KidsScience() {
           ) : (
             <>
               Science for{" "}
-              <span className="bg-gradient-to-r from-sky-500 via-emerald-500 to-violet-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                 Kids
               </span>
             </>
@@ -363,20 +470,20 @@ export default function KidsScience() {
         </p>
 
         <p className="mt-2 text-lg sm:text-xl font-display font-bold text-slate-700">
-          {kh ? "ពិភពលោកជុំវិញយើង" : "The World Around Us"}
+          {kh ? "បីផ្នែកនៃវិទ្យាសាស្ត្រ" : "The Three Branches of Science"}
         </p>
         <p
           className={`text-sm text-slate-500 ${
             kh ? "" : "font-khmer leading-loose"
           }`}
         >
-          {kh ? "The World Around Us" : "ពិភពលោកជុំវិញយើង"}
+          {kh ? "The Three Branches of Science" : "បីផ្នែកនៃវិទ្យាសាស្ត្រ"}
         </p>
 
         <p className="mt-5 max-w-2xl text-base sm:text-lg text-slate-700">
           {kh
-            ? "ស្វែងយល់អំពីពិភពលោកធម្មជាតិតាមរយៈវដ្តទឹក ជីវិតរុក្ខជាតិ និងស្ថានភាពនៃរូបធាតុ។ ប៉ះប៊ូតុង ស្ដាប់ ដើម្បីលឺពាក្យជាភាសាអង់គ្លេស!"
-            : "Explore the natural world through the water cycle, plant life, and the states of matter. Tap Play to hear each word in English!"}
+            ? "ស្វែងយល់ពីបីផ្នែកធំនៃវិទ្យាសាស្ត្រ៖ ជីវវិទ្យា (ការសិក្សាអំពីជីវិត), គីមីវិទ្យា (តើវត្ថុធ្វើពីអ្វី), និងរូបវិទ្យា (របៀបដែលវត្ថុផ្លាស់ទី)។ ប៉ះប៊ូតុង ស្ដាប់ ដើម្បីលឺពាក្យជាភាសាអង់គ្លេស!"
+            : "Explore the three big branches of science: Biology (the study of life), Chemistry (what things are made of), and Physics (how things move). Tap Play to hear each word in English!"}
         </p>
         <p
           className={`mt-2 max-w-2xl text-sm text-slate-500 ${
@@ -384,8 +491,8 @@ export default function KidsScience() {
           }`}
         >
           {kh
-            ? "Explore the natural world through the water cycle, plant life, and the states of matter. Tap Play to hear each word in English!"
-            : "ស្វែងយល់អំពីពិភពលោកធម្មជាតិតាមរយៈវដ្តទឹក ជីវិតរុក្ខជាតិ និងស្ថានភាពនៃរូបធាតុ។ ប៉ះប៊ូតុង ស្ដាប់ ដើម្បីលឺពាក្យជាភាសាអង់គ្លេស!"}
+            ? "Explore the three big branches of science: Biology (the study of life), Chemistry (what things are made of), and Physics (how things move). Tap Play to hear each word in English!"
+            : "ស្វែងយល់ពីបីផ្នែកធំនៃវិទ្យាសាស្ត្រ៖ ជីវវិទ្យា (ការសិក្សាអំពីជីវិត), គីមីវិទ្យា (តើវត្ថុធ្វើពីអ្វី), និងរូបវិទ្យា (របៀបដែលវត្ថុផ្លាស់ទី)។ ប៉ះប៊ូតុង ស្ដាប់ ដើម្បីលឺពាក្យជាភាសាអង់គ្លេស!"}
         </p>
       </header>
 

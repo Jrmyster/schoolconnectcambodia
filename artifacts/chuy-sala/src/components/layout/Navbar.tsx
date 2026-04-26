@@ -1083,8 +1083,8 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "Science for Kids",
         labelKh: "វិទ្យាសាស្ត្រសម្រាប់កុមារ",
         icon: Search,
-        descEn: "The world around us — three picture-card modules covering the water cycle, plant life, and the states of matter. Tap any card to hear the English word.",
-        descKh: "ពិភពលោកជុំវិញយើង — បីផ្នែកនៃកាតរូបភាព៖ វដ្តទឹក ជីវិតរុក្ខជាតិ និងស្ថានភាពនៃរូបធាតុ។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
+        descEn: "The three branches of science — Biology (the study of life), Chemistry (what things are made of), and Physics (how things move). Tap any card to hear the English word.",
+        descKh: "បីផ្នែកនៃវិទ្យាសាស្ត្រ — ជីវវិទ្យា (ការសិក្សាអំពីជីវិត), គីមីវិទ្យា (តើវត្ថុធ្វើពីអ្វី), និងរូបវិទ្យា (របៀបដែលវត្ថុផ្លាស់ទី)។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
       },
       {
         href: "/kids/community",
