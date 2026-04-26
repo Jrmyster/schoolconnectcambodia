@@ -8,6 +8,7 @@ import {
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { OrganicArchitecture3DModule } from "@/components/widgets/OrganicArchitecture3DModule";
 import { SynthesisEngineModule } from "@/components/widgets/SynthesisEngineModule";
+import { FunctionalGroupGallery } from "@/components/widgets/FunctionalGroupGallery";
 
 /* ══════════════════════════════════════════════════════════════════════════
  * Organic Chemistry 101 — គីមីសរីរាង្គមូលដ្ឋាន
@@ -89,6 +90,9 @@ export function OrganicChemistry101Page() {
 
         {/* ── Section 5: The Organic Lab — Tools & Glassware ──── */}
         <OrganicLabSection />
+
+        {/* ── Section 5b: The Molecular Alphabet — Functional Groups ─ */}
+        <FunctionalGroupGallery />
 
         {/* ── Section 6: The Synthesis Engine — Reaction Pathways ─ */}
         <SynthesisEngineModule />
