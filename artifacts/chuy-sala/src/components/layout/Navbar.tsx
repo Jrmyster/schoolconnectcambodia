@@ -932,6 +932,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Climb the three rungs of the AI ladder (narrow AI today, human-level AGI tomorrow, the super-intelligent ASI singularity), peek at the if/then logic behind every program written in Python, JavaScript, and C++, and ask whether a planet-wide AI 'World Game' could one day feed everyone without money or competition.",
         descKh: "ឡើងជណ្ដើរ AI ទាំងបី (AI តូចចង្អៀតថ្ងៃនេះ AGI កម្រិតមនុស្សថ្ងៃស្អែក និង ASI ឯកឧត្តមឆ្លាតខ្ពស់) មើលតក្កវិជ្ជាប្រសិនបើ/នោះនៅពីក្រោយកម្មវិធីគ្រប់ប្រភេទដែលសរសេរក្នុង Python, JavaScript, និង C++ និងសួរថា តើ 'ហ្គេមពិភពលោក' AI ពេញផែនដី អាចចិញ្ចឹមមនុស្សគ្រប់គ្នាដោយគ្មានលុយ ឬការប្រកួតប្រជែងបានទេ ?",
       },
+      {
+        href: "/technology/horology",
+        labelEn: "Horology & Time",
+        labelKh: "ហោរាសាស្ត្រ និងពេលវេលា",
+        icon: Hourglass,
+        descEn: "Horology: The Scientific Study of Time — 5,000 years of timekeeping in three sections. A timeline from sundials and water clocks to mechanical escapements, quartz crystals (32,768 Hz), and atomic clocks (the caesium 9.2-billion-vibration second that GPS depends on). The four parts of a mechanical watch movement (mainspring, gear train, escapement, balance wheel) with an animated diagram. Time and physics — Einstein's relativity (why GPS satellites need a 38-microsecond daily correction) and the Prime Meridian at Greenwich (why Cambodia is UTC+7).",
+        descKh: "ហោរាសាស្ត្រ៖ ការសិក្សាវិទ្យាសាស្ត្រនៃការវាស់វែងពេលវេលា — ប្រវត្តិ ៥,០០០ ឆ្នាំក្នុងផ្នែកបី។ ប្រវត្តិពីនាឡិកាស្រមោល និងនាឡិកាទឹក ដល់ម៉ាស៊ីនបញ្ចេញមេកានិច គ្រីស្តាល់កែវកាវ (៣២,៧៦៨ Hz) និងនាឡិកាអាតូម (វិនាទីសេស៊ូម ៩.២ ពាន់លានរំញ័រ ដែល GPS ពឹងផ្អែក)។ ផ្នែកបួននៃម៉ាស៊ីននាឡិកាមេកានិច (ស្ព្រីងមេ ខ្សែស្ពឺ ម៉ាស៊ីនបញ្ចេញ កង់តុល្យភាព) ជាមួយតារាងដែលមានចលនា។ ពេលវេលា និងរូបវិទ្យា — ទ្រឹស្តីទាក់ទងរបស់ Einstein និងមេរីដៀនដើមនៅ Greenwich (ហេតុអ្វីកម្ពុជាស្ថិតនៅ UTC+7)។",
+      },
     ],
   },
   {
