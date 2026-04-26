@@ -1,0 +1,43 @@
+I want to add a new comprehensive page called 'Chemical Engineering: The Science of Scale' (វិស្វកម្មគីមី៖ វិទ្យាសាស្ត្រនៃមាត្រដ្ឋាន) to the 'Science' dropdown. Please implement the following cleanly using an industrial, pragmatic aesthetic (steel greys, fluid blues, and safety oranges):
+
+1. Routing & Navigation:
+
+Create a new component ChemicalEngineering.jsx.
+
+Register the route: /science/chemical-engineering.
+
+Add a link in the 'Science' dropdown labeled 'Chemical Engineering' with a factory or piping icon.
+
+2. Card 1: The Basics — Chemistry vs. Engineering (មូលដ្ឋានគ្រឹះ៖ គីមីវិទ្យា ធៀបនឹង វិស្វកម្ម):
+
+The Difference: Explain that chemists invent molecules in small glass test tubes. Chemical engineers figure out how to produce those molecules in massive, multi-ton steel factories safely and cheaply.
+
+The Core Concept: It is the mastery of three things: Mass (moving fluids), Energy (heating and cooling), and Reactions (making the product).
+
+3. Card 2: The University Curriculum (កម្មវិធីសិក្សានៅសាកលវិទ្យាល័យ):
+
+Break down the core classes a student will survive in university:
+
+Mass & Energy Balances: The fundamental accounting of a factory. What goes in must equal what comes out.
+
+Fluid Mechanics: The physics of how liquids and gases move through miles of pipes and pumps.
+
+Thermodynamics & Heat Transfer: Calculating exactly how much energy is needed to boil, freeze, or stabilize a massive reaction.
+
+Separation Processes: How to separate a valuable chemical from a soup of waste (like distillation or advanced filtration).
+
+4. Card 3: The Careers (អាជីពការងារ):
+
+Highlight real-world jobs, specifically those relevant to developing regions:
+
+Water & Environmental Engineering: Designing massive reverse-osmosis plants to provide clean drinking water to entire provinces.
+
+Food & Agriculture: Scaling up fertilizer production or designing pasteurization factories to keep food safe.
+
+Energy & Pharmaceuticals: From refining biofuels to mass-producing life-saving vaccines and antibiotics.
+
+5. Formatting & UI:
+
+Use clean icons for the curriculum topics (e.g., a pipe for fluids, a thermometer for heat).
+
+Ensure all core concepts and headings are strictly bilingual (English/Khmer).

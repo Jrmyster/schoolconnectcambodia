@@ -525,7 +525,217 @@ function SectionInvisibleMath({ k, t }: { k: boolean; t: T }) {
           />
         </ConceptCard>
       </div>
+
+      {/* ─── Sub-section: The Instruction Manual — mRNA Vaccines ─── */}
+      <SubSectionHeader
+        k={k}
+        Icon={Dna}
+        spec="01a"
+        en="The Instruction Manual: mRNA Vaccines"
+        kh="សៀវភៅណែនាំ៖ វ៉ាក់សាំង mRNA"
+        enLead="If a traditional vaccine is a wanted poster, an mRNA vaccine is the recipe to draw the poster — a fragile, self-destructing message your own cells read once, and then forget."
+        khLead="ប្រសិនបើវ៉ាក់សាំងបុរាណគឺជាប័ណ្ណប្រកាសឲ្យចាប់ នោះវ៉ាក់សាំង mRNA គឺជារូបមន្តដើម្បីគូរប័ណ្ណប្រកាសនោះ — សារមិនមាំ ដែលបំផ្លាញខ្លួនឯង ដែលកោសិការាងកាយរបស់អ្នកអានវាតែម្តង រួចភ្លេច។"
+        accent={MED_BLUE}
+      />
+
+      <div className="grid md:grid-cols-2 gap-5" data-testid="mrna-grid">
+        {/* Card 1 — The Blueprint, Not the Virus */}
+        <ConceptCard
+          k={k}
+          Icon={Dna}
+          enName="The Blueprint, Not the Virus"
+          khName="ប្លង់មេ មិនមែនវីរុសទេ"
+          enTag="instructions, not the criminal itself"
+          khTag="ការណែនាំ មិនមែនឧក្រិដ្ឋជនផ្ទាល់"
+          enBody="A traditional vaccine injects a physical 'wanted poster' — a dead or weakened virus your immune system can study. An mRNA vaccine is different: it injects the instructions on how to draw the poster. Your own cells become the artist."
+          khBody="វ៉ាក់សាំងបុរាណចាក់ប័ណ្ណប្រកាសឲ្យចាប់ផ្ទាល់ — វីរុសស្លាប់ ឬចុះខ្សោយ ដែលប្រព័ន្ធការពារ​អាចសិក្សា។ វ៉ាក់សាំង mRNA ខុសគ្នា៖ វាចាក់នូវ ការណែនាំ អំពីរបៀបគូរប័ណ្ណប្រកាសនោះ។ កោសិការបស់អ្នកផ្ទាល់ក្លាយជាវិចិត្រករ។"
+          accent={MED_BLUE}
+          glow
+          badge={{ en: "How it works", kh: "របៀបដំណើរការ" }}
+        >
+          <p
+            className={`text-sm sm:text-[15px] text-slate-700 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            {k
+              ? "mRNA តំណាងឲ្យ messenger RNA — RNA ផ្ញើរសារ។ វាចូលក្នុងសាច់ដុំដៃ ហើយផ្តល់ឲ្យកោសិការបស់រាងកាយនូវរូបមន្តបណ្តោះអាសន្នដើម្បីបង្កើតតែ បន្លា (Spike) នៃវីរុស — ដែលគ្មានគ្រោះថ្នាក់ដោយឯកឯង។ កោសិកាឈាមសរសៃពណ៌សរៀនស្គាល់បន្លា ដូច្នេះបើវីរុសពិតបង្ហាញខ្លួន ប្រព័ន្ធការពារបានរួចរាល់ជាស្រេច។"
+              : "mRNA stands for messenger RNA. It enters the arm muscle and gives the body's cells a temporary recipe to build just the Spike of the virus — harmless on its own. White blood cells learn to recognise the spike, so if the real virus ever shows up, the immune system is already prepared."}
+          </p>
+
+          <RNAStrandSVG k={k} />
+
+          <Callout
+            k={k}
+            Icon={ShieldCheck}
+            labelEn="The safety mechanism"
+            labelKh="យន្តការសុវត្ថិភាព"
+            enTitle="A self-destructing message that never touches your DNA."
+            khTitle="សារបំផ្លាញខ្លួនឯង ដែលមិនប៉ះពាល់ DNA របស់អ្នកឡើយ។"
+            enBody="mRNA is fragile by design. Like a message that erases itself, the mRNA dissolves completely within a few days after the instructions are read. It never enters the cell nucleus, and it cannot change your DNA — biologically impossible. Once the recipe has been used, it is simply gone."
+            khBody="mRNA គឺមិនមាំដោយចេតនាក្នុងការរចនា។ ដូចជាសារដែលលុបខ្លួនឯង mRNA រលាយទាំងស្រុងក្នុងរយៈពេលប៉ុន្មានថ្ងៃ បន្ទាប់ពីការណែនាំត្រូវបានអាន។ វាមិនដែលចូលក្នុងស្នូលកោសិកា ហើយវាមិនអាចផ្លាស់ប្តូរ DNA របស់អ្នកបាន — មិនអាចទៅរួចតាមជីវសាស្ត្រ។ បន្ទាប់ពីប្រើរូបមន្តរួច វាលែងមាន។"
+            accent={MED_BLUE}
+          />
+        </ConceptCard>
+
+        {/* Card 2 — The 2023 Nobel Prize */}
+        <ConceptCard
+          k={k}
+          Icon={Sparkles}
+          enName="The 2023 Nobel Prize"
+          khName="ពានរង្វាន់ណូបែលឆ្នាំ ២០២៣"
+          enTag="the discovery that saved millions of lives"
+          khTag="ការរកឃើញដែលបានសង្គ្រោះជីវិតរាប់លាន"
+          enBody="In 2023, the Nobel Prize in Physiology or Medicine was awarded to Dr. Katalin Karikó and Dr. Drew Weissman for the discovery that made every mRNA vaccine possible — the foundation of the COVID-19 vaccines that, by the WHO's count, prevented millions of deaths worldwide in the first two years alone."
+          khBody="ក្នុងឆ្នាំ ២០២៣ ពានរង្វាន់ណូបែលផ្នែកសរីរវិទ្យា ឬវេជ្ជសាស្ត្រ ត្រូវបានប្រគល់ឲ្យលោកវេជ្ជបណ្ឌិត Katalin Karikó និងលោកវេជ្ជបណ្ឌិត Drew Weissman សម្រាប់ការរកឃើញដែលធ្វើឲ្យវ៉ាក់សាំង mRNA ទាំងអស់អាចកើតមាន — មូលដ្ឋាននៃវ៉ាក់សាំង COVID-19 ដែល តាមការរាប់របស់ WHO បានទប់ស្កាត់ការស្លាប់រាប់លាននាក់នៅទូទាំងពិភពលោក ត្រឹមតែពីរឆ្នាំដំបូង។"
+          accent={MED_BLUE}
+          glow
+          badge={{ en: "Nobel · 2023", kh: "ណូបែល · ២០២៣" }}
+        >
+          <Callout
+            k={k}
+            Icon={Users}
+            labelEn="The heroes"
+            labelKh="វីរបុរស"
+            enTitle="Dr. Katalin Karikó & Dr. Drew Weissman"
+            khTitle="វេ. បណ្ឌិត Katalin Karikó និងវេ. បណ្ឌិត Drew Weissman"
+            enBody="Karikó, a Hungarian-born biochemist, spent decades being denied grants and demoted at her university because the field thought mRNA was a dead end. She refused to give up. Weissman, an American immunologist, became her partner in 1997. They worked side by side for years before the breakthrough came."
+            khBody="Karikó គឺជាអ្នកជីវគីមីកំណើតហុងគ្រី ដែលបានចំណាយពេលរាប់ទសវត្សត្រូវបានបដិសេធជំនួយ និងបានបន្ទាបតំណែងនៅសាកលវិទ្យាល័យរបស់នាង ដោយសារវិស័យនេះគិតថា mRNA គឺជាផ្លូវឌុង។ នាងបដិសេធមិនបោះបង់។ Weissman គឺជាអ្នកប្រព័ន្ធការពាររាងកាយជនជាតិអាមេរិក ដែលបានក្លាយជាដៃគូរបស់នាងក្នុងឆ្នាំ ១៩៩៧។ ពួកគេបានធ្វើការជាមួយគ្នារាប់ឆ្នាំមុនពេលការបំបែកធ្លាយមកដល់។"
+            accent={MED_BLUE}
+          />
+          <div className="mt-3">
+            <Callout
+              k={k}
+              Icon={Sparkles}
+              labelEn="The breakthrough"
+              labelKh="ការបំបែកធ្លាយ"
+              enTitle="They taught the message how to whisper."
+              khTitle="ពួកគេបានបង្រៀនសារនោះឲ្យចេះខ្សឹប។"
+              enBody="For decades, injecting synthetic mRNA caused massive, deadly inflammation — the immune system attacked the message before it could be read. Karikó and Weissman discovered that swapping one of the chemical 'letters' of the mRNA (uridine for pseudouridine) let the message slip past the immune system's alarms quietly enough to deliver its instructions. That single edit unlocked an entire generation of vaccines and is now being adapted to fight cancer, HIV, and rare genetic diseases."
+              khBody="អស់រយៈពេលរាប់ទសវត្ស ការចាក់ mRNA សំយោគបណ្តាលឲ្យកើតការរលាកធំ ហើយដែលបណ្តាលឲ្យស្លាប់ — ប្រព័ន្ធការពារបានវាយប្រហារសារនោះ មុនពេលវាអាចត្រូវបានអាន។ Karikó និង Weissman បានរកឃើញថា ការប្តូរ 'អក្សរ' គីមីមួយនៃ mRNA (uridine ទៅជា pseudouridine) អនុញ្ញាតឲ្យសារនោះឆ្លងកាត់ការប្រកាសអាសន្នរបស់ប្រព័ន្ធការពារដោយស្ងាត់ៗ គ្រប់គ្រាន់ដើម្បីផ្តល់ការណែនាំរបស់វា។ ការកែប្រែតែមួយនោះបានបើកសោជំនាន់វ៉ាក់សាំងទាំងមូល ហើយឥឡូវកំពុងត្រូវបានកែសម្រួលដើម្បីប្រយុទ្ធជាមួយជំងឺមហារីក HIV និងជំងឺតំណពូជដ៏កម្រ។"
+              accent={MED_BLUE}
+            />
+          </div>
+        </ConceptCard>
+      </div>
     </section>
+  );
+}
+
+// ─── Sub-section header (smaller, in-section divider) ─────────────────────
+function SubSectionHeader({
+  k,
+  Icon,
+  spec,
+  en,
+  kh,
+  enLead,
+  khLead,
+  accent,
+}: {
+  k: boolean;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  spec: string;
+  en: string;
+  kh: string;
+  enLead: string;
+  khLead: string;
+  accent: string;
+}) {
+  return (
+    <div className="mt-10 mb-5">
+      <div className="flex items-center gap-3 mb-2">
+        <div
+          className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center"
+          style={{ backgroundColor: `${accent}14`, border: `1px solid ${accent}33` }}
+        >
+          <Icon className="w-4 h-4" style={{ color: accent }} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div
+            className={`text-[10px] font-mono uppercase tracking-[0.25em] ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            style={{ color: accent }}
+          >
+            {k ? `ផ្នែករង · ${spec}` : `Sub-section · ${spec}`}
+          </div>
+          <h3
+            className={`font-bold text-lg sm:text-xl text-slate-900 leading-tight ${k ? "font-khmer" : ""}`}
+          >
+            {k ? kh : en}
+          </h3>
+        </div>
+      </div>
+      <div
+        className="rounded-r-md border-l-4 pl-3 py-1"
+        style={{ borderColor: accent }}
+      >
+        <p
+          className={`text-sm text-slate-700 max-w-3xl ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+        >
+          {k ? khLead : enLead}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── Tiny RNA-strand SVG decoration (clinical biotech blue) ─────────────────
+function RNAStrandSVG({ k }: { k: boolean }) {
+  return (
+    <div
+      className="my-3 rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50 to-white p-3"
+      role="img"
+      aria-label={
+        k
+          ? "តួរលេខបង្ហាញខ្សែ RNA តែមួយ — នុយក្លេអូទីត ៤៖ A, U, G, C ភ្ជាប់គ្នាដោយឆ្អឹងខ្នង"
+          : "Diagram of a single mRNA strand — four nucleotide letters A, U, G, C linked along a sugar–phosphate backbone"
+      }
+    >
+      <svg viewBox="0 0 320 56" className="w-full h-12" aria-hidden="true">
+        <defs>
+          <linearGradient id="mrnaBackbone" x1="0" x2="1">
+            <stop offset="0" stopColor="#0284c7" />
+            <stop offset="1" stopColor="#0ea5e9" />
+          </linearGradient>
+        </defs>
+        {/* Backbone */}
+        <path
+          d="M 5 28 Q 40 8 80 28 T 160 28 T 240 28 T 315 28"
+          stroke="url(#mrnaBackbone)"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+        />
+        {/* Nucleotide letters */}
+        {[
+          { x: 30, l: "A", c: "#0284c7" },
+          { x: 70, l: "U", c: "#0ea5e9" },
+          { x: 110, l: "G", c: "#0284c7" },
+          { x: 150, l: "C", c: "#0ea5e9" },
+          { x: 190, l: "A", c: "#0284c7" },
+          { x: 230, l: "U", c: "#0ea5e9" },
+          { x: 270, l: "G", c: "#0284c7" },
+          { x: 305, l: "…", c: "#94a3b8" },
+        ].map((n) => (
+          <g key={n.x}>
+            <circle cx={n.x} cy="28" r="9" fill="white" stroke={n.c} strokeWidth="1.5" />
+            <text
+              x={n.x}
+              y="32"
+              textAnchor="middle"
+              fontSize="10"
+              fontFamily="monospace"
+              fontWeight="bold"
+              fill={n.c}
+            >
+              {n.l}
+            </text>
+          </g>
+        ))}
+        {/* Backbone label */}
+        <text x="160" y="52" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="#0c4a6e">
+          {k ? "ខ្សែ mRNA — ការណែនាំសម្រាប់សាងបន្លាមួយ" : "mRNA strand — instructions for one Spike protein"}
+        </text>
+      </svg>
+    </div>
   );
 }
 
