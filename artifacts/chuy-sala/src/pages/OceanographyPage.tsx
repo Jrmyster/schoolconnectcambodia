@@ -16,6 +16,12 @@ import {
   Briefcase,
   Leaf,
   Mountain,
+  AlertTriangle,
+  Trash2,
+  Recycle,
+  Skull,
+  Ban,
+  Filter,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -159,6 +165,12 @@ export default function OceanographyPage() {
         >
           <LimnologyAndCareers isKh={isKh} />
         </Section>
+
+        {/* ── Warning divider transitioning into the urgent crisis ─ */}
+        <PlasticCrisisDivider isKh={isKh} />
+
+        {/* ── Tool 6: The Plastic Crisis (warning aesthetic) ─────── */}
+        <PlasticCrisisSection isKh={isKh} />
 
         {/* ── Closing strip ───────────────────────────────────────── */}
         <div className="border-t border-cyan-300/10 bg-cyan-400/5 mt-8">
@@ -1761,5 +1773,542 @@ function LimnologyAndCareers({ isKh }: { isKh: boolean }) {
         </div>
       </article>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Warning divider — high-contrast caution stripes signalling tone change
+// ════════════════════════════════════════════════════════════════════════════
+
+function PlasticCrisisDivider({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-10"
+      data-testid="plastic-crisis-divider"
+    >
+      <div className="relative h-20 flex items-center justify-center">
+        {/* Caution stripe band (yellow / black diagonals) */}
+        <div
+          aria-hidden
+          className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-3 rounded-sm shadow-[0_0_18px_rgba(251,191,36,0.35)]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, #fbbf24 0 14px, #0a0a0a 14px 28px)",
+          }}
+        />
+
+        {/* Centered alert pill */}
+        <div className="relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full border-2 border-amber-400 bg-[#1a0f00] shadow-lg shadow-amber-500/30">
+          <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-amber-400">
+            URGENT
+          </span>
+          <span className="opacity-70 text-amber-300">·</span>
+          <span className="font-khmer text-xs text-amber-300">បន្ទាន់</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tool 6: The Plastic Crisis — high-contrast warning aesthetic
+//  (charcoal background, caution yellow, deep red accents)
+// ════════════════════════════════════════════════════════════════════════════
+
+function PlasticCrisisSection({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
+      data-testid="plastic-crisis"
+    >
+      {/* ── Header ─────────────────────────────────────────────── */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-7 h-7 rounded-lg bg-amber-400/15 border border-amber-400/45 flex items-center justify-center text-amber-400">
+          <AlertTriangle className="w-3.5 h-3.5" />
+        </div>
+        <span className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs font-bold text-amber-400">
+          <span className="tracking-widest uppercase">Urgent Briefing</span>
+          <span className="opacity-60">·</span>
+          <span className="font-khmer text-sm font-bold text-amber-300">
+            ការជូនដំណឹងបន្ទាន់
+          </span>
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-r from-amber-400/40 to-transparent" />
+      </div>
+
+      <h3
+        className={`text-2xl sm:text-3xl font-display font-bold text-white mb-2 leading-tight ${
+          isKh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {isKh
+          ? "វិបត្តិប្លាស្ទិក៖ ការការពារមហាសមុទ្ររបស់យើង"
+          : "The Plastic Crisis: Protecting Our Oceans"}
+      </h3>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-amber-300/85 text-xs mb-6">
+        <span className="uppercase tracking-[0.18em] font-bold">
+          Plastic Crisis
+        </span>
+        <span className="opacity-60">·</span>
+        <span className="font-khmer text-sm">វិបត្តិប្លាស្ទិក</span>
+      </div>
+
+      {/* ── Charcoal warning panel ─────────────────────────────── */}
+      <div className="rounded-3xl overflow-hidden border-2 border-amber-400/35 bg-gradient-to-b from-[#1a1410]/95 to-[#0a0908]/95 shadow-2xl shadow-amber-500/10">
+        {/* Top caution stripe */}
+        <div
+          aria-hidden
+          className="h-2"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, #fbbf24 0 14px, #0a0a0a 14px 28px)",
+          }}
+        />
+
+        <div className="p-5 sm:p-6 space-y-5">
+          {/* ── CARD 1: Great Pacific Garbage Patch ─────────────── */}
+          <article
+            className="rounded-2xl border border-amber-400/30 bg-[#0f0c0a]/80 overflow-hidden"
+            data-testid="card-garbage-patch"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-5">
+              {/* Left: stylised gyre illustration */}
+              <div className="md:col-span-2 aspect-[16/10] md:aspect-auto bg-gradient-to-br from-[#0a1f3a] via-[#102030] to-[#0a0908] relative overflow-hidden">
+                <svg
+                  viewBox="0 0 320 200"
+                  className="w-full h-full"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <radialGradient id="ocean-gyre-bg" cx="0.5" cy="0.5" r="0.6">
+                      <stop offset="0" stopColor="#1e3a5f" />
+                      <stop offset="1" stopColor="#050a14" />
+                    </radialGradient>
+                  </defs>
+                  <rect width="320" height="200" fill="url(#ocean-gyre-bg)" />
+
+                  {/* Rotating gyre ring (currents) */}
+                  <g transform="translate(160 100)">
+                    <circle r="74" fill="none" stroke="#38bdf8" strokeWidth="1.2" opacity="0.45" strokeDasharray="6 4" />
+                    <circle r="58" fill="none" stroke="#7dd3fc" strokeWidth="1" opacity="0.35" strokeDasharray="4 4" />
+                    <circle r="40" fill="none" stroke="#bae6fd" strokeWidth="0.8" opacity="0.3" strokeDasharray="3 3" />
+                  </g>
+
+                  {/* Arrows around the gyre to suggest rotation */}
+                  <g fill="#38bdf8" opacity="0.85">
+                    <polygon points="234,100 226,94 226,106" />
+                    <polygon points="86,100 94,94 94,106" />
+                    <polygon points="160,26 154,34 166,34" />
+                    <polygon points="160,174 154,166 166,166" />
+                  </g>
+
+                  {/* Floating plastic debris inside the gyre */}
+                  {/* Plastic bottle */}
+                  <g transform="translate(132 78) rotate(-20)">
+                    <rect x="-3" y="-9" width="6" height="14" rx="1" fill="#f8fafc" />
+                    <rect x="-2" y="-12" width="4" height="3" fill="#fb923c" />
+                  </g>
+                  {/* Plastic bag */}
+                  <g transform="translate(186 88)">
+                    <path d="M -8 -4 Q -10 6 -6 8 L 6 8 Q 10 6 8 -4 L 6 -6 L -6 -6 Z" fill="#cbd5e1" opacity="0.85" />
+                    <line x1="-3" y1="-6" x2="-3" y2="-9" stroke="#cbd5e1" strokeWidth="0.8" />
+                    <line x1="3" y1="-6" x2="3" y2="-9" stroke="#cbd5e1" strokeWidth="0.8" />
+                  </g>
+                  {/* Fishing net mesh */}
+                  <g transform="translate(150 122)" opacity="0.85">
+                    <line x1="-10" y1="-6" x2="10" y2="6" stroke="#fbbf24" strokeWidth="0.6" />
+                    <line x1="10" y1="-6" x2="-10" y2="6" stroke="#fbbf24" strokeWidth="0.6" />
+                    <line x1="-10" y1="0" x2="10" y2="0" stroke="#fbbf24" strokeWidth="0.6" />
+                    <line x1="0" y1="-6" x2="0" y2="6" stroke="#fbbf24" strokeWidth="0.6" />
+                  </g>
+                  {/* Microplastic dots */}
+                  {[
+                    [120, 110], [144, 96], [170, 70], [200, 110],
+                    [180, 132], [125, 130], [148, 140], [196, 70],
+                    [108, 95], [212, 96],
+                  ].map(([cx, cy], i) => (
+                    <circle key={i} cx={cx} cy={cy} r="1.2" fill="#fde68a" opacity="0.85" />
+                  ))}
+
+                  {/* Scale callout */}
+                  <g transform="translate(20 175)">
+                    <rect x="0" y="-12" width="92" height="18" rx="4" fill="#1a0f00" stroke="#fbbf24" strokeWidth="1" />
+                    <text x="46" y="0" textAnchor="middle" fontSize="9" fontWeight="700" fill="#fbbf24">
+                      3× SIZE OF FRANCE
+                    </text>
+                  </g>
+                </svg>
+              </div>
+
+              {/* Right: copy */}
+              <div className="md:col-span-3 p-5">
+                <div className="flex items-center gap-2 mb-1">
+                  <Trash2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <h4
+                    className={`font-display font-bold text-white text-base leading-snug ${
+                      isKh ? "font-khmer leading-loose" : ""
+                    }`}
+                  >
+                    {isKh
+                      ? "តំបន់ប្រមូលផ្តុំសំរាមនៅមហាសមុទ្រប៉ាស៊ីហ្វិក"
+                      : "The Great Pacific Garbage Patch"}
+                  </h4>
+                </div>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-amber-300/80 mb-3">
+                  <span className="uppercase tracking-[0.18em] font-bold">
+                    Garbage Patch
+                  </span>
+                  <span className="opacity-60">·</span>
+                  <span className="font-khmer text-xs">តំបន់សំរាម</span>
+                </div>
+
+                <p
+                  className={`text-amber-50/85 text-sm mb-3 ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh
+                    ? "នេះគឺជាការប្រមូលផ្តុំដ៏ធំសម្បើមនៃកំទេចកំទីសមុទ្រនៅភាគខាងជើងនៃមហាសមុទ្រប៉ាស៊ីហ្វិក។ វាមិនមែនជា «កោះ» សំរាមរឹងមាំទេ — តែជាការប្រមូលផ្តុំខ្ពស់នៃមីក្រូប្លាស្ទិក និងកំទេចកំទីធំៗ (ដូចជាសំណាញ់នេសាទ) ដែលជាប់ដោយចរន្តមហាសមុទ្ររង្វិលៗដែលហៅថា Gyres។"
+                    : "A massive collection of marine debris in the North Pacific Ocean. It is not a solid 'island' of trash — it is a high concentration of microplastics and larger debris (like abandoned fishing nets) trapped by rotating ocean currents called gyres."}
+                </p>
+
+                <div className="rounded-xl bg-amber-500/10 border border-amber-400/40 px-3 py-2 flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <p
+                    className={`text-amber-100 text-xs ${
+                      isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                    }`}
+                  >
+                    {isKh
+                      ? "ខ្នាត៖ វាមានទំហំធំជាងប្រទេសបារាំងប្រហែលបីដង។"
+                      : "Scale: it is roughly three times the size of France."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* ── CARD 2: Impact on Ocean Life ─────────────────────── */}
+          <article
+            className="rounded-2xl border border-rose-400/30 bg-[#1a0a0a]/80 overflow-hidden"
+            data-testid="card-ocean-impact"
+          >
+            <div className="px-5 py-4 border-b border-rose-400/20 flex items-center gap-2">
+              <Skull className="w-4 h-4 text-rose-400 shrink-0" />
+              <h4
+                className={`font-display font-bold text-white text-base leading-snug ${
+                  isKh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {isKh
+                  ? "ផលប៉ះពាល់លើជីវិតក្នុងមហាសមុទ្រ"
+                  : "Impact on Ocean Life"}
+              </h4>
+              <span className="ml-auto flex flex-wrap items-center gap-x-1.5 gap-y-0 text-[10px] text-rose-300/80">
+                <span className="uppercase tracking-[0.18em] font-bold">
+                  Ocean Impact
+                </span>
+                <span className="opacity-60">·</span>
+                <span className="font-khmer text-xs">ផលប៉ះពាល់</span>
+              </span>
+            </div>
+
+            <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* INGESTION */}
+              <div
+                className="rounded-xl border border-amber-400/30 bg-amber-500/5 p-4 flex flex-col"
+                data-testid="impact-ingestion"
+              >
+                <div className="w-10 h-10 rounded-lg bg-amber-400/15 border border-amber-400/40 flex items-center justify-center mb-3 text-amber-300">
+                  <TurtleGlyph className="w-6 h-6" />
+                </div>
+                <h5
+                  className={`font-display font-bold text-white text-sm mb-0.5 ${
+                    isKh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {isKh ? "ការលេបប្លាស្ទិក" : "Ingestion"}
+                </h5>
+                <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-amber-300/80 mb-2">
+                  <span className="uppercase tracking-[0.18em] font-bold">
+                    Ingestion
+                  </span>
+                  <span className="opacity-60">·</span>
+                  <span className="font-khmer text-xs">ការលេប</span>
+                </div>
+                <p
+                  className={`text-amber-50/80 text-xs ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh
+                    ? "អណ្តើកសមុទ្រច្រឡំថង់ប្លាស្ទិកជាសត្វកញ្ឆែ ហើយសត្វស្លាបបំបៅកូនរបស់វាដោយកំទេចប្លាស្ទិកតូចៗ — ដែលធ្វើឱ្យពួកវាស្លាប់ដោយការអត់ឃ្លាន។"
+                    : "Sea turtles mistake plastic bags for jellyfish, and seabirds feed tiny plastic pieces to their chicks — slowly killing them by starvation."}
+                </p>
+              </div>
+
+              {/* ENTANGLEMENT */}
+              <div
+                className="rounded-xl border border-rose-400/30 bg-rose-500/5 p-4 flex flex-col"
+                data-testid="impact-entanglement"
+              >
+                <div className="w-10 h-10 rounded-lg bg-rose-400/15 border border-rose-400/40 flex items-center justify-center mb-3 relative">
+                  <Anchor className="w-5 h-5 text-rose-300" />
+                  <Ban className="w-3 h-3 text-rose-400 absolute -bottom-0.5 -right-0.5 bg-[#1a0a0a] rounded-full p-px" />
+                </div>
+                <h5
+                  className={`font-display font-bold text-white text-sm mb-0.5 ${
+                    isKh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {isKh ? "ការជាប់ខ្ពាក់" : "Entanglement"}
+                </h5>
+                <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-rose-300/80 mb-2">
+                  <span className="uppercase tracking-[0.18em] font-bold">
+                    Ghost Nets
+                  </span>
+                  <span className="opacity-60">·</span>
+                  <span className="font-khmer text-xs">សំណាញ់ខ្មោច</span>
+                </div>
+                <p
+                  className={`text-rose-50/80 text-xs ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh
+                    ? "«សំណាញ់ខ្មោច» (ឧបករណ៍នេសាទដែលគេបោះបង់ចោល) បន្តចាប់ និងសម្លាប់ត្រី ឆ្លាម និងផ្សោតជារាប់ឆ្នាំក្រោយវាបាត់បង់ម្ចាស់។"
+                    : "'Ghost nets' — abandoned fishing gear — keep on trapping and killing fish, sharks, and dolphins for years after they are lost."}
+                </p>
+              </div>
+
+              {/* MICROPLASTICS */}
+              <div
+                className="rounded-xl border border-yellow-400/30 bg-yellow-500/5 p-4 flex flex-col"
+                data-testid="impact-microplastics"
+              >
+                <div className="w-10 h-10 rounded-lg bg-yellow-400/15 border border-yellow-400/40 flex items-center justify-center mb-3 relative">
+                  <Fish className="w-5 h-5 text-yellow-300" />
+                  {/* tiny microplastic dots floating around the fish */}
+                  <span className="absolute top-0.5 right-1 w-1 h-1 rounded-full bg-yellow-300" />
+                  <span className="absolute bottom-1 left-1 w-1 h-1 rounded-full bg-yellow-300" />
+                  <span className="absolute top-2 left-0.5 w-0.5 h-0.5 rounded-full bg-yellow-300" />
+                </div>
+                <h5
+                  className={`font-display font-bold text-white text-sm mb-0.5 ${
+                    isKh ? "font-khmer leading-loose" : ""
+                  }`}
+                >
+                  {isKh ? "មីក្រូប្លាស្ទិក" : "Microplastics"}
+                </h5>
+                <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-yellow-300/80 mb-2">
+                  <span className="uppercase tracking-[0.18em] font-bold">
+                    Microplastics
+                  </span>
+                  <span className="opacity-60">·</span>
+                  <span className="font-khmer text-xs">មីក្រូប្លាស្ទិក</span>
+                </div>
+                <p
+                  className={`text-yellow-50/80 text-xs ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh
+                    ? "ពេលប្លាស្ទិកបាក់បែកជាកំទេចតូចៗ វាចូលក្នុងខ្សែសង្វាក់ចំណីអាហារ — ហើយចុងក្រោយត្រូវបានបរិភោគដោយត្រីដែលមនុស្សញ៉ាំ។"
+                    : "As plastic breaks down into tiny pieces, it enters the food chain — and is eventually eaten by the very fish that humans put on their plates."}
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* ── CARD 3: The Urgency of Action ────────────────────── */}
+          <article
+            className="rounded-2xl border border-emerald-400/30 bg-[#0a1410]/80 overflow-hidden"
+            data-testid="card-urgency"
+          >
+            <div className="px-5 py-4 border-b border-emerald-400/20 flex items-center gap-2">
+              <Recycle className="w-4 h-4 text-emerald-300 shrink-0" />
+              <h4
+                className={`font-display font-bold text-white text-base leading-snug ${
+                  isKh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {isKh
+                  ? "ភាពបន្ទាន់នៃការសម្អាត"
+                  : "The Urgency of Action"}
+              </h4>
+              <span className="ml-auto flex flex-wrap items-center gap-x-1.5 gap-y-0 text-[10px] text-emerald-300/80">
+                <span className="uppercase tracking-[0.18em] font-bold">
+                  Action
+                </span>
+                <span className="opacity-60">·</span>
+                <span className="font-khmer text-xs">សកម្មភាព</span>
+              </span>
+            </div>
+
+            <div className="p-5 space-y-4">
+              {/* PROBLEM block — red border */}
+              <div
+                className="rounded-xl border-l-4 border-rose-500 bg-rose-500/5 px-4 py-3"
+                data-testid="urgency-problem"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                  <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-rose-300">
+                    {isKh ? "បញ្ហា" : "The Problem"}
+                  </span>
+                  <span className="opacity-60 text-rose-300">·</span>
+                  <span className="font-khmer text-xs text-rose-300">
+                    {isKh ? "(The Problem)" : "បញ្ហា"}
+                  </span>
+                </div>
+                <p
+                  className={`text-rose-50/85 text-sm ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh
+                    ? "ប្លាស្ទិកមិនរលាយតាមជីវសាស្ត្រទេ — វាគ្រាន់តែបាក់បែកជាកំទេចតូចៗកាន់តែតូច។ គ្រប់បំណែកប្លាស្ទិកដែលធ្លាប់ផលិតមក នៅតែមានវត្តមាននៅលើផែនដីក្នុងទម្រង់ណាមួយ។"
+                    : "Plastic does not biodegrade — it only breaks into smaller and smaller pieces. Every piece of plastic ever made still exists somewhere on Earth."}
+                </p>
+              </div>
+
+              {/* SOLUTION header */}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-1">
+                <Recycle className="w-4 h-4 text-emerald-300 shrink-0" />
+                <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-emerald-300">
+                  The Solution — A Two-Pronged Approach
+                </span>
+                <span className="opacity-60 text-emerald-300">·</span>
+                <span className="font-khmer text-xs text-emerald-300 font-bold">
+                  ដំណោះស្រាយ — វិធីសាស្ត្រពីរផ្នែក
+                </span>
+              </div>
+
+              {/* TWO-PRONGED grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {/* PRONG 1: Interception */}
+                <div
+                  className="rounded-xl border border-cyan-400/30 bg-cyan-500/5 p-4 flex flex-col"
+                  data-testid="solution-interception"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-7 h-7 rounded-full bg-cyan-400/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 font-bold text-sm">
+                      1
+                    </span>
+                    <Filter className="w-4 h-4 text-cyan-300" />
+                    <h6
+                      className={`font-display font-bold text-white text-sm ${
+                        isKh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {isKh ? "ការស្ទាក់ចាប់" : "Interception"}
+                    </h6>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-cyan-300/80 mb-2">
+                    <span className="uppercase tracking-[0.18em] font-bold">
+                      Interception
+                    </span>
+                    <span className="opacity-60">·</span>
+                    <span className="font-khmer text-xs">ការស្ទាក់ចាប់</span>
+                  </div>
+                  <p
+                    className={`text-cyan-50/85 text-xs ${
+                      isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                    }`}
+                  >
+                    {isKh
+                      ? "បញ្ឈប់ប្លាស្ទិកនៅក្នុងទន្លេ មុនពេលវាហូរទៅដល់មហាសមុទ្រ — ដោយប្រើរបាំងទន្លេ និងសំណាញ់ប្រមូលសំរាម។"
+                      : "Stop plastic in rivers before it ever reaches the ocean — using floating river barriers, trash booms and clean-up nets."}
+                  </p>
+                </div>
+
+                {/* PRONG 2: Reduction */}
+                <div
+                  className="rounded-xl border border-emerald-400/30 bg-emerald-500/5 p-4 flex flex-col"
+                  data-testid="solution-reduction"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-7 h-7 rounded-full bg-emerald-400/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 font-bold text-sm">
+                      2
+                    </span>
+                    <Ban className="w-4 h-4 text-emerald-300" />
+                    <h6
+                      className={`font-display font-bold text-white text-sm ${
+                        isKh ? "font-khmer leading-loose" : ""
+                      }`}
+                    >
+                      {isKh ? "ការកាត់បន្ថយ" : "Reduction"}
+                    </h6>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-emerald-300/80 mb-2">
+                    <span className="uppercase tracking-[0.18em] font-bold">
+                      Reduction
+                    </span>
+                    <span className="opacity-60">·</span>
+                    <span className="font-khmer text-xs">ការកាត់បន្ថយ</span>
+                  </div>
+                  <p
+                    className={`text-emerald-50/85 text-xs ${
+                      isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                    }`}
+                  >
+                    {isKh
+                      ? "ផ្លាស់ប្តូរឆ្ងាយពីប្លាស្ទិកប្រើតែម្តងនៅក្នុងជីវភាពប្រចាំថ្ងៃរបស់យើង — យកថង់ក្រណាត់ ដបទឹកដែកអាចប្រើឡើងវិញ និងបដិសេធបំពង់ប្លាស្ទិក។"
+                      : "Move away from single-use plastics in our daily lives — carry cloth bags, refillable bottles, and refuse plastic straws."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        {/* Bottom caution stripe */}
+        <div
+          aria-hidden
+          className="h-2"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, #fbbf24 0 14px, #0a0a0a 14px 28px)",
+          }}
+        />
+      </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tiny inline turtle glyph — used in the "Ingestion" sub-card
+// ════════════════════════════════════════════════════════════════════════════
+
+function TurtleGlyph({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      aria-hidden="true"
+      fill="currentColor"
+    >
+      {/* Shell */}
+      <ellipse cx="11" cy="13" rx="8" ry="6" />
+      {/* Shell pattern */}
+      <path
+        d="M 11 7.5 L 11 18.5 M 4 13 L 18 13 M 6.5 9 L 15.5 17 M 15.5 9 L 6.5 17"
+        stroke="rgba(0,0,0,0.35)"
+        strokeWidth="0.7"
+        fill="none"
+      />
+      {/* Head */}
+      <circle cx="20" cy="11" r="2.2" />
+      <circle cx="20.6" cy="10.5" r="0.4" fill="rgba(0,0,0,0.6)" />
+      {/* Front legs */}
+      <ellipse cx="6" cy="9" rx="1.6" ry="1" />
+      <ellipse cx="16" cy="9" rx="1.6" ry="1" />
+      {/* Back legs */}
+      <ellipse cx="6" cy="17" rx="1.6" ry="1" />
+      <ellipse cx="16" cy="17" rx="1.6" ry="1" />
+      {/* Tail */}
+      <polygon points="3.5,13 1.5,12 1.5,14" />
+    </svg>
   );
 }
