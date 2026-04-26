@@ -1054,6 +1054,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Foundational starter for primary-school learners — alphabet A–Z with pictures, numbers 1–100, and a 100–1,000 number-builder.",
         descKh: "មូលដ្ឋានគ្រឹះសម្រាប់សិស្សបឋមសិក្សា — អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០។",
       },
+      {
+        href: "/for-kids/my-day",
+        labelEn: "My Day: Actions & Health",
+        labelKh: "ថ្ងៃរបស់ខ្ញុំ៖ សកម្មភាព និងសុខភាព",
+        icon: Sun,
+        descEn: "Tap-to-hear vocabulary cards for everyday actions — wake up, wash hands, brush teeth, eat, play, sleep — with bilingual health tips.",
+        descKh: "កាតវាក្យសព្ទចុចស្ដាប់សម្រាប់សកម្មភាពប្រចាំថ្ងៃ — ភ្ញាក់ពីដេក លាងដៃ ដុសធ្មេញ ញ៉ាំ លេង ដេក — មានគន្លឹះសុខភាពពីរភាសា។",
+      },
     ],
   },
 ];
