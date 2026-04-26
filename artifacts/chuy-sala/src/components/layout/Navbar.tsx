@@ -1086,6 +1086,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "The world around us — three picture-card modules covering the water cycle, plant life, and the states of matter. Tap any card to hear the English word.",
         descKh: "ពិភពលោកជុំវិញយើង — បីផ្នែកនៃកាតរូបភាព៖ វដ្តទឹក ជីវិតរុក្ខជាតិ និងស្ថានភាពនៃរូបធាតុ។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
       },
+      {
+        href: "/kids/community",
+        labelEn: "My Community",
+        labelKh: "សហគមន៍របស់ខ្ញុំ",
+        icon: Handshake,
+        descEn: "Places & people — picture cards for the village (school, market, farm, pagoda, hospital) and the helpers who care for us (teacher, farmer, doctor, monk). Tap any card to hear the English word.",
+        descKh: "ទីកន្លែង និងមនុស្ស — កាតរូបភាពអំពីភូមិ (សាលារៀន ផ្សារ កសិដ្ឋាន វត្ត មន្ទីរពេទ្យ) និងអ្នកជួយយើង (គ្រូបង្រៀន កសិករ គ្រូពេទ្យ ព្រះសង្ឃ)។ ប៉ះកាតណាក៏បាន ដើម្បីស្ដាប់ពាក្យអង់គ្លេស។",
+      },
     ],
   },
 ];
