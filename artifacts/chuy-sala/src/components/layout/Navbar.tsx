@@ -163,6 +163,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ត្រឡប់កាតហ្វូស៊ីលអន្តរកម្មនៃ ទីរ៉ាណូសូរ៉ិច ទ្រីសេរ៉ាតូប ស្ទេហ្គោសូរ និងស្ពីណូសូរ បន្ទាប់មកដើរឆ្លងកាត់ការបុកទង្គិចនៃអាចម៍ផ្កាយឈីកស៊ូឡុបជាជំហានៗ — និងជួបឌីណូស័រស្រដៀងសត្វស្លាបដែលបានរស់រាន។",
       },
       {
+        href: "/study-center/antarctica",
+        labelEn: "Antarctica & Earth Extremes",
+        labelKh: "អង់តាក់ទិក និងភាពខ្លាំងក្លានៃផែនដី",
+        icon: Snowflake,
+        descEn: "The Frozen Desert: a continent under 2 km of ice that holds 70% of Earth's fresh water, ruled by no nation under the 1959 Antarctic Treaty, with 6 months of daylight and 6 months of total darkness.",
+        descKh: "វាលខ្សាច់ទឹកកក៖ ទ្វីបមួយនៅក្រោមទឹកកកកំរាស់ ២ គីឡូម៉ែត្រ ដែលស្តុកទុក ៧០% នៃទឹកសាបនៃផែនដី គ្មានជាតិសាសន៍ណាគ្រប់គ្រងក្រោមសន្ធិសញ្ញាអង់តាក់ទិកឆ្នាំ ១៩៥៩ ជាមួយ ៦ ខែពន្លឺថ្ងៃ និង ៦ ខែងងឹត។",
+      },
+      {
         href: "/spelling-forge",
         labelEn: "The Spelling Forge",
         labelKh: "កម្មវិធីពិនិត្យអក្ខរាវិរុទ្ធ",
@@ -1047,7 +1055,7 @@ function DropdownGroup({
             : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
           }`}
       >
-        <group.icon className="w-3.5 h-3.5 flex-shrink-0" />
+        <group.icon className="w-3.5 h-3.5 flex-shrink-0" aria-hidden />
         <span className={kh ? "font-khmer text-sm" : ""}>
           {kh ? group.labelKh : group.labelEn}
         </span>
@@ -1111,6 +1119,7 @@ function DropdownGroup({
               <>
                 <item.icon
                   className="w-4 h-4 flex-shrink-0"
+                  aria-hidden
                   style={{
                     color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
                     marginTop: hasDesc ? "2px" : "0",
@@ -1405,7 +1414,7 @@ export function Navbar() {
                     className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold text-base transition-colors
                       ${isGroupActive ? "bg-primary/8 text-primary" : "text-foreground hover:bg-black/5"}`}
                   >
-                    <group.icon className={`w-5 h-5 flex-shrink-0 ${isGroupActive ? "text-primary" : "text-muted-foreground"}`} />
+                    <group.icon className={`w-5 h-5 flex-shrink-0 ${isGroupActive ? "text-primary" : "text-muted-foreground"}`} aria-hidden />
                     <span className={`flex-1 text-left ${kh ? "font-khmer" : ""}`}>
                       {kh ? group.labelKh : group.labelEn}
                     </span>
@@ -1427,7 +1436,7 @@ export function Navbar() {
                           ${isActive ? "bg-primary/10 text-primary" : "text-foreground/80 hover:bg-black/5 hover:text-foreground"}`;
                         const mobileInner = (
                           <>
-                            <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"} ${itemHasDesc ? "mt-0.5" : ""}`} />
+                            <item.icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-primary" : "text-muted-foreground"} ${itemHasDesc ? "mt-0.5" : ""}`} aria-hidden />
                             <span className="flex-1 min-w-0">
                               <span className={`block ${kh ? "font-khmer" : ""}`}>
                                 {kh ? item.labelKh : item.labelEn}
