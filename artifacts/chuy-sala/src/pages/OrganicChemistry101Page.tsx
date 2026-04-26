@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { OrganicArchitecture3DModule } from "@/components/widgets/OrganicArchitecture3DModule";
+import { SynthesisEngineModule } from "@/components/widgets/SynthesisEngineModule";
 
 /* ══════════════════════════════════════════════════════════════════════════
  * Organic Chemistry 101 — គីមីសរីរាង្គមូលដ្ឋាន
@@ -88,6 +89,9 @@ export function OrganicChemistry101Page() {
 
         {/* ── Section 5: The Organic Lab — Tools & Glassware ──── */}
         <OrganicLabSection />
+
+        {/* ── Section 6: The Synthesis Engine — Reaction Pathways ─ */}
+        <SynthesisEngineModule />
       </div>
     </div>
   );
