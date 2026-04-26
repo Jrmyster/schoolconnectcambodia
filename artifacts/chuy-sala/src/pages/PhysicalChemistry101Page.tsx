@@ -178,49 +178,70 @@ function ChalkCard({
   termEn?: string;
   termKh?: string;
   icon?: React.ComponentType<{ className?: string }>;
-  accent?: "emerald" | "amber" | "sky" | "violet" | "rose";
+  accent?: "emerald" | "amber" | "sky" | "violet" | "rose" | "cyan";
   children: React.ReactNode;
 }) {
   const { language } = useLanguageStore();
   const kh = language === "kh";
 
-  const colors: Record<string, { ring: string; text: string; bg: string; chip: string }> = {
+  const colors: Record<
+    string,
+    { ring: string; text: string; bg: string; chip: string; glow: string; hoverRing: string }
+  > = {
     emerald: {
       ring: "ring-emerald-400/30",
       text: "text-emerald-200",
       bg: "bg-emerald-900/40",
       chip: "bg-emerald-800/70 text-emerald-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(52,211,153,0.55)]",
+      hoverRing: "hover:ring-emerald-300/70",
     },
     amber: {
       ring: "ring-amber-300/30",
       text: "text-amber-200",
       bg: "bg-amber-900/20",
       chip: "bg-amber-800/60 text-amber-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(251,191,36,0.55)]",
+      hoverRing: "hover:ring-amber-300/70",
     },
     sky: {
       ring: "ring-sky-300/30",
       text: "text-sky-200",
       bg: "bg-sky-900/25",
       chip: "bg-sky-800/60 text-sky-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(56,189,248,0.55)]",
+      hoverRing: "hover:ring-sky-300/70",
     },
     violet: {
       ring: "ring-violet-300/30",
       text: "text-violet-200",
       bg: "bg-violet-900/25",
       chip: "bg-violet-800/60 text-violet-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(167,139,250,0.55)]",
+      hoverRing: "hover:ring-violet-300/70",
     },
     rose: {
       ring: "ring-rose-300/30",
       text: "text-rose-200",
       bg: "bg-rose-900/25",
       chip: "bg-rose-800/60 text-rose-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(251,113,133,0.55)]",
+      hoverRing: "hover:ring-rose-300/70",
+    },
+    cyan: {
+      ring: "ring-cyan-300/30",
+      text: "text-cyan-200",
+      bg: "bg-cyan-900/25",
+      chip: "bg-cyan-800/60 text-cyan-100",
+      glow: "hover:shadow-[0_0_28px_-4px_rgba(34,211,238,0.55)]",
+      hoverRing: "hover:ring-cyan-300/70",
     },
   };
   const c = colors[accent];
 
   return (
     <article
-      className={`rounded-2xl border border-emerald-700/40 ring-1 ${c.ring} ${c.bg} p-5`}
+      className={`rounded-2xl border border-emerald-700/40 ring-1 ${c.ring} ${c.bg} p-5 transition duration-300 hover:-translate-y-0.5 hover:ring-2 ${c.hoverRing} ${c.glow}`}
     >
       <header className="flex items-center gap-2 mb-3">
         {Icon && (
@@ -749,6 +770,180 @@ function MicroSection() {
               "Astronomers point a telescope at a distant star, split its light through a prism, and read the dark lines. Hydrogen, helium, iron — all reveal themselves.",
               "តារាវិទូតម្រង់ទូរទស្សន៍មួយទៅលើផ្កាយឆ្ងាយ បំបែកពន្លឺវាឆ្លងកាត់ព្រីសម៍ ហើយអានបន្ទាត់ខ្មៅ។ អ៊ីដ្រូសែន អេលីយ៉ូម ដែក — សុទ្ធតែបង្ហាញខ្លួន។",
             )}
+          </div>
+        </ChalkCard>
+
+        {/* Card 3 — Advanced Thermodynamics */}
+        <ChalkCard
+          title="Advanced Thermodynamics"
+          khTitle="ទែរម៉ូឌីណាមិកកម្រិតខ្ពស់"
+          termEn="Δ — Energy & Spontaneity"
+          termKh="Δ — ថាមពល និងភាពឯកឯង"
+          icon={Flame}
+          accent="amber"
+        >
+          <p>
+            {t(
+              "The study of energy flow and chemical equilibrium — what makes a process actually want to happen.",
+              "ការសិក្សាអំពីលំហូរថាមពល និងសមតុល្យគីមី — អ្វីដែលធ្វើឱ្យដំណើរការមួយចង់កើតឡើងពិតប្រាកដ។",
+            )}
+          </p>
+          <p>
+            {t(
+              "Three variables run the show: Enthalpy (H, heat content), Entropy (S, disorder), and Gibbs Free Energy (G, the deciding referee).",
+              "អថេរបីគ្រប់គ្រងរឿងទាំងអស់៖ អង់តាល់ពី (H ខ្លឹមសារកំដៅ) អង់ត្រូពី (S វឹកវរ) និងថាមពលសេរីហ្ស៊ីប (G ជាអាជ្ញាកណ្តាលសម្រេច)។",
+            )}
+          </p>
+          <div
+            className="rounded-lg bg-amber-950/40 border border-amber-300/30 p-3 text-xs"
+            data-testid="micro-thermo-formula"
+          >
+            <div className="font-bold text-amber-200 mb-1">
+              {t("The deciding equation:", "សមីការសម្រេច៖")}
+            </div>
+            <div className="text-center my-1">
+              <InlineMath math="\Delta G = \Delta H - T\Delta S" />
+            </div>
+            <div className="opacity-90">
+              {t(
+                "If ΔG is negative, ice melts on its own. If positive, it stays frozen. One sign tells you whether anything in the universe will spontaneously happen.",
+                "បើ ΔG អវិជ្ជមាន ទឹកកករលាយដោយខ្លួនឯង។ បើវិជ្ជមាន វានៅកក។ សញ្ញាមួយនេះប្រាប់ថាតើអ្វីៗក្នុងសកលលោកនឹងកើតឡើងដោយឯកឯងឬទេ។",
+              )}
+            </div>
+          </div>
+        </ChalkCard>
+
+        {/* Card 4 — Chemical Kinetics */}
+        <ChalkCard
+          title="Chemical Kinetics"
+          khTitle="គីណេទិកគីមី"
+          termEn="⏱ — How Fast?"
+          termKh="⏱ — លឿនប៉ុណ្ណា?"
+          icon={Timer}
+          accent="rose"
+        >
+          <p>
+            {t(
+              "Thermodynamics tells you IF a reaction will happen. Kinetics tells you HOW FAST.",
+              "ទែរម៉ូឌីណាមិកប្រាប់ថាប្រតិកម្ម នឹងកើតឬទេ។ គីណេទិកប្រាប់ថាវា លឿនប៉ុណ្ណា។",
+            )}
+          </p>
+          <p>
+            {t(
+              "Rate Laws, Reaction Mechanisms, and Transition State Theory describe the climb molecules must make over an activation-energy barrier.",
+              "ច្បាប់អត្រា យន្តការប្រតិកម្ម និងទ្រឹស្តីស្ថានភាពអន្តរកាលពណ៌នាការឡើងភ្នំដែលម៉ូលេគុលត្រូវឆ្លងកាត់ឧបសគ្គថាមពលធ្វើសកម្មភាព។",
+            )}
+          </p>
+          <div className="rounded-lg bg-rose-950/40 border border-rose-300/30 p-3 text-xs">
+            <div className="font-bold text-rose-200 mb-1">
+              {t("Arrhenius equation:", "សមីការអារ៉េនីយ៉ូស៖")}
+            </div>
+            <div className="text-center my-1">
+              <InlineMath math="k = A e^{-E_a / RT}" />
+            </div>
+            <div className="opacity-90">
+              {t(
+                "Heat the reaction (raise T) or use a catalyst (lower Eₐ) and the rate jumps. Catalysts come in two flavors: homogeneous (same phase) and heterogeneous (different phase, like a solid surface).",
+                "កំដៅប្រតិកម្ម (បង្កើន T) ឬប្រើកាតាលីស (បន្ថយ Eₐ) នោះអត្រាកើនឡើង។ កាតាលីសមានពីរប្រភេទ៖ ដូចគ្នា (ដំណាក់កាលដូចគ្នា) និងផ្សេងគ្នា (ដំណាក់កាលផ្សេងគ្នា ដូចជាផ្ទៃរឹង)។",
+              )}
+            </div>
+          </div>
+        </ChalkCard>
+
+        {/* Card 5 — Statistical Thermodynamics */}
+        <ChalkCard
+          title="Statistical Thermodynamics"
+          khTitle="ទែរម៉ូឌីណាមិកស្ថិតិ"
+          termEn="∑ — Micro → Macro"
+          termKh="∑ — មីក្រូ → ម៉ាក្រូ"
+          icon={Sigma}
+          accent="emerald"
+        >
+          <p>
+            {t(
+              "The bridge between the random dance of single molecules and the steady numbers we read on a thermometer or pressure gauge.",
+              "ស្ពានរវាងការរាំចៃដន្យនៃម៉ូលេគុលតែមួយ និងលេខស្ថិរនៅលើទែម៉ូម៉ែត្រ ឬម៉ាស៊ីនវាស់សម្ពាធ។",
+            )}
+          </p>
+          <p>
+            {t(
+              "Ensembles, Partition Functions, and Molecular Degrees of Freedom translate billions of microscopic states into one macroscopic temperature, pressure, or heat capacity.",
+              "ប្រមូល មុខងារបែងចែក និងសញ្ញាស្វ័យភាពម៉ូលេគុល បកប្រែស្ថានភាពមីក្រូរាប់ពាន់លានទៅជាសីតុណ្ហភាព សម្ពាធ ឬសមត្ថភាពកំដៅម៉ាក្រូតែមួយ។",
+            )}
+          </p>
+          {/* Mini bell-curve / particle-cluster visual */}
+          <div
+            className="rounded-lg border border-emerald-300/30 bg-emerald-950/40 p-3"
+            role="img"
+            aria-label={
+              kh
+                ? "ខ្សែកោងនៃល្បឿនម៉ូលេគុលប្រើគំរូ Maxwell–Boltzmann"
+                : "Bell-curve approximation of a Maxwell–Boltzmann molecular speed distribution"
+            }
+          >
+            <svg viewBox="0 0 200 60" className="w-full h-12">
+              <path
+                d="M0,55 Q50,55 75,40 T100,12 T125,40 Q150,55 200,55"
+                fill="none"
+                stroke="rgb(110, 231, 183)"
+                strokeWidth="2"
+              />
+              <line x1="0" y1="55" x2="200" y2="55" stroke="rgb(110, 231, 183)" strokeOpacity="0.4" />
+              {/* Particle cluster dots beneath the curve */}
+              {[20, 40, 60, 80, 100, 120, 140, 160, 180].map((x, i) => (
+                <circle
+                  key={x}
+                  cx={x}
+                  cy={50 - Math.abs(i - 4) * 2}
+                  r="1.5"
+                  fill="rgb(167, 243, 208)"
+                  opacity={0.5 + (4 - Math.abs(i - 4)) * 0.1}
+                />
+              ))}
+            </svg>
+            <div className="text-[11px] text-emerald-200/85 mt-1 text-center">
+              {t(
+                "Molecular speeds (Maxwell–Boltzmann) → temperature you measure",
+                "ល្បឿនម៉ូលេគុល (Maxwell–Boltzmann) → សីតុណ្ហភាពដែលអ្នកវាស់",
+              )}
+            </div>
+          </div>
+        </ChalkCard>
+
+        {/* Card 6 — Electro & Surface Chemistry */}
+        <ChalkCard
+          title="Electro & Surface Chemistry"
+          khTitle="គីមីអគ្គិសនី និងផ្ទៃមុខ"
+          termEn="⚡ — Electrons & Interfaces"
+          termKh="⚡ — អេឡិចត្រុង និងផ្ទៃអន្តរកម្ម"
+          icon={BatteryCharging}
+          accent="cyan"
+        >
+          <p>
+            {t(
+              "Electrochemistry: redox reactions, the Nernst equation, and electrons flowing through wires from one electrode to the other — the science of every battery and fuel cell.",
+              "អេឡិចត្រូគីមី៖ ប្រតិកម្មអុកស៊ីដូ-រេឌុក សមីការ Nernst និងអេឡិចត្រុងហូរឆ្លងកាត់ខ្សែពីអេឡិចត្រូដមួយទៅមួយ — វិទ្យាសាស្ត្រនៃថ្ម និងកោសិកាឥន្ធនៈ។",
+            )}
+          </p>
+          <p>
+            {t(
+              "Surface & Polymer Chemistry: the meeting line where two phases touch — surface tension, adsorption, and how long-chain molecules behave at interfaces.",
+              "គីមីផ្ទៃ និងប៉ូលីមែរ៖ ខ្សែជួបនៃដំណាក់កាលពីរ — ភាពតានតឹងផ្ទៃ ការស្រូប និងរបៀបដែលម៉ូលេគុលខ្សែវែងមានឥរិយាបថនៅផ្ទៃអន្តរកម្ម។",
+            )}
+          </p>
+          <div className="rounded-lg bg-cyan-950/40 border border-cyan-300/30 p-3 text-xs">
+            <div className="font-bold text-cyan-200 mb-1">
+              {t("Nernst equation:", "សមីការ Nernst៖")}
+            </div>
+            <div className="text-center my-1">
+              <InlineMath math="E = E^\circ - \frac{RT}{nF}\,\ln Q" />
+            </div>
+            <div className="opacity-90">
+              {t(
+                "From a phone battery to a paint coating to a soap bubble — interfacial phenomena decide how the everyday world actually works.",
+                "ចាប់ពីថ្មទូរស័ព្ទ ដល់ស្រទាប់ថ្នាំលាប ដល់ពពុះសាប៊ូ — បាតុភូតផ្ទៃអន្តរកម្មសម្រេចថាតើពិភពប្រចាំថ្ងៃដំណើរការដូចម្តេច។",
+              )}
+            </div>
           </div>
         </ChalkCard>
       </div>
