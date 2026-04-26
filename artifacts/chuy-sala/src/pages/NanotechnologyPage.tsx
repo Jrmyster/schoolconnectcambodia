@@ -116,6 +116,7 @@ export function NanotechnologyPage() {
         </header>
 
         <SectionScale kh={kh} t={t} />
+        <SectionReflectometry kh={kh} t={t} />
         <SectionElectronMicroscope kh={kh} t={t} />
         <SectionAFM kh={kh} t={t} />
 
@@ -305,7 +306,7 @@ function ScaleLadder({
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  Section 02 — The Electron Microscope
+//  Section 03 — The Electron Microscope
 // ════════════════════════════════════════════════════════════════════════════
 
 function SectionElectronMicroscope({
@@ -317,7 +318,7 @@ function SectionElectronMicroscope({
 }) {
   return (
     <section className="mb-10" data-testid="section-em">
-      <SectionHeader spec="02" en="The Electron Microscope" kh="មីក្រូទស្សន៍អេឡិចត្រុង" kh_={kh} />
+      <SectionHeader spec="03" en="The Electron Microscope" kh="មីក្រូទស្សន៍អេឡិចត្រុង" kh_={kh} />
 
       <div
         className={`relative rounded-2xl border-2 ${SILVER_BORDER} p-5 sm:p-7 shadow-sm`}
@@ -479,7 +480,7 @@ function ElectronMicroscopeDiagram({
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  Section 03 — The Atomic Force Microscope (AFM)
+//  Section 04 — The Atomic Force Microscope (AFM)
 // ════════════════════════════════════════════════════════════════════════════
 
 function SectionAFM({
@@ -492,7 +493,7 @@ function SectionAFM({
   return (
     <section className="mb-10" data-testid="section-afm">
       <SectionHeader
-        spec="03"
+        spec="04"
         en="The Atomic Force Microscope (AFM)"
         kh="មីក្រូទស្សន៍កម្លាំងអាតូម (AFM)"
         kh_={kh}
@@ -698,6 +699,487 @@ function VocabChip({
     <span className={`inline-block text-[11px] sm:text-xs font-semibold px-2 py-0.5 rounded border ${colours[color]} ${k ? "font-khmer" : ""}`}>
       {k ? kh : en}
     </span>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 02 — Reflectometry: Measuring the Invisible
+//             ឧបករណ៍វាស់ចំណាំងផ្លាត៖ ការវាស់វែងវត្ថុដែលមើលមិនឃើញ
+// ════════════════════════════════════════════════════════════════════════════
+
+function SectionReflectometry({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section className="mb-10" data-testid="section-reflectometry">
+      <SectionHeader
+        spec="02"
+        en="Reflectometry: Measuring the Invisible"
+        kh="ឧបករណ៍វាស់ចំណាំងផ្លាត៖ ការវាស់វែងវត្ថុដែលមើលមិនឃើញ"
+        kh_={kh}
+      />
+
+      {/* Card 1 — The Soap Bubble Principle */}
+      <article
+        className={`relative rounded-2xl border-2 ${SILVER_BORDER} p-5 sm:p-7 shadow-sm mb-5`}
+        style={CARD_BG}
+        data-testid="card-soap-bubble"
+      >
+        <CornerMarks subtle />
+        <div className="flex items-baseline gap-2 mb-3">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-emerald-700">
+            01
+          </span>
+          <h3 className={`text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+            {t("The Soap Bubble Principle", "គោលការណ៍ពពុះសាប៊ូ")}
+          </h3>
+        </div>
+
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-6 items-start">
+          <div>
+            {/* Phenomenon */}
+            <div className="mb-4">
+              <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-700 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("The phenomenon", "បាតុភូត")}
+              </div>
+              <p className={`text-sm sm:text-base text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "Why do soap bubbles dance with rainbow colors? Why does an oil slick on a wet road glow purple, gold and green even though the oil itself is colorless? The answer is hiding in plain sight — and it is exactly the same trick the most precise measuring machine in a chip factory uses.",
+                  "ហេតុអ្វីពពុះសាប៊ូលេចពណ៌ឥន្ទធនូ? ហេតុអ្វីប្រេងលើផ្លូវសើមភ្លឺពណ៌ស្វាយ មាស និងបៃតង បើទោះប្រេងខ្លួនវាគ្មានពណ៌? ចម្លើយលាក់នៅចំពោះមុខ — ហើយវាគឺជាល្បិចតែមួយដែលម៉ាស៊ីនវាស់វែងដ៏ច្បាស់លាស់បំផុតក្នុងរោងចក្រសៀគ្វីប្រើ។"
+                )}
+              </p>
+            </div>
+
+            {/* The Science */}
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50/60 p-4">
+              <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-700 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("The science · thin-film interference", "វិទ្យាសាស្ត្រ · ការជ្រៀតជ្រែកនៃស្រទាប់ស្ដើង")}
+              </div>
+              <p className={`text-sm text-slate-800 mb-2 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "A bubble is a ",
+                  "ពពុះគឺជា "
+                )}
+                <strong className="text-emerald-900">{t("thin film", "ស្រទាប់ស្ដើង")}</strong>
+                {t(
+                  ". When light hits it, two things happen at once: part of the light bounces off the ",
+                  "។ ពេលពន្លឺប៉ះវា វត្ថុពីរកើតឡើងក្នុងពេលតែមួយ ៖ ផ្នែកមួយនៃពន្លឺឆ្លុះចេញពី"
+                )}
+                <strong className="text-emerald-900">{t("top surface", "ផ្ទៃខាងលើ")}</strong>
+                {t(", and part passes through and bounces off the ", " ហើយផ្នែកមួយទៀតឆ្លងកាត់ ហើយឆ្លុះចេញពី")}
+                <strong className="text-emerald-900">{t("bottom surface", "ផ្ទៃខាងក្រោម")}</strong>
+                {t(
+                  ". The two reflections meet again in the air — that meeting is where the magic happens.",
+                  "។ ការឆ្លុះទាំងពីរជួបគ្នាម្ដងទៀតក្នុងខ្យល់ — ការជួបនោះជាកន្លែងដែលភាពអស្ចារ្យកើតឡើង។"
+                )}
+              </p>
+              <ul className="space-y-2 text-sm text-slate-800">
+                <li className="flex items-start gap-2">
+                  <span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0" />
+                  <span className={kh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                    <strong className="text-rose-700">{t("Destructive interference", "ការជ្រៀតជ្រែកបំផ្លាញ")}</strong>
+                    {t(
+                      " — the two waves crash into each other and cancel out. That color disappears.",
+                      " — រលកទាំងពីរប៉ះគ្នា ហើយលុបគ្នាបាត់។ ពណ៌នោះបាត់ទៅ។"
+                    )}
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span aria-hidden className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0" />
+                  <span className={kh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                    <strong className="text-emerald-700">{t("Constructive interference", "ការជ្រៀតជ្រែកបង្កើន")}</strong>
+                    {t(
+                      " — the waves stack on top of each other and grow brighter. That color shines back.",
+                      " — រលកត្រួតលើគ្នា ហើយកាន់តែភ្លឺ។ ពណ៌នោះឆ្លុះត្រឡប់មកវិញ។"
+                    )}
+                  </span>
+                </li>
+              </ul>
+              <p className={`mt-3 text-sm text-slate-700 italic ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "Which color you see depends entirely on the exact thickness of the soap layer.",
+                  "ពណ៌ដែលអ្នកឃើញ ពឹងផ្អែកទាំងស្រុងលើកម្រាសពិតប្រាកដនៃស្រទាប់សាប៊ូ។"
+                )}
+              </p>
+            </div>
+          </div>
+
+          <ThinFilmDiagram kh={kh} t={t} />
+        </div>
+      </article>
+
+      {/* Card 2 — How a Reflectometer Works */}
+      <article
+        className={`relative rounded-2xl border-2 ${SILVER_BORDER} p-5 sm:p-7 shadow-sm mb-5`}
+        style={CARD_BG}
+        data-testid="card-how-reflectometer-works"
+      >
+        <CornerMarks subtle />
+        <div className="flex items-baseline gap-2 mb-3">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-emerald-700">
+            02
+          </span>
+          <h3 className={`text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+            {t("How a Reflectometer Works", "ដំណើរការរបស់ឧបករណ៍វាស់ចំណាំងផ្លាត")}
+          </h3>
+        </div>
+
+        <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] gap-6 items-start">
+          <ReflectometerDiagram kh={kh} t={t} />
+
+          <div>
+            {/* The Machine */}
+            <div className="mb-4">
+              <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-700 mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("The machine", "ម៉ាស៊ីន")}
+              </div>
+              <p className={`text-sm sm:text-base text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "Engineers use the exact same soap-bubble physics to build a ",
+                  "វិស្វករប្រើរូបវិទ្យាពពុះសាប៊ូដូចគ្នាបេះបិទ ដើម្បីបង្កើត"
+                )}
+                <strong className="text-emerald-900">{t("reflectometer", "ឧបករណ៍វាស់ចំណាំងផ្លាត")}</strong>
+                {t(
+                  ". A precise beam of white light is aimed at a manufactured thin film — for example, the silicon-oxide layer grown on a silicon wafer in a chip factory.",
+                  "។ កាំរស្មីពន្លឺសច្បាស់លាស់មួយត្រូវបានបាញ់ទៅលើស្រទាប់ស្ដើងផលិតមួយ — ឧទាហរណ៍ ស្រទាប់ស៊ីលីស្យូម-អុកស៊ីត ដាំលើផ្ទាំង (wafer) ស៊ីលីស្យូម ក្នុងរោងចក្រសៀគ្វី។"
+                )}
+              </p>
+            </div>
+
+            {/* The Calculation */}
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50/60 p-4">
+              <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-700 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+                {t("The calculation", "ការគណនា")}
+              </div>
+              <p className={`text-sm text-slate-800 mb-3 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "A detector catches the reflected light and measures which wavelengths cancelled out and which grew brighter. The machine's computer feeds those numbers into the interference equation:",
+                  "ឧបករណ៍ចាប់ពន្លឺឆ្លុះត្រឡប់ ហើយវាស់ថា រលកប្រវែងមួយណាបានលុបគ្នា និងមួយណាបានកាន់តែភ្លឺ។ កុំព្យូទ័ររបស់ម៉ាស៊ីនបញ្ចូលលេខទាំងនោះទៅក្នុងសមីការការជ្រៀតជ្រែក ៖"
+                )}
+              </p>
+              <div className="flex justify-center my-2">
+                <code
+                  className="px-4 py-2 bg-slate-950 text-emerald-200 border-2 border-emerald-400/60 rounded-lg font-mono text-base sm:text-lg shadow-inner"
+                  data-testid="equation-thin-film"
+                >
+                  2<span className="text-emerald-300">n</span>
+                  <span className="text-emerald-300">d</span> = <span className="text-emerald-300">m</span>λ
+                </code>
+              </div>
+              <ul className={`mt-3 space-y-1 text-[12.5px] text-slate-700 ${kh ? "font-khmer leading-loose" : "font-mono"}`}>
+                <li>
+                  <span className="text-emerald-700 font-bold font-mono">n</span>
+                  <span className="font-mono"> = </span>
+                  {t("refractive index of the film", "សន្ទស្សន៍ឆ្លុះនៃស្រទាប់")}
+                </li>
+                <li>
+                  <span className="text-emerald-700 font-bold font-mono">d</span>
+                  <span className="font-mono"> = </span>
+                  {t("film thickness (what we want)", "កម្រាសស្រទាប់ (តម្លៃដែលត្រូវការ)")}
+                </li>
+                <li>
+                  <span className="text-emerald-700 font-bold font-mono">m</span>
+                  <span className="font-mono"> = </span>
+                  {t("integer (1, 2, 3, …)", "ចំនួនគត់ (១, ២, ៣, …)")}
+                </li>
+                <li>
+                  <span className="text-emerald-700 font-bold font-mono">λ</span>
+                  <span className="font-mono"> = </span>
+                  {t("wavelength of the light", "រលកប្រវែងនៃពន្លឺ")}
+                </li>
+              </ul>
+              <p className={`mt-3 text-sm text-slate-800 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {t(
+                  "Solving for ",
+                  "ដោយដោះស្រាយ "
+                )}
+                <strong className="font-mono text-emerald-900">d</strong>
+                {t(
+                  " gives the film's thickness — accurate to a single nanometer, without ever physically touching the surface.",
+                  " យើងទទួលបានកម្រាសស្រទាប់ — ជាក់ច្បាស់ដល់មួយណាណូម៉ែត្រ ដោយមិនបានប៉ះផ្ទៃវាសោះ។"
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* Card 3 — Real-World Uses */}
+      <article
+        className={`relative rounded-2xl border-2 ${SILVER_BORDER} p-5 sm:p-7 shadow-sm`}
+        style={CARD_BG}
+        data-testid="card-real-world-uses"
+      >
+        <CornerMarks subtle />
+        <div className="flex items-baseline gap-2 mb-4">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-emerald-700">
+            03
+          </span>
+          <h3 className={`text-lg sm:text-xl font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+            {t("Real-World Uses", "ការប្រើប្រាស់ក្នុងពិភពពិត")}
+          </h3>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          <UseCaseCard
+            kh={kh}
+            icon={<Cpu className="w-5 h-5" />}
+            titleEn="Microchips"
+            titleKh="សៀគ្វីមីក្រូ"
+            bodyEn="A computer chip is essentially a microscopic layered cake of metal and silicon-oxide — sometimes 30 to 50 layers tall. If even one layer is off by a few nanometers, the transistors stop switching cleanly and your phone won't work. Reflectometers stand on the production line and certify every single wafer before it moves to the next step."
+            bodyKh="សៀគ្វីកុំព្យូទ័រគឺសំខាន់ជានំខេកមីក្រូស្ដើងមួយ មានស្រទាប់លោហៈ និងស៊ីលីស្យូម-អុកស៊ីត — ជួនកាល ៣០ ទៅ ៥០ ស្រទាប់។ បើស្រទាប់ណាមួយខុសសូម្បីតែមួយចំនួនណាណូម៉ែត្រ ត្រង់ស៊ីស្ទ័របញ្ឈប់ការបិទបើក ហើយទូរស័ព្ទរបស់អ្នកនឹងមិនដំណើរការ។ ឧបករណ៍វាស់ចំណាំងផ្លាតឈរនៅខ្សែផលិតកម្ម ហើយវាយតម្លៃផ្ទាំងសៀគ្វីនីមួយៗ មុនឆ្ពោះទៅជំហានបន្ទាប់។"
+            chipEn="< 1 nm tolerance"
+            chipKh="< 1 nm គម្លាតអនុញ្ញាត"
+          />
+          <UseCaseCard
+            kh={kh}
+            icon={<Zap className="w-5 h-5" />}
+            titleEn="Anti-Reflective Coatings"
+            titleKh="ស្រទាប់ស្រូបពន្លឺ"
+            bodyEn="The eyeglasses we wear, the lenses inside our cameras, and the solar panels on our roofs all rely on perfectly measured nanocoatings. The coating is grown to exactly the thickness that makes unwanted reflections destructively cancel — so glare disappears from a lens, and so a solar panel absorbs the maximum amount of sunlight instead of bouncing it back to the sky."
+            bodyKh="វ៉ែនតាដែលយើងពាក់ កែវកាមេរ៉ា និងផ្ទាំងថាមពលព្រះអាទិត្យនៅលើដំបូល សុទ្ធតែពឹងលើស្រទាប់ណាណូដែលត្រូវវាស់យ៉ាងល្អិតល្អន់។ ស្រទាប់ត្រូវដាំឱ្យមានកម្រាសសុក្រឹត ដើម្បីឱ្យការឆ្លុះមិនត្រូវការលុបចោលគ្នា — ដូច្នេះពន្លឺថ្លាបាត់ពីកែវ ហើយផ្ទាំងថាមពលស្រូបពន្លឺព្រះអាទិត្យបានច្រើនបំផុត ជាជាងឆ្លុះត្រឡប់ទៅលើមេឃ។"
+            chipEn="lenses · solar panels"
+            chipKh="កែវ · ផ្ទាំងថាមពលព្រះអាទិត្យ"
+          />
+        </div>
+      </article>
+    </section>
+  );
+}
+
+function UseCaseCard({
+  kh,
+  icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+  chipEn,
+  chipKh,
+}: {
+  kh: boolean;
+  icon: React.ReactNode;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  chipEn: string;
+  chipKh: string;
+}) {
+  return (
+    <div className="rounded-xl bg-slate-950 text-emerald-50 border-2 border-emerald-400/40 p-4 sm:p-5 relative overflow-hidden">
+      <span aria-hidden="true" className="pointer-events-none absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-emerald-400/80" />
+      <span aria-hidden="true" className="pointer-events-none absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 border-emerald-400/80" />
+      <span aria-hidden="true" className="pointer-events-none absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-emerald-400/80" />
+      <span aria-hidden="true" className="pointer-events-none absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-emerald-400/80" />
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-emerald-300">{icon}</span>
+        <h4 className={`font-bold text-base sm:text-lg ${kh ? "font-khmer" : ""}`}>
+          {kh ? titleKh : titleEn}
+        </h4>
+      </div>
+      <p className={`text-sm text-slate-200/90 mb-3 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {kh ? bodyKh : bodyEn}
+      </p>
+      <span
+        className={`inline-block text-[11px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border border-emerald-400/60 bg-emerald-500/10 text-emerald-200 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+      >
+        {kh ? chipKh : chipEn}
+      </span>
+    </div>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Diagram: Thin-film interference (Card 1)
+// ──────────────────────────────────────────────────────────────────────────
+function ThinFilmDiagram({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <div
+      className="rounded-xl bg-slate-950 text-emerald-50 p-4 border-2 border-emerald-400/40"
+      role="img"
+      aria-label={t(
+        "Thin-film interference diagram: incoming light splits into two reflections, one off the top surface and one off the bottom surface, which combine and either cancel or reinforce each other in the air above the film.",
+        "ដ្យាក្រាមការជ្រៀតជ្រែកស្រទាប់ស្ដើង ៖ ពន្លឺចូលបែងចែកជាការឆ្លុះពីរ មួយពីផ្ទៃខាងលើ និងមួយពីផ្ទៃខាងក្រោម ដែលរួមបញ្ចូលគ្នា ហើយលុប ឬពង្រឹងគ្នាក្នុងខ្យល់នៅលើស្រទាប់។"
+      )}
+      data-testid="diagram-thin-film"
+    >
+      <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("Thin-film interference", "ការជ្រៀតជ្រែកស្រទាប់ស្ដើង")}
+      </div>
+      <svg viewBox="0 0 320 220" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <defs>
+          <marker id="arrow-em" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+          </marker>
+        </defs>
+        {/* Air label */}
+        <text x="14" y="22" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#a7f3d0">
+          {t("AIR", "ខ្យល់")}
+        </text>
+
+        {/* Thin film slab */}
+        <rect x="20" y="120" width="280" height="40" fill="#0f766e" fillOpacity="0.55" stroke="#34d399" strokeWidth="1.5" />
+        <text x="160" y="146" fontSize={kh ? 10 : 11} fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#ecfeff" textAnchor="middle">
+          {t("THIN FILM (thickness = d)", "ស្រទាប់ស្ដើង (កម្រាស = d)")}
+        </text>
+
+        {/* Substrate below */}
+        <rect x="20" y="160" width="280" height="40" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <text x="160" y="184" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#cbd5e1" textAnchor="middle">
+          {t("SUBSTRATE", "ស្រទាប់ផ្ទៃ")}
+        </text>
+
+        {/* Incoming light beam */}
+        <g color="#fde047">
+          <line x1="60" y1="20" x2="120" y2="120" stroke="#fde047" strokeWidth="2" markerEnd="url(#arrow-em)" />
+          <text x="46" y="38" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#fde047">
+            {t("incoming", "ចូល")}
+          </text>
+        </g>
+
+        {/* Reflection 1 — off top surface (rose / cancels) */}
+        <g color="#fb7185">
+          <line x1="120" y1="120" x2="180" y2="20" stroke="#fb7185" strokeWidth="2" markerEnd="url(#arrow-em)" />
+          <text x="184" y="34" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#fb7185">
+            {t("reflection 1", "ឆ្លុះ ១")}
+          </text>
+          <text x="184" y="46" fontSize="9" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#fb7185">
+            {t("(off top)", "(ផ្ទៃលើ)")}
+          </text>
+        </g>
+
+        {/* Light passes through to bottom */}
+        <line x1="120" y1="120" x2="160" y2="160" stroke="#fde047" strokeWidth="1.5" strokeDasharray="4 3" />
+
+        {/* Reflection 2 — off bottom surface (emerald / reinforces) */}
+        <g color="#34d399">
+          <line x1="160" y1="160" x2="200" y2="120" stroke="#34d399" strokeWidth="1.5" strokeDasharray="4 3" />
+          <line x1="200" y1="120" x2="260" y2="20" stroke="#34d399" strokeWidth="2" markerEnd="url(#arrow-em)" />
+          <text x="226" y="34" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#34d399">
+            {t("reflection 2", "ឆ្លុះ ២")}
+          </text>
+          <text x="226" y="46" fontSize="9" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#34d399">
+            {t("(off bottom)", "(ផ្ទៃក្រោម)")}
+          </text>
+        </g>
+
+        {/* d label with vertical guideline */}
+        <line x1="305" y1="120" x2="305" y2="160" stroke="#fbbf24" strokeWidth="1" />
+        <line x1="300" y1="120" x2="310" y2="120" stroke="#fbbf24" strokeWidth="1" />
+        <line x1="300" y1="160" x2="310" y2="160" stroke="#fbbf24" strokeWidth="1" />
+        <text x="295" y="144" fontSize="11" fontFamily="ui-monospace, monospace" fill="#fbbf24" textAnchor="end">d</text>
+      </svg>
+      <p className={`mt-2 text-[11px] text-emerald-100/90 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {t(
+          "The two reflected beams travel different distances. Their meeting in the air decides what color you see.",
+          "កាំរស្មីឆ្លុះទាំងពីរធ្វើដំណើរចម្ងាយខុសគ្នា។ ការជួបគ្នាក្នុងខ្យល់របស់ពួកវាសម្រេចថាអ្នកឃើញពណ៌អ្វី។"
+        )}
+      </p>
+    </div>
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// Diagram: Reflectometer schematic (Card 2)
+// ──────────────────────────────────────────────────────────────────────────
+function ReflectometerDiagram({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <div
+      className="rounded-xl bg-slate-950 text-emerald-50 p-4 border-2 border-emerald-400/40"
+      role="img"
+      aria-label={t(
+        "Schematic of a reflectometer: a light source emits a precise beam onto a thin film grown on a silicon wafer; a detector catches the reflected beam and a computer reads which wavelengths interfered.",
+        "ដ្យាក្រាមឧបករណ៍វាស់ចំណាំងផ្លាត ៖ ប្រភពពន្លឺបាញ់កាំរស្មីច្បាស់លាស់ទៅលើស្រទាប់ស្ដើងលើផ្ទាំងស៊ីលីស្យូម ឧបករណ៍ចាប់ពន្លឺឆ្លុះត្រឡប់ ហើយកុំព្យូទ័រអានរលកប្រវែងណាដែលបានជ្រៀតជ្រែក។"
+      )}
+      data-testid="diagram-reflectometer"
+    >
+      <div className={`text-[11px] font-mono uppercase tracking-widest text-emerald-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {t("Reflectometer · schematic", "ឧបករណ៍វាស់ចំណាំងផ្លាត · ដ្យាក្រាម")}
+      </div>
+      <svg viewBox="0 0 320 220" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <defs>
+          <marker id="arrow-rm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        {/* Light source — left bulb */}
+        <rect x="14" y="32" width="56" height="40" rx="6" fill="#0b1220" stroke="#34d399" strokeWidth="1.5" />
+        <circle cx="42" cy="52" r="9" fill="#fde047" />
+        <circle cx="42" cy="52" r="3" fill="#fffdf0" />
+        <text x="42" y="86" fontSize={kh ? 9 : 10} fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#a7f3d0" textAnchor="middle">
+          {t("light source", "ប្រភពពន្លឺ")}
+        </text>
+
+        {/* Detector — right box */}
+        <rect x="250" y="32" width="56" height="40" rx="6" fill="#0b1220" stroke="#34d399" strokeWidth="1.5" />
+        <rect x="262" y="42" width="32" height="20" fill="#1e293b" stroke="#34d399" strokeWidth="1" />
+        <line x1="266" y1="48" x2="290" y2="48" stroke="#34d399" strokeWidth="1" />
+        <line x1="266" y1="54" x2="290" y2="54" stroke="#34d399" strokeWidth="1" />
+        <line x1="266" y1="60" x2="282" y2="60" stroke="#34d399" strokeWidth="1" />
+        <text x="278" y="86" fontSize={kh ? 9 : 10} fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#a7f3d0" textAnchor="middle">
+          {t("detector", "ឧបករណ៍ចាប់")}
+        </text>
+
+        {/* Wafer + thin film at the bottom */}
+        <rect x="40" y="170" width="240" height="22" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x="40" y="156" width="240" height="14" fill="#0f766e" fillOpacity="0.65" stroke="#34d399" strokeWidth="1.2" />
+        <text x="160" y="208" fontSize={kh ? 9 : 10} fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#cbd5e1" textAnchor="middle">
+          {t("SILICON WAFER + THIN FILM", "ផ្ទាំងស៊ីលីស្យូម + ស្រទាប់ស្ដើង")}
+        </text>
+        {/* d annotation */}
+        <line x1="32" y1="156" x2="32" y2="170" stroke="#fbbf24" strokeWidth="1" />
+        <line x1="28" y1="156" x2="36" y2="156" stroke="#fbbf24" strokeWidth="1" />
+        <line x1="28" y1="170" x2="36" y2="170" stroke="#fbbf24" strokeWidth="1" />
+        <text x="26" y="167" fontSize="10" fontFamily="ui-monospace, monospace" fill="#fbbf24" textAnchor="end">d</text>
+
+        {/* Incoming beam — yellow */}
+        <line x1="70" y1="62" x2="155" y2="156" stroke="#fde047" strokeWidth="2.5" markerEnd="url(#arrow-rm)" color="#fde047" />
+        <text x="84" y="106" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#fde047" transform="rotate(48 84 106)">
+          {t("incident", "បាញ់ចូល")}
+        </text>
+
+        {/* Reflected beam — emerald */}
+        <line x1="165" y1="156" x2="250" y2="62" stroke="#34d399" strokeWidth="2.5" markerEnd="url(#arrow-rm)" color="#34d399" />
+        <text x="222" y="108" fontSize="10" fontFamily={kh ? "Noto Sans Khmer, ui-sans-serif, sans-serif" : "ui-monospace, monospace"} fill="#34d399" transform="rotate(-48 222 108)">
+          {t("reflected", "ឆ្លុះត្រឡប់")}
+        </text>
+
+        {/* Multi-wavelength badge */}
+        <g>
+          <rect x="116" y="14" width="88" height="18" rx="9" fill="#0b1220" stroke="#34d399" strokeWidth="1" />
+          <circle cx="128" cy="23" r="3" fill="#fb7185" />
+          <circle cx="138" cy="23" r="3" fill="#fde047" />
+          <circle cx="148" cy="23" r="3" fill="#34d399" />
+          <circle cx="158" cy="23" r="3" fill="#60a5fa" />
+          <circle cx="168" cy="23" r="3" fill="#a78bfa" />
+          <text x="178" y="26" fontSize="9" fontFamily="ui-monospace, monospace" fill="#a7f3d0">λ₁…λₙ</text>
+        </g>
+      </svg>
+      <p className={`mt-2 text-[11px] text-emerald-100/90 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {t(
+          "Each wavelength interferes differently with the film — the detector reads the full pattern, the computer solves for thickness.",
+          "រលកប្រវែងនីមួយៗជ្រៀតជ្រែកជាមួយស្រទាប់ខុសៗគ្នា — ឧបករណ៍ចាប់អានគំរូទាំងមូល ហើយកុំព្យូទ័រដោះស្រាយសម្រាប់កម្រាស។"
+        )}
+      </p>
+    </div>
   );
 }
 
