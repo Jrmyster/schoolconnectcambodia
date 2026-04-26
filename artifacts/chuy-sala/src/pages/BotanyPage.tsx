@@ -1,3 +1,4 @@
+import { useState, type ComponentType, type CSSProperties } from "react";
 import { Link } from "wouter";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
@@ -9,6 +10,7 @@ import {
   AlertTriangle,
   Bug,
   Droplets,
+  Flame,
   Flower2,
   History,
   Info,
@@ -16,6 +18,7 @@ import {
   Leaf,
   Mountain,
   Network,
+  Radio,
   Snowflake,
   Sparkles,
   Sprout,
@@ -23,6 +26,8 @@ import {
   TreeDeciduous,
   TreePine,
   Trees,
+  Venus,
+  Mars,
   Wind,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -256,27 +261,64 @@ function Callout({
   );
 }
 
-// ─── Hero chip ─────────────────────────────────────────────────────────────
+// ─── Hero tab pill (clickable) ─────────────────────────────────────────────
+//
+// The pills in the hero double as the page's primary navigation. Clicking a
+// pill switches the content area below the hero to the matching tab. The
+// active pill is filled with its accent colour; inactive pills sit on a
+// translucent white surface so all four read clearly against the canopy.
 
-function HeroChip({
+type IconCmp = ComponentType<{ className?: string; style?: CSSProperties }>;
+
+function HeroTab({
   color,
   k,
   en,
   kh,
+  Icon,
+  active,
+  onClick,
+  testid,
+  id,
+  controls,
 }: {
   color: string;
   k: boolean;
   en: string;
   kh: string;
+  Icon: IconCmp;
+  active: boolean;
+  onClick: () => void;
+  testid: string;
+  id: string;
+  controls: string;
 }) {
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border bg-white/85 backdrop-blur-sm ${k ? "font-khmer" : ""}`}
-      style={{ color, borderColor: `${color}88` }}
+    <button
+      type="button"
+      role="tab"
+      id={id}
+      aria-controls={controls}
+      aria-selected={active}
+      tabIndex={active ? 0 : -1}
+      data-testid={testid}
+      data-active={active ? "true" : "false"}
+      onClick={onClick}
+      className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border backdrop-blur-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-1 ${
+        k ? "font-khmer" : ""
+      }`}
+      style={{
+        color: active ? "#ffffff" : color,
+        backgroundColor: active ? color : "rgba(255,255,255,0.85)",
+        borderColor: active ? color : `${color}88`,
+        boxShadow: active
+          ? `0 6px 14px -8px ${color}99`
+          : "0 2px 6px -3px rgba(15, 23, 42, 0.18)",
+      }}
     >
-      <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }} />
+      <Icon className="w-3.5 h-3.5" style={{ color: active ? "#ffffff" : color }} />
       {k ? kh : en}
-    </span>
+    </button>
   );
 }
 
@@ -311,13 +353,41 @@ function ForestSilhouette({ className = "" }: { className?: string }) {
 //  Page
 // ════════════════════════════════════════════════════════════════════════════
 
+type TabId = "history" | "biology" | "vascular" | "network";
+
+const TAB_DEFS: Array<{
+  id: TabId;
+  Icon: IconCmp;
+  color: string;
+  en: string;
+  kh: string;
+}> = [
+  { id: "history",  Icon: History,  color: SOIL,   en: "Deep History",          kh: "ប្រវត្តិដ៏ជ្រាលជ្រៅ" },
+  { id: "biology",  Icon: Flower2,  color: CANOPY, en: "Biology & Reproduction", kh: "ជីវវិទ្យា និងការបន្តពូជ" },
+  { id: "vascular", Icon: Droplets, color: SKY,    en: "Xylem & Phloem",         kh: "ស៊ីឡែម និងផ្លូអែម" },
+  { id: "network",  Icon: Network,  color: BARK,   en: "The Wood Wide Web",      kh: "បណ្តាញព្រៃឈើ" },
+];
+
 export function BotanyPage() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const k = language === "kh";
 
+  const [activeTab, setActiveTab] = useState<TabId>("history");
+
   return (
     <div className="min-h-screen py-10 sm:py-12 px-4 sm:px-6" style={FRAME}>
+      {/* Tab transition keyframes */}
+      <style>{`
+        @keyframes botany-tab-fade-in {
+          from { opacity: 0; transform: translateY(6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .botany-tab-panel {
+          animation: botany-tab-fade-in 280ms ease-out both;
+        }
+      `}</style>
+
       <div className="max-w-6xl mx-auto">
         {/* Back link */}
         <div className="mb-4">
@@ -333,7 +403,7 @@ export function BotanyPage() {
 
         {/* Hero */}
         <header
-          className="relative rounded-[2rem] p-6 sm:p-9 mb-10 overflow-hidden shadow-xl border"
+          className="relative rounded-[2rem] p-6 sm:p-9 mb-8 overflow-hidden shadow-xl border"
           style={{
             borderColor: `${CANOPY}55`,
             backgroundImage: `
@@ -378,21 +448,74 @@ export function BotanyPage() {
                 )}
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                <HeroChip color={CANOPY} k={k} en="Photosynthesis" kh="រស្មីសំយោគ" />
-                <HeroChip color={SKY}    k={k} en="Xylem & Phloem" kh="ស៊ីឡែម និងផ្លូអែម" />
-                <HeroChip color={SOIL}   k={k} en="Wood Wide Web"  kh="បណ្តាញព្រៃឈើ" />
-                <HeroChip color={ROSE}   k={k} en="Burls"          kh="ដុំសាច់" />
+              <div
+                className={`mt-3 text-[11px] font-mono uppercase tracking-[0.2em] flex items-center gap-2 ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+                style={{ color: CANOPY_DEEP }}
+              >
+                <ArrowDown className="w-3.5 h-3.5" />
+                <span>{t("Tap a topic to explore", "ចុចលើប្រធានបទដើម្បីស្វែងយល់")}</span>
+              </div>
+
+              <div
+                className="mt-3 flex flex-wrap gap-2"
+                role="tablist"
+                aria-label={t("Botany topics", "ប្រធានបទរុក្ខសាស្ត្រ")}
+                data-testid="botany-tablist"
+              >
+                {TAB_DEFS.map((tab) => (
+                  <HeroTab
+                    key={tab.id}
+                    color={tab.color}
+                    k={k}
+                    en={tab.en}
+                    kh={tab.kh}
+                    Icon={tab.Icon}
+                    active={activeTab === tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    testid={`tab-pill-${tab.id}`}
+                    id={`botany-tab-${tab.id}`}
+                    controls={`botany-panel-${tab.id}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </header>
 
-        <SectionDeepHistory  k={k} t={t} />
-        <SectionAlchemy      k={k} t={t} />
-        <SectionDiversity    k={k} t={t} />
-        <SectionWoodWideWeb  k={k} t={t} />
-        <SectionBurls        k={k} t={t} />
+        {/* Tab content panel */}
+        <div
+          key={activeTab}
+          className="botany-tab-panel"
+          role="tabpanel"
+          id={`botany-panel-${activeTab}`}
+          aria-labelledby={`botany-tab-${activeTab}`}
+          tabIndex={0}
+          data-testid={`tab-panel-${activeTab}`}
+        >
+          {activeTab === "history" && <SectionDeepHistory k={k} t={t} />}
+
+          {activeTab === "biology" && (
+            <>
+              <SectionBiologyIntro k={k} t={t} />
+              <SectionDiversity    k={k} t={t} />
+              <SectionBurls        k={k} t={t} />
+            </>
+          )}
+
+          {activeTab === "vascular" && (
+            <>
+              <SectionVascularIntro k={k} t={t} />
+              <SectionAlchemy       k={k} t={t} />
+            </>
+          )}
+
+          {activeTab === "network" && (
+            <>
+              <SectionNetworkIntro k={k} t={t} />
+              <SectionWoodWideWeb  k={k} t={t} />
+            </>
+          )}
+        </div>
 
         {/* Closing */}
         <div
@@ -472,6 +595,17 @@ function SectionDeepHistory({ k, t }: { k: boolean; t: T }) {
       enBody: "The first real trees finally appeared — wood, bark, deep roots, towering canopies. Within a few million years they had pulled so much CO\u2082 out of the air that the whole climate changed.",
       khBody: "ដើមឈើពិតប្រាកដដំបូង ទីបំផុតបានលេចឡើង — ឈើ សំបក ឫសជ្រៅ និងពាលពាសក្បាល។ ក្នុងរយៈពេលប៉ុន្មានលានឆ្នាំ ពួកវាបានទាញ CO\u2082 ច្រើនណាស់ចេញពីខ្យល់ ហើយអាកាសធាតុទាំងមូលបានផ្លាស់ប្តូរ។",
       accent: CANOPY,
+    },
+    {
+      Icon: Flame,
+      tag: "+1,000,000,000 yr",
+      en: "The End of Trees",
+      kh: "ទីបញ្ចប់នៃដើមឈើ",
+      enBody:
+        "As the Sun expands and grows hotter, Earth's CO\u2082 levels will quietly drop too low for photosynthesis to continue. Trees will disappear from the planet long before the oceans ever boil away — a green silence falling on the land first.",
+      khBody:
+        "នៅពេលដែលព្រះអាទិត្យពង្រីក និងក្តៅជាងមុន កម្រិត CO\u2082 របស់ផែនដីនឹងធ្លាក់ចុះស្ងាត់ៗទាបពេក ដែលរស្មីសំយោគមិនអាចបន្តបាន។ ដើមឈើនឹងបាត់ខ្លួនពីភពនេះ យូរមុនពេលដែលមហាសមុទ្រត្រូវឆ្អិន — ភាពស្ងៀមស្ងាត់ពណ៌បៃតងនឹងចុះមកលើដីគោកមុនគេ។",
+      accent: ROSE,
     },
   ];
 
@@ -937,6 +1071,377 @@ function SectionBurls({ k, t }: { k: boolean; t: T }) {
             "បាក់តេរី Agrobacterium ពូកែខ្លាំងណាស់ក្នុងការចាក់ DNA របស់ខ្លួនចូលក្នុងកោសិការុក្ខជាតិ ដែលអ្នកជីវវិទូឥឡូវប្រើវាជាឧបករណ៍ — ម្ជុលធម្មជាតិមួយប្រភេទ — ដើម្បីបង្កើតដំណាំកែប្រែហ្សែនិច ដែលអ្នកអានក្នុងព័ត៌មាន។ ល្បិចដូចគ្នាដែលផ្តល់ដុំសាច់ឈើដល់ដើមឈើក្នុងព្រៃ ផ្តល់ឲ្យយើងនូវស្រូវធន់នឹងសត្វល្អិតក្នុងមន្ទីរពិសោធន៍។"
           )}
         </p>
+      </ConceptCard>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tab intro: Biology & Reproduction
+// ════════════════════════════════════════════════════════════════════════════
+//
+//  Headline card for the "Biology & Reproduction" tab. Frames the question
+//  "Are trees male or female?" and contrasts dioecious (Papaya) vs
+//  monoecious (Mango) reproductive strategies.
+
+function SectionBiologyIntro({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section className="mb-10" data-testid="section-biology-intro">
+      <SectionHeader
+        spec="B0"
+        en="Biology & Reproduction"
+        kh="ជីវវិទ្យា និងការបន្តពូជ"
+        k={k}
+        Icon={Flower2}
+        accent={CANOPY}
+      />
+
+      <ConceptCard
+        k={k}
+        Icon={Flower2}
+        enName="Are Trees Male or Female?"
+        khName="តើដើមឈើជាឈ្មោល ឬញី?"
+        enTag="it depends entirely on the species"
+        khTag="វាអាស្រ័យទាំងស្រុងលើប្រភេទ"
+        enBody="Some trees are dioecious — they come in two distinct kinds, separate male trees that carry pollen and separate female trees that carry fruit. Others are monoecious — every single tree carries both male and female parts on its own branches. Whether a fruit tree in your garden needs a partner, or can quietly make fruit on its own, is decided by which of these two strategies its species evolved."
+        khBody="ដើមឈើខ្លះគឺ Dioecious — ពួកវាមានពីរប្រភេទដាច់ដោយឡែក គឺដើមឈ្មោលដែលផ្ទុកលំអងផ្កា និងដើមញីដែលផ្ទុកផ្លែ។ ដើមឈើខ្លះទៀតគឺ Monoecious — ដើមឈើនីមួយៗ ផ្ទុកទាំងផ្នែកឈ្មោល និងផ្នែកញី នៅលើមែករបស់ខ្លួនវាផ្ទាល់។ ថាតើដើមឈើផ្តល់ផ្លែនៅក្នុងសួនរបស់អ្នក ត្រូវការគូ ឬអាចបង្កើតផ្លែដោយខ្លួនឯងបាន គឺត្រូវបានកំណត់ដោយយុទ្ធសាស្ត្រណាមួយ ក្នុងចំណោមពីរនេះ ដែលប្រភេទរបស់វាបានវិវត្ត។"
+        accent={CANOPY}
+        glow
+        badge={{ en: "Dioecious vs Monoecious", kh: "ឈ្មោលឬញី តាមប្រភេទ" }}
+      >
+        <div className="grid sm:grid-cols-2 gap-3">
+          {/* Dioecious — Papaya */}
+          <div
+            className="rounded-2xl border-2 p-4 bg-white"
+            style={{ borderColor: `${ROSE}55` }}
+            data-testid="reproduction-dioecious"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-0.5">
+                <Mars className="w-4 h-4" style={{ color: SKY }} />
+                <Venus className="w-4 h-4" style={{ color: ROSE }} />
+              </div>
+              <span
+                className={`text-sm font-bold ${k ? "font-khmer" : ""}`}
+                style={{ color: INK }}
+              >
+                {k ? "Dioecious — ដើមដាច់" : "Dioecious — separate trees"}
+              </span>
+              <span
+                className="ml-auto text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: ROSE }}
+              >
+                {k ? "ល្ហុង" : "Papaya"}
+              </span>
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "A papaya farm needs both kinds. The male tree produces pollen but never fruit. The female tree produces the fruit you eat — but only if a male tree is nearby to fertilise her flowers. Plant only female papayas and you will get an empty harvest.",
+                "ចម្ការល្ហុងត្រូវការទាំងពីរប្រភេទ។ ដើមឈ្មោលផលិតលំអងផ្កា ប៉ុន្តែគ្មានផ្លែឡើយ។ ដើមញីផលិតផ្លែដែលអ្នកញ៉ាំ — ប៉ុន្តែលុះត្រាតែដើមឈ្មោលនៅជិតៗ ដើម្បីបង្កកំណើតផ្ការបស់នាង។ ដាំតែដើមល្ហុងញី នោះអ្នកនឹងទទួលបានការប្រមូលផលទទេ។"
+              )}
+            </p>
+            <div
+              className="mt-3 grid grid-cols-2 gap-2 text-[11px]"
+            >
+              <div
+                className={`rounded-lg p-2 border ${k ? "font-khmer" : ""}`}
+                style={{ borderColor: `${SKY}33`, backgroundColor: `${SKY}08` }}
+              >
+                <div className="font-bold flex items-center gap-1" style={{ color: SKY }}>
+                  <Mars className="w-3 h-3" />
+                  {t("Male tree", "ដើមឈ្មោល")}
+                </div>
+                <div className="text-slate-700 mt-0.5">
+                  {t("Pollen only · no fruit", "តែលំអងផ្កា · គ្មានផ្លែ")}
+                </div>
+              </div>
+              <div
+                className={`rounded-lg p-2 border ${k ? "font-khmer" : ""}`}
+                style={{ borderColor: `${ROSE}33`, backgroundColor: `${ROSE}08` }}
+              >
+                <div className="font-bold flex items-center gap-1" style={{ color: ROSE }}>
+                  <Venus className="w-3 h-3" />
+                  {t("Female tree", "ដើមញី")}
+                </div>
+                <div className="text-slate-700 mt-0.5">
+                  {t("Fruit-bearing · needs pollen", "ផ្តល់ផ្លែ · ត្រូវការលំអង")}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Monoecious — Mango */}
+          <div
+            className="rounded-2xl border-2 p-4 bg-white"
+            style={{ borderColor: `${CANOPY}55` }}
+            data-testid="reproduction-monoecious"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-0.5">
+                <Mars className="w-4 h-4" style={{ color: SKY }} />
+                <span className="text-slate-400 text-xs">+</span>
+                <Venus className="w-4 h-4" style={{ color: ROSE }} />
+              </div>
+              <span
+                className={`text-sm font-bold ${k ? "font-khmer" : ""}`}
+                style={{ color: INK }}
+              >
+                {k ? "Monoecious — ដើមតែមួយ" : "Monoecious — both on one"}
+              </span>
+              <span
+                className="ml-auto text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: CANOPY }}
+              >
+                {k ? "ស្វាយ" : "Mango"}
+              </span>
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "A mango tree carries great clusters of tiny flowers, and inside those clusters every flower holds both male stamens and a female pistil. A single tree can pollinate itself, set fruit on its own branches, and feed a whole village from one trunk. Most fruit trees you walk past in Cambodia work this way.",
+                "ដើមស្វាយផ្ទុកចង្កោមផ្កាតូចៗដ៏ច្រើន ហើយនៅក្នុងចង្កោមទាំងនោះ ផ្កានីមួយៗមានទាំងសង្កែឈ្មោល និងសរសៃផ្កាញី។ ដើមឈើតែមួយ អាចបង្កកំណើតខ្លួនវាផ្ទាល់ ភ្ជាប់ផ្លែនៅលើមែករបស់ខ្លួនវា និងចិញ្ចឹមភូមិទាំងមូលពីបន្តូបតែមួយ។ ដើមឈើផ្តល់ផ្លែភាគច្រើនដែលអ្នកដើរកាត់នៅកម្ពុជា ដំណើរការតាមបែបនេះ។"
+              )}
+            </p>
+            <div
+              className="mt-3 rounded-lg p-2 border text-[11px]"
+              style={{
+                borderColor: `${CANOPY}33`,
+                backgroundColor: `${CANOPY}08`,
+              }}
+            >
+              <div
+                className={`font-bold flex items-center gap-1 ${k ? "font-khmer" : ""}`}
+                style={{ color: CANOPY }}
+              >
+                <Flower2 className="w-3 h-3" />
+                {t("Same tree", "ដើមតែមួយ")}
+              </div>
+              <div className={`text-slate-700 mt-0.5 ${k ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Pollen + pistil in every flower · self-fertile",
+                  "លំអង + សរសៃផ្កា ក្នុងផ្កានីមួយៗ · បង្កកំណើតខ្លួនឯង"
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className={`mt-4 text-xs text-slate-600 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          <strong className={k ? "" : "font-bold"}>{t("Worth knowing: ", "គួរដឹង ៖ ")}</strong>
+          {t(
+            "Other Cambodian examples: durian, jackfruit, and longan are monoecious — one tree, both sexes, fruit on its own. But the mulberry and many palms are dioecious, so to harvest fruit a farmer must plant several trees and hope at least one is the right sex.",
+            "ឧទាហរណ៍កម្ពុជាផ្សេងទៀត ៖ ទុរេន ខ្នុរ និងមៀន គឺ Monoecious — ដើមតែមួយ មានទាំងពីរភេទ ផ្តល់ផ្លែដោយខ្លួនវា។ ប៉ុន្តែដើមមនល្វា និងដើមត្នោតជាច្រើន គឺ Dioecious ដូច្នេះដើម្បីប្រមូលផល កសិករត្រូវដាំដើមឈើច្រើនដើម ហើយសង្ឃឹមថា យ៉ាងហោចណាស់មួយដើមមានភេទត្រឹមត្រូវ។"
+          )}
+        </p>
+      </ConceptCard>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tab intro: Xylem & Phloem — The Vascular Engine
+// ════════════════════════════════════════════════════════════════════════════
+//
+//  Headline card for the "Xylem & Phloem" tab. Explains how trees move
+//  resources without a heart: xylem pulls water UP via evaporation; phloem
+//  pushes sugar DOWN from leaves under pressure.
+
+function SectionVascularIntro({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section className="mb-10" data-testid="section-vascular-intro">
+      <SectionHeader
+        spec="V0"
+        en="Xylem & Phloem"
+        kh="ស៊ីឡែម និងផ្លូអែម"
+        k={k}
+        Icon={Droplets}
+        accent={SKY}
+      />
+
+      <ConceptCard
+        k={k}
+        Icon={Droplets}
+        enName="The Vascular Engine"
+        khName="ម៉ាស៊ីនសរសៃឈាម"
+        enTag="how trees move resources without a heart"
+        khTag="របៀបដែលដើមឈើដឹកធនធានដោយគ្មានបេះដូង"
+        enBody="A 30-metre Dipterocarp has no muscle, no pump, and no beating heart — yet every single day it lifts hundreds of litres of water from the soil up to its highest leaf, and ships sugar from its sunlit canopy down to its hidden roots. Two parallel pipelines run inside the trunk in opposite directions. Xylem PULLS water UPWARD from the roots, dragged toward the sky by the slow evaporation of water out of the leaves into the warm air. Phloem PUSHES sugar DOWNWARD from the leaves, driven by the pressure of newly-made glucose flooding into the food pipe. One pipe lifts the world's heaviest liquid against gravity using nothing but sunlight and dry air. The other delivers food to every cell in the tree using nothing but sweetness and pressure."
+        khBody="ដើមឈើជ័រដ្បូងខ្ពស់ ៣០ ម៉ែត្រ គ្មានសាច់ដុំ គ្មានស្នប់ និងគ្មានបេះដូងលោតទេ — ប៉ុន្តែជារៀងរាល់ថ្ងៃ វាលើកទឹករាប់រយលីត្រ ពីដី ឡើងទៅស្លឹកខ្ពស់បំផុតរបស់វា ហើយដឹកស្ករពីពាលដែលទទួលពន្លឺ ចុះទៅឫសលាក់របស់វា។ បំពង់ស្របគ្នាពីរ ដំណើរការក្នុងបន្តូប ក្នុងទិសផ្ទុយគ្នា។ ស៊ីឡែម ទាញទឹក ឡើងលើ ពីឫស ត្រូវបានទាញទៅមេឃ ដោយការហួតយឺតៗនៃទឹក ចេញពីស្លឹក ចូលទៅខ្យល់ក្តៅ។ ផ្លូអែម រុញស្ករ ចុះក្រោម ពីស្លឹក ត្រូវបានដំណើរការដោយសម្ពាធនៃហ្គ្លុយកូសថ្មីៗ ដែលហូរចូលក្នុងបំពង់អាហារ។ បំពង់មួយលើករាវធ្ងន់បំផុតរបស់ពិភពលោក ប្រឆាំងនឹងទំនាញ ដោយប្រើគ្រាន់តែពន្លឺព្រះអាទិត្យ និងខ្យល់ស្ងួត។ បំពង់មួយទៀតដឹកអាហារ ទៅគ្រប់កោសិកាក្នុងដើមឈើ ដោយប្រើគ្រាន់តែផ្អែម និងសម្ពាធ។"
+        accent={SKY}
+        glow
+        badge={{ en: "Pull UP · Push DOWN", kh: "ទាញឡើង · រុញចុះ" }}
+      >
+        <div
+          className="rounded-2xl border-2 p-4 grid grid-cols-1 sm:grid-cols-2 gap-3"
+          style={{ borderColor: `${SKY}33`, backgroundColor: `${SKY}06` }}
+          data-testid="vascular-engine-diagram"
+        >
+          {/* Xylem — UP */}
+          <div
+            className="rounded-xl bg-white border p-3"
+            style={{ borderColor: `${SKY}55` }}
+          >
+            <div className="flex items-center gap-1.5 mb-2">
+              <ArrowUp className="w-4 h-4" style={{ color: SKY }} />
+              <span className={`text-sm font-bold ${k ? "font-khmer" : ""}`} style={{ color: SKY }}>
+                {t("Xylem · pulls UP", "ស៊ីឡែម · ទាញឡើង")}
+              </span>
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "Carries water and dissolved minerals from the roots up to the leaves. The driving force is evaporation: as water vapours away from the surface of every leaf, it tugs the entire column of water below it slightly higher.",
+                "នាំទឹក និងសារធាតុរ៉ែដែលរលាយ ពីឫសឡើងទៅស្លឹក។ កម្លាំងជំរុញគឺការហួត ៖ នៅពេលដែលទឹកហួតចេញពីផ្ទៃនៃស្លឹកនីមួយៗ វាទាញសសរទឹកទាំងមូលនៅពីក្រោមវា ឡើងខ្ពស់បន្តិច។"
+              )}
+            </p>
+            <div
+              className={`mt-2 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-white px-2 py-0.5 rounded-full ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+              style={{ backgroundColor: SKY }}
+            >
+              <ArrowUp className="w-3 h-3" />
+              {t("Roots → leaves", "ឫស → ស្លឹក")}
+            </div>
+          </div>
+
+          {/* Phloem — DOWN */}
+          <div
+            className="rounded-xl bg-white border p-3"
+            style={{ borderColor: `${MOSS}55` }}
+          >
+            <div className="flex items-center gap-1.5 mb-2">
+              <ArrowDown className="w-4 h-4" style={{ color: MOSS }} />
+              <span className={`text-sm font-bold ${k ? "font-khmer" : ""}`} style={{ color: MOSS }}>
+                {t("Phloem · pushes DOWN", "ផ្លូអែម · រុញចុះ")}
+              </span>
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "Carries dissolved sugar made in the sunlit leaves downward to feed the trunk, the bark, the roots, and any new shoots. The push comes from the pressure of fresh sugar flooding in at the top of the pipe.",
+                "នាំស្ករដែលរលាយ ដែលបង្កើតក្នុងស្លឹកដែលទទួលពន្លឺ ចុះក្រោម ដើម្បីចិញ្ចឹមបន្តូប សំបក ឫស និងពន្លកថ្មីៗ។ កម្លាំងរុញមកពីសម្ពាធនៃស្ករស្រស់ ដែលហូរចូលនៅផ្នែកកំពូលនៃបំពង់។"
+              )}
+            </p>
+            <div
+              className={`mt-2 inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-white px-2 py-0.5 rounded-full ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+              style={{ backgroundColor: MOSS }}
+            >
+              <ArrowDown className="w-3 h-3" />
+              {t("Leaves → roots", "ស្លឹក → ឫស")}
+            </div>
+          </div>
+        </div>
+
+        <Callout
+          k={k}
+          Icon={Wind}
+          labelEn="Engine without moving parts"
+          labelKh="ម៉ាស៊ីនគ្មានគ្រឿងផ្លាស់ទី"
+          enTitle="The whole machine runs on sunshine and pressure."
+          khTitle="ម៉ាស៊ីនទាំងមូលដំណើរការដោយពន្លឺព្រះអាទិត្យ និងសម្ពាធ។"
+          enBody="A single full-grown Cambodian tree can lift over 200 litres of water from the soil to the sky in a single hot day — silently, with no battery, no pump, and no part that moves. It is the most efficient water-lifting machine on Earth."
+          khBody="ដើមឈើពេញវ័យកម្ពុជាតែមួយដើម អាចលើកទឹកលើសពី ២០០ លីត្រពីដី ឡើងទៅមេឃ ក្នុងមួយថ្ងៃដ៏ក្តៅ — ដោយស្ងៀម គ្មានថ្ម គ្មានស្នប់ និងគ្មានគ្រឿងផ្លាស់ទីទេ។ វាគឺជាម៉ាស៊ីនលើកទឹកដែលមានប្រសិទ្ធភាពបំផុតនៅលើផែនដី។"
+          accent={SKY}
+        />
+      </ConceptCard>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Tab intro: The Wood Wide Web — The Internet of the Forest
+// ════════════════════════════════════════════════════════════════════════════
+//
+//  Headline card for the "Wood Wide Web" tab. Frames the mycorrhizal network
+//  as the forest's underground internet, with three concrete subjects:
+//  the network itself, the Mother Trees feeding saplings, and chemical
+//  warning signals sent through the roots.
+
+function SectionNetworkIntro({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section className="mb-10" data-testid="section-network-intro">
+      <SectionHeader
+        spec="N0"
+        en="The Wood Wide Web"
+        kh="បណ្តាញព្រៃឈើ"
+        k={k}
+        Icon={Network}
+        accent={BARK}
+      />
+
+      <ConceptCard
+        k={k}
+        Icon={Network}
+        enName="The Internet of the Forest"
+        khName="អ៊ីនធឺណិតនៃព្រៃ"
+        enTag="trees talk underground in sugar and in scent"
+        khTag="ដើមឈើសន្ទនាក្រោមដី ដោយស្ករ និងក្លិន"
+        enBody="Stretching unseen beneath the floor of every healthy forest is the Mycorrhizal Network — a vast web of symbiotic fungi whose hair-thin threads wrap around the roots of every tree and stitch them all together into a single living circuit. Through this hidden cable the largest, oldest 'Mother Trees' pump sugar to young saplings struggling in the shade beneath them, keeping the next generation alive until it can reach the sunlight on its own. And when a tree comes under attack — leaves chewed by a hungry insect — it can release chemical warning signals through its roots into this same network, alerting its neighbours to start producing bitter, defensive compounds in their own leaves before the attacker even arrives. A forest is not a crowd of strangers fighting for light. It is a single quiet conversation."
+        khBody="លាតសន្ធឹងមើលមិនឃើញ នៅក្រោមឥដ្ឋនៃព្រៃដែលមានសុខភាពល្អ គឺបណ្តាញមីកូរ៉ីហ្ស៊ែ — ជាបណ្តាញដ៏ធំនៃផ្សិតស៊ីមប៊ីយ៉ូទិច ដែលសរសៃស្តើងដូចសក់ រុំជុំវិញឫសរបស់ដើមឈើគ្រប់ដើម ហើយត្បាញពួកវាបញ្ចូលគ្នាទាំងអស់ ជាសៀគ្វីរស់តែមួយ។ តាមរយៈខ្សែកាបលាក់នេះ «ដើមឈើមេ» ដ៏ធំ និងចាស់ជាងគេ បញ្ចូលស្ករទៅដើមឈើក្មេងៗ ដែលកំពុងរស់លំបាកក្នុងម្លប់ខាងក្រោម ដើម្បីរក្សាជំនាន់បន្ទាប់ឲ្យរស់ រហូតដល់វាអាចទៅដល់ពន្លឺព្រះអាទិត្យដោយខ្លួនឯង។ ហើយនៅពេលដើមឈើមួយរងការវាយប្រហារ — ស្លឹកត្រូវសត្វល្អិតស៊ី — វាអាចបញ្ចេញសញ្ញាព្រមានគីមី តាមឫសចូលក្នុងបណ្តាញដូចគ្នានេះ ប្រាប់អ្នកជិតខាងឲ្យចាប់ផ្តើមផលិតសារធាតុជូរល្វីង ការពារក្នុងស្លឹករបស់ពួកវាផ្ទាល់ មុនពេលអ្នកវាយប្រហារមកដល់ផងក៏ដោយ។ ព្រៃមួយមិនមែនជាហ្វូងជនចម្លែកប្រកួតប្រជែងគ្នាដើម្បីពន្លឺនោះទេ។ វាគឺជាការសន្ទនាស្ងៀមៗតែមួយ។"
+        accent={BARK}
+        glow
+        badge={{ en: "Mycorrhizal Network", kh: "បណ្តាញមីកូរ៉ីហ្ស៊ែ" }}
+      >
+        <div className="grid sm:grid-cols-3 gap-3">
+          {/* Pillar 1 — the network */}
+          <div
+            className="rounded-xl p-3 border bg-white"
+            style={{ borderColor: `${BARK}44` }}
+            data-testid="network-pillar-mycorrhizae"
+          >
+            <Network className="w-5 h-5 mb-2" style={{ color: BARK }} />
+            <div
+              className={`text-sm font-bold mb-1 ${k ? "font-khmer" : ""}`}
+              style={{ color: INK }}
+            >
+              {t("Mycorrhizal Network", "បណ្តាញមីកូរ៉ីហ្ស៊ែ")}
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "Symbiotic fungi wrap every root and stitch the whole forest into one cable. Trees pay the fungus in sugar; the fungus pays the trees in water and minerals.",
+                "ផ្សិតស៊ីមប៊ីយ៉ូទិច រុំឫសនីមួយៗ និងត្បាញព្រៃទាំងមូលជាខ្សែកាបតែមួយ។ ដើមឈើបង់ឲ្យផ្សិតជាស្ករ ៖ ផ្សិតបង់ឲ្យដើមឈើជាទឹក និងសារធាតុរ៉ែ។"
+              )}
+            </p>
+          </div>
+
+          {/* Pillar 2 — Mother Trees */}
+          <div
+            className="rounded-xl p-3 border bg-white"
+            style={{ borderColor: `${CANOPY}44` }}
+            data-testid="network-pillar-mother-trees"
+          >
+            <Trees className="w-5 h-5 mb-2" style={{ color: CANOPY }} />
+            <div
+              className={`text-sm font-bold mb-1 ${k ? "font-khmer" : ""}`}
+              style={{ color: INK }}
+            >
+              {t("Mother Trees feed saplings", "ដើមឈើមេចិញ្ចឹមដើមតូច")}
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "The oldest, tallest tree pumps spare sugar through the fungus to small saplings standing in its shade — keeping its own descendants alive until they reach the sun.",
+                "ដើមឈើដែលចាស់ជាងគេ និងខ្ពស់ជាងគេ បញ្ចូលស្ករសល់ តាមផ្សិត ទៅដើមឈើតូចៗ ដែលឈរក្នុងម្លប់របស់វា — រក្សាកូនចៅរបស់វាផ្ទាល់ឲ្យរស់ រហូតដល់ពួកវាទៅដល់ពន្លឺព្រះអាទិត្យ។"
+              )}
+            </p>
+          </div>
+
+          {/* Pillar 3 — chemical warnings */}
+          <div
+            className="rounded-xl p-3 border bg-white"
+            style={{ borderColor: `${ROSE}44` }}
+            data-testid="network-pillar-warnings"
+          >
+            <Radio className="w-5 h-5 mb-2" style={{ color: ROSE }} />
+            <div
+              className={`text-sm font-bold mb-1 ${k ? "font-khmer" : ""}`}
+              style={{ color: INK }}
+            >
+              {t("Chemical warning signals", "សញ្ញាព្រមានគីមី")}
+            </div>
+            <p className={`text-xs text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "When insects start eating a tree, it releases warning chemicals through the roots. Neighbour trees pick up the signal and start brewing bitter defences in their own leaves before the bugs ever arrive.",
+                "នៅពេលដែលសត្វល្អិតចាប់ផ្តើមស៊ីដើមឈើ វាបញ្ចេញសារធាតុព្រមានតាមឫស។ ដើមឈើជិតខាងចាប់សញ្ញានោះ ហើយចាប់ផ្តើមចំអិនការពារជូរល្វីង ក្នុងស្លឹករបស់ពួកវាផ្ទាល់ មុនពេលសត្វល្អិតមកដល់ទៅទៀត។"
+              )}
+            </p>
+          </div>
+        </div>
       </ConceptCard>
     </section>
   );

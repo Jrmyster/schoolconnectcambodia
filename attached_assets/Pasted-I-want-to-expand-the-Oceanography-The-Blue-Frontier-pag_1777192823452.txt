@@ -1,0 +1,31 @@
+I want to expand the 'Oceanography: The Blue Frontier' page by adding a new section at the bottom focusing on Limnology and Career Paths. Please implement this using the established deep-sea aesthetic (dark aquatic blues, cyan accents, and clear typography):
+
+1. Section Divider:
+
+Add a distinct visual divider (like a wave graphic or a subtle gradient line) to separate the Ocean zones from this new content.
+
+2. Card 1: Limnology - The Science of Inland Waters (ទន្លេសាស្ត្រ៖ វិទ្យាសាស្ត្រនៃទឹកសាប)
+
+The Concept: Explain that while oceanography studies the saltwater seas, Limnology is the study of freshwater ecosystems: lakes, rivers, wetlands, and groundwater.
+
+The Local Connection: Mention that studying Limnology is how scientists understand and protect massive, complex freshwater systems like the Tonle Sap lake and the Mekong River, which are vital for food and clean water.
+
+3. Card 2: The Dynamics of a Lake (ចលនានៃបឹង)
+
+Content: Briefly explain that just like the ocean has light zones, lakes have physical dynamics. They have watersheds (where rain collects), thermal layers (warm water on top, cold below), and seasonal cycles where nutrients mix to feed fish and plants.
+
+4. Card 3: Career Paths in Water Sciences (អាជីពក្នុងវិទ្យាសាស្ត្រទឹក)
+
+Create a sub-grid of three distinct career options, detailing what they do and why they are important:
+
+Hydrologist (អ្នកជំនាញធនធានទឹក): They study how water moves across the land and underground. They help engineer water filtration systems and manage flood risks.
+
+Marine Biologist / Aquatic Ecologist (អ្នកជីវវិទ្យាទឹក): They study the living organisms in water. They track fish populations and protect endangered species.
+
+Environmental Engineer (វិស្វករបរិស្ថាន): They design technologies to clean polluted water, build sustainable dams, and protect natural habitats from industrial waste.
+
+5. Formatting & UX:
+
+Maintain the interactive, highly visual layout. Use clear icons for the careers (a water drop, a fish, a gear/leaf).
+
+Ensure all core scientific terms and headings are strictly bilingual (English/Khmer).
