@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Briefcase, FileText, MessageSquare,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -947,6 +947,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Box,
         descEn: "3D Printing: Manufacturing the Future — three sections in a maker-space aesthetic (carbon-fibre blacks, neon wireframes, concrete greys). How it works: subtractive vs additive manufacturing, with the digital-model → slicer → heated-nozzle → layered-object pipeline. Printing the small: custom wrenches, gears, and discontinued spare parts for mechanics; finger splints, stethoscopes, and patient-specific prosthetics for clinics in remote areas. Printing the massive: gantry cranes squeezing concrete to print a two-bedroom house in 24 hours, and laser-sintered titanium-powder car chassis printed as a single lattice part.",
         descKh: "ការបោះពុម្ពត្រីមាត្រ៖ ការផលិតសម្រាប់អនាគត — បីផ្នែកក្នុងរចនាបថ maker-space (ខ្មៅ carbon fibre បន្ទាត់ neon ប្រផេះកុងក្រែត)។ របៀបដែលវាដំណើរការ៖ ការផលិតដោយដក និងការផលិតដោយបន្ថែម ជាមួយនឹងលំហូរ គំរូឌីជីថល → កម្មវិធីកាត់ស្រទាប់ → ច្រមុះក្ដៅ → វត្ថុរាងស្រទាប់។ ការបោះពុម្ពខ្នាតតូច៖ ឧបករណ៍កាត់ កង់ស្ព្រែង និងគ្រឿងបន្លាស់រលត់សម្រាប់មេកានិក; ឧបករណ៍ដាក់ម្រាមដៃ stethoscope និងដៃសិប្បនិម្មិតសម្រាប់មន្ទីរសុខាភិបាលនៅខេត្តឆ្ងាយ។ ការបោះពុម្ពខ្នាតធំ៖ ដ៏ឧប្ករណ៍ក្រេនដែលច្របាច់កុងក្រែតបោះពុម្ពផ្ទះពីរបន្ទប់គេងក្នុង ២៤ ម៉ោង និងស៊ុមរថយន្តពីម្សៅទីតានីយ៉ូមផ្សារដោយឡាស៊ែរបោះពុម្ពជា lattice តែមួយ។",
+      },
+      {
+        href: "/technology/maritime",
+        labelEn: "Shipping & Buoyancy",
+        labelKh: "ការដឹកជញ្ជូន និងការអណ្តែត",
+        icon: Ship,
+        descEn: "Maritime Tech: Shipping & Buoyancy — three sections in a heavy industrial / oceanic aesthetic (deep-sea blues, steel greys, cargo orange and red accents). The physics of floating: Archimedes' Principle and the steel-paradox of average density that lets a 220,000-tonne container ship float while a steel nail sinks. Engineering mega-ships: 400-metre Ever Ace-class vessels carrying 24,000 TEU, and the Plimsoll Line — Samuel Plimsoll's painted load-line (TF, F, T, S, W, WNA) that stops captains from overloading. The invisible highways: shipping lanes set by the IMO, and the three global chokepoints that carry 90% of all trade — the Strait of Malacca right next to Cambodia, the Suez Canal, and the Panama Canal.",
+        descKh: "បច្ចេកវិទ្យាសមុទ្រ៖ ការដឹកជញ្ជូន និងការអណ្តែត — បីផ្នែកក្នុងរចនាបថឧស្សាហកម្មធុនធ្ងន់ និងសមុទ្រ (ខៀវសមុទ្រជ្រៅ ប្រផេះដែក សញ្ញាពណ៌ទឹកក្រូច និងពណ៌ក្រហមនៃកុងតឺន័រ)។ រូបវិទ្យានៃការអណ្តែត៖ គោលការណ៍ Archimedes និងភាពផ្ទុយនៃដែកដែលដង់ស៊ីតេមធ្យមធ្វើឱ្យកប៉ាល់ដឹកកុងតឺន័រ ២២០,០០០ តោនអណ្តែត ខណៈដែលដែកគោលលង់។ ការរចនាកប៉ាល់យក្ស៖ កប៉ាល់ Ever Ace ប្រវែង ៤០០ ម៉ែត្រដឹក TEU ២៤,០០០ និងបន្ទាត់ Plimsoll — បន្ទាត់ផ្ទុក (TF, F, T, S, W, WNA) ដែល Samuel Plimsoll លាបទប់ស្កាត់នាយកនាវាមិនឱ្យដឹកធ្ងន់ហួស។ មហាវិថីមើលមិនឃើញ៖ ផ្លូវនាវាចរ និងចំណុចច្របាច់ពិភពលោកបី — ច្រកម៉ាឡាកានៅជិតកម្ពុជា ព្រែកជីកស៊ុយអេស និងព្រែកជីកប៉ាណាម៉ា — ដែលដឹក ៩០% នៃពាណិជ្ជកម្មសកល។",
       },
     ],
   },
