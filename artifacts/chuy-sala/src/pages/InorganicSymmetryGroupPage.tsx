@@ -6,10 +6,10 @@ import {
   FlipHorizontal,
   Crosshair,
   Sigma,
-  Box,
 } from "lucide-react";
 import { InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { SymmetrySpinner } from "@/components/SymmetrySpinner";
 
 /* ══════════════════════════════════════════════════════════════════════════
  * Inorganic Chemistry 101 · Module 03
@@ -129,6 +129,11 @@ export function InorganicSymmetryGroupPage() {
           </p>
         </section>
 
+        {/* ── The Symmetry Spinner · interactive 3D demonstrator ── */}
+        <div className="mb-6">
+          <SymmetrySpinner />
+        </div>
+
         {/* ── Symmetry Operations · 3 cards · CSS Grid · soft pink ─ */}
         <h2
           className={`text-base sm:text-lg font-bold text-pink-900 mb-3 ${
@@ -176,35 +181,6 @@ export function InorganicSymmetryGroupPage() {
                   {t("Spin like a wheel", "បង្វិលដូចកង់")}
                 </p>
               </div>
-            </div>
-
-            {/* 3D-model placeholder · Rotation */}
-            <div
-              data-testid="placeholder-3d-rotation"
-              data-3d-slot="rotation-axis-Cn"
-              role="img"
-              aria-label={
-                kh
-                  ? "កន្លែងសម្រាប់គំរូ ៣ វិមាត្រអនាគតនៃម៉ូលេគុលដែលកំពុងវិល"
-                  : "Placeholder for a future 3D model of a rotating molecule"
-              }
-              className="relative h-32 mb-3 rounded-lg border-2 border-dashed border-pink-300 bg-gradient-to-br from-pink-100 to-rose-100 flex flex-col items-center justify-center overflow-hidden"
-            >
-              <Box className="w-7 h-7 text-pink-400 mb-1" aria-hidden="true" />
-              <span
-                className={`text-[10px] font-bold uppercase tracking-wider text-pink-600 ${
-                  kh ? "font-khmer normal-case tracking-normal" : ""
-                }`}
-              >
-                {t("3D Model coming soon", "គំរូ ៣ វិមាត្រនឹងមកដល់ឆាប់ៗ")}
-              </span>
-              <span
-                className={`text-[10px] text-pink-500/80 mt-0.5 ${
-                  kh ? "font-khmer" : ""
-                }`}
-              >
-                {t("Rotating molecule", "ម៉ូលេគុលកំពុងវិល")}
-              </span>
             </div>
 
             <p
@@ -268,35 +244,6 @@ export function InorganicSymmetryGroupPage() {
               </div>
             </div>
 
-            {/* 3D-model placeholder · Mirror */}
-            <div
-              data-testid="placeholder-3d-mirror"
-              data-3d-slot="mirror-plane-sigma"
-              role="img"
-              aria-label={
-                kh
-                  ? "កន្លែងសម្រាប់គំរូ ៣ វិមាត្រអនាគតនៃម៉ូលេគុលដែលកាត់ដោយប្លង់ឆ្លុះ"
-                  : "Placeholder for a future 3D model of a molecule sliced by a mirror plane"
-              }
-              className="relative h-32 mb-3 rounded-lg border-2 border-dashed border-pink-300 bg-gradient-to-br from-rose-100 to-fuchsia-100 flex flex-col items-center justify-center overflow-hidden"
-            >
-              <Box className="w-7 h-7 text-rose-400 mb-1" aria-hidden="true" />
-              <span
-                className={`text-[10px] font-bold uppercase tracking-wider text-rose-600 ${
-                  kh ? "font-khmer normal-case tracking-normal" : ""
-                }`}
-              >
-                {t("3D Model coming soon", "គំរូ ៣ វិមាត្រនឹងមកដល់ឆាប់ៗ")}
-              </span>
-              <span
-                className={`text-[10px] text-rose-500/80 mt-0.5 ${
-                  kh ? "font-khmer" : ""
-                }`}
-              >
-                {t("Mirror plane slice", "កាត់ប្លង់ឆ្លុះ")}
-              </span>
-            </div>
-
             <p
               className={`text-sm sm:text-base leading-relaxed text-foreground/85 ${
                 kh ? "font-khmer leading-loose" : ""
@@ -356,38 +303,6 @@ export function InorganicSymmetryGroupPage() {
                   )}
                 </p>
               </div>
-            </div>
-
-            {/* 3D-model placeholder · Inversion */}
-            <div
-              data-testid="placeholder-3d-inversion"
-              data-3d-slot="inversion-center-i"
-              role="img"
-              aria-label={
-                kh
-                  ? "កន្លែងសម្រាប់គំរូ ៣ វិមាត្រអនាគតនៃម៉ូលេគុលដែលត្រូវបានបញ្ច្រាសឆ្លងកាត់ចំណុចកណ្តាល"
-                  : "Placeholder for a future 3D model of a molecule inverted through its center point"
-              }
-              className="relative h-32 mb-3 rounded-lg border-2 border-dashed border-pink-300 bg-gradient-to-br from-fuchsia-100 to-pink-100 flex flex-col items-center justify-center overflow-hidden"
-            >
-              <Box
-                className="w-7 h-7 text-fuchsia-400 mb-1"
-                aria-hidden="true"
-              />
-              <span
-                className={`text-[10px] font-bold uppercase tracking-wider text-fuchsia-600 ${
-                  kh ? "font-khmer normal-case tracking-normal" : ""
-                }`}
-              >
-                {t("3D Model coming soon", "គំរូ ៣ វិមាត្រនឹងមកដល់ឆាប់ៗ")}
-              </span>
-              <span
-                className={`text-[10px] text-fuchsia-500/80 mt-0.5 ${
-                  kh ? "font-khmer" : ""
-                }`}
-              >
-                {t("Inverted through center", "បញ្ច្រាសឆ្លងកាត់កណ្តាល")}
-              </span>
             </div>
 
             <p
