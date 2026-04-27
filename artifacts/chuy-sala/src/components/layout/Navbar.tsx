@@ -449,6 +449,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: FlaskRound,
       },
       {
+        href: "/chemistry/ion-calculator",
+        labelEn: "Oxidation State & Ion Calculator",
+        labelKh: "ម៉ាស៊ីនគិតលេខស្ថានភាពអុកស៊ីតកម្ម និងអ៊ីយ៉ុង",
+        icon: Atom,
+        descEn: "Pick any of the first 20 elements, then add or remove electrons and watch the atom flip from neutral to a cation (+) or anion (−) in real time.",
+        descKh: "ជ្រើសរើសធាតុណាមួយក្នុងចំណោម ២០ ធាតុដំបូង បន្ទាប់មកបន្ថែមឬដកអេឡិចត្រុង ហើយមើលអាតូមផ្លាស់ប្តូរពីអព្យាក្រឹតទៅជាកាទីយ៉ុង (+) ឬអានីយ៉ុង (−) ភ្លាមៗ។",
+      },
+      {
         href: "/science/chemical-engineering",
         labelEn: "Chemical Engineering",
         labelKh: "វិស្វកម្មគីមី",

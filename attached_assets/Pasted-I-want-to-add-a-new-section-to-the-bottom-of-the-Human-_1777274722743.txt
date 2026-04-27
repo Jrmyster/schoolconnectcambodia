@@ -1,0 +1,39 @@
+I want to add a new section to the bottom of the 'Human Engine and Movement' page called 'Engine Fuel: Healthy vs. Unhealthy Choices (ឥន្ធនៈម៉ាស៊ីន៖ ជម្រើសអាហារល្អ និងមិនល្អ)'. Please implement this using a clear, high-contrast aesthetic (vibrant greens for healthy, warning oranges/reds for unhealthy):
+
+1. Section Divider:
+
+Add a distinct visual divider (like a glowing energy meter) to separate the anatomy section from this nutrition section.
+
+2. Section 1: The Engine Analogy (ការប្រៀបធៀបម៉ាស៊ីន)
+
+Explain that the human body is an engine. Healthy food is 'High-Quality Fuel' that burns slowly and keeps the engine running strong all day. Unhealthy food is 'Low-Quality Fuel' that burns too fast, clogs the engine, and causes it to break down over time.
+
+3. Section 2: High-Quality Fuel / Healthy Food (អាហារល្អសម្រាប់សុខភាព)
+
+Create a green, bouncy UI card layout highlighting local, nutrient-dense foods:
+
+Fresh Fish (ត្រីស្រស់): Builds strong muscles (Protein).
+
+Morning Glory / Water Spinach (ត្រកួន): Cleans the engine and provides vitamins (Iron/Fiber).
+
+Brown Rice (អង្ករសម្រូប): Provides long-lasting, slow-burning energy (Complex Carbohydrates).
+
+Papaya & Mango (ល្ហុង និងស្វាយ): Protects the engine from getting sick (Vitamins/Antioxidants).
+
+4. Section 3: Low-Quality Fuel / Unhealthy Food (អាហារមិនល្អសម្រាប់សុខភាព)
+
+Create a red/orange UI card layout highlighting highly processed foods common in local shops:
+
+Instant Noodles (មីកញ្ចប់): High in salt, raises blood pressure, and offers very little real energy.
+
+Sugary Energy Drinks (ភេសជ្ជៈប៉ូវកម្លាំង): Causes a fast spike in energy, followed by a 'crash' that makes you feel more tired.
+
+Deep-Fried Street Snacks (នំចៀន): Clogs the engine's 'pipes' (blood vessels) with unhealthy fats.
+
+Hard Candies (ស្ករគ្រាប់): Damages the teeth (the first step of digestion) and provides zero nutrition.
+
+5. Formatting & UX:
+
+Ensure every card is hooked up to the global window.speechSynthesis Text-to-Speech engine so the younger kids can hear the pronunciations.
+
+Ensure all core terms and headings are strictly bilingual (English/Khmer).
