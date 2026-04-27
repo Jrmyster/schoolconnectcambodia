@@ -8,6 +8,11 @@ import {
   Wrench,
   Zap,
   AlertTriangle,
+  Gauge,
+  Cylinder,
+  Truck,
+  Disc3,
+  Droplets,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
@@ -92,6 +97,9 @@ export function PumpsPage() {
           <CentrifugalPumpCard />
         </div>
       </section>
+
+      {/* ─── Steel-pipe divider into the Hydraulics mega-section ─── */}
+      <HydraulicsSection />
 
       {/* Closing — bilingual */}
       <footer className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 text-center">
@@ -1004,3 +1012,964 @@ function CentrifugalPumpDiagram() {
   );
 }
 
+
+// ════════════════════════════════════════════════════════════════════════════
+//  TECH-PMP-02 · Hydraulics: The Power of Liquid
+//                អ៊ីដ្រូលីក៖ ថាមពលនៃអង្គធាតុរាវ
+//
+//  Heavy industrial-engineering aesthetic — caution-yellow, steel grey, and
+//  hydraulic-fluid blue. Three strictly bilingual cards arranged below a
+//  steel-pipe "system divider" that visually breaks fluid dynamics from the
+//  fluid-power chapter.
+//
+//   1. The Golden Rule of Hydraulics — incompressibility + Pascal's Principle
+//   2. How the Pump Works            — flow vs. pressure + cylinder/piston
+//   3. Real-World Muscle             — excavators, tractors, and car brakes
+// ════════════════════════════════════════════════════════════════════════════
+
+function HydraulicsSection() {
+  return (
+    <section
+      data-testid="section-hydraulics"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16"
+    >
+      {/* ─── Visual divider — flanged steel pipe with hazard tape ─── */}
+      <SteelPipeDivider />
+
+      {/* ─── Bilingual section header ─── */}
+      <header className="mt-8 mb-8">
+        <div className="inline-flex items-center gap-2 bg-slate-900/80 border border-yellow-400/80 text-yellow-200 rounded-full px-4 py-1.5 mb-5 text-xs font-bold shadow-md flex-wrap backdrop-blur-sm">
+          <AlertTriangle className="w-3.5 h-3.5" />
+          <span>Industrial Engineering · Fluid Power</span>
+          <span className="opacity-50">·</span>
+          <span className="font-khmer normal-case">
+            វិស្វកម្មឧស្សាហកម្ម · ថាមពលអង្គធាតុរាវ
+          </span>
+          <span className="font-mono opacity-60">· TECH-PMP-02</span>
+        </div>
+
+        <h2
+          data-testid="hydraulics-title"
+          className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-2 leading-tight text-white"
+        >
+          Hydraulics:{" "}
+          <span className="text-yellow-300">The Power of Liquid</span>
+        </h2>
+        <h3 className="font-khmer font-bold text-xl sm:text-2xl lg:text-3xl mb-5 leading-loose text-slate-200">
+          អ៊ីដ្រូលីក៖{" "}
+          <span className="text-yellow-300">ថាមពលនៃអង្គធាតុរាវ</span>
+        </h3>
+
+        <div className="space-y-2 max-w-3xl">
+          <p className="text-slate-200 text-base leading-relaxed">
+            Pumps move water — but the same liquid, trapped in a sealed steel
+            pipe, can also <strong>lift a 40-tonne excavator bucket</strong> or
+            <strong> stop a speeding car</strong>. This is{" "}
+            <em>fluid power</em>: turning gentle pushes into massive,
+            controllable force.
+          </p>
+          <p className="text-slate-200 text-base font-khmer leading-loose">
+            ម៉ាស៊ីនបូមផ្លាស់ទីទឹក — ប៉ុន្តែ​អង្គធាតុរាវ​ដដែល ដែល​ត្រូវ​ឃុំ​នៅ​ក្នុង​បំពង់​ដែក​បិទ​ជិត ក៏​អាច <strong>លើកផ្លិតម៉ាស៊ីនជីក (អេក្សកាវ៉ាទ័រ) ទម្ងន់ ៤០ តោន</strong> ឬ <strong>បញ្ឈប់​រថយន្ត​ដែល​បើក​លឿន</strong> ​បាន​ដែរ​។ នេះ​ជា <em>ថាមពល​អង្គធាតុរាវ</em> ៖ ការ​បំប្លែង​ការ​រុញ​ដោយ​ថ្នមៗ ​ឱ្យ​ទៅ​ជា​កម្លាំង​ដ៏​ធំ ​សម្បើម​ដែល​អាច​គ្រប់គ្រង​បាន​។
+          </p>
+        </div>
+      </header>
+
+      {/* ─── Three industrial cards ─── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <GoldenRuleCard />
+        <HydraulicPumpCard />
+        <HydraulicMuscleCard />
+      </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Steel-pipe divider with bolted flanges and hazard chevron tape
+// ════════════════════════════════════════════════════════════════════════════
+
+function SteelPipeDivider() {
+  return (
+    <div
+      data-testid="steel-pipe-divider"
+      className="relative w-full my-4"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 1200 110" className="w-full h-20 sm:h-24">
+        <defs>
+          {/* Brushed-steel pipe gradient */}
+          <linearGradient id="pipe-steel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#94a3b8" />
+            <stop offset="35%" stopColor="#e2e8f0" />
+            <stop offset="55%" stopColor="#cbd5e1" />
+            <stop offset="100%" stopColor="#475569" />
+          </linearGradient>
+          <linearGradient id="flange-steel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#64748b" />
+            <stop offset="50%" stopColor="#cbd5e1" />
+            <stop offset="100%" stopColor="#334155" />
+          </linearGradient>
+          {/* Black/yellow caution chevron pattern (rotated 45°) */}
+          <pattern
+            id="hazard-tape"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+          >
+            <rect width="10" height="20" fill="#facc15" />
+            <rect x="10" width="10" height="20" fill="#0f172a" />
+          </pattern>
+        </defs>
+
+        {/* Left flange */}
+        <rect x="20" y="20" width="22" height="70" rx="3" fill="url(#flange-steel)" stroke="#1e293b" strokeWidth="1.2" />
+        {/* Bolts on left flange */}
+        {[30, 45, 60, 75].map((cy) => (
+          <circle key={`bL-${cy}`} cx="31" cy={cy} r="3" fill="#1e293b" stroke="#94a3b8" strokeWidth="0.6" />
+        ))}
+
+        {/* Main pipe body */}
+        <rect x="42" y="32" width="1116" height="46" fill="url(#pipe-steel)" stroke="#1e293b" strokeWidth="1.2" />
+        {/* Top reflective highlight */}
+        <rect x="42" y="34" width="1116" height="4" fill="#ffffff" opacity="0.35" />
+        {/* Bottom shadow line */}
+        <rect x="42" y="73" width="1116" height="3" fill="#0f172a" opacity="0.45" />
+
+        {/* Right flange */}
+        <rect x="1158" y="20" width="22" height="70" rx="3" fill="url(#flange-steel)" stroke="#1e293b" strokeWidth="1.2" />
+        {[30, 45, 60, 75].map((cy) => (
+          <circle key={`bR-${cy}`} cx="1169" cy={cy} r="3" fill="#1e293b" stroke="#94a3b8" strokeWidth="0.6" />
+        ))}
+
+        {/* Hazard tape band wrapping the pipe — left */}
+        <rect x="180" y="32" width="60" height="46" fill="url(#hazard-tape)" stroke="#0f172a" strokeWidth="0.8" />
+        {/* Hazard tape band — right */}
+        <rect x="960" y="32" width="60" height="46" fill="url(#hazard-tape)" stroke="#0f172a" strokeWidth="0.8" />
+
+        {/* Stencil plate riveted to the centre */}
+        <rect x="420" y="26" width="360" height="58" rx="4" fill="#facc15" stroke="#1e293b" strokeWidth="1.5" />
+        {/* Rivets on the plate corners */}
+        {[
+          [428, 34], [772, 34], [428, 76], [772, 76],
+        ].map(([cx, cy]) => (
+          <circle key={`r-${cx}-${cy}`} cx={cx} cy={cy} r="2.2" fill="#1e293b" />
+        ))}
+        <text
+          x="600"
+          y="50"
+          textAnchor="middle"
+          fontSize="15"
+          fontWeight="900"
+          fill="#0f172a"
+          fontFamily="ui-monospace, monospace"
+          letterSpacing="2"
+        >
+          HYDRAULIC SYSTEM
+        </text>
+        <text
+          x="600"
+          y="72"
+          textAnchor="middle"
+          fontSize="11"
+          fontWeight="700"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ប្រព័ន្ធអ៊ីដ្រូលីក
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Card 1 — The Golden Rule of Hydraulics
+//           (Incompressibility + Pascal's Principle)
+// ════════════════════════════════════════════════════════════════════════════
+
+function GoldenRuleCard() {
+  return (
+    <BlueprintCard
+      cardNo="04"
+      topicEn="Fluid Power · Principle"
+      topicKh="ថាមពលអង្គធាតុរាវ · គោលការណ៍"
+      titleEn="The Golden Rule of Hydraulics"
+      titleKh="ច្បាប់មាសនៃអ៊ីដ្រូលីក"
+      Icon={Gauge}
+      testId="card-golden-rule"
+      paper="#fefce8"
+    >
+      <BilingualBlock
+        en={
+          <>
+            Hydraulics works because of one stubborn fact about liquids:
+            unlike air, you{" "}
+            <strong>cannot squash a liquid into a smaller space</strong>.
+            Push on it in one place and the pressure has to go{" "}
+            <strong>everywhere else</strong> — instantly, and with the{" "}
+            <strong>same pressure throughout the fluid</strong>.
+          </>
+        }
+        kh={
+          <>
+            អ៊ីដ្រូលីក​ដំណើរការ​បាន​ដោយសារ​អង្គហេតុ​មួយ​ដ៏​រឹង​ច្បាស់​អំពី​អង្គធាតុ​រាវ ៖ ខុស​ពី​ខ្យល់ អ្នក <strong>មិន​អាច​បង្រួម​អង្គធាតុ​រាវ​ឱ្យ​នៅ​ក្នុង​លំហ​តូច​ជាង​មុន​បាន​ឡើយ</strong>។ រុញ​វា​នៅ​កន្លែង​មួយ សម្ពាធ​នោះ​ត្រូវ​តែ​បញ្ជូន​ទៅ​ <strong>គ្រប់​ទីកន្លែង​ផ្សេងៗ​ទៀត</strong> — ភ្លាមៗ ហើយ​ដោយ <strong>សម្ពាធ​ដូច​គ្នា​ពេញ​អង្គធាតុ​រាវ</strong>។
+          </>
+        }
+      />
+
+      {/* Concept chip */}
+      <div className="rounded-xl border-2 border-yellow-500 bg-yellow-50 p-3">
+        <SubLabel en="The Principle" kh="គោលការណ៍" />
+        <div className="font-bold text-yellow-950 text-base leading-snug">
+          Pascal's Principle
+        </div>
+        <div className="font-khmer font-bold text-yellow-950 leading-loose">
+          គោលការណ៍ប៉ាស្កាល់
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <KeyTermChip
+            en="Incompressibility"
+            kh="ភាពមិនអាចបង្រួមបាន"
+            tone="amber"
+          />
+          <KeyTermChip
+            en="Pressure"
+            kh="សម្ពាធ"
+            tone="blue"
+          />
+        </div>
+      </div>
+
+      {/* Pascal U-tube diagram */}
+      <PascalDiagram />
+
+      <div className="rounded-lg border-2 border-sky-500 bg-sky-50 p-3">
+        <SubLabel en="In one sentence" kh="ក្នុងប្រយោគមួយ" />
+        <BilingualBlock
+          en={
+            <>
+              <strong>“Pressure applied anywhere</strong> in a confined,
+              incompressible fluid is transmitted{" "}
+              <strong>equally and in every direction</strong> throughout the
+              fluid.” That is{" "}
+              <strong>why a small push on one side</strong> of the pipe can
+              produce a <strong>massive lift on the other</strong>.
+            </>
+          }
+          kh={
+            <>
+              <strong>«សម្ពាធ​ដែល​ដាក់​នៅ​កន្លែង​ណា​ក៏​ដោយ</strong> នៅ​ក្នុង​អង្គធាតុ​រាវ​ដែល​បិទ​ជិត ហើយ​មិន​អាច​បង្រួម​បាន ត្រូវ​បាន​បញ្ជូន​ <strong>ស្មើ​គ្នា ហើយ​គ្រប់​ទិស​ដៅ</strong> ពេញ​អង្គធាតុ​រាវ​នោះ​។» នោះ​ហើយ​ជា <strong>មូលហេតុ​ដែល​ការ​រុញ​តូច​មួយ​ខាង​ម្ខាង</strong> នៃ​បំពង់ ​អាច​ផលិត <strong>ការ​លើក​ដ៏​ធំ​សម្បើម​នៅ​ខាង​ម្ខាង​ទៀត</strong> បាន​។
+            </>
+          }
+        />
+      </div>
+
+      <div className="rounded-md bg-yellow-50 border-l-4 border-l-yellow-500 border border-yellow-200 p-2.5 text-xs text-slate-800 leading-relaxed flex items-start gap-2">
+        <AlertTriangle
+          className="w-4 h-4 mt-0.5 flex-shrink-0 text-yellow-700"
+          aria-hidden="true"
+        />
+        <span>
+          <strong>Why it matters:</strong> a liquid can't compress, so it
+          behaves like a <strong>solid steel rod that can bend around
+          corners</strong>. Every drop of force you put in comes out the other
+          end — that's the foundation of every hydraulic machine.
+          <br />
+          <span className="font-khmer leading-loose">
+            <strong>ហេតុ​អ្វី​បាន​ជា​សំខាន់ ៖</strong> អង្គធាតុ​រាវ​មិន​អាច​បង្រួម​បាន ដូច្នេះ​វា​មាន​ឥរិយាបទ​ដូច​ជា <strong>ដំបង​ដែក​រឹង​ដែល​អាច​បត់​ជុំ​វិញ​ជ្រុង​បាន</strong>។ កម្លាំង​គ្រប់​តំណក់​ដែល​អ្នក​ដាក់​ចូល ​ត្រូវ​ចេញ​មក​នៅ​ចុង​ម្ខាង​ទៀត — នោះ​ជា​មូលដ្ឋាន​នៃ​ម៉ាស៊ីន​អ៊ីដ្រូលីក​គ្រប់​ប្រភេទ​។
+          </span>
+        </span>
+      </div>
+    </BlueprintCard>
+  );
+}
+
+// SVG: asymmetric U-tube. NARROW left arm (small piston, small area) →
+// equal pressure transmitted through the fluid → WIDE right arm (large
+// piston, ≈ 2.5× the left area) produces a proportionally larger force.
+// This is Pascal's area-based force amplification: F2 = F1 × (A2 / A1).
+// Visible widths: 40 px (left) vs 98 px (right) ≈ 2.45× → label "≈ 2.5 N ↑".
+function PascalDiagram() {
+  return (
+    <div
+      className="relative w-full h-44 rounded-lg border-2 border-slate-300 bg-white overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 320 176" className="w-full h-full">
+        {/* Title */}
+        <text x="6" y="12" fontSize="9" fill="#0f172a" fontWeight="bold">
+          Pascal's Principle · សម្ពាធស្មើគ្នាគ្រប់ទិស
+        </text>
+
+        {/*
+          Asymmetric U-tube: narrow left arm (cylinder area = small),
+          wide right arm (cylinder area ≈ 2.5× the left). Same pressure
+          on both sides → ~2.5× force on the larger piston.
+        */}
+        <path
+          d="M 50 50 L 50 140 Q 50 156 66 156 L 282 156 Q 298 156 298 140 L 298 36 L 200 36 L 200 122 L 90 122 L 90 50 Z"
+          fill="#dbeafe"
+          stroke="#1e293b"
+          strokeWidth="1.6"
+        />
+
+        {/* Hydraulic fluid (blue) — fills the tube up to the piston bases */}
+        <path
+          d="M 52 70 L 52 138 Q 52 154 68 154 L 280 154 Q 296 154 296 138 L 296 56 L 202 56 L 202 124 L 88 124 L 88 70 Z"
+          fill="#1e3a8a"
+          opacity="0.55"
+        />
+
+        {/* Equal-pressure arrows radiating in the centre of the bend */}
+        <g stroke="#facc15" strokeWidth="1.4" fill="none" strokeLinecap="round">
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+            <line
+              key={deg}
+              x1="150"
+              y1="140"
+              x2={150 + 16 * Math.cos((deg * Math.PI) / 180)}
+              y2={140 + 16 * Math.sin((deg * Math.PI) / 180)}
+            />
+          ))}
+        </g>
+        <text x="118" y="172" fontSize="7" fill="#92400e" fontWeight="bold">
+          equal pressure · សម្ពាធស្មើគ្នា
+        </text>
+
+        {/* SMALL piston on the narrow left arm (≈40 wide → small area) */}
+        <rect x="50" y="56" width="40" height="14" fill="#475569" stroke="#0f172a" strokeWidth="1" />
+        <rect x="66" y="32" width="8" height="24" fill="#0f172a" />
+        {/* Force-down arrow on the small piston */}
+        <g stroke="#dc2626" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="70" y1="14" x2="70" y2="32" />
+          <path d="M 64 26 L 70 34 L 76 26" />
+        </g>
+        <text x="22" y="22" fontSize="9" fill="#dc2626" fontWeight="bold">
+          1 N ↓
+        </text>
+        <text x="50" y="86" fontSize="7" fill="#0f172a" fontWeight="bold">
+          small area
+        </text>
+        <text
+          x="50"
+          y="94"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ផ្ទៃតូច
+        </text>
+
+        {/* LARGE piston on the wide right arm (≈98 wide → ~2.5× area) */}
+        <rect x="200" y="42" width="98" height="14" fill="#475569" stroke="#0f172a" strokeWidth="1" />
+        <rect x="245" y="20" width="8" height="22" fill="#0f172a" />
+        {/* Force-up arrow on the large piston (lifts the load) */}
+        <g stroke="#16a34a" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="249" y1="6" x2="249" y2="20" />
+          <path d="M 243 12 L 249 6 L 255 12" />
+        </g>
+        <text x="259" y="16" fontSize="9" fill="#15803d" fontWeight="bold">
+          ≈ 2.5 N ↑
+        </text>
+        <text x="206" y="72" fontSize="7" fill="#0f172a" fontWeight="bold">
+          big area · larger force
+        </text>
+        <text
+          x="206"
+          y="80"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ផ្ទៃធំ · កម្លាំងធំ
+        </text>
+
+        {/* Footnote: F = P × A explanation */}
+        <text x="6" y="140" fontSize="6.5" fill="#475569" fontFamily="ui-monospace, monospace">
+          F = P × A
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Card 2 — How the Pump Works (flow vs. pressure + cylinder/piston)
+// ════════════════════════════════════════════════════════════════════════════
+
+function HydraulicPumpCard() {
+  return (
+    <BlueprintCard
+      cardNo="05"
+      topicEn="Fluid Power · Mechanism"
+      topicKh="ថាមពលអង្គធាតុរាវ · យន្តការ"
+      titleEn="How the Pump Works"
+      titleKh="របៀបដែលម៉ាស៊ីនបូមដំណើរការ"
+      Icon={Cylinder}
+      testId="card-hydraulic-pump"
+      paper="#f1f5f9"
+    >
+      <BilingualBlock
+        en={
+          <>
+            Here is the surprise that catches every new mechanic:{" "}
+            <strong>
+              a hydraulic pump does not create pressure
+            </strong>{" "}
+            — it creates <strong>flow</strong>. It just keeps shoving
+            hydraulic fluid into the system. <strong>Pressure</strong> only
+            shows up when that flow <strong>hits resistance</strong> — like
+            trying to lift a heavy rock.
+          </>
+        }
+        kh={
+          <>
+            ​នេះ​ជា​ការ​ឆ្ងល់​ដែល​ចាប់​ជើង​ជាង​ថ្មី​គ្រប់​នាក់ ៖ <strong>ម៉ាស៊ីន​បូម​អ៊ីដ្រូលីក​មិន​បង្កើត​សម្ពាធ​ទេ</strong> — វា​បង្កើត <strong>លំហូរ</strong>។ វា​គ្រាន់​តែ​បន្ត​រុញ​អង្គធាតុ​រាវ​អ៊ីដ្រូលីក​ចូល​ក្នុង​ប្រព័ន្ធ។ <strong>សម្ពាធ</strong> លេច​ឡើង​លុះ​តែ​លំហូរ​នោះ <strong>ប៉ះ​នឹង​ការ​ទប់​ទល់</strong> — ដូច​ជា​ការ​ព្យាយាម​លើក​ដុំ​ថ្ម​ដ៏​ធ្ងន់​ជា​ដើម​។
+          </>
+        }
+      />
+
+      {/* The Cylinder */}
+      <div className="rounded-xl border-2 border-slate-500 bg-slate-100 p-3">
+        <SubLabel en="The Workhorse Part" kh="ផ្នែកធ្វើការ" />
+        <div className="font-bold text-slate-900 text-base leading-snug">
+          The Cylinder &amp; Piston
+        </div>
+        <div className="font-khmer font-bold text-slate-900 leading-loose">
+          ស៊ីឡាំង និង ភី​ស្តុង
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <KeyTermChip en="Flow" kh="លំហូរ" tone="blue" />
+          <KeyTermChip en="Pressure" kh="សម្ពាធ" tone="red" />
+          <KeyTermChip en="Piston" kh="ភី​ស្តុង" tone="slate" />
+        </div>
+      </div>
+
+      <HydraulicCylinderDiagram />
+
+      <div className="rounded-lg border-2 border-sky-500 bg-sky-50 p-3">
+        <SubLabel en="The chain of events" kh="ខ្សែសង្វាក់ដំណើរការ" />
+        <BilingualBlock
+          en={
+            <>
+              The pump shoves fluid into a strong{" "}
+              <strong>steel cylinder</strong>. Inside that cylinder sits a{" "}
+              <strong>metal rod called a piston</strong>. As more fluid is
+              forced in behind it, the piston has nowhere to go but{" "}
+              <strong>outward</strong> — and it does the heavy lifting on the
+              outside world.
+            </>
+          }
+          kh={
+            <>
+              ម៉ាស៊ីន​បូម​រុញ​អង្គធាតុ​រាវ​ចូល​ក្នុង <strong>ស៊ីឡាំង​ដែក​ដ៏​រឹង</strong> មួយ​។ ​ខាង​ក្នុង​ស៊ីឡាំង​នោះ​មាន <strong>ដំបង​ដែក​មួយ​ឈ្មោះ​ថា​ភី​ស្តុង</strong>។ ពេល​អង្គធាតុ​រាវ​ត្រូវ​បាន​បង្ខំ​ឱ្យ​ចូល​ខាង​ក្រោយ​វា​កាន់​តែ​ច្រើន ភី​ស្តុង​គ្មាន​ផ្លូវ​ទៅ​ណា​ក្រៅ​ពី​ <strong>រុញ​ចេញ​ទៅ​ខាង​ក្រៅ</strong> — ហើយ​វា​ធ្វើ​ការ​លើក​ដ៏​ធ្ងន់​នៅ​ពិភព​ខាង​ក្រៅ​។
+            </>
+          }
+        />
+      </div>
+
+      <div className="rounded-md bg-blue-50 border-l-4 border-l-blue-500 border border-blue-200 p-2.5 text-xs text-slate-800 leading-relaxed flex items-start gap-2">
+        <Droplets
+          className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-700"
+          aria-hidden="true"
+        />
+        <span>
+          <strong>Flow vs. Pressure — the key insight:</strong> a pump set
+          loose with no load (no resistance) builds{" "}
+          <em>almost zero pressure</em> — fluid just sprays out freely. Block
+          that flow and the same pump can build hundreds of bar of pressure
+          almost instantly. <strong>Resistance creates pressure.</strong>
+          <br />
+          <span className="font-khmer leading-loose">
+            <strong>លំហូរ​ឬ​សម្ពាធ — គន្លឹះ​សំខាន់ ៖</strong> ម៉ាស៊ីន​បូម​ដែល​គ្មាន​បន្ទុក (គ្មាន​ការ​ទប់​ទល់) បង្កើត​ <em>សម្ពាធ​ស្ទើរ​តែ​សូន្យ</em> — អង្គធាតុ​រាវ​គ្រាន់​តែ​ហូរ​ចេញ​ដោយ​សេរី។ បិទ​ផ្លូវ​លំហូរ​នោះ ម៉ាស៊ីន​ដដែល​អាច​បង្កើត​សម្ពាធ​រាប់​រយ​បារ​ភ្លាម​បាន​។ <strong>ការ​ទប់​ទល់​បង្កើត​សម្ពាធ​។</strong>
+          </span>
+        </span>
+      </div>
+    </BlueprintCard>
+  );
+}
+
+// SVG: cross-section of a hydraulic cylinder. Pump → fluid line → cylinder
+// with piston pushing rod outward to lift a weight.
+function HydraulicCylinderDiagram() {
+  return (
+    <div
+      className="relative w-full h-44 rounded-lg border-2 border-slate-300 bg-white overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 320 176" className="w-full h-full">
+        {/* Title */}
+        <text x="6" y="14" fontSize="9" fill="#0f172a" fontWeight="bold">
+          Cylinder cross-section · ស៊ីឡាំង
+        </text>
+
+        {/* Pump on the left */}
+        <rect x="6" y="100" width="40" height="40" rx="4" fill="#475569" stroke="#0f172a" strokeWidth="1.2" />
+        <circle cx="26" cy="120" r="8" fill="#facc15" stroke="#0f172a" strokeWidth="0.8" />
+        <text x="6" y="156" fontSize="7" fill="#0f172a" fontWeight="bold">
+          PUMP
+        </text>
+        <text
+          x="6"
+          y="166"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ម៉ាស៊ីនបូម
+        </text>
+
+        {/* Hydraulic fluid line from pump to cylinder */}
+        <path
+          d="M 46 120 L 80 120 L 80 88 L 110 88"
+          stroke="#1e3a8a"
+          strokeWidth="6"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M 46 120 L 80 120 L 80 88 L 110 88"
+          stroke="#3b82f6"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity="0.9"
+        />
+        <text x="48" y="112" fontSize="7" fill="#1e3a8a" fontWeight="bold">
+          flow → លំហូរ
+        </text>
+
+        {/* Cylinder body */}
+        <rect x="110" y="68" width="120" height="40" rx="3" fill="#cbd5e1" stroke="#0f172a" strokeWidth="1.4" />
+        {/* Cylinder shadow + highlight */}
+        <rect x="110" y="70" width="120" height="3" fill="#ffffff" opacity="0.6" />
+        <rect x="110" y="103" width="120" height="3" fill="#0f172a" opacity="0.4" />
+        {/* Fluid inside (left chamber) */}
+        <rect x="112" y="70" width="60" height="36" fill="#1e3a8a" opacity="0.55" />
+        {/* Piston head */}
+        <rect x="170" y="68" width="12" height="40" fill="#1e293b" stroke="#0f172a" strokeWidth="1" />
+        {/* Piston rod extending out the right end */}
+        <rect x="182" y="82" width="80" height="12" fill="#94a3b8" stroke="#0f172a" strokeWidth="1" />
+        {/* Rod end-cap */}
+        <rect x="262" y="78" width="6" height="20" fill="#0f172a" />
+
+        {/* Label: cylinder + piston */}
+        <text x="115" y="62" fontSize="7" fill="#0f172a" fontWeight="bold">
+          Steel cylinder
+        </text>
+        <text
+          x="115"
+          y="124"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ស៊ីឡាំងដែក
+        </text>
+        <text x="172" y="62" fontSize="7" fill="#0f172a" fontWeight="bold">
+          Piston
+        </text>
+        <text
+          x="172"
+          y="124"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ភី​ស្តុង
+        </text>
+
+        {/* Push-out arrow */}
+        <g stroke="#16a34a" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="270" y1="88" x2="298" y2="88" />
+          <path d="M 292 82 L 300 88 L 292 94" />
+        </g>
+        <text x="270" y="74" fontSize="8" fill="#15803d" fontWeight="bold">
+          push
+        </text>
+        <text
+          x="270"
+          y="106"
+          fontSize="6.5"
+          fill="#15803d"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          រុញចេញ
+        </text>
+
+        {/* Heavy load on right (rock) */}
+        <ellipse cx="304" cy="140" rx="14" ry="6" fill="#0f172a" opacity="0.3" />
+        <path
+          d="M 290 138 Q 296 122 304 124 Q 314 122 318 138 Z"
+          fill="#78350f"
+          stroke="#0f172a"
+          strokeWidth="1"
+        />
+        <text x="270" y="160" fontSize="7" fill="#0f172a" fontWeight="bold">
+          heavy load
+        </text>
+        <text
+          x="270"
+          y="170"
+          fontSize="6.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          បន្ទុកធ្ងន់
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Card 3 — Real-World Muscle (excavators / tractors + car brakes)
+// ════════════════════════════════════════════════════════════════════════════
+
+function HydraulicMuscleCard() {
+  return (
+    <BlueprintCard
+      cardNo="06"
+      topicEn="Fluid Power · In the Wild"
+      topicKh="ថាមពលអង្គធាតុរាវ · ក្នុងជីវិតពិត"
+      titleEn="Real-World Muscle"
+      titleKh="កម្លាំងក្នុងពិភពពិត"
+      Icon={Truck}
+      testId="card-hydraulic-muscle"
+      paper="#fef9c3"
+    >
+      <BilingualBlock
+        en={
+          <>
+            Once you understand the cylinder, you start seeing it{" "}
+            <strong>everywhere</strong> — at the rice-field edge, at the
+            construction site, and underneath your own feet on the brake
+            pedal.
+          </>
+        }
+        kh={
+          <>
+            ​ពេល​អ្នក​យល់​ពី​ស៊ីឡាំង​មួយ អ្នក​នឹង​ឃើញ​វា <strong>គ្រប់​ទីកន្លែង</strong> — នៅ​ឆ្នេរ​ស្រែ នៅ​ការដ្ឋាន​សំណង់ និង​នៅ​ខាង​ក្រោម​ជើង​អ្នក​នៅ​លើ​ប្រដាប់​ហ្វ្រាំង​។
+          </>
+        }
+      />
+
+      {/* Use-case 1: Heavy machinery */}
+      <div className="rounded-xl border-2 border-yellow-500 bg-yellow-50 p-3">
+        <div className="flex items-start gap-2 mb-1">
+          <Construction className="w-5 h-5 text-yellow-700 flex-shrink-0" aria-hidden="true" />
+          <SubLabel en="Heavy Machinery" kh="ម៉ាស៊ីនធុនធ្ងន់" />
+        </div>
+        <BilingualBlock
+          en={
+            <>
+              The <strong>excavators</strong> and <strong>tractors</strong>{" "}
+              you see digging Cambodian rice paddies do not lift dirt with
+              ropes or gears — they rely <strong>entirely on hydraulic
+              fluid</strong>. Watch the boom: every silver tube along the arm
+              is a cylinder full of oil under pressure.
+            </>
+          }
+          kh={
+            <>
+              ​<strong>ម៉ាស៊ីនជីក (អេក្សកាវ៉ាទ័រ)</strong> និង <strong>ត្រាក់​ទ័រ</strong> ​ដែល​អ្នក​ឃើញ​កំពុង​ជីក​ស្រែ​នៅ​កម្ពុជា មិន​លើក​ដី​ដោយ​ខ្សែ ​ឬ​ស្ពឺ​ដែក​ទេ — ពួកវា​ពឹង​ផ្អែក​ <strong>ទាំងស្រុង​លើ​អង្គធាតុ​រាវ​អ៊ីដ្រូលីក</strong>។ មើល​ដៃ​ម៉ាស៊ីន ៖ បំពង់​ប្រាក់​នីមួយៗ​នៅ​លើ​ដៃ ​គឺ​ជា​ស៊ីឡាំង​ពោរ​ពេញ​ដោយ​ប្រេង​ដែល​ស្ថិត​ក្រោម​សម្ពាធ​។
+            </>
+          }
+        />
+        <ExcavatorDiagram />
+      </div>
+
+      {/* Use-case 2: Car brakes */}
+      <div className="rounded-xl border-2 border-red-500 bg-red-50 p-3">
+        <div className="flex items-start gap-2 mb-1">
+          <Disc3 className="w-5 h-5 text-red-700 flex-shrink-0" aria-hidden="true" />
+          <SubLabel en="Car Brakes" kh="ហ្វ្រាំងរថយន្ត" />
+        </div>
+        <BilingualBlock
+          en={
+            <>
+              When you <strong>step on a car's brake pedal</strong>, your foot
+              is not directly grabbing the wheel. You are pushing fluid
+              through a <strong>tiny tube</strong>. That fluid travels to the
+              wheels and squeezes the <strong>brake pads against the
+              spinning disc</strong>, slowing the car down.
+            </>
+          }
+          kh={
+            <>
+              ​ពេល​អ្នក <strong>ជាន់​ប្រដាប់​ហ្វ្រាំង​រថយន្ត</strong> ជើង​អ្នក​មិន​បាន​ចាប់​កង់​ដោយ​ផ្ទាល់​ទេ​។ អ្នក​កំពុង​រុញ​អង្គធាតុ​រាវ​តាម​ <strong>បំពង់​តូច​មួយ</strong>។ អង្គធាតុ​រាវ​នោះ​ធ្វើ​ដំណើរ​ទៅ​ដល់​កង់ ហើយ​ច្របាច់ <strong>ភ្នាក់​ហ្វ្រាំង​ទៅ​នឹង​ឌីស​ដែល​កំពុង​វិល</strong> ​ដើម្បី​បន្ថយ​ល្បឿន​រថយន្ត​។
+            </>
+          }
+        />
+        <BrakeDiagram />
+      </div>
+
+      <div className="rounded-md bg-amber-50 border-l-4 border-l-amber-500 border border-amber-200 p-2.5 text-xs text-slate-800 leading-relaxed flex items-start gap-2">
+        <Wrench
+          className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-700"
+          aria-hidden="true"
+        />
+        <span>
+          <strong>The takeaway:</strong> from the 40-tonne digger to the foot
+          pedal in a Camry, the trick is the same — a small movement on one
+          end pushes incompressible fluid through a sealed tube, and that
+          fluid does enormous work at the other end. That's hydraulics.
+          <br />
+          <span className="font-khmer leading-loose">
+            <strong>ខ្លឹមសារ​សំខាន់ ៖</strong> ​ចាប់​ពី​ម៉ាស៊ីន​ជីក​ទម្ងន់ ៤០ តោន​ ​រហូត​ដល់​ឆ្នុក​ហ្វ្រាំង​នៅ​ក្នុង​រថយន្ត គន្លឹះ​គឺ​ដូច​គ្នា ៖ ចលនា​តូច​មួយ​នៅ​ខាង​ម្ខាង​រុញ​អង្គធាតុ​រាវ​ដែល​មិន​អាច​បង្រួម​បាន​តាម​បំពង់​បិទ​ជិត ហើយ​អង្គធាតុ​រាវ​នោះ​ធ្វើ​ការងារ​ដ៏​ធំ​សម្បើម​នៅ​ខាង​ម្ខាង​ទៀត​។ នោះ​ជា​អ៊ីដ្រូលីក​។
+          </span>
+        </span>
+      </div>
+    </BlueprintCard>
+  );
+}
+
+// SVG: stylised excavator silhouette — boom, stick, and bucket — with the
+// three hydraulic cylinders highlighted in caution yellow.
+function ExcavatorDiagram() {
+  return (
+    <div
+      className="relative w-full h-36 mt-2 rounded-lg border-2 border-slate-300 bg-white overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 320 144" className="w-full h-full">
+        <text x="6" y="12" fontSize="8" fill="#0f172a" fontWeight="bold">
+          Excavator · ម៉ាស៊ីនជីក (អេក្សកាវ៉ាទ័រ)
+        </text>
+
+        {/* Ground line */}
+        <line x1="0" y1="124" x2="320" y2="124" stroke="#a16207" strokeWidth="1.5" />
+        <rect x="0" y="124" width="320" height="20" fill="#fde68a" opacity="0.5" />
+
+        {/* Tracks */}
+        <rect x="20" y="108" width="78" height="14" rx="6" fill="#0f172a" />
+        <circle cx="32" cy="115" r="5" fill="#facc15" stroke="#0f172a" strokeWidth="0.8" />
+        <circle cx="86" cy="115" r="5" fill="#facc15" stroke="#0f172a" strokeWidth="0.8" />
+
+        {/* Cab body */}
+        <path
+          d="M 30 108 L 30 78 L 50 60 L 90 60 L 100 78 L 100 108 Z"
+          fill="#facc15"
+          stroke="#0f172a"
+          strokeWidth="1.4"
+        />
+        {/* Cab window */}
+        <rect x="56" y="68" width="30" height="20" fill="#bae6fd" stroke="#0f172a" strokeWidth="0.8" />
+
+        {/* Boom (upper arm) */}
+        <line x1="100" y1="80" x2="190" y2="42" stroke="#facc15" strokeWidth="14" strokeLinecap="round" />
+        <line x1="100" y1="80" x2="190" y2="42" stroke="#0f172a" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+
+        {/* Stick (forearm) */}
+        <line x1="190" y1="42" x2="240" y2="92" stroke="#facc15" strokeWidth="12" strokeLinecap="round" />
+        <line x1="190" y1="42" x2="240" y2="92" stroke="#0f172a" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+
+        {/* Bucket */}
+        <path
+          d="M 232 88 L 248 110 L 280 110 L 286 96 Z"
+          fill="#475569"
+          stroke="#0f172a"
+          strokeWidth="1.4"
+        />
+        {/* Bucket teeth */}
+        <path d="M 250 110 L 252 116 L 256 110 L 258 116 L 262 110 L 264 116 L 268 110 L 270 116 L 274 110 Z" fill="#0f172a" />
+
+        {/* Hydraulic cylinder #1 — boom lift (between cab and boom) */}
+        <g>
+          <line x1="86" y1="92" x2="148" y2="56" stroke="#0f172a" strokeWidth="6" strokeLinecap="round" />
+          <line x1="86" y1="92" x2="148" y2="56" stroke="#facc15" strokeWidth="3.5" strokeLinecap="round" />
+          {/* Highlight ring */}
+          <circle cx="118" cy="74" r="5.5" fill="none" stroke="#dc2626" strokeWidth="1.4" strokeDasharray="2 1.5" />
+        </g>
+        {/* Hydraulic cylinder #2 — stick (between boom and stick) */}
+        <g>
+          <line x1="170" y1="38" x2="218" y2="68" stroke="#0f172a" strokeWidth="5" strokeLinecap="round" />
+          <line x1="170" y1="38" x2="218" y2="68" stroke="#facc15" strokeWidth="2.8" strokeLinecap="round" />
+          <circle cx="194" cy="53" r="5" fill="none" stroke="#dc2626" strokeWidth="1.4" strokeDasharray="2 1.5" />
+        </g>
+        {/* Hydraulic cylinder #3 — bucket curl */}
+        <g>
+          <line x1="222" y1="66" x2="252" y2="92" stroke="#0f172a" strokeWidth="5" strokeLinecap="round" />
+          <line x1="222" y1="66" x2="252" y2="92" stroke="#facc15" strokeWidth="2.8" strokeLinecap="round" />
+          <circle cx="237" cy="79" r="5" fill="none" stroke="#dc2626" strokeWidth="1.4" strokeDasharray="2 1.5" />
+        </g>
+
+        {/* Callout */}
+        <line x1="118" y1="74" x2="160" y2="14" stroke="#dc2626" strokeWidth="0.8" strokeDasharray="1.5 1.5" />
+        <text x="160" y="14" fontSize="7" fill="#b91c1c" fontWeight="bold">
+          hydraulic cylinders · ស៊ីឡាំងអ៊ីដ្រូលីក
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// SVG: foot on brake pedal → tiny tube of brake fluid → caliper squeezing
+// brake pads against a spinning disc.
+function BrakeDiagram() {
+  return (
+    <div
+      className="relative w-full h-36 mt-2 rounded-lg border-2 border-slate-300 bg-white overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 320 144" className="w-full h-full">
+        <text x="6" y="12" fontSize="8" fill="#0f172a" fontWeight="bold">
+          Brake circuit · សៀគ្វីហ្វ្រាំង
+        </text>
+
+        {/* Floor */}
+        <line x1="0" y1="128" x2="120" y2="128" stroke="#475569" strokeWidth="1.4" />
+
+        {/* Brake pedal (lever) */}
+        <line x1="22" y1="128" x2="44" y2="80" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+        <rect x="36" y="74" width="20" height="10" rx="2" fill="#0f172a" />
+        {/* Pedal pivot */}
+        <circle cx="22" cy="128" r="3" fill="#facc15" stroke="#0f172a" strokeWidth="0.8" />
+
+        {/* Foot pressing on the pedal */}
+        <path
+          d="M 30 56 Q 38 50 56 52 Q 70 54 70 70 Q 70 78 58 80 L 36 80 Z"
+          fill="#fbbf24"
+          stroke="#0f172a"
+          strokeWidth="1.2"
+        />
+        {/* Force-down arrow */}
+        <g stroke="#dc2626" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="48" y1="32" x2="48" y2="50" />
+          <path d="M 42 44 L 48 52 L 54 44" />
+        </g>
+        <text x="6" y="40" fontSize="8" fill="#b91c1c" fontWeight="bold">
+          push
+        </text>
+        <text
+          x="6"
+          y="50"
+          fontSize="6.5"
+          fill="#b91c1c"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ជាន់
+        </text>
+
+        {/* Master cylinder */}
+        <rect x="60" y="100" width="30" height="14" rx="2" fill="#475569" stroke="#0f172a" strokeWidth="1" />
+        <text x="60" y="123" fontSize="6.5" fill="#0f172a" fontWeight="bold">
+          master cyl.
+        </text>
+        <text
+          x="60"
+          y="131"
+          fontSize="5.5"
+          fill="#0f172a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ស៊ីឡាំងមេ
+        </text>
+
+        {/* Tiny brake-fluid tube — bridge to the wheel */}
+        <path
+          d="M 90 107 L 160 107 L 160 80 L 220 80"
+          stroke="#1e3a8a"
+          strokeWidth="5"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M 90 107 L 160 107 L 160 80 L 220 80"
+          stroke="#3b82f6"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity="0.9"
+        />
+        <text x="98" y="100" fontSize="7" fill="#1e3a8a" fontWeight="bold">
+          brake fluid
+        </text>
+        <text
+          x="98"
+          y="120"
+          fontSize="6.5"
+          fill="#1e3a8a"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ប្រេងហ្វ្រាំង
+        </text>
+
+        {/* Brake disc (rotor) */}
+        <circle cx="260" cy="80" r="32" fill="#cbd5e1" stroke="#0f172a" strokeWidth="1.4" />
+        <circle cx="260" cy="80" r="22" fill="#94a3b8" stroke="#0f172a" strokeWidth="0.8" />
+        <circle cx="260" cy="80" r="6" fill="#0f172a" />
+        {/* Spin arrow */}
+        <g stroke="#0f172a" strokeWidth="1.2" fill="none" strokeLinecap="round">
+          <path d="M 260 50 A 30 30 0 0 1 286 70" />
+          <path d="M 282 66 L 286 70 L 282 75" />
+        </g>
+
+        {/* Caliper squeezing the disc */}
+        <rect x="220" y="72" width="14" height="16" fill="#dc2626" stroke="#0f172a" strokeWidth="1" />
+        <rect x="286" y="72" width="14" height="16" fill="#dc2626" stroke="#0f172a" strokeWidth="1" />
+        {/* Squeeze arrows */}
+        <g stroke="#dc2626" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="234" y1="80" x2="248" y2="80" />
+          <path d="M 244 76 L 250 80 L 244 84" />
+          <line x1="286" y1="80" x2="272" y2="80" />
+          <path d="M 276 76 L 270 80 L 276 84" />
+        </g>
+
+        <text x="218" y="118" fontSize="7" fill="#b91c1c" fontWeight="bold">
+          pads squeeze rotor
+        </text>
+        <text
+          x="218"
+          y="128"
+          fontSize="6.5"
+          fill="#b91c1c"
+          fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+        >
+          ភ្នាក់ច្របាច់ឌីស
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Small bilingual key-term chip used throughout the hydraulics cards
+// ════════════════════════════════════════════════════════════════════════════
+
+function KeyTermChip({
+  en,
+  kh,
+  tone,
+}: {
+  en: string;
+  kh: string;
+  tone: "amber" | "blue" | "red" | "slate";
+}) {
+  const cls =
+    tone === "amber"
+      ? "bg-amber-100 border-amber-500 text-amber-900"
+      : tone === "blue"
+        ? "bg-sky-100 border-sky-600 text-sky-900"
+        : tone === "red"
+          ? "bg-red-100 border-red-500 text-red-900"
+          : "bg-slate-200 border-slate-500 text-slate-900";
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-md border-2 ${cls} px-2 py-0.5`}
+    >
+      <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider">
+        {en}
+      </span>
+      <span className="opacity-50">·</span>
+      <span className="font-khmer text-[10.5px] font-bold leading-loose">
+        {kh}
+      </span>
+    </span>
+  );
+}
