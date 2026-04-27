@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearch, useLocation } from "wouter";
-import { ExternalLink, Building2, Globe, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
+import { ExternalLink, Building2, ChevronDown, ChevronUp, Star, BookOpen, Quote, FileText, Lightbulb, CheckCircle2, Download, Sparkles } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useChatStore } from "@/store/use-chat";
 import { InterviewSimulator } from "@/components/InterviewSimulator";
@@ -11,54 +11,7 @@ import { CareerDiscoveryMatrix } from "@/components/CareerDiscoveryMatrix";
 import { DayInLifeGallery } from "@/components/DayInLifeGallery";
 import { ChoosePathCompare } from "@/components/ChoosePathCompare";
 import { LetterBuilder } from "@/components/LetterBuilder";
-
-type ScholarshipCard = {
-  name: string;
-  nameKh: string;
-  country: string;
-  countryKh: string;
-  descEn: string;
-  descKh: string;
-  url: string;
-  accent: string;
-  flag: string;
-};
-
-const SCHOLARSHIPS: ScholarshipCard[] = [
-  {
-    name: "Australia Awards Cambodia",
-    nameKh: "អាហារូបករណ៍អូស្ត្រាលី",
-    country: "Australia",
-    countryKh: "អូស្ត្រាលី",
-    descEn: "Fully-funded scholarships for Cambodian students to undertake postgraduate study in Australia, developing skills that contribute to Cambodia's development.",
-    descKh: "អាហារូបករណ៍ពេញលេញសម្រាប់និស្សិតខ្មែរ ដើម្បីបន្តការសិក្សាក្រោយបរិញ្ញាបត្រនៅប្រទេសអូស្ត្រាលី ដោយអភិវឌ្ឍជំនាញដែលរួមចំណែកដល់ការអភិវឌ្ឍន៍ប្រទេសជាតិ។",
-    url: "https://australiaawardscambodia.org/",
-    accent: "from-[#00843D] to-[#FFCD00]",
-    flag: "🇦🇺",
-  },
-  {
-    name: "Chevening Scholarship",
-    nameKh: "អាហារូបករណ៍ Chevening",
-    country: "United Kingdom",
-    countryKh: "ចក្រភពអង់គ្លេស",
-    descEn: "The UK Government's global scholarship programme, funded by the Foreign, Commonwealth & Development Office — for outstanding emerging leaders worldwide.",
-    descKh: "កម្មវិធីអាហារូបករណ៍សកលរបស់រដ្ឋាភិបាលចក្រភពអង់គ្លេស ដែលផ្តល់មូលនិធិដោយក្រសួងការបរទេស — សម្រាប់អ្នកដឹកនាំឆ្នើមមុខរបស់ពិភពលោក។",
-    url: "https://www.chevening.org/scholarship/cambodia/",
-    accent: "from-[#012169] to-[#C8102E]",
-    flag: "🇬🇧",
-  },
-  {
-    name: "Fulbright Program",
-    nameKh: "កម្មវិធី Fulbright",
-    country: "United States",
-    countryKh: "សហរដ្ឋអាមេរិក",
-    descEn: "The U.S. government's flagship international educational exchange program, offering Cambodian students and professionals opportunities to study in the United States.",
-    descKh: "កម្មវិធីផ្លាស់ប្ដូរអប់រំអន្តរជាតិឈានមុខគេរបស់រដ្ឋាភិបាលអាមេរិក ផ្ដល់ឱ្យនិស្សិត និងអ្នកជំនាញខ្មែរ ឱកាសសិក្សានៅអាមេរិក។",
-    url: "https://kh.usembassy.gov/education-culture/fulbright-program/",
-    accent: "from-[#002868] to-[#BF0A30]",
-    flag: "🇺🇸",
-  },
-];
+import { GlobalUniversityHub } from "@/components/GlobalUniversityHub";
 
 export function LaunchpadPage() {
   const t = useTranslation();
@@ -218,68 +171,9 @@ export function LaunchpadPage() {
           </div>
         </section>
 
-        {/* ── Global Scholarships Grid ── */}
+        {/* ── Global Scholars & University Directory ── */}
         <section>
-          <div className="flex items-center gap-2 mb-2">
-            <Globe className="w-5 h-5 text-primary" />
-            <h2 className={`font-display font-bold text-foreground text-xl ${kh ? "font-khmer" : ""}`}>
-              {t("International Scholarships", "អាហារូបករណ៍អន្តរជាតិ")}
-            </h2>
-          </div>
-          <p className={`text-muted-foreground text-sm mb-8 ${kh ? "font-khmer leading-loose" : ""}`}>
-            {t(
-              "Fully-funded programmes open to Cambodian applicants. Click any card to explore eligibility and deadlines.",
-              "កម្មវិធីផ្ដល់ប្រាក់ឧបត្ថម្ភពេញលេញ សម្រាប់ការដាក់ពាក្យសុំរបស់ប្រជាជនខ្មែរ។ ចុចលើប័ណ្ណណាមួយ ដើម្បីស្វែងរកលក្ខខណ្ឌ និងកាលបរិច្ឆេទកំណត់។"
-            )}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SCHOLARSHIPS.map((s) => (
-              <div
-                key={s.name}
-                className="group flex flex-col bg-card rounded-2xl border border-border shadow-sm
-                  hover:shadow-[0_0_28px_rgba(251,191,36,0.35)] hover:border-amber-300
-                  hover:-translate-y-1 transition-all duration-200 overflow-hidden"
-              >
-                {/* Gradient accent bar */}
-                <div className={`h-1.5 bg-gradient-to-r ${s.accent}`} />
-
-                <div className="flex flex-col flex-1 p-6 gap-4">
-                  {/* Flag + country pill */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl" role="img" aria-label={s.country}>{s.flag}</span>
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full bg-muted text-muted-foreground ${kh ? "font-khmer" : ""}`}>
-                      {kh ? s.countryKh : s.country}
-                    </span>
-                  </div>
-
-                  {/* Name */}
-                  <h3 className={`font-bold text-foreground leading-tight ${kh ? "font-khmer text-base" : "font-display text-lg"}`}>
-                    {kh ? s.nameKh : s.name}
-                  </h3>
-
-                  {/* Description */}
-                  <p className={`text-muted-foreground flex-1 leading-relaxed ${kh ? "font-khmer text-sm leading-loose" : "text-sm"}`}>
-                    {kh ? s.descKh : s.descEn}
-                  </p>
-
-                  {/* Gold CTA button */}
-                  <a
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`mt-auto flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl
-                      bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold
-                      hover:from-amber-500 hover:to-amber-600 hover:shadow-md active:scale-95 transition-all
-                      ${kh ? "font-khmer text-base" : "text-sm"}`}
-                  >
-                    {t("Apply / Learn More", "ដាក់ពាក្យ / ស្វែងយល់បន្ថែម")}
-                    <ExternalLink className="w-3.5 h-3.5 opacity-80 flex-shrink-0" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
+          <GlobalUniversityHub />
         </section>
 
         {/* ── Application Guide Accordion ── */}
