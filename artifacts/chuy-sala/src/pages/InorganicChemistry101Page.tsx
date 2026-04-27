@@ -329,6 +329,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Survey of s-block and p-block elements, including their reactivity and industrial applications.",
     descKh:
       "ការសិក្សាទូទៅអំពីធាតុ s-block និង p-block រួមទាំងប្រតិកម្មរបស់ពួកវា និងការអនុវត្តក្នុងឧស្សាហកម្ម។",
+    href: "/science/chemistry/inorganic/main-group",
     bgClass: "bg-amber-50/70",
     borderClass: "border-amber-200",
     iconBgClass: "bg-gradient-to-br from-amber-500 to-orange-600",
