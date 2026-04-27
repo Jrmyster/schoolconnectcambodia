@@ -1,26 +1,37 @@
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import {
   Activity,
+  AlertTriangle,
   Apple,
   Beef,
   Bike,
   Brain,
+  Candy,
+  CheckCircle2,
   ChevronRight,
   Cookie,
+  CupSoda,
   Droplets,
+  Drumstick,
   Dumbbell,
+  Fish,
   Flame,
+  Gauge,
   Heart,
   HeartCrack,
+  Leaf,
   Minus,
   Plus,
   Quote,
   Scale,
+  Soup,
   Sparkles,
+  Volume2,
   Wheat,
   Zap,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { speakText } from "@/lib/speech";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  The Human Engine — ម៉ាស៊ីនរាងកាយ៖ អាហារូបត្ថម្ភ និងចលនា
@@ -133,6 +144,26 @@ export default function HumanEnginePage() {
         <DiseaseCards isKh={isKh} />
       </Section>
 
+      {/* ── Glowing Energy-Meter Divider ─────────────────────────────── */}
+      <EnergyMeterDivider isKh={isKh} />
+
+      {/* ── Section 4: Engine Fuel — Healthy vs. Unhealthy ──────────── */}
+      <Section
+        id="engine-fuel"
+        eyebrowEn="04 · Fuel Quality"
+        eyebrowKh="០៤ · គុណភាពឥន្ធនៈ"
+        titleEn="Engine fuel: healthy vs. unhealthy choices"
+        titleKh="ឥន្ធនៈម៉ាស៊ីន៖ ជម្រើសអាហារល្អ និងមិនល្អ"
+        descEn="Your body is an engine. The food you eat is its fuel — and not all fuels are equal. Tap the Play button on any card to hear the English name spoken aloud."
+        descKh="រាងកាយរបស់អ្នកគឺជាម៉ាស៊ីន។ អាហារដែលអ្នកញ៉ាំគឺជាឥន្ធនៈរបស់វា — ហើយឥន្ធនៈមិនមានគុណភាពដូចគ្នាទេ។ ចុចប៊ូតុង Play លើកាតណាមួយដើម្បីស្ដាប់ឈ្មោះជាភាសាអង់គ្លេស។"
+        accent="emerald"
+        isKh={isKh}
+      >
+        <EngineAnalogy isKh={isKh} />
+        <FuelGrid kind="healthy" isKh={isKh} />
+        <FuelGrid kind="unhealthy" isKh={isKh} />
+      </Section>
+
       {/* ── Closing ─────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-600 text-sm italic">
         <span className={isKh ? "font-khmer not-italic" : ""}>
@@ -213,6 +244,38 @@ function ScopedStyles() {
         50%     { transform: translateY(-3px) rotate(-3deg); }
       }
       .he-flex { animation: he-flex 2s ease-in-out infinite; }
+
+      /* ── Engine-Fuel section ─────────────────────────────────────── */
+      @keyframes he-bounce-soft {
+        0%,100% { transform: translateY(0); }
+        50%     { transform: translateY(-4px); }
+      }
+      .he-bounce-soft:hover { animation: he-bounce-soft 0.9s ease-in-out infinite; }
+      @keyframes he-meter-glow {
+        0%,100% { filter: drop-shadow(0 0 6px rgba(16,185,129,0.55)); opacity: .9; }
+        50%     { filter: drop-shadow(0 0 14px rgba(249,115,22,0.85)); opacity: 1; }
+      }
+      .he-meter-glow { animation: he-meter-glow 2.4s ease-in-out infinite; }
+      @keyframes he-meter-needle {
+        0%   { transform: translateX(0%); }
+        45%  { transform: translateX(46%); }
+        55%  { transform: translateX(46%); }
+        100% { transform: translateX(96%); }
+      }
+      .he-meter-needle { animation: he-meter-needle 6s ease-in-out infinite alternate; }
+      @keyframes he-spark-pulse {
+        0%,100% { transform: scale(1); opacity: .85; }
+        50%     { transform: scale(1.15); opacity: 1; }
+      }
+      .he-spark-pulse { animation: he-spark-pulse 1.4s ease-in-out infinite; }
+      @media (prefers-reduced-motion: reduce) {
+        .he-bounce-soft:hover,
+        .he-meter-glow,
+        .he-meter-needle,
+        .he-spark-pulse {
+          animation: none !important;
+        }
+      }
     `}</style>
   );
 }
@@ -844,5 +907,439 @@ function DiseaseCards({ isKh }: { isKh: boolean }) {
         );
       })}
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  4. Engine Fuel — Healthy vs. Unhealthy Choices
+//  ឥន្ធនៈម៉ាស៊ីន៖ ជម្រើសអាហារល្អ និងមិនល្អ
+// ════════════════════════════════════════════════════════════════════════════
+
+/** Glowing energy-meter strip used as the divider into the fuel section. */
+function EnergyMeterDivider({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+      data-testid="fuel-divider"
+      aria-label={isKh ? "ឧបករណ៍វាស់ថាមពល" : "Energy meter divider"}
+    >
+      <div className="relative rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-sm p-5 sm:p-6 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-700">
+            <Gauge className="w-4 h-4 text-emerald-600 he-spark-pulse" aria-hidden="true" />
+            <span>{isKh ? "ឧបករណ៍វាស់ឥន្ធនៈ" : "Fuel Quality Meter"}</span>
+            <span className={`text-slate-400 font-semibold normal-case tracking-normal ${isKh ? "" : "font-khmer"}`}>
+              · {isKh ? "Fuel Quality Meter" : "ឧបករណ៍វាស់ឥន្ធនៈ"}
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-3 text-[11px] font-bold">
+            <span className="inline-flex items-center gap-1 text-emerald-700">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> {isKh ? "ល្អ" : "Good"}
+            </span>
+            <span className="inline-flex items-center gap-1 text-orange-700">
+              <span className="w-2.5 h-2.5 rounded-full bg-orange-500" /> {isKh ? "ប្រយ័ត្ន" : "Caution"}
+            </span>
+            <span className="inline-flex items-center gap-1 text-rose-700">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500" /> {isKh ? "គ្រោះថ្នាក់" : "Danger"}
+            </span>
+          </div>
+        </div>
+
+        {/* The meter bar */}
+        <div className="relative h-5 sm:h-6 rounded-full overflow-hidden bg-slate-100 he-meter-glow">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, #10b981 0%, #84cc16 30%, #facc15 55%, #f97316 80%, #e11d48 100%)",
+            }}
+          />
+          {/* Tick marks */}
+          <div className="absolute inset-0 flex justify-between pointer-events-none">
+            {[...Array(11)].map((_, i) => (
+              <span key={i} className="w-px bg-white/40" />
+            ))}
+          </div>
+          {/* Animated needle */}
+          <div className="absolute top-0 bottom-0 left-0 he-meter-needle" style={{ width: "4%" }}>
+            <div className="w-full h-full bg-white border-2 border-slate-800 rounded-sm shadow-md" />
+          </div>
+        </div>
+
+        <p className={`mt-3 text-xs sm:text-sm text-slate-600 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "អាហារដែលអ្នកញ៉ាំ ផ្លាស់ប្ដូរទីតាំងនៃម្ជុលមួយនេះ — ពីបៃតង (ល្អ) ទៅក្រហម (គ្រោះថ្នាក់)។"
+            : "The food you eat moves this needle — from green (great fuel) toward red (engine damage)."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/** Side-by-side analogy explaining what high vs. low quality fuel does. */
+function EngineAnalogy({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      data-testid="engine-analogy"
+    >
+      {/* High-quality */}
+      <div className="rounded-2xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50 to-white p-5 sm:p-6 shadow-sm">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-md">
+            <CheckCircle2 className="w-6 h-6" strokeWidth={2.2} aria-hidden="true" />
+          </div>
+          <div className="min-w-0">
+            <h3 className="font-display font-bold text-lg text-emerald-900">
+              {isKh ? "ឥន្ធនៈគុណភាពខ្ពស់" : "High-Quality Fuel"}
+            </h3>
+            <p className={`text-xs font-semibold text-emerald-700 ${isKh ? "" : "font-khmer"}`}>
+              {isKh ? "High-Quality Fuel" : "ឥន្ធនៈគុណភាពខ្ពស់"}
+            </p>
+          </div>
+        </div>
+        <p className={`text-sm text-emerald-900 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "ឆេះយឺតៗ និងស្អាត — រក្សាម៉ាស៊ីន (រាងកាយ) របស់អ្នកឲ្យដំណើរការខ្លាំងពេញមួយថ្ងៃ ផ្ដល់សារធាតុចិញ្ចឹមដល់សាច់ដុំ ខួរក្បាល និងប្រព័ន្ធការពាររបស់អ្នក។"
+            : "Burns slowly and cleanly — keeping your engine (body) running strong all day, feeding your muscles, brain, and immune system."}
+        </p>
+      </div>
+
+      {/* Low-quality */}
+      <div className="rounded-2xl border-2 border-rose-300 bg-gradient-to-br from-rose-50 to-white p-5 sm:p-6 shadow-sm">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-11 h-11 rounded-xl bg-rose-600 text-white flex items-center justify-center shadow-md">
+            <AlertTriangle className="w-6 h-6" strokeWidth={2.2} aria-hidden="true" />
+          </div>
+          <div className="min-w-0">
+            <h3 className="font-display font-bold text-lg text-rose-900">
+              {isKh ? "ឥន្ធនៈគុណភាពទាប" : "Low-Quality Fuel"}
+            </h3>
+            <p className={`text-xs font-semibold text-rose-700 ${isKh ? "" : "font-khmer"}`}>
+              {isKh ? "Low-Quality Fuel" : "ឥន្ធនៈគុណភាពទាប"}
+            </p>
+          </div>
+        </div>
+        <p className={`text-sm text-rose-900 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "ឆេះលឿនពេក ស្ទះម៉ាស៊ីន ហើយបណ្ដាលឲ្យវាខូចតាមពេលវេលា — ផ្ដល់ថាមពលខ្លី រួចមកនឹងអារម្មណ៍នឿយហត់ និងជំងឺ។"
+            : "Burns too fast, clogs the engine, and breaks it down over time — giving a short burst of energy followed by tiredness and disease."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Data: 4 healthy + 4 unhealthy foods ────────────────────────────────────
+type FuelItem = {
+  id: string;
+  icon: typeof Fish;
+  emoji: string;
+  nameEn: string;
+  nameKh: string;
+  tagEn: string;
+  tagKh: string;
+  bodyEn: string;
+  bodyKh: string;
+};
+
+const HEALTHY_FOODS: FuelItem[] = [
+  {
+    id: "fish",
+    icon: Fish,
+    emoji: "🐟",
+    nameEn: "Fresh Fish",
+    nameKh: "ត្រីស្រស់",
+    tagEn: "Protein",
+    tagKh: "ប្រូតេអុីន",
+    bodyEn: "Builds strong muscles and helps your body repair itself after a long day at school or work.",
+    bodyKh: "សាងសង់សាច់ដុំឲ្យរឹងមាំ និងជួយរាងកាយរបស់អ្នកជួសជុលខ្លួនឯងក្រោយថ្ងៃធ្វើការ ឬរៀនវែងៗ។",
+  },
+  {
+    id: "morning-glory",
+    icon: Leaf,
+    emoji: "🥬",
+    nameEn: "Morning Glory",
+    nameKh: "ត្រកួន",
+    tagEn: "Iron & Fiber",
+    tagKh: "ជាតិដែក និងសរសៃ",
+    bodyEn: "Cleans the engine inside, gives you iron for healthy blood, and keeps digestion running smoothly.",
+    bodyKh: "សម្អាតម៉ាស៊ីននៅខាងក្នុង ផ្ដល់ជាតិដែកសម្រាប់ឈាមមានសុខភាពល្អ និងធ្វើឲ្យការរំលាយអាហារដំណើរការរលូន។",
+  },
+  {
+    id: "brown-rice",
+    icon: Wheat,
+    emoji: "🍚",
+    nameEn: "Brown Rice",
+    nameKh: "អង្ករសម្រូប",
+    tagEn: "Complex Carbs",
+    tagKh: "កាបូអ៊ីដ្រាតស្មុគស្មាញ",
+    bodyEn: "Long-lasting, slow-burning energy — keeps you focused in class without the sudden crash.",
+    bodyKh: "ថាមពលឆេះយឺតៗ និងគង់វង្ស — ជួយឲ្យអ្នកផ្ដោតអារម្មណ៍ក្នុងថ្នាក់ ដោយគ្មានអារម្មណ៍ដួលរលំភ្លាមៗ។",
+  },
+  {
+    id: "papaya-mango",
+    icon: Apple,
+    emoji: "🥭",
+    nameEn: "Papaya & Mango",
+    nameKh: "ល្ហុង និងស្វាយ",
+    tagEn: "Vitamins & Antioxidants",
+    tagKh: "វីតាមីន និងសារធាតុប្រឆាំងអុកស៊ីតកម្ម",
+    bodyEn: "Protects the engine from getting sick — vitamin C, vitamin A, and antioxidants strengthen your immune system.",
+    bodyKh: "ការពារម៉ាស៊ីនមិនឲ្យឈឺ — វីតាមីន C វីតាមីន A និងសារធាតុប្រឆាំងអុកស៊ីតកម្ម ពង្រឹងប្រព័ន្ធការពាររបស់អ្នក។",
+  },
+];
+
+const UNHEALTHY_FOODS: FuelItem[] = [
+  {
+    id: "instant-noodles",
+    icon: Soup,
+    emoji: "🍜",
+    nameEn: "Instant Noodles",
+    nameKh: "មីកញ្ចប់",
+    tagEn: "Too much salt",
+    tagKh: "អំបិលច្រើនពេក",
+    bodyEn: "Very high in salt, raises your blood pressure, and offers very little real energy or nutrients.",
+    bodyKh: "មានអំបិលច្រើនពេក បង្កើនសម្ពាធឈាម និងផ្ដល់ថាមពល ឬសារធាតុចិញ្ចឹមពិតប្រាកដតិចតួចបំផុត។",
+  },
+  {
+    id: "energy-drinks",
+    icon: CupSoda,
+    emoji: "🥤",
+    nameEn: "Sugary Energy Drinks",
+    nameKh: "ភេសជ្ជៈប៉ូវកម្លាំង",
+    tagEn: "Sugar spike & crash",
+    tagKh: "ស្ករឡើង និងធ្លាក់ចុះ",
+    bodyEn: "Causes a fast spike in energy, then a 'crash' that makes you feel even more tired than before.",
+    bodyKh: "បណ្ដាលឲ្យថាមពលឡើងលឿន រួចហើយ 'ធ្លាក់ចុះ' ដែលធ្វើឲ្យអ្នកមានអារម្មណ៍នឿយហត់ជាងមុន។",
+  },
+  {
+    id: "fried-snacks",
+    icon: Drumstick,
+    emoji: "🍢",
+    nameEn: "Deep-Fried Street Snacks",
+    nameKh: "នំចៀន",
+    tagEn: "Bad fats",
+    tagKh: "ខ្លាញ់មិនល្អ",
+    bodyEn: "Clogs the engine's 'pipes' (your blood vessels) with unhealthy fats that build up over years.",
+    bodyKh: "ស្ទះ 'បំពង់' របស់ម៉ាស៊ីន (សរសៃឈាមរបស់អ្នក) ដោយខ្លាញ់មិនល្អដែលកកក្នុងរយៈពេលជាច្រើនឆ្នាំ។",
+  },
+  {
+    id: "candies",
+    icon: Candy,
+    emoji: "🍬",
+    nameEn: "Hard Candies",
+    nameKh: "ស្ករគ្រាប់",
+    tagEn: "Zero nutrition",
+    tagKh: "គ្មានសារធាតុចិញ្ចឹម",
+    bodyEn: "Damages the teeth — the very first step of digestion — and provides no vitamins or minerals at all.",
+    bodyKh: "ធ្វើឲ្យធ្មេញខូច — ជំហានដំបូងបង្អស់នៃការរំលាយអាហារ — ហើយមិនផ្ដល់វីតាមីន ឬជាតិរ៉ែទាល់តែសោះ។",
+  },
+];
+
+/** Two-grid layout: green for healthy, red/orange for unhealthy. */
+function FuelGrid({ kind, isKh }: { kind: "healthy" | "unhealthy"; isKh: boolean }) {
+  // Single shared "currently speaking" state per grid keeps tap UX snappy.
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+
+  // Cancel any in-flight utterance when this grid unmounts (e.g. nav away).
+  useEffect(() => {
+    return () => {
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
+  const items = kind === "healthy" ? HEALTHY_FOODS : UNHEALTHY_FOODS;
+  const isHealthy = kind === "healthy";
+
+  const headingEn = isHealthy
+    ? "High-Quality Fuel · Healthy Food"
+    : "Low-Quality Fuel · Unhealthy Food";
+  const headingKh = isHealthy
+    ? "ឥន្ធនៈគុណភាពខ្ពស់ · អាហារល្អសម្រាប់សុខភាព"
+    : "ឥន្ធនៈគុណភាពទាប · អាហារមិនល្អសម្រាប់សុខភាព";
+
+  const subEn = isHealthy
+    ? "Local foods that fuel a strong, focused, healthy engine."
+    : "Common processed foods that quietly damage the engine.";
+  const subKh = isHealthy
+    ? "អាហារក្នុងស្រុកដែលផ្ដល់ឥន្ធនៈដល់ម៉ាស៊ីនមួយដែលរឹងមាំ ផ្ដោតអារម្មណ៍ និងមានសុខភាពល្អ។"
+    : "អាហារកែច្នៃធម្មតាដែលបំផ្លាញម៉ាស៊ីនយ៉ាងស្ងាត់ៗ។";
+
+  function play(item: FuelItem) {
+    setSpeakingId(item.id);
+    const result = speakText(item.nameEn, "en-US", {
+      onEnd: () => setSpeakingId((cur) => (cur === item.id ? null : cur)),
+      onError: () => setSpeakingId((cur) => (cur === item.id ? null : cur)),
+    });
+    if (!result.ok) setSpeakingId(null);
+  }
+
+  return (
+    <div data-testid={`fuel-grid-${kind}`}>
+      {/* Sub-heading bar */}
+      <div
+        className={`flex items-start gap-3 rounded-2xl border-2 p-4 mb-4 ${
+          isHealthy
+            ? "border-emerald-300 bg-emerald-50/70"
+            : "border-rose-300 bg-rose-50/70"
+        }`}
+      >
+        <div
+          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
+            isHealthy ? "bg-emerald-600 text-white" : "bg-rose-600 text-white"
+          }`}
+        >
+          {isHealthy ? (
+            <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
+          ) : (
+            <AlertTriangle className="w-5 h-5" aria-hidden="true" />
+          )}
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3
+            className={`font-display font-bold text-lg sm:text-xl ${
+              isHealthy ? "text-emerald-900" : "text-rose-900"
+            } ${isKh ? "font-khmer leading-tight" : ""}`}
+          >
+            {isKh ? headingKh : headingEn}
+          </h3>
+          <p
+            className={`mt-0.5 text-xs sm:text-sm font-semibold ${
+              isHealthy ? "text-emerald-700" : "text-rose-700"
+            } ${isKh ? "" : "font-khmer"}`}
+          >
+            {isKh ? headingEn : headingKh}
+          </p>
+          <p
+            className={`mt-1 text-sm ${
+              isHealthy ? "text-emerald-900/80" : "text-rose-900/80"
+            } ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            {isKh ? subKh : subEn}
+          </p>
+        </div>
+      </div>
+
+      {/* Card grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {items.map((item) => (
+          <FoodCard
+            key={item.id}
+            item={item}
+            isHealthy={isHealthy}
+            isPlaying={speakingId === item.id}
+            onPlay={() => play(item)}
+            isKh={isKh}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Single food card with TTS Play button. Bilingual name shown always. */
+function FoodCard({
+  item,
+  isHealthy,
+  isPlaying,
+  onPlay,
+  isKh,
+}: {
+  item: FuelItem;
+  isHealthy: boolean;
+  isPlaying: boolean;
+  onPlay: () => void;
+  isKh: boolean;
+}) {
+  const Icon = item.icon;
+  const palette = isHealthy
+    ? {
+        border: "border-emerald-300",
+        bg: "bg-gradient-to-br from-emerald-50 via-white to-lime-50",
+        chip: "bg-emerald-600 text-white",
+        chipText: "text-emerald-800 bg-emerald-100",
+        body: "text-emerald-900",
+        play: "bg-emerald-600 hover:bg-emerald-700 text-white focus-visible:ring-emerald-300",
+        ringTint: "ring-emerald-200",
+      }
+    : {
+        border: "border-rose-300",
+        bg: "bg-gradient-to-br from-rose-50 via-white to-orange-50",
+        chip: "bg-rose-600 text-white",
+        chipText: "text-rose-800 bg-rose-100",
+        body: "text-rose-900",
+        play: "bg-rose-600 hover:bg-rose-700 text-white focus-visible:ring-rose-300",
+        ringTint: "ring-rose-200",
+      };
+
+  return (
+    <article
+      data-testid={`fuel-card-${item.id}`}
+      className={`relative rounded-2xl border-2 ${palette.border} ${palette.bg} p-4 sm:p-5 shadow-sm flex flex-col he-bounce-soft transition-shadow hover:shadow-lg`}
+    >
+      {/* Icon row */}
+      <div className="flex items-center justify-between mb-2">
+        <div
+          className={`w-10 h-10 rounded-xl ${palette.chip} flex items-center justify-center shadow-sm shrink-0`}
+          aria-hidden="true"
+        >
+          <Icon className="w-5 h-5" strokeWidth={2.1} />
+        </div>
+        <span className="text-4xl sm:text-5xl select-none" aria-hidden="true">
+          {item.emoji}
+        </span>
+      </div>
+
+      {/* Always-bilingual name pair */}
+      <div className="mt-1">
+        <h4 className={`font-display font-black text-lg sm:text-xl text-slate-900 leading-tight`}>
+          {item.nameEn}
+        </h4>
+        <p className="mt-0.5 font-khmer text-base text-slate-700 leading-loose">
+          {item.nameKh}
+        </p>
+      </div>
+
+      {/* Nutrient / warning tag */}
+      <div className="mt-2">
+        <span
+          className={`inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold ${palette.chipText} ${
+            isKh ? "font-khmer" : ""
+          }`}
+        >
+          {isKh ? item.tagKh : item.tagEn}
+        </span>
+      </div>
+
+      {/* Body */}
+      <p
+        className={`mt-2.5 text-sm flex-1 ${palette.body} ${
+          isKh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
+        {isKh ? item.bodyKh : item.bodyEn}
+      </p>
+
+      {/* Play button — speaks the English name */}
+      <button
+        type="button"
+        onClick={onPlay}
+        aria-label={`Play audio for ${item.nameEn} (${item.nameKh})`}
+        data-testid={`btn-play-${item.id}`}
+        className={`mt-4 self-start inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm shadow-md hover:shadow-lg active:scale-95 transition-all focus:outline-none focus-visible:ring-4 ${palette.play}`}
+      >
+        <Volume2
+          className={`w-4 h-4 ${isPlaying ? "animate-pulse" : ""}`}
+          aria-hidden="true"
+        />
+        <span>{isKh ? "ស្ដាប់" : "Play"}</span>
+        <span className={`text-[11px] opacity-80 ${isKh ? "" : "font-khmer"}`}>
+          · {isKh ? "Play" : "ស្ដាប់"}
+        </span>
+      </button>
+    </article>
   );
 }

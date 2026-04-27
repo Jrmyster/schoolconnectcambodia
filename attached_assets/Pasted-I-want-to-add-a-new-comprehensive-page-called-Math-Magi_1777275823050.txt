@@ -1,0 +1,37 @@
+I want to add a new comprehensive page called 'Math Magic: Numbers & Tables (វេទមន្តគណិតវិទ្យា៖ លេខ និងតារាង)' to the 'For Kids' dropdown. Please implement this using the established child-friendly aesthetic (bright pastel colors, bouncy animations, rounded edges, and large, readable fonts):
+
+1. Routing & Navigation:
+
+Create a new component KidsMath.jsx.
+
+Register the route: /kids/math-tables.
+
+Add a link in the 'For Kids' dropdown labeled 'Math Magic' with an abacus or plus/minus icon (🧮 / ➕).
+
+2. The UI Layout & Audio Integration:
+
+Ensure every number, equation, and instruction is hooked up to the global window.speechSynthesis Text-to-Speech engine (en-US, rate 0.85). If a child clicks '3 x 4 = 12', the audio should read it aloud.
+
+3. Section 1: The Building Blocks - Addition & Subtraction (មូលដ្ឋានគ្រឹះ៖ វិធីបូក និងដក)
+
+Create two interactive, scrollable tables (1 to 10).
+
+Visuals: Use small icons (like apples or stars) next to the numbers to show the physical quantity.
+
+Concept: Include bilingual text explaining: 'Addition is putting things together! Subtraction is taking things away! (វិធីបូកគឺការដាក់របស់ចូលគ្នា! វិធីដកគឺការយករបស់ចេញ!)'.
+
+4. Section 2: The Fast Track - Multiplication & Division (ផ្លូវកាត់៖ វិធីគុណ និងចែក)
+
+Create an interactive 10x10 Multiplication Grid.
+
+Hover Effect: When a user hovers over or taps a cell (e.g., the intersection of row 4 and column 5), highlight the row and column in a bright yellow, and enlarge the answer '20' so it is easy to read.
+
+Division Toggle: Add a button that flips the grid to show division facts (e.g., showing that 20 ÷ 4 = 5).
+
+Concept: Include bilingual text explaining: 'Multiplication is just fast addition! Division is sharing equally! (វិធីគុណគ្រាន់តែជាការបូកយ៉ាងលឿន! វិធីចែកគឺជាការចែករំលែកស្មើៗគ្នា!)'.
+
+5. Formatting & UX:
+
+Group the sections with clear, color-coded, bilingual headings (e.g., Blue for Addition, Red for Subtraction, Green for Multiplication, Purple for Division).
+
+Ensure the 10x10 grid is fully responsive and scrollable for mobile devices.
