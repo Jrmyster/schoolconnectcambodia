@@ -159,6 +159,7 @@ const InorganicCoordinationPage = lazy(() => import("@/pages/InorganicCoordinati
 const InorganicMainGroupPage    = lazy(() => import("@/pages/InorganicMainGroupPage").then(m => ({ default: m.InorganicMainGroupPage })));
 const InorganicOrganometallicPage = lazy(() => import("@/pages/InorganicOrganometallicPage").then(m => ({ default: m.InorganicOrganometallicPage })));
 const InorganicSpectroscopyPage = lazy(() => import("@/pages/InorganicSpectroscopyPage").then(m => ({ default: m.InorganicSpectroscopyPage })));
+const AdminStudentsPage         = lazy(() => import("@/pages/AdminStudentsPage").then(m => ({ default: m.AdminStudentsPage })));
 const PhysicalChemistry101Page  = lazy(() => import("@/pages/PhysicalChemistry101Page").then(m => ({ default: m.PhysicalChemistry101Page })));
 const AnalyticalChemistry101Page = lazy(() => import("@/pages/AnalyticalChemistry101Page").then(m => ({ default: m.AnalyticalChemistry101Page })));
 const BiochemistryPage          = lazy(() => import("@/pages/BiochemistryPage").then(m => ({ default: m.BiochemistryPage })));
@@ -394,6 +395,7 @@ function Router() {
             <Route path="/science/chemistry/inorganic/main-group" component={InorganicMainGroupPage} />
             <Route path="/science/chemistry/inorganic/organometallic" component={InorganicOrganometallicPage} />
             <Route path="/science/chemistry/inorganic/spectroscopy" component={InorganicSpectroscopyPage} />
+            <Route path="/admin/students" component={AdminStudentsPage} />
             <Route path="/science/chemistry/physical" component={PhysicalChemistry101Page} />
             <Route path="/science/chemistry/analytical" component={AnalyticalChemistry101Page} />
             <Route path="/science/chemistry/biochemistry" component={BiochemistryPage} />

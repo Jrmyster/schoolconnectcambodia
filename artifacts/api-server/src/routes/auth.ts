@@ -13,20 +13,58 @@ declare module "express-session" {
   }
 }
 
+// Synthetic email suffix used by the student Username + PIN flow.
+// Anything ending with this suffix is a "student-PIN" account, which
+// uses a 4-digit PIN instead of a 6+ char password.
+const STUDENT_EMAIL_SUFFIX = "@student.schoolconnect.local";
+const STUDENT_USERNAME_REGEX = /^[a-z0-9_]{3,32}$/;
+const STUDENT_PIN_REGEX = /^\d{4}$/;
+
 router.post("/auth/register", async (req, res) => {
   try {
     const { email, password, schoolId, role } = req.body as { email?: string; password?: string; schoolId?: number; role?: string };
     if (!email || !password) return res.status(400).json({ error: "Email and password are required." });
-    if (password.length < 6) return res.status(400).json({ error: "Password must be at least 6 characters." });
-    const normalizedRole = role === "school" ? "school" : role === "student" ? "student" : null;
+
+    const normalizedEmail = email.toLowerCase();
+    const isStudentPin = normalizedEmail.endsWith(STUDENT_EMAIL_SUFFIX);
+
+    if (isStudentPin) {
+      const localPart = normalizedEmail.slice(0, -STUDENT_EMAIL_SUFFIX.length);
+      if (!STUDENT_USERNAME_REGEX.test(localPart)) {
+        return res.status(400).json({
+          error: "Username must be 3–32 characters: letters, digits, or underscore (_).",
+        });
+      }
+      if (!STUDENT_PIN_REGEX.test(password)) {
+        return res.status(400).json({ error: "PIN must be exactly 4 digits (0–9)." });
+      }
+    } else {
+      if (password.length < 6) return res.status(400).json({ error: "Password must be at least 6 characters." });
+    }
+
+    // A synthetic student-PIN email is reserved for the `student` role —
+    // refuse direct API attempts to register a "school" account with a 4-digit PIN.
+    const normalizedRole = isStudentPin
+      ? "student"
+      : role === "school"
+        ? "school"
+        : role === "student"
+          ? "student"
+          : null;
     if (!normalizedRole) return res.status(400).json({ error: "Please select an account type (Student or School Official)." });
 
-    const existing = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
-    if (existing.length > 0) return res.status(409).json({ error: "An account with this email already exists." });
+    const existing = await db.select().from(usersTable).where(eq(usersTable.email, normalizedEmail)).limit(1);
+    if (existing.length > 0) {
+      return res.status(409).json({
+        error: isStudentPin
+          ? "Username already taken — please choose another."
+          : "An account with this email already exists.",
+      });
+    }
 
     const passwordHash = await bcrypt.hash(password, 12);
     const [user] = await db.insert(usersTable).values({
-      email: email.toLowerCase(),
+      email: normalizedEmail,
       passwordHash,
       schoolId: normalizedRole === "school" ? (schoolId ?? null) : null,
       role: normalizedRole,
