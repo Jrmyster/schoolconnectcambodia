@@ -24,7 +24,7 @@
 // v3 = navigation strategy switched from stale-while-revalidate to
 //      network-first (fixes white-screen-of-death from stale index.html
 //      pointing at evicted JS chunks after a redeploy).
-const VERSION = "v3";
+const VERSION = "v4";
 const SHELL_CACHE = `chouy-sala-shell-${VERSION}`;
 const ASSET_CACHE = `chouy-sala-assets-${VERSION}`;
 const RUNTIME_CACHE = `chouy-sala-runtime-${VERSION}`;

@@ -1,0 +1,1302 @@
+[
+  {
+    "id": "cambodia",
+    "flag": "🇰🇭",
+    "continent": "asia",
+    "name": { "en": "Cambodia", "kh": "កម្ពុជា" },
+    "capital": { "en": "Phnom Penh", "kh": "ភ្នំពេញ" },
+    "population": 16700000,
+    "spokenLanguages": ["Khmer", "English", "French"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$32.4 B",
+    "literacyRate": 84,
+    "mainReligion": { "en": "Theravada Buddhism", "kh": "ព្រះពុទ្ធសាសនាថេរវាទ" },
+    "commonWildlife": [
+      { "en": "Asian Elephant", "kh": "ដំរីអាស៊ី" },
+      { "en": "Indochinese Tiger", "kh": "ខ្លាឥណ្ឌូចិន" },
+      { "en": "Giant Ibis", "kh": "ត្រយង" }
+    ],
+    "famousLandmarks": [
+      { "en": "Angkor Wat", "kh": "ប្រាសាទអង្គរវត្ត" },
+      { "en": "Royal Palace", "kh": "ព្រះបរមរាជវាំង" }
+    ],
+    "funFact": {
+      "en": "Cambodia is the only country in the world with a building (Angkor Wat) on its national flag.",
+      "kh": "កម្ពុជាគឺជាប្រទេសតែមួយគត់នៅលើពិភពលោក ដែលមានសំណង់ស្ថាបត្យកម្ម (អង្គរវត្ត) នៅលើទង់ជាតិ។"
+    }
+  },
+  {
+    "id": "china",
+    "flag": "🇨🇳",
+    "continent": "asia",
+    "name": { "en": "China", "kh": "ចិន" },
+    "capital": { "en": "Beijing", "kh": "ប៉េកាំង" },
+    "population": 1411000000,
+    "spokenLanguages": ["Mandarin Chinese", "Cantonese", "Wu"],
+    "government": { "en": "One-Party Socialist Republic", "kh": "សាធារណរដ្ឋសង្គមនិយមមួយបក្ស" },
+    "gdp": "$17.7 T",
+    "literacyRate": 97,
+    "mainReligion": { "en": "Folk religion / Buddhism / non-religious", "kh": "ជំនឿប្រជាប្រិយ / ព្រះពុទ្ធសាសនា / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Giant Panda", "kh": "ខ្លាឃ្មុំផេនដា" },
+      { "en": "Red-Crowned Crane", "kh": "កុកក្បាលក្រហម" },
+      { "en": "Snow Leopard", "kh": "ខ្លារខិនព្រិល" }
+    ],
+    "famousLandmarks": [
+      { "en": "Great Wall of China", "kh": "កំផែងធំចិន" },
+      { "en": "Forbidden City", "kh": "ទីក្រុងហាមឃាត់" }
+    ],
+    "funFact": {
+      "en": "The Great Wall of China is over 21,000 km long — the longest man-made structure on Earth.",
+      "kh": "កំផែងធំចិនមានប្រវែងជាង ២១,០០០ គីឡូម៉ែត្រ — ជាសំណង់របស់មនុស្សវែងបំផុតលើផែនដី។"
+    }
+  },
+  {
+    "id": "japan",
+    "flag": "🇯🇵",
+    "continent": "asia",
+    "name": { "en": "Japan", "kh": "ជប៉ុន" },
+    "capital": { "en": "Tokyo", "kh": "តូក្យូ" },
+    "population": 125700000,
+    "spokenLanguages": ["Japanese"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$4.2 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Shinto and Buddhism", "kh": "សាសនាស៊ីនតូ និងព្រះពុទ្ធសាសនា" },
+    "commonWildlife": [
+      { "en": "Japanese Macaque", "kh": "ស្វាជប៉ុន" },
+      { "en": "Sika Deer", "kh": "ក្ដាន់ស៊ីកា" },
+      { "en": "Red-Crowned Crane", "kh": "កុកក្បាលក្រហម" }
+    ],
+    "famousLandmarks": [
+      { "en": "Mount Fuji", "kh": "ភ្នំហ្វូជី" },
+      { "en": "Tokyo Tower", "kh": "ប៉មតូក្យូ" }
+    ],
+    "funFact": {
+      "en": "Japan is made up of about 14,000 islands, but only around 430 of them are inhabited.",
+      "kh": "ប្រទេសជប៉ុនមានកោះប្រហែល ១៤,០០០ កោះ ប៉ុន្តែមានតែប្រហែល ៤៣០ កោះប៉ុណ្ណោះដែលមនុស្សរស់នៅ។"
+    }
+  },
+  {
+    "id": "india",
+    "flag": "🇮🇳",
+    "continent": "asia",
+    "name": { "en": "India", "kh": "ឥណ្ឌា" },
+    "capital": { "en": "New Delhi", "kh": "ញូដែលី" },
+    "population": 1428000000,
+    "spokenLanguages": ["Hindi", "English", "Bengali", "Tamil", "Telugu"],
+    "government": { "en": "Federal Parliamentary Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋសភា" },
+    "gdp": "$3.7 T",
+    "literacyRate": 77,
+    "mainReligion": { "en": "Hinduism", "kh": "ហិណ្ឌូសាសនា" },
+    "commonWildlife": [
+      { "en": "Bengal Tiger", "kh": "ខ្លាបេងហ្គាល់" },
+      { "en": "Indian Elephant", "kh": "ដំរីឥណ្ឌា" },
+      { "en": "Peacock", "kh": "ក្ងោក" }
+    ],
+    "famousLandmarks": [
+      { "en": "Taj Mahal", "kh": "តាជម៉ាហាល" },
+      { "en": "Red Fort", "kh": "បន្ទាយក្រហម" }
+    ],
+    "funFact": {
+      "en": "India is the world's most populous country and the largest democracy on Earth.",
+      "kh": "ឥណ្ឌាគឺជាប្រទេសដែលមានប្រជាជនច្រើនបំផុតលើពិភពលោក និងជារដ្ឋប្រជាធិបតេយ្យធំបំផុតនៅលើផែនដី។"
+    }
+  },
+  {
+    "id": "south-korea",
+    "flag": "🇰🇷",
+    "continent": "asia",
+    "name": { "en": "South Korea", "kh": "កូរ៉េខាងត្បូង" },
+    "capital": { "en": "Seoul", "kh": "សេអ៊ូល" },
+    "population": 51700000,
+    "spokenLanguages": ["Korean"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$1.7 T",
+    "literacyRate": 98,
+    "mainReligion": { "en": "Non-religious / Christianity / Buddhism", "kh": "មិនកាន់សាសនា / គ្រិស្តសាសនា / ព្រះពុទ្ធសាសនា" },
+    "commonWildlife": [
+      { "en": "Asiatic Black Bear", "kh": "ខ្លាឃ្មុំខ្មៅអាស៊ី" },
+      { "en": "Siberian Tiger", "kh": "ខ្លាស៊ីបេរី" },
+      { "en": "Magpie", "kh": "បក្សីម៉ាហ្គភី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Gyeongbokgung Palace", "kh": "ព្រះរាជវាំងគីយ៉ុងបុកគុង" },
+      { "en": "N Seoul Tower", "kh": "ប៉មអិនសេអ៊ូល" }
+    ],
+    "funFact": {
+      "en": "South Korea has the world's fastest average internet speeds and is the global capital of K-Pop.",
+      "kh": "កូរ៉េខាងត្បូងមានល្បឿនអ៊ីនធឺណិតលឿនបំផុតនៅលើពិភពលោក និងជារាជធានីសកលនៃតន្ត្រីខេផប។"
+    }
+  },
+  {
+    "id": "indonesia",
+    "flag": "🇮🇩",
+    "continent": "asia",
+    "name": { "en": "Indonesia", "kh": "ឥណ្ឌូនេស៊ី" },
+    "capital": { "en": "Jakarta", "kh": "ហ្សាការតា" },
+    "population": 277500000,
+    "spokenLanguages": ["Indonesian", "Javanese", "Sundanese"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$1.4 T",
+    "literacyRate": 96,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Komodo Dragon", "kh": "តោកូម៉ូដូ" },
+      { "en": "Orangutan", "kh": "អូរ៉ាងអូតង់" },
+      { "en": "Sumatran Tiger", "kh": "ខ្លាស៊ូម៉ាត្រា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Borobudur Temple", "kh": "ប្រាសាទបូរ៉ូប៊ូឌួរ" },
+      { "en": "Mount Bromo", "kh": "ភ្នំប្រូម៉ូ" }
+    ],
+    "funFact": {
+      "en": "Indonesia is made up of more than 17,000 islands, making it the world's largest island country.",
+      "kh": "ឥណ្ឌូនេស៊ីមានកោះច្រើនជាង ១៧,០០០ កោះ ធ្វើឱ្យវាក្លាយជាប្រទេសកោះធំជាងគេបំផុតលើពិភពលោក។"
+    }
+  },
+  {
+    "id": "saudi-arabia",
+    "flag": "🇸🇦",
+    "continent": "asia",
+    "name": { "en": "Saudi Arabia", "kh": "អារ៉ាប៊ីសាអូឌីត" },
+    "capital": { "en": "Riyadh", "kh": "រីយ៉ាដ" },
+    "population": 36400000,
+    "spokenLanguages": ["Arabic"],
+    "government": { "en": "Absolute Monarchy", "kh": "រាជាធិបតេយ្យដាច់ខាត" },
+    "gdp": "$1.1 T",
+    "literacyRate": 97,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Arabian Camel", "kh": "អូដ្ឋអារ៉ាប់" },
+      { "en": "Arabian Oryx", "kh": "សត្វអូរីកអារ៉ាប់" },
+      { "en": "Sand Cat", "kh": "ឆ្មាខ្សាច់" }
+    ],
+    "famousLandmarks": [
+      { "en": "Masjid al-Haram (Mecca)", "kh": "មាស្ជិតអាល់ហារ៉ាម (មេក្កា)" },
+      { "en": "Kingdom Centre Tower", "kh": "ប៉មមជ្ឈមណ្ឌលនគរ" }
+    ],
+    "funFact": {
+      "en": "Saudi Arabia is the only country in the world where rivers do not exist naturally.",
+      "kh": "អារ៉ាប៊ីសាអូឌីតគឺជាប្រទេសតែមួយគត់លើពិភពលោក ដែលគ្មានទន្លេធម្មជាតិឡើយ។"
+    }
+  },
+  {
+    "id": "turkey",
+    "flag": "🇹🇷",
+    "continent": "asia",
+    "name": { "en": "Turkey", "kh": "តួកគី" },
+    "capital": { "en": "Ankara", "kh": "អង់ការ៉ា" },
+    "population": 85800000,
+    "spokenLanguages": ["Turkish", "Kurdish"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$1.1 T",
+    "literacyRate": 97,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Anatolian Leopard", "kh": "ខ្លារខិនអាណាតូលី" },
+      { "en": "Brown Bear", "kh": "ខ្លាឃ្មុំត្នោត" },
+      { "en": "Caracal", "kh": "ឆ្មាការ៉ាកាល" }
+    ],
+    "famousLandmarks": [
+      { "en": "Hagia Sophia", "kh": "វិហារហាជីយ៉ាសូហ្វីយ៉ា" },
+      { "en": "Cappadocia", "kh": "តំបន់កាប៉ាដូស្យា" }
+    ],
+    "funFact": {
+      "en": "Istanbul is the only city in the world that sits on two continents — Europe and Asia.",
+      "kh": "អ៊ីស្តង់ប៊ុលគឺជាទីក្រុងតែមួយគត់នៅលើពិភពលោកដែលមានទីតាំងនៅលើទ្វីបពីរ — អឺរ៉ុប និងអាស៊ី។"
+    }
+  },
+  {
+    "id": "vietnam",
+    "flag": "🇻🇳",
+    "continent": "asia",
+    "name": { "en": "Vietnam", "kh": "វៀតណាម" },
+    "capital": { "en": "Hanoi", "kh": "ហាណូយ" },
+    "population": 100300000,
+    "spokenLanguages": ["Vietnamese"],
+    "government": { "en": "One-Party Socialist Republic", "kh": "សាធារណរដ្ឋសង្គមនិយមមួយបក្ស" },
+    "gdp": "$430 B",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Folk religion / Buddhism", "kh": "ជំនឿប្រជាប្រិយ / ព្រះពុទ្ធសាសនា" },
+    "commonWildlife": [
+      { "en": "Indochinese Tiger", "kh": "ខ្លាឥណ្ឌូចិន" },
+      { "en": "Saola", "kh": "សៅឡា" },
+      { "en": "Asian Black Bear", "kh": "ខ្លាឃ្មុំខ្មៅអាស៊ី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Ha Long Bay", "kh": "ឈូងសមុទ្រហាឡុង" },
+      { "en": "Hoan Kiem Lake", "kh": "បឹងហ័ររ៉ាប" }
+    ],
+    "funFact": {
+      "en": "Vietnam is the world's second-largest exporter of coffee, after Brazil.",
+      "kh": "វៀតណាមជាប្រទេសនាំចេញកាហ្វេធំជាងគេទីពីរលើពិភពលោក បន្ទាប់ពីប្រេស៊ីល។"
+    }
+  },
+  {
+    "id": "thailand",
+    "flag": "🇹🇭",
+    "continent": "asia",
+    "name": { "en": "Thailand", "kh": "ថៃ" },
+    "capital": { "en": "Bangkok", "kh": "បាងកក" },
+    "population": 71700000,
+    "spokenLanguages": ["Thai"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$515 B",
+    "literacyRate": 94,
+    "mainReligion": { "en": "Theravada Buddhism", "kh": "ព្រះពុទ្ធសាសនាថេរវាទ" },
+    "commonWildlife": [
+      { "en": "Asian Elephant", "kh": "ដំរីអាស៊ី" },
+      { "en": "Indochinese Tiger", "kh": "ខ្លាឥណ្ឌូចិន" },
+      { "en": "Gibbon", "kh": "ស្វាហ្គីបុន" }
+    ],
+    "famousLandmarks": [
+      { "en": "Grand Palace", "kh": "ព្រះបរមរាជវាំង" },
+      { "en": "Wat Arun", "kh": "វត្តអារុណ" }
+    ],
+    "funFact": {
+      "en": "Thailand was never colonized by a European power, unique in Southeast Asia.",
+      "kh": "ប្រទេសថៃមិនធ្លាប់ត្រូវបានអាណានិគមដោយមហាអំណាចអឺរ៉ុបណាមួយឡើយ ដែលមានលក្ខណៈពិសេសនៅអាស៊ីអាគ្នេយ៍។"
+    }
+  },
+  {
+    "id": "philippines",
+    "flag": "🇵🇭",
+    "continent": "asia",
+    "name": { "en": "Philippines", "kh": "ហ្វីលីពីន" },
+    "capital": { "en": "Manila", "kh": "ម៉ានីល" },
+    "population": 117300000,
+    "spokenLanguages": ["Filipino", "English"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$440 B",
+    "literacyRate": 96,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Philippine Eagle", "kh": "ឥន្ទ្រីហ្វីលីពីន" },
+      { "en": "Tarsier", "kh": "ស្វាតារសៀរ" },
+      { "en": "Carabao (Water Buffalo)", "kh": "ក្របីទឹក" }
+    ],
+    "famousLandmarks": [
+      { "en": "Chocolate Hills", "kh": "ភ្នំសូកូឡា" },
+      { "en": "Mayon Volcano", "kh": "ភ្នំភ្លើងម៉ាយុន" }
+    ],
+    "funFact": {
+      "en": "The Philippines is made up of 7,641 islands, more than 5,000 of which are unnamed.",
+      "kh": "ហ្វីលីពីនមានកោះ ៧,៦៤១ កោះ ដែលជាង ៥,០០០ កោះមិនមានឈ្មោះ។"
+    }
+  },
+  {
+    "id": "singapore",
+    "flag": "🇸🇬",
+    "continent": "asia",
+    "name": { "en": "Singapore", "kh": "សិង្ហបុរី" },
+    "capital": { "en": "Singapore", "kh": "សិង្ហបុរី" },
+    "population": 5917000,
+    "spokenLanguages": ["English", "Mandarin", "Malay", "Tamil"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$497 B",
+    "literacyRate": 97,
+    "mainReligion": { "en": "Buddhism / Christianity / Islam", "kh": "ព្រះពុទ្ធសាសនា / គ្រិស្តសាសនា / អ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Long-Tailed Macaque", "kh": "ស្វាកន្ទុយវែង" },
+      { "en": "Sunda Pangolin", "kh": "សត្វផោងលីន" },
+      { "en": "Smooth-Coated Otter", "kh": "ភេ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Marina Bay Sands", "kh": "ម៉ារីណាបេសេនស៍" },
+      { "en": "Gardens by the Bay", "kh": "សួនច្បារនៅឈូងសមុទ្រ" }
+    ],
+    "funFact": {
+      "en": "Singapore is one of only three city-states in the world (with Monaco and Vatican City).",
+      "kh": "សិង្ហបុរីគឺជាមួយក្នុងចំណោមបីរដ្ឋទីក្រុងតែមួយគត់លើពិភពលោក (ជាមួយម៉ូណាកូ និងវ៉ាទីកង់)។"
+    }
+  },
+  {
+    "id": "malaysia",
+    "flag": "🇲🇾",
+    "continent": "asia",
+    "name": { "en": "Malaysia", "kh": "ម៉ាឡេស៊ី" },
+    "capital": { "en": "Kuala Lumpur", "kh": "កូឡាឡាំពួ" },
+    "population": 33900000,
+    "spokenLanguages": ["Malay", "English", "Mandarin", "Tamil"],
+    "government": { "en": "Federal Constitutional Monarchy", "kh": "សហព័ន្ធរាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$430 B",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Malayan Tiger", "kh": "ខ្លាម៉ាឡេ" },
+      { "en": "Bornean Orangutan", "kh": "អូរ៉ាងអូតង់បួណេអូ" },
+      { "en": "Proboscis Monkey", "kh": "ស្វាច្រមុះវែង" }
+    ],
+    "famousLandmarks": [
+      { "en": "Petronas Twin Towers", "kh": "ប៉មភ្លោះប៉េត្រូណាស" },
+      { "en": "Batu Caves", "kh": "ល្អាងបាទូ" }
+    ],
+    "funFact": {
+      "en": "Malaysia is one of only 17 megadiverse countries — its rainforests are over 130 million years old.",
+      "kh": "ម៉ាឡេស៊ីគឺជាមួយក្នុងចំណោម ១៧ ប្រទេសដែលមានជីវចម្រុះច្រើនបំផុតលើពិភពលោក — ព្រៃភ្លៀងរបស់វាមានអាយុកាលជាង ១៣០ លានឆ្នាំ។"
+    }
+  },
+  {
+    "id": "pakistan",
+    "flag": "🇵🇰",
+    "continent": "asia",
+    "name": { "en": "Pakistan", "kh": "ប៉ាគីស្ថាន" },
+    "capital": { "en": "Islamabad", "kh": "អ៊ីស្លាម៉ាបាដ" },
+    "population": 240500000,
+    "spokenLanguages": ["Urdu", "English", "Punjabi", "Sindhi"],
+    "government": { "en": "Federal Parliamentary Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋសភា" },
+    "gdp": "$375 B",
+    "literacyRate": 58,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Snow Leopard", "kh": "ខ្លារខិនព្រិល" },
+      { "en": "Markhor", "kh": "ពពែម៉ាខូ" },
+      { "en": "Indus River Dolphin", "kh": "ផ្លាហ្វីនទន្លេឥណ្ឌុស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Badshahi Mosque", "kh": "មស្ជិតបាដស្ហាហ៊ី" },
+      { "en": "K2 Mountain", "kh": "ភ្នំខេ២" }
+    ],
+    "funFact": {
+      "en": "K2 in Pakistan is the world's second-highest mountain (8,611 m) and is far more dangerous to climb than Everest.",
+      "kh": "ភ្នំខេ២ នៅប៉ាគីស្ថានគឺជាភ្នំខ្ពស់ជាងគេទីពីរលើពិភពលោក (៨,៦១១ ម៉ែត្រ) និងគ្រោះថ្នាក់ជាងការឡើងអេវឺរ៉េសច្រើន។"
+    }
+  },
+  {
+    "id": "bangladesh",
+    "flag": "🇧🇩",
+    "continent": "asia",
+    "name": { "en": "Bangladesh", "kh": "បង់ក្លាដែស" },
+    "capital": { "en": "Dhaka", "kh": "ដាកា" },
+    "population": 173000000,
+    "spokenLanguages": ["Bengali"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$460 B",
+    "literacyRate": 75,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Royal Bengal Tiger", "kh": "ខ្លាបេងហ្គាល់រាជ" },
+      { "en": "Asian Elephant", "kh": "ដំរីអាស៊ី" },
+      { "en": "Gharial", "kh": "ក្រពើច្រមុះវែង" }
+    ],
+    "famousLandmarks": [
+      { "en": "Sundarbans Mangrove Forest", "kh": "ព្រៃកោងកាងស៊ុនដាបាន" },
+      { "en": "Lalbagh Fort", "kh": "បន្ទាយឡាល់បាហ្គ" }
+    ],
+    "funFact": {
+      "en": "Bangladesh has the largest mangrove forest on Earth — the Sundarbans, home to the Royal Bengal Tiger.",
+      "kh": "បង់ក្លាដែសមានព្រៃកោងកាងធំជាងគេបំផុតនៅលើផែនដី — ព្រៃស៊ុនដាបាន ដែលជាទីលំនៅរបស់ខ្លាបេងហ្គាល់រាជ។"
+    }
+  },
+  {
+    "id": "iran",
+    "flag": "🇮🇷",
+    "continent": "asia",
+    "name": { "en": "Iran", "kh": "អ៊ីរ៉ង់" },
+    "capital": { "en": "Tehran", "kh": "តេរ៉ង់" },
+    "population": 89200000,
+    "spokenLanguages": ["Persian (Farsi)"],
+    "government": { "en": "Theocratic Republic", "kh": "សាធារណរដ្ឋទេវាធិបតេយ្យ" },
+    "gdp": "$413 B",
+    "literacyRate": 86,
+    "mainReligion": { "en": "Shia Islam", "kh": "សាសនាអ៊ីស្លាមស៊ីអ៊ី" },
+    "commonWildlife": [
+      { "en": "Asiatic Cheetah", "kh": "ខ្លាបង្កងអាស៊ី" },
+      { "en": "Persian Leopard", "kh": "ខ្លារខិនពើស៊ី" },
+      { "en": "Caspian Seal", "kh": "សំពងសមុទ្រកាសព្យាន" }
+    ],
+    "famousLandmarks": [
+      { "en": "Persepolis Ruins", "kh": "ប្រាសាទពើសេប៉ូលីស" },
+      { "en": "Naqsh-e Jahan Square", "kh": "ទីលានណាក់ហ្សេជ៉ាហាន" }
+    ],
+    "funFact": {
+      "en": "Iran (formerly Persia) has one of the oldest continuous civilizations on Earth, dating back over 7,000 years.",
+      "kh": "អ៊ីរ៉ង់ (ដែលធ្លាប់ហៅថាពើស៊ី) មានអរិយធម៌បន្តចាស់ជាងគេបំផុតមួយលើផែនដី ដែលមានអាយុជាង ៧,០០០ ឆ្នាំ។"
+    }
+  },
+  {
+    "id": "israel",
+    "flag": "🇮🇱",
+    "continent": "asia",
+    "name": { "en": "Israel", "kh": "អ៊ីស្រាអែល" },
+    "capital": { "en": "Jerusalem", "kh": "យេរូសាឡិម" },
+    "population": 9700000,
+    "spokenLanguages": ["Hebrew", "Arabic", "English"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$525 B",
+    "literacyRate": 98,
+    "mainReligion": { "en": "Judaism", "kh": "សាសនាយូដា" },
+    "commonWildlife": [
+      { "en": "Nubian Ibex", "kh": "ពពែភ្នំនូប៊ី" },
+      { "en": "Arabian Oryx", "kh": "សត្វអូរីកអារ៉ាប់" },
+      { "en": "Striped Hyena", "kh": "ឆ្កែប្រៃបន្ទះ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Western Wall", "kh": "កំផែងខាងលិច" },
+      { "en": "Dead Sea", "kh": "សមុទ្រមរណៈ" }
+    ],
+    "funFact": {
+      "en": "The Dead Sea on Israel's border is the lowest point on Earth's surface — about 430 m below sea level.",
+      "kh": "សមុទ្រមរណៈនៅព្រំដែនអ៊ីស្រាអែលគឺជាចំណុចទាបបំផុតនៃផ្ទៃផែនដី — ប្រហែល ៤៣០ ម៉ែត្រក្រោមកម្រិតទឹកសមុទ្រ។"
+    }
+  },
+  {
+    "id": "uae",
+    "flag": "🇦🇪",
+    "continent": "asia",
+    "name": { "en": "United Arab Emirates", "kh": "សហព័ន្ធអារ៉ាប់រួម" },
+    "capital": { "en": "Abu Dhabi", "kh": "អាប៊ូដាប៊ី" },
+    "population": 9500000,
+    "spokenLanguages": ["Arabic", "English"],
+    "government": { "en": "Federation of Monarchies", "kh": "សហព័ន្ធនៃរដ្ឋរាជាធិបតេយ្យ" },
+    "gdp": "$510 B",
+    "literacyRate": 98,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Arabian Oryx", "kh": "សត្វអូរីកអារ៉ាប់" },
+      { "en": "Sand Gazelle", "kh": "ឈ្លូសខ្សាច់" },
+      { "en": "Falcon", "kh": "បក្សីហ្វាល់កុង" }
+    ],
+    "famousLandmarks": [
+      { "en": "Burj Khalifa", "kh": "ប៉មបួចខាលីហ្វា" },
+      { "en": "Sheikh Zayed Grand Mosque", "kh": "មស្ជិតធំសេករហ្សាយេដ" }
+    ],
+    "funFact": {
+      "en": "The Burj Khalifa in Dubai is the world's tallest building at 828 m — over twice the height of the Empire State Building.",
+      "kh": "ប៉មបួចខាលីហ្វានៅឌូបៃ គឺជាអគារខ្ពស់បំផុតនៅលើពិភពលោក ខ្ពស់ ៨២៨ ម៉ែត្រ — ខ្ពស់ជាងអគារអេមភាយរ៍ស្ទេតជាងពីរដង។"
+    }
+  },
+  {
+    "id": "united-kingdom",
+    "flag": "🇬🇧",
+    "continent": "europe",
+    "name": { "en": "United Kingdom", "kh": "ចក្រភពអង់គ្លេស" },
+    "capital": { "en": "London", "kh": "ឡុងដ៍" },
+    "population": 67700000,
+    "spokenLanguages": ["English", "Welsh", "Scottish Gaelic"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$3.3 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity (Anglican)", "kh": "គ្រិស្តសាសនា (អង់គ្លីកាន)" },
+    "commonWildlife": [
+      { "en": "Red Fox", "kh": "កញ្ជ្រោងក្រហម" },
+      { "en": "Red Deer", "kh": "ក្ដាន់ក្រហម" },
+      { "en": "Atlantic Puffin", "kh": "បក្សីប៉ាហ្វីនអាត្លង់ទិក" }
+    ],
+    "famousLandmarks": [
+      { "en": "Big Ben & Westminster", "kh": "ប៊ីកបិន និងវេស្តមិនស្ទ័រ" },
+      { "en": "Stonehenge", "kh": "តំបន់ស្តូនហែង" }
+    ],
+    "funFact": {
+      "en": "The UK is made of four countries: England, Scotland, Wales, and Northern Ireland — each with its own flag.",
+      "kh": "ចក្រភពអង់គ្លេសបង្កើតឡើងដោយប្រទេសបួន៖ អង់គ្លេស ស្កុតឡែន វែលស៍ និងអៀរឡង់ខាងជើង — ដែលនីមួយៗមានទង់ជាតិផ្ទាល់ខ្លួន។"
+    }
+  },
+  {
+    "id": "france",
+    "flag": "🇫🇷",
+    "continent": "europe",
+    "name": { "en": "France", "kh": "បារាំង" },
+    "capital": { "en": "Paris", "kh": "ប៉ារីស" },
+    "population": 68400000,
+    "spokenLanguages": ["French"],
+    "government": { "en": "Semi-Presidential Republic", "kh": "សាធារណរដ្ឋពាក់កណ្ដាលប្រធានាធិបតី" },
+    "gdp": "$2.9 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity / Secular", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង / លោកិយ" },
+    "commonWildlife": [
+      { "en": "European Wolf", "kh": "ចចកអឺរ៉ុប" },
+      { "en": "Wild Boar", "kh": "ព្រៃជ្រូក" },
+      { "en": "Pyrenean Chamois", "kh": "ពពែភ្នំពីរ៉េនេ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Eiffel Tower", "kh": "ប៉មអ៊ីហ្វែល" },
+      { "en": "Louvre Museum", "kh": "សារមន្ទីរលូវ" }
+    ],
+    "funFact": {
+      "en": "France is the world's most-visited country, with over 89 million tourists each year.",
+      "kh": "បារាំងជាប្រទេសដែលមានទេសចរច្រើនជាងគេបំផុតនៅលើពិភពលោក ដោយមានទេសចរជាង ៨៩ លាននាក់ក្នុងមួយឆ្នាំ។"
+    }
+  },
+  {
+    "id": "germany",
+    "flag": "🇩🇪",
+    "continent": "europe",
+    "name": { "en": "Germany", "kh": "អាល្លឺម៉ង់" },
+    "capital": { "en": "Berlin", "kh": "បឺឡាំង" },
+    "population": 84500000,
+    "spokenLanguages": ["German"],
+    "government": { "en": "Federal Parliamentary Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋសភា" },
+    "gdp": "$4.4 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity (Catholic & Protestant)", "kh": "គ្រិស្តសាសនា (កាតូលិក និងប្រូតេស្តង់)" },
+    "commonWildlife": [
+      { "en": "Eurasian Lynx", "kh": "ឡឹងក្សអឺរ៉ាស៊ី" },
+      { "en": "Red Deer", "kh": "ក្ដាន់ក្រហម" },
+      { "en": "White Stork", "kh": "សត្វស្ទូកស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Brandenburg Gate", "kh": "ច្រកប្រាន់ដិនបឺក" },
+      { "en": "Neuschwanstein Castle", "kh": "ប្រាសាទនយស្វានស្ថែន" }
+    ],
+    "funFact": {
+      "en": "Germany has over 1,500 different types of sausage and 1,300 breweries.",
+      "kh": "អាល្លឺម៉ង់មានសាច់ក្រកលើសពី ១,៥០០ ប្រភេទ និងរោងស្រាបៀរ ១,៣០០ កន្លែង។"
+    }
+  },
+  {
+    "id": "russia",
+    "flag": "🇷🇺",
+    "continent": "europe",
+    "name": { "en": "Russia", "kh": "រុស្ស៊ី" },
+    "capital": { "en": "Moscow", "kh": "ម៉ូស្គូ" },
+    "population": 143400000,
+    "spokenLanguages": ["Russian"],
+    "government": { "en": "Federal Semi-Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋពាក់កណ្ដាលប្រធានាធិបតី" },
+    "gdp": "$2.0 T",
+    "literacyRate": 100,
+    "mainReligion": { "en": "Russian Orthodox Christianity", "kh": "គ្រិស្តសាសនាអូធូដុក្សរុស្ស៊ី" },
+    "commonWildlife": [
+      { "en": "Siberian Tiger", "kh": "ខ្លាស៊ីបេរី" },
+      { "en": "Brown Bear", "kh": "ខ្លាឃ្មុំត្នោត" },
+      { "en": "Reindeer", "kh": "សត្វរេនឌៀ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Red Square & Kremlin", "kh": "ទីលានក្រហម និងក្រេមឡាំង" },
+      { "en": "Saint Basil's Cathedral", "kh": "វិហារសាំងបាស៊ីល" }
+    ],
+    "funFact": {
+      "en": "Russia is the largest country on Earth — it spans 11 time zones across Europe and Asia.",
+      "kh": "រុស្ស៊ីគឺជាប្រទេសធំជាងគេបំផុតលើផែនដី — វាគ្របដណ្តប់ ១១ តំបន់ពេលវេលាឆ្លងកាត់អឺរ៉ុប និងអាស៊ី។"
+    }
+  },
+  {
+    "id": "italy",
+    "flag": "🇮🇹",
+    "continent": "europe",
+    "name": { "en": "Italy", "kh": "អ៊ីតាលី" },
+    "capital": { "en": "Rome", "kh": "រ៉ូម" },
+    "population": 58900000,
+    "spokenLanguages": ["Italian"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$2.2 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Apennine Wolf", "kh": "ចចកអាប៉េនីន" },
+      { "en": "Marsican Brown Bear", "kh": "ខ្លាឃ្មុំត្នោតម៉ាស៊ីកាន់" },
+      { "en": "Alpine Ibex", "kh": "ពពែភ្នំអាល់ផេន" }
+    ],
+    "famousLandmarks": [
+      { "en": "Colosseum", "kh": "ឆាកកូលូសេអូម" },
+      { "en": "Leaning Tower of Pisa", "kh": "ប៉មទេររបស់ពីសា" }
+    ],
+    "funFact": {
+      "en": "Italy contains two of the world's smallest countries — Vatican City and San Marino — entirely within its borders.",
+      "kh": "អ៊ីតាលីមានពីរប្រទេសតូចបំផុតលើពិភពលោក — វ៉ាទីកង់ និងសានម៉ារីណូ — ស្ថិតនៅទាំងស្រុងក្នុងព្រំដែនរបស់ខ្លួន។"
+    }
+  },
+  {
+    "id": "spain",
+    "flag": "🇪🇸",
+    "continent": "europe",
+    "name": { "en": "Spain", "kh": "អេស្ប៉ាញ" },
+    "capital": { "en": "Madrid", "kh": "ម៉ាឌ្រីដ" },
+    "population": 48400000,
+    "spokenLanguages": ["Spanish (Castilian)", "Catalan", "Basque"],
+    "government": { "en": "Parliamentary Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញសភា" },
+    "gdp": "$1.6 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Iberian Lynx", "kh": "ឡឹងក្សអ៊ីបេរី" },
+      { "en": "Spanish Imperial Eagle", "kh": "ឥន្ទ្រីអធិរាជអេស្ប៉ាញ" },
+      { "en": "Cantabrian Brown Bear", "kh": "ខ្លាឃ្មុំត្នោតកាន់តាប្រី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Sagrada Família", "kh": "វិហារសាក្រាដាហ្វាមីលីយ៉ា" },
+      { "en": "Alhambra Palace", "kh": "ប្រាសាទអាល់ហាំប្រា" }
+    ],
+    "funFact": {
+      "en": "Spain has 49 UNESCO World Heritage sites, the third-most of any country.",
+      "kh": "អេស្ប៉ាញមានកន្លែងបេតិកភណ្ឌពិភពលោករបស់យូណេស្កូចំនួន ៤៩ ដែលច្រើនជាងគេទីបីនៃប្រទេសណាមួយ។"
+    }
+  },
+  {
+    "id": "netherlands",
+    "flag": "🇳🇱",
+    "continent": "europe",
+    "name": { "en": "Netherlands", "kh": "ហូឡង់" },
+    "capital": { "en": "Amsterdam", "kh": "អាំស្ទែដាម" },
+    "population": 17800000,
+    "spokenLanguages": ["Dutch", "English", "Frisian"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$1.1 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Non-religious / Christianity", "kh": "មិនកាន់សាសនា / គ្រិស្តសាសនា" },
+    "commonWildlife": [
+      { "en": "Roe Deer", "kh": "ក្ដាន់រ៉ូ" },
+      { "en": "European Hare", "kh": "ទន្សាយអឺរ៉ុប" },
+      { "en": "Eurasian Spoonbill", "kh": "បក្សីច្រមុះស្លាបព្រា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Anne Frank House", "kh": "ផ្ទះអានហ្រ្វេង" },
+      { "en": "Keukenhof Gardens", "kh": "សួនច្បារខឹយខិនហុហ្វ" }
+    ],
+    "funFact": {
+      "en": "About 26% of the Netherlands is below sea level — protected by an enormous system of dikes and pumps.",
+      "kh": "ប្រហែល ២៦% នៃហូឡង់ស្ថិតនៅក្រោមកម្រិតទឹកសមុទ្រ — ការពារដោយប្រព័ន្ធកំពែងទប់ទឹក និងម៉ាស៊ីនបូមដ៏ធំ។"
+    }
+  },
+  {
+    "id": "sweden",
+    "flag": "🇸🇪",
+    "continent": "europe",
+    "name": { "en": "Sweden", "kh": "ស៊ុយអែត" },
+    "capital": { "en": "Stockholm", "kh": "ស្តុកហុម" },
+    "population": 10500000,
+    "spokenLanguages": ["Swedish"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$600 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity (Lutheran) / Non-religious", "kh": "គ្រិស្តសាសនា (លូធេរ៉ាន) / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Moose (Elk)", "kh": "សត្វមូស" },
+      { "en": "Brown Bear", "kh": "ខ្លាឃ្មុំត្នោត" },
+      { "en": "Eurasian Lynx", "kh": "ឡឹងក្សអឺរ៉ាស៊ី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Vasa Museum", "kh": "សារមន្ទីរវ៉ាសា" },
+      { "en": "Icehotel (Jukkasjärvi)", "kh": "សណ្ឋាគារទឹកកក" }
+    ],
+    "funFact": {
+      "en": "Sweden recycles so well that it imports trash from other countries to fuel its power plants.",
+      "kh": "ស៊ុយអែតកែច្នៃសំរាមបានល្អណាស់ ដែលត្រូវនាំចូលសំរាមពីប្រទេសផ្សេងទៀតមកដុតផ្ដល់ថាមពលដល់រោងចក្ររបស់ខ្លួន។"
+    }
+  },
+  {
+    "id": "norway",
+    "flag": "🇳🇴",
+    "continent": "europe",
+    "name": { "en": "Norway", "kh": "ន័រវែស" },
+    "capital": { "en": "Oslo", "kh": "អូស្លូ" },
+    "population": 5500000,
+    "spokenLanguages": ["Norwegian", "Sami"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$485 B",
+    "literacyRate": 100,
+    "mainReligion": { "en": "Christianity (Lutheran)", "kh": "គ្រិស្តសាសនា (លូធេរ៉ាន)" },
+    "commonWildlife": [
+      { "en": "Polar Bear", "kh": "ខ្លាឃ្មុំប៉ូល" },
+      { "en": "Reindeer", "kh": "សត្វរេនឌៀ" },
+      { "en": "Arctic Fox", "kh": "កញ្ជ្រោងអាក់ទិក" }
+    ],
+    "famousLandmarks": [
+      { "en": "Geirangerfjord", "kh": "ហ្វយដ៍ហ្គៃរ៉ង់ហ្គឺរ" },
+      { "en": "Northern Lights (Aurora)", "kh": "ពន្លឺខាងជើង (អូរ៉ូរ៉ា)" }
+    ],
+    "funFact": {
+      "en": "In northern Norway the sun never sets between mid-May and late July — the famous Midnight Sun.",
+      "kh": "នៅភាគខាងជើងន័រវែស ព្រះអាទិត្យមិនលិចចន្លោះពាក់កណ្ដាលខែឧសភា ដល់ចុងខែកក្កដា — ព្រះអាទិត្យពាក់កណ្ដាលអធ្រាត្រដ៏ល្បីល្បាញ។"
+    }
+  },
+  {
+    "id": "switzerland",
+    "flag": "🇨🇭",
+    "continent": "europe",
+    "name": { "en": "Switzerland", "kh": "ស្វីស" },
+    "capital": { "en": "Bern", "kh": "បឺន" },
+    "population": 8800000,
+    "spokenLanguages": ["German", "French", "Italian", "Romansh"],
+    "government": { "en": "Federal Directorial Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋ" },
+    "gdp": "$905 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity (Catholic & Protestant)", "kh": "គ្រិស្តសាសនា (កាតូលិក និងប្រូតេស្តង់)" },
+    "commonWildlife": [
+      { "en": "Alpine Ibex", "kh": "ពពែភ្នំអាល់ផេន" },
+      { "en": "Marmot", "kh": "សត្វម៉ាម៉ូត" },
+      { "en": "Golden Eagle", "kh": "ឥន្ទ្រីមាស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Matterhorn", "kh": "ភ្នំម៉ាតធើហន" },
+      { "en": "Lake Geneva", "kh": "បឹងហ្សឺណែវ" }
+    ],
+    "funFact": {
+      "en": "Switzerland has stayed neutral in every European war since 1815 — over 200 years of peace.",
+      "kh": "ស្វីសរក្សាជំហរអព្យាក្រឹតក្នុងសង្គ្រាមអឺរ៉ុបគ្រប់ជំនាន់តាំងពីឆ្នាំ ១៨១៥ — សន្តិភាពជាង ២០០ ឆ្នាំ។"
+    }
+  },
+  {
+    "id": "greece",
+    "flag": "🇬🇷",
+    "continent": "europe",
+    "name": { "en": "Greece", "kh": "ក្រិក" },
+    "capital": { "en": "Athens", "kh": "អាតែន" },
+    "population": 10400000,
+    "spokenLanguages": ["Greek"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$240 B",
+    "literacyRate": 98,
+    "mainReligion": { "en": "Greek Orthodox Christianity", "kh": "គ្រិស្តសាសនាអូធូដុក្សក្រិក" },
+    "commonWildlife": [
+      { "en": "Mediterranean Monk Seal", "kh": "សំពងសមុទ្រមេឌីទែរ៉ាណេ" },
+      { "en": "Brown Bear", "kh": "ខ្លាឃ្មុំត្នោត" },
+      { "en": "Loggerhead Sea Turtle", "kh": "អណ្ដើកសមុទ្រឡុកគើហែដ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Acropolis & Parthenon", "kh": "អាក្រូប៉ូលីស និងប៉ាតថេនុង" },
+      { "en": "Santorini", "kh": "កោះសានតូរីនី" }
+    ],
+    "funFact": {
+      "en": "Greece is the birthplace of democracy, the Olympic Games, and Western philosophy.",
+      "kh": "ក្រិកគឺជាកន្លែងកំណើតនៃប្រជាធិបតេយ្យ ល្បែងអូឡាំពិក និងទស្សនវិជ្ជាខាងលិច។"
+    }
+  },
+  {
+    "id": "ireland",
+    "flag": "🇮🇪",
+    "continent": "europe",
+    "name": { "en": "Ireland", "kh": "អៀរឡង់" },
+    "capital": { "en": "Dublin", "kh": "ឌូបឡាំង" },
+    "population": 5200000,
+    "spokenLanguages": ["English", "Irish (Gaeilge)"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$560 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Red Deer", "kh": "ក្ដាន់ក្រហម" },
+      { "en": "Atlantic Puffin", "kh": "បក្សីប៉ាហ្វីនអាត្លង់ទិក" },
+      { "en": "Irish Hare", "kh": "ទន្សាយអៀរឡង់" }
+    ],
+    "famousLandmarks": [
+      { "en": "Cliffs of Moher", "kh": "ច្រាំងភ្នំម៉ហ៊ឺ" },
+      { "en": "Trinity College Library", "kh": "បណ្ណាល័យមហាវិទ្យាល័យត្រីនីធី" }
+    ],
+    "funFact": {
+      "en": "Ireland has no native snakes — none made it across the sea after the last Ice Age.",
+      "kh": "អៀរឡង់គ្មានពស់ដើមកំណើតឡើយ — គ្មានពស់ណាឆ្លងកាត់សមុទ្របានទេបន្ទាប់ពីយុគទឹកកកចុងក្រោយ។"
+    }
+  },
+  {
+    "id": "portugal",
+    "flag": "🇵🇹",
+    "continent": "europe",
+    "name": { "en": "Portugal", "kh": "ព័រទុយហ្គាល់" },
+    "capital": { "en": "Lisbon", "kh": "លីសបោន" },
+    "population": 10400000,
+    "spokenLanguages": ["Portuguese"],
+    "government": { "en": "Semi-Presidential Republic", "kh": "សាធារណរដ្ឋពាក់កណ្ដាលប្រធានាធិបតី" },
+    "gdp": "$295 B",
+    "literacyRate": 96,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Iberian Lynx", "kh": "ឡឹងក្សអ៊ីបេរី" },
+      { "en": "Iberian Wolf", "kh": "ចចកអ៊ីបេរី" },
+      { "en": "Cory's Shearwater", "kh": "បក្សីសមុទ្រកូរី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Belém Tower", "kh": "ប៉មបេឡិម" },
+      { "en": "Pena Palace (Sintra)", "kh": "ប្រាសាទប៉េណា (សិនត្រា)" }
+    ],
+    "funFact": {
+      "en": "Portugal is the world's largest producer of cork — over half of all cork comes from there.",
+      "kh": "ព័រទុយហ្គាល់ជាប្រទេសផលិតឈើថ្កុកធំជាងគេបំផុតលើពិភពលOK — ឈើថ្កុកជាងពាក់កណ្ដាលមកពីទីនោះ។"
+    }
+  },
+  {
+    "id": "poland",
+    "flag": "🇵🇱",
+    "continent": "europe",
+    "name": { "en": "Poland", "kh": "ប៉ូឡូញ" },
+    "capital": { "en": "Warsaw", "kh": "វ៉ាសាវី" },
+    "population": 38000000,
+    "spokenLanguages": ["Polish"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$810 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "European Bison", "kh": "សត្វប៊ីសុនអឺរ៉ុប" },
+      { "en": "Grey Wolf", "kh": "ចចកប្រផេះ" },
+      { "en": "White-Tailed Eagle", "kh": "ឥន្ទ្រីកន្ទុយស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Wawel Castle", "kh": "ប្រាសាទវ៉ាវែល" },
+      { "en": "Wieliczka Salt Mine", "kh": "អណ្តូងអំបិលវីលីឆកា" }
+    ],
+    "funFact": {
+      "en": "Poland's Białowieża Forest is one of the last and largest remnants of primeval forest in Europe.",
+      "kh": "ព្រៃប៊ីយ៉ាឡូវីហ្ស៉ានៅប៉ូឡូញគឺជាកសល់ចុងក្រោយ និងធំជាងគេនៃព្រៃបុរេប្រវត្តិនៅអឺរ៉ុប។"
+    }
+  },
+  {
+    "id": "ukraine",
+    "flag": "🇺🇦",
+    "continent": "europe",
+    "name": { "en": "Ukraine", "kh": "អ៊ុយក្រែន" },
+    "capital": { "en": "Kyiv", "kh": "គៀវ" },
+    "population": 36700000,
+    "spokenLanguages": ["Ukrainian", "Russian"],
+    "government": { "en": "Semi-Presidential Republic", "kh": "សាធារណរដ្ឋពាក់កណ្ដាលប្រធានាធិបតី" },
+    "gdp": "$178 B",
+    "literacyRate": 100,
+    "mainReligion": { "en": "Eastern Orthodox Christianity", "kh": "គ្រិស្តសាសនាអូធូដុក្សខាងកើត" },
+    "commonWildlife": [
+      { "en": "Eurasian Lynx", "kh": "ឡឹងក្សអឺរ៉ាស៊ី" },
+      { "en": "Brown Bear", "kh": "ខ្លាឃ្មុំត្នោត" },
+      { "en": "White Stork", "kh": "សត្វស្ទូកស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Saint Sophia Cathedral", "kh": "វិហារសាំងសូហ្វី" },
+      { "en": "Carpathian Mountains", "kh": "ភ្នំការប៉ាត" }
+    ],
+    "funFact": {
+      "en": "Ukraine is the largest country entirely within Europe and is known as 'the breadbasket of Europe' for its huge wheat exports.",
+      "kh": "អ៊ុយក្រែនជាប្រទេសធំជាងគេបំផុតដែលស្ថិតនៅទាំងស្រុងក្នុងអឺរ៉ុប ហើយត្រូវបានស្គាល់ថាជា «ចាននំប៉័ងនៃអឺរ៉ុប» ដោយសារការនាំចេញស្រូវសាឡីយ៉ាងច្រើន។"
+    }
+  },
+  {
+    "id": "egypt",
+    "flag": "🇪🇬",
+    "continent": "africa",
+    "name": { "en": "Egypt", "kh": "អេហ្ស៊ីប" },
+    "capital": { "en": "Cairo", "kh": "កៃរ៉ូ" },
+    "population": 112700000,
+    "spokenLanguages": ["Arabic"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$398 B",
+    "literacyRate": 73,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Egyptian Mongoose", "kh": "ផ្ងាអេហ្ស៊ីប" },
+      { "en": "Fennec Fox", "kh": "កញ្ជ្រោងហ្វេនណេក" },
+      { "en": "Nile Crocodile", "kh": "ក្រពើទន្លេនីល" }
+    ],
+    "famousLandmarks": [
+      { "en": "Pyramids of Giza", "kh": "ពីរ៉ាមីតគីហ្សា" },
+      { "en": "Sphinx", "kh": "សត្វស្ហ្វីង" }
+    ],
+    "funFact": {
+      "en": "The Great Pyramid of Giza is the only one of the Seven Wonders of the Ancient World still standing.",
+      "kh": "ពីរ៉ាមីតធំនៃគីហ្សាគឺជាអច្ឆរិយបុរាណតែមួយគត់ក្នុងចំណោមអច្ឆរិយទាំងប្រាំពីរនៃពិភពលោកបុរាណដែលនៅឈរបាន។"
+    }
+  },
+  {
+    "id": "ethiopia",
+    "flag": "🇪🇹",
+    "continent": "africa",
+    "name": { "en": "Ethiopia", "kh": "អេត្យូពី" },
+    "capital": { "en": "Addis Ababa", "kh": "អាឌីសអាបាបា" },
+    "population": 126500000,
+    "spokenLanguages": ["Amharic", "Oromo", "Tigrinya"],
+    "government": { "en": "Federal Parliamentary Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋសភា" },
+    "gdp": "$156 B",
+    "literacyRate": 52,
+    "mainReligion": { "en": "Ethiopian Orthodox Christianity / Islam", "kh": "គ្រិស្តសាសនាអូធូដុក្សអេត្យូពី / អ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Ethiopian Wolf", "kh": "ចចកអេត្យូពី" },
+      { "en": "Gelada Baboon", "kh": "ស្វាហ្គេឡាដា" },
+      { "en": "Walia Ibex", "kh": "ពពែភ្នំវ៉ាលីយ៉ា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Rock-Hewn Churches of Lalibela", "kh": "ព្រះវិហារដែលឆ្លាក់ពីថ្ម (ឡាលីបេឡា)" },
+      { "en": "Simien Mountains", "kh": "ភ្នំស៊ីមៀន" }
+    ],
+    "funFact": {
+      "en": "Ethiopia is the only African country never colonized by Europeans and uses its own 13-month calendar.",
+      "kh": "អេត្យូពីគឺជាប្រទេសអាហ្វ្រិកតែមួយគត់ដែលមិនធ្លាប់ត្រូវបានអាណានិគមដោយអឺរ៉ុប ហើយប្រើប្រាស់ប្រតិទិនផ្ទាល់ខ្លួនមាន ១៣ ខែ។"
+    }
+  },
+  {
+    "id": "kenya",
+    "flag": "🇰🇪",
+    "continent": "africa",
+    "name": { "en": "Kenya", "kh": "កេនយ៉ា" },
+    "capital": { "en": "Nairobi", "kh": "ណៃរ៉ូប៊ី" },
+    "population": 55100000,
+    "spokenLanguages": ["Swahili", "English"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$112 B",
+    "literacyRate": 83,
+    "mainReligion": { "en": "Christianity", "kh": "គ្រិស្តសាសនា" },
+    "commonWildlife": [
+      { "en": "African Elephant", "kh": "ដំរីអាហ្វ្រិក" },
+      { "en": "Lion", "kh": "សិង្ហ" },
+      { "en": "Maasai Giraffe", "kh": "ហ្ស៊ីរ៉ាហ្វម៉ាសាយ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Maasai Mara Reserve", "kh": "ឧទ្យានធម្មជាតិម៉ាសាយម៉ារ៉ា" },
+      { "en": "Mount Kenya", "kh": "ភ្នំកេនយ៉ា" }
+    ],
+    "funFact": {
+      "en": "Kenya's Great Rift Valley is the cradle of humanity — some of the oldest human fossils have been found there.",
+      "kh": "ជ្រលងភ្នំធំនៃកេនយ៉ាគឺជាកន្លែងកំណើតនៃមនុស្សជាតិ — ហ្វូស៊ីលមនុស្សចាស់បំផុតមួយចំនួនត្រូវបានរកឃើញនៅទីនោះ។"
+    }
+  },
+  {
+    "id": "morocco",
+    "flag": "🇲🇦",
+    "continent": "africa",
+    "name": { "en": "Morocco", "kh": "ម៉ារ៉ុក" },
+    "capital": { "en": "Rabat", "kh": "រ៉ាបាត" },
+    "population": 37800000,
+    "spokenLanguages": ["Arabic", "Berber", "French"],
+    "government": { "en": "Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញ" },
+    "gdp": "$147 B",
+    "literacyRate": 76,
+    "mainReligion": { "en": "Islam", "kh": "សាសនាអ៊ីស្លាម" },
+    "commonWildlife": [
+      { "en": "Barbary Macaque", "kh": "ស្វាបាបារី" },
+      { "en": "Atlas Mountain Lion (extinct)", "kh": "សិង្ហភ្នំអាត្លាស់ (ផុតពូជ)" },
+      { "en": "Dromedary Camel", "kh": "អូដ្ឋមួយលេក" }
+    ],
+    "famousLandmarks": [
+      { "en": "Marrakech Medina", "kh": "ទីក្រុងបុរាណម៉ារ៉ាកេស" },
+      { "en": "Hassan II Mosque", "kh": "មស្ជិតហាសានទី២" }
+    ],
+    "funFact": {
+      "en": "Morocco's blue city, Chefchaouen, is painted entirely in shades of blue — a tradition started by Jewish refugees in the 1930s.",
+      "kh": "ទីក្រុងពណ៌ខៀវរបស់ម៉ារ៉ុក ឈ្មោះឈែហ្វឆាវែន ត្រូវបានលាបពណ៌ខៀវទាំងស្រុង — ប្រពៃណីដែលចាប់ផ្ដើមដោយជនភៀសខ្លួនយូដាក្នុងទសវត្សរ៍ ១៩៣០។"
+    }
+  },
+  {
+    "id": "nigeria",
+    "flag": "🇳🇬",
+    "continent": "africa",
+    "name": { "en": "Nigeria", "kh": "នីហ្សេរីយ៉ា" },
+    "capital": { "en": "Abuja", "kh": "អាប៊ូចា" },
+    "population": 223800000,
+    "spokenLanguages": ["English", "Hausa", "Yoruba", "Igbo"],
+    "government": { "en": "Federal Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$390 B",
+    "literacyRate": 62,
+    "mainReligion": { "en": "Islam (north) / Christianity (south)", "kh": "សាសនាអ៊ីស្លាម (ខាងជើង) / គ្រិស្តសាសនា (ខាងត្បូង)" },
+    "commonWildlife": [
+      { "en": "African Forest Elephant", "kh": "ដំរីព្រៃអាហ្វ្រិក" },
+      { "en": "Drill Monkey", "kh": "ស្វាដ្រីល" },
+      { "en": "Nigerian-Cameroon Chimpanzee", "kh": "សត្វជីមផេនហ្ស៊ី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Zuma Rock", "kh": "ថ្មហ្ស៊ូម៉ា" },
+      { "en": "Olumo Rock", "kh": "ថ្មអូលូម៉ូ" }
+    ],
+    "funFact": {
+      "en": "Nigeria has the largest movie industry in the world by output — known as 'Nollywood' — releasing over 2,500 films a year.",
+      "kh": "នីហ្សេរីយ៉ាមានឧស្សាហកម្មភាពយន្តធំជាងគេនៅលើពិភពលោកតាមទិន្នផល — គេស្គាល់ឈ្មោះថា «ណូលីវូដ» — បញ្ចេញខ្សែភាពយន្តជាង ២,៥០០ ក្នុងមួយឆ្នាំ។"
+    }
+  },
+  {
+    "id": "south-africa",
+    "flag": "🇿🇦",
+    "continent": "africa",
+    "name": { "en": "South Africa", "kh": "អាហ្វ្រិកខាងត្បូង" },
+    "capital": { "en": "Pretoria · Cape Town · Bloemfontein", "kh": "ព្រេតូរីយ៉ា · កេបថោន · ប្លុមហ្វុនតែន" },
+    "population": 60400000,
+    "spokenLanguages": ["Zulu", "Xhosa", "Afrikaans", "English", "+8 more"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$405 B",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Christianity", "kh": "គ្រិស្តសាសនា" },
+    "commonWildlife": [
+      { "en": "Lion", "kh": "សិង្ហ" },
+      { "en": "African Elephant", "kh": "ដំរីអាហ្វ្រិក" },
+      { "en": "White Rhino", "kh": "រមាសស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Table Mountain", "kh": "ភ្នំតុ" },
+      { "en": "Kruger National Park", "kh": "ឧទ្យានជាតិក្រូហ្គឺរ" }
+    ],
+    "funFact": {
+      "en": "South Africa is the only country in the world with three official capital cities (executive, legislative, judicial).",
+      "kh": "អាហ្វ្រិកខាងត្បូងគឺជាប្រទេសតែមួយគត់លើពិភពលោកដែលមានរាជធានីផ្លូវការចំនួនបី (ប្រតិបត្តិ នីតិបញ្ញត្តិ និងតុលាការ)។"
+    }
+  },
+  {
+    "id": "united-states",
+    "flag": "🇺🇸",
+    "continent": "americas",
+    "name": { "en": "United States", "kh": "សហរដ្ឋអាមេរិក" },
+    "capital": { "en": "Washington, D.C.", "kh": "វ៉ាស៊ីនតោន ឌីស៊ី" },
+    "population": 334900000,
+    "spokenLanguages": ["English", "Spanish"],
+    "government": { "en": "Federal Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$27.4 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity / Non-religious", "kh": "គ្រិស្តសាសនា / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Bald Eagle", "kh": "ឥន្ទ្រីក្បាលទំពែក" },
+      { "en": "American Bison", "kh": "សត្វប៊ីសុនអាមេរិក" },
+      { "en": "Grizzly Bear", "kh": "ខ្លាឃ្មុំក្រីហ្ស៊ី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Statue of Liberty", "kh": "រូបបដិមាសេរីភាព" },
+      { "en": "Grand Canyon", "kh": "ជ្រលងភ្នំធំ" }
+    ],
+    "funFact": {
+      "en": "The US has the world's largest economy and 50 states spread across 6 time zones — including Alaska and Hawaii.",
+      "kh": "សហរដ្ឋអាមេរិកមានសេដ្ឋកិច្ចធំជាងគេលើពិភពលោក និងមានរដ្ឋ ៥០ ចែកជា ៦ តំបន់ពេលវេលា — រួមទាំងអាឡាស្កា និងហាវ៉ៃ។"
+    }
+  },
+  {
+    "id": "canada",
+    "flag": "🇨🇦",
+    "continent": "americas",
+    "name": { "en": "Canada", "kh": "កាណាដា" },
+    "capital": { "en": "Ottawa", "kh": "អូតាវ៉ា" },
+    "population": 40100000,
+    "spokenLanguages": ["English", "French"],
+    "government": { "en": "Federal Parliamentary Constitutional Monarchy", "kh": "សហព័ន្ធរាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញសភា" },
+    "gdp": "$2.1 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity / Non-religious", "kh": "គ្រិស្តសាសនា / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Moose", "kh": "សត្វមូស" },
+      { "en": "Polar Bear", "kh": "ខ្លាឃ្មុំប៉ូល" },
+      { "en": "Beaver", "kh": "សត្វប៊ីវើរ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Niagara Falls", "kh": "ទឹកធ្លាក់ណៀហ្គារ៉ា" },
+      { "en": "CN Tower", "kh": "ប៉មស៊ីអិន" }
+    ],
+    "funFact": {
+      "en": "Canada is the world's second-largest country by area and has more lakes than the rest of the world combined.",
+      "kh": "កាណាដាជាប្រទេសធំជាងគេទីពីរលើពិភពលោកតាមផ្ទៃដី និងមានបឹងច្រើនជាងផលបូកនៃប្រទេសផ្សេងៗទាំងអស់រួមគ្នា។"
+    }
+  },
+  {
+    "id": "mexico",
+    "flag": "🇲🇽",
+    "continent": "americas",
+    "name": { "en": "Mexico", "kh": "មិកស៊ិក" },
+    "capital": { "en": "Mexico City", "kh": "ទីក្រុងមិកស៊ិក" },
+    "population": 128500000,
+    "spokenLanguages": ["Spanish", "Nahuatl", "Maya"],
+    "government": { "en": "Federal Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$1.8 T",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Jaguar", "kh": "ខ្លាហ្សាកា" },
+      { "en": "Axolotl", "kh": "សត្វអក់សូឡូត" },
+      { "en": "Monarch Butterfly", "kh": "មេអំបៅរាជ" }
+    ],
+    "famousLandmarks": [
+      { "en": "Chichen Itza Pyramid", "kh": "ពីរ៉ាមីតឈីឈិនអ៊ីតហ្សា" },
+      { "en": "Teotihuacan", "kh": "តំបន់ទេអូទីហួកាន" }
+    ],
+    "funFact": {
+      "en": "Mexico is home to the world's smallest volcano (Cuexcomate) and gave the world chocolate, corn, and tomatoes.",
+      "kh": "មិកស៊ិកជាទីលំនៅរបស់ភ្នំភ្លើងតូចបំផុតលើពិភពលោក (គួសកូម៉ាតេ) និងបានផ្ដល់សូកូឡា ពោត និងប៉េងប៉ោះដល់ពិភពលោក។"
+    }
+  },
+  {
+    "id": "brazil",
+    "flag": "🇧🇷",
+    "continent": "americas",
+    "name": { "en": "Brazil", "kh": "ប្រេស៊ីល" },
+    "capital": { "en": "Brasília", "kh": "ប្រាសេលីយ៉ា" },
+    "population": 216400000,
+    "spokenLanguages": ["Portuguese"],
+    "government": { "en": "Federal Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$2.1 T",
+    "literacyRate": 94,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Jaguar", "kh": "ខ្លាហ្សាកា" },
+      { "en": "Capybara", "kh": "សត្វកាប៊ីបារ៉ា" },
+      { "en": "Toco Toucan", "kh": "បក្សីទូកាន" }
+    ],
+    "famousLandmarks": [
+      { "en": "Christ the Redeemer", "kh": "បដិមាព្រះគ្រិស្ដសង្គ្រោះ" },
+      { "en": "Iguazu Falls", "kh": "ទឹកធ្លាក់អ៊ីហ្គាស៊ូ" }
+    ],
+    "funFact": {
+      "en": "60% of the Amazon rainforest — the planet's biggest — lies inside Brazil, sheltering 10% of all species on Earth.",
+      "kh": "៦០% នៃព្រៃភ្លៀងអាម៉ាហ្សូន — ព្រៃធំបំផុតលើភពផែនដី — ស្ថិតនៅក្នុងប្រេស៊ីល ដែលជាជម្រកនៃ ១០% នៃប្រភេទសត្វទាំងអស់នៅលើផែនដី។"
+    }
+  },
+  {
+    "id": "argentina",
+    "flag": "🇦🇷",
+    "continent": "americas",
+    "name": { "en": "Argentina", "kh": "អាហ្សង់ទីន" },
+    "capital": { "en": "Buenos Aires", "kh": "ប៊ូណូសអៃរេស" },
+    "population": 46600000,
+    "spokenLanguages": ["Spanish"],
+    "government": { "en": "Federal Presidential Republic", "kh": "សហព័ន្ធសាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$640 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Andean Condor", "kh": "បក្សីកុនដ័ររបស់អង់ដេស" },
+      { "en": "Guanaco", "kh": "សត្វហ្គួណាកូ" },
+      { "en": "Patagonian Penguin", "kh": "ផេងហ្គីនប៉ាតាហ្គោនី" }
+    ],
+    "famousLandmarks": [
+      { "en": "Perito Moreno Glacier", "kh": "ផ្ទាំងទឹកកកប៉េរីតូ ម៉ូរ៉េណូ" },
+      { "en": "Tango Cafés of Buenos Aires", "kh": "ហាងតង់ហ្គូប៊ូណូសអៃរេស" }
+    ],
+    "funFact": {
+      "en": "Argentina contains the highest mountain outside Asia — Aconcagua at 6,961 m — and the southernmost city on Earth, Ushuaia.",
+      "kh": "អាហ្សង់ទីនមានភ្នំខ្ពស់បំផុតក្រៅពីអាស៊ី — អាកុងកាហ្គា ខ្ពស់ ៦,៩៦១ ម៉ែត្រ — និងទីក្រុងភាគខាងត្បូងបំផុតលើផែនដី គឺអ៊ូស្ហួអ៊ីយ៉ា។"
+    }
+  },
+  {
+    "id": "chile",
+    "flag": "🇨🇱",
+    "continent": "americas",
+    "name": { "en": "Chile", "kh": "ឈីលី" },
+    "capital": { "en": "Santiago", "kh": "សានទីហ្គោ" },
+    "population": 19600000,
+    "spokenLanguages": ["Spanish", "Mapudungun"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$345 B",
+    "literacyRate": 96,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Andean Condor", "kh": "បក្សីកុនដ័ររបស់អង់ដេស" },
+      { "en": "Llama", "kh": "សត្វឡាម៉ា" },
+      { "en": "Vicuña", "kh": "សត្វវីគូយ៉ា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Easter Island Moai Statues", "kh": "បដិមាម៉ូអាយកោះអ៊ីស្ទើ" },
+      { "en": "Atacama Desert", "kh": "វាលខ្សាច់អាតាកាម៉ា" }
+    ],
+    "funFact": {
+      "en": "Chile is the world's longest country from north to south — over 4,300 km — but on average just 177 km wide.",
+      "kh": "ឈីលីជាប្រទេសវែងបំផុតលើពិភពលោកពីខាងជើងទៅខាងត្បូង — ជាង ៤,៣០០ គីឡូម៉ែត្រ — ប៉ុន្តែជាមធ្យមទទឹងតែ ១៧៧ គីឡូម៉ែត្រ។"
+    }
+  },
+  {
+    "id": "colombia",
+    "flag": "🇨🇴",
+    "continent": "americas",
+    "name": { "en": "Colombia", "kh": "កូឡុំប៊ី" },
+    "capital": { "en": "Bogotá", "kh": "បូហ្គោតា" },
+    "population": 52100000,
+    "spokenLanguages": ["Spanish"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$364 B",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Spectacled Bear", "kh": "ខ្លាឃ្មុំពាក់វ៉ែនតា" },
+      { "en": "Pink River Dolphin", "kh": "ផ្លាហ្វីនទន្លេពណ៌ផ្កាឈូក" },
+      { "en": "Cotton-Top Tamarin", "kh": "ស្វាតាមារីនកំពូលក្បាលស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Cartagena Old Town", "kh": "ទីក្រុងបុរាណកាតាហែណា" },
+      { "en": "Lost City (Ciudad Perdida)", "kh": "ទីក្រុងបាត់បង់" }
+    ],
+    "funFact": {
+      "en": "Colombia is the world's second-most biodiverse country and produces some of the planet's finest coffee.",
+      "kh": "កូឡុំប៊ីជាប្រទេសដែលមានជីវចម្រុះច្រើនជាងគេទីពីរលើពិភពលោក និងផលិតកាហ្វេដ៏ល្អបំផុតមួយចំនួននៃភពផែនដី។"
+    }
+  },
+  {
+    "id": "peru",
+    "flag": "🇵🇪",
+    "continent": "americas",
+    "name": { "en": "Peru", "kh": "ប៉េរូ" },
+    "capital": { "en": "Lima", "kh": "លីម៉ា" },
+    "population": 34000000,
+    "spokenLanguages": ["Spanish", "Quechua", "Aymara"],
+    "government": { "en": "Presidential Republic", "kh": "សាធារណរដ្ឋប្រធានាធិបតី" },
+    "gdp": "$268 B",
+    "literacyRate": 95,
+    "mainReligion": { "en": "Roman Catholic Christianity", "kh": "គ្រិស្តសាសនាកាតូលិករ៉ូម៉ាំង" },
+    "commonWildlife": [
+      { "en": "Llama", "kh": "សត្វឡាម៉ា" },
+      { "en": "Andean Condor", "kh": "បក្សីកុនដ័ររបស់អង់ដេស" },
+      { "en": "Vicuña", "kh": "សត្វវីគូយ៉ា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Machu Picchu", "kh": "ម៉ាជូពិកជូ" },
+      { "en": "Nazca Lines", "kh": "ខ្សែណាសកា" }
+    ],
+    "funFact": {
+      "en": "Peru's Machu Picchu, built around 1450, was unknown to the outside world until rediscovered in 1911.",
+      "kh": "ម៉ាជូពិកជូនៅប៉េរូ ដែលសាងសង់ប្រមាណឆ្នាំ ១៤៥០ មិនត្រូវបានពិភពខាងក្រៅស្គាល់ទេ រហូតដល់រកឃើញម្ដងទៀតក្នុងឆ្នាំ ១៩១១។"
+    }
+  },
+  {
+    "id": "australia",
+    "flag": "🇦🇺",
+    "continent": "oceania",
+    "name": { "en": "Australia", "kh": "អូស្ត្រាលី" },
+    "capital": { "en": "Canberra", "kh": "កង់បឺរ៉ា" },
+    "population": 26600000,
+    "spokenLanguages": ["English"],
+    "government": { "en": "Federal Parliamentary Constitutional Monarchy", "kh": "សហព័ន្ធរាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញសភា" },
+    "gdp": "$1.7 T",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity / Non-religious", "kh": "គ្រិស្តសាសនា / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Kangaroo", "kh": "ហ្សាង់ហ្គូរ៉ូ" },
+      { "en": "Koala", "kh": "ខូអាឡា" },
+      { "en": "Platypus", "kh": "សត្វផ្លាទីពាស" }
+    ],
+    "famousLandmarks": [
+      { "en": "Sydney Opera House", "kh": "មហាល្ខោនស៊ីដនី" },
+      { "en": "Uluru (Ayers Rock)", "kh": "ថ្មអូលូរ៉ូ" }
+    ],
+    "funFact": {
+      "en": "Australia is the only country that is also a continent, and it has more kangaroos than people.",
+      "kh": "អូស្ត្រាលីជាប្រទេសតែមួយគត់ដែលក៏ជាទ្វីបផងដែរ ហើយវាមានហ្សាង់ហ្គូរ៉ូច្រើនជាងមនុស្ស។"
+    }
+  },
+  {
+    "id": "new-zealand",
+    "flag": "🇳🇿",
+    "continent": "oceania",
+    "name": { "en": "New Zealand", "kh": "នូវែលហ្សេឡង់" },
+    "capital": { "en": "Wellington", "kh": "វេលីងតោន" },
+    "population": 5200000,
+    "spokenLanguages": ["English", "Māori"],
+    "government": { "en": "Parliamentary Constitutional Monarchy", "kh": "រាជាធិបតេយ្យអាស្រ័យរដ្ឋធម្មនុញ្ញសភា" },
+    "gdp": "$253 B",
+    "literacyRate": 99,
+    "mainReligion": { "en": "Christianity / Non-religious", "kh": "គ្រិស្តសាសនា / មិនកាន់សាសនា" },
+    "commonWildlife": [
+      { "en": "Kiwi Bird", "kh": "បក្សីគីវី" },
+      { "en": "Tuatara Lizard", "kh": "សត្វទួរីយ៉ាតារ៉ា" },
+      { "en": "Kea Parrot", "kh": "សេកគីយ៉ា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Milford Sound", "kh": "មីលហ្វដសោន" },
+      { "en": "Hobbiton (Movie Set)", "kh": "ហុបប៊ីតុន" }
+    ],
+    "funFact": {
+      "en": "New Zealand has roughly 5 million people and 26 million sheep — about 5 sheep per person.",
+      "kh": "នូវែលហ្សេឡង់មានប្រជាជនប្រហែល ៥ លាននាក់ និងចៀម ២៦ លានក្បាល — ប្រហែល ៥ ក្បាលក្នុងមនុស្សម្នាក់។"
+    }
+  },
+  {
+    "id": "fiji",
+    "flag": "🇫🇯",
+    "continent": "oceania",
+    "name": { "en": "Fiji", "kh": "ហ្វីជី" },
+    "capital": { "en": "Suva", "kh": "ស៊ូវ៉ា" },
+    "population": 936000,
+    "spokenLanguages": ["English", "Fijian", "Fiji Hindi"],
+    "government": { "en": "Parliamentary Republic", "kh": "សាធារណរដ្ឋសភា" },
+    "gdp": "$5.5 B",
+    "literacyRate": 94,
+    "mainReligion": { "en": "Christianity / Hinduism", "kh": "គ្រិស្តសាសនា / ហិណ្ឌូសាសនា" },
+    "commonWildlife": [
+      { "en": "Fiji Banded Iguana", "kh": "សត្វអ៊ីហ្គាន់ណាហ្វីជី" },
+      { "en": "Humpback Whale", "kh": "ត្រីបាឡែនកោង" },
+      { "en": "Reef Manta Ray", "kh": "ត្រីម៉ានតា" }
+    ],
+    "famousLandmarks": [
+      { "en": "Mamanuca Islands", "kh": "កោះម៉ាម៉ាន់ូកា" },
+      { "en": "Sigatoka Sand Dunes", "kh": "ភ្នំខ្សាច់ស៊ីហ្គាតូកា" }
+    ],
+    "funFact": {
+      "en": "Fiji is made of 333 islands, and the international date line runs through it — so you can stand in two days at once.",
+      "kh": "ហ្វីជីមាន ៣៣៣ កោះ ហើយខ្សែកាលបរិច្ឆេទអន្តរជាតិឆ្លងកាត់វា — ដូច្នេះអ្នកអាចឈរក្នុងពីរថ្ងៃក្នុងពេលតែមួយ។"
+    }
+  }
+]
