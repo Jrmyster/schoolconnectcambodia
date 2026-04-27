@@ -1,0 +1,33 @@
+I want to add a new comprehensive page called 'Maritime Tech: Shipping & Buoyancy (បច្ចេកវិទ្យាសមុទ្រ៖ ការដឹកជញ្ជូន និងការអណ្តែត)' to the 'Technology' dropdown. Please implement this with a heavy industrial and oceanic aesthetic (deep sea blues, steel greys, and bright cargo container accents like orange and red):
+
+1. Routing & Navigation:
+
+Create a new component MaritimeTech.jsx.
+
+Register the route: /technology/maritime.
+
+Add a link in the 'Technology' dropdown labeled 'Shipping & Buoyancy' with a cargo ship or anchor icon.
+
+2. Section 1: The Physics of Floating (រូបវិទ្យានៃការអណ្តែត)
+
+Buoyancy (កម្លាំងរុញច្រានពីក្រោម): Explain Archimedes' Principle. An object floats if it displaces a weight of water equal to its own weight.
+
+The Steel Paradox: Answer the question: Why does a steel ship float while a steel nail sinks? Explain 'Average Density'. A ship isn't a solid block of steel; it is mostly filled with air. This makes the average density of the entire ship less than the density of the water.
+
+3. Section 2: Engineering Mega-Ships (ការរចនាកប៉ាល់យក្ស)
+
+Explain the scale of modern container ships (some are longer than three football fields and can carry 20,000+ steel containers).
+
+Discuss the 'Plimsoll Line' (បន្ទាត់កំណត់ទម្ងន់)—the painted mark on a ship's hull that shows how heavily it can be safely loaded before it risks sinking in different temperatures and types of water (freshwater vs. saltwater).
+
+4. Section 3: The Invisible Highways (មហាវិថីមើលមិនឃើញ)
+
+Shipping Lanes: Explain that ships don't just wander the ocean. They follow strict, predetermined routes called 'Shipping Lanes' to save fuel, avoid storms, and prevent crashes.
+
+Chokepoints: Highlight the crucial global chokepoints: The Strait of Malacca (right here in Southeast Asia), the Suez Canal, and the Panama Canal. Explain that 90% of all global trade moves through these invisible lines.
+
+5. Formatting & UX:
+
+Divide the sections using sleek, modern cards.
+
+Ensure all core physics terms and geographical locations are strictly bilingual (English/Khmer).

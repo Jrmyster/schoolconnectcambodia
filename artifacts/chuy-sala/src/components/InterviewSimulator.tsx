@@ -21,6 +21,7 @@ import {
   Factory,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { trackEvent } from "@/lib/analytics";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -378,6 +379,15 @@ export function InterviewSimulator() {
     setMessages([]);
     setQuestionCount(0);
     setStage("interviewing");
+    // GA4: count exactly which interview tracks students choose so we can
+    // see which careers they explore most. `role` here is the InterviewType
+    // string itself (e.g. "university_entrance", "local_job"), which is the
+    // perfect label for slicing in the GA dashboard.
+    trackEvent({
+      category: "Engagement",
+      action: "start_interview",
+      label: role,
+    });
     await callGemini([], role, false);
   };
 

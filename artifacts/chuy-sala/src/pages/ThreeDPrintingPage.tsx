@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { type ComponentType } from "react";
 import { Link } from "wouter";
 import {
@@ -16,11 +16,13 @@ import {
   Flame,
   PlusSquare,
   Plus,
+  Play,
   Scissors,
   Cuboid,
   Construction,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { trackEvent } from "@/lib/analytics";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  TECH-XX · 3D Printing: Manufacturing the Future
@@ -194,11 +196,50 @@ function Hero({ isKh }: { isKh: boolean }) {
         </div>
       </div>
 
-      {/* Right: Animated print-bed graphic */}
-      <div className="flex justify-center lg:justify-end">
-        <PrintBedHero />
-      </div>
+      {/* Right: Animated print-bed graphic + Start Print button.
+          The button bumps `printRunId`, which forces PrintBedHero to
+          remount and replay the layered build-up animation from frame 0. */}
+      <HeroPrinterPanel isKh={isKh} />
     </section>
+  );
+}
+
+function HeroPrinterPanel({ isKh }: { isKh: boolean }) {
+  // `printRunId` doubles as a React key — incrementing it forces
+  // PrintBedHero to unmount + remount, restarting its CSS keyframes from 0.
+  const [printRunId, setPrintRunId] = useState(0);
+
+  const handleStartPrint = () => {
+    setPrintRunId((n) => n + 1);
+    // GA4 event so we can count how often students replay the demo.
+    trackEvent({
+      category: "Engagement",
+      action: "start_print",
+      label: "3d-printing-demo",
+    });
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-4 lg:items-end">
+      {/* `key` makes React treat each click as a fresh component, which
+          replays the animation deterministically across browsers. */}
+      <PrintBedHero key={printRunId} />
+
+      <button
+        type="button"
+        onClick={handleStartPrint}
+        data-testid="start-print-button"
+        className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-[0.18em] transition-all hover:scale-[1.03] active:scale-95"
+        style={{
+          borderColor: `${NEON_CYAN}66`,
+          backgroundColor: `${NEON_CYAN}14`,
+          color: NEON_CYAN,
+        }}
+      >
+        <Play size={13} fill="currentColor" />
+        <span>{isKh ? "ចាប់ផ្ដើមការបោះពុម្ព" : "Start Print"}</span>
+      </button>
+    </div>
   );
 }
 
