@@ -10,6 +10,19 @@ import {
   Microscope,
   Activity,
   ShieldCheck,
+  BookOpen,
+  Cpu,
+  FlaskConical,
+  BarChart2,
+  GitBranch,
+  Lightbulb,
+  BatteryCharging,
+  Globe,
+  ClipboardCheck,
+  Brain,
+  Wrench,
+  ListChecks,
+  type LucideIcon,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -93,6 +106,11 @@ export function AnalyticalChemistry101Page() {
 
         {/* ── Section 1: Chromatography ────────────────────────── */}
         <ChromatographySection />
+
+        {/* ── Course Curriculum Overview ───────────────────────── */}
+        <CoreCurriculumSection />
+        <KeyTopicsSection />
+        <PracticalApplicationSection />
 
         {/* ── Section 2: Mass Spectrometry ─────────────────────── */}
         <MassSpecSection />
@@ -201,6 +219,484 @@ function Panel({
       </header>
       {children}
     </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Course Curriculum Sections — bilingual paired headings                 */
+/*                                                                         */
+/*  These sit between Chromatography (Section 1) and the deeper technique  */
+/*  sections (Mass Spec, NMR). They give the student a course-level map of */
+/*  what an Analytical Chemistry curriculum actually covers.               */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+/* Tiny accent helpers for highlighting key terms inside body copy.
+   Cyan = techniques / equipment, Sky = sub-categories, Amber = numeric
+   facts (e.g. "~50%"). All three blend with the page's navy chalkboard. */
+function Cy({ children }: { children: React.ReactNode }) {
+  return <span className="text-cyan-300 font-semibold">{children}</span>;
+}
+function Sk({ children }: { children: React.ReactNode }) {
+  return <span className="text-sky-300 font-semibold">{children}</span>;
+}
+function Am({ children }: { children: React.ReactNode }) {
+  return <span className="text-amber-200 font-semibold">{children}</span>;
+}
+
+/* Bilingual paired panel header (EN above, KH below). We do not use the
+   page's existing <Panel> component because that one toggles via t() —
+   the user explicitly asked for headings to be "strictly bilingual",
+   matching the paired pattern used in the previous Inorganic / Physical
+   Chemistry curriculum sections. */
+function BilingualPanel({
+  id,
+  testId,
+  Icon,
+  titleEn,
+  titleKh,
+  subtitleEn,
+  subtitleKh,
+  children,
+}: {
+  id: string;
+  testId: string;
+  Icon: LucideIcon;
+  titleEn: string;
+  titleKh: string;
+  subtitleEn: string;
+  subtitleKh: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      id={id}
+      data-testid={testId}
+      aria-labelledby={`${id}-heading`}
+      className="relative rounded-3xl border border-cyan-400/20 bg-slate-900/60 backdrop-blur-sm p-5 sm:p-7 mb-8 overflow-hidden"
+      style={{
+        boxShadow:
+          "0 0 35px rgba(34,211,238,0.08), inset 0 0 0 1px rgba(148,163,184,0.04)",
+      }}
+    >
+      {/* Subtle corner accents to match Panel */}
+      <span className="pointer-events-none absolute top-0 left-0 w-10 h-10 border-l-2 border-t-2 border-cyan-400/40 rounded-tl-3xl" />
+      <span className="pointer-events-none absolute bottom-0 right-0 w-10 h-10 border-r-2 border-b-2 border-cyan-400/40 rounded-br-3xl" />
+
+      <header className="mb-5 flex items-start gap-3">
+        <div
+          className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0"
+          style={{ boxShadow: "0 0 18px rgba(34,211,238,0.25)" }}
+        >
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="min-w-0">
+          <h2
+            id={`${id}-heading`}
+            className="font-display text-xl sm:text-2xl font-bold text-white leading-snug"
+          >
+            <span className="block">{titleEn}</span>
+            <span className="block font-khmer text-base sm:text-lg font-semibold text-cyan-100/90 mt-1 leading-relaxed">
+              {titleKh}
+            </span>
+          </h2>
+          <p className="text-sm mt-2 leading-relaxed">
+            <span className="block text-slate-400 italic">{subtitleEn}</span>
+            <span className="block font-khmer not-italic text-cyan-200/75 mt-1 leading-loose">
+              {subtitleKh}
+            </span>
+          </p>
+        </div>
+      </header>
+
+      {children}
+    </section>
+  );
+}
+
+/* A single sub-card with a bilingual paired sub-heading (EN above, KH below)
+   plus a body that follows the page's t() language toggle — same pattern as
+   every other body copy on this page. */
+function BilingualSubCard({
+  Icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+  testId,
+  tone = "cyan",
+}: {
+  Icon: LucideIcon;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: React.ReactNode;
+  bodyKh: React.ReactNode;
+  testId: string;
+  tone?: "cyan" | "sky" | "emerald" | "violet" | "amber";
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const toneRing: Record<string, string> = {
+    cyan: "border-cyan-400/30 ring-cyan-400/10",
+    sky: "border-sky-400/30 ring-sky-400/10",
+    emerald: "border-emerald-400/30 ring-emerald-400/10",
+    violet: "border-violet-400/30 ring-violet-400/10",
+    amber: "border-amber-400/30 ring-amber-400/10",
+  };
+  const toneIcon: Record<string, string> = {
+    cyan: "bg-cyan-500/15 text-cyan-200 border-cyan-400/40",
+    sky: "bg-sky-500/15 text-sky-200 border-sky-400/40",
+    emerald: "bg-emerald-500/15 text-emerald-200 border-emerald-400/40",
+    violet: "bg-violet-500/15 text-violet-200 border-violet-400/40",
+    amber: "bg-amber-500/15 text-amber-200 border-amber-400/40",
+  };
+  const toneText: Record<string, string> = {
+    cyan: "text-cyan-200",
+    sky: "text-sky-200",
+    emerald: "text-emerald-200",
+    violet: "text-violet-200",
+    amber: "text-amber-200",
+  };
+
+  return (
+    <article
+      data-testid={testId}
+      className={`rounded-2xl bg-slate-950/55 border ${toneRing[tone]} ring-1 p-4 sm:p-5 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_22px_-4px_rgba(34,211,238,0.45)]`}
+    >
+      <header className="flex items-start gap-3 mb-3">
+        <div
+          className={`shrink-0 w-9 h-9 rounded-xl border flex items-center justify-center ${toneIcon[tone]}`}
+          aria-hidden="true"
+        >
+          <Icon className="w-4 h-4" />
+        </div>
+        <h3 className="font-bold text-white leading-snug">
+          <span className="block text-[15px]">{titleEn}</span>
+          <span
+            className={`block font-khmer text-sm font-semibold mt-0.5 leading-relaxed ${toneText[tone]}`}
+          >
+            {titleKh}
+          </span>
+        </h3>
+      </header>
+      <div
+        className={`text-sm text-slate-300/90 leading-relaxed ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {kh ? bodyKh : bodyEn}
+      </div>
+    </article>
+  );
+}
+
+/* ─── Core Curriculum Structure ───────────────────────────────────────── */
+function CoreCurriculumSection() {
+  return (
+    <BilingualPanel
+      id="core-curriculum"
+      testId="section-core-curriculum"
+      Icon={BookOpen}
+      titleEn="Core Curriculum Structure"
+      titleKh="រចនាសម្ព័ន្ធកម្មវិធីសិក្សាស្នូល"
+      subtitleEn="How a university Analytical Chemistry course is built — from fundamentals, to instruments, to bench work."
+      subtitleKh="របៀបដែលមុខវិជ្ជាគីមីវិភាគនៅសាកលវិទ្យាល័យត្រូវបានរៀបចំ — ចាប់ពីមូលដ្ឋាន ដល់ឧបករណ៍ ដល់ការងារនៅមន្ទីរពិសោធន៍។"
+    >
+      <div className="grid grid-cols-1 gap-4">
+        <BilingualSubCard
+          testId="curriculum-foundation"
+          Icon={BookOpen}
+          tone="cyan"
+          titleEn="Foundation Course"
+          titleKh="មុខវិជ្ជាមូលដ្ឋាន"
+          bodyEn={
+            <>
+              Introduces the basic concepts every analytical chemist must
+              master: <Cy>statistical analysis</Cy> (handling{" "}
+              <Sk>error</Sk> and <Sk>calibration</Sk>),{" "}
+              <Cy>titration</Cy> (<Sk>acid-base</Sk> and{" "}
+              <Sk>solubility</Sk> equilibria), and an introduction to{" "}
+              <Cy>spectroscopy</Cy>.
+            </>
+          }
+          bodyKh={
+            <>
+              ណែនាំគោលគំនិតមូលដ្ឋានដែលអ្នកគីមីវិភាគគ្រប់រូបត្រូវចេះ៖{" "}
+              <Cy>ការវិភាគស្ថិតិ</Cy> (ការគ្រប់គ្រង <Sk>កំហុស</Sk> និង{" "}
+              <Sk>ការកាលីប្រេ</Sk>), <Cy>ទីត្រាស្យុង</Cy> (ឌុលលីប្រ៊ីយ៉ូម{" "}
+              <Sk>អាស៊ីត-បាស</Sk> និង <Sk>ការរលាយ</Sk>), និងការណែនាំអំពី{" "}
+              <Cy>វិសាលគមវិទ្យា</Cy>។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="curriculum-instrumental"
+          Icon={Cpu}
+          tone="sky"
+          titleEn="Instrumental Analysis"
+          titleKh="ការវិភាគដោយឧបករណ៍"
+          bodyEn={
+            <>
+              Focuses on modern equipment that fills today's labs:{" "}
+              <Cy>GC-MS</Cy>, <Cy>HPLC</Cy>, <Cy>atomic spectroscopy</Cy>,
+              and advanced <Cy>electrochemical methods</Cy>. Students learn
+              what each machine can — and cannot — measure.
+            </>
+          }
+          bodyKh={
+            <>
+              ផ្តោតលើឧបករណ៍ទំនើបដែលពេញមន្ទីរពិសោធន៍សព្វថ្ងៃ៖{" "}
+              <Cy>GC-MS</Cy>, <Cy>HPLC</Cy>, <Cy>វិសាលគមអាតូម</Cy>, និង{" "}
+              <Cy>វិធីសាស្ត្រអេឡិចត្រូគីមីកម្រិតខ្ពស់</Cy>។
+              សិស្សរៀនថាម៉ាស៊ីននីមួយៗអាច — និងមិនអាច — វាស់អ្វីខ្លះ។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="curriculum-laboratory"
+          Icon={FlaskConical}
+          tone="emerald"
+          titleEn="Laboratory Component"
+          titleKh="ផ្នែកមន្ទីរពិសោធន៍"
+          bodyEn={
+            <>
+              Approximately <Am>~50%</Am> of the course is hands-on bench
+              work, building real skills in <Cy>method development</Cy>,{" "}
+              <Cy>data interpretation</Cy>, and direct{" "}
+              <Cy>instrumentation</Cy> — the parts of analytical chemistry
+              you can only learn by doing.
+            </>
+          }
+          bodyKh={
+            <>
+              ប្រហែល <Am>~៥០%</Am> នៃមុខវិជ្ជា គឺការងារផ្ទាល់នៅមន្ទីរពិសោធន៍
+              ដែលកសាងជំនាញពិតប្រាកដខាង <Cy>ការអភិវឌ្ឍន៍វិធីសាស្ត្រ</Cy>,{" "}
+              <Cy>ការបកស្រាយទិន្នន័យ</Cy>, និងការប្រើ <Cy>ឧបករណ៍</Cy>
+              ដោយផ្ទាល់ — ផ្នែកនៃគីមីវិភាគ ដែលអ្នកអាចរៀនបានតែតាមរយៈការអនុវត្ត។
+            </>
+          }
+        />
+      </div>
+    </BilingualPanel>
+  );
+}
+
+/* ─── Key Topics Covered ──────────────────────────────────────────────── */
+function KeyTopicsSection() {
+  return (
+    <BilingualPanel
+      id="key-topics"
+      testId="section-key-topics"
+      Icon={ListChecks}
+      titleEn="Key Topics Covered"
+      titleKh="ប្រធានបទសំខាន់ៗដែលបានគ្របដណ្តប់"
+      subtitleEn="The five families of techniques every student walks away knowing how to use."
+      subtitleKh="ក្រុមបច្ចេកទេសទាំងប្រាំ ដែលនិស្សិតគ្រប់រូបចេញពីថ្នាក់ដោយចេះប្រើ។"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <BilingualSubCard
+          testId="topic-data-handling"
+          Icon={BarChart2}
+          tone="cyan"
+          titleEn="Analytical Data Handling"
+          titleKh="ការគ្រប់គ្រងទិន្នន័យវិភាគ"
+          bodyEn={
+            <>
+              <Cy>Statistics</Cy>, <Cy>signal-to-noise ratio</Cy>, and{" "}
+              <Cy>calibration methods</Cy> like <Sk>standard addition</Sk>{" "}
+              and <Sk>internal standards</Sk> — the math that turns raw
+              numbers into trustworthy answers.
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>ស្ថិតិ</Cy>, <Cy>សមាមាត្រសញ្ញា-សូរសម្លេង</Cy>, និង{" "}
+              <Cy>វិធីសាស្ត្រកាលីប្រេ</Cy> ដូចជា <Sk>ការបន្ថែមស្តង់ដារ</Sk>{" "}
+              និង <Sk>ស្តង់ដារផ្ទៃក្នុង</Sk> — គណិតវិទ្យាដែលប្រែលេខឆៅ
+              ទៅជាចម្លើយដែលអាចទុកចិត្តបាន។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="topic-separations"
+          Icon={GitBranch}
+          tone="sky"
+          titleEn="Separations"
+          titleKh="ការបំបែក"
+          bodyEn={
+            <>
+              <Cy>Chromatography</Cy> (both <Sk>gas</Sk> and{" "}
+              <Sk>liquid</Sk>) and <Cy>electrophoretic techniques</Cy> —
+              the methods that pull a complicated mixture apart into its
+              individual components, ready to be measured one by one.
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>ក្រូម៉ាតូក្រាម</Cy> (ទាំង <Sk>ឧស្ម័ន</Sk> និង{" "}
+              <Sk>រាវ</Sk>) និង <Cy>បច្ចេកទេសអេឡិចត្រូហ្វូរេស៊ីស</Cy> —
+              វិធីសាស្ត្រដែលទាញល្បាយស្មុគស្មាញ បំបែកទៅជាសមាសធាតុនីមួយៗ
+              ដែលត្រៀមនឹងវាស់ម្តងមួយ។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="topic-spectroscopy"
+          Icon={Lightbulb}
+          tone="amber"
+          titleEn="Spectroscopy"
+          titleKh="វិសាលគមវិទ្យា"
+          bodyEn={
+            <>
+              <Cy>UV-Visible</Cy>, <Cy>Infrared (IR)</Cy>,{" "}
+              <Cy>Atomic Absorption (AA)</Cy>, and{" "}
+              <Cy>Nuclear Magnetic Resonance (NMR)</Cy> — five different
+              ways that light reveals what a molecule is made of.
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>UV-មើលឃើញ</Cy>, <Cy>អ៊ីនហ្វ្រាក្រហម (IR)</Cy>,{" "}
+              <Cy>ការស្រូបអាតូម (AA)</Cy>, និង{" "}
+              <Cy>រ៉េស៊ូណង់ស៍ម៉ាញ៉េទិចនុយក្លេអ៊ែរ (NMR)</Cy> —
+              វិធីខុសៗគ្នាដែលពន្លឺបង្ហាញថាម៉ូលេគុលមួយផ្សំឡើងពីអ្វី។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="topic-electrochem"
+          Icon={BatteryCharging}
+          tone="violet"
+          titleEn="Electrochemistry"
+          titleKh="អេឡិចត្រូគីមី"
+          bodyEn={
+            <>
+              <Cy>Potentiometry</Cy> (measuring voltage to identify ions —
+              the basis of every <Sk>pH meter</Sk>) and <Cy>voltammetry</Cy>{" "}
+              (sweeping voltage to detect trace metals at extreme dilution).
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>ប៉ូតង់ស្យូម៉ែត្រី</Cy> (វាស់តង់ស្យុងដើម្បីស្គាល់អ៊ីយ៉ុង —
+              មូលដ្ឋាននៃ <Sk>ម៉ាស៊ីនវាស់ pH</Sk>) និង{" "}
+              <Cy>វ៉ុលតាម៉ែត្រី</Cy> (បក់តង់ស្យុងដើម្បីរកលោហៈដាន
+              នៅកម្រិតលាយដ៏ខ្លាំង)។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="topic-specialized"
+          Icon={Globe}
+          tone="emerald"
+          titleEn="Specialized Topics"
+          titleKh="ប្រធានបទឯកទេស"
+          bodyEn={
+            <>
+              <Cy>Environmental analysis</Cy> (water, soil, air),{" "}
+              <Cy>bioanalytical techniques</Cy> (proteins, DNA, drugs in
+              blood), and <Cy>forensic chemistry</Cy> — where analytical
+              science meets the courtroom.
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>ការវិភាគបរិស្ថាន</Cy> (ទឹក ដី ខ្យល់),{" "}
+              <Cy>បច្ចេកទេសជីវវិភាគ</Cy>{" "}
+              (ប្រូតេអ៊ីន DNA ឱសថក្នុងឈាម), និង{" "}
+              <Cy>គីមីនីតិវិទ្យា</Cy> — កន្លែងដែលវិទ្យាសាស្ត្រវិភាគ
+              ជួបនឹងតុលាការ។
+            </>
+          }
+        />
+      </div>
+    </BilingualPanel>
+  );
+}
+
+/* ─── Practical Application ───────────────────────────────────────────── */
+function PracticalApplicationSection() {
+  return (
+    <BilingualPanel
+      id="practical-application"
+      testId="section-practical-application"
+      Icon={Wrench}
+      titleEn="Practical Application"
+      titleKh="ការអនុវត្តជាក់ស្តែង"
+      subtitleEn="The real-world skills the curriculum is designed to deliver — what graduates can actually do on day one."
+      subtitleKh="ជំនាញជាក់ស្តែងដែលកម្មវិធីសិក្សាបានរៀបចំឱ្យ — អ្វីដែលនិស្សិតបញ្ចប់ការសិក្សា អាចធ្វើបានពិតប្រាកដនៅថ្ងៃដំបូង។"
+    >
+      <div className="grid grid-cols-1 gap-4">
+        <BilingualSubCard
+          testId="practical-methodology"
+          Icon={ClipboardCheck}
+          tone="cyan"
+          titleEn="Methodology"
+          titleKh="វិធីសាស្ត្រ"
+          bodyEn={
+            <>
+              Understanding <Cy>sampling techniques</Cy>,{" "}
+              <Cy>sample preparation</Cy>, and{" "}
+              <Cy>method validation</Cy> — the unglamorous foundation that
+              decides whether any later measurement is meaningful.
+            </>
+          }
+          bodyKh={
+            <>
+              ការយល់ដឹងពី <Cy>បច្ចេកទេសយកសំណាក</Cy>,{" "}
+              <Cy>ការរៀបចំសំណាក</Cy>, និង{" "}
+              <Cy>ការផ្ទៀងផ្ទាត់វិធីសាស្ត្រ</Cy> — មូលដ្ឋានដែលមិនមានរស្មី
+              ប៉ុន្តែសម្រេចថា តើការវាស់នៅពេលក្រោយ មានន័យឬអត់។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="practical-problem-solving"
+          Icon={Brain}
+          tone="sky"
+          titleEn="Problem-Solving"
+          titleKh="ការដោះស្រាយបញ្ហា"
+          bodyEn={
+            <>
+              Applying <Cy>chemical principles</Cy> to analyze{" "}
+              <Sk>complex real-world samples</Sk> — well water with unknown
+              contaminants, foods with unlisted additives, soil from a
+              suspected spill site.
+            </>
+          }
+          bodyKh={
+            <>
+              ការអនុវត្ត <Cy>គោលការណ៍គីមី</Cy> ដើម្បីវិភាគ{" "}
+              <Sk>សំណាកស្មុគស្មាញពីពិភពពិត</Sk> — ទឹកអណ្ដូងមានសារធាតុបំពុលមិនស្គាល់
+              ម្ហូបអាហារមានសារធាតុបន្ថែមមិនបានបញ្ជាក់
+              ដីពីទីកន្លែងដែលសង្ស័យថាមានការលេចធ្លាយ។
+            </>
+          }
+        />
+        <BilingualSubCard
+          testId="practical-instrumentation"
+          Icon={Wrench}
+          tone="emerald"
+          titleEn="Instrumentation"
+          titleKh="ឧបករណ៍"
+          bodyEn={
+            <>
+              <Cy>Operating</Cy>, <Cy>maintaining</Cy>, and{" "}
+              <Cy>troubleshooting</Cy> modern laboratory instruments —
+              recognizing a noisy baseline, a dirty injector, or a drifting
+              detector before it ruins a week of data.
+            </>
+          }
+          bodyKh={
+            <>
+              <Cy>ដំណើរការ</Cy>, <Cy>ថែទាំ</Cy>, និង <Cy>ដោះស្រាយបញ្ហា</Cy>{" "}
+              ឧបករណ៍មន្ទីរពិសោធន៍ទំនើប — ស្គាល់បន្ទាត់មូលដ្ឋានមានសូរ
+              ចំណុចចាក់ចូលកខ្វក់ ឬម៉ាស៊ីនរកឃើញរអិល មុនពេលវាបំផ្លាញទិន្នន័យមួយសប្តាហ៍។
+            </>
+          }
+        />
+      </div>
+    </BilingualPanel>
   );
 }
 
