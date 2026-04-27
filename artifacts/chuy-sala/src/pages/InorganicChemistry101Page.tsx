@@ -363,6 +363,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Techniques for structural determination, including Nuclear Magnetic Resonance (NMR) and Electronic Spectroscopy.",
     descKh:
       "បច្ចេកទេសសម្រាប់កំណត់រចនាសម្ព័ន្ធ រួមទាំង Nuclear Magnetic Resonance (NMR) និងវិសាលគមអេឡិចត្រូនិច។",
+    href: "/science/chemistry/inorganic/spectroscopy",
     bgClass: "bg-cyan-50/70",
     borderClass: "border-cyan-200",
     iconBgClass: "bg-gradient-to-br from-cyan-500 to-sky-600",
