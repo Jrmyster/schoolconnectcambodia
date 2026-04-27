@@ -346,6 +346,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Introduction to metal-carbon bonds, catalysis, and the role of metals in biological systems.",
     descKh:
       "សេចក្ដីផ្ដើមអំពីចំណងលោហៈ-កាបូន ការកាតាលីស និងតួនាទីរបស់លោហៈនៅក្នុងប្រព័ន្ធជីវសាស្ត្រ។",
+    href: "/science/chemistry/inorganic/organometallic",
     bgClass: "bg-rose-50/70",
     borderClass: "border-rose-200",
     iconBgClass: "bg-gradient-to-br from-rose-500 to-pink-600",
