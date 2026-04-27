@@ -56,6 +56,7 @@ const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage")
 const AfricaGeographyPage       = lazy(() => import("@/pages/AfricaGeographyPage").then(m => ({ default: m.AfricaGeographyPage })));
 const AsiaContinentPage         = lazy(() => import("@/pages/AsiaContinentPage").then(m => ({ default: m.AsiaContinentPage })));
 const GlobalAtlasPage           = lazy(() => import("@/pages/GlobalAtlas"));
+const WorldTimelinePage         = lazy(() => import("@/pages/WorldTimeline"));
 const LatinAmericaPage          = lazy(() => import("@/pages/LatinAmericaPage").then(m => ({ default: m.LatinAmericaPage })));
 const CoordinatesPage           = lazy(() => import("@/pages/CoordinatesPage").then(m => ({ default: m.CoordinatesPage })));
 const CrisprPage                = lazy(() => import("@/pages/CrisprPage"));
@@ -308,6 +309,7 @@ function Router() {
             <Route path="/study-center/africa" component={AfricaGeographyPage} />
             <Route path="/study-center/asia" component={AsiaContinentPage} />
             <Route path="/study-center/global-atlas" component={GlobalAtlasPage} />
+            <Route path="/study-center/world-timeline" component={WorldTimelinePage} />
             <Route path="/geography/latin-america" component={LatinAmericaPage} />
             <Route path="/study-center/coordinates" component={CoordinatesPage} />
             <Route path="/science/biology/crispr" component={CrisprPage} />

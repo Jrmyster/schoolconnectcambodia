@@ -1,0 +1,361 @@
+[
+  {
+    "id": "agricultural-revolution",
+    "year": -10000,
+    "yearLabel": { "en": "c. 10,000 BCE", "kh": "ប្រ. ១០.០០០ មុនគ.ស." },
+    "era": "ancient",
+    "region": "global",
+    "icon": "🌾",
+    "headline": {
+      "en": "Agricultural Revolution",
+      "kh": "បដិវត្តន៍កសិកម្ម"
+    },
+    "description": {
+      "en": "Humans across the Middle East, Asia, and the Americas begin domesticating wheat, rice, and maize. Farming villages replace nomadic life, allowing populations to grow and labor to specialize.",
+      "kh": "មនុស្សនៅជុំវិញពិភពលោកចាប់ផ្តើមដាំស្រូវ ស្រូវសាលី និងពោត។ ភូមិកសិកម្មជំនួសជីវភាពអ្នកនេសាទសត្វ ធ្វើឱ្យចំនួនប្រជាជនកើនឡើង និងការងារមានឯកទេស។"
+    },
+    "connectedTo": ["first-cities"]
+  },
+  {
+    "id": "first-cities",
+    "year": -3500,
+    "yearLabel": { "en": "c. 3,500 BCE", "kh": "ប្រ. ៣.៥០០ មុនគ.ស." },
+    "era": "ancient",
+    "region": "asia",
+    "icon": "🏛️",
+    "headline": {
+      "en": "First Cities of Mesopotamia",
+      "kh": "ទីក្រុងដំបូងបង្អស់នៃមេសូប៉ូតាមី"
+    },
+    "description": {
+      "en": "Sumerian cities like Uruk and Ur emerge between the Tigris and Euphrates rivers — the first urban centers, with writing (cuneiform), wheels, and codified laws.",
+      "kh": "ទីក្រុងស៊ូមេរ៊្យានដូចជា អ៊ូរុក និងអ៊ូរ លេចចេញរវាងទន្លេទីហ្គ្រីស និងអឺហ្វ្រាត — មជ្ឈមណ្ឌលទីក្រុងដំបូង មានអក្សរ រទេះ និងច្បាប់សរសេរ។"
+    },
+    "connectedTo": ["great-pyramids"]
+  },
+  {
+    "id": "great-pyramids",
+    "year": -2560,
+    "yearLabel": { "en": "c. 2,560 BCE", "kh": "ប្រ. ២.៥៦០ មុនគ.ស." },
+    "era": "ancient",
+    "region": "africa",
+    "icon": "🔺",
+    "headline": {
+      "en": "Great Pyramid of Giza Built",
+      "kh": "ការសាងសង់ពីរ៉ាមីតធំនៃហ្គីហ្សា"
+    },
+    "description": {
+      "en": "Egyptian engineers raise the 146-meter tomb of Pharaoh Khufu using 2.3 million limestone blocks — the tallest human-made structure on Earth for nearly 3,800 years.",
+      "kh": "វិស្វករអេហ្ស៊ីបសាងសង់ផ្នូររបស់ស្តេច ឃឺហ្វូ ខ្ពស់ ១៤៦ ម៉ែត្រ ដោយប្រើដុំថ្មកំបោរ ២,៣ លាន — ជាសំណង់ខ្ពស់បំផុតលើផែនដីអស់ ៣.៨០០ ឆ្នាំ។"
+    }
+  },
+  {
+    "id": "greek-philosophy",
+    "year": -450,
+    "yearLabel": { "en": "c. 450 BCE", "kh": "ប្រ. ៤៥០ មុនគ.ស." },
+    "era": "classical",
+    "region": "europe",
+    "icon": "📜",
+    "headline": {
+      "en": "Greek Philosophy & Democracy",
+      "kh": "ទស្សនវិជ្ជា និងលទ្ធិប្រជាធិបតេយ្យក្រិក"
+    },
+    "description": {
+      "en": "Athens experiments with citizen self-rule while Socrates, Plato, and later Aristotle invent systematic logic and ethics — foundations of Western science and politics.",
+      "kh": "អាតែនសាកល្បងការគ្រប់គ្រងដោយប្រជាពលរដ្ឋ ខណៈដែល សូក្រាត ផ្លាតូ និងអារីស្តូត បង្កើតតក្កវិទ្យានិងសីលធម៌ជាប្រព័ន្ធ — មូលដ្ឋាននៃវិទ្យាសាស្ត្រនិងនយោបាយលោកខាងលិច។"
+    }
+  },
+  {
+    "id": "great-wall",
+    "year": -220,
+    "yearLabel": { "en": "c. 220 BCE", "kh": "ប្រ. ២២០ មុនគ.ស." },
+    "era": "classical",
+    "region": "asia",
+    "icon": "🧱",
+    "headline": {
+      "en": "Great Wall of China Begins",
+      "kh": "ចាប់ផ្តើមកសាងកំពែងធំចិន"
+    },
+    "description": {
+      "en": "Emperor Qin Shi Huang unifies older walls into a single defensive line against northern raiders. Over 2,000 years it grows to more than 21,000 km of fortifications.",
+      "kh": "ចក្រពតិ្តឈិនស៊ីហ័ង បង្រួបបង្រួមកំពែងចាស់ៗឱ្យទៅជាខ្សែការពារតែមួយ។ ក្នុងរយៈពេលជាង ២.០០០ ឆ្នាំ វាពង្រីកដល់ ២១.០០០ គីឡូម៉ែត្រ។"
+    }
+  },
+  {
+    "id": "roman-empire",
+    "year": -27,
+    "yearLabel": { "en": "27 BCE", "kh": "២៧ មុនគ.ស." },
+    "era": "classical",
+    "region": "europe",
+    "icon": "🏛️",
+    "headline": {
+      "en": "Roman Empire Founded",
+      "kh": "ការបង្កើតចក្រភពរ៉ូម៉ាំង"
+    },
+    "description": {
+      "en": "Augustus becomes Rome's first emperor, ending centuries of republic. Roman roads, aqueducts, and codified law spread across Europe, North Africa, and the Middle East.",
+      "kh": "អូហ្គូស្ទុស ឡើងជាចក្រពតិ្តរ៉ូមដំបូង។ ផ្លូវរ៉ូម ប្រឡាយទឹក និងច្បាប់សរសេរ ផ្សាយពាសពេញអឺរ៉ុប អាហ្វ្រិកខាងជើង និងមជ្ឈិមបូព៌ា។"
+    }
+  },
+  {
+    "id": "islamic-golden-age",
+    "year": 800,
+    "yearLabel": { "en": "c. 800 CE", "kh": "ប្រ. ៨០០ គ.ស." },
+    "era": "medieval",
+    "region": "asia",
+    "icon": "📚",
+    "headline": {
+      "en": "Islamic Golden Age",
+      "kh": "សម័យមាសនៃអារ៉ាប់-អ៊ីស្លាម"
+    },
+    "description": {
+      "en": "Baghdad's House of Wisdom translates Greek, Persian, and Indian texts. Scholars invent algebra, advance astronomy and medicine, and preserve learning later passed back to Europe.",
+      "kh": "ផ្ទះប្រាជ្ញានៅបាហ្គដាដ បកប្រែគម្ពីរក្រិក ពែរ្ស និងឥណ្ឌា។ អ្នកប្រាជ្ញបង្កើតពិជគណិត ផ្សព្វផ្សាយតារាសាស្ត្រ និងឱសថសាស្ត្រ រួចបញ្ជូនវិជ្ជាទាំងនេះត្រឡប់ទៅអឺរ៉ុបវិញ។"
+    }
+  },
+  {
+    "id": "angkor-wat",
+    "year": 1113,
+    "yearLabel": { "en": "1113 CE", "kh": "១១១៣ គ.ស." },
+    "era": "medieval",
+    "region": "asia",
+    "icon": "🛕",
+    "headline": {
+      "en": "Angkor Wat Built (Cambodia)",
+      "kh": "ការសាងសង់ប្រាសាទអង្គរវត្ត (កម្ពុជា)"
+    },
+    "description": {
+      "en": "King Suryavarman II of the Khmer Empire commissions Angkor Wat — the largest religious monument ever built. Its sandstone galleries cover 162 hectares and align with the spring equinox sunrise.",
+      "kh": "ព្រះបាទសូរ្យវរ្ម័នទី២ នៃចក្រភពខ្មែរ ឱ្យសាងសង់ប្រាសាទអង្គរវត្ត — សំណង់សាសនាធំជាងគេលើពិភពលោក។ វិហារថ្មភក់របស់វាគ្របដណ្តប់ ១៦២ ហិកតា ហើយតម្រឹមនឹងព្រះអាទិត្យរះថ្ងៃវិសុវត។"
+    }
+  },
+  {
+    "id": "gutenberg-press",
+    "year": 1440,
+    "yearLabel": { "en": "c. 1440 CE", "kh": "ប្រ. ១៤៤០ គ.ស." },
+    "era": "early-modern",
+    "region": "europe",
+    "icon": "📖",
+    "headline": {
+      "en": "Gutenberg Printing Press",
+      "kh": "ម៉ាស៊ីនបោះពុម្ពហ្គូតេនបែក"
+    },
+    "description": {
+      "en": "Johannes Gutenberg's movable-type press makes books cheap and abundant. Literacy spreads, the Reformation accelerates, and the Scientific Revolution becomes possible.",
+      "kh": "ម៉ាស៊ីនបោះពុម្ពតួអក្សរផ្លាស់ទីបានរបស់ យ៉ូហានណេស ហ្គូតេនបែក ធ្វើឱ្យសៀវភៅមានតម្លៃថោកនិងច្រើន។ អក្ខរកម្មរីករាលដាល បដិវត្តន៍សាសនានិងវិទ្យាសាស្ត្រកើតឡើងបាន។"
+    },
+    "connectedTo": ["scientific-revolution"]
+  },
+  {
+    "id": "columbus-americas",
+    "year": 1492,
+    "yearLabel": { "en": "1492 CE", "kh": "១៤៩២ គ.ស." },
+    "era": "early-modern",
+    "region": "americas",
+    "icon": "⛵",
+    "headline": {
+      "en": "European Contact with the Americas",
+      "kh": "ការទាក់ទងរវាងអឺរ៉ុបនិងអាមេរិក"
+    },
+    "description": {
+      "en": "Christopher Columbus's Atlantic crossing opens sustained exchange between the Old and New Worlds — crops, technologies, and tragically diseases and slavery — reshaping every continent.",
+      "kh": "ការឆ្លងសមុទ្រអាត្លង់ទិករបស់ គ្រីស្តូហ្វ័រ កូឡុំប៊ូស បើកការជួញដូរយូរអង្វែងរវាងពិភពចាស់និងពិភពថ្មី — ដំណាំ បច្ចេកវិទ្យា ប៉ុន្តែក៏រួមទាំងជំងឺនិងទាសភាពផងដែរ — ផ្លាស់ប្តូររាល់ទ្វីប។"
+    }
+  },
+  {
+    "id": "scientific-revolution",
+    "year": 1543,
+    "yearLabel": { "en": "1543 CE", "kh": "១៥៤៣ គ.ស." },
+    "era": "early-modern",
+    "region": "europe",
+    "icon": "🔭",
+    "headline": {
+      "en": "Scientific Revolution Begins",
+      "kh": "ចាប់ផ្តើមបដិវត្តន៍វិទ្យាសាស្ត្រ"
+    },
+    "description": {
+      "en": "Copernicus publishes 'On the Revolutions of the Heavenly Spheres', moving Earth from the center of the cosmos. Galileo, Kepler, and Newton soon turn observation and math into modern science.",
+      "kh": "កូផែរនិក បោះពុម្ពសៀវភៅ «អំពីការបង្វិលនៃគោលផ្ទៃមេឃ» បំលាស់ផែនដីចេញពីចំណុចកណ្តាលនៃពិភពលោក។ កាលីលេអូ កែបព្ល័រ និងញូតុន ប្រែការសង្កេតនិងគណិតទៅជាវិទ្យាសាស្ត្រទំនើប។"
+    }
+  },
+  {
+    "id": "steam-engine",
+    "year": 1769,
+    "yearLabel": { "en": "1769 CE", "kh": "១៧៦៩ គ.ស." },
+    "era": "industrial",
+    "region": "europe",
+    "icon": "⚙️",
+    "headline": {
+      "en": "Steam Engine — Industrial Revolution Begins",
+      "kh": "ម៉ាស៊ីនចំហាយ — ចាប់ផ្តើមបដិវត្តន៍ឧស្សាហកម្ម"
+    },
+    "description": {
+      "en": "James Watt's improved steam engine powers factories, mines, locomotives, and ships. Manufacturing shifts from human hands to coal-fired machines — the largest economic change since farming.",
+      "kh": "ម៉ាស៊ីនចំហាយដែលកែលម្អដោយ ជេមស៍ វ័ត ផ្តល់ថាមពលដល់រោងចក្រ អណ្តូងរ៉ែ រថភ្លើង និងនាវា។ ការផលិតបត់ពីដៃមនុស្សទៅកាន់ម៉ាស៊ីនរំងាស់ធ្យូងថ្ម — ការប្រែប្រួលសេដ្ឋកិច្ចធំជាងគេចាប់តាំងពីកសិកម្ម។"
+    },
+    "connectedTo": ["suez-canal", "telegraph"]
+  },
+  {
+    "id": "telegraph",
+    "year": 1837,
+    "yearLabel": { "en": "1837 CE", "kh": "១៨៣៧ គ.ស." },
+    "era": "industrial",
+    "region": "global",
+    "icon": "📡",
+    "headline": {
+      "en": "Electric Telegraph Invented",
+      "kh": "ការច្នៃប្រឌិតតេឡេក្រាមអគ្គិសនី"
+    },
+    "description": {
+      "en": "Morse and Cooke send messages along electric wires at near light speed. For the first time, news crosses continents in minutes instead of weeks — the beginning of instant global communication.",
+      "kh": "ម៉ូ និង ឃូក ផ្ញើសារតាមខ្សែភ្លើងស្ទើរល្បឿនពន្លឺ។ ជាលើកដំបូង ព័ត៌មានឆ្លងទ្វីបក្នុងពេលតែប៉ុន្មាននាទីជំនួសសប្តាហ៍ — ការចាប់ផ្តើមនៃការទំនាក់ទំនងសាកលភ្លាមៗ។"
+    }
+  },
+  {
+    "id": "suez-canal",
+    "year": 1869,
+    "yearLabel": { "en": "1869 CE", "kh": "១៨៦៩ គ.ស." },
+    "era": "industrial",
+    "region": "global",
+    "icon": "🚢",
+    "headline": {
+      "en": "Suez Canal — Global Shipping Lanes Expand",
+      "kh": "ប្រឡាយស៊ុយអ៊ែស — ខ្សែដឹកជញ្ជូនសាកលពង្រីក"
+    },
+    "description": {
+      "en": "The 193-km Suez Canal links the Mediterranean and Red Seas, cutting weeks off the Europe–Asia voyage. Steam ships and global trade explode in volume.",
+      "kh": "ប្រឡាយស៊ុយអ៊ែសបណ្តោយ ១៩៣ គីឡូម៉ែត្រ ភ្ជាប់សមុទ្រមេឌីទែរ៉ាណេនិងសមុទ្រក្រហម កាត់បន្ថយជាច្រើនសប្តាហ៍ពីការធ្វើដំណើររវាងអឺរ៉ុបនិងអាស៊ី។ នាវាចំហាយ និងពាណិជ្ជកម្មសាកលផ្ទុះឡើង។"
+    }
+  },
+  {
+    "id": "powered-flight",
+    "year": 1903,
+    "yearLabel": { "en": "1903 CE", "kh": "១៩០៣ គ.ស." },
+    "era": "modern",
+    "region": "americas",
+    "icon": "✈️",
+    "headline": {
+      "en": "First Powered Flight",
+      "kh": "ការហោះហើរដោយម៉ាស៊ីនលើកដំបូង"
+    },
+    "description": {
+      "en": "The Wright brothers fly 37 meters above Kitty Hawk in 12 seconds. Within 70 years, jet airliners carry millions of passengers and shrink the planet for tourism, trade, and family.",
+      "kh": "បងប្អូន រ៉ៃត៍ ហោះ ៣៧ ម៉ែត្រ ពីលើ ឃីធី ហក់ ក្នុងរយៈពេល ១២ វិនាទី។ ក្នុងរយៈពេល ៧០ ឆ្នាំ យន្តហោះជេតដឹកអ្នកដំណើររាប់លាននាក់ និងបង្រួមភពផែនដីសម្រាប់ទេសចរណ៍ ពាណិជ្ជកម្ម និងគ្រួសារ។"
+    }
+  },
+  {
+    "id": "penicillin",
+    "year": 1928,
+    "yearLabel": { "en": "1928 CE", "kh": "១៩២៨ គ.ស." },
+    "era": "modern",
+    "region": "europe",
+    "icon": "💊",
+    "headline": {
+      "en": "Penicillin Discovered",
+      "kh": "ការរកឃើញ Penicillin"
+    },
+    "description": {
+      "en": "Alexander Fleming notices that mold killed bacteria in his Petri dish. Mass-produced from 1942, penicillin and the antibiotics that follow save an estimated 200 million lives.",
+      "kh": "អាឡិចសាន់ឌ័រ ហ្វ្លេមីង សង្កេតឃើញថាផ្សិតសម្លាប់បាក់តេរីក្នុងចានពិសោធន៍របស់គាត់។ ផលិតជាដុំធំចាប់ពីឆ្នាំ ១៩៤២ Penicillin និងសារធាតុប្រឆាំងបាក់តេរីផ្សេងៗបានរក្សាជីវិតប្រមាណ ២០០ លាននាក់។"
+    }
+  },
+  {
+    "id": "microchip",
+    "year": 1958,
+    "yearLabel": { "en": "1958 CE", "kh": "១៩៥៨ គ.ស." },
+    "era": "modern",
+    "region": "americas",
+    "icon": "🔬",
+    "headline": {
+      "en": "The Microchip Invented",
+      "kh": "ការច្នៃប្រឌិតបន្ទះមីក្រូឈីប"
+    },
+    "description": {
+      "en": "Jack Kilby at Texas Instruments builds the first integrated circuit. Computing power that filled a room now fits on a fingernail — the foundation of every modern electronic device.",
+      "kh": "ជេក គីលប៊ី នៅ Texas Instruments សាងសង់សៀគ្វីរួមសុលដំបូង។ ថាមពលកុំព្យូទ័រដែលធ្លាប់ពេញបន្ទប់ ឥឡូវនេះអាចដាក់លើក្រចកម្រាមដៃ — ជាមូលដ្ឋាននៃឧបករណ៍អេឡិចត្រូនិកទំនើបទាំងអស់។"
+    },
+    "connectedTo": ["arpanet", "smartphone-era"]
+  },
+  {
+    "id": "moon-landing",
+    "year": 1969,
+    "yearLabel": { "en": "July 1969", "kh": "កក្កដា ១៩៦៩" },
+    "era": "modern",
+    "region": "global",
+    "icon": "🌕",
+    "headline": {
+      "en": "Apollo 11 — Moon Landing",
+      "kh": "អាប៉ូឡូ ១១ — ការចុះទៅព្រះច័ន្ទ"
+    },
+    "description": {
+      "en": "Neil Armstrong and Buzz Aldrin walk on the Moon while half a billion people watch live on television. Humanity has stepped onto another world.",
+      "kh": "នីល អាមស្ត្រង និង បាស់ អាល់ឌ្រីន ដើរលើព្រះច័ន្ទ ខណៈដែលប្រជាជនជិតពាក់កណ្តាលប៊ីលាននាក់មើលផ្សាយផ្ទាល់តាមទូរទស្សន៍។ មនុស្សជាតិបានជាន់ជើងលើពិភពមួយផ្សេងទៀត។"
+    }
+  },
+  {
+    "id": "arpanet",
+    "year": 1969,
+    "yearLabel": { "en": "October 1969", "kh": "តុលា ១៩៦៩" },
+    "era": "modern",
+    "region": "americas",
+    "icon": "🖧",
+    "headline": {
+      "en": "ARPANET — Birth of the Internet",
+      "kh": "ARPANET — កំណើតអ៊ីនធឺណិត"
+    },
+    "description": {
+      "en": "The first message is sent between two computers at UCLA and Stanford. The packet-switched network, funded by the U.S. military, will grow into today's global Internet.",
+      "kh": "សារដំបូងត្រូវបានផ្ញើរវាងកុំព្យូទ័រពីរនៅ UCLA និង Stanford។ បណ្តាញប្តូរបាច់ ដែលផ្តល់មូលនិធិដោយយោធាសហរដ្ឋអាមេរិក នឹងរីកធំទៅជាអ៊ីនធឺណិតសាកលសព្វថ្ងៃនេះ។"
+    },
+    "connectedTo": ["world-wide-web"]
+  },
+  {
+    "id": "world-wide-web",
+    "year": 1989,
+    "yearLabel": { "en": "1989 CE", "kh": "១៩៨៩ គ.ស." },
+    "era": "contemporary",
+    "region": "europe",
+    "icon": "🌐",
+    "headline": {
+      "en": "World Wide Web Invented",
+      "kh": "ការច្នៃប្រឌិតវែបសាកល"
+    },
+    "description": {
+      "en": "At CERN in Switzerland, Tim Berners-Lee invents HTML, URLs, and the first web browser. Within a decade the open Web reshapes commerce, news, education, and friendship.",
+      "kh": "នៅ CERN ប្រទេសស្វីស ធីម ប៊ឺនើស-លី បង្កើត HTML អាសយដ្ឋាន URL និងកម្មវិធីរុករកវែបដំបូង។ ក្នុងរយៈពេលមួយទសវត្សរ៍ វែបបើកចំហ ផ្លាស់ប្តូរពាណិជ្ជកម្ម ព័ត៌មាន ការអប់រំ និងមិត្តភាព។"
+    },
+    "connectedTo": ["smartphone-era"]
+  },
+  {
+    "id": "smartphone-era",
+    "year": 2007,
+    "yearLabel": { "en": "2007 CE", "kh": "២០០៧ គ.ស." },
+    "era": "contemporary",
+    "region": "global",
+    "icon": "📱",
+    "headline": {
+      "en": "Smartphone Era — iPhone Released",
+      "kh": "សម័យស្មាតហ្វូន — iPhone ត្រូវបានចេញផ្សាយ"
+    },
+    "description": {
+      "en": "Apple's iPhone fuses phone, camera, computer, and GPS into one pocket device. Within 15 years, more than 6 billion people carry a supercomputer everywhere they go.",
+      "kh": "iPhone របស់ Apple រួមផ្សំទូរស័ព្ទ កាមេរ៉ា កុំព្យូទ័រ និង GPS ជាឧបករណ៍ហោប៉ៅតែមួយ។ ក្នុងរយៈពេល ១៥ ឆ្នាំ ប្រជាជនជាង ៦ ប៊ីលាននាក់ កាន់កុំព្យូទ័រខ្លាំងជាប់ខ្លួនគ្រប់ទីកន្លែង។"
+    }
+  },
+  {
+    "id": "mrna-vaccine",
+    "year": 2020,
+    "yearLabel": { "en": "2020 CE", "kh": "២០២០ គ.ស." },
+    "era": "contemporary",
+    "region": "global",
+    "icon": "🧬",
+    "headline": {
+      "en": "mRNA Vaccines Deployed Globally",
+      "kh": "វ៉ាក់សាំង mRNA ប្រើប្រាស់ជាសាកល"
+    },
+    "description": {
+      "en": "In under a year, mRNA-based COVID-19 vaccines move from lab to billions of arms. The platform opens the door to fast-response vaccines for cancer, malaria, and future pandemics.",
+      "kh": "ក្នុងរយៈពេលតិចជាងមួយឆ្នាំ វ៉ាក់សាំង COVID-19 មូលដ្ឋាន mRNA ផ្លាស់ពីមន្ទីរពិសោធន៍ទៅរាប់ប៊ីលានដៃ។ បច្ចេកវិទ្យានេះបើកផ្លូវសម្រាប់វ៉ាក់សាំងឆ្លើយតបរហ័សចំពោះមហារីក គ្រុនចាញ់ និងជំងឺរាតត្បាតនាពេលអនាគត។"
+    }
+  }
+]

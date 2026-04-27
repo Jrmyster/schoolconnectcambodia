@@ -1,0 +1,30 @@
+I want to update the existing 'Inorganic Chemistry 101' page. Below the current '1. The Not-Carbon World' section shown in the UI, please add a new, comprehensive section called '2. Core Curriculum (កម្មវិធីសិក្សាស្នូល)'. Please implement this matching the established clean, rounded-card aesthetic:
+
+1. The Layout:
+
+Create a CSS Grid layout (2 columns on desktop, 1 column on mobile) to display the 7 core components as distinct, clickable module cards.
+
+Use subtle, distinct pastel background colors or soft borders for each card to differentiate them, similar to the Organic/Inorganic cards.
+
+2. The Content Cards (with strict bilingual headings):
+Please build a card for each of the following, including an appropriate scientific icon (like an atom, a magnet, or a prism) for each:
+
+Atomic Structure & Periodic Trends (រចនាសម្ព័ន្ធអាតូម និងនិន្នាការខួប): Analysis of periodic properties and atomic structure, providing a foundation for understanding inorganic behavior.
+
+Bonding & Molecular Theory (ទ្រឹស្តីចំណង និងម៉ូលេគុល): Study of Lewis structures, Valence-Shell Electron-Pair Repulsion (VSEPR), molecular orbital (MO) diagrams, and band structure for solids.
+
+Symmetry and Group Theory (ទ្រឹស្តីស៊ីមេទ្រី និងក្រុម): Application of symmetry operations, point groups, and character tables to determine molecular properties.
+
+Coordination Chemistry (គីមីវិទ្យាកូអរដោនេ): Exploration of transition metal complexes, including structure, isomerism, nomenclature, and ligand field theory (bonding theories).
+
+Main Group Element Chemistry (គីមីវិទ្យាធាតុក្រុមចម្បង): Survey of s-block and p-block elements, including their reactivity and industrial applications.
+
+Organometallic and Bioinorganic Chemistry (គីមីសរីរាង្គលោហៈ និងជីវអសរីរាង្គ): Introduction to metal-carbon bonds, catalysis, and the role of metals in biological systems.
+
+Spectroscopy & Characterization (វិសាលគមវិទ្យា និងការកំណត់លក្ខណៈ): Techniques for structural determination, including Nuclear Magnetic Resonance (NMR) and Electronic Spectroscopy.
+
+3. Formatting & UX:
+
+Add a subtle hover effect (like a slight lift or shadow increase) to make the cards feel interactive and ready to be explored.
+
+Ensure the typography matches the crisp, readable sans-serif font used in the hero section.

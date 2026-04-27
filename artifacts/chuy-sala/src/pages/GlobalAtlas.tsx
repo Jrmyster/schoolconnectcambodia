@@ -16,6 +16,7 @@ import {
   MapPin,
   BookOpen,
   Compass,
+  ScrollText,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import countriesRaw from "@/data/countriesData.json";
@@ -165,6 +166,23 @@ export default function GlobalAtlas() {
             {kh
               ? "Every country of the world in one offline study book."
               : "ប្រទេសពិភពលោកក្នុងសៀវភៅសិក្សាអូហ្វឡាញតែមួយ។"}
+          </p>
+
+          {/* View Timeline CTA */}
+          <Link
+            href="/study-center/world-timeline"
+            data-testid="link-world-timeline"
+            className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-900 px-5 py-3 font-bold shadow-lg hover:shadow-xl ring-1 ring-amber-300/50 hover:scale-[1.02] transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/60"
+            aria-label="View Timeline · មើលតារាងពេលវេលា"
+          >
+            <ScrollText className="w-5 h-5" aria-hidden="true" />
+            <span className="text-base sm:text-lg">View Timeline</span>
+            <span className="text-amber-900/60">·</span>
+            <span className="font-khmer text-base sm:text-lg">មើលតារាងពេលវេលា</span>
+            <span aria-hidden="true" className="ml-1">→</span>
+          </Link>
+          <p className="mt-2 text-xs text-slate-400">
+            12,000 years of world history · ១២.០០០ ឆ្នាំនៃប្រវត្តិសាស្ត្រពិភពលោក
           </p>
         </header>
 
