@@ -278,6 +278,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Study of Lewis structures, Valence-Shell Electron-Pair Repulsion (VSEPR), molecular orbital (MO) diagrams, and band structure for solids.",
     descKh:
       "ការសិក្សារចនាសម្ព័ន្ធ Lewis ការច្រានគ្នាជាគូអេឡិចត្រុងសែល Valence (VSEPR) ដ្យាក្រាមកក្ខវ៌រម៉ូលេគុល (MO) និងរចនាសម្ព័ន្ធបាន់សម្រាប់សារធាតុរឹង។",
+    href: "/science/chemistry/inorganic/bonding-molecular",
     bgClass: "bg-indigo-50/70",
     borderClass: "border-indigo-200",
     iconBgClass: "bg-gradient-to-br from-indigo-500 to-violet-600",
