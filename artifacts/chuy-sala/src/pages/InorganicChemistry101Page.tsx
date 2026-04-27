@@ -12,6 +12,14 @@ import {
   Box,
   Calculator,
   HelpCircle,
+  Atom,
+  Combine,
+  Hexagon,
+  Orbit,
+  Grid3x3,
+  Dna,
+  Activity,
+  GraduationCap,
 } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -83,16 +91,19 @@ export function InorganicChemistry101Page() {
         {/* ── Section 1: The Not-Carbon World ─────────────────── */}
         <NotCarbonSection />
 
-        {/* ── Section 2: Crystal Lattices & Solid Structures ──── */}
+        {/* ── Section 2: Core Curriculum (7 modules) ──────────── */}
+        <CoreCurriculumSection />
+
+        {/* ── Section 3: Crystal Lattices & Solid Structures ──── */}
         <CrystalLatticesSection />
 
-        {/* ── Section 3: Metals & Alloys ──────────────────────── */}
+        {/* ── Section 4: Metals & Alloys ──────────────────────── */}
         <MetalsAlloysSection />
 
-        {/* ── Section 4: Salts & Crystals ─────────────────────── */}
+        {/* ── Section 5: Salts & Crystals ─────────────────────── */}
         <SaltsCrystalsSection />
 
-        {/* ── Section 5: Agriculture & Power ──────────────────── */}
+        {/* ── Section 6: Agriculture & Power ──────────────────── */}
         <AgriPowerSection />
 
         {/* Footer note */}
@@ -217,7 +228,237 @@ function NotCarbonSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 2 — Crystal Lattices & Solid Structures                        */
+/*  Section 2 — Core Curriculum (7 modules)                                */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+type CurriculumModule = {
+  key: string;
+  Icon: typeof Atom;
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+  /* Pastel theme — using Tailwind classes that already exist on this page so
+     no new safelist entries are required. Each card gets a soft tinted bg,
+     matching border, an icon-tile gradient, and a hover ring color. */
+  bgClass: string;
+  borderClass: string;
+  iconBgClass: string;
+  iconRingClass: string;
+  hoverRingClass: string;
+  titleColor: string;
+};
+
+const CURRICULUM: CurriculumModule[] = [
+  {
+    key: "atomic-structure",
+    Icon: Atom,
+    titleEn: "Atomic Structure & Periodic Trends",
+    titleKh: "រចនាសម្ព័ន្ធអាតូម និងនិន្នាការខួប",
+    descEn:
+      "Analysis of periodic properties and atomic structure, providing a foundation for understanding inorganic behavior.",
+    descKh:
+      "ការវិភាគលក្ខណៈសម្បត្តិតាមខួប និងរចនាសម្ព័ន្ធអាតូម ដែលផ្តល់ជាមូលដ្ឋានសម្រាប់ការយល់ដឹងពីឥរិយាបថអសរីរាង្គ។",
+    bgClass: "bg-sky-50/70",
+    borderClass: "border-sky-200",
+    iconBgClass: "bg-gradient-to-br from-sky-500 to-blue-600",
+    iconRingClass: "ring-sky-200",
+    hoverRingClass: "hover:ring-sky-300",
+    titleColor: "text-sky-900",
+  },
+  {
+    key: "bonding-molecular",
+    Icon: Combine,
+    titleEn: "Bonding & Molecular Theory",
+    titleKh: "ទ្រឹស្តីចំណង និងម៉ូលេគុល",
+    descEn:
+      "Study of Lewis structures, Valence-Shell Electron-Pair Repulsion (VSEPR), molecular orbital (MO) diagrams, and band structure for solids.",
+    descKh:
+      "ការសិក្សារចនាសម្ព័ន្ធ Lewis ការច្រានគ្នាជាគូអេឡិចត្រុងសែល Valence (VSEPR) ដ្យាក្រាមកក្ខវ៌រម៉ូលេគុល (MO) និងរចនាសម្ព័ន្ធបាន់សម្រាប់សារធាតុរឹង។",
+    bgClass: "bg-indigo-50/70",
+    borderClass: "border-indigo-200",
+    iconBgClass: "bg-gradient-to-br from-indigo-500 to-violet-600",
+    iconRingClass: "ring-indigo-200",
+    hoverRingClass: "hover:ring-indigo-300",
+    titleColor: "text-indigo-900",
+  },
+  {
+    key: "symmetry-group",
+    Icon: Hexagon,
+    titleEn: "Symmetry and Group Theory",
+    titleKh: "ទ្រឹស្តីស៊ីមេទ្រី និងក្រុម",
+    descEn:
+      "Application of symmetry operations, point groups, and character tables to determine molecular properties.",
+    descKh:
+      "ការអនុវត្តប្រតិបត្តិការស៊ីមេទ្រី ក្រុមចំនុច និងតារាងអក្សរ ដើម្បីកំណត់លក្ខណៈសម្បត្តិម៉ូលេគុល។",
+    bgClass: "bg-fuchsia-50/70",
+    borderClass: "border-fuchsia-200",
+    iconBgClass: "bg-gradient-to-br from-fuchsia-500 to-pink-600",
+    iconRingClass: "ring-fuchsia-200",
+    hoverRingClass: "hover:ring-fuchsia-300",
+    titleColor: "text-fuchsia-900",
+  },
+  {
+    key: "coordination",
+    Icon: Orbit,
+    titleEn: "Coordination Chemistry",
+    titleKh: "គីមីវិទ្យាកូអរដោនេ",
+    descEn:
+      "Exploration of transition metal complexes, including structure, isomerism, nomenclature, and ligand field theory (bonding theories).",
+    descKh:
+      "ការស្វែងយល់អំពីសមាសធាតុលោហៈអន្តរកាល រួមទាំងរចនាសម្ព័ន្ធ អ៊ីសូម៉េរីស ឈ្មោះវិទ្យា និងទ្រឹស្តីវាលលីហ្គង់ (ទ្រឹស្តីចំណង)។",
+    bgClass: "bg-emerald-50/70",
+    borderClass: "border-emerald-200",
+    iconBgClass: "bg-gradient-to-br from-emerald-500 to-teal-600",
+    iconRingClass: "ring-emerald-200",
+    hoverRingClass: "hover:ring-emerald-300",
+    titleColor: "text-emerald-900",
+  },
+  {
+    key: "main-group",
+    Icon: Grid3x3,
+    titleEn: "Main Group Element Chemistry",
+    titleKh: "គីមីវិទ្យាធាតុក្រុមចម្បង",
+    descEn:
+      "Survey of s-block and p-block elements, including their reactivity and industrial applications.",
+    descKh:
+      "ការសិក្សាទូទៅអំពីធាតុ s-block និង p-block រួមទាំងប្រតិកម្មរបស់ពួកវា និងការអនុវត្តក្នុងឧស្សាហកម្ម។",
+    bgClass: "bg-amber-50/70",
+    borderClass: "border-amber-200",
+    iconBgClass: "bg-gradient-to-br from-amber-500 to-orange-600",
+    iconRingClass: "ring-amber-200",
+    hoverRingClass: "hover:ring-amber-300",
+    titleColor: "text-amber-900",
+  },
+  {
+    key: "organometallic",
+    Icon: Dna,
+    titleEn: "Organometallic and Bioinorganic Chemistry",
+    titleKh: "គីមីសរីរាង្គលោហៈ និងជីវអសរីរាង្គ",
+    descEn:
+      "Introduction to metal-carbon bonds, catalysis, and the role of metals in biological systems.",
+    descKh:
+      "សេចក្ដីផ្ដើមអំពីចំណងលោហៈ-កាបូន ការកាតាលីស និងតួនាទីរបស់លោហៈនៅក្នុងប្រព័ន្ធជីវសាស្ត្រ។",
+    bgClass: "bg-rose-50/70",
+    borderClass: "border-rose-200",
+    iconBgClass: "bg-gradient-to-br from-rose-500 to-pink-600",
+    iconRingClass: "ring-rose-200",
+    hoverRingClass: "hover:ring-rose-300",
+    titleColor: "text-rose-900",
+  },
+  {
+    key: "spectroscopy",
+    Icon: Activity,
+    titleEn: "Spectroscopy & Characterization",
+    titleKh: "វិសាលគមវិទ្យា និងការកំណត់លក្ខណៈ",
+    descEn:
+      "Techniques for structural determination, including Nuclear Magnetic Resonance (NMR) and Electronic Spectroscopy.",
+    descKh:
+      "បច្ចេកទេសសម្រាប់កំណត់រចនាសម្ព័ន្ធ រួមទាំង Nuclear Magnetic Resonance (NMR) និងវិសាលគមអេឡិចត្រូនិច។",
+    bgClass: "bg-cyan-50/70",
+    borderClass: "border-cyan-200",
+    iconBgClass: "bg-gradient-to-br from-cyan-500 to-sky-600",
+    iconRingClass: "ring-cyan-200",
+    hoverRingClass: "hover:ring-cyan-300",
+    titleColor: "text-cyan-900",
+  },
+];
+
+function CoreCurriculumSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section
+      data-testid="section-core-curriculum"
+      aria-labelledby="core-curriculum-heading"
+      className="mb-12 rounded-3xl bg-white border-2 border-slate-200 shadow-sm overflow-hidden"
+    >
+      <header className="px-5 sm:px-7 pt-6 pb-4 border-b border-slate-100 bg-gradient-to-r from-indigo-50 via-slate-50 to-white">
+        <div className="flex items-center gap-3 mb-1">
+          <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-700 to-slate-700 text-white shadow-sm">
+            <GraduationCap className="w-5 h-5" />
+          </span>
+          <h2
+            id="core-curriculum-heading"
+            className={`text-xl sm:text-2xl font-bold text-slate-900 ${
+              kh ? "font-khmer" : ""
+            }`}
+          >
+            {t("2. Core Curriculum", "២. កម្មវិធីសិក្សាស្នូល")}
+          </h2>
+        </div>
+        <p
+          className={`text-sm text-slate-600 ${kh ? "font-khmer leading-loose" : ""}`}
+        >
+          {t(
+            "The seven foundational pillars taught in any university-level inorganic chemistry course. Tap any module to learn more.",
+            "សសរស្តម្ភមូលដ្ឋានទាំងប្រាំពីរ ដែលបង្រៀននៅក្នុងវគ្គគីមីវិទ្យាអសរីរាង្គកម្រិតសាកលវិទ្យាល័យណាមួយ។ ចុចលើម៉ូឌុលណាមួយដើម្បីស្វែងយល់បន្ថែម។",
+          )}
+        </p>
+      </header>
+
+      <div
+        role="list"
+        aria-label="Core curriculum modules · ម៉ូឌុលកម្មវិធីសិក្សាស្នូល"
+        data-testid="curriculum-grid"
+        className="p-5 sm:p-7 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+      >
+        {CURRICULUM.map((m) => {
+          const { Icon } = m;
+          return (
+            <button
+              key={m.key}
+              type="button"
+              role="listitem"
+              data-testid={`curriculum-${m.key}`}
+              aria-label={`${m.titleEn} · ${m.titleKh}`}
+              className={`group text-left rounded-2xl border-2 ${m.borderClass} ${m.bgClass} p-5 shadow-sm ring-1 ring-transparent ${m.hoverRingClass} hover:-translate-y-1 hover:shadow-lg transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-indigo-400/60`}
+            >
+              <div className="flex items-start gap-4">
+                <span
+                  className={`shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl text-white shadow-md ring-2 ${m.iconRingClass} ${m.iconBgClass} group-hover:scale-105 transition-transform`}
+                  aria-hidden="true"
+                >
+                  <Icon className="w-6 h-6" strokeWidth={2.25} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className={`text-base sm:text-lg font-bold leading-snug ${m.titleColor} mb-1`}
+                  >
+                    <span>{m.titleEn}</span>
+                    <span className="block font-khmer text-sm sm:text-base font-semibold opacity-90 mt-0.5 leading-relaxed">
+                      {m.titleKh}
+                    </span>
+                  </h3>
+                </div>
+              </div>
+
+              <p
+                className={`mt-3 text-sm text-slate-700 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(m.descEn, m.descKh)}
+              </p>
+
+              <div
+                className={`mt-3 inline-flex items-center gap-1 text-xs font-semibold ${m.titleColor} opacity-70 group-hover:opacity-100 transition-opacity`}
+              >
+                <span>{t("Explore module", "ស្វែងយល់ម៉ូឌុល")}</span>
+                <span aria-hidden="true">→</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Section 3 — Crystal Lattices & Solid Structures                        */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function CrystalLatticesSection() {
@@ -298,8 +539,8 @@ function CrystalLatticesSection() {
             }`}
           >
             {t(
-              "2. Crystal Lattices & Solid Structures",
-              "២. បណ្តាញគ្រីស្តាល់ និងរចនាសម្ព័ន្ធរឹង",
+              "3. Crystal Lattices & Solid Structures",
+              "៣. បណ្តាញគ្រីស្តាល់ និងរចនាសម្ព័ន្ធរឹង",
             )}
           </h2>
         </div>
@@ -594,7 +835,7 @@ function CrystalLatticesSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 3 — Metals & Alloys                                            */
+/*  Section 4 — Metals & Alloys                                            */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 type Alloy = {
@@ -681,8 +922,8 @@ function MetalsAlloysSection() {
             }`}
           >
             {t(
-              "3. The Science of Metals & Alloys",
-              "៣. វិទ្យាសាស្ត្រនៃលោហៈ និងលោហៈធាតុផ្សំ",
+              "4. The Science of Metals & Alloys",
+              "៤. វិទ្យាសាស្ត្រនៃលោហៈ និងលោហៈធាតុផ្សំ",
             )}
           </h2>
         </div>
@@ -757,7 +998,7 @@ function MetalsAlloysSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 4 — Salts & Crystals                                           */
+/*  Section 5 — Salts & Crystals                                           */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function SaltsCrystalsSection() {
@@ -781,7 +1022,7 @@ function SaltsCrystalsSection() {
               kh ? "font-khmer" : ""
             }`}
           >
-            {t("4. Salts & Crystals", "៤. អំបិល និងគ្រីស្តាល់")}
+            {t("5. Salts & Crystals", "៥. អំបិល និងគ្រីស្តាល់")}
           </h2>
         </div>
         <p
@@ -921,7 +1162,7 @@ function SaltsCrystalsSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 5 — Agriculture & Power                                        */
+/*  Section 6 — Agriculture & Power                                        */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function AgriPowerSection() {
@@ -945,7 +1186,7 @@ function AgriPowerSection() {
               kh ? "font-khmer" : ""
             }`}
           >
-            {t("5. Agriculture & Power", "៥. កសិកម្ម និងថាមពល")}
+            {t("6. Agriculture & Power", "៦. កសិកម្ម និងថាមពល")}
           </h2>
         </div>
         <p

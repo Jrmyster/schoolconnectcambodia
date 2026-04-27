@@ -1,0 +1,49 @@
+I want to update the existing 'Physical Chemistry' page. Below the current '1. Math Meets Matter' section, please add two new comprehensive sections: '2. Physical Chemistry I: Thermodynamics & Kinetics' and '3. Physical Chemistry II: Quantum Chemistry & Spectroscopy'.
+
+Please implement this matching the established 'Undergraduate Preview' aesthetic (dark green backgrounds, subtle grid lines, and crisp white/accent typography):
+
+1. The Layout:
+
+Create a stacked, full-width card layout for these two major sections.
+
+Use a distinct icon for each (e.g., a 🔥 or 📈 for Thermodynamics, and an ⚛️ or 🌊 for Quantum).
+
+2. Section 2: Physical Chemistry I: Thermodynamics & Kinetics (គីមីវិទ្យារូបវន្ត ១៖ ទែម៉ូឌីណាមិច និងគីនេទិច)
+
+Add a subtitle: 'Focused on macroscopic behaviors, energy, and reaction rates. (ផ្តោតលើឥរិយាបថម៉ាក្រូស្កូប ថាមពល និងអត្រាប្រតិកម្ម។)'
+
+Display the following core concepts as an organized, readable list or sub-grid:
+
+Laws of Thermodynamics: First law (internal energy, enthalpy), Second law (entropy, free energy), and Third law.
+
+Equilibrium: Phase changes, phase diagrams, and chemical equilibrium.
+
+Real Gases and Solutions: Deviations from ideal behavior and van der Waals equations.
+
+Chemical Kinetics: Rate laws, reaction mechanisms, and activation energy.
+
+Electrochemistry: Ions, electrodes, and electrochemical cells.
+
+3. Section 3: Physical Chemistry II: Quantum Chemistry & Spectroscopy (គីមីវិទ្យារូបវន្ត ២៖ គីមីវិទ្យាម្កង់តូម និងវិសាលគមវិទ្យា)
+
+Add a subtitle: 'Focused on microscopic phenomena, molecular structure, and quantum mechanics. (ផ្តោតលើបាតុភូតមីក្រូស្កូប រចនាសម្ព័ន្ធម៉ូលេគុល និងយន្តវិទ្យាម្កង់តូម។)'
+
+Display the following core concepts as an organized, readable list or sub-grid:
+
+Quantum Mechanics Fundamentals: Wave-particle duality, Schrödinger equation, and wavefunctions.
+
+Quantum Systems: Particle-in-a-box, harmonic oscillator, and angular momentum.
+
+Atomic and Molecular Structure: Atomic orbitals, molecular orbital theory, and chemical bonding.
+
+Spectroscopy: Interaction of radiation with matter, absorption/emission spectra.
+
+Statistical Mechanics: Partition functions bridging microscopic states and macroscopic properties.
+
+4. Formatting & UX:
+
+Maintain the dark theme (#003322 style greens).
+
+Highlight key terms (like 'Schrödinger equation' or 'Entropy') with subtle accent colors (like a soft neon green or pale yellow) to make the text scannable.
+
+Ensure all main headings are strictly bilingual (English/Khmer).
