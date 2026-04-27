@@ -1,0 +1,53 @@
+I need to upgrade the existing Interview Simulator component to include a new category: 'Technical & Science Careers (អាជីពបច្ចេកទេស និងវិទ្យាសាស្ត្រ)'. Please update the simulator logic to include three new AI interviewer personas that test the students on the advanced science modules we recently built.
+
+1. UI Addition:
+
+Add a new selection tab for 'Technical & Science' next to the existing 'Hospitality & Tourism' options.
+
+Maintain the bilingual (English/Khmer) toggle for the interview questions.
+
+2. Persona 1: Environmental Science Technician (អ្នកបច្ចេកទេសវិទ្យាសាស្ត្របរិស្ថាន)
+
+Icon: Water Drop / Microscope 🔬
+
+Context: Interviewing for a role testing water quality on the Tonle Sap.
+
+Question Bank:
+
+'Can you explain to me how a Reverse Osmosis (RO) filter works compared to a standard sand filter?'
+
+'We study Limnology here. How does the Tonle Sap flood pulse affect the local fish population?'
+
+'If you found high levels of microplastics in a water sample, why is that dangerous for the food chain?'
+
+3. Persona 2: Forestry & Agri-Tech Consultant (អ្នកប្រឹក្សារុក្ខាប្រមាញ់ និងបច្ចេកវិទ្យាកសិកម្ម)
+
+Icon: Mature Tree 🌳
+
+Context: Interviewing for an NGO managing community forests and soil health.
+
+Question Bank:
+
+'What is the "Wood Wide Web," and how do trees use fungi to share resources?'
+
+'If a local farm is experiencing a drought, how does a Mother Tree naturally help younger saplings survive?'
+
+'Can you explain the difference between Xylem and Phloem in a plant's vascular system?'
+
+4. Persona 3: Industrial Engineering Apprentice (កម្មសិក្សាការីវិស្វកម្មឧស្សាហកម្ម)
+
+Icon: Factory / Gears ⚙️
+
+Context: Interviewing for a clean-energy factory or precision manufacturing plant.
+
+Question Bank:
+
+'Our factory produces a lot of exhaust. How does an electrostatic precipitator (like a Cottrell precipitator) clean the smoke?'
+
+'In basic electronics, why is it important that a circuit forms a complete, unbroken loop?'
+
+'In mechanical horology, what is the purpose of the escapement mechanism?'
+
+5. Feedback Logic:
+
+Ensure the simulated AI feedback evaluates the user not just on English grammar, but on the accuracy of the scientific concepts they use in their answers.

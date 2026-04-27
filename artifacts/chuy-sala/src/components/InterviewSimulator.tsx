@@ -16,12 +16,24 @@ import {
   Maximize2,
   Minimize2,
   Share2,
+  Microscope,
+  TreePine,
+  Factory,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-type InterviewType = "university_entrance" | "local_job" | "scholarship";
+type InterviewType =
+  | "university_entrance"
+  | "local_job"
+  | "scholarship"
+  | "env_science_tech"
+  | "forestry_agritech"
+  | "industrial_engineering";
+
+type RoleCategory = "general" | "technical_science";
+
 type Stage = "idle" | "selecting" | "interviewing" | "ending" | "ended";
 
 interface Message {
@@ -29,8 +41,29 @@ interface Message {
   content: string;
 }
 
+const CATEGORIES: {
+  id: RoleCategory;
+  labelEn: string;
+  labelKh: string;
+  accentColor: string;
+}[] = [
+  {
+    id: "general",
+    labelEn: "General Career Paths",
+    labelKh: "អាជីពទូទៅ",
+    accentColor: "#2563EB",
+  },
+  {
+    id: "technical_science",
+    labelEn: "Technical & Science",
+    labelKh: "អាជីពបច្ចេកទេស និងវិទ្យាសាស្ត្រ",
+    accentColor: "#0EA5E9",
+  },
+];
+
 const ROLES: {
   id: InterviewType;
+  category: RoleCategory;
   icon: React.ReactNode;
   labelEn: string;
   labelKh: string;
@@ -40,6 +73,7 @@ const ROLES: {
 }[] = [
   {
     id: "university_entrance",
+    category: "general",
     icon: <GraduationCap size={22} />,
     labelEn: "University Entrance",
     labelKh: "ការចូលរៀនសាកលវិទ្យាល័យ",
@@ -49,6 +83,7 @@ const ROLES: {
   },
   {
     id: "local_job",
+    category: "general",
     icon: <Briefcase size={22} />,
     labelEn: "Job at a Local Business",
     labelKh: "ការងារនៅអាជីវកម្មមូលដ្ឋាន",
@@ -58,12 +93,43 @@ const ROLES: {
   },
   {
     id: "scholarship",
+    category: "general",
     icon: <Award size={22} />,
     labelEn: "Scholarship Interview",
     labelKh: "សម្ភាសន៍អាហារូបករណ៍",
     descEn: "Prepare for a prestigious scholarship panel",
     descKh: "ត្រៀមខ្លួនសម្រាប់គណៈកម្មការអាហារូបករណ៍ល្បីឈ្មោះ",
     accentColor: "#7C3AED",
+  },
+  {
+    id: "env_science_tech",
+    category: "technical_science",
+    icon: <Microscope size={22} />,
+    labelEn: "Environmental Science Technician",
+    labelKh: "អ្នកបច្ចេកទេសវិទ្យាសាស្ត្របរិស្ថាន",
+    descEn: "Water-quality testing role on the Tonle Sap",
+    descKh: "តួនាទីពិនិត្យគុណភាពទឹកនៅបឹងទន្លេសាប",
+    accentColor: "#0EA5E9",
+  },
+  {
+    id: "forestry_agritech",
+    category: "technical_science",
+    icon: <TreePine size={22} />,
+    labelEn: "Forestry & Agri-Tech Consultant",
+    labelKh: "អ្នកប្រឹក្សារុក្ខាប្រមាញ់ និងបច្ចេកវិទ្យាកសិកម្ម",
+    descEn: "NGO managing community forests and soil health",
+    descKh: "អង្គការដែលគ្រប់គ្រងព្រៃសហគមន៍ និងសុខភាពដី",
+    accentColor: "#15803D",
+  },
+  {
+    id: "industrial_engineering",
+    category: "technical_science",
+    icon: <Factory size={22} />,
+    labelEn: "Industrial Engineering Apprentice",
+    labelKh: "កម្មសិក្សាការីវិស្វកម្មឧស្សាហកម្ម",
+    descEn: "Clean-energy factory or precision manufacturing",
+    descKh: "រោងចក្រថាមពលស្អាត ឬផលិតកម្មច្បាស់លាស់",
+    accentColor: "#EA580C",
   },
 ];
 
@@ -87,6 +153,8 @@ export function InterviewSimulator() {
 
   const [stage, setStage] = useState<Stage>("idle");
   const [selectedRole, setSelectedRole] = useState<InterviewType | null>(null);
+  const [selectedCategory, setSelectedCategory] =
+    useState<RoleCategory>("general");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
@@ -644,7 +712,7 @@ export function InterviewSimulator() {
             style={{
               color: OFFICE_BLUE.muted,
               fontSize: "13px",
-              margin: "0 0 20px",
+              margin: "0 0 16px",
               fontFamily: kh ? "var(--font-khmer, sans-serif)" : "inherit",
             }}
           >
@@ -654,6 +722,59 @@ export function InterviewSimulator() {
                 "ភាសាខ្មែរ"
               : "The interview will be conducted in English to help you practice professional communication."}
           </p>
+
+          {/* Category tabs */}
+          <div
+            role="tablist"
+            aria-label={kh ? "ប្រភេទអាជីព" : "Career category"}
+            data-testid="interview-category-tabs"
+            style={{
+              display: "flex",
+              gap: "8px",
+              padding: "4px",
+              background: "rgba(15,30,60,0.5)",
+              border: `1px solid ${OFFICE_BLUE.border}`,
+              borderRadius: "12px",
+              marginBottom: "16px",
+            }}
+          >
+            {CATEGORIES.map((cat) => {
+              const active = cat.id === selectedCategory;
+              return (
+                <button
+                  key={cat.id}
+                  role="tab"
+                  aria-selected={active}
+                  data-testid={`category-tab-${cat.id}`}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  style={{
+                    flex: 1,
+                    background: active
+                      ? `linear-gradient(135deg, ${cat.accentColor}, ${cat.accentColor}cc)`
+                      : "transparent",
+                    border: active
+                      ? `1px solid ${cat.accentColor}`
+                      : "1px solid transparent",
+                    borderRadius: "8px",
+                    padding: "10px 12px",
+                    cursor: "pointer",
+                    color: active ? "white" : OFFICE_BLUE.muted,
+                    fontWeight: 700,
+                    fontSize: "12px",
+                    lineHeight: 1.3,
+                    transition: "background 0.15s, color 0.15s, border-color 0.15s",
+                    fontFamily: kh
+                      ? "var(--font-khmer, sans-serif)"
+                      : "inherit",
+                    textAlign: "center",
+                  }}
+                >
+                  {kh ? cat.labelKh : cat.labelEn}
+                </button>
+              );
+            })}
+          </div>
+
           <div
             style={{
               display: "flex",
@@ -661,7 +782,7 @@ export function InterviewSimulator() {
               gap: "12px",
             }}
           >
-            {ROLES.map((role) => (
+            {ROLES.filter((r) => r.category === selectedCategory).map((role) => (
               <button
                 key={role.id}
                 onClick={() => startInterview(role.id)}
