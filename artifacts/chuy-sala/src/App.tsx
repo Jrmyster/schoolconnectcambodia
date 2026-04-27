@@ -155,6 +155,7 @@ const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry1
 const InorganicAtomicStructurePage = lazy(() => import("@/pages/InorganicAtomicStructurePage").then(m => ({ default: m.InorganicAtomicStructurePage })));
 const InorganicBondingMolecularPage = lazy(() => import("@/pages/InorganicBondingMolecularPage").then(m => ({ default: m.InorganicBondingMolecularPage })));
 const InorganicSymmetryGroupPage = lazy(() => import("@/pages/InorganicSymmetryGroupPage").then(m => ({ default: m.InorganicSymmetryGroupPage })));
+const InorganicCoordinationPage = lazy(() => import("@/pages/InorganicCoordinationPage").then(m => ({ default: m.InorganicCoordinationPage })));
 const PhysicalChemistry101Page  = lazy(() => import("@/pages/PhysicalChemistry101Page").then(m => ({ default: m.PhysicalChemistry101Page })));
 const AnalyticalChemistry101Page = lazy(() => import("@/pages/AnalyticalChemistry101Page").then(m => ({ default: m.AnalyticalChemistry101Page })));
 const BiochemistryPage          = lazy(() => import("@/pages/BiochemistryPage").then(m => ({ default: m.BiochemistryPage })));
@@ -386,6 +387,7 @@ function Router() {
             <Route path="/science/chemistry/inorganic/atomic-structure" component={InorganicAtomicStructurePage} />
             <Route path="/science/chemistry/inorganic/bonding-molecular" component={InorganicBondingMolecularPage} />
             <Route path="/science/chemistry/inorganic/symmetry-group" component={InorganicSymmetryGroupPage} />
+            <Route path="/science/chemistry/inorganic/coordination" component={InorganicCoordinationPage} />
             <Route path="/science/chemistry/physical" component={PhysicalChemistry101Page} />
             <Route path="/science/chemistry/analytical" component={AnalyticalChemistry101Page} />
             <Route path="/science/chemistry/biochemistry" component={BiochemistryPage} />

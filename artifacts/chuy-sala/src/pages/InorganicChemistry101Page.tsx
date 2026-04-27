@@ -312,6 +312,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Exploration of transition metal complexes, including structure, isomerism, nomenclature, and ligand field theory (bonding theories).",
     descKh:
       "ការស្វែងយល់អំពីសមាសធាតុលោហៈអន្តរកាល រួមទាំងរចនាសម្ព័ន្ធ អ៊ីសូម៉េរីស ឈ្មោះវិទ្យា និងទ្រឹស្តីវាលលីហ្គង់ (ទ្រឹស្តីចំណង)។",
+    href: "/science/chemistry/inorganic/coordination",
     bgClass: "bg-emerald-50/70",
     borderClass: "border-emerald-200",
     iconBgClass: "bg-gradient-to-br from-emerald-500 to-teal-600",
