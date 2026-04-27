@@ -1,0 +1,50 @@
+import { Atom } from "lucide-react";
+import type { SearchEntry } from "@/data/searchTypes";
+
+export const searchMeta: SearchEntry = {
+  id: "chemistry-inorganic-module-01-atomic-structure",
+  href: "/science/chemistry/inorganic/atomic-structure",
+  icon: Atom,
+  titleEn: "Module 1 — Atomic Structure & Periodic Trends",
+  titleKh: "មុខវិជ្ជា ១ — រចនាសម្ព័ន្ធអាតូម និងនិន្នាការខួប",
+  categoryEn: "Chemistry · Inorganic 101",
+  categoryKh: "គីមីវិទ្យា · អសរីរាង្គ ១០១",
+  descEn:
+    "Effective Nuclear Charge (Z_eff) as a magnet pulling on electron marbles, atomic radius (bigger down a column, smaller across a row), and electronegativity (an atom's thirst for electrons — Fluorine wins).",
+  descKh:
+    "បន្ទុកនុយក្លេអ៊ែរមានប្រសិទ្ធភាព (Z_eff) ដូចជាមេដែកទាញគ្រាប់អេឡិចត្រុង កាំអាតូម (ធំជាងពេលធ្លាក់ចុះ តូចជាងពេលទៅស្តាំ) និងអេឡិចត្រូអវិជ្ជមាន (ការស្រេកឃ្លានអេឡិចត្រុង — ហ្វ្លុយអ៊ូរឈ្នះ)។",
+  keywordsEn: [
+    "atomic structure",
+    "periodic trends",
+    "effective nuclear charge",
+    "Zeff",
+    "Z_eff",
+    "atomic radius",
+    "electronegativity",
+    "fluorine",
+    "Pauling scale",
+    "shielding",
+    "nuclear magnet",
+    "periodic table trends",
+    "shell",
+    "valence electrons",
+    "inorganic chemistry module 1",
+    "module 01",
+  ],
+  keywordsKh: [
+    "រចនាសម្ព័ន្ធអាតូម",
+    "និន្នាការខួប",
+    "កាំអាតូម",
+    "អេឡិចត្រូអវិជ្ជមាន",
+    "ហ្វ្លុយអ៊ូរ",
+    "ស្នូលអាតូម",
+    "តារាងធាតុខួប",
+    "មុខវិជ្ជា ១",
+    "មុខវិជ្ជា ០១",
+    "មេដែក",
+    "ប្រូតុង",
+    "អេឡិចត្រុង",
+    "សែល",
+  ],
+  type: "page",
+};

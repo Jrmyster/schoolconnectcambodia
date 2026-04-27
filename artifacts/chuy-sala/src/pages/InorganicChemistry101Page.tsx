@@ -238,6 +238,8 @@ type CurriculumModule = {
   titleKh: string;
   descEn: string;
   descKh: string;
+  /* Optional route — when present the card becomes a navigable Link. */
+  href?: string;
   /* Pastel theme — using Tailwind classes that already exist on this page so
      no new safelist entries are required. Each card gets a soft tinted bg,
      matching border, an icon-tile gradient, and a hover ring color. */
@@ -259,6 +261,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Analysis of periodic properties and atomic structure, providing a foundation for understanding inorganic behavior.",
     descKh:
       "ការវិភាគលក្ខណៈសម្បត្តិតាមខួប និងរចនាសម្ព័ន្ធអាតូម ដែលផ្តល់ជាមូលដ្ឋានសម្រាប់ការយល់ដឹងពីឥរិយាបថអសរីរាង្គ។",
+    href: "/science/chemistry/inorganic/atomic-structure",
     bgClass: "bg-sky-50/70",
     borderClass: "border-sky-200",
     iconBgClass: "bg-gradient-to-br from-sky-500 to-blue-600",
@@ -407,15 +410,9 @@ function CoreCurriculumSection() {
       >
         {CURRICULUM.map((m) => {
           const { Icon } = m;
-          return (
-            <button
-              key={m.key}
-              type="button"
-              role="listitem"
-              data-testid={`curriculum-${m.key}`}
-              aria-label={`${m.titleEn} · ${m.titleKh}`}
-              className={`group text-left rounded-2xl border-2 ${m.borderClass} ${m.bgClass} p-5 shadow-sm ring-1 ring-transparent ${m.hoverRingClass} hover:-translate-y-1 hover:shadow-lg transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-indigo-400/60`}
-            >
+          const cardClass = `group text-left rounded-2xl border-2 ${m.borderClass} ${m.bgClass} p-5 shadow-sm ring-1 ring-transparent ${m.hoverRingClass} hover:-translate-y-1 hover:shadow-lg transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-indigo-400/60`;
+          const inner = (
+            <>
               <div className="flex items-start gap-4">
                 <span
                   className={`shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-xl text-white shadow-md ring-2 ${m.iconRingClass} ${m.iconBgClass} group-hover:scale-105 transition-transform`}
@@ -449,6 +446,29 @@ function CoreCurriculumSection() {
                 <span>{t("Explore module", "ស្វែងយល់ម៉ូឌុល")}</span>
                 <span aria-hidden="true">→</span>
               </div>
+            </>
+          );
+          return m.href ? (
+            <Link
+              key={m.key}
+              href={m.href}
+              role="listitem"
+              data-testid={`curriculum-${m.key}`}
+              aria-label={`${m.titleEn} · ${m.titleKh}`}
+              className={cardClass}
+            >
+              {inner}
+            </Link>
+          ) : (
+            <button
+              key={m.key}
+              type="button"
+              role="listitem"
+              data-testid={`curriculum-${m.key}`}
+              aria-label={`${m.titleEn} · ${m.titleKh}`}
+              className={cardClass}
+            >
+              {inner}
             </button>
           );
         })}

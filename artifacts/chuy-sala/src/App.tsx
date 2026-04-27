@@ -152,6 +152,7 @@ const ElectricalSafetyPage      = lazy(() => import("@/pages/ElectricalSafetyPag
 const ChemistryHubPage          = lazy(() => import("@/pages/ChemistryHubPage").then(m => ({ default: m.ChemistryHubPage })));
 const OrganicChemistry101Page   = lazy(() => import("@/pages/OrganicChemistry101Page").then(m => ({ default: m.OrganicChemistry101Page })));
 const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry101Page").then(m => ({ default: m.InorganicChemistry101Page })));
+const InorganicAtomicStructurePage = lazy(() => import("@/pages/InorganicAtomicStructurePage").then(m => ({ default: m.InorganicAtomicStructurePage })));
 const PhysicalChemistry101Page  = lazy(() => import("@/pages/PhysicalChemistry101Page").then(m => ({ default: m.PhysicalChemistry101Page })));
 const AnalyticalChemistry101Page = lazy(() => import("@/pages/AnalyticalChemistry101Page").then(m => ({ default: m.AnalyticalChemistry101Page })));
 const BiochemistryPage          = lazy(() => import("@/pages/BiochemistryPage").then(m => ({ default: m.BiochemistryPage })));
@@ -380,6 +381,7 @@ function Router() {
             <Route path="/chemistry/ion-calculator" component={IonCalculatorPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
             <Route path="/science/chemistry/inorganic" component={InorganicChemistry101Page} />
+            <Route path="/science/chemistry/inorganic/atomic-structure" component={InorganicAtomicStructurePage} />
             <Route path="/science/chemistry/physical" component={PhysicalChemistry101Page} />
             <Route path="/science/chemistry/analytical" component={AnalyticalChemistry101Page} />
             <Route path="/science/chemistry/biochemistry" component={BiochemistryPage} />
