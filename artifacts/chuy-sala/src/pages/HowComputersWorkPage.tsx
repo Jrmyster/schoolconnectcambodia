@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -10,6 +10,7 @@ import { HistoryOfComputingTimeline } from "@/components/tech/HistoryOfComputing
 import { ApolloVsPhoneCard } from "@/components/tech/ApolloVsPhoneCard";
 import { HorizonFutureCard } from "@/components/tech/HorizonFutureCard";
 import { IoT5GModule } from "@/components/tech/IoT5GModule";
+import { RouterPostOfficeModule } from "@/components/tech/RouterPostOfficeModule";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -67,7 +68,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 07", "ឧបករណ៍អន្តរកម្ម៖ ០៧")}</span>
+                <span>{t("INTERACTIVES: 08", "ឧបករណ៍អន្តរកម្ម៖ ០៨")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -89,10 +90,33 @@ export function HowComputersWorkPage() {
           <MotherboardBuilder />
         </section>
 
-        {/* 2. Binary signal */}
+        {/* 2. The Digital Post Office — Routers & Wi-Fi */}
+        <section data-testid="lesson-router-postoffice">
+          {/* Paired bilingual main heading — both EN + KH always visible. */}
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 flex items-center justify-center flex-shrink-0">
+              <Router className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-400/85">
+                <span>Lesson 2</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-cyan-300/85">មេរៀនទី ២</span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">The Digital Post Office — Routers &amp; Wi-Fi</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-cyan-200 mt-1 leading-relaxed">
+                  ប្រៃសណីយ៍ឌីជីថល — រ៉ោតទ័រ និងវ៉ាយហ្វាយ
+                </span>
+              </h2>
+            </div>
+          </div>
+          <RouterPostOfficeModule />
+        </section>
+
+        {/* 3. Binary signal */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ២" : "Lesson 2"}
+            kicker={kh ? "មេរៀនទី ៣" : "Lesson 3"}
             titleEn="The Binary Signal"
             titleKh="សញ្ញាប្រព័ន្ធគោលពីរ"
             kh={kh}
@@ -101,10 +125,10 @@ export function HowComputersWorkPage() {
           <BinarySignalVisualizer />
         </section>
 
-        {/* 3. Hardware vs Software */}
+        {/* 4. Hardware vs Software */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ៣" : "Lesson 3"}
+            kicker={kh ? "មេរៀនទី ៤" : "Lesson 4"}
             titleEn="Hardware vs. Software"
             titleKh="Hardware ប្រឆាំងនឹង Software"
             kh={kh}
@@ -113,10 +137,10 @@ export function HowComputersWorkPage() {
           <HardwareSoftwareAnalogy />
         </section>
 
-        {/* 4. Tech Doctor — symptom checker */}
+        {/* 5. Tech Doctor — symptom checker */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ៤" : "Lesson 4"}
+            kicker={kh ? "មេរៀនទី ៥" : "Lesson 5"}
             titleEn="Tech Doctor — Troubleshooting Clinic"
             titleKh="គ្រូពេទ្យបច្ចេកវិទ្យា — គ្លីនិកជួសជុល"
             kh={kh}
@@ -125,10 +149,10 @@ export function HowComputersWorkPage() {
           <TechDoctor />
         </section>
 
-        {/* 5. Battery Life & Care Guide */}
+        {/* 6. Battery Life & Care Guide */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ៥" : "Lesson 5"}
+            kicker={kh ? "មេរៀនទី ៦" : "Lesson 6"}
             titleEn="Battery Life & Care Guide"
             titleKh="មគ្គុទ្ទេសក៍ថែទាំថ្ម"
             kh={kh}
@@ -137,10 +161,10 @@ export function HowComputersWorkPage() {
           <BatteryCareGuide />
         </section>
 
-        {/* 6. IoT & 5G — The Global Nervous System */}
+        {/* 7. IoT & 5G — The Global Nervous System */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ៦" : "Lesson 6"}
+            kicker={kh ? "មេរៀនទី ៧" : "Lesson 7"}
             titleEn="IoT & 5G: The Global Nervous System"
             titleKh="អ៉ីនធឺណិតនៃកិច្ចការនានា និង 5G — ប្រព័ន្ធសរសៃប្រសាទសកល"
             kh={kh}
@@ -149,10 +173,10 @@ export function HowComputersWorkPage() {
           <IoT5GModule />
         </section>
 
-        {/* 7. History of Computing Timeline */}
+        {/* 8. History of Computing Timeline */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ៧" : "Lesson 7"}
+            kicker={kh ? "មេរៀនទី ៨" : "Lesson 8"}
             titleEn="History of Computing — Timeline"
             titleKh="ប្រវត្តិរូបវិទ្យាកុំព្យូទ័រ — បន្ទាត់ពេលវេលា"
             kh={kh}
