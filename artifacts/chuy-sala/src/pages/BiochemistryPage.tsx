@@ -9,6 +9,9 @@ import {
   FlaskConical,
   Thermometer,
   HeartPulse,
+  Flame,
+  ArrowUpDown,
+  Droplets,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -73,6 +76,7 @@ export function BiochemistryPage() {
         </header>
 
         <DnaSection />
+        <ElectronTransportChainSection />
         <ProteinSection />
         <EnzymeSection />
 
@@ -467,8 +471,499 @@ function LadderSVG({ seq, comp }: { seq: string; comp: string }) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
- * SECTION 2 — Proteins: Tiny Folding Machines
+ * SECTION 02 — The Cellular Engine: The Electron Transport Chain
+ *
+ * Sits between DNA (01) and Proteins (now 03). Mirrors the styling of the
+ * surrounding sections (rounded-3xl + border-4 + white/85 backdrop) but
+ * picks a teal accent so it visually nests between the emerald DNA card
+ * and the violet Protein card. Headings + technical sub-headings are
+ * paired bilingual (EN above, KH below) per the user's strict rule.
  * ══════════════════════════════════════════════════════════════════════════ */
+function ElectronTransportChainSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-teal-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="etc-section"
+      aria-labelledby="etc-heading"
+    >
+      {/* Bilingual paired header (EN + KH simultaneously) */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-violet-600 text-white flex items-center justify-center shadow">
+          <Zap className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0">
+          <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-teal-700 mb-0.5">
+            <span>02 · The Cellular Engine</span>
+            <span className="font-khmer normal-case tracking-normal text-xs text-violet-700 ml-2">
+              ០២ · ម៉ាស៊ីនកោសិកា
+            </span>
+          </div>
+          <h2
+            id="etc-heading"
+            className="font-display text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug"
+          >
+            <span className="block">The Electron Transport Chain</span>
+            <span className="block font-khmer text-lg sm:text-xl font-bold text-teal-800 mt-1 leading-relaxed">
+              ច្រវ៉ាក់ដឹកជញ្ជូនអេឡិចត្រុង
+            </span>
+          </h2>
+        </div>
+      </div>
+
+      <p
+        className={`text-slate-700 leading-relaxed mb-6 ${
+          kh ? "font-khmer text-lg leading-loose" : "text-base sm:text-lg"
+        }`}
+      >
+        {t(
+          "Inside every one of your cells is a tiny power station called the mitochondrion. The Electron Transport Chain (ETC) is the engine inside that station — and it is the single reason a chocolate bar can become the energy that lets you run, think, and breathe.",
+          "នៅខាងក្នុងកោសិកានីមួយៗរបស់អ្នក មានរោងចក្រថាមពលតូចមួយដែលហៅថា មីតូខុនដ្រី។ ច្រវ៉ាក់ដឹកជញ្ជូនអេឡិចត្រុង (ETC) គឺជាម៉ាស៊ីននៅក្នុងរោងចក្រនោះ — ហើយវាគឺជាមូលហេតុតែមួយគត់ ដែលដុំសូកូឡាមួយ អាចក្លាយជាថាមពលដែលអនុញ្ញាតឱ្យអ្នករត់ គិត និងដកដង្ហើម។",
+        )}
+      </p>
+
+      {/* ── Sub-section 1: The Microscopic Dam ─────────────────────── */}
+      <div
+        className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50/60 p-5 sm:p-6 mb-6"
+        data-testid="etc-microscopic-dam"
+      >
+        <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 mb-3 leading-snug">
+          <span className="block">The Microscopic Dam</span>
+          <span className="block font-khmer text-base font-bold text-emerald-700 mt-1 leading-relaxed">
+            ទំនប់វារីអគ្គិសនីមីក្រូទស្សន៍
+          </span>
+        </h3>
+        <p
+          className={`text-slate-700 leading-relaxed ${
+            kh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {t(
+            "Imagine a hydroelectric dam — but shrunk down a billion times and built into the wall of every cell in your body. The ETC takes the energy from the food you eat and uses it to pump tiny positive particles called ",
+            "ស្រមៃមើលទំនប់វារីអគ្គិសនីមួយ — ប៉ុន្តែបង្រួញតូចមួយប៊ីលានដង ហើយសាងសង់នៅក្នុងជញ្ជាំងកោសិកានីមួយៗក្នុងរាងកាយរបស់អ្នក។ ETC យកថាមពលពីអាហារដែលអ្នកញ៉ាំ ហើយប្រើវាដើម្បីបូមភាគល្អិតមានបន្ទុកវិជ្ជមានតូចៗដែលហៅថា ",
+          )}
+          <span className="text-teal-700 font-semibold">
+            {t("protons (H+)", "ប្រូតុង (H+)")}
+          </span>
+          {t(
+            " across a thin membrane. As more and more protons pile up on one side, an intense pressure builds — exactly like water rising behind a dam wall.",
+            " ឆ្លងកាត់ភ្នាសស្តើងមួយ។ នៅពេលដែលប្រូតុងកាន់តែច្រើនកក្រោលនៅម្ខាង សម្ពាធដ៏ខ្លាំងមួយត្រូវបានកសាងឡើង — ដូចគ្នាបេះបិទនឹងទឹកដែលឡើងនៅពីក្រោយជញ្ជាំងទំនប់។",
+          )}
+        </p>
+      </div>
+
+      {/* ── Sub-section 2: The Steps of Power ──────────────────────── */}
+      <div className="mb-6">
+        <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 mb-4 leading-snug">
+          <span className="block">The Steps of Power</span>
+          <span className="block font-khmer text-base font-bold text-violet-700 mt-1 leading-relaxed">
+            ជំហាននៃថាមពល
+          </span>
+        </h3>
+
+        <div className="grid grid-cols-1 gap-3">
+          <ETCStep
+            kh={kh}
+            stepEn="Step 1 · The Fuel"
+            stepKh="ជំហាន ១ · ឥន្ធនៈ"
+            titleEn="Where the energy comes from"
+            titleKh="តើថាមពលមកពីណា"
+            Icon={Flame}
+            tone="emerald"
+            testId="etc-step-fuel"
+            bodyEn={
+              <>
+                Molecules made from your food — the most famous one is called{" "}
+                <span className="text-emerald-700 font-bold">NADH</span> —
+                arrive at the start of the chain and{" "}
+                <span className="text-emerald-700 font-semibold">
+                  drop off high-energy electrons
+                </span>
+                . Think of NADH as the delivery truck that pulls up to the
+                power plant carrying the day's load of fuel.
+              </>
+            }
+            bodyKh={
+              <>
+                ម៉ូលេគុលដែលបង្កើតពីអាហាររបស់អ្នក — ដែលល្បីបំផុតគឺ{" "}
+                <span className="text-emerald-700 font-bold">NADH</span> —
+                មកដល់ដើមច្រវ៉ាក់ ហើយ{" "}
+                <span className="text-emerald-700 font-semibold">
+                  ទម្លាក់អេឡិចត្រុងថាមពលខ្ពស់
+                </span>
+                ។ ស្រមៃមើល NADH ជាឡានដឹកទំនិញ ដែលឈប់នៅរោងចក្រថាមពល
+                ហើយដឹកបន្ទុកឥន្ធនៈរបស់ថ្ងៃនោះ។
+              </>
+            }
+          />
+
+          <ETCStep
+            kh={kh}
+            stepEn="Step 2 · The Pumps"
+            stepKh="ជំហាន ២ · ម៉ាស៊ីនបូម"
+            titleEn="Building the pressure"
+            titleKh="ការកសាងសម្ពាធ"
+            Icon={ArrowUpDown}
+            tone="teal"
+            testId="etc-step-pumps"
+            bodyEn={
+              <>
+                As the electrons{" "}
+                <span className="text-teal-700 font-semibold">
+                  bounce down the chain
+                </span>{" "}
+                from one protein to the next, their energy is harvested at
+                each step and used to{" "}
+                <span className="text-teal-700 font-semibold">
+                  pump protons across the mitochondrial membrane
+                </span>
+                . The result: a massive build-up of positive charge stored
+                up like the water behind the dam.
+              </>
+            }
+            bodyKh={
+              <>
+                នៅពេលដែលអេឡិចត្រុង{" "}
+                <span className="text-teal-700 font-semibold">
+                  លោតចុះតាមច្រវ៉ាក់
+                </span>{" "}
+                ពីប្រូតេអ៊ីនមួយទៅប្រូតេអ៊ីនមួយទៀត ថាមពលរបស់វា
+                ត្រូវបានប្រមូលនៅជំហាននីមួយៗ ហើយប្រើដើម្បី{" "}
+                <span className="text-teal-700 font-semibold">
+                  បូមប្រូតុងឆ្លងកាត់ភ្នាសមីតូខុនដ្រី
+                </span>
+                ។ លទ្ធផល៖ ការកក្រោលដ៏ច្រើននៃបន្ទុកវិជ្ជមាន
+                ដែលរក្សាទុកដូចទឹកនៅពីក្រោយទំនប់។
+              </>
+            }
+          />
+
+          <ETCStep
+            kh={kh}
+            stepEn="Step 3 · The Turbine"
+            stepKh="ជំហាន ៣ · ទួរប៊ីន"
+            titleEn="Generating the battery"
+            titleKh="ការបង្កើតថ្មពិល"
+            Icon={Cog}
+            tone="violet"
+            testId="etc-step-turbine"
+            bodyEn={
+              <>
+                The trapped protons can't stay put forever — they{" "}
+                <span className="text-violet-700 font-semibold">
+                  rush back through a spinning molecular machine
+                </span>{" "}
+                called{" "}
+                <span className="text-violet-700 font-bold">ATP Synthase</span>
+                . As it spins, ATP Synthase generates{" "}
+                <span className="text-violet-700 font-bold">ATP</span> — the
+                tiny rechargeable battery that powers nearly every action
+                in the human body, from blinking to lifting weights.
+              </>
+            }
+            bodyKh={
+              <>
+                ប្រូតុងដែលជាប់ មិនអាចស្ថិតនៅនឹងកន្លែងជារៀងរហូត —
+                ពួកវា{" "}
+                <span className="text-violet-700 font-semibold">
+                  រត់ត្រឡប់មកវិញ ឆ្លងកាត់ម៉ាស៊ីនម៉ូលេគុលដែលវិល
+                </span>{" "}
+                ដែលហៅថា{" "}
+                <span className="text-violet-700 font-bold">
+                  ATP Synthase
+                </span>
+                ។ ខណៈពេលដែលវាវិល ATP Synthase បង្កើត{" "}
+                <span className="text-violet-700 font-bold">ATP</span> —
+                ថ្មពិលតូចដែលអាចបញ្ចូលថ្មបាន
+                ដែលផ្តល់ថាមពលដល់សកម្មភាពស្ទើរតែគ្រប់យ៉ាងក្នុងរាងកាយមនុស្ស
+                ចាប់ពីការព្រិចភ្នែករហូតដល់ការលើកទម្ងន់។
+              </>
+            }
+          />
+
+          <ETCStep
+            kh={kh}
+            stepEn="Step 4 · The Exhaust"
+            stepKh="ជំហាន ៤ · សំណល់"
+            titleEn="Why we breathe oxygen"
+            titleKh="ហេតុអ្វីបានជាយើងដកដង្ហើមអុកស៊ីសែន"
+            Icon={Droplets}
+            tone="sky"
+            testId="etc-step-exhaust"
+            bodyEn={
+              <>
+                At the very end of the chain, the used-up electrons need
+                somewhere to go. This is where{" "}
+                <span className="text-sky-700 font-bold">oxygen (O₂)</span>{" "}
+                steps in: it{" "}
+                <span className="text-sky-700 font-semibold">
+                  catches the spent electrons
+                </span>{" "}
+                and combines them with hydrogen to safely form{" "}
+                <span className="text-sky-700 font-bold">water (H₂O)</span>.
+                <span className="block mt-2 rounded-lg border-l-4 border-amber-400 bg-amber-50 px-3 py-2 text-amber-900">
+                  This is the exact reason human beings need to breathe
+                  oxygen — without it, the chain would clog up in seconds
+                  and your cells would have no way to make ATP.
+                </span>
+              </>
+            }
+            bodyKh={
+              <>
+                នៅចុងបញ្ចប់នៃច្រវ៉ាក់ អេឡិចត្រុងដែលប្រើរួច
+                ត្រូវការកន្លែងណាមួយដើម្បីទៅ។ នេះគឺជាកន្លែងដែល{" "}
+                <span className="text-sky-700 font-bold">
+                  អុកស៊ីសែន (O₂)
+                </span>{" "}
+                ចូលរួម៖ វា{" "}
+                <span className="text-sky-700 font-semibold">
+                  ចាប់យកអេឡិចត្រុងដែលប្រើរួច
+                </span>{" "}
+                ហើយផ្សំជាមួយអ៊ីដ្រូសែន ដើម្បីបង្កើតជា{" "}
+                <span className="text-sky-700 font-bold">ទឹក (H₂O)</span>{" "}
+                ដោយសុវត្ថិភាព។
+                <span className="block mt-2 rounded-lg border-l-4 border-amber-400 bg-amber-50 px-3 py-2 text-amber-900 font-khmer leading-loose">
+                  នេះគឺជាមូលហេតុពិតប្រាកដ ដែលមនុស្សត្រូវដកដង្ហើមអុកស៊ីសែន
+                  — បើគ្មានវាទេ ច្រវ៉ាក់នឹងស្ទះក្នុងពេលពីរបីវិនាទី
+                  ហើយកោសិការបស់អ្នកនឹងគ្មានវិធីបង្កើត ATP ឡើយ។
+                </span>
+              </>
+            }
+          />
+        </div>
+      </div>
+
+      {/* Compact ETC schematic */}
+      <ETCSchematic kh={kh} />
+
+      {/* Closing one-liner */}
+      <div
+        className={`mt-5 rounded-xl border-l-4 border-teal-500 bg-teal-50/70 p-4 text-sm text-slate-800 ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {t(
+          "Every breath you take feeds this dam. Every ATP it makes runs your body. The Electron Transport Chain is the bridge between food, air, and life itself.",
+          "រាល់ដង្ហើមដែលអ្នកដក ផ្តល់ឱ្យទំនប់នេះ។ រាល់ ATP ដែលវាបង្កើត ដំណើរការរាងកាយរបស់អ្នក។ ច្រវ៉ាក់ដឹកជញ្ជូនអេឡិចត្រុង គឺជាស្ពានរវាងអាហារ ខ្យល់ និងជីវិតផ្ទាល់។",
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── ETC Step sub-card ─────────────────────────────────────────────────── */
+function ETCStep({
+  kh,
+  stepEn,
+  stepKh,
+  titleEn,
+  titleKh,
+  Icon,
+  tone,
+  bodyEn,
+  bodyKh,
+  testId,
+}: {
+  kh: boolean;
+  stepEn: string;
+  stepKh: string;
+  titleEn: string;
+  titleKh: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  tone: "emerald" | "teal" | "violet" | "sky";
+  bodyEn: React.ReactNode;
+  bodyKh: React.ReactNode;
+  testId: string;
+}) {
+  const styles = {
+    emerald: {
+      border: "border-emerald-200",
+      ring: "ring-emerald-100",
+      bg: "bg-emerald-50/40",
+      icon: "bg-emerald-600",
+      step: "text-emerald-700",
+      title: "text-emerald-800",
+    },
+    teal: {
+      border: "border-teal-200",
+      ring: "ring-teal-100",
+      bg: "bg-teal-50/40",
+      icon: "bg-teal-600",
+      step: "text-teal-700",
+      title: "text-teal-800",
+    },
+    violet: {
+      border: "border-violet-200",
+      ring: "ring-violet-100",
+      bg: "bg-violet-50/40",
+      icon: "bg-violet-600",
+      step: "text-violet-700",
+      title: "text-violet-800",
+    },
+    sky: {
+      border: "border-sky-200",
+      ring: "ring-sky-100",
+      bg: "bg-sky-50/40",
+      icon: "bg-sky-600",
+      step: "text-sky-700",
+      title: "text-sky-800",
+    },
+  }[tone];
+
+  return (
+    <article
+      data-testid={testId}
+      className={`rounded-2xl border-2 ${styles.border} ring-1 ${styles.ring} ${styles.bg} bg-white p-4 sm:p-5 shadow-sm`}
+    >
+      <header className="flex items-start gap-3 mb-3">
+        <div
+          className={`flex-shrink-0 w-10 h-10 rounded-xl ${styles.icon} text-white flex items-center justify-center shadow`}
+          aria-hidden="true"
+        >
+          <Icon className="w-5 h-5" strokeWidth={2.25} />
+        </div>
+        <div className="min-w-0">
+          <div
+            className={`text-[10px] font-bold uppercase tracking-[0.2em] ${styles.step} mb-0.5`}
+          >
+            <span>{stepEn}</span>
+            <span
+              className={`font-khmer normal-case tracking-normal text-xs ml-2 ${styles.step}`}
+            >
+              {stepKh}
+            </span>
+          </div>
+          <h4 className="font-display font-bold text-slate-900 leading-snug">
+            <span className="block text-base">{titleEn}</span>
+            <span
+              className={`block font-khmer text-sm font-semibold mt-0.5 leading-relaxed ${styles.title}`}
+            >
+              {titleKh}
+            </span>
+          </h4>
+        </div>
+      </header>
+      <div
+        className={`text-sm text-slate-700 leading-relaxed ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {kh ? bodyKh : bodyEn}
+      </div>
+    </article>
+  );
+}
+
+/* ── ETC schematic — minimal SVG of dam → pumps → turbine → exhaust ───── */
+function ETCSchematic({ kh }: { kh: boolean }) {
+  return (
+    <div
+      className="rounded-2xl border border-teal-200 bg-gradient-to-br from-slate-50 to-white p-4 sm:p-5"
+      data-testid="etc-schematic"
+    >
+      <p
+        className={`text-xs uppercase tracking-widest text-teal-700 font-bold mb-3 ${
+          kh ? "font-khmer normal-case tracking-normal" : ""
+        }`}
+      >
+        {kh
+          ? "ផែនទីទំនប់ — ដំណើរការដ៏សាមញ្ញ"
+          : "Dam Map — the flow at a glance"}
+        <span
+          className={`ml-2 font-normal text-slate-500 ${
+            kh ? "font-display normal-case" : "font-khmer"
+          }`}
+        >
+          {kh ? "Dam Map" : "ផែនទីទំនប់"}
+        </span>
+      </p>
+      <svg
+        viewBox="0 0 600 200"
+        className="w-full h-auto"
+        role="img"
+        aria-label={
+          kh
+            ? "ច្រវ៉ាក់ដឹកជញ្ជូនអេឡិចត្រុង"
+            : "Electron Transport Chain schematic"
+        }
+      >
+        <defs>
+          <linearGradient id="etc-mem" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#5eead4" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.9" />
+          </linearGradient>
+        </defs>
+
+        {/* Two-layer membrane */}
+        <rect x="20" y="86" width="560" height="6" rx="3" fill="url(#etc-mem)" />
+        <rect x="20" y="118" width="560" height="6" rx="3" fill="url(#etc-mem)" />
+        <text x="20" y="78" fontSize="10" fill="#0f766e" fontWeight="700">
+          {kh ? "ខាងក្រៅ (ច្រើនប្រូតុង)" : "Outer side  (lots of H+)"}
+        </text>
+        <text x="20" y="146" fontSize="10" fill="#6d28d9" fontWeight="700">
+          {kh ? "ខាងក្នុង (តិចប្រូតុង)" : "Inner side  (few H+)"}
+        </text>
+
+        {/* Pump 1, 2, 3 */}
+        {[140, 260, 380].map((cx, i) => (
+          <g key={i}>
+            <rect x={cx - 22} y="80" width="44" height="48" rx="8" fill="#0d9488" />
+            <text x={cx} y="110" textAnchor="middle" fontSize="11" fill="white" fontWeight="700">
+              {kh ? "បូម" : "Pump"}
+            </text>
+            {/* H+ being pushed up */}
+            <text x={cx} y="68" textAnchor="middle" fontSize="14" fill="#0f766e" fontWeight="900">
+              H⁺ ↑
+            </text>
+          </g>
+        ))}
+
+        {/* ATP Synthase turbine */}
+        <g>
+          <circle cx="490" cy="104" r="26" fill="#7c3aed" />
+          <circle cx="490" cy="104" r="14" fill="#a78bfa" />
+          <text x="490" y="64" textAnchor="middle" fontSize="11" fill="#6d28d9" fontWeight="800">
+            H⁺ ↓
+          </text>
+          <text x="490" y="156" textAnchor="middle" fontSize="11" fill="#6d28d9" fontWeight="800">
+            ATP ✦
+          </text>
+        </g>
+
+        {/* Fuel arrow into pump 1 */}
+        <g>
+          <line x1="40" y1="50" x2="118" y2="80" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" />
+          <polygon points="118,80 110,72 110,82" fill="#10b981" />
+          <text x="40" y="44" fontSize="11" fill="#047857" fontWeight="800">
+            NADH →
+          </text>
+        </g>
+
+        {/* Exhaust: O2 + e- → H2O on the right side, after turbine */}
+        <g>
+          <line x1="540" y1="155" x2="568" y2="172" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
+          <polygon points="568,172 558,168 562,178" fill="#0284c7" />
+          <text x="540" y="190" fontSize="11" fill="#075985" fontWeight="800">
+            O₂ + e⁻ → H₂O
+          </text>
+        </g>
+      </svg>
+      <p
+        className={`text-xs text-slate-500 text-center mt-2 ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {kh
+          ? "ឥន្ធនៈ → ម៉ាស៊ីនបូម (ផ្ទុកសម្ពាធ) → ទួរប៊ីន ATP → សំណល់ទឹក"
+          : "Fuel → Pumps build pressure → ATP turbine → water exhaust"}
+      </p>
+    </div>
+  );
+}
+
 function ProteinSection() {
   const t = useTranslation();
   const { language } = useLanguageStore();
@@ -481,7 +976,7 @@ function ProteinSection() {
     >
       <SectionHeader
         kh={kh}
-        eyebrow={t("02 · The Micro-Machines", "០២ · ម៉ាស៊ីនមីក្រូ")}
+        eyebrow={t("03 · The Micro-Machines", "០៣ · ម៉ាស៊ីនមីក្រូ")}
         titleEn="Proteins — folding nano-machines"
         titleKh="ប្រូតេអ៊ីន — ម៉ាស៊ីននាណូដែលបត់"
         Icon={Cog}
@@ -711,7 +1206,7 @@ function EnzymeSection() {
     >
       <SectionHeader
         kh={kh}
-        eyebrow={t("03 · Frugal Catalysts", "០៣ · កាតាលីករសន្សំសំចៃ")}
+        eyebrow={t("04 · Frugal Catalysts", "០៤ · កាតាលីករសន្សំសំចៃ")}
         titleEn="Enzymes — chemistry at body temperature"
         titleKh="អង់ស៊ីម — គីមីវិទ្យានៅសីតុណ្ហភាពរាងកាយ"
         Icon={Microscope}
