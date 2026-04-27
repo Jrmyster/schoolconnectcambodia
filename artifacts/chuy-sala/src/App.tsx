@@ -27,6 +27,7 @@ import { AuthProvider } from "@/context/AuthContext";
 // Default exports
 const OceanographyPage          = lazy(() => import("@/pages/OceanographyPage"));
 const HorologyPage              = lazy(() => import("@/pages/HorologyPage"));
+const ThreeDPrintingPage        = lazy(() => import("@/pages/ThreeDPrintingPage"));
 const WeatherPage               = lazy(() => import("@/pages/WeatherPage"));
 const SnowPage                  = lazy(() => import("@/pages/SnowPage").then(m => ({ default: m.SnowPage })));
 const QuantumLimitPage          = lazy(() => import("@/pages/QuantumLimitPage"));
@@ -273,6 +274,7 @@ function Router() {
             <Route path="/space" component={SpacePage} />
             <Route path="/oceanography" component={OceanographyPage} />
             <Route path="/technology/horology" component={HorologyPage} />
+            <Route path="/technology/3d-printing" component={ThreeDPrintingPage} />
             <Route path="/weather" component={WeatherPage} />
             <Route path="/weather/snow" component={SnowPage} />
             <Route path="/quantum-limit" component={QuantumLimitPage} />

@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -939,6 +939,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Hourglass,
         descEn: "Horology: The Scientific Study of Time — 5,000 years of timekeeping in three sections. A timeline from sundials and water clocks to mechanical escapements, quartz crystals (32,768 Hz), and atomic clocks (the caesium 9.2-billion-vibration second that GPS depends on). The four parts of a mechanical watch movement (mainspring, gear train, escapement, balance wheel) with an animated diagram. Time and physics — Einstein's relativity (why GPS satellites need a 38-microsecond daily correction) and the Prime Meridian at Greenwich (why Cambodia is UTC+7).",
         descKh: "ហោរាសាស្ត្រ៖ ការសិក្សាវិទ្យាសាស្ត្រនៃការវាស់វែងពេលវេលា — ប្រវត្តិ ៥,០០០ ឆ្នាំក្នុងផ្នែកបី។ ប្រវត្តិពីនាឡិកាស្រមោល និងនាឡិកាទឹក ដល់ម៉ាស៊ីនបញ្ចេញមេកានិច គ្រីស្តាល់កែវកាវ (៣២,៧៦៨ Hz) និងនាឡិកាអាតូម (វិនាទីសេស៊ូម ៩.២ ពាន់លានរំញ័រ ដែល GPS ពឹងផ្អែក)។ ផ្នែកបួននៃម៉ាស៊ីននាឡិកាមេកានិច (ស្ព្រីងមេ ខ្សែស្ពឺ ម៉ាស៊ីនបញ្ចេញ កង់តុល្យភាព) ជាមួយតារាងដែលមានចលនា។ ពេលវេលា និងរូបវិទ្យា — ទ្រឹស្តីទាក់ទងរបស់ Einstein និងមេរីដៀនដើមនៅ Greenwich (ហេតុអ្វីកម្ពុជាស្ថិតនៅ UTC+7)។",
+      },
+      {
+        href: "/technology/3d-printing",
+        labelEn: "3D Printing",
+        labelKh: "ការបោះពុម្ពត្រីមាត្រ",
+        icon: Box,
+        descEn: "3D Printing: Manufacturing the Future — three sections in a maker-space aesthetic (carbon-fibre blacks, neon wireframes, concrete greys). How it works: subtractive vs additive manufacturing, with the digital-model → slicer → heated-nozzle → layered-object pipeline. Printing the small: custom wrenches, gears, and discontinued spare parts for mechanics; finger splints, stethoscopes, and patient-specific prosthetics for clinics in remote areas. Printing the massive: gantry cranes squeezing concrete to print a two-bedroom house in 24 hours, and laser-sintered titanium-powder car chassis printed as a single lattice part.",
+        descKh: "ការបោះពុម្ពត្រីមាត្រ៖ ការផលិតសម្រាប់អនាគត — បីផ្នែកក្នុងរចនាបថ maker-space (ខ្មៅ carbon fibre បន្ទាត់ neon ប្រផេះកុងក្រែត)។ របៀបដែលវាដំណើរការ៖ ការផលិតដោយដក និងការផលិតដោយបន្ថែម ជាមួយនឹងលំហូរ គំរូឌីជីថល → កម្មវិធីកាត់ស្រទាប់ → ច្រមុះក្ដៅ → វត្ថុរាងស្រទាប់។ ការបោះពុម្ពខ្នាតតូច៖ ឧបករណ៍កាត់ កង់ស្ព្រែង និងគ្រឿងបន្លាស់រលត់សម្រាប់មេកានិក; ឧបករណ៍ដាក់ម្រាមដៃ stethoscope និងដៃសិប្បនិម្មិតសម្រាប់មន្ទីរសុខាភិបាលនៅខេត្តឆ្ងាយ។ ការបោះពុម្ពខ្នាតធំ៖ ដ៏ឧប្ករណ៍ក្រេនដែលច្របាច់កុងក្រែតបោះពុម្ពផ្ទះពីរបន្ទប់គេងក្នុង ២៤ ម៉ោង និងស៊ុមរថយន្តពីម្សៅទីតានីយ៉ូមផ្សារដោយឡាស៊ែរបោះពុម្ពជា lattice តែមួយ។",
       },
     ],
   },
