@@ -295,6 +295,7 @@ const CURRICULUM: CurriculumModule[] = [
       "Application of symmetry operations, point groups, and character tables to determine molecular properties.",
     descKh:
       "ការអនុវត្តប្រតិបត្តិការស៊ីមេទ្រី ក្រុមចំនុច និងតារាងអក្សរ ដើម្បីកំណត់លក្ខណៈសម្បត្តិម៉ូលេគុល។",
+    href: "/science/chemistry/inorganic/symmetry-group",
     bgClass: "bg-fuchsia-50/70",
     borderClass: "border-fuchsia-200",
     iconBgClass: "bg-gradient-to-br from-fuchsia-500 to-pink-600",
