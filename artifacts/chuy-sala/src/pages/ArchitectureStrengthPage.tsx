@@ -9,6 +9,12 @@ import {
   Lightbulb,
   Ruler,
   Globe2,
+  Box,
+  PenTool,
+  Boxes,
+  ExternalLink,
+  MonitorCog,
+  Cpu,
 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -119,6 +125,12 @@ export function ArchitectureStrengthPage() {
         <BattleAgainstGravity kh={kh} t={t} />
         <SquaresVsTriangles kh={kh} t={t} />
         <ArchAndDome kh={kh} t={t} />
+
+        {/* ── Bridge from physical architecture → digital architecture ── */}
+        <DraftingDivider kh={kh} t={t} />
+
+        {/* New chapter — Digital Blueprints / ប្លង់ឌីជីថល */}
+        <DigitalBlueprintsSection kh={kh} t={t} />
 
         {/* Closing */}
         <div
@@ -963,5 +975,819 @@ function GeodesicDiagram({ kh }: { kh: boolean }) {
         {kh ? "បណ្ដាញត្រីកោណ" : "triangle web"}
       </text>
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Drafting Divider — bridges the physical-architecture chapter to the
+//  digital-architecture chapter. Visually a drafting ruler with tick marks
+//  and a centred compass medallion stamped with the spec code "→ DIGITAL".
+// ════════════════════════════════════════════════════════════════════════════
+
+function DraftingDivider({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <div
+      className="my-12 flex items-center gap-3 select-none"
+      data-testid="drafting-divider"
+      role="separator"
+      aria-label={t(
+        "Section divider — transitioning from physical architecture to digital engineering software.",
+        "បន្ទាត់​បំបែក​ផ្នែក — ការ​ផ្លាស់ប្ដូរ​ពី​ស្ថាបត្យកម្ម​រូបវ័ន្ត​ទៅ​កម្មវិធី​វិស្វកម្ម​ឌីជីថល។"
+      )}
+    >
+      {/* Left ruler */}
+      <DraftingRuler align="left" />
+
+      {/* Compass medallion */}
+      <div className="relative flex-shrink-0">
+        <div className="w-20 h-20 rounded-full bg-slate-900 border-2 border-cyan-400/70 shadow-lg flex items-center justify-center">
+          <Compass className="w-9 h-9 text-cyan-300" />
+          {/* tick marks around the medallion */}
+          <svg
+            viewBox="0 0 80 80"
+            className="absolute inset-0 w-full h-full"
+            aria-hidden="true"
+          >
+            {Array.from({ length: 24 }).map((_, i) => {
+              const a = (i / 24) * Math.PI * 2;
+              const r1 = 36;
+              const r2 = i % 6 === 0 ? 30 : 33;
+              return (
+                <line
+                  key={i}
+                  x1={40 + r1 * Math.cos(a)}
+                  y1={40 + r1 * Math.sin(a)}
+                  x2={40 + r2 * Math.cos(a)}
+                  y2={40 + r2 * Math.sin(a)}
+                  stroke="#22d3ee"
+                  strokeWidth={i % 6 === 0 ? "1.4" : "0.8"}
+                  opacity={i % 6 === 0 ? "0.9" : "0.55"}
+                />
+              );
+            })}
+          </svg>
+        </div>
+        {/* spec stamp under the medallion */}
+        <div
+          className={`absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] tracking-[0.25em] uppercase text-cyan-700 bg-cyan-50 border border-cyan-300 rounded px-2 py-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs px-3" : ""}`}
+        >
+          {t("→ DIGITAL", "→ ឌីជីថល")}
+        </div>
+      </div>
+
+      {/* Right ruler */}
+      <DraftingRuler align="right" />
+    </div>
+  );
+}
+
+function DraftingRuler({ align }: { align: "left" | "right" }) {
+  // Long horizontal drafting ruler with major + minor tick marks.
+  return (
+    <div className="relative flex-1 h-10">
+      <svg
+        viewBox="0 0 400 40"
+        preserveAspectRatio="none"
+        className="absolute inset-0 w-full h-full"
+        aria-hidden="true"
+      >
+        {/* ruler body */}
+        <rect
+          x="0"
+          y="14"
+          width="400"
+          height="14"
+          fill="#fde68a"
+          stroke="#1e293b"
+          strokeWidth="1"
+        />
+        {/* baseline */}
+        <line x1="0" y1="28" x2="400" y2="28" stroke="#0f172a" strokeWidth="1.2" />
+        {/* tick marks — every 10 units, with majors every 50 */}
+        {Array.from({ length: 41 }).map((_, i) => {
+          const x = i * 10;
+          const major = i % 5 === 0;
+          return (
+            <line
+              key={i}
+              x1={x}
+              y1="28"
+              x2={x}
+              y2={major ? 14 : 21}
+              stroke="#0f172a"
+              strokeWidth={major ? "1" : "0.6"}
+            />
+          );
+        })}
+        {/* numeric labels every 100 */}
+        {[0, 100, 200, 300, 400].map((x) => (
+          <text
+            key={x}
+            x={align === "left" ? x + 2 : 400 - x + 2}
+            y="11"
+            fontSize="6.5"
+            fill="#475569"
+            fontFamily="ui-monospace, monospace"
+          >
+            {x / 10}
+          </text>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 04 — Digital Blueprints: Engineering Software
+//                ប្លង់ឌីជីថល៖ កម្មវិធីវិស្វកម្ម
+//
+//   Three sub-sections:
+//   • Testing the Map Before the Territory  — what CAD is and why it matters
+//   • The Industry Tools                    — three software profiles
+//   • Try it Yourself                       — free, browser-based resources
+//
+//   Aesthetic continues the blueprint theme: drafting-paper grid, slate
+//   navy chrome, cyan accents, monospace spec codes. Each tool card uses
+//   a distinct accent colour but the same blueprint card chassis.
+// ════════════════════════════════════════════════════════════════════════════
+
+function DigitalBlueprintsSection({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section className="mb-10" data-testid="section-digital-blueprints">
+      <SectionHeader
+        spec="04"
+        en="Digital Blueprints: Engineering Software"
+        kh="ប្លង់ឌីជីថល៖ កម្មវិធីវិស្វកម្ម"
+        kh_={kh}
+      />
+
+      {/* Lead-in paragraph for the whole chapter */}
+      <p
+        data-testid="digital-blueprints-title"
+        className={`mb-6 text-sm sm:text-base text-slate-700 max-w-3xl ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {t(
+          "Real bricks are expensive; mistakes cost lives. So today, every serious building, bridge and machine is born twice — once inside a computer, then once on the construction site. These are the tools that let engineers ",
+          "ឥដ្ឋ​ពិត​មាន​តម្លៃ​ថ្លៃ ហើយ​កំហុស​អាច​បង់​ជីវិត។ ដូច្នេះ​សព្វ​ថ្ងៃ រាល់​អគារ ស្ពាន និង​ម៉ាស៊ីន​ដ៏​សំខាន់​សុទ្ធតែ​កើត​ឡើង​ពីរ​ដង — មួយ​ជាមុន​នៅ​ខាង​ក្នុង​កុំព្យូទ័រ ហើយ​មួយ​ទៀត​នៅ​លើ​ទីតាំង​សាងសង់​ពិត។ នេះ​ជា​ឧបករណ៍​ដែល​អនុញ្ញាត​ឱ្យ​វិស្វករ "
+        )}
+        <strong className={`text-cyan-800 ${kh ? "font-khmer" : ""}`}>
+          {t(
+            "test the map before the territory.",
+            "សាកល្បង​ប្លង់​មុន​ពេល​សាងសង់​ពិត។"
+          )}
+        </strong>
+      </p>
+
+      {/* ── Sub-section A — Testing the Map Before the Territory ── */}
+      <CADIntroCard kh={kh} t={t} />
+
+      {/* ── Sub-section B — The Industry Tools (3-card grid) ── */}
+      <IndustryToolsGrid kh={kh} t={t} />
+
+      {/* ── Sub-section C — Try it Yourself (resource links) ── */}
+      <TryItYourselfBox kh={kh} t={t} />
+    </section>
+  );
+}
+
+// ── Sub-section A — CAD intro ────────────────────────────────────────────
+
+function CADIntroCard({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-cyan-300 p-5 sm:p-7 shadow-sm mb-6"
+      style={CARD_BG}
+      data-testid="cad-intro-card"
+    >
+      <CornerMarks subtle />
+      <div className="flex items-center gap-3 mb-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan-700 bg-cyan-50 border border-cyan-300 rounded px-2 py-0.5">
+          SUB-04.A
+        </span>
+        <MonitorCog className="w-5 h-5 text-cyan-700" />
+        <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+          {t(
+            "Testing the Map Before the Territory",
+            "ការសាកល្បងប្លង់មុនពេលសាងសង់ពិត"
+          )}
+        </h3>
+      </div>
+
+      <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-6 items-start">
+        <div>
+          <p className={`text-sm sm:text-base text-slate-800 mb-3 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {t(
+              "Before a modern architect pours a single drop of concrete, the entire structure is built first inside a computer. Engineers load the model with virtual gravity, push virtual wind against the walls, and stack virtual furniture on every floor. The screen shows them — in seconds — exactly where the building would crack. That practice is called ",
+              "មុន​ពេល​ស្ថាបត្យករ​សម័យ​ទំនើប​ចាក់​ស៊ីម៉ងត៍​សូម្បី​តែ​មួយ​ដំណក់ រចនាសម្ព័ន្ធ​ទាំង​មូល​ត្រូវ​បាន​សាងសង់​ជាមុន​នៅ​ខាង​ក្នុង​កុំព្យូទ័រ។ វិស្វករ​ដាក់​ទំនាញ​ផែនដី​និម្មិត​ទៅ​លើ​គំរូ រុញ​ខ្យល់​និម្មិត​ប្រឆាំង​ជញ្ជាំង ហើយ​ដាក់​គ្រឿង​សង្ហារិម​និម្មិត​នៅ​លើ​រាល់​ជាន់។ អេក្រង់​បង្ហាញ​ឱ្យ​ពួកគេ​ឃើញ​—​ក្នុង​រយៈពេល​ប៉ុន្មាន​វិនាទី​—​ច្បាស់​ៗ​ថា​អគារ​នឹង​ប្រេះ​នៅ​ត្រង់​ណា។ ការ​អនុវត្ត​នេះ​ហៅ​ថា "
+            )}
+            <strong className={`text-cyan-800 ${kh ? "font-khmer" : ""}`}>
+              {t(
+                "Computer-Aided Design (CAD).",
+                "ការ​រចនា​ដោយ​ជំនួយ​កុំព្យូទ័រ (CAD)។"
+              )}
+            </strong>
+          </p>
+
+          <p className={`text-sm sm:text-base text-slate-800 mb-4 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {t(
+              "The point is not to draw pretty pictures. The point is to find the weak point first — on a screen, where fixing it costs nothing — instead of after the building has cracked, where fixing it might cost lives.",
+              "គោលដៅ​មិនមែន​ជា​ការ​គូរ​រូបភាព​ស្អាត​ទេ។ គោលដៅ​គឺ​ការ​រក​ឃើញ​ចំណុច​ខ្សោយ​ជាមុន — នៅ​លើ​អេក្រង់ ដែល​ការ​ជួសជុល​មិន​ត្រូវការ​អ្វី​ឡើយ — ជំនួស​ឱ្យ​ការ​រក​ឃើញ​បន្ទាប់​ពី​អគារ​ប្រេះ​ស្រាប់ ដែល​ការ​ជួសជុល​អាច​នឹង​បង់​ជីវិត។"
+            )}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            <VocabChip color="cyan" en="CAD" kh="CAD" k={kh} />
+            <VocabChip color="amber" en="Stress Test" kh="ការសាកល្បងសម្ពាធ" k={kh} />
+            <VocabChip color="rose" en="Simulation" kh="ការក្លែងធ្វើ" k={kh} />
+            <VocabChip color="emerald" en="Digital Twin" kh="កូនភ្លោះឌីជីថល" k={kh} />
+          </div>
+        </div>
+
+        {/* Mini visual: laptop screen showing a CAD wireframe + heat-map */}
+        <div
+          className="rounded-xl bg-slate-900 p-4 text-slate-100"
+          data-testid="cad-intro-diagram"
+        >
+          <div className={`text-[10px] font-mono uppercase tracking-widest text-cyan-300/80 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {t("CAD WORKBENCH · STRESS HEATMAP", "បន្ទប់​ការងារ CAD · ផែនទី​សម្ពាធ")}
+          </div>
+          <CADHeatmapDiagram kh={kh} />
+          <div className={`mt-2 text-center text-[11px] text-slate-400 ${kh ? "font-khmer leading-loose" : "font-mono uppercase tracking-widest"}`}>
+            {t(
+              "Red = where the model would fail",
+              "ក្រហម = ត្រង់​កន្លែង​ដែល​គំរូ​នឹង​បរាជ័យ"
+            )}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// SVG: a stylised laptop screen showing a steel-beam wireframe with a
+// red "stress hotspot" highlighted at the centre — the exact moment a
+// CAD package warns the engineer about a failure point.
+function CADHeatmapDiagram({ kh }: { kh: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 280 160"
+      className="w-full h-auto"
+      role="img"
+      aria-label={
+        kh
+          ? "គំនូរ​អេក្រង់ CAD បង្ហាញ​ធ្នឹម​ដែក​ដែល​ជាប់​ការ​សាកល្បង​សម្ពាធ ហើយ​មាន​ចំណុច​ក្រហម​នៅ​កណ្ដាល"
+          : "Diagram of a CAD screen showing a steel beam under a stress test, with a red hotspot at the centre"
+      }
+    >
+      <title>{kh ? "CAD · ផែនទី​សម្ពាធ" : "CAD · stress heatmap"}</title>
+
+      {/* Laptop screen frame */}
+      <rect x="14" y="10" width="252" height="120" rx="6" fill="#0b1220" stroke="#22d3ee" strokeWidth="1.2" />
+      {/* Laptop base */}
+      <rect x="6" y="132" width="268" height="6" rx="2" fill="#1e293b" stroke="#22d3ee" strokeWidth="1" />
+      <rect x="120" y="138" width="40" height="3" rx="1" fill="#0b1220" />
+
+      {/* Grid background inside screen */}
+      {Array.from({ length: 12 }).map((_, i) => (
+        <line
+          key={`v${i}`}
+          x1={20 + i * 20}
+          y1="14"
+          x2={20 + i * 20}
+          y2="126"
+          stroke="#22d3ee"
+          strokeOpacity="0.12"
+          strokeWidth="0.6"
+        />
+      ))}
+      {Array.from({ length: 6 }).map((_, i) => (
+        <line
+          key={`h${i}`}
+          x1="18"
+          y1={22 + i * 18}
+          x2="262"
+          y2={22 + i * 18}
+          stroke="#22d3ee"
+          strokeOpacity="0.12"
+          strokeWidth="0.6"
+        />
+      ))}
+
+      {/* Beam — a horizontal I-shape supported on two pin supports */}
+      <rect x="40" y="62" width="200" height="14" fill="#475569" stroke="#cbd5e1" strokeWidth="1" />
+      {/* I-beam top + bottom flanges (suggestion only) */}
+      <rect x="40" y="58" width="200" height="4" fill="#cbd5e1" />
+      <rect x="40" y="76" width="200" height="4" fill="#cbd5e1" />
+
+      {/* Supports — triangles */}
+      <polygon points="40,86 30,98 50,98" fill="#cbd5e1" />
+      <polygon points="240,86 230,98 250,98" fill="#cbd5e1" />
+      {/* hatching under supports */}
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i}>
+          <line
+            x1={30 + i * 5}
+            y1="98"
+            x2={25 + i * 5}
+            y2="105"
+            stroke="#cbd5e1"
+            strokeWidth="0.6"
+          />
+          <line
+            x1={230 + i * 5}
+            y1="98"
+            x2={225 + i * 5}
+            y2="105"
+            stroke="#cbd5e1"
+            strokeWidth="0.6"
+          />
+        </g>
+      ))}
+
+      {/* Virtual load arrows pressing down on the beam */}
+      {[80, 110, 140, 170, 200].map((x) => (
+        <g key={x} stroke="#f43f5e" strokeWidth="1.4" fill="none" strokeLinecap="round">
+          <line x1={x} y1="32" x2={x} y2="56" />
+          <path d={`M ${x - 4} 50 L ${x} 58 L ${x + 4} 50`} />
+        </g>
+      ))}
+
+      {/* RED STRESS HOTSPOT — glowing radial in the centre of the beam */}
+      <defs>
+        <radialGradient id="cad-hot" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.95" />
+          <stop offset="60%" stopColor="#f97316" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#facc15" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="140" cy="69" r="22" fill="url(#cad-hot)" />
+      <circle cx="140" cy="69" r="3.2" fill="#fff" stroke="#f43f5e" strokeWidth="1.4" />
+
+      {/* Hotspot label */}
+      <text
+        x="140"
+        y="118"
+        fontSize="8"
+        fill="#fda4af"
+        textAnchor="middle"
+        fontFamily="ui-monospace, monospace"
+      >
+        FAIL · σ_max
+      </text>
+      <text
+        x="140"
+        y="127"
+        fontSize="7.5"
+        fill="#fda4af"
+        textAnchor="middle"
+        fontFamily="Hanuman, 'Noto Sans Khmer', serif"
+      >
+        ចំណុចបរាជ័យ
+      </text>
+
+      {/* HUD label top-left */}
+      <text x="22" y="22" fontSize="7" fill="#22d3ee" fontFamily="ui-monospace, monospace">
+        FEA · σ &gt; σ_yield
+      </text>
+    </svg>
+  );
+}
+
+// ── Sub-section B — The Industry Tools (3-card grid) ────────────────────
+
+function IndustryToolsGrid({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <div className="mb-6">
+      {/* Sub-section header */}
+      <div className="flex items-center gap-3 mb-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan-700 bg-cyan-50 border border-cyan-300 rounded px-2 py-0.5">
+          SUB-04.B
+        </span>
+        <Cpu className="w-5 h-5 text-cyan-700" />
+        <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+          {t("The Industry Tools", "ឧបករណ៍ក្នុងឧស្សាហកម្ម")}
+        </h3>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-5">
+        <SoftwareCard
+          testId="card-cad-software-solidworks"
+          spec="SW-01"
+          accent="rose"
+          icon={Box}
+          enName="SolidWorks & AutoCAD"
+          khName="សូលីដវើក និង អូតូកាត"
+          enTagline="The Industry Standard"
+          khTagline="ស្តង់ដារ​ក្នុង​ឧស្សាហកម្ម"
+          enUseCase="Heavy engineering — machines, bridges, and steel skyscrapers"
+          khUseCase="វិស្វកម្ម​ធុន​ធ្ងន់ — ម៉ាស៊ីន ស្ពាន និង​អគារ​ដែក​ខ្ពស់"
+          en={
+            <>
+              The standard tools used by professional mechanical and civil
+              engineers worldwide. Their killer feature is the{" "}
+              <strong className="text-rose-700">Stress Test</strong> (formally{" "}
+              <em>FEA — Finite Element Analysis</em>): the engineer drops virtual
+              weight onto a steel beam, and the screen flashes{" "}
+              <strong className="text-rose-700">red</strong> exactly where the
+              metal would bend or snap. The bridge gets fixed{" "}
+              <em>inside the laptop</em> before a single rivet is bought.
+            </>
+          }
+          kh={
+            <>
+              ​ឧបករណ៍​ស្តង់ដារ​ដែល​វិស្វករ​មេកានិច និង​សំណង់​អាជីព​នៅ​ទូទាំង​ពិភពលោក​ប្រើ​ប្រាស់។ លក្ខណៈ​ពិសេស​សំខាន់​របស់​វា​គឺ <strong className="text-rose-700">ការ​សាកល្បង​សម្ពាធ</strong> (ឈ្មោះ​ផ្លូវ​ការ <em>FEA — ការ​វិភាគ​ធាតុ​មាន​កំណត់</em>) ៖ វិស្វករ​ដាក់​ទម្ងន់​និម្មិត​ទៅ​លើ​ធ្នឹម​ដែក ហើយ​អេក្រង់​នឹង​ភ្លឺ​ពណ៌ <strong className="text-rose-700">ក្រហម</strong> ​នៅ​ត្រង់​កន្លែង​ដែល​ដែក​នឹង​បត់​ឬ​បាក់។ ស្ពាន​នោះ​ត្រូវ​បាន​ជួសជុល <em>នៅ​ក្នុង​កុំព្យូទ័រ</em> មុន​ពេល​ទិញ​គ្រាប់​ដែក​សូម្បី​តែ​មួយ​ផង។
+            </>
+          }
+          chips={[
+            { en: "FEA", kh: "FEA", color: "rose" },
+            { en: "CAM", kh: "CAM", color: "amber" },
+            { en: "2D + 3D", kh: "2D + 3D", color: "cyan" },
+          ]}
+          kh_={kh}
+        />
+
+        <SoftwareCard
+          testId="card-cad-software-sketchup"
+          spec="SW-02"
+          accent="emerald"
+          icon={PenTool}
+          enName="SketchUp"
+          khName="ស្កេតអាប់"
+          enTagline="The Accessible 3D Modeller"
+          khTagline="ឧបករណ៍​គំរូ 3D ដែល​ងាយ​ប្រើ"
+          enUseCase="Homes, small buildings, interior design, school projects"
+          khUseCase="ផ្ទះ អគារ​តូចៗ ការ​រចនា​ខាង​ក្នុង គម្រោង​សិក្សា"
+          en={
+            <>
+              The most accessible 3D modelling tool on the planet — easy enough
+              that a student can learn the basics in an afternoon, yet powerful
+              enough that real architects use it to design real homes and small
+              commercial buildings. Best of all, there is a{" "}
+              <strong className="text-emerald-700">free browser version</strong>{" "}
+              ({" "}
+              <span className="font-mono text-[12px]">SketchUp Free</span> ) that
+              runs on any standard school computer — no installation needed.
+            </>
+          }
+          kh={
+            <>
+              ឧបករណ៍​គំរូ 3D ដែល​ងាយ​យល់​បំផុត​នៅ​លើ​ភព​ផែនដី — ងាយ​ស្រួល​រហូត​ដល់​សិស្ស​អាច​រៀន​មូលដ្ឋាន​បាន​ក្នុង​ពេល​មួយ​រសៀល តែ​មាន​កម្លាំង​គ្រប់គ្រាន់​ដែល​ស្ថាបត្យករ​ពិត​ប្រើ​ដើម្បី​រចនា​ផ្ទះ​ពិតៗ និង​អគារ​ពាណិជ្ជកម្ម​តូចៗ។ ការ​សំខាន់​បំផុត គឺ​មាន <strong className="text-emerald-700">កំណែ​ឥត​គិត​ថ្លៃ​នៅ​លើ​កម្មវិធី​រុករក</strong> ( <span className="font-mono text-[12px]">SketchUp Free</span> ) ដែល​ដំណើរការ​នៅ​លើ​កុំព្យូទ័រ​សាលា​ធម្មតា — ដោយ​មិន​ត្រូវ​ការ​ដំឡើង​អ្វី​ឡើយ។
+            </>
+          }
+          chips={[
+            { en: "Free Tier", kh: "ឥតគិតថ្លៃ", color: "emerald" },
+            { en: "Browser", kh: "កម្មវិធីរុករក", color: "cyan" },
+            { en: "Beginner", kh: "សម្រាប់អ្នកចាប់ផ្ដើម", color: "amber" },
+          ]}
+          kh_={kh}
+        />
+
+        <SoftwareCard
+          testId="card-cad-software-revit"
+          spec="SW-03"
+          accent="cyan"
+          icon={Boxes}
+          enName="Revit / BIM"
+          khName="កម្មវិធីកសាងគំរូព័ត៌មានអគារ"
+          enTagline="The Living Digital Twin"
+          khTagline="កូន​ភ្លោះ​ឌីជីថល​រស់​រវើក"
+          enUseCase="Skyscrapers, hospitals, airports — buildings with thousands of pipes and wires"
+          khUseCase="អគារ​ខ្ពស់ មន្ទីរពេទ្យ ព្រលាន​យន្តហោះ — អគារ​ដែល​មាន​បំពង់ និង​ខ្សែ​ភ្លើង​រាប់​ពាន់"
+          en={
+            <>
+              Revit doesn't just draw walls. It builds a{" "}
+              <strong className="text-cyan-800">
+                Building Information Model (BIM)
+              </strong>{" "}
+              — a single living digital twin of the whole skyscraper that tracks{" "}
+              <em>every</em> electrical wire, plumbing pipe, air-conditioning
+              vent, and structural beam. Move a window two metres in the model
+              and every drawing, cost estimate, and contractor's worksheet
+              updates automatically. Mistakes that used to be discovered on the
+              28th floor are now caught before lunch.
+            </>
+          }
+          kh={
+            <>
+              Revit មិន​គ្រាន់​តែ​គូរ​ជញ្ជាំង​ទេ។ វា​សាងសង់ <strong className="text-cyan-800">គំរូ​ព័ត៌មាន​អគារ (BIM)</strong> — កូន​ភ្លោះ​ឌីជីថល​រស់​រវើក​តែ​មួយ​នៃ​អគារ​ខ្ពស់​ទាំង​មូល ដែល​តាមដាន <em>រាល់</em> ​ខ្សែ​ភ្លើង បំពង់​ទឹក បំពង់​ខ្យល់​ម៉ាស៊ីន​ត្រជាក់ និង​ធ្នឹម​រចនាសម្ព័ន្ធ​នីមួយៗ។ ផ្លាស់ប្ដូរ​បង្អួច​មួយ​ចម្ងាយ ២ ម៉ែត្រ​នៅ​ក្នុង​គំរូ ហើយ​រាល់​គំនូរ ការ​ប៉ាន់​ស្មាន​តម្លៃ និង​សន្លឹក​ការងារ​របស់​អ្នក​ម៉ៅ​ការ​នឹង​ធ្វើ​បច្ចុប្បន្នភាព​ដោយ​ស្វ័យ​ប្រវត្តិ។ កំហុស​ដែល​ពី​មុន​ត្រូវ​ឃើញ​នៅ​ជាន់​ទី ២៨ ឥឡូវ​ត្រូវ​បាន​ចាប់​មុន​ពេល​អាហារ​ថ្ងៃ​ត្រង់។
+            </>
+          }
+          chips={[
+            { en: "BIM", kh: "BIM", color: "cyan" },
+            { en: "Coordination", kh: "ការសម្របសម្រួល", color: "emerald" },
+            { en: "Pro Tier", kh: "កម្រិតអាជីព", color: "rose" },
+          ]}
+          kh_={kh}
+        />
+      </div>
+    </div>
+  );
+}
+
+// Generic software profile card — same blueprint chassis, recoloured.
+type ChipColor = "rose" | "amber" | "cyan" | "emerald";
+
+function SoftwareCard({
+  testId,
+  spec,
+  accent,
+  icon: Icon,
+  enName,
+  khName,
+  enTagline,
+  khTagline,
+  enUseCase,
+  khUseCase,
+  en,
+  kh,
+  chips,
+  kh_,
+}: {
+  testId: string;
+  spec: string;
+  accent: ChipColor;
+  icon: React.ComponentType<{ className?: string }>;
+  enName: string;
+  khName: string;
+  enTagline: string;
+  khTagline: string;
+  enUseCase: string;
+  khUseCase: string;
+  en: React.ReactNode;
+  kh: React.ReactNode;
+  chips: { en: string; kh: string; color: ChipColor }[];
+  kh_: boolean;
+}) {
+  const accentMap: Record<ChipColor, { border: string; titleText: string; iconBg: string; iconText: string; iconBorder: string; specBg: string; specText: string; specBorder: string; useCaseBg: string; useCaseBorder: string; useCaseText: string }> = {
+    rose: {
+      border: "border-rose-300",
+      titleText: "text-rose-900",
+      iconBg: "bg-rose-50",
+      iconText: "text-rose-700",
+      iconBorder: "border-rose-300",
+      specBg: "bg-rose-50",
+      specText: "text-rose-800",
+      specBorder: "border-rose-300",
+      useCaseBg: "bg-rose-50/60",
+      useCaseBorder: "border-rose-200",
+      useCaseText: "text-rose-900",
+    },
+    amber: {
+      border: "border-amber-300",
+      titleText: "text-amber-900",
+      iconBg: "bg-amber-50",
+      iconText: "text-amber-700",
+      iconBorder: "border-amber-300",
+      specBg: "bg-amber-50",
+      specText: "text-amber-800",
+      specBorder: "border-amber-300",
+      useCaseBg: "bg-amber-50/60",
+      useCaseBorder: "border-amber-200",
+      useCaseText: "text-amber-900",
+    },
+    cyan: {
+      border: "border-cyan-300",
+      titleText: "text-cyan-900",
+      iconBg: "bg-cyan-50",
+      iconText: "text-cyan-700",
+      iconBorder: "border-cyan-300",
+      specBg: "bg-cyan-50",
+      specText: "text-cyan-800",
+      specBorder: "border-cyan-300",
+      useCaseBg: "bg-cyan-50/60",
+      useCaseBorder: "border-cyan-200",
+      useCaseText: "text-cyan-900",
+    },
+    emerald: {
+      border: "border-emerald-300",
+      titleText: "text-emerald-900",
+      iconBg: "bg-emerald-50",
+      iconText: "text-emerald-700",
+      iconBorder: "border-emerald-300",
+      specBg: "bg-emerald-50",
+      specText: "text-emerald-800",
+      specBorder: "border-emerald-300",
+      useCaseBg: "bg-emerald-50/60",
+      useCaseBorder: "border-emerald-200",
+      useCaseText: "text-emerald-900",
+    },
+  };
+  const c = accentMap[accent];
+
+  return (
+    <article
+      className={`relative rounded-2xl border-2 ${c.border} p-5 shadow-sm flex flex-col`}
+      style={CARD_BG}
+      data-testid={testId}
+    >
+      <CornerMarks subtle />
+
+      {/* Header — icon + spec + BILINGUAL name */}
+      <div className="flex items-start gap-3 mb-3">
+        <div className={`w-12 h-12 rounded-xl ${c.iconBg} ${c.iconText} border-2 ${c.iconBorder} flex items-center justify-center flex-shrink-0`}>
+          <Icon className="w-6 h-6" />
+        </div>
+        <div className="flex flex-col min-w-0">
+          <span className={`inline-block self-start font-mono text-[10px] tracking-[0.25em] uppercase ${c.specText} ${c.specBg} border ${c.specBorder} rounded px-2 py-0.5 mb-1`}>
+            {spec}
+          </span>
+          <h4 className={`text-base sm:text-lg font-bold ${c.titleText} leading-tight`}>
+            {enName}
+          </h4>
+          <h4 className={`text-sm sm:text-base font-bold ${c.titleText} leading-snug font-khmer mt-0.5`}>
+            {khName}
+          </h4>
+        </div>
+      </div>
+
+      {/* Tagline — BOTH languages */}
+      <p className="text-sm font-semibold text-slate-700">{enTagline}</p>
+      <p className="text-sm font-semibold text-slate-700 font-khmer leading-loose mb-2">{khTagline}</p>
+
+      {/* Use-case strip — BOTH languages */}
+      <div className={`rounded-lg border ${c.useCaseBorder} ${c.useCaseBg} px-3 py-2 mb-3`}>
+        <div className={`text-[10px] font-mono uppercase tracking-widest ${c.useCaseText} opacity-70 mb-0.5`}>
+          USE CASE · ការប្រើប្រាស់
+        </div>
+        <div className={`text-xs sm:text-sm ${c.useCaseText} leading-snug`}>{enUseCase}</div>
+        <div className={`text-xs sm:text-sm ${c.useCaseText} font-khmer leading-loose`}>{khUseCase}</div>
+      </div>
+
+      {/* Body — render BOTH languages, one per <p> */}
+      <p className="text-sm text-slate-800 leading-relaxed mb-2">{en}</p>
+      <p className="text-sm text-slate-800 font-khmer leading-loose mb-3">{kh}</p>
+
+      {/* Chips */}
+      <div className="flex flex-wrap gap-2 mt-auto">
+        {chips.map((ch, i) => (
+          <VocabChip key={i} color={ch.color} en={ch.en} kh={ch.kh} k={kh_} />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+// ── Sub-section C — Try it Yourself (resource links box) ─────────────────
+
+function TryItYourselfBox({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <div
+      className="relative rounded-2xl border-2 border-cyan-400 p-5 sm:p-6 shadow-sm"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px), " +
+          "linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px)",
+        backgroundSize: "24px 24px",
+        backgroundColor: "#ecfeff",
+      }}
+      data-testid="resource-links-box"
+    >
+      <CornerMarks />
+
+      <div className="flex items-center gap-3 mb-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan-700 bg-cyan-50 border border-cyan-300 rounded px-2 py-0.5">
+          SUB-04.C
+        </span>
+        <Lightbulb className="w-5 h-5 text-cyan-700" />
+        <h3 className={`text-base sm:text-lg font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+          {t("Try it Yourself", "សាកល្បងដោយខ្លួនឯង")}
+        </h3>
+      </div>
+
+      <p className={`text-sm sm:text-base text-slate-800 mb-4 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {t(
+          "You don't need an engineer's licence — or even an installed program — to start designing in 3D today. Open one of these free, browser-based tools on a standard school computer and start building:",
+          "អ្នក​មិន​ត្រូវ​ការ​សញ្ញាបត្រ​វិស្វករ — ឬ​សូម្បី​តែ​កម្មវិធី​ដែល​បាន​ដំឡើង — ដើម្បី​ចាប់​ផ្ដើម​រចនា 3D ​ថ្ងៃ​នេះ​ឡើយ។ បើក​ឧបករណ៍​ឥត​គិត​ថ្លៃ​មួយ​ក្នុង​ចំណោម​នេះ ដែល​ដំណើរការ​ក្នុង​កម្មវិធី​រុករក នៅ​លើ​កុំព្យូទ័រ​សាលា​ធម្មតា ហើយ​ចាប់​ផ្ដើម​សាងសង់ ៖"
+        )}
+      </p>
+
+      <div className="grid sm:grid-cols-2 gap-3">
+        <ResourceLink
+          testId="resource-tinkercad"
+          href="https://www.tinkercad.com/"
+          enName="Tinkercad"
+          khName="ធីនខឺខាត"
+          enDesc="Drag-and-drop 3D blocks. The friendliest way to learn 3D modelling — perfect for first-time students and classroom projects."
+          khDesc="ដាក់​ដុំ 3D ដោយ​អូស​ហើយ​ដាក់។ វិធី​រៀន​គំរូ 3D ដ៏​រួសរាយ​បំផុត — ល្អ​ឥត​ខ្ចោះ​សម្រាប់​សិស្ស​លើក​ទី​មួយ និង​គម្រោង​ក្នុង​ថ្នាក់។"
+          kh_={kh}
+        />
+
+        <ResourceLink
+          testId="resource-sketchup-free"
+          href="https://www.sketchup.com/plans-and-pricing/sketchup-free"
+          enName="SketchUp Free"
+          khName="ស្កេតអាប់ ឥតគិតថ្លៃ"
+          enDesc="A trimmed-down browser version of the full SketchUp app. Design a real house, save it to the cloud, and revisit it from any computer."
+          khDesc="កំណែ​នៅ​លើ​កម្មវិធី​រុករក​នៃ​កម្មវិធី SketchUp ​ពេញ​លេញ។ រចនា​ផ្ទះ​ពិត​មួយ រក្សា​ទុក​នៅ​លើ Cloud ហើយ​ត្រឡប់​មក​មើល​ឡើង​វិញ​ពី​កុំព្យូទ័រ​ណា​មួយ​ក៏​បាន។"
+          kh_={kh}
+        />
+
+        <ResourceLink
+          testId="resource-onshape"
+          href="https://www.onshape.com/en/products/free"
+          enName="Onshape (Free for Hobbyists)"
+          khName="Onshape (ឥតគិតថ្លៃ​សម្រាប់​អ្នកចំណង់​ចំណូល​ចិត្ត)"
+          enDesc="Pro-grade mechanical CAD that runs entirely in the browser. The same kind of tool real engineers use, with a free tier for students."
+          khDesc="កម្មវិធី CAD មេកានិច​កម្រិត​អាជីព​ដែល​ដំណើរការ​ទាំង​ស្រុង​ក្នុង​កម្មវិធី​រុករក។ ឧបករណ៍​ប្រភេទ​ដូច​គ្នា​ដែល​វិស្វករ​ពិត​ប្រើ​ប្រាស់ ដោយ​មាន​កម្រិត​ឥត​គិត​ថ្លៃ​សម្រាប់​សិស្ស។"
+          kh_={kh}
+        />
+
+        <ResourceLink
+          testId="resource-autodesk-edu"
+          href="https://www.autodesk.com/education/edu-software/overview"
+          enName="Autodesk for Education"
+          khName="Autodesk សម្រាប់ការសិក្សា"
+          enDesc="Full free licences for AutoCAD, Revit, Fusion 360 and more — for any verified student or teacher. Same software the professionals use."
+          khDesc="អាជ្ញាបណ្ណ​ឥត​គិត​ថ្លៃ​ពេញ​លេញ​សម្រាប់ AutoCAD, Revit, Fusion 360 និង​ច្រើន​ទៀត — សម្រាប់​សិស្ស​ឬ​គ្រូ​ដែល​បាន​ផ្ទៀង​ផ្ទាត់​ណា​ម្នាក់។ ​កម្មវិធី​ដូច​គ្នា​ដែល​អ្នក​អាជីព​ប្រើ​ប្រាស់។"
+          kh_={kh}
+        />
+      </div>
+
+      {/* Footnote */}
+      <p
+        className={`mt-4 text-xs text-slate-600 italic ${kh ? "font-khmer leading-loose not-italic" : "leading-relaxed"}`}
+      >
+        {t(
+          "All four links open in a new tab. None require a credit card to begin.",
+          "តំណ​ទាំង​បួន​នឹង​បើក​នៅ​ផ្ទាំង​ថ្មី។ គ្មាន​មួយ​ណា​ត្រូវ​ការ​កាត​ឥណទាន​ដើម្បី​ចាប់​ផ្ដើម​ឡើយ។"
+        )}
+      </p>
+    </div>
+  );
+}
+
+function ResourceLink({
+  testId,
+  href,
+  enName,
+  khName,
+  enDesc,
+  khDesc,
+}: {
+  testId: string;
+  href: string;
+  enName: string;
+  khName: string;
+  enDesc: string;
+  khDesc: string;
+  kh_?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-testid={testId}
+      className="group block rounded-xl border-2 border-slate-300 bg-white p-3 hover:border-cyan-500 hover:shadow-md transition-all"
+    >
+      <div className="flex items-start gap-2">
+        <div className="flex-1 min-w-0">
+          {/* Names — BOTH languages stacked */}
+          <div className="text-sm font-bold text-slate-900 group-hover:text-cyan-800 leading-tight">
+            {enName}
+          </div>
+          <div className="text-xs sm:text-sm font-bold text-slate-700 group-hover:text-cyan-700 font-khmer leading-snug">
+            {khName}
+          </div>
+          {/* Descriptions — BOTH languages stacked */}
+          <div className="text-xs text-slate-600 mt-1.5 leading-snug">{enDesc}</div>
+          <div className="text-xs text-slate-600 mt-1 font-khmer leading-loose">{khDesc}</div>
+        </div>
+        <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-cyan-600 flex-shrink-0 mt-0.5" />
+      </div>
+      <div className="mt-2 truncate text-[10px] font-mono text-cyan-700 opacity-80 group-hover:opacity-100">
+        {href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+      </div>
+    </a>
   );
 }
