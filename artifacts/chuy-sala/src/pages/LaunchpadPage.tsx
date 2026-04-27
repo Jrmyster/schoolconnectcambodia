@@ -440,7 +440,12 @@ export function LaunchpadPage() {
         </section>
 
         {/* ── Job Interview Simulator ── */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+        {/* `id` + `scroll-mt-20` so the global search can deep-link here
+            via `/launchpad#interview-simulator` and land below the sticky nav. */}
+        <section
+          id="interview-simulator"
+          className="max-w-4xl mx-auto px-4 sm:px-6 pb-16 scroll-mt-20"
+        >
           <div className="mb-4">
             <h2 className={`text-2xl font-extrabold text-foreground ${kh ? "font-khmer" : ""}`}>
               {t("Job Interview Simulator", "កម្មវិធីហ្វឹកហាត់សម្ភាសន៍ការងារ")}

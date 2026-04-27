@@ -177,7 +177,9 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
               ? (kh
                   ? "តើអ្នកចង់រៀនអ្វីនៅថ្ងៃនេះ? / What do you want to learn today?"
                   : "What do you want to learn today? / តើអ្នកចង់រៀនអ្វីនៅថ្ងៃនេះ?")
-              : (kh ? "ស្វែងរក…" : "Search…")
+              // Compact (navbar) variant — single bilingual line so the magnifier
+              // bar in the global header reads the same in either language.
+              : "Search for anything... (ស្វែងរកអ្វីក៏បាន...)"
           }
           className={inputCls}
         />
@@ -236,15 +238,21 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
           </div>
 
           {visible.length === 0 ? (
-            <div className={`p-6 text-center text-slate-500 ${kh ? "font-khmer text-base" : ""}`}>
+            <div className="p-6 text-center text-slate-500">
               <Search className="w-8 h-8 mx-auto mb-2 text-slate-300" />
               <p className="font-semibold text-slate-700">
                 {kh ? "រកមិនឃើញលទ្ធផលសម្រាប់" : "No results for"} <span className="text-primary">"{q}"</span>
               </p>
-              <p className="text-sm mt-1">
-                {kh
-                  ? "សាកល្បងពាក្យសំខាន់ផ្សេង ដូចជា «ហ្សែន» «ការងារ» ឬ «កុំព្យូទ័រ»"
-                  : "Try a different keyword like 'genetics', 'jobs', or 'computer'."}
+              {/* Single bilingual paired string — exact spec from the brief.
+                  Khmer half is wrapped in <span class="font-khmer"> so the
+                  Khmer script renders in its proper typeface even when the
+                  surrounding paragraph uses the Latin font. */}
+              <p className="text-sm mt-2 text-slate-600">
+                No results found. Check your spelling! (
+                <span className="font-khmer">
+                  រកមិនឃើញលទ្ធផលទេ។ សូមពិនិត្យមើលការប្រកបរបស់អ្នក!
+                </span>
+                )
               </p>
             </div>
           ) : (

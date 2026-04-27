@@ -1,0 +1,40 @@
+I need to upgrade the global search functionality of the website so that students can find every single piece of content we have built. Please implement a site-wide 'Fuzzy Search' system.
+
+1. Package Installation:
+
+Install fuse.js (a lightweight, client-side fuzzy search library).
+
+2. Create the Master Search Index (ទិន្នន័យស្វែងរកគោល):
+
+Create a new utility file called searchIndex.js (or searchIndex.json).
+
+We need to map the entire site. Create an array of objects where each object represents a page or major section.
+
+Each object must contain: title (Bilingual), route (the URL path), category (e.g., Technology, Chemistry, Kids), and a massive keywords array containing the core text, concepts, and vocabulary found on that page (in both English and Khmer).
+
+3. Ensure Complete Coverage:
+Please ensure the index explicitly includes all the new modules we added today:
+
+Technology: 3D Printing (Additive Manufacturing), Maritime Tech (Buoyancy/Shipping Lanes), Fluid Dynamics (Hydraulics/Pascal's Principle), Engineering Software (CAD/SolidWorks/Digital Blueprints).
+
+Science/Chemistry: Inorganic Chemistry 101 (Symmetry, Coordination Chem), Physical Chemistry (Thermodynamics, Quantum Mechanics), Analytical Chemistry (Spectroscopy, Chromatography), Ion & Oxidation Calculator, Biochemistry (Electron Transport Chain/ATP Synthase).
+
+Human Body: Engine Fuel (Nutrition/Healthy vs. Unhealthy food).
+
+Study Center / Kids: The Global Atlas, The World Timeline, Math Magic (Multiplication/Division tables), Interview Simulator tracks.
+
+4. The Global Search UI (ចំណុចប្រទាក់ស្វែងរក):
+
+Add a prominent Search Bar to the main global Navigation Bar (Header) with a magnifying glass icon (🔍).
+
+When a user types in the search bar, use fuse.js to search across the title and keywords of the searchIndex.
+
+Display the results dynamically in a dropdown or a clean modal overlay.
+
+Each result should show the Bilingual Title, the Category, and act as a clickable <Link> that routes the user directly to that specific page.
+
+5. Formatting & UX:
+
+Placeholder text in the search bar should be bilingual: 'Search for anything... (ស្វែងរកអ្វីក៏បាន...)'
+
+If a search returns no results, show a friendly bilingual message: 'No results found. Check your spelling! (រកមិនឃើញលទ្ធផលទេ។ សូមពិនិត្យមើលការប្រកបរបស់អ្នក!)
