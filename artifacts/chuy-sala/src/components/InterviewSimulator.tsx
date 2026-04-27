@@ -404,6 +404,35 @@ export function InterviewSimulator() {
     setStage("ending");
     await callGemini(messages, selectedRole, true);
     setStage("ended");
+
+    // Persist a completion record so the Resume Builder's
+    // "Import Interview Simulator Scores" feature can surface it.
+    try {
+      const role = ROLES.find((r) => r.id === selectedRole);
+      if (role) {
+        const KEY = "chuy-sala:interview-history";
+        const raw = localStorage.getItem(KEY);
+        const existing: Array<{
+          id: string;
+          labelEn: string;
+          labelKh: string;
+          category: string;
+          dateISO: string;
+        }> = raw ? JSON.parse(raw) : [];
+        existing.push({
+          id: role.id,
+          labelEn: role.labelEn,
+          labelKh: role.labelKh,
+          category: role.category,
+          dateISO: new Date().toISOString(),
+        });
+        // Bound to the most-recent 25 entries to keep storage small.
+        const trimmed = existing.slice(-25);
+        localStorage.setItem(KEY, JSON.stringify(trimmed));
+      }
+    } catch {
+      // localStorage may be unavailable (private mode, quota); ignore quietly.
+    }
   };
 
   const handleShare = async () => {

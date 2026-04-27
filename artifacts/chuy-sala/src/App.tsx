@@ -28,6 +28,7 @@ import { AuthProvider } from "@/context/AuthContext";
 const OceanographyPage          = lazy(() => import("@/pages/OceanographyPage"));
 const HorologyPage              = lazy(() => import("@/pages/HorologyPage"));
 const ThreeDPrintingPage        = lazy(() => import("@/pages/ThreeDPrintingPage"));
+const ResumeBuilderPage         = lazy(() => import("@/pages/ResumeBuilderPage"));
 const WeatherPage               = lazy(() => import("@/pages/WeatherPage"));
 const SnowPage                  = lazy(() => import("@/pages/SnowPage").then(m => ({ default: m.SnowPage })));
 const QuantumLimitPage          = lazy(() => import("@/pages/QuantumLimitPage"));
@@ -275,6 +276,7 @@ function Router() {
             <Route path="/oceanography" component={OceanographyPage} />
             <Route path="/technology/horology" component={HorologyPage} />
             <Route path="/technology/3d-printing" component={ThreeDPrintingPage} />
+            <Route path="/career/resume-builder" component={ResumeBuilderPage} />
             <Route path="/weather" component={WeatherPage} />
             <Route path="/weather/snow" component={SnowPage} />
             <Route path="/quantum-limit" component={QuantumLimitPage} />

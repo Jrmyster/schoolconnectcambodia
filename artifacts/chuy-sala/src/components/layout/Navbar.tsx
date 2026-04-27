@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Briefcase, FileText, MessageSquare,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -947,6 +947,30 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Box,
         descEn: "3D Printing: Manufacturing the Future — three sections in a maker-space aesthetic (carbon-fibre blacks, neon wireframes, concrete greys). How it works: subtractive vs additive manufacturing, with the digital-model → slicer → heated-nozzle → layered-object pipeline. Printing the small: custom wrenches, gears, and discontinued spare parts for mechanics; finger splints, stethoscopes, and patient-specific prosthetics for clinics in remote areas. Printing the massive: gantry cranes squeezing concrete to print a two-bedroom house in 24 hours, and laser-sintered titanium-powder car chassis printed as a single lattice part.",
         descKh: "ការបោះពុម្ពត្រីមាត្រ៖ ការផលិតសម្រាប់អនាគត — បីផ្នែកក្នុងរចនាបថ maker-space (ខ្មៅ carbon fibre បន្ទាត់ neon ប្រផេះកុងក្រែត)។ របៀបដែលវាដំណើរការ៖ ការផលិតដោយដក និងការផលិតដោយបន្ថែម ជាមួយនឹងលំហូរ គំរូឌីជីថល → កម្មវិធីកាត់ស្រទាប់ → ច្រមុះក្ដៅ → វត្ថុរាងស្រទាប់។ ការបោះពុម្ពខ្នាតតូច៖ ឧបករណ៍កាត់ កង់ស្ព្រែង និងគ្រឿងបន្លាស់រលត់សម្រាប់មេកានិក; ឧបករណ៍ដាក់ម្រាមដៃ stethoscope និងដៃសិប្បនិម្មិតសម្រាប់មន្ទីរសុខាភិបាលនៅខេត្តឆ្ងាយ។ ការបោះពុម្ពខ្នាតធំ៖ ដ៏ឧប្ករណ៍ក្រេនដែលច្របាច់កុងក្រែតបោះពុម្ពផ្ទះពីរបន្ទប់គេងក្នុង ២៤ ម៉ោង និងស៊ុមរថយន្តពីម្សៅទីតានីយ៉ូមផ្សារដោយឡាស៊ែរបោះពុម្ពជា lattice តែមួយ។",
+      },
+    ],
+  },
+  {
+    labelEn: "Career",
+    labelKh: "អាជីព",
+    icon: Briefcase,
+    color: "blue",
+    items: [
+      {
+        href: "/career/resume-builder",
+        labelEn: "Resume Builder",
+        labelKh: "បង្កើតប្រវត្តិរូបសង្ខេប",
+        icon: FileText,
+        descEn: "Build a clean, bilingual Standard Professional resume in four guided steps (Personal Info → Education → Skills → Experience). Office aesthetic — minimalist whites, deep navy blues, clear borders. Skill-Sync pulls in scores from completed mock interviews as 'Passed: ...' badges; an Action-Verb engine offers strong verbs like Managed (ដឹកនាំ), Analyzed (វិភាគ), Engineered (រចនា), and Collaborated (សហការ); every field has a Khmer translation slot. Print or download as PDF — perfect for interviews in Phnom Penh or Siem Reap.",
+        descKh: "បង្កើតប្រវត្តិរូបសង្ខេបពីរភាសាបែបជំនាញដ៏ស្អាតក្នុងបួនជំហាន (ព័ត៌មានផ្ទាល់ខ្លួន → ការអប់រំ → ជំនាញ → បទពិសោធន៍)។ រចនាបថការិយាល័យ — ស ដ៏ហ្មត់ចត់ ខៀវឆ្នូត និងស៊ុមច្បាស់លាស់។ ការតភ្ជាប់ជំនាញនាំចូលលទ្ធផលសម្ភាសន៍ជា 'បានជាប់៖' ឬម៉ាស៊ីនកិរិយាស័ព្ទផ្ដល់ពាក្យដូចជា ដឹកនាំ វិភាគ រចនា និងសហការ; គ្រប់វាលមានកន្លែងសម្រាប់បកប្រែខ្មែរ។ បោះពុម្ព ឬទាញយក PDF — សម្រាប់សម្ភាសន៍នៅភ្នំពេញ ឬសៀមរាប។",
+      },
+      {
+        href: "/launchpad",
+        labelEn: "Mock Interview",
+        labelKh: "សម្ភាសន៍សាកល្បង",
+        icon: MessageSquare,
+        descEn: "Practice career interviews with the AI Interview Simulator on the Launchpad page — pick a role, answer three questions, and receive a structured performance summary you can later import into your resume.",
+        descKh: "ហាត់សម្ភាសន៍អាជីពជាមួយកម្មវិធីសម្ភាសន៍បញ្ញាសិប្បនិម្មិតនៅទំព័រ Launchpad — ជ្រើសរើសតួនាទី ឆ្លើយសំណួរបី ហើយទទួលបានសេចក្ដីសង្ខេបការអនុវត្ត ដែលអ្នកអាចនាំចូលក្នុងប្រវត្តិរូបសង្ខេបនៅពេលក្រោយ។",
       },
     ],
   },
