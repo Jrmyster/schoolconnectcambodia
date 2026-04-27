@@ -1,0 +1,47 @@
+I want to update the existing 'Analytical Chemistry' page. Below the current 'Chromatography' section shown in the UI, please add three new comprehensive sections: 'Core Curriculum Structure (រចនាសម្ព័ន្ធកម្មវិធីសិក្សាស្នូល)', 'Key Topics Covered (ប្រធានបទសំខាន់ៗ)', and 'Practical Application (ការអនុវត្តជាក់ស្តែង)'.
+
+Please implement this matching the established 'Lab Instrumentation' aesthetic (deep navy backgrounds, subtle glowing cyan/light blue accents, and crisp white typography):
+
+1. The Layout:
+
+Create a stacked, full-width card layout for these sections, using subtle borders to separate them.
+
+2. Section 1: Core Curriculum Structure (រចនាសម្ព័ន្ធកម្មវិធីសិក្សាស្នូល)
+
+Display the following as distinct, readable blocks:
+
+Foundation Course: Introduces basic concepts such as statistical analysis (error, calibration), titration (acid-base, solubility), and introductory spectroscopy.
+
+Instrumental Analysis: Focuses on modern equipment, including GC-MS, HPLC, atomic spectroscopy, and advanced electrochemical methods.
+
+Laboratory Component: Approximately 50% of the course is hands-on, developing skills in method development, data interpretation, and instrumentation.
+
+3. Section 2: Key Topics Covered (ប្រធានបទសំខាន់ៗដែលបានគ្របដណ្តប់)
+
+Display the following using a CSS Grid or sub-cards with relevant scientific icons (e.g., a bell curve for statistics, a light beam for spectroscopy):
+
+Analytical Data Handling: Statistics, signal-to-noise ratio, calibration methods (standard addition, internal standards).
+
+Separations: Chromatography (gas and liquid) and electrophoretic techniques.
+
+Spectroscopy: UV-Visible, Infrared (IR), Atomic Absorption (AA), and Nuclear Magnetic Resonance (NMR).
+
+Electrochemistry: Potentiometry and voltammetry.
+
+Specialized Topics: Environmental analysis, bioanalytical techniques, and forensic chemistry.
+
+4. Section 3: Practical Application (ការអនុវត្តជាក់ស្តែង)
+
+Highlight the real-world skills:
+
+Methodology: Understanding sampling techniques, sample preparation, and validation.
+
+Problem-Solving: Applying chemical principles to analyze complex real-world samples.
+
+Instrumentation: Operating, maintaining, and troubleshooting modern laboratory instruments.
+
+5. Formatting & UX:
+
+Maintain the dark theme (#040D1A style navy blues with #4EE2EC style cyan text highlights).
+
+Ensure all main headings and technical sub-headings are strictly bilingual (English/Khmer).

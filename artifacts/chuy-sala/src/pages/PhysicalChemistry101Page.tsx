@@ -15,6 +15,12 @@ import {
   Waves,
   Box,
   Sparkles,
+  TrendingUp,
+  Scale,
+  Wind,
+  Activity,
+  Layers,
+  Binary,
 } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -87,16 +93,22 @@ export function PhysicalChemistry101Page() {
         {/* ── Section 1: Math Meets Matter (Intro) ─────────────── */}
         <IntroSection />
 
-        {/* ── Section 2: The Quantum Revolution ────────────────── */}
+        {/* ── Section 2: P-Chem I Curriculum Syllabus ──────────── */}
+        <SyllabusPChemISection />
+
+        {/* ── Section 3: P-Chem II Curriculum Syllabus ─────────── */}
+        <SyllabusPChemIISection />
+
+        {/* ── Section 4: The Quantum Revolution ────────────────── */}
         <QuantumRevolutionSection />
 
-        {/* ── Section 3: P-Chem 1 — Macroscopic ────────────────── */}
+        {/* ── Section 5: Macroscopic Deep-Dive ─────────────────── */}
         <MacroSection />
 
-        {/* ── Section 4: P-Chem 2 — Microscopic ────────────────── */}
+        {/* ── Section 6: Microscopic Deep-Dive ─────────────────── */}
         <MicroSection />
 
-        {/* ── Section 5: Careers & Impact ──────────────────────── */}
+        {/* ── Section 7: Careers & Impact ──────────────────────── */}
         <CareersSection />
 
         <p
@@ -337,7 +349,444 @@ function IntroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 2 — The Quantum Revolution                                     */
+/*  Sections 2 & 3 — University Syllabus (P-Chem I & II)                   */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+/* Inline accent helper. The user asked for "subtle accent colors (like a soft
+   neon green or pale yellow)" on key terms. We expose a small <K> helper that
+   wraps a phrase in one of the chalkboard-friendly accents. We use lime for
+   chemistry/physics terms and amber for laws / equations / numbered concepts.
+   Bilingual labels stay paired (EN + KH side-by-side) per the user's
+   "strictly bilingual" rule for headings. */
+function K({
+  children,
+  tone = "lime",
+}: {
+  children: React.ReactNode;
+  tone?: "lime" | "amber";
+}) {
+  const cls =
+    tone === "amber"
+      ? "text-amber-200 font-semibold"
+      : "text-lime-300 font-semibold";
+  return <span className={cls}>{children}</span>;
+}
+
+type SyllabusItem = {
+  key: string;
+  Icon: typeof Atom;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: React.ReactNode;
+  bodyKh: React.ReactNode;
+  accent: "amber" | "sky" | "violet" | "rose" | "cyan" | "emerald";
+};
+
+/* A bilingual full-width syllabus panel. Headings & subtitle are paired
+   EN+KH simultaneously (no toggle); body description follows the page's
+   established t(en, kh) language-switch pattern, which is consistent with
+   every other panel on this page. */
+function SyllabusPanel({
+  id,
+  numberEn,
+  numberKh,
+  Icon,
+  titleEn,
+  titleKh,
+  subtitleEn,
+  subtitleKh,
+  items,
+  testId,
+}: {
+  id: string;
+  numberEn: string;
+  numberKh: string;
+  Icon: typeof Atom;
+  titleEn: string;
+  titleKh: string;
+  subtitleEn: string;
+  subtitleKh: string;
+  items: SyllabusItem[];
+  testId: string;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const accentText: Record<SyllabusItem["accent"], string> = {
+    emerald: "text-emerald-300",
+    amber: "text-amber-300",
+    sky: "text-sky-300",
+    violet: "text-violet-300",
+    rose: "text-rose-300",
+    cyan: "text-cyan-300",
+  };
+  const accentBg: Record<SyllabusItem["accent"], string> = {
+    emerald: "bg-emerald-800/70 ring-emerald-300/30",
+    amber: "bg-amber-800/60 ring-amber-300/30",
+    sky: "bg-sky-800/60 ring-sky-300/30",
+    violet: "bg-violet-800/60 ring-violet-300/30",
+    rose: "bg-rose-800/60 ring-rose-300/30",
+    cyan: "bg-cyan-800/60 ring-cyan-300/30",
+  };
+
+  return (
+    <section
+      data-testid={testId}
+      aria-labelledby={`${id}-heading`}
+      className="mb-12 rounded-3xl bg-emerald-950/60 border-2 border-emerald-700/50 shadow-[0_0_40px_rgba(16,185,129,0.08)] overflow-hidden backdrop-blur-sm"
+    >
+      <header className="px-5 sm:px-7 pt-6 pb-4 border-b border-emerald-700/40 bg-gradient-to-r from-emerald-900/60 to-emerald-950/30">
+        <div className="flex items-start gap-3 mb-2">
+          <span className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-800 text-emerald-100 ring-1 ring-emerald-300/30 shadow-sm">
+            <Icon className="w-5 h-5" />
+          </span>
+          <h2
+            id={`${id}-heading`}
+            className="text-xl sm:text-2xl font-bold text-white leading-snug"
+            style={{ textShadow: "0 0 10px rgba(255,255,255,0.12)" }}
+          >
+            <span className="block">
+              <span className="text-lime-300 mr-1">{numberEn}</span>
+              {titleEn}
+            </span>
+            <span className="block font-khmer text-base sm:text-lg font-semibold text-emerald-100/95 mt-1 leading-relaxed">
+              <span className="text-lime-300 mr-1">{numberKh}</span>
+              {titleKh}
+            </span>
+          </h2>
+        </div>
+        <p className="text-sm text-emerald-100/80 leading-relaxed">
+          <span className="block italic">{subtitleEn}</span>
+          <span className="block font-khmer not-italic mt-1 leading-loose">
+            {subtitleKh}
+          </span>
+        </p>
+      </header>
+
+      <div className="p-5 sm:p-7">
+        <ul role="list" className="grid grid-cols-1 gap-4 sm:gap-5">
+          {items.map((it) => (
+            <li
+              key={it.key}
+              data-testid={`${testId}-item-${it.key}`}
+              className="rounded-2xl border border-emerald-700/40 ring-1 ring-emerald-400/20 bg-emerald-900/40 p-5 transition duration-300 hover:-translate-y-0.5 hover:ring-2 hover:ring-emerald-300/60 hover:shadow-[0_0_28px_-4px_rgba(52,211,153,0.45)]"
+            >
+              <header className="flex items-start gap-3 mb-3">
+                <span
+                  className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl text-white ring-1 shadow-sm ${accentBg[it.accent]}`}
+                  aria-hidden="true"
+                >
+                  <it.Icon className="w-4 h-4" />
+                </span>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-white leading-snug">
+                    <span className="block">{it.titleEn}</span>
+                    <span
+                      className={`block font-khmer text-sm font-semibold mt-0.5 leading-relaxed ${accentText[it.accent]}`}
+                    >
+                      {it.titleKh}
+                    </span>
+                  </h3>
+                </div>
+              </header>
+              <div
+                className={`text-sm text-emerald-50/90 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {kh ? it.bodyKh : it.bodyEn}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Section 2 — P-Chem I: Thermodynamics & Kinetics ─────────────────── */
+function SyllabusPChemISection() {
+  const items: SyllabusItem[] = [
+    {
+      key: "laws-thermo",
+      Icon: Flame,
+      titleEn: "Laws of Thermodynamics",
+      titleKh: "ច្បាប់ទែម៉ូឌីណាមិច",
+      accent: "amber",
+      bodyEn: (
+        <>
+          The <K tone="amber">First Law</K> (conservation of energy:{" "}
+          <K>internal energy</K> and <K>enthalpy</K>), the{" "}
+          <K tone="amber">Second Law</K> (<K>entropy</K> always increases —{" "}
+          <K>Gibbs free energy</K> tells us if a reaction is spontaneous), and
+          the <K tone="amber">Third Law</K> (entropy of a perfect crystal
+          approaches zero as temperature approaches absolute zero).
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K tone="amber">ច្បាប់ទីមួយ</K> (ការអភិរក្សថាមពល៖ <K>ថាមពលផ្ទៃក្នុង</K>{" "}
+          និង <K>អង់ថាល់ពី</K>), <K tone="amber">ច្បាប់ទីពីរ</K> (
+          <K>អង់ត្រូពី</K> កើនឡើងជានិច្ច — <K>ថាមពលសេរីហ្គីប</K>{" "}
+          ប្រាប់យើងថាប្រតិកម្មកើតឡើងដោយខ្លួនឯងឬអត់), និង{" "}
+          <K tone="amber">ច្បាប់ទីបី</K>{" "}
+          (អង់ត្រូពីនៃគ្រីស្តាល់ល្អឥតខ្ចោះខិតជិតសូន្យ
+          ពេលសីតុណ្ហភាពខិតជិតសូន្យដាច់ខាត)។
+        </>
+      ),
+    },
+    {
+      key: "equilibrium",
+      Icon: Scale,
+      titleEn: "Equilibrium",
+      titleKh: "ឌុលលីប្រ៊ីយ៉ូម",
+      accent: "emerald",
+      bodyEn: (
+        <>
+          <K>Phase changes</K> (solid → liquid → gas), <K>phase diagrams</K>{" "}
+          mapping pressure vs. temperature, and{" "}
+          <K tone="amber">chemical equilibrium</K> — the elegant balance point
+          where forward and reverse reactions cancel out.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K>ការប្រែប្រួលដំណាក់កាល</K> (រឹង → រាវ → ឧស្ម័ន),{" "}
+          <K>ដ្យាក្រាមដំណាក់កាល</K>{" "}
+          ដែលគូសផែនទីសម្ពាធធៀបនឹងសីតុណ្ហភាព និង{" "}
+          <K tone="amber">ឌុលលីប្រ៊ីយ៉ូមគីមី</K> — ចំណុចតុល្យភាពដ៏ឆើតឆាយ
+          ដែលប្រតិកម្មទៅមុខនិងទៅក្រោយលុបបំបាត់គ្នា។
+        </>
+      ),
+    },
+    {
+      key: "real-gases",
+      Icon: Wind,
+      titleEn: "Real Gases and Solutions",
+      titleKh: "ឧស្ម័ននិងសូលុយស្យុងពិត",
+      accent: "sky",
+      bodyEn: (
+        <>
+          Deviations from <K>ideal behavior</K> when gases get crowded or cold,
+          and the <K tone="amber">van der Waals equation</K> — a beautiful
+          correction that finally explains why a real tank of gas isn't a
+          cartoon of bouncing points.
+        </>
+      ),
+      bodyKh: (
+        <>
+          ការងាករចេញពី <K>ឥរិយាបថឧត្តម</K> ពេលឧស្ម័នកក្រោល​ ឬត្រជាក់, និង{" "}
+          <K tone="amber">សមីការ van der Waals</K> — ការកែតម្រូវដ៏ស្រស់ស្អាត
+          ដែលពន្យល់ចុងក្រោយពីមូលហេតុដែលធុងឧស្ម័នពិត
+          មិនមែនជារូបគំនូរនៃចំណុចលោតនោះទេ។
+        </>
+      ),
+    },
+    {
+      key: "kinetics",
+      Icon: Timer,
+      titleEn: "Chemical Kinetics",
+      titleKh: "គីនេទិចគីមី",
+      accent: "rose",
+      bodyEn: (
+        <>
+          <K tone="amber">Rate laws</K> (how fast reactions go),{" "}
+          <K>reaction mechanisms</K> (the invisible step-by-step path from
+          reactants to products), and <K tone="amber">activation energy</K> —
+          the energy barrier every reaction must climb to happen.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K tone="amber">ច្បាប់អត្រា</K> (ល្បឿនប្រតិកម្មកើតឡើង),{" "}
+          <K>យន្តការប្រតិកម្ម</K>{" "}
+          (ផ្លូវដែលមើលមិនឃើញជំហានម្តងពីរ៉េអាក់ទីហ្វទៅផលិតផល), និង{" "}
+          <K tone="amber">ថាមពលឆ្លើយតប</K> — រនាំងថាមពលដែលរាល់ប្រតិកម្ម
+          ត្រូវឡើងឆ្លងកាត់ ដើម្បីកើតឡើង។
+        </>
+      ),
+    },
+    {
+      key: "electrochem",
+      Icon: BatteryCharging,
+      titleEn: "Electrochemistry",
+      titleKh: "អេឡិចត្រូគីមី",
+      accent: "violet",
+      bodyEn: (
+        <>
+          <K>Ions</K>, <K>electrodes</K>, and <K tone="amber">
+            electrochemical cells
+          </K>{" "}
+          — the chemistry behind every battery, every electroplated metal, and
+          every fuel cell powering the energy transition.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K>អ៊ីយ៉ុង</K>, <K>អេឡិចត្រូត</K>, និង <K tone="amber">កោសិកាអេឡិចត្រូគីមី</K>{" "}
+          — គីមីវិទ្យានៅពីក្រោយរាល់ថ្ម រាល់លោហៈចំណាប់អគ្គិសនី
+          និងរាល់កោសិកាឥន្ធនៈដែលបញ្ចេញថាមពលអន្តរកាល។
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <SyllabusPanel
+      id="syllabus-pchem-1"
+      testId="section-pchem-1-syllabus"
+      Icon={Flame}
+      numberEn="2."
+      numberKh="២."
+      titleEn="Physical Chemistry I: Thermodynamics & Kinetics"
+      titleKh="គីមីវិទ្យារូបវន្ត ១៖ ទែម៉ូឌីណាមិច និងគីនេទិច"
+      subtitleEn="Focused on macroscopic behaviors, energy, and reaction rates."
+      subtitleKh="ផ្តោតលើឥរិយាបថម៉ាក្រូស្កូប ថាមពល និងអត្រាប្រតិកម្ម។"
+      items={items}
+    />
+  );
+}
+
+/* ─── Section 3 — P-Chem II: Quantum Chemistry & Spectroscopy ──────────── */
+function SyllabusPChemIISection() {
+  const items: SyllabusItem[] = [
+    {
+      key: "qm-fundamentals",
+      Icon: Waves,
+      titleEn: "Quantum Mechanics Fundamentals",
+      titleKh: "មូលដ្ឋានយន្តវិទ្យាម្កង់តូម",
+      accent: "violet",
+      bodyEn: (
+        <>
+          <K>Wave-particle duality</K> (light is both, electrons are both!),
+          the <K tone="amber">Schrödinger equation</K> (the master equation of
+          the quantum world), and <K>wavefunctions</K> — the strange
+          probability clouds that replace classical orbits.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K>ភាពទ្វេនិយមរលក-ភាគល្អិត</K>{" "}
+          (ពន្លឺគឺទាំងពីរ អេឡិចត្រុងគឺទាំងពីរ!),{" "}
+          <K tone="amber">សមីការ Schrödinger</K>{" "}
+          (សមីការមេនៃពិភពកង់ទិច), និង <K>មុខងាររលក</K> —
+          ពពកប្រូបាប៊ីលីតេចម្លែកដែលជំនួសគន្លងបុរាណ។
+        </>
+      ),
+    },
+    {
+      key: "qm-systems",
+      Icon: Box,
+      titleEn: "Quantum Systems",
+      titleKh: "ប្រព័ន្ធកង់ទិច",
+      accent: "sky",
+      bodyEn: (
+        <>
+          The classic teaching toys: <K>particle-in-a-box</K> (electrons trapped
+          between walls), the <K>harmonic oscillator</K> (a quantum spring), and{" "}
+          <K tone="amber">angular momentum</K> — the rotational rules that
+          determine atomic shapes.
+        </>
+      ),
+      bodyKh: (
+        <>
+          ឧបករណ៍បង្រៀនបុរាណ៖ <K>ភាគល្អិតក្នុងប្រអប់</K>{" "}
+          (អេឡិចត្រុងជាប់ចន្លោះជញ្ជាំង), <K>ឌួររំញ័រអាម៉ូនិច</K>{" "}
+          (រ៉េស័រកង់ទិច), និង <K tone="amber">មុំចលនា</K> — ច្បាប់នៃការវិល
+          ដែលកំណត់រូបរាងអាតូម។
+        </>
+      ),
+    },
+    {
+      key: "atomic-molecular",
+      Icon: Atom,
+      titleEn: "Atomic and Molecular Structure",
+      titleKh: "រចនាសម្ព័ន្ធអាតូម និងម៉ូលេគុល",
+      accent: "emerald",
+      bodyEn: (
+        <>
+          <K>Atomic orbitals</K> (s, p, d, f — the famous shapes from chemistry
+          class), <K tone="amber">molecular orbital theory</K> (how orbitals
+          combine into bonds), and <K>chemical bonding</K> from a quantum
+          first-principles perspective.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K>គន្លងអាតូម</K> (s, p, d, f — រូបរាងល្បីៗពីថ្នាក់គីមី),{" "}
+          <K tone="amber">ទ្រឹស្តីគន្លងម៉ូលេគុល</K> (របៀបដែលគន្លងផ្សំគ្នា
+          ទៅជាចំណង), និង <K>ចំណងគីមី</K>{" "}
+          ពីទស្សនៈគោលការណ៍កង់ទិច។
+        </>
+      ),
+    },
+    {
+      key: "spectroscopy-syllabus",
+      Icon: Rainbow,
+      titleEn: "Spectroscopy",
+      titleKh: "វិសាលគមវិទ្យា",
+      accent: "rose",
+      bodyEn: (
+        <>
+          The <K>interaction of radiation with matter</K> — and how every
+          atom's <K tone="amber">absorption / emission spectrum</K> is its
+          unique fingerprint, letting us identify chemicals across the lab,
+          across the planet, even across the galaxy.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K>អន្តរកម្មរវាងវិទ្យុសកម្ម និងសារធាតុ</K> — និងរបៀបដែល{" "}
+          <K tone="amber">វិសាលគមស្រូប/បញ្ចេញ</K> របស់រាល់អាតូម
+          ជាស្នាមម្រាមដៃតែមួយគត់ ដែលអនុញ្ញាតឱ្យយើងសម្គាល់សារធាតុគីមី
+          នៅទូទាំងមន្ទីរពិសោធន៍ ពិភពលោក និងសូម្បីតែទូទាំងហ្គាឡាក់ស៊ី។
+        </>
+      ),
+    },
+    {
+      key: "stat-mech",
+      Icon: Layers,
+      titleEn: "Statistical Mechanics",
+      titleKh: "មេកានិចស្ថិតិ",
+      accent: "cyan",
+      bodyEn: (
+        <>
+          <K tone="amber">Partition functions</K> — the elegant mathematical
+          bridge that connects the chaos of <K>microscopic states</K>{" "}
+          (quadrillions of jiggling atoms) to the smooth, predictable{" "}
+          <K>macroscopic properties</K> we measure with thermometers and
+          pressure gauges.
+        </>
+      ),
+      bodyKh: (
+        <>
+          <K tone="amber">មុខងារផេតិសិន</K> — ស្ពានគណិតវិទ្យាដ៏ឆើតឆាយ
+          ដែលភ្ជាប់ភាពច្របូកច្របល់នៃ <K>ស្ថានភាពមីក្រូស្កូប</K>{" "}
+          (អាតូមរញ្ជួយរាប់ពាន់ពាន់ពាន់) ទៅនឹង <K>លក្ខណៈសម្បត្តិម៉ាក្រូស្កូប</K>{" "}
+          ដែលរលូននិងអាចព្យាករណ៍បាន ដែលយើងវាស់ដោយទែម៉ូម៉ែត្រ និងម៉ាត់សម្ពាធ។
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <SyllabusPanel
+      id="syllabus-pchem-2"
+      testId="section-pchem-2-syllabus"
+      Icon={Atom}
+      numberEn="3."
+      numberKh="៣."
+      titleEn="Physical Chemistry II: Quantum Chemistry & Spectroscopy"
+      titleKh="គីមីវិទ្យារូបវន្ត ២៖ គីមីវិទ្យាម្កង់តូម និងវិសាលគមវិទ្យា"
+      subtitleEn="Focused on microscopic phenomena, molecular structure, and quantum mechanics."
+      subtitleKh="ផ្តោតលើបាតុភូតមីក្រូស្កូប រចនាសម្ព័ន្ធម៉ូលេគុល និងយន្តវិទ្យាម្កង់តូម។"
+      items={items}
+    />
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Section 4 — The Quantum Revolution                                     */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function QuantumRevolutionSection() {
@@ -349,7 +798,7 @@ function QuantumRevolutionSection() {
     <Panel
       id="quantum-revolution"
       icon={Sparkles}
-      title={{ en: "2. The Quantum Revolution", kh: "២. បដិវត្តន៍កង់ទិច" }}
+      title={{ en: "4. The Quantum Revolution", kh: "៤. បដិវត្តន៍កង់ទិច" }}
       subtitle={{
         en: "Around 1900, classical physics broke. Four discoveries rewrote the rulebook of the universe — and gave birth to quantum mechanics.",
         kh: "ប្រហែលឆ្នាំ ១៩០០ រូបវិទ្យាបុរាណបានបាក់បែក។ ការរកឃើញទាំង ៤ បានសរសេរច្បាប់នៃសកលលោកឡើងវិញ — ហើយផ្តល់កំណើតដល់មេកានិចកង់ទិច។",
@@ -536,7 +985,7 @@ function QuantumRevolutionSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 3 — Macroscopic: Thermo & Kinetics                             */
+/*  Section 5 — Macroscopic: Thermo & Kinetics (deep-dive)                 */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function MacroSection() {
@@ -549,8 +998,8 @@ function MacroSection() {
       id="macro"
       icon={Flame}
       title={{
-        en: "3. P-Chem 1 — The Macroscopic World",
-        kh: "៣. គីមីរូបវិទ្យា ១ — ពិភពម៉ាក្រូ",
+        en: "5. The Macroscopic World — Deep Dive",
+        kh: "៥. ពិភពម៉ាក្រូ — ការសិក្សាស៊ីជម្រៅ",
       }}
       subtitle={{
         en: "Heat, energy, and speed — the rules that govern any reaction big enough to see.",
@@ -658,7 +1107,7 @@ function MacroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 4 — Microscopic: Quantum & Spectroscopy                        */
+/*  Section 6 — Microscopic: Quantum & Spectroscopy (deep-dive)            */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function MicroSection() {
@@ -671,8 +1120,8 @@ function MicroSection() {
       id="micro"
       icon={Atom}
       title={{
-        en: "4. P-Chem 2 — The Microscopic World",
-        kh: "៤. គីមីរូបវិទ្យា ២ — ពិភពមីក្រូ",
+        en: "6. The Microscopic World — Deep Dive",
+        kh: "៦. ពិភពមីក្រូ — ការសិក្សាស៊ីជម្រៅ",
       }}
       subtitle={{
         en: "Zoom into a single atom and the rules of everyday physics break down. Welcome to the quantum world.",
@@ -952,7 +1401,7 @@ function MicroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Section 5 — Careers & Real-World Impact                                */
+/*  Section 7 — Careers & Real-World Impact                                */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 function CareersSection() {
@@ -1021,8 +1470,8 @@ function CareersSection() {
       id="careers"
       icon={GraduationCap}
       title={{
-        en: "5. Careers & Impact",
-        kh: "៥. អាជីព និងផលប៉ះពាល់",
+        en: "7. Careers & Impact",
+        kh: "៧. អាជីព និងផលប៉ះពាល់",
       }}
       subtitle={{
         en: "Why study P-Chem? Because it powers some of the most important technology of our century.",
