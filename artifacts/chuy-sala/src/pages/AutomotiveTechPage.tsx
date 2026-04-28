@@ -20,6 +20,9 @@ import {
   Rocket,
   Activity,
   Scaling,
+  Trophy,
+  Camera,
+  MapPin,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -161,6 +164,7 @@ export function AutomotiveTechPage() {
                 <ShortcutChip href="#bay-drive"   en="03 · Drivetrain"   kh="០៣ · បញ្ជូនចលនា"  kh_={kh} />
                 <ShortcutChip href="#bay-control" en="04 · Control & Safety" kh="០៤ · គ្រប់គ្រង · សុវត្ថិភាព" kh_={kh} />
                 <ShortcutChip href="#bay-performance" en="05 · Performance" kh="០៥ · សមត្ថភាព" kh_={kh} />
+                <ShortcutChip href="#hypercar-hall" en="★ Hall of Fame" kh="★ សាលកិត្តិយស" kh_={kh} variant="red" />
               </div>
             </div>
           </div>
@@ -172,6 +176,9 @@ export function AutomotiveTechPage() {
         <BayDrivetrain kh={kh} t={t} />
         <BayControlSafety kh={kh} t={t} />
         <BayPerformance kh={kh} t={t} />
+
+        {/* ─── Hypercar Hall of Fame · leisure-reading showroom ─────────── */}
+        <HypercarHallOfFame kh={kh} t={t} />
 
         {/* ─── Closing reflection ────────────────────────────────────────── */}
         <div
@@ -207,12 +214,16 @@ export function AutomotiveTechPage() {
 
 // ─── Shortcut chip
 function ShortcutChip({
-  href, en, kh, kh_,
-}: { href: string; en: string; kh: string; kh_: boolean }) {
+  href, en, kh, kh_, variant = "orange",
+}: { href: string; en: string; kh: string; kh_: boolean; variant?: "orange" | "red" }) {
+  const cls =
+    variant === "red"
+      ? "border-red-500/50 bg-red-500/10 text-red-200 hover:bg-red-500/20"
+      : "border-orange-500/40 bg-orange-500/10 text-orange-200 hover:bg-orange-500/20";
   return (
     <a
       href={href}
-      className={`inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-orange-500/40 bg-orange-500/10 text-orange-200 hover:bg-orange-500/20 transition-colors ${kh_ ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+      className={`inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider px-2.5 py-1 rounded border transition-colors ${cls} ${kh_ ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
     >
       {kh_ ? kh : en}
     </a>
@@ -1579,5 +1590,382 @@ function TractionAeroDiagram({
         </g>
       </svg>
     </DiagramFrame>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Hypercar Hall of Fame · សាលកិត្តិយសនៃរថយន្តល្បឿនលឿន
+//
+//  A "leisure-reading" showroom that lives below the engineering bays.
+//  Aesthetic: deep matte-black, glass-morphism cards, glowing metallic
+//  accents — a luxury showroom display rather than a textbook page.
+// ════════════════════════════════════════════════════════════════════════════
+
+type Hypercar = {
+  code: string;
+  nameEn: string;
+  nameKh: string;
+  countryEn: string;
+  countryKh: string;
+  countryCode: string;
+  flagColors: [string, string, string]; // 3 horizontal stripes (top→bottom)
+  accent: string;                       // glow color (hex)
+  topSpeed: string;
+  horsepower: string;
+  factEn: string;
+  factKh: string;
+};
+
+const HYPERCARS: Hypercar[] = [
+  {
+    code: "BUG",
+    nameEn: "Bugatti Chiron",
+    nameKh: "Bugatti Chiron",
+    countryEn: "France",
+    countryKh: "ប្រទេសបារាំង",
+    countryCode: "FRA",
+    flagColors: ["#0055A4", "#FFFFFF", "#EF4135"],
+    accent: "#60a5fa",
+    topSpeed: "420 km/h",
+    horsepower: "1,500 hp",
+    factEn:
+      "To go over 400 km/h, the engine sucks in 60,000 liters of air every minute. It needs 10 radiators just to stop the engine from melting.",
+    factKh:
+      "ដើម្បីបើកលើស ៤០០ km/h ម៉ាស៊ីនស្រូបខ្យល់ ៦០,០០០ លីត្រក្នុងមួយនាទី។ វាត្រូវការប្រដាប់បំប៉ោងត្រជាក់ ១០ ដើម្បីការពារកុំឱ្យម៉ាស៊ីនរលាយ។",
+  },
+  {
+    code: "LMB",
+    nameEn: "Lamborghini Aventador",
+    nameKh: "Lamborghini Aventador",
+    countryEn: "Italy",
+    countryKh: "ប្រទេសអ៊ីតាលី",
+    countryCode: "ITA",
+    flagColors: ["#009246", "#FFFFFF", "#CE2B37"],
+    accent: "#fbbf24",
+    topSpeed: "350 km/h",
+    horsepower: "770 hp",
+    factEn:
+      "Features a massive naturally aspirated V12 engine and is shaped like a fighter jet to slice through wind resistance.",
+    factKh:
+      "មានម៉ាស៊ីន V12 ដ៏ធំធេងបែប naturally aspirated ហើយរូបរាងដូចយន្តហោះចម្បាំង ដើម្បីបំបែកកាត់កម្លាំងទាញខ្យល់។",
+  },
+  {
+    code: "FER",
+    nameEn: "Ferrari SF90 Stradale",
+    nameKh: "Ferrari SF90 Stradale",
+    countryEn: "Italy",
+    countryKh: "ប្រទេសអ៊ីតាលី",
+    countryCode: "ITA",
+    flagColors: ["#009246", "#FFFFFF", "#CE2B37"],
+    accent: "#ef4444",
+    topSpeed: "340 km/h",
+    horsepower: "1,000 hp",
+    factEn:
+      "Uses hybrid technology. It combines a roaring V8 engine with electric motors to create instant, explosive acceleration.",
+    factKh:
+      "ប្រើបច្ចេកវិទ្យា hybrid — បញ្ចូលម៉ាស៊ីន V8 ដ៏សាហាវជាមួយម៉ូទ័រអគ្គិសនី ដើម្បីបង្កើតការបង្កើនល្បឿនភ្លាមៗ និងផ្ទុះ។",
+  },
+  {
+    code: "POR",
+    nameEn: "Porsche 911 Turbo S",
+    nameKh: "Porsche 911 Turbo S",
+    countryEn: "Germany",
+    countryKh: "ប្រទេសអាល្លឺម៉ង់",
+    countryCode: "DEU",
+    flagColors: ["#000000", "#DD0000", "#FFCE00"],
+    accent: "#facc15",
+    topSpeed: "330 km/h",
+    horsepower: "640 hp",
+    factEn:
+      "The engine is in the back of the car. This puts massive heavy weight directly over the rear tires, giving it incredible grip when accelerating.",
+    factKh:
+      "ម៉ាស៊ីននៅខាងក្រោយឡាន។ វាដាក់ទម្ងន់ធំៗដោយផ្ទាល់លើកង់ខាងក្រោយ ផ្តល់ការអូសទាញដ៏អស្ចារ្យពេលបង្កើនល្បឿន។",
+  },
+  {
+    code: "COR",
+    nameEn: "Chevrolet Corvette Z06",
+    nameKh: "Chevrolet Corvette Z06",
+    countryEn: "USA",
+    countryKh: "សហរដ្ឋអាមេរិក",
+    countryCode: "USA",
+    flagColors: ["#B22234", "#FFFFFF", "#3C3B6E"],
+    accent: "#f87171",
+    topSpeed: "315 km/h",
+    horsepower: "670 hp",
+    factEn:
+      "American Muscle perfected. It uses a flat-plane crank V8 that revs so fast it sounds like a race car, proving that raw force can rival million-dollar exotics.",
+    factKh:
+      "សាច់ដុំអាមេរិកក្នុងភាពល្អឥតខ្ចោះ។ ប្រើ V8 បែប flat-plane crank ដែលវិលលឿនរហូតស្តាប់ដូចឡានប្រណាំង — បង្ហាញថាកម្លាំងឆៅអាចប្រកួតប្រជែងជាមួយឡានកម្រតម្លៃរាប់លានដុល្លារ។",
+  },
+  {
+    code: "AMV",
+    nameEn: "Aston Martin Valkyrie",
+    nameKh: "Aston Martin Valkyrie",
+    countryEn: "United Kingdom",
+    countryKh: "ចក្រភពអង់គ្លេស",
+    countryCode: "GBR",
+    flagColors: ["#012169", "#FFFFFF", "#C8102E"],
+    accent: "#22d3ee",
+    topSpeed: "350 km/h",
+    horsepower: "1,160 hp",
+    factEn:
+      "Designed by Formula 1 engineers. The bottom of the car is shaped to suck the vehicle down onto the road, creating massive 'downforce'.",
+    factKh:
+      "រចនាដោយវិស្វករ Formula 1។ ខាងក្រោមឡានរចនាដើម្បីស្រូបឡានចុះមកលើផ្លូវ បង្កើតកម្លាំងចុះ « downforce » ដ៏ធំ។",
+  },
+];
+
+function HypercarHallOfFame({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <section
+      id="hypercar-hall"
+      className="mt-12 scroll-mt-24"
+      data-testid="hypercar-hall"
+    >
+      {/* ─── Section divider · glowing speedometer line + intro ────────── */}
+      <SpeedometerDivider kh={kh} t={t} />
+
+      {/* ─── Section header ────────────────────────────────────────────── */}
+      <div className="mb-6 flex items-center gap-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase rounded px-2 py-0.5 border text-red-300 bg-red-500/10 border-red-500/50">
+          SHOWROOM
+        </span>
+        <Trophy className="w-5 h-5 text-red-300" aria-hidden="true" />
+        <h2 className={`text-xl sm:text-2xl font-bold text-slate-50 ${kh ? "font-khmer" : ""}`}>
+          {t(
+            "The Hypercar Hall of Fame",
+            "សាលកិត្តិយសនៃរថយន្តល្បឿនលឿន"
+          )}
+        </h2>
+        <div className="flex-1 border-t border-dashed border-red-500/30" />
+      </div>
+
+      {/* ─── Horizontal scrolling showroom carousel ────────────────────── */}
+      <div className="relative">
+        {/* edge-fade hints that there is more to scroll */}
+        <span aria-hidden className="pointer-events-none absolute top-0 right-0 bottom-4 w-10 z-10 bg-gradient-to-l from-[#0a0a0a] to-transparent" />
+        <span aria-hidden className="pointer-events-none absolute top-0 left-0 bottom-4 w-6 z-10 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
+        <div
+          className="overflow-x-auto pb-4 -mx-4 sm:-mx-6 px-4 sm:px-6 snap-x snap-mandatory scrollbar-thin"
+          data-testid="hypercar-carousel"
+          style={{
+            scrollbarColor: "#dc2626 #1c1917",
+          }}
+        >
+          <div className="flex gap-4 sm:gap-5">
+            {HYPERCARS.map((car) => (
+              <HypercarCard key={car.code} car={car} kh={kh} t={t} />
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll-hint label */}
+        <p className={`mt-2 text-center text-[11px] font-mono uppercase tracking-widest text-slate-500 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          {t("← scroll the showroom →", "← អូសមើលរោងតាំង →")}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─── Glowing speedometer-line section divider with bilingual intro ────────
+function SpeedometerDivider({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <div className="my-10 sm:my-12">
+      {/* The glowing line */}
+      <div className="relative h-px bg-gradient-to-r from-transparent via-red-500/70 to-transparent">
+        {/* Pulsing dot (radar-style ping) at center */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <span
+            aria-hidden
+            className="absolute inline-flex h-4 w-4 rounded-full bg-red-500 opacity-60 animate-ping"
+            style={{ left: "-8px", top: "-8px" }}
+          />
+          <span
+            aria-hidden
+            className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500"
+            style={{ boxShadow: "0 0 14px rgba(220,38,38,0.95), 0 0 28px rgba(220,38,38,0.5)" }}
+          />
+        </div>
+        {/* Tick marks left + right */}
+        <span aria-hidden className="absolute -top-1 left-[20%] h-3 w-px bg-red-500/40" />
+        <span aria-hidden className="absolute -top-1 left-[35%] h-2 w-px bg-red-500/30" />
+        <span aria-hidden className="absolute -top-1 right-[35%] h-2 w-px bg-red-500/30" />
+        <span aria-hidden className="absolute -top-1 right-[20%] h-3 w-px bg-red-500/40" />
+        {/* "0" / "MAX" labels */}
+        <span aria-hidden className="absolute -top-5 left-0 text-[9px] font-mono text-red-400/60 tracking-widest">
+          0
+        </span>
+        <span aria-hidden className="absolute -top-5 right-0 text-[9px] font-mono text-red-400/60 tracking-widest">
+          MAX
+        </span>
+      </div>
+
+      {/* Bilingual intro */}
+      <div className="mt-8 max-w-3xl mx-auto text-center">
+        <div className={`inline-flex items-center gap-2 mb-3 text-[10px] font-mono uppercase tracking-[0.3em] text-red-300/80 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          <span className="w-6 h-px bg-red-500/50" />
+          {t("Engineering meets art", "វិស្វកម្មជួបនឹងសិល្បៈ")}
+          <span className="w-6 h-px bg-red-500/50" />
+        </div>
+        <p className={`text-base sm:text-lg italic text-slate-200 leading-relaxed ${kh ? "font-khmer not-italic leading-loose" : ""}`}>
+          {t(
+            "“When engineers push the laws of physics to the absolute limit, this is what they build.”",
+            "« នៅពេលដែលវិស្វករជំរុញច្បាប់រូបវិទ្យាដល់កម្រិតអតិបរមា នេះគឺជាអ្វីដែលពួកគេបង្កើត។ »"
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── A single glass-morphism showroom card ────────────────────────────────
+function HypercarCard({
+  car, kh, t,
+}: { car: Hypercar; kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <article
+      className="snap-start flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl overflow-hidden relative border border-white/10 transition-all duration-300 hover:-translate-y-1"
+      style={{
+        backgroundColor: "rgba(15, 15, 18, 0.75)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        boxShadow: `0 10px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,255,255,0.02)`,
+      }}
+      data-testid={`hypercar-${car.code.toLowerCase()}`}
+    >
+      {/* glowing top-edge accent in the car's signature color */}
+      <span
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent 0%, ${car.accent} 50%, transparent 100%)`,
+          boxShadow: `0 0 12px ${car.accent}`,
+        }}
+      />
+
+      {/* ── IMAGE PLACEHOLDER ──────────────────────────────────────────── */}
+      {/* Drop a real photo here later: <img src="/hypercars/{car.code}.webp" alt={car.nameEn} /> */}
+      <div
+        className="relative aspect-[16/10] flex items-center justify-center border-b border-white/5"
+        style={{
+          backgroundColor: "#0c0a09",
+          backgroundImage:
+            "linear-gradient(135deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
+            "linear-gradient(225deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
+            "linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
+            "linear-gradient(315deg, rgba(255,255,255,0.025) 25%, transparent 25%)",
+          backgroundSize: "12px 12px",
+          backgroundPosition: "6px 0, 6px 0, 0 0, 0 0",
+        }}
+      >
+        {/* center camera icon */}
+        <div className="flex flex-col items-center gap-1.5 text-stone-600">
+          <Camera className="w-9 h-9" strokeWidth={1.4} aria-hidden="true" />
+          <span className={`text-[9px] font-mono uppercase tracking-[0.3em] ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
+            {t("Photo placeholder", "កន្លែងទុករូបភាព")}
+          </span>
+        </div>
+        {/* corner ID */}
+        <span
+          aria-hidden
+          className="absolute top-2 left-2 text-[9px] font-mono tracking-widest"
+          style={{ color: car.accent, opacity: 0.8 }}
+        >
+          {car.code}-{car.countryCode}
+        </span>
+      </div>
+
+      {/* ── CONTENT ────────────────────────────────────────────────────── */}
+      <div className="p-4 sm:p-5">
+        {/* Car name */}
+        <h3 className={`text-lg sm:text-xl font-bold text-slate-50 leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+          {kh ? car.nameKh : car.nameEn}
+        </h3>
+
+        {/* Country pill */}
+        <div className="mt-2 flex items-center gap-2">
+          <CountryFlagPill colors={car.flagColors} />
+          <MapPin className="w-3 h-3 text-slate-500" aria-hidden="true" />
+          <span className={`text-xs text-slate-400 ${kh ? "font-khmer text-sm" : ""}`}>
+            {kh ? car.countryKh : car.countryEn}
+          </span>
+          <span className="text-[9px] font-mono text-slate-600 ml-auto">{car.countryCode}</span>
+        </div>
+
+        {/* Stats row */}
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          <StatBox
+            Icon={Gauge}
+            labelEn="Top Speed"
+            labelKh="ល្បឿនអតិបរមា"
+            value={car.topSpeed}
+            kh={kh}
+            accent={car.accent}
+          />
+          <StatBox
+            Icon={Zap}
+            labelEn="Horsepower"
+            labelKh="កម្លាំងសេះ"
+            value={car.horsepower}
+            kh={kh}
+            accent={car.accent}
+          />
+        </div>
+
+        {/* Physics fact */}
+        <div className="mt-4 rounded-xl border border-white/5 bg-black/40 p-3">
+          <div className={`flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.2em] mb-1.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+               style={{ color: car.accent }}>
+            <Activity className="w-3 h-3" aria-hidden="true" />
+            {t("Physics Fact", "ការពិតរូបវិទ្យា")}
+          </div>
+          <p className={`text-xs sm:text-[13px] text-slate-300 ${kh ? "font-khmer leading-loose text-sm" : "leading-relaxed"}`}>
+            {kh ? car.factKh : car.factEn}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ─── Tiny 3-stripe horizontal flag pill (no emoji) ─────────────────────────
+function CountryFlagPill({ colors }: { colors: [string, string, string] }) {
+  return (
+    <div className="inline-flex flex-col w-7 h-4 rounded-sm overflow-hidden border border-white/15 shadow-sm">
+      <div className="flex-1" style={{ backgroundColor: colors[0] }} />
+      <div className="flex-1" style={{ backgroundColor: colors[1] }} />
+      <div className="flex-1" style={{ backgroundColor: colors[2] }} />
+    </div>
+  );
+}
+
+// ─── Stat box for a hypercar card ──────────────────────────────────────────
+function StatBox({
+  Icon, labelEn, labelKh, value, kh, accent,
+}: {
+  Icon: React.ComponentType<{ className?: string }>;
+  labelEn: string; labelKh: string; value: string; kh: boolean; accent: string;
+}) {
+  return (
+    <div
+      className="rounded-lg border border-white/5 bg-black/40 px-2.5 py-2"
+      style={{ boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.02)` }}
+    >
+      <div className={`flex items-center gap-1 text-[9px] font-mono uppercase tracking-[0.15em] text-slate-500 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
+        <Icon className="w-3 h-3" aria-hidden="true" />
+        <span className="truncate">{kh ? labelKh : labelEn}</span>
+      </div>
+      <div
+        className="font-mono font-bold text-base sm:text-lg leading-none"
+        style={{ color: accent, textShadow: `0 0 10px ${accent}55` }}
+      >
+        {value}
+      </div>
+    </div>
   );
 }
