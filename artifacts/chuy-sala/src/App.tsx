@@ -26,6 +26,7 @@ import { AuthProvider } from "@/context/AuthContext";
 
 // Default exports
 const MindGym                   = lazy(() => import("@/pages/MindGym"));
+const SoftSkills                = lazy(() => import("@/pages/SoftSkills"));
 const OceanographyPage          = lazy(() => import("@/pages/OceanographyPage"));
 const HorologyPage              = lazy(() => import("@/pages/HorologyPage"));
 const ThreeDPrintingPage        = lazy(() => import("@/pages/ThreeDPrintingPage"));
@@ -347,6 +348,7 @@ function Router() {
             <Route path="/well-being/sanctuary/structural-violence" component={StructuralViolencePage} />
             <Route path="/well-being/abundance-vs-scarcity" component={AbundanceScarcityPage} />
             <Route path="/well-being/family-development" component={FamilyDevelopmentPage} />
+            <Route path="/well-being/soft-skills" component={SoftSkills} />
             <Route path="/science/biology/microscopes" component={MicroscopesPage} />
             <Route path="/future-hub/university-guide" component={UniversityExpectationsPage} />
             <Route path="/study-center/competition-cooperation" component={CompetitionCooperationPage} />

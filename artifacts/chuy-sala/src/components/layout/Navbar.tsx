@@ -1019,6 +1019,14 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       {
+        href: "/well-being/soft-skills",
+        labelEn: "🤝 Soft Skills: The Invisible Tools",
+        labelKh: "🤝 ជំនាញទន់៖ ឧបករណ៍មើលមិនឃើញ",
+        icon: Handshake,
+        descEn: "Hard skills are WHAT you do (math, coding, fixing a car) — and a machine can do them. Soft skills are HOW you do it (listening, teamwork, staying calm, reading the room). Meet the Core Four — Communication, Teamwork, Adaptability, and Emotional Intelligence — your human advantage.",
+        descKh: "ជំនាញរឹង គឺ«អ្វី» ដែលអ្នកធ្វើ (គណិតវិទ្យា ការសរសេរកូដ ការជួសជុលឡាន) — ហើយម៉ាស៊ីនអាចធ្វើបាន។ ជំនាញទន់ គឺ«របៀប» ដែលអ្នកធ្វើវា (ការស្ដាប់ ការងារក្រុម ការនៅស្ងប់ ការយល់អារម្មណ៍មនុស្ស)។ ជួប ជំនាញគោលទាំងបួន — ការប្រាស្រ័យទាក់ទង ការងារក្រុម ភាពបត់បែន និងបញ្ញាស្មារតី — គុណសម្បត្តិមនុស្សរបស់អ្នក។",
+      },
+      {
         href: "/well-being/sanctuary/structural-violence",
         labelEn: "Structural Violence",
         labelKh: "អំពើហិង្សាជារចនាសម្ព័ន្ធ",

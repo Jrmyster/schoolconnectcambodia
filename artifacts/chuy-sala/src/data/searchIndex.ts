@@ -8,7 +8,7 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake,
+  Skull, Volume2, HeartHandshake, Handshake,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -494,6 +494,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។",
     keywordsEn: ["learning", "study", "study skills", "memory", "memorize", "concentration", "focus", "education", "civilization", "dyslexia", "adhd", "learning differences", "how to learn"],
     keywordsKh: ["រៀន", "សិក្សា", "ការចងចាំ", "ការផ្ដោត", "ការអប់រំ", "សិល្បៈនៃការរៀន"],
+  },
+  {
+    id: "soft-skills",
+    href: "/well-being/soft-skills",
+    icon: Handshake,
+    titleEn: "🤝 Soft Skills: The Invisible Tools",
+    titleKh: "🤝 ជំនាញទន់៖ ឧបករណ៍មើលមិនឃើញ",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "The difference between hard skills (what you do — math, coding, fixing a car) and soft skills (how you do it — listening, teamwork, calm under pressure). Meet the Core Four: Communication, Teamwork, Adaptability, and Emotional Intelligence — your human advantage that no machine can copy.",
+    descKh: "ភាពខុសគ្នារវាងជំនាញរឹង (អ្វី ដែលអ្នកធ្វើ — គណិតវិទ្យា ការសរសេរកូដ ការជួសជុលឡាន) និងជំនាញទន់ (របៀប ដែលអ្នកធ្វើវា — ការស្ដាប់ ការងារក្រុម ការនៅស្ងប់ក្រោមសម្ពាធ)។ ជួបជំនាញគោលទាំងបួន៖ ការប្រាស្រ័យទាក់ទង ការងារក្រុម ភាពបត់បែន និងបញ្ញាស្មារតី — គុណសម្បត្តិមនុស្សរបស់អ្នកដែលគ្មានម៉ាស៊ីនណាចម្លងបាន។",
+    keywordsEn: ["soft skills", "hard skills", "communication", "teamwork", "adaptability", "emotional intelligence", "EQ", "human skills", "listening", "leadership", "collaboration", "interpersonal", "people skills", "21st century skills", "human advantage", "well-being"],
+    keywordsKh: ["ជំនាញទន់", "ជំនាញរឹង", "ការប្រាស្រ័យទាក់ទង", "ការងារក្រុម", "ភាពបត់បែន", "បញ្ញាស្មារតី", "ការស្ដាប់", "ការដឹកនាំ", "ការសហការ", "ជំនាញមនុស្ស", "សុខុមាលភាព"],
   },
   {
     id: "mind-gym",
