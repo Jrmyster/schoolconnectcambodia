@@ -25,6 +25,7 @@ import { AuthProvider } from "@/context/AuthContext";
 // re-shaped to default exports inside the loader so React.lazy can use them.
 
 // Default exports
+const MindGym                   = lazy(() => import("@/pages/MindGym"));
 const OceanographyPage          = lazy(() => import("@/pages/OceanographyPage"));
 const HorologyPage              = lazy(() => import("@/pages/HorologyPage"));
 const ThreeDPrintingPage        = lazy(() => import("@/pages/ThreeDPrintingPage"));
@@ -431,6 +432,7 @@ function Router() {
             <Route path="/kids/electronics" component={KidsElectronics} />
             <Route path="/kids/math-tables" component={KidsMath} />
             <Route path="/study-center/antarctica" component={AntarcticaScience} />
+            <Route path="/study-center/puzzles" component={MindGym} />
             <Route path="/study-center/philosophy" component={PhilosophyPage} />
             <Route path="/study-center/sociology" component={SociologyPage} />
             <Route path="/admin/dashboard">

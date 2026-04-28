@@ -496,6 +496,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["រៀន", "សិក្សា", "ការចងចាំ", "ការផ្ដោត", "ការអប់រំ", "សិល្បៈនៃការរៀន"],
   },
   {
+    id: "mind-gym",
+    href: "/study-center/puzzles",
+    icon: Brain,
+    titleEn: "🧩 The Mind Gym: Logic & Puzzles",
+    titleKh: "🧩 កន្លែងហ្វឹកហាត់ខួរក្បាល៖ តក្កវិជ្ជា និងល្បែងប្រាជ្ញា",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "Train the muscle between your ears with 9 bilingual brain teasers across three difficulty tiers — pattern recognition, lateral-thinking riddles, and classic algorithmic-logic puzzles like the river crossing, two-doors-two-guards, and three switches.",
+    descKh: "ហ្វឹកហាត់សាច់ដុំរវាងត្រចៀករបស់អ្នកជាមួយល្បែងផ្គុំខួរក្បាល ៩ ជាពីរភាសាក្នុងកម្រិតពិបាកបី — ការសម្គាល់លំនាំ សំណួរបែបច្នៃប្រឌិត និងល្បែងតក្កវិជ្ជាបុរាណ ដូចជាការឆ្លងទន្លេ ទ្វារពីរ-ឆ្មាំពីរ និងកុងតាក់បី។",
+    keywordsEn: ["puzzles", "logic", "brain", "brain teaser", "riddles", "mind gym", "thinking", "lateral thinking", "pattern recognition", "algorithm", "river crossing", "two doors", "two guards", "three switches", "echo riddle", "math puzzle", "iq", "critical thinking", "problem solving"],
+    keywordsKh: ["ល្បែង", "តក្កវិជ្ជា", "ខួរក្បាល", "សំណួរប្រាជ្ញា", "ហ្វឹកហាត់ខួរក្បាល", "ការគិត", "ការសម្គាល់លំនាំ", "ការគិតបែបច្នៃប្រឌិត", "ក្បួនដោះស្រាយ", "ការឆ្លងទន្លេ", "ទ្វារពីរ", "ឆ្មាំពីរ", "កុងតាក់បី", "សំឡេងបន្ទរ", "ល្បែងគណិតវិទ្យា", "ការដោះស្រាយបញ្ហា"],
+  },
+  {
     id: "spelling-forge",
     href: "/spelling-forge",
     icon: CheckCircle,

@@ -190,6 +190,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "វាលខ្សាច់ទឹកកក៖ ទ្វីបមួយនៅក្រោមទឹកកកកំរាស់ ២ គីឡូម៉ែត្រ ដែលស្តុកទុក ៧០% នៃទឹកសាបនៃផែនដី គ្មានជាតិសាសន៍ណាគ្រប់គ្រងក្រោមសន្ធិសញ្ញាអង់តាក់ទិកឆ្នាំ ១៩៥៩ ជាមួយ ៦ ខែពន្លឺថ្ងៃ និង ៦ ខែងងឹត។",
       },
       {
+        href: "/study-center/puzzles",
+        labelEn: "🧩 The Mind Gym: Logic & Puzzles",
+        labelKh: "🧩 កន្លែងហ្វឹកហាត់ខួរក្បាល៖ តក្កវិជ្ជា និងល្បែងប្រាជ្ញា",
+        icon: Brain,
+        descEn: "Train the muscle between your ears with 9 bilingual brain teasers across three difficulty tiers — pattern recognition, lateral-thinking riddles, and classic algorithmic-logic puzzles. Confetti included.",
+        descKh: "ហ្វឹកហាត់សាច់ដុំរវាងត្រចៀករបស់អ្នកជាមួយល្បែងផ្គុំខួរក្បាល ៩ ជាពីរភាសាក្នុងកម្រិតពិបាកបី — ការសម្គាល់លំនាំ សំណួរប្រើការគិតបែបច្នៃប្រឌិត និងល្បែងតក្កវិជ្ជាបុរាណ។ មានកញ្ចែឆ្នោតផងដែរ។",
+      },
+      {
         href: "/spelling-forge",
         labelEn: "The Spelling Forge",
         labelKh: "កម្មវិធីពិនិត្យអក្ខរាវិរុទ្ធ",
