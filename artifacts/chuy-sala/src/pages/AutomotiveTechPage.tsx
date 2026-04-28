@@ -23,6 +23,9 @@ import {
   Trophy,
   Camera,
   MapPin,
+  BatteryCharging,
+  Power,
+  Layers,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -165,6 +168,7 @@ export function AutomotiveTechPage() {
                 <ShortcutChip href="#bay-control" en="04 · Control & Safety" kh="០៤ · គ្រប់គ្រង · សុវត្ថិភាព" kh_={kh} />
                 <ShortcutChip href="#bay-performance" en="05 · Performance" kh="០៥ · សមត្ថភាព" kh_={kh} />
                 <ShortcutChip href="#hypercar-hall" en="★ Hall of Fame" kh="★ សាលកិត្តិយស" kh_={kh} variant="red" />
+                <ShortcutChip href="#ev-revolution" en="⚡ EV Revolution" kh="⚡ បដិវត្តន៍ EV" kh_={kh} variant="cyan" />
               </div>
             </div>
           </div>
@@ -179,6 +183,9 @@ export function AutomotiveTechPage() {
 
         {/* ─── Hypercar Hall of Fame · leisure-reading showroom ─────────── */}
         <HypercarHallOfFame kh={kh} t={t} />
+
+        {/* ─── Electric Revolution · clean-tech finale ──────────────────── */}
+        <EvRevolution kh={kh} t={t} />
 
         {/* ─── Closing reflection ────────────────────────────────────────── */}
         <div
@@ -215,10 +222,12 @@ export function AutomotiveTechPage() {
 // ─── Shortcut chip
 function ShortcutChip({
   href, en, kh, kh_, variant = "orange",
-}: { href: string; en: string; kh: string; kh_: boolean; variant?: "orange" | "red" }) {
+}: { href: string; en: string; kh: string; kh_: boolean; variant?: "orange" | "red" | "cyan" }) {
   const cls =
     variant === "red"
       ? "border-red-500/50 bg-red-500/10 text-red-200 hover:bg-red-500/20"
+      : variant === "cyan"
+      ? "border-cyan-500/50 bg-cyan-500/10 text-cyan-200 hover:bg-cyan-500/20"
       : "border-orange-500/40 bg-orange-500/10 text-orange-200 hover:bg-orange-500/20";
   return (
     <a
@@ -1967,5 +1976,552 @@ function StatBox({
         {value}
       </div>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  The Electric Revolution · បដិវត្តន៍អគ្គិសនី
+//
+//  Final section · "Clean Tech" aesthetic — deep slate, neon cyan and
+//  electric green accents, sleek glass surfaces. Three sub-sections explain
+//  why an EV is a fundamentally different machine from the gas cars above.
+// ════════════════════════════════════════════════════════════════════════════
+
+const EV_CYAN = "#22d3ee";
+const EV_GREEN = "#4ade80";
+
+function EvRevolution({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <section
+      id="ev-revolution"
+      className="mt-12 scroll-mt-24"
+      data-testid="ev-revolution"
+    >
+      {/* ── Section divider · circuit-trace pulse ───────────────────────── */}
+      <CircuitDivider kh={kh} t={t} />
+
+      {/* ── Section header ──────────────────────────────────────────────── */}
+      <div className="mb-6 flex items-center gap-3">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase rounded px-2 py-0.5 border text-cyan-300 bg-cyan-500/10 border-cyan-500/50">
+          EV · CLEAN TECH
+        </span>
+        <Zap className="w-5 h-5 text-cyan-300" aria-hidden="true" />
+        <h2 className={`text-xl sm:text-2xl font-bold text-slate-50 ${kh ? "font-khmer" : ""}`}>
+          {t(
+            "The Electric Revolution: Instant Torque",
+            "បដិវត្តន៍អគ្គិសនី៖ កម្លាំងបង្វិលជុំភ្លាមៗ"
+          )}
+        </h2>
+        <div className="flex-1 border-t border-dashed border-cyan-500/30" />
+      </div>
+
+      {/* ── Three sub-sections ─────────────────────────────────────────── */}
+      <div className="space-y-6">
+        <EvCard
+          number="01"
+          Icon={Power}
+          titleEn="The Light Switch vs. The Water Pump"
+          titleKh="កុងតាក់ភ្លើង និងម៉ាស៊ីនបូមទឹក"
+          diagram={<PowerDeliveryDiagram kh={kh} />}
+          kh={kh}
+          bodyEn={
+            <>
+              A gas engine works like a <strong className="text-cyan-200">water pump</strong> — it has to{" "}
+              <em className="not-italic text-cyan-200">rev up</em>, spinning faster and faster, before it can deliver maximum{" "}
+              <BiTerm en="torque" kh="កម្លាំងបង្វិលជុំ" accent={EV_CYAN} />. That takes time.
+              {" "}An electric motor works like a <strong className="text-emerald-200">light switch</strong>. The
+              millisecond your foot touches the pedal, <strong className="text-emerald-200">100% of the electrical current</strong>
+              {" "}floods into the magnets and the wheels twist with full force. This is why a $50,000 EV can
+              beat a million-dollar gas car off the line in a short drag race — the gas car is still
+              "spinning up" while the EV is already gone.
+            </>
+          }
+          bodyKh={
+            <>
+              ម៉ាស៊ីនប្រេងដំណើរការដូចជា <strong className="text-cyan-200">ម៉ាស៊ីនបូមទឹក</strong> — វាត្រូវ{" "}
+              <em className="not-italic text-cyan-200">បង្វិលឡើង</em> វិលកាន់តែលឿនៗ មុននឹងវាអាចផ្តល់នូវ{" "}
+              <BiTerm en="torque" kh="កម្លាំងបង្វិលជុំ" accent={EV_CYAN} />អតិបរមា។ វាត្រូវការពេលវេលា។
+              {" "}ម៉ូទ័រអគ្គិសនីវិញដំណើរការដូចជា <strong className="text-emerald-200">កុងតាក់ភ្លើង</strong>។
+              ភ្លាមៗដែលជើងរបស់អ្នកប៉ះឈ្នាន់ <strong className="text-emerald-200">១០០% នៃចរន្តអគ្គិសនី</strong>
+              {" "}ហូរចូលដ៏កម្បាំង ហើយកង់រួមដោយកម្លាំងពេញលេញ។ នេះជាមូលហេតុដែលឡាន EV តម្លៃ ៥០,០០០ ដុល្លារ
+              អាចឈ្នះឡានប្រេងតម្លៃរាប់លានដុល្លារក្នុងការប្រណាំង drag ខ្លី — ឡានប្រេងនៅតែ «បង្វិលឡើង»
+              ខណៈដែល EV បានចាកចេញរួចហើយ។
+            </>
+          }
+          chips={[
+            { en: "Gas · ramp-up", kh: "ប្រេង · បង្វិលឡើង", tone: "slate" },
+            { en: "EV · 100% @ 0.001 s", kh: "EV · ១០០% @ ០.០០១ វិ", tone: "cyan" },
+          ]}
+        />
+
+        <EvCard
+          number="02"
+          Icon={Layers}
+          titleEn="The Skateboard Chassis"
+          titleKh="តួទម្ររាងក្ដារស្គី"
+          diagram={<SkateboardChassisDiagram kh={kh} />}
+          kh={kh}
+          bodyEn={
+            <>
+              An EV completely re-shapes the physics of the car. Instead of a heavy iron engine bolted into
+              the front, the EV's massive <strong className="text-cyan-200">battery pack</strong> is laid
+              {" "}<strong className="text-emerald-200">completely flat across the entire floor</strong> — like
+              a skateboard. That single change drops the{" "}
+              <BiTerm en="center of gravity" kh="ចំណុចកណ្តាលនៃទំនាញ" accent={EV_GREEN} />
+              {" "}to ankle height. A car with a low{" "}
+              <BiTerm en="center of gravity" kh="ចំណុចកណ្តាលនៃទំនាញ" accent={EV_GREEN} />
+              {" "}sticks to the road through tight corners and refuses to flip — the same reason race
+              cars are built low and wide.
+            </>
+          }
+          bodyKh={
+            <>
+              EV ផ្លាស់ប្តូរច្បាប់រូបវិទ្យានៃឡានទាំងស្រុង។ ជំនួសឱ្យម៉ាស៊ីនដែកធ្ងន់ដាក់នៅខាងមុខ
+              <strong className="text-cyan-200"> កញ្ចប់ថ្ម (battery pack)</strong>យក្សរបស់ EV ត្រូវដាក់
+              {" "}<strong className="text-emerald-200">រាបស្មើពេញកម្រាលឡាន</strong> — ដូចជាក្ដារស្គី។
+              ការផ្លាស់ប្តូរតែមួយនេះធ្វើឱ្យ{" "}
+              <BiTerm en="center of gravity" kh="ចំណុចកណ្តាលនៃទំនាញ" accent={EV_GREEN} />
+              {" "}ទាបដល់កម្រិតកជើង។ ឡានដែលមាន{" "}
+              <BiTerm en="center of gravity" kh="ចំណុចកណ្តាលនៃទំនាញ" accent={EV_GREEN} />
+              {" "}ទាប នឹងជាប់ផ្លូវយ៉ាងរឹងតាមជ្រុងតឹងៗ ហើយមិនធ្លាក់ទំលើ —
+              ដូចជាមូលហេតុដែលឡានប្រណាំងត្រូវបានសាងសង់ទាប និងធំទូលាយ។
+            </>
+          }
+          chips={[
+            { en: "Gas · COG high", kh: "ប្រេង · ទំនាញខ្ពស់", tone: "slate" },
+            { en: "EV · COG ankle-low", kh: "EV · ទំនាញទាបដល់កជើង", tone: "green" },
+          ]}
+        />
+
+        <EvCard
+          number="03"
+          Icon={BatteryCharging}
+          titleEn="Regenerative Braking"
+          titleKh="ការចាប់ហ្វ្រាំងបង្កើតថាមពល"
+          diagram={<RegenBrakingDiagram kh={kh} />}
+          kh={kh}
+          bodyEn={
+            <>
+              Here is the most elegant trick in the entire EV playbook: an electric{" "}
+              <BiTerm en="motor" kh="ម៉ូទ័រ" accent={EV_CYAN} /> and an electric{" "}
+              <BiTerm en="generator" kh="ម៉ាស៊ីនភ្លើង" accent={EV_GREEN} /> are
+              the <strong className="text-emerald-200">same machine</strong> — just running in reverse.
+              Press the pedal: electricity flows into the motor, the motor spins the wheels. Lift your foot
+              off: the rolling wheels now spin the motor, the motor becomes a generator, and electricity
+              flows the <strong className="text-emerald-200">other direction</strong> — straight back into
+              the battery. The car slows itself down by turning its own forward motion into{" "}
+              <em className="not-italic text-emerald-200">free fuel</em>. Every red light is a small refuel.
+            </>
+          }
+          bodyKh={
+            <>
+              នេះគឺជាល្បិចដ៏អស្ចារ្យបំផុតក្នុងសៀវភៅរបស់ EV ទាំងមូល៖
+              <BiTerm en="motor" kh="ម៉ូទ័រ" accent={EV_CYAN} />អគ្គិសនី និង
+              <BiTerm en="generator" kh="ម៉ាស៊ីនភ្លើង" accent={EV_GREEN} />អគ្គិសនី គឺជា{" "}
+              <strong className="text-emerald-200">ម៉ាស៊ីនដូចគ្នា</strong> — គ្រាន់តែដំណើរការច្រាសវិញប៉ុណ្ណោះ។
+              ចុចឈ្នាន់ប្រេង៖ អគ្គិសនីហូរចូលម៉ូទ័រ ម៉ូទ័រវិលកង់។ លើកជើងចេញ៖ កង់ដែលកំពុងវិល
+              ឥឡូវនេះវិលម៉ូទ័រ ម៉ូទ័រក្លាយជាម៉ាស៊ីនភ្លើង ហើយអគ្គិសនីហូរ
+              <strong className="text-emerald-200">ផ្លូវផ្ទុយ</strong> — ត្រឡប់ចូលថ្មវិញ។
+              ឡានបន្ថយល្បឿនដោយខ្លួនឯងដោយការបំលែងចលនារបស់វាទៅជា
+              <em className="not-italic text-emerald-200"> ឥន្ធនៈឥតគិតថ្លៃ</em>។ ភ្លើងក្រហមនីមួយៗគឺជាការដាក់ឥន្ធនៈតិចតួច។
+            </>
+          }
+          chips={[
+            { en: "Drive · ⚡ → wheels", kh: "បើក · ⚡ → កង់", tone: "cyan" },
+            { en: "Brake · wheels → ⚡ → battery", kh: "ហ្វ្រាំង · កង់ → ⚡ → ថ្ម", tone: "green" },
+          ]}
+        />
+      </div>
+    </section>
+  );
+}
+
+// ─── Bilingual term — always shows BOTH languages inline ─────────────────
+function BiTerm({ en, kh, accent }: { en: string; kh: string; accent: string }) {
+  return (
+    <strong
+      className="font-bold whitespace-nowrap"
+      style={{ color: accent, textShadow: `0 0 8px ${accent}55` }}
+    >
+      {en} <span className="font-khmer font-normal text-xs opacity-90">({kh})</span>
+    </strong>
+  );
+}
+
+// ─── Section divider · animated electric circuit-trace ───────────────────
+function CircuitDivider({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <div className="my-10 sm:my-12">
+      <div className="relative h-px bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent">
+        {/* Pulse ping at center */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <span
+            aria-hidden
+            className="absolute inline-flex h-4 w-4 rounded-full bg-cyan-400 opacity-60 animate-ping"
+            style={{ left: "-8px", top: "-8px" }}
+          />
+          <span
+            aria-hidden
+            className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400"
+            style={{ boxShadow: "0 0 14px rgba(34,211,238,0.95), 0 0 28px rgba(74,222,128,0.5)" }}
+          />
+        </div>
+        {/* Tick nodes */}
+        {[15, 30, 70, 85].map((p) => (
+          <span
+            key={p}
+            aria-hidden
+            className="absolute -top-1 h-2 w-2 rounded-full"
+            style={{
+              left: `${p}%`,
+              backgroundColor: p < 50 ? "rgba(34,211,238,0.6)" : "rgba(74,222,128,0.6)",
+              boxShadow: `0 0 6px ${p < 50 ? "rgba(34,211,238,0.8)" : "rgba(74,222,128,0.8)"}`,
+              transform: "translateY(-3px)",
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="mt-8 max-w-3xl mx-auto text-center">
+        <div className={`inline-flex items-center gap-2 mb-3 text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-300/80 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+          <span className="w-6 h-px bg-cyan-400/50" />
+          {t("Now switch off the gas", "ឥឡូវបិទប្រេងវិញ")}
+          <span className="w-6 h-px bg-cyan-400/50" />
+        </div>
+        <p className={`text-base sm:text-lg italic text-slate-200 leading-relaxed ${kh ? "font-khmer not-italic leading-loose" : ""}`}>
+          {t(
+            "“The combustion engine spent 130 years learning to be polite. The electric motor doesn't have to ask permission.”",
+            "« ម៉ាស៊ីនផ្ទុះបានចំណាយពេល ១៣០ ឆ្នាំដើម្បីរៀនមានឫកល្អ។ ម៉ូទ័រអគ្គិសនីវិញមិនចាំបាច់សុំការអនុញ្ញាតទេ។ »"
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── A single clean-tech EV explanation card ─────────────────────────────
+type EvChip = { en: string; kh: string; tone: "slate" | "cyan" | "green" };
+
+function EvCard({
+  number, Icon, titleEn, titleKh, diagram, bodyEn, bodyKh, chips, kh,
+}: {
+  number: string;
+  Icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" }>;
+  titleEn: string;
+  titleKh: string;
+  diagram: React.ReactNode;
+  bodyEn: React.ReactNode;
+  bodyKh: React.ReactNode;
+  chips: EvChip[];
+  kh: boolean;
+}) {
+  return (
+    <article
+      className="relative rounded-2xl border border-cyan-500/15 overflow-hidden p-5 sm:p-6"
+      style={{
+        backgroundColor: "rgba(2, 6, 23, 0.72)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        boxShadow:
+          "0 10px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(34,211,238,0.08), 0 0 0 1px rgba(34,211,238,0.04)",
+      }}
+      data-testid={`ev-card-${number}`}
+    >
+      {/* glowing top edge — cyan→green gradient */}
+      <span
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, #22d3ee 30%, #4ade80 70%, transparent 100%)",
+          boxShadow: "0 0 14px rgba(34,211,238,0.6)",
+        }}
+      />
+
+      {/* faint dotted-grid background */}
+      <span
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, #22d3ee 1px, transparent 1px)",
+          backgroundSize: "16px 16px",
+        }}
+      />
+
+      <div className="relative">
+        {/* Header row */}
+        <div className="flex items-start gap-3 sm:gap-4">
+          <div
+            className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+            style={{
+              backgroundColor: "rgba(34,211,238,0.10)",
+              border: "1px solid rgba(34,211,238,0.30)",
+              boxShadow: "0 0 18px rgba(34,211,238,0.20), inset 0 0 0 1px rgba(74,222,128,0.05)",
+            }}
+          >
+            <Icon className="w-6 h-6 text-cyan-300" aria-hidden="true" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-400/80">
+              SECTION {number}
+            </div>
+            <h3 className={`text-base sm:text-lg font-bold text-slate-50 mt-0.5 ${kh ? "font-khmer leading-snug" : ""}`}>
+              {kh ? titleKh : titleEn}
+            </h3>
+            <div className={`text-xs sm:text-sm text-cyan-200/70 mt-1 ${kh ? "" : "font-khmer"}`}>
+              {kh ? titleEn : titleKh}
+            </div>
+          </div>
+        </div>
+
+        {/* Diagram */}
+        <div className="mt-5">{diagram}</div>
+
+        {/* Tone chips */}
+        <div className="mt-4 flex flex-wrap gap-2">
+          {chips.map((c, i) => (
+            <EvChipTag key={i} chip={c} kh={kh} />
+          ))}
+        </div>
+
+        {/* Body text */}
+        <p className={`mt-4 text-sm sm:text-[15px] text-slate-200 ${kh ? "font-khmer leading-loose text-base" : "leading-relaxed"}`}>
+          {kh ? bodyKh : bodyEn}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function EvChipTag({ chip, kh }: { chip: EvChip; kh: boolean }) {
+  const cls =
+    chip.tone === "cyan"
+      ? "border-cyan-500/40 bg-cyan-500/10 text-cyan-200"
+      : chip.tone === "green"
+      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200"
+      : "border-slate-600 bg-slate-800/50 text-slate-300";
+  return (
+    <span
+      className={`inline-flex items-center text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded border ${cls} ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+    >
+      {kh ? chip.kh : chip.en}
+    </span>
+  );
+}
+
+// ─── Frame for EV diagrams (cyan tone instead of orange/red) ─────────────
+function EvDiagramFrame({
+  labelEn, labelKh, kh, children,
+}: {
+  labelEn: string; labelKh: string; kh: boolean; children: React.ReactNode;
+}) {
+  return (
+    <div className="relative rounded-xl border border-cyan-500/20 bg-black/40 p-3 sm:p-4">
+      <div className={`absolute -top-2 left-3 px-2 text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-300 bg-[#0a0a0a] ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+        {kh ? labelKh : labelEn}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ─── DIAGRAM 1 · Power delivery — gas ramp vs EV step ─────────────────────
+function PowerDeliveryDiagram({ kh }: { kh: boolean }) {
+  return (
+    <EvDiagramFrame labelEn="Power vs Time" labelKh="ថាមពលធៀបនឹងពេលវេលា" kh={kh}>
+      <div className="grid grid-cols-2 gap-3">
+        {/* GAS — ramping curve */}
+        <div className="text-center">
+          <svg viewBox="0 0 160 90" className="w-full h-auto" aria-hidden="true">
+            {/* axes */}
+            <line x1="20" y1="10" x2="20" y2="75" stroke="#475569" strokeWidth="1" />
+            <line x1="20" y1="75" x2="155" y2="75" stroke="#475569" strokeWidth="1" />
+            {/* dashed max line */}
+            <line x1="20" y1="20" x2="155" y2="20" stroke="#64748b" strokeWidth="0.6" strokeDasharray="3 3" />
+            {/* ramping curve (S-curve) */}
+            <path
+              d="M 20 75 Q 60 75 90 50 T 150 22"
+              fill="none"
+              stroke="#fb923c"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+            />
+            {/* labels */}
+            <text x="14" y="14" fill="#94a3b8" fontFamily="monospace" fontSize="6">POW</text>
+            <text x="138" y="86" fill="#94a3b8" fontFamily="monospace" fontSize="6">TIME</text>
+            <text x="80" y="42" fill="#fb923c" fontFamily="monospace" fontSize="6.5" textAnchor="middle">slow rev-up</text>
+          </svg>
+          <div className={`mt-1 text-[10px] font-mono uppercase tracking-widest text-orange-300 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {kh ? "ប្រេង · បង្វិលឡើង" : "GAS · RPM ramp-up"}
+          </div>
+        </div>
+        {/* EV — instant step */}
+        <div className="text-center">
+          <svg viewBox="0 0 160 90" className="w-full h-auto" aria-hidden="true">
+            <line x1="20" y1="10" x2="20" y2="75" stroke="#475569" strokeWidth="1" />
+            <line x1="20" y1="75" x2="155" y2="75" stroke="#475569" strokeWidth="1" />
+            <line x1="20" y1="20" x2="155" y2="20" stroke="#64748b" strokeWidth="0.6" strokeDasharray="3 3" />
+            {/* instant step */}
+            <path
+              d="M 20 75 L 22 75 L 22 20 L 152 20"
+              fill="none"
+              stroke="#22d3ee"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              filter="drop-shadow(0 0 4px rgba(34,211,238,0.7))"
+            />
+            {/* lightning at the step */}
+            <text x="30" y="16" fill="#4ade80" fontFamily="monospace" fontSize="9">⚡</text>
+            <text x="14" y="14" fill="#94a3b8" fontFamily="monospace" fontSize="6">POW</text>
+            <text x="138" y="86" fill="#94a3b8" fontFamily="monospace" fontSize="6">TIME</text>
+            <text x="90" y="34" fill="#22d3ee" fontFamily="monospace" fontSize="6.5" textAnchor="middle">instant 100%</text>
+          </svg>
+          <div className={`mt-1 text-[10px] font-mono uppercase tracking-widest text-cyan-300 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {kh ? "EV · ភ្លាមៗ ១០០%" : "EV · light-switch"}
+          </div>
+        </div>
+      </div>
+    </EvDiagramFrame>
+  );
+}
+
+// ─── DIAGRAM 2 · Skateboard chassis — high vs low center of gravity ──────
+function SkateboardChassisDiagram({ kh }: { kh: boolean }) {
+  return (
+    <EvDiagramFrame labelEn="Where the Weight Lives" labelKh="ទម្ងន់នៅកន្លែងណា" kh={kh}>
+      <svg viewBox="0 0 320 180" className="w-full h-auto" aria-hidden="true">
+        {/* GAS car (top) */}
+        <text x="6" y="14" fill="#fb923c" fontFamily="monospace" fontSize="8">GAS</text>
+        {/* road */}
+        <line x1="20" y1="70" x2="300" y2="70" stroke="#475569" strokeWidth="1" />
+        {/* car silhouette */}
+        <path
+          d="M 50 70 L 60 50 L 110 40 L 200 38 L 250 50 L 285 60 L 285 70 Z"
+          fill="rgba(251,146,60,0.10)"
+          stroke="#fb923c"
+          strokeWidth="1.4"
+        />
+        {/* heavy engine block at front */}
+        <rect x="200" y="46" width="40" height="20" fill="rgba(251,146,60,0.45)" stroke="#fb923c" strokeWidth="1" />
+        <text x="220" y="59" fill="#fed7aa" fontFamily="monospace" fontSize="6" textAnchor="middle">ENGINE</text>
+        {/* COG dot HIGH */}
+        <circle cx="170" cy="48" r="5" fill="#fb923c" stroke="#fff" strokeWidth="1" />
+        <text x="170" y="34" fill="#fb923c" fontFamily="monospace" fontSize="6.5" textAnchor="middle">COG ↑</text>
+        {/* wheels */}
+        <circle cx="80" cy="70" r="6" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.2" />
+        <circle cx="265" cy="70" r="6" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.2" />
+
+        {/* divider */}
+        <line x1="0" y1="92" x2="320" y2="92" stroke="#334155" strokeWidth="0.6" strokeDasharray="3 3" />
+
+        {/* EV car (bottom) */}
+        <text x="6" y="112" fill="#22d3ee" fontFamily="monospace" fontSize="8">EV</text>
+        {/* road */}
+        <line x1="20" y1="170" x2="300" y2="170" stroke="#475569" strokeWidth="1" />
+        {/* car silhouette */}
+        <path
+          d="M 50 170 L 65 148 L 115 138 L 220 138 L 270 152 L 285 162 L 285 170 Z"
+          fill="rgba(34,211,238,0.10)"
+          stroke="#22d3ee"
+          strokeWidth="1.4"
+        />
+        {/* flat battery slab across the WHOLE floor */}
+        <rect
+          x="55"
+          y="160"
+          width="225"
+          height="9"
+          fill="rgba(74,222,128,0.50)"
+          stroke="#4ade80"
+          strokeWidth="1"
+          rx="1"
+        />
+        <text x="167" y="167" fill="#bbf7d0" fontFamily="monospace" fontSize="6" textAnchor="middle">
+          BATTERY SLAB · skateboard
+        </text>
+        {/* COG dot LOW */}
+        <circle cx="170" cy="158" r="5" fill="#4ade80" stroke="#fff" strokeWidth="1" />
+        <text x="170" y="148" fill="#4ade80" fontFamily="monospace" fontSize="6.5" textAnchor="middle">COG ↓</text>
+        {/* wheels */}
+        <circle cx="85" cy="170" r="6" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.2" />
+        <circle cx="265" cy="170" r="6" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.2" />
+      </svg>
+    </EvDiagramFrame>
+  );
+}
+
+// ─── DIAGRAM 3 · Regenerative braking — same machine, two directions ─────
+function RegenBrakingDiagram({ kh }: { kh: boolean }) {
+  return (
+    <EvDiagramFrame
+      labelEn="Motor ⇄ Generator"
+      labelKh="ម៉ូទ័រ ⇄ ម៉ាស៊ីនភ្លើង"
+      kh={kh}
+    >
+      <svg viewBox="0 0 360 150" className="w-full h-auto" aria-hidden="true">
+        {/* DRIVE row */}
+        <text x="6" y="16" fill="#22d3ee" fontFamily="monospace" fontSize="8">
+          DRIVE
+        </text>
+        {/* battery */}
+        <rect x="40" y="22" width="60" height="34" rx="4" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="1.4" />
+        <text x="70" y="42" fill="#cffafe" fontFamily="monospace" fontSize="7" textAnchor="middle">BATTERY</text>
+        <text x="70" y="51" fill="#22d3ee" fontFamily="monospace" fontSize="9" textAnchor="middle">⚡</text>
+        {/* arrow → */}
+        <line x1="100" y1="39" x2="148" y2="39" stroke="#22d3ee" strokeWidth="2" filter="drop-shadow(0 0 4px rgba(34,211,238,0.7))" />
+        <polygon points="148,35 156,39 148,43" fill="#22d3ee" />
+        <text x="124" y="32" fill="#22d3ee" fontFamily="monospace" fontSize="6" textAnchor="middle">electricity</text>
+        {/* motor */}
+        <circle cx="180" cy="39" r="20" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="1.6" />
+        <text x="180" y="37" fill="#cffafe" fontFamily="monospace" fontSize="7" textAnchor="middle">MOTOR</text>
+        <text x="180" y="46" fill="#22d3ee" fontFamily="monospace" fontSize="6" textAnchor="middle">↻</text>
+        {/* arrow → */}
+        <line x1="200" y1="39" x2="248" y2="39" stroke="#22d3ee" strokeWidth="2" filter="drop-shadow(0 0 4px rgba(34,211,238,0.7))" />
+        <polygon points="248,35 256,39 248,43" fill="#22d3ee" />
+        <text x="224" y="32" fill="#22d3ee" fontFamily="monospace" fontSize="6" textAnchor="middle">spin</text>
+        {/* wheel */}
+        <circle cx="278" cy="39" r="18" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.4" />
+        <circle cx="278" cy="39" r="3" fill="#94a3b8" />
+        <text x="278" y="68" fill="#94a3b8" fontFamily="monospace" fontSize="7" textAnchor="middle">WHEELS</text>
+
+        {/* divider line */}
+        <line x1="0" y1="80" x2="360" y2="80" stroke="#334155" strokeWidth="0.6" strokeDasharray="3 3" />
+
+        {/* BRAKE row — direction reversed */}
+        <text x="6" y="98" fill="#4ade80" fontFamily="monospace" fontSize="8">
+          BRAKE
+        </text>
+        {/* wheel */}
+        <circle cx="278" cy="118" r="18" fill="#1c1917" stroke="#94a3b8" strokeWidth="1.4" />
+        <circle cx="278" cy="118" r="3" fill="#94a3b8" />
+        <text x="278" y="146" fill="#94a3b8" fontFamily="monospace" fontSize="7" textAnchor="middle">WHEELS</text>
+        {/* arrow ← */}
+        <line x1="248" y1="118" x2="200" y2="118" stroke="#4ade80" strokeWidth="2" filter="drop-shadow(0 0 4px rgba(74,222,128,0.7))" />
+        <polygon points="208,114 200,118 208,122" fill="#4ade80" />
+        <text x="224" y="111" fill="#4ade80" fontFamily="monospace" fontSize="6" textAnchor="middle">spin</text>
+        {/* generator (same machine!) */}
+        <circle cx="180" cy="118" r="20" fill="rgba(74,222,128,0.10)" stroke="#4ade80" strokeWidth="1.6" />
+        <text x="180" y="116" fill="#bbf7d0" fontFamily="monospace" fontSize="6.5" textAnchor="middle">GENERATOR</text>
+        <text x="180" y="125" fill="#4ade80" fontFamily="monospace" fontSize="6" textAnchor="middle">↺</text>
+        {/* arrow ← */}
+        <line x1="148" y1="118" x2="100" y2="118" stroke="#4ade80" strokeWidth="2" filter="drop-shadow(0 0 4px rgba(74,222,128,0.7))" />
+        <polygon points="108,114 100,118 108,122" fill="#4ade80" />
+        <text x="124" y="111" fill="#4ade80" fontFamily="monospace" fontSize="6" textAnchor="middle">electricity</text>
+        {/* battery (now charging) */}
+        <rect x="40" y="101" width="60" height="34" rx="4" fill="rgba(74,222,128,0.10)" stroke="#4ade80" strokeWidth="1.4" />
+        <text x="70" y="121" fill="#bbf7d0" fontFamily="monospace" fontSize="7" textAnchor="middle">BATTERY</text>
+        <text x="70" y="130" fill="#4ade80" fontFamily="monospace" fontSize="6" textAnchor="middle">+ charge</text>
+
+        {/* center bridge: "SAME MACHINE" annotation */}
+        <text x="180" y="76" fill="#fde047" fontFamily="monospace" fontSize="6" textAnchor="middle" fontWeight="bold">
+          ↑↓ SAME MACHINE · just reversed ↑↓
+        </text>
+      </svg>
+    </EvDiagramFrame>
   );
 }
