@@ -1,0 +1,30 @@
+I want to add a new 'leisure reading' section at the bottom of the 'Automotive Engineering' page called 'The Hypercar Hall of Fame (សាលកិត្តិយសនៃរថយន្តល្បឿនលឿន)'.
+
+Please implement this matching a 'High-End Showroom' aesthetic (deep matte black backgrounds, glowing metallic accents, and sleek glass-morphism cards):
+
+1. Section Divider:
+
+Add a sleek, animated racing flag or glowing speedometer line to separate the physics lessons from this showroom section.
+
+Add a bilingual introduction: 'When engineers push the laws of physics to the absolute limit, this is what they build. (នៅពេលដែលវិស្វករជំរុញច្បាប់រូបវិទ្យាដល់កម្រិតអតិបរមា នេះគឺជាអ្វីដែលពួកគេបង្កើត។)'
+
+2. The Data Cards (The Cars):
+Create a horizontal, scrollable carousel (or a sleek grid) of display cards for the following legendary vehicles. Each card must include the Car Name, Country of Origin, Top Speed, Horsepower, and a 'Physics Fact':
+
+Bugatti Chiron (France): >   * Physics Fact: To go over 400 km/h, the engine sucks in 60,000 liters of air every minute. It needs 10 radiators just to stop the engine from melting.
+
+Lamborghini Aventador (Italy): >   * Physics Fact: Features a massive naturally aspirated V12 engine and is shaped like a fighter jet to slice through wind resistance.
+
+Ferrari SF90 Stradale (Italy): >   * Physics Fact: Uses hybrid technology. It combines a roaring V8 engine with electric motors to create instant, explosive acceleration.
+
+Porsche 911 Turbo S (Germany): >   * Physics Fact: The engine is in the back of the car. This puts massive heavy weight directly over the rear tires, giving it incredible grip when accelerating.
+
+Chevrolet Corvette Z06 (USA): >   * Physics Fact: American Muscle perfected. It uses a flat-plane crank V8 that revs so fast it sounds like a race car, proving that raw force can rival million-dollar exotics.
+
+Aston Martin Valkyrie (UK): >   * Physics Fact: Designed by Formula 1 engineers. The bottom of the car is shaped to suck the vehicle down onto the road, creating massive 'downforce'.
+
+3. Formatting & UX:
+
+Ensure all stats (Top Speed / ល្បឿនអតិបរមា, Horsepower / កម្លាំងសេះ) and descriptions are strictly bilingual.
+
+Include an image placeholder `` inside each card so we can drop in photos later.

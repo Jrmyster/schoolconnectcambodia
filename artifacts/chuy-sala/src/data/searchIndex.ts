@@ -302,8 +302,8 @@ export const SEARCH_INDEX: SearchEntry[] = [
     categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
     descEn: "From the 4-stroke 'suck-squeeze-bang-blow' engine to the 20,000-volt spark, turbochargers, the 'air pedal' throttle, mufflers, clutches, manual & automatic gearboxes, rack-and-pinion steering, and 15 Hz ABS brakes.",
     descKh: "ចាប់ពីម៉ាស៊ីន ៤ ជំហាន «ស្រូប-ច្របាច់-ផ្ទុះ-បញ្ចេញ» ដល់ផ្គរ ២០,០០០ វ៉ុល ធួបូ «ឈ្នាន់ខ្យល់» បំពង់ស៊ីម៉ាំង អាំប្រាយ៉ា ប្រអប់លេខកា និងអូតូ ចង្កូត Rack-and-Pinion និងហ្វ្រាំង ABS ១៥ Hz។",
-    keywordsEn: ["car", "cars", "automotive", "engine", "piston", "4-stroke", "rotary", "wankel", "spark plug", "ignition", "throttle", "turbocharger", "turbo", "muffler", "clutch", "transmission", "manual", "automatic", "planetary gear", "steering", "rack and pinion", "abs", "brakes", "anti-lock", "vehicle"],
-    keywordsKh: ["ឡាន", "យានយន្ត", "ម៉ាស៊ីន", "ស៊ីឡាំង", "៤ ជំហាន", "រ៉ូតារី", "ប៊ូហ្គី", "បញ្ឆេះ", "ឈ្នាន់ស្ទុះ", "ធួបូ", "បំពង់ស៊ីម៉ាំង", "អាំប្រាយ៉ា", "ប្រអប់លេខ", "លេខកា", "លេខអូតូ", "ចង្កូត", "ហ្វ្រាំង", "ABS"],
+    keywordsEn: ["car", "cars", "automotive", "engine", "piston", "4-stroke", "rotary", "wankel", "spark plug", "ignition", "throttle", "turbocharger", "turbo", "muffler", "clutch", "transmission", "manual", "automatic", "planetary gear", "steering", "rack and pinion", "abs", "brakes", "anti-lock", "vehicle", "performance", "muscle car", "sports car", "v8", "horsepower", "power-to-weight", "newton second law", "f=ma", "acceleration", "traction", "aerodynamics", "spoiler", "downforce", "carbon fiber", "racing"],
+    keywordsKh: ["ឡាន", "យានយន្ត", "ម៉ាស៊ីន", "ស៊ីឡាំង", "៤ ជំហាន", "រ៉ូតារី", "ប៊ូហ្គី", "បញ្ឆេះ", "ឈ្នាន់ស្ទុះ", "ធួបូ", "បំពង់ស៊ីម៉ាំង", "អាំប្រាយ៉ា", "ប្រអប់លេខ", "លេខកា", "លេខអូតូ", "ចង្កូត", "ហ្វ្រាំង", "ABS", "សមត្ថភាព", "ឡានកីឡា", "ឡានសាច់ដុំ", "V៨", "horsepower", "សមាមាត្រថាមពលនិងទម្ងន់", "ច្បាប់ Newton", "F=ma", "ការបង្កើនល្បឿន", "ការអូសទាញ", "លំហូរខ្យល់", "spoiler", "កម្លាំងចុះ", "កាបូនហ្វៃប័រ", "ការប្រណាំង"],
   },
 
   // ── GEOLOGY ─────────────────────────────────────────────

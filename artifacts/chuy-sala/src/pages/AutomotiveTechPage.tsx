@@ -17,6 +17,9 @@ import {
   CircleDot,
   Triangle,
   ShieldCheck,
+  Rocket,
+  Activity,
+  Scaling,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -51,12 +54,36 @@ const CARD_BG: React.CSSProperties = {
   backgroundSize: "20px 20px",
 };
 
+// Carbon-fiber weave variant for the High-Performance Garage section.
+// Replaces the orange grid with a tighter silver/red carbon-weave pattern.
+const CARD_BG_CARBON: React.CSSProperties = {
+  backgroundColor: "rgba(18, 18, 18, 0.92)",
+  backgroundImage:
+    "linear-gradient(45deg, rgba(220, 38, 38, 0.05) 25%, transparent 25%), " +
+    "linear-gradient(-45deg, rgba(203, 213, 225, 0.05) 25%, transparent 25%), " +
+    "linear-gradient(45deg, transparent 75%, rgba(203, 213, 225, 0.05) 75%), " +
+    "linear-gradient(-45deg, transparent 75%, rgba(220, 38, 38, 0.05) 75%)",
+  backgroundSize: "10px 10px",
+  backgroundPosition: "0 0, 0 5px, 5px -5px, -5px 0",
+};
+
 const SILVER = "#cbd5e1";
 const ORANGE = "#fb923c";
 const ORANGE_DEEP = "#ea580c";
 
-function CornerMarks({ tone = "orange" }: { tone?: "orange" | "silver" }) {
-  const cls = tone === "orange" ? "border-orange-500/70" : "border-slate-400/60";
+// ── High-Performance-Garage palette (carbon fiber + racing red) ────────────
+const RACING_RED = "#dc2626";       // primary racing accent
+const RACING_RED_DEEP = "#991b1b";  // deeper red shadows
+const RACING_RED_LIGHT = "#fca5a5"; // text highlights
+const CARBON_FIBER = "#1c1917";     // deepest carbon background
+
+function CornerMarks({ tone = "orange" }: { tone?: "orange" | "silver" | "red" }) {
+  const cls =
+    tone === "orange"
+      ? "border-orange-500/70"
+      : tone === "red"
+      ? "border-red-500/70"
+      : "border-slate-400/60";
   return (
     <div className="contents">
       <span aria-hidden className={`pointer-events-none absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 ${cls}`} />
@@ -122,8 +149,8 @@ export function AutomotiveTechPage() {
               </h1>
               <p className={`mt-3 text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
                 {t(
-                  "Roll a car onto the workshop floor and lift its skin off. Every part — from a 20,000-volt spark to a brake that pulses 15 times a second — is solving one engineering puzzle. Click open the four bays to see what's inside.",
-                  "រុញឡានចូលលើផ្ទៃរោងជាងហើយលើកស្បែករបស់វាចេញ។ គ្រឿងទាំងអស់ — ចាប់ពីផ្គរ ២០,០០០ វ៉ុលទៅហ្វ្រាំងដែលលោតមួយវិនាទី ១៥ ដង — កំពុងដោះស្រាយបញ្ហាវិស្វកម្មមួយ។ បើករោងវែងទាំងបួនមើលពីខាងក្នុង។"
+                  "Roll a car onto the workshop floor and lift its skin off. Every part — from a 20,000-volt spark to a brake that pulses 15 times a second — is solving one engineering puzzle. Click open the five bays to see what's inside.",
+                  "រុញឡានចូលលើផ្ទៃរោងជាងហើយលើកស្បែករបស់វាចេញ។ គ្រឿងទាំងអស់ — ចាប់ពីផ្គរ ២០,០០០ វ៉ុលទៅហ្វ្រាំងដែលលោតមួយវិនាទី ១៥ ដង — កំពុងដោះស្រាយបញ្ហាវិស្វកម្មមួយ។ បើករោងវែងទាំងប្រាំមើលពីខាងក្នុង។"
                 )}
               </p>
 
@@ -133,6 +160,7 @@ export function AutomotiveTechPage() {
                 <ShortcutChip href="#bay-air"     en="02 · Power & Air"  kh="០២ · ថាមពល និងខ្យល់" kh_={kh} />
                 <ShortcutChip href="#bay-drive"   en="03 · Drivetrain"   kh="០៣ · បញ្ជូនចលនា"  kh_={kh} />
                 <ShortcutChip href="#bay-control" en="04 · Control & Safety" kh="០៤ · គ្រប់គ្រង · សុវត្ថិភាព" kh_={kh} />
+                <ShortcutChip href="#bay-performance" en="05 · Performance" kh="០៥ · សមត្ថភាព" kh_={kh} />
               </div>
             </div>
           </div>
@@ -143,6 +171,7 @@ export function AutomotiveTechPage() {
         <BayPowerAir kh={kh} t={t} />
         <BayDrivetrain kh={kh} t={t} />
         <BayControlSafety kh={kh} t={t} />
+        <BayPerformance kh={kh} t={t} />
 
         {/* ─── Closing reflection ────────────────────────────────────────── */}
         <div
@@ -196,18 +225,24 @@ function BayHeader({
 }: {
   spec: string; en: string; kh: string; kh_: boolean;
   Icon: React.ComponentType<{ className?: string }>;
-  tone?: "orange" | "silver";
+  tone?: "orange" | "silver" | "red";
 }) {
   const map: Record<string, string> = {
     orange: "text-orange-300 bg-orange-500/10 border-orange-500/50",
     silver: "text-slate-200 bg-slate-500/10 border-slate-400/40",
+    red:    "text-red-300 bg-red-500/10 border-red-500/50",
+  };
+  const iconCls: Record<string, string> = {
+    orange: "text-orange-300",
+    silver: "text-slate-200",
+    red:    "text-red-300",
   };
   return (
     <div className="mb-4 flex items-center gap-3">
       <span className={`font-mono text-[10px] tracking-[0.25em] uppercase rounded px-2 py-0.5 border ${map[tone]}`}>
         BAY-{spec}
       </span>
-      <Icon className="w-5 h-5 text-orange-300" />
+      <Icon className={`w-5 h-5 ${iconCls[tone]}`} />
       <h2 className={`text-xl sm:text-2xl font-bold text-slate-50 ${kh_ ? "font-khmer" : ""}`}>
         {kh_ ? kh : en}
       </h2>
@@ -225,7 +260,7 @@ function PartCard({
 }: {
   spec: string; en: string; kh: string; kh_: boolean;
   Icon: React.ComponentType<{ className?: string }>;
-  tone?: "orange" | "silver" | "amber";
+  tone?: "orange" | "silver" | "amber" | "red";
   diagram?: React.ReactNode;
   children: React.ReactNode;
 }) {
@@ -233,18 +268,23 @@ function PartCard({
     orange: "border-orange-500/50",
     silver: "border-slate-500/60",
     amber:  "border-amber-400/60",
+    red:    "border-red-500/60",
   };
   const iconBg: Record<string, string> = {
     orange: "bg-orange-500/15 text-orange-300 border-orange-400/60",
     silver: "bg-slate-500/15 text-slate-200 border-slate-400/60",
     amber:  "bg-amber-400/15 text-amber-300 border-amber-400/60",
+    red:    "bg-red-500/15 text-red-300 border-red-400/60",
   };
+  const cornerTone: "orange" | "silver" | "red" =
+    tone === "silver" ? "silver" : tone === "red" ? "red" : "orange";
+  const bgStyle = tone === "red" ? CARD_BG_CARBON : CARD_BG;
   return (
     <article
       className={`relative rounded-2xl border-2 ${map[tone]} p-4 sm:p-5 shadow-lg overflow-hidden flex flex-col`}
-      style={CARD_BG}
+      style={bgStyle}
     >
-      <CornerMarks tone={tone === "silver" ? "silver" : "orange"} />
+      <CornerMarks tone={cornerTone} />
       <div className="flex items-start gap-3 mb-3">
         <div className={`w-11 h-11 rounded-lg flex items-center justify-center border-2 flex-shrink-0 ${iconBg[tone]}`}>
           <Icon className="w-5 h-5" />
@@ -274,12 +314,13 @@ function Spec({
   en, kh, kh_, value, tone = "orange",
 }: {
   en: string; kh: string; kh_: boolean; value: string;
-  tone?: "orange" | "silver" | "amber";
+  tone?: "orange" | "silver" | "amber" | "red";
 }) {
   const map: Record<string, string> = {
     orange: "border-orange-500/50 text-orange-200 bg-orange-500/10",
     silver: "border-slate-500/50 text-slate-200 bg-slate-500/10",
     amber:  "border-amber-400/50 text-amber-200 bg-amber-400/10",
+    red:    "border-red-500/50 text-red-200 bg-red-500/10",
   };
   return (
     <span className={`inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider px-2 py-0.5 rounded border ${map[tone]} ${kh_ ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
@@ -669,11 +710,16 @@ function BayControlSafety({
 // ════════════════════════════════════════════════════════════════════════════
 
 function DiagramFrame({
-  labelEn, labelKh, kh, children,
-}: { labelEn: string; labelKh: string; kh: boolean; children: React.ReactNode }) {
+  labelEn, labelKh, kh, children, tone = "orange",
+}: {
+  labelEn: string; labelKh: string; kh: boolean; children: React.ReactNode;
+  tone?: "orange" | "red";
+}) {
+  const border = tone === "red" ? "border-red-500/40" : "border-orange-500/30";
+  const label  = tone === "red" ? "text-red-300/85"   : "text-orange-300/80";
   return (
-    <div className="rounded-lg bg-black/60 border border-orange-500/30 p-3">
-      <div className={`text-[10px] font-mono uppercase tracking-widest text-orange-300/80 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+    <div className={`rounded-lg bg-black/60 border ${border} p-3`}>
+      <div className={`text-[10px] font-mono uppercase tracking-widest ${label} mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
         {kh ? labelKh : labelEn}
       </div>
       {children}
@@ -1093,6 +1139,443 @@ function ABSDiagram({ kh, t }: { kh: boolean; t: (en: string, kh: string) => str
           <circle cx="180" cy="6" r="9" fill="#22c55e" stroke="#fff" />
           <text x="190" y="10" fontSize="9" fontFamily="monospace" fill="#86efac">{kh ? "ឈប់ត្រឹម" : "stops in time"} ✓</text>
           <text x="6" y="22" fontSize="9" fontFamily="monospace" fill="#86efac" fontWeight="bold">{kh ? "មាន ABS · លោត" : "WITH ABS · PULSE"}</text>
+        </g>
+      </svg>
+    </DiagramFrame>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Bay 05 · Performance Engineering — Muscle & Speed
+//
+//  Aesthetic shift: from "garage blueprint orange" to "high-performance
+//  garage" — carbon-fiber greys, brushed silver, racing-red accents.
+// ════════════════════════════════════════════════════════════════════════════
+
+function BayPerformance({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <section
+      id="bay-performance"
+      className="mb-10 scroll-mt-24"
+      data-testid="bay-performance"
+    >
+      <BayHeader
+        spec="05"
+        en="Performance Engineering — Muscle & Speed"
+        kh="វិស្វកម្មសមត្ថភាព — កម្លាំង និងល្បឿន"
+        kh_={kh}
+        Icon={Rocket}
+        tone="red"
+      />
+
+      <div className="grid lg:grid-cols-3 gap-4">
+        {/* ─── 01 · Physics of Acceleration ───────────────────────────── */}
+        <PartCard
+          spec="F=ma"
+          en="The Physics of Acceleration"
+          kh="រូបវិទ្យានៃការបង្កើនល្បឿន"
+          kh_={kh}
+          Icon={Activity}
+          tone="red"
+          diagram={<AccelerationDiagram kh={kh} t={t} />}
+        >
+          <p className="mb-2">
+            {t(
+              "Newton's Second Law sums up every race ever run: ",
+              "ច្បាប់ទីពីររបស់ Newton សង្ខេបការប្រណាំងគ្រប់ល្បឿន៖ "
+            )}
+            <strong className="text-red-300">
+              {t("Acceleration = Force ÷ Mass", "ការបង្កើនល្បឿន = កម្លាំង ÷ ម៉ាស")}
+            </strong>
+            {t(
+              ". To make a car go faster, an engineer has only two levers — push harder (a bigger engine) or weigh less (a lighter car).",
+              "។ ដើម្បីធ្វើឱ្យឡានទៅកាន់តែលឿន វិស្វករមានជម្រើសតែ ២ ប៉ុណ្ណោះ — រុញកាន់តែខ្លាំង (ម៉ាស៊ីនធំជាង) ឬមានទម្ងន់តិច (ឡានស្រាលជាង)។"
+            )}
+          </p>
+          <p>
+            {t("That is why a sports car is built around a ", "នោះហើយជាមូលហេតុដែលឡានកីឡាត្រូវបានកសាងជុំវិញ ")}
+            <strong className="text-slate-100">
+              {t("power-to-weight ratio", "សមាមាត្រថាមពលនិងទម្ងន់")}
+            </strong>
+            {t(
+              " — strip out the heavy steel body panels and the heavy back seats, swap them for lightweight aluminum or carbon fiber, and every gram saved means more acceleration from the same engine.",
+              " — ដកបន្ទះដែកធ្ងន់និងកៅអីខាងក្រោយធ្ងន់ ប្ដូរពួកវាជាមួយអាលុយមីញ៉ូមឬកាបូនហ្វៃប័រស្រាល ហើយរាល់ក្រាមដែលសន្សំបានមានន័យថាការបង្កើនល្បឿនច្រើនជាងពីម៉ាស៊ីនដូចគ្នា។"
+            )}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Spec en="Newton 2nd Law" kh="ច្បាប់ទី២ Newton" kh_={kh} value="F = ma" tone="red" />
+            <Spec en="Power / Weight" kh="ថាមពល/ទម្ងន់" kh_={kh} value="hp/kg" tone="silver" />
+            <Spec en="Carbon fiber" kh="កាបូនហ្វៃប័រ" kh_={kh} value="−40 %" tone="silver" />
+          </div>
+        </PartCard>
+
+        {/* ─── 02 · Heart of the Beast (I4 vs V8) ─────────────────────── */}
+        <PartCard
+          spec="V8"
+          en="The Heart of the Beast"
+          kh="បេះដូងនៃសត្វសាហាវ"
+          kh_={kh}
+          Icon={Flame}
+          tone="red"
+          diagram={<EngineCompareDiagram kh={kh} t={t} />}
+        >
+          <p className="mb-2">
+            <strong className="text-slate-200">
+              {t("Regular car · ", "ឡានធម្មតា · ")}
+            </strong>
+            {t(
+              "usually a small 4-cylinder engine designed to sip fuel slowly and save money on the daily commute.",
+              "ជាធម្មតាមានម៉ាស៊ីន ៤ ស៊ីឡាំងតូច ដែលបានរចនាដើម្បីច្រួសសាំងយឺតៗហើយសន្សំលុយក្នុងការធ្វើដំណើរប្រចាំថ្ងៃ។"
+            )}
+          </p>
+          <p>
+            <strong className="text-red-300">
+              {t("Muscle car · ", "ឡានសាច់ដុំ · ")}
+            </strong>
+            {t(
+              "a massive V8. A bigger engine has larger cylinders, so it can suck in massive gulps of air and fuel each cycle. Bigger explosions mean a more violent force pushing the pistons down — and that violence is exactly what you feel when the car launches.",
+              "V8 ដ៏ធំ។ ម៉ាស៊ីនធំជាងមានស៊ីឡាំងធំជាង ដូច្នេះវាអាចស្រូបខ្យល់និងសាំងយ៉ាងច្រើនក្នុងវដ្តនីមួយៗ។ ការផ្ទុះធំជាងមានន័យថាកម្លាំងសាហាវជាងរុញស៊ីឡាំងចុះ — ហើយភាពសាហាវនោះគឺជាអ្វីដែលអ្នកមានអារម្មណ៍ពេលឡានចេញបិទ។"
+            )}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Spec en="Inline-4" kh="៤ ស៊ីឡាំងតម្រង់" kh_={kh} value="≈ 150 hp" tone="silver" />
+            <Spec en="V8" kh="V៨" kh_={kh} value="450+ hp" tone="red" />
+            <Spec en="Displacement" kh="មាឌស៊ីឡាំង" kh_={kh} value="6.2 L" tone="silver" />
+          </div>
+        </PartCard>
+
+        {/* ─── 03 · Gripping the Earth (Traction + Aero) ──────────────── */}
+        <PartCard
+          spec="GRIP"
+          en="Gripping the Earth"
+          kh="ការអូសទាញនៅលើដី"
+          kh_={kh}
+          Icon={Scaling}
+          tone="red"
+          diagram={<TractionAeroDiagram kh={kh} t={t} />}
+        >
+          <p className="mb-2">
+            {t(
+              "A huge engine is useless if the tires just spin in the dirt. Two forces decide whether all that power becomes forward motion: grip and air.",
+              "ម៉ាស៊ីនធំគឺគ្មានន័យបើកង់គ្រាន់តែវិលនៅលើដី។ កម្លាំងពីរសម្រេចថាតើថាមពលទាំងអស់នោះក្លាយជាចលនាទៅមុខឬទេ៖ ការអូសទាញ និងខ្យល់។"
+            )}
+          </p>
+          <p className="mb-2">
+            <strong className="text-red-300">
+              {t("Traction · ", "ការអូសទាញ · ")}
+            </strong>
+            {t(
+              "sports cars run incredibly wide, sticky tires to put every horsepower straight into the pavement instead of letting it slip away as smoke.",
+              "ឡានកីឡារត់កង់ធំទូលាយនិងស្អិតយ៉ាងខ្លាំង ដើម្បីបញ្ចូលរាល់ horsepower ទៅផ្លូវក្រាលថ្ម ជំនួសឱ្យការបណ្ដោយវាបាត់ជាផ្សែង។"
+            )}
+          </p>
+          <p>
+            <strong className="text-slate-200">
+              {t("Aerodynamics · ", "លំហូរខ្យល់ · ")}
+            </strong>
+            {t(
+              "regular cars are shaped like boxes; sports cars are shaped like knives. At highway speed, air feels like a solid wall — a wedge slices through it, and a rear ‘spoiler’ flips the airflow so the wind actually pushes the car ",
+              "ឡានធម្មតារចនាដូចប្រអប់; ឡានកីឡារចនាដូចកាំបិត។ នៅល្បឿនផ្លូវហាយវេ ខ្យល់មានអារម្មណ៍ដូចជាជញ្ជាំងរឹង — រូបភាពកាំបិតបំបែកកាត់វា ហើយ « spoiler » ខាងក្រោយបង្វិលលំហូរខ្យល់ឱ្យខ្យល់ជំរុញឡាន "
+            )}
+            <em className="text-red-300">
+              {t("down", "ចុះ")}
+            </em>
+            {t(
+              " onto the road, gluing the tires to the asphalt.",
+              " មកលើផ្លូវ ដោយជាប់កង់ទៅនឹងផ្លូវដូចសម្ការ។"
+            )}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Spec en="Tire width" kh="ទទឹងកង់" kh_={kh} value="305 mm" tone="silver" />
+            <Spec en="Drag coeff." kh="មេគុណទាញ" kh_={kh} value="Cd 0.28" tone="silver" />
+            <Spec en="Downforce @ 200 km/h" kh="កម្លាំងចុះ @ ២០០ km/h" kh_={kh} value="160 kg" tone="red" />
+          </div>
+        </PartCard>
+      </div>
+    </section>
+  );
+}
+
+// ─── Acceleration: heavy car vs light car under equal force ────────────────
+function AccelerationDiagram({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <DiagramFrame
+      labelEn="F = m × a · SAME FORCE, HALF THE MASS"
+      labelKh="F = m × a · កម្លាំងដូចគ្នា ម៉ាសពាក់កណ្ដាល"
+      kh={kh}
+      tone="red"
+    >
+      <svg viewBox="0 0 320 140" className="w-full h-auto" aria-hidden>
+        {/* Road */}
+        <rect x="0" y="106" width="320" height="20" fill={CARBON_FIBER} />
+        <line x1="0" y1="118" x2="320" y2="118" stroke="#facc15" strokeWidth="1" strokeDasharray="10 8" opacity="0.55" />
+
+        {/* ── LEFT: REGULAR CAR (heavy, slow) ─────────────────────────── */}
+        <g transform="translate(0,0)">
+          <text x="10" y="14" fontSize="9" fontFamily="monospace" fill={SILVER} fontWeight="bold">
+            {kh ? "ឡានធម្មតា · ធ្ងន់" : "REGULAR · HEAVY"}
+          </text>
+          {/* Boxy car silhouette */}
+          <path d="M 16,90 L 16,72 L 36,60 L 92,60 L 110,76 L 116,90 Z" fill="#374151" stroke={SILVER} strokeWidth="1.2" />
+          <rect x="40" y="64" width="40" height="14" fill="#0a0a0a" stroke={SILVER} strokeWidth="0.6" />
+          <circle cx="38" cy="98" r="10" fill="#0a0a0a" stroke={SILVER} strokeWidth="1.4" />
+          <circle cx="92" cy="98" r="10" fill="#0a0a0a" stroke={SILVER} strokeWidth="1.4" />
+          {/* Weight stacks inside */}
+          <g>
+            <rect x="22" y="74" width="14" height="6" fill={SILVER} />
+            <rect x="22" y="80" width="14" height="6" fill="#94a3b8" />
+            <rect x="86" y="74" width="14" height="6" fill={SILVER} />
+            <rect x="86" y="80" width="14" height="6" fill="#94a3b8" />
+            <text x="29" y="92" fontSize="7" fontFamily="monospace" fill="#fde047" textAnchor="middle">m</text>
+            <text x="93" y="92" fontSize="7" fontFamily="monospace" fill="#fde047" textAnchor="middle">m</text>
+          </g>
+          {/* Small force arrow F → */}
+          <g transform="translate(118,80)">
+            <line x1="0" y1="0" x2="20" y2="0" stroke={RACING_RED} strokeWidth="2.4" />
+            <polygon points="20,-4 28,0 20,4" fill={RACING_RED} />
+            <text x="0" y="-4" fontSize="8" fontFamily="monospace" fill={RACING_RED} fontWeight="bold">F</text>
+          </g>
+          {/* Slow speed bar */}
+          <text x="10" y="134" fontSize="7" fontFamily="monospace" fill={SILVER}>
+            a ={" "}
+            <tspan fontWeight="bold" fill="#fca5a5">small</tspan>
+          </text>
+          <rect x="40" y="129" width="80" height="3" fill="#1f2937" />
+          <rect x="40" y="129" width="20" height="3" fill={RACING_RED} />
+        </g>
+
+        {/* ── DIVIDER + EQUATION ──────────────────────────────────────── */}
+        <line x1="160" y1="20" x2="160" y2="100" stroke={SILVER} strokeWidth="0.6" strokeDasharray="2 3" opacity="0.6" />
+        <g transform="translate(160,52)">
+          <rect x="-30" y="-12" width="60" height="22" rx="3" fill={CARBON_FIBER} stroke={RACING_RED} strokeWidth="1.2" />
+          <text x="0" y="3" textAnchor="middle" fontSize="11" fontFamily="monospace" fill={RACING_RED_LIGHT} fontWeight="bold">
+            a = F/m
+          </text>
+        </g>
+
+        {/* ── RIGHT: SPORT CAR (light, fast) ──────────────────────────── */}
+        <g transform="translate(180,0)">
+          <text x="118" y="14" fontSize="9" fontFamily="monospace" fill={RACING_RED_LIGHT} textAnchor="end" fontWeight="bold">
+            {kh ? "ឡានកីឡា · ស្រាល" : "SPORT · LIGHT"}
+          </text>
+          {/* Sleek wedge silhouette (slightly shorter to make room for arrow) */}
+          <path d="M 6,90 L 6,82 L 24,68 L 86,62 L 110,82 L 116,90 Z" fill="#1c1917" stroke={RACING_RED} strokeWidth="1.4" />
+          {/* Tinted window strip */}
+          <path d="M 26,74 L 86,68 L 102,82 L 30,82 Z" fill="#0a0a0a" opacity="0.85" />
+          {/* Wheels with red brake calipers */}
+          <circle cx="26" cy="98" r="10" fill="#0a0a0a" stroke={SILVER} strokeWidth="1.4" />
+          <circle cx="96" cy="98" r="10" fill="#0a0a0a" stroke={SILVER} strokeWidth="1.4" />
+          <circle cx="26" cy="98" r="3.5" fill={RACING_RED} />
+          <circle cx="96" cy="98" r="3.5" fill={RACING_RED} />
+          {/* Same-size force arrow F → (equal force, lighter mass) */}
+          <g transform="translate(118,80)">
+            <line x1="0" y1="0" x2="20" y2="0" stroke={RACING_RED} strokeWidth="2.4" />
+            <polygon points="20,-4 28,0 20,4" fill={RACING_RED} />
+            <text x="0" y="-4" fontSize="8" fontFamily="monospace" fill={RACING_RED} fontWeight="bold">F</text>
+          </g>
+          {/* BIG acceleration bar — same force ÷ smaller mass = bigger a */}
+          <text x="10" y="134" fontSize="7" fontFamily="monospace" fill={SILVER}>
+            a ={" "}
+            <tspan fontWeight="bold" fill="#fca5a5">BIG</tspan>
+          </text>
+          <rect x="40" y="129" width="80" height="3" fill="#1f2937" />
+          <rect x="40" y="129" width="74" height="3" fill={RACING_RED} />
+        </g>
+      </svg>
+    </DiagramFrame>
+  );
+}
+
+// ─── I4 vs V8: small inline cylinders vs big V-arrangement ─────────────────
+function EngineCompareDiagram({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <DiagramFrame
+      labelEn="I4 ECONOMY  vs  V8 MUSCLE"
+      labelKh="I៤ សន្សំ  ទល់នឹង  V៨ សាច់ដុំ"
+      kh={kh}
+      tone="red"
+    >
+      <svg viewBox="0 0 320 140" className="w-full h-auto" aria-hidden>
+        {/* ── LEFT: I4 (small inline cylinders) ───────────────────────── */}
+        <g transform="translate(0,0)">
+          <text x="10" y="14" fontSize="9" fontFamily="monospace" fill={SILVER} fontWeight="bold">
+            {kh ? "I-៤ · សន្សំសាំង" : "INLINE-4 · ECONOMY"}
+          </text>
+          {/* Engine block backplate */}
+          <rect x="6" y="22" width="138" height="84" rx="3" fill={CARBON_FIBER} stroke={SILVER} strokeWidth="0.8" />
+          {/* 4 small cylinders in a row */}
+          {[0, 1, 2, 3].map((i) => {
+            const cx = 22 + i * 30;
+            return (
+              <g key={`i4-${i}`}>
+                <rect x={cx - 9} y={36} width="18" height="44" rx="2" fill="#374151" stroke={SILVER} strokeWidth="0.8" />
+                {/* small flame */}
+                <ellipse cx={cx} cy={56} rx="6" ry="9" fill="#f97316" opacity="0.7" />
+                <ellipse cx={cx} cy={58} rx="3" ry="5" fill="#fde047" opacity="0.85" />
+                {/* piston rod */}
+                <line x1={cx} y1={80} x2={cx} y2={94} stroke={SILVER} strokeWidth="1.4" />
+                <circle cx={cx} cy={97} r="3" fill={SILVER} />
+              </g>
+            );
+          })}
+          {/* crankshaft */}
+          <line x1="14" y1="97" x2="138" y2="97" stroke={SILVER} strokeWidth="2" />
+          <text x="76" y="120" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="#cbd5e1">
+            {kh ? "≈ ១៥០ horsepower" : "≈ 150 horsepower"}
+          </text>
+          <text x="76" y="132" textAnchor="middle" fontSize="7" fontFamily="monospace" fill="#94a3b8">
+            {kh ? "ច្រួសសាំងយឺត" : "sips fuel slowly"}
+          </text>
+        </g>
+
+        {/* ── DIVIDER ─────────────────────────────────────────────────── */}
+        <line x1="160" y1="22" x2="160" y2="106" stroke={SILVER} strokeWidth="0.6" strokeDasharray="2 3" opacity="0.6" />
+        <text x="160" y="20" textAnchor="middle" fontSize="9" fontFamily="monospace" fill={RACING_RED} fontWeight="bold">
+          vs
+        </text>
+
+        {/* ── RIGHT: V8 (8 larger cylinders in V-shape) ───────────────── */}
+        <g transform="translate(176,0)">
+          <text x="134" y="14" fontSize="9" fontFamily="monospace" fill={RACING_RED_LIGHT} textAnchor="end" fontWeight="bold">
+            {kh ? "V៨ · សាច់ដុំ" : "V-8 · MUSCLE"}
+          </text>
+          {/* Engine block backplate (larger, redder) */}
+          <rect x="2" y="22" width="142" height="84" rx="3" fill={CARBON_FIBER} stroke={RACING_RED} strokeWidth="1" />
+          {/* 4 left-bank cylinders, tilted left ───────────────────────── */}
+          {[0, 1, 2, 3].map((i) => {
+            const cx = 18 + i * 22;
+            return (
+              <g key={`v8L-${i}`} transform={`rotate(-22 ${cx} 90)`}>
+                <rect x={cx - 11} y={32} width="22" height="50" rx="2" fill="#3f3f46" stroke={SILVER} strokeWidth="0.9" />
+                {/* big flame */}
+                <ellipse cx={cx} cy={54} rx="9" ry="14" fill="#dc2626" opacity="0.75" />
+                <ellipse cx={cx} cy={56} rx="5" ry="9" fill="#fde047" opacity="0.9" />
+                <ellipse cx={cx} cy={58} rx="2.5" ry="5" fill="#fff" opacity="0.85" />
+                {/* piston rod */}
+                <line x1={cx} y1={82} x2={cx} y2={94} stroke={SILVER} strokeWidth="1.6" />
+                <circle cx={cx} cy={97} r="3" fill={SILVER} />
+              </g>
+            );
+          })}
+          {/* 4 right-bank cylinders, tilted right ──────────────────────── */}
+          {[0, 1, 2, 3].map((i) => {
+            const cx = 30 + i * 22;
+            return (
+              <g key={`v8R-${i}`} transform={`rotate(22 ${cx} 90)`}>
+                <rect x={cx - 11} y={32} width="22" height="50" rx="2" fill="#3f3f46" stroke={SILVER} strokeWidth="0.9" />
+                <ellipse cx={cx} cy={54} rx="9" ry="14" fill="#dc2626" opacity="0.75" />
+                <ellipse cx={cx} cy={56} rx="5" ry="9" fill="#fde047" opacity="0.9" />
+                <ellipse cx={cx} cy={58} rx="2.5" ry="5" fill="#fff" opacity="0.85" />
+                <line x1={cx} y1={82} x2={cx} y2={94} stroke={SILVER} strokeWidth="1.6" />
+                <circle cx={cx} cy={97} r="3" fill={SILVER} />
+              </g>
+            );
+          })}
+          {/* crankshaft */}
+          <line x1="8" y1="97" x2="136" y2="97" stroke={RACING_RED} strokeWidth="2.4" />
+          <text x="72" y="120" textAnchor="middle" fontSize="8" fontFamily="monospace" fill={RACING_RED_LIGHT} fontWeight="bold">
+            {kh ? "≥ ៤៥០ horsepower" : "450+ horsepower"}
+          </text>
+          <text x="72" y="132" textAnchor="middle" fontSize="7" fontFamily="monospace" fill="#fca5a5">
+            {kh ? "ស្រូបយ៉ាងធំ ផ្ទុះធំ" : "huge gulps · huge bangs"}
+          </text>
+        </g>
+      </svg>
+    </DiagramFrame>
+  );
+}
+
+// ─── Traction + Aero: boxy car (turbulent) vs wedge sports car (downforce) ─
+function TractionAeroDiagram({
+  kh, t,
+}: { kh: boolean; t: (en: string, kh: string) => string }) {
+  return (
+    <DiagramFrame
+      labelEn="BOX vs KNIFE · TURBULENCE vs DOWNFORCE"
+      labelKh="ប្រអប់ ទល់នឹង កាំបិត · ច្របូកច្របល់ ទល់នឹង កម្លាំងចុះ"
+      kh={kh}
+      tone="red"
+    >
+      <svg viewBox="0 0 320 150" className="w-full h-auto" aria-hidden>
+        {/* ── TOP ROW: BOX CAR with turbulent airflow ─────────────────── */}
+        <g transform="translate(0,0)">
+          <text x="6" y="12" fontSize="8" fontFamily="monospace" fill={SILVER} fontWeight="bold">
+            {kh ? "ឡានធម្មតា · ប្រអប់" : "REGULAR · BOX"}
+          </text>
+          {/* Box car silhouette */}
+          <path d="M 50,58 L 50,30 L 130,30 L 130,58 Z" fill="#374151" stroke={SILVER} strokeWidth="1" />
+          <rect x="60" y="36" width="60" height="14" fill="#0a0a0a" stroke={SILVER} strokeWidth="0.5" />
+          {/* Narrow tires */}
+          <ellipse cx="62"  cy="60" rx="6" ry="4" fill="#0a0a0a" stroke={SILVER} strokeWidth="0.8" />
+          <ellipse cx="118" cy="60" rx="6" ry="4" fill="#0a0a0a" stroke={SILVER} strokeWidth="0.8" />
+          {/* Turbulent airflow crashing into the front */}
+          <g stroke={RACING_RED} strokeWidth="1" fill="none" opacity="0.85">
+            <path d="M 160,34 Q 152,28 144,32 Q 136,28 130,34" />
+            <path d="M 160,42 Q 150,46 142,40 Q 134,46 130,42" />
+            <path d="M 160,50 Q 152,56 144,50 Q 136,56 130,50" />
+            <circle cx="146" cy="38" r="3" fill="none" />
+            <circle cx="148" cy="48" r="2.5" fill="none" />
+            <circle cx="142" cy="44" r="2" fill="none" />
+          </g>
+          {/* Smooth incoming streamlines */}
+          <g stroke={SILVER} strokeWidth="0.7" fill="none" opacity="0.55">
+            <line x1="170" y1="34" x2="220" y2="34" />
+            <line x1="170" y1="42" x2="220" y2="42" />
+            <line x1="170" y1="50" x2="220" y2="50" />
+          </g>
+          {/* Drag warning arrow ← */}
+          <g transform="translate(230,42)">
+            <line x1="0" y1="0" x2="22" y2="0" stroke={RACING_RED} strokeWidth="2" />
+            <polygon points="0,-4 -8,0 0,4" fill={RACING_RED} />
+            <text x="26" y="3" fontSize="8" fontFamily="monospace" fill={RACING_RED} fontWeight="bold">
+              {kh ? "ទាញ" : "DRAG"}
+            </text>
+          </g>
+          {/* Ground */}
+          <line x1="0" y1="64" x2="320" y2="64" stroke={SILVER} strokeWidth="0.5" opacity="0.5" />
+        </g>
+
+        {/* ── BOTTOM ROW: WEDGE SPORTS CAR with smooth flow + downforce ── */}
+        <g transform="translate(0,72)">
+          <text x="6" y="12" fontSize="8" fontFamily="monospace" fill={RACING_RED_LIGHT} fontWeight="bold">
+            {kh ? "ឡានកីឡា · កាំបិត" : "SPORT · KNIFE"}
+          </text>
+          {/* Wedge silhouette + spoiler */}
+          <path d="M 40,60 L 56,46 L 100,34 L 130,38 L 132,44 L 132,60 Z" fill="#1c1917" stroke={RACING_RED} strokeWidth="1.2" />
+          {/* Spoiler (rear wing) */}
+          <rect x="32" y="40" width="14" height="3" fill={RACING_RED} />
+          <line x1="38" y1="43" x2="38" y2="50" stroke={RACING_RED} strokeWidth="1.2" />
+          {/* Wide sticky tires */}
+          <ellipse cx="50"  cy="62" rx="11" ry="5" fill="#0a0a0a" stroke={RACING_RED} strokeWidth="1" />
+          <ellipse cx="120" cy="62" rx="11" ry="5" fill="#0a0a0a" stroke={RACING_RED} strokeWidth="1" />
+          {/* Smooth streamlines flowing OVER the body */}
+          <g stroke={SILVER} strokeWidth="0.8" fill="none" opacity="0.85">
+            <path d="M 220,30 Q 180,28 140,36 Q 110,30 70,40 Q 56,42 42,42" />
+            <path d="M 220,38 Q 180,36 145,42 Q 110,40 75,46 Q 60,46 46,46" />
+            <path d="M 220,46 Q 180,46 150,50 Q 120,52 90,54 Q 70,54 54,52" />
+          </g>
+          {/* Streamline arrow heads (incoming wind direction) */}
+          <polygon points="220,30 226,33 220,36" fill={SILVER} opacity="0.85" />
+          <polygon points="220,38 226,41 220,44" fill={SILVER} opacity="0.85" />
+          <polygon points="220,46 226,49 220,52" fill={SILVER} opacity="0.85" />
+          {/* Downforce arrows pushing car DOWN */}
+          {[58, 78, 98, 118].map((x) => (
+            <g key={`df-${x}`}>
+              <line x1={x} y1="20" x2={x} y2="32" stroke={RACING_RED} strokeWidth="1.6" />
+              <polygon points={`${x - 3},32 ${x + 3},32 ${x},38`} fill={RACING_RED} />
+            </g>
+          ))}
+          <text x="88" y="18" textAnchor="middle" fontSize="8" fontFamily="monospace" fill={RACING_RED_LIGHT} fontWeight="bold">
+            {kh ? "កម្លាំងចុះ ↓" : "DOWNFORCE ↓"}
+          </text>
+          {/* Ground */}
+          <line x1="0" y1="68" x2="320" y2="68" stroke={SILVER} strokeWidth="0.5" opacity="0.5" />
         </g>
       </svg>
     </DiagramFrame>
