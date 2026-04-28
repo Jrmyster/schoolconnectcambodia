@@ -12,6 +12,11 @@ import {
   Flame,
   ArrowUpDown,
   Droplets,
+  Coins,
+  RefreshCw,
+  Brain,
+  Wind,
+  ChevronRight,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -77,6 +82,7 @@ export function BiochemistryPage() {
 
         <DnaSection />
         <ElectronTransportChainSection />
+        <MetabolismSection />
         <ProteinSection />
         <EnzymeSection />
 
@@ -960,6 +966,433 @@ function ETCSchematic({ kh }: { kh: boolean }) {
           ? "ឥន្ធនៈ → ម៉ាស៊ីនបូម (ផ្ទុកសម្ពាធ) → ទួរប៊ីន ATP → សំណល់ទឹក"
           : "Fuel → Pumps build pressure → ATP turbine → water exhaust"}
       </p>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 3 — Metabolism: The Energy Economy
+ *   ▸ Glycolysis           (catabolic — green)   "the quick cash"
+ *   ▸ The Krebs Cycle      (catabolic — teal)    "the deep harvest"
+ *   ▸ Gluconeogenesis      (anabolic  — violet)  "reverse engineering"
+ *
+ * Aesthetic: clean white cards, soft mint-green borders for catabolic
+ * (breaking-down) pathways and soft violet for the anabolic (building-up)
+ * pathway. Crisp sans-serif typography. Tiny inline carbon-flow strips
+ * instead of giant chemical web diagrams.
+ * ══════════════════════════════════════════════════════════════════════════ */
+function MetabolismSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-emerald-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="metabolism-section"
+      aria-labelledby="metabolism-heading"
+    >
+      {/* Bilingual paired header (EN + KH simultaneously) */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-violet-600 text-white flex items-center justify-center shadow">
+          <Coins className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0">
+          <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-emerald-700 mb-0.5">
+            <span>03 · The Energy Economy</span>
+            <span className="font-khmer normal-case tracking-normal text-xs text-violet-700 ml-2">
+              ០៣ · សេដ្ឋកិច្ចថាមពល
+            </span>
+          </div>
+          <h2
+            id="metabolism-heading"
+            className="font-display text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug"
+          >
+            <span className="block">Metabolism — the city of trades inside every cell</span>
+            <span className="block font-khmer text-lg sm:text-xl font-bold text-emerald-800 mt-1 leading-relaxed">
+              ការរំលាយអាហារ — ទីក្រុងនៃការដោះដូរនៅក្នុងកោសិកានីមួយៗ
+            </span>
+          </h2>
+        </div>
+      </div>
+
+      {/* Bilingual intro — paired EN + KH so both are always visible */}
+      <p className="text-slate-700 text-base sm:text-lg leading-relaxed mb-2">
+        Your cells run a tiny economy 24 hours a day. Some pathways{" "}
+        <strong className="text-emerald-700">break things down</strong> to harvest
+        energy (catabolism). Others <strong className="text-violet-700">build things up</strong>{" "}
+        when supplies run low (anabolism). Three pathways do most of the work.
+      </p>
+      <p className="font-khmer text-slate-700 leading-loose mb-6 border-t border-emerald-100 pt-3">
+        កោសិការបស់អ្នកដំណើរការសេដ្ឋកិច្ចតូចមួយ ២៤ ម៉ោងក្នុងមួយថ្ងៃ។ ផ្លូវខ្លះ{" "}
+        <strong className="text-emerald-700">បំបែករបស់ចុះ</strong> ដើម្បីប្រមូលថាមពល (Catabolism)។ ផ្លូវខ្លះទៀត{" "}
+        <strong className="text-violet-700">សាងសង់របស់ឡើង</strong> នៅពេលដែលផ្គត់ផ្គង់ខ្វះ (Anabolism)។ ផ្លូវចម្បងទាំងបី ធ្វើការងារភាគច្រើន។
+      </p>
+
+      <div className="space-y-5">
+        <PathwayCard
+          tone="emerald"
+          mode={{ en: "Catabolic · Breaking Down", kh: "Catabolic · បំបែក" }}
+          numberLabel={{ en: "Pathway 01", kh: "ផ្លូវ ០១" }}
+          titleEn="Glycolysis — The Quick Cash"
+          titleKh="គ្លីកូលីស — សាច់ប្រាក់រហ័ស"
+          Icon={Zap}
+          paragraphEn={
+            <>
+              This happens in the cell's <strong>cytoplasm</strong> — the watery
+              soup outside the mitochondrion. It takes a single 6-carbon sugar
+              molecule called <em className="text-emerald-700 font-semibold">Glucose (គ្លុយកូស)</em> and
+              violently <strong>snaps it in half</strong> into two 3-carbon pieces called{" "}
+              <em className="text-emerald-700 font-semibold">Pyruvate (ពីរុយវ៉ាត)</em>.
+            </>
+          }
+          paragraphKh={
+            <>
+              ដំណើរការនេះកើតឡើងនៅក្នុង <strong>ស៊ីតូប្លាស</strong> របស់កោសិកា — ទឹកក្នុងកោសិកានៅខាងក្រៅមីតូខុនដ្រី។ វាយក ម៉ូលេគុលស្ករ ៦-កាបូនមួយ ដែលហៅថា{" "}
+              <em className="text-emerald-700 font-semibold">Glucose (គ្លុយកូស)</em> ហើយ{" "}
+              <strong>បំបាក់វាជាពីរ</strong> យ៉ាងខ្លាំង ទៅជាពីរបំណែកដែលមាន ៣-កាបូន ហៅថា{" "}
+              <em className="text-emerald-700 font-semibold">Pyruvate (ពីរុយវ៉ាត)</em>។
+            </>
+          }
+          flow={
+            <CarbonFlow
+              tone="emerald"
+              steps={[
+                { label: "Glucose", sub: "C₆", colorClass: "bg-emerald-600" },
+                { label: "split!", sub: "in half", colorClass: "bg-emerald-400 italic" },
+                { label: "Pyruvate", sub: "C₃", colorClass: "bg-emerald-500" },
+                { label: "Pyruvate", sub: "C₃", colorClass: "bg-emerald-500" },
+              ]}
+            />
+          }
+          stats={[
+            { en: "Location · Cytoplasm", kh: "ទីតាំង · ស៊ីតូប្លាស" },
+            { en: "Speed · Very fast", kh: "ល្បឿន · លឿនបំផុត" },
+            { en: "Oxygen · Not needed", kh: "អុកស៊ីហ្សែន · មិនត្រូវការ" },
+            { en: "Yield · 2 ATP (small)", kh: "ទិន្នផល · 2 ATP (តិច)" },
+          ]}
+          footnoteEn="The emergency power system. When you sprint or lift heavy weights, your muscles run on glycolysis."
+          footnoteKh="ប្រព័ន្ធថាមពលសង្គ្រោះបន្ទាន់។ នៅពេលអ្នករត់ល្បឿនលឿន ឬលើករបស់ធ្ងន់ សាច់ដុំរបស់អ្នកដំណើរការដោយ Glycolysis។"
+          testid="pathway-glycolysis"
+        />
+
+        <PathwayCard
+          tone="teal"
+          mode={{ en: "Catabolic · Deep Harvest", kh: "Catabolic · ការប្រមូលផលជ្រៅ" }}
+          numberLabel={{ en: "Pathway 02", kh: "ផ្លូវ ០២" }}
+          titleEn="The Krebs Cycle — The Deep Harvest"
+          titleKh="វដ្ត Krebs — ការប្រមូលផលជ្រៅ"
+          Icon={RefreshCw}
+          paragraphEn={
+            <>
+              Also called the <strong>Citric Acid Cycle</strong>. It happens deep inside
+              the <strong>mitochondria</strong>. It takes those broken-in-half sugar pieces
+              and <strong>slowly strips away every single high-energy electron</strong> they
+              have left, releasing <em className="text-teal-700 font-semibold">Carbon Dioxide (CO₂)</em>{" "}
+              as waste — yes, the same CO₂ you breathe out. The harvested electrons are loaded
+              onto <em className="text-teal-700 font-semibold">"shuttle buses"</em> called{" "}
+              <strong>NADH</strong> and <strong>FADH₂</strong> and dropped off at the Electron
+              Transport Chain to be turned into ATP.
+            </>
+          }
+          paragraphKh={
+            <>
+              ហៅផងដែរថា <strong>វដ្តអាស៊ីតស៊ីទ្រិក</strong>។ វាកើតឡើងនៅជ្រៅក្នុង <strong>មីតូខុនដ្រី</strong>។ វាយកបំណែកស្ករដែលត្រូវបានបំបាក់ ហើយ <strong>ដក​យកអេឡិចត្រុងថាមពលខ្ពស់ទាំងអស់ចេញបន្តិចម្ដងៗ</strong> ដោយបញ្ចេញ{" "}
+              <em className="text-teal-700 font-semibold">កាបូនឌីអុកស៊ីត (CO₂)</em>{" "}
+              ជាសំណល់ — មែនហើយ វាគឺជា CO₂ ដូចគ្នាដែលអ្នកដកដង្ហើមចេញ។ អេឡិចត្រុងដែលប្រមូលបាន ត្រូវបានដាក់លើ{" "}
+              <em className="text-teal-700 font-semibold">"ឡានដឹកអ្នកដំណើរ"</em> ឈ្មោះ{" "}
+              <strong>NADH</strong> និង <strong>FADH₂</strong> ហើយដឹកទៅទម្លាក់នៅច្រវ៉ាក់ដឹកជញ្ជូនអេឡិចត្រុង (ETC) ដើម្បីប្ដូរទៅជា ATP។
+            </>
+          }
+          flow={
+            <CarbonFlow
+              tone="teal"
+              steps={[
+                { label: "Pyruvate", sub: "C₃", colorClass: "bg-teal-600" },
+                { label: "Krebs", sub: "cycle ↻", colorClass: "bg-teal-500" },
+                { label: "CO₂", sub: "exhaled", colorClass: "bg-sky-500" },
+                { label: "NADH/FADH₂", sub: "→ ETC", colorClass: "bg-violet-600" },
+              ]}
+            />
+          }
+          stats={[
+            { en: "Location · Mitochondria", kh: "ទីតាំង · មីតូខុនដ្រី" },
+            { en: "Waste · CO₂ (you exhale)", kh: "សំណល់ · CO₂ (ដង្ហើមចេញ)" },
+            { en: "Carries · NADH, FADH₂", kh: "ដឹកជញ្ជូន · NADH, FADH₂" },
+            { en: "Hands off to · the ETC", kh: "ប្រគល់ឱ្យ · ETC" },
+          ]}
+          footnoteEn="The slow, oxygen-loving harvest. Every breath you exhale is partly CO₂ leaving here."
+          footnoteKh="ការប្រមូលផលយឺត ស្រឡាញ់អុកស៊ីហ្សែន។ រាល់ដង្ហើមដែលអ្នកដកចេញ មានផ្នែកនៃ CO₂ ចេញពីទីនេះ។"
+          testid="pathway-krebs"
+        />
+
+        <PathwayCard
+          tone="violet"
+          mode={{ en: "Anabolic · Building Up", kh: "Anabolic · សាងសង់ឡើង" }}
+          numberLabel={{ en: "Pathway 03", kh: "ផ្លូវ ០៣" }}
+          titleEn="Gluconeogenesis — Reverse Engineering"
+          titleKh="គ្លុយកូនេអូសេណេស — វិស្វកម្មបញ្ច្រាស"
+          Icon={Brain}
+          paragraphEn={
+            <>
+              Your <strong>brain runs almost entirely on sugar</strong>. If you are
+              starving, fasting, or sleeping for 12 hours, the{" "}
+              <strong className="text-violet-700">liver</strong> performs a chemical miracle.
+              It runs glycolysis <strong>in reverse</strong>, taking random spare parts —{" "}
+              fat byproducts, lactate from tired muscles, leftover{" "}
+              <em className="text-violet-700 font-semibold">amino acids</em> from broken-down protein —
+              and <strong>spends ATP</strong> to glue them back together into{" "}
+              brand-new <em className="text-violet-700 font-semibold">Glucose (គ្លុយកូស)</em>{" "}
+              to keep the brain alive.
+            </>
+          }
+          paragraphKh={
+            <>
+              <strong>ខួរក្បាលរបស់អ្នកដំណើរការស្ទើរតែទាំងស្រុងលើស្ករ</strong>។ ប្រសិនបើអ្នកអត់អាហារ តមអាហារ ឬដេក ១២ ម៉ោង{" "}
+              <strong className="text-violet-700">ថ្លើម</strong> នឹងធ្វើការអព្ភូតហេតុគីមីមួយ។ វាដំណើរការ Glycolysis{" "}
+              <strong>បញ្ច្រាស</strong> ដោយយកគ្រឿងបន្ទាប់បន្សំ — សំណល់ជាតិខ្លាញ់ Lactate ពីសាច់ដុំអស់កម្លាំង{" "}
+              <em className="text-violet-700 font-semibold">អាស៊ីតអាមីណូ</em> ដែលនៅសល់ពីប្រូតេអ៊ីនដែលត្រូវបំបាក់ —{" "}
+              ហើយ <strong>ចំណាយ ATP</strong> ដើម្បីផ្គុំវាឡើងវិញទៅជា{" "}
+              <em className="text-violet-700 font-semibold">Glucose (គ្លុយកូស)</em>{" "}
+              ថ្មីស្រឡាង ដើម្បីរក្សាខួរក្បាលឱ្យនៅរស់។
+            </>
+          }
+          flow={
+            <CarbonFlow
+              tone="violet"
+              reverse
+              steps={[
+                { label: "spare parts", sub: "amino + fat", colorClass: "bg-slate-500" },
+                { label: "Liver", sub: "ATP spent", colorClass: "bg-violet-600" },
+                { label: "Glucose", sub: "C₆ rebuilt", colorClass: "bg-emerald-600" },
+                { label: "Brain fed", sub: "ខួរក្បាល", colorClass: "bg-violet-500" },
+              ]}
+            />
+          }
+          stats={[
+            { en: "Location · Liver", kh: "ទីតាំង · ថ្លើម" },
+            { en: "When · Fasting / starving", kh: "ពេលណា · តមអាហារ / អត់ឃ្លាន" },
+            { en: "Costs · ATP (uses energy)", kh: "ចំណាយ · ATP (ប្រើថាមពល)" },
+            { en: "Saves · the brain", kh: "សង្គ្រោះ · ខួរក្បាល" },
+          ]}
+          footnoteEn="The body's lifeline for the brain. The opposite direction of glycolysis — and the reason you don't pass out overnight."
+          footnoteKh="ខ្សែជីវិតរបស់រាងកាយសម្រាប់ខួរក្បាល។ ទិសផ្ទុយនឹង Glycolysis — ហើយជាមូលហេតុដែលអ្នកមិនសន្លប់នៅពេលយប់។"
+          testid="pathway-gluconeogenesis"
+        />
+      </div>
+
+      {/* Closing economy summary */}
+      <div className="mt-6 rounded-2xl border-2 border-dashed border-emerald-300/70 bg-gradient-to-br from-emerald-50/80 via-white to-violet-50/70 p-4 sm:p-5">
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-violet-600 text-white flex items-center justify-center shadow">
+            <ArrowUpDown className="w-4 h-4" />
+          </div>
+          <div className="space-y-2">
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+              <strong className="text-slate-900">The big picture:</strong>{" "}
+              <span className="text-emerald-700 font-semibold">Glycolysis</span> +{" "}
+              <span className="text-teal-700 font-semibold">Krebs</span> tear glucose apart
+              to make <strong>ATP</strong>. When food runs out,{" "}
+              <span className="text-violet-700 font-semibold">Gluconeogenesis</span>{" "}
+              spends ATP to put glucose back together. Your body is constantly trading
+              one currency for the other.
+            </p>
+            <p className="font-khmer text-sm sm:text-base text-slate-700 leading-loose border-t border-emerald-200/60 pt-2">
+              <strong className="text-slate-900">រូបភាពធំ៖</strong>{" "}
+              <span className="text-emerald-700 font-semibold">Glycolysis</span> +{" "}
+              <span className="text-teal-700 font-semibold">Krebs</span> បំបែក Glucose ដើម្បីបង្កើត <strong>ATP</strong>។ នៅពេលអាហារអស់{" "}
+              <span className="text-violet-700 font-semibold">Gluconeogenesis</span>{" "}
+              ចំណាយ ATP ដើម្បីដាក់ Glucose ឡើងវិញ។ រាងកាយរបស់អ្នកកំពុងដោះដូររូបិយប័ណ្ណមួយទៅរូបិយប័ណ្ណមួយទៀតឥតឈប់ឈរ។
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Pathway card · stacked, full-width, soft pastel border by mode ─────── */
+type PathwayTone = "emerald" | "teal" | "violet";
+function PathwayCard({
+  tone,
+  mode,
+  numberLabel,
+  titleEn,
+  titleKh,
+  Icon,
+  paragraphEn,
+  paragraphKh,
+  flow,
+  stats,
+  footnoteEn,
+  footnoteKh,
+  testid,
+}: {
+  tone: PathwayTone;
+  mode: { en: string; kh: string };
+  numberLabel: { en: string; kh: string };
+  titleEn: string;
+  titleKh: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  paragraphEn: React.ReactNode;
+  paragraphKh: React.ReactNode;
+  flow: React.ReactNode;
+  stats: { en: string; kh: string }[];
+  footnoteEn: string;
+  footnoteKh: string;
+  testid: string;
+}) {
+  const styles = {
+    emerald: {
+      ring: "border-emerald-200",
+      bg: "bg-gradient-to-br from-emerald-50/70 via-white to-emerald-50/30",
+      chipBg: "bg-emerald-100 text-emerald-800 border-emerald-300",
+      iconBg: "bg-emerald-600",
+      titleColor: "text-emerald-800",
+      statBorder: "border-emerald-200 bg-emerald-50/60",
+    },
+    teal: {
+      ring: "border-teal-200",
+      bg: "bg-gradient-to-br from-teal-50/70 via-white to-emerald-50/30",
+      chipBg: "bg-teal-100 text-teal-800 border-teal-300",
+      iconBg: "bg-teal-600",
+      titleColor: "text-teal-800",
+      statBorder: "border-teal-200 bg-teal-50/60",
+    },
+    violet: {
+      ring: "border-violet-200",
+      bg: "bg-gradient-to-br from-violet-50/70 via-white to-violet-50/30",
+      chipBg: "bg-violet-100 text-violet-800 border-violet-300",
+      iconBg: "bg-violet-600",
+      titleColor: "text-violet-800",
+      statBorder: "border-violet-200 bg-violet-50/60",
+    },
+  }[tone];
+
+  return (
+    <article
+      data-testid={testid}
+      className={`rounded-2xl border-2 ${styles.ring} ${styles.bg} p-5 sm:p-6 shadow-sm`}
+    >
+      {/* Card header — paired bilingual */}
+      <header className="flex items-start gap-3 mb-3">
+        <div
+          className={`flex-shrink-0 w-10 h-10 rounded-xl ${styles.iconBg} text-white flex items-center justify-center shadow`}
+        >
+          <Icon className="w-5 h-5" strokeWidth={2.25} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+              {numberLabel.en}
+            </span>
+            <span className="font-khmer text-[11px] text-slate-500">
+              {numberLabel.kh}
+            </span>
+            <span
+              className={`inline-flex items-center text-[10px] font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-full border ${styles.chipBg}`}
+            >
+              {mode.en}
+            </span>
+            <span
+              className={`font-khmer inline-flex items-center text-[11px] font-bold px-2 py-0.5 rounded-full border ${styles.chipBg}`}
+            >
+              {mode.kh}
+            </span>
+          </div>
+          <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 leading-snug">
+            <span className="block">{titleEn}</span>
+            <span
+              className={`block font-khmer text-base sm:text-lg font-bold mt-1 leading-relaxed ${styles.titleColor}`}
+            >
+              {titleKh}
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      {/* Bilingual explanation */}
+      <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+        {paragraphEn}
+      </p>
+      <p className="font-khmer text-slate-700 leading-loose border-t border-slate-200/60 mt-3 pt-3">
+        {paragraphKh}
+      </p>
+
+      {/* Carbon-flow visual strip */}
+      <div className="mt-4">{flow}</div>
+
+      {/* Stat row — paired bilingual */}
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {stats.map((s, i) => (
+          <div
+            key={i}
+            className={`rounded-lg border ${styles.statBorder} px-3 py-2`}
+          >
+            <div className="text-[11px] font-bold text-slate-700 leading-tight">
+              {s.en}
+            </div>
+            <div className="font-khmer text-[11px] text-slate-600 leading-relaxed mt-0.5">
+              {s.kh}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Real-world footnote */}
+      <div className="mt-4 rounded-lg bg-white/70 border border-slate-200 px-3 py-2 space-y-1">
+        <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
+          {footnoteEn}
+        </p>
+        <p className="font-khmer text-xs sm:text-sm text-slate-600 italic leading-loose">
+          {footnoteKh}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+/* ── Carbon-flow strip · tiny pill chain showing carbon/energy direction ── */
+function CarbonFlow({
+  steps,
+  tone,
+  reverse = false,
+}: {
+  steps: { label: string; sub: string; colorClass: string }[];
+  tone: PathwayTone;
+  reverse?: boolean;
+}) {
+  const arrowColor = {
+    emerald: "text-emerald-500",
+    teal: "text-teal-500",
+    violet: "text-violet-500",
+  }[tone];
+
+  return (
+    <div className="flex flex-wrap items-center gap-2 rounded-xl bg-white/70 border border-slate-200 px-3 py-3">
+      {steps.map((s, i) => (
+        <div key={i} className="flex items-center gap-2">
+          <div className="flex flex-col items-center">
+            <span
+              className={`inline-flex items-center justify-center px-2.5 py-1 rounded-md text-white text-xs font-bold shadow-sm ${s.colorClass}`}
+            >
+              {s.label}
+            </span>
+            <span className="text-[10px] text-slate-500 mt-0.5 font-mono">
+              {s.sub}
+            </span>
+          </div>
+          {i < steps.length - 1 && (
+            <ChevronRight
+              className={`w-4 h-4 ${arrowColor} ${reverse ? "rotate-180" : ""}`}
+            />
+          )}
+        </div>
+      ))}
+      {/* exhale puff for Krebs */}
+      {steps.some((s) => s.label === "CO₂") && (
+        <Wind className="w-4 h-4 text-sky-400 ml-1" aria-hidden />
+      )}
     </div>
   );
 }
