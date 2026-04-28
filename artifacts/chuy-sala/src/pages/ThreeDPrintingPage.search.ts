@@ -20,10 +20,20 @@ export const searchMeta: SearchEntry = {
     "prototype", "rapid prototyping", "layer", "stl", "slicer",
     "manufacturing", "fabrication", "printing technology", "bioprinting",
     "rocket parts", "spacex", "nasa printing", "metal printing",
+    // APM (atomically precise manufacturing) — speculative-future section
+    "apm", "atomically precise manufacturing", "atomic manufacturing",
+    "nano", "nanotech", "nanotechnology", "nano-builder",
+    "mechanosynthesis", "molecular manufacturing", "molecular assembler",
+    "diamond crystal", "carbon nanotubes", "post-scarcity", "end of scarcity",
+    "drexler", "feynman bottom there is plenty of room",
   ],
   keywordsKh: [
     "ការបោះពុម្ព៣វិមាត្រ", "បោះពុម្ព ៣D", "ផលិតកម្មបន្ថែម",
     "ម៉ាស៊ីនបោះពុម្ព៣វិមាត្រ", "ប្លាស្ទិច", "ដែក", "គំរូ", "ស្រទាប់",
     "បច្ចេកវិទ្យាបោះពុម្ព", "ផលិតកម្ម",
+    // APM Khmer
+    "ការផលិតដោយភាពជាក់លាក់កម្រិតអាតូម", "អ្នកសាងសង់ណាណូ",
+    "ការសំយោគមេកានិច", "ណាណូ", "អាតូម", "ពេជ្រ", "បំពង់ណាណូកាបោន",
+    "ទីបញ្ចប់នៃភាពខ្វះខាត",
   ],
 };

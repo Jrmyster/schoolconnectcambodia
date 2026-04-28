@@ -20,6 +20,9 @@ import {
   Scissors,
   Cuboid,
   Construction,
+  Atom,
+  Hexagon,
+  Globe2,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import { trackEvent } from "@/lib/analytics";
@@ -42,6 +45,14 @@ const NEON_GREEN = "#4ade80";
 const NEON_MAGENTA = "#ec4899";
 const NEON_AMBER = "#fbbf24";
 const IVORY = "#f5f5f4";
+
+// ── Atomically-Precise-Manufacturing palette (deep-tech / void) ──────
+const VOID = "#020410";          // near-black with a hint of indigo
+const VOID_2 = "#0a0518";        // slightly raised void
+const NEON_VIOLET = "#a855f7";   // primary glow
+const NEON_INDIGO = "#6366f1";   // mid accent
+const NEON_ELECTRIC = "#3b82f6"; // electric blue
+const NEON_PURPLE_LIGHT = "#c084fc"; // highlight
 
 const PAGE_STYLE: React.CSSProperties = {
   backgroundImage:
@@ -92,6 +103,7 @@ export default function ThreeDPrintingPage() {
           <SmallScaleSection isKh={isKh} />
           <MassiveScaleSection isKh={isKh} />
           <ClosingStrip isKh={isKh} />
+          <APMSection isKh={isKh} />
         </div>
       </main>
 
@@ -125,10 +137,47 @@ export default function ThreeDPrintingPage() {
           from { transform: translateY(8px); opacity: 0; }
           to   { transform: translateY(0); opacity: 1; }
         }
+
+        /* ── APM (Atomically Precise Manufacturing) animations ───── */
+        @keyframes apm-border-pulse {
+          0%, 100% {
+            box-shadow:
+              0 0 0 1px rgba(168,85,247,0.30),
+              0 0 22px rgba(168,85,247,0.18),
+              inset 0 0 22px rgba(99,102,241,0.06);
+            border-color: rgba(168,85,247,0.45);
+          }
+          50% {
+            box-shadow:
+              0 0 0 1px rgba(59,130,246,0.40),
+              0 0 38px rgba(59,130,246,0.28),
+              inset 0 0 32px rgba(168,85,247,0.10);
+            border-color: rgba(59,130,246,0.60);
+          }
+        }
+        @keyframes apm-helix-flow {
+          0%   { stroke-dashoffset: 0;   opacity: 0.85; }
+          50%  { opacity: 1; }
+          100% { stroke-dashoffset: -160; opacity: 0.85; }
+        }
+        @keyframes apm-grid-pulse {
+          0%, 100% { opacity: 0.18; }
+          50%      { opacity: 0.45; }
+        }
+        @keyframes apm-orbit {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes apm-shimmer {
+          0%   { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .threed-page svg *, .threed-page [style*="animation"] {
             animation: none !important;
           }
+          .apm-card { animation: none !important; }
         }
       `}</style>
     </div>
@@ -1388,5 +1437,812 @@ function ClosingStrip({ isKh }: { isKh: boolean }) {
         <Tag label="On-demand spare parts" labelKh="គ្រឿងបន្លាស់តាមតម្រូវការ" color={NEON_AMBER} />
       </div>
     </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  APM · ATOMICALLY PRECISE MANUFACTURING (the speculative future)
+//
+//  A visually distinct "deep-tech" coda that pivots from real-world 3D
+//  printing into a speculative-future zone. Dark void backgrounds, pulsing
+//  violet/electric-blue borders, and a DNA-helix-into-digital-grid divider.
+// ════════════════════════════════════════════════════════════════════════════
+
+function APMSection({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      aria-labelledby="apm-title"
+      className="relative -mx-2 sm:-mx-4 rounded-3xl px-3 py-10 sm:px-6 sm:py-14"
+      style={{
+        backgroundImage:
+          `radial-gradient(900px 500px at 18% -10%, rgba(168,85,247,0.18), transparent 60%),` +
+          ` radial-gradient(800px 480px at 88% 110%, rgba(59,130,246,0.16), transparent 60%),` +
+          ` linear-gradient(180deg, ${VOID} 0%, ${VOID_2} 60%, ${VOID} 100%)`,
+        boxShadow:
+          "inset 0 0 80px rgba(99,102,241,0.10), inset 0 0 0 1px rgba(168,85,247,0.18)",
+      }}
+    >
+      {/* DNA-helix → digital-grid divider */}
+      <HelixGridDivider />
+
+      {/* Eyebrow + title */}
+      <header className="mt-8 text-center">
+        <div
+          className="mx-auto inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em]"
+          style={{
+            borderColor: `${NEON_VIOLET}55`,
+            backgroundColor: `${NEON_VIOLET}14`,
+            color: NEON_PURPLE_LIGHT,
+          }}
+        >
+          <Sparkles size={12} />
+          <span>SPECULATIVE FUTURE</span>
+          <span style={{ color: STEEL }}>·</span>
+          <span style={{ color: STEEL_LIGHT }}>អនាគតស្ម័ន</span>
+        </div>
+
+        <h2
+          id="apm-title"
+          className="mt-5 px-2 text-3xl font-black leading-tight tracking-tight sm:text-4xl"
+          style={{ color: IVORY }}
+        >
+          {isKh ? (
+            <>
+              ព្រំដែនចុងក្រោយ៖{" "}
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${NEON_VIOLET}, ${NEON_ELECTRIC})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                ការផលិតដោយភាពជាក់លាក់កម្រិតអាតូម
+              </span>
+            </>
+          ) : (
+            <>
+              The Ultimate Frontier:{" "}
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${NEON_VIOLET}, ${NEON_ELECTRIC})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Atomically Precise Manufacturing
+              </span>
+            </>
+          )}
+        </h2>
+        <p
+          className="mx-auto mt-4 max-w-2xl px-3 text-[15px] leading-relaxed"
+          style={{ color: STEEL_LIGHT }}
+        >
+          {isKh
+            ? "បើ​ការ​បោះពុម្ព ៣ វិមាត្រ​សព្វថ្ងៃ​បន្ថែម​សម្ភារៈ​ស្រទាប់​ម្ដង​មួយ ឱ្យ​ច្រឡំ​នឹង​អនាគត​ដែល​ម៉ាស៊ីន​បន្ថែម​សម្ភារៈ ​អាតូម​ម្ដង​មួយ។ នេះ​មិន​មែន​ជា​ការ​បោះពុម្ព​ទៀត​ទេ — នេះ​ជា​ការ​សាងសង់​សម្ភារៈ​ដោយ​ផ្ទាល់​ពី​អង្គធាតុ​មុខ​បង្អស់​នៃ​ធម្មជាតិ។"
+            : "If today's 3D printing adds material one layer at a time, imagine a future where machines add material one atom at a time. This is no longer printing — it is building matter directly from nature's smallest pieces."}
+        </p>
+      </header>
+
+      {/* Three cards */}
+      <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <APMCard
+          number="01"
+          icon={Atom}
+          accent={NEON_VIOLET}
+          accentDelay="0s"
+          isKh={isKh}
+          eyebrowEn="The Nano-Builder"
+          eyebrowKh="អ្នកសាងសង់ណាណូ"
+          bodyEn="Instead of squirting hot plastic from a nozzle, imagine a microscopic robot arm equipped with tweezers so small they can pick up individual atoms and snap them together — like Lego bricks, but a billion times smaller."
+          bodyKh="ជំនួសឱ្យការច្រួលប្លាស្ទិចក្ដៅពីច្រមុះ ស្រមៃមើលដៃរ៉ូបូតមីក្រូទស្សន៍ដែលមានដង្កៀបតូចណាស់រហូតអាចចាប់អាតូមនីមួយៗ ហើយតស៊ូវ៉ាបញ្ចូលគ្នា — ដូចគ្នានឹងឡេហ្គោ ប៉ុន្តែតូចជាងមួយពាន់លានដង។"
+          tags={[
+            { en: "Atom by atom", kh: "អាតូមម្ដងមួយ" },
+            { en: "Nano-tweezers", kh: "ដង្កៀបណាណូ" },
+            { en: "Picometer precision", kh: "ភាពជាក់លាក់ពីកូម៉ែត្រ" },
+          ]}
+        >
+          <NanoBuilderGlyph />
+        </APMCard>
+
+        <APMCard
+          isKh={isKh}
+          number="02"
+          icon={Hexagon}
+          accent={NEON_INDIGO}
+          accentDelay="1.3s"
+          eyebrowEn="Mechanosynthesis"
+          eyebrowKh="ការសំយោគមេកានិច"
+          bodyEn="APM is just chemistry controlled by machines. Instead of mixing chemicals in a liquid and hoping the atoms bump into each other correctly, a machine forces the atoms together in the exact right spot — building perfect materials like flawless diamond crystals or super-strong carbon nanotubes."
+          bodyKh="APM គឺគ្រាន់តែជាគីមីវិទ្យាដែលត្រូវបានគ្រប់គ្រងដោយម៉ាស៊ីន។ ជំនួសឱ្យការលាយគីមីក្នុងសារធាតុរាវ ហើយសង្ឃឹមថាអាតូមនឹងប៉ះគ្នាត្រឹមត្រូវ ម៉ាស៊ីនបង្ខំអាតូមឱ្យជួបគ្នាក្នុងទីតាំងពិតប្រាកដ — សាងសង់សម្ភារៈឥតខ្ចោះដូចជាពេជ្រគ្រីស្តាល់ ឬបំពង់ណាណូកាបោនរឹងមាំ។"
+          tags={[
+            { en: "Diamond crystal", kh: "គ្រីស្តាល់ពេជ្រ" },
+            { en: "Carbon nanotubes", kh: "បំពង់ណាណូកាបោន" },
+            { en: "Forced reactions", kh: "ប្រតិកម្មបង្ខំ" },
+          ]}
+        >
+          <MechanoSynthGlyph isKh={isKh} />
+        </APMCard>
+
+        <APMCard
+          isKh={isKh}
+          number="03"
+          icon={Globe2}
+          accent={NEON_ELECTRIC}
+          accentDelay="2.6s"
+          eyebrowEn="The End of Scarcity"
+          eyebrowKh="ទីបញ្ចប់នៃភាពខ្វះខាត"
+          bodyEn="If a machine can rearrange atoms, it can turn dirt, air, and sunlight into medicine, computer chips, or food. This technology could theoretically end poverty by making physical goods as cheap and easy to copy as digital files."
+          bodyKh="បើម៉ាស៊ីនមួយអាចរៀបចំអាតូមឡើងវិញ វាអាចប្រែដី ខ្យល់ និងពន្លឺថ្ងៃ ទៅជាឱសថ បន្ទះកុំព្យូទ័រ ឬអាហារ។ បច្ចេកវិទ្យានេះអាចបញ្ចប់ភាពក្រីក្រតាមទ្រឹស្តី ដោយធ្វើឱ្យទំនិញរូបវ័ន្តមានតម្លៃថោក ហើយងាយចម្លងដូចឯកសារឌីជីថល។"
+          tags={[
+            { en: "Post-scarcity", kh: "ក្រោយភាពខ្វះខាត" },
+            { en: "Universal manufacturing", kh: "ផលិតកម្មសកល" },
+            { en: "Atom-level copying", kh: "ការចម្លងកម្រិតអាតូម" },
+          ]}
+        >
+          <ScarcityGlyph isKh={isKh} />
+        </APMCard>
+      </div>
+
+      {/* Footer caveat */}
+      <p
+        className="mx-auto mt-10 max-w-3xl px-4 text-center text-[12px] italic leading-relaxed"
+        style={{ color: `${STEEL}` }}
+      >
+        {isKh
+          ? "ចំណាំ៖ APM គឺនៅតែជាការស្រាវជ្រាវវិទ្យាសាស្រ្ត — រឿងស្រដៀងនឹងការហោះហើរក្នុងឆ្នាំ ១៩០០ — ប៉ុន្តែគោលការណ៍គឺបានបង្ហាញហើយ នៅក្នុងម៉ូលេគុលមួយចំនួនរួចហើយ។"
+          : "Note: APM is still active research — the way flight was in 1900 — but the principle has already been demonstrated for a handful of molecules in the laboratory."}
+      </p>
+    </section>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+//  HELIX → DIGITAL-GRID DIVIDER
+//  Two intertwined sine-wave strands (DNA) on the left smoothly transitioning
+//  into a stipple-grid pattern on the right.
+// ────────────────────────────────────────────────────────────────────────────
+
+function HelixGridDivider() {
+  // Two strands, each one a sine wave 180° out of phase.
+  const W = 800;
+  const H = 80;
+  const strand = (phase: number) => {
+    const pts: string[] = [];
+    for (let x = 0; x <= W; x += 4) {
+      const t = (x / W) * Math.PI * 6 + phase;
+      // Strand fades out as it crosses into the grid zone (right half).
+      const y = H / 2 + Math.sin(t) * 22;
+      pts.push(`${x},${y.toFixed(2)}`);
+    }
+    return pts.join(" ");
+  };
+
+  // Connecting "rungs" between the two strands — only on the left half.
+  const rungs: number[] = [];
+  for (let x = 20; x < W * 0.55; x += 28) rungs.push(x);
+
+  // Grid dots on the right half.
+  const dots: { x: number; y: number; o: number }[] = [];
+  for (let gx = W * 0.45; gx <= W; gx += 22) {
+    for (let gy = 12; gy <= H - 12; gy += 14) {
+      // Fade in from left to right.
+      const o = Math.min(1, (gx - W * 0.45) / (W * 0.55));
+      dots.push({ x: gx, y: gy, o });
+    }
+  }
+
+  return (
+    <div
+      className="relative mx-auto w-full overflow-hidden"
+      style={{ maxWidth: 880 }}
+      aria-hidden
+    >
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="block w-full"
+        style={{ height: 80 }}
+      >
+        <defs>
+          {/* Strand A: violet glow */}
+          <linearGradient id="strandA" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor={NEON_VIOLET} stopOpacity="0.9" />
+            <stop offset="55%" stopColor={NEON_INDIGO} stopOpacity="0.8" />
+            <stop offset="100%" stopColor={NEON_ELECTRIC} stopOpacity="0" />
+          </linearGradient>
+          {/* Strand B: electric-blue glow */}
+          <linearGradient id="strandB" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor={NEON_PURPLE_LIGHT} stopOpacity="0.85" />
+            <stop offset="55%" stopColor={NEON_ELECTRIC} stopOpacity="0.75" />
+            <stop offset="100%" stopColor={NEON_ELECTRIC} stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="rungGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor={NEON_VIOLET} stopOpacity="0.7" />
+            <stop offset="100%" stopColor={NEON_ELECTRIC} stopOpacity="0.05" />
+          </linearGradient>
+        </defs>
+
+        {/* Strand A (sin) */}
+        <polyline
+          points={strand(0)}
+          fill="none"
+          stroke="url(#strandA)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeDasharray="160 0"
+          style={{
+            animation: "apm-helix-flow 6s linear infinite",
+            filter: `drop-shadow(0 0 4px ${NEON_VIOLET}88)`,
+          }}
+        />
+        {/* Strand B (sin shifted by π) */}
+        <polyline
+          points={strand(Math.PI)}
+          fill="none"
+          stroke="url(#strandB)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeDasharray="160 0"
+          style={{
+            animation: "apm-helix-flow 6s linear infinite reverse",
+            filter: `drop-shadow(0 0 4px ${NEON_ELECTRIC}88)`,
+          }}
+        />
+
+        {/* Rungs (DNA base-pairs) */}
+        {rungs.map((x) => {
+          const t = (x / W) * Math.PI * 6;
+          const y1 = H / 2 + Math.sin(t) * 22;
+          const y2 = H / 2 + Math.sin(t + Math.PI) * 22;
+          return (
+            <line
+              key={x}
+              x1={x}
+              x2={x}
+              y1={y1}
+              y2={y2}
+              stroke="url(#rungGrad)"
+              strokeWidth="0.9"
+              opacity="0.7"
+            />
+          );
+        })}
+
+        {/* Digital grid (right half) */}
+        {dots.map((d, i) => (
+          <circle
+            key={i}
+            cx={d.x}
+            cy={d.y}
+            r="1.1"
+            fill={NEON_ELECTRIC}
+            opacity={d.o * 0.7}
+            style={{
+              animation: `apm-grid-pulse 3s ease-in-out ${(i * 0.05) % 2}s infinite`,
+            }}
+          />
+        ))}
+
+        {/* Faint vertical grid lines on the right */}
+        {Array.from({ length: 6 }).map((_, i) => {
+          const x = W * 0.55 + i * (W * 0.45) / 6;
+          return (
+            <line
+              key={`v-${i}`}
+              x1={x}
+              x2={x}
+              y1="6"
+              y2={H - 6}
+              stroke={NEON_ELECTRIC}
+              strokeWidth="0.4"
+              opacity={0.18 + i * 0.04}
+            />
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+//  APMCard — generic card shell with pulsing border + corner numeral
+// ────────────────────────────────────────────────────────────────────────────
+
+function APMCard({
+  isKh,
+  number,
+  icon: Icon,
+  accent,
+  accentDelay,
+  eyebrowEn,
+  eyebrowKh,
+  bodyEn,
+  bodyKh,
+  tags,
+  children,
+}: {
+  isKh: boolean;
+  number: string;
+  icon: ComponentType<{ size?: number; style?: React.CSSProperties }>;
+  accent: string;
+  accentDelay: string;
+  eyebrowEn: string;
+  eyebrowKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  tags: { en: string; kh: string }[];
+  children: React.ReactNode;
+}) {
+  return (
+    <article
+      className="apm-card relative flex flex-col overflow-hidden rounded-2xl border-2 p-6 sm:p-7"
+      style={{
+        borderColor: `${accent}66`,
+        backgroundImage: `linear-gradient(135deg, ${VOID}, ${VOID_2})`,
+        animation: `apm-border-pulse 4.5s ease-in-out ${accentDelay} infinite`,
+      }}
+    >
+      {/* Corner numeral */}
+      <span
+        aria-hidden
+        className="absolute right-4 top-3 select-none font-mono text-[44px] font-black leading-none"
+        style={{ color: `${accent}26` }}
+      >
+        {number}
+      </span>
+
+      {/* Header row */}
+      <div className="flex items-start gap-3">
+        <div
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl"
+          style={{
+            background: `linear-gradient(135deg, ${accent}33, ${accent}10)`,
+            border: `1px solid ${accent}55`,
+            boxShadow: `0 0 14px ${accent}33`,
+          }}
+        >
+          <Icon size={18} style={{ color: accent }} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div
+            className="text-[10px] font-bold uppercase tracking-[0.18em]"
+            style={{ color: STEEL }}
+          >
+            <span style={{ color: accent }}>{eyebrowEn}</span>
+          </div>
+          <div
+            className="mt-0.5 text-[11px] font-semibold leading-tight"
+            style={{ color: STEEL_LIGHT }}
+          >
+            {eyebrowKh}
+          </div>
+        </div>
+      </div>
+
+      {/* Glyph */}
+      <div className="my-5 flex flex-1 items-center justify-center">
+        {children}
+      </div>
+
+      {/* Body copy */}
+      <p
+        className="text-[14px] leading-relaxed"
+        style={{ color: STEEL_LIGHT }}
+      >
+        {isKh ? bodyKh : bodyEn}
+      </p>
+
+      {/* Tags */}
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {tags.map((t, i) => (
+          <Tag key={i} label={t.en} labelKh={t.kh} color={accent} />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+//  GLYPHS
+// ────────────────────────────────────────────────────────────────────────────
+
+function NanoBuilderGlyph() {
+  // Robot-arm tweezers placing one atom into a Lego-like grid of placed atoms.
+  return (
+    <svg viewBox="0 0 200 130" width="200" height="130" aria-hidden>
+      {/* Backing grid (dot stipple) */}
+      <g opacity="0.18">
+        {Array.from({ length: 8 }).map((_, gx) =>
+          Array.from({ length: 5 }).map((_, gy) => (
+            <circle
+              key={`${gx}-${gy}`}
+              cx={20 + gx * 22}
+              cy={20 + gy * 18}
+              r="0.7"
+              fill={NEON_VIOLET}
+            />
+          )),
+        )}
+      </g>
+
+      {/* Robot arm — base + jointed segments + tweezers, swaying gently */}
+      <g style={{ animation: "maker-extrude 2.2s ease-in-out infinite" }}>
+        {/* Base */}
+        <rect x="14" y="12" width="14" height="6" rx="1" fill={VOID_2} stroke={NEON_VIOLET} strokeWidth="0.8" />
+        {/* Upper arm */}
+        <line x1="21" y1="18" x2="60" y2="44" stroke={NEON_VIOLET} strokeWidth="2" strokeLinecap="round" />
+        <circle cx="60" cy="44" r="2.5" fill={VOID_2} stroke={NEON_PURPLE_LIGHT} strokeWidth="1" />
+        {/* Lower arm */}
+        <line x1="60" y1="44" x2="92" y2="62" stroke={NEON_INDIGO} strokeWidth="1.6" strokeLinecap="round" />
+        {/* Tweezer head */}
+        <g transform="translate(92,62)">
+          <line x1="0" y1="0" x2="6" y2="10" stroke={NEON_PURPLE_LIGHT} strokeWidth="1.2" />
+          <line x1="0" y1="0" x2="-6" y2="10" stroke={NEON_PURPLE_LIGHT} strokeWidth="1.2" />
+          {/* The atom being held */}
+          <g transform="translate(0,16)" style={{ animation: "apm-orbit 4s linear infinite", transformOrigin: "0 0" }}>
+            <ellipse cx="0" cy="0" rx="6" ry="2" fill="none" stroke={NEON_VIOLET} strokeWidth="0.6" opacity="0.7" />
+            <ellipse cx="0" cy="0" rx="2" ry="6" fill="none" stroke={NEON_ELECTRIC} strokeWidth="0.6" opacity="0.7" />
+          </g>
+          <circle
+            cx="0"
+            cy="16"
+            r="3.2"
+            fill={NEON_PURPLE_LIGHT}
+            stroke={IVORY}
+            strokeWidth="0.5"
+            style={{ filter: `drop-shadow(0 0 4px ${NEON_VIOLET})` }}
+          />
+        </g>
+      </g>
+
+      {/* Lego-brick lattice of already-placed atoms (3 rows × 5 cols) */}
+      <g transform="translate(40,90)">
+        {Array.from({ length: 3 }).map((_, row) =>
+          Array.from({ length: 5 }).map((_, col) => {
+            // Leave one slot empty — that's where the tweezers will deliver.
+            const isTarget = row === 0 && col === 4;
+            const cx = col * 22 + 8;
+            const cy = -row * 16;
+            if (isTarget) {
+              // Empty placeholder slot, dashed outline
+              return (
+                <circle
+                  key={`s-${row}-${col}`}
+                  cx={cx}
+                  cy={cy}
+                  r="5"
+                  fill="none"
+                  stroke={NEON_PURPLE_LIGHT}
+                  strokeWidth="0.7"
+                  strokeDasharray="2 2"
+                  opacity="0.65"
+                />
+              );
+            }
+            return (
+              <g key={`s-${row}-${col}`}>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r="5"
+                  fill={`${NEON_INDIGO}aa`}
+                  stroke={NEON_INDIGO}
+                  strokeWidth="0.7"
+                />
+                {/* tiny stud highlight */}
+                <circle cx={cx - 1.2} cy={cy - 1.2} r="1.1" fill={NEON_PURPLE_LIGHT} opacity="0.7" />
+              </g>
+            );
+          }),
+        )}
+      </g>
+    </svg>
+  );
+}
+
+function MechanoSynthGlyph({ isKh }: { isKh: boolean }) {
+  // Atoms snapping into a hexagonal carbon lattice with force-vector arrows.
+  // Honeycomb of 7 hexagons (1 center + 6 neighbours), one of which is
+  // mid-snap with directional arrows.
+  const hex = (cx: number, cy: number, r: number) => {
+    const pts: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i + Math.PI / 6;
+      pts.push(`${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`);
+    }
+    return pts.join(" ");
+  };
+
+  // Centres of the honeycomb cells.
+  const R = 14;
+  const dx = R * Math.sqrt(3);
+  const cx = 100;
+  const cy = 65;
+  const cells = [
+    { x: cx, y: cy, snapping: false }, // centre
+    { x: cx, y: cy - 2 * R, snapping: false }, // top
+    { x: cx + dx, y: cy - R, snapping: false }, // top-right
+    { x: cx + dx, y: cy + R, snapping: false }, // bottom-right
+    { x: cx, y: cy + 2 * R, snapping: false }, // bottom
+    { x: cx - dx, y: cy + R, snapping: true }, // bottom-left → animated snap
+    { x: cx - dx, y: cy - R, snapping: false }, // top-left
+  ];
+
+  return (
+    <svg viewBox="0 0 200 130" width="200" height="130" aria-hidden>
+      {/* Background grid */}
+      <g opacity="0.14">
+        {Array.from({ length: 9 }).map((_, gx) =>
+          Array.from({ length: 6 }).map((_, gy) => (
+            <circle
+              key={`bg-${gx}-${gy}`}
+              cx={10 + gx * 22}
+              cy={10 + gy * 22}
+              r="0.7"
+              fill={NEON_INDIGO}
+            />
+          )),
+        )}
+      </g>
+
+      {/* Hex bonds */}
+      {cells.map((c, i) =>
+        c.snapping ? null : (
+          <polygon
+            key={`hex-${i}`}
+            points={hex(c.x, c.y, R)}
+            fill="none"
+            stroke={NEON_INDIGO}
+            strokeWidth="0.9"
+            opacity="0.55"
+          />
+        ),
+      )}
+
+      {/* Atoms */}
+      {cells.map((c, i) =>
+        c.snapping ? null : (
+          <circle
+            key={`atom-${i}`}
+            cx={c.x}
+            cy={c.y}
+            r="3.6"
+            fill={`${NEON_INDIGO}cc`}
+            stroke={NEON_PURPLE_LIGHT}
+            strokeWidth="0.7"
+          />
+        ),
+      )}
+
+      {/* The snapping atom (offset, with force arrows) */}
+      {(() => {
+        const target = cells.find((c) => c.snapping)!;
+        // Animated atom that hovers slightly above target
+        return (
+          <g style={{ animation: "maker-extrude 1.6s ease-in-out infinite" }}>
+            {/* Force-vector arrows pointing inward toward the snap site */}
+            <g stroke={NEON_VIOLET} strokeWidth="1" fill="none" opacity="0.85">
+              <line x1={target.x - 18} y1={target.y - 14} x2={target.x - 5} y2={target.y - 4} />
+              <polygon points={`${target.x - 5},${target.y - 4} ${target.x - 9},${target.y - 5} ${target.x - 7.5},${target.y - 1.5}`} fill={NEON_VIOLET} stroke="none" />
+              <line x1={target.x - 18} y1={target.y + 14} x2={target.x - 5} y2={target.y + 4} />
+              <polygon points={`${target.x - 5},${target.y + 4} ${target.x - 9},${target.y + 5} ${target.x - 7.5},${target.y + 1.5}`} fill={NEON_VIOLET} stroke="none" />
+            </g>
+            {/* Outline of where it will snap to */}
+            <polygon
+              points={hex(target.x, target.y, R)}
+              fill="none"
+              stroke={NEON_PURPLE_LIGHT}
+              strokeWidth="0.7"
+              strokeDasharray="2 2"
+              opacity="0.7"
+            />
+            {/* The atom mid-snap, glowing */}
+            <circle
+              cx={target.x}
+              cy={target.y}
+              r="3.8"
+              fill={NEON_PURPLE_LIGHT}
+              stroke={IVORY}
+              strokeWidth="0.6"
+              style={{ filter: `drop-shadow(0 0 5px ${NEON_VIOLET})` }}
+            />
+          </g>
+        );
+      })()}
+
+      {/* Label */}
+      <g transform="translate(100,118)">
+        <text
+          x="0"
+          y="0"
+          fontFamily={isKh ? "ui-sans-serif, sans-serif" : "ui-monospace, monospace"}
+          fontSize="8"
+          fill={NEON_PURPLE_LIGHT}
+          textAnchor="middle"
+          opacity="0.9"
+        >
+          {isKh ? "ស្ទ្រាប់ពេជ្រ C₆" : "C₆ DIAMOND LATTICE"}
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+function ScarcityGlyph({ isKh }: { isKh: boolean }) {
+  // Bilingual labels for the inputs and outputs columns.
+  const L = {
+    dirt: isKh ? "ដី" : "dirt",
+    air: isKh ? "ខ្យល់" : "air",
+    sun: isKh ? "ថ្ងៃ" : "sun",
+    medicine: isKh ? "ឱសថ" : "medicine",
+    chip: isKh ? "បន្ទះ" : "chip",
+    food: isKh ? "អាហារ" : "food",
+  };
+  // Inputs (dirt, air, sun) → APM box → Outputs (pill, chip, bread).
+  return (
+    <svg viewBox="0 0 220 130" width="220" height="130" aria-hidden>
+      {/* Background grid */}
+      <g opacity="0.16">
+        {Array.from({ length: 10 }).map((_, gx) =>
+          Array.from({ length: 5 }).map((_, gy) => (
+            <circle
+              key={`bg-${gx}-${gy}`}
+              cx={12 + gx * 22}
+              cy={14 + gy * 22}
+              r="0.7"
+              fill={NEON_ELECTRIC}
+            />
+          )),
+        )}
+      </g>
+
+      {/* INPUTS column ─────────────────────────── */}
+      <g transform="translate(20,30)">
+        {/* Dirt — small mound */}
+        <g>
+          <path
+            d="M 0,18 Q 8,4 16,18 Z"
+            fill={`${NEON_ELECTRIC}55`}
+            stroke={NEON_ELECTRIC}
+            strokeWidth="0.7"
+          />
+          <text x="8" y="32" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.dirt}
+          </text>
+        </g>
+        {/* Air — wavy lines */}
+        <g transform="translate(0,42)">
+          <path d="M 0,4 q 4,-4 8,0 t 8,0" fill="none" stroke={NEON_ELECTRIC} strokeWidth="1" />
+          <path d="M 0,10 q 4,-4 8,0 t 8,0" fill="none" stroke={NEON_ELECTRIC} strokeWidth="1" />
+          <text x="8" y="22" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.air}
+          </text>
+        </g>
+        {/* Sun — circle with rays (recoloured to electric-blue glow to match
+            the deep-tech palette; no amber here.) */}
+        <g transform="translate(0,72)">
+          <circle
+            cx="8"
+            cy="8"
+            r="5"
+            fill={NEON_PURPLE_LIGHT}
+            opacity="0.9"
+            style={{ filter: `drop-shadow(0 0 4px ${NEON_ELECTRIC})` }}
+          />
+          {Array.from({ length: 8 }).map((_, i) => {
+            const a = (i / 8) * Math.PI * 2;
+            const x1 = 8 + Math.cos(a) * 7.5;
+            const y1 = 8 + Math.sin(a) * 7.5;
+            const x2 = 8 + Math.cos(a) * 10.5;
+            const y2 = 8 + Math.sin(a) * 10.5;
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={NEON_ELECTRIC} strokeWidth="0.8" />;
+          })}
+          <text x="8" y="22" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.sun}
+          </text>
+        </g>
+      </g>
+
+      {/* Flow arrows IN → APM box ─────────────── */}
+      {[36, 78, 108].map((y, i) => (
+        <g key={`in-${i}`} stroke={NEON_VIOLET} strokeWidth="0.8" opacity="0.75">
+          <line x1="48" y1={y} x2="86" y2={y} strokeDasharray="2 2" />
+          <polygon
+            points={`86,${y} 81,${y - 2.5} 81,${y + 2.5}`}
+            fill={NEON_VIOLET}
+            stroke="none"
+          />
+        </g>
+      ))}
+
+      {/* APM CENTRE BOX — octagon-ish ─────────── */}
+      <g transform="translate(110,40)">
+        {(() => {
+          // 8-sided octagon
+          const r = 26;
+          const pts: string[] = [];
+          for (let i = 0; i < 8; i++) {
+            const a = (Math.PI / 4) * i + Math.PI / 8;
+            pts.push(`${(r * Math.cos(a)).toFixed(2)},${(r * Math.sin(a)).toFixed(2)}`);
+          }
+          return (
+            <>
+              <polygon
+                points={pts.join(" ")}
+                fill={`${NEON_VIOLET}1c`}
+                stroke={NEON_VIOLET}
+                strokeWidth="1.1"
+                style={{
+                  filter: `drop-shadow(0 0 8px ${NEON_VIOLET}88)`,
+                }}
+              />
+              {/* Inner spinning core */}
+              <g style={{ animation: "apm-orbit 6s linear infinite", transformOrigin: "0 0" }}>
+                <polygon
+                  points={pts.map((p) => p.split(",").map((n) => (parseFloat(n) * 0.5).toFixed(2)).join(",")).join(" ")}
+                  fill="none"
+                  stroke={NEON_PURPLE_LIGHT}
+                  strokeWidth="0.8"
+                  opacity="0.85"
+                />
+              </g>
+              <circle cx="0" cy="0" r="3" fill={NEON_PURPLE_LIGHT} style={{ filter: `drop-shadow(0 0 4px ${NEON_VIOLET})` }} />
+              <text x="0" y="40" fontFamily="ui-monospace, monospace" fontSize="7" fill={NEON_PURPLE_LIGHT} textAnchor="middle" opacity="0.9">
+                APM
+              </text>
+            </>
+          );
+        })()}
+      </g>
+
+      {/* Flow arrows APM box → OUT ──────────── */}
+      {[36, 78, 108].map((y, i) => (
+        <g key={`out-${i}`} stroke={NEON_ELECTRIC} strokeWidth="0.8" opacity="0.85">
+          <line x1="146" y1={y} x2="184" y2={y} strokeDasharray="2 2" />
+          <polygon
+            points={`184,${y} 179,${y - 2.5} 179,${y + 2.5}`}
+            fill={NEON_ELECTRIC}
+            stroke="none"
+          />
+        </g>
+      ))}
+
+      {/* OUTPUTS column ─────────────────────────── */}
+      <g transform="translate(190,30)">
+        {/* Pill */}
+        <g>
+          <rect x="-3" y="2" width="20" height="10" rx="5" fill={`${NEON_VIOLET}66`} stroke={NEON_PURPLE_LIGHT} strokeWidth="0.7" />
+          <line x1="7" y1="2" x2="7" y2="12" stroke={NEON_PURPLE_LIGHT} strokeWidth="0.7" />
+          <text x="7" y="24" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.medicine}
+          </text>
+        </g>
+        {/* Chip */}
+        <g transform="translate(0,42)">
+          <rect x="-1" y="3" width="16" height="10" fill={VOID_2} stroke={NEON_ELECTRIC} strokeWidth="0.7" />
+          {[3, 8, 13].map((px) => (
+            <line key={`u-${px}`} x1={px} y1="3" x2={px} y2="0" stroke={NEON_ELECTRIC} strokeWidth="0.6" />
+          ))}
+          {[3, 8, 13].map((px) => (
+            <line key={`d-${px}`} x1={px} y1="13" x2={px} y2="16" stroke={NEON_ELECTRIC} strokeWidth="0.6" />
+          ))}
+          <circle cx="7" cy="8" r="1.4" fill={NEON_ELECTRIC} />
+          <text x="7" y="24" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.chip}
+          </text>
+        </g>
+        {/* Bread / wheat — recoloured to indigo to match the deep-tech palette. */}
+        <g transform="translate(0,72)">
+          <ellipse cx="7" cy="9" rx="9" ry="5" fill={`${NEON_INDIGO}55`} stroke={NEON_INDIGO} strokeWidth="0.7" />
+          <line x1="2" y1="8" x2="12" y2="8" stroke={NEON_PURPLE_LIGHT} strokeWidth="0.5" opacity="0.7" />
+          <line x1="3" y1="11" x2="11" y2="11" stroke={NEON_PURPLE_LIGHT} strokeWidth="0.5" opacity="0.6" />
+          <text x="7" y="22" fontFamily="ui-sans-serif, sans-serif" fontSize="6" fill={STEEL_LIGHT} textAnchor="middle">
+            {L.food}
+          </text>
+        </g>
+      </g>
+    </svg>
   );
 }
