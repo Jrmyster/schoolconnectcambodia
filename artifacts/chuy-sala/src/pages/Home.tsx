@@ -6,6 +6,7 @@ import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { CountUp } from "@/components/CountUp";
 import { LearningPathQuiz } from "@/components/LearningPathQuiz";
+import { FeedbackSection } from "@/components/FeedbackSection";
 
 export function Home() {
   const t = useTranslation();
@@ -306,6 +307,11 @@ export function Home() {
           </a>
         </div>
       </section>
+
+      {/* Suggestions & Feedback — last section before the global footer.
+          Offline-first: posts to Formspree when online, otherwise queues
+          to localStorage and auto-flushes on the window 'online' event. */}
+      <FeedbackSection />
 
     </div>
   );
