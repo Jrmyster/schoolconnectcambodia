@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/PLACEHOLDER";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdayqjla";
 const QUEUE_KEY = "chuy-sala:feedback-queue";
 
 type QueuedFeedback = {
