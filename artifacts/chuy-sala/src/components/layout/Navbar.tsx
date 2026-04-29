@@ -1135,6 +1135,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "មូលដ្ឋានគ្រឹះសម្រាប់សិស្សបឋមសិក្សា — អក្ខរក្រម A–Z មានរូបភាព លេខ ១–១០០ និងឧបករណ៍សាងសង់លេខ ១០០–១,០០០។",
       },
       {
+        href: "/for-kids/word-popper",
+        labelEn: "The Word Popper",
+        labelKh: "ប៉ោងប៉ោងពាក្យ",
+        icon: LanguagesIcon,
+        descEn: "Tap the floating letter balloons in the right order to spell each word — a playful alphabet game that builds English spelling, one pop at a time.",
+        descKh: "ប៉ះប៉ោងប៉ោងអក្សរតាមលំដាប់ត្រឹមត្រូវ ដើម្បីប្រកបពាក្យនីមួយៗ — ល្បែងអក្ខរក្រមរីករាយ ដែលជួយកសាងការប្រកបពាក្យអង់គ្លេសម្តងមួយប៉ោង។",
+      },
+      {
         href: "/for-kids/my-day",
         labelEn: "My Day: Actions & Health",
         labelKh: "ថ្ងៃរបស់ខ្ញុំ៖ សកម្មភាព និងសុខភាព",
@@ -1149,6 +1157,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: PawPrint,
         descEn: "Two-section vocabulary — animals at home and on the farm, then wildlife from across the world. Tap a card to hear the English name.",
         descKh: "វាក្យសព្ទពីរផ្នែក — សត្វនៅផ្ទះ និងនៅកសិដ្ឋាន រួចសត្វព្រៃពីជុំវិញពិភពលោក។ ប៉ះកាតដើម្បីស្ដាប់ឈ្មោះជាភាសាអង់គ្លេស។",
+      },
+      {
+        href: "/for-kids/habitat-sorter",
+        labelEn: "The Habitat Sorter",
+        labelKh: "ផ្ទះសត្វ",
+        icon: Trees,
+        descEn: "Drag each animal back to the habitat where it lives — forest, ocean, farm, desert. A bilingual sorting game that teaches where in the world each creature calls home.",
+        descKh: "អូសសត្វនីមួយៗត្រឡប់ទៅកាន់ទីជម្រកដែលវារស់នៅ — ព្រៃ មហាសមុទ្រ កសិដ្ឋាន វាលខ្សាច់។ ល្បែងតម្រៀបពីរភាសាដែលបង្រៀនពីកន្លែងដែលសត្វនីមួយៗហៅថាផ្ទះ។",
       },
       {
         href: "/for-kids/feelings",
