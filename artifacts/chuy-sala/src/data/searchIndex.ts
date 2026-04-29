@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
+import { COUNTRY_SEARCH_ENTRIES } from "./searchCountriesIndex";
 import type { SearchEntry } from "./searchTypes";
 
 // Re-export the type so existing consumers (e.g. GlobalSearch) keep working
@@ -1885,6 +1886,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
 export const ALL_SEARCH_ENTRIES: SearchEntry[] = [
   ...SEARCH_INDEX,
   ...AUTO_SEARCH_ENTRIES,
+  ...COUNTRY_SEARCH_ENTRIES,
 ];
 
 // Dev-time integrity check: catch duplicate IDs across the manual list and

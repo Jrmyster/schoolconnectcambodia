@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "wouter";
+import { Link, useSearch } from "wouter";
 import {
   ArrowLeft,
   Search,
@@ -92,6 +92,59 @@ export default function GlobalAtlas() {
   const [continent, setContinent] = useState<Continent | "all">("all");
   const [openCountry, setOpenCountry] = useState<Country | null>(null);
 
+  // ── Deep-link support ──────────────────────────────────────────────
+  // The global homepage search dropdown links here as
+  //   /study-center/global-atlas?country=<id>
+  // We read that query string reactively (wouter v3 `useSearch` re-fires
+  // on URL changes), then narrow the grid down to that country and
+  // auto-open its detail modal so the student lands directly on the
+  // country card they searched for.
+  const searchString = useSearch();
+  const requestedCountryId = useMemo(() => {
+    // useSearch returns the search string WITHOUT the leading "?".
+    const params = new URLSearchParams(searchString);
+    return params.get("country")?.trim() || null;
+  }, [searchString]);
+  const requestedCountry = useMemo(() => {
+    if (!requestedCountryId) return null;
+    const needle = requestedCountryId.toLowerCase();
+    return (
+      COUNTRIES.find((c) => c.id.toLowerCase() === needle) ||
+      COUNTRIES.find((c) => c.name.en.toLowerCase() === needle) ||
+      COUNTRIES.find((c) => c.name.kh === requestedCountryId) ||
+      null
+    );
+  }, [requestedCountryId]);
+
+  // When the URL ?country= changes, narrow the grid and auto-open the
+  // country modal. We also clear the typed search box and continent
+  // filter so the requested card is visible regardless of prior state.
+  useEffect(() => {
+    if (!requestedCountry) return;
+    setQuery("");
+    setContinent("all");
+    setOpenCountry(requestedCountry);
+    // Scroll the page back to top so the auto-opened modal is centered.
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [requestedCountry]);
+
+  // Strip the ?country= deep-link param from the URL. We call this the
+  // moment the user starts using the Atlas's own filters (typing in the
+  // search box or picking a continent) so the deep-link lock releases
+  // and normal filtering resumes — without leaving a stale param in the
+  // address bar that would re-trigger the auto-open on the next render.
+  function clearCountryParam() {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("country")) return;
+    url.searchParams.delete("country");
+    const next = url.pathname + (url.search ? url.search : "") + url.hash;
+    window.history.replaceState(null, "", next);
+    // wouter v3 patches replaceState to fire a navigation event, so
+    // useSearch() above will pick this up and requestedCountry will
+    // become null on the next render.
+  }
+
   // Counts per continent (memoized).
   const continentCounts = useMemo(() => {
     const m: Record<string, number> = { all: COUNTRIES.length };
@@ -100,7 +153,12 @@ export default function GlobalAtlas() {
   }, []);
 
   // Filtered list (memoized).
+  // If the URL is requesting a specific country, the grid collapses to
+  // just that one card (so closing the modal still leaves the user
+  // looking at the right card). Otherwise the typed query + continent
+  // chips drive the filter as before.
   const filtered = useMemo(() => {
+    if (requestedCountry) return [requestedCountry];
     const q = query.trim().toLowerCase();
     return COUNTRIES.filter((c) => {
       if (continent !== "all" && c.continent !== continent) return false;
@@ -112,7 +170,7 @@ export default function GlobalAtlas() {
         c.capital.kh.toLowerCase().includes(q)
       );
     }).sort((a, b) => a.name.en.localeCompare(b.name.en));
-  }, [query, continent]);
+  }, [query, continent, requestedCountry]);
 
   return (
     <div className="min-h-screen relative bg-gradient-to-b from-slate-950 via-[#06182f] to-slate-950 text-slate-100">
@@ -200,7 +258,10 @@ export default function GlobalAtlas() {
               id="atlas-search"
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                clearCountryParam();
+                setQuery(e.target.value);
+              }}
               placeholder={
                 kh
                   ? "ស្វែងរកប្រទេស... · Search for a country..."
@@ -213,7 +274,10 @@ export default function GlobalAtlas() {
             {query && (
               <button
                 type="button"
-                onClick={() => setQuery("")}
+                onClick={() => {
+                  clearCountryParam();
+                  setQuery("");
+                }}
                 aria-label="Clear search · សម្អាតការស្វែងរក"
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-slate-400 hover:text-slate-100 hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
                 data-testid="btn-clear-search"
@@ -236,7 +300,10 @@ export default function GlobalAtlas() {
               <button
                 key={c.id}
                 type="button"
-                onClick={() => setContinent(c.id)}
+                onClick={() => {
+                  clearCountryParam();
+                  setContinent(c.id);
+                }}
                 aria-pressed={isActive}
                 data-testid={`chip-${c.id}`}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold border-2 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-500/30 ${
