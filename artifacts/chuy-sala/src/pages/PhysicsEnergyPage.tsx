@@ -20,6 +20,11 @@ import {
   Battery,
   Lightbulb,
   Calculator,
+  AlertTriangle,
+  Atom,
+  Tv,
+  Orbit,
+  Skull,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -202,6 +207,31 @@ export function PhysicsEnergyPage() {
           icon={Shuffle}
         />
         <EntropyCard kh={kh} t={t} />
+
+        {/* ── 6. Case Study: Star in a Jar — Farnsworth Fusor ──── */}
+        {/* Always-bilingual heading (strict EN+KH, not toggle-dependent) */}
+        <div className="flex items-start gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-orange-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+            <Atom className="w-5 h-5" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-orange-700">
+              <span>Section 06</span>
+              <span className="ml-2 font-khmer normal-case tracking-normal text-xs">
+                · ផ្នែក ០៦
+              </span>
+            </div>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-orange-950 leading-tight">
+              <span className="block">
+                Case study — The Star in a Jar (Farnsworth Fusor)
+              </span>
+              <span className="block font-khmer text-base sm:text-lg md:text-xl text-orange-900 mt-0.5 leading-relaxed">
+                ករណីសិក្សា — តារាក្នុងពាង (ម៉ាស៊ីនរំលាយនុយក្លេអ៊ែរ Farnsworth)
+              </span>
+            </h2>
+          </div>
+        </div>
+        <FarnsworthFusorCaseStudy />
 
         {/* Next */}
         <div className="mt-10 flex justify-center">
@@ -1125,5 +1155,629 @@ function Stat({
       </div>
       <div className={`font-mono text-sm sm:text-base font-bold ${valueColor}`}>{value}</div>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// Case Study · The Star in a Jar — Farnsworth Fusor
+//             តារាក្នុងពាង — ម៉ាស៊ីនរំលាយនុយក្លេអ៊ែរ Farnsworth
+//
+// Aesthetic: "High-Tech Physics" — deep dark backgrounds (slate-950) with
+// glowing neon-purple (fuchsia/violet) and plasma-blue (cyan/sky) accents.
+// Strictly bilingual (paired EN+KH) for every heading, label, and core idea.
+// ════════════════════════════════════════════════════════════════════════════
+
+function FarnsworthFusorCaseStudy() {
+  return (
+    <section
+      data-testid="fusor-section"
+      aria-labelledby="fusor-heading"
+      className="relative rounded-2xl overflow-hidden mb-10 border-2 border-fuchsia-500/40 shadow-[0_30px_80px_-30px_rgba(139,92,246,0.6)]"
+      style={{
+        backgroundColor: "#020617",
+        backgroundImage:
+          "radial-gradient(circle at 20% 0%, rgba(139,92,246,0.18), transparent 55%), " +
+          "radial-gradient(circle at 80% 100%, rgba(6,182,212,0.16), transparent 55%), " +
+          "linear-gradient(rgba(139,92,246,0.06) 1px, transparent 1px), " +
+          "linear-gradient(90deg, rgba(139,92,246,0.06) 1px, transparent 1px)",
+        backgroundSize: "100% 100%, 100% 100%, 32px 32px, 32px 32px",
+      }}
+    >
+      {/* Top neon accent bar */}
+      <div
+        aria-hidden
+        className="h-1"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, transparent, #d946ef, #06b6d4, #d946ef, transparent)",
+        }}
+      />
+
+      <div className="p-5 sm:p-7 space-y-6">
+        {/* Title */}
+        <header>
+          <div className="flex items-start gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-fuchsia-500 to-violet-600 text-white flex items-center justify-center shadow-[0_0_24px_rgba(217,70,239,0.55)] flex-shrink-0">
+              <Atom className="w-6 h-6" strokeWidth={2.5} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-fuchsia-300 mb-1">
+                <span>Theoretical Case Study</span>
+                <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-fuchsia-200/90">
+                  · ករណីសិក្សាទ្រឹស្តី
+                </span>
+              </div>
+              <h2
+                id="fusor-heading"
+                className="font-display font-extrabold text-xl sm:text-2xl md:text-3xl text-white leading-tight"
+              >
+                <span className="block">The Star in a Jar — Farnsworth Fusor</span>
+                <span className="block font-khmer text-base sm:text-lg md:text-xl text-cyan-200 font-bold mt-1 leading-relaxed">
+                  តារាក្នុងពាង — ម៉ាស៊ីនរំលាយនុយក្លេអ៊ែរ Farnsworth
+                </span>
+              </h2>
+            </div>
+          </div>
+        </header>
+
+        {/* 0. Safety disclaimer */}
+        <FusorSafetyBanner />
+
+        {/* 1. What is a Fusor? */}
+        <FusorWhatIsCard />
+
+        {/* 2. How it works — electric cage + visualization */}
+        <FusorHowItWorksCard />
+
+        {/* 3. The catch — break-even */}
+        <FusorBreakEvenCard />
+      </div>
+    </section>
+  );
+}
+
+/* ── Safety disclaimer banner (red, highly visible) ─────────────────── */
+function FusorSafetyBanner() {
+  return (
+    <div
+      data-testid="fusor-safety-banner"
+      role="alert"
+      className="relative rounded-xl border-2 border-red-500 bg-red-950/70 px-4 py-3 sm:px-5 sm:py-4 shadow-[0_0_24px_rgba(239,68,68,0.35)]"
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-lg bg-red-500 text-white flex items-center justify-center flex-shrink-0 animate-pulse">
+          <AlertTriangle className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-red-500 text-white text-[10px] font-extrabold uppercase tracking-[0.18em]">
+              <Skull className="w-3 h-3" /> Warning
+            </span>
+            <span className="font-khmer text-[11px] font-bold uppercase tracking-wider text-red-200">
+              ការព្រមាន
+            </span>
+          </div>
+          <p className="text-sm sm:text-[15px] text-red-50 leading-relaxed font-medium">
+            This is a <strong>theoretical physics lesson</strong>. Real Fusors
+            require <strong>lethal high voltages</strong> (tens of thousands of
+            volts) and produce <strong>dangerous X-ray and neutron radiation</strong>.{" "}
+            <strong>Do not attempt to build one.</strong>
+          </p>
+          <p className="font-khmer text-sm text-red-100 leading-loose mt-2 border-t border-red-400/40 pt-2">
+            នេះគឺជាមេរៀន<strong>រូបវិទ្យាទ្រឹស្តី</strong>។ ម៉ាស៊ីន Fusor ពិតប្រាកដ ទាមទារ<strong>តង់ស្យុងខ្ពស់ដែលអាចបណ្តាលឲ្យស្លាប់</strong> (រាប់ម៉ឺនវ៉ុល) និងបង្កើត<strong>វិទ្យុសកម្ម X-ray និងនឺត្រុងដ៏គ្រោះថ្នាក់</strong>។ <strong>សូមកុំសាកល្បងបង្កើតវាឡើយ។</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── 1. What is a Fusor? (IEC + Philo Farnsworth) ───────────────────── */
+function FusorWhatIsCard() {
+  return (
+    <article
+      data-testid="fusor-what-is"
+      className="rounded-xl border border-fuchsia-400/40 bg-slate-900/70 backdrop-blur-sm p-4 sm:p-5"
+    >
+      <header className="flex items-start gap-3 mb-3">
+        <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/50 text-cyan-200 flex items-center justify-center flex-shrink-0">
+          <Tv className="w-5 h-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-300 mb-0.5">
+            <span>Section 01 · The Concept</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-cyan-200/90">
+              · ផ្នែក ០១ · គំនិត
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">What is a Fusor?</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-cyan-200 mt-0.5">
+              តើម៉ាស៊ីននេះជាអ្វី?
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-sm sm:text-[15px] text-slate-100 leading-relaxed">
+        A <strong className="text-fuchsia-300">Farnsworth Fusor</strong> is a
+        small device that performs real nuclear fusion using a technique called{" "}
+        <strong className="text-cyan-300">Inertial Electrostatic Confinement (IEC)</strong>.
+        Modern fusion reactors like ITER need building-sized superconducting
+        magnets that cost <em>billions of dollars</em> to trap and squeeze hot
+        plasma. A Fusor throws all that away and uses{" "}
+        <strong className="text-fuchsia-300">static electricity</strong> instead
+        — the same kind of force that pulls a balloon to your hair.
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-3 border-t border-fuchsia-400/20 pt-3">
+        <strong className="text-fuchsia-300">Farnsworth Fusor</strong> គឺជាឧបករណ៍តូចមួយដែលបង្កើតការរំលាយនុយក្លេអ៊ែរពិតប្រាកដ ដោយប្រើបច្ចេកទេសហៅថា{" "}
+        <strong className="text-cyan-300">ការច្រកដោយអេឡិចត្រូស្តាទិច (IEC)</strong>។ ម៉ាស៊ីនរំលាយនុយក្លេអ៊ែរទំនើបដូចជា ITER ត្រូវការមេដែករួមធំៗដែលមានតម្លៃ<em>រាប់ពាន់លានដុល្លារ</em> ដើម្បីច្រកក្ដៅប្លាស្មា។ Fusor បោះបង់ចោលរឿងទាំងនោះ ហើយប្រើ<strong className="text-fuchsia-300">អគ្គិសនីស្ថិត</strong>ជំនួសវិញ — ប្រភេទកម្លាំងតែមួយដែលទាញប៉េងប៉ោងទៅសក់របស់អ្នក។
+      </p>
+
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* Inventor stat */}
+        <div className="rounded-lg bg-slate-950/70 border border-cyan-400/30 px-3 py-2.5">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-cyan-300">
+            <span>Inventor</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-cyan-200/90">
+              · អ្នកបង្កើត
+            </span>
+          </div>
+          <div className="font-display font-bold text-base text-white mt-0.5">
+            Philo T. Farnsworth (1906 – 1971)
+          </div>
+          <div className="text-xs text-slate-300 leading-relaxed mt-1">
+            The same self-taught American inventor who built the first electronic{" "}
+            <strong className="text-cyan-200">television</strong>.
+          </div>
+          <div className="font-khmer text-xs text-slate-400 leading-relaxed mt-1">
+            អ្នកបង្កើតជនជាតិអាមេរិកម្នាក់ដែលរៀនដោយខ្លួនឯង ហើយបានបង្កើត<strong className="text-cyan-200">ទូរទស្សន៍</strong>អេឡិចត្រូនិចដំបូងគេ។
+          </div>
+        </div>
+        {/* Year built */}
+        <div className="rounded-lg bg-slate-950/70 border border-fuchsia-400/30 px-3 py-2.5">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-fuchsia-300">
+            <span>First Working Device</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-fuchsia-200/90">
+              · ឧបករណ៍ដំបូង
+            </span>
+          </div>
+          <div className="font-display font-bold text-base text-white mt-0.5">
+            1964 · United States
+          </div>
+          <div className="text-xs text-slate-300 leading-relaxed mt-1">
+            Today, <strong className="text-fuchsia-200">teenagers</strong> have
+            built working Fusors for science fairs.
+          </div>
+          <div className="font-khmer text-xs text-slate-400 leading-relaxed mt-1">
+            សព្វថ្ងៃ <strong className="text-fuchsia-200">ក្មេងជំទង់</strong>បានបង្កើត Fusor ដែលដំណើរការសម្រាប់ការតាំងពិពណ៌វិទ្យាសាស្ត្រ។
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ── 2. How it works — the electric cage + animated visualization ───── */
+function FusorHowItWorksCard() {
+  return (
+    <article
+      data-testid="fusor-how-it-works"
+      className="rounded-xl border border-fuchsia-400/40 bg-slate-900/70 backdrop-blur-sm p-4 sm:p-5"
+    >
+      <header className="flex items-start gap-3 mb-3">
+        <div className="w-10 h-10 rounded-lg bg-fuchsia-500/15 border border-fuchsia-400/50 text-fuchsia-200 flex items-center justify-center flex-shrink-0">
+          <Zap className="w-5 h-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-fuchsia-300 mb-0.5">
+            <span>Section 02 · The Mechanism</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-fuchsia-200/90">
+              · ផ្នែក ០២ · យន្តការ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">How It Works — The Electric Cage</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-fuchsia-200 mt-0.5">
+              របៀបដែលវាដំណើរការ — ទ្រុងអគ្គិសនី
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-sm sm:text-[15px] text-slate-100 leading-relaxed">
+        Inside a sealed glass <strong className="text-cyan-300">vacuum chamber</strong>{" "}
+        sit two metal wire spheres, one inside the other — like a wire ball
+        floating inside a slightly bigger wire ball. The inner sphere is the{" "}
+        <strong className="text-fuchsia-300">cathode</strong>: it is pumped full
+        of an enormous{" "}
+        <strong className="text-fuchsia-300">negative electrical charge</strong>{" "}
+        (often −20,000 to −50,000 volts).
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-3 border-t border-fuchsia-400/20 pt-3">
+        នៅក្នុង<strong className="text-cyan-300">បន្ទប់ខ្យល់ជន់</strong>កែវដែលបិទជិត មានស្វ៊ែរខ្សែលោហៈពីរ មួយនៅខាងក្នុងមួយ — ដូចជាបាល់ខ្សែអណ្តែតនៅក្នុងបាល់ខ្សែធំជាងបន្តិច។ ស្វ៊ែរខាងក្នុងគឺជា<strong className="text-fuchsia-300">កាតូត</strong>៖ វាត្រូវបានបញ្ចូលនូវ<strong className="text-fuchsia-300">បន្ទុកអគ្គិសនីអវិជ្ជមានដ៏ធំសម្បើម</strong> (ច្រើនតែ −២០.០០០ ដល់ −៥០.០០០ វ៉ុល)។
+      </p>
+
+      <p className="text-sm sm:text-[15px] text-slate-100 leading-relaxed mt-3">
+        Then a tiny puff of <strong className="text-cyan-300">deuterium gas</strong>{" "}
+        (heavy hydrogen) is let in. The huge electric field rips electrons off
+        the atoms, leaving bare positive nuclei — called{" "}
+        <strong className="text-cyan-300">positive ions</strong>.
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-2">
+        បន្ទាប់មក ឧស្ម័ន<strong className="text-cyan-300">ដឺតេរ្យូម</strong> (អ៊ីដ្រូសែនធ្ងន់) បន្តិចបន្តួចត្រូវបានបញ្ចូល។ ដែនអគ្គិសនីដ៏ធំ ហែកអេឡិចត្រុងចេញពីអាតូម ទុកសល់នុយក្លេអ៊ូសវិជ្ជមានទទេ — ហៅថា<strong className="text-cyan-300">អ៊ីយ៉ុងវិជ្ជមាន</strong>។
+      </p>
+
+      {/* Dynamic punchline + visual */}
+      <div className="mt-4 rounded-xl bg-gradient-to-br from-fuchsia-950/60 via-violet-950/60 to-cyan-950/60 border border-fuchsia-400/40 p-4 shadow-[inset_0_0_24px_rgba(139,92,246,0.25)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(220px,280px)] gap-4 items-center">
+          <div>
+            <p className="text-sm sm:text-[15px] text-white leading-relaxed">
+              Because <strong className="text-fuchsia-300">opposites attract</strong>,
+              the positive ions are{" "}
+              <strong className="text-cyan-300">violently yanked from every direction</strong>{" "}
+              toward the negative inner cage. They scream inward at speeds of{" "}
+              <strong className="text-fuchsia-300">hundreds of kilometres per second</strong>,
+              fly straight through the wire gaps, and{" "}
+              <strong className="text-cyan-300">slam head-on into each other</strong>{" "}
+              at the dead center. A few of them <em>fuse</em> — and a tiny,
+              brilliant{" "}
+              <strong className="text-fuchsia-200">star of plasma</strong>{" "}
+              ignites in the heart of the chamber, glowing purple-pink, releasing
+              a burst of nuclear energy.
+            </p>
+            <p className="font-khmer text-sm text-slate-100 leading-loose mt-3 border-t border-fuchsia-400/20 pt-3">
+              ព្រោះ<strong className="text-fuchsia-300">ផ្ទុយគ្នាទាក់ទាញគ្នា</strong> អ៊ីយ៉ុងវិជ្ជមានត្រូវបាន<strong className="text-cyan-300">ទាញយ៉ាងខ្លាំងពីគ្រប់ទិសទី</strong>ឆ្ពោះទៅទ្រុងខាងក្នុងអវិជ្ជមាន។ ពួកវាបោះចូលក្នុងដោយល្បឿន<strong className="text-fuchsia-300">រាប់រយគីឡូម៉ែត្រក្នុងមួយវិនាទី</strong> ហោះតាមចន្លោះខ្សែ ហើយ<strong className="text-cyan-300">បុកគ្នាដោយផ្ទាល់</strong>នៅចំចំណុចកណ្តាល។ ខ្លះរំលាយ — ហើយ<strong className="text-fuchsia-200">តារាប្លាស្មា</strong>តូច ភ្លឺរស្មីសក់ស្ពាន់ បំភ្លឺនៅបេះដូងបន្ទប់ បញ្ចេញថាមពលនុយក្លេអ៊ែរ។
+            </p>
+          </div>
+          <FusorPlasmaVisual />
+        </div>
+
+        {/* Step strip */}
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <FusorStep
+            n="1"
+            tone="violet"
+            icon={Zap}
+            titleEn="Charge the inner cage"
+            titleKh="បញ្ចូលបន្ទុកក្នុងទ្រុង"
+            descEn="Pump the inner sphere with –20,000 to –50,000 volts."
+            descKh="បញ្ចូលស្វ៊ែរខាងក្នុងដោយ −២០.០០០ ដល់ −៥០.០០០ វ៉ុល។"
+          />
+          <FusorStep
+            n="2"
+            tone="cyan"
+            icon={Atom}
+            titleEn="Inject deuterium"
+            titleKh="បញ្ចូលដឺតេរ្យូម"
+            descEn="A puff of heavy hydrogen, instantly stripped to + ions."
+            descKh="ដឺតេរ្យូមបន្តិច ត្រូវបានកាត់ភ្លាមៗទៅជាអ៊ីយ៉ុង +"
+          />
+          <FusorStep
+            n="3"
+            tone="fuchsia"
+            icon={Orbit}
+            titleEn="Crash · fuse · glow"
+            titleKh="បុក · រំលាយ · ភ្លឺ"
+            descEn="Ions race inward, collide, fuse, and ignite a tiny star."
+            descKh="អ៊ីយ៉ុងបោះចូលក្នុង បុកគ្នា រំលាយ ហើយបង្កើតតារាតូច។"
+          />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* Visual: glass chamber, outer + inner wire spheres, ions racing inward,
+   plasma star pulsing in the center. Pure SVG + CSS animation. */
+function FusorPlasmaVisual() {
+  return (
+    <div
+      aria-hidden
+      className="relative w-full max-w-[280px] aspect-square mx-auto rounded-xl border border-cyan-300/40 bg-slate-950 overflow-hidden shadow-[inset_0_0_30px_rgba(6,182,212,0.25)]"
+    >
+      <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full">
+        {/* Outer wire sphere (anode) */}
+        <g
+          fill="none"
+          stroke="rgba(103, 232, 249, 0.55)"
+          strokeWidth="0.7"
+          strokeDasharray="2 2"
+        >
+          <circle cx="100" cy="100" r="80" />
+          <ellipse cx="100" cy="100" rx="80" ry="22" />
+          <ellipse cx="100" cy="100" rx="22" ry="80" />
+          <ellipse cx="100" cy="100" rx="80" ry="42" transform="rotate(45 100 100)" />
+        </g>
+        {/* Inner wire sphere (cathode) */}
+        <g
+          fill="none"
+          stroke="rgba(217, 70, 239, 0.85)"
+          strokeWidth="0.9"
+        >
+          <circle cx="100" cy="100" r="34" />
+          <ellipse cx="100" cy="100" rx="34" ry="10" />
+          <ellipse cx="100" cy="100" rx="10" ry="34" />
+          <ellipse cx="100" cy="100" rx="34" ry="18" transform="rotate(45 100 100)" />
+        </g>
+        {/* Plasma star at the center */}
+        <g>
+          <circle cx="100" cy="100" r="9" fill="#f0abfc" opacity="0.55">
+            <animate
+              attributeName="r"
+              values="6;11;6"
+              dur="1.4s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="opacity"
+              values="0.4;0.9;0.4"
+              dur="1.4s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          <circle cx="100" cy="100" r="4" fill="#fae8ff">
+            <animate
+              attributeName="r"
+              values="3;5;3"
+              dur="0.7s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
+        {/* Ions racing inward (4 rays from cardinal directions) */}
+        {[
+          { x1: 100, y1: 14, x2: 100, y2: 80 },
+          { x1: 100, y1: 186, x2: 100, y2: 120 },
+          { x1: 14, y1: 100, x2: 80, y2: 100 },
+          { x1: 186, y1: 100, x2: 120, y2: 100 },
+        ].map((r, i) => (
+          <g key={i}>
+            <circle r="2.4" fill="#67e8f9">
+              <animateMotion
+                dur={`${1 + (i % 2) * 0.4}s`}
+                repeatCount="indefinite"
+                path={`M ${r.x1} ${r.y1} L ${r.x2} ${r.y2}`}
+              />
+              <animate
+                attributeName="opacity"
+                values="0;1;0"
+                dur={`${1 + (i % 2) * 0.4}s`}
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle r="2" fill="#a5f3fc">
+              <animateMotion
+                dur={`${1.3 + (i % 2) * 0.3}s`}
+                repeatCount="indefinite"
+                path={`M ${r.x1} ${r.y1} L ${r.x2} ${r.y2}`}
+                begin={`${i * 0.15}s`}
+              />
+              <animate
+                attributeName="opacity"
+                values="0;1;0"
+                dur={`${1.3 + (i % 2) * 0.3}s`}
+                repeatCount="indefinite"
+                begin={`${i * 0.15}s`}
+              />
+            </circle>
+          </g>
+        ))}
+        {/* Diagonal ion rays */}
+        {[
+          { x1: 30, y1: 30, x2: 86, y2: 86 },
+          { x1: 170, y1: 30, x2: 114, y2: 86 },
+          { x1: 30, y1: 170, x2: 86, y2: 114 },
+          { x1: 170, y1: 170, x2: 114, y2: 114 },
+        ].map((r, i) => (
+          <circle key={`d${i}`} r="1.8" fill="#e879f9">
+            <animateMotion
+              dur={`${1.1 + (i % 2) * 0.3}s`}
+              repeatCount="indefinite"
+              path={`M ${r.x1} ${r.y1} L ${r.x2} ${r.y2}`}
+              begin={`${i * 0.18}s`}
+            />
+            <animate
+              attributeName="opacity"
+              values="0;1;0"
+              dur={`${1.1 + (i % 2) * 0.3}s`}
+              repeatCount="indefinite"
+              begin={`${i * 0.18}s`}
+            />
+          </circle>
+        ))}
+      </svg>
+      {/* Labels — paired EN + KH so every concept is bilingual */}
+      <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[92%] flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-[9px] font-mono uppercase tracking-widest text-center">
+        <span className="text-cyan-300">+ ions →</span>
+        <span className="font-khmer normal-case tracking-normal text-cyan-200/80">
+          អ៊ីយ៉ុង+
+        </span>
+        <span className="text-fuchsia-300">cathode (−)</span>
+        <span className="font-khmer normal-case tracking-normal text-fuchsia-200/80">
+          កាតូត−
+        </span>
+        <span className="text-pink-200">★ plasma</span>
+        <span className="font-khmer normal-case tracking-normal text-pink-200/80">
+          ប្លាស្មា
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function FusorStep({
+  n,
+  tone,
+  icon: Icon,
+  titleEn,
+  titleKh,
+  descEn,
+  descKh,
+}: {
+  n: string;
+  tone: "violet" | "cyan" | "fuchsia";
+  icon: React.ComponentType<{ className?: string }>;
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+}) {
+  const ring =
+    tone === "violet"
+      ? "border-violet-400/60 bg-violet-500/10"
+      : tone === "cyan"
+        ? "border-cyan-400/60 bg-cyan-500/10"
+        : "border-fuchsia-400/60 bg-fuchsia-500/10";
+  const accent =
+    tone === "violet"
+      ? "text-violet-200 bg-violet-500"
+      : tone === "cyan"
+        ? "text-cyan-100 bg-cyan-500"
+        : "text-fuchsia-100 bg-fuchsia-500";
+  return (
+    <div className={`rounded-lg border ${ring} px-3 py-2.5`}>
+      <div className="flex items-center gap-2 mb-1">
+        <span
+          className={`w-6 h-6 rounded-md ${accent} text-white flex items-center justify-center font-display font-extrabold text-xs`}
+        >
+          {n}
+        </span>
+        <Icon className="w-3.5 h-3.5 text-white/80" />
+        <span className="text-[10px] font-mono uppercase tracking-widest text-white/70">
+          step · ជំហាន
+        </span>
+      </div>
+      <div className="text-sm font-bold text-white leading-snug">{titleEn}</div>
+      <div className="font-khmer text-[12px] font-bold text-white/85 leading-relaxed">
+        {titleKh}
+      </div>
+      <div className="text-[12px] text-slate-200 leading-snug mt-1">
+        {descEn}
+      </div>
+      <div className="font-khmer text-[11px] text-slate-300 leading-relaxed mt-0.5 border-t border-white/10 pt-1">
+        {descKh}
+      </div>
+    </div>
+  );
+}
+
+/* ── 3. The Catch — break-even energy ───────────────────────────────── */
+function FusorBreakEvenCard() {
+  return (
+    <article
+      data-testid="fusor-break-even"
+      className="rounded-xl border border-amber-400/40 bg-slate-900/70 backdrop-blur-sm p-4 sm:p-5"
+    >
+      <header className="flex items-start gap-3 mb-3">
+        <div className="w-10 h-10 rounded-lg bg-amber-500/15 border border-amber-400/50 text-amber-200 flex items-center justify-center flex-shrink-0">
+          <Lightbulb className="w-5 h-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-300 mb-0.5">
+            <span>Section 03 · The Catch</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-amber-200/90">
+              · ផ្នែក ០៣ · ឧបសគ្គ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">Why It Doesn't Power Our Homes</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-amber-200 mt-0.5">
+              មូលហេតុដែលវាមិនអាចផ្តល់ថាមពលដល់ផ្ទះរបស់យើង
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-sm sm:text-[15px] text-slate-100 leading-relaxed">
+        A device is only a real <strong className="text-amber-300">power plant</strong>{" "}
+        if it produces <em>more</em> energy than it consumes. Physicists call
+        this the <strong className="text-amber-300">break-even</strong> point.
+        The Fusor never reaches it — and the reason lives in those metal wires
+        we charged up.
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-3 border-t border-amber-400/20 pt-3">
+        ឧបករណ៍មួយគឺជា<strong className="text-amber-300">រោងចក្រថាមពល</strong>ពិតប្រាកដ លុះត្រាតែវាបង្កើតថាមពល<em>ច្រើនជាង</em>ដែលវាប្រើប្រាស់។ អ្នករូបវិទ្យាហៅចំណុចនេះថា <strong className="text-amber-300">break-even</strong>។ Fusor មិនដែលឈានដល់ទេ — ហើយមូលហេតុស្ថិតនៅក្នុងខ្សែលោហៈដែលយើងបានបញ្ចូលបន្ទុក។
+      </p>
+
+      {/* The visual energy balance */}
+      <div className="mt-4 rounded-xl bg-slate-950/80 border border-amber-400/30 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-amber-300">
+            <span>Energy Balance</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-amber-200/90">
+              · តុល្យភាពថាមពល
+            </span>
+          </div>
+          <span className="text-[10px] font-mono uppercase tracking-widest text-red-300 inline-flex items-center gap-1">
+            <AlertTriangle className="w-3 h-3" /> Net loss · ខាតបង់
+          </span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* IN */}
+          <div className="rounded-lg border border-cyan-400/40 bg-cyan-500/10 p-3">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-cyan-200">
+              Energy In · ថាមពលចូល
+            </div>
+            <div className="font-display font-extrabold text-3xl sm:text-4xl text-cyan-100 mt-1 tabular-nums">
+              ≈ 1,000+
+            </div>
+            <div className="text-xs text-cyan-100/90 mt-0.5">
+              units of electricity to run the high-voltage supply.
+            </div>
+            <div className="font-khmer text-xs text-cyan-100/70 leading-relaxed mt-1">
+              ឯកតាអគ្គិសនី ដើម្បីផ្គត់ផ្គង់តង់ស្យុងខ្ពស់។
+            </div>
+          </div>
+          {/* OUT */}
+          <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-amber-200">
+              Fusion Energy Out · ថាមពលចេញ
+            </div>
+            <div className="font-display font-extrabold text-3xl sm:text-4xl text-amber-100 mt-1 tabular-nums">
+              ≈ 1
+            </div>
+            <div className="text-xs text-amber-100/90 mt-0.5">
+              unit of useful nuclear fusion energy. Net loss ≫ 99.9%.
+            </div>
+            <div className="font-khmer text-xs text-amber-100/70 leading-relaxed mt-1">
+              ឯកតាថាមពលរំលាយដែលមានប្រយោជន៍។ ខាតបង់ ≫ ៩៩,៩%។
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* The wire-grid problem */}
+      <div className="mt-4 rounded-xl border border-red-500/40 bg-red-950/30 p-4">
+        <div className="flex items-start gap-2.5">
+          <Skull className="w-5 h-5 text-red-300 flex-shrink-0 mt-0.5" />
+          <div className="text-sm text-red-50 leading-relaxed">
+            <strong className="text-red-200">The wire-grid problem.</strong>{" "}
+            Most ions don't actually meet at the dead center — they{" "}
+            <strong className="text-red-200">crash directly into the metal wires</strong>{" "}
+            on the way through. All their kinetic energy turns into{" "}
+            <strong className="text-red-200">useless heat</strong>, and given
+            enough power the inner cage{" "}
+            <strong className="text-red-200">literally melts</strong>. A Fusor
+            needs roughly{" "}
+            <strong className="text-red-200">a thousand times more</strong>{" "}
+            electrical energy to run than it ever gives back as fusion energy.
+          </div>
+        </div>
+        <p className="font-khmer text-sm text-red-100 leading-loose mt-3 border-t border-red-400/30 pt-3">
+          <strong className="text-red-200">បញ្ហាខ្សែទ្រុង។</strong> អ៊ីយ៉ុងភាគច្រើនមិនជួបគ្នានៅចំណុចកណ្តាលទេ — ពួកវា<strong className="text-red-200">បុកដោយផ្ទាល់ទៅខ្សែលោហៈ</strong>នៅពេលហោះកាត់។ ថាមពលរបស់ពួកវាប្រែទៅជា<strong className="text-red-200">កម្ដៅគ្មានប្រយោជន៍</strong> ហើយប្រសិនបើដាក់ថាមពលច្រើន ទ្រុងខាងក្នុង<strong className="text-red-200">រលាយយ៉ាងពិតប្រាកដ</strong>។ Fusor ត្រូវការថាមពលអគ្គិសនី<strong className="text-red-200">ប្រហែលមួយពាន់ដង</strong>ច្រើនជាងថាមពលដែលវាបង្កើតមកវិញពីការរំលាយ។
+        </p>
+      </div>
+
+      <p className="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+        Bottom line: a Fusor is a beautiful classroom demonstration that
+        real fusion happens — but as a power plant, it is the very{" "}
+        <em>opposite</em> of a power plant. It is, in net,{" "}
+        <strong className="text-amber-200">a very expensive light bulb</strong>.
+      </p>
+      <p className="font-khmer text-xs sm:text-sm text-slate-300 leading-loose mt-1">
+        សរុបមក៖ Fusor គឺជាការបង្ហាញក្នុងថ្នាក់រៀនដ៏ស្រស់ស្អាតដែលការរំលាយនុយក្លេអ៊ែរពិតប្រាកដកើតឡើង — ប៉ុន្តែជារោងចក្រថាមពល វាគឺជា<em>ផ្ទុយ</em>នៃរោងចក្រថាមពល។ វាគ្រាន់តែជា<strong className="text-amber-200">អំពូលភ្លើងថ្លៃខ្លាំង</strong>ប៉ុណ្ណោះ។
+      </p>
+    </article>
   );
 }

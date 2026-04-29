@@ -1,0 +1,30 @@
+I want to add a new theoretical case study to the 'Physical Chemistry' (or Physics) page called 'The Star in a Jar: The Farnsworth Fusor (តារាក្នុងពាង៖ ម៉ាស៊ីនរំលាយនុយក្លេអ៊ែរ Farnsworth)'.
+
+Please implement this using a 'High-Tech Physics' aesthetic (deep dark backgrounds with glowing neon purple and plasma-blue accents):
+
+1. Safety Disclaimer (ការព្រមានអំពីសុវត្ថិភាព):
+
+At the very top, add a highly visible red warning banner: 'WARNING: This is a theoretical physics lesson. Real Fusors require lethal high voltages and produce dangerous radiation. Do not attempt to build one. (ការព្រមាន៖ នេះគឺជាមេរៀនរូបវិទ្យាទ្រឹស្តី។ ម៉ាស៊ីននេះទាមទារតង់ស្យុងខ្ពស់ដែលអាចបណ្តាលឲ្យស្លាប់ និងបង្កើតវិទ្យុសកម្មគ្រោះថ្នាក់។ កុំព្យាយាមបង្កើតវា។)'
+
+2. Section 1: What is a Fusor? (តើម៉ាស៊ីននេះជាអ្វី?)
+
+Explain the concept of Inertial Electrostatic Confinement (IEC). Instead of using massive, billion-dollar magnets like modern fusion reactors, a Fusor uses static electricity to trap atoms. It was invented by Philo Farnsworth (the same man who invented the television).
+
+3. Section 2: How It Works - The Electric Cage (របៀបដែលវាដំណើរការ - ទ្រុងអគ្គិសនី)
+
+Explain the mechanism: Inside a vacuum chamber, there are two metal wire spheres (one inside the other).
+
+You pump the inner wire sphere full of a massive negative electrical charge. Then, you introduce positive ions (like Deuterium, heavy hydrogen).
+
+Because opposites attract, the positive ions are violently pulled toward the negative center grid from all directions. They fly so incredibly fast that they crash into each other in the exact dead center and fuse together, releasing a burst of nuclear energy and a beautiful glowing star of plasma. >
+4. Section 3: The Catch - Why it doesn't power our homes (មូលហេតុដែលវាមិនអាចផ្តល់ថាមពលដល់ផ្ទះរបស់យើង)
+
+Explain the physics of 'Break-even' energy. A machine is only a power plant if it makes more energy than it uses.
+
+The Fusor fails because of the wire grid. Most of the ions don't hit each other perfectly in the center; they accidentally crash directly into the metal wires. This wastes all their energy as useless heat, eventually melting the wires. A Fusor consumes thousands of times more electrical energy to run than it produces in fusion energy.
+
+5. Formatting & UX:
+
+Maintain the bilingual structure for all headings and core concepts.
+
+Make the explanation of the ions crashing together feel dynamic and energetic.
