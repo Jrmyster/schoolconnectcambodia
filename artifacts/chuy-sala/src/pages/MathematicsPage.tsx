@@ -24,6 +24,12 @@ import {
   FlaskConical,
   CheckCircle2,
   AlertTriangle,
+  Briefcase,
+  Globe,
+  DollarSign,
+  Repeat,
+  Brain,
+  HelpCircle,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
@@ -275,6 +281,9 @@ export default function MathematicsPage() {
         <StandardDeviationCard isKh={isKh} />
         <PValueCard isKh={isKh} />
       </Section>
+
+      {/* ── Beyond the Curriculum · The Unsolved Frontier ────────────── */}
+      <ErdosFrontierSection isKh={isKh} />
 
       {/* ── Closing ──────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-slate-600 text-sm italic">
@@ -3576,4 +3585,641 @@ function PValueCard({ isKh }: { isKh: boolean }) {
       </div>
     </PaperCard>
   );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Beyond the Curriculum · The Unsolved Frontier — Erdős Problems
+//                          ព្រំដែនមិនទាន់ដោះស្រាយ — បញ្ហាអ៊ែរដូស
+//
+//  Aesthetic: "Academic Chalkboard" — deep slate/charcoal panel that
+//  visually separates from the light graph-paper math sections above.
+//  Crisp white "chalk" body + chalk-yellow accents. Strictly bilingual
+//  (paired EN+KH) for every heading, rule, and core concept.
+// ════════════════════════════════════════════════════════════════════════════
+
+function ErdosFrontierSection({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="erdos-frontier"
+      data-testid="erdos-section"
+      aria-labelledby="erdos-frontier-heading"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24"
+    >
+      <FrontierDivider isKh={isKh} />
+
+      <div className="mt-6 rounded-3xl bg-slate-900 border-2 border-yellow-300/30 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.55)] overflow-hidden chalkboard-surface">
+        {/* Chalk dust gradient top */}
+        <div
+          className="h-2"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, transparent, rgba(253,224,71,0.5), transparent)",
+          }}
+          aria-hidden
+        />
+
+        <div className="p-5 sm:p-8 space-y-6">
+          {/* Bilingual section header */}
+          <header className="flex items-start gap-3">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-yellow-300 text-slate-900 flex items-center justify-center shadow-[0_0_22px_rgba(253,224,71,0.45)]">
+              <Brain className="w-6 h-6" strokeWidth={2.5} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-yellow-200 mb-1">
+                <span>Beyond the Curriculum</span>
+                <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-yellow-100/90">
+                  · លើសពីកម្មវិធីសិក្សា
+                </span>
+              </div>
+              <h2
+                id="erdos-frontier-heading"
+                className="font-display font-extrabold text-2xl sm:text-3xl text-white leading-tight"
+              >
+                <span className="block">The Unsolved Frontier — Erdős Problems</span>
+                <span className="block font-khmer text-xl sm:text-2xl text-yellow-200 font-bold mt-1 leading-relaxed">
+                  ព្រំដែនមិនទាន់ដោះស្រាយ — បញ្ហាអ៊ែរដូស
+                </span>
+              </h2>
+            </div>
+          </header>
+
+          {/* Three sub-cards */}
+          <WanderingGeniusCard />
+          <BountySystemCard />
+          <CollatzCard />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Visual divider between standard math and the frontier section ──── */
+function FrontierDivider({ isKh: _isKh }: { isKh: boolean }) {
+  return (
+    <div data-testid="erdos-divider" className="relative">
+      {/* Horizontal rule with center label */}
+      <div className="relative flex items-center">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-300 to-slate-400" />
+        <div className="px-4 flex items-center gap-2 text-slate-500">
+          <Sparkles className="w-3.5 h-3.5 text-yellow-500" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
+            Frontier · ព្រំដែន
+          </span>
+          <Sparkles className="w-3.5 h-3.5 text-yellow-500" />
+        </div>
+        <div className="flex-1 h-px bg-gradient-to-l from-transparent via-slate-300 to-slate-400" />
+      </div>
+
+      {/* Bilingual intro */}
+      <div className="mt-6 max-w-3xl mx-auto text-center">
+        <p className="text-base sm:text-lg text-slate-800 leading-relaxed font-serif italic">
+          “Mathematics is not finished. There are problems simple enough for a
+          child to understand, but impossible for the greatest minds to solve.”
+        </p>
+        <p className="font-khmer text-base text-slate-700 leading-loose mt-3">
+          “គណិតវិទ្យាមិនទាន់បញ្ចប់ទេ។ មានបញ្ហាខ្លះងាយស្រួលរហូតក្មេងអាចយល់បាន ប៉ុន្តែមិនអាចដោះស្រាយបានសូម្បីតែដោយអ្នកប្រាជ្ញដ៏អស្ចារ្យបំផុត។”
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sub 1 · The Wandering Genius (Paul Erdős) ───────────────────────── */
+function WanderingGeniusCard() {
+  return (
+    <article
+      data-testid="erdos-wandering-genius"
+      className="rounded-2xl bg-slate-950/60 border-2 border-yellow-300/40 p-5 sm:p-6 shadow-[0_0_24px_rgba(253,224,71,0.08)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-yellow-300 text-slate-900 flex items-center justify-center">
+          <Briefcase className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-yellow-300">
+              Section 01 · The Mathematician
+            </span>
+            <span className="font-khmer text-[11px] text-yellow-200">
+              ផ្នែក ០១ · គណិតវិទូ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">The Wandering Genius</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-yellow-200 mt-1 leading-relaxed">
+              ទេពកោសល្យវង្វេង (Paul Erdős)
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
+        <strong className="text-yellow-200">Paul Erdős</strong> (1913 – 1996)
+        was a Hungarian mathematician unlike any other. He owned almost
+        nothing. No house. No car. No real bank account. He{" "}
+        <strong className="text-yellow-200">travelled the world with one
+        suitcase</strong>, knocking on the doors of other mathematicians,
+        sleeping on their couches for a few weeks, and solving puzzles
+        together — then moving on to the next country.
+      </p>
+      <p className="font-khmer text-slate-200 leading-loose mt-3 border-t border-yellow-300/20 pt-3">
+        <strong className="text-yellow-200">Paul Erdős</strong> (១៩១៣ – ១៩៩៦) គឺជាគណិតវិទូហុងគ្រី ដែលគ្មាននរណាដូចគេ។ គាត់ស្ទើរតែគ្មានទ្រព្យសម្បត្តិ។ គ្មានផ្ទះ។ គ្មានឡាន។ គ្មានគណនីធនាគារពិតប្រាកដ។ គាត់{" "}
+        <strong className="text-yellow-200">ធ្វើដំណើរជុំវិញពិភពលោកជាមួយវ៉ាលីតែមួយ</strong>{" "}
+        គោះទ្វារផ្ទះគណិតវិទូផ្សេងទៀត ដេកនៅសាឡុងរបស់ពួកគេពីរបីសប្តាហ៍ ហើយដោះស្រាយល្បែងផ្គុំរូបជាមួយគ្នា — រួចបន្ទាប់មកបន្តទៅប្រទេសបន្ទាប់។
+      </p>
+
+      {/* Quick stats strip */}
+      <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
+        <ChalkStat
+          icon={Globe}
+          valueEn="25+"
+          labelEn="countries lived in"
+          labelKh="ប្រទេសដែលរស់នៅ"
+        />
+        <ChalkStat
+          icon={Sigma}
+          valueEn="~1,500"
+          labelEn="papers published"
+          labelKh="ឯកសារបោះពុម្ពផ្សាយ"
+        />
+        <ChalkStat
+          icon={Users}
+          valueEn="~500"
+          labelEn="co-authors"
+          labelKh="អ្នកនិពន្ធរួម"
+        />
+      </div>
+
+      <p className="text-slate-300 text-xs sm:text-sm italic mt-4 leading-relaxed">
+        “A mathematician is a machine for turning coffee into theorems.”
+        <span className="not-italic text-slate-400"> — attributed to Erdős</span>
+      </p>
+      <p className="font-khmer text-slate-300 text-xs sm:text-sm leading-loose mt-1">
+        “គណិតវិទូគឺជាម៉ាស៊ីនមួយ ដែលបំប្លែងកាហ្វេទៅជាទ្រឹស្តីបទ។”
+        <span className="text-slate-400"> — សំដីភ្ជាប់ឈ្មោះ Erdős</span>
+      </p>
+    </article>
+  );
+}
+
+/* ── Sub 2 · The Bounty System ───────────────────────────────────────── */
+function BountySystemCard() {
+  const bounties: { amount: string; tierEn: string; tierKh: string; descEn: string; descKh: string }[] = [
+    {
+      amount: "$25",
+      tierEn: "Small puzzle",
+      tierKh: "ល្បែងផ្គុំរូបតូច",
+      descEn: "A clean, contained question that should fall to a clever new approach.",
+      descKh: "សំណួរច្បាស់លាស់ មួយដែលគួរដោះស្រាយបានដោយវិធីសាស្ត្រថ្មីដ៏ឆ្លាតវៃ។",
+    },
+    {
+      amount: "$100 – $500",
+      tierEn: "Hard problem",
+      tierKh: "បញ្ហាពិបាក",
+      descEn: "Resistant to the standard tricks. Requires real new mathematics.",
+      descKh: "ប្រឆាំងនឹងវិធីធម្មតា។ ត្រូវការគណិតវិទ្យាថ្មីៗពិតប្រាកដ។",
+    },
+    {
+      amount: "$10,000",
+      tierEn: "Seemingly impossible",
+      tierKh: "ហាក់ដូចជាមិនអាចទៅរួច",
+      descEn: "“Mathematics may not be ready for such problems.” — still open.",
+      descKh: "“គណិតវិទ្យាប្រហែលជាមិនទាន់រួចរាល់សម្រាប់បញ្ហាបែបនេះ។” — នៅតែបើកចំហ។",
+    },
+  ];
+
+  return (
+    <article
+      data-testid="erdos-bounty-system"
+      className="rounded-2xl bg-slate-950/60 border-2 border-yellow-300/40 p-5 sm:p-6 shadow-[0_0_24px_rgba(253,224,71,0.08)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-yellow-300 text-slate-900 flex items-center justify-center">
+          <DollarSign className="w-5 h-5" strokeWidth={3} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-yellow-300">
+              Section 02 · The Method
+            </span>
+            <span className="font-khmer text-[11px] text-yellow-200">
+              ផ្នែក ០២ · វិធីសាស្ត្រ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">The Bounty System</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-yellow-200 mt-1 leading-relaxed">
+              ប្រព័ន្ធប្រាក់រង្វាន់
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
+        Erdős had a famous habit. Whenever he hit a problem he could not crack,
+        he <strong className="text-yellow-200">put a cash prize on it</strong>.
+        He paid the bounty out of his own pocket — often hundreds or thousands
+        of dollars — to whoever first wrote a complete proof. Many of these
+        bounties{" "}
+        <strong className="text-yellow-200">are still active and unpaid today</strong>,
+        kept alive after his death by his colleagues.
+      </p>
+      <p className="font-khmer text-slate-200 leading-loose mt-3 border-t border-yellow-300/20 pt-3">
+        Erdős មានទម្លាប់ដ៏ល្បីមួយ។ នៅពេលណាដែលគាត់ជួបបញ្ហាដែលគាត់មិនអាចដោះស្រាយបាន គាត់{" "}
+        <strong className="text-yellow-200">ដាក់ប្រាក់រង្វាន់ឱ្យវា</strong>។ គាត់បង់ប្រាក់រង្វាន់ពីហោប៉ៅរបស់គាត់ផ្ទាល់ — ជារឿយៗ រាប់រយ ឬរាប់ពាន់ដុល្លារ — ដល់នរណាដែលសរសេរសេចក្ដីបង្ហាញពេញលេញដំបូង។ ប្រាក់រង្វាន់ទាំងនេះច្រើន{" "}
+        <strong className="text-yellow-200">នៅតែសកម្ម និងមិនទាន់បានបង់រហូតមកដល់ថ្ងៃនេះ</strong>{" "}
+        ដែលត្រូវបានបន្តរក្សាបន្ទាប់ពីគាត់ស្លាប់ដោយសហការីរបស់គាត់។
+      </p>
+
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3">
+        {bounties.map((b) => (
+          <BountyTier
+            key={b.amount}
+            amount={b.amount}
+            tierEn={b.tierEn}
+            tierKh={b.tierKh}
+            descEn={b.descEn}
+            descKh={b.descKh}
+          />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function BountyTier({
+  amount,
+  tierEn,
+  tierKh,
+  descEn,
+  descKh,
+}: {
+  amount: string;
+  tierEn: string;
+  tierKh: string;
+  descEn: string;
+  descKh: string;
+}) {
+  return (
+    <div className="rounded-xl bg-white border border-yellow-300/60 shadow-sm overflow-hidden flex flex-col">
+      <div className="px-3 py-2.5 bg-gradient-to-b from-yellow-50 to-white border-b border-yellow-200 flex items-baseline justify-between">
+        <span className="font-display font-extrabold text-2xl text-slate-900 tracking-tight">
+          {amount}
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-amber-700">
+          bounty · រង្វាន់
+        </span>
+      </div>
+      <div className="px-3 py-3 flex-1">
+        <div className="text-sm font-bold text-slate-900">{tierEn}</div>
+        <div className="font-khmer text-[12px] text-slate-700 leading-relaxed">
+          {tierKh}
+        </div>
+        <p className="text-[12px] text-slate-700 leading-snug mt-2">{descEn}</p>
+        <p className="font-khmer text-[12px] text-slate-600 leading-relaxed mt-1.5 border-t border-stone-200 pt-1.5">
+          {descKh}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sub 3 · The $500 Riddle — Collatz Conjecture (3x + 1) ───────────── */
+function CollatzCard() {
+  const [seedInput, setSeedInput] = useState("27");
+  const [seed, setSeed] = useState(27);
+
+  // Compute the Collatz sequence (capped to a safe length for the UI).
+  const sequence = useMemo(() => collatzSequence(seed, 500), [seed]);
+
+  const handleRun = () => {
+    const n = parseInt(seedInput, 10);
+    if (Number.isFinite(n) && n > 0 && n <= 1_000_000) setSeed(n);
+  };
+
+  const peak = useMemo(
+    () => (sequence.length ? Math.max(...sequence) : 0),
+    [sequence],
+  );
+  const steps = sequence.length > 0 ? sequence.length - 1 : 0;
+  const reachedOne = sequence.length > 0 && sequence[sequence.length - 1] === 1;
+
+  return (
+    <article
+      data-testid="erdos-collatz"
+      className="rounded-2xl bg-slate-950/60 border-2 border-yellow-300/50 p-5 sm:p-6 shadow-[0_0_28px_rgba(253,224,71,0.10)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-yellow-300 text-slate-900 flex items-center justify-center">
+          <HelpCircle className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-yellow-300">
+              Section 03 · The Riddle
+            </span>
+            <span className="font-khmer text-[11px] text-yellow-200">
+              ផ្នែក ០៣ · បញ្ហាប្រឈម
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/40 text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-200">
+              <DollarSign className="w-3 h-3" /> $500 bounty · open
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">The $500 Riddle — The Collatz Conjecture</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-yellow-200 mt-1 leading-relaxed">
+              បញ្ហាប្រចាំតម្លៃ ៥០០ ដុល្លារ — សម្មតិកម្មខូឡាតស៍ (3x + 1)
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
+        Of all the problems Erdős backed with money, the most famous is the{" "}
+        <strong className="text-yellow-200">3x + 1 problem</strong> (also called the{" "}
+        <strong className="text-yellow-200">Collatz Conjecture</strong>). It is
+        small enough to teach a ten-year-old in 30 seconds, and large enough
+        that no human in history has been able to prove it true for all
+        numbers. He famously said:{" "}
+        <em className="text-yellow-100">“Mathematics may not be ready for such problems.”</em>
+      </p>
+      <p className="font-khmer text-slate-200 leading-loose mt-3 border-t border-yellow-300/20 pt-3">
+        ក្នុងចំណោមបញ្ហាដែល Erdős បានគាំទ្រដោយប្រាក់ ល្បីបំផុតគឺ{" "}
+        <strong className="text-yellow-200">បញ្ហា 3x + 1</strong> (ហៅផងដែរថា{" "}
+        <strong className="text-yellow-200">សម្មតិកម្មខូឡាតស៍</strong>)។ វាតូចគ្រប់គ្រាន់ក្នុងការបង្រៀនក្មេងអាយុដប់ឆ្នាំ ក្នុងពេល ៣០ វិនាទី ហើយធំគ្រប់គ្រាន់ដែលគ្មានមនុស្សណាក្នុងប្រវត្តិសាស្ត្រ បានបង្ហាញថាវាពិតសម្រាប់លេខទាំងអស់។ គាត់បានពោលដ៏ល្បីថា៖{" "}
+        <em className="text-yellow-100">“គណិតវិទ្យាប្រហែលជាមិនទាន់រួចរាល់សម្រាប់បញ្ហាបែបនេះទេ។”</em>
+      </p>
+
+      {/* Two clean floating rule cards */}
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <CollatzRule
+          id="even"
+          tone="emerald"
+          number="1"
+          conditionEn="If the number is EVEN"
+          conditionKh="បើសិនជាលេខគូ"
+          actionEn="divide it by 2"
+          actionKh="ចែកវាដោយ ២"
+          formula="n ÷ 2"
+          example="10 → 5"
+        />
+        <CollatzRule
+          id="odd"
+          tone="rose"
+          number="2"
+          conditionEn="If the number is ODD"
+          conditionKh="បើសិនជាលេខសេស"
+          actionEn="multiply by 3 and add 1"
+          actionKh="គុណនឹង ៣ រួចបូក ១"
+          formula="3n + 1"
+          example="7 → 22"
+        />
+      </div>
+
+      {/* The conjecture statement */}
+      <div className="mt-4 rounded-xl bg-yellow-300/10 border border-yellow-300/40 px-4 py-3 flex items-start gap-3">
+        <Repeat className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+        <div className="text-xs sm:text-sm text-yellow-50">
+          <div>
+            <strong className="text-yellow-200">The conjecture: </strong>
+            no matter what positive whole number you start with — repeat the two
+            rules above and you will{" "}
+            <strong className="text-yellow-200">always</strong> eventually fall
+            into the same loop:{" "}
+            <span className="font-mono text-yellow-100">4 → 2 → 1 → 4 → 2 → 1 …</span>
+          </div>
+          <div className="font-khmer text-yellow-100/90 leading-loose mt-2">
+            <strong className="text-yellow-200">សម្មតិកម្ម៖ </strong>
+            មិនថាអ្នកចាប់ផ្ដើមដោយចំនួនគត់វិជ្ជមានណាមួយទេ — ធ្វើវិន័យទាំងពីរខាងលើម្ដងហើយម្ដងទៀត ហើយអ្នកនឹង{" "}
+            <strong className="text-yellow-200">ជានិច្ច</strong>{" "}
+            ធ្លាក់ចូលក្នុងរង្វិលជុំដដែល៖{" "}
+            <span className="font-mono text-yellow-100">៤ → ២ → ១ → ៤ → ២ → ១ …</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Try it yourself */}
+      <div className="mt-5 rounded-xl bg-slate-900 border border-yellow-300/30 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-yellow-300">
+            <span>Try it yourself</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-yellow-100/90">
+              · សាកល្បងដោយខ្លួនឯង
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <label htmlFor="collatz-input" className="text-xs text-slate-300">
+            Start with: · ចាប់ផ្ដើមដោយ៖
+          </label>
+          <input
+            id="collatz-input"
+            data-testid="collatz-input"
+            type="number"
+            min={1}
+            max={1_000_000}
+            value={seedInput}
+            onChange={(e) => setSeedInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleRun();
+            }}
+            className="bg-slate-800 border border-yellow-300/40 text-yellow-100 font-mono text-sm rounded px-2 py-1 w-28 focus:outline-none focus:ring-2 focus:ring-yellow-300/60"
+            aria-label="Starting number for the Collatz sequence"
+          />
+          <button
+            data-testid="collatz-run"
+            type="button"
+            onClick={handleRun}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-yellow-300 text-slate-900 text-xs font-bold tracking-wider uppercase hover:bg-yellow-200 transition-colors"
+          >
+            <Play className="w-3.5 h-3.5" /> Run
+          </button>
+          <span className="font-khmer text-[11px] text-slate-400">
+            (រត់)
+          </span>
+        </div>
+
+        {/* The sequence */}
+        <div
+          data-testid="collatz-sequence"
+          className="mt-4 rounded-lg bg-black/60 border border-yellow-300/20 p-3 font-mono text-xs sm:text-sm text-yellow-100 leading-relaxed overflow-x-auto"
+        >
+          {sequence.length === 0 ? (
+            <span className="text-rose-300">
+              Please enter a positive whole number.
+            </span>
+          ) : (
+            <span>
+              {sequence.map((n, i) => (
+                <span key={i}>
+                  {i > 0 && <span className="text-slate-500"> → </span>}
+                  <span
+                    className={
+                      n === 1 || n === 2 || n === 4
+                        ? "text-emerald-300 font-bold"
+                        : n === peak
+                          ? "text-rose-300 font-bold"
+                          : ""
+                    }
+                  >
+                    {n}
+                  </span>
+                </span>
+              ))}
+            </span>
+          )}
+        </div>
+
+        {/* Run summary */}
+        {sequence.length > 0 && (
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            <ChalkStat
+              icon={Sigma}
+              valueEn={String(steps)}
+              labelEn="steps to reach 1"
+              labelKh="ចំនួនជំហានដើម្បីដល់ ១"
+            />
+            <ChalkStat
+              icon={Mountain}
+              valueEn={peak.toLocaleString()}
+              labelEn="highest value reached"
+              labelKh="តម្លៃខ្ពស់បំផុត"
+            />
+            <ChalkStat
+              icon={reachedOne ? CheckCircle2 : InfinityIcon}
+              valueEn={reachedOne ? "4 → 2 → 1" : "still climbing"}
+              labelEn={reachedOne ? "loop reached" : "no result yet"}
+              labelKh={reachedOne ? "ឈានដល់រង្វិលជុំ" : "មិនទាន់ដល់"}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Closing note */}
+      <p className="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+        Computers have tested every starting number up to roughly 2<sup>68</sup> —
+        about 295 million billion — and so far <em>every single one</em> falls
+        into 4 → 2 → 1. But that is not a proof for{" "}
+        <strong className="text-yellow-200">all</strong> numbers — only for the
+        ones we have checked. The bounty stays open.
+      </p>
+      <p className="font-khmer text-xs sm:text-sm text-slate-300 leading-loose mt-1">
+        កុំព្យូទ័របានសាកល្បងគ្រប់ចំនួនចាប់ផ្ដើមរហូតដល់ប្រហែល ២<sup>៦៨</sup> — ប្រហែល ២៩៥ លានពាន់លាន — ហើយរហូតមកដល់ពេលនេះ <em>គ្រប់លេខទាំងអស់</em> ធ្លាក់ទៅ ៤ → ២ → ១។ ប៉ុន្តែនោះមិនមែនជាសេចក្ដីបង្ហាញសម្រាប់{" "}
+        <strong className="text-yellow-200">លេខទាំងអស់</strong>{" "}
+        ទេ — តែសម្រាប់លេខដែលយើងបានពិនិត្យប៉ុណ្ណោះ។ ប្រាក់រង្វាន់នៅតែបើកចំហ។
+      </p>
+    </article>
+  );
+}
+
+function CollatzRule({
+  id,
+  tone,
+  number,
+  conditionEn,
+  conditionKh,
+  actionEn,
+  actionKh,
+  formula,
+  example,
+}: {
+  id: string;
+  tone: "emerald" | "rose";
+  number: string;
+  conditionEn: string;
+  conditionKh: string;
+  actionEn: string;
+  actionKh: string;
+  formula: string;
+  example: string;
+}) {
+  const accent =
+    tone === "emerald"
+      ? "border-emerald-300/70 bg-emerald-400/10"
+      : "border-rose-300/70 bg-rose-400/10";
+  const chip =
+    tone === "emerald"
+      ? "bg-emerald-300 text-emerald-950"
+      : "bg-rose-300 text-rose-950";
+  return (
+    <div
+      data-testid={`collatz-rule-${id}`}
+      className={`rounded-xl border-2 ${accent} p-4 flex flex-col`}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <span className={`w-7 h-7 rounded-md ${chip} flex items-center justify-center font-display font-bold text-base`}>
+          {number}
+        </span>
+        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-yellow-200">
+          rule {number} · វិន័យទី {number}
+        </span>
+      </div>
+      <div className="text-sm sm:text-base text-white leading-snug">
+        <strong className="text-yellow-200">{conditionEn}</strong> — {actionEn}.
+      </div>
+      <div className="font-khmer text-sm text-yellow-100/95 leading-loose mt-1.5 border-t border-white/10 pt-1.5">
+        <strong className="text-yellow-200">{conditionKh}</strong> — {actionKh}។
+      </div>
+      <div className="mt-3 flex items-baseline justify-between gap-2 rounded-lg bg-black/40 border border-white/10 px-3 py-2">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+            formula · រូបមន្ត
+          </div>
+          <div className="font-mono text-base sm:text-lg text-yellow-100">{formula}</div>
+        </div>
+        <div className="text-right">
+          <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+            example · ឧទាហរណ៍
+          </div>
+          <div className="font-mono text-sm sm:text-base text-emerald-200">
+            {example}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Tiny chalk-stat used inside the chalkboard panel ────────────────── */
+function ChalkStat({
+  icon: Icon,
+  valueEn,
+  labelEn,
+  labelKh,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  valueEn: string;
+  labelEn: string;
+  labelKh: string;
+}) {
+  return (
+    <div className="rounded-lg bg-slate-900/70 border border-yellow-300/30 px-3 py-2 flex items-start gap-2 min-w-0">
+      <Icon className="w-4 h-4 text-yellow-300 flex-shrink-0 mt-0.5" />
+      <div className="min-w-0 flex-1">
+        <div className="font-display font-bold text-base sm:text-lg text-white leading-tight truncate">
+          {valueEn}
+        </div>
+        <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight truncate">
+          {labelEn}
+        </div>
+        <div className="font-khmer text-[10px] sm:text-[11px] text-slate-400 leading-relaxed truncate">
+          {labelKh}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Pure helper: compute the Collatz sequence safely ────────────────── */
+function collatzSequence(seed: number, maxSteps: number): number[] {
+  if (!Number.isFinite(seed) || seed <= 0 || !Number.isInteger(seed)) return [];
+  const out: number[] = [seed];
+  let n = seed;
+  for (let i = 0; i < maxSteps; i++) {
+    if (n === 1) break;
+    n = n % 2 === 0 ? n / 2 : 3 * n + 1;
+    out.push(n);
+    if (n > Number.MAX_SAFE_INTEGER / 4) break; // safety guard
+  }
+  return out;
 }

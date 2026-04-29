@@ -1,0 +1,37 @@
+I want to update the existing 'Mathematics: The Language of Logic' page. Please add a new comprehensive section called 'The Unsolved Frontier: Erdős Problems (ព្រំដែនមិនទាន់ដោះស្រាយ៖ បញ្ហាអ៊ែរដូស)'.
+
+Please implement this using an 'Academic Chalkboard' aesthetic (deep slate/charcoal backgrounds with crisp white and chalk-yellow accents):
+
+1. Section Divider:
+
+Add a clean visual divider to separate standard math from this new section.
+
+Add a bilingual introduction: 'Mathematics is not finished. There are problems simple enough for a child to understand, but impossible for the greatest minds to solve. (គណិតវិទ្យាមិនទាន់បញ្ចប់ទេ។ មានបញ្ហាខ្លះងាយស្រួលរហូតដល់ក្មេងអាចយល់បាន ប៉ុន្តែមិនអាចដោះស្រាយបានសូម្បីតែដោយអ្នកប្រាជ្ញដ៏អស្ចារ្យបំផុត។)'
+
+2. Section 1: The Wandering Genius (ទេពកោសល្យវង្វេង)
+
+Introduce Paul Erdős. Explain that he was a mathematician who didn't care about money or houses; he just traveled the world with a single suitcase, staying with other mathematicians to solve puzzles.
+
+3. Section 2: The Bounty System (ប្រព័ន្ធប្រាក់រង្វាន់)
+
+Explain his famous 'Bounty' system. If Erdős found a problem he couldn't solve, he would assign a cash prize to it, ranging from $25 for a small puzzle to $10,000 for a seemingly impossible one. Many of these bounties are still active and unpaid today!
+
+4. Section 3: The $500 Riddle - The Collatz Conjecture (បញ្ហាប្រចាំតម្លៃ ៥០០ ដុល្លារ - សម្មតិកម្មខូឡាតស៍)
+
+Introduce the most famous problem Erdős offered a bounty for (He famously said: 'Mathematics may not be ready for such problems').
+
+Explain the simple rules of the '3x + 1' problem:
+
+Pick ANY positive number.
+
+If it is EVEN, divide it by 2. (បើសិនជាលេខគូ ចែកវាដោយ ២)
+
+If it is ODD, multiply by 3 and add 1. (បើសិនជាលេខសេស គុណនឹង ៣ រួចបូក ១)
+
+Repeat. The conjecture states that no matter what number you start with, you will always eventually fall into a loop of 4 -> 2 -> 1. No one in history has been able to prove if this is always true for infinity.
+
+5. Formatting & UX:
+
+Maintain the bilingual structure (English/Khmer) for all headings, rules, and core concepts.
+
+Use clean, floating cards for the rules to make them easy to read.
