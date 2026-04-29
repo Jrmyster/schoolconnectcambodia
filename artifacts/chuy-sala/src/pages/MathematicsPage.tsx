@@ -30,6 +30,11 @@ import {
   Repeat,
   Brain,
   HelpCircle,
+  Hash,
+  Binary,
+  Layers,
+  Boxes,
+  Cpu,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useLanguageStore } from "@/store/use-language";
@@ -281,6 +286,9 @@ export default function MathematicsPage() {
         <StandardDeviationCard isKh={isKh} />
         <PValueCard isKh={isKh} />
       </Section>
+
+      {/* ── Beyond the Curriculum · The Architecture of Numbers ─────── */}
+      <ArchitectureOfNumbersSection isKh={isKh} />
 
       {/* ── Beyond the Curriculum · The Unsolved Frontier ────────────── */}
       <ErdosFrontierSection isKh={isKh} />
@@ -4222,4 +4230,630 @@ function collatzSequence(seed: number, maxSteps: number): number[] {
     if (n > Number.MAX_SAFE_INTEGER / 4) break; // safety guard
   }
   return out;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Beyond the Curriculum · The Architecture of Numbers
+//                          ស្ថាបត្យកម្មនៃតួលេខ
+//
+//  Aesthetic: shared "Academic Chalkboard" language with the Erdős section
+//  (deep slate/charcoal panel, chalk-yellow + chalk-blue accents).
+//  Strictly bilingual (paired EN+KH) for every heading and core concept.
+// ════════════════════════════════════════════════════════════════════════════
+
+function ArchitectureOfNumbersSection({ isKh: _isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="architecture-of-numbers"
+      data-testid="arch-numbers-section"
+      aria-labelledby="arch-numbers-heading"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24"
+    >
+      <div className="rounded-3xl bg-slate-900 border-2 border-yellow-300/30 shadow-[0_30px_80px_-30px_rgba(15,23,42,0.55)] overflow-hidden chalkboard-surface">
+        {/* Top chalk-dust accent bar */}
+        <div
+          className="h-2"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, transparent, rgba(125,211,252,0.45), rgba(253,224,71,0.45), transparent)",
+          }}
+          aria-hidden
+        />
+
+        <div className="p-5 sm:p-8 space-y-6">
+          {/* Bilingual section header */}
+          <header className="flex items-start gap-3">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-sky-300 text-slate-900 flex items-center justify-center shadow-[0_0_22px_rgba(125,211,252,0.45)]">
+              <Boxes className="w-6 h-6" strokeWidth={2.5} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-sky-200 mb-1">
+                <span>Beyond the Curriculum</span>
+                <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-sky-100/90">
+                  · លើសពីកម្មវិធីសិក្សា
+                </span>
+              </div>
+              <h2
+                id="arch-numbers-heading"
+                className="font-display font-extrabold text-2xl sm:text-3xl text-white leading-tight"
+              >
+                <span className="block">The Architecture of Numbers</span>
+                <span className="block font-khmer text-xl sm:text-2xl text-sky-200 font-bold mt-1 leading-relaxed">
+                  ស្ថាបត្យកម្មនៃតួលេខ
+                </span>
+              </h2>
+            </div>
+          </header>
+
+          {/* Three sub-cards */}
+          <PositionalSystemsCard />
+          <NestedNumberSetsCard />
+          <SpecializedSystemsCard />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Sub 1 · Positional Number Systems ──────────────────────────────── */
+function PositionalSystemsCard() {
+  return (
+    <article
+      data-testid="arch-positional-systems"
+      className="rounded-2xl bg-slate-950/60 border-2 border-sky-300/40 p-5 sm:p-6 shadow-[0_0_24px_rgba(125,211,252,0.08)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-sky-300 text-slate-900 flex items-center justify-center">
+          <Hash className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-sky-300">
+              Section 01 · The Base
+            </span>
+            <span className="font-khmer text-[11px] text-sky-200">
+              ផ្នែក ០១ · គ្រឹះ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">Positional Number Systems</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-sky-200 mt-1 leading-relaxed">
+              ប្រព័ន្ធលេខតាមទីតាំង
+            </span>
+          </h3>
+          <div className="mt-1.5 text-sm text-slate-200 italic leading-relaxed">
+            Different languages for the exact same quantities.
+          </div>
+          <div className="font-khmer text-sm text-slate-300 leading-loose">
+            ភាសាផ្សេងគ្នាសម្រាប់បរិមាណដូចគ្នាបេះបិទ។
+          </div>
+        </div>
+      </header>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <BaseCard
+          testId="arch-decimal"
+          tone="emerald"
+          icon={Hash}
+          baseLabel="Base 10"
+          nameEn="Decimal"
+          nameKh="ទសភាគ"
+          digits="0 1 2 3 4 5 6 7 8 9"
+          taglineEn="The human standard."
+          taglineKh="ស្តង់ដារមនុស្ស។"
+          descEn="Based on our ten fingers — the system everyone learns to count with."
+          descKh="ផ្អែកលើម្រាមដៃទាំងដប់ — ប្រព័ន្ធដែលមនុស្សគ្រប់គ្នារៀនរាប់ជាមួយ។"
+          example="42"
+          exampleNote="forty-two · សែសិបពីរ"
+        />
+        <BaseCard
+          testId="arch-binary"
+          tone="cyan"
+          icon={Binary}
+          baseLabel="Base 2"
+          nameEn="Binary"
+          nameKh="ប៊ីណែរ"
+          digits="0 1"
+          taglineEn="The computer standard."
+          taglineKh="ស្តង់ដារកុំព្យូទ័រ។"
+          descEn="Based on microscopic switches being ON or OFF — every chip thinks in 1s and 0s."
+          descKh="ផ្អែកលើកុងតាក់មីក្រូទស្សន៍ដែលបើក/បិទ — រាល់ឈីបគិតក្នុង ១ និង ០។"
+          example="101010"
+          exampleNote="= 42 in decimal · = ៤២ ទសភាគ"
+        />
+        <BaseCard
+          testId="arch-octal"
+          tone="amber"
+          icon={Cpu}
+          baseLabel="Base 8"
+          nameEn="Octal"
+          nameKh="អុកតាល"
+          digits="0 1 2 3 4 5 6 7"
+          taglineEn="A computing shortcut."
+          taglineKh="ផ្លូវកាត់សម្រាប់កុំព្យូទ័រ។"
+          descEn="A historical shorthand for grouping binary in threes — still used in file permissions."
+          descKh="សញ្ញាសរសេរចាស់សម្រាប់ការដាក់ប៊ីណែរជាក្រុមៗ បីៗ — នៅតែប្រើក្នុងសិទ្ធិឯកសារ។"
+          example="52"
+          exampleNote="= 42 in decimal · = ៤២ ទសភាគ"
+        />
+        <BaseCard
+          testId="arch-hex"
+          tone="fuchsia"
+          icon={Sparkles}
+          baseLabel="Base 16"
+          nameEn="Hexadecimal"
+          nameKh="ហិចសាដេស៊ីម៉ាល់"
+          digits="0–9 · A B C D E F"
+          taglineEn="The engineer's standard."
+          taglineKh="ស្តង់ដារវិស្វករ។"
+          descEn="Used by modern engineers for website colors and memory addresses (e.g. #FF5733)."
+          descKh="ប្រើដោយវិស្វករសម័យទំនើបសម្រាប់ពណ៌គេហទំព័រ និងអាសយដ្ឋានអង្គចងចាំ (ឧ. #FF5733)។"
+          example="2A"
+          exampleNote="= 42 in decimal · = ៤២ ទសភាគ"
+        />
+      </div>
+
+      <p className="mt-4 text-xs sm:text-sm text-slate-300 italic leading-relaxed">
+        Note how every card on this row spells the very same quantity —{" "}
+        <strong className="text-yellow-200">42</strong> — in a different
+        language. The number doesn't change; only the script we write it in does.
+      </p>
+      <p className="font-khmer text-xs sm:text-sm text-slate-300 leading-loose mt-1">
+        សូមកត់សម្គាល់ថា រាល់ប័ណ្ណក្នុងជួរនេះសរសេរបរិមាណដូចគ្នា — <strong className="text-yellow-200">៤២</strong> — ក្នុងភាសាផ្សេងគ្នា។ តួលេខមិនប្រែប្រួលទេ មានតែអក្សរដែលយើងសរសេរវាប៉ុណ្ណោះប្រែប្រួល។
+      </p>
+    </article>
+  );
+}
+
+function BaseCard({
+  testId,
+  tone,
+  icon: Icon,
+  baseLabel,
+  nameEn,
+  nameKh,
+  digits,
+  taglineEn,
+  taglineKh,
+  descEn,
+  descKh,
+  example,
+  exampleNote,
+}: {
+  testId: string;
+  tone: "emerald" | "cyan" | "amber" | "fuchsia";
+  icon: React.ComponentType<{ className?: string }>;
+  baseLabel: string;
+  nameEn: string;
+  nameKh: string;
+  digits: string;
+  taglineEn: string;
+  taglineKh: string;
+  descEn: string;
+  descKh: string;
+  example: string;
+  exampleNote: string;
+}) {
+  const ring = {
+    emerald: "border-emerald-300/60 bg-emerald-400/5",
+    cyan: "border-cyan-300/60 bg-cyan-400/5",
+    amber: "border-amber-300/60 bg-amber-400/5",
+    fuchsia: "border-fuchsia-300/60 bg-fuchsia-400/5",
+  }[tone];
+  const chip = {
+    emerald: "bg-emerald-300 text-emerald-950",
+    cyan: "bg-cyan-300 text-cyan-950",
+    amber: "bg-amber-300 text-amber-950",
+    fuchsia: "bg-fuchsia-300 text-fuchsia-950",
+  }[tone];
+  const accent = {
+    emerald: "text-emerald-200",
+    cyan: "text-cyan-200",
+    amber: "text-amber-200",
+    fuchsia: "text-fuchsia-200",
+  }[tone];
+
+  return (
+    <div
+      data-testid={testId}
+      className={`rounded-xl border-2 ${ring} p-4 flex flex-col`}
+    >
+      <div className="flex items-start gap-2.5 mb-2">
+        <span className={`w-9 h-9 rounded-lg ${chip} flex items-center justify-center flex-shrink-0`}>
+          <Icon className="w-5 h-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className={`text-[10px] font-mono uppercase tracking-[0.2em] ${accent}`}>
+            {baseLabel}
+          </div>
+          <div className="font-display font-bold text-base text-white leading-tight">
+            {nameEn}
+          </div>
+          <div className="font-khmer text-sm font-bold text-white/95 leading-relaxed">
+            {nameKh}
+          </div>
+        </div>
+      </div>
+      <div className="rounded-md bg-black/40 border border-white/10 px-2.5 py-1.5 mt-1">
+        <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+          digits · តួលេខ
+        </div>
+        <div className="font-mono text-sm text-yellow-100 tracking-wider">
+          {digits}
+        </div>
+      </div>
+      <div className="mt-2.5 text-[12px] text-slate-100 leading-snug">
+        <strong className={accent}>{taglineEn}</strong> {descEn}
+      </div>
+      <div className="font-khmer text-[12px] text-slate-200 leading-relaxed mt-1.5 border-t border-white/10 pt-1.5">
+        <strong className={accent}>{taglineKh}</strong> {descKh}
+      </div>
+      <div className="mt-3 flex items-baseline justify-between gap-2 rounded-md bg-black/40 border border-white/10 px-2.5 py-1.5">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+            example · ឧទាហរណ៍
+          </div>
+          <div className="font-mono text-base sm:text-lg text-yellow-100 tabular-nums">
+            {example}
+          </div>
+        </div>
+        <div className="text-right text-[10px] font-mono text-slate-300">
+          {exampleNote}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sub 2 · Nested Dolls — Number Sets ─────────────────────────────── */
+function NestedNumberSetsCard() {
+  return (
+    <article
+      data-testid="arch-number-sets"
+      className="rounded-2xl bg-slate-950/60 border-2 border-yellow-300/40 p-5 sm:p-6 shadow-[0_0_24px_rgba(253,224,71,0.08)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-yellow-300 text-slate-900 flex items-center justify-center">
+          <Layers className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-yellow-300">
+              Section 02 · The Hierarchy
+            </span>
+            <span className="font-khmer text-[11px] text-yellow-200">
+              ផ្នែក ០២ · ឋានានុក្រម
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">The Nested Dolls of Math — Number Sets</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-yellow-200 mt-1 leading-relaxed">
+              តុក្កតាសំបុកនៃគណិតវិទ្យា — សំណុំចំនួន
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-sm sm:text-[15px] text-slate-100 leading-relaxed">
+        Numbers don't all live in one place — they live inside{" "}
+        <strong className="text-yellow-200">nested categories</strong>, like
+        Russian dolls. Each new layer adds a new kind of number that the smaller
+        layer cannot describe. Read the box from the inside out.
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-3 border-t border-yellow-300/20 pt-3">
+        តួលេខទាំងអស់មិនរស់នៅកន្លែងតែមួយទេ — ពួកវារស់នៅខាងក្នុង<strong className="text-yellow-200">ប្រភេទសំបុក</strong>ដូចជាតុក្កតារុស្ស៊ី។ រាល់ស្រទាប់ថ្មី បន្ថែមប្រភេទលេខថ្មី ដែលស្រទាប់តូចជាងមិនអាចពិពណ៌នាបាន។ សូមអាននៅក្នុងប្រអប់ ពីខាងក្នុងទៅខាងក្រៅ។
+      </p>
+
+      {/* Visual nested boxes ℂ ⊃ ℝ ⊃ ℚ ⊃ ℤ ⊃ 𝕎 ⊃ ℕ */}
+      <div className="mt-5 rounded-xl bg-black/50 border border-yellow-300/20 p-3 sm:p-4 overflow-hidden">
+        <NestedSet
+          symbol={<InlineMath math="\mathbb{C}" />}
+          nameEn="Complex Numbers"
+          nameKh="ចំនួនកុំផ្លិច"
+          tagEn="The ultimate set — real + imaginary (a + bi)."
+          tagKh="សំណុំចុងក្រោយ — ពិត + ស្រមើស្រមៃ (a + bi)។"
+          example="3 + 2i"
+          tone="violet"
+        >
+          <NestedSet
+            symbol={<InlineMath math="\mathbb{R}" />}
+            nameEn="Real Numbers"
+            nameKh="ចំនួនពិត"
+            tagEn="Everything on the standard number line."
+            tagKh="អ្វីៗគ្រប់យ៉ាងនៅលើបន្ទាត់លេខស្តង់ដារ។"
+            example="−7,  0,  ½,  π"
+            tone="rose"
+          >
+            <div className="flex flex-col md:flex-row gap-2.5">
+              {/* Rationals branch */}
+              <div className="flex-1 min-w-0">
+                <NestedSet
+                  symbol={<InlineMath math="\mathbb{Q}" />}
+                  nameEn="Rational Numbers"
+                  nameKh="ចំនួនសនិទាន"
+                  tagEn="Anything you can write as a fraction p/q."
+                  tagKh="អ្វីដែលអ្នកអាចសរសេរជាប្រភាគ p/q។"
+                  example="½,  0.75,  −3"
+                  tone="amber"
+                >
+                  <NestedSet
+                    symbol={<InlineMath math="\mathbb{Z}" />}
+                    nameEn="Integers"
+                    nameKh="ចំនួនគត់"
+                    tagEn="Adds the concept of debt — negatives."
+                    tagKh="បន្ថែមគំនិតបំណុល — អវិជ្ជមាន។"
+                    example="−2, −1, 0, 1, 2"
+                    tone="emerald"
+                  >
+                    <NestedSet
+                      symbol={<InlineMath math="\mathbb{W}" />}
+                      nameEn="Whole Numbers"
+                      nameKh="ចំនួនពេញ"
+                      tagEn="Natural numbers plus zero."
+                      tagKh="ចំនួនធម្មជាតិបូកសូន្យ។"
+                      example="0, 1, 2, 3, …"
+                      tone="cyan"
+                    >
+                      <NestedSet
+                        symbol={<InlineMath math="\mathbb{N}" />}
+                        nameEn="Natural Numbers"
+                        nameKh="ចំនួនធម្មជាតិ"
+                        tagEn="Counting numbers — what babies learn first."
+                        tagKh="លេខរាប់ — អ្វីដែលក្មេងតូចរៀនមុនគេ។"
+                        example="1, 2, 3, …"
+                        tone="sky"
+                        leaf
+                      />
+                    </NestedSet>
+                  </NestedSet>
+                </NestedSet>
+              </div>
+              {/* Irrationals sibling */}
+              <div className="flex-1 min-w-0">
+                <NestedSet
+                  symbol={<span className="font-serif italic">𝕀</span>}
+                  nameEn="Irrational Numbers"
+                  nameKh="ចំនួនអសនិទាន"
+                  tagEn="Endless, never-repeating decimals — can NEVER be written as a fraction."
+                  tagKh="ទសភាគគ្មានទីបញ្ចប់ មិនធ្លាប់ដដែល — មិនអាចសរសេរជាប្រភាគបាន។"
+                  example="π,  √2,  e"
+                  tone="fuchsia"
+                  leaf
+                />
+              </div>
+            </div>
+          </NestedSet>
+        </NestedSet>
+      </div>
+
+      {/* Symbol legend / cheat-sheet */}
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
+        {[
+          { sym: "\\mathbb{N}", en: "Natural", kh: "ធម្មជាតិ" },
+          { sym: "\\mathbb{W}", en: "Whole", kh: "ពេញ" },
+          { sym: "\\mathbb{Z}", en: "Integers", kh: "គត់" },
+          { sym: "\\mathbb{Q}", en: "Rational", kh: "សនិទាន" },
+          { sym: "", en: "Irrational", kh: "អសនិទាន", literal: "𝕀" },
+          { sym: "\\mathbb{R}", en: "Real", kh: "ពិត" },
+          { sym: "\\mathbb{C}", en: "Complex", kh: "កុំផ្លិច" },
+        ].map((s) => (
+          <div
+            key={s.en}
+            className="rounded-md bg-slate-900/70 border border-yellow-300/20 px-2 py-1.5 text-center"
+          >
+            <div className="text-yellow-100 text-base">
+              {s.sym ? <InlineMath math={s.sym} /> : (
+                <span className="font-serif italic">{s.literal}</span>
+              )}
+            </div>
+            <div className="text-[10px] text-slate-300 leading-tight">{s.en}</div>
+            <div className="font-khmer text-[10px] text-slate-400 leading-relaxed">
+              {s.kh}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Containment line */}
+      <div className="mt-4 rounded-md bg-slate-900/70 border border-yellow-300/30 px-3 py-2 overflow-x-auto">
+        <div className="text-[10px] font-mono uppercase tracking-widest text-yellow-300 mb-1">
+          <span>The chain of containment</span>
+          <span className="ml-2 font-khmer normal-case tracking-normal text-yellow-200/90">
+            · ខ្សែសង្វាក់នៃការមាន
+          </span>
+        </div>
+        <div className="text-base sm:text-lg text-yellow-100 whitespace-nowrap">
+          <BlockMath math="\mathbb{N} \subset \mathbb{W} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}" />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function NestedSet({
+  symbol,
+  nameEn,
+  nameKh,
+  tagEn,
+  tagKh,
+  example,
+  tone,
+  leaf = false,
+  children,
+}: {
+  symbol: React.ReactNode;
+  nameEn: string;
+  nameKh: string;
+  tagEn: string;
+  tagKh: string;
+  example: string;
+  tone: "violet" | "rose" | "amber" | "emerald" | "cyan" | "sky" | "fuchsia";
+  leaf?: boolean;
+  children?: React.ReactNode;
+}) {
+  const ring = {
+    violet: "border-violet-300/60 bg-violet-400/5",
+    rose: "border-rose-300/60 bg-rose-400/5",
+    amber: "border-amber-300/60 bg-amber-400/5",
+    emerald: "border-emerald-300/60 bg-emerald-400/5",
+    cyan: "border-cyan-300/60 bg-cyan-400/5",
+    sky: "border-sky-300/60 bg-sky-400/5",
+    fuchsia: "border-fuchsia-300/60 bg-fuchsia-400/5",
+  }[tone];
+  const accent = {
+    violet: "text-violet-200",
+    rose: "text-rose-200",
+    amber: "text-amber-200",
+    emerald: "text-emerald-200",
+    cyan: "text-cyan-200",
+    sky: "text-sky-200",
+    fuchsia: "text-fuchsia-200",
+  }[tone];
+
+  return (
+    <div className={`rounded-lg border-2 ${ring} p-2.5 sm:p-3`}>
+      <div className="flex flex-wrap items-center gap-2 mb-1">
+        <span className={`text-2xl ${accent}`}>{symbol}</span>
+        <div className="min-w-0">
+          <div className="text-sm font-bold text-white leading-tight">
+            {nameEn}
+          </div>
+          <div className="font-khmer text-[12px] text-white/90 leading-relaxed">
+            {nameKh}
+          </div>
+        </div>
+        <span className="ml-auto font-mono text-[11px] text-yellow-100 bg-black/40 border border-white/10 rounded px-2 py-0.5">
+          {example}
+        </span>
+      </div>
+      <div className="text-[12px] text-slate-200 leading-snug">{tagEn}</div>
+      <div className="font-khmer text-[11px] text-slate-300 leading-relaxed">
+        {tagKh}
+      </div>
+      {!leaf && children && <div className="mt-2.5">{children}</div>}
+    </div>
+  );
+}
+
+/* ── Sub 3 · Specialized Systems ────────────────────────────────────── */
+function SpecializedSystemsCard() {
+  return (
+    <article
+      data-testid="arch-specialized"
+      className="rounded-2xl bg-slate-950/60 border-2 border-sky-300/40 p-5 sm:p-6 shadow-[0_0_24px_rgba(125,211,252,0.08)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-sky-300 text-slate-900 flex items-center justify-center">
+          <Sparkles className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-sky-300">
+              Section 03 · The Classifications
+            </span>
+            <span className="font-khmer text-[11px] text-sky-200">
+              ផ្នែក ០៣ · ការបែងចែក
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-lg sm:text-xl text-white leading-snug">
+            <span className="block">Specialized Systems</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-sky-200 mt-1 leading-relaxed">
+              ប្រព័ន្ធឯកទេសផ្សេងៗ
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-sm text-slate-100 leading-relaxed">
+        Beyond the nested-dolls hierarchy, mathematicians label numbers in a few
+        more ways — some everyday, others reserved for university lecture halls.
+      </p>
+      <p className="font-khmer text-sm text-slate-200 leading-loose mt-2 border-t border-sky-300/20 pt-2">
+        លើសពីឋានានុក្រមតុក្កតាសំបុក គណិតវិទូដាក់ស្លាកតួលេខតាមវិធីពីរបីផ្សេងទៀត — ខ្លះធម្មតា ខ្លះទុកសម្រាប់សាលសិក្ខាសាលាសាកលវិទ្យាល័យ។
+      </p>
+
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+        {/* Even / Odd */}
+        <div className="rounded-xl border-2 border-emerald-300/50 bg-emerald-400/5 p-3.5">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-7 h-7 rounded-md bg-emerald-300 text-emerald-950 flex items-center justify-center font-display font-extrabold text-sm">
+              ½
+            </span>
+            <div className="min-w-0">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-200">
+                Everyday · ប្រចាំថ្ងៃ
+              </div>
+              <div className="font-display font-bold text-white leading-tight">
+                Even / Odd
+              </div>
+              <div className="font-khmer text-[12px] font-bold text-white/90 leading-relaxed">
+                គូ / សេស
+              </div>
+            </div>
+          </div>
+          <div className="text-[12px] text-slate-100 leading-snug">
+            <strong className="text-emerald-200">Even:</strong> divisible by 2 (2, 4, 6, …).{" "}
+            <strong className="text-emerald-200">Odd:</strong> not divisible by 2 (1, 3, 5, …).
+          </div>
+          <div className="font-khmer text-[12px] text-slate-200 leading-relaxed mt-1.5 border-t border-white/10 pt-1.5">
+            <strong className="text-emerald-200">គូ៖</strong> ចែកនឹង ២ បាន (២, ៤, ៦, …)។{" "}
+            <strong className="text-emerald-200">សេស៖</strong> ចែកនឹង ២ មិនបាន (១, ៣, ៥, …)។
+          </div>
+        </div>
+
+        {/* Prime / Composite */}
+        <div className="rounded-xl border-2 border-amber-300/50 bg-amber-400/5 p-3.5">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-7 h-7 rounded-md bg-amber-300 text-amber-950 flex items-center justify-center font-display font-extrabold text-sm">
+              7
+            </span>
+            <div className="min-w-0">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-200">
+                Building blocks · គ្រឹះ
+              </div>
+              <div className="font-display font-bold text-white leading-tight">
+                Prime / Composite
+              </div>
+              <div className="font-khmer text-[12px] font-bold text-white/90 leading-relaxed">
+                ចំនួនបឋម / ចំនួនសមាស
+              </div>
+            </div>
+          </div>
+          <div className="text-[12px] text-slate-100 leading-snug">
+            <strong className="text-amber-200">Prime:</strong> only two factors — 1 and itself (2, 3, 5, 7, 11…).{" "}
+            <strong className="text-amber-200">Composite:</strong> built by multiplying smaller primes (4 = 2×2, 12 = 2×2×3).
+          </div>
+          <div className="font-khmer text-[12px] text-slate-200 leading-relaxed mt-1.5 border-t border-white/10 pt-1.5">
+            <strong className="text-amber-200">បឋម៖</strong> មានតួចែកតែ ២ — ១ និងខ្លួនវា។ <strong className="text-amber-200">សមាស៖</strong> បង្កើតពីការគុណចំនួនបឋមតូចៗ។
+          </div>
+        </div>
+
+        {/* Hypercomplex & P-adic */}
+        <div className="rounded-xl border-2 border-fuchsia-300/50 bg-fuchsia-400/5 p-3.5">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="w-7 h-7 rounded-md bg-fuchsia-300 text-fuchsia-950 flex items-center justify-center font-display font-extrabold text-sm">
+              ∞
+            </span>
+            <div className="min-w-0">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-fuchsia-200">
+                University-level · កម្រិតសាកលវិទ្យាល័យ
+              </div>
+              <div className="font-display font-bold text-white leading-tight">
+                Hypercomplex &amp; P-adic
+              </div>
+              <div className="font-khmer text-[12px] font-bold text-white/90 leading-relaxed">
+                ហួសកុំផ្លិច និង P-adic
+              </div>
+            </div>
+          </div>
+          <div className="text-[12px] text-slate-100 leading-snug">
+            Extreme theoretical systems. <strong className="text-fuchsia-200">Quaternions</strong> — a hypercomplex set with three imaginary units — power the rotations in 3D video-game physics.
+          </div>
+          <div className="font-khmer text-[12px] text-slate-200 leading-relaxed mt-1.5 border-t border-white/10 pt-1.5">
+            ប្រព័ន្ធទ្រឹស្តីខ្ពស់។ <strong className="text-fuchsia-200">Quaternions</strong> — សំណុំហួសកុំផ្លិចមានឯកតាស្រមើស្រមៃបី — ប្រើសម្រាប់បង្វិលក្នុងរូបវិទ្យាហ្គេមវីដេអូ ៣D។
+          </div>
+        </div>
+      </div>
+    </article>
+  );
 }
