@@ -248,9 +248,9 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
                   Khmer script renders in its proper typeface even when the
                   surrounding paragraph uses the Latin font. */}
               <p className="text-sm mt-2 text-slate-600">
-                No results found. Check your spelling! (
+                No results found. Try another keyword! (
                 <span className="font-khmer">
-                  រកមិនឃើញលទ្ធផលទេ។ សូមពិនិត្យមើលការប្រកបរបស់អ្នក!
+                  រកមិនឃើញលទ្ធផលទេ។ សាកល្បងពាក្យគន្លឹះផ្សេងទៀត!
                 </span>
                 )
               </p>

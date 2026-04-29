@@ -366,8 +366,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     descEn: "Quick science experiments you can do at home with cheap materials.",
     descKh: "ការពិសោធន៍វិទ្យាសាស្ត្ររហ័សដែលអាចធ្វើនៅផ្ទះដោយវត្ថុថោក។",
-    keywordsEn: ["lab", "experiment", "experiments", "fun", "diy", "home science"],
-    keywordsKh: ["ពិសោធន៍", "សប្បាយ", "ផ្ទះ"],
+    keywordsEn: [
+      "fun lab", "funlab", "fun-lab", "lab", "laboratory",
+      "experiment", "experiments", "experimental", "fun", "diy",
+      "home science", "kitchen science", "science fair",
+      "demos", "demo", "demonstration", "hands on", "hands-on",
+      "tinker", "tinkering", "kids experiments",
+    ],
+    keywordsKh: [
+      "មន្ទីរពិសោធន៍សប្បាយ", "មន្ទីរពិសោធន៍",
+      "ការពិសោធន៍", "ពិសោធន៍", "សប្បាយ", "ផ្ទះ",
+      "វិទ្យាសាស្ត្រនៅផ្ទះ", "ការសាកល្បង", "កម្មសាលា",
+    ],
   },
   {
     id: "space",
