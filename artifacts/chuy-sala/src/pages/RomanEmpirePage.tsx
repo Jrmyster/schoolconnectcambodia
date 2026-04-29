@@ -13,6 +13,11 @@ import {
   AlertTriangle,
   CheckCircle2,
   Building2,
+  Hash,
+  Plus,
+  Minus,
+  Calendar,
+  Hand,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -137,6 +142,20 @@ export default function RomanEmpirePage() {
         isKh={isKh}
       >
         <SplitMap isKh={isKh} />
+      </Section>
+
+      {/* ── Section 4 · Lesson 4: Roman Numerals ──────────────────────── */}
+      <Section
+        spec="04"
+        eyebrowEn="Lesson 4 · The math of the legions"
+        eyebrowKh="មេរៀនទី ៤ · គណិតវិទ្យានៃកងទ័ពរ៉ូម៉ាំង"
+        titleEn="Roman Numerals — The Language of Numbers"
+        titleKh="លេខរ៉ូម៉ាំង — ភាសានៃលេខ"
+        descEn="Modern numerals (1, 2, 3) are abstract — they don't look like the things they count. Roman numerals are the opposite: they are pictures of fingers and tally marks pressed onto wood and stone. Learn to read them, and you can read inscriptions, clock faces, and the year on the front of any old building."
+        descKh="លេខទំនើប (១, ២, ៣) ជានាមធម៌ — ពួកវាមិនមើលទៅដូចជារបស់ដែលរាប់ឡើយ។ លេខរ៉ូម៉ាំងគឺផ្ទុយ៖ ពួកវាជារូបភាពនៃម្រាមដៃ និងសញ្ញារាប់ដែលឆ្លាក់លើឈើ និងថ្ម។ រៀនអានពួកវា ហើយអ្នកនឹងអាចអានឆ្លាក់ប្រវត្តិសាស្ត្រ មុខនាឡិកា និងឆ្នាំនៅលើផ្ទាំងអាគារចាស់ៗបាន។"
+        isKh={isKh}
+      >
+        <RomanNumeralsLesson isKh={isKh} />
       </Section>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -718,5 +737,496 @@ function RoadsSVG() {
         ROMA
       </text>
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 4 · Lesson 4 — Roman Numerals: The Language of Numbers
+//                        មេរៀនទី ៤ — លេខរ៉ូម៉ាំង៖ ភាសានៃលេខ
+//
+//  Bilingual rule: every heading, rule, and number definition shows BOTH
+//  English and Khmer simultaneously (paired), regardless of language toggle.
+//  Aesthetic: deep purple panels, gold/amber accents, marble-card feel,
+//  serif "engraved" letterforms for the symbols themselves.
+// ════════════════════════════════════════════════════════════════════════════
+
+type RomanSymbol = {
+  letter: string;
+  value: number;
+  valueLabel: string;
+  originEn: string;
+  originKh: string;
+};
+
+const ROMAN_SYMBOLS: RomanSymbol[] = [
+  {
+    letter: "I",
+    value: 1,
+    valueLabel: "1",
+    originEn: "A single tally — one finger held up.",
+    originKh: "សញ្ញារាប់មួយ — ម្រាមដៃមួយលើកឡើង។",
+  },
+  {
+    letter: "V",
+    value: 5,
+    valueLabel: "5",
+    originEn: "An open hand — the V-shape between thumb and fingers.",
+    originKh: "បាតដៃចំហ — រូប V រវាងមេដៃ និងម្រាមដៃ។",
+  },
+  {
+    letter: "X",
+    value: 10,
+    valueLabel: "10",
+    originEn: "Two hands crossed — or two V-shapes stacked.",
+    originKh: "ដៃពីរឆ្លងគ្នា — ឬរូប V ពីរត្រួតគ្នា។",
+  },
+  {
+    letter: "L",
+    value: 50,
+    valueLabel: "50",
+    originEn: "From an older symbol shaped like a bent angle.",
+    originKh: "ពីនិមិត្តសញ្ញាចាស់រាងមុំពត់។",
+  },
+  {
+    letter: "C",
+    value: 100,
+    valueLabel: "100",
+    originEn: 'From the Latin word "centum" — meaning hundred.',
+    originKh: "ពីពាក្យឡាតាំង “centum” — មានន័យថា មួយរយ។",
+  },
+  {
+    letter: "D",
+    value: 500,
+    valueLabel: "500",
+    originEn: "Half of an ancient symbol used for one thousand.",
+    originKh: "ពាក់កណ្តាលនៃនិមិត្តសញ្ញាបុរាណ ដែលប្រើសម្រាប់មួយពាន់។",
+  },
+  {
+    letter: "M",
+    value: 1000,
+    valueLabel: "1,000",
+    originEn: 'From the Latin word "mille" — meaning thousand.',
+    originKh: "ពីពាក្យឡាតាំង “mille” — មានន័យថា មួយពាន់។",
+  },
+];
+
+function RomanNumeralsLesson({ isKh }: { isKh: boolean }) {
+  return (
+    <div data-testid="roman-numerals-lesson" className="space-y-5">
+      <SevenSymbolsBlock isKh={isKh} />
+      <TwoRulesBlock />
+      <YearBreakdownBlock />
+    </div>
+  );
+}
+
+/* ── Sub 1 · The 7 Sacred Symbols ────────────────────────────────────── */
+function SevenSymbolsBlock({ isKh }: { isKh: boolean }) {
+  return (
+    <article
+      data-testid="roman-symbols-block"
+      className={`rounded-2xl ${PURPLE_GRADIENT} text-white border-2 border-amber-300/60 shadow-lg overflow-hidden`}
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-amber-300/30 bg-black/20 flex items-start gap-3">
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-400 text-purple-950 flex items-center justify-center shadow">
+          <Hash className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-200 mb-0.5">
+            <span>Part 01 · The Symbols</span>
+            <span className={`ml-2 ${isKh ? "" : ""} font-khmer normal-case tracking-normal text-[11px] text-amber-100/90`}>
+              · ផ្នែក ០១ · និមិត្តសញ្ញា
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-xl sm:text-2xl leading-snug">
+            <span className="block">The 7 Sacred Symbols</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-amber-200 mt-1 leading-relaxed">
+              និមិត្តសញ្ញាពិសិដ្ឋទាំង ៧
+            </span>
+          </h3>
+        </div>
+      </div>
+
+      <div className="px-5 sm:px-6 py-4">
+        <p className="text-purple-100 text-sm sm:text-base leading-relaxed">
+          The Roman number system uses just <strong className="text-amber-300">seven letters</strong>.
+          Every other Roman number — no matter how large — is built by combining
+          these. They were not invented at a desk: they grew out of{" "}
+          <strong className="text-amber-300">tally marks on wood</strong> and{" "}
+          <strong className="text-amber-300">hand signals</strong> used by
+          shepherds and merchants long before Rome itself was a city.
+        </p>
+        <p className="font-khmer text-purple-100 leading-loose mt-3 border-t border-amber-300/20 pt-3">
+          ប្រព័ន្ធលេខរ៉ូម៉ាំងប្រើ <strong className="text-amber-300">អក្សរតែ ៧</strong>{" "}
+          ប៉ុណ្ណោះ។ លេខរ៉ូម៉ាំងផ្សេងទៀត — មិនថាធំប៉ុណ្ណាទេ — ត្រូវបានបង្កើតឡើងដោយការផ្សំអក្សរទាំងនេះ។ ពួកវាមិនបានបង្កើតនៅលើតុ៖ ពួកវាបានលូតលាស់ចេញពី{" "}
+          <strong className="text-amber-300">សញ្ញារាប់នៅលើឈើ</strong> និង{" "}
+          <strong className="text-amber-300">សញ្ញាដៃ</strong>{" "}
+          ដែលប្រើដោយអ្នកគង្វាល និងពាណិជ្ជករ ជាយូរមកហើយមុនពេលរ៉ូមជាទីក្រុង។
+        </p>
+
+        <div
+          data-testid="roman-symbols-grid"
+          className="mt-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+        >
+          {ROMAN_SYMBOLS.map((s) => (
+            <SymbolCard key={s.letter} symbol={s} />
+          ))}
+        </div>
+
+        <div className="mt-4 rounded-xl bg-amber-300/10 border border-amber-300/40 px-4 py-3 flex items-start gap-3">
+          <Hand className="w-5 h-5 text-amber-300 flex-shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm text-amber-50">
+            <div>
+              <strong className="text-amber-200">I, V, X are the body itself.</strong>{" "}
+              One finger, an open palm, two crossed hands. The numbers were
+              already on you before they were on stone.
+            </div>
+            <div className="font-khmer text-amber-100/90 leading-loose mt-2">
+              <strong className="text-amber-200">I, V, X គឺជាខ្លួនឯងផ្ទាល់</strong>។
+              ម្រាមដៃមួយ បាតដៃចំហ ដៃពីរឆ្លងគ្នា។ លេខទាំងនេះបានចារនៅលើខ្លួនអ្នក មុនពេលវាត្រូវបានចារនៅលើថ្ម។
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function SymbolCard({ symbol: s }: { symbol: RomanSymbol }) {
+  return (
+    <div
+      data-testid={`roman-symbol-${s.letter}`}
+      className="relative rounded-xl bg-stone-50 border border-amber-300/60 shadow-sm overflow-hidden flex flex-col"
+    >
+      <div className="bg-gradient-to-b from-stone-100 to-stone-50 px-3 py-3 border-b border-amber-300/40 flex items-baseline justify-between">
+        <div className="font-display font-bold text-3xl sm:text-4xl text-purple-950 leading-none tracking-tight">
+          {s.letter}
+        </div>
+        <div className="text-right">
+          <div className="font-mono text-[10px] uppercase tracking-widest text-purple-700/70">
+            value · តម្លៃ
+          </div>
+          <div className="font-display font-bold text-lg text-amber-700 leading-none">
+            {s.valueLabel}
+          </div>
+        </div>
+      </div>
+      <div className="px-3 py-2.5 flex-1">
+        <p className="text-[11px] sm:text-xs text-stone-700 leading-snug">
+          {s.originEn}
+        </p>
+        <p className="font-khmer text-[11px] sm:text-xs text-stone-600 leading-relaxed mt-1.5 border-t border-stone-200 pt-1.5">
+          {s.originKh}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sub 2 · The Logic of the Script ─────────────────────────────────── */
+function TwoRulesBlock() {
+  return (
+    <article
+      data-testid="roman-rules-block"
+      className={`rounded-2xl ${PURPLE_GRADIENT} text-white border-2 border-amber-300/60 shadow-lg overflow-hidden`}
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-amber-300/30 bg-black/20 flex items-start gap-3">
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-400 text-purple-950 flex items-center justify-center shadow">
+          <ScrollText className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-200 mb-0.5">
+            <span>Part 02 · The Two Golden Rules</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-amber-100/90">
+              · ផ្នែក ០២ · វិន័យមាសទាំងពីរ
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-xl sm:text-2xl leading-snug">
+            <span className="block">The Logic of the Script</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-amber-200 mt-1 leading-relaxed">
+              តក្កវិជ្ជានៃសំណេរ
+            </span>
+          </h3>
+        </div>
+      </div>
+
+      <div className="px-5 sm:px-6 py-4">
+        <p className="text-purple-100 text-sm sm:text-base leading-relaxed">
+          Once you know the seven letters, only{" "}
+          <strong className="text-amber-300">two rules</strong> turn them into
+          numbers. The Romans were practical engineers — they only had two,
+          because two is enough.
+        </p>
+        <p className="font-khmer text-purple-100 leading-loose mt-3 border-t border-amber-300/20 pt-3">
+          ពេលដែលអ្នកស្គាល់អក្សរទាំងប្រាំពីរហើយ មានតែ{" "}
+          <strong className="text-amber-300">វិន័យពីរ</strong>{" "}
+          ប៉ុណ្ណោះ ដែលប្ដូរពួកវាទៅជាលេខ។ រ៉ូម៉ាំងជាវិស្វករដែលជាក់ស្ដែង — ពួកគេមានតែពីរ ព្រោះពីរគឺគ្រប់គ្រាន់។
+        </p>
+
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <RuleCard
+            id="addition"
+            tone="add"
+            Icon={Plus}
+            ruleNumber="1"
+            titleEn="Rule 1 · Addition"
+            titleKh="វិន័យទី ១ · ការបូក"
+            ruleEn="When a smaller symbol comes AFTER a larger symbol, ADD them together."
+            ruleKh="នៅពេលនិមិត្តសញ្ញាតូចជាង មកក្រោយ និមិត្តសញ្ញាធំជាង — បូកពួកវាជាមួយគ្នា។"
+            example="VI"
+            mathEn="V + I  =  5 + 1  =  6"
+            mathKh="V + I  =  ៥ + ១  =  ៦"
+          />
+          <RuleCard
+            id="subtraction"
+            tone="sub"
+            Icon={Minus}
+            ruleNumber="2"
+            titleEn="Rule 2 · Subtraction"
+            titleKh="វិន័យទី ២ · ការដក"
+            ruleEn="When a smaller symbol comes BEFORE a larger symbol, SUBTRACT it."
+            ruleKh="នៅពេលនិមិត្តសញ្ញាតូចជាង មកមុន និមិត្តសញ្ញាធំជាង — ដកវាចេញ។"
+            example="IV"
+            mathEn="V − I  =  5 − 1  =  4"
+            mathKh="V − I  =  ៥ − ១  =  ៤"
+          />
+        </div>
+
+        <div className="mt-4 rounded-xl bg-purple-950/40 border border-amber-300/30 px-4 py-3">
+          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-amber-300 mb-1">
+            Why subtract? · ហេតុអ្វីដក?
+          </div>
+          <p className="text-xs sm:text-sm text-purple-100 leading-relaxed">
+            Subtraction was a <strong className="text-amber-200">space-saving trick</strong>. Without it,
+            "four" would have to be written <span className="font-mono text-amber-200">IIII</span>{" "}
+            — four heavy chisel-strokes on stone. With the subtraction rule it
+            becomes just <span className="font-mono text-amber-200">IV</span> — two strokes.
+            Same idea for 9 (<span className="font-mono text-amber-200">IX</span>),
+            40 (<span className="font-mono text-amber-200">XL</span>), and
+            90 (<span className="font-mono text-amber-200">XC</span>).
+          </p>
+          <p className="font-khmer text-xs sm:text-sm text-purple-100 leading-loose mt-2">
+            ការដកគឺជា <strong className="text-amber-200">ល្បិចសន្សំសំចៃកន្លែង</strong>។ បើគ្មានវាទេ លេខ "បួន" ត្រូវសរសេរជា{" "}
+            <span className="font-mono text-amber-200">IIII</span> — ការឆ្លាក់បួនដងធ្ងន់ៗលើថ្ម។ ជាមួយវិន័យដក វាក្លាយជា{" "}
+            <span className="font-mono text-amber-200">IV</span> — ឆ្លាក់តែពីរដង។ គំនិតដូចគ្នាសម្រាប់លេខ ៩{" "}
+            (<span className="font-mono text-amber-200">IX</span>), ៤០{" "}
+            (<span className="font-mono text-amber-200">XL</span>), និង ៩០{" "}
+            (<span className="font-mono text-amber-200">XC</span>)។
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function RuleCard({
+  id,
+  tone,
+  Icon,
+  ruleNumber,
+  titleEn,
+  titleKh,
+  ruleEn,
+  ruleKh,
+  example,
+  mathEn,
+  mathKh,
+}: {
+  id: string;
+  tone: "add" | "sub";
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  ruleNumber: string;
+  titleEn: string;
+  titleKh: string;
+  ruleEn: string;
+  ruleKh: string;
+  example: string;
+  mathEn: string;
+  mathKh: string;
+}) {
+  const accent =
+    tone === "add"
+      ? "border-emerald-300/70 bg-emerald-400/10"
+      : "border-rose-300/70 bg-rose-400/10";
+  const chip =
+    tone === "add"
+      ? "bg-emerald-400 text-emerald-950"
+      : "bg-rose-400 text-rose-950";
+  const accentText =
+    tone === "add" ? "text-emerald-200" : "text-rose-200";
+  return (
+    <div
+      data-testid={`roman-rule-${id}`}
+      className={`rounded-xl border-2 ${accent} p-4 flex flex-col`}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <span className={`w-8 h-8 rounded-lg ${chip} flex items-center justify-center font-display font-bold text-lg`}>
+          {ruleNumber}
+        </span>
+        <div className="flex-1 min-w-0">
+          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-200">
+            {titleEn}
+          </div>
+          <div className="font-khmer text-[11px] text-amber-100/90 leading-relaxed">
+            {titleKh}
+          </div>
+        </div>
+        <Icon className={`w-5 h-5 ${accentText}`} strokeWidth={2.75} />
+      </div>
+      <p className="text-sm text-white leading-relaxed">{ruleEn}</p>
+      <p className="font-khmer text-sm text-purple-100 leading-loose mt-2 border-t border-white/10 pt-2">
+        {ruleKh}
+      </p>
+      <div className="mt-3 rounded-lg bg-stone-50 text-purple-950 px-3 py-3 flex items-baseline justify-between gap-3">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-purple-700/70">
+            example · ឧទាហរណ៍
+          </div>
+          <div className="font-display font-bold text-3xl sm:text-4xl leading-none tracking-tight">
+            {example}
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="font-mono text-sm text-stone-800">{mathEn}</div>
+          <div className="font-khmer text-sm text-stone-700 mt-0.5">{mathKh}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Sub 3 · Reading the Year ────────────────────────────────────────── */
+function YearBreakdownBlock() {
+  // Current year breakdown — 2026 → MMXXVI
+  const parts: { roman: string; value: string; en: string; kh: string }[] = [
+    { roman: "M",  value: "1,000", en: "one thousand",  kh: "មួយពាន់" },
+    { roman: "M",  value: "1,000", en: "one thousand",  kh: "មួយពាន់" },
+    { roman: "X",  value: "10",    en: "ten",           kh: "ដប់" },
+    { roman: "X",  value: "10",    en: "ten",           kh: "ដប់" },
+    { roman: "V",  value: "5",     en: "five",          kh: "ប្រាំ" },
+    { roman: "I",  value: "1",     en: "one",           kh: "មួយ" },
+  ];
+  return (
+    <article
+      data-testid="roman-year-block"
+      className={`rounded-2xl ${PURPLE_GRADIENT} text-white border-2 border-amber-300/60 shadow-lg overflow-hidden`}
+    >
+      <div className="px-5 sm:px-6 py-4 border-b border-amber-300/30 bg-black/20 flex items-start gap-3">
+        <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-400 text-purple-950 flex items-center justify-center shadow">
+          <Calendar className="w-5 h-5" strokeWidth={2.5} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-200 mb-0.5">
+            <span>Part 03 · Putting It Together</span>
+            <span className="ml-2 font-khmer normal-case tracking-normal text-[11px] text-amber-100/90">
+              · ផ្នែក ០៣ · ផ្គុំចូលគ្នា
+            </span>
+          </div>
+          <h3 className="font-display font-bold text-xl sm:text-2xl leading-snug">
+            <span className="block">Reading the Year</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-amber-200 mt-1 leading-relaxed">
+              ការអានឆ្នាំ
+            </span>
+          </h3>
+        </div>
+      </div>
+
+      <div className="px-5 sm:px-6 py-5">
+        <p className="text-purple-100 text-sm sm:text-base leading-relaxed">
+          Walk past any old church or government building and you will see a
+          year carved over the door — written in Roman numerals. Let's read{" "}
+          <strong className="text-amber-300">this year</strong> together.
+        </p>
+        <p className="font-khmer text-purple-100 leading-loose mt-3 border-t border-amber-300/20 pt-3">
+          ដើរកាត់ព្រះវិហារចាស់ ឬអាគាររដ្ឋាភិបាលណាមួយ អ្នកនឹងឃើញឆ្នាំមួយឆ្លាក់នៅពីលើទ្វារ — សរសេរជាលេខរ៉ូម៉ាំង។ តោះអាន{" "}
+          <strong className="text-amber-300">ឆ្នាំនេះ</strong>{" "}
+          ជាមួយគ្នា។
+        </p>
+
+        {/* Big year carved on a stone-coloured tablet */}
+        <div
+          data-testid="roman-year-breakdown"
+          className="mt-5 rounded-2xl bg-stone-50 text-purple-950 border-2 border-amber-300/70 shadow-inner px-4 sm:px-6 py-5"
+        >
+          <div className="text-center">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-purple-700/70 mb-1">
+              The year · ឆ្នាំ
+            </div>
+            <div className="font-display font-extrabold text-5xl sm:text-6xl tracking-[0.15em] text-purple-950">
+              MMXXVI
+            </div>
+            <div className="mt-1 font-mono text-xl sm:text-2xl font-bold text-amber-700">
+              = 2026
+            </div>
+          </div>
+
+          {/* Per-letter chips */}
+          <div className="mt-5 grid grid-cols-3 sm:grid-cols-6 gap-2">
+            {parts.map((p, i) => (
+              <div
+                key={i}
+                className="rounded-lg bg-white border border-purple-200 shadow-sm flex flex-col items-center py-2"
+              >
+                <div className="font-display font-bold text-2xl text-purple-950 leading-none">
+                  {p.roman}
+                </div>
+                <div className="text-[10px] font-mono text-amber-700 mt-1">
+                  = {p.value}
+                </div>
+                <div className="text-[10px] text-stone-600 mt-0.5">{p.en}</div>
+                <div className="font-khmer text-[10px] text-stone-500 leading-relaxed">
+                  {p.kh}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* The math line */}
+          <div className="mt-5 rounded-xl bg-purple-950 text-amber-100 px-4 py-4 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
+            <div className="whitespace-nowrap">
+              <span className="text-amber-300 font-bold">MM</span>
+              <span className="text-purple-300"> (1000+1000) </span>
+              <span className="text-stone-400">+</span>
+              <span className="text-amber-300 font-bold"> XX</span>
+              <span className="text-purple-300"> (10+10) </span>
+              <span className="text-stone-400">+</span>
+              <span className="text-amber-300 font-bold"> VI</span>
+              <span className="text-purple-300"> (5+1)</span>
+            </div>
+            <div className="whitespace-nowrap mt-1">
+              <span className="text-stone-400">=</span>
+              <span className="text-white font-bold"> 2000 + 20 + 6 </span>
+              <span className="text-stone-400">=</span>
+              <span className="text-amber-300 font-bold text-base sm:text-lg"> 2026</span>
+            </div>
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div className="rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2 flex items-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-stone-800">
+                  <strong>VI</strong> uses Rule 1 (addition): 5 + 1 = 6.
+                </div>
+                <div className="font-khmer text-stone-600 leading-relaxed mt-1">
+                  <strong>VI</strong> ប្រើវិន័យទី ១ (ការបូក)៖ ៥ + ១ = ៦។
+                </div>
+              </div>
+            </div>
+            <div className="rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 flex items-start gap-2">
+              <Sparkles className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-stone-800">
+                  Two years ago (2024) was <strong>MMXXIV</strong> — same MM and XX, but the year ended with <strong>IV</strong> (5 − 1 = 4) using Rule 2.
+                </div>
+                <div className="font-khmer text-stone-600 leading-relaxed mt-1">
+                  ពីរឆ្នាំមុន (២០២៤) គឺ <strong>MMXXIV</strong> — MM និង XX ដូចគ្នា ប៉ុន្តែឆ្នាំបញ្ចប់ដោយ <strong>IV</strong> (៥ − ១ = ៤) ដោយប្រើវិន័យទី ២។
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }

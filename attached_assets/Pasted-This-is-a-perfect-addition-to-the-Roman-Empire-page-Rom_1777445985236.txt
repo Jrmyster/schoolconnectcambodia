@@ -1,0 +1,40 @@
+This is a perfect addition to the "Roman Empire" page. Roman numerals aren't just a different way to write numbers; they are a physical "Map" of how Romans counted using their hands and tally sticks.
+
+In the framework of General Semantics, our modern Arabic numerals (1, 2, 3) are highly abstract. They don't look like the quantities they represent. Roman numerals are much closer to the "Territory" of physical counting: I is a single finger, V is the shape of the space between the thumb and fingers, and X is two hands crossed.
+
+Here is the exact prompt to give the Replit agent to build this module.
+
+The Replit Agent Prompt: The Math of the Legions
+Copy and paste this instruction to the Agent:
+
+"I want to update the existing 'The Roman Empire' page. Please add a new comprehensive section called 'Lesson 4: Roman Numerals - The Language of Numbers (មេរៀនទី៤៖ លេខរ៉ូម៉ាំង - ភាសានៃលេខ)'.
+
+Please implement this matching the established 'Rise, Rule, and Ruin' aesthetic (deep purple backgrounds, gold/yellow accents, and clean timeline-style cards):
+
+1. Section 1: The 7 Sacred Symbols (និមិត្តសញ្ញាពិសិដ្ឋទាំង ៧)
+
+Create a grid of cards showing the 7 fundamental letters and their values:
+
+I = 1 | V = 5 | X = 10 | L = 50 | C = 100 | D = 500 | M = 1,000.  
+
+Explain the origin: These symbols come from tally marks on wood and hand signals. I is one finger, V is a hand with the thumb out, and X is two hands crossed.  
+
+2. Section 2: The Logic of the Script (តក្កវិជ្ជានៃសំណេរ)
+
+Explain the two golden rules for reading Roman numerals:
+
+Rule 1: Addition (ការបូក) — When a smaller symbol follows a larger symbol, add them. Example: VI (5 + 1 = 6).  
+
+Rule 2: Subtraction (ការដក) — When a smaller symbol comes before a larger symbol, subtract it. Example: IV (5 - 1 = 4). This was done to save space so they didn't have to write four 'I's in a row.  
+
+3. Section 3: Reading the Year (ការអានឆ្នាំ)
+
+Show a breakdown of the current year (e.g., MMXXIV for 2024).
+
+M + M (2000) + X + X (20) + IV (4) = 2024.
+
+4. Formatting & UX:
+
+Maintain the deep purple and gold theme.
+
+Ensure all headings, rules, and number definitions are strictly bilingual (English/Khmer).
