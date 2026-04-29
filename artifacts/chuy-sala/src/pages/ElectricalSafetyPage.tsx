@@ -36,6 +36,10 @@ import {
   Speaker,
   AudioLines,
   Waves,
+  RotateCcw,
+  Magnet,
+  Recycle,
+  ShieldAlert,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1770,8 +1774,543 @@ export function ElectricalSafetyPage() {
         </div>
       </section>
 
-      {/* ── Section 7: Invisible Wires — How Radios Work ─────────────────── */}
+      {/* ── Section 7: The Gatekeepers — Fuses & Circuit Breakers ────────── */}
+      <GatekeepersSection kh={kh} t={t} />
+
+      {/* ── Section 8: Invisible Wires — How Radios Work ─────────────────── */}
       <RadioSection kh={kh} t={t} />
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION · The Gatekeepers — Fuses & Circuit Breakers
+ *   ▸ Sub 1: The Danger of the Overload   (caution-yellow)
+ *   ▸ Sub 2: The Sacrifice — Fuses        (safety-orange)
+ *   ▸ Sub 3: The Smart Switch — Breakers  (caution-yellow with green ON state)
+ *
+ * Aesthetic: dark charcoal (slate-900/950) backgrounds, caution-yellow
+ * (#facc15) and safety-orange (#fb923c) accents, diagonal hazard-tape
+ * accent stripe at the top. Crisp sans-serif. Strictly bilingual headings
+ * and core terms (Fuse / ហ្វុយស៊ីប, Circuit Breaker / ឌីស្យុងទ័រ,
+ * Overload / ផ្ទុកលើសចំណុះ).
+ * ══════════════════════════════════════════════════════════════════════════ */
+function GatekeepersSection({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section
+      className="max-w-5xl mx-auto px-4 sm:px-6 py-10"
+      data-testid="gatekeepers-section"
+      aria-labelledby="gatekeepers-heading"
+    >
+      <div className="rounded-3xl bg-slate-900 border-2 border-amber-400/50 shadow-[0_0_40px_rgba(251,191,36,0.12)] overflow-hidden">
+        {/* Diagonal hazard tape strip */}
+        <div
+          className="h-3"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, #facc15 0 18px, #0f172a 18px 36px)",
+          }}
+          aria-hidden
+        />
+
+        <div className="p-5 sm:p-8">
+          {/* Bilingual paired header */}
+          <header className="flex items-start gap-3 mb-5">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-400 text-slate-900 flex items-center justify-center shadow-[0_0_20px_rgba(251,191,36,0.45)]">
+              <ShieldAlert className="w-6 h-6" strokeWidth={2.5} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-amber-300 mb-0.5">
+                <span>Section · Safety Inside the Wall</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-amber-200 ml-2">
+                  ផ្នែក · សុវត្ថិភាពនៅក្នុងជញ្ជាំង
+                </span>
+              </div>
+              <h2
+                id="gatekeepers-heading"
+                className="font-display text-2xl sm:text-3xl font-extrabold text-white leading-tight"
+              >
+                <span className="block">The Gatekeepers — Fuses &amp; Circuit Breakers</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-amber-200 mt-1 leading-relaxed">
+                  អ្នកយាមទ្វារ — ហ្វុយស៊ីប និងឌីស្យុងទ័រ
+                </span>
+              </h2>
+            </div>
+          </header>
+
+          {/* Intro — bilingual paired */}
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+            Inside every wall in your house there is a small, silent guardian
+            whose only job is to{" "}
+            <strong className="text-amber-300">stop a fire before it starts</strong>.
+            It does this by sacrificing itself — or by tripping a switch — the
+            moment things get too dangerous. Meet the two devices that quietly
+            keep your home from burning down.
+          </p>
+          <p className="font-khmer text-slate-300 leading-loose mt-3 border-t border-amber-400/20 pt-3">
+            នៅខាងក្នុងជញ្ជាំងផ្ទះរបស់អ្នកម្នាក់ៗ មានអ្នកការពារតូចមួយដ៏ស្ងាត់ ដែលការងារតែមួយគត់របស់វាគឺ{" "}
+            <strong className="text-amber-300">បញ្ឈប់ភ្លើងឆេះមុនពេលវាចាប់ផ្ដើម</strong>។ វាធ្វើដូច្នេះដោយការ លះបង់ខ្លួន — ឬដោយការបិទកុងតាក់ — ភ្លាមៗ ពេលអ្វីៗកើនឡើងគ្រោះថ្នាក់ពេក។ ស្គាល់ឧបករណ៍ពីរយ៉ាង ដែលរក្សាផ្ទះរបស់អ្នកមិនឱ្យឆេះ។
+          </p>
+
+          {/* Three sub-sections stacked */}
+          <div className="mt-6 space-y-5">
+            <OverloadCard />
+            <FuseCard />
+            <BreakerCard />
+          </div>
+
+          {/* Comparison strip */}
+          <ComparisonStrip />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Sub 1 · The Danger of the Overload ─────────────────────────────────── */
+function OverloadCard() {
+  return (
+    <article
+      data-testid="gatekeeper-overload"
+      className="rounded-2xl bg-slate-950 border-2 border-yellow-400/60 p-5 sm:p-6 shadow-[0_0_24px_rgba(250,204,21,0.10)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-yellow-400 text-slate-900 flex items-center justify-center">
+          <AlertTriangle className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-400">
+              Part 01 · Danger
+            </span>
+            <span className="font-khmer text-[11px] text-yellow-300">
+              ផ្នែក ០១ · គ្រោះថ្នាក់
+            </span>
+          </div>
+          <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-snug">
+            <span className="block">The Danger of the Overload</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-yellow-300 mt-1 leading-relaxed">
+              គ្រោះថ្នាក់នៃការផ្ទុកលើសចំណុះ (Overload)
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+        Wires get <strong className="text-yellow-300">hot</strong> when too much
+        electricity flows through them. If you plug a kettle, a rice cooker, an
+        iron, and an air-con into one outlet, the wire hidden inside the wall
+        will heat up <strong className="text-orange-300">like a toaster oven</strong> —
+        and start a fire you cannot see until the smoke arrives. We need a{" "}
+        <strong className="text-amber-300">"weak link"</strong> that breaks{" "}
+        <em>safely</em>, before the wall wire burns.
+      </p>
+      <p className="font-khmer text-slate-300 leading-loose mt-3 border-t border-yellow-400/20 pt-3">
+        ខ្សែភ្លើងក្ដៅ នៅពេលដែលអគ្គិសនីច្រើនពេករត់កាត់វា។ ប្រសិនបើអ្នកដោតកំសត់ ឆ្នាំងបាយ ឆ្នាំងគុជ និងម៉ាស៊ីនត្រជាក់ ចូលរន្ធតែមួយ ខ្សែដែលលាក់នៅក្នុងជញ្ជាំងនឹងក្ដៅឡើង{" "}
+        <strong className="text-orange-300">ដូចជាឡដុតនំប័ុង</strong> — ហើយចាប់ផ្ដើមឆេះភ្លើង ដែលអ្នកមើលមិនឃើញរហូតដល់ផ្សែងលេចចេញ។ យើងត្រូវការ{" "}
+        <strong className="text-amber-300">"ខ្សែខ្សោយ"</strong> មួយ ដែលដាច់ដោយ <em>មានសុវត្ថិភាព</em>{" "}
+        មុនពេលខ្សែជញ្ជាំងឆេះ។
+      </p>
+
+      {/* Visual: outlet → hot wire → fire */}
+      <div className="mt-4 rounded-xl bg-slate-900/60 border border-yellow-400/30 p-3">
+        <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm">
+          <Pill icon={Plug} label="One outlet" sub="រន្ធតែមួយ" tone="slate" />
+          <ChevronArrow />
+          <Pill icon={Plug} label="Too many things" sub="របស់ច្រើនពេក" tone="yellow" />
+          <ChevronArrow />
+          <Pill icon={Flame} label="Wire heats up" sub="ខ្សែក្ដៅ" tone="orange" />
+          <ChevronArrow />
+          <Pill icon={Flame} label="FIRE" sub="ឆេះ!" tone="red" />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ── Sub 2 · The Sacrifice — How Fuses Work ─────────────────────────────── */
+function FuseCard() {
+  return (
+    <article
+      data-testid="gatekeeper-fuse"
+      className="rounded-2xl bg-slate-950 border-2 border-orange-400/60 p-5 sm:p-6 shadow-[0_0_24px_rgba(251,146,60,0.12)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-orange-400 text-slate-900 flex items-center justify-center">
+          <Trash2 className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">
+              Part 02 · The Sacrifice
+            </span>
+            <span className="font-khmer text-[11px] text-orange-300">
+              ផ្នែក ០២ · ការលះបង់
+            </span>
+          </div>
+          <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-snug">
+            <span className="block">The Sacrifice — How Fuses Work</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-orange-300 mt-1 leading-relaxed">
+              ការលះបង់ — របៀបដែលហ្វុយស៊ីប (Fuse) ដំណើរការ
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+        A <strong className="text-orange-300">fuse (ហ្វុយស៊ីប)</strong> is just a
+        tiny, incredibly thin piece of wire sealed inside a glass tube. Because
+        the wire inside is so thin, it heats up{" "}
+        <strong className="text-orange-300">much faster</strong> than the big
+        wires hidden in the wall. If too much current flows through the line,
+        that thin wire <strong className="text-red-300">literally melts in half</strong> —
+        snapping the circuit and stopping the electricity dead.
+        It <strong className="text-amber-300">sacrifices itself</strong> to save
+        the building, and must then be{" "}
+        <strong className="text-orange-200">thrown away and replaced</strong>{" "}
+        with a new one.
+      </p>
+      <p className="font-khmer text-slate-300 leading-loose mt-3 border-t border-orange-400/20 pt-3">
+        <strong className="text-orange-300">ហ្វុយស៊ីប (Fuse)</strong> គ្រាន់តែជាបំណែកខ្សែស្ដើងតូច ដែលដាក់នៅខាងក្នុងបំពង់កែវ។ ដោយសារខ្សែខាងក្នុងស្ដើងណាស់ វាក្ដៅឡើង{" "}
+        <strong className="text-orange-300">លឿនជាង</strong> ខ្សែធំៗដែលលាក់នៅក្នុងជញ្ជាំងច្រើន។ ប្រសិនបើចរន្តច្រើនពេករត់កាត់ខ្សែ ខ្សែស្ដើងនោះ{" "}
+        <strong className="text-red-300">រលាយដាច់ជាពីរ</strong> — កាត់សៀគ្វី ហើយបញ្ឈប់អគ្គិសនីភ្លាម។ វា{" "}
+        <strong className="text-amber-300">លះបង់ខ្លួន</strong> ដើម្បីសង្គ្រោះអាគារ ហើយបន្ទាប់មកត្រូវ{" "}
+        <strong className="text-orange-200">បោះចោល និងជំនួស</strong> ដោយ ហ្វុយស៊ីប ថ្មី។
+      </p>
+
+      {/* Inline SVG: a fuse before / after melt */}
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <FuseSvg state="ok" />
+        <FuseSvg state="blown" />
+      </div>
+    </article>
+  );
+}
+
+/* ── Sub 3 · The Smart Switch — How Breakers Work ───────────────────────── */
+function BreakerCard() {
+  return (
+    <article
+      data-testid="gatekeeper-breaker"
+      className="rounded-2xl bg-slate-950 border-2 border-emerald-400/60 p-5 sm:p-6 shadow-[0_0_24px_rgba(52,211,153,0.10)]"
+    >
+      <header className="flex items-start gap-3 mb-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-emerald-400 text-slate-900 flex items-center justify-center">
+          <RotateCcw className="w-5 h-5" strokeWidth={2.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-300">
+              Part 03 · The Smart Switch
+            </span>
+            <span className="font-khmer text-[11px] text-emerald-200">
+              ផ្នែក ០៣ · កុងតាក់ឆ្លាតវៃ
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-200">
+              <Recycle className="w-3 h-3" /> Reusable
+            </span>
+          </div>
+          <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-snug">
+            <span className="block">The Smart Switch — How Circuit Breakers Work</span>
+            <span className="block font-khmer text-base sm:text-lg font-bold text-emerald-200 mt-1 leading-relaxed">
+              កុងតាក់ឆ្លាតវៃ — របៀបដែលឌីស្យុងទ័រ (Circuit Breaker) ដំណើរការ
+            </span>
+          </h3>
+        </div>
+      </header>
+
+      <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+        A <strong className="text-emerald-300">circuit breaker (ឌីស្យុងទ័រ)</strong>{" "}
+        does the <em>exact same job</em> as a fuse — but it is{" "}
+        <strong className="text-emerald-300">reusable</strong>. Inside the
+        switch is either a strip of metal that{" "}
+        <strong className="text-amber-300">bends as it heats up</strong>, or an{" "}
+        <strong className="text-amber-300">electromagnet</strong> that pulls
+        harder when the current spikes. When the strip bends — or the magnet
+        pulls — too far, it physically{" "}
+        <strong className="text-red-300">trips a tiny spring</strong>, throwing
+        the switch into the <strong className="text-rose-300">OFF</strong>{" "}
+        position and cutting the power.
+      </p>
+      <p className="font-khmer text-slate-300 leading-loose mt-3 border-t border-emerald-400/20 pt-3">
+        <strong className="text-emerald-300">ឌីស្យុងទ័រ (Circuit Breaker)</strong>{" "}
+        ធ្វើ <em>ការងារដូចគ្នាបេះបិទ</em> នឹង ហ្វុយស៊ីប — ប៉ុន្តែវា{" "}
+        <strong className="text-emerald-300">អាចប្រើឡើងវិញបាន</strong>។ នៅខាងក្នុងកុងតាក់ មាន ឬជាបន្ទះដែក ដែល{" "}
+        <strong className="text-amber-300">ពត់ ពេលក្ដៅ</strong> ឬជា{" "}
+        <strong className="text-amber-300">មេដែកអគ្គិសនី</strong> ដែលទាញខ្លាំងជាង នៅពេលចរន្តឡើងខ្ពស់ភ្លាមៗ។ ពេលបន្ទះពត់ ឬមេដែកទាញ លើសពីកម្រិតមួយ វា{" "}
+        <strong className="text-red-300">បង្ហើរពនលឺចាស់តូចមួយ</strong> ហើយផ្លាស់កុងតាក់ទៅទីតាំង{" "}
+        <strong className="text-rose-300">OFF (បិទ)</strong> ដោយកាត់ផ្ដាច់ចរន្ត។
+      </p>
+      <p className="text-slate-200 text-sm sm:text-base leading-relaxed mt-3">
+        You don't have to throw it away. You just{" "}
+        <strong className="text-emerald-300">find what caused the overload</strong>,
+        unplug it, and flip the switch back to{" "}
+        <strong className="text-emerald-300">ON</strong>.
+      </p>
+      <p className="font-khmer text-slate-300 leading-loose mt-2">
+        អ្នកមិនបាច់បោះវាចោលទេ។ អ្នកគ្រាន់តែ{" "}
+        <strong className="text-emerald-300">រកមើលអ្វីដែលបណ្តាលឱ្យមានការផ្ទុកលើស</strong>{" "}
+        ដោតវាចេញ ហើយបិទបើកកុងតាក់មកត្រឡប់ទៅ{" "}
+        <strong className="text-emerald-300">ON (បើក)</strong> វិញ។
+      </p>
+
+      {/* Visual: breaker mechanism */}
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <BreakerSvg state="on" />
+        <BreakerSvg state="tripped" />
+      </div>
+    </article>
+  );
+}
+
+/* ── Comparison footer ─────────────────────────────────────────────────── */
+function ComparisonStrip() {
+  return (
+    <div
+      className="mt-6 rounded-2xl bg-slate-950 border-2 border-dashed border-amber-400/40 p-4 sm:p-5"
+      data-testid="gatekeeper-comparison"
+    >
+      <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-amber-300 mb-3 flex flex-wrap items-baseline gap-2">
+        <span>Side by Side</span>
+        <span className="font-khmer text-[11px] text-amber-200 normal-case tracking-normal">ប្រៀបធៀបជិតគ្នា</span>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <CompareCol
+          headEn="Fuse · ហ្វុយស៊ីប"
+          tone="orange"
+          rows={[
+            { en: "Melts permanently", kh: "រលាយជាអចិន្ត្រៃយ៍" },
+            { en: "Single-use · throw away", kh: "ប្រើបានតែម្ដង · បោះចោល" },
+            { en: "Cheap & very fast", kh: "ថោក និងលឿនណាស់" },
+            { en: "Found in older homes & cars", kh: "មាននៅផ្ទះចាស់ៗ និងឡាន" },
+          ]}
+        />
+        <CompareCol
+          headEn="Circuit Breaker · ឌីស្យុងទ័រ"
+          tone="emerald"
+          rows={[
+            { en: "Trips a switch", kh: "រំសាយកុងតាក់" },
+            { en: "Reusable · just flip back ON", kh: "ប្រើឡើងវិញបាន · គ្រាន់តែបើកវិញ" },
+            { en: "Slightly slower than fuse", kh: "យឺតបន្តិចជាង ហ្វុយស៊ីប" },
+            { en: "Standard in modern wiring", kh: "ស្ដង់ដារក្នុងខ្សែភ្លើងទំនើប" },
+          ]}
+        />
+      </div>
+      <p className="mt-4 text-xs sm:text-sm text-slate-400 italic leading-relaxed">
+        Both do the same heroic job: they break before the wall wire does.
+      </p>
+      <p className="mt-1 font-khmer text-xs sm:text-sm text-slate-400 italic leading-loose">
+        ទាំងពីរធ្វើការងារវីរបុរសដូចគ្នា៖ ពួកវាដាច់ មុនពេលខ្សែជញ្ជាំងដាច់។
+      </p>
+    </div>
+  );
+}
+
+/* ── Tiny bilingual stat column ────────────────────────────────────────── */
+function CompareCol({
+  headEn,
+  tone,
+  rows,
+}: {
+  headEn: string;
+  tone: "orange" | "emerald";
+  rows: { en: string; kh: string }[];
+}) {
+  const styles =
+    tone === "orange"
+      ? "border-orange-400/50 bg-orange-500/5"
+      : "border-emerald-400/50 bg-emerald-500/5";
+  const headColor = tone === "orange" ? "text-orange-300" : "text-emerald-300";
+  return (
+    <div className={`rounded-xl border ${styles} p-3 sm:p-4`}>
+      <div className={`text-sm font-display font-bold mb-2 ${headColor}`}>
+        {headEn}
+      </div>
+      <ul className="space-y-1.5">
+        {rows.map((r, i) => (
+          <li key={i} className="text-xs sm:text-sm">
+            <div className="text-slate-200">{r.en}</div>
+            <div className="font-khmer text-slate-400 leading-relaxed mt-0.5">
+              {r.kh}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ── Tiny pill for the danger flow ─────────────────────────────────────── */
+function Pill({
+  icon: Icon,
+  label,
+  sub,
+  tone,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  sub: string;
+  tone: "slate" | "yellow" | "orange" | "red";
+}) {
+  const styles = {
+    slate: "bg-slate-800 border-slate-600 text-slate-200",
+    yellow: "bg-yellow-500/15 border-yellow-400/60 text-yellow-200",
+    orange: "bg-orange-500/15 border-orange-400/60 text-orange-200",
+    red: "bg-red-500/20 border-red-400/70 text-red-200",
+  }[tone];
+  return (
+    <div
+      className={`flex flex-col items-center gap-1 rounded-lg border ${styles} px-3 py-2 min-w-[88px]`}
+    >
+      <Icon className="w-4 h-4" />
+      <div className="text-[11px] font-bold leading-tight text-center">
+        {label}
+      </div>
+      <div className="font-khmer text-[10px] opacity-80 leading-tight text-center">
+        {sub}
+      </div>
+    </div>
+  );
+}
+
+function ChevronArrow() {
+  return (
+    <span className="text-amber-400 text-lg leading-none" aria-hidden>
+      ▸
+    </span>
+  );
+}
+
+/* ── Inline fuse SVG (intact vs blown) ─────────────────────────────────── */
+function FuseSvg({ state }: { state: "ok" | "blown" }) {
+  const blown = state === "blown";
+  return (
+    <div
+      data-testid={`fuse-svg-${state}`}
+      className={`rounded-xl border ${
+        blown
+          ? "border-red-400/60 bg-red-950/30"
+          : "border-emerald-400/40 bg-emerald-950/20"
+      } p-3`}
+    >
+      <div className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+        <span className={blown ? "text-red-300" : "text-emerald-300"}>
+          {blown ? "Blown · ដាច់ហើយ" : "Intact · នៅល្អ"}
+        </span>
+      </div>
+      <svg viewBox="0 0 240 60" className="w-full h-auto">
+        {/* End caps */}
+        <rect x="2" y="18" width="22" height="24" fill="#94a3b8" rx="2" />
+        <rect x="216" y="18" width="22" height="24" fill="#94a3b8" rx="2" />
+        {/* Glass tube */}
+        <rect
+          x="24"
+          y="14"
+          width="192"
+          height="32"
+          rx="6"
+          fill="rgba(148,163,184,0.08)"
+          stroke="rgba(148,163,184,0.4)"
+        />
+        {/* Thin filament wire */}
+        {blown ? (
+          <>
+            <line x1="24" y1="30" x2="108" y2="30" stroke="#f97316" strokeWidth="1.6" />
+            <line x1="132" y1="30" x2="216" y2="30" stroke="#f97316" strokeWidth="1.6" />
+            {/* Melted gap */}
+            <circle cx="118" cy="30" r="3" fill="#fbbf24" />
+            <circle cx="122" cy="30" r="3" fill="#fbbf24" />
+            <text x="120" y="11" textAnchor="middle" fontSize="9" fill="#fca5a5" fontWeight="700">
+              MELTED ✕
+            </text>
+          </>
+        ) : (
+          <>
+            <line x1="24" y1="30" x2="216" y2="30" stroke="#34d399" strokeWidth="1.6" />
+            <text x="120" y="11" textAnchor="middle" fontSize="9" fill="#86efac" fontWeight="700">
+              current flowing →
+            </text>
+          </>
+        )}
+      </svg>
+      <div className="text-[11px] text-slate-400 mt-1">
+        {blown
+          ? "Throw away & replace · បោះចោល និងជំនួស"
+          : "Fuse OK · ហ្វុយស៊ីបនៅល្អ"}
+      </div>
+    </div>
+  );
+}
+
+/* ── Inline breaker SVG (ON vs tripped) ────────────────────────────────── */
+function BreakerSvg({ state }: { state: "on" | "tripped" }) {
+  const tripped = state === "tripped";
+  return (
+    <div
+      data-testid={`breaker-svg-${state}`}
+      className={`rounded-xl border ${
+        tripped
+          ? "border-red-400/60 bg-red-950/30"
+          : "border-emerald-400/50 bg-emerald-950/20"
+      } p-3`}
+    >
+      <div className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+        <span className={tripped ? "text-red-300" : "text-emerald-300"}>
+          {tripped ? "Tripped · OFF · បិទ" : "Closed · ON · បើក"}
+        </span>
+      </div>
+      <svg viewBox="0 0 200 110" className="w-full h-auto">
+        {/* Body */}
+        <rect x="20" y="10" width="160" height="90" rx="8" fill="#0f172a" stroke="#475569" />
+        {/* Wires in/out */}
+        <line x1="0" y1="55" x2="20" y2="55" stroke="#94a3b8" strokeWidth="3" />
+        <line x1="180" y1="55" x2="200" y2="55" stroke="#94a3b8" strokeWidth="3" />
+
+        {/* Lever / switch */}
+        <g transform={tripped ? "rotate(35 100 60)" : "rotate(-25 100 60)"}>
+          <rect x="92" y="22" width="16" height="40" rx="3" fill={tripped ? "#fb7185" : "#34d399"} />
+          <text x="100" y="18" textAnchor="middle" fontSize="9" fontWeight="800" fill={tripped ? "#fda4af" : "#86efac"}>
+            {tripped ? "OFF" : "ON"}
+          </text>
+        </g>
+        {/* Pivot */}
+        <circle cx="100" cy="60" r="4" fill="#fbbf24" />
+
+        {/* Bimetal strip + magnet hint */}
+        <g>
+          <text x="30" y="92" fontSize="8" fill="#fbbf24" fontWeight="700">
+            ⌇ bimetal
+          </text>
+          <text x="120" y="92" fontSize="8" fill="#fbbf24" fontWeight="700">
+            ◉ magnet
+          </text>
+        </g>
+        {/* Spark when tripped */}
+        {tripped && (
+          <text x="100" y="8" textAnchor="middle" fontSize="11" fill="#fbbf24" fontWeight="800">
+            ⚡ SNAP!
+          </text>
+        )}
+      </svg>
+      <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+        {tripped ? (
+          <>
+            <Magnet className="w-3 h-3 text-amber-400" />
+            <span>Spring tripped — flip back to ON</span>
+          </>
+        ) : (
+          <>
+            <Power className="w-3 h-3 text-emerald-400" />
+            <span>Power flowing safely · ចរន្តហូរ​ដោយសុវត្ថិភាព</span>
+          </>
+        )}
+      </div>
     </div>
   );
 }
