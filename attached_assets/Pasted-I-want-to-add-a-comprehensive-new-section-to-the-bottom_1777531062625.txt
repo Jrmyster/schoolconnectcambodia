@@ -1,0 +1,45 @@
+I want to add a comprehensive new section to the bottom of the 'Botany: The Green Engine of Earth' page called 'Practical Botany: Stewards of the Land (រុក្ខសាស្ត្រអនុវត្ត៖ អ្នកថែរក្សាផែនដី)'.
+
+Please implement this using our established 'Nature' aesthetic (earthy greens, soft browns, clean typography, and bilingual headings):
+
+1. Section 1: The Basics of Gardening (មូលដ្ឋានគ្រឹះនៃការដាំដុះ)
+
+Explain that gardening is just applied chemistry and biology. Emphasize three pillars:
+
+Soil: It’s not just dirt; it’s a living ecosystem of microbes.
+
+Sunlight: The energy source for photosynthesis.
+
+Water: The transport system for nutrients.
+
+2. Section 2: Planting & Caring for Trees (ការដាំ និងការថែរក្សាដើមឈើ)
+
+Provide a step-by-step guide: Digging a hole twice as wide as the root ball (not just deep), the importance of not burying the trunk too deep, and the critical need for regular watering during the first dry season until the taproot reaches deep groundwater.
+
+Explain 'Mulching' (using dry leaves around the base to trap moisture and protect the soil from the baking sun).
+
+3. Section 3: Trees of Cambodia (ដើមឈើនៅកម្ពុជា)
+
+Create small display cards for 3-4 important local trees:
+
+Rumduol (រំដួល): The national flower, known for its fragrant scent.
+
+Moringa (ម្រុំ): A fast-growing 'miracle tree' where the leaves are packed with vitamins and protein.
+
+Beng (បេង): A highly prized, beautiful hardwood tree that is vulnerable due to logging.
+
+Mango (ស្វាយ): A vital shade and food-producing tree for village life.
+
+4. Section 4: The Deforestation Crisis (វិបត្តិនៃការកាប់បំផ្លាញព្រៃឈើ)
+
+Explain the consequences of cutting down forests without replanting:
+
+Erosion: Without tree roots holding it together, fertile topsoil washes into the river during the rainy season.
+
+Drought & Heat: Trees sweat moisture into the air to create rain. Without them, the land bakes.
+
+Loss of Habitat: The destruction of the complex 'Web of Life' for local animals.
+
+5. Formatting & UX:
+
+Ensure all main headings, plant names, and key concepts are strictly bilingual (English/Khmer). Use clean icons (like a shovel, a watering can, and a tree stump) to make the text highly scannable.

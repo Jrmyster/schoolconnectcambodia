@@ -31,6 +31,7 @@ import {
   Wind,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { PracticalBotany } from "@/pages/sections/PracticalBotany";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  BIO-02 · Botany: The Green Engine of Earth
@@ -516,6 +517,9 @@ export function BotanyPage() {
             </>
           )}
         </div>
+
+        {/* Practical Botany — always visible at the bottom */}
+        <PracticalBotany k={k} t={t} />
 
         {/* Closing */}
         <div
