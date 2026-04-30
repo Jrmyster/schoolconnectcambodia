@@ -21,6 +21,7 @@ import {
   Activity,
   Layers,
   Binary,
+  Gauge,
 } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -1102,6 +1103,9 @@ function MacroSection() {
           </div>
         </ChalkCard>
       </div>
+
+      {/* Reaction Orders — sub-section beneath the Kinetics intro */}
+      <ReactionOrders />
     </Panel>
   );
 }
@@ -1541,6 +1545,313 @@ function ChalkboardBackdrop() {
         }}
       />
     </>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Reaction Orders sub-section (lives inside Section 5 · Macro)           */
+/*    លំដាប់ប្រតិកម្ម៖ ល្បឿនកំណត់នៃគីមីសាស្ត្រ                                      */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+type OrderAccent = "slate" | "sky" | "amber";
+
+const ORDER_ACCENTS: Record<
+  OrderAccent,
+  {
+    border: string;
+    badge: string;
+    badgeText: string;
+    chipBg: string;
+    chipText: string;
+    glow: string;
+    plot: string;
+  }
+> = {
+  slate: {
+    border: "border-slate-400/40",
+    badge: "bg-slate-700/60 ring-1 ring-slate-300/40",
+    badgeText: "text-slate-100",
+    chipBg: "bg-slate-800/60",
+    chipText: "text-slate-200",
+    glow: "shadow-[0_0_24px_-6px_rgba(148,163,184,0.45)]",
+    plot: "stroke-slate-200",
+  },
+  sky: {
+    border: "border-sky-400/40",
+    badge: "bg-sky-700/60 ring-1 ring-sky-300/40",
+    badgeText: "text-sky-100",
+    chipBg: "bg-sky-900/40",
+    chipText: "text-sky-200",
+    glow: "shadow-[0_0_24px_-6px_rgba(56,189,248,0.45)]",
+    plot: "stroke-sky-200",
+  },
+  amber: {
+    border: "border-amber-400/40",
+    badge: "bg-amber-700/60 ring-1 ring-amber-300/40",
+    badgeText: "text-amber-100",
+    chipBg: "bg-amber-900/40",
+    chipText: "text-amber-200",
+    glow: "shadow-[0_0_24px_-6px_rgba(251,191,36,0.45)]",
+    plot: "stroke-amber-200",
+  },
+};
+
+/* Tiny chalk-style mini-graph of [A] vs t for each order. */
+function OrderPlot({
+  shape,
+  className,
+  label,
+}: {
+  shape: "linear-down" | "exp-decay" | "second-decay";
+  className: string;
+  label: string;
+}) {
+  const path =
+    shape === "linear-down"
+      ? "M 12 12 L 116 56"
+      : shape === "exp-decay"
+      ? "M 12 12 C 32 22, 56 46, 116 56"
+      : "M 12 12 C 22 18, 30 50, 116 56";
+  return (
+    <svg
+      viewBox="0 0 128 64"
+      role="img"
+      aria-label={label}
+      className="w-full h-14"
+    >
+      {/* dashed axes */}
+      <line x1="12" y1="56" x2="120" y2="56" className="stroke-emerald-100/30" strokeDasharray="2 3" strokeWidth="1" />
+      <line x1="12" y1="8" x2="12" y2="56" className="stroke-emerald-100/30" strokeDasharray="2 3" strokeWidth="1" />
+      {/* axis labels */}
+      <text x="6" y="11" className="fill-emerald-100/60" fontSize="6" fontFamily="monospace">[A]</text>
+      <text x="118" y="62" className="fill-emerald-100/60" fontSize="6" fontFamily="monospace">t</text>
+      {/* curve */}
+      <path d={path} fill="none" strokeWidth="2" className={className} strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OrderCard({
+  n,
+  accent,
+  enTitle,
+  khTitle,
+  enExplain,
+  khExplain,
+  rateLaw,
+  enHalf,
+  khHalf,
+  enGraph,
+  khGraph,
+  plotShape,
+  plotLabelEn,
+  plotLabelKh,
+}: {
+  n: 0 | 1 | 2;
+  accent: OrderAccent;
+  enTitle: string;
+  khTitle: string;
+  enExplain: string;
+  khExplain: string;
+  rateLaw: string;
+  enHalf: string;
+  khHalf: string;
+  enGraph: string;
+  khGraph: string;
+  plotShape: "linear-down" | "exp-decay" | "second-decay";
+  plotLabelEn: string;
+  plotLabelKh: string;
+}) {
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  const a = ORDER_ACCENTS[accent];
+  return (
+    <article
+      className={`relative rounded-2xl border ${a.border} bg-emerald-950/55 ring-1 ring-emerald-700/30 p-5 ${a.glow} flex flex-col`}
+      data-testid={`order-card-${n}`}
+    >
+      {/* Header: numeric badge + bilingual title */}
+      <header className="flex items-start gap-3 mb-3">
+        <span
+          className={`inline-flex items-center justify-center w-10 h-10 rounded-xl font-mono font-bold text-lg ${a.badge} ${a.badgeText}`}
+          aria-hidden="true"
+        >
+          {n}
+        </span>
+        <div className="flex-1 min-w-0">
+          <h4 className={`font-bold text-white text-[15px] leading-tight ${kh ? "font-khmer" : ""}`}>
+            {kh ? khTitle : enTitle}
+          </h4>
+          <p className={`text-[11px] mt-0.5 font-mono ${a.chipText} opacity-90`}>
+            {kh ? enTitle : khTitle}
+          </p>
+        </div>
+      </header>
+
+      {/* Explanation */}
+      <p className={`text-sm text-emerald-50/90 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {kh ? khExplain : enExplain}
+      </p>
+
+      {/* Rate Law */}
+      <section className={`mt-3 rounded-lg ${a.chipBg} border border-emerald-700/40 p-3`}>
+        <p className={`text-[10.5px] font-mono uppercase tracking-[0.2em] mb-1.5 ${a.chipText} ${kh ? "font-khmer normal-case tracking-normal text-[11.5px]" : ""}`}>
+          {kh ? "ច្បាប់ល្បឿន" : "Rate Law"}
+        </p>
+        <div className="text-center bg-black/30 rounded-md py-2 px-2 overflow-x-auto" data-testid={`order-card-${n}-rate`}>
+          <BlockMath math={rateLaw} />
+        </div>
+      </section>
+
+      {/* Half-Life */}
+      <section className={`mt-3 rounded-lg ${a.chipBg} border border-emerald-700/40 p-3`}>
+        <p className={`text-[10.5px] font-mono uppercase tracking-[0.2em] mb-1.5 inline-flex items-center gap-1.5 ${a.chipText} ${kh ? "font-khmer normal-case tracking-normal text-[11.5px]" : ""}`}>
+          <Timer className="w-3 h-3" aria-hidden="true" />
+          {kh ? "ពាក់កណ្ដាលជីវិត" : "Half-Life"}
+        </p>
+        <p className={`text-sm text-emerald-50/90 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {kh ? khHalf : enHalf}
+        </p>
+      </section>
+
+      {/* Graph Shape with mini-plot */}
+      <section className={`mt-3 rounded-lg ${a.chipBg} border border-emerald-700/40 p-3 mt-auto`}>
+        <p className={`text-[10.5px] font-mono uppercase tracking-[0.2em] mb-1.5 inline-flex items-center gap-1.5 ${a.chipText} ${kh ? "font-khmer normal-case tracking-normal text-[11.5px]" : ""}`}>
+          <Activity className="w-3 h-3" aria-hidden="true" />
+          {kh ? "រូបរាងក្រាហ្វ" : "Graph Shape"}
+        </p>
+        <div className="rounded-md bg-black/30 px-2 py-1.5 mb-2">
+          <OrderPlot shape={plotShape} className={a.plot} label={kh ? plotLabelKh : plotLabelEn} />
+        </div>
+        <p className={`text-[12.5px] text-emerald-50/85 ${kh ? "font-khmer leading-loose" : "leading-snug"}`}>
+          {kh ? khGraph : enGraph}
+        </p>
+      </section>
+    </article>
+  );
+}
+
+function ReactionOrders() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  const orders = [
+    {
+      n: 0 as const,
+      accent: "slate" as const,
+      enTitle: "Zero-Order",
+      khTitle: "លំដាប់សូន្យ",
+      enExplain:
+        "The rate is completely independent of the concentration. Adding more reactant does not speed it up.",
+      khExplain:
+        "ល្បឿនមិនអាស្រ័យលើកំហាប់ទាល់តែសោះ។ ការបន្ថែមសារធាតុប្រតិកម្មច្រើនទៀត មិនធ្វើឱ្យវាលឿនឡើងឡើយ។",
+      rateLaw: "\\text{Rate} = k",
+      enHalf: "Decreases as the concentration drops.",
+      khHalf: "ថយចុះនៅពេលកំហាប់ធ្លាក់ចុះ។",
+      enGraph: "A straight line sloping down ([A] vs. Time).",
+      khGraph: "បន្ទាត់ត្រង់ទេរចុះ ([A] ធៀបនឹងពេលវេលា)។",
+      plotShape: "linear-down" as const,
+      plotLabelEn: "Zero-order: [A] decreases linearly with time.",
+      plotLabelKh: "លំដាប់សូន្យ៖ [A] ធ្លាក់ចុះតាមបន្ទាត់ត្រង់។",
+    },
+    {
+      n: 1 as const,
+      accent: "sky" as const,
+      enTitle: "First-Order",
+      khTitle: "លំដាប់ទីមួយ",
+      enExplain:
+        "The rate depends linearly on one reactant. If you double the reactant, the rate doubles.",
+      khExplain:
+        "ល្បឿនអាស្រ័យតាមបន្ទាត់ត្រង់លើសារធាតុប្រតិកម្មមួយ។ បើអ្នកបង្កើនកំហាប់ទ្វេដង ល្បឿនក៏ទ្វេដងដែរ។",
+      rateLaw: "\\text{Rate} = k[A]",
+      enHalf:
+        "Constant. It takes the exact same time to go from 100% to 50% as it does to go from 50% to 25%. Radioactive decay works this way.",
+      khHalf:
+        "ថេរ។ ត្រូវការពេលដូចគ្នាបេះបិទដើម្បីធ្លាក់ពី 100% ទៅ 50% ដូចពី 50% ទៅ 25%។ ការពុកផុយវិទ្យុសកម្មកើតឡើងបែបនេះ។",
+      enGraph: "A curve that flattens out ([A] vs. Time), but a straight line for ln[A] vs. Time.",
+      khGraph: "ខ្សែកោងដែលរលូនចេញ ([A] ធៀបនឹងពេលវេលា) ប៉ុន្តែបន្ទាត់ត្រង់សម្រាប់ ln[A] ធៀបនឹងពេលវេលា។",
+      plotShape: "exp-decay" as const,
+      plotLabelEn: "First-order: [A] decays exponentially.",
+      plotLabelKh: "លំដាប់ទីមួយ៖ [A] ពុកផុយតាមអ៊ិចស្ប៉ូណង់ស្យែល។",
+    },
+    {
+      n: 2 as const,
+      accent: "amber" as const,
+      enTitle: "Second-Order",
+      khTitle: "លំដាប់ទីពីរ",
+      enExplain:
+        "The rate depends on the square of one reactant, or the product of two. Doubling the reactant quadruples the speed!",
+      khExplain:
+        "ល្បឿនអាស្រ័យលើការេនៃសារធាតុប្រតិកម្មមួយ ឬផលគុណនៃពីរ។ ការទ្វេដងសារធាតុ បង្កើនល្បឿនបួនដង!",
+      rateLaw: "\\text{Rate} = k[A]^{2}",
+      enHalf:
+        "Increases as the concentration drops. The reaction slows down drastically over time.",
+      khHalf:
+        "កើនឡើងនៅពេលកំហាប់ធ្លាក់ចុះ។ ប្រតិកម្មនឹងយឺតយ៉ាងខ្លាំងតាមពេលវេលា។",
+      enGraph:
+        "A steep curve ([A] vs. Time), but a straight line for 1/[A] vs. Time.",
+      khGraph:
+        "ខ្សែកោងចោតខ្លាំង ([A] ធៀបនឹងពេលវេលា) ប៉ុន្តែបន្ទាត់ត្រង់សម្រាប់ 1/[A] ធៀបនឹងពេលវេលា។",
+      plotShape: "second-decay" as const,
+      plotLabelEn: "Second-order: [A] drops fast, then crawls.",
+      plotLabelKh: "លំដាប់ទីពីរ៖ [A] ធ្លាក់លឿន រួចវារយឺត។",
+    },
+  ];
+
+  return (
+    <section
+      className="mt-7 rounded-2xl border border-emerald-700/40 bg-emerald-950/40 p-5 sm:p-6"
+      data-testid="reaction-orders"
+      aria-labelledby="reaction-orders-heading"
+    >
+      {/* Header */}
+      <div className="flex items-start gap-3 mb-3">
+        <span
+          className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-rose-800/60 text-rose-100 ring-1 ring-rose-300/30 flex-shrink-0"
+          aria-hidden="true"
+        >
+          <Gauge className="w-5 h-5" />
+        </span>
+        <div className="min-w-0">
+          <p className={`text-[10px] font-mono uppercase tracking-[0.22em] text-rose-200/80 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-[11.5px]" : ""}`}>
+            {kh ? "ការសិក្សាស៊ីជម្រៅគីនេទិច" : "Kinetics deep-dive"}
+          </p>
+          <h3
+            id="reaction-orders-heading"
+            className={`font-bold text-white text-lg sm:text-xl leading-tight ${kh ? "font-khmer" : ""}`}
+            style={{ textShadow: "0 0 10px rgba(255,255,255,0.10)" }}
+          >
+            {kh
+              ? "លំដាប់ប្រតិកម្ម៖ ល្បឿនកំណត់នៃគីមីសាស្ត្រ"
+              : "Reaction Orders: The Speed Limit of Chemistry"}
+          </h3>
+          <p className={`text-[12px] text-emerald-100/70 mt-0.5 ${kh ? "font-khmer" : "font-mono"}`}>
+            {kh
+              ? "Reaction Orders: The Speed Limit of Chemistry"
+              : "លំដាប់ប្រតិកម្ម៖ ល្បឿនកំណត់នៃគីមីសាស្ត្រ"}
+          </p>
+        </div>
+      </div>
+
+      {/* Intro */}
+      <p
+        className={`text-sm text-emerald-50/85 max-w-3xl mb-5 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+        data-testid="reaction-orders-intro"
+      >
+        {t(
+          "A reaction order tells us exactly how the concentration of our ingredients affects the speed of the reaction. Sometimes adding more chemicals speeds things up, and sometimes it does nothing at all.",
+          "លំដាប់ប្រតិកម្មប្រាប់យើងយ៉ាងច្បាស់ថា កំហាប់នៃគ្រឿងផ្សំរបស់យើងប៉ះពាល់ដល់ល្បឿននៃប្រតិកម្មយ៉ាងណា។ ពេលខ្លះការបន្ថែមសារធាតុគីមីច្រើនធ្វើឱ្យវាលឿនឡើង ហើយពេលខ្លះវាមិនធ្វើអ្វីសោះ។",
+        )}
+      </p>
+
+      {/* Cards grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4" data-testid="reaction-orders-grid">
+        {orders.map((o) => (
+          <OrderCard key={o.n} {...o} />
+        ))}
+      </div>
+    </section>
   );
 }
 
