@@ -113,6 +113,7 @@ export function LogarithmsPage() {
 
         {/* Sections */}
         <SectionHowMany kh={kh} t={t} />
+        <SectionRules kh={kh} t={t} />
         <SectionTamingInfinity kh={kh} t={t} />
         <SectionNaturalLog kh={kh} t={t} />
 
@@ -683,5 +684,289 @@ function SectionHeader({
       <Ruler className="w-4 h-4 text-slate-400 ml-1" />
       <div className="flex-1 border-t border-dashed border-slate-300" />
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 01b — The 7 Rules of Logarithms
+//                វិធានទាំង ៧ នៃលោការីត
+//
+//  Dark indigo "chalkboard" cards rendering each rule as a color-tinted KaTeX
+//  formula (M = indigo, N = rose, k = amber, special results = emerald).
+// ════════════════════════════════════════════════════════════════════════════
+
+// KaTeX-friendly hex tints for equation variables.
+const RULE_M_COLOR = "#a5b4fc"; // indigo-300 — first number  M
+const RULE_N_COLOR = "#fda4af"; // rose-300   — second number N
+const RULE_K_COLOR = "#fbbf24"; // amber-400  — exponent / scalar k
+const RULE_RES_COLOR = "#86efac"; // emerald-300 — special results (0, 1, k)
+
+const M_ = `\\textcolor{${RULE_M_COLOR}}{M}`;
+const N_ = `\\textcolor{${RULE_N_COLOR}}{N}`;
+const K_ = `\\textcolor{${RULE_K_COLOR}}{k}`;
+
+function RuleCard({
+  n,
+  enTitle,
+  khTitle,
+  eq,
+  enHint,
+  khHint,
+  k,
+  featured = false,
+}: {
+  n: number;
+  enTitle: string;
+  khTitle: string;
+  eq: string;
+  enHint: string;
+  khHint: string;
+  k: boolean;
+  featured?: boolean;
+}) {
+  return (
+    <div
+      className={`relative rounded-xl border ${
+        featured
+          ? "border-emerald-500/60 bg-gradient-to-br from-indigo-950 via-slate-900 to-emerald-950 shadow-lg p-4 sm:p-5"
+          : "border-indigo-800/70 bg-indigo-950 p-4"
+      }`}
+      data-testid={`rule-card-${n}`}
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <span
+          className={`inline-flex items-center justify-center min-w-[2rem] h-6 px-1.5 rounded-md font-mono font-bold text-[11px] ${
+            featured
+              ? "bg-emerald-500/15 text-emerald-200 border border-emerald-400/50"
+              : "bg-indigo-500/15 text-indigo-200 border border-indigo-400/50"
+          }`}
+          aria-hidden="true"
+        >
+          R{n}
+        </span>
+        <h3
+          className={`text-sm sm:text-[15px] font-bold text-indigo-50 ${k ? "font-khmer" : ""}`}
+        >
+          {k ? khTitle : enTitle}
+        </h3>
+      </div>
+
+      <div
+        className={`text-center bg-black/30 rounded-md border border-indigo-900/60 my-2 overflow-x-auto ${
+          featured ? "py-3 px-2" : "py-2 px-2"
+        }`}
+      >
+        <BlockMath math={eq} />
+      </div>
+
+      <p
+        className={`text-[11.5px] text-indigo-200/85 mt-2 ${k ? "font-khmer leading-loose" : "leading-snug"}`}
+      >
+        {k ? khHint : enHint}
+      </p>
+    </div>
+  );
+}
+
+function SectionRules({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  const rules = [
+    {
+      n: 1,
+      en: "Product Rule",
+      kh: "វិធានផលគុណ",
+      eq: `\\log_b(${M_} \\cdot ${N_}) = \\log_b ${M_} + \\log_b ${N_}`,
+      enHint: "A log of a product splits into a sum of logs.",
+      khHint: "លោការីតនៃផលគុណ បំបែកទៅជាផលបូកនៃលោការីត។",
+    },
+    {
+      n: 2,
+      en: "Quotient Rule",
+      kh: "វិធានផលចែក",
+      eq: `\\log_b\\!\\left(\\dfrac{${M_}}{${N_}}\\right) = \\log_b ${M_} - \\log_b ${N_}`,
+      enHint: "A log of a quotient splits into a difference of logs.",
+      khHint: "លោការីតនៃផលចែក បំបែកទៅជាផលដកនៃលោការីត។",
+    },
+    {
+      n: 3,
+      en: "Power Rule",
+      kh: "វិធានស្វ័យគុណ",
+      eq: `\\log_b\\!\\left(${M_}^{${K_}}\\right) = ${K_} \\cdot \\log_b ${M_}`,
+      enHint: "An exponent inside the log slides out in front as a multiplier.",
+      khHint: "ស្វ័យគុណនៅខាងក្នុងលោការីត អាចរំកិលចេញមកខាងមុខជាគុណការី។",
+    },
+    {
+      n: 4,
+      en: "Zero Rule",
+      kh: "វិធានសូន្យ",
+      eq: `\\log_b(1) = \\textcolor{${RULE_RES_COLOR}}{0}`,
+      enHint: "Any base raised to the 0 power equals 1, so the log of 1 is always 0.",
+      khHint: "គោលណាក៏ដោយ លើកស្វ័យគុណ 0 ស្មើ 1 ដូច្នេះលោការីតនៃ 1 តែងតែស្មើ 0។",
+    },
+    {
+      n: 5,
+      en: "Identity Rule",
+      kh: "វិធានឯកតា",
+      eq: `\\log_b(b) = \\textcolor{${RULE_RES_COLOR}}{1}`,
+      enHint: "A base raised to the 1st power equals itself, so the log of the base is 1.",
+      khHint: "គោលលើកស្វ័យគុណ 1 ស្មើនឹងខ្លួនវា ដូច្នេះលោការីតនៃគោល គឺស្មើ 1។",
+    },
+    {
+      n: 6,
+      en: "Power of Base",
+      kh: "ស្វ័យគុណនៃគោល",
+      eq: `\\log_b\\!\\left(b^{${K_}}\\right) = \\textcolor{${RULE_RES_COLOR}}{${K_}}`,
+      enHint: "If the argument is the base raised to a power, the log just hands that power back.",
+      khHint: "ប្រសិនបើអាគុយម៉ង់គឺគោលលើកស្វ័យគុណ លោការីតគ្រាន់តែប្រគល់ស្វ័យគុណនោះមកវិញ។",
+    },
+    {
+      n: 7,
+      en: "Base to Log Power",
+      kh: "គោលស្វ័យគុណលោការីត",
+      eq: `b^{\\log_b(${K_})} = \\textcolor{${RULE_RES_COLOR}}{${K_}}`,
+      enHint: "Exponent and log are perfect inverses — they cancel each other cleanly, leaving only k.",
+      khHint: "អិចស្ប៉ូណង់សយល និងលោការីត ជាច្រាសគ្នាយ៉ាងពេញលេញ — ពួកវាលុបគ្នាចេញយ៉ាងស្អាត ទុកនៅសល់តែ k ប៉ុណ្ណោះ។",
+    },
+  ];
+
+  return (
+    <section className="mb-10" data-testid="section-rules">
+      <SectionHeader
+        spec="01b"
+        en="The 7 Rules of Logarithms"
+        kh="វិធានទាំង ៧ នៃលោការីត"
+        kh_={kh}
+      />
+
+      <div
+        className="relative rounded-2xl border-2 border-indigo-200 p-5 sm:p-7 shadow-sm"
+        style={CARD_BG}
+      >
+        <CornerMarks subtle />
+
+        {/* Constraints callout */}
+        <div
+          className="rounded-xl border-2 border-amber-300 bg-amber-50/80 p-4 mb-5 flex items-start gap-3"
+          data-testid="rules-constraints"
+        >
+          <Lightbulb className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <div
+            className={`text-sm text-amber-900 flex-1 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            <strong className={kh ? "" : "font-bold"}>
+              {t("Constraints: ", "លក្ខខណ្ឌ ៖ ")}
+            </strong>
+            {t(
+              "For all rules below, the base ",
+              "សម្រាប់រាល់វិធានខាងក្រោម គោល "
+            )}
+            <InlineMath math="b > 0" />
+            {t(" and ", " និង ")}
+            <InlineMath math="b \neq 1" />
+            {t(". The numbers ", "។ លេខ ")}
+            <InlineMath math="M" />
+            {t(" and ", " និង ")}
+            <InlineMath math="N" />
+            {t(
+              " must be positive real numbers (",
+              " ត្រូវតែជាចំនួនពិតវិជ្ជមាន ("
+            )}
+            <InlineMath math="M > 0,\ N > 0" />
+            {t("), and ", ") ហើយ ")}
+            <InlineMath math="k" />
+            {t(
+              " is any real number — except in Rule 7, where ",
+              " គឺជាចំនួនពិតណាមួយ — លើកលែងតែនៅវិធានទី ៧ ដែល "
+            )}
+            <InlineMath math="k > 0" />
+            {t(
+              " (since there it sits inside a logarithm).",
+              " (ព្រោះនៅកន្លែងនោះ វាស្ថិតនៅខាងក្នុងលោការីត)។"
+            )}
+          </div>
+        </div>
+
+        {/* Rules grid (1 – 6) */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
+          data-testid="rules-grid"
+        >
+          {rules.slice(0, 6).map((r) => (
+            <RuleCard
+              key={r.n}
+              n={r.n}
+              enTitle={r.en}
+              khTitle={r.kh}
+              eq={r.eq}
+              enHint={r.enHint}
+              khHint={r.khHint}
+              k={kh}
+            />
+          ))}
+        </div>
+
+        {/* Rule 7 — featured (the inverse identity) */}
+        <div className="mt-4">
+          <RuleCard
+            n={rules[6].n}
+            enTitle={rules[6].en}
+            khTitle={rules[6].kh}
+            eq={rules[6].eq}
+            enHint={rules[6].enHint}
+            khHint={rules[6].khHint}
+            k={kh}
+            featured
+          />
+        </div>
+
+        {/* Colour legend */}
+        <div
+          className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-slate-600 ${kh ? "font-khmer leading-loose" : "font-mono"}`}
+          data-testid="rules-legend"
+        >
+          <span>{t("Colour key: ", "កូដពណ៌ ៖ ")}</span>
+          <span className="inline-flex items-center gap-1">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-sm"
+              style={{ backgroundColor: RULE_M_COLOR }}
+              aria-hidden="true"
+            />
+            <InlineMath math="M" />
+            <span>= {t("first number", "លេខទីមួយ")}</span>
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-sm"
+              style={{ backgroundColor: RULE_N_COLOR }}
+              aria-hidden="true"
+            />
+            <InlineMath math="N" />
+            <span>= {t("second number", "លេខទីពីរ")}</span>
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-sm"
+              style={{ backgroundColor: RULE_K_COLOR }}
+              aria-hidden="true"
+            />
+            <InlineMath math="k" />
+            <span>= {t("exponent", "ស្វ័យគុណ")}</span>
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-sm"
+              style={{ backgroundColor: RULE_RES_COLOR }}
+              aria-hidden="true"
+            />
+            <span>{t("special result", "លទ្ធផលពិសេស")}</span>
+          </span>
+        </div>
+      </div>
+    </section>
   );
 }
