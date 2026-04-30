@@ -1,0 +1,33 @@
+I want to add a forward-looking section to the bottom of the 'Electrical Safety' page called 'The Holy Grail: Room-Temperature Superconductors (ផ្តិលសក្ការៈ៖ អង្គធាតុចម្លងកំពូលនៅសីតុណ្ហភាពបន្ទប់)'.
+
+Please implement this using a 'Future Tech' aesthetic (deep space-black backgrounds with glowing neon cyan and silver accents):
+
+1. Section 1: The Problem with Copper (បញ្ហានៃទង់ដែង)
+
+Tie this back to the earlier safety lessons. Explain that normal wires, like copper, act like a bumpy dirt road. As electrons push through, they bump into atoms, creating friction. This friction creates the heat that trips our circuit breakers and wastes massive amounts of power before it ever reaches our homes.
+
+2. Section 2: The Magic of Zero Resistance (វេទមន្តនៃភាពគ្មានរេស៊ីស្តង់)
+
+Define a superconductor: It is a material where electrons pair up and glide through the atomic structure without hitting anything. It is a perfectly smooth highway.
+
+Add that zero resistance means a wire never gets hot, no matter how much power you push through it.  Explain the 'Meissner Effect'—that these materials also perfectly repel magnetic fields, allowing them to levitate in mid-air.
+
+3. Section 3: The Cold Catch - Why is it so hard? (ហេតុអ្វីបានជាវាពិបាកម្ល៉េះ?)
+
+Explain the current limitation: We already have superconductors, but they only work when frozen to unimaginably cold temperatures (using liquid nitrogen) or crushed under extreme pressure.
+
+Explain the global race: Thousands of scientists are trying to invent a material that does this at normal, everyday 'room temperature.'
+
+4. Section 4: A Post-Scarcity World (ពិភពលោកក្រោយភាពខ្វះខាត)
+
+Detail the practical applications if we solve this puzzle:
+
+Lossless Power Grids: Solar farms in the Sahara could power cities in Asia with zero energy lost in the cables.
+
+Maglev Trains: Trains that float on magnetic tracks, traveling at airplane speeds with almost no energy cost.
+
+Limitless Computing: Supercomputers and AI systems that process unimaginable amounts of data without ever overheating or needing cooling fans.
+
+5. Formatting & UX:
+
+Ensure all main headings and core concepts are strictly bilingual (English/Khmer).

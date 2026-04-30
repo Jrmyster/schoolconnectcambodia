@@ -40,6 +40,12 @@ import {
   Magnet,
   Recycle,
   ShieldAlert,
+  Atom,
+  Snowflake,
+  Sparkles,
+  Globe,
+  Train,
+  Cpu,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -1779,6 +1785,9 @@ export function ElectricalSafetyPage() {
 
       {/* ── Section 8: Invisible Wires — How Radios Work ─────────────────── */}
       <RadioSection kh={kh} t={t} />
+
+      {/* ── Section 9: The Holy Grail — Room-Temperature Superconductors ── */}
+      <SuperconductorsSection kh={kh} t={t} />
     </div>
   );
 }
@@ -3127,6 +3136,692 @@ function FmWaveSvg({ kh }: { kh: boolean }) {
       </text>
       <text x="6" y="132" fontSize="9" fontFamily={kh ? "inherit" : "monospace"} fill={SCOPE_GREEN}>
         {kh ? "FM · ចំងាយរវាងរលកផ្លាស់ប្តូរ" : "FM · spacing varies"}
+      </text>
+    </svg>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 9 · The Holy Grail — Room-Temperature Superconductors
+ *   ▸ Sub 1: The Problem with Copper      (rust-orange friction)
+ *   ▸ Sub 2: The Magic of Zero Resistance (cyan glow + Meissner)
+ *   ▸ Sub 3: The Cold Catch              (ice-blue / frost)
+ *   ▸ Sub 4: A Post-Scarcity World       (silver + cyan applications)
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+function SuperconductorsSection({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 my-8 rounded-3xl overflow-hidden border border-cyan-400/20 shadow-2xl"
+      style={{
+        backgroundColor: "#02030a",
+        backgroundImage:
+          "radial-gradient(ellipse at top, rgba(34,211,238,0.10), transparent 60%), " +
+          "radial-gradient(ellipse at bottom, rgba(148,163,184,0.08), transparent 55%), " +
+          "linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px), " +
+          "linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px)",
+        backgroundSize: "auto, auto, 32px 32px, 32px 32px",
+      }}
+    >
+      {/* Subtle scanline overlay — same retro CRT feel as the radio section */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(226,232,240,1) 0, rgba(226,232,240,1) 1px, transparent 1px, transparent 4px)",
+        }}
+      />
+      {/* Floating "atoms" — pure decoration */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div className="absolute top-[8%] left-[6%] w-2 h-2 rounded-full bg-cyan-300/60 shadow-[0_0_12px_rgba(34,211,238,0.7)] animate-pulse" />
+        <div className="absolute top-[18%] right-[10%] w-1.5 h-1.5 rounded-full bg-slate-200/70 shadow-[0_0_10px_rgba(226,232,240,0.7)] animate-pulse [animation-delay:600ms]" />
+        <div className="absolute bottom-[14%] left-[12%] w-1.5 h-1.5 rounded-full bg-cyan-200/60 shadow-[0_0_10px_rgba(165,243,252,0.7)] animate-pulse [animation-delay:1200ms]" />
+        <div className="absolute bottom-[8%] right-[8%] w-2 h-2 rounded-full bg-slate-300/50 shadow-[0_0_14px_rgba(203,213,225,0.6)] animate-pulse [animation-delay:300ms]" />
+      </div>
+
+      {/* ── Header ──────────────────────────────────────────────────────── */}
+      <header className="relative text-center mb-12">
+        <div
+          className={`inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.3em] uppercase text-cyan-300/80 mb-3 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.9)]" />
+          <span>{t("FRONTIER · Section 09", "ព្រំដែន · ផ្នែក ០៩")}</span>
+        </div>
+        <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-cyan-500/10 border-2 border-cyan-300/50 text-cyan-200 mb-5 shadow-[0_0_36px_rgba(34,211,238,0.45)]">
+          <Atom className="w-10 h-10 animate-[spin_8s_linear_infinite]" />
+        </div>
+        <h2
+          data-testid="superconductors-heading"
+          className="mb-3"
+        >
+          {/* Strictly bilingual heading: BOTH languages always render */}
+          <span
+            className={`block text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-200 via-slate-100 to-cyan-300 bg-clip-text text-transparent ${
+              kh ? "font-khmer leading-snug" : "font-display"
+            }`}
+          >
+            {kh
+              ? "ផ្តិលសក្ការៈ៖ អង្គធាតុចម្លងកំពូលនៅសីតុណ្ហភាពបន្ទប់"
+              : "The Holy Grail: Room-Temperature Superconductors"}
+          </span>
+          <span
+            className={`block text-base md:text-lg font-semibold text-slate-300/80 mt-2 ${
+              kh ? "font-display" : "font-khmer leading-snug"
+            }`}
+          >
+            {kh
+              ? "The Holy Grail: Room-Temperature Superconductors"
+              : "ផ្តិលសក្ការៈ៖ អង្គធាតុចម្លងកំពូលនៅសីតុណ្ហភាពបន្ទប់"}
+          </span>
+        </h2>
+        <p
+          className={`mt-4 text-sm sm:text-base text-cyan-100/70 max-w-2xl mx-auto leading-relaxed ${
+            kh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {t(
+            "Every wire we have ever built loses power as heat. The single biggest unsolved problem in electricity is also the door to a future of unlimited clean energy. Let's look at what's standing in the way.",
+            "ខ្សែភ្លើងគ្រប់ខ្សែដែលយើងធ្លាប់បានសាងសង់ បាត់បង់ថាមពលជាកម្ដៅ។ បញ្ហាដ៏ធំបំផុតមួយដែលមិនទាន់ដោះស្រាយបាននៅក្នុងវិស័យអគ្គិសនី គឺជាទ្វារទៅកាន់អនាគតនៃថាមពលស្អាតគ្មានដែនកំណត់។ ចូរយើងមើលថាតើអ្វីដែលកំពុងរារាំងវា។",
+          )}
+        </p>
+      </header>
+
+      {/* ── Sub 1: The Problem with Copper ──────────────────────────────── */}
+      <article
+        data-testid="superconductors-problem"
+        className="relative rounded-2xl border border-orange-400/30 bg-slate-950/70 shadow-lg overflow-hidden mb-6"
+      >
+        <div className="grid md:grid-cols-[280px_minmax(0,1fr)] gap-0">
+          <div className="relative bg-gradient-to-br from-orange-950/60 via-amber-950/40 to-slate-950 p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-orange-400/20">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-orange-500/15 border-2 border-orange-400/60 text-orange-300 mb-3 shadow-[0_0_20px_rgba(251,146,60,0.4)]">
+              <Flame className="w-8 h-8" />
+            </div>
+            <div
+              className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-orange-300/80 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Sub 1 · The friction problem", "ផ្នែក ១ · បញ្ហាកកិត")}
+            </div>
+            {/* Bumpy "dirt road" SVG */}
+            <BumpyRoadSvg />
+            <div
+              className={`text-[10px] text-orange-200/70 mt-1 text-center ${
+                kh ? "font-khmer text-xs" : "font-mono"
+              }`}
+            >
+              {t("Electrons hit atoms → heat", "អេឡិចត្រុងប៉ះអាតូម → កម្ដៅ")}
+            </div>
+          </div>
+          <div className="p-6 sm:p-7">
+            <h3
+              className={`text-xl sm:text-2xl font-bold mb-1 text-orange-100 ${
+                kh ? "font-khmer leading-snug" : "font-display"
+              }`}
+            >
+              {kh ? "បញ្ហានៃទង់ដែង" : "The Problem with Copper"}
+            </h3>
+            <div
+              className={`text-sm text-orange-200/70 mb-4 ${
+                kh ? "font-display" : "font-khmer"
+              }`}
+            >
+              {kh ? "The Problem with Copper" : "បញ្ហានៃទង់ដែង"}
+            </div>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-3 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Remember the safety lessons — every wire in your home gets a little warm when current flows through it. That warmth is wasted energy.",
+                "ចងចាំមេរៀនសុវត្ថិភាព — ខ្សែភ្លើងគ្រប់ខ្សែក្នុងផ្ទះរបស់អ្នកតែងតែក្ដៅបន្តិចបន្តួចនៅពេលដែលចរន្តហូរកាត់។ កំដៅនោះគឺជាថាមពលដែលបានខ្ជះខ្ជាយ។",
+              )}
+            </p>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-3 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Imagine a normal copper wire as a bumpy dirt road. As electrons try to push through, they keep bumping into the copper atoms — over and over, billions of times per second. That bumping is friction, and friction creates heat.",
+                "ស្រមៃថាខ្សែទង់ដែងធម្មតាគឺដូចជាផ្លូវដីមិនរលោង។ នៅពេលដែលអេឡិចត្រុងព្យាយាមរុញឆ្លងកាត់ ពួកវាបន្តប៉ះអាតូមទង់ដែង — ម្ដងហើយម្ដងទៀត រាប់ពាន់លានដងក្នុងមួយវិនាទី។ ការប៉ះនោះគឺជាកម្លាំងកកិត ហើយកម្លាំងកកិតបង្កើតកម្ដៅ។",
+              )}
+            </p>
+            <div className="rounded-lg border border-orange-400/30 bg-orange-950/30 p-3 mt-4">
+              <p
+                className={`text-xs sm:text-sm text-orange-100/90 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <strong className="text-orange-200">
+                  {t("The cost: ", "តម្លៃ៖ ")}
+                </strong>
+                {t(
+                  "this friction-heat is what trips our circuit breakers, and on the long-distance power grid it wastes a massive 5–10% of every kilowatt-hour generated — lost to the air before it ever reaches a single home.",
+                  "កម្ដៅកកិតនេះគឺជាអ្វីដែលកាត់ប្រអប់ផ្ដាច់ ហើយនៅលើបណ្ដាញចម្ងាយឆ្ងាយ វាខ្ជះខ្ជាយប្រហែល ៥–១០% នៃគីឡូវ៉ាត់ម៉ោងគ្រប់ឯកតាដែលបានផលិត — បាត់បង់ទៅក្នុងខ្យល់មុនពេលវាទៅដល់ផ្ទះណាមួយ។",
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Sub 2: The Magic of Zero Resistance ─────────────────────────── */}
+      <article
+        data-testid="superconductors-magic"
+        className="relative rounded-2xl border border-cyan-400/40 bg-slate-950/70 shadow-[0_0_28px_rgba(34,211,238,0.15)] overflow-hidden mb-6"
+      >
+        <div className="grid md:grid-cols-[280px_minmax(0,1fr)] gap-0">
+          <div className="relative bg-gradient-to-br from-cyan-950/60 via-slate-900 to-slate-950 p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-cyan-400/30">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-400/15 border-2 border-cyan-300/70 text-cyan-200 mb-3 shadow-[0_0_24px_rgba(34,211,238,0.55)]">
+              <Magnet className="w-8 h-8" />
+            </div>
+            <div
+              className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-cyan-300/80 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Sub 2 · Zero resistance", "ផ្នែក ២ · គ្មានរេស៊ីស្តង់")}
+            </div>
+            {/* Smooth highway SVG */}
+            <SmoothHighwaySvg />
+            <div
+              className={`text-[10px] text-cyan-200/80 mt-1 text-center ${
+                kh ? "font-khmer text-xs" : "font-mono"
+              }`}
+            >
+              {t("Electrons glide → no heat", "អេឡិចត្រុងហោះ → គ្មានកម្ដៅ")}
+            </div>
+          </div>
+          <div className="p-6 sm:p-7">
+            <h3
+              className={`text-xl sm:text-2xl font-bold mb-1 text-cyan-100 ${
+                kh ? "font-khmer leading-snug" : "font-display"
+              }`}
+            >
+              {kh ? "វេទមន្តនៃភាពគ្មានរេស៊ីស្តង់" : "The Magic of Zero Resistance"}
+            </h3>
+            <div
+              className={`text-sm text-cyan-200/70 mb-4 ${
+                kh ? "font-display" : "font-khmer"
+              }`}
+            >
+              {kh ? "The Magic of Zero Resistance" : "វេទមន្តនៃភាពគ្មានរេស៊ីស្តង់"}
+            </div>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-3 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "A superconductor is a special material where, under the right conditions, the electrons pair up and glide through the atomic structure without hitting anything at all. It is, in effect, a perfectly smooth highway for electricity.",
+                "អង្គធាតុចម្លងកំពូល គឺជាសម្ភារៈពិសេសមួយ ដែលក្រោមលក្ខខណ្ឌត្រឹមត្រូវ អេឡិចត្រុងផ្គូផ្គងគ្នា និងហោះឆ្លងកាត់រចនាសម្ព័ន្ធអាតូម ដោយមិនប៉ះអ្វីសោះឡើយ។ វាជាផ្លូវហាយវេយរលោងឥតខ្ចោះសម្រាប់អគ្គិសនី។",
+              )}
+            </p>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-4 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Because there is no friction, there is no heat. A superconducting wire never gets hot, no matter how much power you push through it. A current started in a closed superconducting loop will, in theory, flow forever — without a battery, without a source.",
+                "ដោយសារតែគ្មានកម្លាំងកកិត ដូច្នេះគ្មានកម្ដៅ។ ខ្សែអង្គធាតុចម្លងកំពូលមិនដែលក្ដៅឡើយ មិនថាអ្នករុញថាមពលច្រើនប៉ុណ្ណាក៏ដោយ។ ចរន្តដែលបានចាប់ផ្ដើមនៅក្នុងរង្វិលអង្គធាតុចម្លងកំពូលបិទជិតមួយ តាមទ្រឹស្ដីនឹងហូរជារៀងរហូត — ដោយគ្មានថ្ម គ្មានប្រភព។",
+              )}
+            </p>
+            <div className="rounded-lg border border-cyan-400/40 bg-cyan-950/30 p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-cyan-400/20 border border-cyan-300/50 text-cyan-200 shadow-[0_0_14px_rgba(34,211,238,0.5)]">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4
+                    className={`text-sm sm:text-base font-bold text-cyan-100 mb-1 ${
+                      kh ? "font-khmer leading-snug" : "font-display"
+                    }`}
+                  >
+                    {kh
+                      ? "ឥទ្ធិពល Meissner — ការអណ្ដែតទេពកោសល្យ"
+                      : "The Meissner Effect — Magic Levitation"}
+                  </h4>
+                  <p
+                    className={`text-xs sm:text-sm text-cyan-100/80 leading-relaxed ${
+                      kh ? "font-khmer leading-loose" : ""
+                    }`}
+                  >
+                    {t(
+                      "Superconductors don't just carry current perfectly — they also push magnetic fields away with perfect strength. Place a magnet above a superconductor and the magnet will float in mid-air, perfectly still. This is called the Meissner Effect, and it is the secret behind the maglev trains we'll meet below.",
+                      "អង្គធាតុចម្លងកំពូលមិនត្រឹមតែដឹកនាំចរន្តបានឥតខ្ចោះប៉ុណ្ណោះទេ — ពួកវាក៏ច្រានវាលម៉ាញេទិចចេញដោយកម្លាំងឥតខ្ចោះផងដែរ។ ដាក់មេដែកនៅពីលើអង្គធាតុចម្លងកំពូល នោះមេដែកនឹងអណ្ដែតក្នុងអាកាស នឹងធឹង។ វាត្រូវបានគេហៅថាឥទ្ធិពល Meissner ហើយវាគឺជាអាថ៌កំបាំងនៅពីក្រោយរថភ្លើងម៉ាហ្គ្លេវដែលយើងនឹងជួបនៅខាងក្រោម។",
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Sub 3: The Cold Catch ───────────────────────────────────────── */}
+      <article
+        data-testid="superconductors-cold"
+        className="relative rounded-2xl border border-sky-400/30 bg-slate-950/70 shadow-lg overflow-hidden mb-6"
+      >
+        <div className="grid md:grid-cols-[280px_minmax(0,1fr)] gap-0">
+          <div className="relative bg-gradient-to-br from-sky-950/60 via-indigo-950/40 to-slate-950 p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-sky-400/30">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-sky-400/15 border-2 border-sky-300/60 text-sky-200 mb-3 shadow-[0_0_22px_rgba(125,211,252,0.45)]">
+              <Snowflake className="w-8 h-8 animate-[spin_12s_linear_infinite]" />
+            </div>
+            <div
+              className={`text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-sky-300/80 ${
+                kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+              }`}
+            >
+              {t("Sub 3 · The cold catch", "ផ្នែក ៣ · ឧបសគ្គត្រជាក់")}
+            </div>
+            {/* Cold thermometer */}
+            <ColdThermometerSvg kh={kh} />
+            <div
+              className={`text-[10px] text-sky-200/80 mt-1 text-center ${
+                kh ? "font-khmer text-xs" : "font-mono"
+              }`}
+            >
+              {t("−196 °C · liquid nitrogen", "−១៩៦°C · អាសូតរាវ")}
+            </div>
+          </div>
+          <div className="p-6 sm:p-7">
+            <h3
+              className={`text-xl sm:text-2xl font-bold mb-1 text-sky-100 ${
+                kh ? "font-khmer leading-snug" : "font-display"
+              }`}
+            >
+              {kh ? "ហេតុអ្វីបានជាវាពិបាកម្ល៉េះ?" : "The Cold Catch — Why is it so hard?"}
+            </h3>
+            <div
+              className={`text-sm text-sky-200/70 mb-4 ${
+                kh ? "font-display" : "font-khmer"
+              }`}
+            >
+              {kh ? "The Cold Catch — Why is it so hard?" : "ហេតុអ្វីបានជាវាពិបាកម្ល៉េះ?"}
+            </div>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-3 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "Here's the catch: we already have superconductors. We have had them since 1911. The problem is that every single one we have ever discovered only works when you cool it down to unimaginably cold temperatures — colder than anywhere in the natural universe outside a laboratory.",
+                "នេះគឺជាឧបសគ្គ៖ យើងមានអង្គធាតុចម្លងកំពូលរួចហើយ។ យើងមានវាតាំងពីឆ្នាំ ១៩១១។ បញ្ហាគឺថាគ្រប់អង្គធាតុចម្លងកំពូលទាំងអស់ដែលយើងបានរកឃើញ ដំណើរការតែនៅពេលដែលអ្នកធ្វើឲ្យវាត្រជាក់ដល់សីតុណ្ហភាពដែលមិនអាចស្រមៃបាន — ត្រជាក់ជាងគ្រប់ទីកន្លែងនៅក្នុងសកលលោកធម្មជាតិក្រៅពីមន្ទីរពិសោធន៍។",
+              )}
+            </p>
+            <p
+              className={`text-sm sm:text-base text-slate-200/90 leading-relaxed mb-4 ${
+                kh ? "font-khmer leading-loose" : ""
+              }`}
+            >
+              {t(
+                "We achieve those temperatures by bathing the wire in liquid nitrogen (−196 °C) or liquid helium (−269 °C). A few exotic materials work at slightly warmer temperatures, but only when crushed under pressures hundreds of thousands of times stronger than the air around you. Either way, the cooling and pressure equipment costs more than the energy you save.",
+                "យើងសម្រេចបាននូវសីតុណ្ហភាពទាំងនោះដោយការត្រាំខ្សែភ្លើងក្នុងអាសូតរាវ (−១៩៦°C) ឬហេលីញ៉ូមរាវ (−២៦៩°C)។ សម្ភារៈពិសេសមួយចំនួនដំណើរការនៅសីតុណ្ហភាពកក់ក្ដៅជាងបន្តិច ប៉ុន្តែមានតែនៅពេលដែលត្រូវបានកំទេចក្រោមសម្ពាធខ្លាំងជាងខ្យល់ជុំវិញអ្នករាប់សែនដង។ យ៉ាងណាមិញ ឧបករណ៍ត្រជាក់និងសម្ពាធមានតម្លៃថ្លៃជាងថាមពលដែលអ្នកសន្សំ។",
+              )}
+            </p>
+            <div className="rounded-lg border border-sky-400/30 bg-sky-950/30 p-3">
+              <p
+                className={`text-xs sm:text-sm text-sky-100/90 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                <strong className="text-sky-200">
+                  {t("The global race: ", "ការប្រណាំងពិភពលោក៖ ")}
+                </strong>
+                {t(
+                  "thousands of physicists and material scientists in every country — including teams in Cambodia's neighbors — are racing to find a single material that superconducts at normal, everyday 'room temperature' (≈ 25 °C) and at normal air pressure. Whoever finds it will change the world overnight.",
+                  "រូបវិទូ និងអ្នកវិទ្យាសាស្ត្រសម្ភារៈរាប់ពាន់នាក់នៅគ្រប់ប្រទេស — រួមទាំងក្រុមនៅប្រទេសជិតខាងកម្ពុជា — កំពុងប្រណាំងគ្នាស្វែងរកសម្ភារៈតែមួយដែលដឹកនាំកំពូលនៅសីតុណ្ហភាព 'បន្ទប់' ធម្មតាប្រចាំថ្ងៃ (≈ ២៥°C) និងនៅសម្ពាធខ្យល់ធម្មតា។ អ្នកដែលរកឃើញវានឹងផ្លាស់ប្ដូរពិភពលោកក្នុងមួយយប់។",
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Sub 4: A Post-Scarcity World ────────────────────────────────── */}
+      <article
+        data-testid="superconductors-future"
+        className="relative rounded-2xl border border-slate-300/30 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 shadow-[0_0_36px_rgba(34,211,238,0.18)] overflow-hidden"
+      >
+        <div className="p-6 sm:p-7 border-b border-slate-300/15">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-slate-200/10 border-2 border-slate-200/50 text-slate-100 shadow-[0_0_18px_rgba(226,232,240,0.4)]">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <div>
+              <div
+                className={`text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-slate-300/80 ${
+                  kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+                }`}
+              >
+                {t("Sub 4 · If we crack it…", "ផ្នែក ៤ · ប្រសិនបើយើងដោះស្រាយវាបាន…")}
+              </div>
+              <h3
+                className={`text-xl sm:text-2xl font-bold bg-gradient-to-r from-slate-100 via-cyan-200 to-slate-100 bg-clip-text text-transparent ${
+                  kh ? "font-khmer leading-snug" : "font-display"
+                }`}
+              >
+                {kh ? "ពិភពលោកក្រោយភាពខ្វះខាត" : "A Post-Scarcity World"}
+              </h3>
+              <div
+                className={`text-sm text-slate-300/70 ${
+                  kh ? "font-display" : "font-khmer"
+                }`}
+              >
+                {kh ? "A Post-Scarcity World" : "ពិភពលោកក្រោយភាពខ្វះខាត"}
+              </div>
+            </div>
+          </div>
+          <p
+            className={`text-sm sm:text-base text-slate-200/85 leading-relaxed ${
+              kh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {t(
+              "Solve the puzzle of room-temperature superconductivity, and three industries flip overnight. None of these are science fiction — they all already exist as small lab demonstrations. Room temperature is the only thing standing between us and a world where electricity is functionally free.",
+              "ដោះស្រាយល្បែងផ្ដុំរូបនៃអង្គធាតុចម្លងកំពូលនៅសីតុណ្ហភាពបន្ទប់ ហើយឧស្សាហកម្មបីនឹងបង្វិលក្នុងមួយយប់។ គ្មានឧស្សាហកម្មណាមួយជាប្រឌិតវិទ្យាសាស្ត្រឡើយ — ពួកវាសុទ្ធតែមានរួចហើយជាការបង្ហាញតូចៗក្នុងមន្ទីរពិសោធន៍។ សីតុណ្ហភាពបន្ទប់គឺជារឿងតែមួយគត់ដែលឈរនៅចន្លោះពួកយើង និងពិភពលោកមួយដែលអគ្គិសនីគឺឥតគិតថ្លៃ។",
+            )}
+          </p>
+        </div>
+
+        {/* Three application cards */}
+        <div className="grid sm:grid-cols-3 gap-0">
+          <FutureAppCard
+            kh={kh}
+            t={t}
+            icon={Globe}
+            titleEn="Lossless Power Grids"
+            titleKh="បណ្ដាញថាមពលគ្មានការបាត់បង់"
+            bodyEn="Solar farms in the Sahara desert could power factories in Cambodia, Tokyo, or Mumbai with zero energy lost in the cables. Sunlight from where the sun shines, delivered to where the people live — free of charge."
+            bodyKh="កសិដ្ឋានសូឡានៅវាលខ្សាច់សាហារ៉ា អាចផ្គត់ផ្គង់រោងចក្រនៅកម្ពុជា តូក្យូ ឬមុមបៃ ដោយមិនបាត់បង់ថាមពលក្នុងខ្សែភ្លើង។ ពន្លឺថ្ងៃពីកន្លែងដែលថ្ងៃរះ ដឹកជូនទៅកន្លែងដែលមនុស្សរស់នៅ — ឥតគិតថ្លៃ។"
+            accent="cyan"
+          />
+          <FutureAppCard
+            kh={kh}
+            t={t}
+            icon={Train}
+            titleEn="Maglev Trains"
+            titleKh="រថភ្លើងម៉ាហ្គ្លេវ"
+            bodyEn="Trains that float on magnetic tracks (the Meissner Effect again!), traveling at airplane speeds — Phnom Penh to Bangkok in under an hour — with almost no energy cost and no friction wear on the rails."
+            bodyKh="រថភ្លើងដែលអណ្ដែតលើផ្លូវដែកម៉ាញេទិច (ឥទ្ធិពល Meissner ម្ដងទៀត!) ធ្វើដំណើរល្បឿនយន្ដហោះ — ភ្នំពេញទៅបាងកកក្នុងរយៈពេលមិនដល់មួយម៉ោង — ដោយតម្លៃថាមពលស្ទើរតែគ្មាន និងគ្មានការសឹករចន្ទាស់លើផ្លូវដែក។"
+            accent="slate"
+          />
+          <FutureAppCard
+            kh={kh}
+            t={t}
+            icon={Cpu}
+            titleEn="Limitless Computing"
+            titleKh="ការគណនាគ្មានដែនកំណត់"
+            bodyEn="Supercomputers and AI systems that process unimaginable amounts of data without ever overheating, without needing cooling fans, and without burning a single extra watt as waste heat. Every classroom on Earth could afford its own AI tutor."
+            bodyKh="អុបវកុំព្យូទ័រ និងប្រព័ន្ធ AI ដែលដំណើរការទិន្នន័យដ៏ច្រើនមិនអាចស្រមៃបាន ដោយមិនកក្ដៅឡើង មិនត្រូវការកង្ហារត្រជាក់ និងមិនដុតវ៉ាត់បន្ថែមណាមួយជាកម្ដៅខ្ជះខ្ជាយ។ ថ្នាក់រៀនគ្រប់ទីកន្លែងលើផែនដី អាចមានគ្រូបង្ហាត់ AI ផ្ទាល់ខ្លួនរបស់ខ្លួន។"
+            accent="cyan"
+          />
+        </div>
+
+        {/* Closing */}
+        <div className="px-6 sm:px-7 py-5 border-t border-slate-300/15 text-center">
+          <p
+            className={`text-sm text-cyan-100/80 italic max-w-2xl mx-auto ${
+              kh ? "font-khmer not-italic leading-loose" : ""
+            }`}
+          >
+            {t(
+              "From a copper wire that loses its energy as heat, to a silver thread that loses nothing at all. The journey from this safety lesson to the holy grail is the same journey humanity has been on for over 100 years — and it might be your generation that finishes it.",
+              "ពីខ្សែទង់ដែងដែលបាត់បង់ថាមពលជាកម្ដៅ ទៅជាខ្សែប្រាក់ដែលមិនបាត់បង់អ្វីសោះឡើយ។ ដំណើរពីមេរៀនសុវត្ថិភាពនេះទៅកាន់ផ្តិលសក្ការៈ គឺជាដំណើរតែមួយដែលមនុស្សជាតិបានធ្វើអស់រយៈពេលជាង ១០០ ឆ្នាំ — ហើយវាប្រហែលជាមានជំនាន់របស់អ្នកដែលនឹងបញ្ចប់វា។",
+            )}
+          </p>
+        </div>
+      </article>
+    </section>
+  );
+}
+
+// ── Sub 4 helper · One application card ─────────────────────────────────
+function FutureAppCard({
+  kh,
+  t: _t,
+  icon: Icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+  accent,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+  icon: React.ComponentType<{ className?: string }>;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  accent: "cyan" | "slate";
+}) {
+  const a =
+    accent === "cyan"
+      ? {
+          ring: "border-cyan-400/30",
+          chipBg: "bg-cyan-400/10",
+          chipBorder: "border-cyan-300/60",
+          chipText: "text-cyan-200",
+          chipGlow: "shadow-[0_0_18px_rgba(34,211,238,0.45)]",
+          title: "text-cyan-100",
+          sub: "text-cyan-200/70",
+        }
+      : {
+          ring: "border-slate-300/30",
+          chipBg: "bg-slate-200/10",
+          chipBorder: "border-slate-200/60",
+          chipText: "text-slate-100",
+          chipGlow: "shadow-[0_0_18px_rgba(226,232,240,0.4)]",
+          title: "text-slate-100",
+          sub: "text-slate-200/70",
+        };
+  return (
+    <div className={`p-5 sm:p-6 border-r last:border-r-0 ${a.ring} border-b sm:border-b-0`}>
+      <div
+        className={`inline-flex items-center justify-center w-12 h-12 rounded-xl border-2 mb-3 ${a.chipBg} ${a.chipBorder} ${a.chipText} ${a.chipGlow}`}
+      >
+        <Icon className="w-6 h-6" />
+      </div>
+      <h4
+        className={`text-base sm:text-lg font-bold mb-1 ${a.title} ${
+          kh ? "font-khmer leading-snug" : "font-display"
+        }`}
+      >
+        {kh ? titleKh : titleEn}
+      </h4>
+      <div
+        className={`text-xs ${a.sub} mb-3 ${
+          kh ? "font-display" : "font-khmer"
+        }`}
+      >
+        {kh ? titleEn : titleKh}
+      </div>
+      <p
+        className={`text-xs sm:text-sm text-slate-200/85 leading-relaxed ${
+          kh ? "font-khmer leading-loose" : ""
+        }`}
+      >
+        {kh ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+// ── Decorative SVG · The "bumpy dirt road" (copper) ─────────────────────
+function BumpyRoadSvg() {
+  return (
+    <svg
+      viewBox="0 0 220 60"
+      className="w-full h-auto mt-3 mb-2"
+      role="img"
+      aria-hidden="true"
+    >
+      {/* dirt road */}
+      <path
+        d="M 0 40 Q 20 30 30 40 T 60 40 T 90 40 T 120 40 T 150 40 T 180 40 T 220 40 L 220 60 L 0 60 Z"
+        fill="#7c2d12"
+        opacity="0.55"
+      />
+      {/* atom bumps */}
+      {[20, 50, 80, 110, 140, 170, 200].map((cx) => (
+        <circle key={cx} cx={cx} cy="38" r="4" fill="#fb923c" opacity="0.85" />
+      ))}
+      {/* electron path bouncing */}
+      <path
+        d="M 5 22 L 18 14 L 32 26 L 48 14 L 62 28 L 78 14 L 92 26 L 108 14 L 122 28 L 138 14 L 152 26 L 168 14 L 182 28 L 198 14 L 215 22"
+        stroke="#fde68a"
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ filter: "drop-shadow(0 0 3px rgba(253,230,138,0.8))" }}
+      />
+      <circle cx="215" cy="22" r="2.4" fill="#fde68a">
+        <animate
+          attributeName="cx"
+          values="5; 215"
+          dur="2.4s"
+          repeatCount="indefinite"
+        />
+        <animate
+          attributeName="cy"
+          values="22;14;26;14;28;14;26;14;28;14;26;14;28;14;22"
+          dur="2.4s"
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
+  );
+}
+
+// ── Decorative SVG · The "smooth highway" (superconductor) ──────────────
+function SmoothHighwaySvg() {
+  return (
+    <svg
+      viewBox="0 0 220 60"
+      className="w-full h-auto mt-3 mb-2"
+      role="img"
+      aria-hidden="true"
+    >
+      {/* mirror-smooth highway */}
+      <rect x="0" y="38" width="220" height="14" fill="#0c4a6e" opacity="0.55" />
+      <line
+        x1="0"
+        y1="45"
+        x2="220"
+        y2="45"
+        stroke="#22d3ee"
+        strokeWidth="0.8"
+        strokeDasharray="8 6"
+        opacity="0.7"
+      />
+      {/* paired electrons (Cooper pairs) gliding */}
+      <g style={{ filter: "drop-shadow(0 0 4px rgba(34,211,238,0.9))" }}>
+        <circle cx="40" cy="22" r="2.6" fill="#22d3ee">
+          <animate
+            attributeName="cx"
+            values="-10; 230"
+            dur="2.2s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="48" cy="22" r="2.6" fill="#67e8f9">
+          <animate
+            attributeName="cx"
+            values="-2; 238"
+            dur="2.2s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="120" cy="22" r="2.6" fill="#22d3ee">
+          <animate
+            attributeName="cx"
+            values="-50; 190"
+            dur="2.2s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="128" cy="22" r="2.6" fill="#67e8f9">
+          <animate
+            attributeName="cx"
+            values="-42; 198"
+            dur="2.2s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
+      {/* trail line */}
+      <line
+        x1="0"
+        y1="22"
+        x2="220"
+        y2="22"
+        stroke="#22d3ee"
+        strokeWidth="0.5"
+        opacity="0.4"
+      />
+    </svg>
+  );
+}
+
+// ── Decorative SVG · Cold thermometer ───────────────────────────────────
+function ColdThermometerSvg({ kh }: { kh: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 220 60"
+      className="w-full h-auto mt-3 mb-2"
+      role="img"
+      aria-hidden="true"
+    >
+      {/* scale */}
+      <line x1="10" y1="32" x2="210" y2="32" stroke="#7dd3fc" strokeWidth="1" opacity="0.6" />
+      {/* tick marks */}
+      {[
+        { x: 30, label: "−269" },
+        { x: 70, label: "−196" },
+        { x: 130, label: "0" },
+        { x: 180, label: "+25" },
+      ].map((tk) => (
+        <g key={tk.x}>
+          <line x1={tk.x} y1="28" x2={tk.x} y2="36" stroke="#7dd3fc" strokeWidth="1" />
+          <text
+            x={tk.x}
+            y="48"
+            fontSize="7"
+            fontFamily={kh ? "inherit" : "monospace"}
+            fill="#bae6fd"
+            textAnchor="middle"
+          >
+            {tk.label}
+          </text>
+        </g>
+      ))}
+      {/* current achievable zone (cold) */}
+      <rect x="10" y="14" width="60" height="14" fill="#0ea5e9" opacity="0.45" rx="2" />
+      <text x="40" y="11" fontSize="7" fontFamily={kh ? "inherit" : "monospace"} fill="#7dd3fc" textAnchor="middle">
+        {kh ? "ដំណើរការ" : "WORKS"}
+      </text>
+      {/* room temp goal (warm) */}
+      <rect x="170" y="14" width="22" height="14" fill="#f87171" opacity="0.45" rx="2" />
+      <text x="181" y="11" fontSize="7" fontFamily={kh ? "inherit" : "monospace"} fill="#fca5a5" textAnchor="middle">
+        {kh ? "គោលដៅ" : "GOAL"}
       </text>
     </svg>
   );
