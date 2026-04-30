@@ -110,6 +110,20 @@ export default function LanguageRealityPage() {
         <TwoSystems isKh={isKh} />
       </Section>
 
+      {/* ── Section 1b: The Animal vs. The Human Nervous System ──────── */}
+      <Section
+        spec="01b"
+        eyebrowEn="The Animal vs. The Human Nervous System"
+        eyebrowKh="ប្រព័ន្ធសរសៃប្រសាទសត្វ និងមនុស្ស"
+        titleEn="When the human brain forgets it is human, it copies the dog"
+        titleKh="ពេលខួរក្បាលមនុស្សភ្លេចថាខ្លួនជាមនុស្ស វាចម្លងតាមឆ្កែ"
+        descEn="A healthy nervous system processes reality in a specific order — Event, Object, Label, Inference. When we collapse those steps and treat a Label as if it were the Event itself, we drop out of the human mode of thinking and react like an animal: blindly, automatically, emotionally. Korzybski called the way out 'consciousness of abstracting'."
+        descKh="ប្រព័ន្ធសរសៃប្រសាទដ៏ល្អដំណើរការការពិតតាមលំដាប់ជាក់លាក់ — ព្រឹត្តិការណ៍ វត្ថុ ស្លាក និងការសន្និដ្ឋាន។ ពេលយើងបង្រួមជំហានទាំងនោះ ហើយចាត់ទុកស្លាកដូចជាព្រឹត្តិការណ៍ខ្លួនឯង យើងធ្លាក់ចេញពីរបៀបគិតរបស់មនុស្ស ហើយប្រតិកម្មដូចសត្វ៖ ងងឹតងងុល ស្វ័យប្រវត្តិ និងតាមអារម្មណ៍។ លោក Korzybski បានហៅផ្លូវចេញនេះថា «ការដឹងខ្លួននៃការអរូបីកម្ម»។"
+        isKh={isKh}
+      >
+        <NervousSystem isKh={isKh} />
+      </Section>
+
       {/* ── Section 2: Unsanity — The Trap of Normalcy ────────────────── */}
       <Section
         spec="02"
@@ -1255,5 +1269,358 @@ function PaperGrainBg() {
       </defs>
       <rect width="100%" height="100%" fill="url(#paper)" />
     </svg>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 1b · The Animal vs. The Human Nervous System
+//                ប្រព័ន្ធសរសៃប្រសាទសត្វ និងមនុស្ស
+//
+//  1. The Sane Order of Abstraction (4-step ladder: Event → Inference)
+//  2. The Animal Ceiling
+//  3. Copying the Animal (the 'Is' Trap warning)
+// ════════════════════════════════════════════════════════════════════════════
+
+function NervousSystem({ isKh }: { isKh: boolean }) {
+  return (
+    <div data-testid="nervous-system" className="space-y-5">
+      <SaneOrderCard isKh={isKh} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <AnimalCeilingCard isKh={isKh} />
+        <CopyingAnimalCard isKh={isKh} />
+      </div>
+    </div>
+  );
+}
+
+// ── Card A · The Sane Order of Abstraction (visual ladder) ──────────────────
+
+function SaneOrderCard({ isKh }: { isKh: boolean }) {
+  const steps: {
+    Icon: React.ComponentType<{ className?: string }>;
+    en: { name: string; sub: string; desc: string };
+    kh: { name: string; sub: string; desc: string };
+    tone: string;
+    rail: string;
+    badge: string;
+  }[] = [
+    {
+      Icon: Mountain,
+      en: {
+        name: "The Event",
+        sub: "The Territory",
+        desc: "The actual, physical atoms vibrating in reality — which we can never fully touch or see.",
+      },
+      kh: {
+        name: "ព្រឹត្តិការណ៍",
+        sub: "ទឹកដី",
+        desc: "អាតូមរូបវ័ន្តពិតប្រាកដដែលកំពុងញ័រនៅក្នុងការពិត — ដែលយើងមិនអាចប៉ះ ឬមើលឃើញវាបានពេញលេញឡើយ។",
+      },
+      tone: "bg-stone-100 border-stone-400 text-stone-900",
+      rail: "bg-stone-400",
+      badge: "bg-stone-200 text-stone-700 border-stone-400",
+    },
+    {
+      Icon: Eye,
+      en: {
+        name: "The Object",
+        sub: "The Senses",
+        desc: "What our eyes, ears, and skin filter and perceive from that vibrating reality.",
+      },
+      kh: {
+        name: "វត្ថុ",
+        sub: "វិញ្ញាណ",
+        desc: "អ្វីដែលភ្នែក ត្រចៀក និងស្បែករបស់យើង ត្រងហើយយល់ឃើញពីការពិតដែលកំពុងញ័រនោះ។",
+      },
+      tone: "bg-amber-50 border-amber-400 text-amber-900",
+      rail: "bg-amber-400",
+      badge: "bg-amber-100 text-amber-800 border-amber-400",
+    },
+    {
+      Icon: Tag,
+      en: {
+        name: "The Label",
+        sub: "The Words",
+        desc: "The name we give it: 'apple', 'tree', 'friend', 'enemy'.",
+      },
+      kh: {
+        name: "ស្លាក",
+        sub: "ពាក្យ",
+        desc: "ឈ្មោះដែលយើងដាក់ឱ្យវា៖ «ផ្លែប៉ោម» «ដើមឈើ» «មិត្តភក្តិ» «សត្រូវ»។",
+      },
+      tone: "bg-yellow-50 border-yellow-400 text-yellow-900",
+      rail: "bg-yellow-400",
+      badge: "bg-yellow-100 text-yellow-800 border-yellow-400",
+    },
+    {
+      Icon: Brain,
+      en: {
+        name: "The Inference",
+        sub: "The Meaning",
+        desc: "The thoughts, theories, and stories we build on top of the label.",
+      },
+      kh: {
+        name: "ការសន្និដ្ឋាន",
+        sub: "អត្ថន័យ",
+        desc: "គំនិត ទ្រឹស្តី និងរឿងរ៉ាវដែលយើងសាងសង់នៅពីលើស្លាកនោះ។",
+      },
+      tone: "bg-teal-50 border-teal-400 text-teal-900",
+      rail: "bg-teal-400",
+      badge: "bg-teal-100 text-teal-800 border-teal-400",
+    },
+  ];
+
+  return (
+    <article
+      data-testid="card-sane-order"
+      className="relative bg-white border border-teal-300/70 rounded-2xl shadow-sm overflow-hidden"
+    >
+      {/* Top accent stripe */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-stone-400 via-amber-400 via-yellow-400 to-teal-400" aria-hidden="true" />
+
+      {/* Header */}
+      <div className="flex items-center gap-2.5 px-5 pt-5 pb-3 border-b border-teal-200/70 bg-gradient-to-r from-teal-50 via-stone-50 to-amber-50">
+        <div className="w-8 h-8 rounded-lg bg-teal-500/15 border border-teal-400/50 flex items-center justify-center">
+          <Layers className="w-4 h-4 text-teal-700" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-teal-700">
+            CARD 01 · THE SANE ORDER · HUMAN
+          </p>
+          <h3 className={`font-display font-bold text-stone-900 text-base sm:text-lg leading-tight ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "លំដាប់នៃសេចក្តីសន្និដ្ឋានដ៏ត្រឹមត្រូវ" : "The Sane Order of Abstraction"}
+          </h3>
+          <p className={`text-[11px] text-stone-500 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "The Sane Order of Abstraction" : "លំដាប់នៃសេចក្តីសន្និដ្ឋានដ៏ត្រឹមត្រូវ"}
+          </p>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="px-5 py-5 space-y-4">
+        <p className={`text-stone-700 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh
+            ? "ប្រព័ន្ធសរសៃប្រសាទមនុស្សដ៏មានសុខភាពល្អ ដំណើរការការពិតតាមលំដាប់ ៤ ជំហានច្បាស់លាស់។ ជំហាននីមួយៗ ឆ្ងាយពីទឹកដីរូបវ័ន្តកាន់តែច្រើនឡើង។"
+            : "A healthy human nervous system processes reality in a clear 4-step order. Each step climbs further away from the physical territory."}
+        </p>
+
+        {/* Visual ladder */}
+        <ol
+          aria-label={isKh ? "ជណ្ដើរនៃការអរូបីកម្មដ៏ត្រឹមត្រូវ" : "Sane order of abstraction ladder"}
+          className="relative space-y-2.5"
+          data-testid="sane-order-ladder"
+        >
+          {steps.map((s, i) => {
+            const indent = ["ml-0", "ml-3 sm:ml-5", "ml-6 sm:ml-10", "ml-9 sm:ml-16"][i] ?? "ml-12";
+            const txt = isKh ? s.kh : s.en;
+            return (
+              <li
+                key={i}
+                className={`relative ${indent}`}
+                data-testid={`sane-step-${i + 1}`}
+              >
+                <div className={`flex items-start gap-3 rounded-lg border-2 px-3 py-2.5 ${s.tone}`}>
+                  <div className="flex flex-col items-center pt-0.5">
+                    <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full border-2 font-mono text-[11px] font-bold ${s.badge}`} aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    {i < steps.length - 1 ? (
+                      <span className={`mt-1 w-0.5 flex-1 ${s.rail} opacity-60 min-h-[8px]`} aria-hidden="true" />
+                    ) : null}
+                  </div>
+                  <s.Icon className="w-4 h-4 mt-1 shrink-0 opacity-80" aria-hidden="true" />
+                  <div className="flex-1 min-w-0">
+                    <p className={`font-display font-bold text-[14px] leading-tight ${isKh ? "font-khmer" : ""}`}>
+                      {txt.name}
+                      <span className={`ml-2 font-normal text-[11px] opacity-70 ${isKh ? "font-khmer" : ""}`}>
+                        ({txt.sub})
+                      </span>
+                    </p>
+                    <p className={`mt-1 text-[12.5px] opacity-90 ${isKh ? "font-khmer leading-loose" : "leading-snug"}`}>
+                      {txt.desc}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* Consciousness of Abstracting callout */}
+        <div className="rounded-lg bg-teal-50 border-l-4 border-teal-500 px-4 py-3" data-testid="consciousness-callout">
+          <p className={`inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-teal-800 mb-1.5 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            <Sparkles className="w-3 h-3" aria-hidden="true" />
+            {isKh ? "ការដឹងខ្លួននៃការអរូបីកម្ម" : "Consciousness of Abstracting"}
+          </p>
+          <p className={`text-stone-800 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+            {isKh
+              ? "ត្រូវចងចាំជានិច្ចថា ជំហានទី ៤ មិនមែនជាជំហានទី ១ ឡើយ។"
+              : "Always remember that Step 4 is not Step 1."}
+            <br />
+            <span className="inline-flex items-center gap-1.5 mt-1.5 text-stone-600 text-[13px]">
+              <MapIcon className="w-3.5 h-3.5 text-teal-700" aria-hidden="true" />
+              <span className={isKh ? "font-khmer" : "italic"}>
+                {isKh ? "ផែនទីមិនមែនជាទឹកដី" : "The Map is not the Territory."}
+              </span>
+            </span>
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── Card B · The Animal Ceiling ────────────────────────────────────────────
+
+function AnimalCeilingCard({ isKh }: { isKh: boolean }) {
+  return (
+    <article
+      data-testid="card-animal-ceiling"
+      className="relative bg-white border border-amber-300/70 rounded-2xl shadow-sm overflow-hidden flex flex-col"
+    >
+      {/* Header */}
+      <div className="flex items-center gap-2.5 px-5 pt-4 pb-3 border-b border-amber-200/80 bg-gradient-to-r from-amber-50 to-stone-50">
+        <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-400/40 flex items-center justify-center">
+          <Dog className="w-4 h-4 text-amber-700" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-amber-700">
+            CARD 02 · THE CEILING · ANIMAL
+          </p>
+          <h3 className={`font-display font-bold text-stone-900 text-base sm:text-lg leading-tight ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ដែនកំណត់របស់សត្វ" : "The Animal Ceiling"}
+          </h3>
+          <p className={`text-[11px] text-stone-500 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "The Animal Ceiling" : "ដែនកំណត់របស់សត្វ"}
+          </p>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="px-5 py-4 space-y-3 flex-1 flex flex-col">
+        <span className={`inline-block w-fit text-[10px] font-mono uppercase tracking-[0.18em] text-amber-700 bg-amber-500/10 border border-amber-400/40 rounded-sm px-2 py-0.5 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "គំនិតរបស់ Korzybski" : "Korzybski's Idea"}
+        </span>
+        <p className={`text-stone-700 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh
+            ? "លោក Korzybski បានកត់សម្គាល់ថា សត្វធ្វើការអរូបីកម្មរហូតដល់កម្រិតមួយ — ហើយឈប់នៅទីនោះ។ ឆ្កែមួយក្បាលអាចអរូបីកម្មវត្ថុមួយ — វាស្គាល់ «ចានអាហារ» របស់វា ហើយរត់ទៅឯនោះពេលឃ្លាន។"
+            : "Korzybski observed that animals abstract up to a point — and stop there. A dog can abstract an object: it recognizes its 'food bowl' and runs to it when hungry."}
+        </p>
+        <p className={`text-stone-700 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh
+            ? "ប៉ុន្តែ វាមិនអាចអរូបីកម្មអំពីអរូបីកម្មរបស់វាបានឡើយ។ វាមិនអាចគិតអំពី «គំនិតនៃចានអាហារ» «ប្រវត្តិសាស្ត្រនៃចានអាហារ» ឬ «សុភាសិតស្ដីពីចានអាហារ» បានទេ។ វាប៉ះពិដាននៃប្រព័ន្ធសរសៃប្រសាទរបស់វា។"
+            : "But it cannot abstract about its abstractions. It cannot think about the concept of a food bowl, a history of food bowls, or a philosophy of food bowls. It hits a neurological ceiling."}
+        </p>
+
+        {/* Mini ceiling diagram */}
+        <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[12px]">
+          <div className="rounded-md bg-emerald-50 border border-emerald-300/60 px-2.5 py-1.5">
+            <p className="text-emerald-700 font-mono text-[10px] uppercase tracking-widest mb-0.5">
+              {isKh ? "ធ្វើបាន" : "Can"}
+            </p>
+            <p className={`text-stone-700 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "ស្គាល់ចានអាហារ" : "Recognize a food bowl"}
+            </p>
+          </div>
+          <div className="rounded-md bg-stone-100 border border-stone-300/70 px-2.5 py-1.5">
+            <p className="text-stone-500 font-mono text-[10px] uppercase tracking-widest mb-0.5 inline-flex items-center gap-1">
+              <Lock className="w-2.5 h-2.5" aria-hidden="true" />
+              {isKh ? "មិនបាន" : "Cannot"}
+            </p>
+            <p className={`text-stone-600 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "គិតអំពី «គំនិតនៃចានអាហារ»" : "Think about the 'concept' of a food bowl"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ── Card C · Copying the Animal (the 'Is' Trap warning) ────────────────────
+
+function CopyingAnimalCard({ isKh }: { isKh: boolean }) {
+  return (
+    <article
+      data-testid="card-copying-animal"
+      className="relative bg-white border border-rose-300/70 rounded-2xl shadow-sm overflow-hidden flex flex-col"
+    >
+      {/* Top warning stripe */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-400 via-red-400 to-amber-400" aria-hidden="true" />
+
+      {/* Header */}
+      <div className="flex items-center gap-2.5 px-5 pt-5 pb-3 border-b border-rose-200/80 bg-gradient-to-r from-rose-50 via-stone-50 to-amber-50">
+        <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-400/40 flex items-center justify-center">
+          <AlertTriangle className="w-4 h-4 text-rose-700" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-rose-700">
+            CARD 03 · WARNING · THE 'IS' TRAP
+          </p>
+          <h3 className={`font-display font-bold text-stone-900 text-base sm:text-lg leading-tight ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "ការចម្លងតាមសត្វ" : "Copying the Animal"}
+          </h3>
+          <p className={`text-[11px] text-stone-500 mt-0.5 ${isKh ? "font-khmer" : ""}`}>
+            {isKh ? "Copying the Animal" : "ការចម្លងតាមសត្វ"}
+          </p>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="px-5 py-4 space-y-3 flex-1 flex flex-col">
+        <p className={`text-stone-700 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh ? (
+            <>
+              ពេលមនុស្សនិយាយថា{" "}
+              <span className="font-bold text-rose-700">«គាត់ <em>គឺ</em> អ្នកបរាជ័យ»</span> ឬ{" "}
+              <span className="font-bold text-rose-700">«រឿងនេះ <em>គឺ</em> អាក្រក់»</span>
+              {" "}យើងកំពុងបរាជ័យក្នុងការដើរតាមលំដាប់នៃការអរូបីកម្មដ៏ត្រឹមត្រូវ។ យើងច្រឡំ ស្លាក (ជំហានទី ៣) ជាមួយ ព្រឹត្តិការណ៍ (ជំហានទី ១)។
+            </>
+          ) : (
+            <>
+              When humans say{" "}
+              <span className="font-bold text-rose-700">"He <em>is</em> a failure"</span> or{" "}
+              <span className="font-bold text-rose-700">"This <em>is</em> terrible"</span>, we are failing to follow the sane order of abstraction. We confuse the <strong>Label (Step 3)</strong> with the <strong>Event (Step 1)</strong>.
+            </>
+          )}
+        </p>
+
+        {/* Collapse diagram: Step 3 == Step 1 (broken) */}
+        <div className="rounded-lg border border-rose-200 bg-rose-50/60 px-3.5 py-3" aria-hidden="true">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 text-[12px] flex-wrap">
+            <span className="inline-flex items-center gap-1.5 rounded-md border-2 border-yellow-400 bg-yellow-50 px-2.5 py-1.5">
+              <Tag className="w-3.5 h-3.5 text-yellow-700" />
+              <span className={`font-mono font-bold text-yellow-800 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? "ស្លាក (៣)" : "Label (3)"}
+              </span>
+            </span>
+            <span className="font-mono text-base font-bold text-rose-700">=</span>
+            <span className="inline-flex items-center gap-1.5 rounded-md border-2 border-stone-400 bg-stone-100 px-2.5 py-1.5">
+              <Mountain className="w-3.5 h-3.5 text-stone-700" />
+              <span className={`font-mono font-bold text-stone-800 ${isKh ? "font-khmer" : ""}`}>
+                {isKh ? "ព្រឹត្តិការណ៍ (១)" : "Event (1)"}
+              </span>
+            </span>
+            <span className="text-rose-700 font-mono text-[10px] uppercase tracking-widest border border-rose-400 bg-white rounded-sm px-1.5 py-0.5">
+              {isKh ? "ខូច" : "broken"}
+            </span>
+          </div>
+        </div>
+
+        <p className={`text-stone-700 text-sm leading-relaxed ${isKh ? "font-khmer leading-loose" : ""}`}>
+          {isKh
+            ? "ពេលយើងធ្វើដូច្នេះ ប្រព័ន្ធសរសៃប្រសាទរបស់យើងឈប់ដំណើរការដូចជា «អ្នកចងពេលវេលា» របស់មនុស្ស ហើយ «ចម្លង» តាមសត្វ។ យើងប្រតិកម្មទៅនឹងពាក្យ ដោយអារម្មណ៍ភ្លាមៗយ៉ាងងងឹត ដូចសត្វប្រតិកម្មនឹងការគំរាមកំហែងរូបវ័ន្ត។"
+            : "When we do this, our nervous system stops functioning like a human time-binder and 'copies' the animal. We react to words with blind, immediate emotion — just like an animal reacting to a physical threat."}
+        </p>
+
+        {/* Footer pill */}
+        <div className="mt-auto pt-2">
+          <span className={`inline-flex items-center gap-1.5 text-[11px] rounded-full bg-rose-100 text-rose-800 border border-rose-300 px-2.5 py-1 ${isKh ? "font-khmer" : "font-mono"}`}>
+            <AlertTriangle className="w-3 h-3" aria-hidden="true" />
+            {isKh ? "បាត់បង់របៀបគិតរបស់មនុស្ស" : "Human mode lost"}
+          </span>
+        </div>
+      </div>
+    </article>
   );
 }
