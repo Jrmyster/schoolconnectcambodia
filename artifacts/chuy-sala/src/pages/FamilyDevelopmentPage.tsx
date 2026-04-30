@@ -27,6 +27,8 @@ import {
   Apple,
   Droplet,
   Cookie,
+  Brain,
+  BookOpen,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -120,6 +122,7 @@ export default function FamilyDevelopmentPage() {
         <FirstYearCard k={k} t={t} />
         <PregnancyJourneyCard k={k} t={t} />
         <MilestonesCard k={k} t={t} />
+        <BuildingTheBrainCard k={k} t={t} />
 
         {/* Closing strip */}
         <div
@@ -150,6 +153,277 @@ export default function FamilyDevelopmentPage() {
 }
 
 type T = (en: string, kh: string) => string;
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Card 5 · Building the Brain — The Power of Words
+//          ការកសាងខួរក្បាល៖ ថាមពលនៃពាក្យសម្តី
+// ════════════════════════════════════════════════════════════════════════════
+
+function BuildingTheBrainCard({ k, t }: { k: boolean; t: T }) {
+  return (
+    <CardShell
+      k={k}
+      spec="FD-05"
+      icon={<Brain className="w-4 h-4" />}
+      titleEn="Building the Brain: The Power of Words"
+      titleKh="ការកសាងខួរក្បាល៖ ថាមពលនៃពាក្យសម្តី"
+      leadEn="A child's brain grows faster in the first five years than at any other time in their entire life. Every time a parent talks, sings, or reads to that child, real, physical connections are being built between brain cells. The cost is nothing. The tool is your voice."
+      leadKh="ខួរក្បាលរបស់កុមារ លូតលាស់លឿនជាងគេបង្អស់ក្នុងរយៈពេលប្រាំឆ្នាំដំបូង ជាងពេលណាមួយផ្សេងទៀតពេញមួយជីវិត។ រាល់ពេលដែលឪពុកម្ដាយនិយាយ ច្រៀង ឬអានឲ្យកូនស្តាប់ ការតភ្ជាប់ពិតប្រាកដ និងជារូបរាង កំពុងតែត្រូវបានបង្កើតឡើងរវាងកោសិកាខួរក្បាល។ តម្លៃរបស់វាគឺគ្មាន។ ឧបករណ៍គឺសំឡេងរបស់អ្នក។"
+      accentBg={`${CREAM_DEEP}`}
+      accentBorder={`${LEAF}33`}
+      accentText={LEAF_DEEP}
+      testId="card-building-the-brain"
+    >
+      {/* ─── Sub-heading ─────────────────────────────────────────── */}
+      <div className="mb-5">
+        <h3
+          className={`text-base font-bold ${k ? "font-khmer" : ""}`}
+          style={{ color: INK }}
+        >
+          {t(
+            "The Two Pillars of Language",
+            "សសរស្តម្ភទាំងពីរនៃភាសា",
+          )}
+        </h3>
+        <div
+          className={`text-[12px] mt-0.5 ${k ? "" : "font-khmer"}`}
+          style={{ color: INK_SOFT }}
+        >
+          {k ? "The Two Pillars of Language" : "សសរស្តម្ភទាំងពីរនៃភាសា"}
+        </div>
+      </div>
+
+      {/* ─── Two pillars: side by side on sm+ ────────────────────── */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        {/* Pillar 1 — Narrating the Day */}
+        <PillarTile
+          k={k}
+          icon={<MessageCircle className="w-5 h-5" />}
+          accent={LEAF}
+          accentDeep={LEAF_DEEP}
+          accentSoft={LEAF_SOFT}
+          enLabel="Pillar 1 · Everyday talk"
+          khLabel="សសរស្តម្ភទី ១ · ការនិយាយប្រចាំថ្ងៃ"
+          enTitle="Narrating the Day"
+          khTitle="ការនិយាយប្រាប់ពីសកម្មភាពប្រចាំថ្ងៃ"
+          enBody="Babies learn language by listening, long before they can answer back. So the simplest, most powerful thing a parent can do is narrate their day out loud — describe what they are seeing, doing, and feeling, even if the baby seems too young to understand. Each sentence is a tiny vocabulary lesson, and a baby who is constantly bathed in words begins life with a much bigger word-bank than a baby who grows up in silence."
+          khBody="ទារករៀនភាសាដោយការស្តាប់ យូរមុនពេលដែលគាត់អាចឆ្លើយតបវិញបាន។ ដូច្នេះ រឿងសាមញ្ញ និងមានឥទ្ធិពលបំផុត ដែលឪពុកម្ដាយអាចធ្វើបាន គឺនិយាយរៀបរាប់ពីសកម្មភាពប្រចាំថ្ងៃរបស់គេឲ្យឮ — ពណ៌នាអ្វីដែលគេកំពុងមើល កំពុងធ្វើ និងកំពុងមានអារម្មណ៍ ទោះបីជាទារកមើលទៅដូចជានៅតូចពេកមិនយល់ក៏ដោយ។ រាល់ប្រយោគនីមួយៗ គឺជាមេរៀនវាក្យសព្ទតូចមួយ ហើយទារកដែលព័ទ្ធជុំវិញដោយពាក្យសម្តីជាប់ៗ ចាប់ផ្តើមជីវិតជាមួយឃ្លាំងពាក្យធំជាងទារកដែលធំឡើងក្នុងភាពស្ងៀមស្ងាត់។"
+          enExample="“I am washing the red bowl. The water is cold!”"
+          khExample="«ខ្ញុំកំពុងលាងចានពណ៌ក្រហម។ ទឹកត្រជាក់!»"
+          testId="pillar-narrating"
+        />
+
+        {/* Pillar 2 — The Magic of Books */}
+        <PillarTile
+          k={k}
+          icon={<BookOpen className="w-5 h-5" />}
+          accent={TERRA}
+          accentDeep={TERRA_DEEP}
+          accentSoft={TERRA_SOFT}
+          enLabel="Pillar 2 · Story time"
+          khLabel="សសរស្តម្ភទី ២ · ពេលនិទានរឿង"
+          enTitle="The Magic of Books"
+          khTitle="ភាពអស្ចារ្យនៃសៀវភៅ"
+          enBody="Books carry words that almost never come up in everyday conversation — words like “giraffe”, “castle”, “ocean”, “astronaut”. Hearing those rare words inside a story gives the child a secret head-start: by the time they reach the first day of school, they already know what the teacher is talking about. Just one short book a day, every day, builds a vocabulary advantage that lasts a lifetime."
+          khBody="សៀវភៅផ្ទុកនូវពាក្យដែលស្ទើរតែមិនធ្លាប់លេចចេញក្នុងការសន្ទនាប្រចាំថ្ងៃ — ពាក្យដូចជា «សត្វហ្សីរ៉ាហ្វ» «ប្រាសាទ» «មហាសមុទ្រ» «អវកាសយានិក»។ ការឮពាក្យកម្រទាំងនោះក្នុងសាច់រឿងមួយ ផ្តល់ឲ្យកុមារនូវអត្ថប្រយោជន៍មុនគេយ៉ាងស្ងាត់ៗ ៖ ដល់ថ្ងៃដំបូងនៃការចូលរៀនសាលា គេបានដឹងហើយនូវអ្វីដែលគ្រូកំពុងនិយាយ។ គ្រាន់តែសៀវភៅខ្លីមួយក្បាលក្នុងមួយថ្ងៃ រាល់ថ្ងៃ ក៏អាចបង្កើតឧត្តមភាពវាក្យសព្ទដែលនៅជាប់មួយជីវិត។"
+          enExample="One bedtime story = one new world of words."
+          khExample="រឿងនិទានមួយមុនគេង = ពិភពពាក្យថ្មីមួយ។"
+          testId="pillar-books"
+        />
+      </div>
+
+      {/* ─── Compounding effect highlight ────────────────────────── */}
+      <div
+        className="mt-6 rounded-2xl border-2 p-5 sm:p-6 relative overflow-hidden"
+        style={{
+          borderColor: `${AMBER}55`,
+          backgroundImage: `linear-gradient(135deg, ${CREAM_DEEP} 0%, #ffffff 100%)`,
+        }}
+        data-testid="compounding-effect"
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase text-white"
+            style={{ backgroundColor: AMBER }}
+          >
+            {t("The Math", "គណិតវិទ្យានៃការអាន")}
+          </span>
+          <Sparkles
+            className="w-4 h-4"
+            style={{ color: AMBER }}
+            aria-hidden="true"
+          />
+        </div>
+
+        <h4
+          className={`text-lg sm:text-xl font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+          style={{ color: INK }}
+        >
+          {t(
+            "The Compounding Effect of Reading",
+            "ឥទ្ធិពលរួមបញ្ចូលគ្នានៃការអាន",
+          )}
+        </h4>
+
+        {/* Big stat */}
+        <div className="mt-4 flex items-baseline gap-3 flex-wrap">
+          <span
+            className="font-extrabold leading-none"
+            style={{
+              color: AMBER,
+              fontSize: "clamp(2.25rem, 6vw, 3rem)",
+            }}
+            data-testid="million-words-stat"
+          >
+            {t("1,000,000+", "១,០០០,០០០+")}
+          </span>
+          <span
+            className={`text-sm sm:text-base font-semibold ${k ? "font-khmer leading-loose" : ""}`}
+            style={{ color: INK_SOFT }}
+          >
+            {t(
+              "extra words heard before kindergarten",
+              "ពាក្យបន្ថែមដែលបានឮ មុនពេលចូលថ្នាក់មត្តេយ្យ",
+            )}
+          </span>
+        </div>
+
+        <p
+          className={`mt-3 text-sm sm:text-[15px] ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          style={{ color: INK_SOFT }}
+        >
+          {t(
+            "Researchers who actually count the words children hear have found something extraordinary: a child read to consistently every day — a few short books, not just one — can hear hundreds of thousands to over a million more words before kindergarten than a child who is not read to at all. Those extra words become the raw material the brain uses to understand sentences, follow stories, and — eventually — read on its own. Reading aloud is not just a sweet bedtime ritual. It is the foundation of reading comprehension itself.",
+            "អ្នកស្រាវជ្រាវដែលរាប់ពាក្យដែលកុមារបានឮពិតប្រាកដ បានរកឃើញរឿងគួរឲ្យអស្ចារ្យមួយ ៖ កុមារដែលឪពុកម្ដាយអានឲ្យស្តាប់ជាប់ៗរាល់ថ្ងៃ — សៀវភៅខ្លីពីរបី មិនមែនមួយក្បាលទេ — អាចឮពាក្យច្រើនពីរយសែនរហូតដល់ជាងមួយលានពាក្យបន្ថែម មុនចូលថ្នាក់មត្តេយ្យ ធៀបនឹងកុមារដែលគ្មាននរណាអានឲ្យស្តាប់ឡើយ។ ពាក្យបន្ថែមទាំងនោះ ក្លាយជាសម្ភារៈឆៅដែលខួរក្បាលប្រើដើម្បីយល់ប្រយោគ តាមដានសាច់រឿង ហើយចុងក្រោយ — អានដោយខ្លួនឯង។ ការអានឲ្យឮៗ មិនមែនគ្រាន់តែជាពិធីផ្អែមៗមុនគេងទេ។ វាគឺជាមូលដ្ឋាននៃការយល់អត្ថន័យនៃការអានដោយខ្លួនឯង។",
+          )}
+        </p>
+        <p
+          className={`mt-2 text-[11px] ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          style={{ color: INK_SOFT, opacity: 0.7 }}
+        >
+          {t(
+            "Source: Logan et al., Ohio State University, 2019 — “When Children Are Not Read To at Home.”",
+            "ប្រភព ៖ Logan et al., សកលវិទ្យាល័យ Ohio State, ឆ្នាំ ២០១៩ — «When Children Are Not Read To at Home»។",
+          )}
+        </p>
+      </div>
+
+      {/* ─── Closing encouragement ──────────────────────────────── */}
+      <div
+        className="mt-5 flex items-start gap-3 rounded-xl p-4"
+        style={{ backgroundColor: `${LEAF_SOFT}55`, border: `1px solid ${LEAF}33` }}
+      >
+        <Heart
+          className="w-5 h-5 flex-shrink-0 mt-0.5"
+          style={{ color: LEAF_DEEP }}
+          aria-hidden="true"
+        />
+        <p
+          className={`text-sm ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          style={{ color: LEAF_DEEP }}
+        >
+          <strong className={k ? "" : "font-bold"}>
+            {t("This costs nothing. ", "រឿងនេះមិនចំណាយលុយឡើយ។ ")}
+          </strong>
+          {t(
+            "It does not require money, school fees, or a fancy library — only your voice, a little time, and the willingness to keep showing up. The brain a child carries into adulthood is built, word by word, in these quiet daily moments.",
+            "វាមិនត្រូវការលុយ មិនត្រូវការថ្លៃសិក្សា ឬបណ្ណាល័យដ៏ប្រណិតឡើយ — គ្រាន់តែសំឡេងរបស់អ្នក ពេលវេលាបន្តិច និងការប្តេជ្ញាបន្តមានវត្តមានជាប់ៗប៉ុណ្ណោះ។ ខួរក្បាលដែលកុមារយកជាប់ខ្លួនទៅមនុស្សពេញវ័យ ត្រូវបានកសាងពាក្យមួយម្ដងៗ នៅក្នុងពេលវេលាស្ងប់ៗប្រចាំថ្ងៃទាំងនេះ។",
+          )}
+        </p>
+      </div>
+    </CardShell>
+  );
+}
+
+// ── Pillar tile (used inside BuildingTheBrainCard) ──────────────────────────
+
+function PillarTile({
+  k,
+  icon,
+  accent,
+  accentDeep,
+  accentSoft,
+  enLabel,
+  khLabel,
+  enTitle,
+  khTitle,
+  enBody,
+  khBody,
+  enExample,
+  khExample,
+  testId,
+}: {
+  k: boolean;
+  icon: React.ReactNode;
+  accent: string;
+  accentDeep: string;
+  accentSoft: string;
+  enLabel: string;
+  khLabel: string;
+  enTitle: string;
+  khTitle: string;
+  enBody: string;
+  khBody: string;
+  enExample: string;
+  khExample: string;
+  testId?: string;
+}) {
+  return (
+    <div
+      className="rounded-2xl border-2 p-5 bg-white flex flex-col"
+      style={{ borderColor: `${accent}55` }}
+      data-testid={testId}
+    >
+      <div className="flex items-center gap-3 mb-3">
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: `${accentSoft}88`, color: accentDeep }}
+        >
+          <span aria-hidden="true">{icon}</span>
+        </div>
+        <div className="min-w-0">
+          <div
+            className={`text-[10px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            style={{ color: accent }}
+          >
+            {k ? khLabel : enLabel}
+          </div>
+          <h4
+            className={`font-bold text-base sm:text-lg leading-tight ${k ? "font-khmer" : ""}`}
+            style={{ color: INK }}
+          >
+            {k ? khTitle : enTitle}
+          </h4>
+          {/* Always-bilingual sub-heading line */}
+          <div
+            className={`text-[11px] mt-0.5 ${k ? "" : "font-khmer"}`}
+            style={{ color: INK_SOFT }}
+          >
+            {k ? enTitle : khTitle}
+          </div>
+        </div>
+      </div>
+
+      <p
+        className={`text-sm ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+        style={{ color: INK_SOFT }}
+      >
+        {k ? khBody : enBody}
+      </p>
+
+      <div
+        className={`mt-4 rounded-lg px-3 py-2 text-sm italic ${k ? "font-khmer not-italic leading-loose" : "leading-relaxed"}`}
+        style={{
+          backgroundColor: `${accentSoft}55`,
+          color: accentDeep,
+          borderLeft: `3px solid ${accent}`,
+        }}
+      >
+        {k ? khExample : enExample}
+      </div>
+    </div>
+  );
+}
 
 // ── Shared card shell ──────────────────────────────────────────────────────
 
