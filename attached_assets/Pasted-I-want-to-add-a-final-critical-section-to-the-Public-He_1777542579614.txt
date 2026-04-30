@@ -1,0 +1,31 @@
+I want to add a final, critical section to the 'Public Health: The Web of Well-Being' page (or create a dedicated new page) called 'The Golden Hour: Emergency First Aid (ម៉ោងមាស៖ ជំនួយសង្គ្រោះបឋមបន្ទាន់)'.
+
+Please implement this using our established educational aesthetic, utilizing clear, urgent visual cues (clean whites, medical crosses, and stark warning colors) and bilingual typography:
+
+1. Section 1: The Golden Hour (ម៉ោងមាស)
+
+Explain the concept: The 'Golden Hour' is the critical 60 minutes immediately following severe trauma. Explain that in rural villages, doctors are far away, so the actions taken by bystanders in the first 10 minutes determine if the patient survives the trip to the hospital.
+
+2. Section 2: Snakebites - The Myths & The Reality (ពស់ចឹក)
+
+Create a side-by-side comparison card (Myth vs. Fact).
+
+Do NOT (Danger): Never tie a tight tourniquet (rope) above the bite—this traps the venom and kills the limb, leading to amputation. Never cut the wound or try to suck the venom out.
+
+DO (Safe): Keep the patient completely calm to slow their heart rate (which slows venom spread). Immobilize the bitten limb with a splint so it cannot bend. Transport to a hospital immediately.
+
+3. Section 3: Heat Stroke vs. Heat Exhaustion (ជំងឺខ្យល់គរដោយកម្តៅ)
+
+Explain the difference. Heat exhaustion means the body is sweating and fighting. Heat stroke means the engine has 'overheated'—the person stops sweating, their skin gets dry and hot, and they become confused or faint. This is a deadly emergency.
+
+The Fix: Move them to shade immediately. Remove heavy clothing. Pour cool water over their body and fan them aggressively to force rapid evaporation and bring their core temperature down.
+
+4. Section 4: Water Rescue & CPR Basics (ការសង្គ្រោះផ្លូវដង្ហើម)
+
+Outline basic, non-medical steps for drowning.
+
+Explain that if someone is pulled from the water and is unresponsive, the priority is clearing the airway and performing chest compressions (pressing hard and fast in the center of the chest) to manually pump the blood for the heart until help arrives.
+
+5. Formatting & UX:
+
+Ensure all main headings, medical terms, and vital warnings are strictly bilingual (English/Khmer). Use highly visible, universally recognized icons (a snake, a sun/thermometer, and a heartbeat line) to make the sections instantly scannable.

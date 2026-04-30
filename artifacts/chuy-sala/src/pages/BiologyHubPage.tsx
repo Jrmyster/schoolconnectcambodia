@@ -7,6 +7,7 @@ import { FamilyTraitMapper } from "@/components/biology/FamilyTraitMapper";
 import { NaturalSelectionSim } from "@/components/biology/NaturalSelectionSim";
 import { HumanEvolutionTimeline } from "@/components/biology/HumanEvolutionTimeline";
 import { MekongEcology } from "@/components/biology/MekongEcology";
+import { TonleSapEcology } from "@/components/biology/TonleSapEcology";
 
 const NATURE_BG: CSSProperties = {
   backgroundColor: "#f5f7f0",
@@ -97,6 +98,7 @@ export function BiologyHubPage() {
           subEn="The web of life where Cambodia's rivers, fish and people meet."
           subKh="បណ្តាញនៃជីវិត ដែលទន្លេ ត្រី និងមនុស្សកម្ពុជាជួបគ្នា។">
           <MekongEcology />
+          <TonleSapEcology />
         </Section>
 
         <p className={`text-center text-xs sm:text-sm text-stone-600 ${kh ? "font-khmer leading-loose" : ""}`}>
