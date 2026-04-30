@@ -1,0 +1,37 @@
+I want to add a new section to the 'Public Health: The Web of Well-Being' page called 'The Chemistry of Alcohol (គីមីសាស្ត្រនៃគ្រឿងស្រវឹង)'.
+
+Please implement this using our established Well-Being aesthetic, utilizing clean cards and bilingual (English/Khmer) typography:
+
+1. Section 1: Hijacking the Brain (ការប្លន់យកខួរក្បាល)
+
+Explain how ethanol (alcohol) crosses the blood-brain barrier and manipulates two main chemicals:
+
+GABA (The Brakes): Alcohol artificially boosts GABA, which slows down the brain, causing slurred speech, poor balance, and lowered inhibitions.
+
+Glutamate (The Gas Pedal): Alcohol suppresses Glutamate, further slowing down reaction times and memory formation.
+
+Explain that at the same time, it triggers a spike in Dopamine, tricking the brain's reward center into thinking something great just happened.
+
+2. Section 2: The Mechanics of Addiction (យន្តការនៃការញៀន)
+
+Explain neuroadaptation. Because the brain wants to stay in balance (homeostasis), if someone drinks heavily and often, the brain stops making its own GABA and produces extra Glutamate to fight the alcohol.
+
+The Trap: When the alcohol wears off, the brain is left with too much Glutamate and not enough GABA. This causes severe anxiety, shaking, and physical withdrawal. The person now has to drink just to feel 'normal' again.
+
+3. Section 3: The Carcinogen Connection (ទំនាក់ទំនងនៃសារជាតិបង្កមហារីក)
+
+State clearly that alcohol is a Group 1 carcinogen (in the same category as tobacco).
+
+Explain the biology: When the liver breaks down ethanol, it turns it into a highly toxic chemical called Acetaldehyde. This toxin damages DNA.
+
+To repair the damage, cells have to divide more frequently. Every time a cell divides, there is a chance for a copying error (a mutation) to occur, which is how cancer begins.
+
+4. Section 4: Risk Factors & Support (កត្តាហានិភ័យ និងការគាំទ្រ)
+
+Risk Factors: List genetics, high stress, environment, and drinking at an early age before the brain is fully developed.
+
+Support: Introduce Alcoholics Anonymous (AA) / អង្គការអ្នកញៀនស្រាអនាមិក. Explain that addiction is a chronic medical condition, not a moral failure, and that community support systems rely on total abstinence and shared resilience to help the brain slowly heal its chemical balance over time.
+
+5. Formatting & UX:
+
+Ensure all medical terms and core concepts are strictly bilingual (English/Khmer). Use appropriate icons (a brain, a DNA strand, a support ribbon) to make the sections distinct.

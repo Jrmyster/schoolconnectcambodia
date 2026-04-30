@@ -1,0 +1,25 @@
+I want to add a new major section to the bottom of 'The 20th Century - The Electric Revolution' page. Let's call it 'The Cambodian Synthesis: A Musical Journey (ការសំយោគតន្ត្រីកម្ពុជា៖ ដំណើរនៃសិល្បៈ)'.
+
+Please implement this using the page's established aesthetic (dark backgrounds with glowing yellow/gold accents and clean typography):
+
+1. The Introduction:
+
+Add explanatory text bridging the global revolution to Cambodia: 'When the electric guitar and the amplifier arrived in Southeast Asia, Cambodian artists did not just imitate the West. They took the raw power of electric rock, surf, and soul, and fused it with the beautiful, ancient melodies of Khmer traditional music.'
+
+2. The Era Cards (សម័យកាលនៃតន្ត្រី):
+
+Create a chronological grid or timeline of cards detailing this evolution:
+
+The Golden Age (យុគមាស - 1960s to 1975): Focus: The birth of Khmer Rock. Details: Mention legends like Sinn Sisamouth, Ros Serey Sothea, and Pan Ron. Explain how they blended Latin grooves, French pop, and American psychedelic rock with traditional Khmer poetry and vocal techniques.
+
+The Great Silence (ភាពស្ងៀមស្ងាត់ - 1975 to 1979): Focus: The cultural loss during the Khmer Rouge. Details: Briefly and respectfully explain that music was banned, and many of the country's greatest artists and their master recordings were tragically lost.
+
+The Cassette Revival (ការរស់ឡើងវិញនៃកាសែត - 1980s to 1990s): Focus: Rebuilding from memory. Details: Explain how survivors recorded old songs from memory onto cassette tapes in refugee camps and overseas, slowly keeping the "soul" of the music alive and smuggling it back into the country.
+
+The Modern Fusion (ការលាយបញ្ចូលគ្នាសម័យទំនើប - Present): Focus: The digital era and Hip-Hop. Details: Highlight how today's youth are using digital production software to bring the history full circle—sampling the 1960s Golden Age tracks and mixing ancient acoustic instruments (like the Roneat or Kse Diev) into modern hip-hop and electronic beats.
+
+3. Formatting & UX:
+
+Ensure all section titles and key historical concepts are strictly bilingual (English/Khmer).
+
+Use visually distinct styling (like subtle borders or glowing icons) for each era to show the progression of time.

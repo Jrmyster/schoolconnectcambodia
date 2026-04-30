@@ -2,11 +2,15 @@ import { Link } from "wouter";
 import {
   ArrowLeft,
   ArrowRight,
+  CassetteTape,
+  Cpu,
+  Crown,
   Music,
   Music2,
   Disc3,
   Mic2,
   Guitar,
+  Moon,
   Radio,
   Drum,
   Volume2,
@@ -187,6 +191,20 @@ export default function TwentiethCenturyMusicPage() {
       >
         <HipHopVsRap isKh={isKh} />
         <TurntableCard isKh={isKh} />
+      </Section>
+
+      {/* ── Section 4: The Cambodian Synthesis ──────────────────────── */}
+      <Section
+        spec="04"
+        eyebrowEn="Cambodia plugs in"
+        eyebrowKh="កម្ពុជា​ដោត​ភ្លើង"
+        titleEn="The Cambodian Synthesis: A Musical Journey"
+        titleKh="ការសំយោគតន្ត្រីកម្ពុជា៖ ដំណើរនៃសិល្បៈ"
+        descEn="The electric revolution didn't stop at the Pacific. When the amplifier reached Cambodia, our artists didn't just copy — they fused electric rock, surf, and soul with the ancient melodies of Khmer music. What followed is one of the most extraordinary musical journeys of the 20th century."
+        descKh="បដិវត្តន៍​អគ្គិសនី​មិន​បាន​បញ្ឈប់​នៅ​មហាសមុទ្រ​ប៉ាស៊ីហ្វិក​ឡើយ។ ​នៅ​ពេល​ដែល​បំពង​សំឡេង​មក​ដល់​កម្ពុជា ​សិល្បករ​យើង​មិន​ត្រឹម​តែ​ចម្លង​ទេ — ​ពួក​គេ​បាន​លាយ​បញ្ចូល​រ៉ុក​អគ្គិសនី ​ស៊ើហ្វ ​និង​សូល ​ជា​មួយ​នឹង​សំនៀង​បុរាណ​នៃ​តន្ត្រី​ខ្មែរ។ លទ្ធផល​គឺ​ដំណើរ​សិល្បៈ​ដ៏​អស្ចារ្យ​បំផុត​មួយ​នៃ​សតវត្សរ៍​ទី ២០។"
+        isKh={isKh}
+      >
+        <CambodianSynthesis isKh={isKh} />
       </Section>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -668,3 +686,302 @@ function TurntableSVG() {
     </svg>
   );
 }
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 4 · The Cambodian Synthesis — A Musical Journey
+//  ការសំយោគតន្ត្រីកម្ពុជា៖ ដំណើរនៃសិល្បៈ
+// ════════════════════════════════════════════════════════════════════════════
+
+type EraTheme = "gold" | "ash" | "sepia" | "neon";
+
+type Era = {
+  id: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  theme: EraTheme;
+  periodEn: string;
+  periodKh: string;
+  titleEn: string;
+  titleKh: string;
+  focusEn: string;
+  focusKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  tagsEn?: string[];
+  tagsKh?: string[];
+};
+
+const ERAS: Era[] = [
+  {
+    id: "golden",
+    Icon: Crown,
+    theme: "gold",
+    periodEn: "1960s — 1975",
+    periodKh: "ទសវត្សរ៍ ១៩៦០ — ១៩៧៥",
+    titleEn: "The Golden Age",
+    titleKh: "យុគមាស",
+    focusEn: "The birth of Khmer Rock",
+    focusKh: "កំណើត​នៃ​រ៉ុក​ខ្មែរ",
+    bodyEn: "Phnom Penh became one of the most exciting music cities in Asia. Legends like Sinn Sisamouth, Ros Serey Sothea, and Pan Ron blended Latin grooves, French pop, and American psychedelic rock with traditional Khmer poetry and ancient vocal techniques. The result was a sound that was unmistakably Cambodian — and unmistakably new.",
+    bodyKh: "ភ្នំពេញ​បាន​ក្លាយ​ជា​ទីក្រុង​តន្ត្រី​ដ៏​ច្រើន​ទីបំផុត​មួយ​ក្នុង​អាស៊ី។ ​មានកំពូល​សិល្បករ​ដូច​ជា​លោក ស៊ីន ស៊ីសាមុត ​អ្នកនាង រស់ សេរីសុទ្ធា ​និង​អ្នកនាង ប៉ែន រ៉ន ​បាន​លាយ​បញ្ចូល​ចង្វាក់​ឡាទីន ​ភ្លេង​ប៉ុប​បារាំង ​និង​រ៉ុក​ផ្លេច​ផ្លាញ​អាមេរិក ​ជា​មួយ​នឹង​កំណាព្យ​ខ្មែរ​បុរាណ ​និង​បច្ចេក​ទេស​សំឡេង​ដ៏​ចំណាស់។ លទ្ធផល​គឺ​សំឡេង​មួយ​ដែល​ខ្មែរ​យ៉ាង​ច្បាស់ — ហើយ​ថ្មី​យ៉ាង​ច្បាស់​ដែរ។",
+    tagsEn: ["Sinn Sisamouth", "Ros Serey Sothea", "Pan Ron"],
+    tagsKh: ["ស៊ីន ស៊ីសាមុត", "រស់ សេរីសុទ្ធា", "ប៉ែន រ៉ន"],
+  },
+  {
+    id: "silence",
+    Icon: Moon,
+    theme: "ash",
+    periodEn: "1975 — 1979",
+    periodKh: "១៩៧៥ — ១៩៧៩",
+    titleEn: "The Great Silence",
+    titleKh: "ភាពស្ងៀមស្ងាត់",
+    focusEn: "The cultural loss during the Khmer Rouge",
+    focusKh: "ការ​បាត់​បង់​វប្បធម៌​ក្នុង​សម័យ​ខ្មែរ​ក្រហម",
+    bodyEn: "Music was banned. Radios were silenced. Many of Cambodia's greatest artists, along with master tapes, instruments, and entire archives of Khmer music, were tragically lost in the years that followed. A generation of song nearly disappeared.",
+    bodyKh: "តន្ត្រី​ត្រូវ​បាន​ហាម​ឃាត់។ វិទ្យុ​ត្រូវ​បាន​បិទ​ស្ងៀម។ ​សិល្បករ​ដ៏​អស្ចារ្យ​ជាច្រើន​នាក់ របស់​កម្ពុជា ​រួម​ជា​មួយ​ខ្សែ​អាត់​ដើម ​ឧបករណ៍​ភ្លេង ​និង​បណ្ណាល័យ​តន្ត្រី​ខ្មែរ​ទាំង​មូល ​ត្រូវ​បាន​បាត់​បង់​យ៉ាង​ខ្លោច​ផ្សា​ក្នុង​ឆ្នាំ​ដែល​បាន​បន្ត​មក។ ​ជំនាន់​ចម្រៀង​មួយ​ស្ទើរ​តែ​បាត់។",
+  },
+  {
+    id: "cassette",
+    Icon: CassetteTape,
+    theme: "sepia",
+    periodEn: "1980s — 1990s",
+    periodKh: "ទសវត្សរ៍ ១៩៨០ — ១៩៩០",
+    titleEn: "The Cassette Revival",
+    titleKh: "ការរស់ឡើងវិញនៃកាសែត",
+    focusEn: "Rebuilding from memory",
+    focusKh: "ការ​ស្ថាបនា​ឡើង​វិញ​ពី​ការ​ចង​ចាំ",
+    bodyEn: "Survivors in refugee camps and overseas Khmer communities began recording the old songs from memory onto cassette tapes. Verse by verse, melody by melody, the soul of the music was kept alive — and slowly, the cassettes were smuggled back into the country, reseeding what had been almost erased.",
+    bodyKh: "អ្នក​រស់​រាន​មាន​ជីវិត​នៅ​ក្នុង​ជំរំ​ជន​ភៀស​ខ្លួន ​និង​សហគមន៍​ខ្មែរ​នៅ​បរទេស ​បាន​ចាប់​ផ្តើម​ថត​ចម្រៀង​ចាស់​ៗ​ពី​ការ​ចង​ចាំ​ទៅ​លើ​កាសែត។ ​ឃ្លា​មួយ​ៗ ​សំនៀង​មួយ​ៗ ​ព្រលឹង​នៃ​តន្ត្រី​ត្រូវ​បាន​រក្សា​ឱ្យ​នៅ​រស់ — ​ហើយ​បន្ទាប់​មក ​កាសែត​ត្រូវ​បាន​លួច​បញ្ចូល​ត្រឡប់​មក​ប្រទេស​វិញ​ម្តង​បន្តិច​ៗ ​បង្កើត​ឡើង​វិញ​នូវ​អ្វី​ដែល​ស្ទើរ​តែ​បាន​បាត់។",
+  },
+  {
+    id: "modern",
+    Icon: Cpu,
+    theme: "neon",
+    periodEn: "Present",
+    periodKh: "បច្ចុប្បន្ន",
+    titleEn: "The Modern Fusion",
+    titleKh: "ការលាយបញ្ចូលគ្នាសម័យទំនើប",
+    focusEn: "The digital era and Hip-Hop",
+    focusKh: "សម័យ​ឌីជីថល ​និង​ហ៊ីបហប",
+    bodyEn: "Today's young Cambodian producers bring the journey full circle. Using laptops and digital production software, they sample 1960s Golden Age tracks and weave ancient acoustic instruments — the Roneat, the Kse Diev, the Tro — into modern hip-hop, R&B, and electronic beats. Phnom Penh's sound is once again exporting itself to the world.",
+    bodyKh: "អ្នក​ផលិត​ភ្លេង​ខ្មែរ​វ័យ​ក្មេង​នា​ពេល​បច្ចុប្បន្ន ​នាំ​ដំណើរ​នេះ​មក​បំពេញ​ជា​រង្វង់​មូល។ ​ដោយ​ប្រើ​កុំព្យូទ័រ​យួរដៃ ​និង​កម្មវិធី​ផលិត​ភ្លេង​ឌីជីថល ​ពួក​គេ​យក​ខ្សែ​អាត់​ភ្លេង​យុគមាស​ឆ្នាំ ១៩៦០ មក​ផ្សំ ​ហើយ​បក​បញ្ចូល​ឧបករណ៍​អាគូស្ទិក​បុរាណ​ដូច​ជា​រនាត ​ខ្សែ​ដៀវ ​និង​ទ្រ ​ទៅ​ក្នុង​ហ៊ីបហប ​R&B ​និង​ភ្លេង​អេឡិចត្រូនិក​សម័យ​ទំនើប។ ​សំឡេង​ភ្នំពេញ​ម្តង​ទៀត​កំពុង​នាំ​ចេញ​ខ្លួន​ឯង​ទៅ​ពិភពលោក។",
+    tagsEn: ["Roneat", "Kse Diev", "Tro"],
+    tagsKh: ["រនាត", "ខ្សែ​ដៀវ", "ទ្រ"],
+  },
+];
+
+function CambodianSynthesis({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="space-y-6" data-testid="cambodian-synthesis-root">
+      {/* ── Bridge intro ─────────────────────────────────────────── */}
+      <article
+        className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-white to-amber-50 shadow-sm overflow-hidden"
+        data-testid="cs-bridge"
+      >
+        <div className={`relative ${VINYL_BG} px-5 py-4 border-b border-zinc-700 flex items-center gap-4`}>
+          <BrushedRule />
+          <div
+            className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-stone-900 flex items-center justify-center shadow-md flex-shrink-0"
+            aria-hidden="true"
+          >
+            <Music className="w-6 h-6" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div
+              className={`font-mono text-[10px] uppercase tracking-widest text-amber-400 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              {isKh ? "ការ​ភ្ជាប់​សាច់​រឿង" : "The bridge"}
+            </div>
+            <h3
+              className={`font-display font-bold text-xl text-stone-100 ${
+                isKh ? "font-khmer leading-snug" : "leading-tight"
+              }`}
+              style={{ textShadow: "0 0 12px rgba(251,191,36,0.25)" }}
+            >
+              {isKh ? "ពេល​អគ្គិសនី​ឈាន​ដល់​អាស៊ី​អាគ្នេយ៍" : "When electricity reached Southeast Asia"}
+            </h3>
+          </div>
+        </div>
+        <div className="p-5 sm:p-6">
+          <p
+            className={`text-sm sm:text-base text-stone-800 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh
+              ? "នៅ​ពេល​ដែល​គីតា​អគ្គិសនី ​និង​បំពង​សំឡេង​បាន​ឈាន​មក​ដល់​អាស៊ី​អាគ្នេយ៍ ​សិល្បករ​ខ្មែរ​មិន​ត្រឹម​តែ​ធ្វើ​តាម​ពិភព​ខាង​លិច​ឡើយ។ ​ពួក​គេ​បាន​យក​អំណាច​ឆៅ​នៃ​រ៉ុក​អគ្គិសនី ​ស៊ើហ្វ ​និង​សូល ​ហើយ​លាយ​បញ្ចូល​វា​ជា​មួយ​នឹង​សំនៀង​ដ៏​ស្រស់​ស្អាត​បុរាណ​នៃ​តន្ត្រី​ប្រពៃណី​ខ្មែរ។"
+              : "When the electric guitar and the amplifier arrived in Southeast Asia, Cambodian artists did not just imitate the West. They took the raw power of electric rock, surf, and soul, and fused it with the beautiful, ancient melodies of Khmer traditional music."}
+          </p>
+        </div>
+      </article>
+
+      {/* ── Era timeline (chronological) ─────────────────────────── */}
+      <div
+        className={`font-mono text-[10px] uppercase tracking-widest text-amber-700 ${
+          isKh ? "font-khmer normal-case tracking-normal" : ""
+        }`}
+      >
+        {isKh ? "សម័យកាលនៃតន្ត្រី" : "The Eras of the Music"}
+      </div>
+      <ol className="relative space-y-5" data-testid="cs-timeline">
+        {ERAS.map((era, i) => (
+          <EraCard key={era.id} era={era} index={i} isKh={isKh} />
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function EraCard({ era, index, isKh }: { era: Era; index: number; isKh: boolean }) {
+  const Icon = era.Icon;
+  const t = ERA_THEMES[era.theme];
+  const num = String(index + 1).padStart(2, "0");
+
+  return (
+    <li
+      className={`relative rounded-2xl border-2 ${t.cardBorder} ${t.cardBg} shadow-sm overflow-hidden list-none`}
+      data-testid={`cs-era-${era.id}`}
+    >
+      {/* left rail — color rolls forward through the eras */}
+      <span
+        aria-hidden="true"
+        className={`absolute left-0 top-0 bottom-0 w-1.5 ${t.rail}`}
+        style={t.railShadow ? { boxShadow: t.railShadow } : undefined}
+      />
+
+      {/* dark "faceplate" header with year band */}
+      <div className={`relative ${VINYL_BG} pl-6 pr-5 py-4 border-b border-zinc-700 flex items-center gap-4`}>
+        <BrushedRule />
+        <div
+          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${t.iconWrap} flex items-center justify-center shadow-md flex-shrink-0`}
+          style={t.iconGlow ? { boxShadow: t.iconGlow } : undefined}
+          aria-hidden="true"
+        >
+          <Icon className="w-6 h-6" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className={`font-mono text-[10px] tracking-[0.25em] uppercase ${t.numChip} rounded-sm px-1.5 py-0.5`}>
+              ERA-{num}
+            </span>
+            <span
+              className={`font-mono text-[10px] uppercase tracking-widest ${t.periodColor} ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              {isKh ? era.periodKh : era.periodEn}
+            </span>
+          </div>
+          <h3
+            className={`font-display font-bold text-xl text-stone-100 mt-0.5 ${
+              isKh ? "font-khmer leading-snug" : "leading-tight"
+            }`}
+            style={t.titleShadow ? { textShadow: t.titleShadow } : undefined}
+          >
+            {isKh ? era.titleKh : era.titleEn}
+          </h3>
+        </div>
+      </div>
+
+      <div className="p-5 sm:p-6 pl-7 sm:pl-8">
+        <div
+          className={`font-mono text-[10px] uppercase tracking-widest mb-1 ${t.focusColor} ${
+            isKh ? "font-khmer normal-case tracking-normal" : ""
+          }`}
+        >
+          {isKh ? era.focusKh : era.focusEn}
+        </div>
+        <p
+          className={`text-sm text-stone-700 ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          } ${era.tagsEn ? "mb-3" : ""}`}
+        >
+          {isKh ? era.bodyKh : era.bodyEn}
+        </p>
+
+        {era.tagsEn && (
+          <div className="flex flex-wrap gap-1.5">
+            {(isKh ? era.tagsKh ?? era.tagsEn : era.tagsEn).map((tag, j) => (
+              <span
+                key={`${era.id}-tag-${j}`}
+                className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${t.tagChip} ${
+                  isKh ? "font-khmer text-xs" : ""
+                }`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </li>
+  );
+}
+
+const ERA_THEMES: Record<
+  EraTheme,
+  {
+    cardBorder: string;
+    cardBg: string;
+    rail: string;
+    railShadow?: string;
+    iconWrap: string;
+    iconGlow?: string;
+    numChip: string;
+    periodColor: string;
+    titleShadow?: string;
+    focusColor: string;
+    tagChip: string;
+  }
+> = {
+  gold: {
+    cardBorder: "border-amber-300",
+    cardBg: "bg-white",
+    rail: "bg-gradient-to-b from-amber-300 via-amber-500 to-amber-700",
+    railShadow: "0 0 14px rgba(251,191,36,0.55)",
+    iconWrap: "from-amber-400 to-amber-600 text-stone-900",
+    iconGlow: "0 0 16px rgba(251,191,36,0.5)",
+    numChip: "bg-amber-500 text-stone-900",
+    periodColor: "text-amber-300",
+    titleShadow: "0 0 14px rgba(251,191,36,0.35)",
+    focusColor: "text-amber-700",
+    tagChip: "border-amber-300 bg-amber-50 text-amber-900",
+  },
+  ash: {
+    cardBorder: "border-zinc-400",
+    cardBg: "bg-zinc-50",
+    rail: "bg-gradient-to-b from-zinc-400 via-zinc-500 to-zinc-700",
+    iconWrap: "from-zinc-300 to-zinc-500 text-stone-900",
+    numChip: "bg-zinc-700 text-zinc-200",
+    periodColor: "text-zinc-300",
+    focusColor: "text-zinc-700",
+    tagChip: "border-zinc-300 bg-zinc-100 text-zinc-700",
+  },
+  sepia: {
+    cardBorder: "border-orange-300",
+    cardBg: "bg-orange-50/40",
+    rail: "bg-gradient-to-b from-orange-300 via-orange-600 to-amber-800",
+    railShadow: "0 0 10px rgba(234,88,12,0.35)",
+    iconWrap: "from-orange-400 to-orange-700 text-stone-50",
+    iconGlow: "0 0 12px rgba(234,88,12,0.4)",
+    numChip: "bg-orange-700 text-orange-100",
+    periodColor: "text-orange-300",
+    titleShadow: "0 0 10px rgba(234,88,12,0.3)",
+    focusColor: "text-orange-800",
+    tagChip: "border-orange-300 bg-orange-50 text-orange-900",
+  },
+  neon: {
+    cardBorder: "border-fuchsia-300",
+    cardBg: "bg-gradient-to-br from-fuchsia-50/60 via-white to-cyan-50/60",
+    rail: "bg-gradient-to-b from-cyan-400 via-fuchsia-500 to-violet-600",
+    railShadow: "0 0 16px rgba(217,70,239,0.55)",
+    iconWrap: "from-cyan-400 via-fuchsia-500 to-violet-600 text-white",
+    iconGlow: "0 0 18px rgba(217,70,239,0.55)",
+    numChip: "bg-fuchsia-600 text-white",
+    periodColor: "text-fuchsia-300",
+    titleShadow: "0 0 14px rgba(217,70,239,0.45)",
+    focusColor: "text-fuchsia-700",
+    tagChip: "border-fuchsia-300 bg-fuchsia-50 text-fuchsia-800",
+  },
+};
