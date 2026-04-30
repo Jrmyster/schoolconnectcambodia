@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -13,6 +13,7 @@ import { ApolloVsPhoneCard } from "@/components/tech/ApolloVsPhoneCard";
 import { HorizonFutureCard } from "@/components/tech/HorizonFutureCard";
 import { IoT5GModule } from "@/components/tech/IoT5GModule";
 import { RouterPostOfficeModule } from "@/components/tech/RouterPostOfficeModule";
+import { TrustArchitectureModule } from "@/components/tech/TrustArchitectureModule";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -70,7 +71,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 10", "ឧបករណ៍អន្តរកម្ម៖ ១០")}</span>
+                <span>{t("INTERACTIVES: 11", "ឧបករណ៍អន្តរកម្ម៖ ១១")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -237,6 +238,29 @@ export function HowComputersWorkPage() {
           <div className="mt-6">
             <HorizonFutureCard />
           </div>
+        </section>
+
+        {/* 11. The Architecture of Trust — Cryptography & Blockchain */}
+        <section data-testid="lesson-trust-architecture">
+          {/* Paired bilingual main heading — both EN + KH always visible. */}
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-emerald-400/85">
+                <span>Lesson 11</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-emerald-300/85">មេរៀនទី ១១</span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">The Architecture of Trust: Cryptography &amp; Blockchain</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-emerald-200 mt-1 leading-relaxed">
+                  ស្ថាបត្យកម្មនៃទំនុកចិត្ត៖ កូដនីយកម្ម និងប្លុកឆេន
+                </span>
+              </h2>
+            </div>
+          </div>
+          <TrustArchitectureModule />
         </section>
       </div>
     </div>

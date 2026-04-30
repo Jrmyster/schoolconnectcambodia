@@ -1,0 +1,37 @@
+I want to add a comprehensive new section to the 'Public Health: The Web of Well-Being' page called 'The Sugar Paradox: Understanding Diabetes (ជំងឺទឹកនោមផ្អែម)'.
+
+Please implement this using our established Well-Being aesthetic (soft, welcoming colors, clean typography, and bilingual headings):
+
+1. Section 1: The Microscopic Territory (Biology & Mechanics)
+
+What is Diabetes? Explain it simply: It is a condition where the body cannot regulate the amount of glucose (sugar) in the blood.
+
+The Lock and Key (Insulin): Explain that cells need sugar for energy, but the cell doors are locked. The pancreas creates a hormone called 'Insulin', which acts as the physical key to unlock the cell doors and let the sugar inside.
+
+The Malfunction: Explain that in Diabetes, either the pancreas stops making the keys (No Insulin), or the cell's locks get jammed and ignore the keys (Insulin Resistance).
+
+Type 1 vs. Type 2: Create two side-by-side comparison cards. Type 1 is an autoimmune condition (the body attacks its own pancreas). Type 2 is a metabolic condition (often developed over time due to diet, genetics, and lifestyle where the body becomes resistant to insulin).
+
+2. Section 2: History & Manufacturing (ប្រវត្តិ និងការផលិត)
+
+The History: Briefly mention that ancient doctors diagnosed it by noticing ants were attracted to patients' sweet-tasting urine. Fast forward to 1921 when scientists discovered how to extract insulin from dogs and cows to save human lives.
+
+Modern Manufacturing: Explain how we make it today using futuristic science (Recombinant DNA technology). Scientists insert the human insulin gene into bacteria or yeast, turning them into microscopic factories that pump out pure human insulin.
+
+3. Section 3: The Warning Signs & Prevention (រោគសញ្ញា និងការការពារ)
+
+Early Symptoms: List the classic signs: Extreme thirst, frequent urination, unexplained weight loss, blurry vision, and chronic fatigue.
+
+Lowering the Risk (Type 2): Provide actionable steps. Emphasize a balanced diet (reducing refined sugars and white rice, increasing vegetables), regular physical activity (like cycling or walking), and managing stress.
+
+4. Section 4: Local Action Plan - Finding Help in Cambodia (ការស្វែងរកជំនួយនៅកម្ពុជា)
+
+Provide a practical guide for students. If someone in their village has symptoms, where do they go?
+
+List Provincial Referral Hospitals (មន្ទីរពេទ្យបង្អែកខេត្ត) as the primary places for diagnosis and insulin access.
+
+Mention MoPoTsyo Patient Information Centre, a prominent Cambodian NGO that helps rural patients manage diabetes, access affordable medication, and test their blood sugar.
+
+5. Formatting & UX:
+
+Ensure all main headings, medical terms, and key concepts are strictly bilingual (English/Khmer). Use clean icons (like a drop of blood, a key, and a hospital cross) to make the text highly scannable.
