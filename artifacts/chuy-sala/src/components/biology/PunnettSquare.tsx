@@ -99,33 +99,63 @@ export function PunnettSquare() {
         </div>
 
         <div>
-          <div className="grid grid-cols-[auto,1fr,1fr] gap-1.5">
-            <div></div>
-            {a2.map((al, i) => (
-              <div key={i} className="text-center text-sm font-bold text-stone-700 pb-1">{al}</div>
-            ))}
-            {a1.map((al, i) => (
-              <div key={`row${i}`} className="contents">
-                <div className="flex items-center justify-end pr-2 text-sm font-bold text-stone-700">{al}</div>
-                {a2.map((_, j) => {
-                  const cell = grid.find(c => c.row === i && c.col === j)!;
-                  const isRed = cell.pheno === "red";
-                  return (
-                    <div
-                      key={j}
-                      className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-1 shadow-sm border-2 ${
-                        isRed
-                          ? "bg-gradient-to-br from-rose-500 to-red-700 border-red-800 text-white"
-                          : "bg-gradient-to-br from-white to-slate-100 border-slate-300 text-slate-700"
-                      }`}
-                    >
-                      <FlowerIcon color={isRed ? "#fecaca" : "#f8fafc"} stroke={isRed ? "white" : "#94a3b8"} large />
-                      <span className="text-sm font-bold">{cell.alleles.join("")}</span>
-                    </div>
-                  );
-                })}
+          {/* Punnett grid wrapper — capped width keeps the 4 outcome boxes
+              from ballooning on wide screens, and mx-auto centers the whole
+              labeled grid neatly. The fixed-width row-label column (w-6)
+              plus a 2-col gap-1 grid for the 4 cells gives a strict 2x2
+              that scales cleanly down to mobile. */}
+          <div className="max-w-md mx-auto">
+            {/* Column header row — offset to align with the 2x2 cells below. */}
+            <div className="ml-7 grid grid-cols-2 gap-1 mb-1">
+              {a2.map((al, i) => (
+                <div key={i} className="text-center text-sm font-bold text-stone-700">
+                  {al}
+                </div>
+              ))}
+            </div>
+            {/* Row labels column + the strict 2x2 outcome grid. */}
+            <div className="flex items-stretch gap-1">
+              <div className="flex flex-col w-6 gap-1">
+                {a1.map((al, i) => (
+                  <div
+                    key={`rowlabel${i}`}
+                    className="flex-1 flex items-center justify-end pr-1 text-sm font-bold text-stone-700"
+                  >
+                    {al}
+                  </div>
+                ))}
               </div>
-            ))}
+              <div
+                className="grid grid-cols-2 gap-1 flex-1"
+                data-testid="punnett-grid"
+              >
+                {a1.flatMap((_, i) =>
+                  a2.map((_, j) => {
+                    const cell = grid.find((c) => c.row === i && c.col === j)!;
+                    const isRed = cell.pheno === "red";
+                    return (
+                      <div
+                        key={`${i}-${j}`}
+                        data-testid={`punnett-cell-${i}-${j}`}
+                        className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-0.5 p-1 shadow-sm border-2 min-w-0 ${
+                          isRed
+                            ? "bg-gradient-to-br from-rose-500 to-red-700 border-red-800 text-white"
+                            : "bg-gradient-to-br from-white to-slate-100 border-slate-300 text-slate-700"
+                        }`}
+                      >
+                        <FlowerIcon
+                          color={isRed ? "#fecaca" : "#f8fafc"}
+                          stroke={isRed ? "white" : "#94a3b8"}
+                        />
+                        <span className="text-xs sm:text-sm font-bold leading-none">
+                          {cell.alleles.join("")}
+                        </span>
+                      </div>
+                    );
+                  }),
+                )}
+              </div>
+            </div>
           </div>
           <p className={`mt-3 text-xs text-stone-500 text-center ${kh ? "font-khmer leading-loose" : ""}`}>
             {kh
