@@ -239,8 +239,10 @@ export default function WordPopperPage() {
     }
   }
 
-  // Tap handler from a balloon.
-  function handleBalloonTap(b: Balloon, e: React.MouseEvent | React.PointerEvent) {
+  // Tap handler from a balloon. Accepts any synthetic event so it can be
+  // wired to BOTH `onClick` (desktop / fallback) and `onTouchStart` (instant
+  // mobile response, no 300ms click-delay).
+  function handleBalloonTap(b: Balloon, e: React.SyntheticEvent) {
     if (!roundRef.current) return;
     const target = e.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
@@ -300,15 +302,27 @@ export default function WordPopperPage() {
   }, [running, round]);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-sky-300 via-sky-200 to-emerald-100 text-slate-900">
+    <div
+      className="min-h-screen relative overflow-hidden bg-gradient-to-b from-sky-300 via-sky-200 to-emerald-100 text-slate-900 touch-manipulation"
+      style={{ touchAction: "manipulation" }}
+    >
       {/* Decorative sky */}
       <SkyBackdrop />
 
-      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
-        {/* Back link */}
+      {/*
+        ── HUD wrapper: NO stacking context ──────────────────────────────
+        We deliberately drop the `z-20` here so this wrapper does NOT form
+        its own stacking context. That lets us layer individual children
+        relative to the page root: the target card stays low (so balloons
+        can rise visually IN FRONT of it) while interactive controls
+        (back link, level buttons, score, restart bar) get a high z-index
+        and stay reliably tappable above the rising balloon field.
+      */}
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+        {/* Back link — z-30 so a balloon drifting past can't steal the tap */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-bold text-sky-900/80 hover:text-sky-900 transition-colors"
+          className="relative z-30 inline-flex items-center gap-2 text-sm font-bold text-sky-900/80 hover:text-sky-900 transition-colors"
           data-testid="link-back-home"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden="true" />
@@ -353,8 +367,8 @@ export default function WordPopperPage() {
           </p>
         </header>
 
-        {/* HUD: levels + score */}
-        <div className="mt-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+        {/* HUD: levels + score — z-30 keeps these controls tappable above balloons */}
+        <div className="relative z-30 mt-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div
             className="flex flex-wrap gap-2 justify-center"
             role="group"
@@ -428,7 +442,14 @@ export default function WordPopperPage() {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.8, opacity: 0, y: -10 }}
                 transition={{ type: "spring", stiffness: 320, damping: 20 }}
-                className="relative"
+                // ── pointer-events: none ───────────────────────────────────
+                // The target word card sits visually in the center of the
+                // screen, but rising balloons can pass right under (or over)
+                // it. Disabling pointer events here lets a kid's finger tap
+                // straight THROUGH the card and register on the balloon
+                // below. The card stays fully visible — it just becomes
+                // tap-transparent.
+                className="relative pointer-events-none"
                 data-testid="target-card"
               >
                 <div className="absolute inset-0 -m-2 rounded-3xl bg-gradient-to-br from-rose-300 via-amber-200 to-sky-300 opacity-60 blur-xl" aria-hidden="true" />
@@ -476,8 +497,17 @@ export default function WordPopperPage() {
           framer-motion animation that rises from below the viewport to
           well above it; on completion we treat it as "missed". */}
       {running && round && (
+        // z-20 sits ABOVE the target card (which now has no explicit z and
+        // therefore stacks at the page-root baseline) but BELOW the
+        // interactive HUD controls (back link / level buttons / score /
+        // restart bar — all at z-30). Net effect: balloons render
+        // visually in front of the central target word, while the
+        // surrounding tappable controls stay reliably tappable even when
+        // a balloon happens to drift past them. The pop-confetti overlay
+        // below sits at z-50 so the celebration always plays on top.
         <div
-          className="pointer-events-none fixed inset-0 z-10 overflow-hidden"
+          className="pointer-events-none fixed inset-0 z-20 overflow-hidden touch-manipulation"
+          style={{ touchAction: "manipulation" }}
           aria-hidden="false"
         >
           <AnimatePresence>
@@ -493,8 +523,8 @@ export default function WordPopperPage() {
         </div>
       )}
 
-      {/* Pop confetti overlay */}
-      <div className="pointer-events-none fixed inset-0 z-30">
+      {/* Pop confetti overlay — z-50 so it sits above the balloon field */}
+      <div className="pointer-events-none fixed inset-0 z-50">
         <AnimatePresence>
           {pops.map((p) => (
             <PopBurst
@@ -596,12 +626,31 @@ function BalloonFloater({
   onExpire,
 }: {
   balloon: Balloon;
-  onTap: (e: React.MouseEvent) => void;
+  // Widened from MouseEvent to SyntheticEvent so we can wire BOTH
+  // `onClick` (desktop / fallback) and `onTouchStart` (instant mobile)
+  // through the same handler.
+  onTap: (e: React.SyntheticEvent) => void;
   onExpire: () => void;
 }) {
   // Subtle horizontal sway as the balloon rises.
   const swayPx = useMemo(() => 18 + Math.random() * 18, []);
   const swayDur = useMemo(() => 2.4 + Math.random() * 1.2, []);
+
+  // ── Tap de-duplication ────────────────────────────────────────────────
+  // On mobile the browser fires `touchstart` → `touchend` → synthetic
+  // `click`. We want INSTANT response on `touchstart` (no 300ms click
+  // delay, no chance of the balloon drifting away while the browser
+  // waits to see if it was a double-tap), but we must make sure the
+  // synthetic click that follows doesn't fire `onTap` a second time —
+  // otherwise a wrong-balloon would shake twice. A simple ref-based
+  // latch is the safest solution: the first event wins, the second is
+  // ignored, no preventDefault gymnastics required.
+  const consumedRef = useRef(false);
+  const handleTap = (e: React.SyntheticEvent) => {
+    if (consumedRef.current) return;
+    consumedRef.current = true;
+    onTap(e);
+  };
 
   return (
     <motion.div
@@ -628,19 +677,34 @@ function BalloonFloater({
           onExpire();
         }
       }}
-      style={{ left: `${balloon.leftPct}%` }}
-      className="absolute pointer-events-auto select-none"
+      style={{ left: `${balloon.leftPct}%`, touchAction: "manipulation" }}
+      className="absolute pointer-events-auto select-none touch-manipulation"
     >
       <motion.button
         type="button"
-        onClick={onTap}
+        // ── Hitbox & touch optimisation ───────────────────────────────
+        //   • `onTouchStart` fires the millisecond a finger touches the
+        //     screen — no 300ms click-delay, no double-tap-zoom wait.
+        //   • `onClick` is kept as the desktop / mouse fallback.
+        //   • `consumedRef` (above) blocks the duplicate synthetic click
+        //     that follows `touchstart` on mobile.
+        //   • `touch-action: manipulation` disables the browser's own
+        //     double-tap-to-zoom gesture, which otherwise eats rapid
+        //     taps during a fast-paced game.
+        //   • `p-3` adds 12px of generous padding around the SVG so the
+        //     hitbox extends past the balloon's visual edge — easy for
+        //     small fingers, even if the kid taps the string or the
+        //     glossy highlight near the edge.
+        onClick={handleTap}
+        onTouchStart={handleTap}
+        style={{ touchAction: "manipulation" }}
         data-testid={`balloon-${balloon.word.en.toLowerCase()}`}
         aria-label={`${balloon.word.en} (${balloon.word.kh}) balloon · ប៉ោងប៉ោង`}
         animate={{ x: [0, swayPx, -swayPx, 0] }}
         transition={{
           x: { duration: swayDur, ease: "easeInOut", repeat: Infinity },
         }}
-        className="relative block group rounded-full focus:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-sky-300"
+        className="relative block group rounded-full p-3 -m-3 touch-manipulation focus:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-sky-300"
       >
         <Balloon color={balloon.color} word={balloon.word.en} />
       </motion.button>
