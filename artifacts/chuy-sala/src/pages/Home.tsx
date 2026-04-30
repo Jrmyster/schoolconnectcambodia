@@ -4,6 +4,7 @@ import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspa
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
+import { TopicOfTheDay } from "@/components/TopicOfTheDay";
 import { CountUp } from "@/components/CountUp";
 import { LearningPathQuiz } from "@/components/LearningPathQuiz";
 import { FeedbackSection } from "@/components/FeedbackSection";
@@ -71,8 +72,14 @@ export function Home() {
           </p>
           
           {/* Global Search — welcoming entry point */}
-          <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+          <div className="mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
             <GlobalSearch variant="hero" />
+          </div>
+
+          {/* Topic of the Day — daily-rotating discovery pill (deterministic,
+              picked by day-of-year against the global search index, no backend). */}
+          <div className="mb-8">
+            <TopicOfTheDay />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
