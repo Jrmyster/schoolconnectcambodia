@@ -1,0 +1,37 @@
+I want to add a new section to the 'Language & Reality — Escaping the Is Trap' page, directly below the 'Two Systems of Thought' cards. Let's call it 'The Animal vs. The Human Nervous System (ប្រព័ន្ធសរសៃប្រសាទសត្វ និងមនុស្ស)'.
+
+Please implement this using our established clean, educational aesthetic (light backgrounds, clear typography, bilingual text):
+
+1. Section 1: The Sane Order of Abstraction (លំដាប់នៃសេចក្តីសន្និដ្ឋានដ៏ត្រឹមត្រូវ)
+
+Explain how a healthy human nervous system processes reality in a specific order:
+
+The Event (The Territory): The actual, physical atoms vibrating in reality (which we can never fully touch or see).
+
+The Object (The Senses): What our eyes and ears filter and perceive.
+
+The Label (The Words): The name we give it.
+
+The Inference (The Meaning): The thoughts and theories we build about the label.
+
+Explain that 'Consciousness of Abstracting' means always remembering that Step 4 is not Step 1. The Map is not the Territory.
+
+2. Section 2: The Animal Ceiling (ដែនកំណត់របស់សត្វ)
+
+Create a card explaining Korzybski's idea that animals abstract up to a point and no further.
+
+Explain that a dog can abstract an object (it recognizes a 'food bowl'), but it cannot abstract about its abstractions. It cannot think about the concept of a food bowl. It hits a neurological ceiling.
+
+3. Section 3: Copying the Animal (ការចម្លងតាមសត្វ)
+
+Create a warning card about the 'Is' Trap.
+
+Explain that when humans say 'He is a failure' or 'This is terrible', we are failing to follow the sane order of abstraction. We confuse the Label (Step 3) with the Event (Step 1).
+
+When we do this, our nervous system stops functioning like a human time-binder and 'copies' the animal. We react to words with blind, immediate emotion, just like an animal reacting to a physical threat.
+
+4. Formatting & UX:
+
+Ensure all main headings and core concepts are strictly bilingual (English/Khmer).
+
+Use a visual 'ladder' or stepped layout to represent the Sane Order of Abstraction so students can clearly see the progression from Event to Inference.

@@ -10,6 +10,9 @@ import {
   Ruler,
   Zap,
   ScrollText,
+  Droplet,
+  Volume2,
+  Mountain,
 } from "lucide-react";
 import { InlineMath, BlockMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -116,6 +119,7 @@ export function LogarithmsPage() {
         <SectionRules kh={kh} t={t} />
         <SectionTamingInfinity kh={kh} t={t} />
         <SectionNaturalLog kh={kh} t={t} />
+        <SectionRealWorld kh={kh} t={t} />
 
         {/* Closing */}
         <div
@@ -965,6 +969,226 @@ function SectionRules({
             />
             <span>{t("special result", "លទ្ធផលពិសេស")}</span>
           </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 04 — Measuring the Invisible: Logs in the Real World
+//                ការវាស់វែងអ្វីដែលមើលមិនឃើញ៖ លោការីតក្នុងពិភពពិត
+//
+//  Three application cards (pH, Decibel, Richter) showing how base-10
+//  logarithms compress nature's enormous numbers into human-friendly scales.
+// ════════════════════════════════════════════════════════════════════════════
+
+type AppAccent = "cyan" | "sky" | "amber";
+
+const ACCENT_STYLES: Record<
+  AppAccent,
+  {
+    border: string;
+    iconBg: string;
+    iconText: string;
+    badgeBg: string;
+    badgeText: string;
+    glow: string;
+  }
+> = {
+  cyan: {
+    border: "border-cyan-500/40",
+    iconBg: "bg-cyan-500/15 border-cyan-400/50",
+    iconText: "text-cyan-200",
+    badgeBg: "bg-cyan-500/15 border-cyan-400/50",
+    badgeText: "text-cyan-200",
+    glow: "shadow-cyan-900/30",
+  },
+  sky: {
+    border: "border-sky-500/40",
+    iconBg: "bg-sky-500/15 border-sky-400/50",
+    iconText: "text-sky-200",
+    badgeBg: "bg-sky-500/15 border-sky-400/50",
+    badgeText: "text-sky-200",
+    glow: "shadow-sky-900/30",
+  },
+  amber: {
+    border: "border-amber-500/40",
+    iconBg: "bg-amber-500/15 border-amber-400/50",
+    iconText: "text-amber-200",
+    badgeBg: "bg-amber-500/15 border-amber-400/50",
+    badgeText: "text-amber-200",
+    glow: "shadow-amber-900/30",
+  },
+};
+
+function AppCard({
+  n,
+  enTitle,
+  khTitle,
+  enTag,
+  khTag,
+  enText,
+  khText,
+  formula,
+  Icon,
+  accent,
+  k,
+}: {
+  n: number;
+  enTitle: string;
+  khTitle: string;
+  enTag: string;
+  khTag: string;
+  enText: string;
+  khText: string;
+  formula: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  accent: AppAccent;
+  k: boolean;
+}) {
+  const a = ACCENT_STYLES[accent];
+  return (
+    <div
+      className={`relative rounded-xl border ${a.border} bg-indigo-950 p-4 sm:p-5 shadow-lg ${a.glow} flex flex-col`}
+      data-testid={`app-card-${n}`}
+    >
+      <div className="flex items-start gap-3 mb-3">
+        <div
+          className={`w-10 h-10 rounded-lg border ${a.iconBg} ${a.iconText} flex items-center justify-center flex-shrink-0`}
+          aria-hidden="true"
+        >
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3
+            className={`text-[15px] font-bold text-indigo-50 leading-tight ${k ? "font-khmer" : ""}`}
+          >
+            {k ? khTitle : enTitle}
+          </h3>
+          <span
+            className={`inline-block mt-1 text-[10.5px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border ${a.badgeBg} ${a.badgeText} ${k ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}
+          >
+            {k ? khTag : enTag}
+          </span>
+        </div>
+      </div>
+
+      <div
+        className="text-center bg-black/30 rounded-md border border-indigo-900/60 my-2 py-3 px-2 overflow-x-auto"
+        data-testid={`app-card-${n}-formula`}
+      >
+        <BlockMath math={formula} />
+      </div>
+
+      <p
+        className={`text-[12.5px] text-indigo-200/85 mt-2 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {k ? khText : enText}
+      </p>
+    </div>
+  );
+}
+
+function SectionRealWorld({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  const apps = [
+    {
+      n: 1,
+      enTitle: "The pH Scale",
+      khTitle: "កម្រិត pH",
+      enTag: "Chemistry",
+      khTag: "គីមីសាស្ត្រ",
+      enText:
+        "Used in chemistry and agriculture to test if soil or water is acidic. A pH of 5 is 10 times more acidic than a pH of 6.",
+      khText:
+        "ប្រើក្នុងគីមីសាស្ត្រ និងកសិកម្ម ដើម្បីសាកល្បងថាតើដី ឬទឹកមានអាស៊ីតឬអត់។ pH ស្មើ 5 មានអាស៊ីតច្រើនជាង pH ស្មើ 6 ដប់ដង។",
+      formula: "pH = -\\log_{10}[H^{+}]",
+      Icon: Droplet,
+      accent: "cyan" as const,
+    },
+    {
+      n: 2,
+      enTitle: "The Decibel Scale",
+      khTitle: "រង្វាស់ដេស៊ីបែល",
+      enTag: "Sound",
+      khTag: "សំឡេង",
+      enText:
+        "Measures the intensity of sound. A 70 dB sound (a vacuum cleaner) is actually 10 times more powerful than a 60 dB sound (normal conversation).",
+      khText:
+        "វាស់អាំងតង់ស៊ីតេនៃសំឡេង។ សំឡេង 70 dB (ម៉ាស៊ីនបឺតធូលី) គឺមានកម្លាំងខ្លាំងជាងសំឡេង 60 dB (ការសន្ទនាធម្មតា) ដប់ដង។",
+      formula: "L = 10 \\cdot \\log_{10}\\!\\left(\\dfrac{I}{I_0}\\right)",
+      Icon: Volume2,
+      accent: "sky" as const,
+    },
+    {
+      n: 3,
+      enTitle: "The Richter Scale",
+      khTitle: "រង្វាស់រិចទ័រ",
+      enTag: "Earthquakes",
+      khTag: "រញ្ជួយដី",
+      enText:
+        "Measures the energy of an earthquake. A magnitude 7.0 earthquake is not slightly bigger than a 6.0 — it is 10 times more powerful and releases 31 times more energy.",
+      khText:
+        "វាស់ថាមពលនៃរញ្ជួយដី។ រញ្ជួយដីខ្នាត 7.0 មិនមែនធំជាងខ្នាត 6.0 បន្តិចបន្តួចទេ — វាមានកម្លាំងខ្លាំងជាង ដប់ដង ហើយបញ្ចេញថាមពលច្រើនជាង ៣១ ដង។",
+      formula: "M = \\log_{10}\\!\\left(\\dfrac{A}{A_0}\\right)",
+      Icon: Mountain,
+      accent: "amber" as const,
+    },
+  ];
+
+  return (
+    <section className="mb-10" data-testid="section-real-world">
+      <SectionHeader
+        spec="04"
+        en="Measuring the Invisible: Logs in the Real World"
+        kh="ការវាស់វែងអ្វីដែលមើលមិនឃើញ៖ លោការីតក្នុងពិភពពិត"
+        kh_={kh}
+      />
+
+      <div
+        className="relative rounded-2xl border-2 border-indigo-200 p-5 sm:p-7 shadow-sm"
+        style={CARD_BG}
+      >
+        <CornerMarks subtle />
+
+        {/* Introduction */}
+        <p
+          className={`text-[14px] sm:text-[15px] text-slate-800 mb-5 max-w-3xl ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          data-testid="real-world-intro"
+        >
+          {t(
+            "Nature loves to multiply, which creates numbers that are too massive for the human brain to easily read. We use base-10 logarithms to compress these giant numbers into simple scales from 1 to 14.",
+            "ធម្មជាតិចូលចិត្តគុណ ដែលបង្កើតលេខធំធេងពេកសម្រាប់ខួរក្បាលមនុស្សអានបានយ៉ាងងាយ។ យើងប្រើលោការីតគោល 10 ដើម្បីបង្រួមលេខយក្សទាំងនេះ ទៅជារង្វាស់សាមញ្ញពី 1 ដល់ 14។"
+          )}
+        </p>
+
+        {/* Application cards grid */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          data-testid="real-world-grid"
+        >
+          {apps.map((app) => (
+            <AppCard
+              key={app.n}
+              n={app.n}
+              enTitle={app.enTitle}
+              khTitle={app.khTitle}
+              enTag={app.enTag}
+              khTag={app.khTag}
+              enText={app.enText}
+              khText={app.khText}
+              formula={app.formula}
+              Icon={app.Icon}
+              accent={app.accent}
+              k={kh}
+            />
+          ))}
         </div>
       </div>
     </section>
