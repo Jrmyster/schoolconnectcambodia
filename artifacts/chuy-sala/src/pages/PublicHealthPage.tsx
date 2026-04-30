@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ObstetricFistula } from "@/pages/sections/ObstetricFistula";
+import { DiabetesParadox } from "@/pages/sections/DiabetesParadox";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  PHL-01 · Public Health: The Web of Well-Being
@@ -317,6 +318,7 @@ export function PublicHealthPage() {
                 <HeroChip color={ROSE}         k={k} en="Cancer & Toxins" kh="មហារីក និងពុល" />
                 <HeroChip color={SUNRISE}      k={k} en="Stress"          kh="តានតឹង" />
                 <HeroChip color={SAGE}         k={k} en="Relationships"   kh="ទំនាក់ទំនង" />
+                <HeroChip color="#0f766e"      k={k} en="Diabetes"        kh="ទឹកនោមផ្អែម" />
               </div>
             </div>
           </div>
@@ -324,6 +326,7 @@ export function PublicHealthPage() {
 
         <SectionInvisibleMath  k={k} t={t} />
         <ObstetricFistula      k={k} t={t} />
+        <DiabetesParadox       k={k} t={t} />
         <SectionSoap           k={k} t={t} />
         <SectionChemicalTrap   k={k} t={t} />
         <SectionStress         k={k} t={t} />
