@@ -10,11 +10,14 @@ import {
   Dna,
   Eye,
   Flame,
+  FlaskConical,
   Heart,
   HeartHandshake,
   HeartPulse,
   Home,
   Quote,
+  Repeat,
+  Ribbon,
   Search,
   ShieldCheck,
   Sparkles,
@@ -316,6 +319,7 @@ export function PublicHealthPage() {
               <div className="mt-5 flex flex-wrap gap-2">
                 <HeroChip color={MED_BLUE}     k={k} en="Epidemiology"    kh="រោគរាតត្បាត" />
                 <HeroChip color={ROSE}         k={k} en="Cancer & Toxins" kh="មហារីក និងពុល" />
+                <HeroChip color="#b45309"      k={k} en="Alcohol"         kh="គ្រឿងស្រវឹង" />
                 <HeroChip color={SUNRISE}      k={k} en="Stress"          kh="តានតឹង" />
                 <HeroChip color={SAGE}         k={k} en="Relationships"   kh="ទំនាក់ទំនង" />
                 <HeroChip color="#0f766e"      k={k} en="Diabetes"        kh="ទឹកនោមផ្អែម" />
@@ -329,6 +333,7 @@ export function PublicHealthPage() {
         <DiabetesParadox       k={k} t={t} />
         <SectionSoap           k={k} t={t} />
         <SectionChemicalTrap   k={k} t={t} />
+        <SectionAlcoholChemistry k={k} t={t} />
         <SectionStress         k={k} t={t} />
         <SectionHappiness      k={k} t={t} />
 
@@ -1505,6 +1510,255 @@ function SectionHappiness({ k, t }: { k: boolean; t: T }) {
           </span>
         </blockquote>
       </ConceptCard>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 02b — The Chemistry of Alcohol
+//                គីមីសាស្ត្រនៃគ្រឿងស្រវឹង
+//
+//  Aesthetic: amber (whiskey/spirits) for the section frame, with rose for
+//             the carcinogen/withdrawal warnings and sage for healing/support.
+// ════════════════════════════════════════════════════════════════════════════
+
+const ALCOHOL_AMBER = "#b45309";
+
+function NeuroPill({
+  k,
+  letter,
+  enName,
+  khName,
+  enRole,
+  khRole,
+  color,
+}: {
+  k: boolean;
+  letter: string;
+  enName: string;
+  khName: string;
+  enRole: string;
+  khRole: string;
+  color: string;
+}) {
+  return (
+    <div
+      className="flex items-start gap-3 rounded-xl p-3 border"
+      style={{ borderColor: `${color}33`, backgroundColor: `${color}0d` }}
+      data-testid={`neuro-pill-${letter.toLowerCase()}`}
+    >
+      <div
+        className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-xs"
+        style={{
+          backgroundColor: `${color}1f`,
+          color,
+          border: `1px solid ${color}55`,
+        }}
+        aria-hidden="true"
+      >
+        {letter}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div
+          className={`font-bold text-sm leading-tight ${k ? "font-khmer" : ""}`}
+          style={{ color: SLATE }}
+        >
+          {k ? khName : enName}
+        </div>
+        <div
+          className={`text-xs text-slate-700 mt-1 ${k ? "font-khmer leading-loose" : "leading-snug"}`}
+        >
+          {k ? khRole : enRole}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RiskChip({
+  k,
+  Icon,
+  en,
+  kh,
+  color,
+}: {
+  k: boolean;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  en: string;
+  kh: string;
+  color: string;
+}) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full border bg-white ${k ? "font-khmer" : ""}`}
+      style={{ color, borderColor: `${color}66` }}
+    >
+      <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+      {k ? kh : en}
+    </span>
+  );
+}
+
+function SectionAlcoholChemistry({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section className="mb-12" data-testid="section-alcohol-chemistry">
+      <SectionHeader
+        spec="02b"
+        en="The Chemistry of Alcohol"
+        kh="គីមីសាស្ត្រនៃគ្រឿងស្រវឹង"
+        k={k}
+        Icon={FlaskConical}
+        accent={ALCOHOL_AMBER}
+      />
+
+      <p
+        className={`text-sm text-slate-700 mb-6 max-w-3xl ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {t(
+          "Alcohol is not simply a drink — it is a tiny, fat-soluble molecule called ethanol that slips straight past the brain's defences and rewires its chemistry. Understanding that chemistry explains both why alcohol feels good in the moment, and why it is now officially classified as a cancer-causing substance in the same category as tobacco.",
+          "គ្រឿងស្រវឹងមិនមែនគ្រាន់តែជាភេសជ្ជៈធម្មតាទេ — វាជាម៉ូលេគុលតូចមួយ រលាយក្នុងខ្លាញ់ ហៅថា អេតាណុល (Ethanol) ដែលរអិលកាត់ការការពាររបស់ខួរក្បាលដោយផ្ទាល់ ហើយផ្លាស់ប្ដូរគីមីសាស្ត្ររបស់ខួរ។ ការយល់ដឹងពីគីមីនេះ ពន្យល់ទាំងហេតុដែលគ្រឿងស្រវឹងធ្វើឲ្យសប្បាយក្នុងពេលនោះ និងហេតុដែលឥឡូវនេះវាត្រូវបានចាត់ចូលជាសារធាតុបង្កមហារីក ក្នុងថ្នាក់ដូចគ្នានឹងថ្នាំជក់។"
+        )}
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-5">
+        {/* ── Card 1 · Hijacking the Brain ─────────────────────────────── */}
+        <ConceptCard
+          k={k}
+          Icon={Brain}
+          enName="Hijacking the Brain"
+          khName="ការប្លន់យកខួរក្បាល"
+          enTag="ethanol crosses the blood-brain barrier"
+          khTag="អេតាណុលឆ្លងរបាំងឈាម–ខួរក្បាល"
+          enBody="Ethanol is small enough and fatty enough to slip straight through the blood-brain barrier — the wall of cells that normally keeps poisons out of the brain. Once inside, it does not target one neuron at a time. Instead, it tilts the entire balance of two master signalling chemicals that govern thought and movement, while tricking a third into firing a false reward."
+          khBody="អេតាណុលតូចគ្រប់គ្រាន់ និងមានជាតិខ្លាញ់គ្រប់គ្រាន់ ដើម្បីរអិលកាត់ត្រង់របាំងឈាម–ខួរក្បាល — ជញ្ជាំងកោសិកាដែលជាធម្មតារក្សាទុកសារធាតុពុលឲ្យនៅក្រៅខួរក្បាល។ ពេលចូលដល់ខាងក្នុងហើយ វាមិនវាយលើកោសិកាប្រសាទម្ដងតែមួយៗទេ។ វាបង្ខិតតុល្យភាពទាំងមូលនៃសារធាតុមេពីរ ដែលគ្រប់គ្រងគំនិត និងចលនា ហើយបោកបញ្ឆោតសារធាតុទីបី ឲ្យបាញ់សញ្ញារង្វាន់មិនពិត។"
+          accent={ALCOHOL_AMBER}
+          glow
+          badge={{ en: "Section 1", kh: "ផ្នែកទី ១" }}
+        >
+          <div className="grid gap-2.5">
+            <NeuroPill
+              k={k}
+              letter="GABA"
+              enName="GABA — The Brakes"
+              khName="GABA — សន្ទះហ្វ្រាំង"
+              enRole="Alcohol artificially boosts GABA, the brain's main 'slow-down' signal. The result: slurred speech, poor balance, slowed reaction, and lowered inhibitions."
+              khRole="គ្រឿងស្រវឹងបង្កើនកម្រិត GABA ដោយសិប្បនិម្មិត ដែលជាសញ្ញា 'បន្ថយល្បឿន' ចម្បងរបស់ខួរក្បាល។ លទ្ធផល៖ និយាយរអាក់រអួល តុល្យភាពអន់ ប្រតិកម្មយឺត និងការទប់ខ្លួនថយចុះ។"
+              color={MED_BLUE}
+            />
+            <NeuroPill
+              k={k}
+              letter="GLU"
+              enName="Glutamate — The Gas Pedal"
+              khName="គ្លុយតាម៉ាត — ពេទាល់ម៉ាស៊ីន"
+              enRole="At the same time, alcohol suppresses Glutamate, the main 'speed-up' signal. Reaction times slow even further, and the brain stops writing down memories — the famous blackout."
+              khRole="ក្នុងពេលដំណាលគ្នានោះ គ្រឿងស្រវឹងទប់ស្កាត់ គ្លុយតាម៉ាត (Glutamate) ដែលជាសញ្ញា 'បង្កើនល្បឿន' ចម្បង។ ប្រតិកម្មកាន់តែយឺតថែមទៀត ហើយខួរក្បាលឈប់សរសេរការចងចាំ — គឺការបាត់ស្មារតីដ៏ល្បី (blackout)។"
+              color={MED_BLUE_DEEP}
+            />
+            <NeuroPill
+              k={k}
+              letter="DA"
+              enName="Dopamine — The False Reward"
+              khName="ដូប៉ាមីន — រង្វាន់មិនពិត"
+              enRole="Alcohol also triggers a spike of Dopamine, hitting the brain's reward centre. The brain is tricked into thinking that something wonderful just happened — and it remembers, and asks for more."
+              khRole="គ្រឿងស្រវឹងក៏បង្ករឲ្យដូប៉ាមីនកើនឡើងផុសផុលដែរ វាយទៅលើមជ្ឈមណ្ឌលរង្វាន់របស់ខួរក្បាល។ ខួរក្បាលត្រូវបានបោកបញ្ឆោតឲ្យគិតថា មានរឿងអស្ចារ្យកើតឡើង — ហើយវាចងចាំ និងសុំបន្ថែម។"
+              color={ROSE}
+            />
+          </div>
+        </ConceptCard>
+
+        {/* ── Card 2 · Mechanics of Addiction ──────────────────────────── */}
+        <ConceptCard
+          k={k}
+          Icon={Repeat}
+          enName="The Mechanics of Addiction"
+          khName="យន្តការនៃការញៀន"
+          enTag="neuroadaptation: the brain fights back"
+          khTag="នឺរ៉ូអាដាប់តាស្យុង៖ ខួរក្បាលតបវិញ"
+          enBody="The brain hates being out of balance — biologists call this homeostasis. If a person drinks heavily and often, the brain quietly rewires itself to push back: it stops producing as much of its own GABA and pumps out extra Glutamate, just to cancel out the alcohol and keep daily life feeling normal."
+          khBody="ខួរក្បាលស្អប់ការខ្វះតុល្យភាព — អ្នកជីវវិទ្យាហៅនេះថា ហូមេអូស្តាស៊ីស (homeostasis)។ បើមនុស្សម្នាក់ផឹកច្រើន និងញឹកញាប់ ខួរក្បាលរៀបចំខ្លួនឯងឡើងវិញដោយស្ងប់ស្ងាត់ ដើម្បីប្រឆាំងតប៖ វាឈប់បង្កើត GABA របស់ខ្លួនច្រើនដូចមុន ហើយបូមបន្ថែមគ្លុយតាម៉ាតចេញមក គ្រាន់តែដើម្បីលុបបំបាត់ឥទ្ធិពលគ្រឿងស្រវឹង និងធ្វើឲ្យជីវភាពប្រចាំថ្ងៃហាក់ដូចជាធម្មតាវិញ។"
+          accent={ALCOHOL_AMBER}
+          badge={{ en: "Section 2", kh: "ផ្នែកទី ២" }}
+        >
+          <Callout
+            k={k}
+            Icon={AlertTriangle}
+            labelEn="The trap"
+            labelKh="អន្ទាក់"
+            enTitle="When the alcohol leaves, the imbalance stays."
+            khTitle="ពេលគ្រឿងស្រវឹងចេញពីខ្លួន ភាពមិនស្មើនៅសល់។"
+            enBody="When the alcohol wears off, the brain is suddenly left with too little GABA and too much Glutamate. The result is severe anxiety, shaking, sweating, racing heart, and physical withdrawal. The person is no longer drinking to feel good — they are drinking just to feel normal again. That is the moment a habit has crossed the line into an addiction."
+            khBody="ពេលគ្រឿងស្រវឹងចេញពីខ្លួនអស់ ខួរក្បាលនៅសល់ភ្លាមៗដោយ GABA តិចពេក និងគ្លុយតាម៉ាតច្រើនពេក។ លទ្ធផលគឺការថប់បារម្ភធ្ងន់ធ្ងរ ញ័រ បែកញើស បេះដូងលោតលឿន និងការលាឈប់ផ្នែករាងកាយ។ មនុស្សនោះ មិនបានផឹកដើម្បីអារម្មណ៍ស្រួលទៀតទេ — គេផឹកគ្រាន់តែដើម្បីត្រឡប់ទៅអារម្មណ៍ធម្មតាវិញ។ នោះហើយជាពេលដែលទម្លាប់មួយ បានកាត់ឆ្លងបន្ទាត់ទៅជាការញៀន។"
+            accent={ROSE}
+          />
+        </ConceptCard>
+
+        {/* ── Card 3 · Carcinogen Connection ───────────────────────────── */}
+        <ConceptCard
+          k={k}
+          Icon={Dna}
+          enName="The Carcinogen Connection"
+          khName="ទំនាក់ទំនងនៃសារជាតិបង្កមហារីក"
+          enTag="alcohol is a Group 1 carcinogen"
+          khTag="គ្រឿងស្រវឹង ជាសារធាតុបង្កមហារីកថ្នាក់ទី ១"
+          enBody="The IARC — the World Health Organization's cancer agency — classifies alcoholic beverages as a Group 1 carcinogen, the highest category of certainty, the same category as tobacco smoke and asbestos. The damage is not done by the ethanol itself, but by what the liver turns it into."
+          khBody="IARC — ទីភ្នាក់ងារស្រាវជ្រាវមហារីករបស់អង្គការសុខភាពពិភពលោក (WHO) — ចាត់ភេសជ្ជៈដែលមានគ្រឿងស្រវឹងជាសារធាតុបង្កមហារីកថ្នាក់ទី ១ ដែលជាថ្នាក់ខ្ពស់បំផុតនៃភាពច្បាស់ ក្នុងថ្នាក់ដូចគ្នានឹងផ្សែងថ្នាំជក់ និងអាមីយ៉ង់ (asbestos)។ ការខូចខាតមិនមែនបណ្តាលមកពីអេតាណុលដោយខ្លួនវាទេ ប៉ុន្តែបណ្តាលមកពីអ្វីដែលថ្លើមបំប្លែងវាទៅជា។"
+          accent={ROSE}
+          glow
+          badge={{ en: "Section 3", kh: "ផ្នែកទី ៣" }}
+        >
+          <Callout
+            k={k}
+            Icon={Skull}
+            labelEn="The biology"
+            labelKh="ជីវវិទ្យា"
+            enTitle="Acetaldehyde damages DNA — and DNA repair is where cancer begins."
+            khTitle="អាសេតាល់ដេអ៊ីត (Acetaldehyde) បំផ្លាញ DNA — ហើយការជួសជុល DNA គឺជាកន្លែងមហារីកចាប់ផ្តើម។"
+            enBody="When the liver breaks ethanol down, the first product is Acetaldehyde — a highly toxic chemical that physically damages the strands of DNA inside cells. To survive that damage, cells have to divide more often to replace what was lost. Every cell division is a fresh chance for a copying mistake — a mutation. Stack up enough mutations in the wrong place, and a healthy cell can become a cancer cell. This is why alcohol is linked to cancers of the mouth, throat, oesophagus, liver, breast, and colon."
+            khBody="ពេលថ្លើមបំបែកអេតាណុល ផលិតផលដំបូងគឺ អាសេតាល់ដេអ៊ីត (Acetaldehyde) — សារធាតុពុលខ្លាំង ដែលបំផ្លាញខ្សែ DNA នៅក្នុងកោសិកាដោយផ្ទាល់។ ដើម្បីរស់ពីការខូចនោះ កោសិកាត្រូវបែងចែកញឹកញាប់ជាងមុន ដើម្បីជំនួសអ្វីដែលបានបាត់បង់។ រាល់ការបែងចែកកោសិកា គឺជាឱកាសថ្មីសម្រាប់កំហុសក្នុងការចម្លង — គឺការផ្លាស់ប្ដូរហ្សែន (mutation)។ បើការផ្លាស់ប្ដូរនោះកើនឡើងច្រើនគ្រប់គ្រាន់នៅកន្លែងខុស កោសិកាល្អអាចក្លាយជាកោសិកាមហារីក។ នេះហើយជាមូលហេតុ ដែលគ្រឿងស្រវឹងភ្ជាប់នឹងមហារីកនៃមាត់ បំពង់ក បំពង់អាហារ ថ្លើម សុដន់ និងពោះវៀនធំ។"
+            accent={ROSE}
+          />
+        </ConceptCard>
+
+        {/* ── Card 4 · Risk Factors & Support ──────────────────────────── */}
+        <ConceptCard
+          k={k}
+          Icon={Ribbon}
+          enName="Risk Factors & Support"
+          khName="កត្តាហានិភ័យ និងការគាំទ្រ"
+          enTag="addiction is a chronic medical condition, not a moral failure"
+          khTag="ការញៀនជាជំងឺរ៉ាំរ៉ៃ មិនមែនជាការខុសសីលធម៌ទេ"
+          enBody="Nobody chooses to become addicted. Some people are far more vulnerable than others — and one of the largest risk factors of all is starting to drink young, before the brain has finished developing in the mid-twenties."
+          khBody="គ្មាននរណាម្នាក់ជ្រើសរើសក្លាយជាអ្នកញៀនទេ។ មនុស្សខ្លះងាយរងគ្រោះជាងអ្នកដទៃច្រើន — ហើយកត្តាហានិភ័យធំបំផុតមួយ គឺការចាប់ផ្តើមផឹកតាំងពីក្មេង មុនពេលខួរក្បាលអភិវឌ្ឍន៍រួចរាល់ ដែលទើបបញ្ចប់នៅពាក់កណ្តាលអាយុ ២០។"
+          accent={SAGE}
+          badge={{ en: "Section 4", kh: "ផ្នែកទី ៤" }}
+        >
+          <div className="mb-3">
+            <div
+              className={`text-[10px] font-mono uppercase tracking-widest mb-2 ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+              style={{ color: SAGE }}
+            >
+              {t("Main risk factors", "កត្តាហានិភ័យចម្បង")}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <RiskChip k={k} Icon={Dna}            en="Genetics"              kh="ហ្សែន"                       color={SAGE} />
+              <RiskChip k={k} Icon={AlertTriangle} en="Chronic stress"         kh="ការតានតឹងរ៉ាំរ៉ៃ"             color={SAGE} />
+              <RiskChip k={k} Icon={Home}          en="Environment"            kh="បរិយាកាសជុំវិញ"                color={SAGE} />
+              <RiskChip k={k} Icon={Baby}          en="Drinking before adulthood" kh="ការផឹកតាំងពីមុនពេញវ័យ"   color={SAGE} />
+            </div>
+          </div>
+          <Callout
+            k={k}
+            Icon={HeartHandshake}
+            labelEn="Community support"
+            labelKh="ការគាំទ្រសហគមន៍"
+            enTitle="Alcoholics Anonymous (AA) · អង្គការអ្នកញៀនស្រាអនាមិក"
+            khTitle="អង្គការអ្នកញៀនស្រាអនាមិក · Alcoholics Anonymous (AA)"
+            enBody="AA is a worldwide community of people who help one another stay sober through total abstinence and shared honesty. It treats addiction the way medicine itself now treats it — as a chronic medical condition that the brain can slowly heal from when its chemicals are given the time and stillness to rebalance, supported by people who have walked the same path."
+            khBody="AA គឺជាសហគមន៍ពិភពលោកនៃមនុស្ស ដែលជួយគ្នាទៅវិញទៅមកឲ្យនៅឆ្ងាយពីគ្រឿងស្រវឹង តាមរយៈការបោះបង់ទាំងស្រុង និងភាពស្មោះត្រង់រួមគ្នា។ វាចាត់ទុកការញៀន តាមរបៀបដូចគ្នានឹងវេជ្ជសាស្ត្រសព្វថ្ងៃនេះ — ជាជំងឺរ៉ាំរ៉ៃមួយ ដែលខួរក្បាលអាចជាសះស្បើយបន្តិចម្តងៗ នៅពេលសារធាតុគីមីរបស់វា ត្រូវបានផ្ដល់ពេលវេលា និងភាពស្ងប់ស្ងាត់ ដើម្បីតុល្យភាពឡើងវិញ ដោយមានការគាំទ្រពីមនុស្សដែលធ្លាប់ដើរលើផ្លូវដូចគ្នា។"
+            accent={SAGE}
+          />
+        </ConceptCard>
+      </div>
     </section>
   );
 }
