@@ -3,8 +3,10 @@ import {
   Activity,
   AlertTriangle,
   Apple,
+  Bandage,
   Beef,
   Bike,
+  Bone,
   Brain,
   Candy,
   CheckCircle2,
@@ -14,18 +16,22 @@ import {
   Droplets,
   Drumstick,
   Dumbbell,
+  Eye,
   Fish,
   Flame,
   Gauge,
   Heart,
   HeartCrack,
   Leaf,
+  Megaphone,
   Minus,
   Plus,
   Quote,
   Scale,
+  Shield,
   Soup,
   Sparkles,
+  Sun,
   Volume2,
   Wheat,
   Zap,
@@ -114,11 +120,26 @@ export default function HumanEnginePage() {
         <CaloricBalance isKh={isKh} />
       </Section>
 
-      {/* ── Section 2: Movement ──────────────────────────────────────── */}
+      {/* ── Section 2: Spark Plugs — Vitamins & Minerals ─────────────── */}
+      <Section
+        id="spark-plugs"
+        eyebrowEn="02 · Spark Plugs"
+        eyebrowKh="០២ · ប៊ូស៊ីបញ្ឆេះ"
+        titleEn="The Spark Plugs: Vitamins & Minerals"
+        titleKh="ប៊ូស៊ីបញ្ឆេះម៉ាស៊ីន៖ វីតាមីន និងសារធាតុរ៉ែ"
+        descEn="If macronutrients are the fuel for your engine, vitamins and minerals are the spark plugs and oil. You only need tiny amounts, but without them, the engine breaks down."
+        descKh="ប្រសិនបើសារធាតុចិញ្ចឹមម៉ាក្រូជាឥន្ធនៈសម្រាប់ម៉ាស៊ីនរបស់អ្នក វីតាមីន និងសារធាតុរ៉ែគឺជាប៊ូស៊ីបញ្ឆេះ និងប្រេងម៉ាស៊ីន។ អ្នកត្រូវការតែបរិមាណតិចតួចប៉ុណ្ណោះ ប៉ុន្តែបើគ្មានពួកវា ម៉ាស៊ីននឹងខូច។"
+        accent="amber"
+        isKh={isKh}
+      >
+        <SparkPlugs isKh={isKh} />
+      </Section>
+
+      {/* ── Section 3: Movement ──────────────────────────────────────── */}
       <Section
         id="movement"
-        eyebrowEn="02 · Movement"
-        eyebrowKh="០២ · ចលនា"
+        eyebrowEn="03 · Movement"
+        eyebrowKh="០៣ · ចលនា"
         titleEn="The science of movement"
         titleKh="វិទ្យាសាស្ត្រនៃចលនា"
         descEn="Exercise isn't just about looking good. Biologically, it strengthens your heart, grows your muscles, and sharpens your brain. There are two main families."
@@ -129,11 +150,11 @@ export default function HumanEnginePage() {
         <MovementTabs isKh={isKh} />
       </Section>
 
-      {/* ── Section 3: Rust ──────────────────────────────────────────── */}
+      {/* ── Section 4: Rust ──────────────────────────────────────────── */}
       <Section
         id="rust"
-        eyebrowEn="03 · Warning"
-        eyebrowKh="០៣ · ការព្រមាន"
+        eyebrowEn="04 · Warning"
+        eyebrowKh="០៤ · ការព្រមាន"
         titleEn="The dangers of 'rust'"
         titleKh="គ្រោះថ្នាក់នៃ 'ច្រេះ'"
         descEn="An engine that never moves, fuelled with the wrong fuel, breaks down. The same is true for your body. These are the diseases that quietly grow when we sit too long."
@@ -147,11 +168,11 @@ export default function HumanEnginePage() {
       {/* ── Glowing Energy-Meter Divider ─────────────────────────────── */}
       <EnergyMeterDivider isKh={isKh} />
 
-      {/* ── Section 4: Engine Fuel — Healthy vs. Unhealthy ──────────── */}
+      {/* ── Section 5: Engine Fuel — Healthy vs. Unhealthy ──────────── */}
       <Section
         id="engine-fuel"
-        eyebrowEn="04 · Fuel Quality"
-        eyebrowKh="០៤ · គុណភាពឥន្ធនៈ"
+        eyebrowEn="05 · Fuel Quality"
+        eyebrowKh="០៥ · គុណភាពឥន្ធនៈ"
         titleEn="Engine fuel: healthy vs. unhealthy choices"
         titleKh="ឥន្ធនៈម៉ាស៊ីន៖ ជម្រើសអាហារល្អ និងមិនល្អ"
         descEn="Your body is an engine. The food you eat is its fuel — and not all fuels are equal. Tap the Play button on any card to hear the English name spoken aloud."
@@ -187,13 +208,14 @@ function Section({
   eyebrowEn: string; eyebrowKh: string;
   titleEn: string; titleKh: string;
   descEn: string; descKh: string;
-  accent: "emerald" | "orange" | "rose";
+  accent: "emerald" | "orange" | "rose" | "amber";
   isKh: boolean;
   children: React.ReactNode;
 }) {
   const eyebrowColor =
     accent === "emerald" ? "text-emerald-700"
     : accent === "orange" ? "text-orange-700"
+    : accent === "amber" ? "text-amber-700"
     : "text-rose-700";
   return (
     <section id={id} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-24">
@@ -1341,5 +1363,609 @@ function FoodCard({
         </span>
       </button>
     </article>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 2 · The Spark Plugs — Vitamins & Minerals
+//  ប៊ូស៊ីបញ្ឆេះម៉ាស៊ីន៖ វីតាមីន និងសារធាតុរ៉ែ
+// ════════════════════════════════════════════════════════════════════════════
+
+type Micronutrient = {
+  id: string;
+  nameEn: string;
+  nameKh: string;
+  Icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  funcEn: string;
+  funcKh: string;
+  sourcesEn: string;
+  sourcesKh: string;
+  defEn: string;
+  defKh: string;
+};
+
+const VITAMINS: Micronutrient[] = [
+  {
+    id: "a",
+    nameEn: "Vitamin A",
+    nameKh: "វីតាមីន A",
+    Icon: Eye,
+    funcEn: "Vision and immunity.",
+    funcKh: "ការមើលឃើញ និងភាពស៊ាំ។",
+    sourcesEn: "Papaya, carrots, sweet potatoes, liver.",
+    sourcesKh: "ល្ហុង ការ៉ុត ដំឡូងជ្វា ថ្លើម។",
+    defEn: "Night blindness.",
+    defKh: "ខ្វាក់ភ្នែកពេលយប់។",
+  },
+  {
+    id: "b",
+    nameEn: "Vitamin B-Complex",
+    nameKh: "វីតាមីន B-Complex",
+    Icon: Zap,
+    funcEn: "Energy production, brain function, and metabolism.",
+    funcKh: "ផលិតថាមពល មុខងារខួរក្បាល និងការរំលាយអាហារ។",
+    sourcesEn: "Brown rice, eggs, meat, leafy greens.",
+    sourcesKh: "អង្ករសំរូប ស៊ុត សាច់ បន្លែស្លឹកបៃតង។",
+    defEn: "Severe fatigue, weakness.",
+    defKh: "ការនឿយហត់ខ្លាំង កម្លាំងថយចុះ។",
+  },
+  {
+    id: "c",
+    nameEn: "Vitamin C",
+    nameKh: "វីតាមីន C",
+    Icon: Shield,
+    funcEn: "Antioxidant, immune support, and collagen production.",
+    funcKh: "សារធាតុប្រឆាំងអុកស៊ីតកម្ម គាំទ្រភាពស៊ាំ និងផលិតកូឡាហ្សែន។",
+    sourcesEn: "Guava, citrus, tomatoes.",
+    sourcesKh: "ត្របែក ផ្លែឈើជូរ ប៉េងប៉ោះ។",
+    defEn: "Bleeding gums, slow healing.",
+    defKh: "អញ្ចាញធ្មេញហូរឈាម ដំបៅជាសះស្បើយយឺត។",
+  },
+  {
+    id: "d",
+    nameEn: "Vitamin D",
+    nameKh: "វីតាមីន D",
+    Icon: Sun,
+    funcEn: "Calcium absorption and bone health.",
+    funcKh: "ការស្រូបយកជាតិកាល់ស្យូម និងសុខភាពឆ្អឹង។",
+    sourcesEn: "Sunlight, fatty fish.",
+    sourcesKh: "ពន្លឺព្រះអាទិត្យ ត្រីដែលមានជាតិខ្លាញ់។",
+    defEn: "Soft, aching bones (Rickets in children).",
+    defKh: "ឆ្អឹងទន់ និងឈឺ (ជំងឺ Rickets ចំពោះកុមារ)។",
+  },
+  {
+    id: "e",
+    nameEn: "Vitamin E",
+    nameKh: "វីតាមីន E",
+    Icon: Leaf,
+    funcEn: "Protects cells from damage.",
+    funcKh: "ការពារកោសិកាពីការខូចខាត។",
+    sourcesEn: "Nuts, seeds, vegetable oils.",
+    sourcesKh: "គ្រាប់ផ្លែឈើ គ្រាប់ធញ្ញជាតិ ប្រេងបន្លែ។",
+    defEn: "Muscle weakness, vision problems.",
+    defKh: "សាច់ដុំខ្សោយ បញ្ហានៃការមើលឃើញ។",
+  },
+  {
+    id: "k",
+    nameEn: "Vitamin K",
+    nameKh: "វីតាមីន K",
+    Icon: Bandage,
+    funcEn: "Blood clotting and bone health.",
+    funcKh: "ការកករឈាម និងសុខភាពឆ្អឹង។",
+    sourcesEn: "Leafy greens (morning glory, spinach).",
+    sourcesKh: "បន្លែស្លឹកបៃតង (ត្រកួន ស្ពៃ)។",
+    defEn: "Excessive bleeding from small cuts.",
+    defKh: "ការហូរឈាមច្រើនពេកពីមុខរបួសតូចៗ។",
+  },
+];
+
+const MINERALS: Micronutrient[] = [
+  {
+    id: "ca",
+    nameEn: "Calcium",
+    nameKh: "កាល់ស្យូម",
+    Icon: Bone,
+    funcEn: "Strong bones, teeth, and muscle function.",
+    funcKh: "ឆ្អឹងរឹងមាំ ធ្មេញ និងមុខងារសាច់ដុំ។",
+    sourcesEn: "Small fish (eaten with bones), dairy, dark greens.",
+    sourcesKh: "ត្រីតូច (ញ៉ាំទាំងឆ្អឹង) ផលិតផលទឹកដោះគោ បន្លែបៃតងដិត។",
+    defEn: "Stunted growth, brittle bones.",
+    defKh: "ការលូតលាស់យឺត ឆ្អឹងផុយ។",
+  },
+  {
+    id: "fe",
+    nameEn: "Iron",
+    nameKh: "ជាតិដែក",
+    Icon: Droplets,
+    funcEn: "Transports oxygen in the blood.",
+    funcKh: "ដឹកជញ្ជូនអុកស៊ីសែននៅក្នុងឈាម។",
+    sourcesEn: "Red meat, beans, spinach.",
+    sourcesKh: "សាច់ក្រហម សណ្ដែក ស្ពៃ។",
+    defEn: "Anemia (extreme exhaustion, pale skin).",
+    defKh: "ស្លេកស្លាំង (ការនឿយហត់ខ្លាំង ស្បែកស្លេក)។",
+  },
+  {
+    id: "mg",
+    nameEn: "Magnesium",
+    nameKh: "ម៉ាញ៉េស្យូម",
+    Icon: Brain,
+    funcEn: "Nerve function, blood pressure, and bone strength.",
+    funcKh: "មុខងារសរសៃប្រសាទ សម្ពាធឈាម និងភាពរឹងមាំនៃឆ្អឹង។",
+    sourcesEn: "Nuts, seeds, legumes.",
+    sourcesKh: "គ្រាប់ផ្លែឈើ គ្រាប់ធញ្ញជាតិ សណ្ដែក។",
+    defEn: "Muscle cramps, twitches.",
+    defKh: "សាច់ដុំកន្ត្រាក់ និងញ័រ។",
+  },
+  {
+    id: "k-mineral",
+    nameEn: "Potassium",
+    nameKh: "ប៉ូតាស្យូម",
+    Icon: Heart,
+    funcEn: "Healthy blood pressure and nerve function.",
+    funcKh: "សម្ពាធឈាមធម្មតា និងមុខងារសរសៃប្រសាទ។",
+    sourcesEn: "Bananas, coconut water, potatoes.",
+    sourcesKh: "ចេក ទឹកដូង ដំឡូងបារាំង។",
+    defEn: "Severe muscle cramps, irregular heartbeat.",
+    defKh: "សាច់ដុំកន្ត្រាក់ខ្លាំង បេះដូងលោតមិនទៀងទាត់។",
+  },
+  {
+    id: "zn",
+    nameEn: "Zinc",
+    nameKh: "ស័ង្កសី",
+    Icon: Plus,
+    funcEn: "Immune function, DNA synthesis, wound healing.",
+    funcKh: "មុខងារភាពស៊ាំ ការសំយោគ DNA ការជាសះស្បើយនៃរបួស។",
+    sourcesEn: "Meat, shellfish, legumes.",
+    sourcesKh: "សាច់ គ្រឿងសមុទ្រសំបក សណ្ដែក។",
+    defEn: "Frequent sickness, hair loss.",
+    defKh: "ឈឺញឹកញាប់ ជ្រុះសក់។",
+  },
+  {
+    id: "i",
+    nameEn: "Iodine",
+    nameKh: "អ៊ីយ៉ូត",
+    Icon: Megaphone,
+    funcEn: "Thyroid function and metabolism.",
+    funcKh: "មុខងារក្រពេញទីរ៉ូអ៊ីត និងការរំលាយអាហារ។",
+    sourcesEn: "Iodized salt, seafood.",
+    sourcesKh: "អំបិលដែលមានជាតិអ៊ីយ៉ូត គ្រឿងសមុទ្រ។",
+    defEn: "Swollen neck (Goiter), developmental delays.",
+    defKh: "ករហើម (Goiter) ការវិវឌ្ឍយឺត។",
+  },
+];
+
+function SparkPlugs({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="space-y-8" data-testid="spark-plugs-root">
+      {/* ── 2A · Solubility callouts ──────────────────────────────── */}
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-3"
+        data-testid="sp-solubility"
+      >
+        <SolubilityCard
+          isKh={isKh}
+          tone="water"
+          icon={<Droplets className="w-5 h-5" aria-hidden="true" />}
+          titleEn="Water-Soluble Vitamins"
+          titleKh="វីតាមីនរលាយក្នុងទឹក"
+          bodyEn={
+            'These wash out of your system quickly. You must "top them off" every single day.'
+          }
+          bodyKh="ពួកវាហូរចេញពីរាងកាយលឿន។ អ្នកត្រូវ «បំពេញ» ពួកវាឡើងវិញរៀងរាល់ថ្ងៃ។"
+          tagEn="Vitamins B & C"
+          tagKh="វីតាមីន B និង C"
+        />
+        <SolubilityCard
+          isKh={isKh}
+          tone="fat"
+          icon={<Flame className="w-5 h-5" aria-hidden="true" />}
+          titleEn="Fat-Soluble Vitamins"
+          titleKh="វីតាមីនរលាយក្នុងខ្លាញ់"
+          bodyEn={
+            "These are stored in the body's fat and liver for future use. Be careful not to overfill them."
+          }
+          bodyKh="ពួកវាត្រូវបានរក្សាទុកក្នុងខ្លាញ់ និងថ្លើមរបស់រាងកាយសម្រាប់ប្រើពេលក្រោយ។ ប្រយ័ត្នកុំបំពេញហួសកម្រិត។"
+          tagEn="Vitamins A, D, E, K"
+          tagKh="វីតាមីន A, D, E, K"
+        />
+      </div>
+
+      {/* ── 2B · Vitamin grid ─────────────────────────────────────── */}
+      <MicroGroup
+        isKh={isKh}
+        kind="vitamins"
+        eyebrowEn="Vitamins"
+        eyebrowKh="វីតាមីន"
+        headlineEn="Six tiny sparks that keep the engine running"
+        headlineKh="ប៊ូស៊ីតូចៗប្រាំមួយ ដែលធ្វើឱ្យម៉ាស៊ីនដំណើរការ"
+        items={VITAMINS}
+      />
+
+      {/* ── 2C · Mineral grid ─────────────────────────────────────── */}
+      <MicroGroup
+        isKh={isKh}
+        kind="minerals"
+        eyebrowEn="Minerals"
+        eyebrowKh="សារធាតុរ៉ែ"
+        headlineEn="Six earth elements your cells cannot live without"
+        headlineKh="ធាតុដីប្រាំមួយ ដែលកោសិការបស់អ្នកមិនអាចរស់នៅគ្មាន"
+        items={MINERALS}
+      />
+
+      {/* ── 2D · Mechanic's Rules — Synergy ───────────────────────── */}
+      <SynergyBlock isKh={isKh} />
+    </div>
+  );
+}
+
+// ── Solubility callout ─────────────────────────────────────────────────
+function SolubilityCard({
+  isKh,
+  tone,
+  icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+  tagEn,
+  tagKh,
+}: {
+  isKh: boolean;
+  tone: "water" | "fat";
+  icon: React.ReactNode;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  tagEn: string;
+  tagKh: string;
+}) {
+  const palette =
+    tone === "water"
+      ? {
+          bg: "bg-sky-50",
+          border: "border-sky-200",
+          text: "text-sky-900",
+          tint: "bg-sky-100 text-sky-700",
+          tagBg: "bg-sky-600",
+        }
+      : {
+          bg: "bg-amber-50",
+          border: "border-amber-200",
+          text: "text-amber-900",
+          tint: "bg-amber-100 text-amber-700",
+          tagBg: "bg-amber-600",
+        };
+  return (
+    <div
+      className={`rounded-2xl border-2 ${palette.bg} ${palette.border} p-4 sm:p-5`}
+      data-testid={`sp-solubility-${tone}`}
+    >
+      <div className="flex items-center gap-2.5 mb-2">
+        <div
+          className={`w-9 h-9 rounded-xl flex items-center justify-center ${palette.tint}`}
+          aria-hidden="true"
+        >
+          {icon}
+        </div>
+        <h3
+          className={`font-extrabold text-base sm:text-lg ${palette.text} ${isKh ? "font-khmer leading-loose" : ""}`}
+        >
+          {isKh ? titleKh : titleEn}
+        </h3>
+      </div>
+      <p
+        className={`text-sm text-slate-700 mb-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {isKh ? bodyKh : bodyEn}
+      </p>
+      <span
+        className={`inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold text-white ${palette.tagBg} ${isKh ? "font-khmer text-xs" : ""}`}
+      >
+        {isKh ? tagKh : tagEn}
+      </span>
+    </div>
+  );
+}
+
+// ── Vitamins / Minerals grid wrapper ───────────────────────────────────
+function MicroGroup({
+  isKh,
+  kind,
+  eyebrowEn,
+  eyebrowKh,
+  headlineEn,
+  headlineKh,
+  items,
+}: {
+  isKh: boolean;
+  kind: "vitamins" | "minerals";
+  eyebrowEn: string;
+  eyebrowKh: string;
+  headlineEn: string;
+  headlineKh: string;
+  items: Micronutrient[];
+}) {
+  const palette =
+    kind === "vitamins"
+      ? {
+          eyebrow: "text-amber-700",
+          banner: "from-amber-50 via-yellow-50 to-amber-50 border-amber-200",
+          chip: "bg-amber-100 text-amber-800 border-amber-200",
+          iconWrap: "bg-amber-100 text-amber-700",
+          iconRing: "ring-amber-200",
+          headlineColor: "text-amber-900",
+        }
+      : {
+          eyebrow: "text-slate-700",
+          banner:
+            "from-slate-50 via-stone-50 to-slate-50 border-slate-300",
+          chip: "bg-slate-200 text-slate-800 border-slate-300",
+          iconWrap: "bg-slate-200 text-slate-700",
+          iconRing: "ring-slate-300",
+          headlineColor: "text-slate-800",
+        };
+  return (
+    <div data-testid={`sp-group-${kind}`}>
+      <div
+        className={`rounded-2xl border-2 bg-gradient-to-r ${palette.banner} px-4 py-3 mb-4`}
+      >
+        <div
+          className={`text-[11px] font-bold tracking-widest uppercase ${palette.eyebrow} mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}
+        >
+          {isKh ? eyebrowKh : eyebrowEn}
+        </div>
+        <h3
+          className={`font-extrabold text-lg sm:text-xl ${palette.headlineColor} ${isKh ? "font-khmer leading-loose" : ""}`}
+        >
+          {isKh ? headlineKh : headlineEn}
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        {items.map((n) => (
+          <MicroCard
+            key={n.id}
+            kind={kind}
+            isKh={isKh}
+            item={n}
+            chipClass={palette.chip}
+            iconWrap={palette.iconWrap}
+            iconRing={palette.iconRing}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MicroCard({
+  isKh,
+  kind,
+  item,
+  chipClass,
+  iconWrap,
+  iconRing,
+}: {
+  isKh: boolean;
+  kind: "vitamins" | "minerals";
+  item: Micronutrient;
+  chipClass: string;
+  iconWrap: string;
+  iconRing: string;
+}) {
+  const Icon = item.Icon;
+  return (
+    <div
+      className="rounded-2xl border-2 bg-white border-slate-200 p-4 flex flex-col gap-3 hover:shadow-md transition-shadow"
+      data-testid={`sp-card-${kind}-${item.id}`}
+    >
+      <div className="flex items-center gap-3">
+        <div
+          className={`w-11 h-11 rounded-xl flex items-center justify-center ring-4 ${iconWrap} ${iconRing}`}
+          aria-hidden="true"
+        >
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4
+            className={`font-extrabold text-base text-slate-900 leading-tight ${isKh ? "font-khmer leading-loose" : ""}`}
+          >
+            {isKh ? item.nameKh : item.nameEn}
+          </h4>
+          <span
+            className={`inline-block mt-1 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${chipClass} ${isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}
+          >
+            {kind === "vitamins"
+              ? isKh
+                ? "វីតាមីន"
+                : "Vitamin"
+              : isKh
+              ? "សារធាតុរ៉ែ"
+              : "Mineral"}
+          </span>
+        </div>
+      </div>
+
+      <MicroFact
+        isKh={isKh}
+        labelEn="Function"
+        labelKh="មុខងារ"
+        bodyEn={item.funcEn}
+        bodyKh={item.funcKh}
+        toneClass="text-emerald-700"
+      />
+      <MicroFact
+        isKh={isKh}
+        labelEn="Sources"
+        labelKh="ប្រភព"
+        bodyEn={item.sourcesEn}
+        bodyKh={item.sourcesKh}
+        toneClass="text-sky-700"
+      />
+      <MicroFact
+        isKh={isKh}
+        labelEn="Deficiency"
+        labelKh="ការខ្វះខាត"
+        bodyEn={item.defEn}
+        bodyKh={item.defKh}
+        toneClass="text-rose-700"
+        warn
+      />
+    </div>
+  );
+}
+
+function MicroFact({
+  isKh,
+  labelEn,
+  labelKh,
+  bodyEn,
+  bodyKh,
+  toneClass,
+  warn,
+}: {
+  isKh: boolean;
+  labelEn: string;
+  labelKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  toneClass: string;
+  warn?: boolean;
+}) {
+  return (
+    <div>
+      <div
+        className={`flex items-center gap-1 text-[10px] font-mono font-bold uppercase tracking-widest mb-0.5 ${toneClass} ${isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}
+      >
+        {warn && <AlertTriangle className="w-3 h-3" aria-hidden="true" />}
+        <span>{isKh ? labelKh : labelEn}</span>
+      </div>
+      <p
+        className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {isKh ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+// ── 2D · Mechanic's Rules (Nutrient Synergy) ───────────────────────────
+function SynergyBlock({ isKh }: { isKh: boolean }) {
+  return (
+    <div data-testid="sp-synergy">
+      <div className="rounded-2xl border-2 bg-gradient-to-r from-emerald-50 via-amber-50 to-emerald-50 border-emerald-200 px-4 py-3 mb-4">
+        <div
+          className={`text-[11px] font-bold tracking-widest uppercase text-emerald-700 mb-1 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}
+        >
+          {isKh ? "ច្បាប់របស់មេជាងម៉ាស៊ីន" : "The Mechanic's Rules"}
+        </div>
+        <h3
+          className={`font-extrabold text-lg sm:text-xl text-slate-900 ${isKh ? "font-khmer leading-loose" : ""}`}
+        >
+          {isKh
+            ? "សហថាមពលនៃសារធាតុចិញ្ចឹម — របៀបដែលពួកវាជួយគ្នាទៅវិញទៅមក"
+            : "Nutrient Synergy — How they help each other"}
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <SynergyCard
+          isKh={isKh}
+          testId="sp-synergy-iron"
+          icon={<Droplets className="w-5 h-5" aria-hidden="true" />}
+          tagEn="The Iron Helper"
+          tagKh="ជំនួយការសម្រាប់ជាតិដែក"
+          pairEn="Vitamin C + Iron"
+          pairKh="វីតាមីន C + ជាតិដែក"
+          bodyEn="Vitamin C helps your body absorb Iron. Eat guava or squeeze lime on your dark leafy greens — your blood will thank you!"
+          bodyKh="វីតាមីន C ជួយឱ្យរាងកាយរបស់អ្នកស្រូបយកជាតិដែក។ ញ៉ាំត្របែក ឬច្របាច់ក្រូចឆ្មារលើបន្លែស្លឹកបៃតងដិត — ឈាមរបស់អ្នកនឹងអរគុណ!"
+          accent="emerald"
+        />
+        <SynergyCard
+          isKh={isKh}
+          testId="sp-synergy-bone"
+          icon={<Bone className="w-5 h-5" aria-hidden="true" />}
+          tagEn="The Bone Builders"
+          tagKh="អ្នកសាងសង់ឆ្អឹង"
+          pairEn="Vitamin D + Calcium"
+          pairKh="វីតាមីន D + កាល់ស្យូម"
+          bodyEn="Vitamin D acts as the key that unlocks Calcium so your body can absorb it. You need both for strong bones — sunlight helps Vitamin D, dairy and small fish bring the Calcium."
+          bodyKh="វីតាមីន D ដើរតួជាសោដែលដោះសោកាល់ស្យូម ដើម្បីឱ្យរាងកាយរបស់អ្នកស្រូបយកវាបាន។ អ្នកត្រូវការទាំងពីរសម្រាប់ឆ្អឹងរឹងមាំ — ពន្លឺព្រះអាទិត្យជួយវីតាមីន D ផលិតផលទឹកដោះ និងត្រីតូចផ្ដល់កាល់ស្យូម។"
+          accent="amber"
+        />
+      </div>
+    </div>
+  );
+}
+
+function SynergyCard({
+  isKh,
+  testId,
+  icon,
+  tagEn,
+  tagKh,
+  pairEn,
+  pairKh,
+  bodyEn,
+  bodyKh,
+  accent,
+}: {
+  isKh: boolean;
+  testId: string;
+  icon: React.ReactNode;
+  tagEn: string;
+  tagKh: string;
+  pairEn: string;
+  pairKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  accent: "emerald" | "amber";
+}) {
+  const tones =
+    accent === "emerald"
+      ? {
+          border: "border-emerald-200",
+          bg: "bg-emerald-50/50",
+          iconBg: "bg-emerald-100 text-emerald-700",
+          tag: "bg-emerald-600",
+          pair: "text-emerald-800",
+        }
+      : {
+          border: "border-amber-200",
+          bg: "bg-amber-50/50",
+          iconBg: "bg-amber-100 text-amber-700",
+          tag: "bg-amber-600",
+          pair: "text-amber-800",
+        };
+  return (
+    <div
+      className={`rounded-2xl border-2 ${tones.border} ${tones.bg} p-4 sm:p-5`}
+      data-testid={testId}
+    >
+      <div className="flex items-center gap-2.5 mb-2">
+        <div
+          className={`w-10 h-10 rounded-xl flex items-center justify-center ${tones.iconBg}`}
+          aria-hidden="true"
+        >
+          {icon}
+        </div>
+        <div className="flex flex-col">
+          <span
+            className={`inline-flex items-center self-start rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white ${tones.tag} ${isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}
+          >
+            {isKh ? tagKh : tagEn}
+          </span>
+          <span
+            className={`mt-1 font-extrabold text-base ${tones.pair} ${isKh ? "font-khmer leading-loose" : ""}`}
+          >
+            {isKh ? pairKh : pairEn}
+          </span>
+        </div>
+      </div>
+      <p
+        className={`text-sm text-slate-700 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {isKh ? bodyKh : bodyEn}
+      </p>
+    </div>
   );
 }
