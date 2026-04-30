@@ -35,6 +35,7 @@ import {
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ObstetricFistula } from "@/pages/sections/ObstetricFistula";
 import { DiabetesParadox } from "@/pages/sections/DiabetesParadox";
+import { EmergencyFirstAid } from "@/pages/sections/EmergencyFirstAid";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  PHL-01 · Public Health: The Web of Well-Being
@@ -336,6 +337,7 @@ export function PublicHealthPage() {
         <SectionAlcoholChemistry k={k} t={t} />
         <SectionStress         k={k} t={t} />
         <SectionHappiness      k={k} t={t} />
+        <EmergencyFirstAid     k={k} t={t} />
 
         {/* Closing */}
         <div
