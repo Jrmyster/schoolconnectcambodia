@@ -15,6 +15,7 @@ type Career = {
   tasks: { en: string[]; kh: string[] };
   impact: { en: string; kh: string };
   specialties?: Specialty[];
+  focusSubjects?: { en: string[]; kh: string[] };
 };
 
 type Major = {
@@ -53,6 +54,36 @@ function TaskPanel({ career, kh, majorKey }: { career: Career; kh: boolean; majo
       </div>
 
       <div className="px-5 py-4 flex-1 overflow-y-auto">
+        {career.focusSubjects && career.focusSubjects.en.length > 0 && (
+          <div className="mb-4 pb-4 border-b" style={{ borderColor: "#E2E8F0" }}>
+            <p
+              className="text-[10px] font-bold uppercase tracking-wider mb-2 flex flex-wrap items-center gap-x-1.5"
+              style={{ color: "#94A3B8" }}
+            >
+              <span>High School Focus</span>
+              <span aria-hidden="true">/</span>
+              <span className="font-khmer normal-case tracking-normal">
+                មុខវិជ្ជាគោលដៅនៅវិទ្យាល័យ
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-1.5" data-testid={`focus-subjects-${career.id}`}>
+              {(kh ? career.focusSubjects.kh : career.focusSubjects.en).map((subject, i) => (
+                <span
+                  key={i}
+                  className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold ${kh ? "font-khmer" : ""}`}
+                  style={{
+                    background: "#ECFDF5",
+                    color: "#065F46",
+                    border: "1px solid #A7F3D0",
+                  }}
+                >
+                  {subject}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         <p
           className={`text-xs font-bold uppercase tracking-wide mb-3 ${kh ? "font-khmer" : ""}`}
           style={{ color: "#2563EB" }}
