@@ -1,0 +1,43 @@
+I want to add a new section to the 'Family & Development' page, directly below the 'Parenting Styles' section. Let's call it 'The First Year: Infant Care & Safety (ឆ្នាំទីមួយ៖ ការថែទាំ និងសុវត្ថិភាពទារក)'.
+
+Please implement this using our established warm, welcoming aesthetic (soft yellows and greens, clean typography):
+
+1. Section 1: The Rhythm of the First Year (ចង្វាក់នៃឆ្នាំទីមួយ)
+
+Explain that a baby's stomach is tiny, so they need to eat frequently, and their brains are growing rapidly, so they need massive amounts of sleep.
+
+Create a simple comparative timeline or two cards:
+
+Newborns (0-3 months): Eat every 2 to 3 hours (breastmilk or formula only). Sleep 14 to 17 hours a day (usually in short bursts).
+
+Older Babies (6-12 months): Eat every 3 to 4 hours (introducing solids). Sleep 12 to 15 hours a day (sleeping longer through the night).
+
+2. Section 2: First Foods - What to Eat and What to Avoid (អាហារដំបូង)
+
+Explain that around 6 months, babies can start trying solid foods.
+
+Safe First Foods: List soft, easily digestible foods. Examples: Mashed bananas, pureed sweet potatoes, avocados, and soft rice porridge (Borbor / បបរ).
+
+Strictly Avoid (Danger Zone):
+
+Honey: Explain that honey contains bacteria spores that cause infant botulism, which can be fatal. Never give honey before 1 year old.
+
+Cow's Milk: Hard for infants to digest and lacks proper nutrients; wait until 1 year.
+
+Choking Hazards: Whole grapes, nuts, hard candies, and large chunks of meat.
+
+3. Section 3: Safe Sleep & SIDS Prevention (ការគេងប្រកបដោយសុវត្ថិភាព)
+
+Define SIDS (Sudden Infant Death Syndrome).
+
+Create a highly visible 'Safe Sleep Rules' checklist using clear icons:
+
+Back to Sleep: Always place a baby on their back to sleep, never on their stomach.
+
+Empty Crib: The sleeping area should be completely flat and firm. No heavy blankets, no pillows, and no stuffed animals that could suffocate them.
+
+Smoke-Free: Secondhand smoke severely increases the risk of SIDS.
+
+4. Formatting & UX:
+
+Ensure all main headings, warnings, and key concepts are strictly bilingual (English/Khmer). Use clear, friendly icons to make the text highly scannable for tired parents.

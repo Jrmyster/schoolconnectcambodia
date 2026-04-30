@@ -1,0 +1,59 @@
+I need to build a comprehensive new section for the 'Human Engine' page, located directly below the 'Fueling the engine' section. Let's call it 'The Spark Plugs: Vitamins & Minerals (ប៊ូស៊ីបញ្ឆេះម៉ាស៊ីន៖ វីតាមីន និងសារធាតុរ៉ែ)'.
+
+Please implement this using a clean, highly readable grid layout with our established bilingual typography:
+
+1. The Introduction (សេចក្តីផ្តើម):
+
+Add explanatory text: 'If macronutrients are the fuel for your engine, vitamins and minerals are the spark plugs and oil. You only need tiny amounts, but without them, the engine breaks down.'
+
+Create two highlighted callout boxes:
+
+Water-Soluble Vitamins (វីតាមីនរលាយក្នុងទឹក): 'These wash out of your system quickly. You must "top them off" every single day (Vitamins B and C).'
+
+Fat-Soluble Vitamins (វីតាមីនរលាយក្នុងខ្លាញ់): 'These are stored in the body's fat and liver for future use. Be careful not to overfill them (Vitamins A, D, E, and K).'
+
+2. The Vitamin Cards (វីតាមីន):
+
+Create a grid of cards for the following, including a relevant icon, its function, local food sources, and deficiency symptoms:
+
+Vitamin A: (Icon: Eye) Function: Vision and immunity. Sources: Papaya, carrots, sweet potatoes, liver. Deficiency: Night blindness.
+
+Vitamin B-Complex: (Icon: Lightning Bolt) Function: Energy production, brain function, and metabolism. Sources: Brown rice, eggs, meat, leafy greens. Deficiency: Severe fatigue, weakness.
+
+Vitamin C: (Icon: Shield) Function: Antioxidant, immune support, and collagen production. Sources: Guava, citrus, tomatoes. Deficiency: Bleeding gums, slow healing.
+
+Vitamin D: (Icon: Sun) Function: Calcium absorption and bone health. Sources: Sunlight, fatty fish. Deficiency: Soft/aching bones (Rickets in kids).
+
+Vitamin E: (Icon: Leaf) Function: Protects cells from damage. Sources: Nuts, seeds, vegetable oils. Deficiency: Muscle weakness, vision problems.
+
+Vitamin K: (Icon: Bandage) Function: Blood clotting and bone health. Sources: Leafy greens (morning glory, spinach). Deficiency: Excessive bleeding from small cuts.
+
+3. The Mineral Cards (សារធាតុរ៉ែ):
+
+Create a separate grid for minerals:
+
+Calcium: (Icon: Bone) Function: Strong bones, teeth, and muscle function. Sources: Small fish (eaten with bones), dairy, dark greens. Deficiency: Stunted growth, brittle bones.
+
+Iron: (Icon: Blood Drop) Function: Transports oxygen in the blood. Sources: Red meat, beans, spinach. Deficiency: Anemia (extreme exhaustion, pale skin).
+
+Magnesium: (Icon: Brain/Nerve) Function: Nerve function, blood pressure, and bone strength. Sources: Nuts, seeds, legumes. Deficiency: Muscle cramps, twitches.
+
+Potassium: (Icon: Heart) Function: Healthy blood pressure and nerve function. Sources: Bananas, coconut water, potatoes. Deficiency: Severe muscle cramps, irregular heartbeat.
+
+Zinc: (Icon: Plus Sign) Function: Immune function, DNA synthesis, wound healing. Sources: Meat, shellfish, legumes. Deficiency: Frequent sickness, hair loss.
+
+Iodine: (Icon: Shield/Throat) Function: Thyroid function and metabolism. Sources: Iodized salt, seafood. Deficiency: Swollen neck (Goiter), developmental delays.
+
+4. The Mechanic's Rules (Nutrient Synergy / សហថាមពលនៃសារធាតុចិញ្ចឹម):
+
+Add a final section explaining how nutrients team up:
+
+The Iron Helper: 'Vitamin C helps your body absorb Iron. Eat guava or squeeze lime on your dark leafy greens!'
+
+The Bone Builders: 'Vitamin D acts as the key to unlock and absorb Calcium. You need both for strong bones.'
+
+5. Formatting & UX:
+
+Ensure all titles, functions, and symptoms are strictly bilingual (English/Khmer).
+
+Use visually distinct styling to separate Vitamins from Minerals.

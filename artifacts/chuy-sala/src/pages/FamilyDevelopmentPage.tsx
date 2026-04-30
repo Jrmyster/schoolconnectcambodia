@@ -17,6 +17,16 @@ import {
   Sun,
   Sparkles,
   Leaf,
+  Moon,
+  Utensils,
+  Ban,
+  Cigarette,
+  CheckCircle2,
+  Clock,
+  Bed,
+  Apple,
+  Droplet,
+  Cookie,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -107,6 +117,7 @@ export default function FamilyDevelopmentPage() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-12">
         <ParentingStylesCard k={k} t={t} />
+        <FirstYearCard k={k} t={t} />
         <PregnancyJourneyCard k={k} t={t} />
         <MilestonesCard k={k} t={t} />
 
@@ -492,7 +503,7 @@ function PregnancyJourneyCard({ k, t }: { k: boolean; t: T }) {
   return (
     <CardShell
       k={k}
-      spec="FD-02"
+      spec="FD-03"
       icon={<Baby className="w-4 h-4" />}
       titleEn="The Journey of Pregnancy"
       titleKh="ដំណើរនៃការមានផ្ទៃពោះ"
@@ -744,7 +755,7 @@ function MilestonesCard({ k, t }: { k: boolean; t: T }) {
   return (
     <CardShell
       k={k}
-      spec="FD-03"
+      spec="FD-04"
       icon={<Sprout className="w-4 h-4" />}
       titleEn="Baby & Toddler Milestones"
       titleKh="ការវិវត្តរបស់ទារក និងកុមារតូច"
@@ -915,5 +926,613 @@ function MilestoneRow({
         </div>
       </div>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Card 2 · The First Year — Infant Care & Safety
+//  ឆ្នាំទីមួយ៖ ការថែទាំ និងសុវត្ថិភាពទារក
+// ════════════════════════════════════════════════════════════════════════════
+
+function FirstYearCard({ k, t }: { k: boolean; t: T }) {
+  return (
+    <CardShell
+      k={k}
+      spec="FD-02"
+      icon={<Baby className="w-4 h-4" />}
+      titleEn="The First Year: Infant Care & Safety"
+      titleKh="ឆ្នាំទីមួយ៖ ការថែទាំ និងសុវត្ថិភាពទារក"
+      leadEn="A baby's first twelve months are a sprint of growth: a stomach the size of a walnut needing constant fuel, a brain doubling in size needing massive sleep, and a tiny body that depends entirely on the adults around it for safety. Here is what new parents most often want — and need — to know."
+      leadKh="ដប់ពីរខែដំបូងរបស់ទារក គឺជាការរត់ប្រណាំងនៃការលូតលាស់ ៖ ក្រពះតូចប៉ុនគ្រាប់ស្វាយចន្ទីមួយត្រូវការអាហារជាប់ៗ ខួរក្បាលដែលធំទ្វេដងត្រូវការការគេងច្រើនបំផុត ហើយរូបកាយតូចមួយពឹងផ្អែកទាំងស្រុងលើមនុស្សពេញវ័យជុំវិញខ្លួនសម្រាប់សុវត្ថិភាព។ នេះគឺជាអ្វីដែលឪពុកម្ដាយថ្មីៗច្រើនតែចង់ដឹង — និងត្រូវដឹងបំផុត។"
+      accentBg="#fefce8"
+      accentBorder={`${AMBER}55`}
+      accentText={AMBER}
+      testId="fd-card-first-year"
+    >
+      <div className="space-y-7">
+        {/* ─── Section 1 · Rhythm of the First Year ─────────────────── */}
+        <FirstYearSection
+          k={k}
+          testId="fd-firstyear-rhythm"
+          numEn="Section 1"
+          numKh="ផ្នែកទី ១"
+          titleEn="The Rhythm of the First Year"
+          titleKh="ចង្វាក់នៃឆ្នាំទីមួយ"
+          icon={<Clock className="w-4 h-4" aria-hidden="true" />}
+          accent={AMBER}
+        >
+          <p
+            className={`text-sm sm:text-[15px] mb-4 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            style={{ color: INK_SOFT }}
+          >
+            {t(
+              "A newborn's stomach is roughly the size of a cherry — they cannot hold much milk, so they need to eat very often. At the same time, the brain is building millions of new connections every hour, and that work happens during sleep. As babies grow, both rhythms slowly stretch out: meals get bigger and further apart, and sleep gathers into longer stretches at night.",
+              "ក្រពះរបស់ទារកទើបនឹងកើតប្រហែលប៉ុនគ្រាប់ចេរី — វាមិនអាចផ្ទុកទឹកដោះច្រើនបានទេ ដូច្នេះវាត្រូវការញ៉ាំញឹកញាប់ណាស់។ ក្នុងពេលជាមួយគ្នា ខួរក្បាលកំពុងបង្កើតការតភ្ជាប់ថ្មីរាប់លានរៀងរាល់ម៉ោង ហើយការងារនេះកើតឡើងពេលគេង។ នៅពេលទារកធំឡើង ចង្វាក់ទាំងពីរនេះកាន់តែលាតសន្ធឹង ៖ អាហារកាន់តែច្រើន និងឆ្ងាយពីគ្នា ហើយការគេងផ្ដុំជាបន្តវែងៗនៅពេលយប់។"
+            )}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <RhythmTile
+              k={k}
+              testId="fd-rhythm-newborn"
+              ageEn="Newborns"
+              ageKh="ទារកទើបនឹងកើត"
+              monthsEn="0–3 months"
+              monthsKh="០–៣ ខែ"
+              feedEn="Eat every 2–3 hours"
+              feedKh="ញ៉ាំរៀងរាល់ ២–៣ ម៉ោង"
+              feedNoteEn="Breastmilk or formula only — no water, no juice, no food."
+              feedNoteKh="ទឹកដោះម្ដាយ ឬទឹកដោះកំប៉ុងប៉ុណ្ណោះ — គ្មានទឹក គ្មានទឹកផ្លែឈើ គ្មានអាហារ។"
+              sleepEn="Sleep 14–17 hours per day"
+              sleepKh="គេង ១៤–១៧ ម៉ោងក្នុងមួយថ្ងៃ"
+              sleepNoteEn="Usually in short bursts of 2–4 hours, day and night."
+              sleepNoteKh="ច្រើនតែជាដំណាក់កាលខ្លីៗ ២–៤ ម៉ោង ទាំងពេលថ្ងៃ និងពេលយប់។"
+              accent={AMBER}
+              bg="#fefce8"
+            />
+            <RhythmTile
+              k={k}
+              testId="fd-rhythm-older"
+              ageEn="Older Babies"
+              ageKh="ទារកធំបន្តិច"
+              monthsEn="6–12 months"
+              monthsKh="៦–១២ ខែ"
+              feedEn="Eat every 3–4 hours"
+              feedKh="ញ៉ាំរៀងរាល់ ៣–៤ ម៉ោង"
+              feedNoteEn="Milk plus solid foods — purées and mashed family foods."
+              feedNoteKh="ទឹកដោះ បូកនឹងអាហាររឹង — អាហារកិន និងអាហារគ្រួសារកិនម៉ដ្ឋ។"
+              sleepEn="Sleep 12–15 hours per day"
+              sleepKh="គេង ១២–១៥ ម៉ោងក្នុងមួយថ្ងៃ"
+              sleepNoteEn="Most sleep at night, with 1–2 daytime naps."
+              sleepNoteKh="គេងភាគច្រើននៅពេលយប់ ជាមួយការទម្រេតពេលថ្ងៃ ១–២ ដង។"
+              accent={LEAF_DEEP}
+              bg={`${LEAF_SOFT}55`}
+            />
+          </div>
+        </FirstYearSection>
+
+        {/* ─── Section 2 · First Foods ─────────────────────────────── */}
+        <FirstYearSection
+          k={k}
+          testId="fd-firstyear-foods"
+          numEn="Section 2"
+          numKh="ផ្នែកទី ២"
+          titleEn="First Foods — What to Eat & What to Avoid"
+          titleKh="អាហារដំបូង — អ្វីដែលត្រូវញ៉ាំ និងអ្វីដែលត្រូវចៀសវាង"
+          icon={<Utensils className="w-4 h-4" aria-hidden="true" />}
+          accent={AMBER}
+        >
+          <p
+            className={`text-sm sm:text-[15px] mb-4 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            style={{ color: INK_SOFT }}
+          >
+            {t(
+              "Around 6 months, most babies are ready to start trying solid foods alongside milk. Begin with one new food at a time — a teaspoon or two — and watch for any rash or upset stomach over the next few days. Soft, smooth, and slow is the rule.",
+              "នៅប្រហែល ៦ ខែ ទារកភាគច្រើនរួចរាល់ដើម្បីចាប់ផ្ដើមសាកអាហាររឹងបន្ថែមលើទឹកដោះ។ ចាប់ផ្ដើមដោយអាហារថ្មីមួយម្ដង — មួយឬពីរស្លាបព្រា — ហើយសង្កេតការកន្ទួល ឬការឈឺពោះនៅប៉ុន្មានថ្ងៃក្រោយ។ ទន់ រលោង និងយឺតៗ គឺជាក្បួន។"
+            )}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Safe Foods (green) */}
+            <div
+              className="rounded-2xl border-2 p-4"
+              style={{
+                borderColor: `${LEAF}55`,
+                backgroundColor: `${LEAF_SOFT}33`,
+              }}
+              data-testid="fd-foods-safe"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: LEAF_SOFT, color: LEAF_DEEP }}
+                >
+                  <CheckCircle2 className="w-4 h-4" aria-hidden="true" />
+                </div>
+                <div>
+                  <div
+                    className={`text-[10px] font-mono font-bold uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+                    style={{ color: LEAF_DEEP }}
+                  >
+                    {t("Safe First Foods", "អាហារដំបូងសុវត្ថិភាព")}
+                  </div>
+                  <h4
+                    className={`text-base font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+                    style={{ color: LEAF_DEEP }}
+                  >
+                    {t("Soft & easy to digest", "ទន់ និងងាយរំលាយ")}
+                  </h4>
+                </div>
+              </div>
+              <ul className="space-y-2">
+                <SafeFoodItem
+                  k={k}
+                  icon={<Apple className="w-4 h-4" aria-hidden="true" />}
+                  textEn="Mashed banana"
+                  textKh="ចេកកិន"
+                />
+                <SafeFoodItem
+                  k={k}
+                  icon={<Sprout className="w-4 h-4" aria-hidden="true" />}
+                  textEn="Pureed sweet potato"
+                  textKh="ដំឡូងជ្វាកិន"
+                />
+                <SafeFoodItem
+                  k={k}
+                  icon={<Leaf className="w-4 h-4" aria-hidden="true" />}
+                  textEn="Avocado"
+                  textKh="ផ្លែបឺរ"
+                />
+                <SafeFoodItem
+                  k={k}
+                  icon={<Utensils className="w-4 h-4" aria-hidden="true" />}
+                  textEn="Soft rice porridge (Borbor / បបរ)"
+                  textKh="បបរ"
+                />
+              </ul>
+            </div>
+
+            {/* Danger Zone (terracotta/red) */}
+            <div
+              className="rounded-2xl border-2 p-4"
+              style={{
+                borderColor: `${TERRA}66`,
+                backgroundColor: `${TERRA_SOFT}33`,
+              }}
+              data-testid="fd-foods-avoid"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: TERRA_SOFT, color: TERRA_DEEP }}
+                >
+                  <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+                </div>
+                <div>
+                  <div
+                    className={`text-[10px] font-mono font-bold uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+                    style={{ color: TERRA_DEEP }}
+                  >
+                    {t("Danger Zone — Strictly Avoid", "តំបន់គ្រោះថ្នាក់ — ត្រូវចៀសវាងដាច់ខាត")}
+                  </div>
+                  <h4
+                    className={`text-base font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+                    style={{ color: TERRA_DEEP }}
+                  >
+                    {t("Never before 1 year old", "មិនត្រូវឱ្យមុនអាយុ ១ ឆ្នាំ")}
+                  </h4>
+                </div>
+              </div>
+              <ul className="space-y-2.5">
+                <DangerItem
+                  k={k}
+                  icon={<Ban className="w-4 h-4" aria-hidden="true" />}
+                  titleEn="Honey"
+                  titleKh="ទឹកឃ្មុំ"
+                  bodyEn="Contains bacteria spores that can cause infant botulism — a serious, sometimes fatal illness. Never give honey before 1 year old, not even a tiny taste."
+                  bodyKh="មានសារបាក់តេរីដែលបង្កជំងឺ Botulism សម្រាប់ទារក — ជំងឺធ្ងន់ធ្ងរ ហើយជួនកាលស្លាប់។ មិនត្រូវឱ្យទឹកឃ្មុំមុនអាយុ ១ ឆ្នាំទាល់តែសោះ សូម្បីភ្លក្សមួយតក់។"
+                />
+                <DangerItem
+                  k={k}
+                  icon={<Droplet className="w-4 h-4" aria-hidden="true" />}
+                  titleEn="Cow's Milk"
+                  titleKh="ទឹកដោះគោ"
+                  bodyEn="Hard for infants to digest and missing the right balance of iron and nutrients babies need. Stay with breastmilk or formula until 1 year."
+                  bodyKh="ពិបាករំលាយសម្រាប់ទារក និងខ្វះតុល្យភាពនៃជាតិដែក និងសារធាតុចិញ្ចឹមដែលទារកត្រូវការ។ បន្តប្រើទឹកដោះម្ដាយ ឬទឹកដោះកំប៉ុងរហូតដល់អាយុ ១ ឆ្នាំ។"
+                />
+                <DangerItem
+                  k={k}
+                  icon={<Cookie className="w-4 h-4" aria-hidden="true" />}
+                  titleEn="Choking Hazards"
+                  titleKh="គ្រោះថ្នាក់ស្ទះបំពង់ក"
+                  bodyEn="Whole grapes, nuts, hard candies, popcorn, and large chunks of meat can block a tiny windpipe. Cut food into very small, soft pieces — never round and never hard — and always sit with baby while they eat."
+                  bodyKh="ផ្លែទំពាំងបាយជូរទាំងមូល គ្រាប់ផ្លែឈើ ស្ករគ្រាប់រឹង ពោតលីង និងសាច់ដុំធំៗ អាចស្ទះបំពង់ខ្យល់តូច។ កាត់អាហារជាបំណែកតូចៗ និងទន់ — មិនមូល និងមិនរឹង — ហើយអង្គុយជាមួយទារកជានិច្ច ពេលគេញ៉ាំ។"
+                />
+              </ul>
+            </div>
+          </div>
+        </FirstYearSection>
+
+        {/* ─── Section 3 · Safe Sleep & SIDS ───────────────────────── */}
+        <FirstYearSection
+          k={k}
+          testId="fd-firstyear-sleep"
+          numEn="Section 3"
+          numKh="ផ្នែកទី ៣"
+          titleEn="Safe Sleep & SIDS Prevention"
+          titleKh="ការគេងប្រកបដោយសុវត្ថិភាព និងការទប់ស្កាត់ SIDS"
+          icon={<Moon className="w-4 h-4" aria-hidden="true" />}
+          accent={AMBER}
+        >
+          <div
+            className="rounded-xl border-2 px-4 py-3 mb-4 flex items-start gap-2.5"
+            style={{
+              borderColor: `${TERRA}33`,
+              backgroundColor: `${TERRA_SOFT}22`,
+            }}
+            data-testid="fd-sids-definition"
+          >
+            <Stethoscope
+              className="w-4 h-4 flex-shrink-0 mt-0.5"
+              style={{ color: TERRA_DEEP }}
+              aria-hidden="true"
+            />
+            <p
+              className={`text-sm sm:text-[15px] ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+              style={{ color: INK_SOFT }}
+            >
+              <span className="font-bold" style={{ color: TERRA_DEEP }}>
+                {t("SIDS — Sudden Infant Death Syndrome", "SIDS — រោគសញ្ញាស្លាប់ទារកភ្លាមៗ")}
+              </span>
+              {" — "}
+              {t(
+                "is when a healthy baby under 1 year old dies suddenly in their sleep, without warning, and doctors cannot find a clear cause. The good news: a few simple sleep rules cut the risk dramatically. Tired parents, please make these rules into reflexes.",
+                "គឺជាពេលដែលទារកមានសុខភាពល្អអាយុក្រោម ១ ឆ្នាំ ស្លាប់ភ្លាមៗពេលគេង ដោយគ្មានការព្រមាន ហើយវេជ្ជបណ្ឌិតរកមូលហេតុច្បាស់លាស់មិនឃើញ។ ដំណឹងល្អ ៖ ច្បាប់នៃការគេងសាមញ្ញៗមួយចំនួន កាត់បន្ថយហានិភ័យយ៉ាងខ្លាំង។ ឪពុកម្ដាយដែលនឿយហត់ សូមធ្វើឱ្យច្បាប់ទាំងនេះក្លាយជាសភាវគតិ។"
+              )}
+            </p>
+          </div>
+
+          <div
+            className={`text-[10px] font-mono font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5 ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            style={{ color: AMBER }}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>{t("Safe Sleep Rules", "ច្បាប់នៃការគេងប្រកបដោយសុវត្ថិភាព")}</span>
+          </div>
+          <ul className="space-y-2.5" data-testid="fd-sids-rules">
+            <SleepRule
+              k={k}
+              icon={<Baby className="w-5 h-5" aria-hidden="true" />}
+              titleEn="Back to Sleep"
+              titleKh="ដាក់គេងផ្ងារ"
+              bodyEn="Always place a baby on their back to sleep — never on their stomach or side. The back position keeps the airway open and is the single biggest SIDS-prevention step."
+              bodyKh="ដាក់ទារកគេងផ្ងារជានិច្ច — មិនត្រូវដាក់គេងផ្កាប់ ឬផ្អៀងទេ។ ការដាក់គេងផ្ងារធ្វើឱ្យផ្លូវដង្ហើមនៅបើកចំហ ហើយជាជំហានទប់ស្កាត់ SIDS សំខាន់ជាងគេបំផុត។"
+            />
+            <SleepRule
+              k={k}
+              icon={<Bed className="w-5 h-5" aria-hidden="true" />}
+              titleEn="Empty Crib"
+              titleKh="អង្រឹងទទេ"
+              bodyEn="The sleeping area should be flat and firm. No pillows, no thick blankets, no soft toys, no bumper pads — anything that can cover the face is a suffocation risk. A simple swaddle or sleep-sack is enough."
+              bodyKh="តំបន់គេងគួររាបស្មើ និងរឹង។ គ្មានខ្នើយ គ្មានភួយក្រាស់ គ្មានតុក្កតាទន់ៗ គ្មានបន្ទះទ្រនាប់ជញ្ជាំង — អ្វីៗដែលអាចគ្របលើមុខ គឺជាហានិភ័យស្ទះដង្ហើម។ ការរុំទារកធម្មតា ឬឈុតគេងតែមួយ គឺគ្រប់គ្រាន់ហើយ។"
+            />
+            <SleepRule
+              k={k}
+              icon={<Cigarette className="w-5 h-5" aria-hidden="true" />}
+              titleEn="Smoke-Free Home"
+              titleKh="ផ្ទះគ្មានផ្សែងបារី"
+              bodyEn="Secondhand smoke severely raises the risk of SIDS. Keep all smoke — cigarettes, vapes, cooking fires — well away from where the baby sleeps and plays."
+              bodyKh="ផ្សែងបារីទីពីរ បង្កើនហានិភ័យ SIDS យ៉ាងធ្ងន់ធ្ងរ។ រក្សាគ្រប់ប្រភេទផ្សែង — បារី បារីអេឡិចត្រូនិក ភ្លើងធ្វើម្ហូប — ឱ្យឆ្ងាយពីកន្លែងដែលទារកគេង និងលេង។"
+            />
+          </ul>
+        </FirstYearSection>
+
+        {/* Footer reassurance strip */}
+        <div
+          className="rounded-xl border-2 px-4 py-3 flex items-start gap-2"
+          style={{ borderColor: `${LEAF}33`, backgroundColor: `${LEAF_SOFT}33` }}
+        >
+          <Sun
+            className="w-4 h-4 flex-shrink-0 mt-0.5"
+            style={{ color: LEAF_DEEP }}
+            aria-hidden="true"
+          />
+          <p
+            className={`text-sm ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            style={{ color: LEAF_DEEP }}
+          >
+            {t(
+              "Tired is normal. Confused is normal. Asking your clinic, midwife, or a trusted older relative is always allowed — and always wise. You do not have to do this alone.",
+              "ការនឿយហត់គឺធម្មតា។ ការច្របូកច្របល់ក៏ធម្មតាដែរ។ ការសួរគ្លីនិក ឆ្មប ឬសាច់ញាតិចាស់ដែលគួរទុកចិត្តរបស់អ្នក គឺត្រូវបានអនុញ្ញាតជានិច្ច — ហើយវាជារឿងឆ្លាតវៃជានិច្ច។ អ្នកមិនចាំបាច់ធ្វើការនេះម្នាក់ឯងទេ។"
+            )}
+          </p>
+        </div>
+      </div>
+    </CardShell>
+  );
+}
+
+// ── Section header wrapper used inside FirstYearCard ─────────────────────
+function FirstYearSection({
+  k,
+  testId,
+  numEn,
+  numKh,
+  titleEn,
+  titleKh,
+  icon,
+  accent,
+  children,
+}: {
+  k: boolean;
+  testId: string;
+  numEn: string;
+  numKh: string;
+  titleEn: string;
+  titleKh: string;
+  icon: React.ReactNode;
+  accent: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section data-testid={testId}>
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center"
+          style={{ backgroundColor: `${accent}1f`, color: accent }}
+        >
+          {icon}
+        </div>
+        <div>
+          <div
+            className={`text-[10px] font-mono font-bold uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            style={{ color: accent }}
+          >
+            {k ? numKh : numEn}
+          </div>
+          <h3
+            className={`text-lg sm:text-xl font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+            style={{ color: INK }}
+          >
+            {k ? titleKh : titleEn}
+          </h3>
+        </div>
+      </div>
+      <div className="mt-3">{children}</div>
+    </section>
+  );
+}
+
+// ── Rhythm comparison tile (Section 1) ───────────────────────────────────
+function RhythmTile({
+  k,
+  testId,
+  ageEn,
+  ageKh,
+  monthsEn,
+  monthsKh,
+  feedEn,
+  feedKh,
+  feedNoteEn,
+  feedNoteKh,
+  sleepEn,
+  sleepKh,
+  sleepNoteEn,
+  sleepNoteKh,
+  accent,
+  bg,
+}: {
+  k: boolean;
+  testId: string;
+  ageEn: string;
+  ageKh: string;
+  monthsEn: string;
+  monthsKh: string;
+  feedEn: string;
+  feedKh: string;
+  feedNoteEn: string;
+  feedNoteKh: string;
+  sleepEn: string;
+  sleepKh: string;
+  sleepNoteEn: string;
+  sleepNoteKh: string;
+  accent: string;
+  bg: string;
+}) {
+  return (
+    <div
+      className="rounded-2xl border-2 p-4"
+      style={{ borderColor: `${accent}55`, backgroundColor: bg }}
+      data-testid={testId}
+    >
+      <div className="flex items-baseline justify-between gap-2 mb-1 flex-wrap">
+        <h4
+          className={`text-base font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+          style={{ color: accent }}
+        >
+          {k ? ageKh : ageEn}
+        </h4>
+        <span
+          className={`text-[11px] font-mono ${k ? "font-khmer text-[12px]" : ""}`}
+          style={{ color: INK_SOFT }}
+        >
+          {k ? monthsKh : monthsEn}
+        </span>
+      </div>
+      <div
+        className="flex items-start gap-2 mt-3 pt-3 border-t"
+        style={{ borderColor: `${accent}33` }}
+      >
+        <Utensils
+          className="w-4 h-4 flex-shrink-0 mt-0.5"
+          style={{ color: accent }}
+          aria-hidden="true"
+        />
+        <div>
+          <div
+            className={`text-sm font-bold ${k ? "font-khmer leading-loose" : ""}`}
+            style={{ color: INK }}
+          >
+            {k ? feedKh : feedEn}
+          </div>
+          <p
+            className={`text-xs sm:text-[13px] mt-0.5 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            style={{ color: INK_SOFT }}
+          >
+            {k ? feedNoteKh : feedNoteEn}
+          </p>
+        </div>
+      </div>
+      <div
+        className="flex items-start gap-2 mt-2 pt-2 border-t"
+        style={{ borderColor: `${accent}33` }}
+      >
+        <Moon
+          className="w-4 h-4 flex-shrink-0 mt-0.5"
+          style={{ color: accent }}
+          aria-hidden="true"
+        />
+        <div>
+          <div
+            className={`text-sm font-bold ${k ? "font-khmer leading-loose" : ""}`}
+            style={{ color: INK }}
+          >
+            {k ? sleepKh : sleepEn}
+          </div>
+          <p
+            className={`text-xs sm:text-[13px] mt-0.5 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            style={{ color: INK_SOFT }}
+          >
+            {k ? sleepNoteKh : sleepNoteEn}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Safe-foods bullet (Section 2) ────────────────────────────────────────
+function SafeFoodItem({
+  k,
+  icon,
+  textEn,
+  textKh,
+}: {
+  k: boolean;
+  icon: React.ReactNode;
+  textEn: string;
+  textKh: string;
+}) {
+  return (
+    <li className="flex items-center gap-2.5">
+      <span
+        className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+        style={{ backgroundColor: LEAF_SOFT, color: LEAF_DEEP }}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+      <span
+        className={`text-sm sm:text-[15px] ${k ? "font-khmer leading-loose" : ""}`}
+        style={{ color: INK }}
+      >
+        {k ? textKh : textEn}
+      </span>
+    </li>
+  );
+}
+
+// ── Danger-zone item (Section 2) ─────────────────────────────────────────
+function DangerItem({
+  k,
+  icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+}: {
+  k: boolean;
+  icon: React.ReactNode;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+}) {
+  return (
+    <li className="flex items-start gap-2.5">
+      <span
+        className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+        style={{ backgroundColor: TERRA_SOFT, color: TERRA_DEEP }}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+      <div>
+        <div
+          className={`text-sm font-extrabold ${k ? "font-khmer leading-loose" : ""}`}
+          style={{ color: TERRA_DEEP }}
+        >
+          {k ? titleKh : titleEn}
+        </div>
+        <p
+          className={`text-xs sm:text-[13px] mt-0.5 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          style={{ color: INK_SOFT }}
+        >
+          {k ? bodyKh : bodyEn}
+        </p>
+      </div>
+    </li>
+  );
+}
+
+// ── Safe-sleep checklist rule (Section 3) ────────────────────────────────
+function SleepRule({
+  k,
+  icon,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+}: {
+  k: boolean;
+  icon: React.ReactNode;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+}) {
+  return (
+    <li
+      className="rounded-xl border-2 bg-white p-3 flex items-start gap-3"
+      style={{ borderColor: `${AMBER}44` }}
+      data-testid={`fd-sids-rule-${titleEn.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+    >
+      <span
+        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{ backgroundColor: "#fefce8", color: AMBER }}
+        aria-hidden="true"
+      >
+        {icon}
+      </span>
+      <div className="flex-1">
+        <div className="flex items-center gap-1.5 mb-0.5">
+          <CheckCircle2
+            className="w-3.5 h-3.5 flex-shrink-0"
+            style={{ color: LEAF_DEEP }}
+            aria-hidden="true"
+          />
+          <h4
+            className={`text-base font-extrabold leading-tight ${k ? "font-khmer leading-loose" : ""}`}
+            style={{ color: INK }}
+          >
+            {k ? titleKh : titleEn}
+          </h4>
+        </div>
+        <p
+          className={`text-sm ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          style={{ color: INK_SOFT }}
+        >
+          {k ? bodyKh : bodyEn}
+        </p>
+      </div>
+    </li>
   );
 }
