@@ -8,7 +8,7 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake, Handshake,
+  Skull, Volume2, HeartHandshake, Handshake, Box,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -1793,10 +1793,42 @@ export const SEARCH_INDEX: SearchEntry[] = [
       "coordination", "coordination chemistry", "complex",
       "ligand", "ligands", "transition metal", "transition metals",
       "crystal field", "ligand field", "vsepr",
+      "MOF", "MOFs", "metal organic framework", "metal-organic framework",
+      "molecular sponge", "carbon capture", "hydrogen storage",
+      "water harvesting", "porous material", "nodes and linkers",
     ],
     keywordsKh: [
       "អសរីរាង្គ", "គីមីអសរីរាង្គ", "អំបិល", "អាស៊ីត", "បាស", "ដែក",
       "ស៊ីមេទ្រី", "គីមីការសម្របសម្រួល", "ដែកប្ដូរ",
+      "MOF", "រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ", "អេប៉ុងម៉ូលេគុល",
+      "ការចាប់យកកាបូន", "ការផ្ទុកអ៊ីដ្រូសែន", "ការប្រមូលទឹក",
+    ],
+  },
+  {
+    id: "chemistry-mof-deep-dive",
+    href: "/science/chemistry/inorganic#mof",
+    icon: Box,
+    type: "module",
+    titleEn: "Metal-Organic Frameworks — The Molecular Sponges",
+    titleKh: "រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ — អេប៉ុងម៉ូលេគុល",
+    categoryEn: "Chemistry", categoryKh: "គីមីវិទ្យា",
+    descEn: "MOFs are programmable cages built from metal nodes and organic linkers — one gram has the surface area of a football field, and they capture CO₂, store hydrogen, and pull water from desert air.",
+    descKh: "MOF គឺជាទ្រុងដែលអាចសរសេរកម្មវិធីបានធ្វើពីអាតូមលោហៈជាជ្រុង និងម៉ូលេគុលសរីរាង្គជាដំបង — មួយក្រាមមានផ្ទៃក្រឡាស្មើទីលានបាល់ទាត់ ហើយចាប់យក CO₂ ផ្ទុកអ៊ីដ្រូសែន និងស្រូបទឹកពីខ្យល់វាលខ្សាច់។",
+    keywordsEn: [
+      "MOF", "MOFs", "metal organic framework", "metal-organic framework",
+      "molecular sponge", "molecular sponges",
+      "carbon capture", "CO2 capture", "CO2",
+      "hydrogen storage", "H2 storage", "clean fuel", "hydrogen fuel",
+      "water harvesting", "atmospheric water", "desert water",
+      "porous material", "nanoporous", "nodes and linkers",
+      "programmable chemistry", "surface area",
+    ],
+    keywordsKh: [
+      "MOF", "រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ", "អេប៉ុងម៉ូលេគុល",
+      "ការចាប់យកកាបូន", "កាបូន", "CO2",
+      "ការផ្ទុកឥន្ធនៈអ៊ីដ្រូសែន", "អ៊ីដ្រូសែន",
+      "ការប្រមូលទឹកពីខ្យល់", "ទឹក", "វាលខ្សាច់",
+      "ផ្ទៃក្រឡា", "រន្ធ", "ជ្រុង", "ដំបង",
     ],
   },
   {

@@ -20,6 +20,12 @@ import {
   Dna,
   Activity,
   GraduationCap,
+  Cloud,
+  Fuel,
+  Droplets,
+  Layers,
+  Maximize,
+  Zap,
 } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -105,6 +111,9 @@ export function InorganicChemistry101Page() {
 
         {/* ── Section 6: Agriculture & Power ──────────────────── */}
         <AgriPowerSection />
+
+        {/* ── Featured Deep Dive: Metal-Organic Frameworks ────── */}
+        <MOFsSection />
 
         {/* Footer note */}
         <p
@@ -1347,6 +1356,530 @@ function AgriPowerSection() {
     </section>
   );
 }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Featured Deep Dive — Metal-Organic Frameworks (MOFs)                  */
+/*  រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ — អេប៉ុងម៉ូលេគុល                              */
+/*  Visually distinct dark panel (vs the light page above) with subtle    */
+/*  structural-lattice backdrops on the application cards. Strictly        */
+/*  bilingual headings & key concepts (paired EN/KH always together).     */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+function MOFsSection() {
+  const { language } = useLanguageStore();
+  const isKh = language === "kh";
+
+  return (
+    <section
+      id="mof"
+      data-testid="mof-section"
+      aria-labelledby="mof-heading"
+      className="relative mt-12 mb-12 rounded-3xl overflow-hidden border border-cyan-500/30 bg-slate-950 text-slate-100 shadow-[0_0_60px_rgba(34,211,238,0.15)]"
+    >
+      {/* Subtle MOF-lattice backdrop */}
+      <LatticeBackdrop />
+
+      <div className="relative p-6 sm:p-8">
+        {/* Featured-deep-dive ribbon */}
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase bg-cyan-500/20 text-cyan-200 rounded-sm px-2.5 py-0.5 border border-cyan-500/40">
+            FEATURED DEEP DIVE
+          </span>
+          <span className="font-khmer text-[11px] tracking-normal text-cyan-200/90 leading-snug">
+            ការស្វែងយល់ស៊ីជម្រៅ
+          </span>
+        </div>
+
+        {/* Always-paired bilingual title */}
+        <h2
+          id="mof-heading"
+          className={`font-display font-bold text-2xl sm:text-4xl text-white leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}
+        >
+          {isKh ? (
+            <>
+              រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ៖{" "}
+              <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-violet-300 bg-clip-text text-transparent">
+                អេប៉ុងម៉ូលេគុល
+              </span>
+            </>
+          ) : (
+            <>
+              Metal-Organic Frameworks:{" "}
+              <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-violet-300 bg-clip-text text-transparent">
+                The Molecular Sponges
+              </span>
+            </>
+          )}
+        </h2>
+        <div className="mt-1 text-base sm:text-lg font-semibold text-slate-300 font-khmer leading-snug">
+          {isKh
+            ? "Metal-Organic Frameworks: The Molecular Sponges"
+            : "រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ៖ អេប៉ុងម៉ូលេគុល"}
+        </div>
+
+        <p className={`mt-4 max-w-3xl text-slate-300 text-sm sm:text-base ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "MOFs គឺ​ជា​ស្នាដៃ​ក្បាច់​ទំនើប​ជាង​គេ​មួយ​នៃ​គីមីវិទ្យា​អសរីរាង្គ — សារធាតុ​រឹង​មួយ​ប្រភេទ​ដែល​ស្ទើរ​ទាំង​អស់​ជា​ទំនេរ មាន​លក្ខណៈ​ដូច​សំណាញ់​មួយ​យ៉ាង​រលូន​មាន​សណ្ឋាន​ច្បាស់លាស់ ដែល​អ្នក​គីមី​អាច​បង្កើត​ឡើង​យ៉ាង​ច្បាស់​ដូច​ការ​សរសេរ​កម្មវិធី។"
+            : "MOFs are one of the most modern triumphs of inorganic chemistry — a class of solid material that is mostly empty, shaped like a perfectly ordered molecular net that chemists can program almost like writing software."}
+        </p>
+
+        {/* Sub-section 1 — What is a MOF? */}
+        <MOFSubSection
+          spec="01"
+          eyebrowEn="The structure"
+          eyebrowKh="រចនាសម្ព័ន្ធ"
+          titleEn="What is a MOF?"
+          titleKh="តើ MOF ជាអ្វី?"
+          isKh={isKh}
+          testId="mof-section-what"
+        >
+          <div className="grid md:grid-cols-[auto_1fr] gap-6 items-center">
+            <MOFCageSVG />
+            <div className="space-y-3">
+              <p className={`text-slate-200 text-sm sm:text-base ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "ស្រមៃ​ថា​អ្នក​កំពុង​សង់​ទ្រុង ៣ វិមាត្រ។ អ្នក​ប្រើ​អាតូម​លោហៈ​ជា​«ជ្រុង» ហើយ​ប្រើ​ម៉ូលេគុល​សរីរាង្គ​នៃ​កាបូន​ជា​«ដំបង» ដែល​ភ្ជាប់​ជ្រុង​ទាំង​នោះ​ជា​មួយ​គ្នា។"
+                  : "Imagine you are building a 3D cage. You use metal atoms as the corners, and organic carbon molecules as the bars that connect those corners together."}
+              </p>
+              <p className={`text-slate-300 text-sm sm:text-base ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "ដោយ​សារ​អ្នក​អាច​ជ្រើស​លោហៈ​ផ្សេង​គ្នា និង​ដំបង​ផ្សេង​គ្នា អ្នក​អាច​រចនា​ទំហំ និង​រូបរាង​ច្បាស់​នៃ​រន្ធ​នៅ​ខាង​ក្នុង​ទ្រុង​នោះ។ វា​គឺ​ជា​គីមីវិទ្យា​ដែល​អាច​សរសេរ​កម្មវិធី​បាន។"
+                  : "Because you can choose different metals and different linkers, you can design the exact size and shape of the pores inside the cage. This is programmable chemistry."}
+              </p>
+
+              {/* Three concept terms — strictly paired bilingual */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-3">
+                <ConceptChip
+                  iconEl={<Hexagon className="w-3.5 h-3.5" />}
+                  termEn="Nodes"
+                  termKh="ជ្រុង (Nodes)"
+                  detailEn="metal atoms = corners"
+                  detailKh="អាតូម​លោហៈ = ជ្រុង"
+                  tone="cyan"
+                />
+                <ConceptChip
+                  iconEl={<Combine className="w-3.5 h-3.5" />}
+                  termEn="Linkers"
+                  termKh="ដំបង (Linkers)"
+                  detailEn="organic molecules = bars"
+                  detailKh="ម៉ូលេគុល​សរីរាង្គ = ដំបង"
+                  tone="violet"
+                />
+                <ConceptChip
+                  iconEl={<Box className="w-3.5 h-3.5" />}
+                  termEn="Pores"
+                  termKh="រន្ធ (Pores)"
+                  detailEn="empty spaces inside the cage"
+                  detailKh="ចន្លោះ​ទំនេរ​នៅ​ខាង​ក្នុង"
+                  tone="emerald"
+                />
+              </div>
+            </div>
+          </div>
+        </MOFSubSection>
+
+        {/* Sub-section 2 — Magic of Surface Area */}
+        <MOFSubSection
+          spec="02"
+          eyebrowEn="The mind-bender"
+          eyebrowKh="រឿង​ប្លែក"
+          titleEn="The Magic of Surface Area"
+          titleKh="ភាពអស្ចារ្យនៃផ្ទៃក្រឡា"
+          isKh={isKh}
+          testId="mof-section-surface"
+        >
+          <p className={`text-slate-200 text-sm sm:text-base ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {isKh
+              ? "នេះ​ជា​ការ​ពិត​ដែល​ធ្វើ​ឱ្យ​អ្នក​វិទ្យាសាស្ត្រ​មិន​ជឿ​ខ្លួន​ឯង៖ MOF គឺ​ស្ទើរ​តែ​ទាំង​អស់​ជា​ចន្លោះ​ទំនេរ។"
+              : "Here is the fact that makes scientists distrust their own eyes: a MOF is mostly empty space."}
+          </p>
+
+          {/* Hero stat */}
+          <div
+            data-testid="mof-surface-stat"
+            className="mt-4 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-slate-900 to-emerald-500/10 border border-cyan-400/40 p-5 sm:p-6 shadow-[inset_0_0_40px_rgba(34,211,238,0.08)]"
+          >
+            <div className="flex items-start gap-4 flex-wrap">
+              <Maximize className="w-8 h-8 text-cyan-300 flex-shrink-0" aria-hidden="true" />
+              <div className="flex-1 min-w-[200px]">
+                <div className="font-display font-extrabold text-4xl sm:text-5xl bg-gradient-to-r from-cyan-300 to-emerald-300 bg-clip-text text-transparent leading-none">
+                  ≈ 7,000 m²
+                </div>
+                <div className="mt-2 text-sm text-slate-200 leading-tight">
+                  internal surface area
+                </div>
+                <div className="text-sm font-khmer text-slate-300 leading-snug">
+                  ផ្ទៃ​ក្រឡា​ខាង​ក្នុង
+                </div>
+                <div className="mt-2 text-xs text-cyan-200 font-mono uppercase tracking-widest">
+                  per 1 gram · ក្នុង ១ ក្រាម
+                </div>
+              </div>
+            </div>
+
+            <p className={`mt-4 text-sm text-slate-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "ដោយ​សារ​សំណាញ់​ខាង​ក្នុង​នេះ ម្សៅ MOF ត្រឹម ១ ក្រាម (ប្រហែល​ខ្នាត​ដុំ​ស្ករ​មួយ) មាន​ផ្ទៃ​ក្រឡា​ខាង​ក្នុង​រហូត​ដល់ ៧.០០០ ម៉ែត្រ​ការ៉េ — មាន​ន័យ​ថា​អ្នក​អាច​ត្រដាង​ម៉ូលេគុល​ក្នុង​ស្លាប​ព្រា​មួយ​នៃ​ម្សៅ​នេះ ដើម្បី​បក​បាំង​ទីលាន​បាល់ទាត់​ទាំង​មូល!"
+                : "Because of this internal lattice, just a single gram of MOF powder (roughly the size of a sugar cube) can have an internal surface area of up to 7,000 square meters — meaning if you could unfold the molecules in one teaspoon of this powder, they would carpet an entire football field!"}
+            </p>
+
+            {/* Visual analogy — sugar cube vs football field */}
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-[auto_auto_1fr] gap-4 items-center">
+              <div className="rounded-xl bg-slate-900/70 border border-slate-700 px-4 py-3 text-center">
+                <div className="text-3xl" aria-hidden="true">🟦</div>
+                <div className="mt-1 text-xs font-bold text-slate-100">1 g of MOF</div>
+                <div className="text-[11px] font-khmer text-slate-400 leading-snug">
+                  MOF ១ ក្រាម
+                </div>
+                <div className="text-[10px] text-slate-500 mt-1">≈ sugar cube · ដុំស្ករ</div>
+              </div>
+              <div className="text-cyan-300 text-2xl text-center font-mono">≈</div>
+              <div className="rounded-xl bg-emerald-950/40 border border-emerald-500/40 px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl" aria-hidden="true">🏟️</span>
+                  <div>
+                    <div className="text-xs font-bold text-emerald-200">1 football field</div>
+                    <div className="text-[11px] font-khmer text-emerald-100 leading-snug">
+                      ទីលាន​បាល់ទាត់ ១
+                    </div>
+                  </div>
+                </div>
+                <div className="text-[10px] text-slate-400 mt-1">
+                  unfolded internal surface · ផ្ទៃ​ខាង​ក្នុង​ត្រូវ​ត្រដាង
+                </div>
+              </div>
+            </div>
+          </div>
+        </MOFSubSection>
+
+        {/* Sub-section 3 — Saving the World (3 application cards) */}
+        <MOFSubSection
+          spec="03"
+          eyebrowEn="Real-world impact"
+          eyebrowKh="ឥទ្ធិពល​លើ​ពិភពលោក"
+          titleEn="Saving the World — MOF Applications"
+          titleKh="ការសង្គ្រោះពិភពលោក — ការអនុវត្ត MOF"
+          isKh={isKh}
+          testId="mof-section-applications"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <MOFAppCard
+              testId="mof-app-carbon"
+              icon={<Cloud className="w-5 h-5" />}
+              symbolText="CO₂"
+              titleEn="Carbon Capture"
+              titleKh="ការចាប់យកកាបូន"
+              bodyEn="MOFs can be designed with pores of the exact size and electrical charge to trap CO₂ molecules straight out of factory exhaust — stopping them from entering the atmosphere and warming the planet."
+              bodyKh="MOF អាច​ត្រូវ​បាន​រចនា​ឱ្យ​មាន​រន្ធ​ដែល​មាន​ទំហំ និង​បន្ទុក​អគ្គិសនី​ច្បាស់​លាស់ ដើម្បី​ចាប់​យក​ម៉ូលេគុល CO₂ ដោយ​ផ្ទាល់​ពី​ខ្យល់​ផ្សែង​រោងចក្រ — រារាំង​មិន​ឱ្យ​វា​ចូល​ទៅ​ក្នុង​បរិយាកាស និង​បង្ក​ការ​ឡើង​កម្ដៅ​ផែនដី។"
+              tone="slate"
+              isKh={isKh}
+            />
+            <MOFAppCard
+              testId="mof-app-hydrogen"
+              icon={<Fuel className="w-5 h-5" />}
+              symbolText="H₂"
+              titleEn="Hydrogen Storage"
+              titleKh="ការផ្ទុកឥន្ធនៈអ៊ីដ្រូសែន"
+              bodyEn="Hydrogen is a clean fuel — but it is hard to store at high density without dangerous pressures or extreme cold. MOFs act as a low-pressure, high-density sponge that quietly soaks up hydrogen gas, ready to power the cars of the future."
+              bodyKh="អ៊ីដ្រូសែន​ជា​ឥន្ធនៈ​ស្អាត — តែ​វា​ពិបាក​ផ្ទុក​ឱ្យ​មាន​ដង់ស៊ីតេ​ខ្ពស់ ដោយ​មិន​ត្រូវ​ការ​សម្ពាធ​គ្រោះថ្នាក់ ឬ​ត្រជាក់​ខ្លាំង។ MOF ដើរ​តួ​ជា​អេប៉ុង​សម្ពាធ​ទាប ដង់ស៊ីតេ​ខ្ពស់ ដែល​ស្រូប​ឧស្ម័ន​អ៊ីដ្រូសែន​យឺតៗ ត្រៀម​ផ្ដល់​ថាមពល​ដល់​រថយន្ត​នៃ​អនាគត។"
+              tone="violet"
+              isKh={isKh}
+            />
+            <MOFAppCard
+              testId="mof-app-water"
+              icon={<Droplets className="w-5 h-5" />}
+              symbolText="H₂O"
+              titleEn="Water Harvesting"
+              titleKh="ការប្រមូលទឹកពីខ្យល់"
+              bodyEn="Certain MOFs can pull microscopic water vapor out of dry desert air at night, then release it as pure liquid drinking water when warmed by the sun in the morning — a technology already tested in the Sahara."
+              bodyKh="MOF មួយ​ចំនួន​អាច​ស្រូប​ចំហុយ​ទឹក​មីក្រូ​មីក​រ័ត​ចេញ​ពី​ខ្យល់​វាល​ខ្សាច់​ស្ងួត​នៅ​ពេល​យប់ បន្ទាប់​មក​បញ្ចេញ​ជា​ទឹក​ផឹក​បរិសុទ្ធ​នៅ​ពេល​ត្រូវ​ព្រះអាទិត្យ​ដុត​នៅ​ព្រឹក — បច្ចេកវិទ្យា​ដែល​បាន​សាកល្បង​នៅ​វាល​ខ្សាច់​សាហារ៉ា​រួច​ហើយ។"
+              tone="emerald"
+              isKh={isKh}
+            />
+          </div>
+
+          {/* Closing takeaway */}
+          <div className="mt-5 rounded-xl bg-slate-900/60 border border-slate-700/60 px-4 py-3 flex items-start gap-2">
+            <Sparkles className="w-4 h-4 text-cyan-300 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <p className={`text-xs text-slate-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "ការ​រួម​បញ្ចូល​លោហៈ និង​ម៉ូលេគុល​សរីរាង្គ​ចូល​គ្នា​ក្នុង​ទ្រុង​ដែល​អាច​សរសេរ​កម្មវិធី​បាន​មួយ​គឺ​ជា​ឧទាហរណ៍​ដ៏​ល្អ​មួយ​នៃ​សារៈ​សំខាន់​នៃ​គីមីវិទ្យា​អសរីរាង្គ​ទំនើប — វា​អាច​ដោះស្រាយ​បញ្ហា​ដែល​ធំ​ជាង​ខ្លួន​វា​រាប់​លាន​ដង។"
+                : "Combining metals and organic molecules into one programmable cage is one of the cleanest examples of why modern inorganic chemistry matters — it can solve problems millions of times bigger than itself."}
+            </p>
+          </div>
+        </MOFSubSection>
+      </div>
+    </section>
+  );
+}
+
+/* ── MOF helpers ───────────────────────────────────────────────────────── */
+
+function MOFSubSection({
+  spec,
+  eyebrowEn,
+  eyebrowKh,
+  titleEn,
+  titleKh,
+  isKh,
+  children,
+  testId,
+}: {
+  spec: string;
+  eyebrowEn: string;
+  eyebrowKh: string;
+  titleEn: string;
+  titleKh: string;
+  isKh: boolean;
+  children: React.ReactNode;
+  testId?: string;
+}) {
+  return (
+    <div className="mt-8 pt-6 border-t border-slate-800" data-testid={testId}>
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase bg-slate-800 text-cyan-300 rounded-sm px-2.5 py-0.5 border border-slate-700">
+          MOF-{spec}
+        </span>
+        <span className={`text-[11px] font-bold uppercase tracking-widest text-cyan-300 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? eyebrowKh : eyebrowEn}
+        </span>
+      </div>
+      {/* Always paired bilingual heading */}
+      <h3 className={`font-display font-bold text-lg sm:text-2xl text-white leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}>
+        {isKh ? titleKh : titleEn}
+      </h3>
+      <div className="text-sm sm:text-base font-semibold text-slate-400 font-khmer leading-snug mb-4">
+        {isKh ? titleEn : titleKh}
+      </div>
+      <div className="space-y-3">{children}</div>
+    </div>
+  );
+}
+
+function ConceptChip({
+  iconEl,
+  termEn,
+  termKh,
+  detailEn,
+  detailKh,
+  tone,
+}: {
+  iconEl: React.ReactNode;
+  termEn: string;
+  termKh: string;
+  detailEn: string;
+  detailKh: string;
+  tone: "cyan" | "violet" | "emerald";
+}) {
+  const palette =
+    tone === "cyan"
+      ? { border: "border-cyan-500/40", chip: "text-cyan-200", bg: "bg-cyan-950/40" }
+      : tone === "violet"
+        ? { border: "border-violet-500/40", chip: "text-violet-200", bg: "bg-violet-950/40" }
+        : { border: "border-emerald-500/40", chip: "text-emerald-200", bg: "bg-emerald-950/40" };
+  return (
+    <div className={`rounded-lg ${palette.bg} border ${palette.border} px-3 py-2`}>
+      <div className={`flex items-center gap-1.5 text-xs font-bold ${palette.chip}`}>
+        {iconEl}
+        <span>{termEn}</span>
+        <span className="text-slate-500">·</span>
+        <span className="font-khmer">{termKh}</span>
+      </div>
+      <div className="text-[11px] text-slate-300 mt-1 leading-tight">{detailEn}</div>
+      <div className="text-[11px] text-slate-400 font-khmer leading-snug">{detailKh}</div>
+    </div>
+  );
+}
+
+function MOFAppCard({
+  testId,
+  icon,
+  symbolText,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+  tone,
+  isKh,
+}: {
+  testId: string;
+  icon: React.ReactNode;
+  symbolText: string;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  tone: "slate" | "violet" | "emerald";
+  isKh: boolean;
+}) {
+  const palette =
+    tone === "slate"
+      ? {
+          border: "border-cyan-500/40",
+          chip: "bg-cyan-500/15 text-cyan-200 border-cyan-500/40",
+          accent: "text-cyan-200",
+          glow: "shadow-[0_0_30px_rgba(34,211,238,0.15)]",
+          gridColor: "rgba(34,211,238,0.18)",
+        }
+      : tone === "violet"
+        ? {
+            border: "border-violet-500/40",
+            chip: "bg-violet-500/15 text-violet-200 border-violet-500/40",
+            accent: "text-violet-200",
+            glow: "shadow-[0_0_30px_rgba(168,85,247,0.18)]",
+            gridColor: "rgba(168,85,247,0.20)",
+          }
+        : {
+            border: "border-emerald-500/40",
+            chip: "bg-emerald-500/15 text-emerald-200 border-emerald-500/40",
+            accent: "text-emerald-200",
+            glow: "shadow-[0_0_30px_rgba(16,185,129,0.18)]",
+            gridColor: "rgba(16,185,129,0.22)",
+          };
+  return (
+    <article
+      data-testid={testId}
+      className={`relative overflow-hidden rounded-2xl bg-slate-900/80 border ${palette.border} ${palette.glow} backdrop-blur p-5 transition-transform duration-300 hover:-translate-y-0.5`}
+    >
+      {/* Subtle MOF lattice grid backdrop on each card */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `
+            linear-gradient(${palette.gridColor} 1px, transparent 1px),
+            linear-gradient(90deg, ${palette.gridColor} 1px, transparent 1px),
+            radial-gradient(${palette.gridColor} 2px, transparent 2px)
+          `,
+          backgroundSize: "28px 28px, 28px 28px, 28px 28px",
+          backgroundPosition: "0 0, 0 0, 0 0",
+        }}
+      />
+
+      <div className="relative">
+        <div className="flex items-center gap-2 mb-3">
+          <span className={`inline-flex items-center justify-center w-9 h-9 rounded-lg border ${palette.chip}`}>
+            {icon}
+          </span>
+          <span className={`font-mono text-base font-extrabold ${palette.accent}`}>
+            {symbolText}
+          </span>
+        </div>
+        {/* Always-paired bilingual title */}
+        <h4 className={`font-display font-bold text-lg ${palette.accent} leading-tight`}>
+          {titleEn}
+        </h4>
+        <div className="text-sm font-semibold text-slate-300 font-khmer leading-snug">
+          {titleKh}
+        </div>
+        <p className={`mt-3 text-[13px] text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? bodyKh : bodyEn}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function MOFCageSVG() {
+  return (
+    <svg
+      viewBox="0 0 200 200"
+      className="w-44 h-44 sm:w-52 sm:h-52 mx-auto"
+      role="img"
+      aria-labelledby="mof-cage-title"
+    >
+      <title id="mof-cage-title">
+        Schematic of a Metal-Organic Framework cage with metal nodes at the
+        corners and organic linkers as bars between them, enclosing a hollow
+        pore in the center.
+      </title>
+      <defs>
+        <radialGradient id="mofNodeGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#a5f3fc" />
+          <stop offset="100%" stopColor="#0e7490" />
+        </radialGradient>
+        <radialGradient id="mofPoreGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#a7f3d0" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Cage cube — front + back faces with perspective offset */}
+      {(() => {
+        // Eight corners of a cube projected to 2D
+        const corners: [number, number][] = [
+          [40, 60],   // back top-left
+          [140, 60],  // back top-right
+          [140, 160], // back bottom-right
+          [40, 160],  // back bottom-left
+          [70, 30],   // front top-left
+          [170, 30],  // front top-right
+          [170, 130], // front bottom-right
+          [70, 130],  // front bottom-left
+        ];
+        const edges: [number, number][] = [
+          // back face
+          [0, 1], [1, 2], [2, 3], [3, 0],
+          // front face
+          [4, 5], [5, 6], [6, 7], [7, 4],
+          // connectors
+          [0, 4], [1, 5], [2, 6], [3, 7],
+        ];
+        return (
+          <g>
+            {/* Linkers (organic bars) */}
+            {edges.map(([a, b], i) => (
+              <line
+                key={`edge-${i}`}
+                x1={corners[a][0]}
+                y1={corners[a][1]}
+                x2={corners[b][0]}
+                y2={corners[b][1]}
+                stroke="#a78bfa"
+                strokeWidth="2"
+                opacity="0.8"
+              />
+            ))}
+            {/* Pore (empty interior) */}
+            <circle cx="105" cy="95" r="22" fill="url(#mofPoreGrad)" />
+            {/* Nodes (metal corners) */}
+            {corners.map(([x, y], i) => (
+              <circle key={`node-${i}`} cx={x} cy={y} r="6" fill="url(#mofNodeGrad)" stroke="#0e7490" strokeWidth="1" />
+            ))}
+            {/* Labels */}
+            <text x="172" y="25" fill="#67e8f9" fontSize="9" fontFamily="monospace">
+              node
+            </text>
+            <text x="105" y="98" fill="#a7f3d0" fontSize="9" fontFamily="monospace" textAnchor="middle">
+              pore
+            </text>
+            <text x="98" y="180" fill="#a78bfa" fontSize="9" fontFamily="monospace" textAnchor="middle">
+              linker
+            </text>
+          </g>
+        );
+      })()}
+    </svg>
+  );
+}
+
+function LatticeBackdrop() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 opacity-[0.07]"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(34,211,238,1) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,1) 1px, transparent 1px)",
+        backgroundSize: "32px 32px",
+      }}
+    />
+  );
+}
+
+// Keep these named imports tree-shake-safe / referenced for future MOF expansions
+void Layers;
+void Zap;
 
 /* ──────────────────────────────────────────────────────────────────────── */
 /*  Decorative backdrop                                                    */
