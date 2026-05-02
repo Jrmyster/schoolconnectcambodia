@@ -1,0 +1,16 @@
+I want to add a critical environmental health section to the 'Public Health : The Web of Well-Being' page called 'The Plastic Epidemic & Microplastics (វិបត្តិប្លាស្ទិក និង មីក្រូប្លាស្ទិក)'.
+Please implement this using an 'Ecological Alert' aesthetic (ocean blues contrasting with warning oranges and sterile whites) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this plastics section. Ensure keywords include 'plastic', 'microplastics', 'pollution', 'food chain', 'health', and their Khmer equivalents.
+2. Section 1: The Forever Material (វត្ថុធាតុដែលមិនងាយរលាយ)
+Explain the paradox of plastic: It is incredibly useful because it is cheap and lasts forever. But because it lasts forever, every piece of plastic ever made still exists in some form today.
+Unlike organic matter (like banana peels or wood), plastic does not biodegrade (រលាយតាមធម្មជាតិ). Instead, under the sun, it photodegrades—meaning it simply breaks apart into smaller and smaller pieces over hundreds of years.
+3. Section 2: The Invisible Threat (ការគំរាមកំហែងដែលមើលមិនឃើញ - មីក្រូប្លាស្ទិក)
+Define Microplastics (មីក្រូប្លាស្ទិក): Plastic pieces smaller than 5 millimeters, often invisible to the naked eye.
+Explain the bioaccumulation cycle: These tiny particles wash into rivers and lakes. Small fish eat them by accident. Bigger fish eat the small fish. Finally, humans catch and eat the big fish, bringing the plastic directly into our own bodies.
+4. Section 3: Human Biology & Prevention (ជីវវិទ្យាមនុស្ស និង ការការពារ)
+Explain the health risk: Scientists are now finding microplastics in human blood, lungs, and organs. While the long-term effects are still being studied, these particles carry toxic chemicals that can disrupt hormones and cause cellular damage.
+Highlight the solution: Emphasize that the best way to protect public health is to stop using single-use plastics (like straws, plastic bags, and disposable cups) and ensure proper waste disposal so trash doesn't wash into the waterways.
+5. Formatting & UX:
+Ensure all main headings, scientific terms (Microplastics, Biodegrade), and health warnings are strictly bilingual (English/Khmer).
+Use icons like a plastic bottle with a slash through it, a fish, and a microscope to make the text visually striking.

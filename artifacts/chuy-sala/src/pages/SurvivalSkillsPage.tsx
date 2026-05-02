@@ -24,6 +24,13 @@ import {
   RefreshCw,
   Umbrella,
   Clock,
+  Skull,
+  Siren,
+  AlertOctagon,
+  HeartPulse,
+  Ban,
+  CheckCircle2,
+  Plus,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { DehydrationModule } from "@/components/widgets/DehydrationModule";
@@ -153,6 +160,9 @@ export function SurvivalSkillsPage() {
 
         {/* SUR-04 — Celestial Navigation: Reading the Sky (strictly bilingual) */}
         <SectionCelestialNavigation />
+
+        {/* SUR-05 — Toxic Nature: Poison, Venom & Antidotes */}
+        <SectionToxicNature kh={kh} t={t} />
 
         {/* SUR-02 — Dehydration: The Silent Threat (strictly bilingual, self-contained) */}
         <DehydrationModule />
@@ -1286,5 +1296,418 @@ function SkyWheelDiagram() {
         <div className="font-khmer text-[0.6rem] opacity-90">មេឃបង្វិលជុំវិញ</div>
       </div>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 05 — Toxic Nature: Poison, Venom & Antidotes
+//               ធម្មជាតិមានពិស៖ ពិសលេប ពិសចាក់ និង ថ្នាំបន្សាប
+// ════════════════════════════════════════════════════════════════════════════
+
+function SnakeHeadIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+      <path
+        d="M6 32 q14 -22 30 -16 q18 6 22 0 q-4 14 -22 14 q-12 0 -18 8 q-6 -2 -12 -6 z"
+        fill="currentColor"
+      />
+      <path d="M30 24 q4 -4 10 -2" stroke="#fef3c7" strokeWidth="1.4" fill="none" />
+      <circle cx="36" cy="22" r="2.2" fill="#fef3c7" />
+      <circle cx="36" cy="22" r="0.9" fill="#0e2a1f" />
+      <path d="M58 30 l8 -1 l-8 -1 l8 -3 l-10 1 z" fill="#dc2626" />
+      <path d="M14 36 l-3 4 m6 -2 l-3 5 m8 -3 l-2 5" stroke="#fbbf24" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CrossedMushroomIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+      <path d="M14 32 q0 -18 18 -18 q18 0 18 18 z" fill="currentColor" />
+      <circle cx="24" cy="24" r="2.6" fill="#fef3c7" />
+      <circle cx="36" cy="20" r="2.0" fill="#fef3c7" />
+      <circle cx="42" cy="28" r="1.6" fill="#fef3c7" />
+      <rect x="26" y="32" width="12" height="20" rx="2" fill="#f5f5dc" stroke="#92400e" strokeWidth="0.8" />
+      <line x1="8" y1="8" x2="58" y2="58" stroke="#dc2626" strokeWidth="5" strokeLinecap="round" />
+      <line x1="8" y1="8" x2="58" y2="58" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ThreatCard({
+  kh,
+  t,
+  variant,
+  nameEn,
+  nameKh,
+  scientific,
+  badgeEn,
+  badgeKh,
+  storyEn,
+  storyKh,
+  cureEn,
+  cureKh,
+  Icon,
+}: {
+  kh: boolean;
+  t: (en: string, k: string) => string;
+  variant: "venom" | "poison";
+  nameEn: string;
+  nameKh: string;
+  scientific: string;
+  badgeEn: string;
+  badgeKh: string;
+  storyEn: string;
+  storyKh: string;
+  cureEn: string;
+  cureKh: string;
+  Icon: React.ComponentType<{ className?: string }>;
+}) {
+  const isVenom = variant === "venom";
+  const accent = isVenom
+    ? "from-rose-100 to-amber-50 border-rose-700"
+    : "from-lime-100 to-amber-50 border-lime-700";
+  const badgeColor = isVenom
+    ? "bg-rose-700 text-white"
+    : "bg-lime-700 text-white";
+  const iconColor = isVenom ? "text-rose-700" : "text-lime-800";
+
+  return (
+    <article
+      className={`relative rounded-2xl border-2 bg-gradient-to-br ${accent} p-5 flex flex-col shadow-md`}
+      data-testid={`threat-${variant}-${nameEn.toLowerCase().replace(/[^a-z]+/g, "-")}`}
+    >
+      <CornerMarks subtle />
+      <div className="flex items-start gap-3 mb-3">
+        <div className={`w-12 h-12 rounded-xl bg-white border-2 ${isVenom ? "border-rose-700" : "border-lime-700"} flex items-center justify-center flex-shrink-0 ${iconColor}`}>
+          <Icon className="w-7 h-7" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="font-display text-lg font-bold text-emerald-950 leading-tight">
+            {nameEn}
+          </h4>
+          <p className="font-khmer text-base text-emerald-900 leading-snug">{nameKh}</p>
+          <p className="text-[10px] font-mono italic text-emerald-800/70 mt-0.5">{scientific}</p>
+        </div>
+      </div>
+
+      <span className={`inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider ${badgeColor} mb-3`}>
+        {isVenom ? <SnakeHeadIcon className="w-3.5 h-3.5" /> : <Skull className="w-3.5 h-3.5" />}
+        {badgeEn}
+        <span className="font-khmer normal-case tracking-normal opacity-90">· {badgeKh}</span>
+      </span>
+
+      <p className={`text-sm text-emerald-950 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+        {t(storyEn, storyKh)}
+      </p>
+
+      <div className="mt-auto rounded-xl bg-white/70 border border-emerald-900/20 p-3">
+        <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-emerald-900 mb-1">
+          <Plus className="w-3.5 h-3.5" />
+          {t("The Cure", "ការព្យាបាល")}
+        </div>
+        <p className={`text-sm text-emerald-950 leading-snug ${kh ? "font-khmer leading-loose" : ""}`}>
+          {t(cureEn, cureKh)}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function SectionToxicNature({
+  kh,
+  t,
+}: {
+  kh: boolean;
+  t: (en: string, kh: string) => string;
+}) {
+  return (
+    <section
+      id="toxic-nature"
+      className="mb-10 scroll-mt-24"
+      data-testid="section-toxic-nature"
+    >
+      <SectionHeader
+        spec="05"
+        kh_={kh}
+        en="Toxic Nature: Poison, Venom & Antidotes"
+        kh="ធម្មជាតិមានពិស៖ ពិសលេប ពិសចាក់ និង ថ្នាំបន្សាប"
+      />
+      <p className={`text-sm text-amber-100/85 -mt-2 mb-5 max-w-3xl ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {t(
+          "Knowing the difference saves lives — and so does ignoring the dangerous folk-cures.",
+          "ការដឹងពីភាពខុសគ្នាអាចជួយសង្គ្រោះជីវិត — ហើយការបោះបង់ចោលជំនឿខុសឆ្គង ក៏ជួយសង្គ្រោះជីវិតដែរ។"
+        )}
+      </p>
+
+      {/* ── Sub 1 — Venom vs. Poison ───────────────────────────────────── */}
+      <div className="grid sm:grid-cols-2 gap-4 mb-6">
+        {/* Poison panel */}
+        <div
+          className="relative rounded-2xl border-2 border-lime-700 bg-gradient-to-br from-lime-50 to-amber-50 p-5"
+          style={CARD_BG}
+          data-testid="rule-poison"
+        >
+          <CornerMarks subtle />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-11 h-11 rounded-xl bg-lime-700 text-white flex items-center justify-center">
+              <CrossedMushroomIcon className="w-7 h-7" />
+            </div>
+            <div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-lime-900">
+                Rule 1 · វិធាន ១
+              </div>
+              <h4 className="font-display text-xl font-bold text-emerald-950 leading-tight">
+                Poisonous
+                <span className="font-khmer text-base text-emerald-900 ml-2">មានពុល</span>
+              </h4>
+            </div>
+          </div>
+          <p className={`text-sm text-emerald-950 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            <strong>{t("You eat or touch it.", "អ្នកលេបចូល ឬប៉ះវា។")}</strong>{" "}
+            {t(
+              "The toxin enters through your mouth, skin, or stomach. Examples: a wild mushroom, a bright tropical frog, the seeds of certain trees.",
+              "ពិសចូលតាមមាត់ ស្បែក ឬក្រពះ។ ឧទាហរណ៍៖ ផ្សិតព្រៃ កង្កែបពណ៌ភ្លឺ និងគ្រាប់ពូជដើមឈើខ្លះ។"
+            )}
+          </p>
+          <div className="mt-3 inline-flex items-center gap-2 text-[11px] font-mono text-lime-900">
+            <span className="px-2 py-0.5 rounded-full bg-white border border-lime-700">EAT / TOUCH</span>
+            <span className="font-khmer px-2 py-0.5 rounded-full bg-white border border-lime-700">លេប / ប៉ះ</span>
+          </div>
+        </div>
+
+        {/* Venom panel */}
+        <div
+          className="relative rounded-2xl border-2 border-rose-700 bg-gradient-to-br from-rose-50 to-amber-50 p-5"
+          style={CARD_BG}
+          data-testid="rule-venom"
+        >
+          <CornerMarks subtle />
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-11 h-11 rounded-xl bg-rose-700 text-white flex items-center justify-center">
+              <SnakeHeadIcon className="w-7 h-7" />
+            </div>
+            <div>
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-rose-900">
+                Rule 2 · វិធាន ២
+              </div>
+              <h4 className="font-display text-xl font-bold text-emerald-950 leading-tight">
+                Venomous
+                <span className="font-khmer text-base text-emerald-900 ml-2">មានពិស</span>
+              </h4>
+            </div>
+          </div>
+          <p className={`text-sm text-emerald-950 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            <strong>{t("It bites or stings you.", "វាខាំ ឬចាក់អ្នក។")}</strong>{" "}
+            {t(
+              "The toxin is injected straight into your bloodstream by fangs, a stinger, or spines. Examples: a snake, a scorpion, a stingray.",
+              "ពិសត្រូវបានចាក់បញ្ចូលដោយផ្ទាល់ទៅក្នុងឈាម តាមរយៈចង្កូម ដែកចាក់ ឬបន្លា។ ឧទាហរណ៍៖ ពស់ ខ្ទួយ និងត្រីសុឺ។"
+            )}
+          </p>
+          <div className="mt-3 inline-flex items-center gap-2 text-[11px] font-mono text-rose-900">
+            <span className="px-2 py-0.5 rounded-full bg-white border border-rose-700">BITE / STING</span>
+            <span className="font-khmer px-2 py-0.5 rounded-full bg-white border border-rose-700">ខាំ / ចាក់</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Memory hook */}
+      <div className="rounded-xl border-2 border-amber-700 bg-amber-100 px-4 py-3 mb-8 flex items-start gap-3">
+        <AlertTriangle className="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5" />
+        <p className={`text-sm text-amber-950 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          <strong>{t("Quick memory: ", "ចងចាំរហ័ស ៖ ")}</strong>
+          {t(
+            "If YOU bite IT and get sick, it is poisonous. If IT bites YOU and you get sick, it is venomous.",
+            "បើ អ្នក ខាំ វា ហើយអ្នកឈឺ — នោះវា មានពុល។ បើ វា ខាំ អ្នក ហើយអ្នកឈឺ — នោះវា មានពិស។"
+          )}
+        </p>
+      </div>
+
+      {/* ── Sub 2 — Local Threats & Cures ──────────────────────────────── */}
+      <div className="mb-3">
+        <h3 className={`font-display text-xl font-bold text-amber-100 mb-1 ${kh ? "font-khmer" : ""}`}>
+          {t("Local Threats & Cures", "ហានិភ័យក្នុងតំបន់ និង ការព្យាបាល")}
+        </h3>
+        <p className={`text-sm text-amber-100/80 mb-4 ${kh ? "font-khmer leading-loose" : ""}`}>
+          {t(
+            "Three threats every Cambodian student should be able to recognize.",
+            "ហានិភ័យបីយ៉ាង ដែលសិស្សកម្ពុជាគ្រប់រូបគួរស្គាល់។"
+          )}
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <ThreatCard
+          kh={kh}
+          t={t}
+          variant="venom"
+          nameEn="Malayan Pit Viper"
+          nameKh="ពស់ពព្លាក់"
+          scientific="Calloselasma rhodostoma"
+          badgeEn="Venomous"
+          badgeKh="មានពិស"
+          Icon={SnakeHeadIcon}
+          storyEn="This snake causes the most bites in Southeast Asia. It hides under dry leaves in plantations and rubber farms — and unlike other snakes, it does NOT slither away when people approach. Its camouflage is so good that workers step right on it."
+          storyKh="ពស់នេះបង្កការខាំច្រើនជាងគេនៅអាស៊ីអាគ្នេយ៍។ វាលាក់ខ្លួននៅក្រោមស្លឹកឈើស្ងួត ក្នុងចម្ការ និងចម្ការកៅស៊ូ — ហើយខុសពីពស់ដទៃ វាមិនលូនរត់ចេញពេលមនុស្សចូលមកជិតទេ។ ការបន្លំពណ៌ឆ្លាតវៃរបស់វា ធ្វើឲ្យអ្នកធ្វើការជាន់លើវាដោយមិនដឹងខ្លួន។"
+          cureEn="There IS a specific Antivenom (Antivenom). It MUST be administered at a hospital — village remedies will not save the limb or the life."
+          cureKh="មានសេរ៉ូមប្រឆាំងពិសពស់ជាក់លាក់មួយ។ វាត្រូវតែចាក់នៅមន្ទីរពេទ្យ — ថ្នាំស្រុកមិនអាចសង្គ្រោះដៃ ឬជីវិតបានទេ។"
+        />
+        <ThreatCard
+          kh={kh}
+          t={t}
+          variant="poison"
+          nameEn="The Sleng Tree / Strychnine"
+          nameKh="ដើមស្លែង"
+          scientific="Strychnos nux-vomica"
+          badgeEn="Poisonous"
+          badgeKh="មានពុល"
+          Icon={CrossedMushroomIcon}
+          storyEn="The orange fruit looks tempting and the seeds inside contain strychnine — a deadly neurotoxin that causes violent, uncontrollable muscle spasms within an hour. The whole body locks up, including the muscles you breathe with."
+          storyKh="ផ្លែពណ៌ទឹកក្រូចមើលទៅគួរឱ្យចង់ញ៉ាំ ហើយគ្រាប់ខាងក្នុងមានស្ត្រីកនីន — ជាសារធាតុពុលប្រព័ន្ធសរសៃប្រសាទដ៏សាហាវ ដែលបង្កការប្រកាច់សាច់ដុំខ្លាំងក្នុងរយៈពេលមួយម៉ោង។ រាងកាយទាំងមូលនឹងរឹងតឹង រួមទាំងសាច់ដុំដកដង្ហើមផងដែរ។"
+          cureEn="There is NO direct antidote. Immediate stomach pumping (gastric lavage) and breathing support at a hospital are the only chance of survival."
+          cureKh="គ្មានថ្នាំបន្សាបដោយផ្ទាល់ទេ។ ការបឺតក្រពះភ្លាមៗ និងការជួយដកដង្ហើមនៅមន្ទីរពេទ្យ ជាឱកាសតែមួយគត់ដើម្បីរស់រាន។"
+        />
+        <ThreatCard
+          kh={kh}
+          t={t}
+          variant="poison"
+          nameEn="Wild Death Cap Mushrooms"
+          nameKh="ផ្សិតពុលព្រៃ"
+          scientific="Amanita phalloides"
+          badgeEn="Poisonous"
+          badgeKh="មានពុល"
+          Icon={CrossedMushroomIcon}
+          storyEn="Often mistaken for edible straw mushrooms (ផ្សិតចំប៉ើង). The poison feels harmless for 6–12 hours, then quietly destroys the liver. By the time the person feels truly sick, it is often too late."
+          storyKh="ច្រើនត្រូវបានច្រឡំជាមួយផ្សិតចំប៉ើងដែលអាចបរិភោគបាន។ ពិសមើលទៅហាក់ដូចគ្មានគ្រោះថ្នាក់រយៈពេល ៦–១២ ម៉ោង បន្ទាប់មក វាបំផ្លាញថ្លើមដោយស្ងៀមៗ។ លុះត្រាតែមនុស្សនោះមានអារម្មណ៍ឈឺពិតប្រាកដ វាច្រើនតែយឺតពេលហើយ។"
+          cureEn="No direct antidote. The liver dies. Survival rule: if you did not GROW it or BUY it from a trusted seller, do NOT eat it."
+          cureKh="គ្មានថ្នាំបន្សាបដោយផ្ទាល់ទេ។ ថ្លើមនឹងស្លាប់។ វិធានរស់រាន ៖ បើអ្នកមិន ដាំ វាខ្លួនឯង ឬមិន ទិញ ពីអ្នកលក់ដែលអាចទុកចិត្តបាន — សូម កុំបរិភោគ វា។"
+        />
+      </div>
+
+      {/* ── Sub 3 — First-Aid Myths ────────────────────────────────────── */}
+      <div
+        className="relative rounded-2xl border-4 border-rose-700 bg-rose-950 text-white p-5 sm:p-6 mb-4 shadow-2xl"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(45deg, rgba(250, 204, 21, 0.08) 0 12px, transparent 12px 24px)",
+        }}
+        data-testid="myth-busting"
+      >
+        <CornerMarks />
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-12 h-12 rounded-xl bg-rose-600 border-2 border-yellow-300 flex items-center justify-center animate-pulse">
+            <Siren className="w-7 h-7 text-yellow-200" />
+          </div>
+          <div>
+            <div className="inline-flex items-center gap-2 px-2 py-0.5 rounded-full bg-yellow-300 text-rose-950 text-[10px] font-mono uppercase tracking-widest font-bold">
+              <AlertOctagon className="w-3.5 h-3.5" />
+              Snakebite First-Aid · Myth Busting
+            </div>
+            <h4 className={`font-display text-2xl font-bold mt-1 leading-tight ${kh ? "font-khmer" : ""}`}>
+              {t("DO NOT DO THIS", "សូមកុំធ្វើរឿងទាំងនេះ")}
+            </h4>
+            <p className="font-khmer text-sm text-yellow-100/90 mt-0.5">
+              លុបបំបាត់ជំនឿខុសឆ្គងនៃការសង្គ្រោះបឋម
+            </p>
+          </div>
+        </div>
+
+        <ul className="space-y-2.5 mb-5">
+          {[
+            {
+              en: "Cutting the wound to bleed the venom out.",
+              kh: "កាត់របួសដើម្បីបញ្ចេញពិសតាមឈាម។",
+              why_en: "It only damages the limb — and the venom is already past that point.",
+              why_kh: "វាគ្រាន់តែបំផ្លាញដៃ ឬជើង — ហើយពិសបានហួសចំណុចនោះទៅហើយ។",
+            },
+            {
+              en: "Sucking out the venom with your mouth.",
+              kh: "បឺតពិសចេញដោយមាត់។",
+              why_en: "You poison yourself through tiny cuts in your gums.",
+              why_kh: "អ្នកនឹងពុលខ្លួនឯងតាមរយៈរបួសតូចៗនៅអញ្ចាញធ្មេញ។",
+            },
+            {
+              en: "Tying a tight tourniquet (ខ្សែចងរឹត) above the bite.",
+              kh: "ចងខ្សែឲ្យតឹង (ខ្សែចងរឹត) ខាងលើស្នាមខាំ។",
+              why_en: "The limb dies from no blood flow, AND when you finally untie it the trapped venom rushes to the heart all at once — much worse.",
+              why_kh: "ដៃ ឬជើងនឹងស្លាប់ ព្រោះឈាមមិនហូរ ហើយពេលអ្នកស្រាយចេញ ពិសដែលនៅជាប់នឹងហូរទៅបេះដូងភ្លាមៗ — កាន់តែអាក្រក់ជាងមុន។",
+            },
+          ].map((m, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 rounded-xl bg-rose-900/60 border border-rose-400/40 px-3 py-2.5"
+            >
+              <Ban className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <div className={`text-sm font-bold text-yellow-100 leading-snug ${kh ? "font-khmer" : ""}`}>
+                  {t(m.en, m.kh)}
+                </div>
+                <div className={`text-xs text-rose-100/85 leading-snug mt-0.5 ${kh ? "font-khmer leading-loose" : ""}`}>
+                  {t(m.why_en, m.why_kh)}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* The correct first aid */}
+        <div className="rounded-xl bg-emerald-900 border-2 border-emerald-300 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle2 className="w-6 h-6 text-emerald-300" />
+            <div className={`text-sm font-mono uppercase tracking-widest text-emerald-200 ${kh ? "font-khmer normal-case tracking-normal text-base" : ""}`}>
+              {t("The ONLY correct first aid", "ការសង្គ្រោះបឋមត្រឹមត្រូវ​តែមួយគត់")}
+            </div>
+          </div>
+          <ol className={`space-y-2 text-sm text-emerald-50 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            <li className="flex gap-2">
+              <span className="font-mono font-bold text-emerald-300">1.</span>
+              <span>
+                <strong>{t("Stay completely still.", "នៅស្ងៀមឲ្យបានពេញលេញ។")}</strong>{" "}
+                {t(
+                  "Lie the victim down. The lower their heart rate, the slower the venom moves.",
+                  "ដាក់អ្នករងគ្រោះឲ្យដេក។ បេះដូងលោតយឺតប៉ុនណា ពិសហូរយឺតប៉ុណ្ណោះ។"
+                )}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="font-mono font-bold text-emerald-300">2.</span>
+              <span>
+                <strong>{t("Immobilize the bitten limb.", "ធ្វើឲ្យដៃ ឬជើងដែលត្រូវខាំឈប់រំកិល។")}</strong>{" "}
+                {t(
+                  "Splint it like a broken bone. Keep it BELOW the level of the heart if possible.",
+                  "ចងរុំដូចឆ្អឹងបាក់។ ទុកវាឲ្យនៅទាបជាងបេះដូង បើអាច។"
+                )}
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="font-mono font-bold text-emerald-300">3.</span>
+              <span>
+                <strong>{t("Get to a clinic — fast but calm.", "ទៅមន្ទីរពេទ្យ — លឿនប៉ុន្តែស្ងប់។")}</strong>{" "}
+                {t(
+                  "Carry the victim if possible. Note the time of the bite and what the snake looked like — but never waste time chasing or killing it.",
+                  "សែងអ្នករងគ្រោះបើអាច។ កត់សម្គាល់ម៉ោងខាំ និងរូបរាងពស់ — តែកុំខាតពេលដេញ ឬសម្លាប់វាឡើយ។"
+                )}
+              </span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      {/* Closing line */}
+      <div
+        className="relative rounded-2xl border-2 border-amber-600 p-4 flex items-start gap-3"
+        style={CARD_BG}
+      >
+        <CornerMarks subtle />
+        <HeartPulse className="w-5 h-5 text-rose-700 flex-shrink-0 mt-0.5" />
+        <p className={`text-sm text-emerald-950 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          <strong>{t("Bottom line: ", "សេចក្តីសន្និដ្ឋាន ៖ ")}</strong>
+          {t(
+            "Slow down the venom by staying still — speed up the rescue by going straight to a hospital. Folk remedies cost limbs and lives every year in Cambodia.",
+            "បន្ថយល្បឿនពិសដោយការនៅស្ងៀម — បង្កើនល្បឿនការសង្គ្រោះដោយទៅមន្ទីរពេទ្យឲ្យឆាប់។ ថ្នាំស្រុកបង្កការបាត់ដៃ ជើង និងជីវិតរាប់រយករណីជារៀងរាល់ឆ្នាំនៅកម្ពុជា។"
+          )}
+        </p>
+      </div>
+    </section>
   );
 }
