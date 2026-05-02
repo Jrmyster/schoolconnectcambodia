@@ -207,6 +207,9 @@ export default function TwentiethCenturyMusicPage() {
         <CambodianSynthesis isKh={isKh} />
       </Section>
 
+      {/* ── Section 5: The Electric Revolution — Instruments ───────── */}
+      <ElectricRevolution isKh={isKh} />
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <Link
           href="/music-theory"
@@ -219,6 +222,594 @@ export default function TwentiethCenturyMusicPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 5 · The Electric Revolution: Instruments that Changed the World
+//             បដិវត្តន៍អគ្គិសនី៖ ឧបករណ៍ភ្លេងដែលផ្លាស់ប្តូរពិភពលោក
+//
+//  Aesthetic: dark amplifier-cabinet vibe with neon cyan / magenta / lime
+//  accents and a faint amp grill-cloth weave.
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Inline SVG illustrations ────────────────────────────────────────────
+
+const ElectricGuitarSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 120" className={className} aria-hidden>
+    {/* Body — solid offset shape */}
+    <path
+      d="M58 70 C 42 70, 28 80, 28 92 C 28 106, 42 110, 56 106 C 70 102, 84 92, 88 80 C 90 74, 84 70, 78 70 Z"
+      fill="currentColor"
+    />
+    {/* Cutaway notch */}
+    <circle cx="46" cy="86" r="4" fill="#0a0a0f" />
+    {/* Pickups */}
+    <rect x="56" y="74" width="22" height="5" rx="1" fill="#1a1a22" stroke="#fff" strokeWidth="0.5" />
+    <rect x="56" y="84" width="22" height="5" rx="1" fill="#1a1a22" stroke="#fff" strokeWidth="0.5" />
+    {/* Bridge + jack */}
+    <rect x="62" y="94" width="18" height="3" fill="#fff" opacity="0.7" />
+    {/* Neck */}
+    <rect x="78" y="62" width="6" height="42" fill="#1a1208" transform="rotate(-30 78 62)" />
+    {/* Headstock */}
+    <path d="M104 18 L116 14 L118 24 L106 26 Z" fill="#1a1208" transform="rotate(-30 104 18)" />
+    {/* Strings */}
+    {[-1.5, -0.5, 0.5, 1.5].map((dx, i) => (
+      <line
+        key={i}
+        x1={70 + dx}
+        y1="92"
+        x2={108 + dx}
+        y2="20"
+        stroke="#fff"
+        strokeWidth="0.4"
+        opacity="0.9"
+      />
+    ))}
+  </svg>
+);
+
+const ElectricBassSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 120" className={className} aria-hidden>
+    {/* Body — bigger, beefier */}
+    <path
+      d="M52 66 C 32 66, 18 80, 18 96 C 18 112, 36 116, 54 110 C 72 104, 88 92, 90 80 C 92 70, 82 66, 72 66 Z"
+      fill="currentColor"
+    />
+    <circle cx="38" cy="90" r="4" fill="#0a0a0f" />
+    {/* Single big pickup */}
+    <rect x="50" y="80" width="28" height="7" rx="1" fill="#1a1a22" stroke="#fff" strokeWidth="0.5" />
+    {/* Bridge */}
+    <rect x="58" y="98" width="22" height="3" fill="#fff" opacity="0.7" />
+    {/* Neck — longer than guitar */}
+    <rect x="78" y="58" width="7" height="50" fill="#1a1208" transform="rotate(-30 78 58)" />
+    {/* Headstock — flipped */}
+    <path d="M108 12 L122 10 L124 22 L110 24 Z" fill="#1a1208" transform="rotate(-30 108 12)" />
+    {/* 4 thick bass strings */}
+    {[-2, -0.7, 0.7, 2].map((dx, i) => (
+      <line
+        key={i}
+        x1={66 + dx}
+        y1="92"
+        x2={114 + dx}
+        y2="14"
+        stroke="#fff"
+        strokeWidth="0.7"
+        opacity="0.85"
+      />
+    ))}
+  </svg>
+);
+
+const SynthesizerSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 120" className={className} aria-hidden>
+    {/* Synth chassis */}
+    <rect x="10" y="32" width="100" height="56" rx="4" fill="currentColor" />
+    {/* Top control panel */}
+    <rect x="14" y="36" width="92" height="20" rx="2" fill="#0a0a0f" stroke="#fff" strokeOpacity="0.2" />
+    {/* Knobs */}
+    {[24, 38, 52, 66, 80, 94].map((x) => (
+      <g key={x}>
+        <circle cx={x} cy="46" r="4.5" fill="#1a1a22" stroke="#fff" strokeOpacity="0.5" strokeWidth="0.6" />
+        <line x1={x} y1="46" x2={x + 3} y2="42.5" stroke="#fff" strokeWidth="1" />
+      </g>
+    ))}
+    {/* Tiny LED row */}
+    {[24, 38, 52, 66, 80, 94].map((x, i) => (
+      <circle
+        key={i}
+        cx={x}
+        cy="54"
+        r="1"
+        fill={["#22d3ee", "#f0abfc", "#a3e635", "#fb7185", "#fbbf24", "#22d3ee"][i]}
+      />
+    ))}
+    {/* Keyboard — 14 white keys with sharps */}
+    <rect x="14" y="60" width="92" height="26" fill="#fafafa" stroke="#0a0a0f" strokeWidth="0.6" />
+    {Array.from({ length: 13 }).map((_, i) => (
+      <line
+        key={i}
+        x1={14 + (i + 1) * (92 / 14)}
+        y1="60"
+        x2={14 + (i + 1) * (92 / 14)}
+        y2="86"
+        stroke="#0a0a0f"
+        strokeWidth="0.5"
+      />
+    ))}
+    {/* Black keys (skipping at E-F & B-C) */}
+    {[1, 2, 4, 5, 6, 8, 9, 11, 12, 13].map((i) => (
+      <rect
+        key={i}
+        x={14 + i * (92 / 14) - 1.8}
+        y="60"
+        width="3.6"
+        height="16"
+        fill="#0a0a0f"
+      />
+    ))}
+  </svg>
+);
+
+const PickupAmpSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 360 120" className={className} aria-hidden>
+    {/* String */}
+    <line x1="10" y1="30" x2="120" y2="30" stroke="#fff" strokeWidth="1.5" />
+    {/* String vibration ghost */}
+    <line x1="10" y1="30" x2="120" y2="30" stroke="#22d3ee" strokeWidth="0.6" opacity="0.7">
+      <animate attributeName="y1" values="28;32;28" dur="1.2s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="32;28;32" dur="1.2s" repeatCount="indefinite" />
+    </line>
+    <text x="10" y="20" fill="#22d3ee" fontSize="9" fontFamily="monospace">METAL STRING</text>
+
+    {/* Magnet / pickup beneath the string */}
+    <rect x="50" y="36" width="30" height="14" rx="2" fill="#1a1a22" stroke="#22d3ee" strokeWidth="1" />
+    <rect x="54" y="38" width="3" height="10" fill="#22d3ee" />
+    <rect x="60" y="38" width="3" height="10" fill="#22d3ee" />
+    <rect x="66" y="38" width="3" height="10" fill="#22d3ee" />
+    <rect x="72" y="38" width="3" height="10" fill="#22d3ee" />
+    <text x="50" y="62" fill="#22d3ee" fontSize="8" fontFamily="monospace">MAGNETIC PICKUP</text>
+
+    {/* Cable — curving from pickup to amp */}
+    <path
+      d="M 80 50 Q 130 90, 200 80 T 280 70"
+      fill="none"
+      stroke="#f0abfc"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+    />
+    {/* Electricity sparks along the cable */}
+    {[140, 200, 250].map((x, i) => (
+      <circle key={i} cx={x} cy={i === 0 ? 84 : i === 1 ? 80 : 73} r="2" fill="#fde047">
+        <animate attributeName="opacity" values="0.2;1;0.2" dur="0.9s" begin={`${i * 0.3}s`} repeatCount="indefinite" />
+      </circle>
+    ))}
+    <text x="170" y="105" fill="#f0abfc" fontSize="9" fontFamily="monospace">ELECTRICAL SIGNAL → CABLE</text>
+
+    {/* Amplifier */}
+    <g>
+      <rect x="280" y="20" width="70" height="80" rx="4" fill="#1a1a22" stroke="#a3e635" strokeWidth="1.5" />
+      {/* Speaker grill cloth */}
+      <rect x="288" y="28" width="54" height="42" rx="2" fill="#0a0a0f" />
+      <pattern id="amp-grill-pattern" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
+        <circle cx="1.5" cy="1.5" r="0.5" fill="#a3e63540" />
+      </pattern>
+      <rect x="288" y="28" width="54" height="42" rx="2" fill="url(#amp-grill-pattern)" />
+      {/* Speaker cone */}
+      <circle cx="315" cy="49" r="14" fill="none" stroke="#a3e635" strokeWidth="1" opacity="0.6" />
+      <circle cx="315" cy="49" r="9" fill="none" stroke="#a3e635" strokeWidth="1" opacity="0.6" />
+      <circle cx="315" cy="49" r="4" fill="#a3e635" opacity="0.8" />
+      {/* Knobs row */}
+      {[295, 305, 315, 325, 335].map((x) => (
+        <circle key={x} cx={x} cy="80" r="3" fill="#a3e635" />
+      ))}
+      {/* Power LED */}
+      <circle cx="345" cy="92" r="1.8" fill="#fb7185">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite" />
+      </circle>
+      <text x="290" y="113" fill="#a3e635" fontSize="9" fontFamily="monospace">AMPLIFIER</text>
+    </g>
+
+    {/* Sound waves blasting from speaker */}
+    {[18, 24, 30].map((r, i) => (
+      <path
+        key={r}
+        d={`M ${330 + r * 0.6} ${49 - r * 0.7} A ${r} ${r} 0 0 1 ${330 + r * 0.6} ${49 + r * 0.7}`}
+        fill="none"
+        stroke="#a3e635"
+        strokeWidth="1.5"
+        opacity={0.7 - i * 0.18}
+      >
+        <animate attributeName="opacity" values={`${0.7 - i * 0.18};0;${0.7 - i * 0.18}`} dur="2s" begin={`${i * 0.3}s`} repeatCount="indefinite" />
+      </path>
+    ))}
+  </svg>
+);
+
+type ElectricInstrument = {
+  id: string;
+  nameEn: string;
+  nameKh: string;
+  yearEn: string;
+  yearKh: string;
+  taglineEn: string;
+  taglineKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  /** neon accent colour */
+  neon: string;
+  Svg: React.ComponentType<{ className?: string }>;
+};
+
+const ELECTRIC_INSTRUMENTS: ElectricInstrument[] = [
+  {
+    id: "electric-guitar",
+    nameEn: "The Electric Guitar",
+    nameKh: "ហ្គីតាអគ្គិសនី",
+    yearEn: "Invented 1930s · popularised 1950s",
+    yearKh: "បង្កើតក្នុងទសវត្សរ៍ ១៩៣០ · ល្បីក្នុងទសវត្សរ៍ ១៩៥០",
+    taglineEn: "It defined Rock and Roll.",
+    taglineKh: "វាបានកំណត់ Rock and Roll។",
+    bodyEn:
+      "Invented in the 1930s but popularised in the 1950s, the solid-body electric guitar threw away the hollow box and replaced it with magnetic pickups. It allowed musicians to bend strings, sustain a single note for an entire bar, and snarl with distortion in ways previously impossible on an acoustic instrument.",
+    bodyKh:
+      "បង្កើតក្នុងទសវត្សរ៍ ១៩៣០ ប៉ុន្តែមានប្រជាប្រិយក្នុងទសវត្សរ៍ ១៩៥០ ហ្គីតាអគ្គិសនីតួរឹងបានបោះបង់ប្រអប់ប្រហោង ហើយជំនួសវាដោយឧបករណ៍ស្រូបសំឡេងម៉ាញេទិក។ វាអនុញ្ញាតឲ្យអ្នកលេងតន្ត្រី 'បត់' ខ្សែ បន្តនូតតែមួយមួយបារទាំងមូល និងស្រែកដោយ distortion តាមរបៀបដែលមិនធ្លាប់អាចធ្វើបានលើឧបករណ៍អាគូស្ទិក។",
+    neon: "#22d3ee",
+    Svg: ElectricGuitarSvg,
+  },
+  {
+    id: "electric-bass",
+    nameEn: "The Electric Bass",
+    nameKh: "ហ្គីតាបាសអគ្គិសនី",
+    yearEn: "Mass-produced from 1951 (Fender Precision)",
+    yearKh: "ផលិតជាដុំៗចាប់ពីឆ្នាំ ១៩៥១ (Fender Precision)",
+    taglineEn: "The driving heartbeat of Funk, Soul & Pop.",
+    taglineKh: "ចង្វាក់បេះដូងដ៏រឹងមាំនៃ Funk, Soul & Pop។",
+    bodyEn:
+      "The electric bass replaced the massive, heavy upright acoustic bass — and changed everything. Suddenly the bass player could move, dance, and stand on stage with the band. Its deep, driving low frequencies became the rhythmic heartbeat of Funk, Soul, Reggae, and almost all modern Pop music.",
+    bodyKh:
+      "ហ្គីតាបាសអគ្គិសនីបានជំនួសបាសអាគូស្ទិកឈរធំៗដ៏ធ្ងន់ — ហើយប្តូរអ្វីៗគ្រប់យ៉ាង។ ភ្លាមៗនោះ អ្នកលេងបាសអាចផ្លាស់ទី រាំ និងឈរលើឆាកជាមួយវង់ភ្លេង។ ហ្វ្រេកង់ទាបជ្រៅរបស់វាបានក្លាយជាចង្វាក់បេះដូងនៃ Funk, Soul, Reggae និងតន្ត្រី Pop ស្ទើរទាំងអស់សម័យទំនើប។",
+    neon: "#f0abfc",
+    Svg: ElectricBassSvg,
+  },
+  {
+    id: "synthesizer",
+    nameEn: "The Synthesizer",
+    nameKh: "ស៊ីនថេស៊ីស័រ",
+    yearEn: "Affordable from the 1970s · ruled the 1980s",
+    yearKh: "មានតម្លៃសមរម្យចាប់ពីទសវត្សរ៍ ១៩៧០ · គ្រប់គ្រងទសវត្សរ៍ ១៩៨០",
+    taglineEn: "An instrument with no strings at all.",
+    taglineKh: "ឧបករណ៍ដែលមិនមានខ្សែសោះឡើយ។",
+    bodyEn:
+      "An instrument with no strings at all. The synthesizer creates sound purely by generating and shaping raw electronic waves — sine, square, sawtooth — and bending them with filters and envelopes. It defined the glittering sound of the 1980s and is the foundation of nearly all modern electronic dance music (EDM).",
+    bodyKh:
+      "ឧបករណ៍ដែលមិនមានខ្សែសោះឡើយ។ ស៊ីនថេស៊ីស័របង្កើតសំឡេងដោយផ្ទាល់តាមរយៈការបង្កើត និងបង្កើតរូបរាងរលកអេឡិចត្រូនិចសុទ្ធ — sine, square, sawtooth — ហើយកោងវាដោយ filter និង envelope។ វាបានកំណត់សំឡេងភ្លឺច្រឡោងនៃទសវត្សរ៍ ១៩៨០ ហើយជាមូលដ្ឋាននៃតន្ត្រីរាំអេឡិចត្រូនិចទំនើប (EDM) ស្ទើរទាំងអស់។",
+    neon: "#a3e635",
+    Svg: SynthesizerSvg,
+  },
+];
+
+function ElectricRevolution({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="electric-revolution"
+      className="relative overflow-hidden border-y border-fuchsia-500/30"
+      data-testid="electric-revolution"
+      style={{
+        background:
+          "radial-gradient(circle at 12% 0%, rgba(34,211,238,0.18) 0%, transparent 55%)," +
+          "radial-gradient(circle at 92% 100%, rgba(240,171,252,0.18) 0%, transparent 55%)," +
+          "linear-gradient(180deg, #0a0a0f 0%, #050509 60%, #0a0a0f 100%)",
+      }}
+    >
+      {/* Amp grill cloth weave */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-30 pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.18) 1px, transparent 0)",
+          backgroundSize: "6px 6px",
+        }}
+      />
+      {/* Local neon keyframes */}
+      <style>{`
+        @keyframes er-bolt-pulse {
+          0%, 100% { filter: drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 12px #22d3ee88); transform: scale(1); }
+          50%      { filter: drop-shadow(0 0 14px #22d3ee) drop-shadow(0 0 28px #22d3eecc); transform: scale(1.08); }
+        }
+        @keyframes er-wave {
+          0%, 100% { transform: scaleY(1); }
+          50%      { transform: scaleY(1.4); }
+        }
+      `}</style>
+
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        {/* Eyebrow */}
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/40 rounded-sm px-2.5 py-0.5">
+            SEC-05 · ELECTRIC
+          </span>
+          <span
+            className={`text-xs font-bold uppercase tracking-widest text-cyan-300 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            {isKh ? "ឧបករណ៍ភ្លេងទំនើប" : "The new instruments"}
+          </span>
+        </div>
+
+        {/* Section title */}
+        <h2
+          className={`font-display font-extrabold text-3xl sm:text-5xl mb-3 leading-tight flex items-start gap-3 ${
+            isKh ? "font-khmer leading-snug" : ""
+          }`}
+          style={{ color: "#fff" }}
+        >
+          <Zap
+            className="w-9 h-9 sm:w-12 sm:h-12 text-cyan-300 flex-shrink-0 mt-1"
+            style={{ animation: "er-bolt-pulse 2.4s ease-in-out infinite" }}
+          />
+          <span>
+            {isKh ? (
+              <>
+                បដិវត្តន៍អគ្គិសនី៖{" "}
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #22d3ee 0%, #f0abfc 50%, #a3e635 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  ឧបករណ៍ភ្លេងដែលផ្លាស់ប្តូរពិភពលោក
+                </span>
+              </>
+            ) : (
+              <>
+                The Electric Revolution:{" "}
+                <span
+                  style={{
+                    background: "linear-gradient(90deg, #22d3ee 0%, #f0abfc 50%, #a3e635 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                  }}
+                >
+                  Instruments that Changed the World
+                </span>
+              </>
+            )}
+          </span>
+        </h2>
+        <p
+          className={`max-w-3xl text-stone-300 text-sm sm:text-base mb-10 ${
+            isKh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {isKh
+            ? "ការច្នៃប្រឌិតបី — ហ្គីតាអគ្គិសនី បាសអគ្គិសនី និងស៊ីនថេស៊ីស័រ — បានកំណត់សំឡេងនៃសតវត្សរ៍ទី ២០។ ប៉ុន្តែតើពួកវាដំណើរការដូចម្តេច? ចម្លើយចាប់ផ្តើមនៅក្នុងរូបវិទ្យានៃខ្សែរញ័រ និងម៉ាញេទិក។"
+            : "Three inventions — the electric guitar, the electric bass, and the synthesizer — defined the sound of the 20th century. But how do they actually work? The answer begins in the physics of a vibrating string and a magnet."}
+        </p>
+
+        {/* ── Sub-section 1: Sound Becomes Electricity ─────────────── */}
+        <div className="rounded-2xl border border-cyan-400/30 bg-black/50 backdrop-blur-sm overflow-hidden mb-10 shadow-[0_0_40px_-12px_rgba(34,211,238,0.45)]">
+          <div className="px-6 sm:px-8 py-6 border-b border-cyan-400/20">
+            <div
+              className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2 text-cyan-300 ${
+                isKh ? "font-khmer tracking-normal normal-case" : ""
+              }`}
+            >
+              <Zap className="w-3.5 h-3.5" />
+              {isKh ? "ផ្នែកទី ១ · រូបវិទ្យា" : "Section 1 · Physics"}
+            </div>
+            <h3
+              className={`font-display font-bold text-xl sm:text-2xl text-white leading-tight ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "សំឡេងក្លាយជាអគ្គិសនី" : "Sound Becomes Electricity"}
+            </h3>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 px-6 sm:px-8 py-7">
+            {/* Left: explanation */}
+            <div className="space-y-4 text-stone-200 text-sm sm:text-base">
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh
+                  ? "ឧបករណ៍បុរាណ (ហ្គីតាអាគូស្ទិក វីយូឡុង ខ្លុយ) ប្រើ "
+                  : "Traditional instruments (acoustic guitar, violin, flute) use a "}
+                <span className="font-bold text-amber-300">
+                  {isKh ? "តួប្រហោងធ្វើពីឈើ" : "hollow wooden body"}
+                </span>
+                {isKh
+                  ? " ដើម្បីពង្រីកសំឡេងឲ្យលឺខ្លាំងជាង។ ខ្សែញ័រ ខ្យល់ខាងក្នុងតួញ័រតាមដោយ ហើយរូបរាងតួនោះច្រៀងសំឡេងចេញមកក្រៅ។"
+                  : " to make sound louder. The string vibrates, the air inside the body vibrates with it, and the shape of the body sings the sound out into the room."}
+              </p>
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh ? "ឧបករណ៍អគ្គិសនីប្រើ " : "Electric instruments instead use "}
+                <span className="font-bold text-cyan-300">
+                  {isKh
+                    ? "ឧបករណ៍ស្រូបសំឡេងម៉ាញេទិក (Magnetic Pickups)"
+                    : "Magnetic Pickups (ឧបករណ៍ស្រូបសំឡេងម៉ាញេទិក)"}
+                </span>
+                {isKh ? "។" : "."}
+              </p>
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh
+                  ? "នៅពេលដែលខ្សែលោហៈញ័រលើម៉ាញេទិក វាបង្កើត"
+                  : "When a metal string vibrates over a magnet, it creates a "}
+                <span className="font-bold text-fuchsia-300">
+                  {isKh ? "ចរន្តអគ្គិសនីតូចមួយ" : "small electrical current"}
+                </span>
+                {isKh
+                  ? "។ អគ្គិសនីនោះធ្វើដំណើរតាម"
+                  : ". That electricity then travels through a "}
+                <span className="font-bold text-fuchsia-300">
+                  {isKh ? "ខ្សែ (cable)" : "cable"}
+                </span>
+                {isKh ? " ទៅកាន់ " : " to an "}
+                <span className="font-bold text-lime-300">
+                  {isKh ? "អំភ្លី (Amplifier)" : "Amplifier (អំភ្លី)"}
+                </span>
+                {isKh
+                  ? " ដែលធ្វើឲ្យវាខ្លាំងគ្រប់គ្រាន់ដើម្បីបំពេញកីឡដ្ឋានទាំងមូល។"
+                  : ", which makes it loud enough to fill a stadium."}
+              </p>
+
+              {/* Flow chips */}
+              <div className="flex flex-wrap items-center gap-2 pt-2 text-[11px] font-mono uppercase tracking-wider">
+                <span className="px-2 py-1 rounded border border-cyan-400/50 text-cyan-300 bg-cyan-500/10">
+                  {isKh ? "ខ្សែញ័រ" : "Vibration"}
+                </span>
+                <ArrowRight className="w-3 h-3 text-stone-500" />
+                <span className="px-2 py-1 rounded border border-cyan-400/50 text-cyan-300 bg-cyan-500/10">
+                  {isKh ? "ម៉ាញេទិក" : "Magnetic Pickup"}
+                </span>
+                <ArrowRight className="w-3 h-3 text-stone-500" />
+                <span className="px-2 py-1 rounded border border-fuchsia-400/50 text-fuchsia-300 bg-fuchsia-500/10">
+                  {isKh ? "ខ្សែ" : "Cable"}
+                </span>
+                <ArrowRight className="w-3 h-3 text-stone-500" />
+                <span className="px-2 py-1 rounded border border-lime-400/50 text-lime-300 bg-lime-500/10">
+                  {isKh ? "អំភ្លី" : "Amplifier"}
+                </span>
+                <ArrowRight className="w-3 h-3 text-stone-500" />
+                <Volume2 className="w-4 h-4 text-lime-300" />
+              </div>
+            </div>
+
+            {/* Right: animated diagram */}
+            <div
+              className="rounded-xl border border-fuchsia-400/30 bg-black/60 p-3 flex items-center justify-center"
+              style={{ boxShadow: "inset 0 0 30px rgba(240,171,252,0.12)" }}
+            >
+              <PickupAmpSvg className="w-full h-auto" />
+            </div>
+          </div>
+        </div>
+
+        {/* ── Sub-section 2: Instruments of a New Era ──────────────── */}
+        <div className="mb-2">
+          <div
+            className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2 text-fuchsia-300 ${
+              isKh ? "font-khmer tracking-normal normal-case" : ""
+            }`}
+          >
+            <Guitar className="w-3.5 h-3.5" />
+            {isKh ? "ផ្នែកទី ២ · រូបភាព" : "Section 2 · Profiles"}
+          </div>
+          <h3
+            className={`font-display font-bold text-xl sm:text-2xl text-white mb-6 leading-tight ${
+              isKh ? "font-khmer leading-snug" : ""
+            }`}
+          >
+            {isKh ? "ឧបករណ៍ភ្លេងនៃយុគសម័យថ្មី" : "The Instruments of a New Era"}
+          </h3>
+        </div>
+
+        {/* Responsive grid — 1 col mobile, 3 col desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {ELECTRIC_INSTRUMENTS.map((ins) => {
+            const Svg = ins.Svg;
+            return (
+              <article
+                key={ins.id}
+                data-testid={`electric-card-${ins.id}`}
+                className="rounded-2xl overflow-hidden border bg-black/60 backdrop-blur-sm flex flex-col transition-transform hover:-translate-y-1"
+                style={{
+                  borderColor: `${ins.neon}66`,
+                  boxShadow: `0 0 0 1px ${ins.neon}22, 0 18px 40px -16px ${ins.neon}aa`,
+                }}
+              >
+                {/* Portrait */}
+                <div
+                  className="relative aspect-[5/3] grid place-items-center border-b"
+                  style={{
+                    borderColor: `${ins.neon}33`,
+                    background: `radial-gradient(circle at 50% 60%, ${ins.neon}33 0%, transparent 65%), #050509`,
+                  }}
+                >
+                  {/* tiny grill weave */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 opacity-25"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)",
+                      backgroundSize: "5px 5px",
+                    }}
+                  />
+                  <Svg
+                    className="relative w-3/4 h-3/4"
+                    // SVGs use currentColor for the body fill
+                  />
+                  <div
+                    className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[10px] font-mono tracking-wider"
+                    style={{ color: ins.neon }}
+                  >
+                    <span className="inline-flex items-center gap-1">
+                      <span
+                        className="inline-block w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: ins.neon, boxShadow: `0 0 6px ${ins.neon}` }}
+                      />
+                      LIVE
+                    </span>
+                    <span className="opacity-70">{isKh ? ins.yearKh : ins.yearEn}</span>
+                  </div>
+                </div>
+
+                {/* Body */}
+                <div className="p-4 flex-1 flex flex-col">
+                  <div
+                    className="text-base font-display font-bold leading-tight"
+                    style={{
+                      color: ins.neon,
+                      textShadow: `0 0 14px ${ins.neon}66`,
+                    }}
+                  >
+                    {ins.nameEn}
+                  </div>
+                  <div className="font-khmer text-base text-white/95 leading-snug mt-0.5">
+                    {ins.nameKh}
+                  </div>
+                  <div
+                    className={`text-[12px] mt-1 italic text-stone-300 ${
+                      isKh ? "font-khmer not-italic leading-loose" : ""
+                    }`}
+                  >
+                    {isKh ? ins.taglineKh : ins.taglineEn}
+                  </div>
+                  <p
+                    className={`mt-3 text-[12.5px] text-stone-300 ${
+                      isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                    }`}
+                  >
+                    {isKh ? ins.bodyKh : ins.bodyEn}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Closing line */}
+        <div
+          className="mt-8 rounded-xl border border-cyan-400/25 px-4 py-3 flex items-start gap-3 bg-gradient-to-r from-cyan-500/10 via-fuchsia-500/10 to-lime-500/10"
+        >
+          <Volume2 className="w-4 h-4 mt-0.5 text-lime-300 flex-shrink-0" />
+          <p
+            className={`text-xs sm:text-sm text-stone-200 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh
+              ? "ឧបករណ៍ទាំងបីនេះ — ហ្គីតា បាស និងស៊ីនថេស៊ីស័រ — បានធ្វើឲ្យសំឡេងតន្ត្រីរបស់សតវត្សរ៍ទី ២០ ខុសពីសតវត្សរ៍ផ្សេងៗទាំងអស់ដែលបានកើតមុនវា។ វាមិនមែនមកពីសំឡេងតែប៉ុណ្ណោះទេ — វាមកពីអគ្គិសនី។"
+              : "These three instruments — guitar, bass, and synthesizer — made the music of the 20th century sound unlike any century that came before it. The change wasn't just in the notes. It was in the electricity."}
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
