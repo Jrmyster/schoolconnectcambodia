@@ -1,0 +1,20 @@
+I want to add a comprehensive historical and medical page under the 'Study Center' dropdown called 'Pandemics & Triumphs: The History of Disease (ជំងឺរាតត្បាត និងជ័យជម្នះ៖ ប្រវត្តិសាស្ត្រនៃជំងឺ)'.
+Please implement this using a 'Medical History' aesthetic (sterile whites, biohazard yellows, and historical parchment accents) and execute the following:
+1. Update the Search & Discovery Index
+Locate the global searchIndex array and add this new page. Ensure keywords include 'pandemic', 'vaccine', 'plague', 'smallpox', 'polio', 'sanitation', and their Khmer equivalents.
+2. Section 1: The Ancient Plagues (ជំងឺរាតត្បាតសម័យបុរាណ)
+The Biblical Plagues: Explain them as some of the earliest recorded accounts of mass disease and ecological collapse (like water contamination and locusts destroying crops).
+The Black Death (ជំងឺប៉េស្ត): Explain that this was caused by bacteria carried by fleas on rats, killing tens of millions in the 1300s. Symptoms: Buboes (swollen lymph nodes), fever, blackening skin. Modern Cure: Sanitation to control rats, and basic antibiotics.
+Leprosy (ជំងឺឃ្លង់): Explain this ancient bacterial infection that caused severe nerve damage and skin sores, leading to historical panic and the isolation of patients. Modern Cure: It is entirely curable today with a combination of antibiotics.
+3. Section 2: The Viral Invaders (ភ្នាក់ងារចម្លងវីរុស)
+Create 'Disease Profile Cards' for these viral threats:
+Yellow Fever (ជំងឺគ្រុនលឿង): Spread by mosquitoes. Symptoms: Jaundice (yellow skin), fever, organ failure. Control: Mosquito control (sanitation) and a highly effective vaccine.
+Influenza (ជំងឺផ្តាសាយ): A rapidly mutating virus that caused the 1918 pandemic. Symptoms: High fever, respiratory failure. Control: Annual vaccines to match the mutating strains.
+Polio (ជំងឺស្វិតដៃជើង): A virus attacking the nervous system. Symptoms: Permanent paralysis, mainly in children. Control: Massive global vaccination campaigns have almost eradicated it.
+4. Section 3: The Ultimate Victory - Smallpox (ជ័យជម្នះចុងក្រោយ - ជំងឺអុតធំ)
+Highlight Smallpox (ជំងឺអុតធំ) as the greatest medical victory in human history.
+Symptoms: High fever and severe, scarring skin pustules.
+The Fact: Explain that through a brilliant, global vaccination campaign by the WHO, Smallpox is the only human disease to ever be 100% eradicated from the face of the Earth. Nobody catches it anymore.
+5. Formatting & UX:
+Ensure all main headings, disease names, and medical terms are strictly bilingual (English/Khmer).
+Use icons like a biohazard symbol, a syringe, a mosquito, and a microscope to make the text highly scannable.

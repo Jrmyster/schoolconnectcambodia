@@ -15,6 +15,12 @@ import {
   Cookie,
   Waves,
   Cog,
+  Landmark,
+  Skull,
+  HeartPulse,
+  Globe,
+  History,
+  Cross,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -93,6 +99,9 @@ export function PlumbingSewersPage() {
           <CleaningUndergroundCard />
         </div>
       </section>
+
+      {/* History & Public Health — Evolution of Sanitation */}
+      <SanitationEvolutionSection />
 
       {/* Closing — bilingual */}
       <footer className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 text-center">
@@ -956,5 +965,563 @@ function FatbergDiagram() {
         </g>
       </svg>
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  TECH-PLB-02 · Evolution of Sanitation: From Chamber Pots to Clean Water
+//                ការវិវត្តនៃអនាម័យ៖ ពីកន្ថោរ ដល់ទឹកស្អាត
+//
+//  A historical & public-health timeline added beneath the four engineering
+//  cards. Civil-engineering aesthetic — clean pipeline greys, water-treatment
+//  blues, and stark sepia tones for the historical eras. Three subsections:
+//
+//    1. The Ancient Innovators — Indus Valley (Mohenjo-Daro) + Roman aqueducts
+//    2. The Dark Ages of Disease — Chamber pots + Cholera epidemics
+//    3. The Unfinished Revolution — Global Health Alert (1.5 B people today)
+// ════════════════════════════════════════════════════════════════════════════
+
+function SanitationEvolutionSection() {
+  return (
+    <section
+      id="evolution-of-sanitation"
+      data-testid="section-evolution-of-sanitation"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 scroll-mt-24"
+    >
+      {/* Section header — civil-engineering blueprint chip + bilingual title */}
+      <div className="mb-8">
+        <div className="inline-flex items-center gap-2 bg-slate-900/70 border border-amber-300/60 text-amber-200 rounded-full px-4 py-1.5 mb-4 text-xs font-bold shadow-md flex-wrap backdrop-blur-sm">
+          <History className="w-3.5 h-3.5" />
+          <span>History & Public Health</span>
+          <span className="opacity-50">·</span>
+          <span className="font-khmer normal-case">ប្រវត្តិ​សាស្ត្រ និង​សុខភាព​សាធារណៈ</span>
+          <span className="font-mono opacity-60">· TECH-PLB-02</span>
+        </div>
+
+        <h2
+          data-testid="section-evolution-title"
+          className="font-display font-bold text-2xl sm:text-4xl lg:text-5xl mb-2 leading-tight text-white"
+        >
+          The Evolution of Sanitation:{" "}
+          <span className="text-amber-300">From Chamber Pots to Clean Water</span>
+        </h2>
+        <h3 className="font-khmer font-bold text-lg sm:text-2xl lg:text-3xl mb-5 leading-loose text-slate-200">
+          ការ​វិវត្ត​នៃ​អនាម័យ៖{" "}
+          <span className="text-amber-300">ពី​កន្ថោរ ដល់​ទឹក​ស្អាត</span>
+        </h3>
+
+        <div className="space-y-2 max-w-3xl">
+          <p className="text-slate-200 text-base leading-relaxed">
+            Indoor plumbing is not a modern invention — it is a <strong>5,000-year-old idea</strong> that humans <strong>kept forgetting and rediscovering</strong>. This is the story of how cities learned (and re-learned) to live cleanly.
+          </p>
+          <p className="text-slate-200 text-base font-khmer leading-loose">
+            ប្រព័ន្ធ​បំពង់​ទឹក​ក្នុង​ផ្ទះ​មិន​មែន​ជា​ការ​ច្នៃ​ប្រឌិត​សម័យ​ទំនើប​ឡើយ — វា​ជា <strong>គំនិត​អាយុ ៥.០០០ ឆ្នាំ</strong> ដែល​មនុស្ស​យើង <strong>បាន​បំភ្លេច និង​រក​ឃើញ​សារ​ឡើង​វិញ</strong> ម្ដង​ហើយ​ម្ដង​ទៀត។ នេះ​ជា​រឿង​រ៉ាវ​អំពី​របៀប​ដែល​ទីក្រុង​បាន​រៀន​សូត្រ​ឲ្យ​រស់​នៅ​ស្អាត។
+          </p>
+        </div>
+
+        {/* Decorative pipeline rule */}
+        <div className="mt-6 flex items-center gap-3" aria-hidden="true">
+          <span className="h-[3px] flex-1 bg-gradient-to-r from-transparent via-amber-300/70 to-cyan-300/70 rounded-full" />
+          <Droplet className="w-4 h-4 text-cyan-300" />
+          <span className="h-[3px] flex-1 bg-gradient-to-r from-cyan-300/70 via-amber-300/70 to-transparent rounded-full" />
+        </div>
+      </div>
+
+      {/* Era cards — vertical timeline */}
+      <div className="grid grid-cols-1 gap-6">
+        <EraCard
+          eraNo="01"
+          eraEn="c. 2500 BCE — 500 CE"
+          eraKh="ប្រ. ឆ្នាំ ២៥០០ មុន គ.ស. — ឆ្នាំ ៥០០ គ.ស."
+          titleEn="The Ancient Innovators"
+          titleKh="អ្នក​ច្នៃ​ប្រឌិត​សម័យ​បុរាណ"
+          Icon={Landmark}
+          tone="sepia"
+          testId="era-ancient-innovators"
+        >
+          <BilingualBlock
+            en={
+              <>
+                Indoor plumbing is actually an <strong>ancient idea</strong> — not a modern luxury. Long before electricity, two great civilisations had already built sanitation systems that would <strong>shame many cities today</strong>.
+              </>
+            }
+            kh={
+              <>
+                ប្រព័ន្ធ​បំពង់​ទឹក​ក្នុង​ផ្ទះ​គឺ​ពិត​ជា <strong>គំនិត​បុរាណ</strong> មួយ — មិន​មែន​ជា​ការ​ប្រណីត​សម័យ​ទំនើប​ឡើយ។ មុន​ពេល​មាន​អគ្គិសនី​យូរ​ណាស់ មាន​អរិយធម៌​ធំ​ពីរ​ដែល​បាន​សង់​ប្រព័ន្ធ​អនាម័យ​ដែល​អាច <strong>ធ្វើ​ឲ្យ​ទីក្រុង​ជាច្រើន​សម័យ​នេះ​ខ្មាស​មុខ</strong>។
+              </>
+            }
+          />
+
+          {/* Civilisation A — Indus Valley */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <CivilisationCard
+              accent="amber"
+              flag="🏺"
+              nameEn="Indus Valley · Mohenjo-Daro"
+              nameKh="ជ្រលង​ភ្នំ​សិន្ធុ · ម៉ូហិនចូ-ដាហ្រូ"
+              dateEn="≈ 2500 BCE"
+              dateKh="ប្រ. ឆ្នាំ ២៥០០ មុន គ.ស."
+              en={
+                <>
+                  Almost <strong>every home</strong> had a <strong>flushing toilet</strong> connected to a sophisticated <strong>covered street drainage system</strong> made of fired brick — over <strong>4,500 years ago</strong>.
+                </>
+              }
+              kh={
+                <>
+                  <strong>ស្ទើរ​តែ​គ្រប់​ផ្ទះ</strong> មាន <strong>បង្គន់​បង្ហូរ​ទឹក</strong> ដែល​ភ្ជាប់​ទៅ​នឹង <strong>ប្រព័ន្ធ​លូ​បង្ហូរ​តាម​ផ្លូវ​ដែល​មាន​គម្រប</strong> យ៉ាង​ស្មុគ​ស្មាញ ធ្វើ​ពី​ឥដ្ឋ​ដុត — អស់​រយៈ​ពេល​ជាង <strong>៤.៥០០ ឆ្នាំ</strong> មក​ហើយ។
+                </>
+              }
+            />
+            <CivilisationCard
+              accent="stone"
+              flag="🏛️"
+              nameEn="Roman Empire · Aqueducts"
+              nameKh="អាណាចក្រ​រ៉ូម៉ាំង · ស្ពាន​បង្ហូរ​ទឹក"
+              dateEn="≈ 312 BCE — 476 CE"
+              dateKh="ប្រ. ឆ្នាំ ៣១២ មុន គ.ស. — ៤៧៦ គ.ស."
+              en={
+                <>
+                  Massive stone <strong>aqueducts</strong> carried fresh mountain water for <strong>kilometres</strong> into cities, feeding public fountains, baths, and famous <strong>communal latrines</strong> with running water beneath.
+                </>
+              }
+              kh={
+                <>
+                  <strong>ស្ពាន​បង្ហូរ​ទឹក</strong> ធ្វើ​ពី​ថ្ម​ដ៏​ធំ​សម្បើម ដឹក​ទឹក​ស្អាត​ពី​ភ្នំ​ដាច់​ពី​ឆ្ងាយ​រហូត​ដល់ <strong>គីឡូ​ម៉ែត្រ</strong> ចូល​ទីក្រុង ផ្គត់​ផ្គង់​ទឹក​ដល់​ប្រភព​សាធារណៈ បន្ទប់​ងូត​ទឹក និង <strong>បង្គន់​សហគមន៍</strong> ដ៏​ល្បី​ដែល​មាន​ទឹក​ហូរ​នៅ​ខាង​ក្រោម។
+                </>
+              }
+            />
+          </div>
+
+          {/* Mini diagram — Roman aqueduct silhouette */}
+          <AqueductDiagram />
+        </EraCard>
+
+        <EraCard
+          eraNo="02"
+          eraEn="≈ 1500 — 1850 CE"
+          eraKh="ប្រ. ឆ្នាំ ១៥០០ — ១៨៥០ គ.ស."
+          titleEn="The Dark Ages of Disease"
+          titleKh="យុគ​សម័យ​ងងឹត​នៃ​ជំងឺ"
+          Icon={Skull}
+          tone="dark"
+          testId="era-dark-ages-of-disease"
+        >
+          <BilingualBlock
+            en={
+              <>
+                After the fall of Rome, much of this knowledge was <strong>forgotten for over a thousand years</strong>. By the 18th and 19th centuries, life in European cities had become <strong>shockingly filthy</strong>.
+              </>
+            }
+            kh={
+              <>
+                ក្រោយ​ការ​ដួល​រលំ​នៃ​អាណាចក្រ​រ៉ូម៉ាំង ចំណេះ​ដឹង​ភាគ​ច្រើន​ត្រូវ <strong>បាន​បំភ្លេច​អស់​រយៈ​ពេល​ជាង​មួយ​ពាន់​ឆ្នាំ</strong>។ ដល់​សតវត្ស​ទី ១៨ និង ១៩ ជីវិត​នៅ​ទីក្រុង​អឺរ៉ុប​បាន​ក្លាយ​ទៅ​ជា <strong>កខ្វក់​ដ៏​គួរ​ឲ្យ​តក់​ស្លុត</strong>។
+              </>
+            }
+          />
+
+          {/* The Chamber Pot */}
+          <div className="rounded-xl border-2 border-amber-700/70 bg-amber-50 p-3">
+            <div className="flex items-center gap-2 mb-1.5">
+              <Cylinder className="w-5 h-5 text-amber-800" aria-hidden="true" />
+              <div className="leading-tight">
+                <div className="font-bold text-base text-amber-950">
+                  The Chamber Pot · Daily Reality
+                </div>
+                <div className="font-khmer text-base text-amber-950 leading-loose">
+                  កន្ថោរ · ការ​ពិត​ប្រចាំ​ថ្ងៃ
+                </div>
+              </div>
+            </div>
+            <BilingualBlock
+              en={
+                <>
+                  Every household kept a <strong>"chamber pot"</strong> (កន្ថោរ) — a simple bucket inside the house used as a toilet. Each morning, families would simply <strong>throw the contents directly out of the window</strong> into the public street below, often shouting a warning to people walking past.
+                </>
+              }
+              kh={
+                <>
+                  គ្រួសារ​នី​មួយ​ៗ​មាន <strong>«កន្ថោរ»</strong> — ជា​ដុប​សាមញ្ញ​មួយ​ក្នុង​ផ្ទះ​ដែល​ប្រើ​ជា​បង្គន់។ ជា​រៀង​រាល់​ព្រឹក គ្រួសារ​នឹង <strong>ចាក់​អ្វី​ៗ​ខាង​ក្នុង​នោះ​ចេញ​ផ្ទាល់​តាម​បង្អួច</strong> ទៅ​ផ្លូវ​សាធារណៈ​ខាង​ក្រោម ជា​ញឹក​ញាប់​ស្រែក​ប្រាប់​អ្នក​ដើរ​ផ្លូវ​ឲ្យ​ប្រុង​ប្រយ័ត្ន។
+                </>
+              }
+            />
+          </div>
+
+          {/* The medical consequence — Cholera */}
+          <div className="rounded-xl border-2 border-rose-700 bg-rose-50 p-3">
+            <div className="flex items-center gap-2 mb-1.5">
+              <Skull className="w-5 h-5 text-rose-800" aria-hidden="true" />
+              <div className="leading-tight">
+                <div className="font-bold text-base text-rose-950">
+                  The Health Consequence · Cholera
+                </div>
+                <div className="font-khmer text-base text-rose-950 leading-loose">
+                  ផល​វិបាក​សុខភាព · ជំងឺ​អាសន្ន​រោគ
+                </div>
+              </div>
+            </div>
+            <BilingualBlock
+              en={
+                <>
+                  Human waste flowed down the streets and ran <strong>directly into the same rivers</strong> people drank from. The result was massive outbreaks of <strong>Cholera (ជំងឺ​អាសន្ន​រោគ)</strong> and <strong>dysentery</strong> — diseases that killed <strong>tens of thousands</strong> of people <strong>per outbreak</strong> in cities like London, Paris, and Hamburg, and <strong>millions worldwide</strong> across the 1800s.
+                </>
+              }
+              kh={
+                <>
+                  កាក​សំណល់​មនុស្ស​ហូរ​តាម​ផ្លូវ ហើយ​ហូរ​ចូល <strong>ទន្លេ​ដដែល</strong> ដែល​មនុស្ស​ផឹក។ លទ្ធផល​គឺ​មាន​ការ​ផ្ទុះ​ឡើង​នូវ <strong>ជំងឺ​អាសន្ន​រោគ</strong> និង <strong>ជំងឺ​មូល​មាត់</strong> ដ៏​ធំ​ធេង — ជំងឺ​ដែល​បាន​សម្លាប់​មនុស្ស <strong>រាប់​ម៉ឺន​នាក់​ក្នុង​មួយ​ការ​ផ្ទុះ</strong> នៅ​ទីក្រុង​ដូច​ជា​ឡុង​ដ៍ ប៉ារីស និង​ហាំប៊ឺហ្គ ហើយ​សរុប​ <strong>រាប់​លាន​នាក់​ទូ​ទាំង​ពិភពលោក</strong> ពេញ​មួយ​សតវត្ស​ទី ១៩។
+                </>
+              }
+            />
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              <DeathToll cityEn="London" cityKh="ឡុងដ៍" toll="14,137" yearEn="1849 alone" yearKh="ឆ្នាំ ១៨៤៩" />
+              <DeathToll cityEn="Paris" cityKh="ប៉ារីស" toll="≈ 19,000" yearEn="1832 outbreak" yearKh="ការផ្ទុះឆ្នាំ ១៨៣២" />
+              <DeathToll cityEn="Hamburg" cityKh="ហាំប៊ឺហ្គ" toll="≈ 8,600" yearEn="1892" yearKh="ឆ្នាំ ១៨៩២" />
+            </div>
+          </div>
+        </EraCard>
+
+        {/* Section 3 — Global Health Alert */}
+        <GlobalHealthAlert />
+      </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Era card — sepia (history) or dark (disease) variant
+// ════════════════════════════════════════════════════════════════════════════
+
+function EraCard({
+  eraNo,
+  eraEn,
+  eraKh,
+  titleEn,
+  titleKh,
+  Icon,
+  tone,
+  testId,
+  children,
+}: {
+  eraNo: string;
+  eraEn: string;
+  eraKh: string;
+  titleEn: string;
+  titleKh: string;
+  Icon: typeof Landmark;
+  tone: "sepia" | "dark";
+  testId: string;
+  children: React.ReactNode;
+}) {
+  // Two distinct civil-engineering palettes for historical contrast.
+  const palette =
+    tone === "sepia"
+      ? {
+          headerGradient:
+            "linear-gradient(135deg, #78350f 0%, #b45309 60%, #92400e 100%)",
+          paper: "#fdf6e3", // aged-paper sepia
+          chipText: "text-amber-100",
+          iconBg: "bg-amber-200 border-amber-100 text-amber-900",
+          accentBorder: "border-amber-700/60",
+        }
+      : {
+          headerGradient:
+            "linear-gradient(135deg, #1e293b 0%, #334155 60%, #0c1322 100%)",
+          paper: "#f5f3ee", // weathered grey paper
+          chipText: "text-rose-200",
+          iconBg: "bg-rose-200 border-rose-100 text-rose-900",
+          accentBorder: "border-slate-700/60",
+        };
+
+  return (
+    <article
+      data-testid={testId}
+      className={`relative rounded-3xl border-2 ${palette.accentBorder} shadow-2xl overflow-hidden flex flex-col text-slate-900`}
+      style={{ background: palette.paper }}
+    >
+      {/* Sepia / iron header */}
+      <header
+        className="relative px-5 pt-5 pb-3 border-b-2 border-amber-300/40"
+        style={{ background: palette.headerGradient }}
+      >
+        {/* rivet row */}
+        <div className="absolute top-1.5 left-3 right-3 flex justify-between" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className="w-1.5 h-1.5 rounded-full bg-amber-300/40 border border-amber-200/30" />
+          ))}
+        </div>
+        <div className="flex items-start gap-3 pt-2">
+          <div className={`flex-shrink-0 w-12 h-12 rounded-xl ${palette.iconBg} border-2 flex items-center justify-center shadow-md`}>
+            <Icon className="w-6 h-6" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className={`text-[10px] font-mono uppercase tracking-widest mb-0.5 flex flex-wrap gap-x-2 ${palette.chipText} opacity-90`}>
+              <span>Era · {eraNo}</span>
+              <span className="opacity-50">/</span>
+              <span>{eraEn}</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem]">{eraKh}</span>
+            </div>
+            <h3 className="font-bold text-lg text-white leading-tight">
+              <span className="block">{titleEn}</span>
+              <span className="block font-khmer text-base leading-loose mt-0.5 text-amber-100">
+                {titleKh}
+              </span>
+            </h3>
+          </div>
+        </div>
+      </header>
+
+      {/* Body */}
+      <div className="px-5 py-4 flex flex-col gap-4 flex-1 relative">
+        {/* faint blueprint grid */}
+        <div className="absolute inset-0 pointer-events-none opacity-30" aria-hidden="true">
+          <svg className="w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <pattern id={`era-paper-${testId}`} width="22" height="22" patternUnits="userSpaceOnUse">
+                <path d="M 22 0 L 0 0 0 22" fill="none" stroke="#78350f" strokeWidth="0.3" opacity="0.18" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill={`url(#era-paper-${testId})`} />
+          </svg>
+        </div>
+        <div className="relative z-10 flex flex-col gap-4 flex-1">{children}</div>
+      </div>
+    </article>
+  );
+}
+
+// Civilisation mini-card — for Indus Valley vs Roman side-by-side
+function CivilisationCard({
+  accent,
+  flag,
+  nameEn,
+  nameKh,
+  dateEn,
+  dateKh,
+  en,
+  kh,
+}: {
+  accent: "amber" | "stone";
+  flag: string;
+  nameEn: string;
+  nameKh: string;
+  dateEn: string;
+  dateKh: string;
+  en: React.ReactNode;
+  kh: React.ReactNode;
+}) {
+  const cls =
+    accent === "amber"
+      ? "border-amber-600 bg-amber-100/60"
+      : "border-stone-500 bg-stone-100/70";
+  return (
+    <div className={`rounded-xl border-2 ${cls} p-3 flex flex-col gap-2`}>
+      <div className="flex items-center gap-2">
+        <span className="text-2xl leading-none" aria-hidden="true">{flag}</span>
+        <div className="leading-tight min-w-0 flex-1">
+          <div className="font-bold text-sm text-slate-900 truncate">{nameEn}</div>
+          <div className="font-khmer text-sm text-slate-700 leading-loose truncate">{nameKh}</div>
+        </div>
+      </div>
+      <div className="text-[10px] font-mono uppercase tracking-wider text-slate-600 flex flex-wrap gap-x-2">
+        <span>{dateEn}</span>
+        <span className="font-khmer normal-case tracking-normal">{dateKh}</span>
+      </div>
+      <BilingualBlock en={en} kh={kh} />
+    </div>
+  );
+}
+
+// Compact death-toll tile for the cholera consequences row
+function DeathToll({
+  cityEn,
+  cityKh,
+  toll,
+  yearEn,
+  yearKh,
+}: {
+  cityEn: string;
+  cityKh: string;
+  toll: string;
+  yearEn: string;
+  yearKh: string;
+}) {
+  return (
+    <div className="rounded-lg border-2 border-rose-700/70 bg-white p-2 text-center">
+      <div className="text-[10px] font-bold uppercase tracking-wider text-rose-800">
+        {cityEn}
+      </div>
+      <div className="font-khmer text-[10px] text-rose-800 leading-loose">
+        {cityKh}
+      </div>
+      <div className="font-display font-extrabold text-base sm:text-lg text-rose-900 leading-none mt-1">
+        {toll} ☠
+      </div>
+      <div className="text-[9px] text-rose-700/80 mt-0.5">{yearEn}</div>
+      <div className="font-khmer text-[9px] text-rose-700/80 leading-loose">{yearKh}</div>
+    </div>
+  );
+}
+
+// SVG: a small Roman aqueduct silhouette with arches + flowing water
+function AqueductDiagram() {
+  return (
+    <div
+      className="relative w-full h-32 rounded-lg border-2 border-amber-700/50 bg-amber-50 overflow-hidden"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 320 128" className="w-full h-full">
+        {/* Sky/sepia background */}
+        <rect width="320" height="128" fill="#fdf6e3" />
+        {/* Distant hills */}
+        <path d="M 0 100 Q 60 70 120 95 T 240 88 T 320 100 L 320 128 L 0 128 Z" fill="#d6b378" opacity="0.5" />
+        {/* Aqueduct top channel */}
+        <rect x="20" y="32" width="280" height="14" fill="#92400e" />
+        <rect x="20" y="32" width="280" height="4" fill="#78350f" />
+        {/* Water in channel */}
+        <rect x="22" y="36" width="276" height="3" fill="#0ea5e9" opacity="0.85" />
+        {/* Arches row */}
+        {[20, 60, 100, 140, 180, 220, 260].map((x, i) => (
+          <g key={i}>
+            <rect x={x} y={46} width="8" height="60" fill="#92400e" />
+            <path
+              d={`M ${x + 8} 46 Q ${x + 22} 30 ${x + 36} 46 L ${x + 36} 70 L ${x + 8} 70 Z`}
+              fill="#fdf6e3"
+              stroke="#92400e"
+              strokeWidth="3"
+            />
+            <rect x={x + 8} y={70} width="32" height="36" fill="#92400e" />
+          </g>
+        ))}
+        {/* Right pier */}
+        <rect x="296" y="46" width="8" height="60" fill="#92400e" />
+        {/* Ground */}
+        <rect x="0" y="106" width="320" height="22" fill="#a16207" />
+        {/* Drop label */}
+        <g transform="translate(8, 56)">
+          <text fontSize="8" fontWeight="bold" fill="#78350f">FRESH WATER · ទឹកស្អាត →</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 3 — Global Health Alert (high contrast)
+// ════════════════════════════════════════════════════════════════════════════
+
+function GlobalHealthAlert() {
+  return (
+    <article
+      data-testid="era-unfinished-revolution"
+      className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-rose-500"
+    >
+      {/* High-contrast diagonal warning stripes header */}
+      <div
+        className="relative px-5 py-4 text-white"
+        style={{
+          background:
+            "repeating-linear-gradient(45deg, #be123c 0 18px, #881337 18px 36px)",
+        }}
+      >
+        <div className="absolute top-1.5 left-3 right-3 flex justify-between" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className="w-1.5 h-1.5 rounded-full bg-amber-300/80 border border-amber-200/60" />
+          ))}
+        </div>
+        <div className="flex items-start gap-3 pt-2">
+          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-300 border-2 border-white text-rose-900 flex items-center justify-center shadow-lg">
+            <AlertTriangle className="w-6 h-6" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-[10px] font-mono uppercase tracking-widest mb-0.5 flex flex-wrap gap-x-2 text-amber-200">
+              <span>Era · 03</span>
+              <span className="opacity-50">/</span>
+              <span>Today — Right Now</span>
+              <span className="font-khmer normal-case tracking-normal text-[0.7rem]">សព្វ​ថ្ងៃ​នេះ</span>
+            </div>
+            <h3 className="font-bold text-xl sm:text-2xl text-white leading-tight">
+              <span className="block">⚠ Global Health Alert · The Unfinished Revolution</span>
+              <span className="block font-khmer text-base sm:text-lg leading-loose mt-0.5 text-amber-100">
+                ការ​ជូន​ដំណឹង​សុខភាព​ពិភពលោក · បដិវត្តន៍​ដែល​មិន​ទាន់​បញ្ចប់
+              </span>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      {/* Body — stark cream/ivory */}
+      <div className="px-5 sm:px-7 py-6 bg-[#fffaf0] text-slate-900 flex flex-col gap-5">
+        {/* The hero stat */}
+        <div className="rounded-2xl border-4 border-rose-600 bg-white p-5 text-center shadow-inner">
+          <div className="flex items-center justify-center gap-2 text-rose-700 mb-2">
+            <Globe className="w-5 h-5" aria-hidden="true" />
+            <span className="text-xs font-bold uppercase tracking-widest">Right now, worldwide</span>
+            <span className="font-khmer text-xs">សព្វ​ថ្ងៃ​នេះ ទូទាំង​ពិភពលោក</span>
+          </div>
+          <div
+            className="font-display font-black text-5xl sm:text-7xl text-rose-700 leading-none tracking-tight"
+            data-testid="alert-stat"
+          >
+            1.5 billion
+          </div>
+          <div className="font-khmer font-bold text-xl sm:text-2xl text-rose-800 leading-loose mt-1">
+            ១,៥ ពាន់​លាន​នាក់
+          </div>
+          <p className="mt-3 text-base text-slate-800 leading-relaxed max-w-2xl mx-auto">
+            people <strong>still do not have access to a safe, private toilet</strong>.
+          </p>
+          <p className="font-khmer text-base text-slate-800 leading-loose max-w-2xl mx-auto">
+            នៅ​តែ <strong>មិន​មាន​លទ្ធភាព​ប្រើ​បង្គន់​ឯកជន​ដែល​មាន​សុវត្ថិភាព</strong>។
+          </p>
+        </div>
+
+        {/* The modern tragedy explained */}
+        <BilingualBlock
+          en={
+            <>
+              While modern cities have <strong>invisible networks of pipes</strong> that quietly keep them clean, the revolution that began with the Indus Valley <strong>never reached everyone</strong>. In rural communities — including parts of Cambodia — open defecation and untreated waste still <strong>contaminate the water supply</strong>.
+            </>
+          }
+          kh={
+            <>
+              ខណៈ​ដែល​ទីក្រុង​ទំនើប​មាន <strong>បណ្ដាញ​ទុយោ​ដែល​មើល​មិន​ឃើញ</strong> ដែល​រក្សា​ភាព​ស្អាត​ដោយ​ស្ងៀម​ស្ងាត់ បដិវត្តន៍​ដែល​ចាប់​ផ្ដើម​ពី​ជ្រលង​ភ្នំ​សិន្ធុ <strong>មិន​ទាន់​បាន​ឈាន​ដល់​មនុស្ស​ទាំង​អស់​ឡើយ</strong>។ នៅ​តាម​សហគមន៍​ជន​បទ — រួម​ទាំង​មួយ​ភាគ​នៃ​ប្រទេស​កម្ពុជា — ការ​បន្ទោរ​បង់​ខាង​ក្រៅ និង​កាក​សំណល់​ដែល​មិន​ត្រូវ​បាន​ដោះ​ស្រាយ នៅ​តែ <strong>ធ្វើ​ឲ្យ​ប្រភព​ទឹក​មាន​ការ​បំពុល</strong>។
+            </>
+          }
+        />
+
+        {/* The medical consequence — modern */}
+        <div className="rounded-xl border-2 border-rose-600 bg-rose-50 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Cross className="w-5 h-5 text-rose-700" aria-hidden="true" />
+            <HeartPulse className="w-5 h-5 text-rose-700" aria-hidden="true" />
+            <div className="leading-tight">
+              <div className="font-bold text-base text-rose-950">Why It Matters</div>
+              <div className="font-khmer text-base text-rose-950 leading-loose">ហេតុ​អ្វី​បាន​ជា​សំខាន់</div>
+            </div>
+          </div>
+          <BilingualBlock
+            en={
+              <>
+                Lack of safe sanitation is one of the <strong>leading causes of preventable illness</strong> in the world today. Contaminated water spreads <strong>cholera, typhoid, dysentery, and parasites</strong>. The biggest victims are <strong>children under five</strong> — over <strong>1,000 children die every single day</strong> from diarrhoeal diseases linked to unsafe water and toilets.
+              </>
+            }
+            kh={
+              <>
+                កង្វះ​អនាម័យ​មាន​សុវត្ថិភាព គឺ​ជា​មូលហេតុ​មួយ​ក្នុង​ចំណោម​មូលហេតុ​សំខាន់​បំផុត​នៃ <strong>ជំងឺ​ដែល​អាច​ការពារ​បាន</strong> នៅ​លើ​ពិភពលោក​សព្វ​ថ្ងៃ​នេះ។ ទឹក​ដែល​មាន​ការ​បំពុល​ផ្ទុះ​នូវ​ជំងឺ <strong>អាសន្ន​រោគ ទីហ្វូអ៊ីត ជំងឺ​មូល​មាត់ និង​ប៉ារ៉ាស៊ីត</strong>។ ជន​រង​គ្រោះ​ធំ​ជាង​គេ​គឺ <strong>កុមារ​អាយុ​ក្រោម ៥ ឆ្នាំ</strong> — ជា​រៀង​រាល់​ថ្ងៃ មាន​កុមារ​ជាង <strong>១.០០០ នាក់​ស្លាប់</strong> ដោយ​សារ​ជំងឺ​រាក​ដែល​ភ្ជាប់​ទៅ​នឹង​ទឹក និង​បង្គន់​មិន​មាន​សុវត្ថិភាព។
+              </>
+            }
+          />
+        </div>
+
+        {/* Closing reflection */}
+        <div className="rounded-xl border border-slate-300 bg-slate-50 p-3 text-center">
+          <p className="font-serif italic text-sm text-slate-700">
+            “The Indus Valley solved this 4,500 years ago. The Romans solved it 2,000 years ago. The unfinished revolution is to make sure every village solves it tomorrow.”
+          </p>
+          <p className="font-khmer not-italic text-sm text-slate-700 leading-loose mt-1">
+            «ជ្រលង​ភ្នំ​សិន្ធុ​បាន​ដោះ​ស្រាយ​បញ្ហា​នេះ​កាល​ពី ៤.៥០០ ឆ្នាំ​មុន។ រ៉ូម៉ាំង​បាន​ដោះ​ស្រាយ​កាល​ពី ២.០០០ ឆ្នាំ​មុន។ បដិវត្តន៍​ដែល​មិន​ទាន់​បញ្ចប់​គឺ​ត្រូវ​ធ្វើ​ឲ្យ​ភូមិ​នី​មួយ​ៗ​ដោះ​ស្រាយ​បាន​នៅ​ថ្ងៃ​ស្អែក។»
+          </p>
+        </div>
+      </div>
+    </article>
   );
 }
