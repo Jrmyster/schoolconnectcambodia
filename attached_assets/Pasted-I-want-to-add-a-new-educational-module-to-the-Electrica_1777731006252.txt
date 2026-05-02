@@ -1,0 +1,17 @@
+I want to add a new educational module to the 'Electrical Safety' page called 'The Incandescent Bulb: Let There Be Light (អំពូលភ្លើងតាំង៖ ការបង្កើតពន្លឺ)'.
+Please implement this using a warm, glowing aesthetic (soft yellows and amber accents on a dark background) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this lightbulb section so it is searchable and automatically included in the 'Topic of the Day' daily rotation. Ensure keywords include 'lightbulb', 'electricity', 'wattage', 'Edison', and their Khmer equivalents.
+2. Section 1: The Invention & The Vacuum (ការច្នៃប្រឌិត និង បូមខ្យល់ចេញ)
+Explain the history: Thomas Edison and his team didn't invent the very first electric light, but they made it practical in 1879.
+Explain the core problem they solved: If you heat a wire until it glows in normal air, the oxygen makes it catch fire instantly. The genius of the lightbulb was putting the wire inside a glass globe and sucking all the air out (a vacuum) or filling it with an inert gas, so the wire can glow at 2,500°C without burning up.
+3. Section 2: How It Works & Why It Fails (របៀបដែលវាដំណើរការ និងមូលហេតុដែលវាខូច)
+Explain the physics: Electricity is pushed through a very thin wire called a Filament (ខ្សែហ្វីឡាម៉ង់), usually made of tungsten. Because the wire is so thin, it creates 'resistance', which generates massive amounts of heat until the wire literally glows with light.
+Explain the lifespan: A standard incandescent bulb only lasts about 1,000 hours. Over time, the extreme heat causes the tungsten metal to slowly evaporate. Eventually, the wire gets too thin and simply snaps. This is why a bulb 'burns out' and needs to be replaced.
+4. Section 3: Wattage vs. Brightness (កម្លាំងវ៉ាត់ និង ពន្លឺ)
+Explain the correlation: Wattage (វ៉ាត់) measures how much electrical energy the bulb consumes, while Lumens (លូម៉ែន) measure actual brightness.
+For these old bulbs, higher wattage pushes more electricity through the filament, creating more heat and, therefore, more light (e.g., a 100-Watt bulb is brighter than a 40-Watt bulb).
+Safety Note: Add a bilingual warning that 90% of the energy used by an incandescent bulb is wasted as heat, not light. Touching a bulb that has been on can cause severe burns, which is why the world is switching to cool, energy-efficient LEDs.
+5. Formatting & UX:
+Ensure all main headings, scientific terms, and safety warnings are strictly bilingual (English/Khmer).
+Use icons like a glowing bulb, a warning thermometer, and a lightning bolt to make the sections highly scannable.

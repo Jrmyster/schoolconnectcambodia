@@ -14,6 +14,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { DailyDefenseSection } from "./DentistryDailyDefenseSection";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  SCI-DENT · Dentistry & Orthodontics: Engineers of the Smile
@@ -106,6 +107,9 @@ export default function DentistryPage() {
       >
         <ToothAnatomy isKh={isKh} />
       </Section>
+
+      {/* ── Section 4: The Daily Defense — Brushing & Flossing ────────── */}
+      <DailyDefenseSection isKh={isKh} />
 
       {/* ── Section 3: Career Pathway ─────────────────────────────────── */}
       <Section
