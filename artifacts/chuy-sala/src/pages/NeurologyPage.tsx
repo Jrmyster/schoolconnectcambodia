@@ -16,6 +16,12 @@ import {
   AlertTriangle,
   Activity,
   Workflow,
+  Droplet,
+  Clock,
+  Hand,
+  MessageSquare,
+  Scale,
+  HeartPulse,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -156,6 +162,22 @@ export function NeurologyPage() {
         />
         <SleepCycle kh={kh} t={t} />
         <AllNighterWarning kh={kh} t={t} />
+
+        {/* ── 4. When the Engine Stalls — Neurological Disorders ─ */}
+        <SectionTitle
+          en="When the engine stalls — neurological disorders"
+          kh="នៅពេលខួរក្បាលមានបញ្ហា — ជំងឺសរសៃប្រសាទ"
+          numberLabel="04"
+          icon={AlertTriangle}
+        />
+        <p className={`text-sm sm:text-base text-sky-100/80 leading-relaxed mb-5 max-w-3xl ${kh ? "font-khmer leading-loose" : ""}`}>
+          {t(
+            "Even the most remarkable engine can break. Knowing the early signs of these four common disorders can save a parent, a grandparent, or a neighbour — and in the case of stroke, every minute counts.",
+            "សូម្បីតែម៉ាស៊ីនដ៏អស្ចារ្យបំផុតក៏អាចខូចបានដែរ។ ការដឹងពីសញ្ញាដំបូងនៃជំងឺទូទៅទាំងបួននេះ អាចសង្គ្រោះឪពុកម្ដាយ ជីដូនជីតា ឬអ្នកជិតខាងបាន — ហើយសម្រាប់ជំងឺដាច់សរសៃខួរក្បាល រាល់នាទីសុទ្ធតែសំខាន់។"
+          )}
+        </p>
+        <DisordersGrid kh={kh} t={t} />
+        <BeFastCallout kh={kh} t={t} />
 
         {/* footer crumbs */}
         <div className="mt-12 pt-6 border-t border-dashed border-sky-300/20 flex flex-wrap items-center justify-between gap-3 text-xs text-sky-300/60 font-mono">
@@ -865,6 +887,413 @@ function AllNighterWarning({ kh, t }: { kh: boolean; t: (en: string, k: string) 
               "បើគ្មានការគេង ប្រអប់សារហ៊ីប៉ូកាំបនឹងហៀរ ហើយមិនត្រូវបានលុបចូលឃ្លាំងរយៈពេលវែងឡើយ។ ការសិក្សាបង្ហាញថា មួយយប់នៃការគ្មានគេង អាចបន្ថយការរំលឹកថ្ងៃបន្ទាប់រហូតដល់ ៤០%។ មេរៀនគឺឃោរឃៅ ៖ ការរៀន ៦ ម៉ោង + ការគេង ៨ ម៉ោង ឈ្នះការដាក់ខួរ ១៤ ម៉ោង។ ការគេងមិនមែនជាបដិបក្ខនៃការរៀនទេ — វាជាផ្នែកមួយនៃការរៀន។"
             )}
           </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// 4. Neurological disorders — grid of 4 + B.E. F.A.S.T. callout
+// ─────────────────────────────────────────────────────────────────────────
+
+type Disorder = {
+  key: "parkinson" | "alzheimer" | "epilepsy" | "stroke";
+  nameEn: string;
+  nameKh: string;
+  tagEn: string;
+  tagKh: string;
+  anatomyEn: string;
+  anatomyKh: string;
+  signs: { en: string; kh: string }[];
+  icon: React.ComponentType<{ className?: string }>;
+  accent: string; // hex color for icon + accent
+  glow: string; // matching shadow color
+};
+
+const DISORDERS: Disorder[] = [
+  {
+    key: "parkinson",
+    nameEn: "Parkinson's Disease",
+    nameKh: "ជំងឺផាកិនសុន",
+    tagEn: "Movement disorder",
+    tagKh: "ជំងឺនៃចលនា",
+    anatomyEn:
+      "Deep in the midbrain sits a small region called the substantia nigra, which makes dopamine — the chemical that lets the brain start and smooth movement. In Parkinson's, those dopamine-making cells slowly die, so movement becomes stiff, slow, and shaky.",
+    anatomyKh:
+      "នៅជ្រៅក្នុងខួរក្បាលកណ្តាល មានតំបន់តូចមួយឈ្មោះ substantia nigra ដែលផលិតសារធាតុ dopamine — សារធាតុគីមីដែលជួយខួរក្បាលចាប់ផ្តើម និងធ្វើឱ្យចលនារលូន។ ក្នុងជំងឺផាកិនសុន កោសិកាផលិត dopamine ទាំងនោះស្លាប់បន្តិចម្តងៗ ដូច្នេះចលនាក្លាយជារឹង យឺត និងញ័រ។",
+    signs: [
+      {
+        en: "A slow tremor in one hand or finger when at rest (often the very first sign)",
+        kh: "ការញ័រយឺតៗនៅដៃ ឬម្រាមដៃម្ខាង ពេលសម្រាក (ជាញឹកញាប់ ជាសញ្ញាដំបូងបំផុត)",
+      },
+      {
+        en: "Movement becomes slower — buttoning a shirt or eating with a spoon takes longer than before",
+        kh: "ចលនាក្លាយជាយឺត — ការចាក់ឡេវអាវ ឬការបរិភោគនឹងស្លាបព្រា ប្រើពេលយូរជាងមុន",
+      },
+      {
+        en: "Stiff, rigid arms and legs; smaller, cramped handwriting",
+        kh: "ដៃជើងរឹងតឹង; ការសរសេរតូច និងតឹងបង្គ្រប់",
+      },
+      {
+        en: "A shuffling walk and a stooped posture; loss of the natural arm-swing",
+        kh: "ការដើរអូសជើង និងខ្នងកោងទៅមុខ; បាត់បង់ការយោលដៃធម្មជាតិ",
+      },
+    ],
+    icon: Activity,
+    accent: "#a78bfa",
+    glow: "rgba(167,139,250,0.35)",
+  },
+  {
+    key: "alzheimer",
+    nameEn: "Alzheimer's Disease",
+    nameKh: "ជំងឺអាល់ហ្សាយម័រ",
+    tagEn: "Memory disorder",
+    tagKh: "ជំងឺនៃការចងចាំ",
+    anatomyEn:
+      "Alzheimer's begins by attacking the hippocampus — the brain's 'inbox' for new memories — before spreading outward across the cortex. Abnormal proteins (amyloid plaques and tau tangles) clog the spaces between neurons until the connections themselves are lost.",
+    anatomyKh:
+      "ជំងឺអាល់ហ្សាយម័រ ចាប់ផ្តើមដោយវាយប្រហារហ៊ីប៉ូកាំប — 'ប្រអប់សារ' នៃខួរក្បាលសម្រាប់ការចងចាំថ្មី — មុនពេលរាលដាលចេញទៅខាងក្រៅឆ្លងកាត់សំបកខួរ។ ប្រូតេអ៊ីនមិនធម្មតា (amyloid plaques និង tau tangles) ស្ទះចន្លោះរវាងណឺរ៉ូន រហូតដល់ការតភ្ជាប់ផ្ទាល់ក៏បាត់បង់។",
+    signs: [
+      {
+        en: "Forgetting recently learned information — asking the same question many times in one day",
+        kh: "ភ្លេចព័ត៌មានដែលទើបនឹងរៀន — សួរសំណួរដដែលច្រើនដងក្នុងមួយថ្ងៃ",
+      },
+      {
+        en: "Getting lost in familiar places, like the road home from the market",
+        kh: "វង្វេងផ្លូវនៅកន្លែងធ្លាប់ស្គាល់ ដូចជាផ្លូវត្រឡប់ពីផ្សារទៅផ្ទះ",
+      },
+      {
+        en: "Trouble finding everyday words; calling familiar objects by the wrong name",
+        kh: "មានបញ្ហាក្នុងការរកពាក្យប្រចាំថ្ងៃ; ហៅឈ្មោះវត្ថុធ្លាប់ស្គាល់ខុស",
+      },
+      {
+        en: "Big changes in mood, personality, or judgement — withdrawing from family activities",
+        kh: "ការផ្លាស់ប្តូរធំៗនៃអារម្មណ៍ បុគ្គលិកលក្ខណៈ ឬការវិនិច្ឆ័យ — ដកខ្លួនពីសកម្មភាពគ្រួសារ",
+      },
+    ],
+    icon: Inbox,
+    accent: "#fbbf24",
+    glow: "rgba(252,211,77,0.35)",
+  },
+  {
+    key: "epilepsy",
+    nameEn: "Epilepsy",
+    nameKh: "ជំងឺអេពីឡេបស៊ី (ឆ្កួតជ្រូក)",
+    tagEn: "Electrical-storm disorder",
+    tagKh: "ជំងឺនៃព្យុះអគ្គិសនី",
+    anatomyEn:
+      "In a healthy brain, neurons fire in well-coordinated patterns. In epilepsy, large groups of neurons suddenly fire all at once in an uncontrolled electrical storm — a 'seizure'. Where that storm starts decides which body part jerks, which sense distorts, or whether the person blacks out completely.",
+    anatomyKh:
+      "ក្នុងខួរក្បាលធម្មតា ណឺរ៉ូនបាញ់តាមលំនាំសមស្រប។ ក្នុងជំងឺនេះ ក្រុមណឺរ៉ូនច្រើនបាញ់ភ្លាមៗព្រមគ្នាក្នុងព្យុះអគ្គិសនីដែលគ្រប់គ្រងមិនបាន — ហៅថា 'ការប្រកាច់'។ កន្លែងដែលព្យុះនោះចាប់ផ្តើមកំណត់ថា ផ្នែករាងកាយណាមួយញ័រ ប្រសាទណាមួយមានអារម្មណ៍ខុសប្រក្រតី ឬថាតើមនុស្សនោះសន្លប់ទាំងស្រុងឬអត់។",
+    signs: [
+      {
+        en: "Sudden, uncontrolled jerking of the arms and legs — sometimes with loss of consciousness",
+        kh: "ការញ័រដៃជើងភ្លាមៗ មិនអាចបញ្ឈប់បាន — ពេលខ្លះមកជាមួយការសន្លប់",
+      },
+      {
+        en: "Brief 'absence' spells — staring blankly into space for several seconds and not responding",
+        kh: "រយៈពេលខ្លី 'ដាច់សតិ' — សម្លឹងទទេច្រើនវិនាទី ហើយមិនឆ្លើយតប",
+      },
+      {
+        en: "Strange smells, tastes, or a sudden feeling of déjà-vu just before an attack ('aura')",
+        kh: "ក្លិន រសជាតិ ឬអារម្មណ៍ចម្លែកថា 'ធ្លាប់ឃើញរួចហើយ' មុនការប្រកាច់ ('aura')",
+      },
+      {
+        en: "Confusion, deep tiredness, or sore muscles for hours afterwards",
+        kh: "ភាពច្រឡំ ការអស់កម្លាំងធ្ងន់ ឬឈឺសាច់ដុំជាច្រើនម៉ោងបន្ទាប់",
+      },
+    ],
+    icon: Zap,
+    accent: "#38bdf8",
+    glow: "rgba(56,189,248,0.4)",
+  },
+  {
+    key: "stroke",
+    nameEn: "Stroke",
+    nameKh: "ជំងឺដាច់សរសៃខួរក្បាល",
+    tagEn: "Brain emergency",
+    tagKh: "ជំងឺបន្ទាន់នៃខួរក្បាល",
+    anatomyEn:
+      "A stroke happens when blood — and the oxygen it carries — suddenly stops reaching part of the brain, either because a vessel is blocked by a clot or because a vessel bursts. Brain tissue starts dying within minutes, so a stroke is always a race against the clock.",
+    anatomyKh:
+      "ជំងឺដាច់សរសៃខួរក្បាលកើតឡើង នៅពេលឈាម — និងអុកស៊ីសែនដែលវាដឹកជញ្ជូន — ឈប់ទៅដល់ផ្នែកមួយនៃខួរក្បាលភ្លាមៗ ដោយសារសរសៃត្រូវបានស្ទះដោយកំណកឈាម ឬដោយសារសរសៃបែក។ ជាលិកាខួរក្បាលចាប់ផ្តើមស្លាប់ក្នុងរយៈពេលប៉ុន្មាននាទី ដូច្នេះជំងឺនេះតែងតែជាការប្រជែងពេលវេលា។",
+    signs: [
+      {
+        en: "Sudden numbness or weakness on one side of the body — a drooping face or a hanging arm",
+        kh: "ស្ពឹក ឬខ្សោយនៅរាងកាយម្ខាងភ្លាមៗ — ផ្ទៃមុខធ្លាក់វៀច ឬដៃធ្លាក់មិនអាចលើកបាន",
+      },
+      {
+        en: "Sudden trouble speaking or understanding what others say",
+        kh: "ពិបាកនិយាយ ឬពិបាកយល់នូវអ្វីដែលអ្នកដទៃនិយាយ ភ្លាមៗ",
+      },
+      {
+        en: "Sudden blurred or double vision in one or both eyes",
+        kh: "ភ្នែកស្រវាំង ឬឃើញទ្វេភ្លាមៗ នៅភ្នែកម្ខាង ឬទាំងពីរ",
+      },
+      {
+        en: "Sudden severe headache, dizziness, loss of balance, or trouble walking",
+        kh: "ឈឺក្បាលធ្ងន់ វិលមុខ បាត់បង់តុល្យភាព ឬពិបាកដើរ ភ្លាមៗ",
+      },
+    ],
+    icon: Droplet,
+    accent: "#f87171",
+    glow: "rgba(248,113,113,0.4)",
+  },
+];
+
+function DisordersGrid({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-6">
+      {DISORDERS.map((d) => {
+        const Icon = d.icon;
+        return (
+          <article
+            key={d.key}
+            className="relative rounded-2xl border shadow-lg overflow-hidden flex flex-col"
+            style={{ ...CARD_BG, borderColor: `${d.accent}55` }}
+            data-testid={`disorder-${d.key}`}
+          >
+            <CornerMarks tone="cyan" />
+            <div className="relative p-5">
+              {/* header */}
+              <div className="flex items-start gap-3 mb-3">
+                <div
+                  className="w-11 h-11 rounded-xl border-2 flex items-center justify-center flex-shrink-0"
+                  style={{
+                    borderColor: d.accent,
+                    color: d.accent,
+                    backgroundColor: "rgba(15,23,42,0.65)",
+                    boxShadow: `0 0 14px ${d.glow}`,
+                  }}
+                >
+                  <Icon className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div
+                    className={`text-[10px] font-mono uppercase tracking-widest mb-0.5 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+                    style={{ color: d.accent, opacity: 0.85 }}
+                  >
+                    {kh ? d.tagKh : d.tagEn}
+                  </div>
+                  <h3
+                    className={`text-lg font-bold text-amber-50 leading-tight ${kh ? "font-khmer leading-snug" : ""}`}
+                  >
+                    {kh ? d.nameKh : d.nameEn}
+                  </h3>
+                  {/* opposite-language subtitle for full bilingual coverage */}
+                  <div
+                    className={`text-[11px] mt-0.5 text-sky-200/60 ${kh ? "" : "font-khmer"}`}
+                  >
+                    {kh ? d.nameEn : d.nameKh}
+                  </div>
+                </div>
+              </div>
+
+              {/* anatomy */}
+              <p
+                className={`text-sm text-sky-100/85 leading-relaxed mb-4 ${kh ? "font-khmer leading-loose" : ""}`}
+              >
+                {kh ? d.anatomyKh : d.anatomyEn}
+              </p>
+
+              {/* warning signs */}
+              <div className="border-t border-dashed border-sky-300/20 pt-3">
+                <div
+                  className={`flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-rose-300 mb-2 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+                >
+                  <AlertTriangle className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>{t("Warning signs", "សញ្ញាព្រមាន")}</span>
+                </div>
+                <ul className="space-y-1.5">
+                  {d.signs.map((s, i) => (
+                    <li
+                      key={i}
+                      className={`flex items-start gap-2 text-sm text-sky-100/85 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: d.accent }}
+                      />
+                      <span>{kh ? s.kh : s.en}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── B.E. F.A.S.T. — high-visibility stroke-detection callout ───────────────
+
+type FastLetter = {
+  letter: string;
+  enWord: string;
+  khWord: string;
+  enCue: string;
+  khCue: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const FAST_LETTERS: FastLetter[] = [
+  {
+    letter: "B",
+    enWord: "Balance",
+    khWord: "តុល្យភាព",
+    enCue: "Sudden loss of balance, dizziness, or trouble walking.",
+    khCue: "បាត់បង់តុល្យភាព វិលមុខ ឬពិបាកដើរភ្លាមៗ។",
+    icon: Scale,
+  },
+  {
+    letter: "E",
+    enWord: "Eyes",
+    khWord: "ភ្នែក",
+    enCue: "Sudden blurred, double, or lost vision in one or both eyes.",
+    khCue: "ភ្នែកស្រវាំង ឃើញទ្វេ ឬបាត់បង់ការមើល ភ្លាមៗ។",
+    icon: Eye,
+  },
+  {
+    letter: "F",
+    enWord: "Face",
+    khWord: "ផ្ទៃមុខ",
+    enCue: "Ask them to smile — does one side of the face droop or feel numb?",
+    khCue: "សុំឱ្យគាត់ញញឹម — តើផ្ទៃមុខម្ខាងធ្លាក់វៀច ឬស្ពឹកដែរឬទេ?",
+    icon: AlertTriangle,
+  },
+  {
+    letter: "A",
+    enWord: "Arms",
+    khWord: "ដៃ",
+    enCue: "Ask them to raise both arms — does one arm drift downward or fall?",
+    khCue: "សុំឱ្យគាត់លើកដៃទាំងពីរ — តើដៃម្ខាងធ្លាក់ចុះ ឬលើកមិនរួចទេ?",
+    icon: Hand,
+  },
+  {
+    letter: "S",
+    enWord: "Speech",
+    khWord: "ការនិយាយ",
+    enCue: "Ask them to repeat a simple sentence — is the speech slurred or strange?",
+    khCue: "សុំឱ្យគាត់និយាយប្រយោគសាមញ្ញម្តង — តើពាក្យសម្ដីច្របូកច្របល់ ឬចម្លែកដែរឬទេ?",
+    icon: MessageSquare,
+  },
+  {
+    letter: "T",
+    enWord: "Time",
+    khWord: "ពេលវេលា",
+    enCue: "If ANY sign appears — call an ambulance and rush to the hospital NOW.",
+    khCue: "បើឃើញសញ្ញាណាមួយ — ហៅឡានពេទ្យ ហើយប្រញាប់ទៅមន្ទីរពេទ្យឥឡូវនេះ!",
+    icon: Clock,
+  },
+];
+
+function BeFastCallout({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-rose-400/70 shadow-lg overflow-hidden mb-10"
+      style={{
+        background:
+          "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.20), transparent 55%), radial-gradient(circle at 100% 100%, rgba(250,204,21,0.10), transparent 55%), rgba(15,23,42,0.94)",
+      }}
+      data-testid="be-fast-callout"
+    >
+      <CornerMarks tone="gold" />
+      <div className="relative p-5 sm:p-6">
+        {/* header */}
+        <div className="flex items-start gap-4 mb-5">
+          <div className="w-14 h-14 rounded-xl border-2 border-rose-400/80 bg-slate-900/70 text-rose-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_18px_rgba(244,63,94,0.4)]">
+            <HeartPulse className="w-6 h-6" aria-hidden="true" />
+          </div>
+          <div className="min-w-0">
+            <div
+              className={`text-[10px] font-mono uppercase tracking-widest text-rose-300 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            >
+              {t("Stroke emergency · memorise this", "ជំងឺដាច់សរសៃខួរក្បាលបន្ទាន់ · ត្រូវចងចាំ")}
+            </div>
+            <h3
+              className={`text-xl sm:text-2xl font-bold text-amber-50 leading-tight ${kh ? "font-khmer leading-snug" : ""}`}
+            >
+              {t(
+                "B.E. F.A.S.T. — six signs that can save a life",
+                "B.E. F.A.S.T. — សញ្ញាប្រាំមួយដែលអាចសង្គ្រោះជីវិត"
+              )}
+            </h3>
+            <p
+              className={`mt-1.5 text-sm text-sky-100/85 ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            >
+              {t(
+                "In an untreated ischemic stroke, brain cells die at an estimated rate of nearly two million per minute. The faster a person reaches the hospital, the more of them — and more of who they are — can be saved.",
+                "ក្នុងជំងឺដាច់សរសៃខួរក្បាលប្រភេទស្ទះឈាមដែលមិនបានព្យាបាល កោសិកាខួរក្បាលស្លាប់ក្នុងអត្រាប៉ាន់ស្មានជិត ២ លានកោសិកាក្នុងមួយនាទី។ កាន់តែលឿនអ្នកជំងឺទៅដល់មន្ទីរពេទ្យ កាន់តែច្រើនកោសិកា — និងកាន់តែច្រើននៃខ្លួនគាត់ — អាចត្រូវបានសង្គ្រោះ។"
+              )}
+            </p>
+          </div>
+        </div>
+
+        {/* the 6 letters */}
+        <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="be-fast-letters">
+          {FAST_LETTERS.map((f) => {
+            const Icon = f.icon;
+            const isTime = f.letter === "T";
+            return (
+              <li
+                key={f.letter}
+                className={`relative rounded-xl border p-3 sm:p-4 flex items-start gap-3 overflow-hidden ${
+                  isTime
+                    ? "border-rose-400/80 bg-rose-500/10"
+                    : "border-rose-400/30 bg-slate-900/60"
+                }`}
+                data-testid={`be-fast-${f.letter.toLowerCase()}`}
+              >
+                {/* big letter */}
+                <div
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 font-display font-bold text-xl sm:text-2xl ${
+                    isTime
+                      ? "bg-rose-500 text-white shadow-[0_0_18px_rgba(244,63,94,0.6)]"
+                      : "bg-rose-500/15 text-rose-300 border border-rose-400/50"
+                  }`}
+                  aria-hidden="true"
+                >
+                  {f.letter}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Icon
+                      className={`w-3.5 h-3.5 ${isTime ? "text-rose-200" : "text-rose-300/80"}`}
+                      aria-hidden="true"
+                    />
+                    <h4
+                      className={`text-sm sm:text-base font-bold leading-tight ${isTime ? "text-amber-50" : "text-amber-100"}`}
+                    >
+                      <span>{f.enWord}</span>
+                      <span
+                        className={`mx-1.5 ${isTime ? "text-rose-200" : "text-sky-300/60"}`}
+                      >
+                        ·
+                      </span>
+                      <span className="font-khmer font-bold">{f.khWord}</span>
+                    </h4>
+                  </div>
+                  <p
+                    className={`text-xs sm:text-[13px] ${isTime ? "text-rose-100" : "text-sky-100/80"} ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+                  >
+                    {kh ? f.khCue : f.enCue}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* closing emphasis */}
+        <div
+          className={`mt-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-500/15 border border-rose-400/50 text-rose-200 text-xs font-bold ${kh ? "font-khmer" : ""}`}
+        >
+          <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+          {t("Time lost = brain lost", "ពេលវេលាដែលបាត់ = ខួរក្បាលដែលបាត់")}
         </div>
       </div>
     </article>
