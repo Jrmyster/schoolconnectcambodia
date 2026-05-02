@@ -17,6 +17,10 @@ import {
   BookOpen,
   Compass,
   ScrollText,
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Activity,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import countriesRaw from "@/data/countriesData.json";
@@ -54,7 +58,29 @@ type Country = {
   commonWildlife: LocalizedString[];
   famousLandmarks: LocalizedString[];
   funFact: Bilingual;
+  /** Births per 1,000 people per year (recent global stats). */
+  birthRate: number;
+  /** Deaths per 1,000 people per year (recent global stats). */
+  deathRate: number;
 };
+
+/* ── Population-trend helper ────────────────────────────────────────────
+ * Compares birth vs. death rate (per 1,000 people) and returns one of
+ * "increasing" / "decreasing" / "stable". A small tolerance is used so
+ * countries with effectively-equal rates land in the neutral "stable"
+ * bucket instead of flipping based on a 0.1-point rounding difference.
+ */
+type PopulationTrend = "increasing" | "decreasing" | "stable";
+
+function getPopulationTrend(
+  birthRate: number,
+  deathRate: number,
+  tolerance = 0.5,
+): PopulationTrend {
+  const diff = birthRate - deathRate;
+  if (Math.abs(diff) <= tolerance) return "stable";
+  return diff > 0 ? "increasing" : "decreasing";
+}
 
 const COUNTRIES: Country[] = countriesRaw as Country[];
 
@@ -495,6 +521,12 @@ function CountryCard({
             </div>
           </div>
         </dl>
+
+        {/* Demographics — birth/death rates + population trend */}
+        <DemographicsBlock
+          birthRate={country.birthRate}
+          deathRate={country.deathRate}
+        />
       </div>
 
       <div className="px-5 py-2.5 bg-gradient-to-r from-cyan-50 to-sky-50 border-t border-slate-100 text-xs font-bold text-cyan-700 group-hover:from-cyan-100 group-hover:to-sky-100 transition-colors flex items-center justify-between gap-2">
@@ -502,6 +534,115 @@ function CountryCard({
         <span className="font-khmer text-cyan-600/80">ចុចមើលព័ត៌មានលម្អិត</span>
       </div>
     </button>
+  );
+}
+
+/* ── Demographics block (used inside CountryCard) ────────────────────── */
+
+const TREND_STYLES: Record<
+  PopulationTrend,
+  { label: { en: string; kh: string }; color: string; bg: string; border: string; Icon: typeof TrendingUp; ariaArrow: string }
+> = {
+  increasing: {
+    label: { en: "Increasing", kh: "កំពុងកើនឡើង" },
+    color: "text-emerald-700",
+    bg: "bg-emerald-50",
+    border: "border-emerald-200",
+    Icon: TrendingUp,
+    ariaArrow: "⬆",
+  },
+  decreasing: {
+    label: { en: "Decreasing", kh: "កំពុងថយចុះ" },
+    color: "text-rose-700",
+    bg: "bg-rose-50",
+    border: "border-rose-200",
+    Icon: TrendingDown,
+    ariaArrow: "⬇",
+  },
+  stable: {
+    label: { en: "Stable", kh: "ថេរ" },
+    color: "text-slate-600",
+    bg: "bg-slate-100",
+    border: "border-slate-200",
+    Icon: Minus,
+    ariaArrow: "➖",
+  },
+};
+
+function DemographicsBlock({
+  birthRate,
+  deathRate,
+}: {
+  birthRate: number;
+  deathRate: number;
+}) {
+  const trend = getPopulationTrend(birthRate, deathRate);
+  const style = TREND_STYLES[trend];
+  const TrendIcon = style.Icon;
+
+  return (
+    <div
+      className="mt-4 pt-3 border-t border-dashed border-slate-200"
+      data-testid="demographics-block"
+      data-trend={trend}
+    >
+      <div className="flex items-center gap-1.5 mb-2">
+        <Activity className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
+        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+          Demographics
+        </span>
+        <span className="font-khmer text-[10px] text-slate-400">
+          · ប្រជាសាស្ត្រ
+        </span>
+      </div>
+
+      <dl className="grid grid-cols-2 gap-2 text-xs">
+        {/* Birth Rate */}
+        <div className="rounded-lg bg-emerald-50/70 border border-emerald-100 px-2 py-1.5">
+          <dt className="text-[9px] font-bold uppercase tracking-wide text-emerald-700/80 leading-tight">
+            Birth Rate
+            <span className="font-khmer block text-emerald-700/60 normal-case tracking-normal">
+              អត្រាកំណើត
+            </span>
+          </dt>
+          <dd className="mt-0.5 font-mono font-bold text-emerald-800 text-sm leading-tight">
+            {birthRate.toFixed(1)}
+            <span className="text-[9px] font-normal text-emerald-700/70 ml-1">
+              per 1,000
+            </span>
+          </dd>
+        </div>
+
+        {/* Death Rate */}
+        <div className="rounded-lg bg-slate-50 border border-slate-200 px-2 py-1.5">
+          <dt className="text-[9px] font-bold uppercase tracking-wide text-slate-600 leading-tight">
+            Death Rate
+            <span className="font-khmer block text-slate-500 normal-case tracking-normal">
+              អត្រាមរណភាព
+            </span>
+          </dt>
+          <dd className="mt-0.5 font-mono font-bold text-slate-800 text-sm leading-tight">
+            {deathRate.toFixed(1)}
+            <span className="text-[9px] font-normal text-slate-500 ml-1">
+              per 1,000
+            </span>
+          </dd>
+        </div>
+      </dl>
+
+      {/* Trend pill */}
+      <div
+        className={`mt-2 inline-flex items-center gap-1.5 px-2 py-1 rounded-full border text-[11px] font-bold ${style.color} ${style.bg} ${style.border}`}
+        data-testid="population-trend"
+        aria-label={`Population trend ${style.ariaArrow} ${style.label.en}`}
+      >
+        <TrendIcon className="w-3 h-3" aria-hidden="true" strokeWidth={2.5} />
+        <span>{style.label.en}</span>
+        <span className="font-khmer font-normal opacity-90">
+          · {style.label.kh}
+        </span>
+      </div>
+    </div>
   );
 }
 

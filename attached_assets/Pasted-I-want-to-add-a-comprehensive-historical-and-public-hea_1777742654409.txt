@@ -1,0 +1,21 @@
+I want to add a comprehensive historical and public health section to the 'Sewers and Plumbing : The Invisible City' page called 'The Evolution of Sanitation: From Chamber Pots to Clean Water (ការវិវត្តនៃអនាម័យ៖ ពីកន្ថោរ ដល់ទឹកស្អាត)'.
+Please implement this using a 'civil engineering' aesthetic (clean pipeline grays, water-purification blues, and stark historical sepia tones) and execute the following:
+1. Update the Search & Discovery Index
+Locate the global searchIndex array and add this new section. Ensure keywords include 'plumbing', 'toilet', 'history', 'sanitation', 'cholera', and their Khmer equivalents.
+2. Section 1: The Ancient Innovators (អ្នកច្នៃប្រឌិតសម័យបុរាណ)
+Explain that indoor plumbing is actually an ancient idea. Highlight the Indus Valley Civilization (Mohenjo-Daro) around 2500 BCE, where almost every home had a flushing toilet connected to a sophisticated street drainage system.
+Mention the Roman Empire, famous for its massive stone aqueducts bringing fresh water into cities, and their communal public latrines.
+3. Section 2: The Dark Ages of Disease (យុគសម័យងងឹតនៃជំងឺ)
+Paint a picture of life before modern scaled plumbing (especially in 18th and 19th-century Europe).
+Explain the use of 'Chamber Pots' (កន្ថោរ)—buckets kept inside the house for waste, which were then thrown directly out of windows into the public streets.
+Highlight the health consequence: Because human waste ran directly into the rivers people drank from, massive outbreaks of Cholera (ជំងឺអាសន្នរោគ) and dysentery killed millions.
+4. Section 3: The Unfinished Revolution (បដិវត្តន៍ដែលមិនទាន់បញ្ចប់)
+Create a distinct, high-contrast 'Global Health Alert' text block.
+Explain the modern tragedy: While modern cities have invisible networks of pipes keeping them clean, over 1.5 billion people worldwide still do not have access to a safe, private toilet.
+Detail how the lack of safe sanitation leads to contaminated water, making it one of the leading causes of preventable illness in rural communities globally today.
+5. Formatting & UX:
+Ensure all main headings, historical eras, and medical warnings are strictly bilingual (English/Khmer).
+Use icons like an ancient aqueduct, a water drop, and a medical cross to make the narrative visually engaging.
+
+
+
