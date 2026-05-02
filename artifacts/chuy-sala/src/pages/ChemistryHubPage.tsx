@@ -10,6 +10,7 @@ import {
   Sigma,
   FlaskRound,
   Dna,
+  Flame,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -247,6 +248,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/chemistry/flame-test",
+    number: "10",
+    titleEn: "The Flame Test — Reading the Colors of Fire",
+    titleKh: "ការធ្វើតេស្តអណ្តាតភ្លើង — ការអានពណ៌នៃភ្លើង",
+    blurbEn:
+      "Why does copper burn blue-green and sodium burn yellow? The quantum jump, ΔE = hν, and a glowing color guide to four famous elements.",
+    blurbKh:
+      "ហេតុ​អ្វី​បាន​ជា​ទង់ដែង​ឆេះ​ពណ៌​ខៀវ-បៃតង ហើយ​សូដ្យូម​ឆេះ​ពណ៌​លឿង? ការ​លោត​កង់ទិច សមីការ ΔE = hν និង​មគ្គុទ្ទេសក៍​ពណ៌​ភ្លឺ​នៃ​ធាតុ​ល្បីៗ​បួន។",
+    topicsEn: ["Quantum Jump", "Photons (ΔE = hν)", "Cu · Na · Sr · K", "Fireworks"],
+    topicsKh: ["ការ​លោត​កង់ទិច", "ភូតុង (ΔE = hν)", "Cu · Na · Sr · K", "កាំជ្រួច"],
+    icon: Flame,
+    accent: {
+      bgFrom: "from-slate-900",
+      bgTo: "to-slate-950",
+      border: "border-amber-500/40",
+      chip: "bg-amber-900/60 text-amber-100",
+      iconBg: "bg-gradient-to-br from-amber-500 via-rose-500 to-cyan-500",
+      btn: "bg-amber-600",
+      btnHover: "hover:bg-amber-700",
+      title: "text-amber-50",
+    },
+  },
+  {
     href: "/science/chemistry/biochemistry",
     number: "09",
     titleEn: "Biochemistry",
@@ -297,8 +321,8 @@ export function ChemistryHubPage() {
             }`}
           >
             {t(
-              "Nine learning modules — from the tiniest atom to the chemistry of life itself. Pick where you want to start.",
-              "មុខវិជ្ជារៀនប្រាំបួន — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៃជីវិតផ្ទាល់។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
+              "Ten learning modules — from the tiniest atom to the chemistry of life itself. Pick where you want to start.",
+              "មុខវិជ្ជារៀនដប់ — ចាប់ពីអាតូមតូចបំផុត រហូតដល់គីមីវិទ្យានៃជីវិតផ្ទាល់។ ជ្រើសរើសកន្លែងដែលអ្នកចង់ចាប់ផ្តើម។",
             )}
           </p>
         </div>

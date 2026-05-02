@@ -55,6 +55,7 @@ const LanguageRealityPage       = lazy(() => import("@/pages/LanguageRealityPage
 const DentistryPage             = lazy(() => import("@/pages/DentistryPage"));
 const VeterinaryMedicinePage    = lazy(() => import("@/pages/VeterinaryMedicinePage"));
 const ArchaeologyPaleontologyPage = lazy(() => import("@/pages/ArchaeologyPaleontologyPage"));
+const FlameTestPage             = lazy(() => import("@/pages/FlameTestPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
 const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage"));
 const AfricaGeographyPage       = lazy(() => import("@/pages/AfricaGeographyPage").then(m => ({ default: m.AfricaGeographyPage })));
@@ -395,6 +396,7 @@ function Router() {
             <Route path="/chemistry/advanced" component={ChemistryAdvancedPage} />
             <Route path="/chemistry/real-world" component={ChemistryRealWorldPage} />
             <Route path="/chemistry/ion-calculator" component={IonCalculatorPage} />
+            <Route path="/chemistry/flame-test" component={FlameTestPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
             <Route path="/science/chemistry/inorganic" component={InorganicChemistry101Page} />
             <Route path="/science/chemistry/inorganic/atomic-structure" component={InorganicAtomicStructurePage} />

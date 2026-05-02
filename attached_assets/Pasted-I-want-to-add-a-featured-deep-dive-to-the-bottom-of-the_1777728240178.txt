@@ -1,0 +1,16 @@
+I want to add a featured deep dive to the bottom of the 'Inorganic Chemistry' page called 'Metal-Organic Frameworks: The Molecular Sponges (រចនាសម្ព័ន្ធលោហៈ-សរីរាង្គ៖ អេប៉ុងម៉ូលេគុល)'.
+Please implement this using our established educational aesthetic (clean dark mode, structural/geometric visual accents) and execute the following:
+1. Section 1: What is a MOF? (តើ MOF ជាអ្វី?)
+Explain the structure using a simple analogy: Imagine building a 3D cage. You use metal atoms as the 'corners' (nodes) and organic carbon molecules as the 'bars' (linkers).
+Because you can choose different metals and different linkers, you can design the exact size and shape of the pores inside the cage. It is programmable chemistry.
+2. Section 2: The Magic of Surface Area (ភាពអស្ចារ្យនៃផ្ទៃក្រឡា)
+Highlight the most mind-bending fact about MOFs: They are mostly empty space.
+Explain that because of this internal lattice, just one single gram of a MOF (about the size of a sugar cube) can have an internal surface area of up to 7,000 square meters. That means you could unfold a teaspoon of this powder to cover an entire football field!
+3. Section 3: Saving the World - MOF Applications (ការសង្គ្រោះពិភពលោក - ការអនុវត្ត MOF)
+Create a grid of three distinct 'Application Cards' highlighting how MOFs address global challenges:
+Carbon Capture (ការចាប់យកកាបូន): MOFs can be designed with pores the exact size and electrical charge to trap CO2 molecules straight out of factory exhaust, stopping them from entering the atmosphere.
+Hydrogen Storage (ការផ្ទុកឥន្ធនៈអ៊ីដ្រូសែន): Hydrogen is a clean fuel, but it is explosive and hard to compress. MOFs act as a safe, high-density sponge to store hydrogen gas for futuristic cars.
+Water Harvesting (ការប្រមូលទឹកពីខ្យល់): Certain MOFs can pull microscopic water vapor out of dry, desert air at night, and then release it as pure, drinkable liquid water when warmed by the sun during the day.
+4. Formatting & UX:
+Ensure all main headings and key scientific concepts are strictly bilingual (English/Khmer).
+Use subtle, geometric grid backgrounds on the cards to visually represent the MOF lattice structure.
