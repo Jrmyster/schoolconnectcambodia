@@ -35,6 +35,13 @@ import {
   Users,
   Wallet,
   Wind as WindIcon,
+  FishSymbol,
+  Recycle,
+  Trash2,
+  Ban,
+  Waves,
+  CheckCircle2,
+  Leaf,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ObstetricFistula } from "@/pages/sections/ObstetricFistula";
@@ -342,6 +349,7 @@ export function PublicHealthPage() {
         <SectionStress         k={k} t={t} />
         <SectionHappiness      k={k} t={t} />
         <SectionDermatology    k={k} t={t} />
+        <SectionPlasticEpidemic k={k} t={t} />
         <EmergencyFirstAid     k={k} t={t} />
 
         {/* Closing */}
@@ -2203,6 +2211,540 @@ function SectionDermatology({ k, t }: { k: boolean; t: T }) {
           </p>
         </div>
       </ConceptCard>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  PHL-XX · The Plastic Epidemic & Microplastics
+//          វិបត្តិប្លាស្ទិក និង មីក្រូប្លាស្ទិក
+//
+//  Aesthetic: ocean blues + warning oranges + sterile whites
+//  1. The Forever Material            — photo- vs bio-degrade
+//  2. The Invisible Threat            — microplastics + bioaccumulation cycle
+//  3. Human Biology & Prevention      — health risks + single-use plastics
+// ════════════════════════════════════════════════════════════════════════════
+
+const OCEAN = "#0369a1";
+const OCEAN_DEEP = "#0c4a6e";
+const OCEAN_LIGHT = "#e0f2fe";
+const ALERT = "#ea580c";
+const ALERT_DEEP = "#9a3412";
+
+function PlasticBottleSlashed({ className = "w-7 h-7" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+      <rect x="26" y="6" width="12" height="6" rx="1" fill="currentColor" opacity="0.85" />
+      <path
+        d="M22 16 q0 -4 4 -4 h12 q4 0 4 4 v4 q4 4 4 12 v22 q0 4 -4 4 h-20 q-4 0 -4 -4 v-22 q0 -8 4 -12 z"
+        fill="currentColor"
+        opacity="0.55"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <line x1="22" y1="32" x2="42" y2="32" stroke="#fff" strokeWidth="0.8" opacity="0.5" />
+      <line x1="22" y1="42" x2="42" y2="42" stroke="#fff" strokeWidth="0.8" opacity="0.5" />
+      <line x1="6" y1="6" x2="58" y2="58" stroke="#dc2626" strokeWidth="6" strokeLinecap="round" />
+      <line x1="6" y1="6" x2="58" y2="58" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function FoodChainStep({
+  k,
+  step,
+  fishSize,
+  labelEn,
+  labelKh,
+  bodyEn,
+  bodyKh,
+  colorClass,
+  Icon,
+}: {
+  k: boolean;
+  step: number;
+  fishSize: "xs" | "sm" | "md" | "lg";
+  labelEn: string;
+  labelKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  colorClass: string;
+  Icon: React.ComponentType<{ className?: string }>;
+}) {
+  const fishW = { xs: "w-6 h-6", sm: "w-8 h-8", md: "w-12 h-12", lg: "w-16 h-16" }[fishSize];
+  return (
+    <div
+      className="relative flex flex-col items-center gap-2 flex-1 min-w-[120px]"
+      data-testid={`food-chain-step-${step}`}
+    >
+      <span className="absolute -top-2 -left-2 w-7 h-7 rounded-full bg-white border-2 border-orange-500 text-orange-700 text-xs font-mono font-bold flex items-center justify-center z-10">
+        {step}
+      </span>
+      <div className={`w-20 h-20 rounded-2xl ${colorClass} flex items-center justify-center text-white shadow-md`}>
+        <Icon className={fishW} />
+      </div>
+      <div className="text-center">
+        <div className="font-bold text-sm text-slate-900 leading-tight">{labelEn}</div>
+        <div className="font-khmer text-xs text-slate-700 leading-snug">{labelKh}</div>
+      </div>
+      <p className={`text-[11px] text-slate-700 text-center leading-snug ${k ? "font-khmer leading-loose" : ""}`}>
+        {k ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+function FoodChainArrow() {
+  return (
+    <div className="hidden md:flex items-center justify-center text-orange-500 self-start mt-8">
+      <ArrowRight className="w-6 h-6" />
+    </div>
+  );
+}
+
+function SectionPlasticEpidemic({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section
+      id="plastic-epidemic"
+      className="mb-12 scroll-mt-24"
+      data-testid="section-plastic-epidemic"
+    >
+      <SectionHeader
+        spec="PLA"
+        en="The Plastic Epidemic & Microplastics"
+        kh="វិបត្តិប្លាស្ទិក និង មីក្រូប្លាស្ទិក"
+        k={k}
+        Icon={Recycle}
+        accent={OCEAN}
+      />
+
+      {/* Intro / hook */}
+      <div
+        className="relative overflow-hidden rounded-3xl border-2 p-5 sm:p-6 mb-6 flex items-start gap-4 shadow-sm"
+        style={{
+          borderColor: `${OCEAN}40`,
+          backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${OCEAN_LIGHT} 100%)`,
+        }}
+      >
+        <div
+          className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white shadow"
+          style={{ backgroundColor: ALERT }}
+        >
+          <AlertTriangle className="w-7 h-7" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div
+            className={`text-[10px] font-mono uppercase tracking-[0.25em] mb-1 ${k ? "font-khmer normal-case tracking-normal text-xs" : ""}`}
+            style={{ color: ALERT_DEEP }}
+          >
+            {t("Ecological Alert", "ការព្រមានអំពីបរិស្ថាន")}
+          </div>
+          <p className={`text-sm text-slate-800 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            {t(
+              "Every year, the Mekong alone carries an estimated 40,000 tons of plastic into the South China Sea. The pieces never disappear — they just shrink, climb up the food chain, and end up inside us.",
+              "ជារៀងរាល់ឆ្នាំ ទន្លេមេគង្គតែឯងបានបញ្ជូនប្លាស្ទិកប្រមាណ ៤០.០០០ តោន ចូលទៅសមុទ្រចិនខាងត្បូង។ បំណែកទាំងនោះមិនបាត់ទៅទេ — ពួកវាគ្រាន់តែតូចទៅៗ ឡើងតាមខ្សែសង្វាក់ចំណី ហើយចុងក្រោយចូលក្នុងខ្លួនយើង។"
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Sub 1 — The Forever Material ──────────────────────────────── */}
+      <div className="mb-6">
+        <h3 className={`flex items-center gap-2 text-lg font-bold mb-3 ${k ? "font-khmer" : ""}`} style={{ color: OCEAN_DEEP }}>
+          <PlasticBottleSlashed className="w-6 h-6" />
+          <span>{t("1. The Forever Material", "១. វត្ថុធាតុដែលមិនងាយរលាយ")}</span>
+        </h3>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* Paradox card */}
+          <div
+            className="rounded-2xl border-2 p-5 bg-white shadow-sm"
+            style={{ borderColor: `${OCEAN}40` }}
+            data-testid="plastic-paradox"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span
+                className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: OCEAN }}
+              >
+                {t("The Paradox", "ភាពផ្ទុយគ្នា")}
+              </span>
+            </div>
+            <p className={`text-sm text-slate-800 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <strong>{t("Plastic is incredibly useful because it is cheap and lasts forever.", "ប្លាស្ទិកមានប្រយោជន៍ខ្លាំង ព្រោះវាថោក និងស្ថិតស្ថេរអស់កល្បជានិច្ច។")}</strong>{" "}
+              {t(
+                "But because it lasts forever, every piece of plastic ever made still exists somewhere on Earth today — in a landfill, in the ocean, or as dust in the air.",
+                "ប៉ុន្តែដោយសារវាស្ថិតស្ថេរអស់កល្បជានិច្ច រាល់បំណែកប្លាស្ទិកដែលធ្លាប់ផលិតមក នៅតែមានកន្លែងណាមួយលើផែនដីសព្វថ្ងៃនេះ — នៅកន្លែងចាក់សំរាម នៅក្នុងសមុទ្រ ឬជាធូលីក្នុងខ្យល់។"
+              )}
+            </p>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              {[
+                { en: "1907", kh: "ឆ្នាំ ១៩០៧", subEn: "First plastic", subKh: "ប្លាស្ទិកដំបូង" },
+                { en: "8.3B", kh: "៨,៣ ប៊ីលាន", subEn: "Tons made", subKh: "តោនផលិត" },
+                { en: "9%", kh: "៩%", subEn: "Recycled", subKh: "កែច្នៃឡើងវិញ" },
+              ].map((s, i) => (
+                <div key={i} className="rounded-lg border border-sky-200 bg-sky-50 px-2 py-2">
+                  <div className="font-mono font-bold text-base" style={{ color: OCEAN_DEEP }}>{s.en}</div>
+                  <div className="font-khmer text-[10px] text-slate-700">{s.kh}</div>
+                  <div className="text-[10px] text-slate-600 leading-tight mt-0.5">{s.subEn}</div>
+                  <div className="font-khmer text-[10px] text-slate-600 leading-tight">{s.subKh}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bio vs Photo card */}
+          <div
+            className="rounded-2xl border-2 p-5 shadow-sm"
+            style={{
+              borderColor: `${ALERT}40`,
+              backgroundImage: `linear-gradient(135deg, #ffffff 0%, #fff7ed 100%)`,
+            }}
+            data-testid="degrade-comparison"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span
+                className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: ALERT }}
+              >
+                {t("Two Kinds of Decay", "ការរលាយពីរប្រភេទ")}
+              </span>
+            </div>
+
+            {/* Biodegrade row */}
+            <div className="flex items-start gap-3 mb-3 rounded-lg border border-emerald-300 bg-emerald-50/60 p-2.5">
+              <Leaf className="w-5 h-5 text-emerald-700 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-bold text-emerald-900">
+                  Biodegrade <span className="font-khmer text-emerald-800">· រលាយតាមធម្មជាតិ</span>
+                </div>
+                <p className={`text-xs text-slate-700 leading-snug ${k ? "font-khmer leading-loose" : ""}`}>
+                  {t(
+                    "Banana peels, wood, and bones. Microbes eat them and they return to soil within weeks or years.",
+                    "សម្បកចេក ឈើ និងឆ្អឹង។ មីក្រូសរីរាង្គលេបពួកវា ហើយវាត្រឡប់ទៅជាដី ក្នុងរយៈពេលប៉ុន្មានសប្ដាហ៍ ឬឆ្នាំ។"
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Photodegrade row */}
+            <div
+              className="flex items-start gap-3 rounded-lg p-2.5 border-2"
+              style={{ borderColor: `${ALERT}80`, backgroundColor: "#fff7ed" }}
+            >
+              <Sun className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: ALERT_DEEP }} />
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-bold" style={{ color: ALERT_DEEP }}>
+                  Photodegrade <span className="font-khmer text-orange-800">· បំបែកដោយពន្លឺថ្ងៃ</span>
+                </div>
+                <p className={`text-xs text-slate-800 leading-snug ${k ? "font-khmer leading-loose" : ""}`}>
+                  {t(
+                    "Plastic does NOT biodegrade. Sunlight only breaks it into smaller and smaller pieces over hundreds of years — the pieces are still plastic.",
+                    "ប្លាស្ទិក មិន រលាយតាមធម្មជាតិទេ។ ពន្លឺថ្ងៃគ្រាន់តែបំបែកវាជាបំណែកតូចៗ អស់រយៈពេលរាប់រយឆ្នាំ — បំណែកនោះនៅតែជាប្លាស្ទិក។"
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Visual: bottle → pieces */}
+            <div className="mt-3 flex items-center justify-around">
+              <PlasticBottleSlashed className="w-8 h-8 text-sky-700" />
+              <ArrowRight className="w-4 h-4 text-orange-500" />
+              <div className="flex gap-0.5 items-center">
+                {[5, 4, 3, 2, 1.2].map((s, i) => (
+                  <div
+                    key={i}
+                    className="rounded-sm bg-sky-700/80"
+                    style={{ width: `${s * 2}px`, height: `${s * 2}px` }}
+                  />
+                ))}
+              </div>
+              <ArrowRight className="w-4 h-4 text-orange-500" />
+              <div className="text-[10px] font-mono text-orange-800">100s yrs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Sub 2 — The Invisible Threat ──────────────────────────────── */}
+      <div className="mb-6">
+        <h3 className={`flex items-center gap-2 text-lg font-bold mb-3 ${k ? "font-khmer" : ""}`} style={{ color: OCEAN_DEEP }}>
+          <Microscope className="w-6 h-6" />
+          <span>
+            {t("2. The Invisible Threat — Microplastics", "២. ការគំរាមកំហែងដែលមើលមិនឃើញ — មីក្រូប្លាស្ទិក")}
+          </span>
+        </h3>
+
+        {/* Definition card */}
+        <div
+          className="rounded-2xl border-2 p-5 mb-4 shadow-sm flex items-start gap-4"
+          style={{
+            borderColor: `${OCEAN}40`,
+            backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${OCEAN_LIGHT} 100%)`,
+          }}
+          data-testid="microplastic-definition"
+        >
+          <div
+            className="flex-shrink-0 w-14 h-14 rounded-xl bg-white border-2 flex items-center justify-center"
+            style={{ borderColor: `${OCEAN}55`, color: OCEAN_DEEP }}
+          >
+            <Microscope className="w-8 h-8" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-bold leading-tight" style={{ color: OCEAN_DEEP }}>
+              Microplastics <span className="font-khmer">· មីក្រូប្លាស្ទិក</span>
+            </div>
+            <p className={`text-sm text-slate-800 mt-1 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              <strong>{t("Plastic pieces smaller than 5 millimeters", "បំណែកប្លាស្ទិកតូចជាង ៥ មិល្លីម៉ែត្រ")}</strong>
+              {" — "}
+              {t(
+                "often invisible to the naked eye. Smaller than a grain of rice, sometimes smaller than a single human cell.",
+                "ច្រើនតែមើលមិនឃើញដោយភ្នែកទទេ។ តូចជាងគ្រាប់អង្ករ ហើយពេលខ្លះតូចជាងកោសិកាមនុស្សតែមួយ។"
+              )}
+            </p>
+          </div>
+        </div>
+
+        {/* Bioaccumulation cycle */}
+        <div
+          className="relative rounded-2xl border-2 p-5 sm:p-6 shadow-sm overflow-hidden"
+          style={{
+            borderColor: `${OCEAN}40`,
+            backgroundImage: `linear-gradient(180deg, #ffffff 0%, ${OCEAN_LIGHT} 100%)`,
+          }}
+          data-testid="bioaccumulation-cycle"
+        >
+          {/* wave decoration */}
+          <Waves className="absolute -bottom-4 -right-4 w-32 h-32 opacity-10" style={{ color: OCEAN }} />
+
+          <div className="relative">
+            <div className="flex items-center gap-2 mb-1">
+              <span
+                className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full text-white"
+                style={{ backgroundColor: ALERT }}
+              >
+                {t("Bioaccumulation Cycle", "វដ្តនៃការប្រមូលផ្តុំជីវសាស្ត្រ")}
+              </span>
+            </div>
+            <p className={`text-xs text-slate-700 mb-5 ${k ? "font-khmer leading-loose" : ""}`}>
+              {t(
+                "How a plastic bag from your school lunch ends up on your dinner plate.",
+                "របៀបដែលថង់ប្លាស្ទិកពីអាហារថ្ងៃត្រង់នៅសាលា អាចចប់នៅលើចានបាយល្ងាចរបស់អ្នក។"
+              )}
+            </p>
+
+            <div className="flex flex-wrap md:flex-nowrap items-stretch justify-between gap-3">
+              <FoodChainStep
+                k={k}
+                step={1}
+                fishSize="md"
+                labelEn="Trash → River"
+                labelKh="សំរាម → ទន្លេ"
+                bodyEn="Bags, bottles and straws wash from streets into the Mekong and Tonle Sap."
+                bodyKh="ថង់ ដប និងបំពង់បឺត ហូរពីផ្លូវចូលទៅទន្លេមេគង្គ និងបឹងទន្លេសាប។"
+                colorClass="bg-orange-600"
+                Icon={Trash2}
+              />
+              <FoodChainArrow />
+              <FoodChainStep
+                k={k}
+                step={2}
+                fishSize="xs"
+                labelEn="Sun shrinks them"
+                labelKh="ថ្ងៃធ្វើឱ្យតូច"
+                bodyEn="Sunlight breaks them into invisible microplastics that float in the water."
+                bodyKh="ពន្លឺថ្ងៃបំបែកពួកវាជាមីក្រូប្លាស្ទិកមើលមិនឃើញ ដែលអណ្ដែតក្នុងទឹក។"
+                colorClass="bg-sky-500"
+                Icon={Sparkles}
+              />
+              <FoodChainArrow />
+              <FoodChainStep
+                k={k}
+                step={3}
+                fishSize="sm"
+                labelEn="Small fish eat"
+                labelKh="ត្រីតូចលេប"
+                bodyEn="Small fish mistake the particles for plankton and swallow them."
+                bodyKh="ត្រីតូចច្រឡំបំណែកនោះជាប្លុងតុង ហើយលេបវាចូល។"
+                colorClass="bg-sky-700"
+                Icon={FishSymbol}
+              />
+              <FoodChainArrow />
+              <FoodChainStep
+                k={k}
+                step={4}
+                fishSize="lg"
+                labelEn="Big fish eat small fish"
+                labelKh="ត្រីធំស៊ីត្រីតូច"
+                bodyEn="Each big fish carries the plastic of every small fish it ever ate."
+                bodyKh="ត្រីធំនីមួយៗកាន់ប្លាស្ទិករបស់ត្រីតូចទាំងអស់ ដែលវាធ្លាប់លេប។"
+                colorClass="bg-sky-900"
+                Icon={FishSymbol}
+              />
+              <FoodChainArrow />
+              <FoodChainStep
+                k={k}
+                step={5}
+                fishSize="md"
+                labelEn="We eat the big fish"
+                labelKh="យើងបរិភោគត្រីធំ"
+                bodyEn="The plastic is now inside us. This concentration step is called bioaccumulation."
+                bodyKh="ឥឡូវប្លាស្ទិកនៅក្នុងខ្លួនយើង។ ដំណាក់កាលប្រមូលផ្តុំនេះ ហៅថា ការប្រមូលផ្តុំជីវសាស្ត្រ។"
+                colorClass="bg-orange-700"
+                Icon={Users}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Sub 3 — Human Biology & Prevention ────────────────────────── */}
+      <div className="mb-4">
+        <h3 className={`flex items-center gap-2 text-lg font-bold mb-3 ${k ? "font-khmer" : ""}`} style={{ color: OCEAN_DEEP }}>
+          <HeartPulse className="w-6 h-6 text-rose-600" />
+          <span>{t("3. Human Biology & Prevention", "៣. ជីវវិទ្យាមនុស្ស និង ការការពារ")}</span>
+        </h3>
+
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* Health risk panel */}
+          <div
+            className="relative rounded-2xl border-4 border-rose-700 bg-rose-950 text-white p-5 shadow-xl overflow-hidden"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, rgba(250, 204, 21, 0.07) 0 12px, transparent 12px 24px)",
+            }}
+            data-testid="health-risk"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-11 h-11 rounded-xl bg-rose-600 border-2 border-yellow-300 flex items-center justify-center">
+                <Microscope className="w-7 h-7 text-yellow-200" />
+              </div>
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-yellow-300 text-rose-950 text-[10px] font-mono uppercase tracking-widest font-bold">
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  {t("Health Warning", "ការព្រមានសុខភាព")}
+                </span>
+                <h4 className="font-display text-lg font-bold mt-1 leading-tight">
+                  {t("Inside our bodies", "នៅក្នុងខ្លួនយើង")}
+                  <span className="font-khmer text-sm text-yellow-100/90 ml-2">នៅក្នុងខ្លួនយើង</span>
+                </h4>
+              </div>
+            </div>
+            <p className={`text-sm text-rose-50 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "Scientists are now finding microplastics in human blood, lungs, and even the placentas of unborn babies.",
+                "អ្នកវិទ្យាសាស្ត្ររកឃើញមីក្រូប្លាស្ទិកនៅក្នុងឈាមមនុស្ស សួត និងសូម្បីតែសុក (placenta) របស់ទារកដែលមិនទាន់កើត។"
+              )}
+            </p>
+            <ul className="space-y-2">
+              {[
+                {
+                  en: "They carry toxic chemicals (BPA, phthalates) that disrupt hormones.",
+                  kh: "ពួកវាផ្ទុកសារធាតុគីមីពុល (BPA, ផាតាឡាត) ដែលបង្អាក់អ័រម៉ូន។",
+                },
+                {
+                  en: "Inflammation and cellular damage have been measured in animal studies.",
+                  kh: "ការរលាក និងការខូចខាតកោសិកា ត្រូវបានវាស់នៅក្នុងការសិក្សាសត្វ។",
+                },
+                {
+                  en: "Long-term effects on humans are still being studied — but the particles do NOT leave the body easily.",
+                  kh: "ផលប៉ះពាល់រយៈពេលវែងលើមនុស្ស នៅតែកំពុងស្រាវជ្រាវ — ប៉ុន្តែបំណែកនោះ មិនងាយចេញពីខ្លួនទេ។",
+                },
+              ].map((m, i) => (
+                <li key={i} className="flex items-start gap-2 text-xs text-yellow-50">
+                  <Skull className="w-4 h-4 text-yellow-300 flex-shrink-0 mt-0.5" />
+                  <span className={k ? "font-khmer leading-loose" : "leading-snug"}>
+                    {k ? m.kh : m.en}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solution panel */}
+          <div
+            className="relative rounded-2xl border-2 p-5 shadow-sm"
+            style={{
+              borderColor: "#15803d",
+              backgroundImage: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%)",
+            }}
+            data-testid="prevention"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-11 h-11 rounded-xl bg-emerald-700 text-white flex items-center justify-center">
+                <CheckCircle2 className="w-7 h-7" />
+              </div>
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-700 text-white text-[10px] font-mono uppercase tracking-widest font-bold">
+                  <Recycle className="w-3.5 h-3.5" />
+                  {t("The Solution", "ដំណោះស្រាយ")}
+                </span>
+                <h4 className="font-display text-lg font-bold mt-1 leading-tight text-emerald-900">
+                  {t("Refuse single-use plastic", "បដិសេធប្លាស្ទិកប្រើតែម្ដង")}
+                  <span className="font-khmer text-sm text-emerald-700 ml-2">បដិសេធប្លាស្ទិកប្រើតែម្ដង</span>
+                </h4>
+              </div>
+            </div>
+            <p className={`text-sm text-emerald-950 mb-3 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {t(
+                "The single best way to protect public health is to keep new plastic out of the water in the first place.",
+                "មធ្យោបាយតែមួយដ៏ល្អបំផុតដើម្បីការពារសុខភាពសាធារណៈ គឺការទប់ស្កាត់ប្លាស្ទិកថ្មី មិនឲ្យចូលក្នុងទឹកតាំងពីដំបូង។"
+              )}
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              {[
+                { en: "Plastic straws", kh: "បំពង់បឺតប្លាស្ទិក" },
+                { en: "Plastic bags", kh: "ថង់ប្លាស្ទិក" },
+                { en: "Disposable cups", kh: "កែវប្រើចោល" },
+                { en: "Plastic cutlery", kh: "ចង្កឹះ-ស្លាបព្រាប្លាស្ទិក" },
+              ].map((it, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-1.5 rounded-lg border border-rose-300 bg-rose-50 px-2 py-1.5"
+                >
+                  <Ban className="w-3.5 h-3.5 text-rose-700 flex-shrink-0" />
+                  <div className="min-w-0">
+                    <div className="text-xs font-bold text-rose-900 leading-tight">{it.en}</div>
+                    <div className="font-khmer text-[10px] text-rose-800 leading-tight">{it.kh}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-lg border border-emerald-300 bg-white p-3">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-emerald-800 mb-1 flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                {t("And dispose of trash properly", "ហើយបោះសំរាមឱ្យបានត្រឹមត្រូវ")}
+              </div>
+              <p className={`text-xs text-emerald-950 leading-snug ${k ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Never throw plastic in rivers, canals, or on the street — every piece you stop is one less particle in someone's blood.",
+                  "កុំបោះប្លាស្ទិកក្នុងទន្លេ ប្រឡាយ ឬនៅលើផ្លូវ — រាល់បំណែកដែលអ្នករារាំងបាន ​គឺបំណែកមួយតិចជាងនៅក្នុងឈាមអ្នកណាម្នាក់។"
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Closing line */}
+      <div
+        className="relative rounded-2xl border-2 p-4 flex items-start gap-3 shadow-sm"
+        style={{
+          borderColor: `${OCEAN}40`,
+          backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${OCEAN_LIGHT} 100%)`,
+        }}
+      >
+        <Waves className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: OCEAN_DEEP }} />
+        <p className={`text-sm text-slate-800 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          <strong>{t("Bottom line: ", "សេចក្តីសន្និដ្ឋាន ៖ ")}</strong>
+          {t(
+            "Plastic is a public-health issue, not just a beach issue. The water you drink, the fish you eat, and the air you breathe are all connected — and the cleanest fix is the plastic that is never made.",
+            "ប្លាស្ទិកគឺជាបញ្ហាសុខភាពសាធារណៈ មិនមែនត្រឹមជាបញ្ហាឆ្នេរសមុទ្រនោះទេ។ ទឹកដែលអ្នកផឹក ត្រីដែលអ្នកបរិភោគ និងខ្យល់ដែលអ្នកដកដង្ហើម សុទ្ធតែជាប់ទាក់ទងគ្នា — ហើយដំណោះស្រាយដ៏ស្អាតបំផុត គឺប្លាស្ទិកដែលមិនត្រូវបានផលិតឡើយ។"
+          )}
+        </p>
+      </div>
     </section>
   );
 }

@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil,
+  Anvil, Recycle,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -2059,6 +2059,33 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "វ៉ាក់សាំង អនាម័យ ជំងឺរាតត្បាត និងរបៀបសហគមន៍រក្សាសុខភាព។",
     keywordsEn: ["public health", "vaccine", "vaccination", "epidemic", "pandemic", "sanitation", "hygiene", "covid", "disease prevention", "who"],
     keywordsKh: ["សុខភាពសាធារណៈ", "វ៉ាក់សាំង", "អនាម័យ", "ជំងឺរាតត្បាត"],
+  },
+  {
+    id: "public-health-plastic-epidemic",
+    href: "/well-being/public-health#plastic-epidemic",
+    icon: Recycle,
+    titleEn: "The Plastic Epidemic & Microplastics",
+    titleKh: "វិបត្តិប្លាស្ទិក និង មីក្រូប្លាស្ទិក",
+    categoryEn: "Well-being · Public Health", categoryKh: "សុខុមាលភាព · សុខភាពសាធារណៈ",
+    descEn: "Why plastic never truly disappears, how microplastics climb the food chain from rivers into our blood, and the single best public-health response: stop using single-use plastic.",
+    descKh: "ហេតុអ្វីប្លាស្ទិកមិនបាត់ពិតប្រាកដ របៀបមីក្រូប្លាស្ទិកឡើងតាមខ្សែសង្វាក់ចំណីពីទន្លេចូលក្នុងឈាមមនុស្ស និងដំណោះស្រាយសុខភាពសាធារណៈដ៏ល្អបំផុត ៖ ឈប់ប្រើប្លាស្ទិកប្រើតែម្ដង។",
+    keywordsEn: [
+      "plastic", "plastics", "microplastic", "microplastics",
+      "pollution", "environmental health", "ocean pollution", "river pollution",
+      "food chain", "bioaccumulation",
+      "biodegrade", "photodegrade", "single-use plastic", "straws", "plastic bag",
+      "health", "hormones", "endocrine disruptor", "toxic chemicals",
+      "recycling", "waste", "trash",
+    ],
+    keywordsKh: [
+      "ប្លាស្ទិក", "មីក្រូប្លាស្ទិក",
+      "ការបំពុល", "ការបំពុលបរិស្ថាន", "ការបំពុលសមុទ្រ",
+      "ខ្សែសង្វាក់ចំណី", "ការប្រមូលផ្តុំជីវសាស្ត្រ",
+      "រលាយតាមធម្មជាតិ", "ប្លាស្ទិកប្រើតែម្ដង", "បំពង់បឺត", "ថង់ប្លាស្ទិក",
+      "សុខភាព", "អ័រម៉ូន", "សារធាតុគីមីពុល",
+      "កាកសំណល់", "សំរាម",
+    ],
+    type: "module",
   },
   {
     id: "well-being-dermatology",
