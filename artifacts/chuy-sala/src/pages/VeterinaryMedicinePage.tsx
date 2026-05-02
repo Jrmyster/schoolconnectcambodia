@@ -877,16 +877,24 @@ function DiseaseRow({ disease, isKh }: { disease: Disease; isKh: boolean }) {
           aria-hidden="true"
         />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h4
-              className={`font-bold text-sm ${z ? "text-rose-700" : "text-slate-900"} ${isKh ? "font-khmer" : ""}`}
-            >
-              {isKh ? disease.nameKh : disease.nameEn}
-            </h4>
+          {/* Always-paired bilingual disease name (EN top, KH below) */}
+          <div className="flex items-start gap-2 flex-wrap">
+            <div className="min-w-0 flex-1">
+              <h4
+                className={`font-bold text-sm ${z ? "text-rose-700" : "text-slate-900"} leading-snug`}
+              >
+                {disease.nameEn}
+              </h4>
+              <div
+                className={`text-[12px] sm:text-[13px] font-khmer leading-snug ${z ? "text-rose-600" : "text-slate-600"}`}
+              >
+                {disease.nameKh}
+              </div>
+            </div>
             {z ? (
               <span
                 data-testid="vet-zoonotic-badge"
-                className="inline-flex items-center gap-1 bg-rose-600 text-white font-mono text-[9px] tracking-widest uppercase rounded-sm px-1.5 py-0.5"
+                className="inline-flex items-center gap-1 bg-rose-600 text-white font-mono text-[9px] tracking-widest uppercase rounded-sm px-1.5 py-0.5 flex-shrink-0 mt-0.5"
               >
                 <AlertTriangle className="w-2.5 h-2.5" aria-hidden="true" />
                 ZOONOTIC
@@ -894,7 +902,7 @@ function DiseaseRow({ disease, isKh }: { disease: Disease; isKh: boolean }) {
             ) : null}
           </div>
           <p
-            className={`text-xs sm:text-[13px] text-slate-700 mt-1 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
+            className={`text-xs sm:text-[13px] text-slate-700 mt-1.5 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}
           >
             {isKh ? disease.bodyKh : disease.bodyEn}
           </p>

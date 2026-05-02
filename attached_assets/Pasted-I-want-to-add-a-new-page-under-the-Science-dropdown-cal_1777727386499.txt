@@ -1,0 +1,18 @@
+I want to add a new page under the 'Science' dropdown called 'Unearthing the Past: Archaeology & Paleontology (ការជីកកកាយអតីតកាល៖ បុរាណវិទ្យា និង ប៉ាលេអុងតូឡូស៊ី)'.
+Please implement this using our established educational aesthetic (earthy browns and stone grays, clean typography) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array used for the main search bar and the 'Topic of the Day' feature.
+Add a new entry for this page so it is fully searchable and automatically included in the daily topic rotation. Ensure the title and keywords in the index are bilingual.
+2. Section 1: The Great Difference (ភាពខុសគ្នាដ៏ធំ)
+Create a side-by-side comparison explaining the core difference between the two sciences:
+Archaeology (បុរាណវិទ្យា): Studies human history. If it involves people, buildings, tools, or pottery, it is archaeology.
+Paleontology (ប៉ាលេអុងតូឡូស៊ី): Studies ancient life before humans existed. If it involves dinosaurs, ancient plants, or fossils, it is paleontology.
+3. Section 2: Archaeology - The Story of Us (រឿងរ៉ាវរបស់យើង)
+Explain what archaeologists look for: Artifacts (objects made by humans).
+The Local Connection: Add a specific highlight box about the Angkor Empire (អាណាចក្រអង្គរ). Explain that archaeologists don't just use shovels; today they use advanced technology like LIDAR (lasers from helicopters) to map ancient cities hidden beneath the jungle canopy.
+4. Section 3: Paleontology - The Story of Earth (រឿងរ៉ាវរបស់ផែនដី)
+Explain what paleontologists look for: Fossils (the remains or impressions of prehistoric plants or animals embedded in rock).
+Explain the concept of 'Deep Time'—that the Earth is billions of years old, and humans have only been here for a tiny fraction of the last chapter.
+5. Formatting & UX:
+Ensure all main headings and core concepts are strictly bilingual (English/Khmer).
+Use distinct visual styles for the two sections (e.g., warm terra-cotta colors for Archaeology, cool slate/fossil grays for Paleontology) to visually reinforce that they are different fields.

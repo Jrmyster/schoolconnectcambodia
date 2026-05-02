@@ -1,0 +1,52 @@
+import { Pickaxe } from "lucide-react";
+import type { SearchEntry } from "@/data/searchTypes";
+
+export const searchMeta: SearchEntry = {
+  id: "science-archaeology-paleontology",
+  type: "page",
+  href: "/science/archaeology-paleontology",
+  icon: Pickaxe,
+  titleEn: "Unearthing the Past — Archaeology & Paleontology",
+  titleKh: "ការជីកកកាយអតីតកាល — បុរាណវិទ្យា និង ប៉ាលេអុងតូឡូស៊ី",
+  categoryEn: "Science",
+  categoryKh: "វិទ្យាសាស្ត្រ",
+  descEn:
+    "Two sister sciences digging into the past. Archaeology studies humans — Angkor, artifacts, LIDAR mapping under the jungle. Paleontology studies pre-human life — dinosaurs, fossils, and the deep time of Earth.",
+  descKh:
+    "វិទ្យាសាស្ត្រ​បងប្អូន​ពីរ​ដែល​ជីក​ចូល​ទៅ​ក្នុង​អតីតកាល។ បុរាណវិទ្យា​សិក្សា​មនុស្ស — អង្គរ បុរាណវត្ថុ និង​ការ​ស្ទង់​ដោយ LIDAR ពី​ក្រោម​ព្រៃ។ ប៉ាលេអុងតូឡូស៊ី​សិក្សា​ជីវិត​មុន​មនុស្ស — ឌីណូស័រ ហ្វូស៊ីល និង​ពេលវេលា​ជ្រៅ​នៃ​ផែនដី។",
+  keywordsEn: [
+    "archaeology",
+    "paleontology",
+    "fossils",
+    "dinosaurs",
+    "ancient",
+    "history",
+    "prehistoric",
+    "artifacts",
+    "angkor",
+    "angkor wat",
+    "lidar",
+    "excavation",
+    "deep time",
+    "geologic time",
+    "earth history",
+    "human history",
+    "stone age",
+    "bones",
+    "pottery",
+    "dig site",
+  ],
+  keywordsKh: [
+    "បុរាណវិទ្យា",
+    "ប៉ាលេអុងតូឡូស៊ី",
+    "ហ្វូស៊ីល",
+    "ឌីណូស័រ",
+    "អង្គរ",
+    "អាណាចក្រអង្គរ",
+    "បុរាណវត្ថុ",
+    "ប្រវត្តិសាស្ត្រ",
+    "ផែនដីបុរាណ",
+    "ការជីកកកាយ",
+    "ពេលវេលាជ្រៅ",
+  ],
+};

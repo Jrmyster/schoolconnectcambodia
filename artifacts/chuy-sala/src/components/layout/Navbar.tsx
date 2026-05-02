@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -527,6 +527,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: PawPrint,
         descEn: "Meet the animal doctors who perform surgery, deliver newborns, and stop zoonotic diseases like Rabies and Bird Flu, walk Cambodia's high-school → university → DVM road, and tour the patient ward — cattle, pigs, poultry, dogs and cats — with red Zoonotic warnings on every disease that can jump to humans.",
         descKh: "ស្គាល់​ពេទ្យ​សត្វ​ដែល​ធ្វើ​វះកាត់ ជួយ​សម្រាល​កូន​សត្វ និង​ឈប់​ជំងឺ​ហ្សូណូទិក​ដូច​ជា ឆ្កែឆ្កួត និង​ផ្តាសាយ​បក្សី ដើរ​ផ្លូវ​វិទ្យាល័យ → សាកលវិទ្យាល័យ → DVM របស់​កម្ពុជា ហើយ​ដើរ​ទស្សនា​បន្ទប់​អ្នក​ជំងឺ — គោ ក្របី ជ្រូក មាន់ ឆ្កែ និង​ឆ្មា — ជាមួយ​នឹង​ការ​ព្រមាន​ពណ៌​ក្រហម​លើ​គ្រប់​ជំងឺ​ដែល​អាច​លោត​មក​មនុស្ស។",
+      },
+      {
+        href: "/science/archaeology-paleontology",
+        labelEn: "Unearthing the Past: Archaeology & Paleontology",
+        labelKh: "ការជីកកកាយអតីតកាល៖ បុរាណវិទ្យា និង ប៉ាលេអុងតូឡូស៊ី",
+        icon: Pickaxe,
+        descEn: "Two sister sciences that both dig into dirt — but one studies humans (Angkor, artifacts, LIDAR mapping under jungle canopy) and one studies pre-human life (dinosaurs, fossils, deep time). Side-by-side comparison, an Angkor Empire highlight, and a 24-hour Cosmic Calendar where humans appear in the last 77 seconds.",
+        descKh: "វិទ្យាសាស្ត្រ​បងប្អូន​ពីរ​ដែល​ទាំង​ពីរ​ជីក​ដី — តែ​មួយ​សិក្សា​មនុស្ស (អង្គរ បុរាណវត្ថុ ការ​ស្ទង់ LIDAR ពី​ក្រោម​ព្រៃ) ហើយ​មួយ​ទៀត​សិក្សា​ជីវិត​មុន​មនុស្ស (ឌីណូស័រ ហ្វូស៊ីល ពេលវេលា​ជ្រៅ)។ ការ​ប្រៀបធៀប​ចំហៀង​នឹង​ចំហៀង ការ​រំលេច​អាណាចក្រ​អង្គរ និង​ប្រតិទិន​ចក្រវាល ២៤ ម៉ោង​ដែល​មនុស្ស​លេច​ឡើង​ត្រឹម ៧៧ វិនាទី​ចុង​ក្រោយ។",
       },
       {
         href: "/mathematics",

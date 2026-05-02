@@ -54,6 +54,7 @@ const HeisenbergPage            = lazy(() => import("@/pages/HeisenbergPage"));
 const LanguageRealityPage       = lazy(() => import("@/pages/LanguageRealityPage"));
 const DentistryPage             = lazy(() => import("@/pages/DentistryPage"));
 const VeterinaryMedicinePage    = lazy(() => import("@/pages/VeterinaryMedicinePage"));
+const ArchaeologyPaleontologyPage = lazy(() => import("@/pages/ArchaeologyPaleontologyPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
 const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage"));
 const AfricaGeographyPage       = lazy(() => import("@/pages/AfricaGeographyPage").then(m => ({ default: m.AfricaGeographyPage })));
@@ -318,6 +319,7 @@ function Router() {
             <Route path="/philosophy/language" component={LanguageRealityPage} />
             <Route path="/science/dentistry" component={DentistryPage} />
             <Route path="/science/veterinary" component={VeterinaryMedicinePage} />
+            <Route path="/science/archaeology-paleontology" component={ArchaeologyPaleontologyPage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
             <Route path="/study-center/europe" component={EuropeHistoryPage} />
             <Route path="/study-center/africa" component={AfricaGeographyPage} />
