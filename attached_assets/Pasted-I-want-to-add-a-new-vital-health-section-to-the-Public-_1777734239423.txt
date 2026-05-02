@@ -1,0 +1,23 @@
+I want to add a new vital health section to the 'Public Health : The Web of Well-Being' page called 'Dermatology: Protecting Our Largest Organ (រោគសើស្បែក៖ ការការពារសរីរាង្គដ៏ធំបំផុតរបស់យើង)'.
+Please implement this using a clean, clinical, and sunny aesthetic (medical blues, warm skin tones, and bright sun yellows) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this dermatology section so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'skin', 'sunscreen', 'cancer', 'sunburn', and their Khmer equivalents.
+2. Section 1: The Invisible Fire - UV Rays (ភ្លើងដែលមើលមិនឃើញ - កាំរស្មី UV)
+Explain the science of the sun. The sun sends down two main types of dangerous invisible light: UVA (ages the skin) and UVB (burns the skin) .
+Correct the myth about tanning: Explain that a 'tan' (ការប្រែពណ៌សម្បុរស្បែក) is not a sign of health. It is actually the skin's defense mechanism. The skin produces extra dark pigment (Melanin / មេឡានីន) to try and stop UV radiation from damaging the DNA inside your skin cells.
+Explain that a Sunburn (ការរលាកស្បែកដោយសារកម្តៅថ្ងៃ) occurs when the UV radiation is so intense that the skin cells actually die and the body sends blood to the area to heal it (causing redness and pain).
+3. Section 2: The Daily Shield - Sunscreen (ខែលការពារប្រចាំថ្ងៃ - ឡេការពារកម្តៅថ្ងៃ)
+Explain what SPF (Sun Protection Factor) means.
+Emphasize that sunscreen isn't just for the beach; it should be worn every day, even when it is cloudy, because UV rays pass right through clouds.
+4. Section 3: The Warning Signs - Skin Cancer (សញ្ញាព្រមាន - ជំងឺមហារីកស្បែក)
+Explain that repeated damage to skin DNA can cause cells to multiply out of control, creating skin cancer (Melanoma).
+Create a highly visual, easy-to-read guide for the 'ABCDEs of Skin Cancer':
+A - Asymmetry (ភាពមិនស៊ីមេទ្រី): One half of a mole does not match the other.
+B - Border (គែម): The edges are irregular, ragged, or blurred.
+C - Color (ពណ៌): The color is not the same all over (shades of brown, black, red, or blue).
+D - Diameter (អង្កត់ផ្ចិត): The spot is larger than 6 millimeters (about the size of a pencil eraser).
+E - Evolving (ការវិវឌ្ឍ): The mole is changing in size, shape, or color over time.
+5. Formatting & UX:
+Ensure all main headings, medical terms, and the ABCDE guide are strictly bilingual (English/Khmer).
+Use clear icons (a sun with a UV warning, a shield, a magnifying glass over a skin spot) to make the text scannable and accessible.
+

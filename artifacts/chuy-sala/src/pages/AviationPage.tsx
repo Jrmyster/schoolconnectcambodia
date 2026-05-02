@@ -19,6 +19,14 @@ import {
   LifeBuoy,
   Anchor,
   Waves,
+  Drone,
+  BatteryCharging,
+  Cpu,
+  Sprout,
+  Flame,
+  Zap,
+  Camera,
+  RadioTower,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -152,6 +160,20 @@ export default function AviationPage() {
         isKh={isKh}
       >
         <FactsRow isKh={isKh} />
+      </Section>
+
+      {/* ── Tool 6: The Future of Flight — Drones & Autonomy ─────────── */}
+      <Section
+        id="future-of-flight"
+        eyebrowEn="What's Next"
+        eyebrowKh="អ្វីដែលបន្ទាប់"
+        titleEn="The Future of Flight: Drones & Autonomy"
+        titleKh="អនាគតនៃការហោះហើរ៖ ដ្រូន និង ស្វ័យប្រវត្តិកម្ម"
+        descEn="The next chapter of aviation is being written right now — with electric batteries replacing jet fuel, AI starting to fly the planes, and small unmanned aircraft already saving lives in places trucks and helicopters cannot reach."
+        descKh="ជំពូកបន្ទាប់នៃអាកាសចរណ៍កំពុងត្រូវបានសរសេរនៅពេលនេះ — ជាមួយនឹងថ្មអគ្គិសនីជំនួសឥន្ធនៈយន្តហោះ បញ្ញាសិប្បនិម្មិត (AI) ចាប់ផ្ដើមបើកបរយន្តហោះ និងយន្តហោះតូចគ្មានមនុស្សបើកដែលកំពុងជួយសង្គ្រោះជីវិតមនុស្សនៅកន្លែងដែលឡានធំ និងឧទ្ធម្ភាគចក្រមិនអាចទៅដល់។"
+        isKh={isKh}
+      >
+        <FutureOfFlight isKh={isKh} />
       </Section>
 
       {/* ── Closing ──────────────────────────────────────────────────── */}
@@ -1416,6 +1438,451 @@ function Helicopters({ isKh }: { isKh: boolean }) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+//  Future of Flight — Drones & Autonomy
+//  អនាគតនៃការហោះហើរ៖ ដ្រូន និង ស្វ័យប្រវត្តិកម្ម
+//
+//  Three sub-modules in a futuristic dark "command-deck" panel:
+//    1. Electric Skies — battery + ultra-light materials
+//    2. AI Pilots & Autonomous Aircraft — AI co-pilot
+//    3. The Era of UAVs / Drones — UAV definition + 3 social impact cards
+//
+//  Aesthetic: sleek silvers (#cbd5e1, #94a3b8), glowing neon blues
+//  (#22d3ee, #38bdf8), thin grid lines, dark slate-950/900 background.
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Quad-rotor drone silhouette with subtly pulsing neon-blue rotor discs
+const DroneSvg = ({ className }: { className?: string }) => {
+  const reduced = usePrefersReducedMotion();
+  return (
+    <svg viewBox="0 0 280 200" className={className} aria-hidden>
+      {/* Faint grid backdrop */}
+      <defs>
+        <pattern id="drone-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" strokeWidth="0.5" />
+        </pattern>
+        <radialGradient id="drone-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="280" height="200" fill="url(#drone-grid)" />
+
+      {/* Diagonal arms */}
+      <line x1="140" y1="100" x2="60" y2="50"  stroke="#475569" strokeWidth="6" strokeLinecap="round" />
+      <line x1="140" y1="100" x2="220" y2="50" stroke="#475569" strokeWidth="6" strokeLinecap="round" />
+      <line x1="140" y1="100" x2="60" y2="150" stroke="#475569" strokeWidth="6" strokeLinecap="round" />
+      <line x1="140" y1="100" x2="220" y2="150" stroke="#475569" strokeWidth="6" strokeLinecap="round" />
+
+      {/* Central body */}
+      <rect x="116" y="78" width="48" height="44" rx="8" fill="#0f172a" stroke="#22d3ee" strokeWidth="1.2" />
+      <rect x="124" y="86" width="32" height="20" rx="2" fill="#1e293b" />
+      {/* Camera lens (front, glowing) */}
+      <circle cx="140" cy="120" r="5" fill="#0f172a" stroke="#22d3ee" strokeWidth="1.2" />
+      <circle cx="140" cy="120" r="2" fill="#22d3ee">
+        {!reduced && (
+          <animate attributeName="opacity" values="1;0.35;1" dur="1.6s" repeatCount="indefinite" />
+        )}
+      </circle>
+
+      {/* Rotor discs + spinning blades */}
+      {[
+        { cx: 60,  cy: 50  },
+        { cx: 220, cy: 50  },
+        { cx: 60,  cy: 150 },
+        { cx: 220, cy: 150 },
+      ].map((p, i) => (
+        <g key={i} transform={`translate(${p.cx} ${p.cy})`}>
+          <circle r="22" fill="url(#drone-glow)" />
+          <circle r="14" fill="none" stroke="#22d3ee" strokeWidth="1" strokeDasharray="2 3" opacity="0.7" />
+          <circle r="3" fill="#0f172a" stroke="#22d3ee" strokeWidth="0.8" />
+          <g>
+            <line x1="-14" y1="0" x2="14" y2="0" stroke="#94a3b8" strokeWidth="1.4" strokeLinecap="round" opacity="0.85" />
+            <line x1="0" y1="-14" x2="0" y2="14" stroke="#94a3b8" strokeWidth="1.4" strokeLinecap="round" opacity="0.55" />
+            {!reduced && (
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 0 0"
+                to={i % 2 === 0 ? "360 0 0" : "-360 0 0"}
+                dur="0.32s"
+                repeatCount="indefinite"
+              />
+            )}
+          </g>
+        </g>
+      ))}
+
+      {/* Status LEDs */}
+      <circle cx="124" cy="82" r="1.6" fill="#22d3ee">
+        {!reduced && <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite" />}
+      </circle>
+      <circle cx="156" cy="82" r="1.6" fill="#f43f5e">
+        {!reduced && <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" begin="0.6s" repeatCount="indefinite" />}
+      </circle>
+    </svg>
+  );
+};
+
+function FutureOfFlight({ isKh }: { isKh: boolean }) {
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden border border-cyan-400/20 shadow-xl"
+      data-testid="future-of-flight"
+      style={{
+        background:
+          "linear-gradient(135deg, #020617 0%, #0f172a 45%, #0b1222 100%)",
+      }}
+    >
+      {/* Faint cyan grid overlay across the whole panel */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{
+          backgroundImage:
+            "linear-gradient(#22d3ee0d 1px, transparent 1px), linear-gradient(90deg, #22d3ee0d 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+      {/* Glow accents */}
+      <div
+        aria-hidden
+        className="absolute -top-16 -right-16 w-72 h-72 rounded-full blur-3xl opacity-40"
+        style={{ background: "radial-gradient(circle, #22d3ee 0%, transparent 70%)" }}
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-24 -left-12 w-80 h-80 rounded-full blur-3xl opacity-30"
+        style={{ background: "radial-gradient(circle, #38bdf8 0%, transparent 70%)" }}
+      />
+
+      <div className="relative p-5 sm:p-6 space-y-6">
+        {/* Hud-style header chip */}
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-400/10 border border-cyan-400/40 text-cyan-300 text-[11px] font-mono tracking-widest uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 future-pulse" />
+            {isKh ? "ស្ថានភាព · ការអនុវត្តពិតប្រាកដ" : "STATUS · LIVE DEPLOYMENT"}
+          </span>
+          <span className="hidden sm:inline-block flex-1 h-px bg-gradient-to-r from-cyan-400/40 to-transparent" />
+        </div>
+
+        {/* ── Sub-section 1: Electric Skies ─────────────────────────── */}
+        <article
+          data-testid="future-electric-skies"
+          className="grid md:grid-cols-[180px_1fr] gap-5 rounded-xl border border-cyan-400/20 bg-slate-900/60 backdrop-blur-sm p-5"
+        >
+          {/* Visual: animated charging battery */}
+          <div className="relative grid place-items-center">
+            <div className="relative w-32 h-20 rounded-lg border-2 border-cyan-400/70 bg-slate-950 grid place-items-center overflow-hidden shadow-[0_0_24px_-4px_rgba(34,211,238,0.6)]">
+              {/* Battery terminal */}
+              <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-2 h-7 rounded-r-sm bg-cyan-400/70" />
+              {/* Charging fill */}
+              <div className="absolute inset-1 flex items-end overflow-hidden rounded-md">
+                <div className="w-full bg-gradient-to-t from-cyan-400 to-sky-300 future-charge-fill" />
+              </div>
+              {/* Lightning glyph */}
+              <Zap className="relative w-9 h-9 text-slate-950" strokeWidth={3} fill="currentColor" />
+            </div>
+            <div className="mt-2 text-[10px] font-mono tracking-widest uppercase text-cyan-300/80">
+              {isKh ? "ថ្ម · បញ្ចូលថាមពល" : "BATTERY · CHARGING"}
+            </div>
+          </div>
+
+          {/* Body */}
+          <div>
+            <div
+              className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-cyan-300 mb-1 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              <BatteryCharging className="w-3.5 h-3.5" />
+              {isKh ? "ផ្នែកទី ១ · ថាមពល" : "Section 1 · Power"}
+            </div>
+            <h3
+              className={`font-display font-bold text-xl sm:text-2xl text-white leading-tight ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "ផ្ទៃមេឃអគ្គិសនី" : "Electric Skies"}
+            </h3>
+            <div className="mt-3 space-y-3 text-slate-300 text-sm sm:text-[15px]">
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh ? (
+                  <>
+                    ដូចគ្នានឹងឡានដែរ យន្តហោះកំពុងផ្លាស់ប្ដូរពីការដុតឥន្ធនៈហ្វូស៊ីលទៅរក{" "}
+                    <span className="font-bold text-cyan-300">ថ្មអគ្គិសនីដ៏ធំ</span> ដើម្បីបញ្ឈប់ការប្រែប្រួលអាកាសធាតុ។
+                  </>
+                ) : (
+                  <>
+                    Just like cars, airplanes are moving away from burning fossil fuels toward{" "}
+                    <span className="font-bold text-cyan-300">massive electric batteries</span> to stop climate change.
+                  </>
+                )}
+              </p>
+              <div className="rounded-lg border border-amber-400/30 bg-amber-400/5 px-4 py-3">
+                <div
+                  className={`text-[10px] font-bold tracking-widest uppercase text-amber-300 mb-1 ${
+                    isKh ? "font-khmer normal-case tracking-normal" : ""
+                  }`}
+                >
+                  {isKh ? "បញ្ហាវិស្វកម្ម" : "Engineering challenge"}
+                </div>
+                <p className={`text-amber-100/90 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh
+                    ? "ថ្មគឺធ្ងន់ខ្លាំងបំផុតបើប្រៀបធៀបនឹងឥន្ធនៈយន្តហោះរាវ។ វិស្វករត្រូវតែបង្កើតវត្ថុធាតុដែលមានទម្ងន់ស្រាលបំផុត ដើម្បីធ្វើឱ្យយន្តហោះអគ្គិសនីធំៗក្លាយជាការពិត។"
+                    : "Batteries are incredibly heavy compared to liquid jet fuel. Engineers must invent new, ultra-light materials to make large electric planes a reality."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        {/* ── Sub-section 2: AI Pilots & Autonomous Aircraft ──────── */}
+        <article
+          data-testid="future-ai-pilots"
+          className="grid md:grid-cols-[1fr_180px] gap-5 rounded-xl border border-sky-400/20 bg-slate-900/60 backdrop-blur-sm p-5"
+        >
+          {/* Body */}
+          <div className="md:order-1 order-2">
+            <div
+              className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-sky-300 mb-1 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              {isKh ? "ផ្នែកទី ២ · ស្វ័យប្រវត្តិកម្ម" : "Section 2 · Autonomy"}
+            </div>
+            <h3
+              className={`font-display font-bold text-xl sm:text-2xl text-white leading-tight ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "ពីឡុត AI និង យន្តហោះស្វ័យប្រវត្តិ" : "AI Pilots & Autonomous Aircraft"}
+            </h3>
+            <p
+              className={`mt-3 text-slate-300 text-sm sm:text-[15px] ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh ? (
+                <>
+                  អនាគតនៃការហោះហើរ ប្រហែលជាមិនរួមបញ្ចូលមនុស្សពីឡុតក្នុងបន្ទប់បើកបរទេ។{" "}
+                  <span className="font-bold text-sky-300">បញ្ញាសិប្បនិម្មិត (AI)</span> អាចដំណើរការទិន្នន័យអាកាសធាតុ ល្បឿនខ្យល់ និងសិន្សុរបស់ម៉ាស៊ីន លឿនជាងខួរក្បាលមនុស្សរាប់ពាន់ដង — ធ្វើឱ្យការហោះហើរកាន់តែសុវត្ថិភាព និងមានប្រសិទ្ធភាព។
+                </>
+              ) : (
+                <>
+                  The future of flying might not include human pilots in the cockpit. Artificial Intelligence{" "}
+                  <span className="font-bold text-sky-300">(AI · បញ្ញាសិប្បនិម្មិត)</span> can process weather data, wind speed, and mechanical sensors{" "}
+                  <span className="font-bold text-sky-300">thousands of times faster</span> than a human brain — making flights safer and more efficient.
+                </>
+              )}
+            </p>
+
+            {/* Data-feed chips */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950 border border-cyan-400/30 text-cyan-300 text-[11px] font-mono tracking-wide">
+                <Wind className="w-3 h-3" /> WIND · {isKh ? "ខ្យល់" : "wind"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950 border border-cyan-400/30 text-cyan-300 text-[11px] font-mono tracking-wide">
+                <Gauge className="w-3 h-3" /> SENSORS · {isKh ? "សិន្ស័រ" : "sensors"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950 border border-cyan-400/30 text-cyan-300 text-[11px] font-mono tracking-wide">
+                <RadioTower className="w-3 h-3" /> ATC · {isKh ? "ប៉ម" : "tower"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950 border border-cyan-400/30 text-cyan-300 text-[11px] font-mono tracking-wide">
+                <Camera className="w-3 h-3" /> VISION · {isKh ? "ភ្នែក" : "vision"}
+              </span>
+            </div>
+          </div>
+
+          {/* Visual: AI brain glyph */}
+          <div className="md:order-2 order-1 grid place-items-center">
+            <div className="relative w-32 h-32 rounded-full border border-sky-400/40 grid place-items-center bg-slate-950 shadow-[0_0_28px_-6px_rgba(56,189,248,0.6)]">
+              {/* Orbiting dotted ring */}
+              <div
+                className="absolute inset-2 rounded-full border border-cyan-400/30"
+                style={{ borderStyle: "dashed" }}
+              />
+              <Cpu className="w-14 h-14 text-cyan-300 future-pulse" strokeWidth={1.5} />
+              {/* Tiny corner ticks */}
+              <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1.5 w-2 h-px bg-cyan-300" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1.5 w-2 h-px bg-cyan-300" />
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1.5 w-px h-2 bg-cyan-300" />
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1.5 w-px h-2 bg-cyan-300" />
+            </div>
+            <div className="mt-2 text-[10px] font-mono tracking-widest uppercase text-sky-300/80">
+              {isKh ? "AI · សកម្ម" : "AI · ACTIVE"}
+            </div>
+          </div>
+        </article>
+
+        {/* ── Sub-section 3: The Era of UAVs / Drones ─────────────── */}
+        <article
+          data-testid="future-uavs"
+          className="rounded-xl border border-cyan-400/30 bg-slate-900/60 backdrop-blur-sm overflow-hidden"
+        >
+          {/* Header band with drone visual */}
+          <div className="grid md:grid-cols-[1fr_240px] gap-4 px-5 pt-5 pb-2">
+            <div>
+              <div
+                className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-cyan-300 mb-1 ${
+                  isKh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <Drone className="w-3.5 h-3.5" />
+                {isKh ? "ផ្នែកទី ៣ · ឧបករណ៍" : "Section 3 · The Aircraft"}
+              </div>
+              <h3
+                className={`font-display font-bold text-xl sm:text-2xl text-white leading-tight ${
+                  isKh ? "font-khmer leading-snug" : ""
+                }`}
+              >
+                {isKh ? "យុគសម័យនៃដ្រូន" : "The Era of UAVs / Drones"}
+              </h3>
+              <div className="mt-3 rounded-lg border border-cyan-400/30 bg-cyan-400/5 px-4 py-3">
+                <div className="text-[10px] font-mono tracking-widest uppercase text-cyan-300 mb-1">
+                  {isKh ? "និយមន័យ · DEFINITION" : "DEFINITION · និយមន័យ"}
+                </div>
+                <p
+                  className={`text-cyan-100 text-sm ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh ? (
+                    <>
+                      <span className="font-bold text-white">UAV</span> · Unmanned Aerial Vehicle ·{" "}
+                      <span className="font-bold text-white">យានអវកាសគ្មានមនុស្សបើក</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-bold text-white">UAV</span> = Unmanned Aerial Vehicle{" "}
+                      <span className="text-cyan-300/80">(យានអវកាសគ្មានមនុស្សបើក)</span> — a flying machine with no pilot on board.
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="grid place-items-center">
+              <DroneSvg className="w-full max-w-[240px] h-auto" />
+            </div>
+          </div>
+
+          {/* Social Impact card grid */}
+          <div className="px-5 pb-5">
+            <div
+              className={`text-[11px] font-bold tracking-widest uppercase text-slate-400 mb-3 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              {isKh ? "ផលប៉ះពាល់សង្គម · កំពុងផ្លាស់ប្ដូរពិភពលោកនៅពេលនេះ" : "SOCIAL IMPACT · CHANGING THE WORLD RIGHT NOW"}
+            </div>
+            <div className="grid md:grid-cols-3 gap-3">
+              <ImpactCard
+                isKh={isKh}
+                testId="impact-medical"
+                Icon={Cross}
+                accent="rose"
+                tagEn="MEDEVAC"
+                tagKh="សង្គ្រោះ"
+                titleEn="Medical Lifelines"
+                titleKh="សេវាសង្គ្រោះវេជ្ជសាស្ត្រ"
+                bodyEn="In remote villages where roads flood during the rainy season, autonomous drones drop life-saving vaccines, anti-venom, and blood supplies from the sky in minutes instead of hours."
+                bodyKh="នៅភូមិដាច់ស្រយាលដែលផ្លូវលិចក្នុងរដូវវស្សា ដ្រូនស្វ័យប្រវត្តិបោះវ៉ាក់សាំងជួយជីវិត ថ្នាំការពារពិសពស់ និងឈាមពីលើមេឃក្នុងរយៈពេលប៉ុន្មាននាទី ជំនួសឱ្យប៉ុន្មានម៉ោង។"
+              />
+              <ImpactCard
+                isKh={isKh}
+                testId="impact-farming"
+                Icon={Sprout}
+                accent="emerald"
+                tagEn="AGRI"
+                tagKh="កសិកម្ម"
+                titleEn="Smart Farming"
+                titleKh="កសិកម្មឆ្លាតវៃ"
+                bodyEn="Drones equipped with infrared cameras fly over rice fields to tell farmers exactly which crops need more water, and safely spray fertilizers only where needed."
+                bodyKh="ដ្រូនដែលមានកាមេរ៉ាអ៊ីនហ្វ្រារ៉េដ ហោះលើចំការស្រែស្រូវ ដើម្បីប្រាប់កសិករថា ដំណាំណាមួយត្រូវការទឹកបន្ថែម ហើយបាញ់ជីយ៉ាងសុវត្ថិភាពតែនៅកន្លែងដែលត្រូវការ។"
+              />
+              <ImpactCard
+                isKh={isKh}
+                testId="impact-rescue"
+                Icon={Flame}
+                accent="amber"
+                tagEn="RESCUE"
+                tagKh="ការសង្គ្រោះ"
+                titleEn="Disaster Rescue"
+                titleKh="ការសង្គ្រោះគ្រោះមហន្តរាយ"
+                bodyEn="During floods or fires, drones use thermal vision to find trapped survivors at night, guiding human rescue teams to their exact location."
+                bodyKh="ក្នុងគ្រាទឹកជំនន់ឬអគ្គិភ័យ ដ្រូនប្រើចក្ខុវិស័យកំដៅ ដើម្បីរកអ្នករស់រានដែលជាប់ឃុំនៅពេលយប់ ហើយណែនាំក្រុមសង្គ្រោះមនុស្សទៅកាន់ទីតាំងពិតប្រាកដ។"
+              />
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  );
+}
+
+function ImpactCard({
+  isKh,
+  testId,
+  Icon,
+  accent,
+  tagEn,
+  tagKh,
+  titleEn,
+  titleKh,
+  bodyEn,
+  bodyKh,
+}: {
+  isKh: boolean;
+  testId: string;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  accent: "rose" | "emerald" | "amber";
+  tagEn: string;
+  tagKh: string;
+  titleEn: string;
+  titleKh: string;
+  bodyEn: string;
+  bodyKh: string;
+}) {
+  const map = {
+    rose:    { ring: "border-rose-400/40",    glow: "shadow-[0_0_24px_-8px_rgba(244,63,94,0.7)]",   icon: "text-rose-300",    tag: "text-rose-200    bg-rose-500/10    border-rose-400/30",    accentLine: "from-rose-400/70" },
+    emerald: { ring: "border-emerald-400/40", glow: "shadow-[0_0_24px_-8px_rgba(16,185,129,0.7)]",  icon: "text-emerald-300", tag: "text-emerald-200 bg-emerald-500/10 border-emerald-400/30", accentLine: "from-emerald-400/70" },
+    amber:   { ring: "border-amber-400/40",   glow: "shadow-[0_0_24px_-8px_rgba(245,158,11,0.7)]",  icon: "text-amber-300",   tag: "text-amber-200   bg-amber-500/10   border-amber-400/30",   accentLine: "from-amber-400/70" },
+  } as const;
+  const a = map[accent];
+  return (
+    <div
+      data-testid={testId}
+      className={`relative rounded-lg border ${a.ring} ${a.glow} bg-slate-950/80 p-4 flex flex-col`}
+    >
+      {/* Top accent line */}
+      <span className={`absolute top-0 left-3 right-3 h-px bg-gradient-to-r ${a.accentLine} to-transparent`} />
+      <div className="flex items-center justify-between mb-2">
+        <div className={`w-10 h-10 rounded-md grid place-items-center bg-slate-900 border ${a.ring} ${a.icon}`}>
+          <Icon className="w-5 h-5" strokeWidth={2} />
+        </div>
+        <span className={`text-[10px] font-mono tracking-widest uppercase px-2 py-0.5 rounded border ${a.tag} ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? tagKh : tagEn}
+        </span>
+      </div>
+      <h4
+        className={`font-display font-bold text-base text-white mt-1 ${
+          isKh ? "font-khmer leading-snug" : "leading-tight"
+        }`}
+      >
+        {isKh ? titleKh : titleEn}
+      </h4>
+      <p
+        className={`mt-2 text-[13px] text-slate-300 ${
+          isKh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}
+      >
+        {isKh ? bodyKh : bodyEn}
+      </p>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 //  Scoped styles
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -1458,10 +1925,28 @@ function ScopedStyles() {
         border-radius: 4px;
       }
 
+      @keyframes future-pulse {
+        0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px rgba(34,211,238,0.8)); }
+        50%      { opacity: 0.55; filter: drop-shadow(0 0 10px rgba(34,211,238,1)); }
+      }
+      .future-pulse { animation: future-pulse 1.8s ease-in-out infinite; }
+
+      @keyframes future-charge-fill {
+        0%   { height: 18%; }
+        50%  { height: 92%; }
+        100% { height: 18%; }
+      }
+      .future-charge-fill {
+        animation: future-charge-fill 2.6s ease-in-out infinite;
+        height: 60%;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .cloud-drift,
         .plane-bob,
-        .aviation-lift-pulse {
+        .aviation-lift-pulse,
+        .future-pulse,
+        .future-charge-fill {
           animation: none !important;
         }
       }

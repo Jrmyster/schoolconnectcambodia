@@ -8,7 +8,7 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind,
+  Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -751,6 +751,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "មើលរូបធាតុត្រជាក់ផ្លាស់ប្ដូរក្នុងម៉ាស៊ីនត្រជាក់ មើលឧបករណ៍កំដៅភ្លឺក្រហម និងរកឃើញហេតុអ្វីការបញ្ចេញខ្យល់ធ្វើឲ្យបន្ទប់រៀនមានសុខភាពល្អ។",
     keywordsEn: ["hvac", "air conditioner", "ac", "aircon", "heating", "cooling", "ventilation", "refrigerator", "fridge", "fan", "temperature", "thermostat"],
     keywordsKh: ["HVAC", "ម៉ាស៊ីនត្រជាក់", "ការកំដៅ", "ការត្រជាក់", "ខ្យល់", "ទូទឹកកក", "សីតុណ្ហភាព"],
+  },
+  {
+    id: "aviation-future",
+    href: "/aviation#future-of-flight",
+    icon: Drone,
+    titleEn: "The Future of Flight: Drones & Autonomy",
+    titleKh: "អនាគតនៃការហោះហើរ៖ ដ្រូន និង ស្វ័យប្រវត្តិកម្ម",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "Where aviation is heading next: electric aircraft replacing jet fuel, AI co-pilots that out-think humans, and unmanned drones already delivering vaccines, watching rice fields, and finding survivors in disasters.",
+    descKh: "ទិសដៅបន្ទាប់នៃអាកាសចរណ៍៖ យន្តហោះអគ្គិសនីជំនួសឥន្ធនៈ AI ដែលគិតលឿនជាងមនុស្ស និងដ្រូនគ្មានមនុស្សបើកដែលកំពុងបញ្ជូនវ៉ាក់សាំង មើលស្រែស្រូវ និងស្វែងរកអ្នករស់រានពីគ្រោះមហន្តរាយ។",
+    keywordsEn: ["drone", "drones", "UAV", "unmanned aerial vehicle", "unmanned", "electric aircraft", "electric plane", "battery", "autonomous", "autonomy", "AI pilot", "artificial intelligence", "AI", "future of flight", "vaccine delivery", "smart farming", "precision agriculture", "disaster rescue", "thermal imaging", "infrared", "aviation", "futuristic"],
+    keywordsKh: ["ដ្រូន", "យានអវកាសគ្មានមនុស្សបើក", "UAV", "យន្តហោះអគ្គិសនី", "ថ្មអគ្គិសនី", "ស្វ័យប្រវត្តិកម្ម", "ស្វ័យប្រវត្តិ", "បញ្ញាសិប្បនិម្មិត", "AI", "ពីឡុត AI", "អនាគត", "វ៉ាក់សាំង", "កសិកម្មឆ្លាតវៃ", "ការសង្គ្រោះ", "គ្រោះមហន្តរាយ", "កាំរស្មីអ៊ីនហ្វ្រារ៉េដ"],
   },
   {
     id: "aviation-helicopters",
