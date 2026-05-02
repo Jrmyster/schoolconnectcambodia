@@ -3,6 +3,7 @@ import { Mail, GraduationCap, MapPin, Pencil } from "lucide-react";
 import { Need } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
+import { ConnectToHelp } from "@/components/ConnectToHelp";
 
 interface NeedCardProps {
   need: Need;
@@ -130,6 +131,16 @@ export function NeedCard({ need, onEdit }: NeedCardProps) {
             <Mail className="w-5 h-5 mr-2" />
             {t("Contact to Donate", "ទាក់ទងដើម្បីបរិច្ចាគ")}
           </Button>
+
+          {!isFullyFunded && (
+            <ConnectToHelp
+              schoolNameEn={need.school?.nameEn || ""}
+              schoolNameKh={need.school?.nameKh || ""}
+              needTitleEn={need.titleEn}
+              contactPhone={need.school?.contactPhone}
+              telegramUsername={null}
+            />
+          )}
         </div>
       </div>
     </div>
