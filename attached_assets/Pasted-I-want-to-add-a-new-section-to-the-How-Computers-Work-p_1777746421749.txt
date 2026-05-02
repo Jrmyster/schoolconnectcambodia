@@ -1,0 +1,16 @@
+I want to add a new section to the 'How Computers Work' page titled 'The Invisible Web: Cellular Networks 2G to 6G (បណ្តាញអរូបី៖ បណ្តាញទូរស័ព្ទ 2G ដល់ 6G)'.
+Please implement this using a tech-forward aesthetic (radio wave graphics, signal bars, and a progression from dull gray to futuristic neon blue) and execute the following:
+1. Update the Search & Discovery Index
+Locate the global searchIndex array and add this new section. Ensure keywords include 'network', 'cellular', 'radio waves', '2G', '3G', '4G', '5G', '6G', 'internet', and their Khmer equivalents.
+2. Section 1: How Cellular Data Works (តើទិន្នន័យទូរស័ព្ទដំណើរការយ៉ាងដូចម្តេច?)
+Explain the core concept: Your phone doesn't connect directly to the internet. It uses an antenna to convert digital data (0s and 1s) into invisible Radio Waves (រលកវិទ្យុ). These waves travel through the air to a local Cell Tower, which is connected to the global internet via underground fiber-optic cables.
+3. Section 2: The Generations of Speed (ជំនាន់នៃល្បឿន)
+Create a progression timeline or grid for the 'G' (Generation) networks:
+2G (1990s): The Voice & Text Era. It digitized signals, allowing for SMS text messaging and clearer phone calls. Data was incredibly slow.
+3G (2000s): The Mobile Web. This generation brought basic internet to phones, allowing people to check emails and load simple web pages on the go.
+4G LTE (2010s): The Video Era. Speeds became fast enough to stream high-quality video, make video calls, and launch the modern app economy (ride-sharing, food delivery).
+5G (2020s): The Internet of Things. Uses ultra-high-frequency waves to connect thousands of devices at once with almost zero delay (latency), enabling self-driving cars and remote surgery.
+6G (The Future): The Terahertz Frontier. Still in development, 6G will use even higher frequencies, potentially integrating AI directly into the network and making holographic communication a reality.
+4. Formatting & UX:
+Ensure all main headings, technical terms, and historical eras are strictly bilingual (English/Khmer).
+Use ascending cell signal bars (📶) as visual markers for each generation.
