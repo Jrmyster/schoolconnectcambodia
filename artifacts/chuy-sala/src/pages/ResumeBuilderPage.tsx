@@ -495,59 +495,100 @@ function Stepper({
   isKh: boolean;
   stepIndex: number;
 }) {
+  const current = STEPS[stepIndex] ?? STEPS[0];
+  const CurrentIcon = current.icon;
   return (
-    <ol
-      className="flex items-stretch gap-2 overflow-x-auto rounded-xl border bg-white p-2"
-      style={{ borderColor: BORDER }}
-      data-testid="resume-stepper"
-      aria-label={isKh ? "ជំហានបង្កើត" : "Builder steps"}
-    >
-      {STEPS.map((s, i) => {
-        const Icon = s.icon;
-        const active = s.id === currentStep;
-        const completed = i < stepIndex;
-        return (
-          <li key={s.id} className="flex-1 min-w-[110px]">
-            <button
-              type="button"
-              data-testid={`step-${s.id}`}
-              onClick={() => setStep(s.id)}
-              className="flex w-full items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-xs transition"
-              style={{
-                borderColor: active ? NAVY : completed ? "#bfdbfe" : BORDER,
-                backgroundColor: active ? NAVY : completed ? "#eff6ff" : PAPER,
-                color: active ? "#fff" : completed ? NAVY : INK,
-              }}
+    <div className="space-y-2">
+      {/* Mobile-only "Step X of 4: Current Step Name" indicator.
+          Saves vertical space on phones while keeping context obvious. */}
+      <div
+        className="flex items-center justify-between gap-2 rounded-xl border bg-white px-3 py-2 sm:hidden"
+        style={{ borderColor: BORDER }}
+        data-testid="resume-stepper-mobile-indicator"
+        aria-live="polite"
+      >
+        <div className="flex items-center gap-2 min-w-0">
+          <span
+            className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-[11px] font-bold text-white"
+            style={{ backgroundColor: NAVY }}
+          >
+            {stepIndex + 1}
+          </span>
+          <div className="flex min-w-0 flex-col leading-tight">
+            <span
+              className="text-[10px] font-bold uppercase tracking-[0.14em]"
+              style={{ color: MUTED }}
             >
-              <span
-                className="grid h-6 w-6 place-items-center rounded-md border text-[10px] font-bold"
+              {isKh
+                ? `ជំហានទី ${stepIndex + 1} នៃ ${STEPS.length}`
+                : `Step ${stepIndex + 1} of ${STEPS.length}`}
+            </span>
+            <span className="flex items-center gap-1.5 text-sm font-bold break-words" style={{ color: INK }}>
+              <CurrentIcon size={13} />
+              <span className="break-words">{isKh ? current.labelKh : current.labelEn}</span>
+            </span>
+            <span className="text-[11px] font-medium break-words" style={{ color: SUBTLE }}>
+              {isKh ? current.labelEn : current.labelKh}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal stepper. On mobile: swipeable, snap-aligned, hidden scrollbar.
+          On sm+: keeps the original 4-column row look. */}
+      <ol
+        className="hide-scrollbar flex items-stretch gap-2 overflow-x-auto whitespace-nowrap rounded-xl border bg-white p-2 snap-x snap-mandatory"
+        style={{ borderColor: BORDER }}
+        data-testid="resume-stepper"
+        aria-label={isKh ? "ជំហានបង្កើត" : "Builder steps"}
+      >
+        {STEPS.map((s, i) => {
+          const Icon = s.icon;
+          const active = s.id === currentStep;
+          const completed = i < stepIndex;
+          return (
+            <li key={s.id} className="flex-1 min-w-[150px] sm:min-w-[110px] snap-start">
+              <button
+                type="button"
+                data-testid={`step-${s.id}`}
+                onClick={() => setStep(s.id)}
+                className="flex min-h-[44px] w-full items-center gap-2 rounded-lg border px-3 py-2 text-left text-xs transition"
                 style={{
-                  borderColor: active ? "rgba(255,255,255,0.4)" : completed ? NAVY : BORDER,
-                  backgroundColor: active ? "rgba(255,255,255,0.15)" : "#fff",
-                  color: active ? "#fff" : NAVY,
+                  borderColor: active ? NAVY : completed ? "#bfdbfe" : BORDER,
+                  backgroundColor: active ? NAVY : completed ? "#eff6ff" : PAPER,
+                  color: active ? "#fff" : completed ? NAVY : INK,
                 }}
               >
-                {i + 1}
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span className="flex items-center gap-1.5 font-semibold">
-                  <Icon size={12} />
-                  {isKh ? s.labelKh : s.labelEn}
-                </span>
                 <span
-                  className="text-[10px] font-medium"
+                  className="grid h-6 w-6 shrink-0 place-items-center rounded-md border text-[10px] font-bold"
                   style={{
-                    color: active ? "rgba(255,255,255,0.75)" : MUTED,
+                    borderColor: active ? "rgba(255,255,255,0.4)" : completed ? NAVY : BORDER,
+                    backgroundColor: active ? "rgba(255,255,255,0.15)" : "#fff",
+                    color: active ? "#fff" : NAVY,
                   }}
                 >
-                  {isKh ? s.labelEn : s.labelKh}
+                  {i + 1}
                 </span>
-              </span>
-            </button>
-          </li>
-        );
-      })}
-    </ol>
+                <span className="flex min-w-0 flex-col leading-tight">
+                  <span className="flex items-center gap-1.5 truncate font-semibold">
+                    <Icon size={12} />
+                    <span className="truncate">{isKh ? s.labelKh : s.labelEn}</span>
+                  </span>
+                  <span
+                    className="truncate text-[10px] font-medium"
+                    style={{
+                      color: active ? "rgba(255,255,255,0.75)" : MUTED,
+                    }}
+                  >
+                    {isKh ? s.labelEn : s.labelKh}
+                  </span>
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
   );
 }
 
@@ -564,26 +605,31 @@ function StepNav({
   const prev = idx > 0 ? STEPS[idx - 1] : null;
   const next = idx < STEPS.length - 1 ? STEPS[idx + 1] : null;
   return (
-    <div className="mt-6 flex items-center justify-between gap-3 border-t pt-4" style={{ borderColor: BORDER }}>
+    <div
+      className="mt-6 flex flex-col-reverse gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between"
+      style={{ borderColor: BORDER }}
+    >
       <button
         type="button"
         disabled={!prev}
         onClick={() => prev && setStep(prev.id)}
-        className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold disabled:opacity-40"
+        className="inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md border px-4 py-2 text-sm font-semibold disabled:opacity-40 sm:w-auto sm:text-xs"
         style={{ borderColor: BORDER, color: SUBTLE, backgroundColor: PAPER }}
+        data-testid="btn-step-back"
       >
-        <ArrowLeft size={12} />
+        <ArrowLeft size={14} />
         {prev ? (isKh ? prev.labelKh : prev.labelEn) : isKh ? "មុន" : "Previous"}
       </button>
       <button
         type="button"
         disabled={!next}
         onClick={() => next && setStep(next.id)}
-        className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40"
+        className="inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm font-bold text-white disabled:opacity-40 sm:w-auto sm:text-xs"
         style={{ backgroundColor: next ? NAVY : MUTED }}
+        data-testid="btn-step-next"
       >
         {next ? (isKh ? next.labelKh : next.labelEn) : isKh ? "បញ្ចប់" : "Done"}
-        <ArrowRight size={12} />
+        <ArrowRight size={14} />
       </button>
     </div>
   );
@@ -613,7 +659,7 @@ function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
     <input
       {...props}
       className={
-        "w-full rounded-md border bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 " +
+        "block w-full min-h-[44px] rounded-md border bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 " +
         (props.className ?? "")
       }
       style={{ borderColor: BORDER, color: INK, ...(props.style ?? {}) }}
@@ -626,7 +672,7 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
     <textarea
       {...props}
       className={
-        "w-full rounded-md border bg-white px-3 py-2 text-sm leading-relaxed outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 " +
+        "block w-full min-h-[44px] rounded-md border bg-white px-3 py-2 text-sm leading-relaxed outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 " +
         (props.className ?? "")
       }
       style={{ borderColor: BORDER, color: INK, ...(props.style ?? {}) }}
@@ -865,7 +911,7 @@ function EducationSection({
               <button
                 type="button"
                 onClick={() => removeEdu(edu.id)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-md px-2 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700"
                 aria-label={isKh ? "លុប" : "Remove"}
               >
                 <Trash2 size={12} />
@@ -929,11 +975,11 @@ function EducationSection({
           onClick={() =>
             setResume((r) => ({ ...r, education: [...r.education, emptyEducation()] }))
           }
-          className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold"
+          className="inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md border px-4 py-2 text-sm font-semibold sm:w-auto sm:text-xs"
           style={{ borderColor: NAVY, color: NAVY, backgroundColor: PAPER }}
           data-testid="add-education"
         >
-          <Plus size={12} />
+          <Plus size={14} />
           {isKh ? "បន្ថែមការអប់រំ" : "Add another education entry"}
         </button>
       </div>
@@ -1032,13 +1078,13 @@ function SkillsSection({
         className="mt-4 rounded-lg border p-4"
         style={{ borderColor: "#bfdbfe", backgroundColor: "#f5f9ff" }}
       >
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: NAVY }}>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em]" style={{ color: NAVY }}>
               <Bot size={13} />
               {isKh ? "ការតភ្ជាប់ជំនាញ" : "Skill-Sync"}
             </div>
-            <div className="mt-1 text-[13px]" style={{ color: SUBTLE }}>
+            <div className="mt-1 break-words text-[13px]" style={{ color: SUBTLE }}>
               {isKh
                 ? "នាំចូលលទ្ធផលសម្ភាសន៍ដែលអ្នកបានបញ្ចប់ ចូលជា 'ជំនាញបច្ចេកទេស' ដោយស្វ័យប្រវត្តិ។"
                 : "Pull in the mock interviews you've completed as Technical Skills badges, automatically."}
@@ -1047,11 +1093,11 @@ function SkillsSection({
           <button
             type="button"
             onClick={importInterviewScores}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-xs font-bold text-white"
+            className="inline-flex w-full min-h-[44px] shrink-0 items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm font-bold text-white sm:w-auto sm:text-xs"
             style={{ backgroundColor: NAVY }}
             data-testid="btn-skill-sync"
           >
-            <Sparkles size={12} />
+            <Sparkles size={14} />
             {isKh ? "នាំចូលពិន្ទុសម្ភាសន៍" : "Import Interview Simulator Scores"}
           </button>
         </div>
@@ -1118,11 +1164,12 @@ function SkillsSection({
               <button
                 type="button"
                 onClick={() => removeSkill(skill.id)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md border text-rose-600 hover:bg-rose-50"
+                className="inline-flex w-full min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 rounded-md border text-sm font-semibold text-rose-600 hover:bg-rose-50 sm:w-11 sm:gap-0 sm:text-xs"
                 style={{ borderColor: BORDER }}
-                aria-label={isKh ? "លុប" : "Remove skill"}
+                aria-label={isKh ? "លុបជំនាញ" : "Remove skill"}
               >
                 <Trash2 size={14} />
+                <span className="sm:hidden">{isKh ? "លុប" : "Remove"}</span>
               </button>
             </div>
           ))}
@@ -1130,10 +1177,11 @@ function SkillsSection({
         <button
           type="button"
           onClick={() => setResume((r) => ({ ...r, skills: [...r.skills, emptySkill()] }))}
-          className="mt-3 inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold"
+          className="mt-3 inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md border px-4 py-2 text-sm font-semibold sm:w-auto sm:text-xs"
           style={{ borderColor: NAVY, color: NAVY, backgroundColor: PAPER }}
+          data-testid="add-skill"
         >
-          <Plus size={12} />
+          <Plus size={14} />
           {isKh ? "បន្ថែមជំនាញ" : "Add another skill"}
         </button>
       </div>
@@ -1269,7 +1317,7 @@ function ExperienceSection({
               <button
                 type="button"
                 onClick={() => removeExp(exp.id)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-md px-2 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700"
               >
                 <Trash2 size={12} />
                 {isKh ? "លុប" : "Remove"}
@@ -1333,10 +1381,10 @@ function ExperienceSection({
               <button
                 type="button"
                 onClick={() => addBullet(exp.id)}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[11px] font-semibold"
+                className="mt-3 inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-sm font-semibold sm:w-auto sm:text-xs"
                 style={{ borderColor: BORDER, color: SUBTLE, backgroundColor: PAPER }}
               >
-                <Plus size={11} />
+                <Plus size={13} />
                 {isKh ? "បន្ថែមចំណុច" : "Add bullet"}
               </button>
             </div>
@@ -1348,11 +1396,11 @@ function ExperienceSection({
           onClick={() =>
             setResume((r) => ({ ...r, experience: [...r.experience, emptyExperience()] }))
           }
-          className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-semibold"
+          className="inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md border px-4 py-2 text-sm font-semibold sm:w-auto sm:text-xs"
           style={{ borderColor: NAVY, color: NAVY, backgroundColor: PAPER }}
           data-testid="add-experience"
         >
-          <Plus size={12} />
+          <Plus size={14} />
           {isKh ? "បន្ថែមបទពិសោធន៍" : "Add another experience"}
         </button>
       </div>
@@ -1398,26 +1446,26 @@ function BulletEditor({
       className="rounded-md border p-3"
       style={{ borderColor: BORDER, backgroundColor: PAPER }}
     >
-      <div className="mb-2 flex items-center justify-between">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <span
-          className="grid h-5 w-5 place-items-center rounded-full text-[10px] font-bold text-white"
+          className="grid h-6 w-6 place-items-center rounded-full text-[11px] font-bold text-white"
           style={{ backgroundColor: NAVY }}
         >
           {indexLabel}
         </span>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Verb suggester */}
           <div className="relative" ref={ref}>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex items-center gap-1 rounded-md border px-2 py-1 text-[10px] font-bold"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-md border px-3 py-2 text-xs font-bold"
               style={{ borderColor: ACCENT, color: ACCENT, backgroundColor: "#eff6ff" }}
               data-testid={`verb-trigger-${indexLabel}`}
             >
-              <Sparkles size={10} />
+              <Sparkles size={12} />
               {isKh ? "បញ្ចូលកិរិយាស័ព្ទខ្លាំង" : "Insert strong verb"}
-              <ChevronDown size={10} />
+              <ChevronDown size={12} />
             </button>
             {open && (
               <div
@@ -1433,7 +1481,7 @@ function BulletEditor({
                       onInsertVerb(v);
                       setOpen(false);
                     }}
-                    className="flex w-full items-center justify-between gap-3 border-b px-3 py-1.5 text-left text-xs hover:bg-slate-50"
+                    className="flex min-h-[44px] w-full items-center justify-between gap-3 border-b px-3 py-2 text-left text-xs hover:bg-slate-50"
                     style={{ borderColor: BORDER }}
                     data-testid={`verb-option-${v.en}`}
                   >
@@ -1448,10 +1496,10 @@ function BulletEditor({
             <button
               type="button"
               onClick={onRemove}
-              className="text-rose-500 hover:text-rose-700"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-rose-500 hover:text-rose-700"
               aria-label={isKh ? "លុបចំណុច" : "Remove bullet"}
             >
-              <Trash2 size={12} />
+              <Trash2 size={14} />
             </button>
           )}
         </div>
@@ -1479,19 +1527,22 @@ function BulletEditor({
 
 function PreviewToolbar({ isKh }: { isKh: boolean }) {
   return (
-    <div className="flex items-center justify-between">
-      <div className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: SUBTLE }}>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        className="text-[11px] font-bold uppercase tracking-[0.16em] break-words"
+        style={{ color: SUBTLE }}
+      >
         {isKh ? "ការមើលជាមុន · STANDARD PROFESSIONAL" : "Live Preview · Standard Professional"}
       </div>
       <button
         type="button"
         onClick={() => window.print()}
-        className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold text-white"
+        className="inline-flex w-full min-h-[44px] items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm font-bold text-white sm:w-auto sm:text-xs"
         style={{ backgroundColor: NAVY }}
         data-testid="btn-print"
       >
-        <Printer size={12} />
-        {isKh ? "ទាញយក PDF / បោះពុម្ព" : "Download PDF / Print"}
+        <Printer size={14} />
+        {isKh ? "បង្កើត / ទាញយក PDF" : "Generate Resume · PDF / Print"}
       </button>
     </div>
   );
@@ -1810,12 +1861,15 @@ function SectionTitle({
   isKh: boolean;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
       <Icon size={16} style={{ color: NAVY }} />
-      <h2 className="text-lg font-bold leading-none" style={{ color: INK }}>
+      <h2 className="text-lg font-bold leading-tight break-words" style={{ color: INK }}>
         {isKh ? kh : en}
       </h2>
-      <span className="text-[11px] font-semibold" style={{ color: MUTED }}>
+      <span
+        className="text-[11px] font-semibold break-words"
+        style={{ color: MUTED }}
+      >
         · {isKh ? en : kh}
       </span>
     </div>
@@ -1830,6 +1884,13 @@ function SectionTitle({
 function PrintStyles() {
   return (
     <style>{`
+      /* Hide horizontal scrollbar on the mobile stepper without losing
+         the swipe / overflow behavior. Works across major browsers. */
+      .resume-builder .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .resume-builder .hide-scrollbar::-webkit-scrollbar { display: none; width: 0; height: 0; }
+      /* Prevent bilingual labels (English + ខ្មែរ) from forcing horizontal
+         scroll on narrow phones — wrap them onto two lines instead. */
+      .resume-builder label { white-space: normal; word-break: break-word; }
       @media print {
         @page { size: A4; margin: 12mm; }
         html, body { background: #fff !important; }
