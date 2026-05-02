@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Sparkles, Volume2, BookOpen, Hash, Layers3, RotateCcw, ChevronRight,
   CalendarDays, Star, CalendarRange, Sun, CheckCircle2, HelpCircle, Palette,
+  ArrowRight, Compass,
 } from "lucide-react";
+import { Link } from "wouter";
 import { useLanguageStore } from "@/store/use-language";
 import { speakText, speakWord } from "@/lib/speech";
 
@@ -185,7 +187,178 @@ export default function BeginnerGuidePage() {
         {tab === "questions" && <QuestionWordsGallery kh={kh} />}
         {tab === "colors" && <ColorsGallery kh={kh} />}
       </section>
+
+      {/* EXPLORE MORE — outward links to other "For Kids" pages */}
+      <ExploreMoreSection kh={kh} />
     </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────── */
+/* EXPLORE MORE — kid-friendly cards linking to other "For Kids" pages */
+/* ──────────────────────────────────────────────────────────────────── */
+
+type ExploreCard = {
+  href: string;
+  emoji: string;
+  titleEn: string;
+  titleKh: string;
+  descEn: string;
+  descKh: string;
+  /** Tailwind classes for the card's pastel gradient + border + hover ring */
+  cardClass: string;
+  /** Tailwind classes for the inner emoji bubble */
+  bubbleClass: string;
+  /** Tailwind classes for the EN title color */
+  titleClass: string;
+  /** ARIA-label fallback (English) */
+  ariaEn: string;
+  /** ARIA-label fallback (Khmer) */
+  ariaKh: string;
+};
+
+const EXPLORE_CARDS: ExploreCard[] = [
+  {
+    href: "/for-kids/word-popper",
+    emoji: "🎈",
+    titleEn: "The Word Popper",
+    titleKh: "ប៉ោងប៉ោងពាក្យ",
+    descEn: "Pop letter balloons to spell each word!",
+    descKh: "ប៉ះប៉ោងប៉ោងអក្សរដើម្បីប្រកបពាក្យ!",
+    cardClass:
+      "from-rose-100 via-pink-100 to-fuchsia-200 border-rose-300 hover:border-rose-400 hover:ring-rose-200",
+    bubbleClass: "bg-white border-rose-300 shadow-rose-200",
+    titleClass: "text-rose-700",
+    ariaEn: "Open The Word Popper game",
+    ariaKh: "បើកល្បែងប៉ោងប៉ោងពាក្យ",
+  },
+  {
+    href: "/for-kids/my-day",
+    emoji: "☀️",
+    titleEn: "My Day: Actions & Health",
+    titleKh: "ថ្ងៃរបស់ខ្ញុំ៖ សកម្មភាព និងសុខភាព",
+    descEn: "Wake up, wash, eat, play — daily action words.",
+    descKh: "ភ្ញាក់ លាងដៃ ញ៉ាំ លេង — ពាក្យសកម្មភាពប្រចាំថ្ងៃ។",
+    cardClass:
+      "from-amber-100 via-yellow-100 to-orange-200 border-amber-300 hover:border-amber-400 hover:ring-amber-200",
+    bubbleClass: "bg-white border-amber-300 shadow-amber-200",
+    titleClass: "text-amber-700",
+    ariaEn: "Open My Day: Actions and Health",
+    ariaKh: "បើកថ្ងៃរបស់ខ្ញុំ៖ សកម្មភាព និងសុខភាព",
+  },
+  {
+    href: "/for-kids/animals",
+    emoji: "🐾",
+    titleEn: "Animals: Near & Far",
+    titleKh: "សត្វ៖ ជិត និងឆ្ងាយ",
+    descEn: "Pets, farm animals, and wildlife from around the world.",
+    descKh: "សត្វចិញ្ចឹម សត្វកសិដ្ឋាន និងសត្វព្រៃពីជុំវិញពិភពលោក។",
+    cardClass:
+      "from-emerald-100 via-teal-100 to-green-200 border-emerald-300 hover:border-emerald-400 hover:ring-emerald-200",
+    bubbleClass: "bg-white border-emerald-300 shadow-emerald-200",
+    titleClass: "text-emerald-700",
+    ariaEn: "Open Animals: Near and Far",
+    ariaKh: "បើកសត្វ៖ ជិត និងឆ្ងាយ",
+  },
+  {
+    href: "/for-kids/healthy-foods",
+    emoji: "🍎",
+    titleEn: "Fuel Your Body: Healthy Foods",
+    titleKh: "ផ្តល់ថាមពលដល់រាងកាយ៖ អាហារសុខភាព",
+    descEn: "Fruits, veggies & proteins — and the superpower each one gives you!",
+    descKh: "ផ្លែឈើ បន្លែ និងសាច់ — និងអំណាចពិសេសដែលនីមួយៗផ្តល់ឲ្យ!",
+    cardClass:
+      "from-red-100 via-rose-100 to-pink-200 border-red-300 hover:border-red-400 hover:ring-red-200",
+    bubbleClass: "bg-white border-red-300 shadow-red-200",
+    titleClass: "text-red-700",
+    ariaEn: "Open Fuel Your Body: Healthy Foods",
+    ariaKh: "បើកផ្តល់ថាមពលដល់រាងកាយ៖ អាហារសុខភាព",
+  },
+];
+
+function ExploreMoreSection({ kh }: { kh: boolean }) {
+  return (
+    <section
+      data-testid="section-explore-more"
+      aria-labelledby="explore-more-heading"
+      className="max-w-6xl mx-auto px-4 sm:px-6 pb-20"
+    >
+      <div className="rounded-3xl bg-white/80 backdrop-blur border-4 border-purple-200 shadow-xl p-6 sm:p-10 relative overflow-hidden">
+        {/* Decorative blurs to match hero aesthetic */}
+        <span aria-hidden className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-pink-200 opacity-50 blur-3xl" />
+        <span aria-hidden className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-sky-200 opacity-50 blur-3xl" />
+
+        {/* Header — bilingual, always paired (EN above, KH below) */}
+        <header className="relative text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border-2 border-purple-300 text-purple-800 text-xs font-bold uppercase tracking-wider mb-3">
+            <Compass className="w-4 h-4" />
+            <span>Explore More</span>
+            <span aria-hidden className="opacity-60">·</span>
+            <span className="font-khmer normal-case tracking-normal text-sm">
+              រុករកបន្ថែម
+            </span>
+          </div>
+          <h2
+            id="explore-more-heading"
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
+          >
+            <span className="bg-gradient-to-r from-fuchsia-500 via-rose-500 to-amber-500 bg-clip-text text-transparent">
+              More Fun Activities!
+            </span>
+          </h2>
+          <p className="mt-2 font-khmer text-xl sm:text-2xl font-bold text-slate-700 leading-snug">
+            សកម្មភាពកម្សាន្តបន្ថែម!
+          </p>
+          <p className={`mt-3 text-sm sm:text-base text-slate-600 max-w-xl mx-auto ${kh ? "font-khmer text-base sm:text-lg leading-loose" : ""}`}>
+            {kh
+              ? "ជ្រើសរើសល្បែងបន្ទាប់របស់អ្នក — ចុចលើកាតណាមួយដើម្បីចាប់ផ្ដើម។"
+              : "Pick your next adventure — tap any card to start!"}
+          </p>
+        </header>
+
+        {/* Card grid — 2 cols mobile, 3 cols tablet, 4 cols desktop */}
+        <div className="relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+          {EXPLORE_CARDS.map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              data-testid={`explore-card-${card.href.split("/").pop()}`}
+              aria-label={kh ? card.ariaKh : card.ariaEn}
+              className={`group relative flex flex-col items-center text-center min-h-[180px] sm:min-h-[220px] p-4 sm:p-5 rounded-3xl border-4 bg-gradient-to-br shadow-md hover:shadow-2xl hover:ring-4 transition-all duration-200 active:scale-[0.97] hover:-translate-y-1 ${card.cardClass}`}
+            >
+              {/* Emoji bubble */}
+              <span
+                aria-hidden
+                className={`flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 shadow-lg text-4xl sm:text-5xl mb-3 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-6 ${card.bubbleClass}`}
+              >
+                {card.emoji}
+              </span>
+
+              {/* Bilingual title — both languages always visible */}
+              <h3 className={`font-display text-base sm:text-lg font-extrabold leading-tight ${card.titleClass}`}>
+                {card.titleEn}
+              </h3>
+              <p className="font-khmer mt-1 text-sm sm:text-base font-bold text-slate-800 leading-snug">
+                {card.titleKh}
+              </p>
+
+              {/* Short description — language-toggled */}
+              <p className={`mt-2 text-xs sm:text-sm text-slate-700 leading-snug ${kh ? "font-khmer text-sm leading-relaxed" : ""}`}>
+                {kh ? card.descKh : card.descEn}
+              </p>
+
+              {/* "Go" affordance pinned to bottom */}
+              <span
+                className={`mt-auto pt-3 inline-flex items-center gap-1 text-xs sm:text-sm font-bold ${card.titleClass} group-hover:gap-2 transition-all`}
+              >
+                {kh ? "ចូលលេង" : "Let's go"}
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
