@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle, RadioTower,
+  Anvil, Recycle, RadioTower, Satellite,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -189,6 +189,32 @@ export const SEARCH_INDEX: SearchEntry[] = [
       "រ៉ោតទ័រ", "Wi-Fi", "វ៉ាយហ្វាយ", "បណ្ដាញ", "អ៊ីនធឺណិត",
       "ឥតខ្សែ", "IP",
       "ទូរស័ព្ទ", "រលកវិទ្យុ", "ប៉មទូរស័ព្ទ", "បណ្តាញទូរស័ព្ទ",
+    ],
+  },
+  {
+    id: "geo-gps-space-age-map",
+    href: "/study-center/coordinates#gps",
+    icon: Satellite,
+    titleEn: "GPS: The Space-Age Map",
+    titleKh: "ប្រព័ន្ធ GPS៖ ផែនទីសម័យអវកាស",
+    categoryEn: "Geography", categoryKh: "ភូមិសាស្ត្រ",
+    descEn: "How a network of 30+ satellites racing around Earth lets your phone work out exactly where you are — and how high — using nothing but listening and the speed of light.",
+    descKh: "របៀបដែលបណ្តាញផ្កាយរណបជាង ៣០ ដែលវិលជុំផែនដី អនុញ្ញាតឱ្យទូរស័ព្ទរបស់អ្នកដឹងច្បាស់ថា អ្នកនៅទីណា និងខ្ពស់ប៉ុនណា ដោយប្រើតែការស្តាប់ និងល្បឿនពន្លឺប៉ុណ្ណោះ។",
+    keywordsEn: [
+      "GPS", "global positioning system", "satellite", "satellites",
+      "navigation", "trilateration", "coordinates", "latitude", "longitude",
+      "altitude", "constellation", "orbit", "orbital",
+      "speed of light", "atomic clock", "milliseconds",
+      "google maps", "geolocation", "location", "location services",
+      "rule of four", "space-age",
+      "smartphone", "phone location",
+    ],
+    keywordsKh: [
+      "GPS", "ប្រព័ន្ធកំណត់ទីតាំងសកល", "ផ្កាយរណប", "បណ្តាញផ្កាយរណប",
+      "នាំផ្លូវ", "ការវាស់ចម្ងាយត្រីកោណ", "កូអរដោនេ",
+      "រយៈទទឹង", "រយៈបណ្ដោយ", "កម្ពស់",
+      "គន្លង", "ល្បឿនពន្លឺ", "នាឡិកាអាតូម", "មិល្លីវិនាទី",
+      "ទីតាំង", "ផែនទី", "សម័យអវកាស",
     ],
   },
   {

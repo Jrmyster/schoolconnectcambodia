@@ -19,10 +19,14 @@ export const searchMeta: SearchEntry = {
     "equator", "prime meridian", "time zone",
     "navigation", "google maps", "geolocation",
     "compass", "map skills",
+    "satellite", "satellites", "trilateration", "constellation",
+    "altitude", "speed of light", "atomic clock",
   ],
   keywordsKh: [
     "កូអរដោនេ", "រយៈទទឹង", "រយៈបណ្ដោយ", "GPS",
     "បន្ទាត់អេក្វាទ័រ", "ផ្កាយរណប", "ល្វែងពេលវេលា",
     "ត្រីវិស័យ",
+    "បណ្តាញផ្កាយរណប", "ការវាស់ចម្ងាយត្រីកោណ",
+    "កម្ពស់", "ល្បឿនពន្លឺ", "នាឡិកាអាតូម",
   ],
 };

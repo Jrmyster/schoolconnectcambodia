@@ -11,6 +11,7 @@ import {
   Sun,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import { GpsSpaceAgeSection } from "@/components/coordinates/GpsSpaceAgeSection";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  STC-COORD-01 · Latitude & Longitude: The Invisible Grid
@@ -84,6 +85,11 @@ export function CoordinatesPage() {
           <LongitudeCard />
           <HistoryClockCard />
         </div>
+      </section>
+
+      {/* GPS — modern application (deep-space aesthetic) */}
+      <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <GpsSpaceAgeSection />
       </section>
 
       {/* Closing — bilingual */}
