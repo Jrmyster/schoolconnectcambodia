@@ -1,0 +1,17 @@
+I want to add a new section to the '20th Century Genres' page focusing on the technology of music, titled 'The Mechanics of Sound: Audio Equipment (យន្តការនៃសំឡេង៖ ឧបករណ៍អូឌីយ៉ូ)'.
+Please implement this using a sleek 'Studio Gear' aesthetic (matte blacks, metallic silvers, and glowing LED audio meter greens/reds) and execute the following:
+1. Update the Search & Discovery Index
+Locate the global searchIndex array and add this new section. Ensure keywords include 'microphone', 'speaker', 'mixer', 'audio', 'sound waves', and their Khmer equivalents.
+2. Section 1: The Transducers (ឧបករណ៍បំប្លែងថាមពល)
+Explain the concept of a 'Transducer'—a device that changes energy from one form to another.
+The Microphone (មីក្រូហ្វូន): Explain that it takes acoustic energy (sound waves in the air) and converts it into electrical energy (audio signals through a wire).
+The Speaker (ឧបករណ៍បំពងសំឡេង): Explain that it does the exact opposite. It takes electrical energy, pushes a magnet, and moves a cone to create massive acoustic sound waves back into the air.
+3. Section 2: The Brain of the Studio (ខួរក្បាលនៃស្ទូឌីយោ)
+The Audio Mixer / Console (ឧបករណ៍លាយសំឡេង): Explain that a mixer takes dozens of electrical signals (from different microphones and instruments), adjusts their volume (amplitude) and tone (frequencies), and blends them into one single stereo track (Left and Right).
+4. Section 3: The 20th Century Revolution (បដិវត្តន៍សតវត្សទី២០)
+Create a highlighted text block: 'Without this gear, modern music does not exist. (បើគ្មានឧបករណ៍ទាំងនេះទេ តន្ត្រីសម័យទំនើបក៏មិនអាចកើតមានដែរ។)'
+Explain that before this equipment, singers had to scream to be heard over a band. The microphone allowed for intimate, quiet singing (like jazz and pop), and the amplifier gave birth to the electric guitar and rock and roll.
+5. Formatting & UX:
+Ensure all main headings, equipment names, and physics terms are strictly bilingual (English/Khmer).
+Use icons like a vintage microphone, a speaker cone, and a mixer slider to differentiate the sections.
+
