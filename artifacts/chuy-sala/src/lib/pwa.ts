@@ -37,6 +37,39 @@ export function getPwaState(): PwaState {
   return state;
 }
 
+/**
+ * Detect iPhone / iPad / iPod, including iPadOS 13+ which masquerades as
+ * macOS but reports touch points. iOS Safari does NOT support the standard
+ * `beforeinstallprompt` event, so we have to show manual instructions.
+ */
+export function isIOS(): boolean {
+  if (typeof window === "undefined" || typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent || "";
+  // Classic iPhone / iPad / iPod
+  if (/iPad|iPhone|iPod/.test(ua) && !("MSStream" in window)) return true;
+  // iPadOS 13+ — reports as Mac but exposes touch.
+  if (
+    navigator.platform === "MacIntel" &&
+    typeof navigator.maxTouchPoints === "number" &&
+    navigator.maxTouchPoints > 1
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * True when the page is being run as an installed PWA (standalone display
+ * mode on Chrome/Android, or `navigator.standalone` on iOS Safari).
+ */
+export function isStandalone(): boolean {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia?.("(display-mode: standalone)").matches) return true;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((window.navigator as any).standalone === true) return true;
+  return false;
+}
+
 export function subscribePwa(listener: () => void): () => void {
   listeners.add(listener);
   return () => listeners.delete(listener);

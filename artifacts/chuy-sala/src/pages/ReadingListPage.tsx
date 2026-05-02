@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
-import { FoundationalLibrarySection } from "@/components/FoundationalLibrarySection";
+import { LibraryTabs } from "@/components/LibraryTabs";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -364,8 +364,8 @@ export function ReadingListPage() {
           <AuthorOfMonthCard author={currentAuthor} user={user} kh={kh} t={t} />
         )}
 
-        {/* Foundational Library — curated 200+ book starter shelf */}
-        <FoundationalLibrarySection kh={kh} t={t} />
+        {/* Library tabs — Foundational Library + Imaginative Worlds & Teen Fiction */}
+        <LibraryTabs kh={kh} t={t} />
 
         {/* Category filter chips */}
         <div>
