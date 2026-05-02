@@ -12,6 +12,7 @@ import { NotificationBell } from "@/components/NotificationBell";
 import { ThemePalette } from "@/components/ThemePalette";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { InstallAppButton } from "@/components/InstallAppButton";
+import { LiveStudentCounter, LiveStudentCounterCompact } from "@/components/layout/LiveStudentCounter";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -1504,9 +1505,13 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Slogan — hidden on mobile, visible from lg up */}
+            {/* Live Student Counter — pulsing green dot + bilingual count */}
+            <LiveStudentCounter />
+            <LiveStudentCounterCompact />
+
+            {/* Slogan — hidden on mobile, visible from xl up to make room for the counter */}
             <div
-              className="hidden lg:flex items-center gap-3 min-w-0"
+              className="hidden xl:flex items-center gap-3 min-w-0"
               aria-hidden={false}
             >
               <span

@@ -1,0 +1,24 @@
+I want to add a comprehensive new section to the 'Music Theory and the Art of Sound' page called 'The Symphony of Sound: Instruments of the Orchestra (បទភ្លេងនៃសំឡេង៖ ឧបករណ៍ភ្លេងនៃវង់តន្ត្រី)'.
+Please implement this using an elegant, acoustic-inspired aesthetic (rich mahogany browns, brass golds, and deep blacks) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this instruments section so it is searchable and automatically included in the 'Topic of the Day' rotation. Ensure keywords include 'orchestra', 'violin', 'flute', 'music', and their Khmer equivalents.
+2. Section 1: The Four Families (ត្រកូលទាំងបួន)
+Explain that an orchestra is divided into four main families based on how they make the air vibrate.
+3. Section 2: The Instrument Galleries (វិចិត្រសាលឧបករណ៍ភ្លេង)
+Create a responsive grid system. Divide the grid into four distinct categories with the following instruments:
+The String Family (ឧបករណ៍ខ្សែ):
+Violin (វីយូឡុង): The highest-pitched string instrument, played with a bow made of horsehair.
+Cello (សែលឡូ): A large, deep-sounding instrument played while sitting down.
+The Woodwind Family (ឧបករណ៍ផ្លុំផ្លិត):
+Flute (ខ្លុយផ្លុយ): Made of silver or gold; produces sound when air is blown across a hole, much like blowing over a bottle.
+Clarinet (ក្លារីណែត): Uses a single wooden 'reed' that vibrates against the mouthpiece.
+The Brass Family (ឧបករណ៍លង្ហិន):
+Trumpet (ត្រែ): The brightest and highest brass instrument, used for heroic fanfares.
+French Horn (ត្រែបារាំង): A beautiful, coiled tube of brass that produces a mellow, echoing sound.
+The Percussion Family (ឧបករណ៍គោះ):
+Timpani (ស្គរធំ / ស្គរទីមប៉ានី): Massive copper kettle drums that can be tuned to specific pitches.
+Snare Drum (ស្គរតូច): Has metal wires underneath that snap against the bottom skin to create a sharp 'crack'.
+4. Formatting & UX:
+Ensure all main headings, instrument names, and family names are strictly bilingual (English/Khmer).
+Use simple, clean icons or vector images for each instrument to make the grid highly visual.
+Stack the categories vertically on mobile screens so students can easily scroll through the families.
