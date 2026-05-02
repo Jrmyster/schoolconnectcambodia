@@ -28,6 +28,9 @@ import {
   Layers,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { lazy, Suspense } from "react";
+
+const Engine3DViewer = lazy(() => import("@/components/automotive/Engine3DViewer"));
 
 // ════════════════════════════════════════════════════════════════════════════
 //  TEC-AUTO · Automotive Engineering: The Anatomy of a Machine
@@ -447,6 +450,49 @@ function BayHeart({
             <Spec en="Sparks/min" kh="ផ្គរ/នាទី" kh_={kh} value="≈ 6,000" tone="orange" />
           </div>
         </PartCard>
+      </div>
+
+      {/* ─── Live procedural 3D engine (full width below the 3 cards) ─── */}
+      <div className="mt-5">
+        <div
+          className={`flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-orange-300/90 mb-2 ${
+            kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+          }`}
+        >
+          <Gauge className="w-3.5 h-3.5" />
+          <span>{t("Live 3D · Inline-4 Engine", "ម៉ូដែលម៉ាស៊ីន 3D · ៤ ស៊ីឡាំង")}</span>
+          <span className="opacity-50">/</span>
+          <span className="text-amber-200">ICE-4 · 3D</span>
+        </div>
+        <h3
+          className={`text-base sm:text-lg font-bold text-slate-50 leading-tight mb-1 ${
+            kh ? "font-khmer leading-loose" : ""
+          }`}
+        >
+          {t(
+            "Spin the engine — drag the throttle, watch the pistons fire 1-3-4-2",
+            "បង្វិលម៉ាស៊ីន — អូសល្បឿន មើលស៊ីឡាំងបាញ់តាមលំដាប់ ១–៣–៤–២"
+          )}
+        </h3>
+        <p
+          className={`text-xs sm:text-sm text-slate-400 mb-3 ${
+            kh ? "font-khmer leading-loose" : "leading-relaxed"
+          }`}
+        >
+          {t(
+            "A live, interactive 3D engine built from scratch. Click and drag to orbit around the block, scroll to zoom in past the glass, and slide the throttle to change RPM. The orange flash inside each cylinder is the 'Power' stroke — fuel exploding to push the piston down.",
+            "ម៉ាស៊ីន 3D ផ្ទាល់ដែលមានអន្តរកម្ម។ ចុចហើយអូសដើម្បីបង្វិលជុំវិញ មូលដើម្បីពង្រីកចូលក្នុងកញ្ចក់ ហើយអូសល្បឿនដើម្បីផ្លាស់ប្ដូរ RPM។ ពន្លឺពណ៌ទឹកក្រូចនៅខាងក្នុងស៊ីឡាំងនីមួយៗគឺជាជំហាន 'ផ្ទុះ' (Power) — ឥន្ធនៈផ្ទុះដើម្បីរុញស៊ីឡាំងចុះ។"
+          )}
+        </p>
+        <Suspense
+          fallback={
+            <div className="rounded-lg border border-orange-500/30 bg-black/60 h-[400px] flex items-center justify-center text-xs font-mono text-orange-300/80 uppercase tracking-widest">
+              {t("Booting 3D engine…", "កំពុងផ្ទុកម៉ាស៊ីន 3D…")}
+            </div>
+          }
+        >
+          <Engine3DViewer kh={kh} />
+        </Suspense>
       </div>
     </section>
   );
