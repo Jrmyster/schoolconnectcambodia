@@ -1,0 +1,16 @@
+I want to add a new physics and technology page under the 'Study Center' dropdown called 'Moving Humanity: From Stairs to Teleportation (ចលនាមនុស្សជាតិ៖ ពីជណ្តើរ ដល់ការបញ្ជូនរូបធាតុ)'.
+Please implement this using a sleek, progressive aesthetic (starting with stone/wood textures at the top and transitioning to futuristic glowing neon at the bottom) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add this new page. Ensure keywords include 'stairs', 'elevator', 'escalator', 'teleportation', 'quantum', 'physics', and their Khmer equivalents.
+2. Section 1: The Human Engine (ម៉ាស៊ីនមនុស្ស - ជណ្តើរ)
+Stairs (ជណ្តើរ): Explain the physics of an inclined plane. Stairs are the oldest form of vertical transport, forcing humans to use their own biological energy to fight gravity. By breaking a steep climb into small steps, we trade distance for reduced effort.
+3. Section 2: The Mechanical Ascent (ការឡើងដោយប្រើម៉ាស៊ីន - ជណ្តើរយន្ត)
+Elevators (ជណ្តើរយន្តប្រអប់): Explain the genius of the 'counterweight' (ទម្ងន់ផ្ទុយ). An elevator doesn't just pull the box up; a heavy weight drops down, meaning the motor only uses a tiny bit of electricity to move the passengers.
+Transveyors/Escalators (ជណ្តើរយន្តរំកិល): Explain the concept of 'continuous motion transit'—using hidden chains and gears to move a constant flow of people without waiting for a box to arrive.
+4. Section 3: The Quantum Leap (ការលោតផ្លោះកង់ទិច - ការបញ្ជូនរូបធាតុ)
+Teleportation (ការបញ្ជូនរូបធាតុ): Explain the theoretical physics of how this futuristic transport would work.
+The Science: Explain that real teleportation wouldn't push your physical body through a tube. Instead, a machine would scan every single atom in your body, destroy the original you, send the data (information) at the speed of light to a new location, and a 3D printer-like machine would rebuild you using local atoms.
+The Philosophical Question: Include a bold text block: 'If the machine destroys the original you, and builds an exact copy... is the person who steps out the other side still YOU? (ប្រសិនបើម៉ាស៊ីនកម្ទេចរូបរាងដើមរបស់អ្នក ហើយបង្កើតច្បាប់ចម្លងដូចបេះបិទ... តើមនុស្សដែលដើរចេញពីម្ខាងទៀតនៅតែជាអ្នកដែរឬទេ?)'
+5. Formatting & UX:
+Ensure all main headings, transit methods, and physics terms are strictly bilingual (English/Khmer).
+Use icons like steps, an elevator box, and a glowing atom to differentiate the sections.

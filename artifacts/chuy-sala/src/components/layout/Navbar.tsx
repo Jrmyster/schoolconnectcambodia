@@ -338,6 +338,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "អ្វីដែលធ្វើឱ្យយើងជាមនុស្ស — វិទ្យាសាស្ត្របួនវិស័យ ៖ បុរាណវិទ្យា ជីវវិទ្យា ភាសា និងវប្បធម៌; អ្នកត្រួសត្រាយ Boas, Mead និង Ibn Khaldun; និងទ្រឹស្តីចុងក្រោយថា វប្បធម៌និងបរិស្ថាន មិនមែនជីវវិទ្យា គឺជាកត្តាបង្កើតអាកប្បកិរិយារបស់មនុស្សទូទៅ។",
       },
       {
+        href: "/study-center/pandemics-history",
+        labelEn: "Pandemics & Triumphs: The History of Disease",
+        labelKh: "ជំងឺរាតត្បាត និងជ័យជម្នះ៖ ប្រវត្តិសាស្ត្រនៃជំងឺ",
+        icon: Pill,
+        descEn: "Three sections of medical history: the Ancient Plagues (Biblical disasters, the Black Death, and Leprosy), the Viral Invaders (Yellow Fever, Influenza, Polio with full disease profile cards), and the Ultimate Victory — the WHO eradication of Smallpox, the only human disease ever 100% wiped out.",
+        descKh: "បីផ្នែកនៃប្រវត្តិវេជ្ជសាស្ត្រ ៖ ជំងឺរាតត្បាតបុរាណ (ជំងឺក្នុងព្រះគម្ពីរ ជំងឺប៉េស្ត ជំងឺឃ្លង់) ភ្នាក់ងារចម្លងវីរុស (ជំងឺគ្រុនលឿង ផ្ដាសាយ ស្វិតដៃជើង) និងជ័យជម្នះចុងក្រោយ — ការលុបបំបាត់ជំងឺអុតធំដោយ WHO ដែលជាជំងឺមនុស្សតែមួយគត់ដែលត្រូវបានលុបបំបាត់ ១០០%។",
+      },
+      {
         href: "/study-center/authority-conformity",
         labelEn: "Authority & Conformity: The Science of Obedience",
         labelKh: "អំណាច និងការស្របតាមសង្គម ៖ វិទ្យាសាស្ត្រនៃការស្តាប់បង្គាប់",
