@@ -1,0 +1,16 @@
+I want to add a new section to the '20th Century Genres' page called 'The Electric Revolution: Instruments that Changed the World (បដិវត្តន៍អគ្គិសនី៖ ឧបករណ៍ភ្លេងដែលផ្លាស់ប្តូរពិភពលោក)'.
+Please implement this using a bold, high-energy aesthetic (neon accents, dark backgrounds, perhaps a subtle amplifier grill cloth texture) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this electric instruments section so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'electric guitar', 'synthesizer', 'rock', 'electricity', and their Khmer equivalents.
+2. Section 1: Sound Becomes Electricity (សំឡេងក្លាយជាអគ្គិសនី)
+Explain the core physics simply: Traditional instruments use hollow wooden bodies to make sound louder. Electric instruments use Magnetic Pickups (ឧបករណ៍ស្រូបសំឡេងម៉ាញេទិក).
+Explain that when a metal string vibrates over a magnet, it creates a small electrical current. That electricity travels through a cable to an Amplifier (អំភ្លី), which makes it loud enough to fill a stadium.
+3. Section 2: The Instruments of a New Era (ឧបករណ៍ភ្លេងនៃយុគសម័យថ្មី)
+Create a responsive grid of 'Instrument Profile Cards' highlighting the icons of the 20th century:
+The Electric Guitar (ហ្គីតាអគ្គិសនី): Invented in the 1930s but popularized in the 1950s. It defined Rock and Roll and allowed musicians to 'bend' and sustain notes in ways previously impossible.
+The Electric Bass (ហ្គីតាបាសអគ្គិសនី): Replaced the massive, heavy upright acoustic bass. It provided the deep, driving rhythmic heartbeat for Funk, Soul, and Pop music.
+The Synthesizer (ស៊ីនថេស៊ីស័រ): An instrument with no strings at all! It creates sound purely by generating and shaping raw electronic waves. It defined the sound of the 1980s and modern electronic dance music (EDM).
+4. Formatting & UX:
+Ensure all main headings, instrument names, and scientific terms are strictly bilingual (English/Khmer).
+Use icons like a lightning bolt, a guitar silhouette, and a soundwave to make the text highly engaging.
+

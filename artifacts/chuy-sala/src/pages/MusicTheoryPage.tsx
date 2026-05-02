@@ -218,6 +218,9 @@ export default function MusicTheoryPage() {
         <Reharmonization isKh={isKh} />
       </Section>
 
+      {/* ── 5. The Symphony of Sound — Orchestra ─────────────────────── */}
+      <SymphonyOfSound isKh={isKh} />
+
       {/* ── Closing ──────────────────────────────────────────────────── */}
       <footer className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 text-center text-stone-600 text-sm italic">
         <span className={isKh ? "font-khmer not-italic" : ""}>
@@ -1411,6 +1414,568 @@ function Reharmonization({ isKh }: { isKh: boolean }) {
         </span>
       </div>
     </PaperCard>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  5. The Symphony of Sound — Instruments of the Orchestra
+//     បទភ្លេងនៃសំឡេង៖ ឧបករណ៍ភ្លេងនៃវង់តន្ត្រី
+//
+//  Aesthetic: rich mahogany browns, brass golds, deep blacks — a dark
+//  concert-hall mood that contrasts the cream parchment above.
+// ════════════════════════════════════════════════════════════════════════════
+
+type OrchestraInstrument = {
+  nameEn: string;
+  nameKh: string;
+  descEn: string;
+  descKh: string;
+  Svg: React.ComponentType<{ className?: string }>;
+};
+
+type OrchestraFamily = {
+  id: string;
+  nameEn: string;
+  nameKh: string;
+  taglineEn: string;
+  taglineKh: string;
+  /** Hex accent — a brass / amber tone per family for subtle differentiation */
+  accent: string;
+  instruments: OrchestraInstrument[];
+};
+
+// ── Inline SVG icons (single colour, brass-friendly) ───────────────────
+
+const ViolinSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Body (figure-8) */}
+    <path
+      d="M50 30 C 38 30, 30 42, 30 56 C 30 72, 42 84, 50 84 C 58 84, 70 72, 70 56 C 70 42, 62 30, 50 30 Z"
+      fill="currentColor"
+      opacity="0.9"
+    />
+    {/* Waist cuts */}
+    <path d="M30 56 C 36 50, 40 50, 42 54" fill="none" stroke="#1a0d05" strokeWidth="1.4" />
+    <path d="M70 56 C 64 50, 60 50, 58 54" fill="none" stroke="#1a0d05" strokeWidth="1.4" />
+    {/* Neck + scroll */}
+    <rect x="47" y="10" width="6" height="22" fill="currentColor" />
+    <circle cx="50" cy="9" r="4" fill="currentColor" />
+    {/* Strings */}
+    {[-3, -1, 1, 3].map((dx) => (
+      <line key={dx} x1={50 + dx} y1="14" x2={50 + dx} y2="78" stroke="#1a0d05" strokeWidth="0.6" />
+    ))}
+    {/* F-holes */}
+    <path d="M42 58 q-2 4 0 8" fill="none" stroke="#1a0d05" strokeWidth="1" />
+    <path d="M58 58 q2 4 0 8" fill="none" stroke="#1a0d05" strokeWidth="1" />
+  </svg>
+);
+
+const CelloSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    <path
+      d="M50 22 C 35 22, 24 38, 24 56 C 24 76, 40 92, 50 92 C 60 92, 76 76, 76 56 C 76 38, 65 22, 50 22 Z"
+      fill="currentColor"
+      opacity="0.92"
+    />
+    {/* Waist */}
+    <path d="M24 56 C 32 50, 38 50, 40 54" fill="none" stroke="#1a0d05" strokeWidth="1.4" />
+    <path d="M76 56 C 68 50, 62 50, 60 54" fill="none" stroke="#1a0d05" strokeWidth="1.4" />
+    {/* Neck + scroll */}
+    <rect x="47" y="4" width="6" height="20" fill="currentColor" />
+    <circle cx="50" cy="3" r="3.5" fill="currentColor" />
+    {/* Strings */}
+    {[-3, -1, 1, 3].map((dx) => (
+      <line key={dx} x1={50 + dx} y1="8" x2={50 + dx} y2="86" stroke="#1a0d05" strokeWidth="0.7" />
+    ))}
+    {/* F-holes */}
+    <path d="M40 60 q-2 5 0 10" fill="none" stroke="#1a0d05" strokeWidth="1.1" />
+    <path d="M60 60 q2 5 0 10" fill="none" stroke="#1a0d05" strokeWidth="1.1" />
+    {/* Endpin */}
+    <line x1="50" y1="92" x2="50" y2="98" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+const FluteSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Long horizontal tube */}
+    <rect x="8" y="46" width="84" height="8" rx="4" fill="currentColor" />
+    {/* Embouchure */}
+    <circle cx="20" cy="50" r="2.2" fill="#1a0d05" />
+    {/* Keys */}
+    {[35, 45, 55, 65, 75, 85].map((x) => (
+      <g key={x}>
+        <line x1={x} y1="42" x2={x} y2="46" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx={x} cy="40" r="2.4" fill="currentColor" />
+      </g>
+    ))}
+    {/* End cap */}
+    <rect x="6" y="44" width="4" height="12" rx="1" fill="currentColor" />
+  </svg>
+);
+
+const ClarinetSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Mouthpiece */}
+    <path d="M14 46 L24 44 L24 56 L14 54 Z" fill="currentColor" />
+    {/* Body */}
+    <rect x="24" y="44" width="56" height="12" rx="2" fill="currentColor" />
+    {/* Bell flare */}
+    <path d="M80 40 L94 32 L94 68 L80 60 Z" fill="currentColor" />
+    {/* Keys */}
+    {[33, 43, 53, 63, 73].map((x) => (
+      <circle key={x} cx={x} cy="40" r="2.2" fill="currentColor" />
+    ))}
+    {[33, 43, 53, 63, 73].map((x) => (
+      <line key={`l${x}`} x1={x} y1="42" x2={x} y2="46" stroke="currentColor" strokeWidth="1.4" />
+    ))}
+    {/* Joint rings */}
+    <line x1="40" y1="44" x2="40" y2="56" stroke="#1a0d05" strokeWidth="1" />
+    <line x1="60" y1="44" x2="60" y2="56" stroke="#1a0d05" strokeWidth="1" />
+  </svg>
+);
+
+const TrumpetSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Mouthpiece */}
+    <circle cx="10" cy="50" r="3.5" fill="currentColor" />
+    {/* Lead pipe */}
+    <rect x="13" y="48" width="50" height="4" fill="currentColor" />
+    {/* Valve cluster */}
+    {[30, 40, 50].map((x) => (
+      <g key={x}>
+        <rect x={x - 3} y="38" width="6" height="20" rx="1" fill="currentColor" />
+        <circle cx={x} cy="36" r="2.2" fill="currentColor" />
+      </g>
+    ))}
+    {/* Bell flare */}
+    <path
+      d="M63 50 C 75 38, 90 36, 96 36 L96 64 C 90 64, 75 62, 63 50 Z"
+      fill="currentColor"
+    />
+    {/* Inside of bell */}
+    <ellipse cx="92" cy="50" rx="4" ry="14" fill="#1a0d05" opacity="0.55" />
+  </svg>
+);
+
+const FrenchHornSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Outer coiled tubing */}
+    <circle cx="42" cy="50" r="32" fill="none" stroke="currentColor" strokeWidth="5" />
+    <circle cx="42" cy="50" r="22" fill="none" stroke="currentColor" strokeWidth="3.2" />
+    {/* Bell */}
+    <path
+      d="M70 30 C 86 18, 100 24, 96 50 C 90 72, 76 76, 70 70 Z"
+      fill="currentColor"
+    />
+    <ellipse cx="89" cy="34" rx="5" ry="10" fill="#1a0d05" opacity="0.55" transform="rotate(-25 89 34)" />
+    {/* Mouthpiece + leadpipe */}
+    <line x1="14" y1="58" x2="22" y2="60" stroke="currentColor" strokeWidth="3" />
+    <circle cx="12" cy="58" r="2.5" fill="currentColor" />
+    {/* Valves */}
+    {[36, 44, 52].map((x) => (
+      <rect key={x} x={x - 2.2} y="14" width="4.4" height="10" rx="1" fill="currentColor" />
+    ))}
+  </svg>
+);
+
+const TimpaniSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Bowl */}
+    <path
+      d="M16 46 Q 50 92, 84 46 L84 50 Q 50 96, 16 50 Z"
+      fill="currentColor"
+    />
+    {/* Drum head — top ellipse */}
+    <ellipse cx="50" cy="46" rx="34" ry="9" fill="#fdf3d4" stroke="currentColor" strokeWidth="2" />
+    {/* Tension lugs around the rim */}
+    {Array.from({ length: 7 }).map((_, i) => {
+      const t = (i / 6) * Math.PI;
+      const x = 50 + Math.cos(t) * 33;
+      const y = 46 + Math.sin(t) * 9;
+      return <circle key={i} cx={x} cy={y + 2} r="2" fill="currentColor" />;
+    })}
+    {/* Bowl shading */}
+    <path d="M22 56 Q 50 84, 78 56" fill="none" stroke="#1a0d05" strokeWidth="1" opacity="0.6" />
+    {/* Pedal */}
+    <rect x="40" y="92" width="20" height="4" rx="1" fill="currentColor" />
+  </svg>
+);
+
+const SnareDrumSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    {/* Top head ellipse */}
+    <ellipse cx="50" cy="34" rx="34" ry="8" fill="#fdf3d4" stroke="currentColor" strokeWidth="2" />
+    {/* Cylinder body */}
+    <path
+      d="M16 34 L16 64 Q 50 76, 84 64 L84 34"
+      fill="currentColor"
+    />
+    {/* Tension lugs / rods */}
+    {[24, 36, 50, 64, 76].map((x) => (
+      <line key={x} x1={x} y1="34" x2={x} y2="64" stroke="#1a0d05" strokeWidth="0.7" opacity="0.6" />
+    ))}
+    {/* Snare wires across the bottom */}
+    {[68, 70, 72, 74].map((y) => (
+      <path key={y} d={`M18 ${y} Q 50 ${y + 4}, 82 ${y}`} fill="none" stroke="#fcd34d" strokeWidth="0.7" />
+    ))}
+    {/* Rim */}
+    <ellipse cx="50" cy="34" rx="34" ry="8" fill="none" stroke="#1a0d05" strokeWidth="1.2" opacity="0.6" />
+  </svg>
+);
+
+const ORCHESTRA_FAMILIES: OrchestraFamily[] = [
+  {
+    id: "strings",
+    nameEn: "The String Family",
+    nameKh: "ឧបករណ៍ខ្សែ",
+    taglineEn: "Vibrating strings, drawn by a horsehair bow.",
+    taglineKh: "ខ្សែញ័រ ដែលត្រូវបានកក្រើកដោយព្រួញសក់សេះ។",
+    accent: "#d6a857",
+    instruments: [
+      {
+        nameEn: "Violin",
+        nameKh: "វីយូឡុង",
+        descEn:
+          "The highest-pitched string instrument, played with a bow made of horsehair. Held under the chin, it sings the soaring melodies you hear at the front of every orchestra.",
+        descKh:
+          "ឧបករណ៍ខ្សែដែលមានសំឡេងខ្ពស់បំផុត លេងជាមួយព្រួញដែលធ្វើពីសក់សេះ។ ត្រូវបានកាន់នៅក្រោមចង្ការ វាច្រៀងម៉ាឡូឌីដ៏ខ្ពង់ខ្ពស់ដែលអ្នកឮនៅពីមុខវង់តន្ត្រី។",
+        Svg: ViolinSvg,
+      },
+      {
+        nameEn: "Cello",
+        nameKh: "សែលឡូ",
+        descEn:
+          "A large, deep-sounding instrument played while sitting down, with the body resting between the knees. Its warm voice is the closest in the orchestra to a singing human.",
+        descKh:
+          "ឧបករណ៍ធំមួយដែលមានសំឡេងជ្រៅ លេងពេលអង្គុយ ដោយដាក់តួវាចន្លោះជង្គង់។ សំឡេងកក់ក្ដៅរបស់វាគឺប្រហាក់ប្រហែលនឹងសំឡេងមនុស្សច្រៀងបំផុតក្នុងវង់តន្ត្រី។",
+        Svg: CelloSvg,
+      },
+    ],
+  },
+  {
+    id: "woodwinds",
+    nameEn: "The Woodwind Family",
+    nameKh: "ឧបករណ៍ផ្លុំផ្លិត",
+    taglineEn: "A column of air, shaped by holes and keys.",
+    taglineKh: "សសរខ្យល់មួយ ដែលបង្កើតរូបរាងដោយរន្ធ និងគន្លឹះ។",
+    accent: "#e8c773",
+    instruments: [
+      {
+        nameEn: "Flute",
+        nameKh: "ខ្លុយផ្លុយ",
+        descEn:
+          "Made of silver or gold; produces sound when air is blown across a hole, much like blowing over a bottle. The flute is light, bright, and one of the oldest instruments in the world.",
+        descKh:
+          "ធ្វើពីប្រាក់ ឬមាស; បង្កើតសំឡេងពេលផ្លុំខ្យល់ឆ្លងកាត់រន្ធមួយ ដូចជាការផ្លុំលើដបទឹក។ ខ្លុយផ្លុយមានទម្ងន់ស្រាល ភ្លឺ និងជាឧបករណ៍ចាស់បំផុតមួយក្នុងពិភពលោក។",
+        Svg: FluteSvg,
+      },
+      {
+        nameEn: "Clarinet",
+        nameKh: "ក្លារីណែត",
+        descEn:
+          "Uses a single wooden 'reed' that vibrates against the mouthpiece. With a wide range from low and woody to bright and bird-like, it can play almost any mood.",
+        descKh:
+          "ប្រើ 'រ៉ូស' ឈើតែមួយ ដែលញ័រប៉ះមាត់ឧបករណ៍។ ជាមួយវិសាលភាពធំពីសំឡេងទាប និងដូចឈើ ទៅសំឡេងភ្លឺ និងដូចសត្វស្លាប វាអាចលេងស្ទើរគ្រប់អារម្មណ៍។",
+        Svg: ClarinetSvg,
+      },
+    ],
+  },
+  {
+    id: "brass",
+    nameEn: "The Brass Family",
+    nameKh: "ឧបករណ៍លង្ហិន",
+    taglineEn: "Buzzing lips inside long, coiled metal tubes.",
+    taglineKh: "បបូរមាត់រន្ទាប់ក្នុងបំពង់លោហៈវែង និងរង្វិល។",
+    accent: "#f5c049",
+    instruments: [
+      {
+        nameEn: "Trumpet",
+        nameKh: "ត្រែ",
+        descEn:
+          "The brightest and highest brass instrument, used for heroic fanfares, royal announcements, and the cry of jazz solos. Three valves are all it needs to play every note.",
+        descKh:
+          "ឧបករណ៍លង្ហិនដែលមានសំឡេងភ្លឺ និងខ្ពស់បំផុត ប្រើសម្រាប់សំឡេងហ៊ាន សេចក្ដីប្រកាសរាជវង្ស និងសំឡេងស្រែករបស់ jazz solo។ វាត្រូវការត្រឹមតែ ៣ valve ប៉ុណ្ណោះដើម្បីលេងគ្រប់នូត។",
+        Svg: TrumpetSvg,
+      },
+      {
+        nameEn: "French Horn",
+        nameKh: "ត្រែបារាំង",
+        descEn:
+          "A beautiful, coiled tube of brass that produces a mellow, echoing sound — as if it were calling from a distant forest. Uncoiled, the tube would stretch over 3 metres long.",
+        descKh:
+          "បំពង់លង្ហិនរង្វិលដ៏ស្រស់ស្អាត ដែលបង្កើតសំឡេងទន់ និងបន្លឺត្រឡប់ — ហាក់ដូចជាហៅពីព្រៃឆ្ងាយ។ បើដោះរង្វិលចេញ បំពង់វានឹងវែងជាង ៣ ម៉ែត្រ។",
+        Svg: FrenchHornSvg,
+      },
+    ],
+  },
+  {
+    id: "percussion",
+    nameEn: "The Percussion Family",
+    nameKh: "ឧបករណ៍គោះ",
+    taglineEn: "Strike, shake, or scrape — the heartbeat of music.",
+    taglineKh: "វាយ អង្រួន ឬកោស — ចង្វាក់បេះដូងនៃតន្ត្រី។",
+    accent: "#d99441",
+    instruments: [
+      {
+        nameEn: "Timpani",
+        nameKh: "ស្គរធំ / ស្គរទីមប៉ានី",
+        descEn:
+          "Massive copper kettle drums that can be tuned to specific pitches with a foot pedal. They sit at the back of the orchestra and provide the thundering pulse of a symphony.",
+        descKh:
+          "ស្គរក្ដាមធំធំធ្វើពីស្ពាន់ ដែលអាចកែសម្រួលឲ្យមានសំឡេងជាក់លាក់ដោយប្រើជើងជាន់។ ពួកវាស្ថិតនៅខាងក្រោយវង់តន្ត្រី ហើយផ្ដល់ចង្វាក់ផ្គរលាន់នៃសំម៉ាក្រូនី។",
+        Svg: TimpaniSvg,
+      },
+      {
+        nameEn: "Snare Drum",
+        nameKh: "ស្គរតូច",
+        descEn:
+          "Has metal wires (called snares) underneath that snap against the bottom skin to create a sharp 'crack'. It is the marching rhythm of the parade and the sizzle of a jazz drumkit.",
+        descKh:
+          "មានខ្សែលោហៈ (ហៅថា snare) នៅខាងក្រោម ដែលបះផ្ទាំងស្បែកខាងក្រោមបង្កើតសំឡេងស្រួច 'ច្រេច'។ វាគឺជាចង្វាក់ដើរក្បួន និងសំឡេងរេចរេឃនៃស្គរ jazz។",
+        Svg: SnareDrumSvg,
+      },
+    ],
+  },
+];
+
+function SymphonyOfSound({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="orchestra"
+      className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-4"
+      data-testid="symphony-of-sound"
+    >
+      {/* Outer mahogany card */}
+      <div
+        className="rounded-3xl overflow-hidden border shadow-2xl"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 0%, #4a2818 0%, transparent 60%)," +
+            "radial-gradient(circle at 100% 100%, #5a3a1f 0%, transparent 55%)," +
+            "linear-gradient(180deg, #2a160a 0%, #1a0d05 60%, #0a0503 100%)",
+          borderColor: "#7c4a17aa",
+          boxShadow: "0 30px 80px -30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(212,168,87,0.18)",
+        }}
+      >
+        {/* ── Section header ────────────────────────────────────────── */}
+        <header className="px-6 sm:px-10 pt-10 pb-6 border-b border-amber-700/25">
+          <div
+            className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase mb-3 ${
+              isKh ? "font-khmer tracking-normal normal-case" : ""
+            }`}
+            style={{ color: "#e8c773" }}
+          >
+            <Sparkles className="w-3 h-3" />
+            {isKh ? "បទភ្លេងនៃសំឡេង" : "The Symphony of Sound"}
+          </div>
+          <h2
+            className={`font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-3 leading-tight ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+            style={{
+              background: "linear-gradient(180deg, #f5d98a 0%, #d6a857 50%, #a06820 100%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            {isKh
+              ? "ឧបករណ៍ភ្លេងនៃវង់តន្ត្រី"
+              : "Instruments of the Orchestra"}
+          </h2>
+          <p
+            className={`max-w-3xl text-sm sm:text-base text-amber-100/85 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh
+              ? "នៅពេលឧបករណ៍រាប់សិបបាននាំគ្នាមកលេងព្រមៗ — ផ្លាក់រាប់រយផ្សេងគ្នាហូររួមបញ្ចូលគ្នាបង្កើតជាសំឡេងសំបូរបែបមួយដ៏ស្រស់ស្អាត។ វាគឺជាវង់តន្ត្រី — ហើយវាបែងចែកជាគ្រួសារធំៗបួន។"
+              : "When dozens of instruments come together, hundreds of different vibrations weave into one rich, glowing sound. That is an orchestra — and it is built from four great families."}
+          </p>
+        </header>
+
+        {/* ── Section 1: The Four Families intro ────────────────────── */}
+        <div className="px-6 sm:px-10 py-8 border-b border-amber-700/25">
+          <div
+            className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2 ${
+              isKh ? "font-khmer tracking-normal normal-case" : ""
+            }`}
+            style={{ color: "#d6a857" }}
+          >
+            <span className="inline-block w-6 h-px bg-amber-500/60" />
+            {isKh ? "ផ្នែកទី ១" : "Section 1"}
+          </div>
+          <h3
+            className={`font-display font-bold text-xl sm:text-2xl text-amber-100 mb-3 ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {isKh ? "ត្រកូលទាំងបួន" : "The Four Families"}
+          </h3>
+          <p
+            className={`max-w-3xl text-sm sm:text-base text-amber-100/80 ${
+              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+            }`}
+          >
+            {isKh
+              ? "វង់តន្ត្រី (orchestra) ត្រូវបានបែងចែកជាគ្រួសារធំៗបួន ដោយផ្អែកលើរបៀបដែលឧបករណ៍ធ្វើឲ្យខ្យល់ញ័រ៖ ខ្សែ (Strings) ដែលត្រូវបានបោសដោយព្រួញ ផ្លុំផ្លិត (Woodwinds) ដែលផ្លុំកាត់ឬកាត់រន្ធ លង្ហិន (Brass) ដែលប្រើបបូរមាត់រន្ទាប់ និងគោះ (Percussion) ដែលត្រូវបានវាយ ឬអង្រួន។"
+              : "An orchestra is divided into four main families based on how they make the air vibrate: Strings, drawn by a bow; Woodwinds, blown across or through reeds; Brass, buzzed with the lips; and Percussion, struck or shaken. Every instrument on the concert stage belongs to exactly one of these four."}
+          </p>
+
+          {/* Mini-row of family chips */}
+          <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+            {ORCHESTRA_FAMILIES.map((fam) => (
+              <div
+                key={fam.id}
+                className="rounded-xl px-3 py-2.5 border bg-black/40 backdrop-blur-sm"
+                style={{ borderColor: `${fam.accent}55` }}
+              >
+                <div
+                  className="text-xs font-bold tracking-wide"
+                  style={{ color: fam.accent }}
+                >
+                  {fam.nameEn}
+                </div>
+                <div
+                  className="font-khmer text-sm text-amber-50/90 leading-snug mt-0.5"
+                >
+                  {fam.nameKh}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Section 2: The Instrument Galleries grid ──────────────── */}
+        <div className="px-6 sm:px-10 py-8">
+          <div
+            className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2 ${
+              isKh ? "font-khmer tracking-normal normal-case" : ""
+            }`}
+            style={{ color: "#d6a857" }}
+          >
+            <span className="inline-block w-6 h-px bg-amber-500/60" />
+            {isKh ? "ផ្នែកទី ២" : "Section 2"}
+          </div>
+          <h3
+            className={`font-display font-bold text-xl sm:text-2xl text-amber-100 mb-6 ${
+              isKh ? "font-khmer leading-loose" : ""
+            }`}
+          >
+            {isKh ? "វិចិត្រសាលឧបករណ៍ភ្លេង" : "The Instrument Galleries"}
+          </h3>
+
+          {/* Responsive grid — 1 col mobile, 2 col tablet, 4 col desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+            {ORCHESTRA_FAMILIES.map((fam) => (
+              <article
+                key={fam.id}
+                className="rounded-2xl overflow-hidden border flex flex-col"
+                style={{
+                  borderColor: `${fam.accent}55`,
+                  background:
+                    "linear-gradient(180deg, rgba(74,40,24,0.55) 0%, rgba(20,10,5,0.7) 100%)",
+                  boxShadow: `0 0 0 1px ${fam.accent}22, 0 18px 40px -24px ${fam.accent}88`,
+                }}
+                data-testid={`family-${fam.id}`}
+              >
+                {/* Family header */}
+                <div
+                  className="px-4 py-3 border-b"
+                  style={{
+                    borderColor: `${fam.accent}33`,
+                    background: `linear-gradient(180deg, ${fam.accent}22 0%, transparent 100%)`,
+                  }}
+                >
+                  <div
+                    className="text-base font-display font-bold leading-tight"
+                    style={{ color: fam.accent }}
+                  >
+                    {fam.nameEn}
+                  </div>
+                  <div className="font-khmer text-base text-amber-50/95 leading-snug mt-0.5">
+                    {fam.nameKh}
+                  </div>
+                  <div
+                    className={`text-[11px] mt-1 italic text-amber-100/65 ${
+                      isKh ? "font-khmer not-italic leading-loose" : ""
+                    }`}
+                  >
+                    {isKh ? fam.taglineKh : fam.taglineEn}
+                  </div>
+                </div>
+
+                {/* Instruments — stack vertically inside each family card */}
+                <div className="flex-1 p-4 space-y-4">
+                  {fam.instruments.map((ins) => {
+                    const Icon = ins.Svg;
+                    return (
+                      <div
+                        key={ins.nameEn}
+                        className="flex gap-3 items-start"
+                        data-testid={`instrument-${ins.nameEn.toLowerCase().replace(/\s+/g, "-")}`}
+                      >
+                        {/* SVG portrait in a brass-bordered frame */}
+                        <div
+                          className="w-16 h-16 rounded-xl flex-shrink-0 grid place-items-center border"
+                          style={{
+                            borderColor: `${fam.accent}66`,
+                            background:
+                              "radial-gradient(circle at 30% 25%, #fdf3d4 0%, #f0d39c 60%, #d6a857 100%)",
+                            boxShadow: `inset 0 1px 0 #fff8, 0 4px 14px -4px ${fam.accent}aa`,
+                          }}
+                        >
+                          <Icon className="w-12 h-12" style={{ color: "#3a1f0e" }} />
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div
+                            className="text-sm font-bold leading-tight"
+                            style={{ color: fam.accent }}
+                          >
+                            {ins.nameEn}
+                          </div>
+                          <div className="font-khmer text-sm text-amber-50/95 leading-snug">
+                            {ins.nameKh}
+                          </div>
+                          <p
+                            className={`text-[12.5px] text-amber-100/80 mt-1.5 ${
+                              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                            }`}
+                          >
+                            {isKh ? ins.descKh : ins.descEn}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Closing reflection */}
+          <div
+            className="mt-8 rounded-xl border px-4 py-3 flex items-start gap-3"
+            style={{
+              borderColor: "#d6a85744",
+              background: "linear-gradient(180deg, #4a281833 0%, transparent 100%)",
+            }}
+          >
+            <Music className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#e8c773" }} />
+            <p
+              className={`text-xs sm:text-sm text-amber-100/80 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "នៅពេលអ្នកដឹកនាំ (conductor) លើកដៃ — ត្រកូលទាំងបួននេះច្រៀងជាមួយគ្នា។ ខ្សែផ្ដល់ម៉ាឡូឌី ផ្លុំផ្លិតលាបពណ៌ លង្ហិនបន្ថែមពន្លឺ ហើយគោះកំណត់ចង្វាក់បេះដូង។ នោះហើយជាទស្សន៍ឆ្នាំងនៃវង់តន្ត្រី។"
+                : "When the conductor lifts the baton, all four families sing as one. Strings carry the melody, woodwinds add colour, brass brings the light, and percussion sets the heartbeat. That is the magic of the orchestra."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
