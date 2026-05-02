@@ -1,0 +1,21 @@
+I want to add a featured deep dive to the bottom of the 'How Computers Work' page called 'Beyond Silicon: The Quantum Era (ហួសពីស៊ីលីកូន៖ យុគសម័យកង់ទិច)'.
+Please implement this using a futuristic, sleek aesthetic (dark backgrounds with neon blue or purple accents) and our established bilingual typography:
+1. Section 1: Bits vs. Qubits (ប៊ីត និង ឃ្យូប៊ីត)
+Explain the core difference using a simple analogy:
+Classical Bit: Like a coin sitting on a table, it is either strictly Heads (1) or Tails (0). It solves mazes by trying one path at a time.
+Qubit (Superposition): Like a coin spinning in the air, it is a blur of both Heads and Tails at the same time. It solves mazes by exploring every path simultaneously.
+Briefly mention Entanglement (ការភ្ជាប់គ្នានៃកង់ទិច): If you spin two entangled coins, stopping one instantly forces the other to stop on the exact same side, even if it is on the other side of the universe.
+2. Section 2: Cracking the Code - Shor's Algorithm (ក្បួនដោះស្រាយរបស់ Shor)
+Explain that modern internet security (passwords, banking) relies on math problems that would take a normal computer millions of years to solve.
+Introduce Shor's Algorithm: A quantum calculation that can solve these massive problems in hours or minutes. Explain that this represents a looming 'cryptography crisis' where the world must invent new, quantum-proof locks before these computers become fully stable.
+3. Section 3: Applications & The Future (ការអនុវត្ត និងអនាគត)
+Create cards for real-world uses:
+Biochemistry & Medicine: Simulating exact molecular interactions to cure diseases. Standard computers guess; quantum computers simulate the actual quantum chemistry.
+Material Science: Designing lighter, stronger materials for sustainable engineering and energy grids.
+4. Section 4: Quantum Computing + AI (កុំព្យូទ័រកង់ទិច និង AI)
+Explain the convergence: Artificial Intelligence needs massive amounts of data and calculation to 'think.' Current AI is bottlenecked by the physical limits of silicon chips.
+State that plugging an advanced AI into a quantum computer acts as an unimaginable multiplier. It gives AI the hardware to process infinite variables at once, rapidly accelerating the timeline toward Artificial Super Intelligence (ASI) and fundamentally changing the global economy.
+5. Formatting & UX:
+Ensure all headings and core concepts are strictly bilingual (English/Khmer).
+Use modern, clean icons (an atom, a lock, an AI brain network) to break up the text and keep it highly scannable.
+

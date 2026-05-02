@@ -8,6 +8,7 @@ import { TopicOfTheDay } from "@/components/TopicOfTheDay";
 import { CountUp } from "@/components/CountUp";
 import { LearningPathQuiz } from "@/components/LearningPathQuiz";
 import { FeedbackSection } from "@/components/FeedbackSection";
+import { RainySeasonAlert } from "@/components/RainySeasonAlert";
 
 export function Home() {
   const t = useTranslation();
@@ -21,6 +22,10 @@ export function Home() {
   
   return (
     <div className="w-full min-h-screen">
+      {/* Rainy-season safety banner — sits between the global Navbar and the
+          Hero. Self-gates to May–October and remembers in-session dismissal. */}
+      <RainySeasonAlert />
+
       {/* Hero Section */}
       {/* NOTE: overflow is intentionally NOT hidden here so the GlobalSearch
           dropdown can extend below the hero. The bg image is absolutely
