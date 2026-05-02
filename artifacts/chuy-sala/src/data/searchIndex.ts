@@ -1888,6 +1888,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["public health", "vaccine", "vaccination", "epidemic", "pandemic", "sanitation", "hygiene", "covid", "disease prevention", "who"],
     keywordsKh: ["សុខភាពសាធារណៈ", "វ៉ាក់សាំង", "អនាម័យ", "ជំងឺរាតត្បាត"],
   },
+  {
+    id: "well-being-dermatology",
+    href: "/well-being/public-health#dermatology",
+    icon: Sun,
+    titleEn: "Dermatology: Protecting Our Largest Organ",
+    titleKh: "រោគសើស្បែក៖ ការការពារសរីរាង្គដ៏ធំបំផុតរបស់យើង",
+    categoryEn: "Well-being", categoryKh: "សុខុមាលភាព",
+    descEn: "UVA & UVB rays, melanin & sunburn, daily sunscreen and SPF, plus the ABCDE early-warning guide for skin cancer.",
+    descKh: "កាំរស្មី UVA និង UVB មេឡានីន និងការរលាកស្បែក ឡេការពារកម្តៅថ្ងៃប្រចាំថ្ងៃ និង SPF ព្រមទាំងមគ្គុទេសក៍ ABCDE សម្រាប់ការព្រមានដំបូងនៃជំងឺមហារីកស្បែក។",
+    keywordsEn: ["skin", "sunscreen", "cancer", "sunburn", "dermatology", "melanoma", "UV", "UVA", "UVB", "SPF", "tan", "melanin", "mole", "ABCDE", "sun protection"],
+    keywordsKh: ["ស្បែក", "ឡេការពារកម្តៅថ្ងៃ", "មហារីក", "ការរលាកស្បែក", "រោគសើស្បែក", "មេឡាណូម៉ា", "កាំរស្មី UV", "មេឡានីន", "ប្រជ្រុយ", "កម្តៅថ្ងៃ", "ការការពារស្បែក"],
+  },
 
   // ── WEATHER EXTRA ─────────────────────────────────────────────────
   {

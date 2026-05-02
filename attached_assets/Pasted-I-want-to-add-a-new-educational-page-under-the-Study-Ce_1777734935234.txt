@@ -1,0 +1,20 @@
+I want to add a new educational page under the 'Study Center' dropdown called 'Ancient Professions & Lost Arts (វិជ្ជាជីវៈបុរាណ និង សិល្បៈដែលបាត់បង់)'.
+Please implement this using an ancient, rustic aesthetic (parchment textures, deep bronze, and stone grays) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this page so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'ancient', 'blacksmith', 'engineering', 'Angkor', and their Khmer equivalents.
+2. Section 1: The Masters of Material (ម្ចាស់នៃវត្ថុធាតុដើម)
+Create a responsive grid of 'Artisan Profile Cards' detailing how ancient humans manipulated raw materials into survival tools:
+The Blacksmith (ជាងដែក): Explain the art of using extreme heat and a heavy hammer to bend rigid iron into tools, plows, and weapons.
+The Leatherworker (ជាងស្បែក): Explain how animal hides were tanned using natural chemicals to create durable armor, water skins, and winter clothing.
+The Tailor & Weaver (ជាងកាត់ដេរ និង អ្នកត្បាញ): Detail the painstaking, completely manual process of spinning plant fibers or wool into thread, and weaving them into protective garments.
+3. Section 2: The Builders of Empires (អ្នកកសាងចក្រភព)
+Highlight the monumental scale of ancient construction, specifically focusing on local heritage:
+Stone Carving (ចម្លាក់ថ្ម): Explain how artisans used simple chisels and immense patience to carve intricate stories into solid rock.
+Ancient Engineering (វិស្វកម្មបុរាណ): Explain how ancient engineers built massive structures, like the temples of Angkor Wat, using exact geometry, water management, and the 'Corbel Arch'—all without modern cranes or mortar.
+4. Section 3: Lost Wisdom (ប្រាជ្ញាដែលបាត់បង់)
+Create a thought-provoking final section detailing practices ancient civilizations used that modern society has largely forgotten:
+Celestial Navigation (ការធ្វើនាវាចរណ៍តាមផ្កាយ): Crossing vast oceans using only the position of the stars, rather than GPS.
+Natural Architecture (ស្ថាបត្យកម្មធម្មជាតិ): Designing homes with 'wind catchers' to funnel cool air inside, creating natural air conditioning instead of relying on electricity.
+5. Formatting & UX:
+Ensure all main headings, professions, and ancient concepts are strictly bilingual (English/Khmer).
+Use historic icons (an anvil, a chisel, a woven tapestry, a compass) to make the text highly engaging.

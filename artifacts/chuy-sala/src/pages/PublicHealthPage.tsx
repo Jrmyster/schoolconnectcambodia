@@ -7,6 +7,7 @@ import {
   Baby,
   Brain,
   Cigarette,
+  CloudRain,
   Dna,
   Eye,
   Flame,
@@ -22,12 +23,15 @@ import {
   ShieldCheck,
   Sparkles,
   Stethoscope,
+  Sun,
   Sunrise,
   Syringe,
   Droplet,
   Hand,
+  Microscope,
   Skull,
   ShieldOff,
+  Umbrella,
   Users,
   Wallet,
   Wind as WindIcon,
@@ -337,6 +341,7 @@ export function PublicHealthPage() {
         <SectionAlcoholChemistry k={k} t={t} />
         <SectionStress         k={k} t={t} />
         <SectionHappiness      k={k} t={t} />
+        <SectionDermatology    k={k} t={t} />
         <EmergencyFirstAid     k={k} t={t} />
 
         {/* Closing */}
@@ -1761,6 +1766,443 @@ function SectionAlcoholChemistry({ k, t }: { k: boolean; t: T }) {
           />
         </ConceptCard>
       </div>
+    </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  SEC-05 · Dermatology: Protecting Our Largest Organ
+//          រោគសើស្បែក៖ ការការពារសរីរាង្គដ៏ធំបំផុតរបស់យើង
+//
+//  1. The Invisible Fire — UVA / UVB / Melanin / Sunburn
+//  2. The Daily Shield   — SPF / sunscreen even on cloudy days
+//  3. Warning Signs      — Skin cancer (Melanoma) + ABCDE guide
+//
+//  Aesthetic: clinical · medical blue + warm skin tone + bright sun yellow.
+// ════════════════════════════════════════════════════════════════════════════
+
+const DERM_SUN = "#f59e0b";        // bright sun yellow / amber
+const DERM_SUN_DEEP = "#b45309";   // burnt amber for headings
+const DERM_SUN_SOFT = "#fef3c7";   // pale honey backdrop
+const DERM_SKIN = "#f5d0a9";       // warm skin tone
+const DERM_SKIN_DEEP = "#9a5b2e";  // deeper skin tone for outlines
+
+function SectionDermatology({ k, t }: { k: boolean; t: T }) {
+  return (
+    <section id="dermatology" className="mb-12 scroll-mt-20" data-testid="section-dermatology">
+      <SectionHeader
+        spec="05"
+        en="Dermatology: Protecting Our Largest Organ"
+        kh="រោគសើស្បែក៖ ការការពារសរីរាង្គដ៏ធំបំផុតរបស់យើង"
+        k={k}
+        Icon={Sun}
+        accent={MED_BLUE}
+      />
+
+      <p
+        className={`text-sm text-slate-700 mb-6 max-w-3xl ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+      >
+        {t(
+          "Your skin is the largest organ of your body — about 2 square metres of living tissue that breathes, senses, and shields every cell beneath it. Most days you do not even think about it. But every time you step outside, an invisible fire is falling on it, and the choices you make in the next few minutes decide whether your skin will quietly heal — or quietly accumulate damage that may surface decades later as cancer.",
+          "ស្បែករបស់អ្នក គឺជាសរីរាង្គដ៏ធំបំផុតនៅក្នុងរាងកាយរបស់អ្នក — ប្រហែល ២ ម៉ែត្រការ៉េនៃជាលិការស់ ដែលដកដង្ហើម អារម្មណ៍ និងការពារគ្រប់កោសិកានៅក្រោមវា។ ភាគច្រើននៃថ្ងៃ អ្នកមិនបានគិតពីវាសោះ។ ប៉ុន្តែរាល់ពេលដែលអ្នកដើរចេញទៅខាងក្រៅ ភ្លើងមួយដែលមើលមិនឃើញកំពុងធ្លាក់មកលើវា ហើយជម្រើសដែលអ្នកធ្វើនៅប៉ុន្មាននាទីខាងមុខនេះ កំណត់ថាតើស្បែករបស់អ្នកនឹងជាសះស្បើយដោយស្ងៀមស្ងាត់ — ឬប្រមូលផ្តុំការខូចខាតដោយស្ងៀមស្ងាត់ ដែលអាចលេចចេញជាច្រើនទសវត្សក្រោយ ជាជំងឺមហារីក។"
+        )}
+      </p>
+
+      {/* ─── Sub-section 1 · The Invisible Fire — UV Rays ─────────────────── */}
+      <SubSectionHeader
+        k={k}
+        Icon={Sun}
+        spec="05a"
+        en="The Invisible Fire — UV Rays"
+        kh="ភ្លើងដែលមើលមិនឃើញ — កាំរស្មី UV"
+        enLead="The sun feels warm and gentle on your face, but inside that warmth is a kind of light your eyes cannot see and your skin cannot feel — until the damage is already done."
+        khLead="ពន្លឺថ្ងៃហាក់ដូចជាកក់ក្តៅ និងស្រាលនៅលើមុខរបស់អ្នក ប៉ុន្តែនៅក្នុងភាពកក់ក្តៅនោះ មានពន្លឺមួយប្រភេទ ដែលភ្នែករបស់អ្នកមើលមិនឃើញ ហើយស្បែករបស់អ្នកមិនអាចមានអារម្មណ៍ — រហូតដល់ការខូចខាតបានកើតឡើងរួចហើយ។"
+        accent={DERM_SUN}
+      />
+
+      <div className="grid md:grid-cols-2 gap-5" data-testid="uv-grid">
+        <ConceptCard
+          k={k}
+          Icon={Sun}
+          enName="UVA — the silent ager"
+          khName="UVA — អ្នកធ្វើឲ្យស្បែកចាស់ស្ងាត់ៗ"
+          enTag="long wavelength · ages the skin"
+          khTag="រលកវែង · ធ្វើឲ្យស្បែកចាស់"
+          enBody="UVA rays have the longest wavelength of the dangerous ultraviolet light. They slip deep into the second layer of your skin (the dermis), break down the collagen and elastin that keep skin firm, and slowly print wrinkles and dark spots that you only notice years later. UVA passes straight through window glass and through clouds, which is why it is constantly working on you — even on a cloudy day, even inside a car."
+          khBody="កាំរស្មី UVA មានរលកវែងជាងគេបំផុតនៃពន្លឺអ៊ុលត្រាវីយូឡេដែលបង្កគ្រោះថ្នាក់។ ពួកវាជ្រាបចូលយ៉ាងជ្រៅទៅក្នុងស្រទាប់ទីពីរនៃស្បែករបស់អ្នក (Dermis) បំបែកកូឡាហ្សែន និងអេឡាស្ទិន ដែលរក្សាស្បែកឲ្យរឹងមាំ ហើយបោះពុម្ពយឺតៗនូវស្នាមជ្រួញ និងចំណុចខ្មៅ ដែលអ្នកនឹងសង្កេតឃើញតែប៉ុន្មានឆ្នាំក្រោយប៉ុណ្ណោះ។ UVA ឆ្លងកាត់កញ្ចក់បង្អួច និងពពកដោយផ្ទាល់ ដែលជាហេតុដែលធ្វើឲ្យវាធ្វើការលើអ្នកជានិច្ច — សូម្បីតែថ្ងៃមានពពក សូម្បីតែនៅខាងក្នុងឡាន។"
+          accent={DERM_SUN}
+          glow
+          badge={{ en: "Aging", kh: "ការចាស់" }}
+        />
+
+        <ConceptCard
+          k={k}
+          Icon={Flame}
+          enName="UVB — the burner"
+          khName="UVB — អ្នកដុតស្បែក"
+          enTag="short wavelength · burns the skin"
+          khTag="រលកខ្លី · ដុតស្បែក"
+          enBody="UVB rays carry more energy per ray and are the main cause of sunburn. They strike the top layer of your skin (the epidermis) hard enough to scramble the DNA inside individual skin cells. UVB is strongest between 10am and 4pm, and is the type of UV that most directly causes the mutations that lead to skin cancer."
+          khBody="កាំរស្មី UVB មានថាមពលច្រើនជាងក្នុងមួយរលក ហើយជាមូលហេតុចម្បងនៃការរលាកស្បែកដោយសារកម្តៅថ្ងៃ។ ពួកវាបុកស្រទាប់ខាងលើនៃស្បែករបស់អ្នក (Epidermis) ខ្លាំងគ្រប់គ្រាន់ ដើម្បីធ្វើឲ្យ DNA នៅក្នុងកោសិកាស្បែកនីមួយៗច្រឡំ។ UVB ខ្លាំងបំផុតរវាងម៉ោង ១០ ព្រឹក និង ៤ ល្ងាច ហើយជាប្រភេទ UV ដែលបង្ករផ្ទាល់នូវការផ្លាស់ប្តូរហ្សែន ដែលនាំទៅរកជំងឺមហារីកស្បែក។"
+          accent="#dc2626"
+          glow
+          badge={{ en: "Burning", kh: "ការដុត" }}
+        />
+      </div>
+
+      {/* Tan myth + Sunburn explainer side-by-side */}
+      <div className="grid md:grid-cols-2 gap-5 mt-5">
+        <div
+          className="rounded-3xl p-5 sm:p-6 border-2 bg-white"
+          style={{
+            borderColor: `${DERM_SKIN_DEEP}55`,
+            backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${DERM_SKIN}33 100%)`,
+          }}
+          data-testid="tan-myth"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <ShieldOff className="w-5 h-5" style={{ color: DERM_SKIN_DEEP }} />
+            <span
+              className={`text-[10px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+              style={{ color: DERM_SKIN_DEEP }}
+            >
+              {t("Myth-buster", "បំបាក់ការយល់ច្រឡំ")}
+            </span>
+          </div>
+          <h4
+            className={`font-bold text-base sm:text-lg mb-2 ${k ? "font-khmer" : ""}`}
+            style={{ color: SLATE }}
+          >
+            {t(
+              "A “tan” is not a sign of health.",
+              "“ការប្រែពណ៌សម្បុរស្បែក” មិនមែនជាសញ្ញានៃសុខភាពល្អទេ។"
+            )}
+          </h4>
+          <p
+            className={`text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            {t(
+              "A tan (ការប្រែពណ៌សម្បុរស្បែក) is your skin’s emergency defence response. When UV starts hitting your DNA, special cells called melanocytes (មេឡាណូស៊ីត) flood the area with extra dark pigment — Melanin (មេឡានីន) — to try to absorb the radiation before it shreds the genetic code inside your cells. So a tan literally means: “my skin has just been damaged enough that it had to call for backup.” The darker you turn, the more DNA injuries already happened.",
+              "ការប្រែពណ៌សម្បុរស្បែក (Tan) គឺជាប្រតិកម្មការពារបន្ទាន់របស់ស្បែករបស់អ្នក។ នៅពេល UV ចាប់ផ្តើមបុក DNA របស់អ្នក កោសិកាពិសេសហៅថា មេឡាណូស៊ីត (Melanocytes) បង្ហូរទឹកថ្នាំខ្មៅបន្ថែម — មេឡានីន (Melanin) — ទៅលើតំបន់នោះ ដើម្បីព្យាយាមស្រូបយកវិទ្យុសកម្ម មុនពេលវាកាត់ផ្តាច់កូដហ្សែននៅក្នុងកោសិការបស់អ្នក។ ដូច្នេះការប្រែពណ៌ស្បែក មានន័យត្រង់ៗថា៖ «ស្បែករបស់ខ្ញុំទើបនឹងត្រូវខូចខាតគ្រប់គ្រាន់ ដែលត្រូវហៅកម្លាំងជំនួយ»។ កាន់តែខ្មៅ ការខូចខាត DNA កាន់តែច្រើនបានកើតឡើងរួចហើយ។"
+            )}
+          </p>
+        </div>
+
+        <div
+          className="rounded-3xl p-5 sm:p-6 border-2 bg-white"
+          style={{
+            borderColor: "#dc262655",
+            backgroundImage: "linear-gradient(135deg, #ffffff 0%, #fee2e266 100%)",
+          }}
+          data-testid="sunburn-explainer"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <AlertTriangle className="w-5 h-5" style={{ color: "#dc2626" }} />
+            <span
+              className={`text-[10px] font-mono uppercase tracking-widest ${k ? "font-khmer normal-case tracking-normal" : ""}`}
+              style={{ color: "#dc2626" }}
+            >
+              {t("Cell-level injury", "ការរបួសកម្រិតកោសិកា")}
+            </span>
+          </div>
+          <h4
+            className={`font-bold text-base sm:text-lg mb-2 ${k ? "font-khmer" : ""}`}
+            style={{ color: SLATE }}
+          >
+            {t(
+              "Sunburn — when skin cells actually die.",
+              "ការរលាកស្បែកដោយសារកម្តៅថ្ងៃ — ពេលកោសិកាស្បែកស្លាប់ពិតៗ។"
+            )}
+          </h4>
+          <p
+            className={`text-sm text-slate-700 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            {t(
+              "A sunburn (ការរលាកស្បែកដោយសារកម្តៅថ្ងៃ) is not just “colour change.” It happens when UV radiation is so intense that the DNA damage is beyond repair, and the skin cells choose to die rather than risk turning cancerous. Your body then rushes blood to the area to clear the dead cells and start healing — that is the redness, the heat, the pain, and the peeling a few days later. Every serious childhood sunburn measurably raises your lifetime risk of skin cancer.",
+              "ការរលាកស្បែកដោយសារកម្តៅថ្ងៃ មិនមែនគ្រាន់តែជា «ការប្តូរពណ៌» នោះទេ។ វាកើតឡើងនៅពេលដែលវិទ្យុសកម្ម UV ខ្លាំងពេក ការខូចខាត DNA លើសពីការជួសជុលបាន ហើយកោសិកាស្បែកជ្រើសរើសស្លាប់ ជាជាងប្រថុយក្លាយជាមហារីក។ បន្ទាប់មក រាងកាយរបស់អ្នកប្រញាប់បញ្ជូនឈាមទៅតំបន់នោះ ដើម្បីសម្អាតកោសិកាស្លាប់ និងចាប់ផ្តើមជាសះស្បើយ — នោះគឺជាក្រហម កម្តៅ ការឈឺ និងការលាស់ស្បែកប៉ុន្មានថ្ងៃក្រោយ។ រាល់ការរលាកស្បែកធ្ងន់ធ្ងរនៅវ័យកុមារ បង្កើនហានិភ័យពេញមួយជីវិតរបស់អ្នកចំពោះជំងឺមហារីកស្បែក។"
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* ─── Sub-section 2 · The Daily Shield — Sunscreen ─────────────────── */}
+      <SubSectionHeader
+        k={k}
+        Icon={Umbrella}
+        spec="05b"
+        en="The Daily Shield — Sunscreen"
+        kh="ខែលការពារប្រចាំថ្ងៃ — ឡេការពារកម្តៅថ្ងៃ"
+        enLead="Sunscreen is not a beach product. It is a daily piece of medical equipment as basic as soap or a toothbrush — a thin coat of cream that bounces the invisible fire off your skin before it can reach your DNA."
+        khLead="ឡេការពារកម្តៅថ្ងៃ មិនមែនជាផលិតផលឆ្នេរសមុទ្រទេ។ វាគឺជាឧបករណ៍វេជ្ជសាស្ត្រប្រចាំថ្ងៃ ដ៏សាមញ្ញដូចជាសាប៊ូ ឬច្រាសដុសធ្មេញ — ស្រទាប់ឡេស្តើមួយដែលច្រានវាយភ្លើងមើលមិនឃើញចេញពីស្បែករបស់អ្នក មុនពេលវាអាចទៅដល់ DNA របស់អ្នក។"
+        accent={MED_BLUE}
+      />
+
+      <div className="grid md:grid-cols-2 gap-5">
+        <ConceptCard
+          k={k}
+          Icon={ShieldCheck}
+          enName="What SPF actually means"
+          khName="អត្ថន័យពិតរបស់ SPF"
+          enTag="Sun Protection Factor · កត្តាការពារកម្តៅថ្ងៃ"
+          khTag="Sun Protection Factor · កត្តាការពារកម្តៅថ្ងៃ"
+          enBody="SPF (Sun Protection Factor / កត្តាការពារកម្តៅថ្ងៃ) is a measure of how much longer your skin can stay in the sun before it starts to burn, compared to wearing nothing. SPF 30 lets through about 1/30 of the burning UVB — roughly 97% blocked. SPF 50 blocks about 98%. There is no such thing as a sunscreen that blocks 100%, so reapply every two hours, and after sweating or swimming."
+          khBody="SPF (Sun Protection Factor / កត្តាការពារកម្តៅថ្ងៃ) គឺជាការវាស់វែងថា ស្បែករបស់អ្នកអាចនៅក្រោមកម្តៅថ្ងៃបានយូរប៉ុណ្ណា មុនពេលចាប់ផ្តើមដុត ធៀបនឹងការមិនលាបអ្វីសោះ។ SPF ៣០ អនុញ្ញាតឲ្យឆ្លងកាត់ប្រហែល ១/៣០ នៃ UVB ដែលដុត — ប្រហែល ៩៧% ត្រូវបានរារាំង។ SPF ៥០ រារាំងបានប្រហែល ៩៨%។ មិនមានឡេការពារកម្តៅថ្ងៃណាមួយរារាំងបាន ១០០% ទេ ដូច្នេះត្រូវលាបឡើងវិញរៀងរាល់ ២ ម៉ោង និងបន្ទាប់ពីបែកញើស ឬហែលទឹក។"
+          accent={MED_BLUE}
+          glow
+        >
+          {/* Visual: SPF protection bars */}
+          <div
+            className="rounded-2xl border p-3 bg-white"
+            style={{ borderColor: `${MED_BLUE}33` }}
+            role="img"
+            aria-label={
+              k
+                ? "ក្រាហ្វិកបង្ហាញ SPF ១៥ ៣០ និង ៥០ រារាំង UVB"
+                : "Bar graphic comparing UVB blocked by SPF 15, SPF 30 and SPF 50"
+            }
+            data-testid="spf-bars"
+          >
+            {[
+              { label: "SPF 15", pct: 93 },
+              { label: "SPF 30", pct: 97 },
+              { label: "SPF 50", pct: 98 },
+            ].map((row) => (
+              <div key={row.label} className="mb-2 last:mb-0">
+                <div className="flex items-center justify-between mb-1">
+                  <span
+                    className="text-[11px] font-mono font-semibold"
+                    style={{ color: MED_BLUE_DEEP }}
+                  >
+                    {row.label}
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-700">
+                    {row.pct}% {t("UVB blocked", "UVB ត្រូវបានរារាំង")}
+                  </span>
+                </div>
+                <div className="h-2.5 rounded-full overflow-hidden bg-slate-100">
+                  <div
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${row.pct}%`,
+                      backgroundImage: `linear-gradient(90deg, ${MED_BLUE_LIGHT}, ${MED_BLUE})`,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </ConceptCard>
+
+        <ConceptCard
+          k={k}
+          Icon={CloudRain}
+          enName="Cloudy days are not safe days"
+          khName="ថ្ងៃមានពពក មិនមែនជាថ្ងៃសុវត្ថិភាពទេ"
+          enTag="UV passes through clouds"
+          khTag="UV ឆ្លងកាត់ពពក"
+          enBody="On a fully overcast day, up to 80% of the UV still reaches the ground — you just cannot feel the warmth, so you do not realise you are being burned. Sunscreen should be worn every single day you are outside for any length of time, even when it is grey, even in the rainy season, even on the way to school. The damage is cumulative: a tiny bit every day for ten years adds up to far more than a single beach holiday."
+          khBody="នៅថ្ងៃដែលពពកស្តុកស្តម្ភទាំងស្រុង រហូតដល់ ៨០% នៃ UV នៅតែទៅដល់ដី — អ្នកគ្រាន់តែមិនមានអារម្មណ៍កក់ក្តៅប៉ុណ្ណោះ ដូច្នេះអ្នកមិនដឹងថាអ្នកកំពុងត្រូវដុត។ ឡេការពារកម្តៅថ្ងៃ គួរត្រូវបានលាបរាល់ថ្ងៃ ដែលអ្នកនៅខាងក្រៅរយៈពេលណាមួយ សូម្បីពេលមេឃងងឹត សូម្បីតែរដូវវស្សា សូម្បីតែតាមផ្លូវទៅសាលា។ ការខូចខាតគឺប្រមូលផ្តុំ៖ បន្តិចបន្តួចជារៀងរាល់ថ្ងៃអស់រយៈពេល ១០ ឆ្នាំ ប្រមូលផ្តុំច្រើនជាងវិស្សមកាលឆ្នេរសមុទ្រតែមួយលើក។"
+          accent={MED_BLUE}
+        >
+          <Callout
+            k={k}
+            Icon={Sun}
+            labelEn="Daily habit"
+            labelKh="ទម្លាប់ប្រចាំថ្ងៃ"
+            enTitle="A teaspoon for the face, a shot-glass for the body."
+            khTitle="មួយស្លាបព្រាកាហ្វេសម្រាប់មុខ មួយកែវតូចសម្រាប់រាងកាយ។"
+            enBody="Most people use far too little sunscreen — about a quarter of what is needed — which means an SPF 30 in real life only protects like an SPF 7 or 8. Aim for about a teaspoon (5 ml) for your face, ears and neck, and roughly a shot-glass (30 ml) to cover the rest of your body. Apply 15 minutes before going out, and again every two hours."
+            khBody="មនុស្សភាគច្រើនប្រើឡេការពារកម្តៅថ្ងៃតិចពេក — ប្រហែលមួយភាគបួននៃអ្វីដែលត្រូវការ — ដែលមានន័យថា SPF ៣០ ក្នុងជីវិតពិត ការពារបានត្រឹមតែដូច SPF ៧ ឬ ៨។ គោលដៅប្រហែលមួយស្លាបព្រាកាហ្វេ (៥ មីលីលីត្រ) សម្រាប់មុខ ត្រចៀក និងករ ហើយប្រហែលមួយកែវតូច (៣០ មីលីលីត្រ) គ្របដណ្តប់ផ្នែកដែលនៅសល់នៃរាងកាយ។ លាបមុនចេញខាងក្រៅ ១៥ នាទី ហើយលាបឡើងវិញរៀងរាល់ ២ ម៉ោង។"
+            accent={MED_BLUE}
+          />
+        </ConceptCard>
+      </div>
+
+      {/* ─── Sub-section 3 · Warning Signs — Skin Cancer ──────────────────── */}
+      <SubSectionHeader
+        k={k}
+        Icon={Microscope}
+        spec="05c"
+        en="The Warning Signs — Skin Cancer"
+        kh="សញ្ញាព្រមាន — ជំងឺមហារីកស្បែក"
+        enLead="Repeated UV damage to skin DNA can cause cells to multiply out of control. The most dangerous form is Melanoma — but caught early, it is one of the most curable cancers. The trick is knowing what to look for, and looking once a month."
+        khLead="ការខូចខាត DNA ស្បែកដោយ UV ម្តងហើយម្តងទៀត អាចបណ្តាលឲ្យកោសិកាបង្កើតផលដោយឥតគ្រប់គ្រង។ ទម្រង់គ្រោះថ្នាក់បំផុតគឺ មេឡាណូម៉ា (Melanoma) — ប៉ុន្តែបើរកឃើញដំបូង វាជាជំងឺមហារីកមួយដែលអាចព្យាបាលបានច្រើនជាងគេ។ ល្បិចគឺត្រូវដឹងថាមើលរកអ្វី ហើយមើលម្តងក្នុងមួយខែ។"
+        accent={ROSE}
+      />
+
+      <ConceptCard
+        k={k}
+        Icon={Microscope}
+        enName="Melanoma — when pigment cells turn cancerous"
+        khName="មេឡាណូម៉ា — ពេលកោសិកាមេឡានីនក្លាយជាមហារីក"
+        enTag="serious · highly curable when caught early"
+        khTag="ធ្ងន់ធ្ងរ · ព្យាបាលបានល្អ ពេលរកឃើញដំបូង"
+        enBody="When the same melanocytes (មេឡាណូស៊ីត) that protect you with melanin are themselves damaged again and again by UV, their own DNA can mutate. They can lose the brakes that tell them when to stop dividing — and a small dark spot becomes a tumour that can spread to the rest of the body. Once a month, in good light, look at every mole on your skin (back, scalp, soles of feet, between toes — everywhere) and ask the ABCDE questions below. If a mole answers “yes” to any of them, see a doctor."
+        khBody="នៅពេលកោសិកាមេឡាណូស៊ីត (Melanocytes) ដូចគ្នា ដែលការពារអ្នកដោយមេឡានីន ត្រូវខូចខាតដោយ UV ម្តងហើយម្តងទៀត DNA របស់ពួកវាខ្លួនឯងអាចផ្លាស់ប្តូរ។ ពួកវាអាចបាត់បង់ឆ្នុកដែលប្រាប់ពួកវាថា ពេលណាត្រូវបញ្ឈប់ការបែងចែកកោសិកា — ហើយចំណុចខ្មៅតូចមួយ ក្លាយជាដុំសាច់ដែលអាចរាលដាលទៅផ្នែកដទៃនៃរាងកាយ។ ម្តងក្នុងមួយខែ ក្រោមពន្លឺល្អ មើលរាល់ប្រជ្រុយនៅលើស្បែករបស់អ្នក (ខ្នង ស្បែកក្បាល បាតជើង ចន្លោះម្រាមជើង — គ្រប់ទីកន្លែង) ហើយសួរសំណួរ ABCDE ខាងក្រោម។ បើប្រជ្រុយណាមួយឆ្លើយ «បាទ/ចាស» ចំពោះសំណួរណាមួយ សូមទៅជួបពេទ្យ។"
+        accent={ROSE}
+        glow
+        badge={{ en: "Self-check monthly", kh: "ពិនិត្យខ្លួនឯងប្រចាំខែ" }}
+      >
+        {/* ABCDE guide — five colour-coded letter cards */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-2"
+          data-testid="abcde-grid"
+        >
+          {[
+            {
+              letter: "A",
+              accent: "#0284c7",
+              en: "Asymmetry",
+              kh: "ភាពមិនស៊ីមេទ្រី",
+              enBody: "One half of the mole does not match the other half. A normal mole is roughly symmetric — fold it in half mentally and the two sides should look the same.",
+              khBody: "ពាក់កណ្តាលមួយនៃប្រជ្រុយ មិនដូចពាក់កណ្តាលម្ខាងទេ។ ប្រជ្រុយធម្មតាមានភាពស៊ីមេទ្រី — ប្រសិនបើបត់វាជាពីរក្នុងគំនិត ផ្នែកទាំងពីរគួរតែមើលទៅដូចគ្នា។",
+              svg: (
+                <svg viewBox="0 0 60 60" className="w-full h-full" aria-hidden="true">
+                  <path d="M 30 8 Q 12 18 14 36 Q 22 56 36 50 Q 54 42 50 26 Q 46 14 30 8 Z" fill="#1e293b" />
+                  <line x1="30" y1="4" x2="30" y2="56" stroke="#0284c7" strokeWidth="1.5" strokeDasharray="3 3" />
+                </svg>
+              ),
+            },
+            {
+              letter: "B",
+              accent: "#15803d",
+              en: "Border",
+              kh: "គែម",
+              enBody: "The edges are irregular, ragged, notched, or blurred — not a clean smooth circle. Healthy moles have a clear, even border.",
+              khBody: "គែមមានភាពមិនទៀងទាត់ រឆេតរឆូត ចូលក្នុង ឬព្រិលៗ — មិនមែនជារង្វង់រលោងស្អាតទេ។ ប្រជ្រុយដែលមានសុខភាពល្អ មានគែមច្បាស់ និងស្មើ។",
+              svg: (
+                <svg viewBox="0 0 60 60" className="w-full h-full" aria-hidden="true">
+                  <path d="M 30 10 Q 14 12 12 26 Q 6 36 18 44 Q 24 56 36 52 Q 52 50 50 36 Q 56 24 44 18 Q 40 8 30 10 Z" fill="#1e293b" />
+                </svg>
+              ),
+            },
+            {
+              letter: "C",
+              accent: "#b45309",
+              en: "Color",
+              kh: "ពណ៌",
+              enBody: "The colour is not the same all over — different shades of brown, black, sometimes patches of red, white, or blue. A safe mole is one even colour.",
+              khBody: "ពណ៌មិនដូចគ្នាទាំងអស់ទេ — មានស្រមោលត្នោត ខ្មៅខុសៗគ្នា ពេលខ្លះមានចំណុចក្រហម ស ឬខៀវ។ ប្រជ្រុយសុវត្ថិភាព មានពណ៌ស្មើតែមួយ។",
+              svg: (
+                <svg viewBox="0 0 60 60" className="w-full h-full" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="abcdeC" cx="40%" cy="35%">
+                      <stop offset="0" stopColor="#b45309" />
+                      <stop offset="0.55" stopColor="#1e293b" />
+                      <stop offset="1" stopColor="#7f1d1d" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="30" cy="30" r="20" fill="url(#abcdeC)" />
+                </svg>
+              ),
+            },
+            {
+              letter: "D",
+              accent: "#9333ea",
+              en: "Diameter",
+              kh: "អង្កត់ផ្ចិត",
+              enBody: "Larger than 6 millimetres — about the width of a pencil eraser. Most melanomas are bigger than this when found, but smaller spots can also be cancerous, so use this as a guide, not a hard rule.",
+              khBody: "ធំជាង ៦ មីលីម៉ែត្រ — ប្រហែលទទឹងនៃជ័រលុប។ មេឡាណូម៉ាភាគច្រើនធំជាងនេះពេលរកឃើញ ប៉ុន្តែចំណុចតូចជាងក៏អាចជាមហារីកដែរ ដូច្នេះប្រើនេះជាការណែនាំ មិនមែនជាច្បាប់ដាច់ខាតទេ។",
+              svg: (
+                <svg viewBox="0 0 60 60" className="w-full h-full" aria-hidden="true">
+                  <circle cx="30" cy="30" r="18" fill="#1e293b" />
+                  <line x1="6" y1="50" x2="54" y2="50" stroke="#9333ea" strokeWidth="1.5" />
+                  <line x1="6" y1="46" x2="6" y2="54" stroke="#9333ea" strokeWidth="1.5" />
+                  <line x1="54" y1="46" x2="54" y2="54" stroke="#9333ea" strokeWidth="1.5" />
+                  <text x="30" y="58" textAnchor="middle" fontSize="7" fill="#9333ea" fontFamily="monospace">6mm</text>
+                </svg>
+              ),
+            },
+            {
+              letter: "E",
+              accent: "#be123c",
+              en: "Evolving",
+              kh: "ការវិវឌ្ឍ",
+              enBody: "The mole is changing — in size, shape, colour, or feel — over weeks or months. Any spot that itches, bleeds, or scabs over and will not heal is also evolving. Change is the single biggest warning sign.",
+              khBody: "ប្រជ្រុយកំពុងផ្លាស់ប្តូរ — ទំហំ រូបរាង ពណ៌ ឬអារម្មណ៍ — ក្នុងរយៈពេលប៉ុន្មានសប្តាហ៍ ឬប៉ុន្មានខែ។ ចំណុចណាមួយដែលរមាស់ ហូរឈាម ឬបង្កើតអាប់ដែលមិនជាសះស្បើយ ក៏កំពុងវិវឌ្ឍដែរ។ ការផ្លាស់ប្តូរ គឺជាសញ្ញាព្រមានធំបំផុតតែមួយ។",
+              svg: (
+                <svg viewBox="0 0 60 60" className="w-full h-full" aria-hidden="true">
+                  <circle cx="18" cy="30" r="6" fill="#1e293b" opacity="0.6" />
+                  <circle cx="32" cy="30" r="9" fill="#1e293b" opacity="0.8" />
+                  <path d="M 50 22 Q 56 30 50 38 Q 42 42 40 30 Q 42 18 50 22 Z" fill="#1e293b" />
+                  <path d="M 4 50 L 56 50" stroke="#be123c" strokeWidth="1.2" markerEnd="url(#arrEvol)" />
+                  <defs>
+                    <marker id="arrEvol" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                      <path d="M 0 0 L 6 3 L 0 6 z" fill="#be123c" />
+                    </marker>
+                  </defs>
+                </svg>
+              ),
+            },
+          ].map((item) => (
+            <div
+              key={item.letter}
+              className="rounded-2xl border-2 bg-white overflow-hidden flex flex-col"
+              style={{
+                borderColor: `${item.accent}55`,
+                boxShadow: `0 6px 18px -12px ${item.accent}88`,
+              }}
+              data-testid={`abcde-${item.letter.toLowerCase()}`}
+            >
+              <div
+                className="flex items-center gap-2 px-3 py-2 border-b"
+                style={{
+                  backgroundColor: `${item.accent}10`,
+                  borderColor: `${item.accent}33`,
+                }}
+              >
+                <span
+                  className="font-mono font-extrabold text-base w-7 h-7 rounded-lg flex items-center justify-center text-white shadow-sm"
+                  style={{ backgroundColor: item.accent }}
+                  aria-hidden="true"
+                >
+                  {item.letter}
+                </span>
+                <span
+                  className={`font-bold text-sm ${k ? "font-khmer" : ""}`}
+                  style={{ color: SLATE }}
+                >
+                  {k ? item.kh : item.en}
+                </span>
+              </div>
+              <div
+                className="px-3 pt-3 pb-2 flex items-center justify-center"
+                style={{ backgroundColor: `${DERM_SKIN}22` }}
+              >
+                <div className="w-16 h-16">{item.svg}</div>
+              </div>
+              <p
+                className={`px-3 py-3 text-xs text-slate-700 flex-1 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+              >
+                {k ? item.khBody : item.enBody}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="mt-4 rounded-2xl p-3 sm:p-4 border-l-4 flex items-start gap-2.5"
+          style={{
+            borderLeftColor: ROSE,
+            backgroundColor: `${ROSE}0d`,
+            borderColor: `${ROSE}33`,
+          }}
+          data-testid="see-doctor-note"
+        >
+          <Stethoscope className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: ROSE }} />
+          <p
+            className={`text-xs sm:text-sm text-slate-800 ${k ? "font-khmer leading-loose" : "leading-relaxed"}`}
+          >
+            <strong className={k ? "" : "font-bold"}>
+              {t("If in doubt, get it checked: ", "បើសង្ស័យ សូមឲ្យពេទ្យពិនិត្យ៖ ")}
+            </strong>
+            {t(
+              "A two-minute visit to a doctor or dermatologist is enough to look at a suspicious spot. Caught at this stage, melanoma is over 95% curable. Caught after it has spread, survival drops sharply. The only mistake is waiting.",
+              "ការជួបពេទ្យ ឬគ្រូពេទ្យជំនាញរោគសើស្បែករយៈពេល ២ នាទី គ្រប់គ្រាន់ដើម្បីមើលចំណុចគួរឲ្យសង្ស័យមួយ។ បើរកឃើញនៅដំណាក់កាលនេះ មេឡាណូម៉ាអាចព្យាបាលបានលើស ៩៥%។ បើរកឃើញបន្ទាប់ពីវារាលដាល អត្រារស់រានមានជីវិតធ្លាក់ចុះយ៉ាងខ្លាំង។ កំហុសតែមួយគត់គឺការរង់ចាំ។"
+            )}
+          </p>
+        </div>
+      </ConceptCard>
     </section>
   );
 }
