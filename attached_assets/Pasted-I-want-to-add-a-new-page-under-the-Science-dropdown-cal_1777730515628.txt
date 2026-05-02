@@ -1,0 +1,17 @@
+I want to add a new page under the 'Science' dropdown called 'Women in Science: The Pioneers (ស្ត្រីក្នុងវិស័យវិទ្យាសាស្ត្រ៖ អ្នកត្រួសត្រាយផ្លូវ)'.
+Please implement this using an inspiring, elegant aesthetic (soft purples, golds, and clean whites) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this page so it is searchable and automatically included in the 'Topic of the Day' daily rotation.
+2. Section 1: The Trailblazers (អ្នកត្រួសត្រាយផ្លូវ)
+Create a responsive grid of 'Scientist Profile Cards'. Each card must include a stylized portrait or icon, their name, their field, and a brief bilingual summary of their massive contributions:
+Marie Curie (គីមីវិទ្យា និង រូបវិទ្យា / Chemistry & Physics): The first person to win two Nobel Prizes. She discovered radioactivity and new elements, paving the way for cancer treatments and x-rays.
+Rosalind Franklin (ជីវវិទ្យា / Biology): The chemist whose X-ray photographs revealed the double-helix shape of DNA, unlocking the secret to how all life is built.
+Tu Youyou (វេជ្ជសាស្ត្រ / Medicine): A scientist who searched ancient medical texts to discover a cure for malaria (artemisinin), saving millions of lives across tropical regions worldwide.
+Katherine Johnson (គណិតវិទ្យា / Mathematics): The brilliant mathematician whose hand-calculated orbital equations were critical for sending the first humans to the moon.
+3. Section 2: The Future is You (អនាគតគឺជារូបអ្នក)
+Create a featured, highly visible 'Inspiration Box' directly addressing young female students.
+Headline: 'Cambodia Needs Your Mind (ប្រទេសកម្ពុជាត្រូវការបញ្ញារបស់អ្នក)'
+Message: 'Intelligence has no gender. Whether it is engineering a new water filter, discovering a cure for a disease, or programming the next generation of AI, the world needs female doctors, chemists, and engineers. Your questions matter. Your ideas can change the world.'
+4. Formatting & UX:
+Ensure all main headings, scientist names, and the inspiration message are strictly bilingual (English/Khmer).
+Stack the profile cards neatly on mobile screens so students can easily scroll through history.
