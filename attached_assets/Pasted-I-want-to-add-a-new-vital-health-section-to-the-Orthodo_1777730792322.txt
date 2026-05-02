@@ -1,0 +1,16 @@
+I want to add a new vital health section to the 'Orthodontics and Dentistry' page called 'The Daily Defense: Brushing & Flossing (ការការពារប្រចាំថ្ងៃ៖ ការដុសធ្មេញ និងប្រើខ្សែទន្តពេទ្យ)'.
+Please implement this using a clean, clinical aesthetic (mint greens, pristine whites, and soft blues) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this oral hygiene section so it is searchable and automatically included in the 'Topic of the Day' daily rotation. Ensure keywords include 'teeth', 'brushing', 'flossing', 'plaque', and their Khmer equivalents.
+2. Section 1: The Invisible Enemy - Plaque (សត្រូវមើលមិនឃើញ - បាក់តេរីធ្មេញ)
+Explain the biology of decay: Our mouths are full of bacteria. When we eat sugar or carbohydrates, these bacteria eat the leftovers and produce acid as waste.
+Explain that this acid eats away the hard outer shell of the tooth (Enamel), causing cavities (ប្រហោងធ្មេញ). Brushing twice a day sweeps away the bacteria before it can build an acidic fortress (plaque).
+3. Section 2: The 'Missing 40%' - Why We Floss (៤០% ដែលបាត់បង់ - ហេតុអ្វីយើងត្រូវប្រើខ្សែទន្តពេទ្យ)
+Create a highly visual call-out box.
+Explain the core concept: A toothbrush can only reach the front, back, and top of a tooth. This is only 60% of the surface.
+The spaces between the teeth make up the remaining 40%. If you don't floss, you are leaving almost half of your mouth completely uncleaned, which is where the most dangerous cavities and gum disease (រលាកអញ្ចាញធ្មេញ) begin.
+4. Section 3: The Heart Connection (ទំនាក់ទំនងទៅនឹងបេះដូង)
+Connect oral health to the rest of the body. Explain that severe gum disease allows dangerous bacteria to enter the bloodstream, which has been directly linked to heart infections and cardiovascular disease. A healthy mouth protects a healthy heart.
+5. Formatting & UX:
+Ensure all main headings, anatomical terms, and instructions are strictly bilingual (English/Khmer).
+Use clean, universally understood icons (a toothbrush, a tooth with a shield, dental floss) to make the sections instantly scannable.

@@ -25,6 +25,7 @@ import { HeatDeathModule } from "@/components/space/HeatDeathModule";
 import { CosmicTimeMachine } from "@/components/CosmicTimeMachine";
 import { CosmicScaleModule } from "@/components/space/CosmicScaleModule";
 import { SpacesuitEngineeringModule } from "@/components/space/SpacesuitEngineeringModule";
+import { ArtemisMissionsModule } from "@/components/space/ArtemisMissionsModule";
 import { RelativityChallenge } from "@/components/RelativityChallenge";
 import { ChiefAstronomerLeaderboard } from "@/components/ChiefAstronomerLeaderboard";
 
@@ -397,6 +398,9 @@ export function SpacePage() {
 
         {/* ── Earth & The Moon: Our Cosmic Home ─────────────────────────── */}
         <EarthMoonModule />
+
+        {/* ── Return to the Moon: The Artemis Missions ──────────────────── */}
+        <ArtemisMissionsModule />
 
         {/* ── Mars: Our Next-Door Neighbor ──────────────────────────────── */}
         <MarsPlanetModule />
