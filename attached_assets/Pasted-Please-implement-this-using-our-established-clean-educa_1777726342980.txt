@@ -1,0 +1,28 @@
+Please implement this using our established clean, educational aesthetic (soft blues and greens, clear typography) and execute the following:
+1. Update the Search & Discovery Index (Crucial Step)
+Before building the page, locate the searchIndex array used for the main search bar and the 'Topic of the Day' feature.
+Add a new entry for this Veterinary Medicine page so it is fully searchable and automatically included in the daily topic rotation. Ensure the title and keywords in the index are bilingual.
+2. Section 1: What is a Veterinarian? (តើពេទ្យសត្វជាអ្វី?)
+Explain the profession: Veterinarians are animal doctors. They perform surgeries, prescribe medicine, deliver babies, and stop the spread of zoonotic diseases (diseases that can jump from animals to humans, like Rabies or Bird Flu).
+Emphasize that in rural areas, a vet is a community hero who protects the local food supply and economic livelihood.
+3. Section 2: The Path to Practice (ផ្លូវឆ្ពោះទៅកាន់ការសិក្សា)
+Create a visual timeline or stepping-stone layout for the educational journey:
+High School (វិទ្យាល័យ): Focus heavily on Biology (to understand living systems), Chemistry (to understand medicine), and Mathematics (to calculate proper dosages). English is also vital for reading medical textbooks.
+University (សាកលវិទ្យាល័យ): Earn a Bachelor's Degree in Animal Science or Biology, followed by a specialized degree in Veterinary Medicine.
+4. Section 3: The Patients & Common Conditions (អ្នកជំងឺ និងស្ថានភាពទូទៅ)
+Create a responsive grid of distinct 'Patient Cards'. Each card should feature a relevant animal icon and list common afflictions:
+Cattle & Water Buffalo (គោ និង ក្របី):
+Foot-and-Mouth Disease (ជំងឺអុតក្តាម): Highly contagious virus causing blisters on the mouth and hooves.
+Bloat: A deadly buildup of gas in the stomach from eating wet grass.
+Pigs (ជ្រូក):
+African Swine Fever (ជំងឺប៉េស្តជ្រូកអាហ្វ្រិក): A severe, highly fatal viral disease causing high fevers and internal bleeding.
+Poultry / Chickens (មាន់):
+Avian Influenza / Bird Flu (ជំងឺផ្តាសាយបក្សី): A deadly respiratory virus that can occasionally spread to humans.
+Newcastle Disease: A contagious viral infection causing breathing issues and twisted necks.
+Dogs & Cats (ឆ្កែ និង ឆ្មា):
+Rabies (ជំងឺឆ្កែឆ្កួត): A 100% fatal virus affecting the brain. Vaccination is the only prevention.
+Parasites: Ticks, fleas, and heartworms that drain the animal's energy.
+5. Formatting & UX:
+Ensure all main headings and diseases are strictly bilingual (English/Khmer).
+Use visual tags or warning colors (like red text) for diseases that are contagious to humans (Zoonotic).
+Stack the patient cards into a single column on smaller mobile screens to maintain readability.
