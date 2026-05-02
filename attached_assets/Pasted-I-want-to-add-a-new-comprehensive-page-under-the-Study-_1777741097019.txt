@@ -1,0 +1,18 @@
+I want to add a new comprehensive page under the 'Study Center' dropdown called 'Anthropology: The Human Story (នរវិទ្យា៖ រឿងរ៉ាវរបស់មនុស្សជាតិ)'.
+Please implement this using a grounded, academic aesthetic (earth tones, terracotta, and deep forest greens) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this page so it is searchable. Ensure keywords include 'anthropology', 'culture', 'environment', 'human behavior', and their Khmer equivalents.
+Ensure the new page is linked directly in the 'Study Center' dropdown menu.
+2. Section 1: What is Anthropology? (តើនរវិទ្យាជាអ្វី?)
+Define the science: Anthropology is the study of what makes us human. It explores our past (archaeology), our biology (evolution), our languages, and most importantly, our complex societies.
+3. Section 2: The Pioneers of the Human Mind (អ្នកត្រួសត្រាយផ្លូវនៃគំនិតមនុស្ស)
+Create a grid of 'Historical Figure Cards' highlighting famous anthropologists:
+Franz Boas: Known as the 'Father of Modern Anthropology.' He proved that human behavior is not determined by biology or race, but by social learning and culture.
+Margaret Mead: Famous for her fieldwork in the Pacific Islands. She showed that things we think are 'natural' human behaviors (like gender roles or teenage rebellion) actually change entirely depending on the culture you are raised in.
+Ibn Khaldun: An early 14th-century pioneer who studied how the environment (desert vs. city) fundamentally changed the psychology and social structure of different civilizations.
+4. Section 3: The Ultimate Conclusion (សេចក្តីសន្និដ្ឋានចុងក្រោយ)
+Create a prominent, highlighted text block for the core thesis of modern anthropology: 'Culture and Environment are the Ultimate Determinants of Macro-Human Behavior. (វប្បធម៌ និងបរិស្ថាន គឺជាកត្តាកំណត់ចម្បងនៃអាកប្បកិរិយារបស់មនុស្សទូទៅ។)'
+Explain the concept: Humans do not have strong, fixed instincts like other animals. Instead, our 'instinct' is to adapt. The environment we live in dictates the problems we face, and the 'Culture' we invent is our toolkit for solving those problems. Therefore, large-scale human behavior is shaped by where we live and what we are taught, not by biology.
+5. Formatting & UX:
+Ensure all main headings, core theses, and historical profiles are strictly bilingual (English/Khmer).
+Use icons like a globe, a fossil, and a group of people to make the sections highly visual

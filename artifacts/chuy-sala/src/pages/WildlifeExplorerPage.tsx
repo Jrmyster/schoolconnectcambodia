@@ -750,8 +750,16 @@ export default function WildlifeExplorerPage() {
     invertebrateDescKh: "សត្វដែលគ្មានឆ្អឹងកង",
     warmBloodedEn: "Warm-blooded",
     warmBloodedKh: "មានឈាមក្តៅ",
+    warmBloodedDescEn:
+      "These animals generate their own body heat. Their internal temperature stays the same no matter how cold or hot the environment is. Because of this, they need to eat often for energy.",
+    warmBloodedDescKh:
+      "សត្វទាំងនេះបង្កើតកម្តៅរាងកាយដោយខ្លួនឯង។ សីតុណ្ហភាពខាងក្នុងរបស់វានៅថេរ ទោះបីជាបរិយាកាសខាងក្រៅត្រជាក់ ឬក្តៅក៏ដោយ។ ហេតុនេះហើយទើបពួកវាត្រូវការស៊ីចំណីញឹកញាប់ដើម្បីទទួលបានថាមពល។",
     coldBloodedEn: "Cold-blooded",
     coldBloodedKh: "មានឈាមត្រជាក់",
+    coldBloodedDescEn:
+      "Their body temperature changes with their environment. They rely on the sun to warm up and become active, and they seek shade to cool down. They can survive on much less food.",
+    coldBloodedDescKh:
+      "សីតុណ្ហភាពរាងកាយរបស់វាប្រែប្រួលទៅតាមបរិយាកាស។ ពួកវាពឹងផ្អែកលើកម្តៅថ្ងៃដើម្បីកម្តៅសាច់ឱ្យសកម្ម ហើយស្វែងរកម្លប់ដើម្បីត្រជាក់។ ពួកវាអាចរស់បានដោយប្រើចំណីតិចតួចបំផុត។",
     arthropodsEn: "Arthropods",
     arthropodsKh: "សត្វជើងភ្ជាប់",
     otherInvertEn: "Other",
@@ -858,6 +866,12 @@ export default function WildlifeExplorerPage() {
                       <span aria-hidden="true">🔥</span>
                       <span>{isKh ? t.warmBloodedKh : t.warmBloodedEn}</span>
                     </div>
+                    <p
+                      className={`text-[11px] sm:text-xs text-slate-500 leading-snug mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}
+                      data-testid="warm-blooded-desc"
+                    >
+                      {isKh ? t.warmBloodedDescKh : t.warmBloodedDescEn}
+                    </p>
                     <ul className="flex flex-wrap gap-1.5 list-none p-0">
                       {(["Mammal", "Bird"] as AnimalClass[]).map((c) => (
                         <ClassChip key={c} cls={c} isKh={isKh} />
@@ -871,6 +885,12 @@ export default function WildlifeExplorerPage() {
                       <span aria-hidden="true">❄️</span>
                       <span>{isKh ? t.coldBloodedKh : t.coldBloodedEn}</span>
                     </div>
+                    <p
+                      className={`text-[11px] sm:text-xs text-slate-500 leading-snug mb-2 ${isKh ? "font-khmer leading-loose" : ""}`}
+                      data-testid="cold-blooded-desc"
+                    >
+                      {isKh ? t.coldBloodedDescKh : t.coldBloodedDescEn}
+                    </p>
                     <ul className="flex flex-wrap gap-1.5 list-none p-0">
                       {(["Fish", "Reptile", "Amphibian"] as AnimalClass[]).map((c) => (
                         <ClassChip key={c} cls={c} isKh={isKh} />
