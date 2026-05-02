@@ -1,0 +1,15 @@
+I want to add a critical marine safety and biology section to the 'Wildlife Explorer' page called 'Beautiful but Deadly: The Blue-Ringed Octopus (ស្រស់ស្អាតតែសាហាវ៖ មឹកចិញ្ចៀនខៀវ)'.
+Please implement this using a 'Hazard Warning' aesthetic (deep ocean blues contrasting with high-alert yellows and iridescent cyan accents) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this section so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'octopus', 'venom', 'ocean danger', 'tetrodotoxin', and their Khmer equivalents.
+2. Section 1: The Master of Disguise (កំពូលអ្នកបន្លំខ្លួន)
+Explain the animal: This octopus is tiny—usually no bigger than a golf ball. Most of the time, it is pale brown or yellowish and blends perfectly into the rocks and coral of tide pools.
+3. Section 2: The Neon Warning (សញ្ញាព្រមានពណ៌អ៊ីយូតា)
+Explain the defense mechanism: When the octopus feels threatened, its skin instantly changes. Bright, flashing, iridescent blue rings appear all over its body.
+Create a highly visible, bold text block: 'Rule of the Ocean: If it glows, let it go. (ច្បាប់សមុទ្រ៖ បើវាបញ្ចេញពន្លឺ សូមដកខ្លួនចេញ)'.
+4. Section 3: The Venom - Tetrodotoxin (ពិស - ថ្នាំពុល Tetrodotoxin)
+Explain the science: The venom isn't injected through stingers; it is in their saliva when they bite. The venom is a neurotoxin called Tetrodotoxin, which is 1,000 times more toxic than cyanide.
+Medical Alert: Explain that the bite is often completely painless. The venom causes rapid muscle paralysis. Because there is no antivenom, the only first-aid treatment is immediate and continuous CPR (artificial respiration) until the venom wears off hours later, as the victim's lungs will be paralyzed.
+5. Formatting & UX:
+Ensure all main headings, scientific names, and medical warnings are strictly bilingual (English/Khmer).
+Use icons like a skull and crossbones, a glowing ring, and a medical cross to make the text immediately recognizable as a safety warning.

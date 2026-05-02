@@ -1,0 +1,15 @@
+I need to update the 'Youth Reproductive Health & Support' section and integrate it fully into the platform's search functionality.
+Please execute the following updates while maintaining the existing safe, confidential aesthetic (soft pinks, greens, and whites):
+1. Update the Search & Discovery Index
+Locate the global searchIndex array.
+Add specific searchable entries for the four organizations on this page: Mother's Heart, RHAC, Marie Stopes, and RACHA.
+Ensure the search keywords include the following English and Khmer terms so students can find the page easily: 'reproductive health (សុខភាពបន្តពូជ)', 'family planning (ផែនការគ្រួសារ)', 'pregnancy (ការមានផ្ទៃពោះ)', 'menstruation (ការមករដូវ)', 'sanitary pads (ទ្រនាប់អនាម័យ)', and 'hygiene (អនាម័យ)'.
+2. Highlight Free Menstruation Supplies (រំលេចសម្ភារៈអនាម័យឥតគិតថ្លៃ)
+Modify the UI of the resource cards to make free hygiene supplies instantly visible.
+Create a small, highly visible UI badge (e.g., a soft pink or purple pill-shaped tag) that reads: 'Free Menstrual Supplies Available (មានផ្តល់សម្ភារៈអនាម័យឥតគិតថ្លៃ)'.
+Add this badge to the RHAC and RACHA cards, as these organizations frequently provide rural youth outreach and hygiene kits.
+3. Expand the 'Did You Know?' Accordion
+Inside the existing 'Did You Know? (Health literacy)' accordion box at the bottom of the page, add a new bilingual bullet point specifically addressing period poverty.
+Text to add: 'Menstruation is a normal, healthy part of life. No student should miss school because they lack supplies. You can visit your local RHAC clinic or ask a trusted teacher about RACHA programs to receive free sanitary pads and hygiene education. (ការមករដូវគឺជារឿងធម្មតា និងមានសុខភាពល្អ។ មិនគួរមានសិស្សណាម្នាក់អវត្តមានពីសាលារៀនដោយសារតែខ្វះខាតសម្ភារៈអនាម័យនោះទេ។ អ្នកអាចទៅកាន់គ្លីនិក RHAC ក្នុងតំបន់របស់អ្នក ឬសាកសួរគ្រូបង្រៀនដែលអ្នកទុកចិត្តអំពីកម្មវិធី RACHA ដើម្បីទទួលបានទ្រនាប់អនាម័យ និងការអប់រំពីអនាម័យដោយឥតគិតថ្លៃ។)'
+4. Privacy Assurance
+Ensure the green 'Your privacy is important' banner remains sticky or highly visible at the bottom of the screen, reassuring students that their searches for these terms are not tracked.

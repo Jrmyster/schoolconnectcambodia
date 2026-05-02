@@ -382,6 +382,7 @@ interface RHResource {
   phoneLabel: string;
   website: string;
   websiteLabel: string;
+  freeMenstrualSupplies?: boolean;
 }
 
 const RH_RESOURCES: RHResource[] = [
@@ -404,6 +405,7 @@ const RH_RESOURCES: RHResource[] = [
     phoneLabel: "023 883 027",
     website: "https://rhac.org.kh",
     websiteLabel: "rhac.org.kh",
+    freeMenstrualSupplies: true,
   },
   {
     name: "Marie Stopes",
@@ -424,13 +426,14 @@ const RH_RESOURCES: RHResource[] = [
     phoneLabel: "",
     website: "https://racha.org.kh",
     websiteLabel: "racha.org.kh",
+    freeMenstrualSupplies: true,
   },
 ];
 
 function ReproductiveHealthSection({ kh, t }: { kh: boolean; t: TFn }) {
   const [factOpen, setFactOpen] = useState(false);
   return (
-    <section className="space-y-6">
+    <section id="reproductive-health" className="space-y-6 scroll-mt-24">
       {/* Header */}
       <div className="flex items-center gap-2">
         <HeartHandshake className="w-5 h-5 text-rose-500" />
@@ -472,6 +475,18 @@ function ReproductiveHealthSection({ kh, t }: { kh: boolean; t: TFn }) {
                   <p className={`text-muted-foreground text-sm mt-1 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
                     {kh ? r.focusKh : r.focusEn}
                   </p>
+                  {r.freeMenstrualSupplies && (
+                    <span
+                      data-testid={`free-menstrual-badge-${r.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                      className={`mt-2 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-pink-100 to-purple-100 border border-pink-300/70 px-3 py-1 text-[11px] font-bold text-purple-800 shadow-sm ${kh ? "font-khmer text-xs" : ""}`}
+                    >
+                      <Sparkles className="w-3 h-3 text-pink-500" aria-hidden />
+                      {t(
+                        "Free Menstrual Supplies Available",
+                        "មានផ្តល់សម្ភារៈអនាម័យឥតគិតថ្លៃ",
+                      )}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -529,30 +544,46 @@ function ReproductiveHealthSection({ kh, t }: { kh: boolean; t: TFn }) {
         </button>
         {factOpen && (
           <div className="px-5 pb-5 -mt-1">
-            <div className="border-t border-amber-100 pt-4">
-              <p className={`text-foreground/90 text-sm md:text-base leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
-                {t(
-                  "Teen pregnancy is a health issue, not a moral one. Access to education and medical care is a human right.",
-                  "ការមានផ្ទៃពោះក្នុងវ័យជំទង់ គឺជាបញ្ហាសុខភាព មិនមែនជាបញ្ហាសីលធម៌នោះទេ។ ការទទួលបានការអប់រំ និងការថែទាំវេជ្ជសាស្ត្រ គឺជាសិទ្ធិរបស់មនុស្សគ្រប់រូប។",
-                )}
-              </p>
+            <div className="border-t border-amber-100 pt-4 space-y-3">
+              <ul className="space-y-3 list-disc pl-5 marker:text-amber-500">
+                <li className={`text-foreground/90 text-sm md:text-base leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                  {t(
+                    "Teen pregnancy is a health issue, not a moral one. Access to education and medical care is a human right.",
+                    "ការមានផ្ទៃពោះក្នុងវ័យជំទង់ គឺជាបញ្ហាសុខភាព មិនមែនជាបញ្ហាសីលធម៌នោះទេ។ ការទទួលបានការអប់រំ និងការថែទាំវេជ្ជសាស្ត្រ គឺជាសិទ្ធិរបស់មនុស្សគ្រប់រូប។",
+                  )}
+                </li>
+                <li
+                  data-testid="did-you-know-period-poverty"
+                  className={`text-foreground/90 text-sm md:text-base leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                >
+                  {t(
+                    "Menstruation is a normal, healthy part of life. No student should miss school because they lack supplies. You can visit your local RHAC clinic or ask a trusted teacher about RACHA programs to receive free sanitary pads and hygiene education.",
+                    "ការមករដូវគឺជារឿងធម្មតា និងមានសុខភាពល្អ។ មិនគួរមានសិស្សណាម្នាក់អវត្តមានពីសាលារៀន ដោយសារតែខ្វះសម្ភារៈអនាម័យឡើយ។ អ្នកអាចទៅគ្លីនិក RHAC ក្នុងតំបន់របស់អ្នក ឬសួរគ្រូដែលអ្នកទុកចិត្តអំពីកម្មវិធី RACHA ដើម្បីទទួលបានទ្រនាប់អនាម័យឥតគិតថ្លៃ និងការអប់រំអំពីអនាម័យ។",
+                  )}
+                </li>
+              </ul>
             </div>
           </div>
         )}
       </div>
 
-      {/* Anonymity / privacy note */}
-      <div className="bg-emerald-50/70 border border-emerald-200 rounded-2xl px-5 py-4 flex items-start gap-3">
-        <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-        <p className={`text-emerald-900 text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
-          <span className="font-bold">
-            {t("Your privacy is important. ", "ភាពឯកជនរបស់អ្នកមានសារៈសំខាន់។ ")}
-          </span>
-          {t(
-            "Browsing these resources on Chouy Sala is private and confidential.",
-            "ការមើលឯកសារធនធានទាំងនេះនៅលើ Chouy Sala គឺឯកជន និងជាសម្ងាត់។",
-          )}
-        </p>
+      {/* Anonymity / privacy note — sticky so it stays visible while browsing resources */}
+      <div className="sticky bottom-3 z-20">
+        <div
+          data-testid="privacy-banner"
+          className="bg-emerald-50/95 backdrop-blur-sm border border-emerald-200 rounded-2xl px-5 py-4 flex items-start gap-3 shadow-md"
+        >
+          <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+          <p className={`text-emerald-900 text-sm leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+            <span className="font-bold">
+              {t("Your privacy is important. ", "ភាពឯកជនរបស់អ្នកមានសារៈសំខាន់។ ")}
+            </span>
+            {t(
+              "Browsing these resources on Chouy Sala is private and confidential — your searches for these terms are not tracked.",
+              "ការមើលឯកសារធនធានទាំងនេះនៅលើ Chouy Sala គឺឯកជន និងជាសម្ងាត់ — ការស្វែងរកពាក្យទាំងនេះរបស់អ្នកមិនត្រូវបានតាមដានឡើយ។",
+            )}
+          </p>
+        </div>
       </div>
     </section>
   );
