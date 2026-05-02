@@ -48,6 +48,7 @@ import {
   Cpu,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { IncandescentBulbSection } from "./ElectricalIncandescentBulbSection";
 
 // ── Core Concept cards (the "Big Three") ────────────────────────────────────
 
@@ -514,6 +515,9 @@ export function ElectricalSafetyPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Module: The Incandescent Bulb — Let There Be Light ───────────── */}
+      <IncandescentBulbSection kh={kh} />
 
       {/* ── Section 4: Safety Protocols ──────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10">

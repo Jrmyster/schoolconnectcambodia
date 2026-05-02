@@ -1,0 +1,16 @@
+I want to add a new educational module to the 'Television' page called 'The Invisible Command: How a TV Remote Works (បញ្ជាមើលមិនឃើញ៖ របៀបបញ្ជាទូរទស្សន៍ដំណើរការ)'.
+Please implement this using a sleek, tech-focused aesthetic (dark backgrounds with glowing red and infrared accents) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this remote control section so it is searchable and automatically included in the 'Topic of the Day' rotation. Ensure keywords include 'remote', 'infrared', 'television', 'signal', and their Khmer equivalents.
+2. Section 1: Invisible Light (ពន្លឺដែលមើលមិនឃើញ)
+Explain the core science: The bulb at the end of a TV remote is an LED, but it doesn't shoot visible light. It shoots Infrared (IR) light (ពន្លឺអ៊ីនហ្វ្រារ៉េដ).
+Explain that the human eye cannot see infrared because the light waves are too long, but the sensor on the front of the television is built specifically to 'see' this invisible color.
+3. Section 2: The Secret Flashing Code (លេខកូដភ្លឹបភ្លែតៗសម្ងាត់)
+Explain the mechanism: When you press a button, the remote doesn't just turn the light on. It flashes the light on and off incredibly fast in a specific pattern.
+Connect this to Computer Science: This pattern is Binary Code (កូដគោលពីរ). For example, pressing 'Volume Up' might flash a pattern of 10110, while 'Channel Down' flashes 11001. The TV reads these flashes and translates them into the action.
+4. Section 3: The Smartphone Science Experiment (ការពិសោធន៍វិទ្យាសាស្ត្រជាមួយទូរស័ព្ទ)
+Create a highly visible, engaging 'Try This at Home' box.
+Explain the trick: While human eyes cannot see infrared light, digital camera sensors can. Tell the students to point their TV remote directly at their smartphone camera and press a button while looking at the phone screen. They will magically see the bulb flashing a bright purple or white light on their screen!
+5. Formatting & UX:
+Ensure all main headings, scientific terms (Infrared, Binary), and instructions are strictly bilingual (English/Khmer).
+Use icons like a remote control, an eye with a slash through it (invisible), and a smartphone camera to make the text scannable.
