@@ -1643,8 +1643,8 @@ export const SEARCH_INDEX: SearchEntry[] = [
     categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
     descEn: "Photosynthesis, plant anatomy, rice, and the science of farming.",
     descKh: "សំយោគពន្លឺ កាយវិភាគរុក្ខជាតិ ស្រូវ និងវិទ្យាសាស្ត្រកសិកម្ម។",
-    keywordsEn: ["botany", "plant", "plants", "tree", "trees", "leaf", "flower", "rice", "crop", "agriculture", "farming", "photosynthesis", "chlorophyll"],
-    keywordsKh: ["រុក្ខវិទ្យា", "រុក្ខជាតិ", "ដើមឈើ", "ស្លឹក", "ផ្កា", "ស្រូវ", "កសិកម្ម", "សំយោគពន្លឺ"],
+    keywordsEn: ["botany", "plant", "plants", "tree", "trees", "leaf", "flower", "rice", "crop", "agriculture", "farming", "photosynthesis", "chlorophyll", "forest", "forestry", "woodland", "jungle"],
+    keywordsKh: ["រុក្ខវិទ្យា", "រុក្ខជាតិ", "ដើមឈើ", "ស្លឹក", "ផ្កា", "ស្រូវ", "កសិកម្ម", "សំយោគពន្លឺ", "ព្រៃឈើ", "រុក្ខាប្រមាញ់", "ព្រៃ"],
   },
   {
     id: "biology-cellular-power-plant",
