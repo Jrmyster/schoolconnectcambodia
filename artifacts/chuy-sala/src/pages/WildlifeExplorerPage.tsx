@@ -3,6 +3,7 @@ import {
   Volume2, Trees, Sparkles, Search, RotateCcw, X,
   ChevronDown, ChevronUp, BookOpen, Bug, MapPin,
   Binoculars, Feather, Globe, Bird, AlertTriangle, Ear,
+  Skull, Plus, Waves, HeartPulse,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
@@ -1205,6 +1206,9 @@ export default function WildlifeExplorerPage() {
       {/* ── New Section: Ornithology — The Avian World ────────────── */}
       <Ornithology isKh={isKh} />
 
+      {/* ── New Section: Blue-Ringed Octopus — Beautiful but Deadly ── */}
+      <BlueRingedOctopus isKh={isKh} />
+
       {toast && (
         <div
           role="status"
@@ -1737,5 +1741,422 @@ function Ornithology({ isKh }: { isKh: boolean }) {
         </div>
       </div>
     </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Blue-Ringed Octopus — Beautiful but Deadly
+//  ស្រស់ស្អាតតែសាហាវ៖ មឹកចិញ្ចៀនខៀវ
+//
+//  Aesthetic: deep ocean blues + high-alert yellows + iridescent cyan accents.
+//  A safety-first marine biology section. Three sub-sections:
+//    1. The Master of Disguise (កំពូលអ្នកបន្លំខ្លួន)
+//    2. The Neon Warning (សញ្ញាព្រមានពណ៌អ៊ីយូតា)
+//    3. The Venom — Tetrodotoxin (ពិស — ថ្នាំពុល Tetrodotoxin)
+// ════════════════════════════════════════════════════════════════════════════
+
+const BlueRingedOctopusSvg = ({ className, glowing = false }: { className?: string; glowing?: boolean }) => (
+  <svg viewBox="0 0 200 160" className={className} aria-hidden>
+    <defs>
+      <radialGradient id="bro-body" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stopColor={glowing ? "#fde68a" : "#fef3c7"} />
+        <stop offset="60%" stopColor={glowing ? "#fbbf24" : "#d4a373"} />
+        <stop offset="100%" stopColor={glowing ? "#b45309" : "#7c5a2e"} />
+      </radialGradient>
+      <radialGradient id="bro-ring" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#a5f3fc" />
+        <stop offset="55%" stopColor="#22d3ee" />
+        <stop offset="100%" stopColor="#0e7490" />
+      </radialGradient>
+    </defs>
+    {/* Mantle (head) */}
+    <ellipse cx="100" cy="55" rx="46" ry="38" fill="url(#bro-body)" />
+    {/* Tentacles */}
+    <path d="M58 78 Q40 100 30 130 Q44 124 54 110 Q60 100 70 92 Z" fill="url(#bro-body)" />
+    <path d="M75 88 Q68 120 60 150 Q78 140 84 118 Q88 104 92 96 Z" fill="url(#bro-body)" />
+    <path d="M100 92 Q100 130 100 152 Q112 140 112 120 Q112 104 110 96 Z" fill="url(#bro-body)" />
+    <path d="M125 88 Q132 120 140 150 Q122 140 116 118 Q112 104 108 96 Z" fill="url(#bro-body)" />
+    <path d="M142 78 Q160 100 170 130 Q156 124 146 110 Q140 100 130 92 Z" fill="url(#bro-body)" />
+    {/* Eyes */}
+    <ellipse cx="84" cy="50" rx="6" ry="4" fill="#0a0a0a" />
+    <ellipse cx="116" cy="50" rx="6" ry="4" fill="#0a0a0a" />
+    <circle cx="85.5" cy="49" r="1.4" fill="#fff" />
+    <circle cx="117.5" cy="49" r="1.4" fill="#fff" />
+    {/* Iridescent rings — bright when "glowing", muted when camouflaged */}
+    {[
+      [78, 70, 5], [92, 38, 4.5], [118, 40, 4.5], [130, 72, 5],
+      [102, 70, 5.5], [70, 88, 4], [134, 90, 4], [110, 105, 4.5],
+      [88, 108, 4], [148, 110, 3.5],
+    ].map(([cx, cy, r], i) => (
+      <circle
+        key={i}
+        cx={cx}
+        cy={cy}
+        r={r}
+        fill="none"
+        stroke="url(#bro-ring)"
+        strokeWidth={glowing ? 2.4 : 1}
+        opacity={glowing ? 1 : 0.35}
+      />
+    ))}
+  </svg>
+);
+
+function BlueRingedOctopus({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="blue-ringed-octopus"
+      className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-16 scroll-mt-24"
+      data-testid="blue-ringed-octopus"
+    >
+      <div className="max-w-6xl mx-auto">
+        <div
+          className="relative rounded-3xl border-2 border-cyan-400/40 overflow-hidden shadow-xl"
+          style={{
+            background:
+              "radial-gradient(circle at 85% 0%, rgba(34,211,238,0.18) 0%, transparent 55%)," +
+              "radial-gradient(circle at 0% 100%, rgba(250,204,21,0.10) 0%, transparent 55%)," +
+              "linear-gradient(180deg, #0c1e3d 0%, #0b2545 50%, #061434 100%)",
+          }}
+        >
+          {/* Subtle bubble pattern */}
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.10] pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, #67e8f9 1px, transparent 0)",
+              backgroundSize: "28px 28px",
+            }}
+          />
+
+          {/* ── Header ─────────────────────────────────────────── */}
+          <header className="relative px-6 sm:px-10 pt-10 pb-6">
+            <div
+              className={`inline-flex items-center gap-2 bg-yellow-400/95 border-2 border-yellow-300 text-slate-900 rounded-full px-3 py-1.5 text-xs font-extrabold tracking-wide shadow-lg shadow-yellow-500/20 mb-4 uppercase ${
+                isKh ? "font-khmer normal-case" : ""
+              }`}
+              data-testid="hazard-badge"
+            >
+              <AlertTriangle className="w-3.5 h-3.5" />
+              {isKh ? "ការព្រមានសុវត្ថិភាពសមុទ្រ" : "Marine Safety Warning"}
+            </div>
+
+            <h2
+              className={`font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight flex items-start gap-3 flex-wrap ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              <Skull className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-300 mt-1.5 flex-shrink-0 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
+              <span className="text-white">
+                {isKh ? (
+                  <>
+                    ស្រស់ស្អាតតែសាហាវ៖{" "}
+                    <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-yellow-300 bg-clip-text text-transparent">
+                      មឹកចិញ្ចៀនខៀវ
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Beautiful but Deadly:{" "}
+                    <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-yellow-300 bg-clip-text text-transparent">
+                      The Blue-Ringed Octopus
+                    </span>
+                  </>
+                )}
+              </span>
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-cyan-200/90 italic font-mono">
+              Hapalochlaena spp.
+            </p>
+            <p
+              className={`mt-3 max-w-3xl text-sm sm:text-base text-slate-200 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "សត្វតូចមួយប៉ុនបាល់កូលស៍ ដែលលាក់ខ្លួននៅក្នុងថ្ម និងផ្កាថ្មនៃសមុទ្រ។ វាអាចសម្លាប់មនុស្សពេញវ័យបានក្នុងរយៈពេលប៉ុន្មាននាទី — ប៉ុន្តែវាប្រាប់អ្នកជាមុនជានិច្ច។"
+                : "A creature no bigger than a golf ball, hidden among the rocks and coral of the sea. It can kill an adult in minutes — but it always warns you first."}
+            </p>
+          </header>
+
+          {/* ── Section 1: The Master of Disguise ───────────────── */}
+          <div className="px-6 sm:px-10 py-8 border-t border-cyan-400/20">
+            <SectionEyebrow numEn="Section 1" numKh="ផ្នែកទី ១" tone="cyan" isKh={isKh} />
+            <h3
+              className={`font-display font-extrabold text-xl sm:text-2xl text-white mb-3 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? (
+                <>កំពូលអ្នកបន្លំខ្លួន <span className="block sm:inline text-base sm:text-xl font-sans font-bold text-cyan-300/90">(The Master of Disguise)</span></>
+              ) : (
+                <>The Master of Disguise <span className="block sm:inline text-base sm:text-xl font-khmer text-cyan-300/90">(កំពូលអ្នកបន្លំខ្លួន)</span></>
+              )}
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div className={`text-slate-200 text-sm sm:text-base space-y-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                <p>
+                  {isKh
+                    ? "មឹកនេះតូចណាស់ — ជាធម្មតាមិនធំជាងបាល់វាយកូលស៍ (golf ball) ទេ។ ភាគច្រើននៃពេលវេលា វាមានពណ៌ត្នោតស្លេក ឬលឿង ហើយលាយចូលគ្នាយ៉ាងល្អឥតខ្ចោះជាមួយថ្ម និងផ្កាថ្មនៃអាងទឹកនៅពេលទឹកស្រក (tide pools)។"
+                    : "This octopus is tiny — usually no bigger than a golf ball. Most of the time, it is pale brown or yellowish and blends perfectly into the rocks and coral of tide pools."}
+                </p>
+                <p>
+                  {isKh
+                    ? "អ្នកអាចដើរកាត់វាដោយមិនបានកត់សម្គាល់ឃើញ។ ទោះជាមានគ្រោះថ្នាក់ខ្លាំងក៏ដោយ វាមិនមែនជាសត្វឆ្មាសទេ — វាគ្រាន់តែចង់ឲ្យគេទុកវាឲ្យនៅស្ងៀមប៉ុណ្ណោះ។"
+                    : "You could walk right past one and never see it. Despite the danger, it is not aggressive — it just wants to be left alone."}
+                </p>
+
+                <div className="flex flex-wrap items-center gap-2 pt-2">
+                  <Stat label={isKh ? "ទំហំ" : "Size"} value="≈ 5 cm" tone="cyan" />
+                  <Stat label={isKh ? "ទម្ងន់" : "Weight"} value="≈ 28 g" tone="cyan" />
+                  <Stat label={isKh ? "ជម្រក" : "Habitat"} value={isKh ? "អាងទឹកស្រក" : "Tide pools"} tone="sky" />
+                </div>
+              </div>
+
+              {/* Camouflaged portrait */}
+              <div className="relative rounded-2xl border-2 border-cyan-400/30 bg-gradient-to-br from-stone-200 via-amber-100 to-stone-300 p-5 shadow-inner overflow-hidden">
+                <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900/70 text-cyan-200 text-[10px] font-bold uppercase tracking-wider">
+                  <Waves className="w-3 h-3" />
+                  {isKh ? "បានបន្លំខ្លួន" : "Camouflaged"}
+                </div>
+                <BlueRingedOctopusSvg className="w-full h-44" glowing={false} />
+              </div>
+            </div>
+          </div>
+
+          {/* ── Section 2: The Neon Warning ─────────────────────── */}
+          <div className="px-6 sm:px-10 py-8 border-t border-cyan-400/20">
+            <SectionEyebrow numEn="Section 2" numKh="ផ្នែកទី ២" tone="yellow" isKh={isKh} />
+            <h3
+              className={`font-display font-extrabold text-xl sm:text-2xl text-white mb-3 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? (
+                <>សញ្ញាព្រមានពណ៌អ៊ីយូតា <span className="block sm:inline text-base sm:text-xl font-sans font-bold text-yellow-300/90">(The Neon Warning)</span></>
+              ) : (
+                <>The Neon Warning <span className="block sm:inline text-base sm:text-xl font-khmer text-yellow-300/90">(សញ្ញាព្រមានពណ៌អ៊ីយូតា)</span></>
+              )}
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              {/* Glowing portrait */}
+              <div className="relative rounded-2xl border-2 border-yellow-400/40 bg-gradient-to-br from-slate-900 via-blue-950 to-cyan-950 p-5 shadow-[0_0_40px_rgba(34,211,238,0.25)] overflow-hidden order-2 md:order-1">
+                <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-yellow-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
+                  <AlertTriangle className="w-3 h-3" />
+                  {isKh ? "កំពុងព្រមាន!" : "Warning!"}
+                </div>
+                <BlueRingedOctopusSvg className="w-full h-44 drop-shadow-[0_0_18px_rgba(34,211,238,0.55)]" glowing />
+              </div>
+
+              <div className={`text-slate-200 text-sm sm:text-base space-y-3 order-1 md:order-2 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                <p>
+                  {isKh
+                    ? "នៅពេលដែលមឹកមានអារម្មណ៍ថាខ្លួនប្រឈមនឹងការគំរាមកំហែង ស្បែករបស់វាផ្លាស់ប្តូរយ៉ាងភ្លាមៗ។ ចិញ្ចៀនពណ៌ខៀវភ្លឺថ្លា ឆាបឆេវ និងមានពន្លឺខ្លួនឯង (iridescent) លេចឡើងពាសពេញរាងកាយរបស់វា។"
+                    : "When the octopus feels threatened, its skin instantly changes. Bright, flashing, iridescent blue rings appear all over its body."}
+                </p>
+                <p>
+                  {isKh
+                    ? "នេះគឺជាការនិយាយរបស់ធម្មជាតិសម្រាប់៖ «ឈប់! ខ្ញុំមានពិស។ កុំចូលមកជិតខ្ញុំ។»"
+                    : "This is nature's way of saying: \u201CStop! I am venomous. Do not come closer.\u201D"}
+                </p>
+
+                {/* Bold rule of the ocean callout */}
+                <div
+                  data-testid="rule-of-the-ocean"
+                  className="relative mt-4 rounded-2xl border-2 border-yellow-300 bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-400 p-5 shadow-lg"
+                >
+                  <div className="flex items-start gap-3">
+                    <Sparkles className="w-7 h-7 text-slate-900 flex-shrink-0 mt-0.5 animate-pulse" />
+                    <div>
+                      <div className={`text-[10px] font-extrabold uppercase tracking-[0.25em] text-slate-800 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                        {isKh ? "ច្បាប់សមុទ្រ" : "Rule of the Ocean"}
+                      </div>
+                      <p className={`font-display font-black text-xl sm:text-2xl text-slate-900 leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}>
+                        {isKh ? "បើវាបញ្ចេញពន្លឺ សូមដកខ្លួនចេញ។" : "If it glows, let it go."}
+                      </p>
+                      <p className={`mt-1 text-sm font-bold text-slate-800 ${isKh ? "font-khmer" : "font-khmer"}`}>
+                        {isKh ? "(If it glows, let it go.)" : "(បើវាបញ្ចេញពន្លឺ សូមដកខ្លួនចេញ។)"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Section 3: The Venom — Tetrodotoxin ─────────────── */}
+          <div className="px-6 sm:px-10 py-8 border-t border-cyan-400/20">
+            <SectionEyebrow numEn="Section 3" numKh="ផ្នែកទី ៣" tone="red" isKh={isKh} />
+            <h3
+              className={`font-display font-extrabold text-xl sm:text-2xl text-white mb-1 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? (
+                <>ពិស — ថ្នាំពុល Tetrodotoxin <span className="block sm:inline text-base sm:text-xl font-sans font-bold text-rose-300/90">(The Venom)</span></>
+              ) : (
+                <>The Venom — Tetrodotoxin <span className="block sm:inline text-base sm:text-xl font-khmer text-rose-300/90">(ពិស — ថ្នាំពុល Tetrodotoxin)</span></>
+              )}
+            </h3>
+            <p className="mb-4 text-xs font-mono uppercase tracking-wider text-cyan-300/80">
+              C<sub>11</sub>H<sub>17</sub>N<sub>3</sub>O<sub>8</sub>
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* The science */}
+              <div className="rounded-2xl border-2 border-cyan-400/30 bg-slate-900/50 backdrop-blur-sm p-5 shadow-inner">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/40">
+                    <Sparkles className="w-5 h-5 text-cyan-300" />
+                  </div>
+                  <h4 className={`font-display font-extrabold text-white text-base ${isKh ? "font-khmer" : ""}`}>
+                    {isKh ? "វិទ្យាសាស្ត្រនៃពិស" : "The Science of the Venom"}
+                  </h4>
+                </div>
+                <div className={`text-slate-200 text-sm space-y-3 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  <p>
+                    {isKh
+                      ? "ពិសរបស់វា មិនត្រូវបានចាក់តាមរយៈបន្លាដូចសត្វមួយចំនួនទេ — វាស្ថិតនៅក្នុងទឹកមាត់របស់វា ហើយត្រូវបានបញ្ចេញនៅពេលវាខាំ។"
+                      : "The venom isn't injected through stingers; it is in their saliva when they bite."}
+                  </p>
+                  <p>
+                    {isKh ? (
+                      <>ពិសនេះគឺជា <span className="text-cyan-300 font-bold">សារធាតុប៉ះពាល់សរសៃប្រសាទ (neurotoxin)</span> ដែលហៅថា <span className="text-yellow-300 font-bold">Tetrodotoxin</span> — ហើយវាមាន <span className="text-rose-300 font-extrabold">ពុលជាង Cyanide ដល់ទៅ ១,០០០ ដង</span>។</>
+                    ) : (
+                      <>The venom is a <span className="text-cyan-300 font-bold">neurotoxin</span> called <span className="text-yellow-300 font-bold">Tetrodotoxin</span>, which is <span className="text-rose-300 font-extrabold">1,000 times more toxic than cyanide</span>.</>
+                    )}
+                  </p>
+                </div>
+
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-lg bg-cyan-950/60 border border-cyan-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-cyan-200">×1,000</div>
+                    <div className={`text-[10px] text-cyan-300/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "ខ្លាំងជាង Cyanide" : "vs Cyanide"}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-yellow-950/60 border border-yellow-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-yellow-200">~26</div>
+                    <div className={`text-[10px] text-yellow-300/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "មនុស្ស/ខាំ" : "people / bite"}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-rose-950/60 border border-rose-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-rose-200">0</div>
+                    <div className={`text-[10px] text-rose-300/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "ថ្នាំបន្សាបពិស" : "Antivenom"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Medical alert */}
+              <div
+                data-testid="medical-alert"
+                className="relative rounded-2xl border-2 border-red-400 bg-gradient-to-br from-red-950/80 via-rose-950/70 to-red-900/80 p-5 shadow-[0_0_30px_rgba(239,68,68,0.25)] overflow-hidden"
+              >
+                <div className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-red-500 flex items-center justify-center shadow-lg ring-4 ring-red-300/30">
+                  <Plus className="w-8 h-8 text-white" strokeWidth={3} />
+                </div>
+
+                <div className={`inline-flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.25em] text-red-200 mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  {isKh ? "ការព្រមានវេជ្ជសាស្ត្រ" : "Medical Alert"}
+                </div>
+                <h4 className={`font-display font-extrabold text-white text-base mb-3 ${isKh ? "font-khmer" : ""}`}>
+                  {isKh ? "បើមាននរណាម្នាក់ត្រូវបានខាំ" : "If Someone Is Bitten"}
+                </h4>
+
+                <ul className={`space-y-2.5 text-sm text-red-50 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  <li className="flex gap-2">
+                    <span className="text-yellow-300 font-extrabold flex-shrink-0">•</span>
+                    <span>
+                      {isKh
+                        ? "ការខាំ ច្រើនតែ មិនឈឺទាល់តែសោះ — ជនរងគ្រោះប្រហែលជាមិនដឹងថាគេត្រូវបានខាំទេ។"
+                        : "The bite is often completely painless — the victim may not even know they were bitten."}
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-yellow-300 font-extrabold flex-shrink-0">•</span>
+                    <span>
+                      {isKh
+                        ? "ពិសនេះបណ្តាលឲ្យសាច់ដុំស្លាប់ខ្មោចយ៉ាងលឿន (rapid muscle paralysis) — រួមបញ្ចូលទាំងសាច់ដុំសួត។"
+                        : "The venom causes rapid muscle paralysis — including the muscles used for breathing."}
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-yellow-300 font-extrabold flex-shrink-0">•</span>
+                    <span>
+                      {isKh ? (
+                        <><span className="font-extrabold text-yellow-200">មិនមានថ្នាំបន្សាបពិស (no antivenom) ទេ។</span> ការព្យាបាលដំបូងតែមួយគត់គឺ <span className="font-extrabold text-yellow-200">CPR (ការដកដង្ហើមសិប្បនិម្មិត) ភ្លាមៗ និងជាបន្តបន្ទាប់</span> រហូតដល់ពិសរលាយ ប៉ុន្មានម៉ោងក្រោយមក ព្រោះសួតរបស់ជនរងគ្រោះនឹងស្លាប់ខ្មោច។</>
+                      ) : (
+                        <>There is <span className="font-extrabold text-yellow-200">no antivenom</span>. The only first-aid treatment is <span className="font-extrabold text-yellow-200">immediate and continuous CPR (artificial respiration)</span> until the venom wears off hours later, because the victim's lungs will be paralyzed.</>
+                      )}
+                    </span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="text-yellow-300 font-extrabold flex-shrink-0">•</span>
+                    <span className="font-bold">
+                      {isKh
+                        ? "ហៅឲ្យជំនួយវេជ្ជសាស្ត្របន្ទាន់ភ្លាមៗ ហើយបន្ត CPR — កុំឈប់ឡើយ។"
+                        : "Call emergency medical help immediately and continue CPR — do not stop."}
+                    </span>
+                  </li>
+                </ul>
+
+                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-400 text-slate-900 text-xs font-extrabold shadow">
+                  <HeartPulse className="w-4 h-4" />
+                  {isKh ? "CPR ជួយសង្គ្រោះជីវិត" : "CPR saves lives"}
+                </div>
+              </div>
+            </div>
+
+            {/* Closing reminder */}
+            <div className="mt-8 rounded-xl border-2 border-cyan-400/40 bg-slate-900/60 backdrop-blur-sm px-4 py-3 flex items-start gap-3">
+              <Skull className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+              <p className={`text-sm text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "សមុទ្រគឺស្រស់ស្អាត — ប៉ុន្តែវាមានច្បាប់របស់វាផ្ទាល់។ មើល កុំចាប់។ កោតសរសើរ កុំរំខាន។"
+                  : "The ocean is beautiful — but it has its own rules. Look, don't touch. Admire, don't disturb."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SectionEyebrow({
+  numEn, numKh, tone, isKh,
+}: { numEn: string; numKh: string; tone: "cyan" | "yellow" | "red"; isKh: boolean }) {
+  const toneClass =
+    tone === "cyan" ? "text-cyan-300 [&>span]:bg-cyan-400" :
+    tone === "yellow" ? "text-yellow-300 [&>span]:bg-yellow-400" :
+    "text-red-300 [&>span]:bg-red-400";
+  return (
+    <div
+      className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2 ${toneClass} ${
+        isKh ? "font-khmer normal-case tracking-normal" : ""
+      }`}
+    >
+      <span className="inline-block w-6 h-px" />
+      {isKh ? numKh : numEn}
+    </div>
+  );
+}
+
+function Stat({ label, value, tone }: { label: string; value: string; tone: "cyan" | "sky" }) {
+  const toneClass = tone === "cyan"
+    ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-200"
+    : "border-sky-400/40 bg-sky-500/10 text-sky-200";
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border-2 ${toneClass} text-xs font-bold shadow-sm`}>
+      <span className="opacity-70">{label}:</span>
+      <span className="font-extrabold">{value}</span>
+    </span>
   );
 }

@@ -1,0 +1,20 @@
+I want to add a new critical safety section to the 'Survival Skills' page called 'Toxic Nature: Poison, Venom, and Antidotes (ធម្មជាតិមានពិស៖ ពិសលេប ពិសចាក់ និង ថ្នាំបន្សាប)'.
+Please implement this using a highly visible 'Survival Guide' aesthetic (olive greens, hazard yellows, and stark whites) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this toxicology section. Ensure keywords include 'poison', 'venom', 'snakebite', 'mushroom', 'antidote', and their Khmer equivalents.
+2. Section 1: The Core Rule - Venom vs. Poison (វិធានសំខាន់ - ពិសចាក់បញ្ចូល ធៀបនឹង ពិសលេបចូល)
+Explain the biological difference simply:
+Poisonous (មានពុល): You get sick if you eat or touch it (like a toxic mushroom or frog).
+Venomous (មានពិស): You get sick if it bites or stings you and injects the toxin directly into your bloodstream (like a snake or scorpion).
+3. Section 2: Local Threats & Cures (ហានិភ័យក្នុងតំបន់ និង ការព្យាបាល)
+Create a responsive grid of 'Threat Profile Cards' for Southeast Asia:
+The Malayan Pit Viper (ពស់ពព្លាក់): Type: Venomous. This snake causes the most bites in Southeast Asia because it hides under dry leaves in plantations and does not move away when people approach. The Cure: There is a specific Antivenom (សេរ៉ូមប្រឆាំងពិសពស់), but it MUST be administered at a hospital.
+The Sleng Tree / Strychnine (ដើមស្លែង): Type: Poisonous. The seeds of this tree contain strychnine, a deadly neurotoxin that causes severe muscle spasms. The Cure: There is no direct antidote. Immediate stomach pumping at a hospital is required.
+Wild Death Cap Mushrooms (ផ្សិតពុល): Type: Poisonous. Often mistaken for edible straw mushrooms. The Cure: No direct antidote. They destroy the liver. Survival Rule: If you did not grow it or buy it, do not eat it.
+4. Section 3: Busting First-Aid Myths (លុបបំបាត់ជំនឿខុសឆ្គងនៃការសង្គ្រោះបឋម)
+Create a high-contrast 'DO NOT DO THIS' warning box regarding snakebites.
+Explain that cutting the wound, sucking out the venom, or tying a tight tourniquet (ខ្សែចងរឹត) will actually cause the limb to die or push the venom into the heart faster.
+The only correct first aid is to keep the victim completely still (immobilized) so the heart rate stays low, and transport them to a clinic immediately.
+5. Formatting & UX:
+Ensure all main headings, plant/animal names, and medical warnings are strictly bilingual (English/Khmer).
+Use icons like a snake head, a crossed-out mushroom, and a medical siren.
