@@ -1,7 +1,9 @@
 import { Link } from "wouter";
 import {
+  Activity,
   ArrowLeft,
   ArrowRight,
+  ArrowRightLeft,
   CassetteTape,
   Cpu,
   Crown,
@@ -13,7 +15,9 @@ import {
   Moon,
   Radio,
   Drum,
+  SlidersHorizontal,
   Volume2,
+  Waves,
   Sparkles,
   CheckCircle2,
   Zap,
@@ -209,6 +213,9 @@ export default function TwentiethCenturyMusicPage() {
 
       {/* ── Section 5: The Electric Revolution — Instruments ───────── */}
       <ElectricRevolution isKh={isKh} />
+
+      {/* ── Section 6: The Mechanics of Sound — Audio Equipment ────── */}
+      <AudioEquipment isKh={isKh} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <Link
@@ -1576,3 +1583,626 @@ const ERA_THEMES: Record<
     tagChip: "border-fuchsia-300 bg-fuchsia-50 text-fuchsia-800",
   },
 };
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Section 6 · The Mechanics of Sound: Audio Equipment
+//             យន្តការនៃសំឡេង៖ ឧបករណ៍អូឌីយ៉ូ
+//
+//  Aesthetic: "Studio Gear" — matte blacks, brushed metallic silvers,
+//  glowing LED audio-meter greens flowing into ambers and reds (the
+//  classic VU-meter colour-march). Every panel has the look of a real
+//  rack-mounted piece of recording-studio equipment.
+// ════════════════════════════════════════════════════════════════════════════
+
+const STUDIO_BG =
+  "bg-gradient-to-br from-[#08080a] via-[#101014] to-[#1c1c22]";
+const SILVER_RING = "border-zinc-400/35";
+
+// ── Inline SVG: vintage "ribbon" microphone ─────────────────────────────────
+const VintageMicSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 160" className={className} aria-hidden>
+    {/* Mic body — chromed cylinder */}
+    <defs>
+      <linearGradient id="micChrome" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stopColor="#52525b" />
+        <stop offset="40%"  stopColor="#e5e7eb" />
+        <stop offset="60%"  stopColor="#f4f4f5" />
+        <stop offset="100%" stopColor="#3f3f46" />
+      </linearGradient>
+      <linearGradient id="micGrill" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%"   stopColor="#27272a" />
+        <stop offset="100%" stopColor="#0a0a0c" />
+      </linearGradient>
+    </defs>
+    {/* Top mounting yoke */}
+    <rect x="56" y="10" width="8" height="14" rx="2" fill="url(#micChrome)" />
+    {/* Grill (capsule) */}
+    <ellipse cx="60" cy="56" rx="32" ry="36" fill="url(#micGrill)" stroke="url(#micChrome)" strokeWidth="3" />
+    {/* Grill mesh — horizontal lines */}
+    {Array.from({ length: 9 }).map((_, i) => (
+      <line key={i} x1="32" y1={28 + i * 7} x2="88" y2={28 + i * 7} stroke="#71717a" strokeWidth="0.7" opacity="0.7" />
+    ))}
+    {/* Mesh — vertical */}
+    {Array.from({ length: 7 }).map((_, i) => (
+      <line key={i} x1={36 + i * 8} y1="24" x2={36 + i * 8} y2="88" stroke="#71717a" strokeWidth="0.7" opacity="0.5" />
+    ))}
+    {/* Body shaft */}
+    <rect x="50" y="92" width="20" height="44" rx="3" fill="url(#micChrome)" stroke="#27272a" strokeWidth="0.7" />
+    {/* Lower band */}
+    <rect x="48" y="120" width="24" height="4" fill="#18181b" />
+    {/* On-air LED */}
+    <circle cx="60" cy="106" r="2.5" fill="#ef4444">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite" />
+    </circle>
+    {/* Cable curling away */}
+    <path d="M 60 136 Q 70 148 56 156" fill="none" stroke="#0a0a0c" strokeWidth="3" strokeLinecap="round" />
+    {/* Sound waves entering from the left */}
+    {[10, 16, 22].map((r, i) => (
+      <path
+        key={r}
+        d={`M ${24 - r * 0.5} ${56 - r * 0.7} A ${r} ${r} 0 0 0 ${24 - r * 0.5} ${56 + r * 0.7}`}
+        fill="none"
+        stroke="#22c55e"
+        strokeWidth="1.5"
+        opacity={0.85 - i * 0.18}
+      >
+        <animate attributeName="opacity" values={`${0.85 - i * 0.18};0;${0.85 - i * 0.18}`} dur="2.2s" begin={`${i * 0.32}s`} repeatCount="indefinite" />
+      </path>
+    ))}
+  </svg>
+);
+
+// ── Inline SVG: speaker cone (cross-section, opposite of mic) ─────────────
+const SpeakerConeSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 160 140" className={className} aria-hidden role="img" aria-label="speaker cone cross-section">
+    <defs>
+      <linearGradient id="spkChrome" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stopColor="#3f3f46" />
+        <stop offset="50%"  stopColor="#d4d4d8" />
+        <stop offset="100%" stopColor="#52525b" />
+      </linearGradient>
+      <radialGradient id="spkCone" cx="50%" cy="50%">
+        <stop offset="0%"   stopColor="#27272a" />
+        <stop offset="80%"  stopColor="#0a0a0c" />
+      </radialGradient>
+    </defs>
+    {/* Cabinet outline */}
+    <rect x="6" y="10" width="60" height="120" rx="4" fill="#18181b" stroke="url(#spkChrome)" strokeWidth="2" />
+    {/* Cone profile (trapezoid) */}
+    <polygon points="20,42 56,30 56,110 20,98" fill="url(#spkCone)" stroke="url(#spkChrome)" strokeWidth="1.2" />
+    {/* Voice-coil + magnet (rear) */}
+    <rect x="6" y="58" width="14" height="24" fill="#0a0a0c" stroke="url(#spkChrome)" strokeWidth="1" />
+    <rect x="6" y="64" width="14" height="12" fill="#71717a" />
+    {/* Front dust cap */}
+    <ellipse cx="56" cy="70" rx="3" ry="10" fill="#18181b" stroke="#a1a1aa" strokeWidth="0.6" />
+    {/* Vibrating arrows */}
+    <g stroke="#22c55e" strokeWidth="1" fill="none">
+      <line x1="60" y1="70" x2="68" y2="70">
+        <animate attributeName="x2" values="64;72;64" dur="0.45s" repeatCount="indefinite" />
+      </line>
+    </g>
+    {/* Sound waves blasting outward */}
+    {[18, 28, 38, 48].map((r, i) => (
+      <path
+        key={r}
+        d={`M ${72 + r * 0.6} ${70 - r * 0.85} A ${r} ${r} 0 0 1 ${72 + r * 0.6} ${70 + r * 0.85}`}
+        fill="none"
+        stroke="#22c55e"
+        strokeWidth="1.6"
+        opacity={0.85 - i * 0.16}
+      >
+        <animate attributeName="opacity" values={`${0.85 - i * 0.16};0;${0.85 - i * 0.16}`} dur="2.4s" begin={`${i * 0.28}s`} repeatCount="indefinite" />
+      </path>
+    ))}
+    {/* Cable feeding from behind */}
+    <path d="M 6 90 Q -2 100 8 112" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+// ── Inline SVG: studio mixer console ────────────────────────────────────────
+const MixerConsoleSvg = ({ className }: { className?: string }) => {
+  const channels = 8;
+  const xs = Array.from({ length: channels }, (_, i) => 18 + i * 28);
+  return (
+    <svg viewBox="0 0 240 150" className={className} aria-hidden>
+      <defs>
+        <linearGradient id="mxBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#27272a" />
+          <stop offset="100%" stopColor="#0a0a0c" />
+        </linearGradient>
+        <linearGradient id="mxKnob" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#e4e4e7" />
+          <stop offset="100%" stopColor="#52525b" />
+        </linearGradient>
+      </defs>
+      {/* Console chassis */}
+      <rect x="4" y="6" width="232" height="138" rx="6" fill="url(#mxBody)" stroke="#a1a1aa" strokeWidth="1.2" />
+      {/* Channel strips */}
+      {xs.map((x, i) => {
+        const sliderTop = 60 + ((i * 7) % 38);   // staggered slider positions
+        return (
+          <g key={i}>
+            {/* Channel divider */}
+            <line x1={x - 12} y1="14" x2={x - 12} y2="138" stroke="#3f3f46" strokeWidth="0.7" />
+            {/* Top knob (gain) */}
+            <circle cx={x} cy="22" r="5" fill="url(#mxKnob)" stroke="#0a0a0c" strokeWidth="0.5" />
+            <line x1={x} y1="22" x2={x + 3} y2="18.5" stroke="#0a0a0c" strokeWidth="1" />
+            {/* EQ knobs (HI MID LO) */}
+            <circle cx={x} cy="36" r="3.5" fill="#fbbf24" />
+            <circle cx={x} cy="46" r="3.5" fill="#22c55e" />
+            <circle cx={x} cy="56" r="3.5" fill="#60a5fa" />
+            {/* Slider track */}
+            <rect x={x - 1} y="68" width="2" height="58" fill="#3f3f46" />
+            {/* Slider cap */}
+            <rect x={x - 6} y={sliderTop} width="12" height="6" rx="1" fill="url(#mxKnob)" stroke="#0a0a0c" strokeWidth="0.4" />
+            {/* Channel-strip LED meter (mini) */}
+            <rect x={x - 9} y="68" width="2" height="56" fill="#0a0a0c" />
+            {Array.from({ length: 12 }).map((_, b) => {
+              const fill = b < 7 ? "#22c55e" : b < 10 ? "#fbbf24" : "#ef4444";
+              const lit = (b < (10 - (i % 5))) ? 1 : 0.18;
+              return <rect key={b} x={x - 9} y={68 + b * 4.6} width="2" height="3.5" fill={fill} opacity={lit} />;
+            })}
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+// ── LED VU-meter strip (horizontal classic green→amber→red) ────────────────
+function VUMeter({ label, level }: { label: string; level: number }) {
+  const segs = 16;
+  return (
+    <div className="flex items-center gap-2">
+      <span className="font-mono text-[9px] text-zinc-500 w-3 text-right">{label}</span>
+      <div className="flex-1 h-3 rounded-sm bg-black border border-zinc-700 flex items-center gap-px px-px">
+        {Array.from({ length: segs }).map((_, i) => {
+          const fill = i < segs * 0.65 ? "#22c55e" : i < segs * 0.85 ? "#fbbf24" : "#ef4444";
+          const lit = i < Math.floor(segs * level) ? 1 : 0.15;
+          return (
+            <span
+              key={i}
+              className="flex-1 h-2 rounded-[1px]"
+              style={{
+                background: fill,
+                opacity: lit,
+                boxShadow: lit === 1 ? `0 0 4px ${fill}` : "none",
+              }}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Studio "rack panel" card — matte black with brushed-silver border ─────
+function RackPanel({
+  Icon, accent, eyebrowEn, eyebrowKh, titleEn, titleKh, isKh, children,
+}: {
+  Icon: React.ComponentType<{ className?: string }>;
+  accent: "green" | "blue" | "red";
+  eyebrowEn: string; eyebrowKh: string;
+  titleEn: string; titleKh: string;
+  isKh: boolean;
+  children: React.ReactNode;
+}) {
+  const accentText  = accent === "green" ? "text-emerald-400"
+                     : accent === "blue"  ? "text-sky-400"
+                                          : "text-rose-400";
+  const accentGlow  = accent === "green" ? "rgba(34,197,94,0.55)"
+                     : accent === "blue"  ? "rgba(96,165,250,0.55)"
+                                          : "rgba(244,63,94,0.55)";
+  const accentLed   = accent === "green" ? "#22c55e"
+                     : accent === "blue"  ? "#60a5fa"
+                                          : "#ef4444";
+  return (
+    <article
+      className={`relative rounded-2xl border ${SILVER_RING} ${STUDIO_BG} text-zinc-100 overflow-hidden shadow-lg`}
+      style={{ boxShadow: `0 14px 40px -22px ${accentGlow}, inset 0 1px 0 rgba(255,255,255,0.04)` }}
+    >
+      {/* Brushed-silver top rule */}
+      <div className="h-[3px] w-full" style={{
+        background: `linear-gradient(90deg, transparent 0%, ${accentLed}aa 12%, #d4d4d8 50%, ${accentLed}aa 88%, transparent 100%)`,
+      }} aria-hidden />
+
+      {/* Top header bar — eyebrow + title + power LED */}
+      <header className="flex items-center gap-3 px-5 py-3 border-b border-zinc-700/70 bg-black/30">
+        <div className={`w-10 h-10 rounded-lg bg-zinc-900 border ${SILVER_RING} flex items-center justify-center flex-shrink-0`}>
+          <Icon className={`w-5 h-5 ${accentText}`} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className={`font-mono text-[10px] uppercase tracking-widest ${accentText} ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+            {isKh ? eyebrowKh : eyebrowEn}
+          </div>
+          <div
+            className={`font-display font-bold text-lg sm:text-xl text-zinc-100 ${isKh ? "font-khmer leading-snug" : "leading-tight"}`}
+            style={{ textShadow: `0 0 10px ${accentGlow}` }}
+          >
+            {isKh ? titleKh : titleEn}
+          </div>
+        </div>
+        <span
+          className="w-2 h-2 rounded-full"
+          style={{ background: accentLed, boxShadow: `0 0 8px ${accentLed}` }}
+          aria-hidden
+        />
+      </header>
+
+      <div className="p-5 sm:p-6">{children}</div>
+    </article>
+  );
+}
+
+function AudioEquipment({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      data-testid="section-audio-equipment"
+      id="audio-equipment"
+    >
+      {/* Section label */}
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <span className="font-mono text-[10px] tracking-[0.25em] uppercase bg-stone-900 text-emerald-400 rounded-sm px-2.5 py-0.5">
+          SEC-06
+        </span>
+        <span className={`text-xs font-bold uppercase tracking-widest text-emerald-700 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+          {isKh ? "ឧបករណ៍ស្ទូឌីយោ · យន្តការនៃសំឡេង" : "Studio Gear · The Mechanics of Sound"}
+        </span>
+      </div>
+
+      <h2
+        className={`font-display font-bold text-2xl sm:text-3xl text-stone-950 mb-2 ${isKh ? "font-khmer leading-snug" : ""}`}
+        data-testid="audio-equipment-title"
+      >
+        {isKh
+          ? "យន្តការនៃសំឡេង៖ ឧបករណ៍អូឌីយ៉ូ"
+          : "The Mechanics of Sound: Audio Equipment"}
+      </h2>
+      <p className={`text-stone-700 text-sm sm:text-base mb-8 max-w-3xl ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+        {isKh
+          ? "តន្ត្រី​សម័យ​ទំនើប​មិន​ត្រឹម​តែ​ជា​សិល្បៈ​ប៉ុណ្ណោះ​ទេ — វា​គឺ​ជា​បច្ចេកវិទ្យា​ផង​ដែរ។ មុន​ពេល​សំឡេង​មក​ដល់​ត្រចៀក​អ្នក វា​ត្រូវ​ឆ្លង​កាត់​ច្រវាក់​ឧបករណ៍​មួយ ៖ មីក្រូហ្វូន, ឧបករណ៍​លាយ, ឧបករណ៍​បំពង​សំឡេង។ មក​ស្គាល់​ឧបករណ៍​ទាំង​នោះ ​ដែល​អនុញ្ញាត​ឱ្យ​បដិវត្តន៍​ទាំង​មូល​នេះ​អាច​កើត​ឡើង។"
+          : "Modern music is not just an art — it is also a technology. Before any sound reaches your ears, it travels through a chain of equipment: a microphone, a mixer, a speaker. Meet the gear that quietly made the entire 20th-century revolution possible."}
+      </p>
+
+      {/* ── Subsection 6.1: The Transducers ───────────────────────────── */}
+      <div data-testid="subsection-transducers" className="mb-10">
+        <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <ArrowRightLeft className="w-4 h-4 text-emerald-700" />
+          <h3 className={`font-bold text-lg sm:text-xl text-stone-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh
+              ? "៦.១ · ឧបករណ៍បំប្លែងថាមពល (Transducers)"
+              : "6.1 · The Transducers (ឧបករណ៍បំប្លែងថាមពល)"}
+          </h3>
+        </div>
+        <p className={`text-stone-700 text-sm sm:text-base mb-5 max-w-3xl ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh
+            ? "ឧបករណ៍​បំប្លែង​ថាមពល (Transducer) គឺ​ជា​ឧបករណ៍​ដែល​ប្ដូរ​ថាមពល​ពី​ទម្រង់​មួយ​ទៅ​ទម្រង់​មួយ​ទៀត។ មីក្រូហ្វូន និង​ឧបករណ៍​បំពង​សំឡេង គឺ​ជា​ឧបករណ៍​បំប្លែង​ថាមពល​ពីរ​ដែល​ឆ្លុះ​បញ្ចាំង​គ្នា ៖ ម្នាក់​បង្វែរ​ខ្យល់​ទៅ​ភ្លើង ហើយ​ម្នាក់​ទៀត​បង្វែរ​ភ្លើង​ត្រឡប់​ទៅ​ខ្យល់​វិញ។"
+            : "A transducer is a device that converts energy from one form into another. The microphone and the speaker are two perfectly mirrored transducers: one turns air into electricity, the other turns electricity back into air."}
+        </p>
+
+        {/* Mic + Speaker, mirrored, with a flow diagram in between */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+          {/* Microphone panel */}
+          <RackPanel
+            Icon={Mic2}
+            accent="green"
+            eyebrowEn="Acoustic → Electrical · ខ្យល់​ → ភ្លើង"
+            eyebrowKh="អាគូស្ទិក → អគ្គិសនី · Acoustic → Electrical"
+            titleEn="The Microphone · មីក្រូហ្វូន"
+            titleKh="មីក្រូហ្វូន · The Microphone"
+            isKh={isKh}
+          >
+            <div className="grid grid-cols-[auto_1fr] gap-4 items-start">
+              <VintageMicSvg className="w-20 h-auto flex-shrink-0" />
+              <div>
+                <p className={`text-sm text-zinc-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh
+                    ? "មីក្រូហ្វូន​ចាប់​យក​ថាមពល​អាគូស្ទិក (រលក​សំឡេង​ក្នុង​ខ្យល់) ហើយ​បំប្លែង​វា​ទៅ​ជា​ថាមពល​អគ្គិសនី (សញ្ញា​អូឌីយ៉ូ​ឆ្លង​កាត់​ខ្សែ)។ រលក​សំឡេង​រញ្ជួយ​បន្ទះ​ភ្នាស​តូច​មួយ ហើយ​ការ​រញ្ជួយ​នោះ​ត្រូវ​បាន​ប្ដូរ​ជា​លំនាំ​អគ្គិសនី​ដ៏​ឆ្លាត​មួយ ​ដែល​បន្ទរ​សំឡេង​ពិត​ប្រាកដ ​រាល់​ម៉ូម៉ង់។"
+                    : "A microphone takes acoustic energy (sound waves in the air) and converts it into electrical energy (audio signals through a wire). Sound waves vibrate a thin diaphragm, and that vibration is translated into a clever electrical pattern that mirrors the original sound, moment by moment."}
+                </p>
+                <div className="mt-3 rounded-md border border-emerald-900/60 bg-emerald-950/40 p-2.5">
+                  <div className={`font-mono text-[10px] uppercase tracking-widest text-emerald-300 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                    {isKh ? "ការ​បំប្លែង" : "The conversion"}
+                  </div>
+                  <div className={`text-sm text-emerald-100 ${isKh ? "font-khmer leading-loose" : "font-mono"}`}>
+                    {isKh ? "ខ្យល់ ➜ ភ្នាស ➜ អគ្គិសនី" : "AIR ➜ DIAPHRAGM ➜ ELECTRICITY"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </RackPanel>
+
+          {/* Direction-of-flow indicator */}
+          <div className="hidden lg:flex flex-col items-center justify-center px-3" aria-hidden>
+            <ArrowRightLeft className="w-7 h-7 text-zinc-400" />
+            <span
+              className={`text-[10px] text-zinc-500 mt-2 text-center ${
+                isKh ? "font-khmer leading-snug" : "font-mono uppercase tracking-widest"
+              }`}
+            >
+              {isKh ? "ឆ្លុះ​បញ្ចាំង​គ្នា" : "Mirror"}
+            </span>
+            <span
+              className={`text-[10px] text-zinc-600 mt-0.5 italic text-center ${
+                !isKh ? "font-khmer not-italic leading-snug" : ""
+              }`}
+            >
+              {isKh ? "perfect opposites" : "ឆ្លុះ​បញ្ចាំង​គ្នា"}
+            </span>
+          </div>
+
+          {/* Speaker panel */}
+          <RackPanel
+            Icon={Volume2}
+            accent="red"
+            eyebrowEn="Electrical → Acoustic · ភ្លើង​ → ខ្យល់"
+            eyebrowKh="អគ្គិសនី → អាគូស្ទិក · Electrical → Acoustic"
+            titleEn="The Speaker · ឧបករណ៍បំពងសំឡេង"
+            titleKh="ឧបករណ៍បំពងសំឡេង · The Speaker"
+            isKh={isKh}
+          >
+            <div className="grid grid-cols-[1fr_auto] gap-4 items-start">
+              <div>
+                <p className={`text-sm text-zinc-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh
+                    ? "ឧបករណ៍​បំពង​សំឡេង​ធ្វើ​អ្វី​ដែល​ផ្ទុយ​ពី​មីក្រូហ្វូន​ទាំង​ស្រុង។ វា​ទទួល​យក​ថាមពល​អគ្គិសនី រុញ​មេដែក​មួយ ហើយ​ផ្លាស់​ទី​ស៊ុង (cone) ​ដើម្បី​បង្កើត​រលក​សំឡេង​យក្ស​ត្រឡប់​ទៅ​ក្នុង​ខ្យល់​វិញ។ ​មេដែក, ​បន្ទះ​ស៊ុង​ក្រដាស, ​និង​ខ្យល់​ដែល​ត្រូវ​ច្រាន — ​នោះ​ហើយ​ជា​មូល​ហេតុ​ដែល​អ្នក​ស្ដាប់​ឮ​ភ្លេង។"
+                    : "A speaker does the exact opposite of a microphone. It takes electrical energy, pushes a magnet, and moves a paper cone to create massive acoustic sound waves back into the air. A magnet, a paper cone, and air being shoved — that is literally why you hear music."}
+                </p>
+                <div className="mt-3 rounded-md border border-rose-900/60 bg-rose-950/40 p-2.5">
+                  <div className={`font-mono text-[10px] uppercase tracking-widest text-rose-300 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                    {isKh ? "ការ​បំប្លែង" : "The conversion"}
+                  </div>
+                  <div className={`text-sm text-rose-100 ${isKh ? "font-khmer leading-loose" : "font-mono"}`}>
+                    {isKh ? "អគ្គិសនី ➜ មេដែក ➜ ខ្យល់" : "ELECTRICITY ➜ MAGNET ➜ AIR"}
+                  </div>
+                </div>
+              </div>
+              <SpeakerConeSvg className="w-24 h-auto flex-shrink-0" />
+            </div>
+          </RackPanel>
+        </div>
+
+        {/* Tiny "signal flow" caption strip beneath both transducers */}
+        <div
+          className={`mt-4 rounded-lg ${STUDIO_BG} border ${SILVER_RING} px-4 py-3 text-zinc-300 text-xs flex items-center gap-3 flex-wrap ${isKh ? "font-khmer leading-loose" : "font-mono"}`}
+        >
+          <Waves className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+          <span>
+            {isKh
+              ? "សំឡេង​ពិត ➜ មីក្រូហ្វូន ➜ ខ្សែ ➜ ឧបករណ៍​លាយ ➜ ឧបករណ៍​ពង្រីក​សញ្ញា ➜ ឧបករណ៍​បំពង​សំឡេង ➜ ត្រចៀក​អ្នក"
+              : "REAL SOUND ➜ MIC ➜ CABLE ➜ MIXER ➜ AMPLIFIER ➜ SPEAKER ➜ YOUR EAR"}
+          </span>
+        </div>
+      </div>
+
+      {/* ── Subsection 6.2: The Brain of the Studio (Mixer) ───────────── */}
+      <div data-testid="subsection-mixer" className="mb-10">
+        <div className="flex items-center gap-2 mb-2 flex-wrap">
+          <SlidersHorizontal className="w-4 h-4 text-sky-700" />
+          <h3 className={`font-bold text-lg sm:text-xl text-stone-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh
+              ? "៦.២ · ខួរក្បាលនៃស្ទូឌីយោ — ឧបករណ៍លាយសំឡេង"
+              : "6.2 · The Brain of the Studio — The Mixer"}
+          </h3>
+        </div>
+
+        <RackPanel
+          Icon={SlidersHorizontal}
+          accent="blue"
+          eyebrowEn="The Console · ​ខន​សូល"
+          eyebrowKh="ខន​សូល · The Console"
+          titleEn="The Audio Mixer · ឧបករណ៍លាយសំឡេង"
+          titleKh="ឧបករណ៍លាយសំឡេង · The Audio Mixer"
+          isKh={isKh}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-5 items-start">
+            {/* Mixer console graphic + meters */}
+            <div className="rounded-xl border border-zinc-700/70 bg-black/40 p-3">
+              <MixerConsoleSvg className="w-full h-auto" />
+              <div className="mt-3 space-y-1.5">
+                <VUMeter label="L" level={0.78} />
+                <VUMeter label="R" level={0.66} />
+              </div>
+              <div className={`text-[10px] text-zinc-500 mt-2 ${isKh ? "font-khmer leading-loose" : "font-mono uppercase tracking-widest"}`}>
+                {isKh ? "៨ ឆានែល លាយចូល → ស្តេរេអូ ​ឆ្វេង/ស្ដាំ ចេញ" : "8 channels in → stereo L/R out"}
+              </div>
+            </div>
+
+            {/* Explanation */}
+            <div>
+              <p className={`text-sm text-zinc-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "ឧបករណ៍​លាយ​សំឡេង​ទទួល​យក​សញ្ញា​អគ្គិសនី​រាប់​សិប​ផ្សេង​ៗ​គ្នា (ពី​មីក្រូហ្វូន​និង​ឧបករណ៍​ផ្សេង​ៗ) ​លៃ​តម្រូវ​សំឡេង (amplitude) និង​សំនៀង (frequencies) ​របស់​ពួក​វា ហើយ​លាយ​ពួក​វា​បញ្ចូល​គ្នា​ជា​បទ​ស្តេរេអូ​តែ​មួយ (ឆ្វេង និង​ស្ដាំ)។ វិស្វករ​លាយ​ស្ដាប់​មែន​ទែន — ​បញ្ចេញ​ជង់ស្គរ​ទៅ​ខាង​ឆ្វេង ​ដាក់​សំឡេង​ច្រៀង​នៅ​កណ្ដាល ​ដាក់​ហ្គីតារ​ទៅ​ខាង​ស្ដាំ — ​រហូត​ដល់​បន្ទប់​ដែល​មាន​មនុស្ស​ប្រាំ​នាក់​ស្ដាប់​ទៅ​ដូច​ជា​ក្រុម​ភ្លេង​មួយ​ឯក​ច្ឆ័ន្ទ។"
+                  : "A mixer takes dozens of separate electrical signals (from different microphones and instruments), adjusts their volume (amplitude) and tone (frequencies), and blends them into one single stereo track (Left and Right). The mixing engineer is really listening — pushing the drums to the left, locking the vocal in the centre, parking the guitar to the right — until a roomful of five people sounds like one cohesive band."}
+              </p>
+
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <MixerControlPill
+                  isKh={isKh}
+                  color="text-amber-300"
+                  ledColor="#fbbf24"
+                  enLabel="GAIN"
+                  khLabel="ប៊ឺត"
+                  enHint="how loud each input is"
+                  khHint="ភាព​ខ្លាំង​នៃ​សញ្ញា​នីមួយ​ៗ"
+                />
+                <MixerControlPill
+                  isKh={isKh}
+                  color="text-emerald-300"
+                  ledColor="#22c55e"
+                  enLabel="EQ"
+                  khLabel="អេក្យូ"
+                  enHint="bass / mid / treble shaping"
+                  khHint="ការ​លៃ​សំនៀង​ទាប/កណ្ដាល/ខ្ពស់"
+                />
+                <MixerControlPill
+                  isKh={isKh}
+                  color="text-sky-300"
+                  ledColor="#60a5fa"
+                  enLabel="PAN"
+                  khLabel="ប៉ាន"
+                  enHint="left ↔ right placement"
+                  khHint="ដាក់​ឆ្វេង ↔ ស្ដាំ"
+                />
+                <MixerControlPill
+                  isKh={isKh}
+                  color="text-rose-300"
+                  ledColor="#ef4444"
+                  enLabel="FADER"
+                  khLabel="ហ្វេឌ័រ"
+                  enHint="final blend volume"
+                  khHint="ភាព​ខ្លាំង​សម្រាប់​ការ​លាយ"
+                />
+              </div>
+
+              <div className="mt-4 rounded-md border border-sky-900/60 bg-sky-950/40 p-3 flex items-start gap-2">
+                <Activity className="w-4 h-4 text-sky-300 flex-shrink-0 mt-0.5" />
+                <p className={`text-xs text-sky-100 ${isKh ? "font-khmer leading-loose" : "leading-snug"}`}>
+                  {isKh
+                    ? "បន្ទាត់​ភ្លើង​បៃតង-លឿង-ក្រហម​នៅ​ខាង​ឆ្វេង​នេះ​គឺ​ជា 'VU meter' ដែល​បង្ហាញ​ភាព​ខ្លាំង​នៃ​សញ្ញា​ក្នុង​ពេល​ពិត។ ពណ៌​ក្រហម = ខ្លាំង​ពេក នឹង​ខូច​សំឡេង។"
+                    : "The green-yellow-red bars to the left are 'VU meters' showing the live signal level. Red = too loud — the sound will distort."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </RackPanel>
+      </div>
+
+      {/* ── Subsection 6.3: The 20th Century Revolution ───────────────── */}
+      <div data-testid="subsection-revolution">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <Zap className="w-4 h-4 text-rose-700" />
+          <h3 className={`font-bold text-lg sm:text-xl text-stone-900 ${isKh ? "font-khmer" : ""}`}>
+            {isKh
+              ? "៦.៣ · បដិវត្តន៍សតវត្សទី២០"
+              : "6.3 · The 20th Century Revolution"}
+          </h3>
+        </div>
+
+        {/* Highlighted manifesto block */}
+        <div
+          className={`relative rounded-2xl border ${SILVER_RING} ${STUDIO_BG} overflow-hidden mb-5`}
+          style={{ boxShadow: "0 18px 48px -22px rgba(34,197,94,0.45)" }}
+          data-testid="audio-revolution-quote"
+        >
+          {/* meter-tape strip across the top */}
+          <div className="h-1.5 w-full flex">
+            {Array.from({ length: 24 }).map((_, i) => {
+              const c = i < 16 ? "#22c55e" : i < 21 ? "#fbbf24" : "#ef4444";
+              return <span key={i} className="flex-1" style={{ background: c, opacity: 0.55 + (i / 24) * 0.45 }} />;
+            })}
+          </div>
+          <div className="p-6 sm:p-8">
+            <div className={`font-mono text-[10px] uppercase tracking-widest text-emerald-400 mb-3 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+              {isKh ? "សេចក្ដី​ប្រកាស" : "The thesis"}
+            </div>
+            <p
+              className={`font-display font-extrabold text-xl sm:text-3xl text-zinc-50 leading-tight ${isKh ? "font-khmer leading-snug" : ""}`}
+              style={{ textShadow: "0 0 18px rgba(34,197,94,0.45)" }}
+            >
+              {isKh
+                ? "បើ​គ្មាន​ឧបករណ៍​ទាំង​នេះ​ទេ ​តន្ត្រី​សម័យ​ទំនើប​ក៏​មិន​អាច​កើត​មាន​ដែរ។"
+                : "Without this gear, modern music does not exist."}
+            </p>
+            <p
+              className={`mt-3 text-sm sm:text-base text-zinc-400 ${
+                !isKh ? "font-khmer leading-loose" : "italic leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "Without this gear, modern music does not exist."
+                : "បើ​គ្មាន​ឧបករណ៍​ទាំង​នេះ​ទេ ​តន្ត្រី​សម័យ​ទំនើប​ក៏​មិន​អាច​កើត​មាន​ដែរ។"}
+            </p>
+          </div>
+        </div>
+
+        {/* Two cause/effect cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <RevolutionCard
+            isKh={isKh}
+            accent="green"
+            Icon={Mic2}
+            enHeading="The microphone unlocked intimate singing."
+            khHeading="មីក្រូហ្វូន​បាន​ដោះ​សោ​ការ​ច្រៀង​យ៉ាង​ស្ងប់ស្ងាត់។"
+            enBody="Before the microphone, singers had to scream over a loud band so the back of the room could hear. With a mic in front of their lips, performers could whisper, hum, and sigh — and the whole world would still hear every breath. That is what made the soft, conversational vocals of jazz crooners and modern pop possible."
+            khBody="មុន​ពេល​មាន​មីក្រូហ្វូន ​អ្នក​ច្រៀង​ត្រូវ​តែ​ស្រែក​ដាក់​ក្រុម​ភ្លេង​ខ្លាំង ​ដើម្បី​ឱ្យ​មនុស្ស​នៅ​ខាង​ក្រោយ​បន្ទប់​ឮ។ ​ពេល​មាន​មីក្រូហ្វូន​នៅ​មុខ​បបូរ​មាត់ ​អ្នក​ចម្រៀង​អាច​ខ្សឹប ​អាច​ច្រៀង​ស្រួយ ​អាច​ដក​ដង្ហើម — ហើយ​ពិភពលោក​ទាំង​មូល​នៅ​តែ​ឮ​ដង្ហើម​ទាំង​មូល​របស់​ពួក​គេ។ ​នោះ​ហើយ​ជា​មូល​ហេតុ​ដែល​សំឡេង​ច្រៀង​ទន់​ភ្លន់ ​ដូច​ជា Jazz crooners និង Pop សម័យ​ទំនើប អាច​កើត​ឡើង។"
+          />
+          <RevolutionCard
+            isKh={isKh}
+            accent="red"
+            Icon={Guitar}
+            enHeading="The amplifier gave birth to the electric guitar — and to rock & roll."
+            khHeading="ឧបករណ៍​ពង្រីក​សញ្ញា​បាន​ផ្ដល់​កំណើត​ឱ្យ​ហ្គីតារ​អគ្គិសនី — និង​តន្ត្រី​រ៉ុក​អែន​រ៉ូល។"
+            enBody="An acoustic guitar can never out-shout a drum kit. But run an electric guitar through an amplifier and a speaker stack, and a single player suddenly has more sonic power than an entire brass band. That one technological shift gave the world Chuck Berry, Jimi Hendrix, the British Invasion, heavy metal, punk, and grunge — every loud guitar moment of the last 70 years."
+            khBody="ហ្គីតារ​អាគូស្ទិក​មិន​អាច​ឈ្នះ​សំឡេង​ស្គរ​ទេ។ ​ប៉ុន្តែ​ដោត​ហ្គីតារ​អគ្គិសនី​ឆ្លង​កាត់​ឧបករណ៍​ពង្រីក​សញ្ញា​និង​បំពង​សំឡេង ​អ្នក​លេង​តែ​ម្នាក់​ឯង​ភ្លាម​មាន​អំណាច​សំឡេង​ខ្លាំង​ជាង​ក្រុម​ភ្លេង​លង្ហិន​ទាំង​មូល។ ​ការ​ផ្លាស់​ប្ដូរ​បច្ចេកវិទ្យា​នោះ​មួយ​បាន​ផ្ដល់​ឱ្យ​ពិភពលោក​នូវ Chuck Berry, Jimi Hendrix, ការ​លុក​លុយ​អង់​គ្លេស, តន្ត្រី​មេតាល់, ភាង់, និង​ហ្គ្រាង — រាល់​សន្ទុះ​ហ្គីតារ​ខ្លាំង​ៗ​នៃ ៧០ ឆ្នាំ​ចុង​ក្រោយ​នេះ។"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MixerControlPill({
+  isKh, color, ledColor, enLabel, khLabel, enHint, khHint,
+}: {
+  isKh: boolean;
+  color: string;
+  ledColor: string;
+  enLabel: string; khLabel: string;
+  enHint: string;  khHint: string;
+}) {
+  return (
+    <div className="rounded-lg border border-zinc-700/70 bg-black/30 px-3 py-2 flex items-start gap-2">
+      <span
+        className="w-2 h-2 rounded-full mt-1 flex-shrink-0"
+        style={{ background: ledColor, boxShadow: `0 0 6px ${ledColor}` }}
+        aria-hidden
+      />
+      <div className="min-w-0">
+        <div className={`font-mono text-[10px] tracking-widest ${color} ${isKh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
+          {isKh ? khLabel : enLabel}
+        </div>
+        <div className={`text-[11px] text-zinc-400 ${isKh ? "font-khmer leading-loose" : "leading-snug"}`}>
+          {isKh ? khHint : enHint}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RevolutionCard({
+  isKh, accent, Icon, enHeading, khHeading, enBody, khBody,
+}: {
+  isKh: boolean;
+  accent: "green" | "red";
+  Icon: React.ComponentType<{ className?: string }>;
+  enHeading: string; khHeading: string;
+  enBody: string; khBody: string;
+}) {
+  const accentText = accent === "green" ? "text-emerald-300" : "text-rose-300";
+  const accentLed  = accent === "green" ? "#22c55e" : "#ef4444";
+  const stripFrom  = accent === "green" ? "#22c55e" : "#fbbf24";
+  const stripTo    = accent === "green" ? "#fbbf24" : "#ef4444";
+  return (
+    <article className={`relative rounded-2xl border ${SILVER_RING} ${STUDIO_BG} text-zinc-100 overflow-hidden`}>
+      <div className="h-[3px] w-full" style={{ background: `linear-gradient(90deg, ${stripFrom}, ${stripTo})` }} />
+      <div className="p-5 sm:p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className={`w-10 h-10 rounded-lg bg-zinc-900 border ${SILVER_RING} flex items-center justify-center`}>
+            <Icon className={`w-5 h-5 ${accentText}`} />
+          </div>
+          <h4
+            className={`font-display font-bold text-base sm:text-lg leading-snug ${isKh ? "font-khmer" : ""}`}
+            style={{ textShadow: `0 0 10px ${accentLed}55` }}
+          >
+            {isKh ? khHeading : enHeading}
+          </h4>
+        </div>
+        <p className={`text-sm text-zinc-300 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+          {isKh ? khBody : enBody}
+        </p>
+      </div>
+    </article>
+  );
+}

@@ -19,10 +19,24 @@ export const searchMeta: SearchEntry = {
     "rock", "rock and roll", "hip hop", "electronic music",
     "synthesizer", "vinyl", "cambodian music golden era",
     "sin sisamouth", "ros sereysothea",
+    // Section 6 — Mechanics of Sound · Audio Equipment
+    "microphone", "mic", "ribbon microphone", "vintage microphone",
+    "speaker", "speaker cone", "loudspeaker", "amplifier",
+    "audio mixer", "mixer", "mixing console", "mixing board",
+    "audio engineer", "recording studio", "studio gear",
+    "sound waves", "sound", "audio", "transducer",
+    "VU meter", "stereo", "amplitude", "frequency", "EQ",
+    "fader", "gain", "pan",
   ],
   keywordsKh: [
     "តន្ត្រីសតវត្សទី២០", "ប្រវត្តិតន្ត្រី",
     "Jazz", "Rock", "Hip Hop", "តន្ត្រីខ្មែរសម័យមាស",
     "ស៊ីន ស៊ីសាមុត", "រស់ សេរីសុទ្ធា",
+    // Section 6 — Mechanics of Sound · Audio Equipment
+    "មីក្រូហ្វូន", "ឧបករណ៍បំពងសំឡេង", "ឧបករណ៍ពង្រីកសញ្ញា",
+    "ឧបករណ៍លាយសំឡេង", "ខនសូល", "ស្ទូឌីយោ",
+    "សំឡេង", "អូឌីយ៉ូ", "រលកសំឡេង", "ឧបករណ៍បំប្លែងថាមពល",
+    "យន្តការនៃសំឡេង", "បច្ចេកវិទ្យាសំឡេង",
+    "វិស្វករសំឡេង", "ស្តេរេអូ", "សំនៀង",
   ],
 };
