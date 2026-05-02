@@ -20,6 +20,7 @@ import achievementsRouter from "./achievements";
 import notificationsRouter from "./notifications";
 import schoolMessagesRouter from "./schoolMessages";
 import impactRouter from "./impact";
+import galacticGrammarRouter from "./galacticGrammar";
 
 const router: IRouter = Router();
 
@@ -44,5 +45,6 @@ router.use(achievementsRouter);
 router.use(notificationsRouter);
 router.use(schoolMessagesRouter);
 router.use(impactRouter);
+router.use(galacticGrammarRouter);
 
 export default router;
