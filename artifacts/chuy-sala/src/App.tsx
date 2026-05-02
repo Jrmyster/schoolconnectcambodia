@@ -114,6 +114,7 @@ const KidsMath                  = lazy(() => import("@/pages/KidsMath"));
 const WordPopperPage            = lazy(() => import("@/pages/WordPopperPage"));
 const HabitatSorterPage         = lazy(() => import("@/pages/HabitatSorterPage"));
 const AntarcticaScience         = lazy(() => import("@/pages/AntarcticaScience").then(m => ({ default: m.AntarcticaScience })));
+const ScaleOfUniversePage       = lazy(() => import("@/pages/ScaleOfUniversePage"));
 const WorldHistoryPage          = lazy(() => import("@/pages/WorldHistoryPage"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
@@ -323,6 +324,7 @@ function Router() {
             <Route path="/science/veterinary" component={VeterinaryMedicinePage} />
             <Route path="/science/archaeology-paleontology" component={ArchaeologyPaleontologyPage} />
             <Route path="/science/women-in-science" component={WomenInSciencePage} />
+            <Route path="/science/scale-of-universe" component={ScaleOfUniversePage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
             <Route path="/study-center/europe" component={EuropeHistoryPage} />
             <Route path="/study-center/africa" component={AfricaGeographyPage} />
