@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck, Atom } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -14,6 +14,7 @@ import { HorizonFutureCard } from "@/components/tech/HorizonFutureCard";
 import { IoT5GModule } from "@/components/tech/IoT5GModule";
 import { RouterPostOfficeModule } from "@/components/tech/RouterPostOfficeModule";
 import { TrustArchitectureModule } from "@/components/tech/TrustArchitectureModule";
+import { QuantumEraModule } from "@/components/tech/QuantumEraModule";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -261,6 +262,33 @@ export function HowComputersWorkPage() {
             </div>
           </div>
           <TrustArchitectureModule />
+        </section>
+
+        {/* 12. FEATURED DEEP DIVE · Beyond Silicon — The Quantum Era */}
+        <section data-testid="lesson-quantum-era">
+          {/* Paired bilingual main heading — both EN + KH always visible.
+              Violet/fuchsia palette to differentiate from cyan + emerald
+              and signal "next-generation / futuristic". */}
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-violet-500/15 border border-violet-400/50 text-violet-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_18px_-4px_rgba(167,139,250,0.65)]">
+              <Atom className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-violet-300/95">
+                <span>Lesson 12 · Featured deep dive</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-violet-200/85">
+                  មេរៀនទី ១២ · ការសិក្សាស៊ីជម្រៅ
+                </span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">Beyond Silicon: The Quantum Era</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-fuchsia-200 mt-1 leading-relaxed">
+                  ហួសពីស៊ីលីកូន៖ យុគសម័យកង់ទិច
+                </span>
+              </h2>
+            </div>
+          </div>
+          <QuantumEraModule />
         </section>
       </div>
     </div>
