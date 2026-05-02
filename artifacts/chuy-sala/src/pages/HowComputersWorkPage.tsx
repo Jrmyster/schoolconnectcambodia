@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck, Atom } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck, Atom, RadioTower } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -15,6 +15,7 @@ import { IoT5GModule } from "@/components/tech/IoT5GModule";
 import { RouterPostOfficeModule } from "@/components/tech/RouterPostOfficeModule";
 import { TrustArchitectureModule } from "@/components/tech/TrustArchitectureModule";
 import { QuantumEraModule } from "@/components/tech/QuantumEraModule";
+import { CellularNetworksModule } from "@/components/tech/CellularNetworksModule";
 
 const BLUEPRINT_BG: CSSProperties = {
   backgroundColor: "#020617",
@@ -72,7 +73,7 @@ export function HowComputersWorkPage() {
                 )}
               </p>
               <div className={`mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-cyan-200/70 ${kh ? "font-khmer text-xs" : ""}`}>
-                <span>{t("INTERACTIVES: 11", "ឧបករណ៍អន្តរកម្ម៖ ១១")}</span>
+                <span>{t("INTERACTIVES: 12", "ឧបករណ៍អន្តរកម្ម៖ ១២")}</span>
                 <span className="opacity-40">|</span>
                 <span>{t("BLUEPRINT THEME", "ប្រធានបទ Blueprint")}</span>
                 <span className="opacity-40">|</span>
@@ -223,10 +224,37 @@ export function HowComputersWorkPage() {
           <IoT5GModule />
         </section>
 
-        {/* 10. History of Computing Timeline (was Lesson 9) */}
+        {/* 10. NEW · The Invisible Web — Cellular Networks 2G to 6G */}
+        <section
+          id="cellular-networks"
+          data-testid="lesson-cellular-networks"
+          className="scroll-mt-24"
+        >
+          {/* Paired bilingual main heading — both EN + KH always visible. */}
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 flex items-center justify-center flex-shrink-0">
+              <RadioTower className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-400/85">
+                <span>Lesson 10</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-cyan-300/85">មេរៀនទី ១០</span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">The Invisible Web: Cellular Networks 2G to 6G</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-cyan-200 mt-1 leading-relaxed">
+                  បណ្តាញអរូបី៖ បណ្តាញទូរស័ព្ទ 2G ដល់ 6G
+                </span>
+              </h2>
+            </div>
+          </div>
+          <CellularNetworksModule />
+        </section>
+
+        {/* 11. History of Computing Timeline (was Lesson 10) */}
         <section>
           <SectionHeading
-            kicker={kh ? "មេរៀនទី ១០" : "Lesson 10"}
+            kicker={kh ? "មេរៀនទី ១១" : "Lesson 11"}
             titleEn="History of Computing — Timeline"
             titleKh="ប្រវត្តិរូបវិទ្យាកុំព្យូទ័រ — បន្ទាត់ពេលវេលា"
             kh={kh}
@@ -241,7 +269,7 @@ export function HowComputersWorkPage() {
           </div>
         </section>
 
-        {/* 11. The Architecture of Trust — Cryptography & Blockchain */}
+        {/* 12. The Architecture of Trust — Cryptography & Blockchain */}
         <section data-testid="lesson-trust-architecture">
           {/* Paired bilingual main heading — both EN + KH always visible. */}
           <div className="mb-4 sm:mb-5 flex items-start gap-3">
@@ -250,8 +278,8 @@ export function HowComputersWorkPage() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-emerald-400/85">
-                <span>Lesson 11</span>
-                <span className="font-khmer normal-case tracking-normal text-xs text-emerald-300/85">មេរៀនទី ១១</span>
+                <span>Lesson 12</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-emerald-300/85">មេរៀនទី ១២</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
                 <span className="block">The Architecture of Trust: Cryptography &amp; Blockchain</span>
@@ -264,7 +292,7 @@ export function HowComputersWorkPage() {
           <TrustArchitectureModule />
         </section>
 
-        {/* 12. FEATURED DEEP DIVE · Beyond Silicon — The Quantum Era */}
+        {/* 13. FEATURED DEEP DIVE · Beyond Silicon — The Quantum Era */}
         <section data-testid="lesson-quantum-era">
           {/* Paired bilingual main heading — both EN + KH always visible.
               Violet/fuchsia palette to differentiate from cyan + emerald
@@ -275,9 +303,9 @@ export function HowComputersWorkPage() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-violet-300/95">
-                <span>Lesson 12 · Featured deep dive</span>
+                <span>Lesson 13 · Featured deep dive</span>
                 <span className="font-khmer normal-case tracking-normal text-xs text-violet-200/85">
-                  មេរៀនទី ១២ · ការសិក្សាស៊ីជម្រៅ
+                  មេរៀនទី ១៣ · ការសិក្សាស៊ីជម្រៅ
                 </span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">

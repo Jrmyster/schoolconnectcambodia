@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle,
+  Anvil, Recycle, RadioTower,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -181,12 +181,43 @@ export const SEARCH_INDEX: SearchEntry[] = [
       "router", "routers", "wifi", "wi-fi", "wireless",
       "network", "networking", "internet", "ip address", "lan", "wan",
       "packet", "packets", "modem", "isp", "ethernet",
+      "cellular", "radio waves", "cell tower", "2G", "3G", "4G", "5G", "6G",
     ],
     keywordsKh: [
       "កុំព្យូទ័រ", "បច្ចេកវិទ្យា", "binary", "ហាដវែរ", "សូហ្វវែរ",
       "ខ្វានតូម", "AI",
       "រ៉ោតទ័រ", "Wi-Fi", "វ៉ាយហ្វាយ", "បណ្ដាញ", "អ៊ីនធឺណិត",
       "ឥតខ្សែ", "IP",
+      "ទូរស័ព្ទ", "រលកវិទ្យុ", "ប៉មទូរស័ព្ទ", "បណ្តាញទូរស័ព្ទ",
+    ],
+  },
+  {
+    id: "tech-cellular-networks",
+    href: "/how-computers-work#cellular-networks",
+    icon: RadioTower,
+    titleEn: "The Invisible Web: Cellular Networks 2G to 6G",
+    titleKh: "បណ្តាញអរូបី៖ បណ្តាញទូរស័ព្ទ 2G ដល់ 6G",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "How your phone turns 0s and 1s into invisible radio waves, and the speed-and-signal journey from 2G voice calls all the way to 6G holograms.",
+    descKh: "របៀបដែលទូរស័ព្ទរបស់អ្នកបំប្លែង ០ និង ១ ទៅជារលកវិទ្យុដែលមើលមិនឃើញ និងដំណើរនៃល្បឿន ចាប់ពីការហៅទូរស័ព្ទ 2G រហូតដល់ហូឡូក្រាម 6G។",
+    keywordsEn: [
+      "network", "networks", "cellular", "cell network", "mobile network",
+      "radio waves", "radio wave", "antenna", "cell tower", "tower",
+      "2G", "3G", "4G", "4G LTE", "LTE", "5G", "6G",
+      "internet", "mobile internet", "mobile data", "data",
+      "fibre", "fiber", "fibre optic", "fiber optic",
+      "SMS", "text message", "video calls", "IoT", "internet of things",
+      "latency", "terahertz", "holographic",
+      "Ogburn", "telecom", "telecommunications", "wireless",
+    ],
+    keywordsKh: [
+      "បណ្តាញ", "បណ្តាញទូរស័ព្ទ", "បណ្តាញចល័ត",
+      "រលកវិទ្យុ", "អង់តែន", "ប៉មទូរស័ព្ទ", "ប៉ម",
+      "2G", "3G", "4G", "5G", "6G",
+      "អ៊ីនធឺណិត", "អ៊ីនធឺណិតចល័ត", "ទិន្នន័យចល័ត",
+      "ខ្សែកាបអុបទិក", "អុបទិក",
+      "សារ SMS", "ហៅវីដេអូ", "អ៊ីនធឺណិតនៃកិច្ចការនានា",
+      "តេរ៉ាហឺត", "ហូឡូក្រាម", "ឥតខ្សែ", "ទូរគមនាគមន៍",
     ],
   },
   {
