@@ -4,6 +4,7 @@ import {
   ChevronDown, ChevronUp, BookOpen, Bug, MapPin,
   Binoculars, Feather, Globe, Bird, AlertTriangle, Ear,
   Skull, Plus, Waves, HeartPulse,
+  Droplets, Heart, Wind, Anchor,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
@@ -1229,6 +1230,9 @@ export default function WildlifeExplorerPage() {
       {/* ── New Section: Blue-Ringed Octopus — Beautiful but Deadly ── */}
       <BlueRingedOctopus isKh={isKh} />
 
+      {/* ── New Section: Marine Biology — Giants of the Deep ───────── */}
+      <MarineBiology isKh={isKh} />
+
       {toast && (
         <div
           role="status"
@@ -2147,6 +2151,641 @@ function BlueRingedOctopus({ isKh }: { isKh: boolean }) {
         </div>
       </div>
     </section>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Marine Biology — Giants of the Deep: Ocean Life
+//  យក្សសមុទ្រ៖ ជីវិតក្នុងមហាសមុទ្រ
+//
+//  Aesthetic: midnight blues, cyan highlights, bubble pattern overlay,
+//  water-ripple textures. Sub-sections cover (1) Ocean Mammals — dolphins
+//  and whales as mammals (with the local Irrawaddy Dolphin and the Blue
+//  Whale highlighted) and (2) Cartilage Fish — sharks and manta rays.
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── SVG illustrations: dolphin leap, blue whale, shark fin, manta ray ──
+
+const DolphinLeapSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 160 90" className={className} aria-hidden>
+    {/* Water surface */}
+    <path d="M0 70 Q 40 64, 80 70 T 160 70 L 160 90 L 0 90 Z" fill="#0e7490" opacity="0.55" />
+    <path d="M0 74 Q 40 68, 80 74 T 160 74" stroke="#67e8f9" strokeWidth="1.2" fill="none" opacity="0.7" />
+    {/* Dolphin arching body */}
+    <path
+      d="M28 70 Q 60 18, 110 30 Q 130 34, 138 50 Q 132 46, 124 48 Q 122 56, 130 62 Q 110 64, 90 60 Q 60 56, 40 70 Z"
+      fill="#cbd5e1"
+    />
+    <path
+      d="M28 70 Q 60 18, 110 30 Q 122 34, 130 46 Q 100 38, 70 48 Q 50 56, 40 70 Z"
+      fill="#94a3b8"
+      opacity="0.85"
+    />
+    {/* Dorsal fin */}
+    <path d="M82 28 L 92 12 L 102 28 Z" fill="#94a3b8" />
+    {/* Eye */}
+    <circle cx="118" cy="36" r="1.6" fill="#0a0a0a" />
+    {/* Smile */}
+    <path d="M126 42 Q 132 44, 138 42" stroke="#0a0a0a" strokeWidth="0.8" fill="none" />
+    {/* Splash droplets */}
+    <circle cx="34" cy="62" r="2.2" fill="#67e8f9" />
+    <circle cx="22" cy="58" r="1.6" fill="#67e8f9" />
+    <circle cx="44" cy="56" r="1.4" fill="#67e8f9" />
+  </svg>
+);
+
+const BlueWhaleSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 200 90" className={className} aria-hidden>
+    {/* Body */}
+    <path
+      d="M10 52 Q 40 30, 100 32 Q 150 34, 178 44 Q 188 46, 190 52 Q 188 58, 178 60 Q 150 70, 100 72 Q 40 74, 10 56 Z"
+      fill="#1e3a8a"
+    />
+    {/* Belly highlight */}
+    <path
+      d="M30 60 Q 80 70, 150 64 Q 170 62, 178 58 Q 170 70, 150 72 Q 80 78, 30 66 Z"
+      fill="#3b82f6"
+      opacity="0.55"
+    />
+    {/* Throat grooves */}
+    <path d="M40 58 L 40 68 M 50 58 L 50 70 M 60 58 L 60 70 M 70 58 L 70 70 M 80 58 L 80 70" stroke="#1e293b" strokeWidth="0.6" opacity="0.6" />
+    {/* Tail flukes */}
+    <path d="M186 50 L 198 36 L 198 50 Z M 186 54 L 198 68 L 198 54 Z" fill="#1e3a8a" />
+    {/* Pectoral fin */}
+    <path d="M90 60 Q 100 78, 118 76 Q 110 70, 100 60 Z" fill="#1e293b" opacity="0.7" />
+    {/* Eye */}
+    <circle cx="32" cy="48" r="1.5" fill="#fef3c7" />
+    {/* Blowhole spray */}
+    <path d="M44 32 Q 44 22, 40 18 M 44 32 Q 44 22, 48 18 M 44 32 Q 44 24, 44 16" stroke="#67e8f9" strokeWidth="1.2" fill="none" />
+  </svg>
+);
+
+const SharkFinSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 160 90" className={className} aria-hidden>
+    {/* Water surface */}
+    <path d="M0 64 Q 40 60, 80 64 T 160 64 L 160 90 L 0 90 Z" fill="#0c4a6e" opacity="0.7" />
+    <path d="M0 60 Q 40 56, 80 60 T 160 60" stroke="#67e8f9" strokeWidth="1" fill="none" opacity="0.7" />
+    <path d="M0 70 Q 40 66, 80 70 T 160 70" stroke="#67e8f9" strokeWidth="0.8" fill="none" opacity="0.5" />
+    {/* Dorsal fin */}
+    <path d="M68 64 L 92 18 L 100 64 Z" fill="#475569" />
+    <path d="M68 64 L 92 18 L 96 40 L 80 64 Z" fill="#334155" />
+    {/* Wake ripples */}
+    <path d="M48 70 Q 80 76, 112 70" stroke="#67e8f9" strokeWidth="0.8" fill="none" opacity="0.7" />
+    <path d="M40 76 Q 80 82, 120 76" stroke="#67e8f9" strokeWidth="0.6" fill="none" opacity="0.5" />
+    {/* Submerged silhouette hint */}
+    <path d="M30 78 Q 80 74, 130 78 Q 140 80, 130 82 Q 80 86, 30 82 Z" fill="#0f172a" opacity="0.55" />
+  </svg>
+);
+
+const MantaRaySvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 160 90" className={className} aria-hidden>
+    {/* Wings (diamond/pectoral fins) */}
+    <path
+      d="M80 28 Q 40 30, 12 56 Q 36 60, 60 54 Q 78 50, 80 50 Q 82 50, 100 54 Q 124 60, 148 56 Q 120 30, 80 28 Z"
+      fill="#1e293b"
+    />
+    {/* Body highlight */}
+    <ellipse cx="80" cy="44" rx="14" ry="10" fill="#334155" />
+    {/* Cephalic horns (the "devil ray" lobes) */}
+    <path d="M70 30 Q 66 22, 70 18 Q 74 24, 74 30 Z" fill="#1e293b" />
+    <path d="M90 30 Q 86 24, 86 18 Q 94 22, 90 30 Z" fill="#1e293b" />
+    {/* Belly spots */}
+    <circle cx="72" cy="46" r="1.4" fill="#cbd5e1" opacity="0.7" />
+    <circle cx="86" cy="48" r="1.6" fill="#cbd5e1" opacity="0.7" />
+    <circle cx="80" cy="42" r="1.2" fill="#cbd5e1" opacity="0.6" />
+    {/* Long whip-like tail */}
+    <path d="M80 54 Q 82 70, 78 84 Q 74 86, 76 78 Q 80 64, 80 54" stroke="#1e293b" strokeWidth="2" fill="none" />
+    {/* Bubbles */}
+    <circle cx="20" cy="22" r="2.2" fill="#67e8f9" opacity="0.7" />
+    <circle cx="30" cy="14" r="1.4" fill="#67e8f9" opacity="0.6" />
+    <circle cx="142" cy="20" r="1.8" fill="#67e8f9" opacity="0.7" />
+  </svg>
+);
+
+// ── Reusable bilingual sub-heading and "fact" callout helpers ──────────
+
+function MarineBilingualH3({
+  en, kh, isKh, accentClass,
+}: { en: string; kh: string; isKh: boolean; accentClass: string }) {
+  return (
+    <h3
+      className={`font-display font-extrabold text-xl sm:text-2xl text-white mb-3 ${
+        isKh ? "font-khmer leading-snug" : ""
+      }`}
+    >
+      {isKh ? (
+        <>
+          {kh}{" "}
+          <span className={`block sm:inline text-base sm:text-xl font-sans font-bold ${accentClass}`}>
+            ({en})
+          </span>
+        </>
+      ) : (
+        <>
+          {en}{" "}
+          <span className={`block sm:inline text-base sm:text-xl font-khmer ${accentClass}`}>
+            ({kh})
+          </span>
+        </>
+      )}
+    </h3>
+  );
+}
+
+function MarineBlText({
+  en, kh, className = "",
+}: { en: string; kh: string; className?: string }) {
+  return (
+    <span className={className}>
+      {en}{" "}
+      <span className="font-khmer text-cyan-200/90">({kh})</span>
+    </span>
+  );
+}
+
+function MarineBiology({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="marine-biology"
+      className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-16 scroll-mt-24 overflow-x-clip"
+      data-testid="marine-biology"
+    >
+      <div className="max-w-6xl mx-auto">
+        <div
+          className="relative rounded-3xl border-2 border-cyan-400/40 overflow-hidden shadow-xl"
+          style={{
+            background:
+              "radial-gradient(circle at 90% 0%, rgba(34,211,238,0.22) 0%, transparent 55%)," +
+              "radial-gradient(circle at 0% 100%, rgba(59,130,246,0.20) 0%, transparent 55%)," +
+              "linear-gradient(180deg, #03132e 0%, #0a1f4a 50%, #020a1c 100%)",
+          }}
+        >
+          {/* Bubble dot pattern */}
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.10] pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, #67e8f9 1px, transparent 0)",
+              backgroundSize: "32px 32px",
+            }}
+          />
+          {/* Soft animated water ripple lines */}
+          <svg
+            aria-hidden
+            className="absolute inset-x-0 top-0 w-full h-24 opacity-[0.18] pointer-events-none"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path d="M0 40 Q 150 10, 300 40 T 600 40 T 900 40 T 1200 40" stroke="#67e8f9" strokeWidth="1.5" fill="none" />
+            <path d="M0 70 Q 150 40, 300 70 T 600 70 T 900 70 T 1200 70" stroke="#67e8f9" strokeWidth="1" fill="none" opacity="0.7" />
+            <path d="M0 100 Q 150 70, 300 100 T 600 100 T 900 100 T 1200 100" stroke="#67e8f9" strokeWidth="0.8" fill="none" opacity="0.5" />
+          </svg>
+
+          {/* ── Header ────────────────────────────────────────────── */}
+          <header className="relative px-6 sm:px-10 pt-10 pb-6">
+            <div
+              className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 max-w-full bg-cyan-400/95 border-2 border-cyan-200 text-slate-900 rounded-2xl px-3 py-1.5 text-xs font-extrabold tracking-wide shadow-lg shadow-cyan-500/30 mb-4 uppercase ${
+                isKh ? "font-khmer normal-case" : ""
+              }`}
+              data-testid="marine-eyebrow-badge"
+            >
+              <Waves className="w-3.5 h-3.5" />
+              {isKh ? "ជីវវិទ្យាសមុទ្រ" : "Marine Biology"}
+              <span aria-hidden className="opacity-60">·</span>
+              <span className={isKh ? "" : "font-khmer normal-case"}>
+                {isKh ? "(Marine Biology)" : "ជីវវិទ្យាសមុទ្រ"}
+              </span>
+            </div>
+
+            <h2
+              className={`font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight flex items-start gap-3 flex-wrap ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+              data-testid="marine-heading"
+            >
+              <Anchor className="w-8 h-8 sm:w-10 sm:h-10 text-cyan-300 mt-1.5 flex-shrink-0 drop-shadow-[0_0_10px_rgba(34,211,238,0.55)]" />
+              <span className="text-white">
+                {isKh ? (
+                  <>
+                    យក្សសមុទ្រ៖{" "}
+                    <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+                      ជីវិតក្នុងមហាសមុទ្រ
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Giants of the Deep:{" "}
+                    <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+                      Ocean Life
+                    </span>
+                  </>
+                )}
+              </span>
+            </h2>
+            {/* Always-paired bilingual subtitle */}
+            <p
+              className={`mt-2 text-sm sm:text-base font-bold ${isKh ? "text-cyan-200" : "font-khmer text-cyan-200"}`}
+            >
+              {isKh
+                ? "(Giants of the Deep: Ocean Life)"
+                : "យក្សសមុទ្រ៖ ជីវិតក្នុងមហាសមុទ្រ"}
+            </p>
+            <p
+              className={`mt-3 max-w-3xl text-sm sm:text-base text-slate-200 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "មហាសមុទ្រគ្របដណ្តប់ផ្ទៃផែនដីជាង ៧០% ហើយលាក់សត្វដ៏ពិសេសបំផុតមួយចំនួននៅលើភពផែនដី — ខ្លះធំជាងឌីណូស័រ ខ្លះមិនមានឆ្អឹងទាំងស្រុង។ ចូរយើងជ្រមុជទៅរុករកមើលគេ។"
+                : "The ocean covers more than 70% of Earth and hides some of the most extraordinary animals on the planet — some bigger than dinosaurs, others with no bones at all. Let's dive in and meet them."}
+            </p>
+          </header>
+
+          {/* ════════════════════════════════════════════════════════ */}
+          {/* SECTION 1 — The Ocean Mammals                            */}
+          {/* ════════════════════════════════════════════════════════ */}
+          <div
+            id="marine-ocean-mammals"
+            className="px-6 sm:px-10 py-8 border-t border-cyan-400/20"
+            data-testid="ocean-mammals"
+          >
+            <SectionEyebrow numEn="Section 1" numKh="ផ្នែកទី ១" tone="cyan" isKh={isKh} />
+            <MarineBilingualH3
+              en="The Ocean Mammals"
+              kh="ថនិកសត្វសមុទ្រ"
+              isKh={isKh}
+              accentClass="text-cyan-300/90"
+            />
+
+            {/* ── Fact Check callout: Dolphins & Whales are NOT fish ── */}
+            <div
+              data-testid="fact-check-mammals"
+              className="relative mt-3 rounded-2xl border-2 border-cyan-300 bg-gradient-to-br from-cyan-950/80 via-sky-950/70 to-blue-950/80 p-5 shadow-[0_0_28px_rgba(34,211,238,0.18)] overflow-hidden"
+            >
+              <div className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-cyan-400 flex items-center justify-center shadow-lg ring-4 ring-cyan-300/30">
+                <CheckCircleDot />
+              </div>
+
+              <div
+                className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 max-w-full text-[10px] font-extrabold uppercase tracking-[0.25em] text-cyan-200 mb-2 ${
+                  isKh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                {isKh ? "ការត្រួតពិនិត្យការពិត" : "Fact Check"}
+                <span aria-hidden className="opacity-60">·</span>
+                <span className={isKh ? "" : "font-khmer"}>
+                  {isKh ? "(Fact Check)" : "ការត្រួតពិនិត្យការពិត"}
+                </span>
+              </div>
+              <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-3 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                {isKh ? (
+                  <>
+                    ផ្សោត <span className="font-sans text-cyan-200/90 text-base font-bold">(Dolphins)</span> និងត្រីបាឡែន <span className="font-sans text-cyan-200/90 text-base font-bold">(Whales)</span> <span className="text-cyan-300">មិនមែនជាត្រីទេ</span> — ពួកវាជាថនិកសត្វ <span className="font-sans text-cyan-200/90 text-base font-bold">(mammals)</span>!
+                  </>
+                ) : (
+                  <>
+                    Dolphins <span className="font-khmer text-cyan-200/90 text-base font-bold">(ផ្សោត)</span> and Whales <span className="font-khmer text-cyan-200/90 text-base font-bold">(ត្រីបាឡែន)</span> are <span className="text-cyan-300">NOT fish</span> — they are mammals <span className="font-khmer text-cyan-200/90 text-base font-bold">(ថនិកសត្វ)</span>!
+                  </>
+                )}
+              </h4>
+
+              <p className={`text-sm sm:text-base text-cyan-50/95 mb-4 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh ? (
+                  <>
+                    ទោះបីពួកវារស់នៅក្នុងទឹកក៏ដោយ ផ្សោត <MarineBlText en="(Dolphins)" kh="ផ្សោត" /> និងត្រីបាឡែន <MarineBlText en="(Whales)" kh="ត្រីបាឡែន" /> គឺជាថនិកសត្វ ដូចជាមនុស្ស ឆ្កែ និងដំរីដែរ។
+                  </>
+                ) : (
+                  <>
+                    Even though they live in the water, Dolphins (<span className="font-khmer text-cyan-200/90">ផ្សោត</span>) and Whales (<span className="font-khmer text-cyan-200/90">ត្រីបាឡែន</span>) are mammals — just like humans, dogs, and elephants.
+                  </>
+                )}
+              </p>
+
+              {/* Three-trait grid: warm-blooded · live birth · breathes air */}
+              <div className="grid sm:grid-cols-3 gap-3" data-testid="mammal-traits">
+                <div className="rounded-xl border border-rose-400/40 bg-rose-950/40 p-3">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Heart className="w-5 h-5 text-rose-300 flex-shrink-0" />
+                    <div className={`text-[10px] font-extrabold uppercase tracking-wider text-rose-200 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                      {isKh ? "ឈាមក្តៅ" : "Warm-blooded"}
+                    </div>
+                  </div>
+                  <p className={`text-xs text-slate-200 ${isKh ? "font-khmer leading-relaxed" : "leading-snug"}`}>
+                    {isKh ? "រាងកាយរបស់ពួកវារក្សាកំដៅផ្ទាល់ខ្លួន ដូចមនុស្សដែរ។" : "Their bodies stay warm on their own, just like ours."}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-emerald-400/40 bg-emerald-950/40 p-3">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Sparkles className="w-5 h-5 text-emerald-300 flex-shrink-0" />
+                    <div className={`text-[10px] font-extrabold uppercase tracking-wider text-emerald-200 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                      {isKh ? "បង្កើតកូនរស់" : "Live birth"}
+                    </div>
+                  </div>
+                  <p className={`text-xs text-slate-200 ${isKh ? "font-khmer leading-relaxed" : "leading-snug"}`}>
+                    {isKh ? "ពួកវាបង្កើតកូនរស់ មិនមែនពងឡើយ ហើយផ្តល់ទឹកដោះដល់កូន។" : "They give birth to live babies and feed them milk — they don't lay eggs."}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-cyan-400/40 bg-cyan-950/40 p-3">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <Wind className="w-5 h-5 text-cyan-300 flex-shrink-0" />
+                    <div className={`text-[10px] font-extrabold uppercase tracking-wider text-cyan-200 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                      {isKh ? "ដកដង្ហើមខ្យល់" : "Breathes air"}
+                    </div>
+                  </div>
+                  <p className={`text-xs text-slate-200 ${isKh ? "font-khmer leading-relaxed" : "leading-snug"}`}>
+                    {isKh ? (
+                      <>ពួកវាត្រូវតែឡើងផ្ទៃទឹកដើម្បីដកដង្ហើមតាមរន្ធខ្យល់ <span className="font-sans font-bold text-cyan-200">(blowhole)</span> នៅលើកំពូលក្បាល។</>
+                    ) : (
+                      <>They must swim to the surface to breathe air through a <span className="font-bold text-cyan-200">blowhole</span> <span className="font-khmer font-bold text-cyan-200">(រន្ធខ្យល់)</span> on top of their head.</>
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Local Hero: Irrawaddy Dolphin ──────────────────── */}
+            <div
+              data-testid="hero-irrawaddy-dolphin"
+              className="grid md:grid-cols-2 gap-6 items-center mt-8 rounded-2xl border-2 border-amber-300/50 bg-gradient-to-br from-slate-900/80 via-blue-950/70 to-cyan-950/60 p-5 shadow-[0_0_30px_rgba(251,191,36,0.18)] overflow-hidden"
+            >
+              <div className="order-2 md:order-1">
+                <div className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 max-w-full px-2.5 py-1 rounded-2xl bg-amber-400/95 border border-amber-300 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  <MapPin className="w-3 h-3" />
+                  {isKh ? "វីរបុរសក្នុងស្រុក" : "Local Hero"}
+                  <span aria-hidden className="opacity-60">·</span>
+                  <span className={isKh ? "" : "font-khmer"}>
+                    {isKh ? "(Local Hero)" : "វីរបុរសក្នុងស្រុក"}
+                  </span>
+                </div>
+                <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-1 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                  {isKh ? (
+                    <>ផ្សោតទន្លេមេគង្គ <span className="block sm:inline text-base font-sans font-bold text-amber-300/90">(The Irrawaddy Dolphin)</span></>
+                  ) : (
+                    <>The Irrawaddy Dolphin <span className="block sm:inline text-base font-khmer text-amber-300/90">(ផ្សោតទន្លេមេគង្គ)</span></>
+                  )}
+                </h4>
+                <p className="text-xs font-mono uppercase tracking-wider text-cyan-300/70 mb-3">Orcaella brevirostris</p>
+                <p className={`text-sm sm:text-base text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh ? (
+                    <>ផ្សោតដែលកម្រ និងមានច្រមុះមូលនេះ ជាការភ្ញាក់ផ្អើល — វារស់នៅក្នុង <span className="font-bold text-amber-200">ទឹកសាប</span> នៃ <span className="font-bold text-amber-200">ទន្លេមេគង្គ</span> នៅ <span className="font-bold text-amber-200">កម្ពុជា</span>!</>
+                  ) : (
+                    <>This rare, blunt-nosed dolphin is a surprise — it actually lives in the <span className="font-bold text-amber-200">freshwater</span> of the <span className="font-bold text-amber-200">Mekong River</span> right here in <span className="font-bold text-amber-200">Cambodia</span>!</>
+                  )}
+                </p>
+                <div className="flex flex-wrap items-center gap-2 mt-3">
+                  <Stat label={isKh ? "ជម្រក" : "Habitat"} value={isKh ? "មេគង្គ · ទឹកសាប" : "Mekong · Freshwater"} tone="cyan" />
+                  <Stat label={isKh ? "ច្រមុះ" : "Snout"} value={isKh ? "មូល" : "Blunt / round"} tone="sky" />
+                </div>
+              </div>
+
+              <div className="relative rounded-2xl border-2 border-amber-300/40 bg-gradient-to-br from-cyan-900 via-sky-900 to-blue-900 p-5 shadow-inner overflow-hidden order-1 md:order-2">
+                <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
+                  <Droplets className="w-3 h-3" />
+                  {isKh ? "ទឹកសាប" : "Freshwater"}
+                </div>
+                <DolphinLeapSvg className="w-full h-44" />
+              </div>
+            </div>
+
+            {/* ── The Blue Whale ─────────────────────────────────── */}
+            <div
+              data-testid="hero-blue-whale"
+              className="grid md:grid-cols-2 gap-6 items-center mt-6 rounded-2xl border-2 border-blue-400/50 bg-gradient-to-br from-blue-950/80 via-indigo-950/70 to-slate-950/80 p-5 shadow-[0_0_30px_rgba(59,130,246,0.22)] overflow-hidden"
+            >
+              <div className="relative rounded-2xl border-2 border-blue-400/40 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 p-5 shadow-inner overflow-hidden">
+                <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-400 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider">
+                  <Sparkles className="w-3 h-3" />
+                  {isKh ? "សត្វធំបំផុត" : "Largest ever"}
+                </div>
+                <BlueWhaleSvg className="w-full h-44" />
+              </div>
+
+              <div>
+                <div className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 max-w-full px-2.5 py-1 rounded-2xl bg-blue-400/95 border border-blue-200 text-slate-900 text-[10px] font-extrabold uppercase tracking-wider mb-2 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                  <Waves className="w-3 h-3" />
+                  {isKh ? "កំណត់ត្រាពិភពលោក" : "World Record"}
+                  <span aria-hidden className="opacity-60">·</span>
+                  <span className={isKh ? "" : "font-khmer"}>
+                    {isKh ? "(World Record)" : "កំណត់ត្រាពិភពលោក"}
+                  </span>
+                </div>
+                <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-1 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                  {isKh ? (
+                    <>ត្រីបាឡែនខៀវ <span className="block sm:inline text-base font-sans font-bold text-blue-300/90">(The Blue Whale)</span></>
+                  ) : (
+                    <>The Blue Whale <span className="block sm:inline text-base font-khmer text-blue-300/90">(ត្រីបាឡែនខៀវ)</span></>
+                  )}
+                </h4>
+                <p className="text-xs font-mono uppercase tracking-wider text-cyan-300/70 mb-3">Balaenoptera musculus</p>
+                <p className={`text-sm sm:text-base text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh ? (
+                    <>វាគឺជា <span className="font-extrabold text-blue-200">សត្វធំជាងគេបំផុត</span> ដែលធ្លាប់រស់នៅលើផែនដី — <span className="font-extrabold text-blue-200">ធំជាងឌីណូស័រណាមួយក៏ដោយ</span> — ហើយ <span className="font-extrabold text-blue-200">បេះដូងរបស់វាមានទំហំស្មើនឹងឡានតូចមួយ</span>។</>
+                  ) : (
+                    <>It is the <span className="font-extrabold text-blue-200">largest animal to have ever lived</span> on Earth — <span className="font-extrabold text-blue-200">bigger than any dinosaur</span> — and its <span className="font-extrabold text-blue-200">heart is the size of a small car</span>.</>
+                  )}
+                </p>
+                <div className="grid grid-cols-3 gap-2 mt-3 text-center">
+                  <div className="rounded-lg bg-blue-950/60 border border-blue-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-blue-200">~30 m</div>
+                    <div className={`text-[10px] text-blue-300/80 ${isKh ? "font-khmer" : ""}`}>{isKh ? "ប្រវែង" : "Length"}</div>
+                  </div>
+                  <div className="rounded-lg bg-indigo-950/60 border border-indigo-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-indigo-200">~180 t</div>
+                    <div className={`text-[10px] text-indigo-300/80 ${isKh ? "font-khmer" : ""}`}>{isKh ? "ទម្ងន់" : "Weight"}</div>
+                  </div>
+                  <div className="rounded-lg bg-rose-950/60 border border-rose-500/40 px-2 py-2">
+                    <div className="text-base font-extrabold text-rose-200">~600 kg</div>
+                    <div className={`text-[10px] text-rose-300/80 ${isKh ? "font-khmer" : ""}`}>{isKh ? "បេះដូង" : "Heart"}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ════════════════════════════════════════════════════════ */}
+          {/* SECTION 2 — The Cartilage Fish                           */}
+          {/* ════════════════════════════════════════════════════════ */}
+          <div
+            id="marine-cartilage-fish"
+            className="px-6 sm:px-10 py-8 border-t border-cyan-400/20"
+            data-testid="cartilage-fish"
+          >
+            <SectionEyebrow numEn="Section 2" numKh="ផ្នែកទី ២" tone="cyan" isKh={isKh} />
+            <MarineBilingualH3
+              en="The Cartilage Fish"
+              kh="ត្រីឆ្អឹងខ្ចី"
+              isKh={isKh}
+              accentClass="text-cyan-300/90"
+            />
+
+            <p className={`text-sm sm:text-base text-slate-200 mt-1 mb-5 max-w-3xl ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh ? (
+                <>
+                  ត្រីពិសេសមួយក្រុមមិនមានឆ្អឹងរឹងទាល់តែសោះ — ពួកវាស្ថិតក្នុងពិភពរបស់ខ្លួនឯង។ សូមជួបត្រីឆ្លាម <span className="font-sans font-bold text-cyan-200/90">(Sharks)</span> និងបបែលយក្ស <span className="font-sans font-bold text-cyan-200/90">(Manta Rays)</span>។
+                </>
+              ) : (
+                <>
+                  A special group of fish has no hard bones at all — they're in a class of their own. Meet the Sharks <span className="font-khmer font-bold text-cyan-200/90">(ត្រីឆ្លាម)</span> and the Manta Rays <span className="font-khmer font-bold text-cyan-200/90">(បបែលយក្ស)</span>.
+                </>
+              )}
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 items-stretch">
+              {/* SHARKS card */}
+              <article
+                data-testid="profile-sharks"
+                className="rounded-2xl border-2 border-slate-400/40 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950/80 p-5 shadow-inner overflow-hidden flex flex-col"
+              >
+                <div className="relative rounded-xl border border-cyan-400/30 bg-gradient-to-br from-cyan-900 via-blue-900 to-slate-950 mb-4 overflow-hidden">
+                  <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900/80 text-cyan-200 text-[10px] font-bold uppercase tracking-wider">
+                    <Waves className="w-3 h-3" />
+                    {isKh ? "ប្រមាញ់" : "Hunter"}
+                  </div>
+                  <SharkFinSvg className="w-full h-32" />
+                </div>
+
+                <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-1 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                  {isKh ? (
+                    <>ត្រីឆ្លាម <span className="block sm:inline text-base font-sans font-bold text-cyan-300/90">(Sharks)</span></>
+                  ) : (
+                    <>Sharks <span className="block sm:inline text-base font-khmer text-cyan-300/90">(ត្រីឆ្លាម)</span></>
+                  )}
+                </h4>
+                <p className={`text-sm text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh
+                    ? "ប្រមាញ់ដ៏ខ្លាំងពូកែនៃមហាសមុទ្រ — ពួកវារស់នៅលើផែនដីយើងជាង ៤០០ លានឆ្នាំ ច្រើនជាងដើមឈើ និងឌីណូស័រទៅទៀត។"
+                    : "The mighty hunters of the ocean — they have lived on Earth for over 400 million years, longer than trees and dinosaurs."}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Stat label={isKh ? "គ្រោងឆ្អឹង" : "Skeleton"} value={isKh ? "ឆ្អឹងខ្ចី" : "Cartilage"} tone="cyan" />
+                  <Stat label={isKh ? "អាយុក្រុម" : "Lineage"} value="~400 M yrs" tone="sky" />
+                </div>
+              </article>
+
+              {/* MANTA RAYS card */}
+              <article
+                data-testid="profile-manta-rays"
+                className="rounded-2xl border-2 border-cyan-400/40 bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-950 p-5 shadow-inner overflow-hidden flex flex-col"
+              >
+                <div className="relative rounded-xl border border-cyan-400/30 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-950 mb-4 overflow-hidden">
+                  <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900/80 text-cyan-200 text-[10px] font-bold uppercase tracking-wider">
+                    <Waves className="w-3 h-3" />
+                    {isKh ? "ហោះក្នុងទឹក" : "Glider"}
+                  </div>
+                  <MantaRaySvg className="w-full h-32" />
+                </div>
+
+                <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-1 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                  {isKh ? (
+                    <>បបែលយក្ស <span className="block sm:inline text-base font-sans font-bold text-cyan-300/90">(Manta Rays)</span></>
+                  ) : (
+                    <>Manta Rays <span className="block sm:inline text-base font-khmer text-cyan-300/90">(បបែលយក្ស)</span></>
+                  )}
+                </h4>
+                <p className={`text-sm text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                  {isKh
+                    ? "ដូចជាសំពត់ដ៏ស្រស់ស្អាតដែលហោះកាត់មហាសមុទ្រ — ស្លាបរបស់វាអាចលាតសន្ធឹងដល់ ៧ ម៉ែត្រ ប៉ុន្តែវាស៊ីតែសត្វល្អិតតូចៗ (planktons) ប៉ុណ្ណោះ។"
+                    : "Like beautiful blankets gliding through the ocean — their wings can stretch to 7 metres across, yet they eat only tiny plankton."}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Stat label={isKh ? "គ្រោងឆ្អឹង" : "Skeleton"} value={isKh ? "ឆ្អឹងខ្ចី" : "Cartilage"} tone="cyan" />
+                  <Stat label={isKh ? "ទទឹងស្លាប" : "Wingspan"} value="up to 7 m" tone="sky" />
+                </div>
+              </article>
+            </div>
+
+            {/* ── The Cartilage explainer ────────────────────────── */}
+            <div
+              data-testid="cartilage-explainer"
+              className="relative mt-8 rounded-2xl border-2 border-cyan-300/60 bg-gradient-to-br from-cyan-950/80 via-sky-950/70 to-blue-950/80 p-5 shadow-[0_0_28px_rgba(34,211,238,0.18)] overflow-hidden"
+            >
+              <div className="flex items-start gap-3 flex-wrap">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-cyan-500/25 border border-cyan-400/50 flex-shrink-0">
+                  <Ear className="w-6 h-6 text-cyan-200" />
+                </div>
+                <div className="flex-1 min-w-[240px]">
+                  <div
+                    className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 max-w-full text-[10px] font-extrabold uppercase tracking-[0.25em] text-cyan-200 mb-1 ${
+                      isKh ? "font-khmer normal-case tracking-normal" : ""
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    {isKh ? "ជីវវិទ្យាដ៏អស្ចារ្យ" : "Amazing Biology"}
+                    <span aria-hidden className="opacity-60">·</span>
+                    <span className={isKh ? "" : "font-khmer"}>
+                      {isKh ? "(Amazing Biology)" : "ជីវវិទ្យាដ៏អស្ចារ្យ"}
+                    </span>
+                  </div>
+                  <h4 className={`font-display font-extrabold text-white text-lg sm:text-xl mb-2 ${isKh ? "font-khmer leading-snug" : ""}`}>
+                    {isKh ? (
+                      <>ឆ្អឹងខ្ចី <span className="text-cyan-300">(Cartilage)</span> — សម្ងាត់នៃល្បឿន និងភាពបត់បែន</>
+                    ) : (
+                      <>Cartilage <span className="text-cyan-300">(ឆ្អឹងខ្ចី)</span> — the secret to speed and flexibility</>
+                    )}
+                  </h4>
+                  <p className={`text-sm sm:text-base text-cyan-50/95 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                    {isKh ? (
+                      <>មិនដូចត្រីធម្មតា ឬមនុស្ស <span className="font-bold text-cyan-200">ត្រីឆ្លាម និងបបែលយក្ស មិនមានឆ្អឹងរឹងទេ</span>។ គ្រោងឆ្អឹងទាំងមូលរបស់ពួកវាគឺធ្វើពី <span className="font-extrabold text-cyan-200">ឆ្អឹងខ្ចី (Cartilage)</span> — ជាសម្ភារៈដូចកៅស៊ូដែលអាចបត់បានដ៏ដូចគ្នា ដែលនៅខាងក្នុង <span className="font-bold text-cyan-200">ត្រចៀក</span> និង <span className="font-bold text-cyan-200">ច្រមុះ</span> របស់មនុស្ស។ នេះធ្វើឲ្យពួកវាជា <span className="font-extrabold text-cyan-200">ប្រមាញ់ដែលលឿន និងបត់បែនយ៉ាងគួរឲ្យជឿ</span>។</>
+                    ) : (
+                      <>Unlike normal fish or humans, <span className="font-bold text-cyan-200">sharks and rays do not have hard bones</span>. Their entire skeleton is made of <span className="font-extrabold text-cyan-200">Cartilage (ឆ្អឹងខ្ចី)</span> — the same flexible, rubbery material inside the human <span className="font-bold text-cyan-200">ear</span> and <span className="font-bold text-cyan-200">nose</span>. This makes them <span className="font-extrabold text-cyan-200">incredibly fast and flexible hunters</span>.</>
+                    )}
+                  </p>
+
+                  {/* Compare strip: Bone vs Cartilage */}
+                  <div className="mt-4 grid sm:grid-cols-2 gap-3">
+                    <div className="rounded-xl border border-slate-400/40 bg-slate-900/60 p-3">
+                      <div className={`text-[10px] font-extrabold uppercase tracking-wider text-slate-300 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                        {isKh ? "ឆ្អឹងធម្មតា" : "Normal bone"}
+                      </div>
+                      <p className={`text-xs text-slate-200 ${isKh ? "font-khmer leading-relaxed" : "leading-snug"}`}>
+                        {isKh ? "រឹង · ធ្ងន់ · កំណត់ល្បឿន (មនុស្ស ឆ្កែ ត្រីភាគច្រើន)។" : "Hard · heavy · slows you down (humans, dogs, most fish)."}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-cyan-400/50 bg-cyan-950/50 p-3">
+                      <div className={`text-[10px] font-extrabold uppercase tracking-wider text-cyan-200 mb-1 ${isKh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                        {isKh ? "ឆ្អឹងខ្ចី (Cartilage)" : "Cartilage (ឆ្អឹងខ្ចី)"}
+                      </div>
+                      <p className={`text-xs text-cyan-50 ${isKh ? "font-khmer leading-relaxed" : "leading-snug"}`}>
+                        {isKh ? "បត់បែន · ស្រាល · លឿនបំផុត (ត្រីឆ្លាម · បបែលយក្ស · ត្រចៀក/ច្រមុះមនុស្ស)។" : "Flexible · light · super fast (sharks · rays · human ears & nose)."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Closing reminder */}
+          <div className="mx-6 sm:mx-10 mb-8 rounded-xl border-2 border-cyan-400/40 bg-slate-900/60 backdrop-blur-sm px-4 py-3 flex items-start gap-3">
+            <Anchor className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-0.5" />
+            <p className={`text-sm text-slate-200 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+              {isKh
+                ? "មហាសមុទ្រគឺជាផ្ទះរបស់សត្វដ៏អស្ចារ្យ — ខ្លះធំ ខ្លះបត់បែន ខ្លះរស់នៅទន្លេមេគង្គរបស់យើង។ ការពារពួកវា គឺជាការការពារផែនដី។"
+                : "The ocean is home to extraordinary animals — some massive, some flexible, some right here in our own Mekong River. Protecting them is protecting our planet."}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Small helper: a filled cyan check-circle icon for the Fact-Check badge. */
+function CheckCircleDot() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-8 h-8 text-slate-900" aria-hidden>
+      <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.0" />
+      <path
+        d="M5 12.5 L 10 17 L 19 7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

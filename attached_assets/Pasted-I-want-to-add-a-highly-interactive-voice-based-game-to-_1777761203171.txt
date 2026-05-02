@@ -1,0 +1,23 @@
+I want to add a highly interactive, voice-based game to the 'Study Center' dropdown menu titled 'Galactic Grammar: Voice Adventure (វេយ្យាករណ៍អវកាស៖ ដំណើរផ្សងព្រេងតាមសំឡេង)'.
+Please build this component using a 'Sci-Fi Dashboard' aesthetic (deep space backgrounds, glowing console borders, and radar animations) and implement the following:
+1. Add to Navigation & Search
+Add this new link to the 'Study Center' dropdown menu.
+Update the search index to include 'grammar', 'speaking', 'voice game', 'space', 'English practice', and their Khmer equivalents.
+2. The Game UI: The Captain's Console
+Design the main interface to look like a spaceship communication console.
+Center a prominent, glowing 'Hold to Speak / ចុចសង្កត់ដើម្បីនិយាយ' microphone button.
+Include a scrolling text terminal that displays the AI's dialogue and the user's transcribed speech.
+3. Voice Integration (Web Speech API)
+Use the browser's native SpeechRecognition API to capture the student's voice input and convert it to text.
+Use the browser's native SpeechSynthesis API to allow the AI to read its responses back to the student out loud.
+4. The Gameplay Loop & AI Logic
+The Prompt: The AI (acting as the Ship's Computer) gives the student a situation. Example: 'Captain, an alien ship is approaching. Tell them we come in peace, but ask what they want.'
+The Input: The user holds the mic and speaks their response in English.
+The Evaluation: Send the transcribed text to the LLM backend with a system prompt to evaluate it for grammar, fluency, and vocabulary.
+The Feedback: The LLM must return a structured JSON response containing:
+correction: A polite correction if they made a mistake (e.g., 'You said: What do you wanting? Better: What do you want?').
+fluency_tip: A quick tip to sound more natural.
+story_continuation: The next line of the story based on what they said.
+5. Formatting & Accessibility:
+Ensure all UI instructions and buttons are entirely bilingual (English/Khmer) so the student understands how to play before they start speaking English.
+Include a 'Request Microphone Access' permission handler when the component first loads.
