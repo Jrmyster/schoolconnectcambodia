@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import {
   Plane,
   ArrowUp,
@@ -12,6 +12,13 @@ import {
   Info,
   Play,
   Pause,
+  Wind,
+  Cross,
+  Gauge,
+  RotateCw,
+  LifeBuoy,
+  Anchor,
+  Waves,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 
@@ -120,7 +127,21 @@ export default function AviationPage() {
         <FourForces isKh={isKh} />
       </Section>
 
-      {/* ── Tool 4: Global Facts ─────────────────────────────────────── */}
+      {/* ── Tool 4: Helicopters — Masters of the Hover ───────────────── */}
+      <Section
+        id="helicopters"
+        eyebrowEn="Vertical Flight"
+        eyebrowKh="ការហោះហើរបញ្ឈរ"
+        titleEn="Helicopters: Masters of the Hover"
+        titleKh="ឧទ្ធម្ភាគចក្រ៖ ម្ចាស់នៃការហោះហើរនៅមួយកន្លែង"
+        descEn="An aeroplane has to keep moving forward, or it falls. A helicopter doesn't. Its blades are spinning wings, and that simple change lets it stand perfectly still in mid-air, land on a roof, or pluck a person off a sinking ship."
+        descKh="យន្តហោះត្រូវតែបន្តផ្លាស់ទីទៅមុខ បើមិនដូច្នេះវានឹងធ្លាក់។ ឧទ្ធម្ភាគចក្រមិនចាំបាច់ទេ។ ស្លាបរបស់វាគឺស្លាបវិល ហើយការផ្លាស់ប្តូរសាមញ្ញនោះអនុញ្ញាតឱ្យវាឈរនឹងនៅលើអាកាស ចុះចតលើដំបូលផ្ទះ ឬសង្គ្រោះមនុស្សពីនាវាដែលកំពុងលិច។"
+        isKh={isKh}
+      >
+        <Helicopters isKh={isKh} />
+      </Section>
+
+      {/* ── Tool 5: Global Facts ─────────────────────────────────────── */}
       <Section
         eyebrowEn="Did you know?"
         eyebrowKh="តើអ្នកដឹងទេ?"
@@ -150,16 +171,17 @@ export default function AviationPage() {
 // ════════════════════════════════════════════════════════════════════════════
 
 function Section({
-  eyebrowEn, eyebrowKh, titleEn, titleKh, descEn, descKh, isKh, children,
+  eyebrowEn, eyebrowKh, titleEn, titleKh, descEn, descKh, isKh, children, id,
 }: {
   eyebrowEn: string; eyebrowKh: string;
   titleEn: string; titleKh: string;
   descEn: string; descKh: string;
   isKh: boolean;
   children: React.ReactNode;
+  id?: string;
 }) {
   return (
-    <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section id={id} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 scroll-mt-20">
       <div className={`text-xs font-bold tracking-widest uppercase text-sky-700 mb-2 ${isKh ? "font-khmer tracking-normal normal-case" : ""}`}>
         {isKh ? eyebrowKh : eyebrowEn}
       </div>
@@ -888,6 +910,508 @@ function FactCard({
         </div>
       </div>
     </article>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Helicopters — Masters of the Hover
+//  ឧទ្ធម្ភាគចក្រ៖ ម្ចាស់នៃការហោះហើរនៅមួយកន្លែង
+//
+//  Three sub-modules inside one Section wrapper:
+//    1. Wings That Spin — rotary wings + Da Vinci/Sikorsky history
+//    2. The Tail Rotor & Physics — Newton's third law diagram
+//    3. Speed vs. Rescue — speed cap + VTOL superpower
+//
+//  Aesthetic: sky blue + cloud white + mechanical slate grey
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Honour prefers-reduced-motion to pause SMIL animations on SVGs ────
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduce(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+  return reduce;
+}
+
+// ── Side-on helicopter SVG with a continuously spinning main rotor ─────
+const HelicopterSvg = ({ className }: { className?: string }) => {
+  const reduced = usePrefersReducedMotion();
+  return (
+  <svg viewBox="0 0 280 160" className={className} aria-hidden>
+    {/* Tail boom */}
+    <path d="M 150 88 L 252 100 L 252 110 L 150 102 Z" fill="#475569" />
+    {/* Tail fin */}
+    <path d="M 246 100 L 268 80 L 264 104 L 252 110 Z" fill="#334155" />
+    {/* Tail rotor hub */}
+    <circle cx="262" cy="92" r="4" fill="#0f172a" />
+    {/* Tail rotor blades — spinning */}
+    <g transform="translate(262 92)">
+      <line x1="-12" y1="0" x2="12" y2="0" stroke="#0f172a" strokeWidth="1.6" strokeLinecap="round" />
+      <line x1="0" y1="-12" x2="0" y2="12" stroke="#0f172a" strokeWidth="1.6" strokeLinecap="round" />
+      {!reduced && (
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.18s" repeatCount="indefinite" additive="sum" />
+      )}
+    </g>
+    {/* Main fuselage */}
+    <path
+      d="M 50 80 Q 30 80, 30 100 L 30 118 Q 30 132, 50 132 L 158 132 Q 168 132, 172 122 L 172 88 Q 168 78, 158 78 Z"
+      fill="#0ea5e9"
+    />
+    {/* Cockpit window */}
+    <path d="M 36 92 Q 38 82, 50 82 L 88 82 L 92 110 L 36 110 Z" fill="#bae6fd" opacity="0.9" />
+    <line x1="62" y1="82" x2="66" y2="110" stroke="#0c4a6e" strokeWidth="0.8" opacity="0.5" />
+    {/* Side window */}
+    <rect x="100" y="88" width="22" height="18" rx="3" fill="#bae6fd" opacity="0.9" />
+    <rect x="128" y="88" width="22" height="18" rx="3" fill="#bae6fd" opacity="0.9" />
+    {/* Door line */}
+    <line x1="124" y1="88" x2="124" y2="128" stroke="#0c4a6e" strokeWidth="0.6" opacity="0.4" />
+    {/* Landing skids */}
+    <line x1="36" y1="142" x2="166" y2="142" stroke="#1e293b" strokeWidth="2.4" strokeLinecap="round" />
+    <line x1="48" y1="132" x2="44" y2="142" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" />
+    <line x1="148" y1="132" x2="158" y2="142" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" />
+    {/* Rotor mast */}
+    <rect x="98" y="60" width="6" height="20" rx="1" fill="#1e293b" />
+    {/* Rotor hub */}
+    <circle cx="101" cy="58" r="6" fill="#0f172a" />
+    {/* Main rotor blades — spinning */}
+    <g transform="translate(101 58)">
+      <ellipse cx="0" cy="0" rx="92" ry="2.6" fill="#1e293b" opacity="0.92" />
+      <ellipse cx="0" cy="0" rx="92" ry="2.6" fill="#1e293b" opacity="0.55" transform="rotate(45)" />
+      <ellipse cx="0" cy="0" rx="92" ry="2.6" fill="#1e293b" opacity="0.92" transform="rotate(90)" />
+      <ellipse cx="0" cy="0" rx="92" ry="2.6" fill="#1e293b" opacity="0.55" transform="rotate(135)" />
+      {!reduced && (
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.45s" repeatCount="indefinite" additive="sum" />
+      )}
+    </g>
+    {/* Air-displacement waves under rotor */}
+    {[0, 1, 2].map((i) => (
+      <path
+        key={i}
+        d={`M 30 ${66 + i * 4} Q 100 ${72 + i * 4}, 172 ${66 + i * 4}`}
+        fill="none"
+        stroke="#bae6fd"
+        strokeWidth="1.2"
+        opacity={0.5 - i * 0.13}
+      >
+        {!reduced && (
+          <animate attributeName="opacity" values={`${0.5 - i * 0.13};0;${0.5 - i * 0.13}`} dur="1.4s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
+        )}
+      </path>
+    ))}
+  </svg>
+  );
+};
+
+// ── Top-down rotation diagram for the tail-rotor / Newton's 3rd Law ────
+const NewtonRotorDiagram = ({ isKh }: { isKh: boolean }) => {
+  const reduced = usePrefersReducedMotion();
+  return (
+  <svg viewBox="0 0 320 220" className="w-full h-auto" aria-hidden>
+    {/* Body — top-down view */}
+    <ellipse cx="120" cy="110" rx="56" ry="34" fill="#cbd5e1" />
+    <ellipse cx="120" cy="110" rx="50" ry="28" fill="#e2e8f0" />
+    {/* Tail boom */}
+    <rect x="170" y="104" width="100" height="12" rx="3" fill="#94a3b8" />
+    {/* Tail rotor */}
+    <circle cx="276" cy="110" r="10" fill="#1e293b" />
+    <line x1="266" y1="110" x2="286" y2="110" stroke="#0f172a" strokeWidth="2" />
+    {/* Main rotor circle (top-down disc) */}
+    <circle cx="120" cy="110" r="84" fill="none" stroke="#0ea5e9" strokeWidth="1" strokeDasharray="3 4" opacity="0.5" />
+    {/* Spinning main rotor (top-down) */}
+    <g transform="translate(120 110)">
+      <line x1="-82" y1="0" x2="82" y2="0" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+      <line x1="0" y1="-82" x2="0" y2="82" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" opacity="0.6" />
+      <circle r="6" fill="#0f172a" />
+      {!reduced && (
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.6s" repeatCount="indefinite" additive="sum" />
+      )}
+    </g>
+    {/* ROTOR direction arrow (curved, anti-clockwise, sky blue) */}
+    <path d="M 60 60 A 70 70 0 0 0 60 160" fill="none" stroke="#0284c7" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrow-sky)" />
+    <text x="22" y="108" fill="#0284c7" fontSize="11" fontWeight="700" fontFamily="ui-sans-serif">
+      ROTOR
+    </text>
+    {/* BODY reaction arrow (curved, clockwise, rose) */}
+    <path d="M 200 162 A 90 90 0 0 0 200 60" fill="none" stroke="#e11d48" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrow-rose)" />
+    <text x="190" y="172" fill="#e11d48" fontSize="11" fontWeight="700" fontFamily="ui-sans-serif">
+      {isKh ? "BODY (ប្រតិកម្ម)" : "BODY (reaction)"}
+    </text>
+    {/* TAIL push arrows — sideways */}
+    <line x1="276" y1="92" x2="276" y2="62" stroke="#16a34a" strokeWidth="3" strokeLinecap="round" markerEnd="url(#arrow-green)" />
+    <text x="244" y="56" fill="#16a34a" fontSize="11" fontWeight="700" fontFamily="ui-sans-serif">
+      {isKh ? "TAIL PUSH" : "TAIL PUSH"}
+    </text>
+    {/* Arrow markers */}
+    <defs>
+      <marker id="arrow-sky" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" fill="#0284c7" />
+      </marker>
+      <marker id="arrow-rose" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" fill="#e11d48" />
+      </marker>
+      <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" fill="#16a34a" />
+      </marker>
+    </defs>
+    {/* Compass label corner */}
+    <text x="6" y="14" fill="#64748b" fontSize="9" fontFamily="ui-monospace">TOP-DOWN VIEW</text>
+  </svg>
+  );
+};
+
+function Helicopters({ isKh }: { isKh: boolean }) {
+  return (
+    <div className="space-y-6">
+      {/* ── Sub-section 1: Wings That Spin ───────────────────────────── */}
+      <article
+        data-testid="heli-wings-that-spin"
+        className="rounded-2xl border-2 border-sky-200 bg-white/90 backdrop-blur-sm shadow-sm overflow-hidden"
+      >
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Visual */}
+          <div className="relative bg-gradient-to-br from-sky-100 via-sky-50 to-white p-6 grid place-items-center min-h-[260px] border-b-2 md:border-b-0 md:border-r-2 border-sky-200 overflow-hidden">
+            {/* faint cloud puffs behind */}
+            <div className="absolute top-4 left-6 w-16 h-8 rounded-full bg-white/70 blur-sm" />
+            <div className="absolute bottom-6 right-6 w-20 h-10 rounded-full bg-white/60 blur-sm" />
+            <HelicopterSvg className="relative w-full max-w-[300px] h-auto" />
+          </div>
+          {/* Body */}
+          <div className="p-5 sm:p-6 flex flex-col">
+            <div
+              className={`inline-flex items-center gap-2 self-start text-[11px] font-bold tracking-widest uppercase text-sky-700 mb-2 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+              {isKh ? "ផ្នែកទី ១ · ស្លាបវិល" : "Section 1 · Rotary Wings"}
+            </div>
+            <h3
+              className={`font-display font-bold text-xl sm:text-2xl text-slate-900 leading-tight ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "ស្លាបដែលវិល" : "Wings That Spin"}
+            </h3>
+            <div className="mt-3 space-y-3 text-slate-700 text-sm sm:text-[15px]">
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh ? (
+                  <>
+                    យន្តហោះត្រូវតែផ្លាស់ទីទៅមុខ <span className="font-bold text-sky-800">យ៉ាងលឿន</span> ដើម្បីជំរុញខ្យល់ឆ្លងកាត់ស្លាបរបស់វា។ ប៉ុន្តែស្លាបរបស់ឧទ្ធម្ភាគចក្រគឺជា{" "}
+                    <span className="font-bold text-sky-800">ស្លាបវិល (rotary wings)</span>។
+                  </>
+                ) : (
+                  <>
+                    Airplanes must move forward <span className="font-bold text-sky-800">very fast</span> to push air over their wings. A helicopter's blades are its wings — called{" "}
+                    <span className="font-bold text-sky-800">rotary wings (ស្លាបវិល)</span>.
+                  </>
+                )}
+              </p>
+              <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                {isKh
+                  ? "ដោយសារតែស្លាបវិលដោយខ្លួនវាផ្ទាល់ តួអាកាសយានអាចឈរនឹង នៅលើអាកាសទាំងស្រុង — ហៅថា ការហោះហើរនៅមួយកន្លែង (hovering)។"
+                  : "Because the wings spin by themselves, the body of the aircraft can stay completely still in the air — this is called hovering (ការហោះហើរនៅមួយកន្លែង)."}
+              </p>
+            </div>
+
+            {/* Hover chip + history note */}
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sky-100 text-sky-800 border border-sky-300 text-xs font-bold">
+                <Wind className="w-3.5 h-3.5" />
+                {isKh ? "ការហោះហើរនៅមួយកន្លែង · HOVER" : "HOVER · ការហោះហើរនៅមួយកន្លែង"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 border border-slate-300 text-xs font-bold">
+                <RotateCw className="w-3.5 h-3.5" />
+                {isKh ? "ស្លាបវិល · ROTARY WING" : "ROTARY WING"}
+              </span>
+            </div>
+
+            {/* History note */}
+            <div className="mt-4 rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 flex items-start gap-3">
+              <Calendar className="w-4 h-4 text-slate-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <div
+                  className={`text-[10px] font-bold tracking-widest uppercase text-slate-600 mb-1 ${
+                    isKh ? "font-khmer normal-case tracking-normal" : ""
+                  }`}
+                >
+                  {isKh ? "កំណត់ត្រាប្រវត្តិសាស្ត្រ" : "A short history"}
+                </div>
+                <p
+                  className={`text-[13px] text-slate-700 ${
+                    isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                  }`}
+                >
+                  {isKh ? (
+                    <>
+                      <span className="font-bold">Leonardo da Vinci</span> បានគូរ "
+                      <span className="italic">ស្គ្រូខ្យល់</span>" នៅជាង ៥០០ ឆ្នាំមុន។ ប៉ុន្តែឧទ្ធម្ភាគចក្រដែលផលិតជាដុំជោគជ័យដំបូងគេបង្អស់ត្រូវបានបង្កើតដោយ{" "}
+                      <span className="font-bold">Igor Sikorsky</span> ក្នុង <span className="tabular-nums font-bold">១៩៣៩</span>។
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-bold">Leonardo da Vinci</span> sketched an "
+                      <span className="italic">aerial screw</span>" more than 500 years ago. But the first successful, mass-produced modern helicopter was invented by{" "}
+                      <span className="font-bold">Igor Sikorsky</span> in <span className="tabular-nums font-bold">1939</span>.
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Sub-section 2: The Tail Rotor & Physics ──────────────────── */}
+      <article
+        data-testid="heli-tail-rotor"
+        className="rounded-2xl border-2 border-slate-300 bg-white/90 backdrop-blur-sm shadow-sm overflow-hidden"
+      >
+        <div className="px-5 sm:px-6 pt-5 pb-2">
+          <div
+            className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-slate-700 mb-1 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            <Wind className="w-3.5 h-3.5" />
+            {isKh ? "ផ្នែកទី ២ · រូបវិទ្យា" : "Section 2 · Physics"}
+          </div>
+          <h3
+            className={`font-display font-bold text-xl sm:text-2xl text-slate-900 leading-tight ${
+              isKh ? "font-khmer leading-snug" : ""
+            }`}
+          >
+            {isKh ? "កន្ទុយឧទ្ធម្ភាគចក្រ និង រូបវិទ្យា" : "The Tail Rotor & Physics"}
+          </h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5 px-5 sm:px-6 pb-6">
+          {/* Diagram */}
+          <div className="rounded-xl border border-slate-200 bg-gradient-to-b from-sky-50/60 via-white to-white p-3 grid place-items-center">
+            <NewtonRotorDiagram isKh={isKh} />
+          </div>
+
+          {/* Explanation */}
+          <div className="space-y-3 text-slate-700 text-sm sm:text-[15px]">
+            <div className="rounded-xl border border-sky-200 bg-sky-50 px-4 py-3">
+              <div
+                className={`text-[10px] font-bold tracking-widest uppercase text-sky-800 mb-1 ${
+                  isKh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                {isKh ? "ច្បាប់ទីបីរបស់ Newton" : "Newton's Third Law"}
+              </div>
+              <p className={`text-sky-900 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                {isKh
+                  ? "សម្រាប់សកម្មភាពនីមួយៗ មានប្រតិកម្មស្មើគ្នា និងផ្ទុយ — សកម្មភាព និង ប្រតិកម្ម (Action & Reaction)។"
+                  : "For every action there is an equal and opposite reaction — Action & Reaction (សកម្មភាព និងប្រតិកម្ម)."}
+              </p>
+            </div>
+
+            <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+              {isKh ? (
+                <>
+                  នៅពេលម៉ាស៊ីនបង្វិលផ្លែស្លាបរ៉ូទ័រដ៏ធ្ងន់{" "}
+                  <span className="font-bold text-sky-800">ទៅខាងឆ្វេង</span> រូបវិទ្យាព្យាយាមបង្វិលតួឧទ្ធម្ភាគចក្រ{" "}
+                  <span className="font-bold text-rose-700">ទៅខាងស្តាំ</span>។
+                </>
+              ) : (
+                <>
+                  When the engine spins the heavy main rotor blades{" "}
+                  <span className="font-bold text-sky-800">to the left</span>, physics tries to spin the body of the helicopter{" "}
+                  <span className="font-bold text-rose-700">to the right</span>.
+                </>
+              )}
+            </p>
+            <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+              {isKh ? (
+                <>
+                  ដំណោះស្រាយ៖{" "}
+                  <span className="font-bold text-emerald-700">ស្គ្រូកន្ទុយតូច (tail rotor)</span> រុញខ្យល់ទៅចំហៀង — ដើម្បីបញ្ឈប់តួពីការវិលចេញពីការគ្រប់គ្រង។
+                </>
+              ) : (
+                <>
+                  The solution: a small propeller on the tail — the{" "}
+                  <span className="font-bold text-emerald-700">tail rotor (ស្គ្រូកន្ទុយ)</span> — pushes air sideways to stop the body from spinning out of control.
+                </>
+              )}
+            </p>
+
+            {/* Color legend */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-mono">
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded border border-sky-300 bg-sky-50 text-sky-800">
+                <span className="w-2 h-2 rounded-full bg-sky-600" />
+                {isKh ? "រ៉ូទ័រ" : "Rotor"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded border border-rose-300 bg-rose-50 text-rose-800">
+                <span className="w-2 h-2 rounded-full bg-rose-600" />
+                {isKh ? "តួ (ប្រតិកម្ម)" : "Body (reaction)"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded border border-emerald-300 bg-emerald-50 text-emerald-800">
+                <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                {isKh ? "កន្ទុយរុញ" : "Tail push"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* ── Sub-section 3: Speed vs. Rescue ──────────────────────────── */}
+      <article
+        data-testid="heli-speed-vs-rescue"
+        className="rounded-2xl border-2 border-sky-200 bg-white/90 backdrop-blur-sm shadow-sm overflow-hidden"
+      >
+        <div className="px-5 sm:px-6 pt-5 pb-2">
+          <div
+            className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-sky-700 mb-1 ${
+              isKh ? "font-khmer normal-case tracking-normal" : ""
+            }`}
+          >
+            <Gauge className="w-3.5 h-3.5" />
+            {isKh ? "ផ្នែកទី ៣ · ការអនុវត្ត" : "Section 3 · In Practice"}
+          </div>
+          <h3
+            className={`font-display font-bold text-xl sm:text-2xl text-slate-900 leading-tight ${
+              isKh ? "font-khmer leading-snug" : ""
+            }`}
+          >
+            {isKh ? "ល្បឿនធៀបនឹងការសង្គ្រោះ" : "Speed vs. Rescue"}
+          </h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5 px-5 sm:px-6 pb-6">
+          {/* Card A — Speed */}
+          <div
+            className="rounded-xl border-2 border-slate-300 bg-gradient-to-br from-slate-50 to-white p-5 flex flex-col"
+            data-testid="heli-speed-card"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-11 h-11 rounded-xl bg-slate-200 text-slate-700 grid place-items-center flex-shrink-0">
+                <Gauge className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div
+                  className={`text-[10px] font-bold tracking-widest uppercase text-slate-600 ${
+                    isKh ? "font-khmer normal-case tracking-normal" : ""
+                  }`}
+                >
+                  {isKh ? "ដែនកំណត់ល្បឿន" : "Speed limit"}
+                </div>
+                <div className="font-display font-extrabold text-2xl text-slate-900 tabular-nums leading-none mt-0.5">
+                  ~250 <span className="text-base text-slate-500 font-bold">km/h</span>
+                </div>
+                <div className="text-[11px] text-slate-500 font-semibold tabular-nums">
+                  ≈ 150 mph
+                </div>
+              </div>
+            </div>
+            <p
+              className={`text-sm text-slate-700 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "ដោយសារតែរបៀបដែលផ្លែស្លាបវិលផ្លាស់ទីឆ្លងកាត់ខ្យល់ ឧទ្ធម្ភាគចក្រគឺ យឺតជាងយន្តហោះ។ ភាគច្រើនមានល្បឿនអតិបរមាប្រហែល ២៥០ គ.ម/ម៉ោង (១៥០ ម៉ាយ/ម៉ោង)។"
+                : "Because of how the spinning blades move through the air, helicopters are slower than airplanes. Most max out around 250 km/h (150 mph)."}
+            </p>
+            {/* Comparative bar */}
+            <div className="mt-4">
+              <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                <span className="inline-flex items-center gap-1">
+                  <RotateCw className="w-3 h-3" />
+                  {isKh ? "ឧទ្ធម្ភាគចក្រ" : "Helicopter"}
+                </span>
+                <span className="tabular-nums">~250 km/h</span>
+              </div>
+              <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div className="h-full bg-slate-500" style={{ width: "27%" }} />
+              </div>
+              <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-500 mt-2 mb-1">
+                <span className="inline-flex items-center gap-1">
+                  <Plane className="w-3 h-3" />
+                  {isKh ? "យន្តហោះផ្លូវ" : "Jet airliner"}
+                </span>
+                <span className="tabular-nums">~900 km/h</span>
+              </div>
+              <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
+                <div className="h-full bg-sky-500" style={{ width: "100%" }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Card B — VTOL / Rescue */}
+          <div
+            className="rounded-xl border-2 border-rose-300 bg-gradient-to-br from-rose-50 to-white p-5 flex flex-col relative overflow-hidden"
+            data-testid="heli-rescue-card"
+          >
+            {/* Subtle medical-cross watermark */}
+            <Cross className="absolute -right-4 -bottom-4 w-32 h-32 text-rose-100" aria-hidden />
+            <div className="relative flex items-start gap-3 mb-3">
+              <div className="w-11 h-11 rounded-xl bg-rose-600 text-white grid place-items-center flex-shrink-0 shadow-md">
+                <Cross className="w-5 h-5" strokeWidth={2.6} />
+              </div>
+              <div className="min-w-0">
+                <div
+                  className={`text-[10px] font-bold tracking-widest uppercase text-rose-700 ${
+                    isKh ? "font-khmer normal-case tracking-normal" : ""
+                  }`}
+                >
+                  {isKh ? "មហាអំណាច · VTOL" : "Superpower · VTOL"}
+                </div>
+                <div className="font-display font-extrabold text-xl text-slate-900 leading-tight mt-0.5">
+                  {isKh ? "ការសង្គ្រោះ" : "Rescue"}
+                </div>
+                <div className={`text-[11px] text-rose-700 font-semibold ${isKh ? "font-khmer" : ""}`}>
+                  {isKh
+                    ? "ការហោះឡើង និងចុះចតបញ្ឈរ"
+                    : "Vertical Takeoff and Landing"}
+                </div>
+              </div>
+            </div>
+            <p
+              className={`relative text-sm text-slate-700 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh ? (
+                <>
+                  មហាអំណាចរបស់ពួកវាគឺ <span className="font-bold text-rose-700">VTOL</span> — ការហោះឡើង និងចុះចតបញ្ឈរ។ ដោយសារពួកវាមិនត្រូវការផ្លូវយន្តហោះ ឧទ្ធម្ភាគចក្រគឺជាយានសង្គ្រោះដ៏ល្អបំផុត។ ពួកវាអាចលើកមនុស្សចេញពីទឹកជំនន់ ពីលើភ្នំ ឬពីនាវានៅកណ្តាលមហាសមុទ្រ។
+                </>
+              ) : (
+                <>
+                  Their superpower is <span className="font-bold text-rose-700">VTOL</span> — Vertical Takeoff and Landing. Because they don't need runways, helicopters are the ultimate rescue vehicles. They can pluck people out of raging floods, off the tops of mountains, or from ships in the middle of the ocean.
+                </>
+              )}
+            </p>
+
+            {/* Rescue scenario chips */}
+            <div className="relative mt-4 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-sky-300 text-sky-800 text-[11px] font-bold">
+                <Waves className="w-3 h-3" />
+                {isKh ? "ទឹកជំនន់" : "Floods"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-emerald-300 text-emerald-800 text-[11px] font-bold">
+                <Mountain className="w-3 h-3" />
+                {isKh ? "កំពូលភ្នំ" : "Mountain peaks"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-slate-300 text-slate-700 text-[11px] font-bold">
+                <Anchor className="w-3 h-3" />
+                {isKh ? "នាវាសមុទ្រ" : "Ships at sea"}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-rose-300 text-rose-800 text-[11px] font-bold">
+                <LifeBuoy className="w-3 h-3" />
+                {isKh ? "ការសង្គ្រោះវេជ្ជសាស្ត្រ" : "Medevac"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   );
 }
 

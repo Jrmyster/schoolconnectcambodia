@@ -8,7 +8,7 @@ import {
   CheckCircle, Stethoscope, Dumbbell, Apple, HeartCrack, Scale,
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
-  Skull, Volume2, HeartHandshake, Handshake, Box, Bird,
+  Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -751,6 +751,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "មើលរូបធាតុត្រជាក់ផ្លាស់ប្ដូរក្នុងម៉ាស៊ីនត្រជាក់ មើលឧបករណ៍កំដៅភ្លឺក្រហម និងរកឃើញហេតុអ្វីការបញ្ចេញខ្យល់ធ្វើឲ្យបន្ទប់រៀនមានសុខភាពល្អ។",
     keywordsEn: ["hvac", "air conditioner", "ac", "aircon", "heating", "cooling", "ventilation", "refrigerator", "fridge", "fan", "temperature", "thermostat"],
     keywordsKh: ["HVAC", "ម៉ាស៊ីនត្រជាក់", "ការកំដៅ", "ការត្រជាក់", "ខ្យល់", "ទូទឹកកក", "សីតុណ្ហភាព"],
+  },
+  {
+    id: "aviation-helicopters",
+    href: "/aviation#helicopters",
+    icon: Wind,
+    titleEn: "Helicopters: Masters of the Hover",
+    titleKh: "ឧទ្ធម្ភាគចក្រ៖ ម្ចាស់នៃការហោះហើរនៅមួយកន្លែង",
+    categoryEn: "Technology", categoryKh: "បច្ចេកវិទ្យា",
+    descEn: "Why helicopters can stand still in mid-air: rotary wings, the tail rotor that fights Newton's third law, and how VTOL turns them into the ultimate rescue vehicle (~250 km/h max).",
+    descKh: "ហេតុអ្វីបានជាឧទ្ធម្ភាគចក្រអាចឈរនឹងលើអាកាស៖ ស្លាបវិល ស្គ្រូកន្ទុយដែលប្រឆាំងនឹងច្បាប់ទីបីរបស់ Newton និងរបៀបដែល VTOL ធ្វើឲ្យពួកវាក្លាយជាយានសង្គ្រោះដ៏ល្អបំផុត (~២៥០ គ.ម/ម៉ោង)។",
+    keywordsEn: ["helicopter", "helicopters", "rotor", "tail rotor", "rotary wing", "rotary wings", "hover", "hovering", "VTOL", "vertical takeoff", "vertical landing", "rescue", "medevac", "Sikorsky", "Igor Sikorsky", "Leonardo da Vinci", "aerial screw", "Newton third law", "action reaction", "aviation", "flight"],
+    keywordsKh: ["ឧទ្ធម្ភាគចក្រ", "ហេលីកុបទ័រ", "រ៉ូទ័រ", "ស្គ្រូកន្ទុយ", "ស្លាបវិល", "ការហោះហើរនៅមួយកន្លែង", "ការសង្គ្រោះ", "VTOL", "ហោះឡើងបញ្ឈរ", "ច្បាប់ទីបី Newton", "Sikorsky", "ដាវាំងស៊ី", "អាកាសចរណ៍"],
   },
   {
     id: "aviation",

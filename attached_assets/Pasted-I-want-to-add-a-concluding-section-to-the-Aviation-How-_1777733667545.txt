@@ -1,0 +1,18 @@
+I want to add a concluding section to the 'Aviation : How We Fly' page called 'The Future of Flight: Drones & Autonomy (អនាគតនៃការហោះហើរ៖ ដ្រូន និង ស្វ័យប្រវត្តិកម្ម)'.
+Please implement this using a futuristic, high-tech aesthetic (sleek silvers, glowing neon blues, and clean grid lines) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this section so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'drone', 'UAV', 'electric aircraft', 'autonomous', and their Khmer equivalents.
+2. Section 1: Electric Skies (ផ្ទៃមេឃអគ្គិសនី)
+Explain the shift in power: Just like cars, airplanes are moving away from burning fossil fuels toward massive electric batteries to stop climate change.
+Explain the engineering challenge: Batteries are incredibly heavy compared to liquid jet fuel. Engineers must invent new, ultra-light materials to make large electric planes a reality.
+3. Section 2: AI Pilots & Autonomous Aircraft (ពីឡុត AI និង យន្តហោះស្វ័យប្រវត្តិ)
+Explain that the future of flying might not include human pilots in the cockpit. Artificial Intelligence can process weather data, wind speed, and mechanical sensors thousands of times faster than a human brain, making flights safer and more efficient.
+4. Section 3: The Era of UAVs / Drones (យុគសម័យនៃដ្រូន)
+Define UAV: Unmanned Aerial Vehicle (យានអវកាសគ្មានមនុស្សបើក).
+Create a grid of 'Social Impact Cards' to highlight how drones are changing the world right now:
+Medical Lifelines (សេវាសង្គ្រោះវេជ្ជសាស្ត្រ): In remote villages where roads flood during the rainy season, autonomous drones are used to drop life-saving vaccines, anti-venom, and blood supplies from the sky in minutes instead of hours.
+Smart Farming (កសិកម្មឆ្លាតវៃ): Drones equipped with infrared cameras fly over rice fields to tell farmers exactly which crops need more water and safely spray fertilizers only where needed.
+Disaster Rescue (ការសង្គ្រោះគ្រោះមហន្តរាយ): During floods or fires, drones use thermal vision to find trapped survivors at night, guiding human rescue teams to their exact location.
+5. Formatting & UX:
+Ensure all main headings, technological terms, and use-cases are strictly bilingual (English/Khmer).
+Use modern icons like a drone silhouette, a battery with a lightning bolt, and a medical drop box.
