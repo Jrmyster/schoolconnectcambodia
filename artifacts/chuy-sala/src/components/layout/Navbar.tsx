@@ -330,6 +330,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "វិទ្យាសាស្ត្រនៃសង្គម — គោលគំនិតសំខាន់ៗ កែវយឹត Veblen លើការប្រើប្រាស់បង្ហាញឈ្មោះ និងអ្វីដែលអ្នកសង្គមវិទ្យាធ្វើពិតប្រាកដ។",
       },
       {
+        href: "/study-center/anthropology",
+        labelEn: "Anthropology: The Human Story",
+        labelKh: "នរវិទ្យា៖ រឿងរ៉ាវរបស់មនុស្សជាតិ",
+        icon: Globe,
+        descEn: "What makes us human — the four-field science of archaeology, biology, language, and culture; the pioneers Boas, Mead, and Ibn Khaldun; and the ultimate thesis that culture and environment, not biology, shape macro-human behavior.",
+        descKh: "អ្វីដែលធ្វើឱ្យយើងជាមនុស្ស — វិទ្យាសាស្ត្របួនវិស័យ ៖ បុរាណវិទ្យា ជីវវិទ្យា ភាសា និងវប្បធម៌; អ្នកត្រួសត្រាយ Boas, Mead និង Ibn Khaldun; និងទ្រឹស្តីចុងក្រោយថា វប្បធម៌និងបរិស្ថាន មិនមែនជីវវិទ្យា គឺជាកត្តាបង្កើតអាកប្បកិរិយារបស់មនុស្សទូទៅ។",
+      },
+      {
         href: "/study-center/authority-conformity",
         labelEn: "Authority & Conformity: The Science of Obedience",
         labelKh: "អំណាច និងការស្របតាមសង្គម ៖ វិទ្យាសាស្ត្រនៃការស្តាប់បង្គាប់",

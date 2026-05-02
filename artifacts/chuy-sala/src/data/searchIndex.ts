@@ -591,6 +591,18 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["sociology", "society", "social", "culture", "veblen", "consumption", "class", "community", "social science"],
     keywordsKh: ["សង្គមវិទ្យា", "សង្គម", "វប្បធម៌", "សហគមន៍", "វិទ្យាសាស្ត្រសង្គម"],
   },
+  {
+    id: "anthropology",
+    href: "/study-center/anthropology",
+    icon: Globe,
+    titleEn: "Anthropology: The Human Story",
+    titleKh: "នរវិទ្យា៖ រឿងរ៉ាវរបស់មនុស្សជាតិ",
+    categoryEn: "Study Center", categoryKh: "មជ្ឈមណ្ឌលសិក្សា",
+    descEn: "The four-field science of being human — archaeology, biology, language, and culture; the pioneers Franz Boas, Margaret Mead, and Ibn Khaldun; and the modern thesis that culture and environment, not biology or race, shape macro-human behavior.",
+    descKh: "វិទ្យាសាស្ត្របួនវិស័យនៃការក្លាយជាមនុស្ស — បុរាណវិទ្យា ជីវវិទ្យា ភាសា និងវប្បធម៌; អ្នកត្រួសត្រាយ Franz Boas, Margaret Mead និង Ibn Khaldun; និងទ្រឹស្តីសម័យទំនើបថា វប្បធម៌ និងបរិស្ថាន មិនមែនជីវវិទ្យា ឬពូជសាសន៍ ជាកត្តាបង្កើតអាកប្បកិរិយារបស់មនុស្សទូទៅ។",
+    keywordsEn: ["anthropology", "anthropologist", "culture", "environment", "human behavior", "human behaviour", "society", "ethnography", "archaeology", "evolution", "boas", "franz boas", "margaret mead", "ibn khaldun", "muqaddimah", "fieldwork", "human story", "humanity", "ethnology", "civilization"],
+    keywordsKh: ["នរវិទ្យា", "នរវិទូ", "វប្បធម៌", "បរិស្ថាន", "អាកប្បកិរិយាមនុស្ស", "សង្គម", "បុរាណវិទ្យា", "វិវត្តន៍", "មនុស្សជាតិ", "អរិយធម៌", "ការសិក្សាមនុស្ស", "ប៉ូអាស៊ី", "ម៉ីដ", "ខាល់ឌូន"],
+  },
 
   // ── SCIENCE: more modules ─────────────────────────────────
   {
