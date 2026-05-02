@@ -1,0 +1,24 @@
+I want to add a highly interactive, featured page under the 'Science' dropdown called 'The Scale of the Universe (ទំហំនៃចក្រវាឡ)'.
+Please implement this using a fully immersive, dark 'deep space' aesthetic with smooth, floating animations, and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this page so it is fully searchable and included in the 'Topic of the Day' rotation.
+2. The Core Concept (គំនិតចម្បង)
+Add a brief introductory text explaining that human beings are stuck in the middle of reality. We are giant compared to atoms, but infinitesimally small compared to galaxies. This tool lets us zoom through the 'Powers of Ten'.
+3. The Interactive Zoom Interface (ចំណុចប្រទាក់ពង្រីកអន្តរកម្ម)
+Build a large, central interactive viewer.
+At the bottom of the viewer, place a wide slider. The slider represents the scale in meters, ranging from 10^-15 (a proton) to 10^26 (the observable universe).
+As the user moves the slider, the central image smoothly transitions, and a bilingual information card updates with the current object.
+4. The Scale Milestones (ចំណុចសំខាន់ៗនៃទំហំ)
+Program the slider to snap to or highlight these specific milestones as the user scrubs through:
+10^-15m: Proton / ប្រូតុង (The heart of an atom)
+10^-10m: Hydrogen Atom / អាតូមអ៊ីដ្រូសែន (The building block of everything)
+10^-6m: Red Blood Cell / កោសិកាឈាមក្រហម (The engine of human life)
+10^-3m: Ant / ស្រមោច (The micro-world we can see)
+1m: Human Being / មនុស្ស (Our scale)
+10^7m: Earth / ផែនដី (Our home)
+10^13m: Solar System / ប្រព័ន្ធព្រះអាទិត្យ (The sun's domain)
+10^21m: The Milky Way Galaxy / កាឡាក់ស៊ី (Our local star city)
+10^26m: The Observable Universe / ចក្រវាឡដែលអាចមើលឃើញ (The edge of reality)
+5. Formatting & UX:
+Ensure all labels, scientific notations, and descriptions are completely bilingual (English/Khmer).
+Make the transitions between scales feel smooth, like the user is physically zooming in or out with a camera lens.

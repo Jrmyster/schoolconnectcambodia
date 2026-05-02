@@ -14,6 +14,7 @@ import {
   Atom,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
+import { RemoteControlSection } from "./TelevisionRemoteSection";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  TECH-TV-01 · Television: The Illusion of Light
@@ -426,6 +427,9 @@ export function TelevisionPage() {
             <ResolutionLadder k={k} />
           </div>
         </div>
+
+        {/* SECTION 4 · The Invisible Command — How a TV Remote Works */}
+        <RemoteControlSection k={k} />
 
         {/* Closing reflection */}
         <div
