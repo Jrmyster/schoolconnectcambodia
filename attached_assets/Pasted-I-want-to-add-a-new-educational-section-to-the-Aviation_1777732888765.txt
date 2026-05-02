@@ -1,0 +1,16 @@
+I want to add a new educational section to the 'Aviation : How We Fly' page called 'Helicopters: Masters of the Hover (ឧទ្ធម្ភាគចក្រ៖ ម្ចាស់នៃការហោះហើរនៅមួយកន្លែង)'.
+Please implement this using an airy, dynamic aesthetic (sky blues, cloud whites, and mechanical grays) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add a new entry for this helicopter section so it is searchable and included in the 'Topic of the Day' rotation. Ensure keywords include 'helicopter', 'aviation', 'rotor', 'rescue', and their Khmer equivalents.
+2. Section 1: Wings That Spin (ស្លាបដែលវិល)
+Explain the core difference from airplanes: Airplanes must move forward very fast to push air over their wings. A helicopter's blades are its wings (called rotary wings). Because the wings spin, the body of the aircraft can stay completely still in the air (hovering) .
+Add a brief history note: While Leonardo da Vinci sketched an 'aerial screw' centuries ago, the first successful, mass-produced modern helicopter was invented by Igor Sikorsky in 1939.
+3. Section 2: The Tail Rotor & Physics (កន្ទុយឧទ្ធម្ភាគចក្រ និង រូបវិទ្យា)
+Explain Newton's Third Law (Action & Reaction): When the engine spins the heavy main rotor blades to the left, physics tries to spin the body of the helicopter to the right.
+Explain the solution: The small propeller on the tail (the tail rotor) pushes air sideways to stop the body from spinning out of control .
+4. Section 3: Speed vs. Rescue (ល្បឿនធៀបនឹងការសង្គ្រោះ)
+Discuss speed limits: Because of how the spinning blades move through the air, helicopters are slower than airplanes. Most max out around 250 km/h (150 mph).
+Highlight their superpower: VTOL (Vertical Takeoff and Landing). Explain that because they do not need runways, helicopters are the ultimate rescue vehicles. They can pluck people out of raging floods, off the tops of mountains, or from ships in the middle of the ocean.
+5. Formatting & UX:
+Ensure all main headings, scientific concepts (VTOL, Rotor), and historical facts are strictly bilingual (English/Khmer).
+Use icons like a spinning propeller, a medical cross for rescue, and a speedometer to make the sections scannable.

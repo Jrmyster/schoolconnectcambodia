@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Volume2, Trees, Sparkles, Search, RotateCcw, X,
   ChevronDown, ChevronUp, BookOpen, Bug, MapPin,
+  Binoculars, Feather, Globe, Bird, AlertTriangle, Ear,
 } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
 import {
@@ -1201,6 +1202,9 @@ export default function WildlifeExplorerPage() {
         </div>
       </section>
 
+      {/* ── New Section: Ornithology — The Avian World ────────────── */}
+      <Ornithology isKh={isKh} />
+
       {toast && (
         <div
           role="status"
@@ -1212,5 +1216,526 @@ export default function WildlifeExplorerPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//  Ornithology — The Avian World
+//  បក្សីវិទ្យា៖ ពិភពសត្វស្លាប
+//
+//  Aesthetic: sky blues, forest greens, airy whites — an outdoor field-guide
+//  feel with simple SVG bird portraits and sky/leaf gradients.
+// ════════════════════════════════════════════════════════════════════════════
+
+// ── Bird SVG illustrations (single-colour, fill via currentColor) ──────
+
+const HouseSparrowSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 90" className={className} aria-hidden>
+    {/* Chubby body */}
+    <ellipse cx="62" cy="55" rx="32" ry="22" fill="currentColor" />
+    {/* Head */}
+    <circle cx="92" cy="40" r="16" fill="currentColor" />
+    {/* Wing detail */}
+    <path d="M44 50 Q 60 38, 78 52 Q 60 60, 44 50 Z" fill="#0a0a0a" opacity="0.18" />
+    {/* Tail — short, fan-shaped */}
+    <path d="M30 52 L18 48 L18 62 L30 60 Z" fill="currentColor" />
+    {/* Beak — short conical */}
+    <path d="M104 40 L116 38 L104 44 Z" fill="#fbbf24" />
+    {/* Eye */}
+    <circle cx="96" cy="38" r="2.2" fill="#0a0a0a" />
+    <circle cx="96.7" cy="37.3" r="0.7" fill="#fff" />
+    {/* Legs */}
+    <line x1="58" y1="76" x2="58" y2="86" stroke="#5a3a14" strokeWidth="1.6" />
+    <line x1="68" y1="76" x2="68" y2="86" stroke="#5a3a14" strokeWidth="1.6" />
+    {/* Tiny ground shadow */}
+    <ellipse cx="62" cy="86" rx="20" ry="1.5" fill="#0a0a0a" opacity="0.15" />
+  </svg>
+);
+
+const BarnSwallowSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 90" className={className} aria-hidden>
+    {/* Body — sleek streamlined */}
+    <path
+      d="M30 50 C 40 38, 70 36, 86 44 L 88 50 C 78 56, 50 58, 30 54 Z"
+      fill="currentColor"
+    />
+    {/* Head */}
+    <circle cx="86" cy="44" r="10" fill="currentColor" />
+    {/* Throat patch — chestnut */}
+    <path d="M74 48 Q 84 56, 92 48 L 90 52 Q 82 58, 74 52 Z" fill="#b45309" opacity="0.85" />
+    {/* Beak — short and pointed */}
+    <path d="M96 44 L106 43 L96 47 Z" fill="#1a1a1a" />
+    {/* Eye */}
+    <circle cx="89" cy="42" r="1.7" fill="#0a0a0a" />
+    <circle cx="89.5" cy="41.5" r="0.6" fill="#fff" />
+    {/* Long forked tail — the iconic feature */}
+    <path d="M30 50 L4 30 L18 50 L4 70 L30 54 Z" fill="currentColor" />
+    {/* Wing — swept back, in flight */}
+    <path
+      d="M50 44 Q 62 18, 90 22 Q 70 32, 60 44 Z"
+      fill="currentColor"
+      opacity="0.85"
+    />
+    {/* Wing detail line */}
+    <path d="M55 38 Q 70 26, 88 26" fill="none" stroke="#0a0a0a" strokeWidth="0.5" opacity="0.4" />
+  </svg>
+);
+
+const GiantIbisSvg = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 120 130" className={className} aria-hidden>
+    {/* Long thin legs */}
+    <line x1="55" y1="78" x2="55" y2="118" stroke="#4a3a28" strokeWidth="2" />
+    <line x1="65" y1="78" x2="65" y2="118" stroke="#4a3a28" strokeWidth="2" />
+    {/* Foot toes */}
+    <path d="M51 118 L55 124 L59 118 M61 118 L65 124 L69 118" fill="none" stroke="#4a3a28" strokeWidth="1.4" />
+    {/* Body — large oval */}
+    <ellipse cx="60" cy="68" rx="32" ry="18" fill="currentColor" />
+    {/* Wing detail */}
+    <path d="M40 64 Q 60 56, 86 66 Q 70 76, 40 70 Z" fill="#0a0a0a" opacity="0.22" />
+    {/* Tail tuft */}
+    <path d="M28 64 L14 60 L20 70 L28 72 Z" fill="currentColor" />
+    {/* Long curved neck */}
+    <path
+      d="M82 64 C 86 50, 90 36, 92 22 C 92 18, 90 14, 88 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="9"
+      strokeLinecap="round"
+    />
+    {/* Head — small */}
+    <circle cx="88" cy="14" r="6" fill="currentColor" />
+    {/* Bare bald patch on head — pale grey */}
+    <path d="M84 12 Q 88 8, 92 12" fill="#cbd5e1" opacity="0.6" />
+    {/* Long curved decurved beak — the ibis signature */}
+    <path
+      d="M93 14 C 102 16, 108 22, 108 32 C 108 36, 106 40, 104 42"
+      fill="none"
+      stroke="#1a1a1a"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+    />
+    {/* Eye */}
+    <circle cx="89" cy="13" r="1.4" fill="#fbbf24" />
+    <circle cx="89" cy="13" r="0.6" fill="#0a0a0a" />
+    {/* Ground line */}
+    <ellipse cx="60" cy="120" rx="22" ry="1.5" fill="#0a0a0a" opacity="0.15" />
+  </svg>
+);
+
+type BirdProfile = {
+  id: string;
+  badgeEn: string;
+  badgeKh: string;
+  /** Short two-letter or symbol icon shown in the badge */
+  badgeIcon: React.ComponentType<{ className?: string }>;
+  nameEn: string;
+  nameKh: string;
+  taglineEn: string;
+  taglineKh: string;
+  bodyEn: string;
+  bodyKh: string;
+  Svg: React.ComponentType<{ className?: string }>;
+  /** Tailwind colour stem used everywhere on the card */
+  tone: "sky" | "emerald" | "rose";
+  /** True for the Critical Local — adds the red Endangered border + warning */
+  endangered?: boolean;
+};
+
+const BIRD_PROFILES: BirdProfile[] = [
+  {
+    id: "house-sparrow",
+    badgeEn: "Global Commoner",
+    badgeKh: "អ្នកជិតខាងសកល",
+    badgeIcon: Globe,
+    nameEn: "House Sparrow",
+    nameKh: "ចាបស្រុក",
+    taglineEn: "Found almost everywhere humans live.",
+    taglineKh: "ឃើញស្ទើរគ្រប់ទីកន្លែងដែលមនុស្សរស់នៅ។",
+    bodyEn:
+      "The house sparrow is one of the most successful bird species on Earth. They are highly adaptable and thrive in both busy cities and quiet farms — building nests in roofs, walls, and street-light fixtures. If you have ever heard a small chirp coming from under a tile, that was probably a sparrow.",
+    bodyKh:
+      "ចាបស្រុកជាប្រភេទសត្វស្លាបជោគជ័យបំផុតមួយនៅលើផែនដី។ ពួកវាមានភាពបត់បែនខ្ពស់ ហើយរស់នៅបានយ៉ាងល្អទាំងក្នុងទីក្រុងមមាញឹក និងនៅតាមចំការស្ងាត់ — សង់សំបុករបស់ពួកវានៅលើដំបូល ជញ្ជាំង និងបង្គោលភ្លើងផ្លូវ។ បើសិនជាអ្នកធ្លាប់ឮសំឡេងស្រែកតូចមួយចេញពីក្រោមក្បឿង — ប្រហែលជាចាប។",
+    Svg: HouseSparrowSvg,
+    tone: "emerald",
+  },
+  {
+    id: "barn-swallow",
+    badgeEn: "The Migrator",
+    badgeKh: "សត្វផ្លាស់ទី",
+    badgeIcon: Globe,
+    nameEn: "Barn Swallow",
+    nameKh: "សត្វត្រចៀកកាំ",
+    taglineEn: "Long, forked tail — and a passport with no borders.",
+    taglineKh: "កន្ទុយវែងពីរសាខា — និងលិខិតឆ្លងដែនគ្មានព្រំដែន។",
+    bodyEn:
+      "Known for their long, deeply forked tails, barn swallows travel thousands of miles across the globe every year to escape the winter. A bird ringed in a barn in northern Europe in summer can be photographed sitting on a wire in southern Africa just months later — one of the longest annual migrations of any songbird.",
+    bodyKh:
+      "ល្បីដោយសារកន្ទុយវែងដែលចាក់ជាសាខាជ្រៅ សត្វត្រចៀកកាំធ្វើដំណើរជាង ពាន់ៗ ម៉ាយឆ្លងកាត់ផែនដីជារៀងរាល់ឆ្នាំ ដើម្បីគេចចេញពីរដូវរងា។ សត្វមួយដែលត្រូវបានចងចិញ្ចៀននៅជង្រុកមួយក្នុងទ្វីបអឺរ៉ុបខាងជើងក្នុងរដូវក្តៅ អាចត្រូវបានថតរូបនៅអង្គុយលើខ្សែភ្លើងនៅអាហ្វ្រិកខាងត្បូង តែ ប៉ុន្មានខែក្រោយមក — ជាការផ្លាស់ទីប្រចាំឆ្នាំវែងបំផុតមួយរបស់សត្វស្លាបច្រៀង។",
+    Svg: BarnSwallowSvg,
+    tone: "sky",
+  },
+  {
+    id: "giant-ibis",
+    badgeEn: "Critically Endangered",
+    badgeKh: "ប្រឈមនឹងការផុតពូជយ៉ាងធ្ងន់ធ្ងរ",
+    badgeIcon: AlertTriangle,
+    nameEn: "Giant Ibis",
+    nameKh: "ត្រយងយក្ស",
+    taglineEn: "The national bird of Cambodia.",
+    taglineKh: "សត្វស្លាបជាតិនៃប្រទេសកម្ពុជា។",
+    bodyEn:
+      "The Giant Ibis is the national bird of Cambodia — a tall wading bird with a long down-curved beak that walks the swampy forests of the country's far north. There are only a few hundred left in the wild today, lost mostly to habitat destruction. Protecting Cambodia's remaining lowland forests is the only way to save them.",
+    bodyKh:
+      "ត្រយងយក្សគឺជាសត្វស្លាបជាតិនៃប្រទេសកម្ពុជា — ជាសត្វស្លាបឈរខ្ពស់ដែលមានចំពុះវែងកោងចុះក្រោម ដើរនៅក្នុងព្រៃទឹកជោរនៃតំបន់ខាងជើងឆ្ងាយរបស់ប្រទេស។ សព្វថ្ងៃមានតែ ប៉ុន្មានរយក្បាល ប៉ុណ្ណោះនៅសេសសល់ក្នុងព្រៃ — បាត់បង់ភាគច្រើនដោយសារការបំផ្លាញទីជម្រក។ ការការពារព្រៃតំបន់ទំនាបដែលនៅសល់របស់កម្ពុជា គឺជាមធ្យោបាយតែមួយគត់ដើម្បីសង្គ្រោះពួកវា។",
+    Svg: GiantIbisSvg,
+    tone: "rose",
+    endangered: true,
+  },
+];
+
+// Tone → tailwind class set, kept inline so Tailwind can detect every class.
+const TONE_CLASSES = {
+  sky: {
+    cardBorder: "border-sky-300",
+    cardBg: "bg-gradient-to-br from-sky-50 to-white",
+    pillBg: "bg-sky-100 text-sky-800 border-sky-300",
+    portraitBg: "bg-gradient-to-br from-sky-100 via-sky-50 to-white",
+    portraitText: "text-sky-700",
+    nameColor: "text-sky-900",
+    accent: "text-sky-700",
+  },
+  emerald: {
+    cardBorder: "border-emerald-300",
+    cardBg: "bg-gradient-to-br from-emerald-50 to-white",
+    pillBg: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    portraitBg: "bg-gradient-to-br from-emerald-100 via-emerald-50 to-white",
+    portraitText: "text-amber-800",
+    nameColor: "text-emerald-900",
+    accent: "text-emerald-700",
+  },
+  rose: {
+    cardBorder: "border-rose-400 ring-2 ring-rose-200",
+    cardBg: "bg-gradient-to-br from-rose-50 to-white",
+    pillBg: "bg-rose-100 text-rose-800 border-rose-400",
+    portraitBg: "bg-gradient-to-br from-rose-50 via-stone-50 to-emerald-50",
+    portraitText: "text-stone-700",
+    nameColor: "text-rose-900",
+    accent: "text-rose-700",
+  },
+} as const;
+
+function Ornithology({ isKh }: { isKh: boolean }) {
+  return (
+    <section
+      id="ornithology"
+      className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-16"
+      data-testid="ornithology"
+    >
+      {/* Soft sky-to-leaf background panel */}
+      <div className="max-w-6xl mx-auto">
+        <div
+          className="rounded-3xl border-2 border-sky-200 overflow-hidden shadow-sm"
+          style={{
+            background:
+              "radial-gradient(circle at 90% 0%, #dbeafe 0%, transparent 50%)," +
+              "radial-gradient(circle at 0% 100%, #dcfce7 0%, transparent 50%)," +
+              "linear-gradient(180deg, #f0f9ff 0%, #ffffff 50%, #f0fdf4 100%)",
+          }}
+        >
+          {/* Faint cloud-and-leaf pattern */}
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.05] pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, #064e3b 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          />
+
+          {/* ── Header ─────────────────────────────────────────── */}
+          <header className="px-6 sm:px-10 pt-10 pb-6">
+            <div
+              className={`inline-flex items-center gap-2 bg-white/80 border-2 border-sky-300 text-sky-800 rounded-full px-3 py-1.5 text-xs font-bold tracking-wide shadow-sm mb-4 ${
+                isKh ? "font-khmer" : ""
+              }`}
+            >
+              <Binoculars className="w-3.5 h-3.5" />
+              {isKh ? "បក្សីវិទ្យា" : "Ornithology"}
+            </div>
+            <h2
+              className={`font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight flex items-start gap-3 flex-wrap ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              <Feather className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-600 mt-1.5 flex-shrink-0" />
+              <span>
+                {isKh ? (
+                  <>
+                    បក្សីវិទ្យា៖{" "}
+                    <span className="bg-gradient-to-r from-sky-700 via-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+                      ពិភពសត្វស្លាប
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Ornithology:{" "}
+                    <span className="bg-gradient-to-r from-sky-700 via-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+                      The Avian World
+                    </span>
+                  </>
+                )}
+              </span>
+            </h2>
+            <p
+              className={`mt-3 max-w-3xl text-sm sm:text-base text-slate-700 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "សត្វស្លាបជាសាច់ញាតិដ៏រស់នៅជិតបំផុតរបស់សត្វដាយណូស័រ — ហើយនៅពេលអ្នកសង្កេតមើលពួកវា អ្នកក៏កំពុងធ្វើជាអ្នកវិទ្យាសាស្ត្រដែរ។"
+                : "Birds are the closest living relatives of the dinosaurs — and when you watch them, you are doing real science."}
+            </p>
+          </header>
+
+          {/* ── Section 1: What is Ornithology? ────────────────── */}
+          <div className="px-6 sm:px-10 py-6 border-t border-sky-200/70">
+            <div
+              className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-sky-700 mb-2 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              <span className="inline-block w-6 h-px bg-sky-400" />
+              {isKh ? "ផ្នែកទី ១" : "Section 1"}
+            </div>
+            <h3
+              className={`font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-3 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh ? "តើបក្សីវិទ្យាជាអ្វី?" : "What is Ornithology?"}
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-6 items-start">
+              <div className="space-y-3 text-slate-700 text-sm sm:text-base">
+                <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                  {isKh ? (
+                    <>
+                      <span className="font-bold text-emerald-800">បក្សីវិទ្យា (Ornithology)</span>{" "}
+                      គឺជាការសិក្សាអំពីសត្វស្លាប — ផ្នែកមួយនៃជីវវិទ្យា (zoology)។ វាត្រូវបានគេធ្វើជាគ្រប់ទីកន្លែង៖ ក្នុងមន្ទីរពិសោធន៍ ក្នុងព្រៃ ឬនៅតាមផ្ទះអ្នកនៅពេលចំពូកសត្វស្លាបសម្រាករនៅលើខ្សែភ្លើងខាងក្រៅបង្អួច។
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-bold text-emerald-800">Ornithology</span> is the science of studying birds — a branch of zoology. It is done everywhere: in laboratories, in forests, and from your own house when a flock lands on the wires outside the window.
+                    </>
+                  )}
+                </p>
+                <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                  {isKh ? (
+                    <>
+                      <span className="font-bold text-sky-800">ការសង្កេតមើលសត្វស្លាប (Bird Watching)</span>{" "}
+                      គឺជាមធ្យោបាយមួយដែលអ្នកណាក៏អាចក្លាយជា{" "}
+                      <span className="font-bold text-sky-800">អ្នកវិទ្យាសាស្ត្រពលរដ្ឋ (citizen scientist)</span> បាន។ ការរាប់ប្រភេទដែលអ្នកឃើញនៅឧទ្យានជាតិមួយ អាចជួយអ្នកស្រាវជ្រាវឲ្យតាមដានសុខភាពនៃប្រព័ន្ធអេកូឡូស៊ីទាំងមូល។
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-bold text-sky-800">Bird watching</span> is a way for anyone to be a{" "}
+                      <span className="font-bold text-sky-800">citizen scientist</span>. Counting which species you see in a national park can help researchers track the health of an entire ecosystem.
+                    </>
+                  )}
+                </p>
+                <p className={isKh ? "font-khmer leading-loose" : "leading-relaxed"}>
+                  {isKh
+                    ? "អ្វីដែលអ្នកត្រូវការ — គឺគ្រាន់តែ ភ្នែក ត្រចៀក និងការអត់ធ្មត់របស់អ្នកប៉ុណ្ណោះ ដើម្បីសង្កេតមើលរបៀបដែលសាច់ញាតិដ៏រស់នៅជិតបំផុតរបស់សត្វដាយណូស័របែរស់រាន ហោះហើរ និងទំនាក់ទំនងគ្នា។"
+                    : "All you need are your eyes, ears, and patience to observe how these dinosaurs' closest living relatives survive, fly, and communicate with each other."}
+                </p>
+
+                {/* Sense chips */}
+                <div className="flex flex-wrap items-center gap-2 pt-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 border-sky-300 text-sky-800 text-xs font-bold shadow-sm">
+                    <Binoculars className="w-3.5 h-3.5" />
+                    {isKh ? "ភ្នែក" : "Eyes"}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 border-emerald-300 text-emerald-800 text-xs font-bold shadow-sm">
+                    <Ear className="w-3.5 h-3.5" />
+                    {isKh ? "ត្រចៀក" : "Ears"}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border-2 border-amber-300 text-amber-800 text-xs font-bold shadow-sm">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    {isKh ? "ការអត់ធ្មត់" : "Patience"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Side panel — illustrated quote */}
+              <div className="rounded-2xl border-2 border-emerald-200 bg-white/85 p-5 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <Bird className="w-7 h-7 text-emerald-700 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className={`text-sm text-slate-800 ${isKh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+                      {isKh
+                        ? "“សត្វស្លាបគឺជាសត្វដាយណូស័រដែលនៅសេសសល់ — ដែលបានរៀនហោះ ហើយមានអាយុរស់ជាង ៦៥ លានឆ្នាំក្រោយការផុតពូជរបស់សាច់ញាតិពួកវា។”"
+                        : "“Birds are dinosaurs that learned to fly — and have outlived their cousins by more than 65 million years.”"}
+                    </p>
+                    <p className="mt-2 text-xs text-emerald-700 font-mono uppercase tracking-wider">
+                      {isKh ? "ទំនាក់ទំនងវិវត្ត" : "Evolutionary link"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-lg bg-sky-50 border border-sky-200 px-2 py-2">
+                    <div className="text-base font-extrabold text-sky-800">~10,000</div>
+                    <div className={`text-[10px] text-sky-700/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "ប្រភេទ" : "species"}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-emerald-50 border border-emerald-200 px-2 py-2">
+                    <div className="text-base font-extrabold text-emerald-800">7</div>
+                    <div className={`text-[10px] text-emerald-700/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "ទ្វីប" : "continents"}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-rose-50 border border-rose-200 px-2 py-2">
+                    <div className="text-base font-extrabold text-rose-700">1 in 8</div>
+                    <div className={`text-[10px] text-rose-700/80 ${isKh ? "font-khmer" : ""}`}>
+                      {isKh ? "ប្រឈម" : "threatened"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Section 2: Bird Profile Cards ──────────────────── */}
+          <div className="px-6 sm:px-10 py-8 border-t border-sky-200/70">
+            <div
+              className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-emerald-700 mb-2 ${
+                isKh ? "font-khmer normal-case tracking-normal" : ""
+              }`}
+            >
+              <span className="inline-block w-6 h-px bg-emerald-400" />
+              {isKh ? "ផ្នែកទី ២" : "Section 2"}
+            </div>
+            <h3
+              className={`font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-2 ${
+                isKh ? "font-khmer leading-snug" : ""
+              }`}
+            >
+              {isKh
+                ? "អ្នកជិតខាងសកល និង រតនសម្បត្តិដ៏កម្រ"
+                : "Global Neighbors vs. Rare Treasures"}
+            </h3>
+            <p
+              className={`max-w-3xl text-sm text-slate-600 mb-6 ${
+                isKh ? "font-khmer leading-loose" : "leading-relaxed"
+              }`}
+            >
+              {isKh
+                ? "សត្វស្លាបខ្លះមាននៅគ្រប់ទីកន្លែង ខ្លះធ្វើដំណើរប្រចាំឆ្នាំឆ្លងផែនដី ហើយខ្លះទៀតរស់នៅសល់តែមួយចំនួនតូចនៅទីកន្លែងតែមួយ — សូមស្គាល់ពួកវាខ្លះ។"
+                : "Some birds live everywhere; some travel the planet every year; and some are now down to a precious few in a single forest — meet a few of them."}
+            </p>
+
+            {/* Responsive grid — 1 col mobile, 3 col desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {BIRD_PROFILES.map((bird) => {
+                const t = TONE_CLASSES[bird.tone];
+                const Svg = bird.Svg;
+                const Badge = bird.badgeIcon;
+                return (
+                  <article
+                    key={bird.id}
+                    data-testid={`bird-card-${bird.id}`}
+                    className={`relative rounded-2xl border-2 ${t.cardBorder} ${t.cardBg} shadow-sm overflow-hidden flex flex-col transition-transform hover:-translate-y-1`}
+                  >
+                    {/* Endangered ribbon — only on the Giant Ibis */}
+                    {bird.endangered && (
+                      <div className="absolute top-0 right-0 z-10 bg-rose-600 text-white px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider rounded-bl-xl shadow-md flex items-center gap-1">
+                        <AlertTriangle className="w-3 h-3" />
+                        {isKh ? "ប្រឈមនឹងផុតពូជ" : "Endangered"}
+                      </div>
+                    )}
+
+                    {/* Portrait */}
+                    <div
+                      className={`relative aspect-[5/3] grid place-items-center border-b ${t.cardBorder} ${t.portraitBg}`}
+                    >
+                      <Svg className={`relative w-3/4 h-3/4 ${t.portraitText}`} />
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-4 flex-1 flex flex-col">
+                      {/* Status pill */}
+                      <span
+                        className={`inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full border ${t.pillBg} text-[10px] font-extrabold uppercase tracking-wider mb-2`}
+                      >
+                        <Badge className="w-3 h-3" />
+                        <span className={isKh ? "font-khmer normal-case tracking-normal" : ""}>
+                          {isKh ? bird.badgeKh : bird.badgeEn}
+                        </span>
+                      </span>
+
+                      <h4
+                        className={`font-display font-extrabold text-lg leading-tight ${t.nameColor}`}
+                      >
+                        {bird.nameEn}
+                      </h4>
+                      <p className="font-khmer text-base text-slate-700 leading-snug mt-0.5">
+                        {bird.nameKh}
+                      </p>
+                      <p
+                        className={`text-[12px] mt-1 italic text-slate-500 ${
+                          isKh ? "font-khmer not-italic leading-loose" : ""
+                        }`}
+                      >
+                        {isKh ? bird.taglineKh : bird.taglineEn}
+                      </p>
+
+                      <p
+                        className={`mt-3 text-[12.5px] text-slate-700 ${
+                          isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                        }`}
+                      >
+                        {isKh ? bird.bodyKh : bird.bodyEn}
+                      </p>
+
+                      {/* Conservation call-out for the Ibis only */}
+                      {bird.endangered && (
+                        <div className="mt-3 rounded-lg border border-rose-300 bg-rose-50 px-3 py-2 flex items-start gap-2">
+                          <Trees className="w-4 h-4 text-emerald-700 mt-0.5 flex-shrink-0" />
+                          <p
+                            className={`text-[11px] text-rose-900 ${
+                              isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                            }`}
+                          >
+                            {isKh
+                              ? "ការការពារព្រៃគឺជាមធ្យោបាយតែមួយគត់ដើម្បីសង្គ្រោះត្រយងយក្ស។"
+                              : "Protecting the forests is the only way to save the Giant Ibis."}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            {/* Closing prompt */}
+            <div className="mt-8 rounded-xl border-2 border-sky-200 bg-white/80 px-4 py-3 flex items-start gap-3">
+              <Binoculars className="w-5 h-5 text-sky-700 flex-shrink-0 mt-0.5" />
+              <p
+                className={`text-sm text-slate-700 ${
+                  isKh ? "font-khmer leading-loose" : "leading-relaxed"
+                }`}
+              >
+                {isKh
+                  ? "ការសង្កេតបន្ទាប់របស់អ្នកអាចចាប់ផ្តើមពីបង្អួចផ្ទះអ្នក។ តើមានសត្វស្លាបប៉ុន្មានប្រភេទដែលអ្នកអាចរាប់បាននៅសប្តាហ៍នេះ?"
+                  : "Your next observation can begin from your own window. How many bird species can you count this week?"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
