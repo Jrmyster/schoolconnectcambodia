@@ -97,6 +97,7 @@ const WildlifeExplorerPage      = lazy(() => import("@/pages/WildlifeExplorerPag
 const AnthropologyPage          = lazy(() => import("@/pages/AnthropologyPage"));
 const PandemicsHistoryPage      = lazy(() => import("@/pages/PandemicsHistoryPage"));
 const MovingHumanityPage        = lazy(() => import("@/pages/MovingHumanityPage"));
+const HealthyFoodsPage          = lazy(() => import("@/pages/HealthyFoodsPage"));
 const DinosaurExtinctionPage    = lazy(() => import("@/pages/DinosaurExtinctionPage"));
 const FossilFuelsPage           = lazy(() => import("@/pages/FossilFuelsPage"));
 const BicyclePhysicsPage        = lazy(() => import("@/pages/BicyclePhysicsPage"));
@@ -450,6 +451,7 @@ function Router() {
             <Route path="/for-kids/feelings" component={MyFeelingsPage} />
             <Route path="/for-kids/word-popper" component={WordPopperPage} />
             <Route path="/for-kids/habitat-sorter" component={HabitatSorterPage} />
+            <Route path="/for-kids/healthy-foods" component={HealthyFoodsPage} />
             <Route path="/kids/science" component={KidsScience} />
             <Route path="/kids/community" component={KidsCommunity} />
             <Route path="/kids/electronics" component={KidsElectronics} />

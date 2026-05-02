@@ -1,0 +1,17 @@
+I want to add a new section to the 'Sociology' page (or under the Study Center dropdown) called 'Cultural Lag: When Technology Outpaces Society (គម្លាតវប្បធម៌៖ នៅពេលបច្ចេកវិទ្យាដើរលឿនជាងសង្គម)'.
+Please implement this using a modern, thought-provoking aesthetic (deep purples and digital neon blues contrasting with classic textbook serif fonts) and execute the following:
+1. Update the Search & Discovery Index
+Locate the searchIndex array and add this new section. Ensure keywords include 'cultural lag', 'sociology', 'technology', 'ethics', 'social media', and their Khmer equivalents.
+2. Section 1: The Two Halves of Culture (ផ្នែកទាំងពីរនៃវប្បធម៌)
+Explain the core sociological theory:
+Material Culture (វប្បធម៌រូបី): Things we build. Smartphones, AI, medical tools, and infrastructure. This changes very fast.
+Non-Material Culture (វប្បធម៌អរូបី): Things we believe. Laws, ethics, traditions, and manners. This changes very slowly.
+3. Section 2: What is Cultural Lag? (តើគម្លាតវប្បធម៌ជាអ្វី?)
+Define the term: Cultural Lag is the period of chaos and friction that happens when technology jumps ahead, and society doesn't know how to handle it yet because the rules haven't been written.
+4. Section 3: Modern Examples (ឧទាហរណ៍ក្នុងសម័យទំនើប)
+Create a grid of 'Case Studies' to show this is happening right now:
+Artificial Intelligence (បញ្ញាសិប្បនិម្មិត): AI agents can now write essays, code, and make art in seconds (Material). But schools, copyright laws, and artists are still arguing about what is considered 'cheating' or 'stealing' (Non-Material Lag).
+Social Media (បណ្តាញសង្គម): We invented apps that connect billions of people instantly (Material). But human psychology hasn't adapted to seeing thousands of opinions a day, leading to anxiety, cyberbullying, and a lack of digital etiquette (Non-Material Lag).
+5. Formatting & UX:
+Ensure all main headings, sociological terms, and examples are strictly bilingual (English/Khmer).
+Use icons like a microchip paired with a gavel (law) or a brain to symbolize the tension between tech and human behavior.

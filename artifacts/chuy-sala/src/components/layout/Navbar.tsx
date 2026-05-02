@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, ComponentType } from "react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
@@ -1238,6 +1238,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Smile,
         descEn: "Big-emoji feelings vocabulary — happy, sad, angry, scared, tired, hungry. Tap a face to hear the English word and learn to talk about emotions.",
         descKh: "វាក្យសព្ទអារម្មណ៍ដែលមានរូបធំៗ — សប្បាយចិត្ត ពិបាកចិត្ត ខឹង ភ័យខ្លាច អស់កម្លាំង ឃ្លាន។ ប៉ះមុខដើម្បីស្ដាប់ពាក្យអង់គ្លេស ហើយរៀននិយាយពីអារម្មណ៍។",
+      },
+      {
+        href: "/for-kids/healthy-foods",
+        labelEn: "Fuel Your Body: Healthy Foods 🍎",
+        labelKh: "ផ្តល់ថាមពលដល់រាងកាយ៖ អាហារសុខភាព 🍎",
+        icon: Apple,
+        descEn: "A rainbow of fruits, vegetables, energy foods, and proteins — with the 'superpower' (vitamin or mineral) each one gives your growing body and brain.",
+        descKh: "ឥន្ទធនូនៃផ្លែឈើ បន្លែ អាហារថាមពល និងសាច់ — ជាមួយ 'អំណាចពិសេស' (វីតាមីន ឬសារធាតុរ៉ែ) ដែលនីមួយៗផ្តល់ឲ្យរាងកាយ និងខួរក្បាលរបស់អ្នកដែលកំពុងលូតលាស់។",
       },
       {
         href: "/kids/science",
