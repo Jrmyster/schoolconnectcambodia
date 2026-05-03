@@ -1,0 +1,37 @@
+I want to add a new educational page to the Science module titled 'Navier-Stokes: The Rules of Fluid Flow (សមីការ Navier-Stokes៖ ច្បាប់នៃលំហូរទឹកនិងខ្យល់)'.
+
+Please implement this with a sleek, aerodynamic UI aesthetic (using wind-tunnel blues and fluid dynamic graphics) and execute the following:
+
+1. Update Navigation:
+
+Add this page under the Science dropdown menu.
+
+Update the search index to include 'Navier-Stokes', 'fluid dynamics', 'aerodynamics', 'physics', and their Khmer equivalents.
+
+2. Section 1: The Simple View (សម្រាប់អ្នកចាប់ផ្តើម)
+
+Explain the concept simply: Imagine a river flowing around a rock, or air moving over an airplane wing. The Navier-Stokes equation is the 'rulebook' that tells every single drop of water or puff of air exactly where to go and how fast to move. It calculates how fluids get pushed, pulled, and slowed down by friction.
+
+3. Section 2: The Technical View (ផ្នែកបច្ចេកទេស)
+
+Display the equation using proper mathematical formatting (e.g., KaTeX or MathJax if available, or clean typography): ρ(∂u/∂t + u⋅∇u) = -∇p + μ∇²u + f
+
+Break down the terms into a clean bilingual list:
+
+Inertia (និចលភាព): ρ(∂u/∂t + u⋅∇u) - How the fluid's speed changes over time.
+
+Pressure Gradient (គម្លាតសម្ពាធ): -∇p - Fluids move from high pressure to low pressure.
+
+Viscosity (ភាពខាប់): μ∇²u - The internal friction (e.g., honey flows slower than water).
+
+External Forces (កម្លាំងខាងក្រៅ): f - Gravity or other forces pulling on the fluid.
+
+4. Section 3: The Million Dollar Prize (រង្វាន់មួយលានដុល្លារ)
+
+Add an inspirational callout box explaining that the Navier-Stokes equation is one of the seven Millennium Prize Problems. Anyone who can prove mathematically that smooth, predictable solutions always exist in three dimensions will win $1,000,000 from the Clay Mathematics Institute.
+
+5. Formatting & UX:
+
+Ensure all headings, terms, and explanations are strictly bilingual (English/Khmer).
+
+Include layout space for an interactive fluid simulator to be embedded below the simple explanation.
