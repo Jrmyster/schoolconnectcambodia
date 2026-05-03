@@ -1844,16 +1844,9 @@ export function Navbar() {
                 />
               ))}
               {/* End-of-list spacer so the right-most pill (e.g. "For Kids")
-                  never touches the search bar / right edge while scrolling. */}
+                  never touches the right edge while scrolling. */}
               <div aria-hidden className="flex-shrink-0 w-8" />
             </nav>
-
-            {/* Compact persistent search — pinned to the right of the secondary
-                nav row, after the scrollable category list. Hidden on small
-                screens (mobile users have the hamburger menu + hero search). */}
-            <div className="hidden md:flex flex-shrink-0 ml-4 w-64">
-              <GlobalSearch variant="compact" className="!max-w-none" />
-            </div>
 
             {user?.isAdmin && (
               <Link
