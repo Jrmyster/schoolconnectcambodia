@@ -41,14 +41,7 @@ export function Home() {
 
         {/* z-40 lifts hero content (and the GlobalSearch dropdown inside it)
             above the stats card below (which sits at z-30). */}
-        <div className="relative z-40 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
-          {/* Global Search — relocated from the navbar. The negative top
-              margin pulls it up so it sits between the navbar and the
-              hero text, partially overlapping the sky in the background. */}
-          <div className="relative z-10 -mt-8 mb-8 mx-auto max-w-2xl shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <GlobalSearch variant="hero" />
-          </div>
-
+        <div className="relative z-40 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16 flex flex-col items-center justify-center">
           {/* Language toggle — desktop only. On mobile this is redundant with
               the toggle inside the hamburger menu and was overlapping the
               alert banner, so it's hidden below the md breakpoint. */}
@@ -103,6 +96,13 @@ export function Home() {
               <Heart className="w-5 h-5 text-destructive" />
               <span className={language === 'kh' ? 'font-khmer' : ''}>{t("View All Needs", "មើលតម្រូវការទាំងអស់")}</span>
             </Link>
+          </div>
+
+          {/* Global Search — relocated from the top of the hero. Sits
+              directly underneath the action buttons with mt-8 breathing
+              room. Width is centered & constrained to max-w-2xl. */}
+          <div className="relative z-10 mt-8 w-full mx-auto max-w-2xl shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <GlobalSearch variant="hero" />
           </div>
         </div>
       </section>
