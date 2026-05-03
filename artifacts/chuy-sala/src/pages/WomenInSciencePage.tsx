@@ -601,7 +601,7 @@ export default function WomenInSciencePage() {
         </header>
 
         {/* ── Section 1: The Trailblazers ─────────────────────────────── */}
-        <section className="mb-14 sm:mb-20">
+        <section id="trailblazers" className="mb-14 sm:mb-20 scroll-mt-24">
           <BilingualHeading
             Icon={Award}
             en="The Trailblazers"
@@ -625,7 +625,7 @@ export default function WomenInSciencePage() {
         </section>
 
         {/* ── Section 1.5: Everyday Innovations ───────────────────────── */}
-        <section className="mb-14 sm:mb-20">
+        <section id="everyday-innovations" className="mb-14 sm:mb-20 scroll-mt-24">
           <BilingualHeading
             Icon={Wrench}
             en="Everyday Innovations: Invented by Women"
