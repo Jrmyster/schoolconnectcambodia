@@ -403,6 +403,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "សង្គ្រាមលោកលើកទី ១ និងលំហដី សង្គ្រាមលោកលើកទី ២ និងរោងមហោស្រព ២ គម្រោងម៉ាន់ហាតាន់ និង E=mc² សង្គ្រាមត្រជាក់ និង MAD និងការរីករាលនុយក្លេអ៊ែរពីឆ្នាំ ១៩៤៥ ដល់សព្វថ្ងៃ។",
       },
       {
+        href: "/study-center/global-diplomacy",
+        labelEn: "Global Diplomacy: International Relations",
+        labelKh: "ការទូតសកល៖ ទំនាក់ទំនងអន្តរជាតិ",
+        icon: Handshake,
+        descEn: "How nations communicate, trade, and resolve conflicts without going to war. Define foreign relations and the treaties that govern shared water, trade, and climate; understand what an embassy is (a 'mini-country' inside a foreign nation) and what an ambassador does (the official voice of their head of state); and discover the 'soft power' of language, technology, and student exchange.",
+        descKh: "របៀបដែលប្រជាជាតិ ទាក់ទងគ្នា ជួញដូរ និងដោះស្រាយជម្លោះ ដោយមិនធ្វើសង្គ្រាម។ កំណត់និយមន័យទំនាក់ទំនងការបរទេស និងសន្ធិសញ្ញាដែលគ្រប់គ្រងទឹករួម ពាណិជ្ជកម្ម និងអាកាសធាតុ យល់អំពីស្ថានទូត («ប្រទេសតូច» នៅខាងក្នុងប្រជាជាតិបរទេស) និងឯកអគ្គរដ្ឋទូត (សំឡេងផ្លូវការនៃប្រមុខរដ្ឋ) និងស្វែងយល់អំពី «អំណាចទន់» នៃភាសា បច្ចេកវិទ្យា និងការផ្លាស់ប្តូរនិស្សិត។",
+      },
+      {
         href: "/study-center/entrepreneurship",
         labelEn: "Entrepreneurship & Innovation",
         labelKh: "សហគ្រិនភាព និងនវានុវត្តន៍",

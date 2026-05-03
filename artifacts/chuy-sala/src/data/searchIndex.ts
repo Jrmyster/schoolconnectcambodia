@@ -1631,6 +1631,41 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["war", "wars", "world war", "ww1", "ww2", "wwi", "wwii", "cold war", "conflict", "conflicts", "geopolitics", "history", "vietnam war", "korean war"],
     keywordsKh: ["សង្គ្រាម", "ជម្លោះ", "សង្គ្រាមលោក", "សង្គ្រាមត្រជាក់", "ប្រវត្តិសាស្ត្រ"],
   },
+  {
+    id: "study-center-global-diplomacy",
+    href: "/study-center/global-diplomacy",
+    icon: Handshake,
+    titleEn: "Global Diplomacy: International Relations",
+    titleKh: "ការទូតសកល៖ ទំនាក់ទំនងអន្តរជាតិ",
+    categoryEn: "Study Center · Diplomacy & Statecraft",
+    categoryKh: "មជ្ឈមណ្ឌលសិក្សា · ការទូត និងគ្រប់គ្រងរដ្ឋ",
+    descEn:
+      "How countries communicate, trade, and resolve conflicts without resorting to war. Learn what foreign relations actually are, why no nation survives alone in a globally connected world (treaties for shared water, international trade, and climate), what an embassy is (a 'mini-country' inside a foreign nation) and what an ambassador does (the official voice of their head of state, negotiating directly with the host government), and how 'soft power' — languages, technology, student exchange, volunteer teaching — builds the human trust that makes lasting peace possible.",
+    descKh:
+      "របៀបដែលប្រទេស ទាក់ទងគ្នា ជួញដូរ និងដោះស្រាយជម្លោះ ដោយមិនអនុវត្តសង្គ្រាម។ រៀនពីអ្វីដែលជាទំនាក់ទំនងការបរទេស ហេតុអ្វីគ្មានប្រជាជាតិណារស់បានដោយឯកានៅពិភពលោកដែលតភ្ជាប់សកល (សន្ធិសញ្ញាសម្រាប់ទឹករួម ពាណិជ្ជកម្មអន្តរជាតិ និងអាកាសធាតុ) អ្វីដែលជាស្ថានទូត («ប្រទេសតូច» នៅខាងក្នុងប្រជាជាតិបរទេស) និងអ្វីដែលឯកអគ្គរដ្ឋទូតធ្វើ (សំឡេងផ្លូវការនៃប្រមុខរដ្ឋរបស់ខ្លួន ចរចាដោយផ្ទាល់ជាមួយរដ្ឋាភិបាលម្ចាស់ផ្ទះ) និងរបៀបដែល «អំណាចទន់» — ភាសា បច្ចេកវិទ្យា ការផ្លាស់ប្តូរនិស្សិត ការបង្រៀនស្ម័គ្រចិត្ត — សាងសង់ការទុកចិត្តរបស់មនុស្ស ដែលធ្វើឱ្យសន្តិភាពស្ថិតស្ថេរអាចទៅរួច។",
+    keywordsEn: [
+      "international relations", "diplomacy", "global diplomacy",
+      "embassy", "embassies", "ambassador", "ambassadors",
+      "foreign policy", "foreign relations", "foreign affairs",
+      "treaty", "treaties", "negotiation", "summit",
+      "passport", "visa", "consulate",
+      "soft power", "cultural exchange", "student exchange",
+      "united nations", "un", "diplomat", "diplomatic",
+      "geopolitics", "statecraft", "trade agreement",
+      "mekong", "shared water", "climate agreement",
+    ],
+    keywordsKh: [
+      "ទំនាក់ទំនងអន្តរជាតិ", "ការទូត", "ការទូតសកល",
+      "ស្ថានទូត", "ឯកអគ្គរដ្ឋទូត",
+      "គោលនយោបាយការបរទេស", "ទំនាក់ទំនងការបរទេស", "កិច្ចការបរទេស",
+      "សន្ធិសញ្ញា", "ការចរចា", "កិច្ចប្រជុំកំពូល",
+      "លិខិតឆ្លងដែន", "ទិដ្ឋាការ", "កុងស៊ុល",
+      "អំណាចទន់", "ការផ្លាស់ប្តូរវប្បធម៌", "ការផ្លាស់ប្តូរនិស្សិត",
+      "អង្គការសហប្រជាជាតិ", "អ្នកការទូត",
+      "ភូមិសាស្ត្រនយោបាយ", "កិច្ចព្រមព្រៀងពាណិជ្ជកម្ម",
+      "មេគង្គ", "ទឹករួម", "កិច្ចព្រមព្រៀងអាកាសធាតុ",
+    ],
+  },
 
   // ── STUDY CENTER · PSYCHOLOGY / SOCIOLOGY ─────────────────────────
   {
