@@ -180,9 +180,9 @@ export function Home() {
                 title: t("See the Impact", "មើលពីផលប៉ះពាល់"),
                 desc: t("Schools post 'Thank You' photos on the transparency log once items are received.", "សាលារៀនបង្ហោះរូបភាព 'អរគុណ' នៅលើកំណត់ហេតុតម្លាភាពនៅពេលទទួលបានសម្ភារៈ។")
               }
-            ].map((item, i) => (
-              <div key={i} className="relative bg-white p-8 rounded-3xl shadow-lg border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <span className="absolute -top-6 -left-6 text-7xl font-black text-primary/10 font-display select-none">
+            ].map((item) => (
+              <div key={item.step} className="relative bg-white p-8 rounded-3xl shadow-lg border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                <span aria-hidden="true" className="absolute -top-6 -left-6 text-7xl font-black text-primary/10 font-display select-none">
                   {item.step}
                 </span>
                 <h3 className={`text-xl font-bold text-foreground mb-4 mt-4 relative z-10 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
