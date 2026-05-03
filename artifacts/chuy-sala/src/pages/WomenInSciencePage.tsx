@@ -8,9 +8,12 @@ import {
   Code2,
   Cpu,
   Car,
+  Disc3,
   Dna,
+  Eye,
   HeartPulse,
   Lightbulb,
+  PhoneCall,
   Quote,
   Rocket,
   Shield,
@@ -18,6 +21,8 @@ import {
   Sparkles,
   Stethoscope,
   Syringe,
+  Utensils,
+  Video,
   Wifi,
   Wrench,
 } from "lucide-react";
@@ -251,6 +256,61 @@ const INVENTIONS: Invention[] = [
     descriptionKh:
       "នាងបានបង្កើតកម្មវិធីបកប្រែកូដ (compiler) ដំបូងគេ ដែលជាកម្មវិធីបកប្រែភាសាសរសេររបស់មនុស្សទៅជាលេខ 1 និង 0 ដែលកុំព្យូទ័រយល់។",
     Icon: Code2,
+  },
+  {
+    nameEn: "Caller ID & Call Waiting",
+    nameKh: "ការបង្ហាញលេខអ្នកហៅចូល និងការរង់ចាំការហៅចូល",
+    inventorEn: "Dr. Shirley Ann Jackson",
+    inventorKh: "បណ្ឌិត សឺលី អាន ចាកសុន",
+    descriptionEn:
+      "She is a theoretical physicist whose breakthrough research in telecommunications directly led to the invention of Caller ID and Call Waiting.",
+    descriptionKh:
+      "នាងគឺជារូបវិទូទ្រឹស្តីដែលការស្រាវជ្រាវដ៏ជោគជ័យរបស់នាងក្នុងវិស័យទូរគមនាគមន៍បាននាំឱ្យមានការបង្កើតប្រព័ន្ធបង្ហាញលេខអ្នកហៅចូល និងការរង់ចាំការហៅចូលដោយផ្ទាល់។",
+    Icon: PhoneCall,
+  },
+  {
+    nameEn: "Laser Cataract Surgery",
+    nameKh: "ការវះកាត់បកភ្នែកដោយឡាស៊ែរ",
+    inventorEn: "Dr. Patricia Bath",
+    inventorKh: "បណ្ឌិត ប៉ាទ្រីសៀ បាត",
+    descriptionEn:
+      "She invented the Laserphaco Probe, a specialized medical tool that safely uses lasers to cure blindness caused by cataracts.",
+    descriptionKh:
+      "នាងបានបង្កើត Laserphaco Probe ដែលជាឧបករណ៍វេជ្ជសាស្ត្រពិសេសដែលប្រើឡាស៊ែរដោយសុវត្ថិភាពដើម្បីព្យាបាលភាពពិការភ្នែកដែលបណ្តាលមកពីជំងឺបាយភ្នែក។",
+    Icon: Eye,
+  },
+  {
+    nameEn: "Home Security Systems",
+    nameKh: "ប្រព័ន្ធសុវត្ថិភាពផ្ទះ",
+    inventorEn: "Marie Van Brittan Brown",
+    inventorKh: "ម៉ារី វ៉ាន់ ប្រ៊ីតថិន ប្រោន",
+    descriptionEn:
+      "She invented the first closed-circuit television (CCTV) security system, which became the foundation for all modern video doorbells and home security cameras.",
+    descriptionKh:
+      "នាងបានបង្កើតប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាពទូរទស្សន៍បិទជិត (CCTV) ដំបូងគេ ដែលបានក្លាយជាមូលដ្ឋានគ្រឹះសម្រាប់កណ្តឹងទ្វារវីដេអូ និងកាមេរ៉ាសុវត្ថិភាពផ្ទះទំនើបទាំងអស់។",
+    Icon: Video,
+  },
+  {
+    nameEn: "The Dishwasher",
+    nameKh: "ម៉ាស៊ីនលាងចាន",
+    inventorEn: "Josephine Cochrane",
+    inventorKh: "ជូសេហ្វីន កូក្រេន",
+    descriptionEn:
+      "She engineered the first commercially successful automatic dishwasher, utilizing high water pressure rather than physical scrubbers to clean dishes without breaking them.",
+    descriptionKh:
+      "នាងបានបង្កើតម៉ាស៊ីនលាងចានស្វ័យប្រវត្តិដែលទទួលបានជោគជ័យផ្នែកពាណិជ្ជកម្មដំបូងគេ ដោយប្រើសម្ពាធទឹកខ្លាំងជំនួសឱ្យការដុសខាត់ដើម្បីលាងចានដោយមិនបែក។",
+    Icon: Utensils,
+  },
+  {
+    nameEn: "The Circular Saw",
+    nameKh: "រណាររង្វង់",
+    inventorEn: "Tabitha Babbitt",
+    inventorKh: "តាប៊ីថា បាប៊ីត",
+    descriptionEn:
+      "Watching men struggle with an inefficient two-man pit saw, she realized a spinning circular blade would cut wood much faster, completely changing the construction industry.",
+    descriptionKh:
+      "ដោយឃើញបុរសពិបាកក្នុងការប្រើរណារអូសពីរនាក់ដែលគ្មានប្រសិទ្ធភាព នាងបានដឹងថាស្លឹករណាររង្វង់វិលនឹងកាត់ឈើបានលឿនជាងឆ្ងាយ ដែលផ្លាស់ប្តូរឧស្សាហកម្មសំណង់ទាំងស្រុង។",
+    Icon: Disc3,
   },
 ];
 

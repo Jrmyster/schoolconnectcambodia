@@ -1,0 +1,43 @@
+I want to expand the 'Everyday Innovations: Invented by Women' list component. Please append the following five new data objects to the existing array so they render in the exact same UI style (Icon, Title, Inventor, and bilingual descriptions) below the current items.
+
+6. Caller ID & Call Waiting (ការបង្ហាញលេខអ្នកហៅចូល និងការរង់ចាំការហៅចូល)
+
+Inventor: Dr. Shirley Ann Jackson (បណ្ឌិត សឺលី អាន ចាកសុន)
+
+Description (EN): She is a theoretical physicist whose breakthrough research in telecommunications directly led to the invention of Caller ID and Call Waiting.
+
+Description (KH): នាងគឺជារូបវិទូទ្រឹស្តីដែលការស្រាវជ្រាវដ៏ជោគជ័យរបស់នាងក្នុងវិស័យទូរគមនាគមន៍បាននាំឱ្យមានការបង្កើតប្រព័ន្ធបង្ហាញលេខអ្នកហៅចូល និងការរង់ចាំការហៅចូលដោយផ្ទាល់។
+
+7. Laser Cataract Surgery (ការវះកាត់បកភ្នែកដោយឡាស៊ែរ)
+
+Inventor: Dr. Patricia Bath (បណ្ឌិត ប៉ាទ្រីសៀ បាត)
+
+Description (EN): She invented the Laserphaco Probe, a specialized medical tool that safely uses lasers to cure blindness caused by cataracts.
+
+Description (KH): នាងបានបង្កើត Laserphaco Probe ដែលជាឧបករណ៍វេជ្ជសាស្ត្រពិសេសដែលប្រើឡាស៊ែរដោយសុវត្ថិភាពដើម្បីព្យាបាលភាពពិការភ្នែកដែលបណ្តាលមកពីជំងឺបាយភ្នែក។
+
+8. Home Security Systems (ប្រព័ន្ធសុវត្ថិភាពផ្ទះ)
+
+Inventor: Marie Van Brittan Brown (ម៉ារី វ៉ាន់ ប្រ៊ីតថិន ប្រោន)
+
+Description (EN): She invented the first closed-circuit television (CCTV) security system, which became the foundation for all modern video doorbells and home security cameras.
+
+Description (KH): នាងបានបង្កើតប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាពទូរទស្សន៍បិទជិត (CCTV) ដំបូងគេ ដែលបានក្លាយជាមូលដ្ឋានគ្រឹះសម្រាប់កណ្តឹងទ្វារវីដេអូ និងកាមេរ៉ាសុវត្ថិភាពផ្ទះទំនើបទាំងអស់។
+
+9. The Dishwasher (ម៉ាស៊ីនលាងចាន)
+
+Inventor: Josephine Cochrane (ជូសេហ្វីន កូក្រេន)
+
+Description (EN): She engineered the first commercially successful automatic dishwasher, utilizing high water pressure rather than physical scrubbers to clean dishes without breaking them.
+
+Description (KH): នាងបានបង្កើតម៉ាស៊ីនលាងចានស្វ័យប្រវត្តិដែលទទួលបានជោគជ័យផ្នែកពាណិជ្ជកម្មដំបូងគេ ដោយប្រើសម្ពាធទឹកខ្លាំងជំនួសឱ្យការដុសខាត់ដើម្បីលាងចានដោយមិនបែក។
+
+10. The Circular Saw (រណាររង្វង់)
+
+Inventor: Tabitha Babbitt (តាប៊ីថា បាប៊ីត)
+
+Description (EN): Watching men struggle with an inefficient two-man pit saw, she realized a spinning circular blade would cut wood much faster, completely changing the construction industry.
+
+Description (KH): ដោយឃើញបុរសពិបាកក្នុងការប្រើរណារអូសពីរនាក់ដែលគ្មានប្រសិទ្ធភាព នាងបានដឹងថាស្លឹករណាររង្វង់វិលនឹងកាត់ឈើបានលឿនជាងឆ្ងាយ ដែលផ្លាស់ប្តូរឧស្សាហកម្មសំណង់ទាំងស្រុង។
+
+Ensure these new items inherit the same hover states and responsive padding as the first five items in the list.
