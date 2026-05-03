@@ -525,6 +525,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ប្រតិកម្មត្រឡប់បាន N₂ + 3H₂ ⇌ 2NH₃ ដែលទាញអាសូតចេញពីខ្យល់ស្ដើង ហើយបំប្លែងទៅជាជីសំយោគដែលចិញ្ចឹមមនុស្ស ៨ ពាន់លាននាក់។ គោលការណ៍របស់ Le Chatelier ដំណើរការ៖ សម្ពាធ ២០០ atm ៤៥០ °C និងកាតាលីករដែក។",
       },
       {
+        href: "/science/chemistry/nitrogen-cycle",
+        labelEn: "7.6. The Nitrogen Cycle: Nature's Fertilizer Factory",
+        labelKh: "៧.៦. វដ្តអាសូត៖ រោងចក្រជីធម្មជាតិ",
+        icon: Leaf,
+        descEn: "Why 78% of the air is nitrogen but plants can't touch it, the three steps that move nitrogen from sky to soil to root and back (fixation by lightning and root bacteria, nitrification into nitrates, denitrification back to N₂), and how compost or synthetic fertilizer in a Cambodian rice paddy is just speeding up the natural cycle.",
+        descKh: "ហេតុអ្វីខ្យល់ ៧៨% គឺជាអាសូត ប៉ុន្តែរុក្ខជាតិមិនអាចប៉ះវាបាន ជំហានទាំងបីដែលផ្លាស់ទីអាសូតពីមេឃទៅដី ទៅឫស និងត្រឡប់មកវិញ (ការកែច្នៃដោយផ្គររន្ទះ និងបាក់តេរីឫស នីទ្រីកម្មទៅជានីត្រាត ឌីនីទ្រីកម្មត្រឡប់ទៅ N₂) និងរបៀបដែលជីកំប៉ុស្ត ឬជីសំយោគនៅក្នុងស្រែស្រូវកម្ពុជា គ្រាន់តែបង្កើនល្បឿនវដ្តធម្មជាតិ។",
+      },
+      {
         href: "/science/chemistry/analytical",
         labelEn: "8. Analytical Chemistry",
         labelKh: "៨. គីមីវិភាគ និងឧបករណ៍",
