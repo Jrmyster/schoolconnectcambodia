@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle, RadioTower, Satellite, Hexagon, Fan,
+  Anvil, Recycle, RadioTower, Satellite, Hexagon, Fan, Baby,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -821,6 +821,41 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "តាមដានពន្លឺឆ្លងកាត់កែវកាមេរ៉ា ផ្គុំត្រីកោណការថតឱ្យបង្ហាប់ម៉ូតូកំពុងធ្វើដំណើរ និងរៀនរបៀបដែលអ្នកថតភាពយន្តនិទានរឿងទាំងមូលដោយស៊ុមបី។",
     keywordsEn: ["camera", "cameras", "cinematography", "film", "filmmaking", "movie", "photography", "photo", "lens", "exposure", "iso", "aperture", "shutter", "light"],
     keywordsKh: ["កាមេរ៉ា", "សិល្បៈភាពយន្ត", "ភាពយន្ត", "ការថត", "កែវ", "ពន្លឺ", "រូបថត"],
+  },
+  {
+    id: "infant-nutrition",
+    href: "/well-being/infant-nutrition",
+    icon: Baby,
+    titleEn: "Infant Nutrition: Formula, Breast Milk, and Safety",
+    titleKh: "អាហារូបត្ថម្ភទារក៖ ទឹកដោះគោម្សៅ ទឹកដោះម្តាយ និងសុវត្ថិភាព",
+    categoryEn: "Well-Being · Parenting & Health",
+    categoryKh: "សុខុមាលភាព · ការចិញ្ចឹមបីបាច់ និងសុខភាព",
+    descEn:
+      "What's actually inside a can of commercial baby formula (iron, vitamin D, calcium, DHA), an honest side-by-side comparison of breast milk and formula, and a high-visibility safety warning about the dangers of homemade infant formula — fatal infections, seizures from salt overload, and severe malnutrition.",
+    descKh:
+      "តើមានអ្វីពិតប្រាកដនៅក្នុងកំប៉ុងទឹកដោះគោម្សៅពាណិជ្ជកម្ម (ជាតិដែក វីតាមីន D កាល់ស្យូម DHA) ការប្រៀបធៀបស្មោះត្រង់រវាងទឹកដោះម្តាយ និងទឹកដោះគោម្សៅ និងការព្រមានសុវត្ថិភាពច្បាស់លាស់អំពីគ្រោះថ្នាក់នៃទឹកដោះគោម្សៅទារកធ្វើដោយខ្លួនឯង — ការឆ្លងមេរោគដែលបណ្ដាលឱ្យស្លាប់ ជំងឺឆ្កួតជ្រូកដោយសារអំបិលលើស និងកង្វះអាហារូបត្ថម្ភធ្ងន់ធ្ងរ។",
+    keywordsEn: [
+      "baby", "babies", "infant", "infants", "newborn", "newborns",
+      "baby formula", "infant formula", "formula", "powdered milk",
+      "breast milk", "breastfeeding", "breastfed", "nursing", "lactation",
+      "infant nutrition", "baby nutrition", "infant feeding", "baby feeding", "feeding",
+      "homemade formula", "homemade baby formula", "diy formula",
+      "cow's milk", "cow milk", "goat milk", "goats milk", "soy milk", "plant milk",
+      "iron", "vitamin d", "calcium", "dha", "fortified",
+      "parenting", "health", "pediatrics", "pediatric", "safety", "warning",
+      "malnutrition", "dehydration", "kidney", "seizure",
+    ],
+    keywordsKh: [
+      "ទារក", "កុមារតូច", "ទើបកើត",
+      "ទឹកដោះគោម្សៅ", "ទឹកដោះម្សៅទារក", "ម្សៅទឹកដោះ", "ទឹកដោះកំប៉ុង",
+      "ទឹកដោះម្តាយ", "ការបំបៅដោះ", "បំបៅកូន",
+      "អាហារូបត្ថម្ភទារក", "ការបំបៅទារក", "អាហារទារក",
+      "ទឹកដោះគោម្សៅធ្វើដោយខ្លួនឯង",
+      "ទឹកដោះគោ", "ទឹកដោះពពែ", "ទឹកដោះសណ្ដែកសៀង",
+      "ជាតិដែក", "វីតាមីន D", "កាល់ស្យូម", "DHA",
+      "ការចិញ្ចឹមបីបាច់", "សុខភាព", "កុមារពេទ្យ", "សុវត្ថិភាព", "ការព្រមាន",
+      "កង្វះអាហារូបត្ថម្ភ", "តម្រងនោម", "ឆ្កួតជ្រូក",
+    ],
   },
   {
     id: "vacuum-cleaner",

@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple,
+  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -1155,6 +1155,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sprout,
         descEn: "From seed to society — Diana Baumrind's three parenting styles (authoritative, authoritarian, permissive), the science of pregnancy from HCG to the three trimesters and the three stages of labor, and the early milestones of babies and toddlers including a gentle introduction to early signs of autism.",
         descKh: "ពីគ្រាប់ពូជទៅសង្គម — រចនាប័ទ្មចិញ្ចឹមកូនទាំងបីរបស់ Diana Baumrind (មានតុល្យភាព តឹងរ៉ឹងជ្រុល ធូររលុងជ្រុល) វិទ្យាសាស្ត្រនៃការមានផ្ទៃពោះពី HCG ដល់ត្រីមាសទាំងបី និងដំណាក់កាលឈឺពោះសម្រាលទាំងបី និងដំណាក់កាលសំខាន់ៗដំបូងរបស់ទារក និងកុមារតូច រួមទាំងការណែនាំថ្នមៗអំពីសញ្ញាដំបូងនៃអូទីសឹម។",
+      },
+      {
+        href: "/well-being/infant-nutrition",
+        labelEn: "Infant Nutrition: Formula, Breast Milk & Safety",
+        labelKh: "អាហារូបត្ថម្ភទារក៖ ទឹកដោះគោម្សៅ ទឹកដោះម្តាយ និងសុវត្ថិភាព",
+        icon: Baby,
+        descEn: "What's actually inside a can of commercial baby formula (iron, vitamin D, calcium, DHA), an honest side-by-side comparison of breast milk and formula, and a high-visibility safety warning every Cambodian caregiver needs to read about the dangers of homemade infant formula.",
+        descKh: "តើមានអ្វីពិតប្រាកដនៅក្នុងកំប៉ុងទឹកដោះគោម្សៅពាណិជ្ជកម្ម (ជាតិដែក វីតាមីន D កាល់ស្យូម DHA) ការប្រៀបធៀបស្មោះត្រង់រវាងទឹកដោះម្តាយ និងទឹកដោះគោម្សៅ និងការព្រមានសុវត្ថិភាពច្បាស់លាស់ដែលអ្នកថែទាំជនជាតិខ្មែរគ្រប់រូបត្រូវអានអំពីគ្រោះថ្នាក់នៃទឹកដោះគោម្សៅទារកដែលធ្វើដោយខ្លួនឯង។",
       },
       {
         href: "/well-being/survival-skills",
