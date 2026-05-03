@@ -1,0 +1,47 @@
+I want to add a new section directly below 'The Trailblazers' grid titled 'Everyday Innovations: Invented by Women (នវានុវត្តន៍ប្រចាំថ្ងៃ៖ បង្កើតឡើងដោយស្ត្រី)'.
+
+Please implement this as a clean, vertical list or accordion-style layout. It should not use the large profile cards from above, but rather a streamlined row format (e.g., Icon on the left, Invention Name in bold, and the Inventor/Description text beside or below it).
+
+Please populate the list with the following bilingual data objects:
+
+1. Wi-Fi & Bluetooth Technology (បច្ចេកវិទ្យា Wi-Fi និង Bluetooth)
+
+Inventor: Hedy Lamarr (ហ៊ីឌី ឡាម៉ា)
+
+Description (EN): She co-invented frequency-hopping technology during WWII, which laid the direct foundation for modern Wi-Fi, GPS, and Bluetooth.
+
+Description (KH): នាងគឺជាសហអ្នកបង្កើតបច្ចេកវិទ្យាលោតផ្លាស់ប្តូរប្រេកង់ (frequency-hopping) ក្នុងអំឡុងសង្គ្រាមលោកលើកទី២ ដែលជាមូលដ្ឋានគ្រឹះផ្ទាល់សម្រាប់ Wi-Fi, GPS, និង Bluetooth ទំនើប។
+
+2. The Medical Syringe (សឺរ៉ាំងពេទ្យ)
+
+Inventor: Letitia Geer (លេទីធា ហ្គៀរ)
+
+Description (EN): In 1899, she invented the first one-handed medical syringe, completely revolutionizing modern healthcare and hospital treatments.
+
+Description (KH): នៅឆ្នាំ១៨៩៩ នាងបានបង្កើតសឺរ៉ាំងពេទ្យប្រើដៃម្ខាងដំបូងគេ ដែលបានធ្វើបដិវត្តទាំងស្រុងនូវការថែទាំសុខភាព និងការព្យាបាលនៅមន្ទីរពេទ្យទំនើប។
+
+3. Kevlar / Bulletproof Armor (Kevlar / អាវក្រោះការពារគ្រាប់កាំភ្លើង)
+
+Inventor: Stephanie Kwolek (ស្តេហ្វានី ឃូលេក)
+
+Description (EN): She invented Kevlar, a lightweight material five times stronger than steel, used in bulletproof vests, airplanes, and spacecraft.
+
+Description (KH): នាងបានបង្កើត Kevlar ដែលជាវត្ថុធាតុទម្ងន់ស្រាល តែរឹងមាំជាងដែកថែបដល់ទៅ ៥ ដង ដែលត្រូវបានប្រើប្រាស់ក្នុងអាវក្រោះការពារគ្រាប់កាំភ្លើង យន្តហោះ និងយានអវកាស។
+
+4. Windshield Wipers (ប្រព័ន្ធជូតកញ្ចក់រថយន្ត)
+
+Inventor: Mary Anderson (ម៉ារី អាន់ឌឺសាន់)
+
+Description (EN): She invented the first windshield wiper system in 1903, making driving in the rain safe for everyone.
+
+Description (KH): នាងបានបង្កើតប្រព័ន្ធជូតកញ្ចក់រថយន្តដំបូងគេនៅឆ្នាំ១៩០៣ ដែលធ្វើឱ្យការបើកបរពេលភ្លៀងមានសុវត្ថិភាពសម្រាប់មនុស្សគ្រប់គ្នា។
+
+5. The First Computer Compiler (កម្មវិធីបកប្រែកូដកុំព្យូទ័រដំបូងគេ)
+
+Inventor: Grace Hopper (ហ្គ្រេស ហូបភឺ)
+
+Description (EN): She invented the first compiler, a program that translates written human language into the 1s and 0s that computers understand.
+
+Description (KH): នាងបានបង្កើតកម្មវិធីបកប្រែកូដ (compiler) ដំបូងគេ ដែលជាកម្មវិធីបកប្រែភាសាសរសេររបស់មនុស្សទៅជាលេខ 1 និង 0 ដែលកុំព្យូទ័រយល់។
+
+Please ensure this list is responsive, adding subtle hover effects to each row to make it feel interactive.

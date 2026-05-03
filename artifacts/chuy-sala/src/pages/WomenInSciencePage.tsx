@@ -5,6 +5,7 @@ import {
   Award,
   Beaker,
   Brain,
+  Cpu,
   Dna,
   HeartPulse,
   Lightbulb,
@@ -125,6 +126,57 @@ const SCIENTISTS: Scientist[] = [
       "At NASA she computed the orbital trajectories for John Glenn's first American orbit and the Apollo 11 Moon landing — astronauts trusted her math more than the early computers.",
     contributionKh:
       "នៅ NASA នាងបានគណនាគន្លងគោចរសម្រាប់ការគោចរអាមេរិកដំបូងរបស់ John Glenn និងការចុះចតព្រះច័ន្ទ Apollo 11 — អវកាសយានិកជឿទុកចិត្តលើគណនារបស់នាង ច្រើនជាងកុំព្យូទ័រដំបូងៗទៀត។",
+  },
+  {
+    nameEn: "Christina Koch",
+    nameKh: "គ្រីស្ទីណា កូក",
+    fieldEn: "Space Exploration",
+    fieldKh: "ការរុករកអវកាស",
+    yearsEn: "b. 1979",
+    Icon: Rocket,
+    initials: "CK",
+    summaryEn:
+      "The NASA engineer and astronaut who holds the record for the longest single spaceflight by a woman.",
+    summaryKh:
+      "វិស្វករ និងជាអវកាសយានិករបស់ទីភ្នាក់ងារអវកាស NASA ដែលបានបំបែកកំណត់ត្រាហោះហើរក្នុងលំហតែម្នាក់ឯងយូរបំផុតដោយស្ត្រី។",
+    contributionEn:
+      "She conducted the first all-female spacewalk and is a Mission Specialist for Artemis II, which will be the first crewed mission to fly around the Moon in over 50 years.",
+    contributionKh:
+      "នាងបានចូលរួមក្នុងប្រតិបត្តិការដើរក្នុងលំហអវកាសដែលមានតែស្ត្រីជាលើកដំបូង ហើយត្រូវបានជ្រើសរើសជាអ្នកឯកទេសបេសកកម្មសម្រាប់ Artemis II ដែលជាបេសកកម្មនាំមនុស្សវិលជុំវិញព្រះច័ន្ទជាលើកដំបូង ក្នុងរយៈពេលជាង ៥០ ឆ្នាំ។",
+  },
+  {
+    nameEn: "Katalin Karikó",
+    nameKh: "កាតាលីន ការីកូ",
+    fieldEn: "Biochemistry",
+    fieldKh: "ជីវគីមីវិទ្យា",
+    yearsEn: "b. 1955",
+    Icon: Beaker,
+    initials: "KK",
+    summaryEn:
+      "The biochemist whose decades of persistent research led to the creation of mRNA vaccines.",
+    summaryKh:
+      "អ្នកជីវគីមីវិទ្យាដែលការស្រាវជ្រាវដ៏ព្យាយាមអស់ជាច្រើនទសវត្សរ៍របស់គាត់បាននាំទៅដល់ការបង្កើតវ៉ាក់សាំង mRNA។",
+    contributionEn:
+      "Despite facing years of rejections and lost funding, she never gave up on her idea. Her foundational work directly led to the COVID-19 vaccines that saved millions of lives globally.",
+    contributionKh:
+      "ទោះបីជាប្រឈមមុខនឹងការបដិសេធ និងការបាត់បង់មូលនិធិអស់ជាច្រើនឆ្នាំក៏ដោយ ក៏គាត់មិនដែលបោះបង់គំនិតរបស់គាត់ឡើយ។ ស្នាដៃជាមូលដ្ឋានរបស់គាត់បាននាំឱ្យមានវ៉ាក់សាំងកូវីដ១៩ ដែលបានសង្គ្រោះជីវិតមនុស្សរាប់លាននាក់នៅទូទាំងពិភពលោក។",
+  },
+  {
+    nameEn: "Katie Bouman",
+    nameKh: "ខេទី ប៊ូម៉ាន់",
+    fieldEn: "Computer Science",
+    fieldKh: "វិទ្យាសាស្ត្រកុំព្យូទ័រ",
+    yearsEn: "b. 1989",
+    Icon: Cpu,
+    initials: "KB",
+    summaryEn:
+      "The computer scientist who helped develop the algorithm that captured the first-ever image of a black hole.",
+    summaryKh:
+      "អ្នកវិទ្យាសាស្ត្រកុំព្យូទ័រដែលបានជួយបង្កើតក្បួនដោះស្រាយ (Algorithm) ដែលចាប់យករូបភាពដំបូងបង្អស់នៃប្រហោងខ្មៅ (Black hole)។",
+    contributionEn:
+      "At just 29 years old, she led the creation of a computer program that stitched together massive amounts of telescope data from around the world to photograph something previously thought impossible to see.",
+    contributionKh:
+      "ក្នុងវ័យត្រឹមតែ ២៩ ឆ្នាំ នាងបានដឹកនាំការបង្កើតកម្មវិធីកុំព្យូទ័រដែលផ្គុំទិន្នន័យកែវយឺតយ៉ាងច្រើនសន្ធឹកសន្ធាប់ពីជុំវិញពិភពលោក ដើម្បីថតរូបអ្វីមួយដែលពីមុនគេគិតថាមិនអាចមើលឃើញបាន។",
   },
 ];
 
