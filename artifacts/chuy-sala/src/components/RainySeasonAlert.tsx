@@ -78,7 +78,7 @@ export function RainySeasonAlert() {
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-1.5 sm:py-3">
           <div className="flex items-start gap-3">
             {/* Icon — white CloudRain on solid dark-orange disc for max contrast */}
             <div className="flex-shrink-0 mt-0.5">
@@ -150,16 +150,18 @@ export function RainySeasonAlert() {
                 )}
               </div>
 
-              {/* Action buttons — stack vertically on mobile, inline on sm+.
-                  Each button is always bilingual per spec ("EN / KH"). */}
-              <div className="mt-2.5 flex flex-col sm:flex-row sm:flex-wrap gap-2">
+              {/* Action buttons — flex-wrap on every breakpoint so they
+                  break onto new lines instead of overflowing the banner.
+                  Smaller padding/text on mobile keeps both pills inside
+                  narrow viewports. */}
+              <div className="mt-2 flex flex-wrap gap-1.5 sm:gap-2">
                 <Link
                   href="/well-being/public-health"
-                  className="inline-flex items-center justify-center gap-1.5 bg-white hover:bg-amber-50 text-slate-900 font-bold rounded-full px-3.5 py-1.5 text-xs sm:text-sm shadow-sm hover:shadow ring-1 ring-amber-900/20 transition-all active:scale-95"
+                  className="inline-flex items-center justify-center gap-1 sm:gap-1.5 bg-white hover:bg-amber-50 text-slate-900 font-bold rounded-full px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-sm shadow-sm hover:shadow ring-1 ring-amber-900/20 transition-all active:scale-95 max-w-full"
                   data-testid="rainy-season-flood-link"
                 >
                   <ShieldAlert
-                    className="w-3.5 h-3.5 text-orange-700 flex-shrink-0"
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-700 flex-shrink-0"
                     aria-hidden="true"
                   />
                   <span>Flood Prep</span>
@@ -169,11 +171,11 @@ export function RainySeasonAlert() {
 
                 <Link
                   href="/physics/frugal-lab"
-                  className="inline-flex items-center justify-center gap-1.5 bg-amber-200 hover:bg-amber-100 text-slate-900 font-bold rounded-full px-3.5 py-1.5 text-xs sm:text-sm shadow-sm hover:shadow ring-1 ring-amber-900/20 transition-all active:scale-95"
+                  className="inline-flex items-center justify-center gap-1 sm:gap-1.5 bg-amber-200 hover:bg-amber-100 text-slate-900 font-bold rounded-full px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-sm shadow-sm hover:shadow ring-1 ring-amber-900/20 transition-all active:scale-95 max-w-full"
                   data-testid="rainy-season-water-link"
                 >
                   <Droplets
-                    className="w-3.5 h-3.5 text-sky-700 flex-shrink-0"
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-sky-700 flex-shrink-0"
                     aria-hidden="true"
                   />
                   <span>Clean Water</span>

@@ -1701,10 +1701,17 @@ export function Navbar() {
 
           {/* Right controls */}
           <div className="flex items-center gap-3">
-            {/* Bell appears only for school accounts (handles its own visibility) */}
-            <NotificationBell />
-            <ThemePalette />
-            <LanguageToggle />
+            {/* Bell + Theme + Language toggles — hidden on mobile (toggles
+                are surfaced inside the hamburger drawer below) so the mobile
+                header stays strictly Logo (left) ↔ Hamburger (right).
+                NotificationBell already self-hides for non-school accounts;
+                wrapping in `hidden lg:flex` ensures it never appears in the
+                mobile header even for school users. */}
+            <div className="hidden lg:flex items-center gap-3">
+              <NotificationBell />
+              <ThemePalette />
+              <LanguageToggle />
+            </div>
 
             {/* Auth — desktop */}
             <div className="hidden lg:flex items-center gap-2">
@@ -1832,6 +1839,14 @@ export function Navbar() {
             {/* Mobile global search */}
             <div className="px-1 pt-1 pb-2">
               <GlobalSearch variant="compact" onNavigate={() => setMobileOpen(false)} />
+            </div>
+
+            {/* Mobile-only Theme + Language toggles — these live in the
+                desktop header on lg+ screens but are surfaced here so the
+                mobile header itself stays clean (logo ↔ hamburger only). */}
+            <div className="px-1 pb-2 flex items-center gap-2">
+              <ThemePalette />
+              <LanguageToggle compact />
             </div>
 
             {NAV_GROUPS.map((group) => {

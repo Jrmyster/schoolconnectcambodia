@@ -42,8 +42,10 @@ export function Home() {
         {/* z-40 lifts hero content (and the GlobalSearch dropdown inside it)
             above the stats card below (which sits at z-30). */}
         <div className="relative z-40 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
-          {/* Language toggle — front and center */}
-          <div className="flex justify-center mb-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          {/* Language toggle — desktop only. On mobile this is redundant with
+              the toggle inside the hamburger menu and was overlapping the
+              alert banner, so it's hidden below the md breakpoint. */}
+          <div className="hidden md:flex justify-center mb-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/50 text-white font-bold text-sm hover:bg-white/30 active:scale-95 transition-all shadow-lg"
@@ -62,7 +64,7 @@ export function Home() {
             </span>
           </div>
           
-          <h1 className={`text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg leading-tight ${language === 'kh' ? 'font-khmer leading-snug' : 'font-display tracking-tight'}`}>
+          <h1 className={`text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg ${language === 'kh' ? 'font-khmer leading-relaxed sm:leading-snug' : 'font-display tracking-tight leading-tight'}`}>
             {t("Bridge the gap for", "តភ្ជាប់គម្លាតសម្រាប់")}<br />
             <span className="text-accent underline decoration-4 underline-offset-8">
               {t("rural Cambodian schools", "សាលារៀននៅជនបទកម្ពុជា")}
