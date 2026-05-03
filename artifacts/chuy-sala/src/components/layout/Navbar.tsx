@@ -1281,6 +1281,13 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Learn to manage Earth's resources so that 100% of humanity can thrive.",
         descKh: "រៀនគ្រប់គ្រងធនធានរបស់ផែនដី ដើម្បីឱ្យមនុស្សជាតិ ១០០% អាចរីកចម្រើន។",
       },
+      {
+        href: "https://warisobsolete.com",
+        labelEn: "World Peace",
+        labelKh: "សន្តិភាពពិភពលោក",
+        icon: Globe,
+        external: true,
+      },
     ],
   },
   {
