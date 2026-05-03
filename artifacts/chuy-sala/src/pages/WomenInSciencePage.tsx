@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -6,6 +7,7 @@ import {
   Beaker,
   Brain,
   Bone,
+  ChevronDown,
   Code2,
   Cpu,
   Car,
@@ -19,13 +21,17 @@ import {
   Lightbulb,
   Orbit,
   PhoneCall,
+  Pickaxe,
   Quote,
   Rocket,
+  Search,
   Shield,
   Sigma,
   Sparkles,
   Stethoscope,
   Syringe,
+  Telescope,
+  Users,
   Utensils,
   Video,
   Wifi,
@@ -758,6 +764,9 @@ export default function WomenInSciencePage() {
           </ul>
         </section>
 
+        {/* ── Section 1.75: Global Directory of Women Scientists ──────── */}
+        <DirectorySection />
+
         {/* ── Section 2: The Future is You ────────────────────────────── */}
         <section className="mb-12">
           <BilingualHeading
@@ -910,5 +919,296 @@ export default function WomenInSciencePage() {
         </section>
       </div>
     </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+ *  GLOBAL DIRECTORY OF WOMEN SCIENTISTS
+ *  Searchable, accordion-grouped reference list organised by field.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+type DirectoryEntry = {
+  name: string;
+  years?: string;
+  bio: string;
+};
+
+type DirectoryCategory = {
+  id: string;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  titleEn: string;
+  titleKh: string;
+  entries: DirectoryEntry[];
+};
+
+const DIRECTORY: DirectoryCategory[] = [
+  {
+    id: "anthropology",
+    Icon: Users,
+    titleEn: "Anthropology",
+    titleKh: "នរវិទ្យា",
+    entries: [
+      { name: "Margaret Mead", years: "1901–1978", bio: "Famous American anthropologist who studied social and cultural patterns." },
+      { name: "Mildred Trotter", years: "1899–1991", bio: "Pioneer in forensic anthropology and human skeletal anatomy." },
+      { name: "Dorothea Leighton", years: "1908–1989", bio: "Founded the field of medical anthropology." },
+      { name: "Alicia Dussán de Reichel", years: "1920–2023", bio: "Key figure in Colombian social anthropology." },
+    ],
+  },
+  {
+    id: "archaeology",
+    Icon: Pickaxe,
+    titleEn: "Archaeology",
+    titleKh: "បុរាណវិទ្យា",
+    entries: [
+      { name: "Mary Leakey", years: "1913–1996", bio: "Discovered the first 'Proconsul' skull and ancient hominid footprints." },
+      { name: "Dorothy Garrod", years: "1892–1968", bio: "First woman to hold a chair at Cambridge, specializing in the Palaeolithic." },
+      { name: "Tatiana Proskouriakoff", years: "1909–1985", bio: "Deciphered Maya hieroglyphs through architectural analysis." },
+      { name: "Margaret Rule", years: "1928–2015", bio: "Led the excavation of the Tudor warship, the Mary Rose." },
+    ],
+  },
+  {
+    id: "astronomy",
+    Icon: Telescope,
+    titleEn: "Astronomy & Astrophysics",
+    titleKh: "តារាសាស្ត្រ និងរូបវិទ្យាតារា",
+    entries: [
+      { name: "Vera Rubin", years: "1928–2016", bio: "Provided the first evidence for the existence of Dark Matter." },
+      { name: "Annie Jump Cannon", years: "1863–1941", bio: "Developed the contemporary system for stellar classification." },
+      { name: "Jocelyn Bell Burnell", years: "b. 1943", bio: "Discovered the first radio pulsars as a graduate student." },
+      { name: "Cecilia Payne-Gaposchkin", years: "1900–1978", bio: "Discovered that stars are composed primarily of hydrogen and helium." },
+    ],
+  },
+  {
+    id: "biology-genetics",
+    Icon: Dna,
+    titleEn: "Biology & Genetics",
+    titleKh: "ជីវវិទ្យា និងហ្សែន",
+    entries: [
+      { name: "Barbara McClintock", years: "1902–1992", bio: "Discovered 'jumping genes' (transposons) in maize." },
+      { name: "Rachel Carson", years: "1907–1964", bio: "Marine biologist whose book Silent Spring launched the environmental movement." },
+      { name: "June Almeida", years: "1930–2007", bio: "The first person to identify a human coronavirus." },
+      { name: "Dian Fossey", years: "1932–1985", bio: "Renowned zoologist who studied mountain gorillas in Rwanda." },
+    ],
+  },
+  {
+    id: "chemistry-biochemistry",
+    Icon: FlaskConical,
+    titleEn: "Chemistry & Biochemistry",
+    titleKh: "គីមីវិទ្យា និងជីវគីមីវិទ្យា",
+    entries: [
+      { name: "Stephanie Kwolek", years: "1923–2014", bio: "Inventor of Kevlar, the high-strength material used in bulletproof vests." },
+      { name: "Gertrude B. Elion", years: "1918–1999", bio: "Developed innovative drug treatments for leukemia and malaria." },
+      { name: "Gerty Theresa Cori", years: "1896–1957", bio: "First woman to win a Nobel Prize in Physiology or Medicine for her work on sugar metabolism." },
+    ],
+  },
+  {
+    id: "physics-mathematics",
+    Icon: Sigma,
+    titleEn: "Physics & Mathematics",
+    titleKh: "រូបវិទ្យា និងគណិតវិទ្យា",
+    entries: [
+      { name: "Maria Goeppert-Mayer", years: "1906–1972", bio: "Nobel Prize winner for her model of the atomic nucleus." },
+      { name: "Shirley Ann Jackson", years: "b. 1946", bio: "First African-American woman to earn a PhD from MIT, pioneer in telecommunications research." },
+      { name: "Maryam Mirzakhani", years: "1977–2017", bio: "The first woman to win the Fields Medal in mathematics." },
+    ],
+  },
+];
+
+const DIRECTORY_TOTAL = DIRECTORY.reduce((n, c) => n + c.entries.length, 0);
+
+function DirectorySection() {
+  const t = useTranslation();
+  const [query, setQuery] = useState("");
+  const [openId, setOpenId] = useState<string | null>(DIRECTORY[0]?.id ?? null);
+
+  const q = query.trim().toLowerCase();
+  const isSearching = q.length > 0;
+
+  const filtered = useMemo(() => {
+    if (!isSearching) return DIRECTORY;
+    return DIRECTORY
+      .map((cat) => ({
+        ...cat,
+        entries: cat.entries.filter(
+          (e) =>
+            e.name.toLowerCase().includes(q) ||
+            e.bio.toLowerCase().includes(q) ||
+            cat.titleEn.toLowerCase().includes(q) ||
+            cat.titleKh.includes(query.trim()),
+        ),
+      }))
+      .filter((cat) => cat.entries.length > 0);
+  }, [q, query, isSearching]);
+
+  const matchCount = filtered.reduce((n, c) => n + c.entries.length, 0);
+
+  return (
+    <section className="mb-14 sm:mb-20" data-testid="section-directory">
+      <BilingualHeading
+        Icon={Sparkles}
+        en="Global Directory of Women Scientists"
+        kh="បញ្ជីឈ្មោះអ្នកវិទ្យាសាស្ត្រស្ត្រីទូទាំងពិភពលោក"
+      />
+      <p className="mt-4 mb-6 text-base max-w-3xl" style={{ color: INK_SOFT }}>
+        {t(
+          `${DIRECTORY_TOTAL} more pioneering women, organised by field. Type any name or topic to filter the list instantly.`,
+          `ស្ត្រីត្រួសត្រាយផ្លូវចំនួន ${DIRECTORY_TOTAL} នាក់បន្ថែមទៀត រៀបតាមវិស័យ។ វាយឈ្មោះ ឬប្រធានបទណាមួយ ដើម្បីច្រោះបញ្ជីភ្លាមៗ។`,
+        )}
+      </p>
+
+      {/* Search input ─────────────────────────────────────────── */}
+      <div
+        className="relative mb-6 sm:mb-8 rounded-2xl bg-white shadow-sm transition-all"
+        style={{ border: `1.5px solid ${query ? PURPLE : "rgba(124, 58, 237, 0.18)"}` }}
+      >
+        <Search
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
+          style={{ color: PURPLE }}
+        />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t(
+            "Search by name, field, or topic…",
+            "ស្វែងរកតាមឈ្មោះ វិស័យ ឬប្រធានបទ…",
+          )}
+          aria-label={t("Search the directory", "ស្វែងរកក្នុងបញ្ជី")}
+          data-testid="input-directory-search"
+          className="w-full bg-transparent pl-12 pr-4 py-3 sm:py-3.5 rounded-2xl text-sm sm:text-base focus:outline-none placeholder:text-slate-400"
+          style={{ color: PURPLE_DEEP }}
+        />
+      </div>
+
+      {/* Results ──────────────────────────────────────────────── */}
+      {isSearching && (
+        <p className="mb-4 text-sm" style={{ color: INK_SOFT }}>
+          {matchCount === 0
+            ? t(
+                `No scientists match "${query}".`,
+                `មិនមានអ្នកវិទ្យាសាស្ត្រត្រូវនឹង "${query}" ទេ។`,
+              )
+            : t(
+                `${matchCount} ${matchCount === 1 ? "match" : "matches"} for "${query}".`,
+                `លទ្ធផល ${matchCount} សម្រាប់ "${query}"។`,
+              )}
+        </p>
+      )}
+
+      <div className="flex flex-col gap-3 sm:gap-4">
+        {filtered.map((cat) => {
+          const isOpen = isSearching || openId === cat.id;
+          const CatIcon = cat.Icon;
+          return (
+            <div
+              key={cat.id}
+              className="rounded-2xl bg-white border overflow-hidden transition-all"
+              style={{ borderColor: "rgba(124, 58, 237, 0.14)" }}
+              data-testid={`directory-cat-${cat.id}`}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  !isSearching && setOpenId((prev) => (prev === cat.id ? null : cat.id))
+                }
+                aria-expanded={isOpen}
+                aria-controls={`directory-panel-${cat.id}`}
+                className="w-full flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 sm:py-4 text-left hover:bg-purple-50/40 transition-colors"
+              >
+                <div
+                  className="flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center"
+                  style={{ background: `${PURPLE}15`, color: PURPLE }}
+                >
+                  <CatIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className="text-base sm:text-lg font-bold leading-tight"
+                    style={{ color: PURPLE_DEEP }}
+                  >
+                    {cat.titleEn}
+                  </h3>
+                  <p
+                    className="font-khmer text-sm sm:text-base leading-snug"
+                    style={{ color: PURPLE }}
+                  >
+                    {cat.titleKh}
+                  </p>
+                </div>
+                <span
+                  className="flex-shrink-0 hidden sm:inline-flex items-center justify-center min-w-[2rem] h-7 px-2 rounded-full text-xs font-bold"
+                  style={{ background: `${PURPLE}10`, color: PURPLE }}
+                >
+                  {cat.entries.length}
+                </span>
+                {!isSearching && (
+                  <ChevronDown
+                    className={`flex-shrink-0 w-5 h-5 transition-transform duration-200 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                    style={{ color: PURPLE }}
+                  />
+                )}
+              </button>
+
+              {isOpen && (
+                <div
+                  id={`directory-panel-${cat.id}`}
+                  className="px-4 sm:px-5 pb-4 sm:pb-5 border-t"
+                  style={{ borderColor: "rgba(124, 58, 237, 0.10)" }}
+                >
+                  <ul className="flex flex-col gap-3 sm:gap-4 pt-4">
+                    {cat.entries.map((e) => (
+                      <li
+                        key={e.name}
+                        className="rounded-xl px-3 sm:px-4 py-3 bg-purple-50/40"
+                      >
+                        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                          <span
+                            className="font-bold text-sm sm:text-base"
+                            style={{ color: PURPLE_DEEP }}
+                          >
+                            {e.name}
+                          </span>
+                          {e.years && (
+                            <span
+                              className="text-xs sm:text-sm font-mono"
+                              style={{ color: PURPLE }}
+                            >
+                              ({e.years})
+                            </span>
+                          )}
+                        </div>
+                        <p
+                          className="mt-1 text-sm sm:text-[0.95rem] leading-snug"
+                          style={{ color: INK_SOFT }}
+                        >
+                          {e.bio}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {filtered.length === 0 && (
+          <div
+            className="rounded-2xl border-2 border-dashed py-10 px-4 text-center"
+            style={{ borderColor: "rgba(124, 58, 237, 0.25)", color: INK_SOFT }}
+          >
+            <Search className="w-8 h-8 mx-auto mb-2" style={{ color: PURPLE }} />
+            <p className="font-semibold" style={{ color: PURPLE_DEEP }}>
+              {t("No results found.", "រកមិនឃើញលទ្ធផលទេ។")}
+            </p>
+            <p className="text-sm mt-1">
+              {t("Try a different name or field.", "សាកល្បងឈ្មោះ ឬវិស័យផ្សេង។")}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

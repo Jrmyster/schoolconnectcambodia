@@ -1,0 +1,65 @@
+I want to add a massive, categorized directory of historical and modern women scientists to the 'Women in Science: The Pioneers' page.
+
+Please implement this as a series of Sectioned Accordions or Filterable Tabs organized by scientific field. Each entry should include the name and, where provided, their dates and a short description. Maintain a strictly bilingual English/Khmer format for the category titles.
+
+1. Anthropology (នរវិទ្យា)
+
+Margaret Mead (1901–1978): Famous American anthropologist who studied social and cultural patterns.
+
+Mildred Trotter (1899–1991): Pioneer in forensic anthropology and human skeletal anatomy.
+
+Dorothea Leighton (1908–1989): Founded the field of medical anthropology.
+
+Alicia Dussán de Reichel (1920–2023): Key figure in Colombian social anthropology.
+
+2. Archaeology (បុរាណវិទ្យា)
+
+Mary Leakey (1913–1996): Discovered the first 'Proconsul' skull and ancient hominid footprints.
+
+Dorothy Garrod (1892–1968): First woman to hold a chair at Cambridge, specializing in the Palaeolithic.
+
+Tatiana Proskouriakoff (1909–1985): Deciphered Maya hieroglyphs through architectural analysis.
+
+Margaret Rule (1928–2015): Led the excavation of the Tudor warship, the Mary Rose.
+
+3. Astronomy & Astrophysics (តារាសាស្ត្រ និងរូបវិទ្យាតារា)
+
+Vera Rubin (1928–2016): Provided the first evidence for the existence of Dark Matter.
+
+Annie Jump Cannon (1863–1941): Developed the contemporary system for stellar classification.
+
+Jocelyn Bell Burnell (b. 1943): Discovered the first radio pulsars as a graduate student.
+
+Cecilia Payne-Gaposchkin (1900–1978): Discovered that stars are composed primarily of hydrogen and helium.
+
+4. Biology & Genetics (ជីវវិទ្យា និងហ្សែន)
+
+Barbara McClintock (1902–1992): Discovered 'jumping genes' (transposons) in maize.
+
+Rachel Carson (1907–1964): Marine biologist whose book Silent Spring launched the environmental movement.
+
+June Almeida (1930–2007): The first person to identify a human coronavirus.
+
+Dian Fossey (1932–1985): Renowned zoologist who studied mountain gorillas in Rwanda.
+
+5. Chemistry & Biochemistry (គីមីវិទ្យា និងជីវគីមីវិទ្យា)
+
+Stephanie Kwolek (1923–2014): Inventor of Kevlar, the high-strength material used in bulletproof vests.
+
+Gertrude B. Elion (1918–1999): Developed innovative drug treatments for leukemia and malaria.
+
+Gerty Theresa Cori (1896–1957): First woman to win a Nobel Prize in Physiology or Medicine for her work on sugar metabolism.
+
+6. Physics & Mathematics (រូបវិទ្យា និងគណិតវិទ្យា)
+
+Maria Goeppert-Mayer (1906–1972): Nobel Prize winner for her model of the atomic nucleus.
+
+Shirley Ann Jackson (b. 1946): First African-American woman to earn a PhD from MIT, pioneer in telecommunications research.
+
+Maryam Mirzakhani (1977–2017): The first woman to win the Fields Medal in mathematics.
+
+UI Requirements:
+
+Use a 'List with Search' functionality so students can type a name and find their field instantly.
+
+Ensure the layout is highly responsive and looks organized on mobile devices.
