@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby,
+  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -449,6 +449,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sparkles,
         descEn: "Four trailblazing women — Marie Curie (radioactivity & two Nobel Prizes), Rosalind Franklin (the X-ray photograph that revealed DNA's double helix), Tu Youyou (the malaria cure that saves millions), and Katherine Johnson (the math that sent humans to the Moon) — plus an inspiration message: Cambodia needs your mind.",
         descKh: "ស្ត្រីអ្នកត្រួសត្រាយផ្លូវចំនួនបួននាក់ — ម៉ារី គុយរី (វិទ្យុសកម្ម និងរង្វាន់ណូបែលពីរ) រ៉ូហ្សាលីន ហ្វ្រែងឃ្លីន (រូបថតកាំរស្មីអ៊ិចដែលបង្ហាញរូបរាងកំសៀវកំសៀរនៃ DNA) ទូ យូយូ (ថ្នាំព្យាបាលគ្រុនចាញ់ដែលជួយសង្គ្រោះមនុស្សរាប់លាននាក់) និង ខាថឺរីន ចនសុន (គណិតវិទ្យាដែលបញ្ជូនមនុស្សទៅព្រះច័ន្ទ) — ព្រមទាំងសារបំផុសគំនិត៖ ប្រទេសកម្ពុជាត្រូវការបញ្ញារបស់អ្នក។",
+      },
+      {
+        href: "/science/fourier-transform",
+        labelEn: "Fourier Transformation: The Secret Recipe of Waves",
+        labelKh: "ការបំប្លែង Fourier៖ រូបមន្តសម្ងាត់នៃរលក",
+        icon: Activity,
+        descEn: "The math that 'tastes' a complex signal and tells you exactly which pure tones (frequencies) are inside it — explained with the smoothie analogy, the Time vs Frequency view, and the three places it changed the world: MP3 music, MRI medical imaging, and Wi-Fi.",
+        descKh: "គណិតវិទ្យាដែល 'ភ្លក់' សញ្ញាស្មុគស្មាញ ហើយប្រាប់អ្នកថាតើមានសំឡេងសុទ្ធ (ប្រេកង់) មួយណាខ្លះនៅខាងក្នុង — ពន្យល់ដោយការប្រៀបធៀបជាមួយទឹកក្រឡុក ទិដ្ឋភាពពេលវេលា ធៀបនឹងប្រេកង់ និងកន្លែងបីដែលវាបានផ្លាស់ប្តូរពិភពលោក៖ តន្ត្រី MP3 រូបភាពពេទ្យ MRI និង Wi-Fi។",
       },
       {
         href: "/science/energy-future",
