@@ -33,7 +33,7 @@ export function MapPage() {
             {t("Explore schools across Cambodia. Click on a pin to view active needs.", "ស្វែងរកសាលារៀននៅទូទាំងប្រទេសកម្ពុជា។ ចុចលើម្ជុលដើម្បីមើលតម្រូវការសកម្ម។")}
           </p>
         </div>
-        
+
         <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-secondary/20">
           {isLoading ? (
             <div className="flex items-center justify-center h-32 text-primary">
