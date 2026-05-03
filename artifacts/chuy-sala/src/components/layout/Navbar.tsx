@@ -721,6 +721,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
       },
       {
+        href: "/science/chemistry/sweet-science",
+        labelEn: "Sweet Science: Sugars & Cellular Energy",
+        labelKh: "វិទ្យាសាស្ត្រនៃជាតិស្ករ៖ ជាតិស្ករ និងថាមពលកោសិកា",
+        icon: Hexagon,
+        descEn: "Mono-, di-, and polysaccharides explained with hexagonal carbon rings. Meet glucose, fructose, and sucrose — then follow a glucose molecule into the mitochondria where it powers the ATP factory that runs every muscle, lung, and thought.",
+        descKh: "ម៉ូណូ-, ឌី-, និងប៉ូលីសាការីត ពន្យល់ដោយរង្វង់កាបូនរាងហ្វិកសាហ្គន។ ស្គាល់គ្លុយកូស ហ្វ្រុចតូស និងស៊ុចក្រូស — បន្ទាប់មកតាមដានគ្លុយកូសមួយម៉ូលេគុលចូលក្នុងមីតូកុនឌ្រី កន្លែងដែលវាបញ្ចេញថាមពលឱ្យម៉ាស៊ីនផលិត ATP ដែលដំណើរការគ្រប់សាច់ដុំ សួត និងគំនិត។",
+      },
+      {
         href: "/biology/cellular-power-plant",
         labelEn: "Biochemistry: The Cellular Power Plant",
         labelKh: "ជីវគីមីវិទ្យា ៖ រោងចក្រថាមពលកោសិកា",

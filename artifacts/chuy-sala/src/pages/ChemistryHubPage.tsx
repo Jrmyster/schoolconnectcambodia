@@ -295,6 +295,29 @@ const MODULES: Module[] = [
     },
   },
   {
+    href: "/science/chemistry/sweet-science",
+    number: "09.5",
+    titleEn: "Sweet Science: Sugars & Cellular Energy",
+    titleKh: "វិទ្យាសាស្ត្រនៃជាតិស្ករ៖ ជាតិស្ករ និងថាមពលកោសិកា",
+    blurbEn:
+      "Hexagonal carbon rings explained: meet mono-, di-, and polysaccharides. Then follow glucose into the mitochondria, where it gets broken apart to charge the ATP batteries that power your muscles, lungs, and brain.",
+    blurbKh:
+      "រង្វង់កាបូនរាងហ្វិកសាហ្គនពន្យល់៖ ស្គាល់ម៉ូណូ-, ឌី-, និងប៉ូលីសាការីត។ បន្ទាប់មកតាមដានគ្លុយកូសចូលក្នុងមីតូកុនឌ្រី កន្លែងវាត្រូវបំបែកដើម្បីសាកថ្ម ATP ដែលផ្ដល់ថាមពលដល់សាច់ដុំ សួត និងខួរក្បាលរបស់អ្នក។",
+    topicsEn: ["Glucose · Fructose · Sucrose", "Mono · Di · Poly", "Mitochondria", "ATP"],
+    topicsKh: ["គ្លុយកូស · ហ្វ្រុចតូស · ស៊ុចក្រូស", "ម៉ូណូ · ឌី · ប៉ូលី", "មីតូកុនឌ្រី", "ATP"],
+    icon: Hexagon,
+    accent: {
+      bgFrom: "from-emerald-50",
+      bgTo: "to-orange-50",
+      border: "border-emerald-300",
+      chip: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-gradient-to-br from-emerald-500 via-lime-500 to-orange-500",
+      btn: "bg-emerald-700",
+      btnHover: "hover:bg-emerald-800",
+      title: "text-slate-900",
+    },
+  },
+  {
     href: "/science/chemistry/biochemistry",
     number: "09",
     titleEn: "Biochemistry",

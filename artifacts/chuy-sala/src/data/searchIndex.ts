@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle, RadioTower, Satellite,
+  Anvil, Recycle, RadioTower, Satellite, Hexagon,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -2385,6 +2385,40 @@ export const SEARCH_INDEX: SearchEntry[] = [
       "គីមីវិភាគ", "ការវាស់ត្រូត", "វិភាគ",
       "ក្រូម៉ាតូក្រាហ្វី", "ស្ប៉េកត្រូស្កុបី", "ម៉ាស់ស្ប៉េកត្រូស្កុបី",
       "ការវាស់", "ការវិភាគ",
+    ],
+  },
+  {
+    id: "chemistry-sweet-science",
+    href: "/science/chemistry/sweet-science",
+    icon: Hexagon,
+    titleEn: "Sweet Science: Sugars and Cellular Energy",
+    titleKh: "វិទ្យាសាស្ត្រនៃជាតិស្ករ៖ ជាតិស្ករ និងថាមពលកោសិកា",
+    categoryEn: "Chemistry · Biochemistry",
+    categoryKh: "គីមីវិទ្យា · ជីវគីមីវិទ្យា",
+    descEn:
+      "Carbohydrates explained with hexagonal carbon rings: monosaccharides (glucose, fructose), disaccharides (sucrose = glucose + fructose), and polysaccharides (starch, glycogen). Then follow a glucose molecule into the mitochondria, where it is broken apart to charge ATP — the actual battery that powers every muscle, every breath, and every thought.",
+    descKh:
+      "កាបូអ៊ីដ្រាតពន្យល់ដោយរង្វង់កាបូនរាងហ្វិកសាហ្គន៖ ម៉ូណូសាការីត (គ្លុយកូស ហ្វ្រុចតូស) ឌីសាការីត (ស៊ុចក្រូស = គ្លុយកូស + ហ្វ្រុចតូស) និងប៉ូលីសាការីត (ម្សៅ គ្លីកូហ្សែន)។ បន្ទាប់មកតាមដានគ្លុយកូសមួយម៉ូលេគុលចូលក្នុងមីតូកុនឌ្រី កន្លែងវាត្រូវបំបែកដើម្បីសាក ATP — ថ្មពិតប្រាកដដែលផ្ដល់ថាមពលដល់រាល់សាច់ដុំ រាល់ការដកដង្ហើម និងរាល់គំនិត។",
+    keywordsEn: [
+      "sweet science", "sugar", "sugars", "carb", "carbs", "carbohydrate", "carbohydrates",
+      "glucose", "c6h12o6", "blood sugar",
+      "fructose", "fruit sugar",
+      "sucrose", "table sugar", "sugarcane", "sugar cane",
+      "monosaccharide", "monosaccharides", "disaccharide", "disaccharides",
+      "polysaccharide", "polysaccharides", "starch", "glycogen", "cellulose",
+      "atp", "adenosine triphosphate", "cellular energy", "cellular respiration",
+      "mitochondria", "mitochondrion",
+      "metabolism", "energy", "fuel",
+    ],
+    keywordsKh: [
+      "ជាតិស្ករ", "ស្ករ", "កាបូអ៊ីដ្រាត",
+      "គ្លុយកូស", "ហ្វ្រុចតូស", "ស៊ុចក្រូស",
+      "ម៉ូណូសាការីត", "ឌីសាការីត", "ប៉ូលីសាការីត",
+      "ម្សៅ", "គ្លីកូហ្សែន", "សែលុយឡូស",
+      "ATP", "អាដេណូស៊ីន ទ្រីផូស្វាត",
+      "មីតូកុនឌ្រី", "ថាមពលកោសិកា",
+      "មេតាបូលីសម៍", "ថាមពល", "ឥន្ធនៈ",
+      "អំពៅ", "ផ្លែឈើ",
     ],
   },
   {

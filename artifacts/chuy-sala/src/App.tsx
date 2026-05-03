@@ -177,6 +177,7 @@ const InorganicSpectroscopyPage = lazy(() => import("@/pages/InorganicSpectrosco
 const AdminStudentsPage         = lazy(() => import("@/pages/AdminStudentsPage").then(m => ({ default: m.AdminStudentsPage })));
 const PhysicalChemistry101Page  = lazy(() => import("@/pages/PhysicalChemistry101Page").then(m => ({ default: m.PhysicalChemistry101Page })));
 const HaberBoschProcessPage     = lazy(() => import("@/pages/HaberBoschProcessPage").then(m => ({ default: m.HaberBoschProcessPage })));
+const SweetSciencePage          = lazy(() => import("@/pages/SweetSciencePage").then(m => ({ default: m.SweetSciencePage })));
 const AnalyticalChemistry101Page = lazy(() => import("@/pages/AnalyticalChemistry101Page").then(m => ({ default: m.AnalyticalChemistry101Page })));
 const BiochemistryPage          = lazy(() => import("@/pages/BiochemistryPage").then(m => ({ default: m.BiochemistryPage })));
 const ChemistryBuildingBlocksPage = lazy(() => import("@/pages/ChemistryModulePages").then(m => ({ default: m.ChemistryBuildingBlocksPage })));
@@ -426,6 +427,7 @@ function Router() {
             <Route path="/science/chemistry/haber-bosch" component={HaberBoschProcessPage} />
             <Route path="/science/chemistry/analytical" component={AnalyticalChemistry101Page} />
             <Route path="/science/chemistry/biochemistry" component={BiochemistryPage} />
+            <Route path="/science/chemistry/sweet-science" component={SweetSciencePage} />
             <Route path="/fun-lab" component={FunLabPage} />
             <Route path="/physics" component={PhysicsHubPage} />
             <Route path="/physics/motion" component={PhysicsMotionPage} />
