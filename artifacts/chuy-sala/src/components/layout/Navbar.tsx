@@ -1767,27 +1767,17 @@ export function Navbar() {
       </div>
 
       {/* ── Row 2: Dropdown nav — desktop only ─────────────────
-          Strict flexbox contract to eliminate overlap between the
-          category pills and the search bar:
-
-          Parent row : flex items-center justify-between w-full gap-4
-          Left rail  : flex items-center gap-2 flex-1 min-w-0
-                       overflow-x-auto whitespace-nowrap hide-scrollbar
-                       — `min-w-0` is the critical fix that lets the
-                       flex item shrink below its content size and
-                       scroll horizontally instead of pushing into the
-                       search bar.
-          Right rail : flex-shrink-0 w-64 (with the optional Admin
-                       pill sitting outside, also flex-shrink-0).
-          The GlobalSearch outer is plain (no absolute) — only its
-          dropdown panel is positioned absolutely, which is correct
-          and does not affect layout flow. */}
+          The global search bar has been relocated out of this row and
+          into the page Hero. The category pills now occupy the full
+          width of the row, with the optional Admin pill on the right.
+          Horizontal overflow scrolling is preserved so categories
+          remain reachable on narrower desktops. */}
       <div className="hidden lg:block border-t border-border/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between w-full gap-4 h-11">
             <nav
               aria-label={kh ? "ប្រភេទនៃការរុករក" : "Site categories"}
-              className="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto whitespace-nowrap hide-scrollbar pr-72"
+              className="flex items-center gap-2 flex-1 w-full justify-start min-w-0 overflow-x-auto whitespace-nowrap hide-scrollbar"
             >
               {NAV_GROUPS.map((group) => (
                 <DropdownGroup
@@ -1799,25 +1789,19 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right cluster — strictly fixed-width search, never shrinks */}
-            <div className="flex-shrink-0 flex items-center gap-2">
-              <div className="flex-shrink-0 w-64">
-                <GlobalSearch variant="compact" />
-              </div>
-              {user?.isAdmin && (
-                <Link
-                  href="/admin"
-                  className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
-                    location.startsWith("/admin")
-                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                      : "bg-white text-primary border-primary/30 hover:border-primary/60 hover:bg-primary/5"
-                  } ${kh ? "font-khmer" : ""}`}
-                >
-                  <Shield className="w-3.5 h-3.5" />
-                  {kh ? "គ្រប់គ្រង" : "Admin"}
-                </Link>
-              )}
-            </div>
+            {user?.isAdmin && (
+              <Link
+                href="/admin"
+                className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
+                  location.startsWith("/admin")
+                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                    : "bg-white text-primary border-primary/30 hover:border-primary/60 hover:bg-primary/5"
+                } ${kh ? "font-khmer" : ""}`}
+              >
+                <Shield className="w-3.5 h-3.5" />
+                {kh ? "គ្រប់គ្រង" : "Admin"}
+              </Link>
+            )}
           </div>
         </div>
       </div>

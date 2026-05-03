@@ -42,6 +42,13 @@ export function Home() {
         {/* z-40 lifts hero content (and the GlobalSearch dropdown inside it)
             above the stats card below (which sits at z-30). */}
         <div className="relative z-40 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16">
+          {/* Global Search — relocated from the navbar. The negative top
+              margin pulls it up so it sits between the navbar and the
+              hero text, partially overlapping the sky in the background. */}
+          <div className="relative z-10 -mt-8 mb-8 mx-auto max-w-2xl shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <GlobalSearch variant="hero" />
+          </div>
+
           {/* Language toggle — desktop only. On mobile this is redundant with
               the toggle inside the hamburger menu and was overlapping the
               alert banner, so it's hidden below the md breakpoint. */}
@@ -78,13 +85,11 @@ export function Home() {
             )}
           </p>
           
-          {/* Global Search — welcoming entry point */}
-          <div className="mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-            <GlobalSearch variant="hero" />
-          </div>
-
           {/* Topic of the Day — daily-rotating discovery pill (deterministic,
-              picked by day-of-year against the global search index, no backend). */}
+              picked by day-of-year against the global search index, no backend).
+              The primary GlobalSearch now lives at the very top of this hero
+              block (above the language toggle), so the duplicate that used to
+              sit here has been removed. */}
           <div className="mb-8">
             <TopicOfTheDay />
           </div>
