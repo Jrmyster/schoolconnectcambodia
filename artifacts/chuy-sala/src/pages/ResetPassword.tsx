@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,6 @@ interface FormValues {
 export function ResetPassword() {
   const t = useTranslation();
   const { language } = useLanguageStore();
-  const [location] = useLocation();
   const token = new URLSearchParams(window.location.search).get("token") ?? "";
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -109,9 +108,10 @@ export function ResetPassword() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {/* New Password */}
               <div>
-                <label className={labelClass}>{t("New Password", "ពាក្យសម្ងាត់ថ្មី")}*</label>
+                <label className={labelClass} htmlFor="reset-password">{t("New Password", "ពាក្យសម្ងាត់ថ្មី")}*</label>
                 <div className="relative">
                   <input
+                    id="reset-password"
                     type={showPass ? "text" : "password"}
                     autoComplete="new-password"
                     {...register("password", {
@@ -124,6 +124,7 @@ export function ResetPassword() {
                   <button
                     type="button"
                     onClick={() => setShowPass(v => !v)}
+                    aria-label={t("Show / hide password", "បង្ហាញ / លាក់ពាក្យសម្ងាត់")}
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground transition-colors"
                   >
                     {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -138,9 +139,10 @@ export function ResetPassword() {
 
               {/* Confirm Password */}
               <div>
-                <label className={labelClass}>{t("Confirm New Password", "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី")}*</label>
+                <label className={labelClass} htmlFor="reset-confirm-password">{t("Confirm New Password", "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី")}*</label>
                 <div className="relative">
                   <input
+                    id="reset-confirm-password"
                     type={showConfirm ? "text" : "password"}
                     autoComplete="new-password"
                     {...register("confirmPassword", {
@@ -153,6 +155,7 @@ export function ResetPassword() {
                   <button
                     type="button"
                     onClick={() => setShowConfirm(v => !v)}
+                    aria-label={t("Show / hide password", "បង្ហាញ / លាក់ពាក្យសម្ងាត់")}
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/60 hover:text-foreground transition-colors"
                   >
                     {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -166,7 +169,7 @@ export function ResetPassword() {
               </div>
 
               {serverError && (
-                <div className="rounded-xl bg-destructive/10 border border-destructive/20 px-4 py-3">
+                <div role="alert" className="rounded-xl bg-destructive/10 border border-destructive/20 px-4 py-3">
                   <p className={`text-destructive text-sm ${language === "kh" ? "font-khmer" : ""}`}>{serverError}</p>
                 </div>
               )}
