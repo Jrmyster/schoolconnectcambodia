@@ -13,13 +13,13 @@ import { RainySeasonAlert } from "@/components/RainySeasonAlert";
 export function Home() {
   const t = useTranslation();
   const { language, toggleLanguage } = useLanguageStore();
-  
+
   const { data: schools } = useListSchools();
   const { data: needs } = useListNeeds();
   const { data: completed } = useListCompletedProjects();
 
   const activeNeeds = needs?.filter(n => n.status === 'active') || [];
-  
+
   return (
     <div className="w-full min-h-screen">
       {/* Rainy-season safety banner — sits between the global Navbar and the
@@ -63,21 +63,21 @@ export function Home() {
               {t("Empowering the next generation", "ផ្តល់អំណាចដល់ជំនាន់ក្រោយ")}
             </span>
           </div>
-          
+
           <h1 className={`text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg ${language === 'kh' ? 'font-khmer leading-relaxed sm:leading-snug' : 'font-display tracking-tight leading-tight'}`}>
             {t("Bridge the gap for", "តភ្ជាប់គម្លាតសម្រាប់")}<br />
             <span className="text-accent underline decoration-4 underline-offset-8">
               {t("rural Cambodian schools", "សាលារៀននៅជនបទកម្ពុជា")}
             </span>
           </h1>
-          
+
           <p className={`text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto font-medium drop-shadow-md ${language === 'kh' ? 'font-khmer' : ''}`}>
             {t(
               "Directly connect with schools in need. Browse requests for books, infrastructure, and technology, and see exactly where your donation goes.",
               "ភ្ជាប់ទំនាក់ទំនងផ្ទាល់ជាមួយសាលារៀនដែលកំពុងខ្វះខាត។ ស្វែងរកតម្រូវការសៀវភៅ ហេដ្ឋារចនាសម្ព័ន្ធ និងបច្ចេកវិទ្យា ហើយមើលឱ្យច្បាស់ពីទីកន្លែងដែលអំណោយរបស់អ្នកទៅដល់។"
             )}
           </p>
-          
+
           {/* Topic of the Day — daily-rotating discovery pill (deterministic,
               picked by day-of-year against the global search index, no backend).
               The primary GlobalSearch now lives at the very top of this hero
@@ -121,7 +121,7 @@ export function Home() {
               {t("Registered Schools", "សាលារៀនដែលបានចុះឈ្មោះ")}
             </p>
           </div>
-          
+
           <div className="flex flex-col items-center text-center pt-8 md:pt-0">
             <div className="w-16 h-16 bg-orange-50 text-accent rounded-2xl flex items-center justify-center mb-4">
               <Heart className="w-8 h-8" />
