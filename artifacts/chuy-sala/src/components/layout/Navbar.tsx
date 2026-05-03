@@ -1787,7 +1787,7 @@ export function Navbar() {
           <div className="flex items-center justify-between w-full gap-4 h-11">
             <nav
               aria-label={kh ? "ប្រភេទនៃការរុករក" : "Site categories"}
-              className="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto whitespace-nowrap hide-scrollbar"
+              className="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto whitespace-nowrap hide-scrollbar pr-72"
             >
               {NAV_GROUPS.map((group) => (
                 <DropdownGroup
