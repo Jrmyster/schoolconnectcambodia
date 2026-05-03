@@ -5,15 +5,21 @@ import {
   Award,
   Beaker,
   Brain,
+  Code2,
   Cpu,
+  Car,
   Dna,
   HeartPulse,
   Lightbulb,
   Quote,
   Rocket,
+  Shield,
   Sigma,
   Sparkles,
   Stethoscope,
+  Syringe,
+  Wifi,
+  Wrench,
 } from "lucide-react";
 import { useTranslation } from "@/store/use-language";
 
@@ -179,6 +185,149 @@ const SCIENTISTS: Scientist[] = [
       "ក្នុងវ័យត្រឹមតែ ២៩ ឆ្នាំ នាងបានដឹកនាំការបង្កើតកម្មវិធីកុំព្យូទ័រដែលផ្គុំទិន្នន័យកែវយឺតយ៉ាងច្រើនសន្ធឹកសន្ធាប់ពីជុំវិញពិភពលោក ដើម្បីថតរូបអ្វីមួយដែលពីមុនគេគិតថាមិនអាចមើលឃើញបាន។",
   },
 ];
+
+type Invention = {
+  nameEn: string;
+  nameKh: string;
+  inventorEn: string;
+  inventorKh: string;
+  descriptionEn: string;
+  descriptionKh: string;
+  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+};
+
+const INVENTIONS: Invention[] = [
+  {
+    nameEn: "Wi-Fi & Bluetooth Technology",
+    nameKh: "បច្ចេកវិទ្យា Wi-Fi និង Bluetooth",
+    inventorEn: "Hedy Lamarr",
+    inventorKh: "ហ៊ីឌី ឡាម៉ា",
+    descriptionEn:
+      "She co-invented frequency-hopping technology during WWII, which laid the direct foundation for modern Wi-Fi, GPS, and Bluetooth.",
+    descriptionKh:
+      "នាងគឺជាសហអ្នកបង្កើតបច្ចេកវិទ្យាលោតផ្លាស់ប្តូរប្រេកង់ (frequency-hopping) ក្នុងអំឡុងសង្គ្រាមលោកលើកទី២ ដែលជាមូលដ្ឋានគ្រឹះផ្ទាល់សម្រាប់ Wi-Fi, GPS, និង Bluetooth ទំនើប។",
+    Icon: Wifi,
+  },
+  {
+    nameEn: "The Medical Syringe",
+    nameKh: "សឺរ៉ាំងពេទ្យ",
+    inventorEn: "Letitia Geer",
+    inventorKh: "លេទីធា ហ្គៀរ",
+    descriptionEn:
+      "In 1899, she invented the first one-handed medical syringe, completely revolutionizing modern healthcare and hospital treatments.",
+    descriptionKh:
+      "នៅឆ្នាំ១៨៩៩ នាងបានបង្កើតសឺរ៉ាំងពេទ្យប្រើដៃម្ខាងដំបូងគេ ដែលបានធ្វើបដិវត្តទាំងស្រុងនូវការថែទាំសុខភាព និងការព្យាបាលនៅមន្ទីរពេទ្យទំនើប។",
+    Icon: Syringe,
+  },
+  {
+    nameEn: "Kevlar / Bulletproof Armor",
+    nameKh: "Kevlar / អាវក្រោះការពារគ្រាប់កាំភ្លើង",
+    inventorEn: "Stephanie Kwolek",
+    inventorKh: "ស្តេហ្វានី ឃូលេក",
+    descriptionEn:
+      "She invented Kevlar, a lightweight material five times stronger than steel, used in bulletproof vests, airplanes, and spacecraft.",
+    descriptionKh:
+      "នាងបានបង្កើត Kevlar ដែលជាវត្ថុធាតុទម្ងន់ស្រាល តែរឹងមាំជាងដែកថែបដល់ទៅ ៥ ដង ដែលត្រូវបានប្រើប្រាស់ក្នុងអាវក្រោះការពារគ្រាប់កាំភ្លើង យន្តហោះ និងយានអវកាស។",
+    Icon: Shield,
+  },
+  {
+    nameEn: "Windshield Wipers",
+    nameKh: "ប្រព័ន្ធជូតកញ្ចក់រថយន្ត",
+    inventorEn: "Mary Anderson",
+    inventorKh: "ម៉ារី អាន់ឌឺសាន់",
+    descriptionEn:
+      "She invented the first windshield wiper system in 1903, making driving in the rain safe for everyone.",
+    descriptionKh:
+      "នាងបានបង្កើតប្រព័ន្ធជូតកញ្ចក់រថយន្តដំបូងគេនៅឆ្នាំ១៩០៣ ដែលធ្វើឱ្យការបើកបរពេលភ្លៀងមានសុវត្ថិភាពសម្រាប់មនុស្សគ្រប់គ្នា។",
+    Icon: Car,
+  },
+  {
+    nameEn: "The First Computer Compiler",
+    nameKh: "កម្មវិធីបកប្រែកូដកុំព្យូទ័រដំបូងគេ",
+    inventorEn: "Grace Hopper",
+    inventorKh: "ហ្គ្រេស ហូបភឺ",
+    descriptionEn:
+      "She invented the first compiler, a program that translates written human language into the 1s and 0s that computers understand.",
+    descriptionKh:
+      "នាងបានបង្កើតកម្មវិធីបកប្រែកូដ (compiler) ដំបូងគេ ដែលជាកម្មវិធីបកប្រែភាសាសរសេររបស់មនុស្សទៅជាលេខ 1 និង 0 ដែលកុំព្យូទ័រយល់។",
+    Icon: Code2,
+  },
+];
+
+function InventionRow({ inv }: { inv: Invention }) {
+  const { Icon } = inv;
+  return (
+    <li
+      className="group rounded-2xl bg-white border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus-within:-translate-y-0.5 focus-within:shadow-lg"
+      style={{
+        borderColor: "rgba(124, 58, 237, 0.14)",
+        boxShadow: "0 1px 2px rgba(76, 29, 149, 0.06)",
+      }}
+      data-testid={`row-invention-${inv.nameEn.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
+    >
+      <div className="flex items-start gap-4 p-4 sm:p-5">
+        {/* Icon medallion */}
+        <div
+          className="grid place-items-center rounded-xl shrink-0 transition-colors duration-200 group-hover:bg-[color:var(--inv-hover)]"
+          style={
+            {
+              backgroundColor: PURPLE_SOFT,
+              color: PURPLE_DEEP,
+              width: 48,
+              height: 48,
+              ["--inv-hover" as any]: "rgba(124, 58, 237, 0.16)",
+            } as React.CSSProperties
+          }
+          aria-hidden
+        >
+          <Icon className="w-6 h-6" />
+        </div>
+
+        {/* Text */}
+        <div className="flex-1 min-w-0">
+          {/* Invention name — bold, bilingual */}
+          <h3
+            className="text-base sm:text-lg font-bold leading-snug"
+            style={{ color: PURPLE_DEEP }}
+          >
+            {inv.nameEn}
+          </h3>
+          <p
+            className="font-khmer text-sm sm:text-base leading-snug mt-0.5"
+            style={{ color: PURPLE }}
+          >
+            {inv.nameKh}
+          </p>
+
+          {/* Inventor line */}
+          <p className="mt-2 text-xs sm:text-sm" style={{ color: INK_SOFT }}>
+            <span className="font-semibold" style={{ color: INK }}>
+              {inv.inventorEn}
+            </span>
+            <span className="mx-1.5 opacity-40">·</span>
+            <span className="font-khmer" style={{ color: INK }}>
+              {inv.inventorKh}
+            </span>
+          </p>
+
+          {/* Descriptions — both languages, stacked */}
+          <p
+            className="mt-2 text-sm leading-relaxed"
+            style={{ color: INK_SOFT }}
+          >
+            {inv.descriptionEn}
+          </p>
+          <p
+            className="mt-1.5 font-khmer text-sm leading-loose"
+            style={{ color: INK_SOFT }}
+          >
+            {inv.descriptionKh}
+          </p>
+        </div>
+      </div>
+    </li>
+  );
+}
 
 function BilingualHeading({
   en,
@@ -413,6 +562,33 @@ export default function WomenInSciencePage() {
               <ScientistCard key={s.nameEn} s={s} />
             ))}
           </div>
+        </section>
+
+        {/* ── Section 1.5: Everyday Innovations ───────────────────────── */}
+        <section className="mb-14 sm:mb-20">
+          <BilingualHeading
+            Icon={Wrench}
+            en="Everyday Innovations: Invented by Women"
+            kh="នវានុវត្តន៍ប្រចាំថ្ងៃ៖ បង្កើតឡើងដោយស្ត្រី"
+          />
+          <p
+            className="mt-4 mb-8 text-base max-w-3xl"
+            style={{ color: INK_SOFT }}
+          >
+            {t(
+              "From the phone in your pocket to the car on the road — these everyday inventions all came from the minds of women.",
+              "ចាប់ពីទូរស័ព្ទក្នុងហោប៉ៅរបស់អ្នក រហូតដល់រថយន្តលើផ្លូវ — ការបង្កើតប្រចាំថ្ងៃទាំងនេះសុទ្ធតែចេញពីបញ្ញារបស់ស្ត្រី។",
+            )}
+          </p>
+
+          <ul
+            className="flex flex-col gap-3 sm:gap-4"
+            data-testid="list-everyday-innovations"
+          >
+            {INVENTIONS.map((inv) => (
+              <InventionRow key={inv.nameEn} inv={inv} />
+            ))}
+          </ul>
         </section>
 
         {/* ── Section 2: The Future is You ────────────────────────────── */}
