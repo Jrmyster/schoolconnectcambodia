@@ -21,7 +21,6 @@ import {
   Activity,
   Scaling,
   Trophy,
-  Camera,
   MapPin,
   BatteryCharging,
   Power,
@@ -1669,6 +1668,8 @@ type Hypercar = {
   horsepower: string;
   factEn: string;
   factKh: string;
+  imageSrc: string;                     // Wikimedia Commons (CC) photo
+  imageCredit: string;                  // attribution / source line
 };
 
 const HYPERCARS: Hypercar[] = [
@@ -1687,6 +1688,9 @@ const HYPERCARS: Hypercar[] = [
       "To go over 400 km/h, the engine sucks in 60,000 liters of air every minute. It needs 10 radiators just to stop the engine from melting.",
     factKh:
       "ដើម្បីបើកលើស ៤០០ km/h ម៉ាស៊ីនស្រូបខ្យល់ ៦០,០០០ លីត្រក្នុងមួយនាទី។ វាត្រូវការប្រដាប់បំប៉ោងត្រជាក់ ១០ ដើម្បីការពារកុំឱ្យម៉ាស៊ីនរលាយ។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bugatti_Chiron_Royal_Blue.jpg/960px-Bugatti_Chiron_Royal_Blue.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
   {
     code: "LMB",
@@ -1703,6 +1707,9 @@ const HYPERCARS: Hypercar[] = [
       "Features a massive naturally aspirated V12 engine and is shaped like a fighter jet to slice through wind resistance.",
     factKh:
       "មានម៉ាស៊ីន V12 ដ៏ធំធេងបែប naturally aspirated ហើយរូបរាងដូចយន្តហោះចម្បាំង ដើម្បីបំបែកកាត់កម្លាំងទាញខ្យល់។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Lamborghini_Aventador_LP750-4_SV_IMG_9103.jpg/960px-Lamborghini_Aventador_LP750-4_SV_IMG_9103.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
   {
     code: "FER",
@@ -1719,6 +1726,9 @@ const HYPERCARS: Hypercar[] = [
       "Uses hybrid technology. It combines a roaring V8 engine with electric motors to create instant, explosive acceleration.",
     factKh:
       "ប្រើបច្ចេកវិទ្យា hybrid — បញ្ចូលម៉ាស៊ីន V8 ដ៏សាហាវជាមួយម៉ូទ័រអគ្គិសនី ដើម្បីបង្កើតការបង្កើនល្បឿនភ្លាមៗ និងផ្ទុះ។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/2024_Ferrari_SF90_XX_Stradale_in_Bianco_Artico%2C_front_left.jpg/960px-2024_Ferrari_SF90_XX_Stradale_in_Bianco_Artico%2C_front_left.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
   {
     code: "POR",
@@ -1735,6 +1745,9 @@ const HYPERCARS: Hypercar[] = [
       "The engine is in the back of the car. This puts massive heavy weight directly over the rear tires, giving it incredible grip when accelerating.",
     factKh:
       "ម៉ាស៊ីននៅខាងក្រោយឡាន។ វាដាក់ទម្ងន់ធំៗដោយផ្ទាល់លើកង់ខាងក្រោយ ផ្តល់ការអូសទាញដ៏អស្ចារ្យពេលបង្កើនល្បឿន។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Porsche_992_Turbo_S_1X7A6046_%28cropped%29.jpg/960px-Porsche_992_Turbo_S_1X7A6046_%28cropped%29.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
   {
     code: "COR",
@@ -1751,6 +1764,9 @@ const HYPERCARS: Hypercar[] = [
       "American Muscle perfected. It uses a flat-plane crank V8 that revs so fast it sounds like a race car, proving that raw force can rival million-dollar exotics.",
     factKh:
       "សាច់ដុំអាមេរិកក្នុងភាពល្អឥតខ្ចោះ។ ប្រើ V8 បែប flat-plane crank ដែលវិលលឿនរហូតស្តាប់ដូចឡានប្រណាំង — បង្ហាញថាកម្លាំងឆៅអាចប្រកួតប្រជែងជាមួយឡានកម្រតម្លៃរាប់លានដុល្លារ។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Corvette_Z06%2C_BAS_24%2C_Brussels_%28P1170397-RR%29.jpg/960px-Corvette_Z06%2C_BAS_24%2C_Brussels_%28P1170397-RR%29.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
   {
     code: "AMV",
@@ -1767,6 +1783,9 @@ const HYPERCARS: Hypercar[] = [
       "Designed by Formula 1 engineers. The bottom of the car is shaped to suck the vehicle down onto the road, creating massive 'downforce'.",
     factKh:
       "រចនាដោយវិស្វករ Formula 1។ ខាងក្រោមឡានរចនាដើម្បីស្រូបឡានចុះមកលើផ្លូវ បង្កើតកម្លាំងចុះ « downforce » ដ៏ធំ។",
+    imageSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/2019_Aston_Martin_Valkyrie_AMR_Pro_6.5_Front.jpg/1920px-2019_Aston_Martin_Valkyrie_AMR_Pro_6.5_Front.jpg",
+    imageCredit: "Wikimedia Commons (CC)",
   },
 ];
 
@@ -1903,33 +1922,37 @@ function HypercarCard({
         }}
       />
 
-      {/* ── IMAGE PLACEHOLDER ──────────────────────────────────────────── */}
-      {/* Drop a real photo here later: <img src="/hypercars/{car.code}.webp" alt={car.nameEn} /> */}
+      {/* ── HERO IMAGE ─────────────────────────────────────────────────
+          Real photo from Wikimedia Commons (CC). The wrapper crops via
+          `overflow-hidden` so the inner <img> can scale on hover without
+          spilling over the card. `object-cover` fills the 16:10 frame
+          without distorting the aspect ratio. */}
       <div
-        className="relative aspect-[16/10] flex items-center justify-center border-b border-white/5"
-        style={{
-          backgroundColor: "#0c0a09",
-          backgroundImage:
-            "linear-gradient(135deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
-            "linear-gradient(225deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
-            "linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%), " +
-            "linear-gradient(315deg, rgba(255,255,255,0.025) 25%, transparent 25%)",
-          backgroundSize: "12px 12px",
-          backgroundPosition: "6px 0, 6px 0, 0 0, 0 0",
-        }}
+        className="group relative aspect-[16/10] overflow-hidden border-b border-white/5"
+        style={{ backgroundColor: "#0c0a09" }}
       >
-        {/* center camera icon */}
-        <div className="flex flex-col items-center gap-1.5 text-stone-600">
-          <Camera className="w-9 h-9" strokeWidth={1.4} aria-hidden="true" />
-          <span className={`text-[9px] font-mono uppercase tracking-[0.3em] ${kh ? "font-khmer normal-case tracking-normal text-[11px]" : ""}`}>
-            {t("Photo placeholder", "កន្លែងទុករូបភាព")}
-          </span>
-        </div>
+        <img
+          src={car.imageSrc}
+          alt={car.nameEn}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        {/* subtle bottom-fade so the white text below the photo reads */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-12 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, rgba(15,15,18,0.55))",
+          }}
+        />
         {/* corner ID */}
         <span
           aria-hidden
-          className="absolute top-2 left-2 text-[9px] font-mono tracking-widest"
-          style={{ color: car.accent, opacity: 0.8 }}
+          className="absolute top-2 left-2 text-[9px] font-mono tracking-widest px-1.5 py-0.5 rounded bg-black/55 backdrop-blur-sm"
+          style={{ color: car.accent, opacity: 0.95 }}
         >
           {car.code}-{car.countryCode}
         </span>
