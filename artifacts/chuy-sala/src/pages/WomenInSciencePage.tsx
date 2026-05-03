@@ -1043,7 +1043,7 @@ function DirectorySection() {
   const matchCount = filtered.reduce((n, c) => n + c.entries.length, 0);
 
   return (
-    <section className="mb-14 sm:mb-20" data-testid="section-directory">
+    <section id="directory" className="mb-14 sm:mb-20 scroll-mt-24" data-testid="section-directory">
       <BilingualHeading
         Icon={Sparkles}
         en="Global Directory of Women Scientists"
