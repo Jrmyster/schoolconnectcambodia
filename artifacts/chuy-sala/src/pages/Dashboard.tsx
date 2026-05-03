@@ -26,6 +26,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 export function Dashboard() {
   const { user, loading } = useAuth();
   const [, navigate] = useLocation();
+  const t = useTranslation();
 
   useEffect(() => {
     if (!loading && !user) navigate("/login");
@@ -33,8 +34,9 @@ export function Dashboard() {
 
   if (loading || !user) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
+      <div role="status" className="min-h-[60vh] flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-[#1A6EA8] border-t-transparent rounded-full animate-spin" />
+        <span className="sr-only">{t("Loading…", "កំពុងផ្ទុក…")}</span>
       </div>
     );
   }
@@ -308,7 +310,7 @@ function SchoolDashboard() {
                   : t("Hide from map", "លាក់ពីផែនទី")}
             </button>
           </div>
-          {visError && <p className="text-xs text-red-600 mt-2">{visError}</p>}
+          {visError && <p role="alert" className="text-xs text-red-600 mt-2">{visError}</p>}
         </section>
       </div>
     </div>
