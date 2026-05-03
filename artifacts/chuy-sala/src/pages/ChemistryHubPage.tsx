@@ -11,6 +11,7 @@ import {
   FlaskRound,
   Dna,
   Flame,
+  Factory,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
@@ -189,6 +190,29 @@ const MODULES: Module[] = [
       btn: "bg-emerald-700",
       btnHover: "hover:bg-emerald-800",
       title: "text-emerald-50",
+    },
+  },
+  {
+    href: "/science/chemistry/haber-bosch",
+    number: "07.5",
+    titleEn: "The Haber-Bosch Process",
+    titleKh: "ដំណើរការ Haber-Bosch",
+    blurbEn:
+      "The reaction that feeds the world. Watch nitrogen + hydrogen ⇌ ammonia, see Le Chatelier's Principle in action, and learn why 8 billion people are alive today.",
+    blurbKh:
+      "ប្រតិកម្មដែលចិញ្ចឹមពិភពលោក។ មើលអាសូត + អ៊ីដ្រូសែន ⇌ អាម៉ូញាក់ ឃើញគោលការណ៍របស់ Le Chatelier ដំណើរការ ហើយរៀនថាហេតុអ្វីបានជាមនុស្ស ៨ ពាន់លាននាក់នៅរស់សព្វថ្ងៃ។",
+    topicsEn: ["Equilibrium", "Le Chatelier", "Iron Catalyst", "Ammonia · NH₃"],
+    topicsKh: ["សមតុល្យ", "Le Chatelier", "កាតាលីករដែក", "អាម៉ូញាក់ · NH₃"],
+    icon: Factory,
+    accent: {
+      bgFrom: "from-slate-50",
+      bgTo: "to-emerald-50",
+      border: "border-emerald-200",
+      chip: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-gradient-to-br from-slate-600 via-sky-600 to-emerald-600",
+      btn: "bg-emerald-700",
+      btnHover: "hover:bg-emerald-800",
+      title: "text-slate-900",
     },
   },
   {

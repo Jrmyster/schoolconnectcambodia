@@ -517,6 +517,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sigma,
       },
       {
+        href: "/science/chemistry/haber-bosch",
+        labelEn: "7.5. The Haber-Bosch Process",
+        labelKh: "៧.៥. ដំណើរការ Haber-Bosch",
+        icon: Factory,
+        descEn: "The reversible reaction N₂ + 3H₂ ⇌ 2NH₃ that pulls nitrogen from thin air and turns it into the synthetic fertilizer feeding 8 billion people. Le Chatelier's Principle in action: 200 atm pressure, 450 °C, and an iron catalyst.",
+        descKh: "ប្រតិកម្មត្រឡប់បាន N₂ + 3H₂ ⇌ 2NH₃ ដែលទាញអាសូតចេញពីខ្យល់ស្ដើង ហើយបំប្លែងទៅជាជីសំយោគដែលចិញ្ចឹមមនុស្ស ៨ ពាន់លាននាក់។ គោលការណ៍របស់ Le Chatelier ដំណើរការ៖ សម្ពាធ ២០០ atm ៤៥០ °C និងកាតាលីករដែក។",
+      },
+      {
         href: "/science/chemistry/analytical",
         labelEn: "8. Analytical Chemistry",
         labelKh: "៨. គីមីវិភាគ និងឧបករណ៍",
