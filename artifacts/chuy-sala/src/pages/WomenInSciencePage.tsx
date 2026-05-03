@@ -699,7 +699,7 @@ export default function WomenInSciencePage() {
             ស្ត្រីក្នុងវិស័យវិទ្យាសាស្ត្រ៖ អ្នកត្រួសត្រាយផ្លូវ
           </p>
           <p className="mt-5 text-base sm:text-lg max-w-3xl" style={{ color: INK }}>
-            Four extraordinary minds whose curiosity changed the world — from
+            Thirteen extraordinary minds whose curiosity changed the world — from
             the structure of DNA to the medicine that cures malaria, from the
             atom to the Moon.
           </p>
@@ -707,7 +707,7 @@ export default function WomenInSciencePage() {
             className="font-khmer mt-3 text-base sm:text-lg max-w-3xl leading-relaxed"
             style={{ color: INK_SOFT }}
           >
-            ឧត្តមបញ្ញាជនបួននាក់ ដែលបំណងចង់ដឹងរបស់ពួកគេបានផ្លាស់ប្តូរពិភពលោក —
+            ឧត្តមបញ្ញាជនដប់បីនាក់ ដែលបំណងចង់ដឹងរបស់ពួកគេបានផ្លាស់ប្តូរពិភពលោក —
             ចាប់ពីរចនាសម្ព័ន្ធ DNA រហូតដល់ថ្នាំព្យាបាលគ្រុនចាញ់
             ចាប់ពីអាតូម រហូតដល់ព្រះច័ន្ទ។
           </p>
