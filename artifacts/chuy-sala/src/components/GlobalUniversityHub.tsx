@@ -120,9 +120,9 @@ const SCHOLARSHIPS: Scholarship[] = [
    Specialty is bilingual via a tiny lookup so the dataset stays compact.
    ────────────────────────────────────────────────────────────────────────── */
 
-type Region = "usa" | "europe" | "china" | "japan" | "oceania";
+export type Region = "usa" | "europe" | "china" | "japan" | "oceania";
 
-type SpecialtyKey =
+export type SpecialtyKey =
   | "engineering" | "technology" | "sciences" | "humanities" | "liberalarts"
   | "medicine" | "law" | "business" | "economics" | "arts" | "design"
   | "music" | "film" | "mathematics" | "agriculture" | "publichealth"
@@ -131,7 +131,7 @@ type SpecialtyKey =
   | "marinescience" | "linguistics" | "hospitality" | "journalism"
   | "foreignservice" | "pacificstudies";
 
-const SPECIALTY: Record<SpecialtyKey, { en: string; kh: string }> = {
+export const SPECIALTY: Record<SpecialtyKey, { en: string; kh: string }> = {
   engineering:            { en: "Engineering",             kh: "វិស្វកម្ម" },
   technology:             { en: "Technology",              kh: "បច្ចេកវិទ្យា" },
   sciences:               { en: "Sciences",                kh: "វិទ្យាសាស្ត្រ" },
@@ -165,7 +165,7 @@ const SPECIALTY: Record<SpecialtyKey, { en: string; kh: string }> = {
   pacificstudies:         { en: "Pacific Studies",         kh: "ការសិក្សាប៉ាស៊ីហ្វិក" },
 };
 
-const REGIONS: Array<{ id: Region | "all"; en: string; kh: string }> = [
+export const REGIONS: Array<{ id: Region | "all"; en: string; kh: string }> = [
   { id: "all",     en: "All Regions",         kh: "តំបន់ទាំងអស់" },
   { id: "usa",     en: "United States",       kh: "សហរដ្ឋអាមេរិក" },
   { id: "europe",  en: "Europe",              kh: "អឺរ៉ុប" },
@@ -174,7 +174,7 @@ const REGIONS: Array<{ id: Region | "all"; en: string; kh: string }> = [
   { id: "oceania", en: "Australia / Oceania", kh: "អូស្ត្រាលី" },
 ];
 
-type University = {
+export type University = {
   name: string;
   countryEn: string;
   countryKh: string;
@@ -182,7 +182,7 @@ type University = {
   specialty: SpecialtyKey;
 };
 
-const UNIVERSITIES: University[] = [
+export const UNIVERSITIES: University[] = [
   // ─── United States (50) ────────────────────────────────────────────────────
   { name: "Massachusetts Institute of Technology (MIT)", countryEn: "USA", countryKh: "សហរដ្ឋអាមេរិក", region: "usa", specialty: "engineering" },
   { name: "Stanford University",                          countryEn: "USA", countryKh: "សហរដ្ឋអាមេរិក", region: "usa", specialty: "computerscience" },

@@ -14,6 +14,7 @@ import {
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
 import { COUNTRY_SEARCH_ENTRIES } from "./searchCountriesIndex";
+import { UNIVERSITY_SEARCH_ENTRIES } from "./searchUniversitiesIndex";
 import type { SearchEntry } from "./searchTypes";
 
 // Re-export the type so existing consumers (e.g. GlobalSearch) keep working
@@ -2941,6 +2942,7 @@ export const ALL_SEARCH_ENTRIES: SearchEntry[] = [
   ...SEARCH_INDEX,
   ...AUTO_SEARCH_ENTRIES,
   ...COUNTRY_SEARCH_ENTRIES,
+  ...UNIVERSITY_SEARCH_ENTRIES,
 ];
 
 // Dev-time integrity check: catch duplicate IDs across the manual list and

@@ -172,7 +172,7 @@ export function LaunchpadPage() {
         </section>
 
         {/* ── Global Scholars & University Directory ── */}
-        <section>
+        <section id="global-university-hub" className="scroll-mt-20">
           <GlobalUniversityHub />
         </section>
 
