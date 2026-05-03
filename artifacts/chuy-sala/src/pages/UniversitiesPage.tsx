@@ -329,8 +329,9 @@ function UniversityCard({ u, cardNo }: { u: University; cardNo: string }) {
   const Icon = u.Icon;
   return (
     <article
+      id={`uni-${u.id}`}
       data-testid={`uni-card-${u.id}`}
-      className="relative rounded-2xl bg-white border border-blue-200 shadow-lg overflow-hidden flex flex-col hover-elevate transition-shadow"
+      className="relative rounded-2xl bg-white border border-blue-200 shadow-lg overflow-hidden flex flex-col hover-elevate transition-shadow scroll-mt-24"
     >
       {/* Gold side bar */}
       <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${u.accent.bar}`} />
