@@ -5,7 +5,8 @@ import {
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
   Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple,
 } from "lucide-react";
-import { useState, useRef, useEffect, useId, ComponentType } from "react";
+import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
+import { createPortal } from "react-dom";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
 import { NotificationBell } from "@/components/NotificationBell";
@@ -1311,9 +1312,17 @@ function DropdownGroup({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const kh = language === "kh";
   const hasDescriptions = group.items.some((item) => item.descEn || item.descKh);
+
+  // Portal-positioned panel coords (viewport-fixed). Recomputed on open,
+  // scroll, and resize so the panel "follows" the trigger but is never
+  // clipped by the scrollable pills container.
+  const [panelPos, setPanelPos] = useState<{ top: number; left: number } | null>(null);
+  const panelMinWidth = hasDescriptions ? 300 : 200;
 
   const isGroupActive = isGroupActiveFor(location, group);
   const theme = COLOR_THEMES[group.color ?? "slate"] ?? COLOR_THEMES.slate;
@@ -1327,13 +1336,15 @@ function DropdownGroup({
     setOpen(false);
   }, [location]);
 
-  // Close on outside click + Escape (matches mobile-menu behaviour)
+  // Close on outside click + Escape (matches mobile-menu behaviour).
+  // Outside = neither the trigger wrapper nor the portaled panel.
   useEffect(() => {
     if (!open) return;
     function onDown(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      const target = e.target as Node;
+      if (ref.current?.contains(target)) return;
+      if (panelRef.current?.contains(target)) return;
+      setOpen(false);
     }
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -1346,11 +1357,47 @@ function DropdownGroup({
     };
   }, [open]);
 
+  // Compute & maintain the portaled panel's viewport position. We pin the
+  // panel to the trigger's left edge, but flip rightward if it would
+  // overflow the viewport, so right-edge pills (e.g. "For Kids") never
+  // get clipped.
+  useLayoutEffect(() => {
+    if (!open) {
+      setPanelPos(null);
+      return;
+    }
+    function recompute() {
+      const trigger = triggerRef.current;
+      if (!trigger) return;
+      const rect = trigger.getBoundingClientRect();
+      const viewportW = window.innerWidth;
+      const margin = 8;
+      let left = rect.left;
+      // If left-aligned panel would overflow right edge, right-align it
+      // to the trigger instead.
+      if (left + panelMinWidth + margin > viewportW) {
+        left = Math.max(margin, rect.right - panelMinWidth);
+      }
+      // Clamp to viewport.
+      if (left < margin) left = margin;
+      const top = rect.bottom + 6;
+      setPanelPos({ top, left });
+    }
+    recompute();
+    window.addEventListener("resize", recompute);
+    window.addEventListener("scroll", recompute, true);
+    return () => {
+      window.removeEventListener("resize", recompute);
+      window.removeEventListener("scroll", recompute, true);
+    };
+  }, [open, panelMinWidth]);
+
   return (
     <div ref={ref} style={{ position: "relative" }}>
       {/* Trigger button — uses disclosure (button + aria-expanded) semantics
           rather than role="menu", per WAI-ARIA APG guidance for site nav. */}
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
@@ -1368,18 +1415,22 @@ function DropdownGroup({
         />
       </button>
 
-      {/* Dropdown panel — rendered with inline styles to guarantee visibility */}
-      {open && (
+      {/* Dropdown panel — portaled to <body> so the scrollable pills
+          container's overflow:auto cannot clip it. Position is
+          recomputed from the trigger's viewport rect. */}
+      {open && panelPos && typeof document !== "undefined" && createPortal(
         <div
+          ref={panelRef}
           id={panelId}
           aria-label={kh ? group.labelKh : group.labelEn}
           className="nav-dropdown-scroll"
           style={{
-            position: "absolute",
-            top: "calc(100% + 6px)",
-            left: 0,
+            position: "fixed",
+            top: `${panelPos.top}px`,
+            left: `${panelPos.left}px`,
             zIndex: 9999,
-            minWidth: hasDescriptions ? "300px" : "200px",
+            minWidth: `${panelMinWidth}px`,
+            maxWidth: `min(${panelMinWidth + 120}px, calc(100vw - 16px))`,
             backgroundColor: "white",
             border: "1px solid #e5e7eb",
             borderRadius: "12px",
@@ -1480,7 +1531,8 @@ function DropdownGroup({
               </Link>
             );
           })}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );
@@ -1643,38 +1695,51 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* ── Row 2: Dropdown nav — desktop only ───────────────── */}
+      {/* ── Row 2: Dropdown nav — desktop only ─────────────────
+          Layout strategy:
+          • Outer flex row, full width, with a min-w-0 scrollable left
+            region for the category pills and a flex-shrink-0 right
+            region anchoring Search (+ optional Admin pill).
+          • The pills region scrolls horizontally on overflow with its
+            scrollbar visually hidden, so nothing is ever clipped off
+            the viewport. */}
       <div className="hidden lg:block border-t border-border/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-1 h-11">
-            {NAV_GROUPS.map((group) => (
-              <DropdownGroup
-                key={group.labelEn}
-                group={group}
-                location={location}
-                language={language}
-              />
-            ))}
+          <div className="flex items-center gap-3 h-11">
+            <nav
+              aria-label={kh ? "ប្រភេទនៃការរុករក" : "Site categories"}
+              className="flex-1 min-w-0 flex items-center gap-1 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {NAV_GROUPS.map((group) => (
+                <DropdownGroup
+                  key={group.labelEn}
+                  group={group}
+                  location={location}
+                  language={language}
+                />
+              ))}
+            </nav>
 
-            {/* Compact global search — pushed to the right */}
-            <div className="ml-auto flex-shrink-0 w-64 xl:w-80">
-              <GlobalSearch variant="compact" />
+            {/* Right cluster — anchored, never shrinks below 250px */}
+            <div className="flex-shrink-0 flex items-center gap-2 min-w-[250px] xl:min-w-[320px]">
+              <div className="flex-1 min-w-[250px]">
+                <GlobalSearch variant="compact" />
+              </div>
+              {user?.isAdmin && (
+                <Link
+                  href="/admin"
+                  className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
+                    location.startsWith("/admin")
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : "bg-white text-primary border-primary/30 hover:border-primary/60 hover:bg-primary/5"
+                  } ${kh ? "font-khmer" : ""}`}
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  {kh ? "គ្រប់គ្រង" : "Admin"}
+                </Link>
+              )}
             </div>
-
-            {user?.isAdmin && (
-              <Link
-                href="/admin"
-                className={`ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
-                  location.startsWith("/admin")
-                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                    : "bg-white text-primary border-primary/30 hover:border-primary/60 hover:bg-primary/5"
-                } ${kh ? "font-khmer" : ""}`}
-              >
-                <Shield className="w-3.5 h-3.5" />
-                {kh ? "គ្រប់គ្រង" : "Admin"}
-              </Link>
-            )}
-          </nav>
+          </div>
         </div>
       </div>
 
