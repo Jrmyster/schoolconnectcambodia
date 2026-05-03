@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle, RadioTower, Satellite, Hexagon, Fan, Baby,
+  Anvil, Recycle, RadioTower, Satellite, Hexagon, Fan, Baby, Droplet,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -821,6 +821,43 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "តាមដានពន្លឺឆ្លងកាត់កែវកាមេរ៉ា ផ្គុំត្រីកោណការថតឱ្យបង្ហាប់ម៉ូតូកំពុងធ្វើដំណើរ និងរៀនរបៀបដែលអ្នកថតភាពយន្តនិទានរឿងទាំងមូលដោយស៊ុមបី។",
     keywordsEn: ["camera", "cameras", "cinematography", "film", "filmmaking", "movie", "photography", "photo", "lens", "exposure", "iso", "aperture", "shutter", "light"],
     keywordsKh: ["កាមេរ៉ា", "សិល្បៈភាពយន្ត", "ភាពយន្ត", "ការថត", "កែវ", "ពន្លឺ", "រូបថត"],
+  },
+  {
+    id: "survival-hydration",
+    href: "/well-being/survival-hydration",
+    icon: Droplet,
+    titleEn: "Survival Hydration: The Rationing Myth",
+    titleKh: "ការរក្សាជាតិទឹកដើម្បីរស់រានមានជីវិត៖ ការយល់ច្រឡំអំពីការត្បិតត្បៀតទឹក",
+    categoryEn: "Well-Being · Survival Skills",
+    categoryKh: "សុខុមាលភាព · ជំនាញរស់រានមានជីវិត",
+    descEn:
+      "Ration sweat, not water. The golden rule of wilderness survival, the deadly cascade triggered by tiny 'saving' sips (thick blood → heatstroke → confused brain → fatal mistake), and the right way to make a canteen last: stay in deep shade, never travel at noon, work only at dawn and dusk, and breathe through your nose.",
+    descKh:
+      "ត្បិតត្បៀតញើស មិនមែនទឹកទេ។ វិធានមាសនៃការរស់រានមានជីវិតក្នុងព្រៃ ប្រតិកម្មលំដាប់សម្លាប់ដោយការផឹកតិចៗ (ឈាមខាប់ → ការក្ដៅខ្លួនធ្ងន់ធ្ងរ → ខួរក្បាលច្រឡំ → កំហុសធ្ងន់ធ្ងរ) និងវិធីត្រឹមត្រូវដើម្បីឱ្យដបនៅបានយូរ៖ ស្នាក់ក្នុងម្លប់ជ្រៅ កុំធ្វើដំណើរនៅពេលថ្ងៃត្រង់ ធ្វើការតែពេលព្រឹកនិងល្ងាច និងដកដង្ហើមតាមច្រមុះ។",
+    keywordsEn: [
+      "water", "drinking water", "hydration", "dehydration", "dehydrated",
+      "rationing", "ration", "ration water", "save water", "saving water",
+      "survival", "survival skills", "wilderness survival", "wilderness",
+      "lost in forest", "lost in jungle", "stranded", "search and rescue",
+      "heatstroke", "heat stroke", "heat exhaustion", "hyperthermia",
+      "canteen", "water bottle", "bottle",
+      "shade", "noon", "dawn", "dusk", "midday",
+      "sweat", "sweating", "perspiration",
+      "blood", "kidney", "cognition", "brain",
+      "stop method", "rule of threes",
+    ],
+    keywordsKh: [
+      "ទឹក", "ទឹកផឹក", "ការរក្សាជាតិទឹក", "ខ្វះទឹក", "កង្វះទឹក",
+      "ការត្បិតត្បៀតទឹក", "ការត្បិតត្បៀត", "ការសន្សំទឹក",
+      "ការរស់រានមានជីវិត", "ជំនាញរស់រានមានជីវិត", "ការរស់នៅក្នុងព្រៃ", "ព្រៃ",
+      "វង្វេងផ្លូវ", "ជាប់គាំង", "ការស្វែងរក និងសង្គ្រោះ",
+      "ការក្ដៅខ្លួនធ្ងន់ធ្ងរ", "ការអស់កម្លាំងដោយកំដៅ",
+      "ដបទឹក", "ដប",
+      "ម្លប់", "ថ្ងៃត្រង់", "ព្រឹកព្រលឹម", "ល្ងាច",
+      "ញើស", "ការបែកញើស",
+      "ឈាម", "តម្រងនោម", "ខួរក្បាល",
+      "វិធីសាស្ត្រ S.T.O.P.",
+    ],
   },
   {
     id: "infant-nutrition",

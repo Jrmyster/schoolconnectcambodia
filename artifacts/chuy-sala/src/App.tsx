@@ -143,6 +143,7 @@ const StructuralViolencePage    = lazy(() => import("@/pages/StructuralViolence"
 const AbundanceScarcityPage     = lazy(() => import("@/pages/AbundanceScarcity").then(m => ({ default: m.AbundanceScarcity })));
 const FamilyDevelopmentPage     = lazy(() => import("@/pages/FamilyDevelopmentPage"));
 const InfantNutritionPage       = lazy(() => import("@/pages/InfantNutritionPage").then(m => ({ default: m.InfantNutritionPage })));
+const SurvivalHydrationPage     = lazy(() => import("@/pages/SurvivalHydrationPage").then(m => ({ default: m.SurvivalHydrationPage })));
 const MicroscopesPage           = lazy(() => import("@/pages/Microscopes").then(m => ({ default: m.Microscopes })));
 const UniversityExpectationsPage = lazy(() => import("@/pages/UniversityExpectations").then(m => ({ default: m.UniversityExpectations })));
 const AlumniPage                = lazy(() => import("@/pages/AlumniPage").then(m => ({ default: m.AlumniPage })));
@@ -374,6 +375,7 @@ function Router() {
             <Route path="/well-being/abundance-vs-scarcity" component={AbundanceScarcityPage} />
             <Route path="/well-being/family-development" component={FamilyDevelopmentPage} />
             <Route path="/well-being/infant-nutrition" component={InfantNutritionPage} />
+            <Route path="/well-being/survival-hydration" component={SurvivalHydrationPage} />
             <Route path="/well-being/soft-skills" component={SoftSkills} />
             <Route path="/science/biology/microscopes" component={MicroscopesPage} />
             <Route path="/future-hub/university-guide" component={UniversityExpectationsPage} />
