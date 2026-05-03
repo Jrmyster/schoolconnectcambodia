@@ -1,0 +1,33 @@
+I want to add a new educational page to the Study Center section titled 'Global Diplomacy: International Relations (ការទូតសកល៖ ទំនាក់ទំនងអន្តរជាតិ)'.
+
+Please implement this using a formal, diplomatic aesthetic (navy blues, gold accents, and globe/flag icons) and execute the following:
+
+1. Update the Navigation & Search
+
+Add this new page to the 'Study Center' dropdown menu.
+
+Update the search index to include 'international relations', 'embassy', 'ambassador', 'diplomacy', 'foreign policy', and their Khmer equivalents.
+
+2. Section 1: What are Foreign Relations? (តើទំនាក់ទំនងការបរទេសគឺជាអ្វី?)
+
+Define the concept: It is the system of how different countries communicate, trade, and resolve conflicts without resorting to war.
+
+Explain that in a globally connected world, no nation survives completely alone. Countries must negotiate treaties for things like shared water resources, international trade (tying back to our economics module!), and climate change.
+
+3. Section 2: Embassies and Ambassadors (ស្ថានទូត និងឯកអគ្គរដ្ឋទូត)
+
+Define an Embassy (ស្ថានទូត): Explain that it is like a 'mini-country' placed inside a foreign nation. It serves as a safe headquarters for diplomats and helps citizens who are traveling abroad.
+
+Define an Ambassador (ឯកអគ្គរដ្ឋទូត): Explain that this is the highest-ranking official representing their home country's government in another nation. They are the official voice of their leader, tasked with negotiating directly with the host country's government.
+
+4. Section 3: Bridging the Gap (ការផ្សារភ្ជាប់គម្លាត)
+
+Create an inspiring highlight box about the importance of 'soft power' and cultural exchange.
+
+Explain that bridging the gap isn't just about politicians signing papers; it is about human connection. When citizens of different countries learn each other's languages, share technology, or volunteer to teach, they build a foundation of mutual trust that makes global peace possible.
+
+5. Formatting & UX:
+
+Ensure all headings, diplomatic terms, and definitions are strictly bilingual (English/Khmer).
+
+Use icons like a handshake, a passport, an official government building, and a dove of peace.
