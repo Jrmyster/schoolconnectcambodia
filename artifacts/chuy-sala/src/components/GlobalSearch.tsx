@@ -177,9 +177,10 @@ export function GlobalSearch({ variant = "hero", className = "", onNavigate }: P
               ? (kh
                   ? "តើអ្នកចង់រៀនអ្វីនៅថ្ងៃនេះ? / What do you want to learn today?"
                   : "What do you want to learn today? / តើអ្នកចង់រៀនអ្វីនៅថ្ងៃនេះ?")
-              // Compact (navbar) variant — single bilingual line so the magnifier
-              // bar in the global header reads the same in either language.
-              : "Search for anything... (ស្វែងរកអ្វីក៏បាន...)"
+              // Compact (navbar) variant — short bilingual placeholder so the
+              // pinned-right header search reads cleanly at a fixed narrow
+              // width and stays identical across EN/KH.
+              : "Search / ស្វែងរក..."
           }
           className={inputCls}
         />
