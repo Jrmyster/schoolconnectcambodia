@@ -25,6 +25,14 @@ type NavItem = {
   external?: boolean;
   descEn?: string;
   descKh?: string;
+  /**
+   * When true, this entry is rendered as a non-clickable section header
+   * with a thin top divider line. `href` is ignored for navigation but
+   * still used as a unique React key — give it a synthetic value like
+   * `"divider:career"`. Used to group related items inside one dropdown
+   * (e.g. Career Resources merged into Resources).
+   */
+  divider?: boolean;
 };
 
 // ── Semantic category color system ────────────────────────────────────────────
@@ -132,6 +140,31 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/charities", labelEn: "Partners",      labelKh: "ដៃគូ",          icon: Handshake },
       { href: "/alumni",    labelEn: "Alumni",         labelKh: "រឿងជោគជ័យ",   icon: Star },
       { href: "/reading-list", labelEn: "Reading List", labelKh: "បញ្ជីសៀវភៅអាន", icon: BookOpen },
+
+      // ── Career Resources (merged in from the former "Career" dropdown) ──
+      {
+        href: "divider:career-resources",
+        labelEn: "Career Resources",
+        labelKh: "ធនធានអាជីព",
+        icon: Briefcase,
+        divider: true,
+      },
+      {
+        href: "/career/resume-builder",
+        labelEn: "Resume Builder",
+        labelKh: "បង្កើតប្រវត្តិរូបសង្ខេប",
+        icon: FileText,
+        descEn: "Build a clean, bilingual Standard Professional resume in four guided steps (Personal Info → Education → Skills → Experience). Office aesthetic — minimalist whites, deep navy blues, clear borders. Skill-Sync pulls in scores from completed mock interviews as 'Passed: ...' badges; an Action-Verb engine offers strong verbs like Managed (ដឹកនាំ), Analyzed (វិភាគ), Engineered (រចនា), and Collaborated (សហការ); every field has a Khmer translation slot. Print or download as PDF — perfect for interviews in Phnom Penh or Siem Reap.",
+        descKh: "បង្កើតប្រវត្តិរូបសង្ខេបពីរភាសាបែបជំនាញដ៏ស្អាតក្នុងបួនជំហាន (ព័ត៌មានផ្ទាល់ខ្លួន → ការអប់រំ → ជំនាញ → បទពិសោធន៍)។ រចនាបថការិយាល័យ — ស ដ៏ហ្មត់ចត់ ខៀវឆ្នូត និងស៊ុមច្បាស់លាស់។ ការតភ្ជាប់ជំនាញនាំចូលលទ្ធផលសម្ភាសន៍ជា 'បានជាប់៖' ឬម៉ាស៊ីនកិរិយាស័ព្ទផ្ដល់ពាក្យដូចជា ដឹកនាំ វិភាគ រចនា និងសហការ; គ្រប់វាលមានកន្លែងសម្រាប់បកប្រែខ្មែរ។ បោះពុម្ព ឬទាញយក PDF — សម្រាប់សម្ភាសន៍នៅភ្នំពេញ ឬសៀមរាប។",
+      },
+      {
+        href: "/launchpad",
+        labelEn: "Mock Interview",
+        labelKh: "សម្ភាសន៍សាកល្បង",
+        icon: MessageSquare,
+        descEn: "Practice career interviews with the AI Interview Simulator on the Launchpad page — pick a role, answer three questions, and receive a structured performance summary you can later import into your resume.",
+        descKh: "ហាត់សម្ភាសន៍អាជីពជាមួយកម្មវិធីសម្ភាសន៍បញ្ញាសិប្បនិម្មិតនៅទំព័រ Launchpad — ជ្រើសរើសតួនាទី ឆ្លើយសំណួរបី ហើយទទួលបានសេចក្ដីសង្ខេបការអនុវត្ត ដែលអ្នកអាចនាំចូលក្នុងប្រវត្តិរូបសង្ខេបនៅពេលក្រោយ។",
+      },
     ],
   },
   {
@@ -1105,30 +1138,6 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    labelEn: "Career",
-    labelKh: "អាជីព",
-    icon: Briefcase,
-    color: "blue",
-    items: [
-      {
-        href: "/career/resume-builder",
-        labelEn: "Resume Builder",
-        labelKh: "បង្កើតប្រវត្តិរូបសង្ខេប",
-        icon: FileText,
-        descEn: "Build a clean, bilingual Standard Professional resume in four guided steps (Personal Info → Education → Skills → Experience). Office aesthetic — minimalist whites, deep navy blues, clear borders. Skill-Sync pulls in scores from completed mock interviews as 'Passed: ...' badges; an Action-Verb engine offers strong verbs like Managed (ដឹកនាំ), Analyzed (វិភាគ), Engineered (រចនា), and Collaborated (សហការ); every field has a Khmer translation slot. Print or download as PDF — perfect for interviews in Phnom Penh or Siem Reap.",
-        descKh: "បង្កើតប្រវត្តិរូបសង្ខេបពីរភាសាបែបជំនាញដ៏ស្អាតក្នុងបួនជំហាន (ព័ត៌មានផ្ទាល់ខ្លួន → ការអប់រំ → ជំនាញ → បទពិសោធន៍)។ រចនាបថការិយាល័យ — ស ដ៏ហ្មត់ចត់ ខៀវឆ្នូត និងស៊ុមច្បាស់លាស់។ ការតភ្ជាប់ជំនាញនាំចូលលទ្ធផលសម្ភាសន៍ជា 'បានជាប់៖' ឬម៉ាស៊ីនកិរិយាស័ព្ទផ្ដល់ពាក្យដូចជា ដឹកនាំ វិភាគ រចនា និងសហការ; គ្រប់វាលមានកន្លែងសម្រាប់បកប្រែខ្មែរ។ បោះពុម្ព ឬទាញយក PDF — សម្រាប់សម្ភាសន៍នៅភ្នំពេញ ឬសៀមរាប។",
-      },
-      {
-        href: "/launchpad",
-        labelEn: "Mock Interview",
-        labelKh: "សម្ភាសន៍សាកល្បង",
-        icon: MessageSquare,
-        descEn: "Practice career interviews with the AI Interview Simulator on the Launchpad page — pick a role, answer three questions, and receive a structured performance summary you can later import into your resume.",
-        descKh: "ហាត់សម្ភាសន៍អាជីពជាមួយកម្មវិធីសម្ភាសន៍បញ្ញាសិប្បនិម្មិតនៅទំព័រ Launchpad — ជ្រើសរើសតួនាទី ឆ្លើយសំណួរបី ហើយទទួលបានសេចក្ដីសង្ខេបការអនុវត្ត ដែលអ្នកអាចនាំចូលក្នុងប្រវត្តិរូបសង្ខេបនៅពេលក្រោយ។",
-      },
-    ],
-  },
-  {
     labelEn: "Well-being",
     labelKh: "សុខុមាលភាព",
     icon: Smile,
@@ -1515,6 +1524,30 @@ function DropdownGroup({
           }}
         >
           {group.items.map((item) => {
+            // Section header / divider — non-clickable label with a thin
+            // top rule. Used to subgroup items inside a single dropdown
+            // (e.g. "Career Resources" inside Resources).
+            if (item.divider) {
+              return (
+                <div
+                  key={item.href}
+                  role="presentation"
+                  style={{
+                    margin: "8px 6px 4px 6px",
+                    paddingTop: "8px",
+                    borderTop: "1px solid hsl(var(--border))",
+                  }}
+                >
+                  <p
+                    className={`px-2 text-[10px] font-bold uppercase tracking-widest ${kh ? "font-khmer" : ""}`}
+                    style={{ color: "hsl(var(--muted-foreground))" }}
+                  >
+                    {kh ? item.labelKh : item.labelEn}
+                  </p>
+                </div>
+              );
+            }
+
             const isActive = isItemActive(location, item);
 
             const hasDesc = !!(item.descEn || item.descKh);
@@ -1883,6 +1916,21 @@ export function Navbar() {
                       className="nav-dropdown-scroll ml-4 mt-0.5 mb-1 flex flex-col gap-0.5 border-l-2 border-primary/20 pl-3 max-h-[60vh] overflow-y-auto overscroll-contain"
                     >
                       {group.items.map((item) => {
+                        // Mobile: render section header / divider variant.
+                        if (item.divider) {
+                          return (
+                            <div
+                              key={item.href}
+                              role="presentation"
+                              className="mt-2 mb-1 pt-2 border-t border-border/60"
+                            >
+                              <p className={`px-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground ${kh ? "font-khmer" : ""}`}>
+                                {kh ? item.labelKh : item.labelEn}
+                              </p>
+                            </div>
+                          );
+                        }
+
                         const isActive = isItemActive(location, item);
 
                         const itemHasDesc = !!(item.descEn || item.descKh);
