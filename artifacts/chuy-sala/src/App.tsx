@@ -37,6 +37,7 @@ const SnowPage                  = lazy(() => import("@/pages/SnowPage").then(m =
 const QuantumLimitPage          = lazy(() => import("@/pages/QuantumLimitPage"));
 const MagnetsPage               = lazy(() => import("@/pages/MagnetsPage"));
 const HvacPage                  = lazy(() => import("@/pages/HvacPage"));
+const VacuumCleanerPage         = lazy(() => import("@/pages/VacuumCleanerPage").then(m => ({ default: m.VacuumCleanerPage })));
 const AviationPage              = lazy(() => import("@/pages/AviationPage"));
 const MusicTheoryPage           = lazy(() => import("@/pages/MusicTheoryPage"));
 const MathematicsPage           = lazy(() => import("@/pages/MathematicsPage"));
@@ -313,6 +314,7 @@ function Router() {
             <Route path="/quantum-limit" component={QuantumLimitPage} />
             <Route path="/magnets" component={MagnetsPage} />
             <Route path="/hvac" component={HvacPage} />
+            <Route path="/technology/vacuum-cleaner" component={VacuumCleanerPage} />
             <Route path="/aviation" component={AviationPage} />
             <Route path="/music-theory" component={MusicTheoryPage} />
             <Route path="/mathematics" component={MathematicsPage} />

@@ -1,0 +1,37 @@
+I want to add a new educational page to the Parenting & Health section titled 'Infant Nutrition: Formula, Breast Milk, and Safety (អាហារូបត្ថម្ភទារក៖ ទឹកដោះគោម្សៅ ទឹកដោះម្តាយ និងសុវត្ថិភាព)'.
+
+Please implement this using a soft, reassuring, and medical-safe aesthetic (pastel yellows, baby blues, and clean medical cross icons) and execute the following:
+
+1. Update the Navigation & Search
+
+Add this new page to the Parenting/Health sidebar menu.
+
+Update the search index to include 'baby formula', 'breast milk', 'infant nutrition', 'homemade formula', and their Khmer equivalents.
+
+2. Section 1: What is Baby Formula? (តើទឹកដោះគោម្សៅទារកគឺជាអ្វី?)
+
+Explain the science: Commercial baby formula is highly regulated and scientifically engineered. It is usually made from specially treated cow's milk (or soy) that has been chemically altered to digest easily like human milk.
+
+List the essential additives: It is fortified with specific amounts of Iron, Vitamin D, Calcium, and DHA (for brain development).
+
+3. Section 2: Breast Milk vs. Formula (ទឹកដោះម្តាយ ប្រៀបធៀបនឹង ទឹកដោះគោម្សៅ)
+
+Create a side-by-side comparison card layout:
+
+Breast Milk (ទឹកដោះម្តាយ): The biological gold standard. It contains live antibodies from the mother to fight infections, and its nutritional makeup dynamically changes as the baby grows. It is also free.
+
+Baby Formula (ទឹកដោះគោម្សៅ): Provides complete, guaranteed nutrition. It is a vital, life-saving option if a mother cannot breastfeed, allows other caregivers (like fathers) to feed the baby, and digests slower, which can sometimes help babies sleep longer.
+
+4. Section 3: The Danger of Homemade Formula (គ្រោះថ្នាក់នៃទឹកដោះគោម្សៅធ្វើដោយខ្លួនឯង)
+
+Create a high-visibility 'WARNING' block (red or bright orange).
+
+State clearly: Never attempt to make homemade baby formula. (កុំព្យាយាមធ្វើទឹកដោះគោម្សៅទារកដោយខ្លួនឯងឱ្យសោះ។)
+
+Explain the 'Why': Regular cow's milk, goat's milk, or plant milks lack the precise vitamins a baby needs and have too much protein for an infant's kidneys to process. Homemade recipes can lead to fatal bacterial infections, seizures from salt imbalances, and severe malnutrition.
+
+5. Formatting & UX:
+
+Ensure all headings, nutritional terms, and safety warnings are strictly bilingual (English/Khmer).
+
+Use clear icons like a baby bottle, a mother holding a baby, and a warning shield.

@@ -9,7 +9,7 @@ import {
   Globe, Snowflake, Train, Tv, Radar, PawPrint, Sprout, Languages, Radio, Factory,
   Cog, History, TrendingUp, Activity, Bug, Pill, Lock, Columns3,
   Skull, Volume2, HeartHandshake, Handshake, Box, Bird, Wind, Drone,
-  Anvil, Recycle, RadioTower, Satellite, Hexagon,
+  Anvil, Recycle, RadioTower, Satellite, Hexagon, Fan,
 } from "lucide-react";
 import Fuse from "fuse.js";
 import { AUTO_SEARCH_ENTRIES } from "./searchAutoIndex";
@@ -821,6 +821,37 @@ export const SEARCH_INDEX: SearchEntry[] = [
     descKh: "តាមដានពន្លឺឆ្លងកាត់កែវកាមេរ៉ា ផ្គុំត្រីកោណការថតឱ្យបង្ហាប់ម៉ូតូកំពុងធ្វើដំណើរ និងរៀនរបៀបដែលអ្នកថតភាពយន្តនិទានរឿងទាំងមូលដោយស៊ុមបី។",
     keywordsEn: ["camera", "cameras", "cinematography", "film", "filmmaking", "movie", "photography", "photo", "lens", "exposure", "iso", "aperture", "shutter", "light"],
     keywordsKh: ["កាមេរ៉ា", "សិល្បៈភាពយន្ត", "ភាពយន្ត", "ការថត", "កែវ", "ពន្លឺ", "រូបថត"],
+  },
+  {
+    id: "vacuum-cleaner",
+    href: "/technology/vacuum-cleaner",
+    icon: Fan,
+    titleEn: "The Pressure Drop: How Vacuum Cleaners Work",
+    titleKh: "ការធ្លាក់ចុះសម្ពាធ៖ របៀបដែលម៉ាស៊ីនបូមធូលីដំណើរការ",
+    categoryEn: "Technology · HVAC & Mechanics",
+    categoryKh: "បច្ចេកវិទ្យា · HVAC និងមេកានិច",
+    descEn:
+      "A vacuum cleaner doesn't 'suck' — air can't pull. A motor-driven fan pushes air out the back, creating a low-pressure zone inside. The high-pressure outside atmosphere then shoves air (and dust) into the inlet to fill the void. A filter catches the dirt; clean air leaves through the exhaust. The same physics scales up to the ducts of an air conditioner.",
+    descKh:
+      "ម៉ាស៊ីនបូមធូលីមិន «បឺត» ទេ — ខ្យល់មិនអាចទាញបានទេ។ កង្ហារដំណើរការដោយម៉ូទ័រច្រានខ្យល់ចេញពីខាងក្រោយ បង្កើតតំបន់សម្ពាធទាបនៅខាងក្នុង។ បរិយាកាសសម្ពាធខ្ពស់ខាងក្រៅច្រានខ្យល់ (និងធូលី) ចូលរន្ធដើម្បីបំពេញទីទេរ។ តម្រងចាប់យកធូលី; ខ្យល់ស្អាតចេញតាមរន្ធបញ្ចេញ។ រូបវិទ្យាដូចគ្នានេះត្រូវបានពង្រីកទៅទុយោម៉ាស៊ីនត្រជាក់។",
+    keywordsEn: [
+      "vacuum", "vacuum cleaner", "hoover", "suction",
+      "pressure", "pressure drop", "low pressure", "atmospheric pressure", "partial vacuum",
+      "motor", "electric motor", "fan", "blower", "impeller",
+      "filter", "hepa", "hepa filter", "dust", "dirt",
+      "airflow", "air flow", "ventilation", "duct", "ducts", "exhaust",
+      "hvac", "air conditioner", "ac", "mechanics",
+      "physics", "fluid dynamics",
+    ],
+    keywordsKh: [
+      "ម៉ាស៊ីនបូមធូលី", "ការបឺត",
+      "សម្ពាធ", "ការធ្លាក់ចុះសម្ពាធ", "សម្ពាធទាប", "សម្ពាធបរិយាកាស", "សុញ្ញកាស",
+      "ម៉ូទ័រ", "ម៉ូទ័រអគ្គិសនី", "កង្ហារ",
+      "តម្រង", "HEPA", "ធូលី",
+      "ខ្យល់ហូរ", "ខ្យល់ចេញចូល", "ទុយោ", "បញ្ចេញខ្យល់",
+      "HVAC", "ម៉ាស៊ីនត្រជាក់", "មេកានិច",
+      "រូបវិទ្យា",
+    ],
   },
   {
     id: "hvac",
