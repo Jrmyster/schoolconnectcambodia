@@ -1767,19 +1767,27 @@ export function Navbar() {
       </div>
 
       {/* ── Row 2: Dropdown nav — desktop only ─────────────────
-          Layout strategy:
-          • Outer flex row, full width, with a min-w-0 scrollable left
-            region for the category pills and a flex-shrink-0 right
-            region anchoring Search (+ optional Admin pill).
-          • The pills region scrolls horizontally on overflow with its
-            scrollbar visually hidden, so nothing is ever clipped off
-            the viewport. */}
+          Strict flexbox contract to eliminate overlap between the
+          category pills and the search bar:
+
+          Parent row : flex items-center justify-between w-full gap-4
+          Left rail  : flex items-center gap-2 flex-1 min-w-0
+                       overflow-x-auto whitespace-nowrap hide-scrollbar
+                       — `min-w-0` is the critical fix that lets the
+                       flex item shrink below its content size and
+                       scroll horizontally instead of pushing into the
+                       search bar.
+          Right rail : flex-shrink-0 w-64 (with the optional Admin
+                       pill sitting outside, also flex-shrink-0).
+          The GlobalSearch outer is plain (no absolute) — only its
+          dropdown panel is positioned absolutely, which is correct
+          and does not affect layout flow. */}
       <div className="hidden lg:block border-t border-border/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 h-11">
+          <div className="flex items-center justify-between w-full gap-4 h-11">
             <nav
               aria-label={kh ? "ប្រភេទនៃការរុករក" : "Site categories"}
-              className="flex-1 min-w-0 flex items-center gap-1 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto whitespace-nowrap hide-scrollbar"
             >
               {NAV_GROUPS.map((group) => (
                 <DropdownGroup
@@ -1791,9 +1799,9 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right cluster — anchored, never shrinks below 250px */}
-            <div className="flex-shrink-0 flex items-center gap-2 min-w-[250px] xl:min-w-[320px]">
-              <div className="flex-1 min-w-[250px]">
+            {/* Right cluster — strictly fixed-width search, never shrinks */}
+            <div className="flex-shrink-0 flex items-center gap-2">
+              <div className="flex-shrink-0 w-64">
                 <GlobalSearch variant="compact" />
               </div>
               {user?.isAdmin && (
