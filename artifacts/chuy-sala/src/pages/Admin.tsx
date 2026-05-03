@@ -530,7 +530,7 @@ export function Admin() {
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("School", "សាលា")}</th>
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Province", "ខេត្ត")}</th>
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("District", "ស្រុក")}</th>
-                          <th className="px-4 py-3 w-24"></th>
+                          <th scope="col" className="px-4 py-3 w-24"><span className="sr-only">{t("Actions", "សកម្មភាព")}</span></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -581,7 +581,7 @@ export function Admin() {
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Category", "ប្រភេទ")}</th>
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Goal", "គោលដៅ")}</th>
                           <th className={`text-left px-4 py-3 font-semibold ${language === 'kh' ? 'font-khmer text-base' : ''}`}>{t("Status", "ស្ថានភាព")}</th>
-                          <th className="px-4 py-3 w-24"></th>
+                          <th scope="col" className="px-4 py-3 w-24"><span className="sr-only">{t("Actions", "សកម្មភាព")}</span></th>
                         </tr>
                       </thead>
                       <tbody>
