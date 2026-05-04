@@ -1,0 +1,64 @@
+I need to expand the 'Science' section of our educational platform by adding a new subcategory and a comprehensive new page.
+
+Please implement the following updates using our existing bilingual (English/Khmer) design system, ensuring semantic HTML and accessible UI components (like cards or grids).
+
+PART 1: NAVIGATION UPDATE
+
+Locate the 'Science' dropdown in the main navigation bar.
+
+Add a new subcategory titled 'Human Body (រាងកាយមនុស្ស)'.
+
+Under this subcategory, add a link titled 'Blood & Circulation (ឈាម និងប្រព័ន្ធឈាមរត់)' that routes to a new page at /science/circulatory-system.
+
+PART 2: BUILD THE NEW PAGE
+Create the new page component (CirculatorySystem.jsx or similar) with the following structured sections. Ensure all text is presented bilingually (English and Khmer side-by-side or stacked).
+
+1. Page Header:
+
+Title: The Circulatory System & Blood (ប្រព័ន្ធឈាមរត់ និងឈាម)
+
+Subtitle: A complete guide to the heart, blood vessels, and the cells that keep us alive.
+
+2. Section 1: The Components of Blood (សមាសធាតុនៃឈាម):
+Create a grid or set of cards explaining the four main components:
+
+Plasma (ប្លាស្មា): The liquid base of blood, mostly water, carrying nutrients and waste.
+
+Red Blood Cells (កោសិកាឈាមក្រហម): Explain their disc shape and how they carry oxygen.
+
+Hemoglobin (អេម៉ូក្លូប៊ីន): Define this as the iron-rich protein inside red blood cells that actually binds to oxygen and gives blood its red color.
+
+White Blood Cells (កោសិកាឈាមស): Explain their role as the immune system's defense against infections and disease.
+
+Platelets (ផ្លាកែត): Explain how they help blood clot to stop bleeding from cuts.
+
+3. Section 2: The Circulatory Highway (ផ្លូវនៃប្រព័ន្ធឈាមរត់):
+Explain the structural "plumbing" of the body:
+
+The Heart (បេះដូង): Describe it as the muscular pump that drives the whole system.
+
+Arteries (សរសៃឈាមអាកទែ): Explain that these carry oxygen-rich blood away from the heart (thick walls, high pressure).
+
+Veins (សរសៃឈាមវ៉ែន): Explain that these carry oxygen-poor blood back to the heart (thinner walls, use valves to prevent backflow).
+
+Capillaries (សរសៃឈាមតូចៗ): The tiny connectors where oxygen and nutrients are actually traded with body tissue.
+
+4. Section 3: Blood Types (ប្រភេទឈាម):
+
+Create a clear table explaining the ABO blood group system (A, B, AB, O).
+
+Briefly explain what the Rh factor is (Positive vs. Negative).
+
+Mention the "Universal Donor" (O Negative) and "Universal Recipient" (AB Positive).
+
+5. Section 4: Blood Pressure (សម្ពាធឈាម):
+
+Explain what blood pressure is: the force of blood pushing against the artery walls.
+
+Define the two numbers: Systolic (pressure when the heart beats/pumps) and Diastolic (pressure when the heart rests between beats).
+
+Explain how doctors measure it: Mention the tool used (a sphygmomanometer or blood pressure cuff) and the standard healthy reading (around 120/80 mmHg).
+
+PART 3: VISUALS AND LAYOUT
+
+Do not rely on external images. Please generate simple, clean SVG icons or CSS shapes to represent a Red Blood Cell, a Heart, and a Blood Pressure reading to make the page visually engaging.
