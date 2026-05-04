@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind,
+  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -498,6 +498,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Wind,
         descEn: "The single equation that tells every drop of water and puff of air exactly where to go — explained simply (rivers around rocks, air over wings) and technically (inertia, pressure gradient, viscosity, external forces). Plus the $1,000,000 Millennium Prize Problem still waiting to be solved.",
         descKh: "សមីការតែមួយដែលប្រាប់ដំណក់ទឹក និងខ្យល់ឱ្យដឹងថាត្រូវទៅណា និងលឿនប៉ុនណា — ពន្យល់សាមញ្ញ (ទន្លេជុំវិញថ្ម ខ្យល់លើស្លាបយន្តហោះ) និងបច្ចេកទេស (និចលភាព គម្លាតសម្ពាធ ភាពខាប់ កម្លាំងខាងក្រៅ)។ ព្រមទាំងបញ្ហារង្វាន់សហស្សវត្សរ៍ ១,០០០,០០០ ដុល្លារដែលនៅរង់ចាំការដោះស្រាយ។",
+      },
+      {
+        href: "/electrical-engineering",
+        labelEn: "Electrical Engineering Reference",
+        labelKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
+        icon: CircuitBoard,
+        descEn: "A complete bench cheat-sheet — Ohm's Law equation wheel, metric prefixes, capacitor and resistor color codes, diode/BJT/MOSFET pinouts, LED forward-voltage table, NE555 and LM78XX pinouts, 741 and LM358 op-amps, SMD code decoding, breadboard anatomy, AWG wire gauge, plus a glossary of resistivity, impedance, capacitance, and inductance.",
+        descKh: "សន្លឹកជំនួយវិស្វកម្មពេញលេញ — កង់សមីការច្បាប់អូម បុព្វបទម៉ែត្រ កូដពណ៌រេស៊ីស្តង់ និងកាប៉ាស៊ីទ័រ ផែនទីម្ជុលឌីយ៉ូត BJT MOSFET តារាង Vf របស់ LED ផែនទីម្ជុល NE555 និង LM78XX អុប-អំ 741 និង LM358 ការឌិកូដ SMD រូបរាង Breadboard តារាងខ្សែ AWG និងសទ្ទានុក្រមអំពីរេស៊ីស្ទីវីតេ អាំពេដង់ កាប៉ាស៊ីតង់ និងអាំងឌុចតង់។",
       },
       {
         href: "/science/energy-future",

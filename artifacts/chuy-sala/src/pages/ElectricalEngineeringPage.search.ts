@@ -1,0 +1,50 @@
+import { CircuitBoard } from "lucide-react";
+import type { SearchEntry } from "@/data/searchTypes";
+
+export const searchMeta: SearchEntry = {
+  id: "electrical-engineering",
+  type: "page",
+  href: "/electrical-engineering",
+  icon: CircuitBoard,
+  titleEn: "Electrical Engineering Reference",
+  titleKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
+  categoryEn: "Science",
+  categoryKh: "វិទ្យាសាស្ត្រ",
+  descEn:
+    "A complete bench cheat-sheet — Ohm's Law and the equation wheel, metric prefixes, capacitor and resistor color codes, diode/BJT/MOSFET pinouts, LED forward-voltage table, NE555 and LM78XX pinouts, 741 and LM358 op-amps, SMD code decoding, breadboard anatomy, AWG wire gauge, plus a glossary of resistivity, impedance, capacitance, capacitors and inductance.",
+  descKh:
+    "សន្លឹកជំនួយវិស្វកម្មពេញលេញ — ច្បាប់អូម និងកង់សមីការ បុព្វបទម៉ែត្រ កូដពណ៌រេស៊ីស្តង់ និងកាប៉ាស៊ីទ័រ ផែនទីម្ជុលឌីយ៉ូត BJT MOSFET តារាង Vf របស់ LED ផែនទីម្ជុល NE555 និង LM78XX អុប-អំ 741 និង LM358 ការឌិកូដ SMD រូបរាង Breadboard តារាងខ្សែ AWG និងសទ្ទានុក្រមអំពីរេស៊ីស្ទីវីតេ អាំពេដង់ កាប៉ាស៊ីតង់ និងអាំងឌុចតង់។",
+  keywordsEn: [
+    "electrical engineering", "electronics", "ee", "circuit", "circuits",
+    "ohm", "ohm's law", "ohms law",
+    "resistor", "resistors", "resistance", "resistivity",
+    "capacitor", "capacitors", "capacitance",
+    "inductor", "inductors", "inductance",
+    "impedance", "reactance",
+    "diode", "diodes", "led", "light emitting diode",
+    "bjt", "transistor", "transistors", "mosfet", "fet",
+    "op-amp", "op amp", "operational amplifier", "741", "lm358",
+    "555", "ne555", "timer ic",
+    "lm7805", "lm78xx", "voltage regulator", "regulator",
+    "smd", "surface mount", "smt",
+    "breadboard", "wire gauge", "awg",
+    "color code", "color coding", "colour code",
+    "pinout", "datasheet", "cheat sheet", "cheatsheet",
+    "metric prefix", "prefix", "mega", "kilo", "micro", "nano", "pico",
+    "wiring", "voltage", "current", "power", "watt", "volt", "ampere",
+    "physics", "electronics 101", "hardware",
+  ],
+  keywordsKh: [
+    "វិស្វកម្មអគ្គិសនី", "អេឡិចត្រូនិច", "សៀគ្វី",
+    "ច្បាប់អូម", "អូម",
+    "រេស៊ីស្តង់", "កាប៉ាស៊ីទ័រ", "កាប៉ាស៊ីតង់",
+    "អាំងឌុចទ័រ", "អាំងឌុចតង់", "អាំពេដង់",
+    "ឌីយ៉ូត", "ត្រង់ស៊ីស្ទ័រ", "MOSFET", "BJT",
+    "អុប-អំ", "ឧបករណ៍ពង្រីកសញ្ញាប្រតិបត្តិការ",
+    "តួសម្រួលតង់ស្យុង",
+    "ផែនទីម្ជុល", "កូដពណ៌", "សន្លឹកជំនួយ",
+    "Breadboard", "ខ្សែ AWG",
+    "បុព្វបទម៉ែត្រ", "តង់ស្យុង", "ចរន្ត", "ថាមពល",
+    "រូបវិទ្យា", "ឧបករណ៍ផ្នែករឹង",
+  ],
+};

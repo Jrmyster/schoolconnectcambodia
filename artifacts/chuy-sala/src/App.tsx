@@ -59,6 +59,7 @@ const ArchaeologyPaleontologyPage = lazy(() => import("@/pages/ArchaeologyPaleon
 const WomenInSciencePage        = lazy(() => import("@/pages/WomenInSciencePage"));
 const FourierTransformPage      = lazy(() => import("@/pages/FourierTransformPage"));
 const NavierStokesPage          = lazy(() => import("@/pages/NavierStokesPage"));
+const ElectricalEngineeringPage = lazy(() => import("@/pages/ElectricalEngineeringPage"));
 const FlameTestPage             = lazy(() => import("@/pages/FlameTestPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
 const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage"));
@@ -343,6 +344,7 @@ function Router() {
             <Route path="/science/women-in-science" component={WomenInSciencePage} />
             <Route path="/science/fourier-transform" component={FourierTransformPage} />
             <Route path="/science/navier-stokes" component={NavierStokesPage} />
+            <Route path="/electrical-engineering" component={ElectricalEngineeringPage} />
             <Route path="/science/scale-of-universe" component={ScaleOfUniversePage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
             <Route path="/study-center/europe" component={EuropeHistoryPage} />
