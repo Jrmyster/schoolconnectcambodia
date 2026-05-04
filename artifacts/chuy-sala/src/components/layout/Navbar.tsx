@@ -515,6 +515,13 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "មគ្គុទ្ទេសក៍ស្តីពីបេះដូង សរសៃឈាម កោសិកាឈាម ប្រភេទឈាម ABO និងសម្ពាធឈាម — ជាមួយការពន្យល់ពីរភាសា។",
       },
       {
+        href: "divider:engineering-physics",
+        labelEn: "Engineering & Physics",
+        labelKh: "វិស្វកម្ម និងរូបវិទ្យា",
+        icon: CircuitBoard,
+        divider: true,
+      },
+      {
         href: "/electrical-engineering",
         labelEn: "Electrical Engineering Reference",
         labelKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
@@ -529,6 +536,13 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Zap,
         descEn: "Powering Spaceship Earth — solar, wind, hydro, geothermal, nuclear fission, the thorium fuel cycle, piezoelectric floor tiles, and the speculative frontier of fusion and space-based solar.",
         descKh: "ការផ្តល់ថាមពលដល់ផែនដី — ព្រះអាទិត្យ ខ្យល់ វារីអគ្គិសនី កម្ដៅផែនដី ប្រតិកម្មបំបែកនុយក្លេអ៊ែរ វដ្តឥន្ធនៈថូរីយ៉ូម ក្រឡាសម្ពាធ និងព្រំដែនអនាគតនៃការរលាយ និងថាមពលពីអវកាស។",
+      },
+      {
+        href: "divider:biology",
+        labelEn: "Biology",
+        labelKh: "ជីវវិទ្យា",
+        icon: Bug,
+        divider: true,
       },
       {
         href: "/science/entomology",
