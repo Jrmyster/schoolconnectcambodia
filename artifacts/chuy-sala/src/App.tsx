@@ -61,6 +61,7 @@ const FourierTransformPage      = lazy(() => import("@/pages/FourierTransformPag
 const NavierStokesPage          = lazy(() => import("@/pages/NavierStokesPage"));
 const ElectricalEngineeringPage = lazy(() => import("@/pages/ElectricalEngineeringPage"));
 const CirculatorySystemPage     = lazy(() => import("@/pages/CirculatorySystemPage"));
+const LymphaticSystemPage       = lazy(() => import("@/pages/LymphaticSystemPage"));
 const FlameTestPage             = lazy(() => import("@/pages/FlameTestPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
 const EuropeHistoryPage         = lazy(() => import("@/pages/EuropeHistoryPage"));
