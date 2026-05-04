@@ -18,8 +18,8 @@ function toKhNum(n: number | string): string {
 
 // Tunables for the simulation
 const BASE = 38;          // realistic baseline of concurrent students
-const MIN_VAL = 12;       // floor — never goes below this
-const MAX_VAL = 120;      // ceiling — never goes above this
+const MIN_VAL = 20;       // floor — never goes below this
+const MAX_VAL = 65;       // ceiling — never goes above this
 const MIN_DELTA = 1;      // smallest random change
 const MAX_DELTA = 3;      // largest random change
 const MIN_INTERVAL_MS = 30_000;  // 30 seconds
