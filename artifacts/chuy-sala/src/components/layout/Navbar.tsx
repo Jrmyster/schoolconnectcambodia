@@ -460,14 +460,6 @@ const NAV_GROUPS: NavGroup[] = [
     color: "cyan",
     items: [
       {
-        href: "/science/scale-of-universe",
-        labelEn: "The Scale of the Universe",
-        labelKh: "ទំហំនៃចក្រវាឡ",
-        icon: Telescope,
-        descEn: "An interactive 'Powers of Ten' zoom from a single proton (10⁻¹⁵ m) to the edge of the observable universe (10²⁶ m) — through nine milestones including hydrogen atoms, red blood cells, ants, Earth, the Solar System, and the Milky Way galaxy.",
-        descKh: "ការពង្រីកអន្តរកម្ម 'គោលដប់' ពីប្រូតុងតែមួយ (១០⁻¹⁵ ម) ដល់គែមនៃចក្រវាឡដែលអាចមើលឃើញ (១០²⁶ ម) — ឆ្លងកាត់ ៩ ចំណុចសំខាន់ រួមទាំងអាតូមអ៊ីដ្រូសែន កោសិកាឈាមក្រហម ស្រមោច ផែនដី ប្រព័ន្ធព្រះអាទិត្យ និងកាឡាក់ស៊ីផ្លូវទឹកដោះ។",
-      },
-      {
         href: "/science/disproven-theories",
         labelEn: "Disproven Theories",
         labelKh: "ទ្រឹស្ដីដែលត្រូវបានច្រានចោល",
@@ -945,6 +937,21 @@ const NAV_GROUPS: NavGroup[] = [
         icon: LifeBuoy,
         descEn: "Floods, earthquakes, tsunamis — read the warning signs and pack your Go-Bag.",
         descKh: "ទឹកជំនន់ ការរញ្ជួយដី ស៊ូណាមិ — អានសញ្ញាព្រមាន និងខ្ចប់កាបូបបន្ទាន់របស់អ្នក។",
+      },
+      {
+        href: "divider:astronomy",
+        labelEn: "Astronomy",
+        labelKh: "តារាសាស្ត្រ",
+        icon: Telescope,
+        divider: true,
+      },
+      {
+        href: "/science/scale-of-universe",
+        labelEn: "The Scale of the Universe",
+        labelKh: "ទំហំនៃចក្រវាឡ",
+        icon: Telescope,
+        descEn: "An interactive 'Powers of Ten' zoom from a single proton (10⁻¹⁵ m) to the edge of the observable universe (10²⁶ m) — through nine milestones including hydrogen atoms, red blood cells, ants, Earth, the Solar System, and the Milky Way galaxy.",
+        descKh: "ការពង្រីកអន្តរកម្ម 'គោលដប់' ពីប្រូតុងតែមួយ (១០⁻¹⁵ ម) ដល់គែមនៃចក្រវាឡដែលអាចមើលឃើញ (១០²⁶ ម) — ឆ្លងកាត់ ៩ ចំណុចសំខាន់ រួមទាំងអាតូមអ៊ីដ្រូសែន កោសិកាឈាមក្រហម ស្រមោច ផែនដី ប្រព័ន្ធព្រះអាទិត្យ និងកាឡាក់ស៊ីផ្លូវទឹកដោះ។",
       },
       {
         href: "/space",
