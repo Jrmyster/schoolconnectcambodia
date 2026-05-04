@@ -1,0 +1,51 @@
+I need to expand the 'Human Body' section of our educational platform by adding a new comprehensive page about the immune and lymphatic systems.
+
+Please implement the following updates using our existing bilingual (English/Khmer) design system, ensuring semantic HTML and accessible UI components (like cards or grids).
+
+PART 1: NAVIGATION UPDATE
+
+Locate the 'Science' dropdown in the main navigation bar.
+
+Find the subcategory header for 'Human Body (រាងកាយមនុស្ស)'.
+
+Under this subcategory, directly beneath the 'Circulatory System' link, add a new link titled 'The Lymphatic System (ប្រព័ន្ធទឹករងៃ)' that routes to a new page at /science/lymphatic-system.
+
+PART 2: BUILD THE NEW PAGE
+Create the new page component (LymphaticSystem.jsx or similar) with the following structured sections. Ensure all text is presented bilingually (English and Khmer side-by-side or stacked).
+
+1. Page Header:
+
+Title: The Lymphatic System & Immunity (ប្រព័ន្ធទឹករងៃ និងភាពស៊ាំ)
+
+Subtitle: The body's silent drainage network and frontline defense against disease.
+
+2. Section 1: The Core Purpose (គោលបំណងចម្បង):
+Explain the three main jobs of the lymphatic system using a clean card layout:
+
+Fluid Balance (តុល្យភាពជាតិទឹក): It acts as a drainage system, collecting excess fluid (lymph) from tissues and returning it to the bloodstream so the body doesn't swell up.
+
+Fat Absorption (ការស្រូបយកជាតិខ្លាញ់): Specialized lymph vessels in the digestive system absorb fats and vitamins from the food we eat.
+
+Immune Defense (ការការពារភាពស៊ាំ): It filters out harmful bacteria, viruses, and cellular waste, acting as the body's security checkpoint.
+
+3. Section 2: The Defenders (កោសិកាការពារតួសំខាន់ៗ):
+Describe the common cells that live and work in this system:
+
+Lymphocytes (កោសិកាឡាំហ្វូស៊ីត): The elite soldiers. Mention B-cells (which create antibodies to lock onto invaders) and T-cells (which destroy infected cells directly).
+
+Macrophages (ម៉ាក្រូហ្វាស): The 'big eaters'. These cells swallow and digest dead cells, debris, and pathogens like microscopic pac-men.
+
+4. Section 3: The Nodes & Geography (ទីតាំងកូនកណ្តុរ):
+Explain what lymph nodes are (small, bean-shaped filters) and list where the major clusters (glands) are located around the human body:
+
+Cervical Nodes (កូនកណ្តុរនៅក): Located in the neck. (Explain this is why your neck sometimes feels swollen when you have a sore throat).
+
+Axillary Nodes (កូនកណ្តុរនៅក្លៀក): Located in the armpits.
+
+Inguinal Nodes (កូនកណ្តុរនៅក្រលៀន): Located in the groin.
+
+Also mention the Spleen (អណ្តើក) as the largest lymphatic organ, acting as a giant blood filter.
+
+PART 3: VISUALS AND LAYOUT
+
+Please generate clean, simple SVG icons or CSS shapes to represent a Macrophage, a Lymph Node, and a shield (representing immunity) to make the page visually engaging. Do not rely on external image links.
