@@ -500,6 +500,21 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "សមីការតែមួយដែលប្រាប់ដំណក់ទឹក និងខ្យល់ឱ្យដឹងថាត្រូវទៅណា និងលឿនប៉ុនណា — ពន្យល់សាមញ្ញ (ទន្លេជុំវិញថ្ម ខ្យល់លើស្លាបយន្តហោះ) និងបច្ចេកទេស (និចលភាព គម្លាតសម្ពាធ ភាពខាប់ កម្លាំងខាងក្រៅ)។ ព្រមទាំងបញ្ហារង្វាន់សហស្សវត្សរ៍ ១,០០០,០០០ ដុល្លារដែលនៅរង់ចាំការដោះស្រាយ។",
       },
       {
+        href: "divider:human-body",
+        labelEn: "Human Body",
+        labelKh: "រាងកាយមនុស្ស",
+        icon: HeartPulse,
+        divider: true,
+      },
+      {
+        href: "/science/circulatory-system",
+        labelEn: "Circulatory System & Blood",
+        labelKh: "ប្រព័ន្ធឈាមរត់ និងឈាម",
+        icon: HeartPulse,
+        descEn: "A complete guide to the heart, blood vessels, red blood cells, blood types (ABO system), and blood pressure — with bilingual explanations and custom SVG diagrams.",
+        descKh: "មគ្គុទ្ទេសក៍ស្តីពីបេះដូង សរសៃឈាម កោសិកាឈាម ប្រភេទឈាម ABO និងសម្ពាធឈាម — ជាមួយការពន្យល់ពីរភាសា។",
+      },
+      {
         href: "/electrical-engineering",
         labelEn: "Electrical Engineering Reference",
         labelKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
