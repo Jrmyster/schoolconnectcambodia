@@ -342,6 +342,30 @@ export function HowComputersWorkPage() {
           </div>
           <AITransformersModule />
         </section>
+
+        {/* 15. FEATURED DEEP DIVE · The Pocket Computer: Raspberry Pi */}
+        <section data-testid="lesson-raspberry-pi">
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-emerald-500/15 border border-emerald-400/50 text-emerald-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_18px_-4px_rgba(52,211,153,0.55)]">
+              <PiCircuitBoardSVG size={20} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-emerald-300/95">
+                <span>Lesson 15 · Featured deep dive</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-emerald-200/85">
+                  មេរៀនទី ១៥ · ការសិក្សាស៊ីជម្រៅ
+                </span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">The Pocket Computer: Raspberry Pi</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-emerald-200 mt-1 leading-relaxed">
+                  កុំព្យូទ័រក្នុងហោប៉ៅ៖ Raspberry Pi
+                </span>
+              </h2>
+            </div>
+          </div>
+          <RaspberryPiModule />
+        </section>
       </div>
     </div>
   );
@@ -537,6 +561,242 @@ function AITransformersModule() {
             "ក្នុងទំហំ trillion parameter និង petabyte ទិន្នន័យ សមីការតែមួយនេះស្ថិតនៅពីក្រោម AI ទំនើបទាំងអស់។",
           )}
         </p>
+      </div>
+    </div>
+  );
+}
+
+// ── Raspberry Pi SVG Icons ───────────────────────────────────────────────────
+
+function PiCircuitBoardSVG({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="7" y="7" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.2" fill="currentColor" fillOpacity="0.15" />
+      <line x1="7" y1="1" x2="7" y2="3"  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="17" y1="1" x2="17" y2="3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="7" y1="21" x2="7" y2="23"  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="17" y1="21" x2="17" y2="23" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="1" y1="7"  x2="3" y2="7"  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="1" y1="17" x2="3" y2="17" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="21" y1="7"  x2="23" y2="7"  stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <line x1="21" y1="17" x2="23" y2="17" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.7" />
+    </svg>
+  );
+}
+
+function SoCChipSVG() {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
+      <defs>
+        <filter id="piGlow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect x="14" y="14" width="36" height="36" rx="4" fill="#065f46" stroke="#34d399" strokeWidth="1.5" filter="url(#piGlow)" />
+      <rect x="20" y="20" width="24" height="24" rx="2" fill="#022c22" stroke="#6ee7b7" strokeWidth="1" />
+      <text x="32" y="36" textAnchor="middle" fontSize="8" fill="#34d399" fontFamily="monospace" fontWeight="bold">SoC</text>
+      {[18,26,34,42].map((y, i) => (
+        <g key={i}>
+          <line x1="6" y1={y} x2="14" y2={y} stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="50" y1={y} x2="58" y2={y} stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" />
+        </g>
+      ))}
+      {[18,26,34,42].map((x, i) => (
+        <g key={i}>
+          <line x1={x} y1="6"  x2={x} y2="14" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1={x} y1="50" x2={x} y2="58" stroke="#34d399" strokeWidth="1.5" strokeLinecap="round" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function GPIOPinsSVG() {
+  const pins = Array.from({ length: 20 }, (_, i) => i);
+  return (
+    <svg viewBox="0 0 200 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" aria-hidden="true">
+      <rect x="0" y="20" width="200" height="24" rx="3" fill="#1a2e1a" stroke="#34d399" strokeWidth="1" />
+      {pins.map((i) => {
+        const x = 6 + i * 9.5;
+        const isTop = i % 2 === 0;
+        const pinColor = i < 4 ? "#f59e0b" : i >= 16 ? "#a78bfa" : "#34d399";
+        return (
+          <g key={i}>
+            <rect x={x - 2} y={isTop ? 8 : 36} width="4" height="16" rx="1" fill={pinColor} opacity="0.9" />
+            <circle cx={x} cy={isTop ? 7 : 57} r="2.5" fill={pinColor} opacity="0.6" />
+          </g>
+        );
+      })}
+      <text x="6"   y="62" fontSize="5.5" fill="#f59e0b" fontFamily="monospace" opacity="0.9">3.3V</text>
+      <text x="150" y="62" fontSize="5.5" fill="#a78bfa" fontFamily="monospace" opacity="0.9">GPIO</text>
+    </svg>
+  );
+}
+
+// ── Raspberry Pi Module ───────────────────────────────────────────────────────
+
+const PI_ANATOMY = [
+  {
+    id: "soc",
+    titleEn: "System on a Chip (SoC)",
+    titleKh: "ប្រព័ន្ធនៅលើបន្ទះឈីប (SoC)",
+    bodyEn: "The brain. Instead of a massive motherboard, it combines the CPU (thinking) and GPU (graphics) into one tiny silicon square.",
+    bodyKh: "ជាខួរក្បាល។ វាបញ្ចូល CPU និង GPU ទៅក្នុងការ៉េស៊ីលីកូនតូចមួយ។",
+    Svg: SoCChipSVG,
+    accent: "#34d399",
+    border: "border-emerald-500/50",
+    bg: "bg-emerald-500/10",
+  },
+  {
+    id: "gpio",
+    titleEn: "GPIO Pins",
+    titleKh: "ជើងបញ្ជូនទិន្នន័យ (GPIO)",
+    bodyEn: "The magic connection. These metal 'General Purpose Input/Output' pins allow the Pi to talk to the physical world — LED lights, temperature sensors, or robot motors.",
+    bodyKh: "ការតភ្ជាប់ដ៏អស្ចារ្យ។ ជើងទាំងនេះអនុញ្ញាតឱ្យ Pi ទំនាក់ទំនងជាមួយពិភពពិត — ភ្លើង LED ឧបករណ៍វាស់សីតុណ្ហភាព ឬម៉ូទ័រមនុស្សយន្ត។",
+    Svg: GPIOPinsSVG,
+    accent: "#6ee7b7",
+    border: "border-teal-500/50",
+    bg: "bg-teal-500/10",
+  },
+  {
+    id: "sd",
+    titleEn: "MicroSD Storage",
+    titleKh: "អង្គចងចាំ MicroSD",
+    bodyEn: "Instead of a heavy hard drive, it uses a tiny memory card to hold its operating system (usually Linux) and all your files.",
+    bodyKh: "ជំនួសឱ្យថាសរឹងធ្ងន់ វាប្រើកាតអង្គចងចាំតូចមួយ ដើម្បីផ្ទុក Linux និងឯកសារទាំងអស់របស់អ្នក។",
+    Svg: () => (
+      <svg viewBox="0 0 64 64" fill="none" className="w-full h-full" aria-hidden="true">
+        <rect x="16" y="8" width="32" height="48" rx="4" fill="#0f2a1a" stroke="#34d399" strokeWidth="1.5"/>
+        <rect x="22" y="14" width="20" height="6" rx="1" fill="#34d399" opacity="0.25"/>
+        {[24,32,40].map(y => <line key={y} x1="22" y1={y} x2="42" y2={y} stroke="#34d399" strokeWidth="1" opacity="0.4"/>)}
+        <text x="32" y="50" textAnchor="middle" fontSize="7" fill="#6ee7b7" fontFamily="monospace">SD</text>
+      </svg>
+    ),
+    accent: "#34d399",
+    border: "border-emerald-400/50",
+    bg: "bg-emerald-400/10",
+  },
+] as const;
+
+const PI_USES = [
+  {
+    icon: "🤖",
+    titleEn: "Robotics",
+    titleKh: "មនុស្សយន្ត",
+    bodyEn: "Use GPIO pins to write a Python script that drives a robot chassis or controls a drone.",
+    bodyKh: "ប្រើ GPIO សរសេរកូដ Python ដើម្បីបញ្ជាមនុស្សយន្ត ឬដ្រូន។",
+    border: "border-emerald-500/40",
+    badge: "bg-emerald-900/60 text-emerald-300",
+  },
+  {
+    icon: "🌐",
+    titleEn: "Web Servers",
+    titleKh: "ម៉ាស៊ីនមេគេហទំព័រ",
+    bodyEn: "Host your own websites, create a local network file server, or build a network-wide ad blocker.",
+    bodyKh: "បង្ហោះគេហទំព័រផ្ទាល់ខ្លួន បង្កើតម៉ាស៊ីនមេផ្ទុកឯកសារ ឬបង្កើតកម្មវិធីរារាំងការផ្សាយពាណិជ្ជកម្ម។",
+    border: "border-teal-500/40",
+    badge: "bg-teal-900/60 text-teal-300",
+  },
+  {
+    icon: "🕹️",
+    titleEn: "Retro Gaming",
+    titleKh: "ហ្គេមអតីតកាល",
+    bodyEn: "Install special software so the Pi can emulate and play classic arcade and console video games.",
+    bodyKh: "ដំឡើងកម្មវិធីពិសេស ដើម្បីលេងហ្គេមអតីតកាលបែបបុរាណ។",
+    border: "border-cyan-500/40",
+    badge: "bg-cyan-900/60 text-cyan-300",
+  },
+] as const;
+
+function RaspberryPiModule() {
+  const t = useTranslation();
+
+  return (
+    <div className="rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-slate-950 via-emerald-950/20 to-slate-900 overflow-hidden shadow-xl">
+
+      {/* ── Header band ── */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 px-6 sm:px-8 pt-7 pb-6 border-b border-emerald-500/20">
+        {/* SVG visual */}
+        <div className="w-36 h-28 sm:w-44 sm:h-36 flex-shrink-0 rounded-xl border border-emerald-500/30 bg-slate-900/70 p-3 overflow-hidden flex items-center justify-center">
+          <PiCircuitBoardSVG size={90} />
+        </div>
+        {/* Intro text */}
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-mono uppercase tracking-widest text-emerald-400/80 mb-2">
+            {t("Single-Board Computer", "កុំព្យូទ័របន្ទះទោល")}
+          </p>
+          <h3 className="text-white font-bold text-base sm:text-lg mb-1">
+            {t("What is a Single-Board Computer?", "តើអ្វីទៅជាកុំព្យូទ័របន្ទះទោល?")}
+          </h3>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            {t(
+              "Unlike a desktop with many separate, bulky parts, a Raspberry Pi fits an entire computer — processor, memory, and graphics — onto a single circuit board the size of a credit card.",
+              "មិនដូចកុំព្យូទ័រលើតុដែលមានផ្នែកដាច់ដោយឡែកជាច្រើននោះទេ Raspberry Pi បញ្ចូលកុំព្យូទ័រទាំងមូល ទៅលើបន្ទះសៀគ្វីប៉ុនកាតឥណទាន។",
+            )}
+          </p>
+          <p className="text-slate-400 text-sm leading-relaxed mt-2">
+            {t(
+              "It was designed to make learning computer science, engineering, and programming cheap and accessible to everyone.",
+              "វាត្រូវបានរចនាឡើងដើម្បីធ្វើឱ្យការរៀនកុំព្យូទ័រ វិស្វកម្ម និងការសរសេរកូដ មានតំលៃថោក និងងាយស្រួលចូលប្រើ។",
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Anatomy ── */}
+      <div className="px-6 sm:px-8 py-6 border-b border-emerald-500/15">
+        <p className="text-xs font-mono uppercase tracking-widest text-emerald-400/80 mb-4">
+          {t("The Anatomy of a Pi", "គ្រឿងបង្គុំនៃ Raspberry Pi")}
+        </p>
+        <div className="space-y-3">
+          {PI_ANATOMY.map((item) => (
+            <div key={item.id} className={`rounded-xl border ${item.border} ${item.bg} p-4 flex gap-4 items-start`}>
+              <div className="w-14 h-14 flex-shrink-0 rounded-lg bg-slate-900/60 border border-white/10 p-1.5 overflow-hidden">
+                <item.Svg />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-bold text-white text-sm sm:text-base leading-snug mb-0.5">
+                  {item.titleEn}
+                </h4>
+                <p className="font-khmer text-xs text-emerald-200/70 mb-2 leading-relaxed">
+                  {item.titleKh}
+                </p>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {t(item.bodyEn, item.bodyKh)}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Use Cases ── */}
+      <div className="px-6 sm:px-8 py-6">
+        <p className="text-xs font-mono uppercase tracking-widest text-emerald-400/80 mb-4">
+          {t("What Can You Build?", "តើអ្នកអាចបង្កើតអ្វីបានខ្លះ?")}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {PI_USES.map((use) => (
+            <div key={use.titleEn} className={`rounded-xl border ${use.border} bg-slate-900/50 p-4 flex flex-col gap-2`}>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl" aria-hidden="true">{use.icon}</span>
+                <div>
+                  <span className={`inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${use.badge}`}>
+                    {use.titleEn}
+                  </span>
+                  <p className="font-khmer text-xs text-slate-400 mt-0.5 leading-tight">{use.titleKh}</p>
+                </div>
+              </div>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                {t(use.bodyEn, use.bodyKh)}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
