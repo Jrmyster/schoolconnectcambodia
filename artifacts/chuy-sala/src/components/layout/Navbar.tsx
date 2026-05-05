@@ -120,6 +120,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "A heritage tour of the country: the river that flows two ways, Angkor's barays still visible from space, the 74-letter Khmer alphabet, and the thinkers who modernised it.",
         descKh: "ដំណើរទស្សនាបេតិកភណ្ឌប្រទេស ៖ ទន្លេដែលហូរពីរទិស បារាយណ៍អង្គរដែលនៅមើលឃើញពីលំហ អក្សរខ្មែរ ៧៤ តួ និងអ្នកប្រាជ្ញដែលបានធ្វើឲ្យវាទាន់សម័យ។",
       },
+      {
+        href: "/explore/mission-statement",
+        labelEn: "Mission Statement",
+        labelKh: "គោលបំណងនិងបេសកកម្ម",
+        icon: ScrollText,
+        descEn: "School Connect Cambodia's founding philosophy — why we built this platform, our pledge to scientific literacy, and our vision for an empowered Cambodian generation.",
+        descKh: "ទស្សនវិជ្ជារបស់ School Connect Cambodia — ហេតុអ្វីបានជាយើងបង្កើតប្លាតហ្វម និងការប្តេជ្ញាចិត្តរបស់យើង។",
+      },
     ],
   },
   {
