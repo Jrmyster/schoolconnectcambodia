@@ -1,0 +1,58 @@
+Please ignore any previous session plans regarding the Electrical Engineering page. We are starting a brand new task.
+
+I need to expand the 'Human Body' section of our 'Science' curriculum by adding a new, comprehensive page about the Lymphatic System.
+
+Please implement the following updates, ensuring you use semantic HTML, clean CSS, and accessible UI components (like a grid or cards for the facts and components).
+
+PART 1: NAVIGATION & ROUTING UPDATE
+
+Locate the main navigation data structure.
+
+Find the 'Science' dropdown menu and locate the 'Human Body' subcategory.
+
+Add a new link titled 'The Lymphatic System' that routes to a new page component at /science/lymphatic-system.
+
+PART 2: BUILD THE NEW PAGE COMPONENT
+Create the new page (LymphaticSystem.jsx or similar) with the following structured sections:
+
+1. Page Header & Introduction:
+
+Title: The Lymphatic System
+
+Description: A vital, one-way network of vessels, nodes, and organs (like the spleen and thymus) that acts as the body’s "sewerage system" and a key part of the immune system. It filters toxins, maintains fluid balance, and transports white blood cells (lymphocytes) to fight infection.
+
+What is Lymph?: Add a callout or highlight box explaining that lymph is a clear, watery fluid derived from interstitial fluid, containing white blood cells, fats, and proteins.
+
+2. Section 1: Key Facts (Use a Card Grid Layout):
+
+No Active Pump: Unlike the blood circulatory system, it has no heart to pump it. It relies on muscle contraction, movement, and deep breathing to circulate lymph fluid.
+
+Fluid Drainage & Volume: It collects extra fluid (lymph) that leaks from blood vessels into tissues, returning it to the blood to prevent swelling. It manages nearly double the volume of fluid compared to the blood circulation.
+
+Filters Pathogens: The body contains roughly 400-800 lymph nodes that filter lymph, trapping bacteria, viruses, and abnormal cells (like cancer cells).
+
+Immune Defense: It produces and transports lymphocytes (T-cells and B-cells) to fight infection.
+
+Lymph Nodes Swell: When you have an infection, lymph nodes swell because they produce more white blood cells and accumulate pathogens.
+
+Fat Absorption: It helps absorb fats and nutrients from the digestive system and transports them to the bloodstream.
+
+Common Conditions: If the system fails to drain fluid correctly, it can cause swelling known as lymphedema. Other diseases include lymphoma, which is a cancer of the lymphatic system.
+
+3. Section 2: Key Components (Use a List or Icon/Text Layout):
+
+Lymph Nodes: Small glands that filter lymph.
+
+Lymph Vessels: Thin tubes that carry lymph.
+
+Spleen: Filters blood, stores white blood cells.
+
+Thymus: Where T-cells mature.
+
+Bone Marrow: Produces lymphocytes.
+
+Tonsils/Adenoids: Trap pathogens from food and air.
+
+PART 3: VISUALS
+
+Please apply styling that matches the rest of the site's educational pages. Use adequate spacing, clear headings (<h2>, <h3>), and distinct visual sections.
