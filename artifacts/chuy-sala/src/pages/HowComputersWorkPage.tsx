@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck, Atom, RadioTower } from "lucide-react";
+import { Cpu, Compass, Binary, Code2, Stethoscope, BatteryCharging, History, Wifi, Router, Cog, Terminal, ShieldCheck, Atom, RadioTower, BrainCircuit } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { MotherboardBuilder } from "@/components/tech/MotherboardBuilder";
 import { BinarySignalVisualizer } from "@/components/tech/BinarySignalVisualizer";
@@ -318,6 +318,225 @@ export function HowComputersWorkPage() {
           </div>
           <QuantumEraModule />
         </section>
+
+        {/* 14. FEATURED DEEP DIVE · The Modern Brain: AI Transformers */}
+        <section data-testid="lesson-ai-transformers">
+          <div className="mb-4 sm:mb-5 flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-amber-500/15 border border-amber-400/50 text-amber-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_18px_-4px_rgba(251,191,36,0.55)]">
+              <BrainCircuit className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[10px] font-mono uppercase tracking-[0.25em] text-amber-300/95">
+                <span>Lesson 14 · Featured deep dive</span>
+                <span className="font-khmer normal-case tracking-normal text-xs text-amber-200/85">
+                  មេរៀនទី ១៤ · ការសិក្សាស៊ីជម្រៅ
+                </span>
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight mt-0.5">
+                <span className="block">The Modern Brain: How AI Transformers Work</span>
+                <span className="block font-khmer text-xl sm:text-2xl font-bold text-amber-200 mt-1 leading-relaxed">
+                  ខួរក្បាលទំនើប៖ តើ AI Transformers ដំណើរការយ៉ាងដូចម្តេច
+                </span>
+              </h2>
+            </div>
+          </div>
+          <AITransformersModule />
+        </section>
+      </div>
+    </div>
+  );
+}
+
+// ── AI Transformers Module ──────────────────────────────────────────────────
+
+const STEPS = [
+  {
+    num: "01",
+    colorClass: "border-amber-500/60 bg-amber-500/10",
+    numClass: "text-amber-400",
+    titleEn: "From Binary to Neural Networks",
+    titleKh: "ពីប្រព័ន្ធទ្វេភាគ ទៅបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត",
+    bodyEn:
+      "A CPU executes billions of ones and zeros per second — pure logic. Artificial Neural Networks (ANNs) stack these binary operations into layers of interconnected nodes, each modeled loosely on a brain neuron. Instead of following rigid IF/THEN rules, the network adjusts the strength (\"weight\") of each connection through training until it can recognize patterns: a handwritten digit, a spoken word, or a fraudulent transaction.",
+    bodyKh:
+      "CPU ដំណើរការលេខ ០ និង ១ ជាទ្វេនៃប្រព័ន្ធ — តក្កវិទ្យាសុទ្ធសាធ។ បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (ANN) ជង់ប្រតិបត្តិការទ្វេភាគទៅជាស្រទាប់នៃ node ដែលភ្ជាប់គ្នា ដូចនឹងនឺរ៉ូននៃខួរក្បាលមនុស្ស។ ជំនួសឱ្យការតាមដានច្បាប់តឹងរ៉ឹង បណ្តាញនេះកែប្រែ \"ទម្ងន់\" នៃការភ្ជាប់ ដើម្បីស្គាល់រូបភាព ជាដើម។",
+  },
+  {
+    num: "02",
+    colorClass: "border-orange-500/60 bg-orange-500/10",
+    numClass: "text-orange-400",
+    titleEn: "The Transformer Architecture",
+    titleKh: "ស្ថាបត្យកម្ម Transformer",
+    bodyEn:
+      "In 2017, a Google team published \"Attention Is All You Need\" — introducing the Transformer. Unlike earlier AI that read data one token at a time (like a human reading left-to-right), a Transformer processes an entire sequence at once in parallel. This breakthrough made training on massive datasets practical for the first time, and is the foundation of every modern Large Language Model: GPT, Gemini, Claude, and beyond.",
+    bodyKh:
+      "ក្នុងឆ្នាំ ២០១៧ ក្រុម Google បានបង្ហាញ \"Attention Is All You Need\" — ណែនាំ Transformer។ ភាពខុសគ្នាពី AI មុន Transformer ដំណើរការ token ទាំងអស់ក្នុងពេលតែមួយ (ជំនួសការអានរៀងគ្នា)។ ភាពក្លាហានដូចនេះធ្វើឱ្យការបណ្តុះបណ្តាលដ៏ធំ GPT Gemini Claude ក្លាយជាការពិត។",
+  },
+  {
+    num: "03",
+    colorClass: "border-rose-500/60 bg-rose-500/10",
+    numClass: "text-rose-400",
+    titleEn: "The 'Attention' Mechanism",
+    titleKh: "យន្តការនៃការយកចិត្តទុកដាក់",
+    bodyEn:
+      "Self-Attention is the core innovation. When a Transformer reads a sentence, every word simultaneously \"votes\" on how relevant every other word is to understanding it. The word \"bank\" alone is ambiguous — but surrounded by \"river\" and \"canoe\" the model learns to pay high attention to those nearby words and low attention to unrelated ones. This lets AI resolve context a rigid rule-set never could.",
+    bodyKh:
+      "Self-Attention គឺជានវានុវត្ត​ស្នូល។ ពេល Transformer អានប្រយោគ ពាក្យនីមួយៗ \"បោះឆ្នោត\" លើភាពពាក់ព័ន្ធរបស់ពាក្យផ្សេងទៀត។ ពាក្យ \"bank\" តែម្នាក់ឯងមិនច្បាស់ — ប៉ុន្តែបើព័ទ្ធជុំវិញដោយ \"ទន្លេ\" ម៉ូដែលស្គាល់ន័យ \"ច្រាំង\" ឬ \"ធនាគារ\" ដោយស្វ័យប្រវត្តិ — រឿងដែល AI ចាស់មិនអាចធ្វើបាន។",
+  },
+  {
+    num: "04",
+    colorClass: "border-purple-500/60 bg-purple-500/10",
+    numClass: "text-purple-400",
+    titleEn: "Predicting the Next Word",
+    titleKh: "ការព្យាករណ៍ពាក្យបន្ទាប់",
+    bodyEn:
+      "At its foundation, a Large Language Model is an extraordinarily complex probability engine. Given every word it has seen so far, it computes a probability score across its entire vocabulary and picks the most contextually fitting next token. Scale this to trillions of parameters trained on most of the written internet, and the model can write essays, translate languages, debug code, and compose poetry — all from the same underlying math: P(next word | all previous words).",
+    bodyKh:
+      "ស្នូលនៃ Large Language Model គឺម៉ាស៊ីនប្រូបាប៊ីលីតេស្មុគស្មាញ។ វាគណនាពិន្ទុប្រូបាប៊ីលីតេសម្រាប់ token បន្ទាប់ ហើយជ្រើសរើសអ្វីដែលសមបំផុត។ ធំដល់ trillion parameter ផ្ទុកពាក្យរបស់អ៊ីនធឺណែត ម៉ូដែលអាចសរសេរអត្ថបទ បកប្រែ ជួសជុលកូដ — ទាំងអស់ពីគណិតវិទ្យាតែមួយ: P(ពាក្យបន្ទាប់ | ពាក្យទាំងអស់មុននេះ)។",
+  },
+] as const;
+
+// Neural-network SVG icon — abstract node-and-edge web
+function NeuralNetworkSVG() {
+  // 9 nodes arranged in 3 layers: input(3), hidden(3), output(3)
+  const nodes = [
+    // Input layer  x=60
+    { id: "i0", cx: 60,  cy: 60  },
+    { id: "i1", cx: 60,  cy: 130 },
+    { id: "i2", cx: 60,  cy: 200 },
+    // Hidden layer x=160
+    { id: "h0", cx: 160, cy: 85  },
+    { id: "h1", cx: 160, cy: 130 },
+    { id: "h2", cx: 160, cy: 175 },
+    // Output layer x=260
+    { id: "o0", cx: 260, cy: 100 },
+    { id: "o1", cx: 260, cy: 160 },
+  ];
+  const edges: [string, string][] = [
+    ["i0","h0"],["i0","h1"],["i0","h2"],
+    ["i1","h0"],["i1","h1"],["i1","h2"],
+    ["i2","h0"],["i2","h1"],["i2","h2"],
+    ["h0","o0"],["h0","o1"],
+    ["h1","o0"],["h1","o1"],
+    ["h2","o0"],["h2","o1"],
+  ];
+  const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+  return (
+    <svg viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full" aria-hidden="true">
+      {/* Glow filter */}
+      <defs>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <linearGradient id="edgeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#a78bfa" stopOpacity="0.55" />
+        </linearGradient>
+      </defs>
+      {/* Edges */}
+      {edges.map(([a, b]) => {
+        const A = byId[a], B = byId[b];
+        return (
+          <line key={`${a}-${b}`}
+            x1={A.cx} y1={A.cy} x2={B.cx} y2={B.cy}
+            stroke="url(#edgeGrad)" strokeWidth="1.5" />
+        );
+      })}
+      {/* Layer labels */}
+      {[{ x: 60, label: "Input" }, { x: 160, label: "Hidden" }, { x: 260, label: "Output" }].map(l => (
+        <text key={l.label} x={l.x} y={238} textAnchor="middle"
+          fontSize="9" fill="#fbbf24" opacity="0.7" fontFamily="monospace" letterSpacing="0.05em">
+          {l.label.toUpperCase()}
+        </text>
+      ))}
+      {/* Nodes */}
+      {nodes.map(n => {
+        const isInput  = n.id.startsWith("i");
+        const isOutput = n.id.startsWith("o");
+        const fill = isInput ? "#f59e0b" : isOutput ? "#a78bfa" : "#34d399";
+        return (
+          <g key={n.id} filter="url(#glow)">
+            <circle cx={n.cx} cy={n.cy} r={11} fill={fill} opacity="0.18" />
+            <circle cx={n.cx} cy={n.cy} r={7}  fill={fill} opacity="0.85" />
+            <circle cx={n.cx} cy={n.cy} r={3}  fill="#fff"  opacity="0.9"  />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function AITransformersModule() {
+  const t = useTranslation();
+
+  return (
+    <div className="rounded-2xl border border-amber-500/25 bg-gradient-to-br from-slate-950 via-amber-950/20 to-slate-900 overflow-hidden shadow-xl">
+
+      {/* ── Header band ── */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 px-6 sm:px-8 pt-7 pb-6 border-b border-amber-500/20">
+
+        {/* SVG visual */}
+        <div className="w-36 h-28 sm:w-44 sm:h-36 flex-shrink-0 rounded-xl border border-amber-500/30 bg-slate-900/70 p-2 overflow-hidden">
+          <NeuralNetworkSVG />
+        </div>
+
+        {/* Intro text */}
+        <div>
+          <p className="text-xs font-mono uppercase tracking-widest text-amber-400/80 mb-2">
+            {t("AI Architecture", "ស្ថាបត្យកម្ម AI")}
+          </p>
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed max-w-lg">
+            {t(
+              "Modern AI doesn't just follow instructions — it learns. Below is the four-step journey from the binary logic inside your CPU all the way to the 'thinking' of ChatGPT, Gemini, and Claude.",
+              "AI ទំនើបមិនគ្រាន់តែធ្វើតាមការណែនាំ — វារៀន។ ខាងក្រោមគឺដំណើរការ ៤ ជំហានពីតក្កវិទ្យាទ្វេភាគដល់ \"ការគិត\" របស់ ChatGPT Gemini និង Claude។",
+            )}
+          </p>
+        </div>
+      </div>
+
+      {/* ── Steps ── */}
+      <div className="px-6 sm:px-8 py-6 space-y-4">
+        {STEPS.map((step) => (
+          <div key={step.num}
+            className={`rounded-xl border ${step.colorClass} p-5 flex gap-4 items-start`}>
+
+            {/* Step number */}
+            <div className={`text-2xl font-black font-mono ${step.numClass} leading-none flex-shrink-0 w-9 text-right opacity-80`}>
+              {step.num}
+            </div>
+
+            {/* Content */}
+            <div className="min-w-0 flex-1">
+              <h3 className="font-bold text-white text-base sm:text-lg leading-snug mb-0.5">
+                {step.titleEn}
+              </h3>
+              <p className="font-khmer text-xs sm:text-sm text-slate-300/80 mb-3 leading-relaxed">
+                {step.titleKh}
+              </p>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                {t(step.bodyEn, step.bodyKh)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Footer callout ── */}
+      <div className="mx-6 sm:mx-8 mb-7 mt-1 rounded-xl border border-purple-500/30 bg-purple-950/30 px-5 py-4">
+        <p className="text-xs font-mono uppercase tracking-widest text-purple-400/80 mb-1.5">
+          {t("The math behind it all", "គណិតវិទ្យាដែលស្ថិតនៅពីក្រោយ")}
+        </p>
+        <p className="text-slate-200 text-sm leading-relaxed font-mono">
+          P(w<sub>n</sub> | w<sub>1</sub>, w<sub>2</sub>, … w<sub>n-1</sub>) → {t("predict the next best token", "ព្យាករណ៍ token ដ៏ល្អបំផុតបន្ទាប់")}
+        </p>
+        <p className="text-slate-400 text-xs mt-2">
+          {t(
+            "Scaled to trillions of parameters and petabytes of training data, this single equation underlies every essay, translation, and generated image produced by modern AI.",
+            "ក្នុងទំហំ trillion parameter និង petabyte ទិន្នន័យ សមីការតែមួយនេះស្ថិតនៅពីក្រោម AI ទំនើបទាំងអស់។",
+          )}
+        </p>
       </div>
     </div>
   );
