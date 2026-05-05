@@ -1,0 +1,27 @@
+I need to update the content of our 'Anthropology : The Human Story' page by adding a closing quote at the very bottom of the page.
+
+Please implement the following updates using our existing bilingual (English/Khmer) design system, ensuring semantic HTML (like a <blockquote> or a styled card component) to make the quote visually distinct.
+
+1. Locate the Page:
+
+Find the file for the Anthropology page (e.g., AnthropologyPage.tsx or similar).
+
+Scroll to the very bottom of the main content area, just before the footer or the end of the page container.
+
+2. Add the Bilingual Quote:
+
+Insert a newly styled quote section containing the following text in both English and Khmer.
+
+English Text:
+"The tremendous and still accelerating development of science and technology has not been accompanied by an equal development in social, economic, and political patterns...We are now...only beginning to explore the potentialities which it offers for developments in our culture outside technology, particularly in the social, political and economic fields. It is safe to predict that...such social inventions as modern-type Capitalism, Fascism, and Communism will be regarded as primitive experiments directed toward the adjustment of modern society to modern technology."
+
+Khmer Text:
+"ការអភិវឌ្ឍន៍យ៉ាងធំធេង និងនៅតែបន្តបង្កើនល្បឿននៃវិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា មិនត្រូវបានអមដោយការអភិវឌ្ឍន៍ស្មើគ្នានៅក្នុងគំរូសង្គម សេដ្ឋកិច្ច និងនយោបាយទេ... ឥឡូវនេះយើង... ទើបតែចាប់ផ្តើមស្វែងយល់ពីសក្តានុពលដែលវាផ្តល់សម្រាប់ការអភិវឌ្ឍន៍នៅក្នុងវប្បធម៌របស់យើងក្រៅពីបច្ចេកវិទ្យា ជាពិសេសនៅក្នុងវិស័យសង្គម នយោបាយ និងសេដ្ឋកិច្ច។ វាមានសុវត្ថិភាពក្នុងការទស្សន៍ទាយថា... ការច្នៃប្រឌិតសង្គមដូចជាមូលធននិយមបែបទំនើប ហ្វាស៊ីសនិយម និងកុម្មុយនិស្តនឹងត្រូវបានចាត់ទុកថាជាការពិសោធន៍ដំបូងដែលឆ្ពោះទៅរកការកែសម្រួលសង្គមទំនើបទៅនឹងបច្ចេកវិទ្យាទំនើប។"
+
+3. Add the Citation:
+
+Format the author attribution clearly below the quote: - Dr. Ralph Linton (បណ្ឌិត Ralph Linton)
+
+4. Styling Notes:
+
+Please apply styling that gives this quote a slightly different visual weight from standard body text—perhaps a slight background tint, italicized font, or a left-border highlight to signify it as a blockquote.

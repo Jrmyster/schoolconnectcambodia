@@ -686,6 +686,50 @@ export function AnthropologyPage() {
             .
           </p>
         </div>
+
+        {/* ── Closing Quote ─────────────────────────────────────────────── */}
+        <blockquote
+          className="mt-12 sm:mt-16 rounded-xl p-6 sm:p-8 border-l-4"
+          style={{
+            background: PAPER_2,
+            borderColor: TERRA,
+            boxShadow: `inset 0 0 0 1px ${RULE}`,
+          }}
+        >
+          <Quote
+            className="w-7 h-7 mb-4"
+            style={{ color: TERRA }}
+            aria-hidden="true"
+          />
+          <div className="space-y-3 mb-5">
+            <p className="text-sm sm:text-base leading-relaxed italic" style={{ color: INK_SOFT }}>
+              {T(
+                "The tremendous and still accelerating development of science and technology has not been accompanied by an equal development in social, economic, and political patterns.",
+                "ការអភិវឌ្ឍន៍វិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា មិនត្រូវបានអមដោយការអភិវឌ្ឍន៍ស្មើគ្នា នៅក្នុងគំរូសង្គម សេដ្ឋកិច្ច និងនយោបាយ។"
+              )}
+            </p>
+            <p className="text-sm sm:text-base leading-relaxed italic" style={{ color: INK_SOFT }}>
+              {T(
+                "We are now only beginning to explore the potentialities which it offers for developments in our culture outside technology, particularly in the social, political and economic fields.",
+                "ឥឡូវនេះ យើងទើបតែចាប់ផ្តើមស្វែងរក លទ្ធភាពដែលបច្ចេកវិទ្យាផ្តល់ ដល់វប្បធម៌ ជាពិសេសសង្គម នយោបាយ និងសេដ្ឋកិច្ច។"
+              )}
+            </p>
+            <p className="text-sm sm:text-base leading-relaxed italic" style={{ color: INK_SOFT }}>
+              {T(
+                "It is safe to predict that such social inventions as modern-type Capitalism, Fascism, and Communism will be regarded as primitive experiments directed toward the adjustment of modern society to modern technology.",
+                "អាចព្យាករណ៍ថា ការច្នៃប្រឌិតសង្គម ដូចជាមូលធននិយម ហ្វាស៊ីស្ម និងកុម្មុយនីស្ម នឹងត្រូវចាត់ទុកថា ជាការពិសោធន៍ដ៏ចម្លែក ក្នុងការកែសម្រួលសង្គមមនុស្ស។"
+              )}
+            </p>
+          </div>
+          <footer>
+            <cite
+              className="not-italic text-sm font-semibold tracking-wide"
+              style={{ color: TERRA_DEEP }}
+            >
+              — {T("Dr. Ralph Linton", "បណ្ឌិត Ralph Linton")}
+            </cite>
+          </footer>
+        </blockquote>
       </div>
     </div>
   );
