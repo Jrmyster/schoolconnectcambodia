@@ -704,6 +704,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ពីបំពង់សាកល្បងកញ្ចក់ ទៅរោងចក្រដែករាប់តោន — សសរស្តម្ភបី (ម៉ាស · ថាមពល · ប្រតិកម្ម) មុខវិជ្ជាស្នូលបួននៅសាកលវិទ្យាល័យ និងរបៀបដែលវិស្វករគីមីផ្តល់ទឹកស្អាត ស្បៀងសុវត្ថិភាព វ៉ាក់សាំង និងឥន្ធនៈជីវសាស្ត្រ ក្នុងមាត្រដ្ឋានខេត្ត។",
       },
       {
+        href: "/fun-lab",
+        labelEn: "Fun Lab",
+        labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
+        icon: FlaskConical,
+        descEn: "Safe, hands-on chemistry experiments you can try at home.",
+        descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
+      },
+      {
         href: "/science/chemistry/haber-bosch",
         labelEn: "The Haber-Bosch Process",
         labelKh: "ដំណើរការ Haber-Bosch",
@@ -990,14 +998,6 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Building2,
         descEn: "Why does a triangle never break, an arch get tighter under weight, and a dome stay up with no columns? Trace the path that weight takes from a roof down to the ground.",
         descKh: "ហេតុអ្វីបានជាត្រីកោណមិនបាក់, រាងកោងកាន់តែតឹងពេលដាក់ទម្ងន់, ហើយដូមឈរបានដោយគ្មានសសរ? តាមដានផ្លូវដែលទម្ងន់ធ្វើដំណើរពីដំបូលចុះទៅដី។",
-      },
-      {
-        href: "/fun-lab",
-        labelEn: "Fun Lab",
-        labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
-        icon: FlaskConical,
-        descEn: "Safe, hands-on chemistry experiments you can try at home.",
-        descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
       },
       {
         href: "divider:astronomy",
