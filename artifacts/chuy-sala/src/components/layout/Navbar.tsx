@@ -773,6 +773,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "សមីការតែមួយដែលប្រាប់ដំណក់ទឹក និងខ្យល់ឱ្យដឹងថាត្រូវទៅណា និងលឿនប៉ុនណា — ពន្យល់សាមញ្ញ (ទន្លេជុំវិញថ្ម ខ្យល់លើស្លាបយន្តហោះ) និងបច្ចេកទេស (និចលភាព គម្លាតសម្ពាធ ភាពខាប់ កម្លាំងខាងក្រៅ)។ ព្រមទាំងបញ្ហារង្វាន់សហស្សវត្សរ៍ ១,០០០,០០០ ដុល្លារដែលនៅរង់ចាំការដោះស្រាយ។",
       },
       {
+        href: "/electrical-engineering",
+        labelEn: "Electrical Engineering Reference",
+        labelKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
+        icon: CircuitBoard,
+        descEn: "A complete bench cheat-sheet — Ohm's Law equation wheel, metric prefixes, capacitor and resistor color codes, diode/BJT/MOSFET pinouts, LED forward-voltage table, NE555 and LM78XX pinouts, 741 and LM358 op-amps, SMD code decoding, breadboard anatomy, AWG wire gauge, plus a glossary of resistivity, impedance, capacitance, and inductance.",
+        descKh: "សន្លឹកជំនួយវិស្វកម្មពេញលេញ — កង់សមីការច្បាប់អូម បុព្វបទម៉ែត្រ កូដពណ៌រេស៊ីស្តង់ Vf LED ផែនទីម្ជុល NE555 LM78XX អុប-អំ 741 ការឌិកូដ SMD Breadboard តារាងខ្សែ AWG និងសទ្ទានុក្រម។",
+      },
+      {
         href: "/science/materials",
         labelEn: "Materials Science: The Stuff of the World",
         labelKh: "វិទ្យាសាស្ត្រសម្ភារៈ៖ សារធាតុនៃពិភពលោក",
@@ -953,12 +961,11 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "Vector ម៉ាទ្រីស និងតង់ស័រ-3 ពន្យល់ជាដ្យាក្រាម — គូបស្ត្រេស Cauchy (σᵢⱼ, T⁽ᵉⁱ⁾) ផ្លែ ⊗ commutator [x,y] ច្បាប់ Einstein និង K-theory K*(F)។",
       },
       {
-        href: "/fun-lab",
-        labelEn: "Fun Lab",
-        labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
-        icon: FlaskConical,
-        descEn: "Safe, hands-on chemistry experiments you can try at home.",
-        descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
+        href: "divider:architecture-design",
+        labelEn: "Architecture & Design",
+        labelKh: "ស្ថាបត្យកម្ម និងការរចនា",
+        icon: Building2,
+        divider: true,
       },
       {
         href: "/science/architecture",
@@ -967,6 +974,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Building2,
         descEn: "Why does a triangle never break, an arch get tighter under weight, and a dome stay up with no columns? Trace the path that weight takes from a roof down to the ground.",
         descKh: "ហេតុអ្វីបានជាត្រីកោណមិនបាក់, រាងកោងកាន់តែតឹងពេលដាក់ទម្ងន់, ហើយដូមឈរបានដោយគ្មានសសរ? តាមដានផ្លូវដែលទម្ងន់ធ្វើដំណើរពីដំបូលចុះទៅដី។",
+      },
+      {
+        href: "/fun-lab",
+        labelEn: "Fun Lab",
+        labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
+        icon: FlaskConical,
+        descEn: "Safe, hands-on chemistry experiments you can try at home.",
+        descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
       },
       {
         href: "/science/neurology",
