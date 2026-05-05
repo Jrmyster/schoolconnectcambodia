@@ -63,6 +63,7 @@ const NavierStokesPage          = lazy(() => import("@/pages/NavierStokesPage"))
 const ElectricalEngineeringPage = lazy(() => import("@/pages/ElectricalEngineeringPage"));
 const CirculatorySystemPage     = lazy(() => import("@/pages/CirculatorySystemPage"));
 const LymphaticSystemPage       = lazy(() => import("@/pages/LymphaticSystemPage"));
+const IntegumentarySystemPage   = lazy(() => import("@/pages/IntegumentarySystemPage"));
 const KesslerSyndromePage       = lazy(() => import("@/pages/KesslerSyndromePage"));
 const FlameTestPage             = lazy(() => import("@/pages/FlameTestPage"));
 const RayleighScatteringPage    = lazy(() => import("@/pages/RayleighScatteringPage"));
@@ -352,6 +353,7 @@ function Router() {
             <Route path="/electrical-engineering" component={ElectricalEngineeringPage} />
             <Route path="/science/circulatory-system" component={CirculatorySystemPage} />
             <Route path="/science/lymphatic-system" component={LymphaticSystemPage} />
+            <Route path="/science/integumentary-system" component={IntegumentarySystemPage} />
             <Route path="/science/scale-of-universe" component={ScaleOfUniversePage} />
             <Route path="/science/kessler-syndrome" component={KesslerSyndromePage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />

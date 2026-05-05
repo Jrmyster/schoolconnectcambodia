@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite,
+  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -497,6 +497,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Droplets,
         descEn: "The body's silent drainage network and frontline immune defense — lymph nodes, B-cells, T-cells, macrophages, the spleen, thymus, and how the system fights infection without a pump.",
         descKh: "បណ្តាញបង្ហូរ និងការការពារជំងឺ — lymph nodes, B-cell, T-cell, macrophage, អ័ព្ទ thymus និងរបៀបប្រព័ន្ធនេះប្រយុទ្ធជំងឺដោយគ្មានចង្វាក់។",
+      },
+      {
+        href: "/science/integumentary-system",
+        labelEn: "The Integumentary System",
+        labelKh: "ប្រព័ន្ធស្បែក",
+        icon: Layers,
+        descEn: "Skin, hair, and nails — the body's largest organ system. Explore the three skin layers (epidermis, dermis, hypodermis), protection, temperature regulation, sensation, Vitamin D synthesis, and how keratin makes nails and hair tough.",
+        descKh: "ស្បែក សក់ និងក្រចក — ប្រព័ន្ធសរីរាង្គធំបំផុត ។ ស្រទាប់ epidermis dermis hypodermis មុខងារ និង keratin ។",
       },
       {
         href: "divider:engineering-physics",

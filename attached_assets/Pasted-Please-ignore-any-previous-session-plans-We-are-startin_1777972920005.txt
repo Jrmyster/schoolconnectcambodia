@@ -1,0 +1,50 @@
+Please ignore any previous session plans. We are starting a brand new task to expand our biology curriculum.
+
+I need to add a new, comprehensive page about 'The Integumentary System' (the skin, hair, and nails) to the 'Human Body' section of our 'Science' curriculum.
+
+Please implement the following updates using our existing bilingual (English/Khmer) design system, ensuring semantic HTML and accessible UI components (like a grid or cards for the layers and functions).
+
+PART 1: NAVIGATION & ROUTING UPDATE
+
+Locate the main navigation data structure.
+
+Find the 'Science' dropdown menu and locate the 'Human Body' subcategory.
+
+Add a new link titled 'The Integumentary System' that routes to a new page component at /science/integumentary-system. Place this logically near the Lymphatic and Circulatory systems.
+
+PART 2: BUILD THE NEW PAGE COMPONENT
+Create the new page (IntegumentarySystem.jsx or similar) with the following structured sections, presented bilingually (English and Khmer):
+
+1. Page Header & Introduction:
+
+Title: The Integumentary System (ប្រព័ន្ធស្បែក)
+
+Description: The body's largest organ system, acting as a waterproof protective shield, a dynamic temperature regulator, and a complex sensory network.
+
+2. Section 1: The Three Layers (ស្រទាប់ទាំងបីនៃស្បែក):
+Use a layered card layout or a vertical stack to represent depth:
+
+Epidermis (អេពីឌែម - ស្រទាប់ក្រៅ): The waterproof outer barrier. It constantly sheds dead cells, creates our skin tone using a pigment called melanin, and acts as the first line of defense.
+
+Dermis (ឌែម - ស្រទាប់កណ្តាល): The thick middle engine room. Contains sweat glands, hair follicles, nerve endings, and blood vessels. It relies on collagen and elastin for strength and flexibility.
+
+Hypodermis / Subcutaneous (ស្រទាប់ខ្លាញ់ខាងក្រោម): The base layer made of fat and connective tissue. It anchors the skin to muscles, insulates the body against cold, and absorbs shock.
+
+3. Section 2: Core Functions (មុខងារចម្បង):
+Use a clean grid layout for these facts:
+
+Protection (ការការពារ): Blocks harmful bacteria, viruses, and UV radiation from entering the internal organs.
+
+Temperature Regulation (ការគ្រប់គ្រងសីតុណ្ហភាព): Produces sweat to cool the body down, and triggers goosebumps/constricts blood vessels to trap heat when it is cold.
+
+Sensation (អារម្មណ៍): Packed with specialized nerve endings to feel touch, pressure, pain, and temperature changes.
+
+Vitamin D Synthesis (ការបង្កើតវីតាមីន D): Uses sunlight to produce Vitamin D, which is essential for bone health.
+
+4. Section 3: Hair & Nails (សក់ និងក្រចក):
+
+Explain that hair and nails are essentially specialized extensions of the skin made from a tough protein called keratin. They protect sensitive fingertips, toes, and the scalp from physical damage and UV rays.
+
+PART 3: VISUALS
+
+Please apply styling that matches the rest of the site's educational pages. Generate clean SVG icons to represent layers, a sun (for Vitamin D), and a shield (for protection). Use clear headings (<h2>, <h3>) and distinct visual sections.
