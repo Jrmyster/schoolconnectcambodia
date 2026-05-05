@@ -1,0 +1,49 @@
+I need to expand the 'Astronomy' section of our 'Science' curriculum by adding a new, comprehensive page about Earth's satellites and the threat of Kessler Syndrome.
+
+Please implement the following updates, ensuring you use semantic HTML, clean CSS, and accessible UI components (like cards and visual grids). Please ensure all headings and key concepts are presented bilingually in English and Khmer.
+
+PART 1: NAVIGATION & ROUTING UPDATE
+
+Locate the main navigation data structure.
+
+Find the 'Science' dropdown menu and locate the 'Astronomy (តារាសាស្ត្រ)' subcategory.
+
+Add a new link titled 'Satellites & Kessler Syndrome' that routes to a new page component at /science/kessler-syndrome. Place this below 'The Scale of the Universe' and 'Space'.
+
+PART 2: BUILD THE NEW PAGE COMPONENT
+Create the new page (KesslerSyndrome.jsx or similar) with the following structured sections:
+
+1. Page Header & Introduction:
+
+Title: Satellites & Kessler Syndrome (ផ្កាយរណប និងរោគសញ្ញា Kessler)
+
+Description: An exploration of humanity's mechanical constellation, the history of orbital flight, and the ticking clock of space debris that threatens our access to the stars.
+
+2. Section 1: The Pioneers of Orbit (អ្នកត្រួសត្រាយផ្លូវក្នុងគន្លងអវកាស):
+
+Sputnik 1 (1957): The first artificial satellite launched by humanity, a simple metal sphere that changed history.
+
+Famous Modern Satellites: Mention the International Space Station (ISS) as the largest human-made object in space, the Hubble Space Telescope for deep-space observation, and the GPS network that powers global navigation.
+
+3. Section 2: A Crowded Sky (មេឃដែលពោរពេញដោយផ្កាយរណប):
+Use a statistics card or grid to explain how many objects are currently up there:
+
+The Numbers: Explain that there are currently roughly 9,000 to 10,000 active satellites in orbit, alongside millions of pieces of trackable space junk (dead satellites, spent rocket stages, and shrapnel).
+
+Low Earth Orbit (LEO - គន្លងផែនដីកម្រិតទាប): The most crowded zone (roughly 160 to 2,000 km above Earth). This is where the ISS and massive new internet satellite constellations operate.
+
+Geosynchronous Orbit (GEO): Much further out (around 35,786 km), used for weather and communication satellites that need to stay fixed over one spot on Earth.
+
+4. Section 3: The Danger of Kessler Syndrome (គ្រោះថ្នាក់នៃរោគសញ្ញា Kessler):
+
+The Chain Reaction: Explain the theory proposed by NASA scientist Donald Kessler in 1978. If the density of objects in Low Earth Orbit becomes too high, a single collision could create a cloud of debris. This debris acts like shotgun shrapnel, hitting other satellites, creating even more debris, resulting in an unstoppable cascade.
+
+The Consequence: A severe Kessler Syndrome event could create a 'debris belt' around Earth, making it too dangerous to launch new rockets, trapping humanity on Earth and destroying global internet, GPS, and weather forecasting.
+
+5. Section 4: Space Traffic Management (ការគ្រប់គ្រងចរាចរណ៍អវកាស):
+
+Discuss the urgent modern solutions being developed: radar tracking of debris, algorithms to automatically dodge collisions, and experimental 'tow-truck' satellites designed to capture dead satellites and drag them down to burn up in the atmosphere.
+
+PART 3: VISUALS AND LAYOUT
+
+Please generate clean, simple SVG icons or CSS shapes to represent a satellite, a globe, and a debris field. Use warning colors (like amber or red) for the Kessler Syndrome section to emphasize the danger. Ensure spacing matches the rest of the site's educational modules.

@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
-  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard,
+  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -996,6 +996,14 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "Space",
         labelKh: "អវកាស",
         icon: Rocket,
+      },
+      {
+        href: "/science/kessler-syndrome",
+        labelEn: "Satellites & Kessler Syndrome",
+        labelKh: "ផ្កាយរណប និងរោគសញ្ញា Kessler",
+        icon: Satellite,
+        descEn: "How 9,000+ active satellites and millions of debris fragments crowd Low Earth Orbit — and the chain-reaction threat that could one day trap humanity on Earth.",
+        descKh: "ផ្កាយរណបជាង 9,000 និងសំរាមអវកាសរាប់លាន ក្នុង LEO — និងគ្រោះថ្នាក់ Kessler ដែលអាចទប់យើងនៅផែនដី។",
       },
       {
         href: "divider:earth-sciences",
