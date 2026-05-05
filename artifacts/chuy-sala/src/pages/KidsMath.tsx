@@ -537,20 +537,24 @@ function BigGrid({
   const [active, setActive] = useState<{ r: number; c: number } | null>(null);
   const p = MODE_PALETTES[mode];
 
-  // For division: cell (r, c) shows  (r * c) ÷ c = r — so the *product* is
-  // the number being divided. We display it as "product ÷ c = r" so kids
-  // can see "20 ÷ 5 = 4" by hovering row=4 column=5.
+  // For division: cell (r, c) shows r ÷ c, rounded to 2 decimal places when
+  // the result is not a whole number (e.g. 3 ÷ 2 → 1.5, 10 ÷ 3 → 3.33).
+  const fmtDiv = (r: number, c: number) => {
+    const raw = r / c;
+    return Number.isInteger(raw) ? `${raw}` : parseFloat(raw.toFixed(2)).toString();
+  };
+
   const cellLabel = useMemo(
     () => (r: number, c: number) => {
       if (mode === "mult") return `${r * c}`;
-      return `${r}`; // division answer is the row index
+      return fmtDiv(r, c);
     },
     [mode]
   );
 
   const cellAria = (r: number, c: number) => {
     if (mode === "mult") return `${r} times ${c} equals ${r * c}`;
-    return `${r * c} divided by ${c} equals ${r}`;
+    return `${r} divided by ${c} equals ${fmtDiv(r, c)}`;
   };
 
   function handleSelect(r: number, c: number) {
