@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 // Components (eager — needed on every page or for the shell)
 import { Navbar } from "@/components/layout/Navbar";
+import { STIBanner } from "@/components/STIBanner";
 import { RouteTracker } from "@/components/RouteTracker";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
@@ -283,6 +284,7 @@ function ScrollToTop() {
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <STIBanner />
       <ScrollToTop />
       <RouteTracker />
       <PWAStatusBar />
