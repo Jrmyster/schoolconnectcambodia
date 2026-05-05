@@ -657,8 +657,8 @@ const NAV_GROUPS: NavGroup[] = [
       },
       {
         href: "divider:physics",
-        labelEn: "Physics",
-        labelKh: "រូបវិទ្យា",
+        labelEn: "Physics and Engineering",
+        labelKh: "រូបវិទ្យា និងវិស្វកម្ម",
         icon: Atom,
         divider: true,
       },
@@ -715,6 +715,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Wind,
         descEn: "The single equation that tells every drop of water and puff of air exactly where to go — explained simply (rivers around rocks, air over wings) and technically (inertia, pressure gradient, viscosity, external forces). Plus the $1,000,000 Millennium Prize Problem still waiting to be solved.",
         descKh: "សមីការតែមួយដែលប្រាប់ដំណក់ទឹក និងខ្យល់ឱ្យដឹងថាត្រូវទៅណា និងលឿនប៉ុនណា — ពន្យល់សាមញ្ញ (ទន្លេជុំវិញថ្ម ខ្យល់លើស្លាបយន្តហោះ) និងបច្ចេកទេស (និចលភាព គម្លាតសម្ពាធ ភាពខាប់ កម្លាំងខាងក្រៅ)។ ព្រមទាំងបញ្ហារង្វាន់សហស្សវត្សរ៍ ១,០០០,០០០ ដុល្លារដែលនៅរង់ចាំការដោះស្រាយ។",
+      },
+      {
+        href: "/science/materials",
+        labelEn: "Materials Science: The Stuff of the World",
+        labelKh: "វិទ្យាសាស្ត្រសម្ភារៈ៖ សារធាតុនៃពិភពលោក",
+        icon: Wrench,
+        descEn: "Inspect the Big Three (metals, polymers, ceramics & glass), pull and crush them in a live stress–strain workshop, and see why plastic waste is also a feedstock.",
+        descKh: "ពិនិត្យក្រុមធំទាំងបី (លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់) ទាញ និងសង្កត់វាក្នុងសិក្ខាសាលាស្ត្រេស–បន្ទះផ្ទាល់ និងមើលហេតុអ្វីសំណល់ប្លាស្ទិកក៏ជាសម្ភារៈឆៅ។",
       },
       {
         href: "/science/chemistry/heisenberg",
@@ -839,14 +847,6 @@ const NAV_GROUPS: NavGroup[] = [
         icon: FlaskConical,
         descEn: "Safe, hands-on chemistry experiments you can try at home.",
         descKh: "ការពិសោធន៍គីមីវិទ្យាសុវត្ថិភាពដែលអ្នកអាចសាកល្បងនៅផ្ទះ។",
-      },
-      {
-        href: "/science/materials",
-        labelEn: "Materials Science: The Stuff of the World",
-        labelKh: "វិទ្យាសាស្ត្រសម្ភារៈ៖ សារធាតុនៃពិភពលោក",
-        icon: Wrench,
-        descEn: "Inspect the Big Three (metals, polymers, ceramics & glass), pull and crush them in a live stress–strain workshop, and see why plastic waste is also a feedstock.",
-        descKh: "ពិនិត្យក្រុមធំទាំងបី (លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់) ទាញ និងសង្កត់វាក្នុងសិក្ខាសាលាស្ត្រេស–បន្ទះផ្ទាល់ និងមើលហេតុអ្វីសំណល់ប្លាស្ទិកក៏ជាសម្ភារៈឆៅ។",
       },
       {
         href: "/science/glaciology",
