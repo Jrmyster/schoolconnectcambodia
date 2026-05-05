@@ -1,0 +1,82 @@
+I need to fix the 'Mission Statement' page we just built. Currently, the bilingual language toggle is not updating the body text, and there is placeholder gibberish text under the headings when switched to Khmer.
+
+Please refactor MissionStatement.jsx (or .tsx) to properly use our site's language context (e.g., language === 'km' or however the bilingual state is managed globally).
+
+Please apply the following English and Khmer translations to the respective sections so that when the user toggles the language, the entire page translates:
+
+1. Title & Preamble:
+
+EN Title: Mission Statement: School Connect Cambodia
+
+KM Title: សេចក្តីថ្លែងការណ៍បេសកកម្ម៖ School Connect Cambodia
+
+EN Heading: Preamble: The Promise of Tomorrow
+
+KM Heading: អារម្ភកថា៖ ការសន្យានៃថ្ងៃស្អែក
+
+KM P1 (At the heart of every...): នៅជាបេះដូងនៃរាល់សង្គមដែលកំពុងរីកចម្រើន គឺជាការប្តេជ្ញាចិត្តជាមូលដ្ឋានចំពោះការបណ្តុះសក្តានុពលរបស់មនុស្ស។ School Connect Cambodia ត្រូវបានបង្កើតឡើងដោយផ្អែកលើការជឿជាក់យ៉ាងមុតមាំតែមួយគត់៖ ថាសក្តានុពលដ៏អស្ចារ្យ និងមិនទាន់បានប្រើប្រាស់របស់សិស្សានុសិស្សកម្ពុជា ត្រូវការត្រឹមតែស្ថាបត្យកម្មនៃឱកាសដើម្បីបញ្ឆេះយុគសម័យថ្មីនៃការច្នៃប្រឌិត ភាពរុងរឿង និងវឌ្ឍនភាពសង្គមដ៏ជ្រាលជ្រៅ។
+
+KM P2 (School Connect Cambodia exists...): School Connect Cambodia មានវត្តមានដើម្បីលុបបំបាត់របាំងទាំងនេះ។ យើងមិនត្រឹមតែបង្កើតគេហទំព័រមួយប៉ុណ្ណោះទេ យើងកំពុងបង្កើតប្រព័ន្ធអេកូឡូស៊ីឌីជីថលដ៏ស្វាហាប់ ដែលត្រូវបានរចនាឡើងដើម្បីផ្តល់អំណាចដល់សិស្ស អ្នកអប់រំ និងសហគមន៍។ តាមរយៈការផ្សារភ្ជាប់គម្លាតរវាងថ្នាក់រៀនដាច់ស្រយាល និងបណ្តុំព័ត៌មានក្នុងស្រុកដែលមានគុណភាពខ្ពស់ យើងកំពុងរៀបចំហេដ្ឋារចនាសម្ព័ន្ធជាមូលដ្ឋានសម្រាប់អនាគតមួយ ដែលត្រូវបានកសាងឡើងដោយ និងសម្រាប់ប្រជាជនកម្ពុជាដែលមានអំណាច។
+
+2. Part I: Architecture of Opportunity:
+
+EN Heading: Part I: The Architecture of Opportunity — A Dual-Purpose Ecosystem
+
+KM Heading: ផ្នែកទី ១៖ ស្ថាបត្យកម្មនៃឱកាស — ប្រព័ន្ធអេកូឡូស៊ីដែលមានគោលបំណងទ្វេដង
+
+KM Paragraph: ដើម្បីសម្រេចបាននូវការផ្លាស់ប្តូរជាប្រព័ន្ធ វេទិកាមួយត្រូវតែមានប្រយោជន៍ជាក់ស្តែងក្នុងពេលបច្ចុប្បន្ន និងរឹងមាំសម្រាប់អនាគត។ School Connect Cambodia ដំណើរការជាម៉ាស៊ីនគោលបំណងទ្វេដង ដោយរួមបញ្ចូលផែនទីធនធានឌីជីថលជាមួយនឹងមជ្ឈមណ្ឌលអប់រំកណ្តាលដ៏ទូលំទូលាយ។
+
+EN Subheading 1: 1. The Digital Resource Map: Connecting the Fragmented
+
+KM Subheading 1: ១. ផែនទីធនធានឌីជីថល៖ ការភ្ជាប់ទំនាក់ទំនងផ្នែកដែលបែកបាក់
+
+KM Bullet - Visibility: ភាពមើលឃើញ និងភស្តុភារ
+
+KM Bullet - Frugal Engineering: វិស្វកម្មសន្សំសំចៃ និងអត្ថប្រយោជន៍
+
+KM Bullet - Community Sync: ការធ្វើសមកាលកម្មសហគមន៍
+
+EN Subheading 2: 2. The Centralized Education Hub: Democratizing Knowledge
+
+KM Subheading 2: ២. មជ្ឈមណ្ឌលអប់រំកណ្តាល៖ ការធ្វើប្រជាធិបតេយ្យនីយកម្មចំណេះដឹង
+
+KM Bullet - Bilingual: ភាពងាយស្រួលប្រើប្រាស់ពីរភាសា
+
+KM Bullet - Living Syllabus: កម្មវិធីសិក្សារស់រវើក
+
+3. Part II: Imperative of Scientific Literacy:
+
+EN Heading: Part II: The Imperative of Scientific Literacy
+
+KM Heading: ផ្នែកទី ២៖ ភាពចាំបាច់នៃអក្ខរកម្មវិទ្យាសាស្ត្រ
+
+EN Subheading: Navigating Reality Through Science
+
+KM Subheading: ការស្វែងយល់ពីការពិតតាមរយៈវិទ្យាសាស្ត្រ
+
+EN Subheading: The STEM Catalyst in Cambodia
+
+KM Subheading: កាតាលីករ STEM នៅកម្ពុជា
+
+4. Part III & Conclusion:
+
+EN Heading: Part III: The Power of an Intelligent and Innovative Population
+
+KM Heading: ផ្នែកទី ៣៖ ថាមពលនៃប្រជាជនដែលមានភាពឆ្លាតវៃ និងនវានុវត្តន៍
+
+EN Subheading: The Compounding Returns of Education
+
+KM Subheading: ផលចំណេញត្រឡប់មកវិញនៃការអប់រំ
+
+EN Subheading: Building the Future, Today
+
+KM Subheading: ការកសាងអនាគត ថ្ងៃនេះ
+
+EN Heading: Conclusion: Our Pledge to the Future
+
+KM Heading: សេចក្តីសន្និដ្ឋាន៖ ការប្តេជ្ញាចិត្តរបស់យើងចំពោះអនាគត
+
+KM Conclusion Paragraph: School Connect Cambodia គឺជាការប្តេជ្ញាចិត្តរបស់យើងចំពោះចក្ខុវិស័យនេះ។ យើងកំពុងកសាងផ្លូវឌីជីថល មន្ទីរពិសោធន៍និម្មិត និងបណ្តាញសហការដែលចាំបាច់ដើម្បីបញ្ចេញសក្តានុពលគ្មានដែនកំណត់របស់សិស្សានុសិស្សកម្ពុជា។
+
+Execution Requirements:
+Remove all placeholder gibberish (e.g., 'Hro vrgtiefjgyn'). Ensure that every heading, paragraph, and bullet point switches dynamically based on the global language toggle.
