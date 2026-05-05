@@ -537,10 +537,10 @@ function BigGrid({
   const [active, setActive] = useState<{ r: number; c: number } | null>(null);
   const p = MODE_PALETTES[mode];
 
-  // For division: cell (r, c) shows r ÷ c, rounded to 2 decimal places when
-  // the result is not a whole number (e.g. 3 ÷ 2 → 1.5, 10 ÷ 3 → 3.33).
+  // For division: cell (r, c) shows c ÷ r — top-row number (c) divided by
+  // left-column number (r), rounded to 2 decimal places for non-whole results.
   const fmtDiv = (r: number, c: number) => {
-    const raw = r / c;
+    const raw = c / r;
     return Number.isInteger(raw) ? `${raw}` : parseFloat(raw.toFixed(2)).toString();
   };
 
@@ -554,7 +554,7 @@ function BigGrid({
 
   const cellAria = (r: number, c: number) => {
     if (mode === "mult") return `${r} times ${c} equals ${r * c}`;
-    return `${r} divided by ${c} equals ${fmtDiv(r, c)}`;
+    return `${c} divided by ${r} equals ${fmtDiv(r, c)}`;
   };
 
   function handleSelect(r: number, c: number) {
