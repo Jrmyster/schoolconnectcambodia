@@ -350,6 +350,7 @@ function Router() {
             <Route path="/science/navier-stokes" component={NavierStokesPage} />
             <Route path="/electrical-engineering" component={ElectricalEngineeringPage} />
             <Route path="/science/circulatory-system" component={CirculatorySystemPage} />
+            <Route path="/science/lymphatic-system" component={LymphaticSystemPage} />
             <Route path="/science/scale-of-universe" component={ScaleOfUniversePage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
             <Route path="/study-center/europe" component={EuropeHistoryPage} />

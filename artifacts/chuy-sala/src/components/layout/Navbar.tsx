@@ -507,6 +507,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "មគ្គុទ្ទេសក៍ស្តីពីបេះដូង សរសៃឈាម កោសិកាឈាម ប្រភេទឈាម ABO និងសម្ពាធឈាម — ជាមួយការពន្យល់ពីរភាសា។",
       },
       {
+        href: "/science/lymphatic-system",
+        labelEn: "The Lymphatic System",
+        labelKh: "ប្រព័ន្ធទឹករងៃ",
+        icon: Droplets,
+        descEn: "The body's silent drainage network and frontline immune defense — lymph nodes, B-cells, T-cells, macrophages, the spleen, thymus, and how the system fights infection without a pump.",
+        descKh: "បណ្តាញបង្ហូរ និងការការពារជំងឺ — lymph nodes, B-cell, T-cell, macrophage, អ័ព្ទ thymus និងរបៀបប្រព័ន្ធនេះប្រយុទ្ធជំងឺដោយគ្មានចង្វាក់។",
+      },
+      {
         href: "divider:engineering-physics",
         labelEn: "Engineering & Physics",
         labelKh: "វិស្វកម្ម និងរូបវិទ្យា",
