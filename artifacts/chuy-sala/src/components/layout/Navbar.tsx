@@ -810,6 +810,21 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "តក្កវិទ្យាកម្រិតខ្ពស់សម្រាប់វិស្វករ អ្នករូបវិទ្យា និង AI ៖ ដេរីវេដោយផ្នែក ពន្យល់ជាអ្នកឡើងភ្នំ ដែលកក់ទិសមួយ ហើយវ៉ិចទ័រ និងម៉ាទ្រីសជាម៉ាស៊ីនដែលទាញ សង្កត់ និងបង្វិលក្រឡាទាំងមូល។",
       },
       {
+        href: "divider:tensors",
+        labelEn: "Tensors",
+        labelKh: "តង់ស័រ",
+        icon: Sigma,
+        divider: true,
+      },
+      {
+        href: "/mathematics/tensors",
+        labelEn: "Introduction to Tensors",
+        labelKh: "សេចក្ដីណែនាំអំពីតង់ស័រ",
+        icon: Sigma,
+        descEn: "Vectors, matrices, and 3-tensors defined with diagrams — then the Cauchy stress cube (σᵢⱼ, traction vectors T⁽ᵉⁱ⁾), tensor product ⊗, commutator [x,y]=xy−yx, Einstein summation, Levi-Civita symbol, and algebraic K-theory K*(F).",
+        descKh: "Vector ម៉ាទ្រីស និងតង់ស័រ-3 ពន្យល់ជាដ្យាក្រាម — គូបស្ត្រេស Cauchy (σᵢⱼ, T⁽ᵉⁱ⁾) ផ្លែ ⊗ commutator [x,y] ច្បាប់ Einstein និង K-theory K*(F)។",
+      },
+      {
         href: "/fun-lab",
         labelEn: "Fun Lab",
         labelKh: "មន្ទីរពិសោធន៍កំសាន្ត",
