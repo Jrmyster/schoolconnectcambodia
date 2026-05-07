@@ -1,0 +1,57 @@
+I need to expand our 'How Computers Work' page by adding a new section at the bottom about the Raspberry Pi.
+
+Please update the HowComputersWork.jsx (or .tsx) component by adding a new section titled 'The Pocket Computer: Raspberry Pi'.
+
+Please use our existing bilingual design system, ensuring semantic HTML (like a grid or flexbox for the anatomy and use-cases), and use the exact English and Khmer translations provided below:
+
+1. Section Header & Introduction:
+
+EN Heading: The Pocket Computer: Raspberry Pi
+
+KM Heading: កុំព្យូទ័រក្នុងហោប៉ៅ៖ Raspberry Pi
+
+EN Subheading: What is a Single-Board Computer?
+
+KM Subheading: តើអ្វីទៅជាកុំព្យូទ័របន្ទះទោល (Single-Board Computer)?
+
+EN Paragraph: Unlike a desktop with many separate, bulky parts, a Raspberry Pi fits an entire computer—the processor, memory, and graphics—onto a single circuit board the size of a credit card. It was specifically designed to make learning computer science, engineering, and programming cheap and accessible to everyone.
+
+KM Paragraph: មិនដូចកុំព្យូទ័រលើតុដែលមានផ្នែកដាច់ដោយឡែកជាច្រើននោះទេ Raspberry Pi បញ្ចូលកុំព្យូទ័រទាំងមូល—រួមមានអង្គគណនា អង្គចងចាំ និងក្រាហ្វិក—ទៅលើបន្ទះសៀគ្វីប៉ុនកាតឥណទាន។ វាត្រូវបានរចនាឡើងយ៉ាងពិសេសដើម្បីធ្វើឱ្យការរៀនវិទ្យាសាស្ត្រកុំព្យូទ័រ វិស្វកម្ម និងការសរសេរកូដមានតម្លៃថោក និងងាយស្រួលសម្រាប់មនុស្សគ្រប់គ្នា។
+
+2. The Anatomy (How it Works):
+(Please style these points using a neat vertical list, cards, or an anatomy breakdown layout)
+
+EN Subheading: The Anatomy of a Pi
+
+KM Subheading: គ្រឿងបង្គុំនៃ Raspberry Pi
+
+EN Point 1 (SoC): System on a Chip (SoC): The brain. Instead of a massive motherboard, it combines the CPU (thinking) and GPU (graphics) into one tiny silicon square.
+
+KM Point 1: ប្រព័ន្ធនៅលើបន្ទះឈីប (SoC)៖ ជាខួរក្បាល។ ជំនួសឱ្យបន្ទះមេដ៏ធំ វាបញ្ចូលស៊ីភីយូ (CPU) និងជីភីយូ (GPU) ទៅក្នុងការ៉េស៊ីលីកូនតូចមួយ។
+
+EN Point 2 (GPIO): GPIO Pins: The magic connection. These metal 'General Purpose Input/Output' pins allow the Pi to talk to the physical world—turning on LED lights, reading temperature sensors, or spinning robot motors.
+
+KM Point 2: ជើងបញ្ជូនទិន្នន័យ (GPIO)៖ ការតភ្ជាប់ដ៏អស្ចារ្យ។ ជើងលោហៈទាំងនេះអនុញ្ញាតឱ្យ Pi ទំនាក់ទំនងជាមួយពិភពពិត—ដូចជាការបើកភ្លើង LED អានឧបករណ៍វាស់សីតុណ្ហភាព ឬបង្វិលម៉ូទ័រមនុស្សយន្ត។
+
+EN Point 3 (MicroSD): MicroSD Storage: Instead of a heavy hard drive, it uses a tiny memory card to hold its operating system (usually a version of Linux) and all your files.
+
+KM Point 3: អង្គចងចាំ MicroSD៖ ជំនួសឱ្យថាសរឹងធ្ងន់ វាប្រើកាតអង្គចងចាំតូចមួយដើម្បីផ្ទុកប្រព័ន្ធប្រតិបត្តិការ (ជាធម្មតា Linux) និងឯកសារទាំងអស់របស់អ្នក។
+
+3. Real-World Uses:
+(Please style this as a 3-column grid or smaller feature cards)
+
+EN Subheading: What Can You Build?
+
+KM Subheading: តើអ្នកអាចបង្កើតអ្វីបានខ្លះ?
+
+Card 1 (EN/KM): Robotics (មនុស្សយន្ត): Because of the GPIO pins, you can write a Python script to drive a robot chassis or control a drone. / ដោយសារតែជើងបញ្ជូនទិន្នន័យ (GPIO) អ្នកអាចសរសេរកូដ Python ដើម្បីបញ្ជាមនុស្សយន្ត ឬដ្រូន។
+
+Card 2 (EN/KM): Web Servers (ម៉ាស៊ីនមេគេហទំព័រ): You can use a Pi to host your own websites, create a local network file server, or build a network-wide ad blocker. / អ្នកអាចប្រើ Pi ដើម្បីបង្ហោះគេហទំព័រផ្ទាល់ខ្លួនរបស់អ្នក បង្កើតម៉ាស៊ីនមេផ្ទុកឯកសារក្នុងបណ្តាញមូលដ្ឋាន ឬបង្កើតកម្មវិធីទប់ស្កាត់ការផ្សាយពាណិជ្ជកម្ម។
+
+Card 3 (EN/KM): Retro Gaming (ហ្គេមអតីតកាល): By installing special software, the Pi can emulate and play classic arcade and console video games. / តាមរយៈការដំឡើងកម្មវិធីពិសេស Pi អាចចាក់ និងលេងហ្គេមអតីតកាលបែបបុរាណបាន។
+
+4. Visuals:
+
+Please generate clean, abstract SVG icons to accompany the sections: perhaps a small circuit board icon for the main header, a gear/chip for the SoC, a pin array for the GPIO, and a robot/server icon for the 'Uses' section.
+
+Ensure the bilingual toggle hooks into these texts correctly so they switch alongside the rest of the page.
