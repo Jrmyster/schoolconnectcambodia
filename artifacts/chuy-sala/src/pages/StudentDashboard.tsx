@@ -309,7 +309,7 @@ function CareerHub({ kh, t }: CareerHubProps) {
   const cards = [
     {
       key: "resume",
-      href: "/launchpad?tool=resume",
+      href: "/career/resume-builder",
       icon: FileText,
       iconWrap: "bg-amber-100 text-amber-700",
       titleEn: "Resume Builder",
