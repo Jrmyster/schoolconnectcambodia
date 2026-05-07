@@ -1,0 +1,52 @@
+I need to add a 'Welcome Tour' component to improve the user experience (UX) for first-time visitors. The goal is to make the site's dual-purpose structure immediately clear to NGOs and students.
+
+Please implement a guided tour using a library like react-joyride or a custom-built modal system.
+
+PART 1: TRIGGER LOGIC
+
+The tour should automatically start the first time a user visits the homepage.
+
+Use localStorage to ensure that once a user finishes or skips the tour, it doesn't pop up again unless they clear their cache.
+
+PART 2: BILINGUAL TOUR STEPS
+The tour must be fully bilingual. Please use these steps and translations:
+
+Step 1: Welcome (សូមស្វាគមន៍)
+
+Target: Center of screen (Welcome Modal).
+
+EN: Welcome to School Connect Cambodia! Let us show you how to navigate this platform in 3 quick steps.
+
+KM: សូមស្វាគមន៍មកកាន់ School Connect Cambodia! អនុញ្ញាតឱ្យយើងបង្ហាញអ្នកពីរបៀបប្រើប្រាស់គេហទំព័រនេះក្នុង ៣ ជំហានសាមញ្ញ។
+
+Step 2: Language Toggle (ការប្តូរភាសា)
+
+Target: The bilingual toggle button in the Navbar.
+
+EN: You can switch the entire website between English and Khmer at any time with this button.
+
+KM: អ្នកអាចប្តូរគេហទំព័រទាំងមូលរវាងភាសាអង់គ្លេស និងខ្មែរបានគ្រប់ពេលជាមួយប៊ូតុងនេះ។
+
+Step 3: The Education Hub (មជ្ឈមណ្ឌលអប់រំ)
+
+Target: The 'Science' or 'Education Hub' link in the navigation.
+
+EN: This is for students! Here they can find bilingual STEM lessons, from Biology to Robotics.
+
+KM: នេះសម្រាប់សិស្សានុសិស្ស! នៅទីនេះពួកគេអាចស្វែងរកមេរៀន STEM ជាពីរភាសា ចាប់ពីជីវវិទ្យា រហូតដល់រ៉ូបូត។
+
+Step 4: The Resource Map (ផែនទីធនធាន)
+
+Target: The 'Resource Map' link in the navigation.
+
+EN: This is for NGOs and Teachers! Use this map to coordinate physical supplies and share materials across provinces.
+
+KM: នេះសម្រាប់អង្គការ និងគ្រូបង្រៀន! ប្រើផែនទីនេះដើម្បីសម្របសម្រួលការផ្គត់ផ្គង់ និងចែករំលែកសម្ភារៈតាមបណ្តាខេត្ត។
+
+PART 3: DESIGN & UI
+
+The tour tooltips should be white with a clean border, using our theme colors (Deep Purple/Blue).
+
+Include 'Back' (ត្រឡប់ក្រោយ), 'Next' (បន្ទាប់), and 'Skip' (រំលង) buttons in every step.
+
+When the tour ends, show a small celebratory toast or message: 'You're all set! (អ្នករួចរាល់ហើយ!)'
