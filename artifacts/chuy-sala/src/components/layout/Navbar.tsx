@@ -555,6 +555,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "មជ្ឈមណ្ឌលកែច្នៃអាហាររបស់រាងកាយ។",
       },
       {
+        href: "/science/human-body/reproductive-system",
+        labelEn: "The Reproductive System",
+        labelKh: "ប្រព័ន្ធបន្តពូជ",
+        icon: Dna,
+        descEn: "DNA, genetics, and creating life.",
+        descKh: "DNA សេនេទិច និងការបង្កើតជីវិត។",
+      },
+      {
         href: "divider:biology",
         labelEn: "Biology",
         labelKh: "ជីវវិទ្យា",
