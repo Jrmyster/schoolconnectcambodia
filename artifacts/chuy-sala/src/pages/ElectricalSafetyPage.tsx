@@ -49,6 +49,7 @@ import {
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { IncandescentBulbSection } from "./ElectricalIncandescentBulbSection";
+import { ElectricalOscilloscopeSection } from "./ElectricalOscilloscopeSection";
 
 // ── Core Concept cards (the "Big Three") ────────────────────────────────────
 
@@ -518,6 +519,9 @@ export function ElectricalSafetyPage() {
 
       {/* ── Module: The Incandescent Bulb — Let There Be Light ───────────── */}
       <IncandescentBulbSection kh={kh} />
+
+      {/* ── Module: Oscilloscopes ────────────────────────────────────────── */}
+      <ElectricalOscilloscopeSection />
 
       {/* ── Section 4: Safety Protocols ──────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10">

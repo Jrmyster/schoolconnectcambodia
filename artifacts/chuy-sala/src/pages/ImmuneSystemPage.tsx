@@ -1,5 +1,5 @@
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Shield, Swords, Activity, Syringe, Target, Crosshair, Search, Beaker, Lightbulb, Biohazard, Thermometer, UserSquare, Baby } from "lucide-react";
+import { Shield, Swords, Activity, Syringe, Target, Crosshair, Search, Beaker, Lightbulb, Biohazard, Thermometer, UserSquare, Baby, Zap, Clock, ShieldAlert } from "lucide-react";
 
 export default function ImmuneSystemPage() {
   const t = useTranslation();
@@ -31,29 +31,124 @@ export default function ImmuneSystemPage() {
 
         {/* Innate vs. Adaptive Immunity */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-8">
-          <div className="flex items-center gap-3 mb-4 text-rose-600">
+          <div className="flex items-center gap-3 mb-6 text-rose-600">
             <Swords className="w-8 h-8" />
             <h2 className={`text-2xl font-bold ${kh ? 'font-khmer' : ''}`}>
               {t("Innate vs. Adaptive Immunity", "ភាពស៊ាំពីកំណើត ទល់នឹង ភាពស៊ាំសម្របខ្លួន")}
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-rose-50 rounded-xl p-5 border border-rose-100">
-              <strong className={`block text-lg text-rose-900 mb-2 ${kh ? 'font-khmer' : ''}`}>
-                {t("Innate Immunity", "ភាពស៊ាំពីកំណើត")}
-              </strong>
-              <p className={`text-sm text-rose-800 ${kh ? 'font-khmer' : ''}`}>
-                {t("The body's fast, general frontline defense. It includes physical barriers like the skin and mucus, as well as general white blood cells (like macrophages) that attack anything they don't recognize as 'self'. It responds immediately but has no memory.", "ការការពារខ្សែត្រៀមជួរមុខដ៏លឿន និងទូទៅរបស់រាងកាយ។ រួមមានរបាំងរូបវន្តដូចជាស្បែក និងទឹករំអិល ក៏ដូចជាកោសិកាឈាមសទូទៅ (ដូចជាម៉ាក្រូហ្វាស) ដែលវាយប្រហារអ្វីៗដែលវាមិនស្គាល់ថាជារបស់រាងកាយ។ វាឆ្លើយតបភ្លាមៗ ប៉ុន្តែគ្មានការចងចាំទេ។")}
-              </p>
+            
+            {/* Innate Immunity Column */}
+            <div className="bg-rose-50/50 rounded-2xl p-5 border border-rose-100 flex flex-col gap-5">
+              <div className="flex items-center gap-3 border-b border-rose-200/50 pb-3">
+                <Shield className="w-6 h-6 text-rose-500" />
+                <strong className={`text-xl text-rose-900 ${kh ? 'font-khmer' : ''}`}>
+                  {t("Innate Immunity (Non-Specific)", "ភាពស៊ាំពីកំណើត (មិនជាក់លាក់)")}
+                </strong>
+              </div>
+              
+              <div className="flex gap-3">
+                <Zap className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-rose-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Speed & Memory", "ល្បឿន និងការចងចាំ")}
+                  </span>
+                  <p className={`text-sm text-rose-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Takes effect immediately upon pathogen entry. We are born with it; it requires no 'learning' and attacks all pathogens equally.",
+                      "មានប្រសិទ្ធភាពភ្លាមៗពេលមេរោគចូល។ យើងកើតមកមានវាស្រាប់; វាមិនទាមទារ 'ការរៀនសូត្រ' ទេ ហើយវាវាយប្រហារមេរោគទាំងអស់ស្មើៗគ្នា។"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <ShieldAlert className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-rose-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("The First Line of Defense", "ខ្សែត្រៀមការពារជួរមុខ")}
+                  </span>
+                  <p className={`text-sm text-rose-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Includes physical barriers (skin, mucous membranes in the lungs) and fluid secretions (highly acidic stomach acid, enzymes in the eyes/mouth).",
+                      "រួមមានរបាំងរូបវន្ត (ស្បែក និងភ្នាសរំអិលក្នុងសួត) និងការបញ្ចេញរាវ (អាស៊ីតក្រពះខ្លាំង អង់ស៊ីមក្នុងភ្នែក/មាត់)។"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Activity className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-rose-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Internal Defenses", "ការការពារផ្ទៃក្នុង")}
+                  </span>
+                  <p className={`text-sm text-rose-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Utilizes specialized cells (phagocytes and neutrophils) that engulf and destroy foreign invaders, as well as initiating inflammation and fever to kill off bacteria.",
+                      "ប្រើប្រាស់កោសិកាពិសេស (phagocytes និង neutrophils) ដែលរុំព័ទ្ធ និងបំផ្លាញអ្នកឈ្លានពាន ព្រមទាំងបង្កើតការរលាក និងគ្រុនក្តៅដើម្បីសម្លាប់បាក់តេរី។"
+                    )}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="bg-blue-50 rounded-xl p-5 border border-blue-100">
-              <strong className={`block text-lg text-blue-900 mb-2 ${kh ? 'font-khmer' : ''}`}>
-                {t("Adaptive Immunity", "ភាពស៊ាំសម្របខ្លួន")}
-              </strong>
-              <p className={`text-sm text-blue-800 ${kh ? 'font-khmer' : ''}`}>
-                {t("A slower, highly targeted defense system. It uses specialized T-cells and B-cells to analyze specific pathogens, create customized weapons against them, and remember them for the future, ensuring you rarely get the exact same illness twice.", "ប្រព័ន្ធការពារដែលយឺតជាង និងមានគោលដៅច្បាស់លាស់។ វាប្រើប្រាស់កោសិកា T-cell និង B-cell ពិសេសដើម្បីវិភាគមេរោគ បង្កើតអាវុធជាក់លាក់ប្រឆាំងនឹងពួកវា និងចងចាំពួកវាសម្រាប់ថ្ងៃអនាគត ដែលធ្វើឱ្យអ្នកកម្រនឹងកើតជំងឺដដែលពីរដង។")}
-              </p>
+
+            {/* Adaptive Immunity Column */}
+            <div className="bg-blue-50/50 rounded-2xl p-5 border border-blue-100 flex flex-col gap-5">
+              <div className="flex items-center gap-3 border-b border-blue-200/50 pb-3">
+                <Target className="w-6 h-6 text-blue-500" />
+                <strong className={`text-xl text-blue-900 ${kh ? 'font-khmer' : ''}`}>
+                  {t("Adaptive Immunity (Specific)", "ភាពស៊ាំសម្របខ្លួន (ជាក់លាក់)")}
+                </strong>
+              </div>
+
+              <div className="flex gap-3">
+                <Clock className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-blue-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Speed & Memory", "ល្បឿន និងការចងចាំ")}
+                  </span>
+                  <p className={`text-sm text-blue-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Takes several days to take effect. It requires a 'learning' process to recognize specific pathogens using their unique macromolecules (antigens).",
+                      "ចំណាយពេលច្រើនថ្ងៃដើម្បីមានប្រសិទ្ធភាព។ វាទាមទារដំណើរការ 'រៀនសូត្រ' ដើម្បីស្គាល់មេរោគជាក់លាក់ដោយប្រើម៉ាក្រូម៉ូលេគុល (អង់ទីហ្សែន) ពិសេសរបស់វា។"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Crosshair className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-blue-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Cell-Mediated Immunity (T-Cells)", "ភាពស៊ាំតាមរយៈកោសិកា (កោសិកា T)")}
+                  </span>
+                  <p className={`text-sm text-blue-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Powered by T-lymphocytes (killer, helper, and memory T-cells) which recognize foreign antigens and directly destroy infected or bacterial cells.",
+                      "ដំណើរការដោយ T-lymphocytes (កោសិកា T ឃាតករ ជំនួយ និងចងចាំ) ដែលស្គាល់អង់ទីហ្សែនពីខាងក្រៅ ហើយបំផ្លាញកោសិកាឆ្លងមេរោគ ឬកោសិកាបាក់តេរីដោយផ្ទាល់។"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Beaker className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                <div>
+                  <span className={`block font-bold text-blue-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Antibody-Mediated Immunity (B-Cells)", "ភាពស៊ាំតាមរយៈអង់ទីគ័រ (កោសិកា B)")}
+                  </span>
+                  <p className={`text-sm text-blue-700/90 leading-relaxed ${kh ? 'font-khmer leading-loose' : ''}`}>
+                    {t(
+                      "Powered by B-lymphocytes. These cells produce special defense proteins called antibodies that circulate in the blood, attaching to specific pathogens to mark them for destruction.",
+                      "ដំណើរការដោយ B-lymphocytes។ កោសិកាទាំងនេះផលិតប្រូតេអ៊ីនការពារពិសេសហៅថា អង់ទីគ័រ ដែលធ្វើចរាចរក្នុងឈាម ដោយភ្ជាប់ទៅនឹងមេរោគជាក់លាក់ដើម្បីសម្គាល់ពួកវាសម្រាប់ការបំផ្លាញ។"
+                    )}
+                  </p>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 

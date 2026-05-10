@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { Bug, Shield, CheckCircle2, XCircle, HelpCircle, Wind, Syringe, Heart, AlertCircle } from "lucide-react";
+import { Bug, Shield, CheckCircle2, XCircle, HelpCircle, Wind, Syringe, Heart, AlertCircle, Activity, Clock, RefreshCw } from "lucide-react";
 
 export default function MicrobiologyPage() {
   const t = useTranslation();
@@ -93,6 +93,138 @@ export default function MicrobiologyPage() {
                 </div>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Viral Anatomy & Multiplication Section */}
+        <div className="mt-12 space-y-8">
+          <div className="flex items-center gap-3 text-rose-600 mb-6">
+            <Activity className="w-8 h-8" />
+            <h2 className={`text-2xl font-bold ${kh ? 'font-khmer' : 'font-display'}`}>
+              {t("Viral Anatomy & Multiplication", "កាយវិភាគវិទ្យា និងការបំបែកខ្លួនរបស់វីរុស")}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Anatomy */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-rose-100/50">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="w-6 h-6 text-rose-500" />
+                <h3 className={`text-xl font-bold text-slate-800 ${kh ? 'font-khmer' : ''}`}>
+                  {t("Viral Anatomy (The Nucleocapsid)", "កាយវិភាគវិទ្យាវីរុស (Nucleocapsid)")}
+                </h3>
+              </div>
+              <p className={`text-slate-600 mb-6 ${kh ? 'font-khmer leading-relaxed' : 'leading-relaxed'}`}>
+                {t(
+                  "All viruses have a Nucleic Acid Core (DNA or RNA, but never both) surrounded by a protein shell called a Capsid (made of repeating units called capsomeres).",
+                  "វីរុសទាំងអស់មានស្នូលអាស៊ីតនុយក្លេអ៊ីក (DNA ឬ RNA ប៉ុន្តែមិនដែលមានទាំងពីរទេ) ហ៊ុំព័ទ្ធដោយសំបកប្រូតេអ៊ីនហៅថា Capsid (ផ្សំពីឯកតាដែលហៅថា capsomeres)។"
+                )}
+              </p>
+
+              <h4 className={`font-bold text-slate-800 mb-3 ${kh ? 'font-khmer' : ''}`}>
+                {t("Naked vs. Enveloped Viruses", "វីរុសអាក្រាត (Naked) និង វីរុសមានស្រោម (Enveloped)")}
+              </h4>
+              <p className={`text-slate-600 ${kh ? 'font-khmer leading-relaxed' : 'leading-relaxed'}`}>
+                {t(
+                  "Naked viruses only have a protein capsid (like the common cold). Enveloped viruses are surrounded by a lipid membrane stolen from the host cell (like Influenza or Ebola). They use 'spikes' to attach to host cells.",
+                  "វីរុសអាក្រាតមានត្រឹមតែសំបកប្រូតេអ៊ីន (ដូចជាជំងឺផ្តាសាយ)។ វីរុសមានស្រោមត្រូវបានហ៊ុំព័ទ្ធដោយភ្នាសលីពីតដែលលួចពីកោសិកាអ្នកផ្ទុក (ដូចជាគ្រុនផ្តាសាយធំ ឬអេបូឡា)។ ពួកវាប្រើ 'បន្លា' (spikes) ដើម្បីភ្ជាប់ទៅនឹងកោសិកាអ្នកផ្ទុក។"
+                )}
+              </p>
+            </div>
+
+            {/* Infections */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-rose-100/50 flex flex-col">
+              <div className="flex items-center gap-3 mb-4">
+                <Clock className="w-6 h-6 text-rose-500" />
+                <h3 className={`text-xl font-bold text-slate-800 ${kh ? 'font-khmer' : ''}`}>
+                  {t("Acute vs. Latent Infections", "ការឆ្លងមេរោគស្រួចស្រាវ និង ការបង្កប់")}
+                </h3>
+              </div>
+              <div className="space-y-4 flex-1">
+                <div className="bg-rose-50/50 p-4 rounded-xl border border-rose-100">
+                  <strong className={`block text-rose-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Acute Infection", "ការឆ្លងមេរោគស្រួចស្រាវ (Acute)")}
+                  </strong>
+                  <span className={`text-sm text-slate-600 ${kh ? 'font-khmer leading-relaxed' : ''}`}>
+                    {t("Resolves quickly as the immune system fights it off.", "អាចជាសះស្បើយយ៉ាងលឿននៅពេលដែលប្រព័ន្ធភាពស៊ាំប្រយុទ្ធជាមួយវា។")}
+                  </span>
+                </div>
+                <div className="bg-slate-50/80 p-4 rounded-xl border border-slate-200">
+                  <strong className={`block text-slate-800 mb-1 ${kh ? 'font-khmer' : ''}`}>
+                    {t("Latent Infection", "ការឆ្លងមេរោគបង្កប់ (Latent)")}
+                  </strong>
+                  <span className={`text-sm text-slate-600 ${kh ? 'font-khmer leading-relaxed' : ''}`}>
+                    {t(
+                      "Occurs when the virus (like Herpes or Chickenpox/Shingles) hides dormant inside nerve cells for years and reactivates later.",
+                      "កើតឡើងនៅពេលវីរុស (ដូចជាជំងឺអ៊ុតស្វាយ/រើម ឬ Herpes) លាក់ខ្លួនសម្ងំនៅក្នុងកោសិកាសរសៃប្រសាទរាប់ឆ្នាំ ហើយធ្វើសកម្មភាពឡើងវិញនៅពេលក្រោយ។"
+                    )}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Multiplication Steps */}
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-rose-100/50">
+            <div className="flex items-center gap-3 mb-6">
+              <RefreshCw className="w-6 h-6 text-rose-500" />
+              <h3 className={`text-xl font-bold text-slate-800 ${kh ? 'font-khmer' : ''}`}>
+                {t("The 5 Steps of Animal Virus Multiplication", "ដំណាក់កាលទាំង ៥ នៃការបំបែកខ្លួនរបស់វីរុសសត្វ")}
+              </h3>
+            </div>
+            
+            <div className="grid sm:grid-cols-5 gap-4">
+              {[
+                {
+                  step: 1,
+                  titleEn: "Absorption",
+                  titleKh: "ការស្រូបយក",
+                  descEn: "Attachment to receptors",
+                  descKh: "ការភ្ជាប់ទៅនឹង receptors",
+                },
+                {
+                  step: 2,
+                  titleEn: "Penetration/Uncoating",
+                  titleKh: "ការជ្រៀតចូល/ដោះសំបក",
+                  descEn: "Entering the cell and releasing DNA/RNA",
+                  descKh: "ការចូលទៅក្នុងកោសិកា និងបញ្ចេញ DNA/RNA",
+                },
+                {
+                  step: 3,
+                  titleEn: "Synthesis",
+                  titleKh: "ការសំយោគ",
+                  descEn: "Hijacking the cell to make viral parts",
+                  descKh: "ការលួចប្រើប្រាស់កោសិកាដើម្បីបង្កើតផ្នែករបស់វីរុស",
+                },
+                {
+                  step: 4,
+                  titleEn: "Assembly",
+                  titleKh: "ការប្រមូលផ្តុំ",
+                  descEn: "Putting the parts together",
+                  descKh: "ការផ្គុំផ្នែកបញ្ចូលគ្នា",
+                },
+                {
+                  step: 5,
+                  titleEn: "Release",
+                  titleKh: "ការបញ្ចេញ",
+                  descEn: "Leaving via 'budding' or lysing the cell",
+                  descKh: "ចេញតាម 'ការបែកពន្លក' ឬការបំបែកកោសិកា",
+                },
+              ].map((s) => (
+                <div key={s.step} className="relative pt-4">
+                  <div className="absolute top-8 left-8 w-[calc(100%-2rem)] h-[2px] bg-rose-100 hidden sm:block"></div>
+                  <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold relative z-10 mb-3 border-4 border-white shadow-sm mx-auto sm:mx-0">
+                    {s.step}
+                  </div>
+                  <h4 className={`font-bold text-slate-800 mb-1 text-sm text-center sm:text-left ${kh ? 'font-khmer' : ''}`}>
+                    {kh ? s.titleKh : s.titleEn}
+                  </h4>
+                  <p className={`text-xs text-slate-500 text-center sm:text-left ${kh ? 'font-khmer leading-relaxed' : 'leading-relaxed'}`}>
+                    {kh ? s.descKh : s.descEn}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

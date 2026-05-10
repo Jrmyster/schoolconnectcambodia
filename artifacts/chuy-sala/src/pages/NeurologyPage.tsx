@@ -22,6 +22,8 @@ import {
   MessageSquare,
   Scale,
   HeartPulse,
+  BrainCircuit,
+  Volume2,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -142,6 +144,9 @@ export function NeurologyPage() {
           )}
         </p>
         <BrainMap kh={kh} t={t} />
+
+        {/* ── 1.5 The Bicameral Mind ───────────────────────────── */}
+        <BicameralMindCallout kh={kh} t={t} />
 
         {/* ── 2. Neural Network ────────────────────────────────── */}
         <SectionTitle
@@ -1294,6 +1299,84 @@ function BeFastCallout({ kh, t }: { kh: boolean; t: (en: string, k: string) => s
         >
           <Clock className="w-3.5 h-3.5" aria-hidden="true" />
           {t("Time lost = brain lost", "ពេលវេលាដែលបាត់ = ខួរក្បាលដែលបាត់")}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function BicameralMindCallout({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  return (
+    <article
+      className="relative rounded-2xl border-2 border-sky-400/50 shadow-lg overflow-hidden mb-10"
+      style={{
+        background:
+          "radial-gradient(circle at 100% 0%, rgba(56,189,248,0.15), transparent 60%), rgba(15,23,42,0.92)",
+      }}
+    >
+      <CornerMarks tone="cyan" />
+      <div className="relative p-5 sm:p-6 grid md:grid-cols-[64px_1fr] gap-4">
+        <div className="w-14 h-14 rounded-xl border-2 border-sky-400/70 bg-slate-900/70 text-sky-300 flex items-center justify-center flex-shrink-0 shadow-[0_0_18px_rgba(56,189,248,0.4)]">
+          <BrainCircuit className="w-6 h-6" />
+        </div>
+        <div>
+          <div className={`text-[10px] font-mono uppercase tracking-widest text-sky-300 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+            {t("Thought Experiment", "ការពិសោធន៍នៃការគិត")}
+          </div>
+          <h3 className={`text-xl font-bold text-amber-50 mb-3 ${kh ? "font-khmer" : ""}`}>
+            {t(
+              "The Bicameral Mind: Voices of the Gods",
+              "ចិត្តពីរផ្នែក៖ សំឡេងរបស់ព្រះ"
+            )}
+          </h3>
+          <p className={`text-sm sm:text-base text-sky-100/85 leading-relaxed mb-4 ${kh ? "font-khmer leading-loose" : ""}`}>
+            {t(
+              "Introduced by Julian Jaynes in the 1970s, this fascinating hypothesis suggests that before roughly 1000 BCE, humans did not possess conscious self-awareness (introspection).",
+              "ទ្រឹស្តីនេះត្រូវបានណែនាំដោយ Julian Jaynes នៅទសវត្សរ៍ឆ្នាំ ១៩៧០ វាបង្ហាញថាមុនឆ្នាំ ១០០០ មុនគ.ស. មនុស្សមិនទាន់មានការដឹងខ្លួនឯង (ការសង្កេតចិត្តខ្លួនឯង) នៅឡើយទេ។"
+            )}
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-4">
+            <div className="bg-slate-900/60 border border-sky-400/20 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Brain className="w-4 h-4 text-amber-300" />
+                <h4 className={`font-bold text-amber-200 text-sm ${kh ? "font-khmer" : ""}`}>
+                  {t("Two Chambers", "បន្ទប់ពីរ")}
+                </h4>
+              </div>
+              <p className={`text-xs text-sky-100/80 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "The right hemisphere generated problem-solving commands, which were transmitted across the corpus callosum to the left hemisphere.",
+                  "អឌ្ឍគោលខួរក្បាលខាងស្តាំបង្កើតពាក្យបញ្ជាដោះស្រាយបញ្ហា ដែលត្រូវបានបញ្ជូនកាត់តាម corpus callosum ទៅកាន់អឌ្ឍគោលខួរក្បាលខាងឆ្វេង។"
+                )}
+              </p>
+            </div>
+            <div className="bg-slate-900/60 border border-sky-400/20 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Volume2 className="w-4 h-4 text-sky-300" />
+                <h4 className={`font-bold text-sky-200 text-sm ${kh ? "font-khmer" : ""}`}>
+                  {t("Auditory Hallucinations", "ការយល់ច្រឡំតាមត្រចៀក")}
+                </h4>
+              </div>
+              <p className={`text-xs text-sky-100/80 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                {t(
+                  "Early humans supposedly experienced these internal commands as actual auditory hallucinations—perceiving their own thoughts as the voices of gods, ancestors, or rulers.",
+                  "មនុស្សសម័យដើមត្រូវបានគេសន្មតថាជួបប្រទះពាក្យបញ្ជាខាងក្នុងទាំងនេះជាការយល់ច្រឡំសម្លេងពិតៗ — ដោយយល់ថាគំនិតរបស់ពួកគេជាសំឡេងរបស់ព្រះ បុព្វបុរស ឬអ្នកដឹកនាំ។"
+                )}
+              </p>
+            </div>
+          </div>
+
+          <div className={`inline-flex items-start sm:items-center gap-2 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-300/30 text-sky-200/90 text-xs ${kh ? "font-khmer leading-loose" : "leading-relaxed"}`}>
+            <Lightbulb className="w-4 h-4 flex-shrink-0 text-amber-300 mt-0.5 sm:mt-0" />
+            <span>
+              <strong className="text-amber-200 font-bold">{t("The Modern View:", "ទស្សនៈសម័យទំនើប៖")}</strong>{" "}
+              {t(
+                "Modern neuroscientists view this mostly as a fascinating philosophical thought experiment about how language shapes consciousness, rather than a literal anatomical map of ancient brains.",
+                "អ្នកវិទ្យាសាស្ត្រសរសៃប្រសាទសម័យទំនើបមើលឃើញថា នេះភាគច្រើនជាការពិសោធន៍នៃការគិតបែបទស្សនវិជ្ជាដ៏គួរឲ្យចាប់អារម្មណ៍អំពីរបៀបដែលភាសាបង្កើតការដឹងខ្លួន ជាជាងផែនទីកាយវិភាគវិទ្យាពិតប្រាកដនៃខួរក្បាលមនុស្សសម័យបុរាណ។"
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </article>

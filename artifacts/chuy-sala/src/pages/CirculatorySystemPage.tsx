@@ -7,6 +7,8 @@ import {
   FlaskConical,
   Shield,
   Syringe,
+  GitMerge,
+  Network,
 } from "lucide-react";
 import { useTranslation } from "@/store/use-language";
 
@@ -438,6 +440,125 @@ export default function CirculatorySystemPage() {
                 </div>
               </div>
             </Card>
+          </section>
+
+          {/* ══ SECTION 2.5: CLINICAL ANATOMY ══ */}
+          <section aria-labelledby="cardio-anatomy">
+            <SectionTitle icon={HeartPulse} en="The Cardiovascular System: The Heart & Vessels" kh="ប្រព័ន្ធសរសៃឈាមបេះដូង៖ បេះដូង និងសរសៃឈាម" id="cardio-anatomy" />
+            
+            <div className="grid sm:grid-cols-2 gap-5 mb-5">
+              <Card>
+                <div className="flex items-center gap-3 mb-3">
+                  <Activity className="w-6 h-6 flex-shrink-0" style={{ color: ROSE }} aria-hidden />
+                  <h3 className="font-bold text-lg" style={{ color: PALE }}>
+                    {t("Primary Function", "មុខងារចម្បង")}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                  {t(
+                    "Beyond delivering oxygen, blood transports carbon dioxide, metabolic waste (to the liver and kidneys), electrolytes, hormones (like insulin and cortisol), and immune cells (white blood cells and antibodies) around the body.",
+                    "ក្រៅពីការបញ្ជូនអុកស៊ីសែន ឈាមដឹកជញ្ជូនកាបូនឌីអុកស៊ីត កាកសំណល់មេតាប៉ូលីស (ទៅថ្លើម និងតម្រងនោម) អេឡិចត្រូលីត អរម៉ូន (ដូចជាអាំងស៊ុយលីន និងករទីសូល) និងកោសិកាប្រព័ន្ធភាពស៊ាំ (កោសិកាឈាមស និងអង្គបដិបក្ខ) ទូទាំងរាងកាយ។"
+                  )}
+                </p>
+              </Card>
+
+              <Card>
+                <div className="flex items-center gap-3 mb-3">
+                  <Network className="w-6 h-6 flex-shrink-0" style={{ color: ROSE }} aria-hidden />
+                  <h3 className="font-bold text-lg" style={{ color: PALE }}>
+                    {t("The Conduction System (Pacemaker)", "ប្រព័ន្ធចម្លងចរន្តអគ្គិសនីបេះដូង")}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                  {t(
+                    "The heart beats via electrical signals. The signal starts at the SA Node (the pacemaker), travels to the AV Node (the gatekeeper, which pauses the signal slightly to let the ventricles fill), and then travels through the Purkinje fibers to trigger the muscular contraction.",
+                    "បេះដូងលោតតាមរយៈសញ្ញាអគ្គិសនី។ សញ្ញាចាប់ផ្តើមនៅ SA Node (អ្នកបង្កើតចង្វាក់) ធ្វើដំណើរទៅ AV Node (អ្នកយាមទ្វារ ដែលផ្អាកសញ្ញាបន្តិចដើម្បីអោយថតក្រោមបំពេញ) ហើយបន្ទាប់មកឆ្លងកាត់ Purkinje fibers ដើម្បីកេះអោយសាច់ដុំកន្ត្រាក់។"
+                  )}
+                </p>
+              </Card>
+            </div>
+
+            <div className="space-y-5">
+              <Card highlight>
+                <div className="flex items-center gap-3 mb-4">
+                  <GitMerge className="w-6 h-6 flex-shrink-0" style={{ color: PALE }} aria-hidden />
+                  <h3 className="font-bold text-lg" style={{ color: PALE }}>
+                    {t("The Path of Blood", "ផ្លូវនៃឈាម")}
+                  </h3>
+                </div>
+                <div className="grid md:grid-cols-[1fr,auto,1fr] gap-4 items-center">
+                  <div className="p-4 rounded-xl" style={{ background: `${VEIN_BLUE}15`, border: `1px solid ${VEIN_BLUE}33` }}>
+                    <h4 className="font-bold text-sm mb-2 uppercase tracking-wider" style={{ color: VEIN_BLUE }}>{t("Deoxygenated", "គ្មានអុកស៊ីសែន")}</h4>
+                    <p className="text-sm font-medium" style={{ color: TEXT }}>
+                      {t("Right Atrium → Right Ventricle → Lungs", "ថតលើស្តាំ → ថតក្រោមស្តាំ → សួត")}
+                    </p>
+                  </div>
+                  <div className="hidden md:block text-2xl" style={{ color: TEXT_DIM }}>→</div>
+                  <div className="p-4 rounded-xl" style={{ background: `${CRIMSON}15`, border: `1px solid ${CRIMSON}33` }}>
+                    <h4 className="font-bold text-sm mb-2 uppercase tracking-wider" style={{ color: CRIMSON }}>{t("Oxygenated", "សំបូរអុកស៊ីសែន")}</h4>
+                    <p className="text-sm font-medium" style={{ color: TEXT }}>
+                      {t("Left Atrium → Left Ventricle → Aorta", "ថតលើឆ្វេង → ថតក្រោមឆ្វេង → Aorta")}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-sm mt-4 leading-relaxed" style={{ color: TEXT }}>
+                  {t(
+                    "The left ventricle is the thickest chamber because it must pump against high pressure to reach the entire body.",
+                    "ថតក្រោមខាងឆ្វេងគឺជាថតក្រាស់ជាងគេ ព្រោះវាត្រូវបូមប្រឆាំងនឹងសម្ពាធខ្ពស់ដើម្បីទៅដល់រាងកាយទាំងមូល។"
+                  )}
+                </p>
+              </Card>
+
+              <div className="grid sm:grid-cols-2 gap-5">
+                <Card>
+                  <h3 className="font-bold text-lg mb-4" style={{ color: PALE }}>
+                    {t("Systole vs. Diastole", "ស៊ីស្តូល និង ឌីយ៉ាស្តូល")}
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="p-3 rounded-lg" style={{ background: `${PANEL_SOFT}` }}>
+                      <span className="font-mono text-xs tracking-wider" style={{ color: CRIMSON }}>SYSTOLE</span>
+                      <p className="text-sm mt-1" style={{ color: TEXT }}>
+                        {t("Ventricles contract and eject blood (the 'lub' sound).", "ថតក្រោមកន្ត្រាក់ និងបាញ់ឈាមចេញ (សំឡេង 'lub')។")}
+                      </p>
+                    </div>
+                    <div className="p-3 rounded-lg" style={{ background: `${PANEL_SOFT}` }}>
+                      <span className="font-mono text-xs tracking-wider" style={{ color: VEIN_BLUE }}>DIASTOLE</span>
+                      <p className="text-sm mt-1" style={{ color: TEXT }}>
+                        {t("Ventricles relax and fill with blood (the 'dub' sound).", "ថតក្រោមសម្រាក និងបំពេញដោយឈាម (សំឡេង 'dub')។")}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card>
+                  <h3 className="font-bold text-lg mb-4" style={{ color: PALE }}>
+                    {t("The Five Blood Vessels", "សរសៃឈាមទាំងប្រាំ")}
+                  </h3>
+                  <ul className="text-sm space-y-3" style={{ color: TEXT }}>
+                    <li className="flex gap-2">
+                      <strong style={{ color: CRIMSON, width: '100px', flexShrink: 0 }}>{t("Arteries", "អារទែ")}</strong>
+                      <span>{t("thick-walled, high pressure", "ជញ្ជាំងក្រាស់ សម្ពាធខ្ពស់")}</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <strong style={{ color: ROSE, width: '100px', flexShrink: 0 }}>{t("Arterioles", "អារទែរ្យូល")}</strong>
+                      <span>{t("smaller branching arteries", "អារទែបែកខ្នែងតូចៗ")}</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <strong style={{ color: PALE, width: '100px', flexShrink: 0 }}>{t("Capillaries", "សរសៃឈាមតូចៗ")}</strong>
+                      <span>{t("gas/nutrient exchange", "កន្លែងប្តូរឧស្ម័ន និងសារធាតុចិញ្ចឹម")}</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <strong style={{ color: "#818cf8", width: '100px', flexShrink: 0 }}>{t("Venules", "វ៉េនន្យូល")}</strong>
+                      <span>{t("small veins collecting blood", "សរសៃវ៉ែនតូចៗប្រមូលឈាម")}</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <strong style={{ color: VEIN_BLUE, width: '100px', flexShrink: 0 }}>{t("Veins", "វ៉ែន")}</strong>
+                      <span>{t("thin-walled, return blood to heart", "ជញ្ជាំងស្តើង ដឹកឈាមទៅបេះដូង")}</span>
+                    </li>
+                  </ul>
+                </Card>
+              </div>
+            </div>
           </section>
 
           {/* ══ SECTION 3: BLOOD TYPES ══ */}
