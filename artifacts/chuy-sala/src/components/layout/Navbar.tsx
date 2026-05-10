@@ -547,6 +547,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ការដកដង្ហើម និងការផ្លាស់ប្តូរឧស្ម័ន។",
       },
       {
+        href: "/science/human-body/digestive-system",
+        labelEn: "The Digestive System",
+        labelKh: "ប្រព័ន្ធរំលាយអាហារ",
+        icon: Apple,
+        descEn: "The body's food processing center.",
+        descKh: "មជ្ឈមណ្ឌលកែច្នៃអាហាររបស់រាងកាយ។",
+      },
+      {
         href: "divider:biology",
         labelEn: "Biology",
         labelKh: "ជីវវិទ្យា",
