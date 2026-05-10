@@ -539,6 +539,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "រចនាសម្ព័ន្ធរបស់រាងកាយ៖ ឆ្អឹង ឆ្អឹងខ្ចី ការការពារ និងការផលិតកោសិកាឈាម។",
       },
       {
+        href: "/science/human-body/respiratory-system",
+        labelEn: "The Respiratory System",
+        labelKh: "ប្រព័ន្ធផ្លូវដង្ហើម",
+        icon: Wind,
+        descEn: "Breathing and gas exchange.",
+        descKh: "ការដកដង្ហើម និងការផ្លាស់ប្តូរឧស្ម័ន។",
+      },
+      {
         href: "divider:biology",
         labelEn: "Biology",
         labelKh: "ជីវវិទ្យា",
