@@ -8,7 +8,7 @@ import { useTranslation, useLanguageStore } from "@/store/use-language";
  *  Shows a softly-pulsing green dot and a bilingual "Active Students" label
  *  that auto-collapses to "🟢 NN" on small mobile screens.
  *
- *  TODO: Connect to WebSocket/Database for actual concurrent user tracking.
+ *  Now powered by a dynamic, time-based algorithm to simulate live connection.
  * ────────────────────────────────────────────────────────────────────────── */
 
 const KH_DIGITS = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
@@ -16,17 +16,60 @@ function toKhNum(n: number | string): string {
   return String(n).replace(/[0-9]/g, (d) => KH_DIGITS[Number(d)]);
 }
 
-// Tunables for the simulation
-const BASE = 38;          // realistic baseline of concurrent students
-const MIN_VAL = 20;       // floor — never goes below this
-const MAX_VAL = 65;       // ceiling — never goes above this
-const MIN_DELTA = 1;      // smallest random change
-const MAX_DELTA = 3;      // largest random change
-const MIN_INTERVAL_MS = 30_000;  // 30 seconds
-const MAX_INTERVAL_MS = 90_000;  // 90 seconds
-
 function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getInitialStudents() {
+  const hour = new Date().getHours();
+  const isNight = hour >= 21 || hour < 6;
+  return isNight ? randInt(3, 9) : randInt(38, 52);
+}
+
+/**
+ * Shared hook to manage the time-based organic simulation.
+ * 
+ * If the time is 9:00 PM or later (hour >= 21) OR before 6:00 AM (hour < 6),
+ * the activeStudents count is set to a low number (3-9).
+ * Otherwise, it's set to a higher daytime number (38-52).
+ * Every 3 minutes, the number fluctuates by 1 or 2 people.
+ */
+function useActiveStudents() {
+  const [activeStudents, setActiveStudents] = useState<number>(getInitialStudents);
+
+  useEffect(() => {
+    // Re-evaluate initial bounds on mount (in case client time differs from load)
+    setActiveStudents(getInitialStudents());
+
+    const intervalId = window.setInterval(() => {
+      const hour = new Date().getHours();
+      const isNight = hour >= 21 || hour < 6;
+      const min = isNight ? 3 : 38;
+      const max = isNight ? 9 : 52;
+
+      setActiveStudents((current) => {
+        // If we crossed the day/night threshold, reset into the correct range
+        if (current < min || current > max) {
+          return randInt(min, max);
+        }
+
+        const direction = Math.random() < 0.5 ? -1 : 1;
+        const delta = randInt(1, 2) * direction;
+        const next = current + delta;
+        
+        // Clamp into the believable range
+        if (next < min) return current + Math.abs(delta); // bounce up
+        if (next > max) return current - Math.abs(delta); // bounce down
+        return next;
+      });
+    }, 3 * 60 * 1000); // 3 minutes
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
+  return activeStudents;
 }
 
 export function LiveStudentCounter() {
@@ -34,43 +77,8 @@ export function LiveStudentCounter() {
   const { language } = useLanguageStore();
   const k = language === "kh";
 
-  const [count, setCount] = useState<number>(BASE);
-
-  /**
-   * Organic-traffic simulation.
-   *
-   * Every 30–90 seconds, randomly add OR subtract 1–3 students, clamped to
-   * [MIN_VAL, MAX_VAL]. This makes the number feel alive without needing a
-   * real backend right now.
-   *
-   * TODO: Connect to WebSocket/Database for actual concurrent user tracking.
-   */
-  useEffect(() => {
-    let timeoutId: number | undefined;
-
-    const tick = () => {
-      setCount((current) => {
-        const direction = Math.random() < 0.5 ? -1 : 1;
-        const delta = randInt(MIN_DELTA, MAX_DELTA) * direction;
-        const next = current + delta;
-        // Clamp into a believable range
-        if (next < MIN_VAL) return current + Math.abs(delta); // bounce up
-        if (next > MAX_VAL) return current - Math.abs(delta); // bounce down
-        return next;
-      });
-
-      // Schedule next tick at a random interval
-      timeoutId = window.setTimeout(tick, randInt(MIN_INTERVAL_MS, MAX_INTERVAL_MS));
-    };
-
-    timeoutId = window.setTimeout(tick, randInt(MIN_INTERVAL_MS, MAX_INTERVAL_MS));
-
-    return () => {
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, []);
-
-  const displayCount = k ? toKhNum(count) : String(count);
+  const activeStudents = useActiveStudents();
+  const displayCount = k ? toKhNum(activeStudents) : String(activeStudents);
 
   return (
     <div
@@ -78,8 +86,8 @@ export function LiveStudentCounter() {
       role="status"
       aria-live="polite"
       aria-label={t(
-        `${count} students currently active`,
-        `សិស្ស ${count} នាក់កំពុងរៀន`,
+        `${activeStudents} students currently active`,
+        `សិស្ស ${activeStudents} នាក់កំពុងរៀន`,
       )}
       data-testid="live-student-counter"
     >
@@ -132,37 +140,15 @@ export function LiveStudentCounterCompact() {
   const { language } = useLanguageStore();
   const k = language === "kh";
 
-  const [count, setCount] = useState<number>(BASE);
-
-  // Same organic simulation as the full counter.
-  // TODO: Connect to WebSocket/Database for actual concurrent user tracking.
-  useEffect(() => {
-    let timeoutId: number | undefined;
-    const tick = () => {
-      setCount((current) => {
-        const direction = Math.random() < 0.5 ? -1 : 1;
-        const delta = randInt(MIN_DELTA, MAX_DELTA) * direction;
-        const next = current + delta;
-        if (next < MIN_VAL) return current + Math.abs(delta);
-        if (next > MAX_VAL) return current - Math.abs(delta);
-        return next;
-      });
-      timeoutId = window.setTimeout(tick, randInt(MIN_INTERVAL_MS, MAX_INTERVAL_MS));
-    };
-    timeoutId = window.setTimeout(tick, randInt(MIN_INTERVAL_MS, MAX_INTERVAL_MS));
-    return () => {
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, []);
-
-  const displayCount = k ? toKhNum(count) : String(count);
+  const activeStudents = useActiveStudents();
+  const displayCount = k ? toKhNum(activeStudents) : String(activeStudents);
 
   return (
     <div
       className="sm:hidden inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-emerald-300/60 bg-emerald-50"
       role="status"
       aria-live="polite"
-      aria-label={`${count} students active`}
+      aria-label={`${activeStudents} students active`}
       data-testid="live-student-counter-compact"
     >
       <span className="relative flex w-2 h-2 flex-shrink-0" aria-hidden="true">

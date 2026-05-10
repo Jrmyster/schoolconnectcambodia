@@ -102,7 +102,7 @@ const EndocrineSystemPage        = lazy(() => import("@/pages/EndocrineSystemPag
 const ImmuneSystemPage           = lazy(() => import("@/pages/ImmuneSystemPage"));
 const SkeletalSystemPage         = lazy(() => import("@/pages/SkeletalSystemPage"));
 const RespiratorySystemPage      = lazy(() => import("@/pages/RespiratorySystemPage"));
-const DigestiveSystemPage        = lazy(() => import("@/pages/DigestiveSystemPage"));
+const DigestiveSystemPage        = lazy(() => import("@/pages/Science/DigestiveSystem"));
 const ReproductiveSystem         = lazy(() => import("@/pages/Science/ReproductiveSystem"));
 const ExcretorySystemPage        = lazy(() => import("@/pages/Science/ExcretorySystem"));
 const BotanyPage                 = lazy(() => import("@/pages/BotanyPage").then(m => ({ default: m.BotanyPage })));
