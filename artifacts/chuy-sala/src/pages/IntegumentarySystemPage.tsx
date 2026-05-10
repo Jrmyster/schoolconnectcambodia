@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Shield, Sun, Thermometer, Layers, Fingerprint, Zap } from "lucide-react";
+import { ArrowLeft, Shield, Sun, Thermometer, Layers, Fingerprint, Zap, Palette } from "lucide-react";
 import { useTranslation } from "@/store/use-language";
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -329,6 +329,79 @@ export default function IntegumentarySystemPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* ═══ NEW SECTION: SKIN COLOR ═══ */}
+          <section aria-labelledby="skin-color-heading">
+            <SectionTitle icon={Palette} en="The Science of Skin Color" kh="វិទ្យាសាស្ត្រនៃពណ៌ស្បែក" id="skin-color-heading" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card accent={EPI_COL}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl border shrink-0" style={{ background: PANEL_SOFT, borderColor: `${EPI_COL}44` }}>
+                    <Fingerprint className="w-6 h-6" style={{ color: EPI_COL }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-base mb-2" style={{ color: EPI_COL }}>
+                      {t("Melanocytes & Melanin", "មេឡាណូស៊ីត និង មេឡានីន")}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                      {t(
+                        "Specialized cells in the epidermis called melanocytes produce a pigment called melanin. Everyone has roughly the same number of these cells; the difference in skin color comes from how much and what type of melanin they produce.",
+                        "កោសិកាពិសេសនៅក្នុងអេពីឌែម (មេឡាណូស៊ីត) ផលិតជាតិពណ៌ហៅថាមេឡានីន។ មនុស្សគ្រប់រូបមានចំនួនកោសិកាទាំងនេះប្រហែលគ្នា ការខុសប្លែកគ្នានៃពណ៌ស្បែកគឺមកពីចំនួន និងប្រភេទមេឡានីនដែលពួកវាផលិត។"
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card accent={GOLD}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-xl border shrink-0" style={{ background: PANEL_SOFT, borderColor: `${GOLD}44` }}>
+                    <Palette className="w-6 h-6" style={{ color: GOLD }} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-base mb-2" style={{ color: GOLD }}>
+                      {t("Types of Pigment", "ប្រភេទជាតិពណ៌")}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: TEXT }}>
+                      {t(
+                        "There are two primary types of melanin: Eumelanin produces rich brown and black tones, while Pheomelanin produces lighter red and yellow tones.",
+                        "Eumelanin បង្កើតពណ៌ត្នោតនិងខ្មៅដ៏ស្រស់ស្អាត ចំណែកឯ Pheomelanin បង្កើតពណ៌ក្រហមនិងលឿងស្រាលជាង។"
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <div className="md:col-span-2">
+                <Card highlight accent={AMBER}>
+                  <div className="flex items-start gap-5">
+                    <div className="hidden sm:flex flex-col gap-2 shrink-0 items-center justify-center mt-1">
+                      <Sun className="w-6 h-6" style={{ color: GOLD }} />
+                      <div className="w-0.5 h-6 opacity-40" style={{ background: AMBER }}></div>
+                      <Shield className="w-6 h-6" style={{ color: HYPO }} />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-base mb-2" style={{ color: PALE }}>
+                        {t("The Evolutionary Balance", "តុល្យភាពវិវត្តន៍")}
+                      </h3>
+                      <p className="text-sm leading-relaxed mb-3" style={{ color: TEXT }}>
+                        {t(
+                          "High melanin concentrations act as a natural sunscreen, protecting DNA and vital nutrients (like folate) from intense UV radiation near the equator.",
+                          "កំហាប់មេឡានីនខ្ពស់ដើរតួជាឡេការពារកម្តៅថ្ងៃធម្មជាតិ ដែលការពារ DNA និងសារធាតុចិញ្ចឹមសំខាន់ៗពីកាំរស្មី UV ខ្លាំងនៅជិតអេក្វាទ័រ។"
+                        )}
+                      </p>
+                      <p className="text-sm leading-relaxed" style={{ color: TEXT_DIM }}>
+                        {t(
+                          "Conversely, lower melanin concentrations in northern latitudes allow enough sunlight to penetrate the skin to synthesize Vitamin D, which is crucial for bone health.",
+                          "ផ្ទុយទៅវិញ កំហាប់មេឡានីនទាបនៅរយៈទទឹងភាគខាងជើង អនុញ្ញាតឱ្យពន្លឺព្រះអាទិត្យជ្រាបចូលស្បែកគ្រប់គ្រាន់ដើម្បីបង្កើតវីតាមីន D ដែលមានសារៈសំខាន់សម្រាប់សុខភាពឆ្អឹង។"
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
             </div>
           </section>
 

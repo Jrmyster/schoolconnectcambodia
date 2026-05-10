@@ -241,7 +241,9 @@ export default function GlobalAtlas() {
             </span>
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base sm:text-lg text-slate-300">
+          <PopulationCounter />
+
+          <p className="mt-8 max-w-3xl text-base sm:text-lg text-slate-300">
             {kh
               ? "ប្រទេសពិភពលោកក្នុងសៀវភៅសិក្សាអូហ្វឡាញតែមួយ — ស្វែងរកតាមឈ្មោះ ឬច្រោះតាមទ្វីប រួចចុចលើកាតប្រទេសណាមួយដើម្បីមើលទង់ជាតិ ប្រជាជន រាជធានី ភាសា សាសនា សត្វព្រៃ ស្ថាបត្យកម្ម និងការពិតកម្សាន្ត។"
               : "Every country of the world in one offline study book — search by name or filter by continent, then tap any card to see its flag, population, capital, languages, religion, wildlife, landmarks, and a fun fact."}
@@ -413,6 +415,50 @@ export default function GlobalAtlas() {
           onClose={() => setOpenCountry(null)}
         />
       )}
+    </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────── */
+/*  Population Counter Component                                          */
+/* ────────────────────────────────────────────────────────────────────── */
+
+function PopulationCounter() {
+  const language = useLanguageStore((s) => s.language);
+  const kh = language === "kh";
+  const [population, setPopulation] = useState<number>(8118835000);
+
+  useEffect(() => {
+    // Starting date calculation base
+    const startDate = new Date("2026-01-01T00:00:00Z").getTime();
+    
+    const calculatePopulation = () => {
+      const now = Date.now();
+      const secondsElapsed = Math.max(0, (now - startDate) / 1000);
+      const currentPop = 8118835000 + (secondsElapsed * 2.37);
+      setPopulation(Math.floor(currentPop));
+    };
+
+    calculatePopulation();
+    // Update more frequently than 1s to see the digits ticking rapidly
+    const interval = setInterval(calculatePopulation, 421);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="mt-8 mb-4 p-5 sm:p-6 rounded-3xl bg-slate-900/60 border border-slate-700/50 shadow-2xl backdrop-blur-md max-w-md flex items-center gap-5 transition-transform hover:scale-[1.02]">
+      <div className="bg-cyan-500/20 p-3 sm:p-4 rounded-2xl shrink-0">
+        <Users className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400" />
+      </div>
+      <div>
+        <h2 className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest text-cyan-300/80 mb-1 ${kh ? 'font-khmer normal-case tracking-normal text-[11px] sm:text-sm' : ''}`}>
+          {kh ? "ចំនួនប្រជាជនពិភពលោកបច្ចុប្បន្ន" : "Current World Population"}
+        </h2>
+        <div className="font-mono text-3xl sm:text-4xl font-black text-slate-100 tracking-tight tabular-nums" aria-live="polite">
+          {population.toLocaleString()}
+        </div>
+      </div>
     </div>
   );
 }

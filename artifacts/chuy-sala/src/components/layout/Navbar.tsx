@@ -563,6 +563,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "DNA សេនេទិច និងការបង្កើតជីវិត។",
       },
       {
+        href: "/science/human-body/excretory-system",
+        labelEn: "The Excretory System",
+        labelKh: "ប្រព័ន្ធបញ្ចេញចោល",
+        icon: Filter,
+        descEn: "Kidneys, hydration, and filtering waste.",
+        descKh: "តម្រងនោម ការរក្សាជាតិទឹក និងការចម្រោះកាកសំណល់។",
+      },
+      {
         href: "divider:biology",
         labelEn: "Biology",
         labelKh: "ជីវវិទ្យា",

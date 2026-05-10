@@ -104,6 +104,7 @@ const SkeletalSystemPage         = lazy(() => import("@/pages/SkeletalSystemPage
 const RespiratorySystemPage      = lazy(() => import("@/pages/RespiratorySystemPage"));
 const DigestiveSystemPage        = lazy(() => import("@/pages/DigestiveSystemPage"));
 const ReproductiveSystem         = lazy(() => import("@/pages/Science/ReproductiveSystem"));
+const ExcretorySystemPage        = lazy(() => import("@/pages/Science/ExcretorySystem"));
 const BotanyPage                 = lazy(() => import("@/pages/BotanyPage").then(m => ({ default: m.BotanyPage })));
 const MicrobiologyPage           = lazy(() => import("@/pages/MicrobiologyPage"));
 const GeologicalWondersPage      = lazy(() => import("@/pages/GeologicalWondersPage").then(m => ({ default: m.GeologicalWondersPage })));
@@ -418,6 +419,7 @@ function Router() {
             <Route path="/science/human-body/respiratory-system" component={RespiratorySystemPage} />
             <Route path="/science/human-body/digestive-system" component={DigestiveSystemPage} />
             <Route path="/science/human-body/reproductive-system" component={ReproductiveSystem} />
+            <Route path="/science/human-body/excretory-system" component={ExcretorySystemPage} />
             <Route path="/biology/botany" component={BotanyPage} />
             <Route path="/science/biology/microbiology" component={MicrobiologyPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
