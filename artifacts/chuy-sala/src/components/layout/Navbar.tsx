@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
-  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna,
+  Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna, Bone,
   Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
@@ -521,6 +521,22 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Activity,
         descEn: "Hormones, glands, and homeostasis — how the body communicates internally.",
         descKh: "អរម៉ូន ក្រពេញ និង homeostasis — របៀបដែលរាងកាយទាក់ទងគ្នាខាងក្នុង។",
+      },
+      {
+        href: "/science/human-body/immune-system",
+        labelEn: "The Immune System",
+        labelKh: "ប្រព័ន្ធភាពស៊ាំ",
+        icon: Shield,
+        descEn: "The body's defense network: innate vs. adaptive immunity, T-cells, and vaccines.",
+        descKh: "បណ្តាញការពាររបស់រាងកាយ៖ ភាពស៊ាំពីកំណើត ទល់នឹងភាពស៊ាំសម្របខ្លួន កោសិកា T និងវ៉ាក់សាំង។",
+      },
+      {
+        href: "/science/human-body/skeletal-system",
+        labelEn: "The Skeletal System",
+        labelKh: "ប្រព័ន្ធគ្រោងឆ្អឹង",
+        icon: Bone,
+        descEn: "The body's structural framework: bones, cartilage, protection, and blood cell production.",
+        descKh: "រចនាសម្ព័ន្ធរបស់រាងកាយ៖ ឆ្អឹង ឆ្អឹងខ្ចី ការការពារ និងការផលិតកោសិកាឈាម។",
       },
       {
         href: "divider:biology",
