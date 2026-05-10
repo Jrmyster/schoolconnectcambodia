@@ -184,10 +184,10 @@ export function SpacePage() {
             </div>
 
             <h1 className={`font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white mb-4 leading-tight ${kh ? "font-khmer leading-loose" : ""}`}>
-              {t(
-                <>Explore the <span className="text-sky-400">Universe</span></>,
-                <>ស្វែងយល់<span className="text-sky-400">ចក្រវាល</span></>
-              )}
+              {kh
+                ? <>ស្វែងយល់<span className="text-sky-400">ចក្រវាល</span></>
+                : <>Explore the <span className="text-sky-400">Universe</span></>
+              }
             </h1>
             <p className={`text-white/80 max-w-2xl mx-auto leading-relaxed ${kh ? "font-khmer text-base leading-loose" : "text-base"}`}>
               {t(

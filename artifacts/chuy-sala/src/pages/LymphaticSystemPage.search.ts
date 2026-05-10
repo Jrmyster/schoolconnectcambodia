@@ -1,7 +1,9 @@
+import { Shield } from "lucide-react";
 import type { SearchEntry } from "@/data/searchTypes";
 
 export const searchMeta: SearchEntry = {
   id: "lymphatic-system",
+  icon: Shield,
   type: "page",
   href: "/science/lymphatic-system",
   titleEn: "The Lymphatic System & Immunity",

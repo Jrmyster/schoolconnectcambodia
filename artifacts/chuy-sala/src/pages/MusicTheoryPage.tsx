@@ -266,10 +266,10 @@ function Section({
 function PaperCard({
   children, className = "", as = "div",
 }: { children: React.ReactNode; className?: string; as?: "div" | "article" }) {
-  const Tag = as as keyof React.JSX.IntrinsicElements;
+  const Tag = as as unknown as React.FC<{ className?: string; children?: React.ReactNode }>;
   return (
     <Tag className={`bg-[#fdfaf2] rounded-2xl border border-amber-900/15 shadow-[0_2px_24px_-12px_rgba(120,53,15,0.45)] ${className}`}>
-      {children as React.ReactNode}
+      {children}
     </Tag>
   );
 }
@@ -1430,7 +1430,7 @@ type OrchestraInstrument = {
   nameKh: string;
   descEn: string;
   descKh: string;
-  Svg: React.ComponentType<{ className?: string }>;
+  Svg: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
 };
 
 type OrchestraFamily = {

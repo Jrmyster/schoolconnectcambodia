@@ -54,7 +54,7 @@ import { ElectricalOscilloscopeSection } from "./ElectricalOscilloscopeSection";
 // ── Core Concept cards (the "Big Three") ────────────────────────────────────
 
 type Concept = {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   symbol: string;
   unit: string;
   termEn: string;
@@ -118,7 +118,7 @@ const CONCEPTS: Concept[] = [
 // ── Safety protocols ────────────────────────────────────────────────────────
 
 type Protocol = {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   titleEn: string;
   titleKh: string;
   bodyEn: string;

@@ -46,7 +46,7 @@ function SectionTitle({
   kh,
   id,
 }: {
-  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean; style?: React.CSSProperties }>;
   en: string;
   kh: string;
   id?: string;

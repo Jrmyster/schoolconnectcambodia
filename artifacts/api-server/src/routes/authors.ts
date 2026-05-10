@@ -58,7 +58,7 @@ router.post("/challenges/:challengeId/complete", requireRole("student"), async (
     return res.status(401).json({ error: "You must be logged in to complete a challenge" });
   }
   const userId = req.session.userId;
-  const { challengeId } = req.params;
+  const challengeId = req.params.challengeId as string;
 
   try {
     // Find the author with this challenge to get the badge type

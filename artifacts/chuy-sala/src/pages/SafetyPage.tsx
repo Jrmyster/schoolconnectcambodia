@@ -10,7 +10,7 @@ import { CybersecurityShield } from "@/components/safety/CybersecurityShield";
 // ── Threat warning cards ──────────────────────────────────────────────────────
 
 type ThreatCard = {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   borderColor: string;
   titleEn: string;

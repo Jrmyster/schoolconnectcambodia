@@ -20,7 +20,7 @@ function glow(c: string, r = 8) {
 }
 
 function SectionTitle({ icon: Icon, en, kh, id, warn = false }: {
-  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean; style?: React.CSSProperties }>;
   en: string; kh: string; id?: string; warn?: boolean;
 }) {
   const col = warn ? AMBER : CYAN;

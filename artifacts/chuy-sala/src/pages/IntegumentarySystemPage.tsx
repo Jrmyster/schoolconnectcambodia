@@ -30,7 +30,7 @@ function glow(c: string, r = 8) {
 }
 
 function SectionTitle({ icon: Icon, en, kh, id }: {
-  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean; style?: React.CSSProperties }>;
   en: string; kh: string; id?: string;
 }) {
   return (
@@ -44,12 +44,12 @@ function SectionTitle({ icon: Icon, en, kh, id }: {
   );
 }
 
-function Card({ children, highlight = false, accent }: {
-  children: React.ReactNode; highlight?: boolean; accent?: string;
+function Card({ children, highlight = false, accent, className = "" }: {
+  children: React.ReactNode; highlight?: boolean; accent?: string; className?: string;
 }) {
   const col = accent ?? AMBER;
   return (
-    <div className="rounded-2xl p-5 sm:p-6 border" style={{
+    <div className={`rounded-2xl p-5 sm:p-6 border ${className}`} style={{
       background: highlight ? PANEL_SOFT : PANEL,
       borderColor: `${col}44`,
       boxShadow: highlight ? glow(col, 6) : "none",

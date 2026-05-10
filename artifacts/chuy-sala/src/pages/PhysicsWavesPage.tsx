@@ -656,7 +656,7 @@ function SilentSpaceSvg() {
         <line x1="170" y1="72" x2="208" y2="118" />
         <line x1="208" y1="72" x2="170" y2="118" />
       </g>
-      <RocketDoodle x="32" y="32" />
+      <RocketDoodle x={32} y={32} />
       <text x="120" y="172" fontSize="10" fill="#a78bfa" fontFamily="monospace" textAnchor="middle" fontWeight="bold">NO MEDIUM = NO SOUND</text>
     </svg>
   );

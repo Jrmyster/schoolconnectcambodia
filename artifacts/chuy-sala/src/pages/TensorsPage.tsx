@@ -56,7 +56,7 @@ function SectionHeader({
   accent,
   isKh,
 }: {
-  icon: React.ElementType;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   num: string;
   en: string;
   kh: string;

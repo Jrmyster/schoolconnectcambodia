@@ -44,6 +44,7 @@ export function LaunchpadPage() {
     // URL has no major → make sure local state matches (e.g. user pressed
     // back after auto-selecting, or hit Reset which clears the param).
     setPathwayMajorId("");
+    return;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
