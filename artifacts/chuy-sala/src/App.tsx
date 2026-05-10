@@ -98,7 +98,9 @@ const PublicHealthPage          = lazy(() => import("@/pages/PublicHealthPage").
 const DiseaseDividePage         = lazy(() => import("@/pages/DiseaseDividePage").then(m => ({ default: m.DiseaseDividePage })));
 const AddictionSciencePage      = lazy(() => import("@/pages/AddictionSciencePage"));
 const CompetitionCooperationPage = lazy(() => import("@/pages/CompetitionCooperationPage").then(m => ({ default: m.CompetitionCooperationPage })));
+const EndocrineSystemPage        = lazy(() => import("@/pages/EndocrineSystemPage"));
 const BotanyPage                 = lazy(() => import("@/pages/BotanyPage").then(m => ({ default: m.BotanyPage })));
+const MicrobiologyPage           = lazy(() => import("@/pages/MicrobiologyPage"));
 const GeologicalWondersPage      = lazy(() => import("@/pages/GeologicalWondersPage").then(m => ({ default: m.GeologicalWondersPage })));
 const ArtOfLearningPage         = lazy(() => import("@/pages/ArtOfLearningPage"));
 const PathwayToMedicinePage     = lazy(() => import("@/pages/PathwayToMedicinePage"));
@@ -405,7 +407,9 @@ function Router() {
             <Route path="/science/biology/microscopes" component={MicroscopesPage} />
             <Route path="/future-hub/university-guide" component={UniversityExpectationsPage} />
             <Route path="/study-center/competition-cooperation" component={CompetitionCooperationPage} />
+            <Route path="/science/human-body/endocrine-system" component={EndocrineSystemPage} />
             <Route path="/biology/botany" component={BotanyPage} />
+            <Route path="/science/biology/microbiology" component={MicrobiologyPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />

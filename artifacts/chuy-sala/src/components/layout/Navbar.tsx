@@ -515,6 +515,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ស្បែក សក់ និងក្រចក — ប្រព័ន្ធសរីរាង្គធំបំផុត ។ ស្រទាប់ epidermis dermis hypodermis មុខងារ និង keratin ។",
       },
       {
+        href: "/science/human-body/endocrine-system",
+        labelEn: "The Endocrine System",
+        labelKh: "ប្រព័ន្ធអង់ដូគ្រីន",
+        icon: Activity,
+        descEn: "Hormones, glands, and homeostasis — how the body communicates internally.",
+        descKh: "អរម៉ូន ក្រពេញ និង homeostasis — របៀបដែលរាងកាយទាក់ទងគ្នាខាងក្នុង។",
+      },
+      {
         href: "divider:biology",
         labelEn: "Biology",
         labelKh: "ជីវវិទ្យា",
@@ -528,6 +536,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Leaf,
         descEn: "Cells, genetics, evolution and the Mekong's living web — bilingual & interactive.",
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
+      },
+      {
+        href: "/science/biology/microbiology",
+        labelEn: "Microbiology",
+        labelKh: "មីក្រូជីវវិទ្យា",
+        icon: Bug,
+        descEn: "Virology and Bacteriology: Explore the tiny organisms that shape our world, from beneficial gut bacteria to viral invaders.",
+        descKh: "រោគវិទ្យា និងបាក់តេរីវិទ្យា៖ ស្វែងយល់ពីភាវៈរស់ដ៏តូចៗដែលផ្លាស់ប្តូរពិភពលោករបស់យើង ពីបាក់តេរីមានប្រយោជន៍រហូតដល់វីរុសបង្កជំងឺ។",
       },
       {
         href: "/science/chemistry/sweet-science",

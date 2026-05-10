@@ -60,13 +60,14 @@ function SchoolDashboard() {
 
   const { data: needs } = useListNeeds(
     user?.schoolId ? { schoolId: user.schoolId } : undefined,
+    // @ts-expect-error Orval typing requires queryKey, but it's injected at runtime
     { query: { enabled: !!user?.schoolId } },
   );
 
   const summary = {
-    active: needs?.filter((n: any) => n.status === "active").length ?? 0,
-    funded: needs?.filter((n: any) => n.status === "funded").length ?? 0,
-    completed: needs?.filter((n: any) => n.status === "completed").length ?? 0,
+    active: (Array.isArray(needs) ? needs.filter((n: any) => n.status === "active") : []).length,
+    funded: (Array.isArray(needs) ? needs.filter((n: any) => n.status === "funded") : []).length,
+    completed: (Array.isArray(needs) ? needs.filter((n: any) => n.status === "completed") : []).length,
   };
 
   const [hideFromMap, setHideFromMap] = useState<boolean>(false);

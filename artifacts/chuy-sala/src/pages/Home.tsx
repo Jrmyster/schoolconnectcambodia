@@ -18,7 +18,7 @@ export function Home() {
   const { data: needs } = useListNeeds();
   const { data: completed } = useListCompletedProjects();
 
-  const activeNeeds = needs?.filter(n => n.status === 'active') || [];
+  const activeNeeds = Array.isArray(needs) ? needs.filter(n => n.status === 'active') : [];
 
   return (
     <div className="w-full min-h-screen">
