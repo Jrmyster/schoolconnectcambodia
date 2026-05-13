@@ -902,21 +902,7 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Meet self-taught Michael Faraday and the moving-magnet experiment that powers every plant on Earth, throw a 'fishing net' around a charge to derive Gauss's Law (∮ E·dA = Q/ε₀), then see motors, transformers, and MRI scanners as the same idea at different scales.",
         descKh: "ស្គាល់ហ្វារ៉ាដេយដែលរៀនដោយខ្លួនឯង និងពិសោធន៍មេដែកផ្លាស់ទីដែលផ្ដល់ថាមពលដល់រោងចក្រអគ្គិសនីលើផែនដី បោះ 'សំណាញ់ត្រី' ពទ្ធជុំវិញបន្ទុក ដើម្បីទាញច្បាប់ហ្គោស (∮ E·dA = Q/ε₀) រួចមើលម៉ូទ័រ បំលែងតង់ស្យុង និង MRI ជាគំនិតតែមួយក្នុងខ្នាតផ្សេងៗ។",
       },
-      {
-        href: "divider:astronomy",
-        labelEn: "Astronomy",
-        labelKh: "តារាវិទ្យា",
-        icon: Telescope,
-        divider: true,
-      },
-      {
-        href: "/science/orbital-mechanics",
-        labelEn: "Orbital Mechanics",
-        labelKh: "មេកានិចអង្កាស",
-        icon: Telescope,
-        descEn: "Launch a satellite and watch it crash, escape, or orbit — an interactive 2D simulation of Newton's law of gravitation with velocity and distance controls.",
-        descKh: "បាញ់ផ្កាប់ ហើយមើលថាវាផ្ទុះ ឬទ្រនាប់ — ការក្លែងបន្ត 2D អន្តរកម្មនៃច្បាប់ទំនាញរបស់ Newton ជាមួយការគ្រប់គ្រងល្បឿន និងចម្ងាយ។",
-      },
+
       {
         href: "divider:oral-health",
         labelEn: "Oral Health",
@@ -1100,6 +1086,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Satellite,
         descEn: "How 9,000+ active satellites and millions of debris fragments crowd Low Earth Orbit — and the chain-reaction threat that could one day trap humanity on Earth.",
         descKh: "ផ្កាយរណបជាង 9,000 និងសំរាមអវកាសរាប់លាន ក្នុង LEO — និងគ្រោះថ្នាក់ Kessler ដែលអាចទប់យើងនៅផែនដី។",
+      },
+      {
+        href: "/science/orbital-mechanics",
+        labelEn: "Orbital Mechanics",
+        labelKh: "មេកានិចអង្កាស",
+        icon: Telescope,
+        descEn: "Launch a satellite and watch it crash, escape, or orbit — an interactive 2D simulation of Newton's law of gravitation with velocity and distance controls.",
+        descKh: "បាញ់ផ្កាប់ ហើយមើលថាវាផ្ទុះ ឬទ្រនាប់ — ការក្លែងបន្ត 2D អន្តរកម្មនៃច្បាប់ទំនាញរបស់ Newton ជាមួយការគ្រប់គ្រងល្បឿន និងចម្ងាយ។",
       },
       {
         href: "divider:earth-sciences",

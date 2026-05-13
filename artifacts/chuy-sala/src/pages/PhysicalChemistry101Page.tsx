@@ -1,3 +1,5 @@
+import { useState, useMemo } from "react";
+import { ComposedChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -94,22 +96,25 @@ export function PhysicalChemistry101Page() {
         {/* ── Section 1: Math Meets Matter (Intro) ─────────────── */}
         <IntroSection />
 
-        {/* ── Section 2: P-Chem I Curriculum Syllabus ──────────── */}
+        {/* ── Section 2: Quantum Mechanics: Particle in a Box ──── */}
+        <ParticleInBoxSection />
+
+        {/* ── Section 3: P-Chem I Curriculum Syllabus ──────────── */}
         <SyllabusPChemISection />
 
-        {/* ── Section 3: P-Chem II Curriculum Syllabus ─────────── */}
+        {/* ── Section 4: P-Chem II Curriculum Syllabus ─────────── */}
         <SyllabusPChemIISection />
 
-        {/* ── Section 4: The Quantum Revolution ────────────────── */}
+        {/* ── Section 5: The Quantum Revolution ────────────────── */}
         <QuantumRevolutionSection />
 
-        {/* ── Section 5: Macroscopic Deep-Dive ─────────────────── */}
+        {/* ── Section 6: Macroscopic Deep-Dive ─────────────────── */}
         <MacroSection />
 
-        {/* ── Section 6: Microscopic Deep-Dive ─────────────────── */}
+        {/* ── Section 7: Microscopic Deep-Dive ─────────────────── */}
         <MicroSection />
 
-        {/* ── Section 7: Careers & Impact ──────────────────────── */}
+        {/* ── Section 8: Careers & Impact ──────────────────────── */}
         <CareersSection />
 
         <p
@@ -350,7 +355,137 @@ function IntroSection() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
-/*  Sections 2 & 3 — University Syllabus (P-Chem I & II)                   */
+/*  Section 2 — Quantum Mechanics: Particle in a Box (interactive)         */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+function ParticleInBoxSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+  const [n, setN] = useState(1);
+  const [Lnm, setLnm] = useState(1.0);
+
+  // ψₙ(x) = √(2/L)·sin(nπx/L),  |ψ|² = (2/L)·sin²(nπx/L)
+  const chartData = useMemo(() => {
+    const pts = 300;
+    return Array.from({ length: pts + 1 }, (_, i) => {
+      const x = (i / pts) * Lnm;
+      const s = Math.sin((n * Math.PI * x) / Lnm);
+      return {
+        x: parseFloat(x.toFixed(3)),
+        psi: parseFloat((Math.sqrt(2 / Lnm) * s).toFixed(4)),
+        prob: parseFloat(((2 / Lnm) * s * s).toFixed(4)),
+      };
+    });
+  }, [n, Lnm]);
+
+  // Eₙ = n²h²/(8mL²)  in eV
+  const energyEv = useMemo(() => {
+    const Lm = Lnm * 1e-9;
+    return (n * n * 6.626e-34 * 6.626e-34) / (8 * 9.109e-31 * Lm * Lm * 1.602e-19);
+  }, [n, Lnm]);
+
+  const nodes = n - 1;
+  const lambdaNm = ((2 * Lnm) / n).toFixed(2);
+
+  return (
+    <Panel
+      id="particle-in-box"
+      icon={Box}
+      title={{ en: "2. Quantum Mechanics: Particle in a Box", kh: "២. មេកានិចកង់ទិច៖ ភាគល្អិតក្នុងប្រអប់" }}
+      subtitle={{
+        en: "Drag the sliders to see how the wave function ψ and probability density |ψ|² respond to energy level and box size.",
+        kh: "អូសសន្ទុះ ដើម្បីមើលរបៀបដែល ψ និង |ψ|² ឆ្លើយតបទៅនឹងកម្រិតថាមពល និងទំហំប្រអប់។",
+      }}
+    >
+      <div className="space-y-5">
+        {/* Sliders */}
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-xl bg-emerald-900/50 border border-emerald-700/40 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <label htmlFor="pib-n" className={`text-xs font-bold uppercase tracking-widest text-violet-300 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Quantum Number", "ចំនួនកង់ទិច")}
+              </label>
+              <span className="font-mono text-2xl font-black text-white">n = {n}</span>
+            </div>
+            <input id="pib-n" type="range" min={1} max={5} step={1} value={n} onChange={(e) => setN(+e.target.value)} className="w-full accent-violet-400 cursor-pointer" />
+            <div className="flex justify-between text-[11px] text-emerald-400/70 mt-1 font-mono"><span>n=1</span><span>n=5</span></div>
+            <p className={`text-[11px] text-emerald-200/70 mt-2 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t("Sets the energy level. n−1 interior zero-crossings (nodes) appear on the curve.", "កំណត់កម្រិតថាមពល។ ចំណុចទទេ n−1 លេចឡើងនៅលើខ្សែកោង។")}
+            </p>
+          </div>
+          <div className="rounded-xl bg-emerald-900/50 border border-emerald-700/40 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <label htmlFor="pib-L" className={`text-xs font-bold uppercase tracking-widest text-amber-300 ${kh ? "font-khmer normal-case tracking-normal" : ""}`}>
+                {t("Box Length", "ប្រវែងប្រអប់")}
+              </label>
+              <span className="font-mono text-2xl font-black text-white">{Lnm.toFixed(1)} nm</span>
+            </div>
+            <input id="pib-L" type="range" min={0.5} max={3.0} step={0.1} value={Lnm} onChange={(e) => setLnm(+e.target.value)} className="w-full accent-amber-400 cursor-pointer" />
+            <div className="flex justify-between text-[11px] text-emerald-400/70 mt-1 font-mono"><span>0.5 nm</span><span>3.0 nm</span></div>
+            <p className={`text-[11px] text-emerald-200/70 mt-2 ${kh ? "font-khmer leading-loose" : ""}`}>
+              {t("A larger box stretches the waveform and sharply lowers the energy levels.", "ប្រអប់ធំជាងនេះ ពង្រីករូបតំណាង ហើយបន្ថយកម្រិតថាមពលយ៉ាងខ្លាំង។")}
+            </p>
+          </div>
+        </div>
+
+        {/* Readout bar */}
+        <div className="rounded-xl bg-emerald-950/70 border border-emerald-700/40 px-4 py-3 grid grid-cols-3 gap-3 text-center">
+          <div>
+            <div className={`text-[10px] font-mono uppercase tracking-widest text-emerald-400/80 mb-0.5 ${kh ? "font-khmer normal-case" : ""}`}>{t("Energy", "ថាមពល")}</div>
+            <div className="text-white font-mono font-bold text-sm">E<sub>{n}</sub> = {energyEv.toFixed(3)} eV</div>
+            <div className="text-[10px] text-emerald-300/60 font-mono">= {n}²·E₁</div>
+          </div>
+          <div>
+            <div className={`text-[10px] font-mono uppercase tracking-widest text-emerald-400/80 mb-0.5 ${kh ? "font-khmer normal-case" : ""}`}>{t("Interior Nodes", "ចំណុចទទេ")}</div>
+            <div className="text-violet-300 font-mono font-bold text-sm">{nodes}</div>
+            <div className="text-[10px] text-emerald-300/60 font-mono">n − 1 = {n} − 1</div>
+          </div>
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-emerald-400/80 mb-0.5">λ de Broglie</div>
+            <div className="text-amber-300 font-mono font-bold text-sm">{lambdaNm} nm</div>
+            <div className="text-[10px] text-emerald-300/60 font-mono">2L / n</div>
+          </div>
+        </div>
+
+        {/* Chart */}
+        <div className="rounded-2xl bg-emerald-950/80 border border-emerald-700/40 px-2 pt-5 pb-3">
+          <div className="flex items-center justify-center gap-6 mb-3 text-xs font-mono">
+            <span className="flex items-center gap-1.5"><span className="inline-block w-5 h-0.5 bg-emerald-400 rounded" /><span className="text-emerald-300">ψ(x) — {t("wave function", "មុខងាររលក")}</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block w-5 h-0.5 bg-amber-400 rounded" /><span className="text-amber-300">|ψ|²(x) — {t("probability density", "ដង់ស៊ីតេប្រូបាប")}</span></span>
+          </div>
+          <ResponsiveContainer width="100%" height={220}>
+            <ComposedChart data={chartData} margin={{ top: 4, right: 16, left: 4, bottom: 4 }}>
+              <XAxis dataKey="x" type="number" domain={[0, Lnm]} tickCount={5} tickFormatter={(v: number) => v.toFixed(1)} tick={{ fill: "#6ee7b7", fontSize: 10, fontFamily: "monospace" }} axisLine={{ stroke: "#064e3b" }} tickLine={{ stroke: "#064e3b" }} label={{ value: "x (nm)", position: "insideBottomRight", offset: -4, fill: "#6ee7b7", fontSize: 10 }} />
+              <YAxis tick={{ fill: "#6ee7b7", fontSize: 10, fontFamily: "monospace" }} tickFormatter={(v: number) => v.toFixed(1)} axisLine={{ stroke: "#064e3b" }} tickLine={{ stroke: "#064e3b" }} />
+              <Line type="monotone" dataKey="psi" stroke="#34d399" strokeWidth={2} dot={false} isAnimationActive={false} />
+              <Line type="monotone" dataKey="prob" stroke="#fbbf24" strokeWidth={2} dot={false} isAnimationActive={false} />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Explanations */}
+        <div className="space-y-3">
+          <ChalkCard title="What does ψ(x) mean?" khTitle="ψ(x) មានន័យថាអ្វី?" termEn="The Wave Function" termKh="មុខងាររលក" icon={Waves} accent="emerald">
+            <p>{t("The green curve ψ(x) is the electron's wave function — not its exact position, but a mathematical object encoding all quantum information. ψ can be negative (phase of the wave), which is perfectly valid physics.", "ខ្សែកោងបៃតង ψ(x) គឺជាមុខងាររលករបស់អេឡិចត្រុង — មិនមែនជាទីតាំងពិតប្រាកដរបស់វា ប៉ុន្តែជាវត្ថុគណិតវិទ្យា ដែលរក្សាព័ត៌មានកង់ទិចទាំងអស់។ ψ អាចជាអវិជ្ជមានបាន ដែលនេះ​ជារូបវិទ្យា​ត្រឹមត្រូវ​ល្អ​ណាស់​។")}</p>
+          </ChalkCard>
+          <ChalkCard title="What does |ψ|²(x) mean?" khTitle="|ψ|²(x) មានន័យថាអ្វី?" termEn="Probability Density" termKh="ដង់ស៊ីតេប្រូបាប" icon={Activity} accent="amber">
+            <p>{t("Squaring ψ removes all negative values, giving the amber |ψ|² curve — always ≥ 0. A peak on this curve means the electron is most likely to be found at that position if you measure it. The nodes (zero points) are positions where the electron is never detected.", "ការការ ψ ដកតម្លៃអវិជ្ជមានចេញ ផ្តល់ |ψ|² — ≥ 0 ជានិច្ច។ ចំណុចខ្ពស់មួយ មានន័យថាអេឡិចត្រុងទំនងជាត្រូវបានរកឃើញទីនោះ។ ចំណុចទទេ (ចំណុចសូន្យ) គឺជាទីតាំងដែលអេឡិចត្រុងមិនដែលត្រូវបានរកឃើញ។")}</p>
+          </ChalkCard>
+          <ChalkCard title="Why must n be an integer?" khTitle="ហេតុអ្វីបានជា n ជាចំនួនគត់?" termEn="Quantization from Boundary Conditions" termKh="ការកំណត់ចំនួនពីលក្ខខណ្ឌព្រំដែន" icon={Binary} accent="violet">
+            <p>{t("ψ must be zero at both walls (x=0 and x=L) because the electron cannot exist outside the box. This forces only whole half-wavelengths to fit: λ = 2L/n. Only integer n satisfies this, so energy is automatically quantized — this is the origin of energy levels in atoms.", "ψ ត្រូវតែស្មើសូន្យនៅជញ្ជាំងទាំងពីរ ពីព្រោះអេឡិចត្រុងមិនអាចមាននៅខាងក្រៅប្រអប់។ នេះបង្ខំឱ្យតែពាក់កណ្ដាលរលកនៃចំនួនគត់ ចូល: λ=2L/n។ n ដែលជាចំនួនគត់ប៉ុណ្ណោះ បំពេញលក្ខខណ្ឌនេះ ដូច្នេះថាមពលត្រូវបានកំណត់ ─ នេះ​ជា​ប្រភព​នៃ​កម្រិតថាមពល​ក្នុង​អាតូម​។")}</p>
+            <div className="rounded-lg bg-emerald-950/60 border border-violet-400/30 px-3 py-2 text-center mt-2">
+              <InlineMath math={String.raw`E_n = n^2 \cdot \frac{h^2}{8mL^2}`} />
+            </div>
+          </ChalkCard>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Sections 3 & 4 — University Syllabus (P-Chem I & II)                   */
 /* ──────────────────────────────────────────────────────────────────────── */
 
 /* Inline accent helper. The user asked for "subtle accent colors (like a soft
@@ -637,8 +772,8 @@ function SyllabusPChemISection() {
       id="syllabus-pchem-1"
       testId="section-pchem-1-syllabus"
       Icon={Flame}
-      numberEn="2."
-      numberKh="២."
+      numberEn="3."
+      numberKh="៣."
       titleEn="Physical Chemistry I: Thermodynamics & Kinetics"
       titleKh="គីមីវិទ្យារូបវន្ត ១៖ ទែម៉ូឌីណាមិច និងគីនេទិច"
       subtitleEn="Focused on macroscopic behaviors, energy, and reaction rates."
@@ -775,8 +910,8 @@ function SyllabusPChemIISection() {
       id="syllabus-pchem-2"
       testId="section-pchem-2-syllabus"
       Icon={Atom}
-      numberEn="3."
-      numberKh="៣."
+      numberEn="4."
+      numberKh="៤."
       titleEn="Physical Chemistry II: Quantum Chemistry & Spectroscopy"
       titleKh="គីមីវិទ្យារូបវន្ត ២៖ គីមីវិទ្យាម្កង់តូម និងវិសាលគមវិទ្យា"
       subtitleEn="Focused on microscopic phenomena, molecular structure, and quantum mechanics."
@@ -799,7 +934,7 @@ function QuantumRevolutionSection() {
     <Panel
       id="quantum-revolution"
       icon={Sparkles}
-      title={{ en: "4. The Quantum Revolution", kh: "៤. បដិវត្តន៍កង់ទិច" }}
+      title={{ en: "5. The Quantum Revolution", kh: "៥. បដិវត្តន៍កង់ទិច" }}
       subtitle={{
         en: "Around 1900, classical physics broke. Four discoveries rewrote the rulebook of the universe — and gave birth to quantum mechanics.",
         kh: "ប្រហែលឆ្នាំ ១៩០០ រូបវិទ្យាបុរាណបានបាក់បែក។ ការរកឃើញទាំង ៤ បានសរសេរច្បាប់នៃសកលលោកឡើងវិញ — ហើយផ្តល់កំណើតដល់មេកានិចកង់ទិច។",
@@ -999,8 +1134,8 @@ function MacroSection() {
       id="macro"
       icon={Flame}
       title={{
-        en: "5. The Macroscopic World — Deep Dive",
-        kh: "៥. ពិភពម៉ាក្រូ — ការសិក្សាស៊ីជម្រៅ",
+        en: "6. The Macroscopic World — Deep Dive",
+        kh: "៦. ពិភពម៉ាក្រូ — ការសិក្សាស៊ីជម្រៅ",
       }}
       subtitle={{
         en: "Heat, energy, and speed — the rules that govern any reaction big enough to see.",
@@ -1124,8 +1259,8 @@ function MicroSection() {
       id="micro"
       icon={Atom}
       title={{
-        en: "6. The Microscopic World — Deep Dive",
-        kh: "៦. ពិភពមីក្រូ — ការសិក្សាស៊ីជម្រៅ",
+        en: "7. The Microscopic World — Deep Dive",
+        kh: "៧. ពិភពមីក្រូ — ការសិក្សាស៊ីជម្រៅ",
       }}
       subtitle={{
         en: "Zoom into a single atom and the rules of everyday physics break down. Welcome to the quantum world.",
@@ -1474,8 +1609,8 @@ function CareersSection() {
       id="careers"
       icon={GraduationCap}
       title={{
-        en: "7. Careers & Impact",
-        kh: "៧. អាជីព និងផលប៉ះពាល់",
+        en: "8. Careers & Impact",
+        kh: "៨. អាជីព និងផលប៉ះពាល់",
       }}
       subtitle={{
         en: "Why study P-Chem? Because it powers some of the most important technology of our century.",
