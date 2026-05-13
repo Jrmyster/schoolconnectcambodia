@@ -144,6 +144,7 @@ const ScaleOfUniversePage       = lazy(() => import("@/pages/ScaleOfUniversePage
 const MissionStatementPage      = lazy(() => import("@/pages/MissionStatementPage"));
 const WorldHistoryPage          = lazy(() => import("@/pages/WorldHistoryPage"));
 const StudentArtGallery      = lazy(() => import("@/pages/StudentArtGallery"));
+const OrbitalMechanics         = lazy(() => import("@/pages/Science/OrbitalMechanics"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
@@ -309,6 +310,7 @@ function Router() {
             <Route path="/projects" component={CompletedProjects} />
             <Route path="/impact" component={ImpactReportPage} />
             <Route path="/art-gallery" component={StudentArtGallery} />
+            <Route path="/science/orbital-mechanics" component={OrbitalMechanics} />
             <Route path="/world-history" component={WorldHistoryPage} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
