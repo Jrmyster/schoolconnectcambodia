@@ -1044,6 +1044,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "Vector ម៉ាទ្រីស និងតង់ស័រ-3 ពន្យល់ជាដ្យាក្រាម — គូបស្ត្រេស Cauchy (σᵢⱼ, T⁽ᵉⁱ⁾) ផ្លែ ⊗ commutator [x,y] ច្បាប់ Einstein និង K-theory K*(F)។",
       },
       {
+        href: "/mathematics/topology",
+        labelEn: "Topology: The Mathematics of Shape",
+        labelKh: "ថតវិទ្យា៖ គណិតវិទ្យានៃរូបរាង",
+        icon: Sigma,
+        descEn: "Explore objects that can be stretched and twisted but not torn — featuring an interactive Möbius strip and the coffee-mug-donut homeomorphism.",
+        descKh: "រុករកវត្ថុដែលអាចទាញពន្លាត និងបង្វិលបាន ប៉ុន្តែមិនអាចហែក ឬបិទភ្ជាប់បានឡើយ — រួមមានបន្ទះ Möbius និងការបំប្លែងពែងកាហ្វេទៅជានំដូណាត់។",
+      },
+      {
         href: "divider:architecture-design",
         labelEn: "Architecture & Design",
         labelKh: "ស្ថាបត្យកម្ម និងការរចនា",

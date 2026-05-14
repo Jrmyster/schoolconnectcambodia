@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -85,6 +85,7 @@ export function BiochemistryPage() {
         <MetabolismSection />
         <ProteinSection />
         <EnzymeSection />
+        <EnzymeViewer3DSection />
 
         {/* Wrap-up */}
         <section
@@ -1722,6 +1723,340 @@ function EnzymeSection() {
   );
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+ * SECTION 05 — 3D Enzyme Viewer: Salivary Amylase (PDB: 1SMD)
+ * Expands the enzyme section with a live interactive molecular viewer.
+ * Uses 3Dmol.js loaded from CDN — no new npm deps required.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+type EnzStyle = "cartoon" | "ballstick" | "surface";
+
+/** Apply a visualization style to an already-initialised 3Dmol viewer. */
+function applyEnzStyle(
+  viewer: any,
+  s: EnzStyle,
+  activeSite: boolean,
+  $3Dmol: any,
+) {
+  // Clear previous surfaces then clear styles
+  try { viewer.removeAllSurfaces(); } catch (_) {}
+  viewer.setStyle({}, {});
+
+  if (s === "cartoon") {
+    viewer.setStyle({}, { cartoon: { color: "spectrum" } });
+  } else if (s === "ballstick") {
+    viewer.setStyle({}, {
+      stick: { radius: 0.12, colorscheme: "Jmol" },
+      sphere: { scale: 0.22, colorscheme: "Jmol" },
+    });
+  } else if (s === "surface") {
+    // Ghost cartoon underneath translucent VDW surface
+    viewer.setStyle({}, { cartoon: { color: "spectrum", opacity: 0.12 } });
+    viewer.addSurface($3Dmol.SurfaceType.VDW, {
+      opacity: 0.82,
+      colorscheme: { gradient: "roygb" },
+    });
+  }
+
+  // Catalytic triad of human salivary α-amylase (1SMD): Asp197, Glu233, Asp300
+  if (activeSite) {
+    viewer.setStyle(
+      { resi: [197, 233, 300] },
+      { sphere: { color: "#FFD700", radius: 1.25 } },
+    );
+  }
+
+  viewer.render();
+}
+
+function EnzymeViewer3DSection() {
+  const t = useTranslation();
+  const { language } = useLanguageStore();
+  const kh = language === "kh";
+
+  return (
+    <section
+      className="rounded-3xl border-4 border-sky-200 bg-white/85 backdrop-blur shadow-md p-5 sm:p-8 mb-8"
+      data-testid="enzyme-viewer-section"
+      aria-labelledby="enzyme-3d-heading"
+    >
+      <SectionHeader
+        kh={kh}
+        eyebrow={t("05 · 3D Enzyme Viewer", "០៥ · អ្នកមើលអង់ស៊ីម ៣D")}
+        titleEn="Salivary Amylase — live 3D structure (PDB: 1SMD)"
+        titleKh="អាមីឡាស់ទឹកមាត់ — រចនាសម្ព័ន្ធ ៣D ផ្ទាល់ (PDB: 1SMD)"
+        Icon={Microscope}
+        accent="sky"
+      />
+
+      <p
+        className={`text-slate-700 leading-relaxed mb-6 ${
+          kh ? "font-khmer text-lg leading-loose" : "text-base sm:text-lg"
+        }`}
+      >
+        {t(
+          "Below is the real atomic structure of Human Salivary α-Amylase — the enzyme in your saliva that starts breaking down rice the moment you begin chewing. Determined by X-ray crystallography, deposited in the Protein Data Bank. Drag to rotate · scroll to zoom.",
+          "ខាងក្រោមនេះគឺជារចនាសម្ព័ន្ធអាតូមពិតប្រាកដ នៃ Human Salivary α-Amylase — អង់ស៊ីមក្នុងទឹកមាត់ ដែលចាប់ផ្តើមបំបែកអង្ករ ភ្លាមៗពេលអ្នកចាប់ចំបុ។ ត្រូវបានកំណត់ដោយ X-ray crystallography ហើយបញ្ចូលក្នុង Protein Data Bank។ អូសដើម្បីបង្វិល · រំកិលដើម្បីពង្រីក។",
+        )}
+      </p>
+
+      <Viewer3DCanvas kh={kh} />
+
+      <EnzymeEducationBlock kh={kh} />
+    </section>
+  );
+}
+
+/* ── Interactive 3D canvas ────────────────────────────────────────────────── */
+function Viewer3DCanvas({ kh }: { kh: boolean }) {
+  const t = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const viewerRef = useRef<any>(null);
+  const pdbRef = useRef<string>("");
+
+  type Phase = "loading-script" | "loading-pdb" | "ready" | "error";
+  const [phase, setPhase] = useState<Phase>("loading-script");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [style, setStyle] = useState<EnzStyle>("cartoon");
+  const [activeSite, setActiveSite] = useState(false);
+
+  // ── Step 1: inject 3Dmol.js from CDN (idempotent) ──────────────────────
+  useEffect(() => {
+    const win = window as any;
+    if (win.$3Dmol) { setPhase("loading-pdb"); return; }
+    const SCRIPT_ID = "threedmol-cdn";
+    let el = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
+    if (!el) {
+      el = document.createElement("script");
+      el.id = SCRIPT_ID;
+      el.src = "https://3dmol.org/build/3Dmol-min.js";
+      el.async = true;
+      document.head.appendChild(el);
+    }
+    const onLoad = () => setPhase("loading-pdb");
+    const onErr  = () => { setErrorMsg("Failed to load 3Dmol.js."); setPhase("error"); };
+    el.addEventListener("load", onLoad);
+    el.addEventListener("error", onErr);
+    return () => { el!.removeEventListener("load", onLoad); el!.removeEventListener("error", onErr); };
+  }, []);
+
+  // ── Step 2: fetch PDB structure from RCSB ──────────────────────────────
+  useEffect(() => {
+    if (phase !== "loading-pdb") return;
+    fetch("https://files.rcsb.org/download/1SMD.pdb")
+      .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
+      .then((text) => { pdbRef.current = text; setPhase("ready"); })
+      .catch((e) => { setErrorMsg(`Failed to fetch 1SMD: ${e.message}`); setPhase("error"); });
+  }, [phase]);
+
+  // ── Step 3: initialise viewer once PDB is loaded ───────────────────────
+  useEffect(() => {
+    if (phase !== "ready" || !containerRef.current || !pdbRef.current) return;
+    const $3Dmol = (window as any).$3Dmol;
+    if (!$3Dmol) return;
+    if (viewerRef.current) { try { viewerRef.current.clear(); } catch (_) {} }
+    const viewer = $3Dmol.createViewer(containerRef.current, {
+      backgroundColor: "#0c1a2e",
+      antialias: true,
+    });
+    viewerRef.current = viewer;
+    viewer.addModel(pdbRef.current, "pdb");
+    applyEnzStyle(viewer, "cartoon", false, $3Dmol);
+    viewer.zoomTo();
+    viewer.render();
+    return () => { try { viewer.clear(); } catch (_) {} };
+  }, [phase]);
+
+  // ── Handlers ───────────────────────────────────────────────────────────
+  const handleStyle = useCallback((s: EnzStyle) => {
+    setStyle(s);
+    if (!viewerRef.current || phase !== "ready") return;
+    applyEnzStyle(viewerRef.current, s, activeSite, (window as any).$3Dmol);
+  }, [activeSite, phase]);
+
+  const handleActiveSite = useCallback(() => {
+    const next = !activeSite;
+    setActiveSite(next);
+    if (!viewerRef.current || phase !== "ready") return;
+    applyEnzStyle(viewerRef.current, style, next, (window as any).$3Dmol);
+  }, [activeSite, style, phase]);
+
+  const styleOpts: { id: EnzStyle; en: string; kh: string }[] = [
+    { id: "cartoon",  en: "Ribbon / Cartoon", kh: "រស្មីខ្សែបូ" },
+    { id: "ballstick", en: "Ball & Stick",    kh: "គ្រាប់ & ដំបង" },
+    { id: "surface",  en: "Surface",           kh: "ផ្ទៃ" },
+  ];
+
+  return (
+    <div className="mb-6" data-testid="enzyme-viewer-3d">
+      {/* ── Control bar ─────────────────────────────────────────────── */}
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <span className={`text-xs font-bold uppercase tracking-wider text-slate-500 mr-1 ${
+          kh ? "font-khmer normal-case tracking-normal" : ""
+        }`}>
+          {t("Style:", "រចនាប័ទ្ម៖")}
+        </span>
+        {styleOpts.map((o) => (
+          <button
+            key={o.id}
+            onClick={() => handleStyle(o.id)}
+            data-testid={`viewer-style-${o.id}`}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+              style === o.id
+                ? "bg-sky-600 text-white shadow-md scale-105"
+                : "bg-sky-50 text-sky-800 hover:bg-sky-100"
+            } ${kh ? "font-khmer" : ""}`}
+          >
+            {kh ? o.kh : o.en}
+          </button>
+        ))}
+        <div className="w-px h-5 bg-slate-200 mx-1" />
+        <button
+          onClick={handleActiveSite}
+          data-testid="viewer-toggle-active-site"
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border-2 ${
+            activeSite
+              ? "bg-amber-400 border-amber-500 text-amber-900 shadow-md shadow-amber-200 scale-105"
+              : "bg-white border-amber-300 text-amber-800 hover:bg-amber-50"
+          } ${kh ? "font-khmer" : ""}`}
+        >
+          {activeSite
+            ? t("✦ Active Site ON", "✦ តំបន់សកម្ម បើក")
+            : t("Active Site",     "តំបន់សកម្ម")}
+        </button>
+      </div>
+
+      {/* ── 3D canvas ───────────────────────────────────────────────── */}
+      <div className="relative rounded-2xl overflow-hidden border-2 border-sky-200 shadow-lg" style={{ height: 380 }}>
+        {/* Dark canvas host — 3Dmol attaches itself here */}
+        <div ref={containerRef} className="absolute inset-0" />
+
+        {/* Loading / error overlay */}
+        {phase !== "ready" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0c1a2e] text-white gap-3">
+            {phase === "error" ? (
+              <>
+                <span className="text-2xl">⚠️</span>
+                <p className={`text-sm text-center px-6 text-red-300 ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}>{errorMsg}</p>
+                <p className="text-xs text-slate-400">Requires an internet connection.</p>
+              </>
+            ) : (
+              <>
+                <div className="w-10 h-10 rounded-full border-4 border-sky-400 border-t-transparent animate-spin" />
+                <p className={`text-sm text-sky-300 ${
+                  kh ? "font-khmer" : ""
+                }`}>
+                  {phase === "loading-script"
+                    ? t("Loading 3D viewer…", "កំពុងផ្ទុកអ្នកមើល ៣D…")
+                    : t("Loading enzyme structure…", "កំពុងផ្ទុករចនាសម្ព័ន្ធអង់ស៊ីម…")}
+                </p>
+                <p className="text-xs text-slate-500">PDB: 1SMD — Human Salivary α-Amylase</p>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Active site legend badge */}
+        {activeSite && phase === "ready" && (
+          <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1.5">
+            <span className="inline-block w-3 h-3 rounded-full bg-yellow-400 shadow shadow-yellow-300" />
+            <span className={`text-xs font-semibold text-yellow-300 ${
+              kh ? "font-khmer" : ""
+            }`}>
+              {t("Active Site (Asp197, Glu233, Asp300)", "តំបន់សកម្ម (Asp197, Glu233, Asp300)")}
+            </span>
+          </div>
+        )}
+
+        {/* Controls hint */}
+        {phase === "ready" && (
+          <div className="absolute bottom-3 left-3 text-[10px] text-slate-400 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-lg">
+            {t("Drag · Scroll · Right-click pan", "អូស · រំកិល · ចុចស្ដាំ + អូសសម្រាប់ pan")}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── Educational text block ───────────────────────────────────────────────── */
+function EnzymeEducationBlock({ kh }: { kh: boolean }) {
+  const t = useTranslation();
+  return (
+    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* What is an enzyme */}
+      <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-sky-50 via-white to-cyan-50/60 p-5">
+        <div className={`text-[10px] font-bold uppercase tracking-[0.25em] text-sky-700 mb-2 ${
+          kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+        }`}>
+          {t("What is an Enzyme?", "តើអង់ស៊ីមជាអ្វី?")}
+        </div>
+        <p className={`text-sm text-slate-700 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}>
+          {t(
+            "An enzyme is a protein that acts as a biological catalyst — it dramatically speeds up a chemical reaction without being consumed. Your body runs thousands of different enzymes simultaneously, each one built for a single specific task.",
+            "អង់ស៊ីមគឺជាប្រូតេអ៊ីន ដែលធ្វើការជាកាតាលីករជីវវិទ្យា — វាបង្កើនល្បឿនប្រតិកម្មគីមីយ៉ាងខ្លាំង ដោយខ្លួនឯងមិនត្រូវប្រើអស់ទេ។ រាងកាយរបស់អ្នកដំណើរការអង់ស៊ីមផ្សេងៗគ្នារាប់ពាន់ ក្នុងពេលតែមួយ ហើយនីមួយៗសាងសង់សម្រាប់ភារកិច្ចតែមួយ។",
+          )}
+        </p>
+      </div>
+
+      {/* Lock & Key */}
+      <div className="rounded-2xl border-2 border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-sky-50/60 p-5">
+        <div className={`text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-700 mb-2 ${
+          kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+        }`}>
+          {t("The Lock & Key Model", "គំរូសោ និងកូនសោ")}
+        </div>
+        <p className={`text-sm text-slate-700 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}>
+          {t(
+            "Every enzyme has an \"active site\" — a precisely shaped pocket that fits only one type of molecule (the substrate). The substrate clicks in like a key into a lock, the reaction occurs, and the products are released. The enzyme resets immediately for the next molecule. The yellow spheres in the 3D model above mark the active site of Amylase.",
+            "អង់ស៊ីមនីមួយៗមាន \"តំបន់សកម្ម\" — រន្ធដែលមានរូបរាងច្បាស់លាស់ ដែលត្រូវនឹងម៉ូលេគុលតែប្រភេទតែមួយ (សារធាតុ-ផ្គុំ)។ សារធាតុ-ផ្គុំចូលដូចកូនសោចូលក្នុងសោ ប្រតិកម្មកើតឡើង ហើយផលិតផលចេញទៅ។ អង់ស៊ីមមួយទៀតភ្លាមៗ។ គ្រាប់ពណ៌លឿងក្នុងគំរូ ៣D ខាងលើ ដាក់ស្នូលតំបន់សកម្មរបស់ Amylase ។",
+          )}
+        </p>
+      </div>
+
+      {/* What Amylase does */}
+      <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-white to-sky-50/50 p-5">
+        <div className={`text-[10px] font-bold uppercase tracking-[0.25em] text-sky-700 mb-2 ${
+          kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+        }`}>
+          {t("What Amylase Does in Your Body", "អ្វីដែល Amylase ធ្វើក្នុងរាងកាយ")}
+        </div>
+        <p className={`text-sm text-slate-700 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}>
+          {t(
+            "α-Amylase (PDB: 1SMD) cleaves the glycosidic bonds inside starch molecules, breaking long chains of glucose into smaller sugars your intestine can absorb. Digestion of a mouthful of rice begins within seconds of chewing — entirely thanks to this enzyme in your saliva.",
+            "α-Amylase (PDB: 1SMD) កាត់ចំណងគ្លីកូស៊ីដ ក្នុងម៉ូលេគុលម្សៅ ដោយបំបែកខ្សែវែងនៃគ្លុយកូសទៅជាស្ករតូចៗ ដែលពោះវៀនអ្នកអាចស្រូបយកបាន។ ការរំលាយអង្ករមួយគ្រាប់ ចាប់ផ្តើមក្នុងរយៈពេលពីរបីវិនាទីបន្ទាប់ពីចំបុ — ទាំងអស់ grace of this enzyme ក្នុងទឹកមាត់របស់អ្នក។",
+          )}
+        </p>
+      </div>
+
+      {/* Cambodian context */}
+      <div className="rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-white p-5">
+        <div className={`text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700 mb-2 ${
+          kh ? "font-khmer normal-case tracking-normal text-xs" : ""
+        }`}>
+          {t("🇰🇭 Cambodian Context", "🇰🇭 បរិបទកម្ពុជា")}
+        </div>
+        <p className={`text-sm text-slate-700 ${
+          kh ? "font-khmer leading-loose" : "leading-relaxed"
+        }`}>
+          {t(
+            "Rice (Jasmine, Phka Malis) is the foundation of every Cambodian meal and is almost pure starch. Every single bite activates millions of Amylase molecules in your saliva — making this enzyme personally relevant to every student reading this page. The same enzyme also digests Num Banh Chok noodles, sticky rice, and rice porridge (Babor).",
+            "អង្ករ (រំដួល ផ្កាម៉ាលីស) គឺជាមូលដ្ឋាននៃអាហារខ្មែរគ្រប់ពេល ហើយជាម្សៅស្ទើរតែ ១០០%។ រាល់ការទំពារ ធ្វើឱ្យម៉ូលេគុល Amylase រាប់លានដំណើរការក្នុងទឹកមាត់ — ដែលធ្វើឱ្យអង់ស៊ីមនេះ ពាក់ព័ន្ធផ្ទាល់ ចំពោះសិស្សគ្រប់រូប។ អង់ស៊ីមដូចគ្នានេះ ក៏រំលាយ នំបញ្ចុក ខ្ចីដំណើប និង បបរ ផងដែរ។",
+          )}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function ComparisonRow({
   Icon,
   lab,
@@ -1811,17 +2146,19 @@ function SectionHeader({
   titleEn: string;
   titleKh: string;
   Icon: React.ComponentType<{ className?: string }>;
-  accent: "emerald" | "violet" | "amber";
+  accent: "emerald" | "violet" | "amber" | "sky";
 }) {
   const ring = {
     emerald: "bg-emerald-600",
     violet: "bg-violet-600",
     amber: "bg-amber-600",
+    sky: "bg-sky-600",
   }[accent];
   const text = {
     emerald: "text-emerald-700",
     violet: "text-violet-700",
     amber: "text-amber-700",
+    sky: "text-sky-700",
   }[accent];
 
   return (

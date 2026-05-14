@@ -48,6 +48,7 @@ const LimitsDerivativesPage     = lazy(() => import("@/pages/LimitsDerivativesPa
 const IntegralsPage             = lazy(() => import("@/pages/IntegralsPage").then(m => ({ default: m.IntegralsPage })));
 const AdvancedMathPage          = lazy(() => import("@/pages/AdvancedMathPage").then(m => ({ default: m.AdvancedMathPage })));
 const TensorsPage               = lazy(() => import("@/pages/TensorsPage"));
+const TopologyPage              = lazy(() => import("@/pages/TopologyPage"));
 const SurvivalSkillsPage        = lazy(() => import("@/pages/SurvivalSkillsPage").then(m => ({ default: m.SurvivalSkillsPage })));
 const NanotechnologyPage        = lazy(() => import("@/pages/NanotechnologyPage").then(m => ({ default: m.NanotechnologyPage })));
 const RadioTechPage             = lazy(() => import("@/pages/RadioTechPage"));
@@ -352,6 +353,7 @@ function Router() {
             <Route path="/mathematics/integrals" component={IntegralsPage} />
             <Route path="/mathematics/advanced" component={AdvancedMathPage} />
             <Route path="/mathematics/tensors" component={TensorsPage} />
+            <Route path="/mathematics/topology" component={TopologyPage} />
             <Route path="/well-being/survival-skills" component={SurvivalSkillsPage} />
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/technology/radio" component={RadioTechPage} />
