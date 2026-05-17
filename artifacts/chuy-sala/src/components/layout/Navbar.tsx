@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna, Bone,
-  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers, Filter, Palette,
+  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers, Filter, Palette, HeartHandshake,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -587,6 +587,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
       },
       {
+        href: "/biology/escape-room",
+        labelEn: "Digital Escape Room",
+        labelKh: "បន្ទប់រត់គេចឌីជីថល",
+        icon: Lock,
+        descEn: "Can you escape? Test your biology knowledge with three interactive puzzle rooms: organelles, DNA base pairing, and the photosynthesis equation.",
+        descKh: "តើអ្នកអាចរត់គេចបានទេ? សាកល្បងចំណេះដឹងជីវវិទ្យារបស់អ្នកជាមួយនឹងបន្ទប់ល្បែងចំនួនបី៖ សរីរាង្គកោសិកា ការផ្គូផ្គង DNA និងសមីការរស្មីសំយោគ។",
+      },
+      {
         href: "/science/biology/microbiology",
         labelEn: "Microbiology",
         labelKh: "មីក្រូជីវវិទ្យា",
@@ -821,6 +829,22 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "5. Physics of the Bicycle",
         labelKh: "៥. រូបវិទ្យានៃកង់",
         icon: Bike,
+      },
+      {
+        href: "/physics/particle-collider",
+        labelEn: "6. Particle Collider",
+        labelKh: "៦. ម៉ាស៊ីនបុកភាគល្អិត",
+        icon: Atom,
+        descEn: "Smash subatomic particles together! Select protons, electrons, and positrons to observe scattering, matter-antimatter annihilation, and the reality of E=mc².",
+        descKh: "បុកភាគល្អិតអនុអាតូមចូលគ្នា! ជ្រើសរើសប្រូតុង អេឡិចត្រុង និងប៉ូស៊ីត្រុង ដើម្បីសង្កេតមើលការបែកខ្ចាត់ខ្ចាយ ការបំផ្លាញរូបធាតុ-អង្គធាតុផ្ទុយ និងការពិតនៃ E=mc²។",
+      },
+      {
+        href: "/physics/equations",
+        labelEn: "7. Physics Cheat Sheet",
+        labelKh: "៧. សន្លឹកជួយចងចាំរូបវិទ្យា",
+        icon: Sigma,
+        descEn: "Essential equations for measurement, kinematics, dynamics, momentum, and circular motion with interactive calculators.",
+        descKh: "សមីការចាំបាច់សម្រាប់ការវាស់វែង គីណេម៉ាទិច ឌីណាមិច សន្ទុះ និងចលនារង្វង់ ជាមួយម៉ាស៊ីនគិតលេខអន្តរកម្ម។",
       },
       {
         href: "/science/fourier-transform",
@@ -1413,6 +1437,22 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ហេតុអ្វីកុមារនៅភូមិដែលគ្មានទឹកស្អាត និងកុមារនៅទីក្រុងធំសម្បូរ ស្លាប់ដោយជំងឺផ្សេងគ្នាទាំងស្រុង។ រៀនពីអន្តរកាលរោគរាតត្បាត — របៀបដែលទឹកស្អាត អនាម័យ និងវ៉ាក់សាំង ផ្លាស់ប្តូរប្រទេសពីអ្នកសម្លាប់ឆ្លង (អាសន្នរោគ គ្រុនចាញ់ របេង) ទៅជាអ្នកសម្លាប់រ៉ាំរ៉ៃ (បេះដូង ទឹកនោមផ្អែម មហារីក Alzheimer)។",
       },
       {
+        href: "/well-being/communicable-diseases",
+        labelEn: "Communicable Diseases Explorer",
+        labelKh: "អ្នករុករកជំងឺឆ្លង",
+        icon: Bug,
+        descEn: "An interactive guide to the pathogens that threaten human health — from Malaria and Dengue to Measles and Typhoid. Learn how they spread, their symptoms, and the critical prevention tactics that save lives.",
+        descKh: "មគ្គុទ្ទេសក៍អន្តរកម្មស្តីពីភ្នាក់ងារបង្កជំងឺ ដែលគំរាមកំហែងសុខភាពមនុស្ស — ពីគ្រុនចាញ់ និងគ្រុនឈាម ដល់កញ្ជ្រិល និងគ្រុនពោះវៀន។ ស្វែងយល់ពីរបៀបដែលវារាលដាល រោគសញ្ញា និងវិធីសាស្ត្រការពារដ៏សំខាន់។",
+      },
+      {
+        href: "/well-being/global-ngos",
+        labelEn: "Global Philanthropies & NGOs",
+        labelKh: "សប្បុរសធម៌សកល និងអង្គការក្រៅរដ្ឋាភិបាល",
+        icon: HeartHandshake,
+        descEn: "Explore the network of international organizations working to improve health, defend human rights, and provide humanitarian aid worldwide.",
+        descKh: "ស្វែងយល់ពីបណ្តាញអង្គការអន្តរជាតិ ដែលធ្វើការយ៉ាងសកម្មដើម្បីកែលម្អសុខភាព ការពារសិទ្ធិមនុស្ស និងផ្តល់ជំនួយមនុស្សធម៌នៅជុំវិញពិភពលោក។",
+      },
+      {
         href: "/well-being/family-development",
         labelEn: "Parenting & Development",
         labelKh: "ការចិញ្ចឹមបីបាច់ និងការវិវត្ត",
@@ -1598,6 +1638,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Calculator,
         descEn: "Numbers & tables — interactive Addition (blue) & Subtraction (red) fact tables, plus a 10×10 Multiplication (green) / Division (purple) grid with row+column highlight. Tap any equation to hear it in English.",
         descKh: "លេខ និងតារាង — តារាងវិធីបូក (ខៀវ) និងវិធីដក (ក្រហម) ដែលអាចចុចបាន រួមជាមួយតារាង ១០×១០ វិធីគុណ (បៃតង) និងវិធីចែក (ស្វាយ) ដែលបញ្ជាក់ជួរ និងជួរឈរ។ ប៉ះសមីការណាមួយដើម្បីស្ដាប់ជាភាសាអង់គ្លេស។",
+      },
+      {
+        href: "/kids/adventure-map",
+        labelEn: "Adventure Quest 🗺️",
+        labelKh: "ដំណើរផ្សងព្រេង 🗺️",
+        icon: Compass,
+        descEn: "Explore a 2D tile-based map, discover hidden shrines, and solve math and chemistry puzzles to unlock a victory fanfare!",
+        descKh: "រុករកផែនទីក្រឡា 2D ស្វែងរកទីសក្ការៈលាក់កំបាំង និងដោះស្រាយល្បែងប្រាជ្ញាគណិតវិទ្យា និងគីមីវិទ្យា ដើម្បីទទួលបានសំឡេងជ័យជម្នះ!",
       },
     ],
   },

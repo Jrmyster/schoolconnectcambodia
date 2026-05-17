@@ -58,6 +58,10 @@ const HeisenbergPage            = lazy(() => import("@/pages/HeisenbergPage"));
 const LanguageRealityPage       = lazy(() => import("@/pages/LanguageRealityPage"));
 const DentistryPage             = lazy(() => import("@/pages/DentistryPage"));
 const VeterinaryMedicinePage    = lazy(() => import("@/pages/VeterinaryMedicinePage"));
+const AdventureMapPage          = lazy(() => import("@/pages/AdventureMapPage"));
+const EscapeRoomPage            = lazy(() => import("@/pages/EscapeRoomPage"));
+const ParticlePhysicsPage       = lazy(() => import("@/pages/ParticlePhysicsPage"));
+const PhysicsEquationsPage      = lazy(() => import("@/pages/PhysicsEquationsPage"));
 const ArchaeologyPaleontologyPage = lazy(() => import("@/pages/ArchaeologyPaleontologyPage"));
 const WomenInSciencePage        = lazy(() => import("@/pages/WomenInSciencePage"));
 const FourierTransformPage      = lazy(() => import("@/pages/FourierTransformPage"));
@@ -97,6 +101,8 @@ const CambodiaPage              = lazy(() => import("@/pages/CambodiaPage").then
 const EnergyFuturePage          = lazy(() => import("@/pages/EnergyFuturePage").then(m => ({ default: m.EnergyFuturePage })));
 const PublicHealthPage          = lazy(() => import("@/pages/PublicHealthPage").then(m => ({ default: m.PublicHealthPage })));
 const DiseaseDividePage         = lazy(() => import("@/pages/DiseaseDividePage").then(m => ({ default: m.DiseaseDividePage })));
+const CommunicableDiseasesPage  = lazy(() => import("@/pages/CommunicableDiseasesPage"));
+const GlobalNgosPage            = lazy(() => import("@/pages/GlobalNgosPage"));
 const AddictionSciencePage      = lazy(() => import("@/pages/AddictionSciencePage"));
 const CompetitionCooperationPage = lazy(() => import("@/pages/CompetitionCooperationPage").then(m => ({ default: m.CompetitionCooperationPage })));
 const EndocrineSystemPage        = lazy(() => import("@/pages/EndocrineSystemPage"));
@@ -409,6 +415,8 @@ function Router() {
             <Route path="/science/energy-future" component={EnergyFuturePage} />
             <Route path="/well-being/public-health" component={PublicHealthPage} />
             <Route path="/well-being/disease-divide" component={DiseaseDividePage} />
+            <Route path="/well-being/communicable-diseases" component={CommunicableDiseasesPage} />
+            <Route path="/well-being/global-ngos" component={GlobalNgosPage} />
             <Route path="/well-being/addiction-science" component={AddictionSciencePage} />
             <Route path="/well-being/sanctuary/structural-violence" component={StructuralViolencePage} />
             <Route path="/well-being/abundance-vs-scarcity" component={AbundanceScarcityPage} />
@@ -428,6 +436,7 @@ function Router() {
             <Route path="/science/human-body/excretory-system" component={ExcretorySystemPage} />
             <Route path="/biology/botany" component={BotanyPage} />
             <Route path="/science/biology/microbiology" component={MicrobiologyPage} />
+            <Route path="/biology/escape-room" component={EscapeRoomPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />
@@ -446,8 +455,11 @@ function Router() {
             <Route path="/study-center/dinosaur-extinction" component={DinosaurExtinctionPage} />
             <Route path="/fossil-fuels" component={FossilFuelsPage} />
             <Route path="/physics/bicycle" component={BicyclePhysicsPage} />
+            <Route path="/physics/particle-collider" component={ParticlePhysicsPage} />
+            <Route path="/physics/equations" component={PhysicsEquationsPage} />
             <Route path="/robotics" component={RoboticsPage} />
             <Route path="/video-games" component={VideoGamesPage} />
+            <Route path="/kids/adventure-map" component={AdventureMapPage} />
             <Route path="/spelling-forge" component={SpellingForgePage} />
             <Route path="/sexual-health" component={SexualHealthPage} />
             <Route path="/global-cities" component={GlobalCitiesPage} />

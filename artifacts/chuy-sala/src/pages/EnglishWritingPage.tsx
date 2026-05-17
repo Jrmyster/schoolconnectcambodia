@@ -12,6 +12,7 @@ import { ComparativeSuperlativeModule } from "@/components/widgets/ComparativeSu
 import { PronunciationAssistant } from "@/components/widgets/PronunciationAssistant";
 import { FamilyVocabularyModule } from "@/components/widgets/FamilyVocabularyModule";
 import { WaterVerbsModule } from "@/components/widgets/WaterVerbsModule";
+import { WordOfTheDay } from "@/components/widgets/WordOfTheDay";
 
 export function EnglishWritingPage() {
   const { language } = useLanguageStore();
@@ -38,6 +39,9 @@ export function EnglishWritingPage() {
               : "Build your English writing skills one sentence at a time — with simple, clear, bilingual tools."}
           </p>
         </div>
+
+        {/* Word of the Day */}
+        <WordOfTheDay />
 
         {/* Pronunciation Assistant — Web Speech API powered audio tool */}
         <div className="mb-10">
