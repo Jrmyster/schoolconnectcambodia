@@ -51,7 +51,7 @@ export default function ParticlePhysicsPage() {
   const [energyReadoutKh, setEnergyReadoutKh] = useState<string | null>(null);
 
   // Animation Refs
-  const reqRef = useRef<number>();
+  const reqRef = useRef<number | undefined>(undefined);
   const stateRef = useRef<{
     pA: DrawableParticle | null;
     pB: DrawableParticle | null;
