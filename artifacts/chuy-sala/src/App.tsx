@@ -126,6 +126,7 @@ const AnthropologyPage          = lazy(() => import("@/pages/AnthropologyPage"))
 const PandemicsHistoryPage      = lazy(() => import("@/pages/PandemicsHistoryPage"));
 const MovingHumanityPage        = lazy(() => import("@/pages/MovingHumanityPage"));
 const HealthyFoodsPage          = lazy(() => import("@/pages/HealthyFoodsPage"));
+const FruitsVegetablesPage      = lazy(() => import("@/pages/FruitsVegetablesPage"));
 const DinosaurExtinctionPage    = lazy(() => import("@/pages/DinosaurExtinctionPage"));
 const FossilFuelsPage           = lazy(() => import("@/pages/FossilFuelsPage"));
 const BicyclePhysicsPage        = lazy(() => import("@/pages/BicyclePhysicsPage"));
@@ -152,6 +153,8 @@ const MissionStatementPage      = lazy(() => import("@/pages/MissionStatementPag
 const WorldHistoryPage          = lazy(() => import("@/pages/WorldHistoryPage"));
 const StudentArtGallery      = lazy(() => import("@/pages/StudentArtGallery"));
 const OrbitalMechanics         = lazy(() => import("@/pages/Science/OrbitalMechanics"));
+const MillionaireChallengePage = lazy(() => import("@/pages/MillionaireChallengePage"));
+const JeopardyPage             = lazy(() => import("@/pages/JeopardyPage"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
@@ -437,6 +440,8 @@ function Router() {
             <Route path="/biology/botany" component={BotanyPage} />
             <Route path="/science/biology/microbiology" component={MicrobiologyPage} />
             <Route path="/biology/escape-room" component={EscapeRoomPage} />
+            <Route path="/study-center/millionaire" component={MillionaireChallengePage} />
+            <Route path="/study-center/jeopardy" component={JeopardyPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />
@@ -524,6 +529,7 @@ function Router() {
             <Route path="/for-kids/word-popper" component={WordPopperPage} />
             <Route path="/for-kids/habitat-sorter" component={HabitatSorterPage} />
             <Route path="/for-kids/healthy-foods" component={HealthyFoodsPage} />
+            <Route path="/for-kids/fruits-vegetables" component={FruitsVegetablesPage} />
             <Route path="/kids/science" component={KidsScience} />
             <Route path="/kids/community" component={KidsCommunity} />
             <Route path="/kids/electronics" component={KidsElectronics} />

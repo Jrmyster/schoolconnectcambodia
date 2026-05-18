@@ -1,9 +1,13 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
+import { OrbitControls, Environment, ContactShadows, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { Sigma, RotateCw, Fingerprint, BoxSelect } from "lucide-react";
+import { Sigma, RotateCw, Fingerprint, BoxSelect, Map as MapIcon } from "lucide-react";
 import { useLanguageStore } from "@/store/use-language";
+import FourColorMap from "@/components/FourColorMap";
+import EulersFormula from "@/components/EulersFormula";
+import KleinBottle from "@/components/KleinBottle";
+import KnotTheory from "@/components/KnotTheory";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Topology: The Mathematics of Shape
@@ -57,6 +61,10 @@ export default function TopologyPage() {
           {[
             ["#mobius", isKh ? "បន្ទះ Möbius" : "Möbius Strip"],
             ["#homeomorphism", isKh ? "ការបំប្លែងពែង-ដូណាត់" : "Torus-Mug Homeomorphism"],
+            ["#four-color", isKh ? "ទ្រឹស្តីបទពណ៌ ៤" : "Four Color Theorem"],
+            ["#euler", isKh ? "រូបមន្ត Euler" : "Euler's Formula"],
+            ["#klein-bottle", isKh ? "ដប Klein" : "Klein Bottle"],
+            ["#knot-theory", isKh ? "ទ្រឹស្តីចំណង" : "Knot Theory"],
           ].map(([href, label]) => (
             <a
               key={href}
@@ -96,13 +104,15 @@ export default function TopologyPage() {
                 </span>
               </div>
               <Canvas camera={{ position: [0, 3, 5], fov: 45 }}>
-                <ambientLight intensity={0.6} />
-                <directionalLight position={[10, 10, 5]} intensity={1} />
-                <pointLight position={[-10, -10, -5]} intensity={0.5} color="#818cf8" />
-                <MobiusMesh />
-                <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
-                <OrbitControls enableZoom={true} autoRotate autoRotateSpeed={1.5} />
-                <Environment preset="city" />
+                <Suspense fallback={<CanvasLoader isKh={isKh} />}>
+                  <ambientLight intensity={0.6} />
+                  <directionalLight position={[10, 10, 5]} intensity={1} />
+                  <pointLight position={[-10, -10, -5]} intensity={0.5} color="#818cf8" />
+                  <MobiusMesh />
+                  <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+                  <OrbitControls enableZoom={true} autoRotate autoRotateSpeed={1.5} />
+                  <Environment preset="city" />
+                </Suspense>
               </Canvas>
             </article>
           </div>
@@ -188,6 +198,92 @@ export default function TopologyPage() {
           </div>
         </div>
       </section>
+
+      {/* ── 3. FOUR COLOR THEOREM ─────────────────────────────────────── */}
+      <section
+        id="four-color"
+        className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24"
+      >
+        <SectionHeader
+          eyebrow={isKh ? "ផ្នែកទី ៣" : "Section 03"}
+          en="The Four Color Theorem"
+          kh="ទ្រឹស្តីបទពណ៌ ៤"
+          isKh={isKh}
+          subEn="Color the map of Cambodia without letting adjacent provinces share the same color."
+          subKh="ផាត់ពណ៌ផែនទីប្រទេសកម្ពុជា ដោយមិនឱ្យខេត្តដែលនៅជាប់គ្នាមានពណ៌ដូចគ្នាឡើយ។"
+        />
+        
+        <div className="mt-8 relative z-10">
+          <article className="blueprint-card p-6 md:p-10 w-full relative rounded-xl border border-indigo-200 bg-white/50 backdrop-blur-sm">
+            <CardCorners />
+            <div className="flex items-center gap-2 mb-6 justify-center">
+              <MapIcon className="w-5 h-5 text-indigo-600" />
+              <span className="font-mono text-[11px] tracking-widest text-indigo-600">
+                TOP-03 · FOUR_COLOR_MAP
+              </span>
+            </div>
+            
+            <FourColorMap />
+          </article>
+        </div>
+      </section>
+
+      {/* ── 4. EULER'S FORMULA ─────────────────────────────────────── */}
+      <section
+        id="euler"
+        className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24"
+      >
+        <SectionHeader
+          eyebrow={isKh ? "ផ្នែកទី ៤" : "Section 04"}
+          en="Euler's Polyhedron Formula"
+          kh="រូបមន្ត Polyhedron របស់ Euler"
+          isKh={isKh}
+          subEn="A magical constant that connects the vertices, edges, and faces of 3D shapes."
+          subKh="ថេរដ៏អស្ចារ្យដែលភ្ជាប់កំពូល គែម និងផ្ទៃមុខនៃរូបរាង ៣ វិមាត្រ។"
+        />
+        
+        <div className="mt-8 relative z-10">
+          <EulersFormula />
+        </div>
+      </section>
+
+      {/* ── 5. KLEIN BOTTLE ─────────────────────────────────────── */}
+      <section
+        id="klein-bottle"
+        className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24"
+      >
+        <SectionHeader
+          eyebrow={isKh ? "ផ្នែកទី ៥" : "Section 05"}
+          en="The Klein Bottle"
+          kh="ដប Klein"
+          isKh={isKh}
+          subEn="A shape with no edges and no inside or outside."
+          subKh="រូបរាងដែលគ្មានគែម និងគ្មានខាងក្នុង ឬខាងក្រៅ។"
+        />
+        
+        <div className="mt-8 relative z-10">
+          <KleinBottle />
+        </div>
+      </section>
+
+      {/* ── 6. KNOT THEORY ─────────────────────────────────────── */}
+      <section
+        id="knot-theory"
+        className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24"
+      >
+        <SectionHeader
+          eyebrow={isKh ? "ផ្នែកទី ៦" : "Section 06"}
+          en="Knot Theory"
+          kh="ទ្រឹស្តីចំណង"
+          isKh={isKh}
+          subEn="The mathematical study of closed loops in 3D space."
+          subKh="ការសិក្សាគណិតវិទ្យាអំពីរង្វង់បិទជិតនៅក្នុងលំហ ៣ វិមាត្រ។"
+        />
+        
+        <div className="mt-8 relative z-10">
+          <KnotTheory />
+        </div>
+      </section>
     </div>
   );
 }
@@ -217,6 +313,19 @@ function SectionHeader({ eyebrow, en, kh, subEn, subKh, isKh }: any) {
         {isKh ? subKh : subEn}
       </p>
     </div>
+  );
+}
+
+function CanvasLoader({ isKh }: { isKh: boolean }) {
+  return (
+    <Html center>
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+        <span className={`text-sm whitespace-nowrap text-indigo-800 ${isKh ? "font-khmer" : "font-medium"}`}>
+          {isKh ? "កំពុងផ្ទុក..." : "Loading..."}
+        </span>
+      </div>
+    </Html>
   );
 }
 
@@ -295,13 +404,15 @@ function TorusMugScene({ isKh }: { isKh: boolean }) {
     <>
       <div className="absolute inset-0">
         <Canvas camera={{ position: [4, 4, 4], fov: 40 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[5, 10, 5]} intensity={1.2} />
-          <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#fef3c7" />
-          <TorusMugMesh morphValue={morphValue} />
-          <ContactShadows position={[0, -1.8, 0]} opacity={0.5} scale={10} blur={2} />
-          <OrbitControls enableZoom={false} autoRotate={false} />
-          <Environment preset="city" />
+          <Suspense fallback={<CanvasLoader isKh={isKh} />}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[5, 10, 5]} intensity={1.2} />
+            <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#fef3c7" />
+            <TorusMugMesh morphValue={morphValue} />
+            <ContactShadows position={[0, -1.8, 0]} opacity={0.5} scale={10} blur={2} />
+            <OrbitControls enableZoom={false} autoRotate={false} />
+            <Environment preset="city" />
+          </Suspense>
         </Canvas>
       </div>
       

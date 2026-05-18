@@ -3,7 +3,7 @@ import {
   Map, Heart, CheckCircle, Menu, X, PlusCircle, LogIn, LogOut,
   GraduationCap, Handshake, BookOpen, Leaf, Star,
   Shield, Rocket, ChevronDown, Compass, Library, FlaskConical, Smile, User, Sun, Columns3, Dna, Bone,
-  Activity, Banknote, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers, Filter, Palette, HeartHandshake,
+  Activity, Banknote, MonitorPlay, Wrench, Globe, Zap, Atom, Beaker, Microscope, Sparkles, PersonStanding, PenLine, Mountain, LifeBuoy, Cpu, Binary, Waves, Camera, CloudRain, Thermometer, HeartPulse, Plane, Magnet, Music, Sigma, Fuel, Bike, Bot, Gamepad2, Users, Brain, Dumbbell, Hexagon, Diamond, FlaskRound, Building2, Snowflake, Train, ScrollText, Landmark, Network, Trees, Radar as RadarIcon, Flag, Radiation, Tv, Languages as LanguagesIcon, BrainCircuit, Factory, Bug, Pill, Radio, Lock, Eye, Car, Skull, Split, Disc3, Unlink, Gauge, Presentation, Construction, Droplet, Droplets, Hourglass, PawPrint, Pickaxe, Fan, Flame, Lightbulb, Sprout, Blocks, Search, Box, Ship, Briefcase, FileText, MessageSquare, Calculator, Telescope, Hammer, Apple, Baby, Wind, CircuitBoard, Satellite, Layers, Filter, Palette, HeartHandshake,
 } from "lucide-react";
 import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } from "react";
 import { createPortal } from "react-dom";
@@ -183,6 +183,22 @@ const NAV_GROUPS: NavGroup[] = [
     color: "blue",
     items: [
       { href: "/exam-prep",             labelEn: "Exam Prep",        labelKh: "ត្រៀមប្រឡង",           icon: GraduationCap },
+      {
+        href: "/study-center/millionaire",
+        labelEn: "The Millionaire Challenge",
+        labelKh: "កម្មវិធីសេដ្ឋីប្រាក់លាន",
+        icon: Banknote,
+        descEn: "Test your knowledge across all subjects in a progressive 15-question game show format with interactive lifelines.",
+        descKh: "សាកល្បងចំណេះដឹងរបស់អ្នកលើគ្រប់មុខវិជ្ជាតាមរយៈទម្រង់កម្មវិធីហ្គេម ១៥ សំណួរដែលមានជម្រើសជំនួយអន្តរកម្ម។",
+      },
+      {
+        href: "/study-center/jeopardy",
+        labelEn: "Classroom Jeopardy",
+        labelKh: "ទូកចម្លើយ",
+        icon: MonitorPlay,
+        descEn: "A massive, projector-friendly 5x5 game board. Play as a classroom to answer questions across Physics, Chemistry, Biology, English, and History.",
+        descKh: "ក្ដារហ្គេម ៥x៥ ដ៏ធំសម្រាប់បញ្ចាំងលើអេក្រង់។ លេងក្នុងថ្នាក់រៀនដើម្បីឆ្លើយសំណួររូបវិទ្យា គីមីវិទ្យា ជីវវិទ្យា ភាសាអង់គ្លេស និងប្រវត្តិវិទ្យា។",
+      },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
       {
         href: "/pathway-to-medicine",
@@ -1606,6 +1622,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Apple,
         descEn: "A rainbow of fruits, vegetables, energy foods, and proteins — with the 'superpower' (vitamin or mineral) each one gives your growing body and brain.",
         descKh: "ឥន្ទធនូនៃផ្លែឈើ បន្លែ អាហារថាមពល និងសាច់ — ជាមួយ 'អំណាចពិសេស' (វីតាមីន ឬសារធាតុរ៉ែ) ដែលនីមួយៗផ្តល់ឲ្យរាងកាយ និងខួរក្បាលរបស់អ្នកដែលកំពុងលូតលាស់។",
+      },
+      {
+        href: "/for-kids/fruits-vegetables",
+        labelEn: "Fruits & Vegetables",
+        labelKh: "ផ្លែឈើ និងបន្លែ",
+        icon: Leaf,
+        descEn: "A bilingual flashcard grid of 20 common Cambodian fruits and vegetables. Tap to flip and learn the Khmer translation!",
+        descKh: "បណ្តុំកាតវាក្យសព្ទពីរភាសានៃផ្លែឈើ និងបន្លែកម្ពុជាទូទៅចំនួន ២០។ ប៉ះដើម្បីត្រឡប់ និងរៀនការបកប្រែជាភាសាខ្មែរ!",
       },
       {
         href: "/kids/science",

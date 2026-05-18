@@ -53,13 +53,16 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
   // Clue 2: Nucleus -> e.g., 2
   // Clue 3: Ribosome -> e.g., 5
   // Clue 4: Cell Membrane -> e.g., 1
-  // Code: 9251
+  // 5. Golgi (Packaging) -> 4
+  // 6. Lysosome (Recycling) -> 7
+  // 7. Chloroplast (Solar Panel) -> 3
+  // Code: 9251473
 
-  const [code, setCode] = useState(["", "", "", ""]);
+  const [code, setCode] = useState(["", "", "", "", "", "", ""]);
   const [error, setError] = useState(false);
 
   const checkCode = () => {
-    if (code.join("") === "9251") {
+    if (code.join("") === "9251473") {
       playUnlock();
       onUnlock();
     } else {
@@ -81,8 +84,8 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
       <div className="flex-1 overflow-y-auto pr-2">
         <p className={`text-slate-300 mb-6 ${isKh ? "font-khmer text-lg leading-relaxed" : "text-lg"}`}>
           {isKh
-            ? "សោទ្វារត្រូវបានចាក់ដោយលេខកូដ ៤ ខ្ទង់។ កំណត់អត្តសញ្ញាណសរីរាង្គកោសិកា ដើម្បីស្វែងរកលេខកូដ៖"
-            : "The door is locked with a 4-digit code. Identify the cell organelles to reveal the passcode:"}
+            ? "សោទ្វារត្រូវបានចាក់ដោយលេខកូដ ៧ ខ្ទង់។ កំណត់អត្តសញ្ញាណសរីរាង្គកោសិកា ដើម្បីស្វែងរកលេខកូដ៖"
+            : "The door is locked with a 7-digit code. Identify the cell organelles to reveal the passcode:"}
         </p>
 
         <div className="space-y-4 mb-8">
@@ -110,9 +113,27 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
             </span>
             <span className="text-emerald-400 font-mono font-bold bg-slate-900 px-3 py-1 rounded">Memb = 1</span>
           </div>
+          <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+            <span className={`text-slate-200 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "៥. មជ្ឈមណ្ឌលវេចខ្ចប់ និងដឹកជញ្ជូន" : "5. The Packaging and Shipping Center"}
+            </span>
+            <span className="text-emerald-400 font-mono font-bold bg-slate-900 px-3 py-1 rounded">Golg = 4</span>
+          </div>
+          <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+            <span className={`text-slate-200 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "៦. មជ្ឈមណ្ឌលកែច្នៃ និងកម្ចាត់សំរាម" : "6. The Recycling Center and Garbage Disposal"}
+            </span>
+            <span className="text-emerald-400 font-mono font-bold bg-slate-900 px-3 py-1 rounded">Lyso = 7</span>
+          </div>
+          <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+            <span className={`text-slate-200 ${isKh ? "font-khmer" : ""}`}>
+              {isKh ? "៧. បន្ទះស្រូបពន្លឺព្រះអាទិត្យមានតែក្នុងកោសិការុក្ខជាតិ" : "7. The Solar Panel found only in plant cells"}
+            </span>
+            <span className="text-emerald-400 font-mono font-bold bg-slate-900 px-3 py-1 rounded">Chlo = 3</span>
+          </div>
         </div>
 
-        <div className="bg-slate-900 p-6 rounded-2xl border-2 border-slate-700 max-w-sm mx-auto">
+        <div className="bg-slate-900 p-6 rounded-2xl border-2 border-slate-700 max-w-lg mx-auto">
           <div className="flex justify-between items-center mb-6 text-slate-400">
             <Lock className="w-5 h-5" />
             <span className={`text-sm uppercase tracking-wider ${isKh ? "font-khmer" : ""}`}>
@@ -121,8 +142,8 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
             <ShieldAlert className="w-5 h-5" />
           </div>
 
-          <div className={`flex gap-3 justify-center mb-6 ${error ? "animate-[shake_0.2s_ease-in-out_2]" : ""}`}>
-            {[0, 1, 2, 3].map((i) => (
+          <div className={`flex gap-2 sm:gap-3 justify-center mb-6 ${error ? "animate-[shake_0.2s_ease-in-out_2]" : ""}`}>
+            {[0, 1, 2, 3, 4, 5, 6].map((i) => (
               <input
                 key={i}
                 type="text"
@@ -134,7 +155,7 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
                   newCode[i] = val;
                   setCode(newCode);
                   // Auto-advance
-                  if (val && i < 3) {
+                  if (val && i < 6) {
                     const nextInput = document.getElementById(`digit-${i + 1}`);
                     nextInput?.focus();
                   }
@@ -149,7 +170,7 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
                   }
                 }}
                 id={`digit-${i}`}
-                className={`w-14 h-16 bg-slate-800 border-2 rounded-xl text-center text-3xl font-mono text-white focus:outline-none transition-colors
+                className={`w-9 sm:w-12 h-12 sm:h-16 bg-slate-800 border-2 rounded-xl text-center text-xl sm:text-3xl font-mono text-white focus:outline-none transition-colors
                   ${error ? "border-rose-500 text-rose-500" : "border-slate-600 focus:border-emerald-500"}
                 `}
               />
@@ -159,7 +180,7 @@ function Room1({ isKh, onUnlock }: { isKh: boolean; onUnlock: () => void }) {
           <button
             onClick={checkCode}
             className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all
-              ${code.join("").length === 4 
+              ${code.join("").length === 7 
                 ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)]" 
                 : "bg-slate-800 text-slate-500 cursor-not-allowed"}
             `}
