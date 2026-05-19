@@ -1,8 +1,22 @@
 export type DifficultyTier = 'easy' | 'medium' | 'hard';
 
+export type SubjectType = 
+  | 'Physics' 
+  | 'Mathematics' 
+  | 'Chemistry' 
+  | 'History' 
+  | 'English' 
+  | 'Khmer' 
+  | 'Science' 
+  | 'Electrical Engineering' 
+  | 'Mechanical Engineering' 
+  | 'Geography' 
+  | 'Geology' 
+  | 'Countries Around the World';
+
 export interface MillionaireQuestion {
   id: string;
-  categoryEn: string;
+  categoryEn: SubjectType;
   categoryKh: string;
   questionEn: string;
   questionKh: string;
@@ -34,7 +48,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   // ── EASY TIER ──
   {
     id: "e1",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "Which organelle is known as the powerhouse of the cell?",
     questionKh: "តើសរីរាង្គកោសិកាមួយណាដែលត្រូវបានគេស្គាល់ថាជារោងចក្រថាមពលនៃកោសិកា?",
     optionsEn: ["Nucleus", "Mitochondria", "Ribosome", "Chloroplast"],
@@ -79,7 +93,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "e6",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What part of the plant conducts photosynthesis?",
     questionKh: "តើផ្នែកណានៃរុក្ខជាតិដែលធ្វើរស្មីសំយោគ?",
     optionsEn: ["Root", "Stem", "Leaf", "Flower"],
@@ -124,7 +138,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "e11",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "How many legs does an insect have?",
     questionKh: "តើសត្វល្អិតមានជើងប៉ុន្មាន?",
     optionsEn: ["4", "6", "8", "10"],
@@ -169,7 +183,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "e16",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What do pandas primarily eat?",
     questionKh: "តើសត្វខ្លាឃ្មុំផេនដាស៊ីអ្វីជាអាហារចម្បង?",
     optionsEn: ["Meat", "Insects", "Bamboo", "Fish"],
@@ -189,7 +203,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   // ── MEDIUM TIER ──
   {
     id: "m1",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What process do plants use to convert sunlight into food?",
     questionKh: "តើរុក្ខជាតិប្រើដំណើរការអ្វីដើម្បីបំប្លែងពន្លឺព្រះអាទិត្យទៅជាអាហារ?",
     optionsEn: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
@@ -234,7 +248,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "m6",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What is the primary function of red blood cells?",
     questionKh: "តើមុខងារចម្បងនៃកោសិកាឈាមក្រហមគឺជាអ្វី?",
     optionsEn: ["Fight infection", "Clot blood", "Carry oxygen", "Digest food"],
@@ -279,7 +293,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "m11",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "Which part of the brain controls balance and coordination?",
     questionKh: "តើផ្នែកណានៃខួរក្បាលដែលគ្រប់គ្រងតុល្យភាព និងចលនា?",
     optionsEn: ["Cerebrum", "Cerebellum", "Brainstem", "Hypothalamus"],
@@ -324,7 +338,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "m16",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What type of animal is a frog?",
     questionKh: "តើកង្កែបជាសត្វប្រភេទអ្វី?",
     optionsEn: ["Reptile", "Amphibian", "Mammal", "Fish"],
@@ -344,7 +358,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   // ── HARD TIER ──
   {
     id: "h1",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What is the largest organ in the human body?",
     questionKh: "តើសរីរាង្គណាដែលធំជាងគេនៅក្នុងរាងកាយមនុស្ស?",
     optionsEn: ["Heart", "Liver", "Brain", "Skin"],
@@ -389,7 +403,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "h6",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "What is the name of the enzyme that unwinds DNA during replication?",
     questionKh: "តើអង់ស៊ីមអ្វីដែលដោះឌីអិនអេអំឡុងពេលថតចម្លង?",
     optionsEn: ["Polymerase", "Ligase", "Helicase", "Primase"],
@@ -434,7 +448,7 @@ export const MILLIONAIRE_QUESTIONS: MillionaireQuestion[] = [
   },
   {
     id: "h11",
-    categoryEn: "Biology", categoryKh: "ជីវវិទ្យា",
+    categoryEn: "Science", categoryKh: "វិទ្យាសាស្ត្រ",
     questionEn: "Which type of RNA brings amino acids to the ribosome?",
     questionKh: "តើ RNA ប្រភេទណាដែលនាំអាស៊ីតអាមីណូទៅកាន់រីបូសូម?",
     optionsEn: ["mRNA", "rRNA", "tRNA", "snRNA"],

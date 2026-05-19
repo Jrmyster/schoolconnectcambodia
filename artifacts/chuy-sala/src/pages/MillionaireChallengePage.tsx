@@ -1,7 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguageStore } from '@/store/use-language';
-import { MILLIONAIRE_QUESTIONS, PRIZE_LADDER, MillionaireQuestion } from '@/data/millionaire-questions';
-import { CircleDollarSign, Users, SplitSquareHorizontal, CheckCircle2, XCircle, ArrowRight, Trophy, PlayCircle, Dices } from 'lucide-react';
+import { MILLIONAIRE_QUESTIONS, PRIZE_LADDER, MillionaireQuestion, SubjectType } from '@/data/millionaire-questions';
+import { CircleDollarSign, Users, SplitSquareHorizontal, CheckCircle2, XCircle, ArrowRight, Trophy, PlayCircle, Dices, BookOpen } from 'lucide-react';
+
+const SUBJECTS: { id: SubjectType, labelEn: string, labelKh: string }[] = [
+  { id: 'Physics', labelEn: 'Physics', labelKh: 'រូបវិទ្យា' },
+  { id: 'Mathematics', labelEn: 'Mathematics', labelKh: 'គណិតវិទ្យា' },
+  { id: 'Chemistry', labelEn: 'Chemistry', labelKh: 'គីមីវិទ្យា' },
+  { id: 'History', labelEn: 'History', labelKh: 'ប្រវត្តិវិទ្យា' },
+  { id: 'English', labelEn: 'English', labelKh: 'ភាសាអង់គ្លេស' },
+  { id: 'Khmer', labelEn: 'Khmer', labelKh: 'ភាសាខ្មែរ' },
+  { id: 'Science', labelEn: 'Science', labelKh: 'វិទ្យាសាស្ត្រ' },
+  { id: 'Electrical Engineering', labelEn: 'Electrical Eng.', labelKh: 'វិស្វកម្មអគ្គិសនី' },
+  { id: 'Mechanical Engineering', labelEn: 'Mechanical Eng.', labelKh: 'វិស្វកម្មមេកានិច' },
+  { id: 'Geography', labelEn: 'Geography', labelKh: 'ភូមិវិទ្យា' },
+  { id: 'Geology', labelEn: 'Geology', labelKh: 'ភូគព្ភវិទ្យា' },
+  { id: 'Countries Around the World', labelEn: 'World Countries', labelKh: 'ប្រទេសជុំវិញពិភពលោក' },
+];
 
 // --- AUDIO HELPERS ---
 const audioCtx = typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext) 
@@ -100,7 +115,8 @@ export default function MillionaireChallengePage() {
   const { language } = useLanguageStore();
   const isKh = language === 'kh';
 
-  const [gameMode, setGameMode] = useState<'menu' | 'classic' | 'random'>('menu');
+  const [gameMode, setGameMode] = useState<'menu' | 'subject-select' | 'classic' | 'random'>('menu');
+  const [selectedSubject, setSelectedSubject] = useState<SubjectType | null>(null);
   const [activeQuestions, setActiveQuestions] = useState<MillionaireQuestion[]>([]);
   const [qIndex, setQIndex] = useState(0);
   const [gameState, setGameState] = useState<'idle' | 'suspense' | 'correct' | 'wrong' | 'won'>('idle');
@@ -120,7 +136,7 @@ export default function MillionaireChallengePage() {
     };
   }, []);
 
-  const startGame = (mode: 'classic' | 'random') => {
+  const startGame = (mode: 'classic' | 'random', subject?: SubjectType) => {
     // Reset all game state
     setGameMode(mode);
     setQIndex(0);
@@ -129,13 +145,25 @@ export default function MillionaireChallengePage() {
     setEliminatedOptions([]);
     setUsed5050(false);
     setUsedAskClass(false);
+    
+    if (subject) setSelectedSubject(subject);
 
-    if (mode === 'classic') {
-      // Classic mode pulls the first 5 of each tier, representing the original fixed set
-      const easy = MILLIONAIRE_QUESTIONS.filter(q => q.difficultyTier === 'easy').slice(0, 5);
-      const med = MILLIONAIRE_QUESTIONS.filter(q => q.difficultyTier === 'medium').slice(0, 5);
-      const hard = MILLIONAIRE_QUESTIONS.filter(q => q.difficultyTier === 'hard').slice(0, 5);
-      setActiveQuestions([...easy, ...med, ...hard]);
+    if (mode === 'classic' && subject) {
+      const pool = MILLIONAIRE_QUESTIONS.filter(q => q.categoryEn === subject);
+      
+      const easy = pool.filter(q => q.difficultyTier === 'easy').sort(() => Math.random() - 0.5);
+      const med = pool.filter(q => q.difficultyTier === 'medium').sort(() => Math.random() - 0.5);
+      const hard = pool.filter(q => q.difficultyTier === 'hard').sort(() => Math.random() - 0.5);
+      
+      // Pad with random questions of the same difficulty if there aren't enough in the selected subject
+      const pad = (arr: MillionaireQuestion[], targetLen: number, diff: 'easy'|'medium'|'hard') => {
+         if (arr.length >= targetLen) return arr.slice(0, targetLen);
+         const missing = targetLen - arr.length;
+         const backups = MILLIONAIRE_QUESTIONS.filter(q => q.difficultyTier === diff && q.categoryEn !== subject).sort(() => Math.random() - 0.5);
+         return [...arr, ...backups.slice(0, missing)];
+      };
+
+      setActiveQuestions([...pad(easy, 5, 'easy'), ...pad(med, 5, 'medium'), ...pad(hard, 5, 'hard')]);
     } else {
       // Random mode
       const easy = [...MILLIONAIRE_QUESTIONS.filter(q => q.difficultyTier === 'easy')].sort(() => Math.random() - 0.5).slice(0, 5);
@@ -232,7 +260,7 @@ export default function MillionaireChallengePage() {
           <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl">
             {/* Classic Mode Button */}
             <button
-              onClick={() => startGame('classic')}
+              onClick={() => setGameMode('subject-select')}
               className={`flex-1 flex flex-col items-center justify-center gap-4 p-8 rounded-3xl bg-blue-900/40 border border-blue-500/50 hover:bg-blue-800/60 hover:border-blue-400 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(59,130,246,0.1)] hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] group`}
             >
               <PlayCircle className="w-12 h-12 text-blue-400 group-hover:text-white transition-colors" />
@@ -262,6 +290,50 @@ export default function MillionaireChallengePage() {
               </div>
             </button>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // -----------------------------------------------------
+  // RENDER SUBJECT SELECT SCREEN
+  // -----------------------------------------------------
+  if (gameMode === 'subject-select') {
+    return (
+      <div className="min-h-screen bg-[#0f172a] flex flex-col items-center p-6 relative overflow-y-auto">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-[#0f172a] to-[#0f172a] pointer-events-none fixed" />
+        
+        <div className="z-10 flex flex-col items-center w-full max-w-5xl mt-12 mb-12">
+          <BookOpen className="w-16 h-16 text-blue-400 mb-6" />
+          <h1 className={`text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-blue-500 mb-4 ${isKh ? 'font-khmer' : ''}`}>
+            {isKh ? 'ជ្រើសរើសមុខវិជ្ជា' : 'SELECT YOUR SUBJECT'}
+          </h1>
+          <p className={`text-lg text-slate-300 mb-12 text-center max-w-2xl ${isKh ? 'font-khmer' : ''}`}>
+            {isKh 
+              ? 'ជ្រើសរើសប្រធានបទដែលអ្នកចង់ប្រកួតប្រជែង។ សំណួរនីមួយៗនឹងត្រូវជ្រើសរើសពិសេសសម្រាប់អ្នក។' 
+              : 'Choose the topic you want to be challenged on. The questions will be specifically tailored to your choice.'}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+            {SUBJECTS.map((sub) => (
+              <button
+                key={sub.id}
+                onClick={() => startGame('classic', sub.id)}
+                className={`p-6 rounded-2xl bg-slate-900/60 border border-slate-700 hover:bg-blue-900/40 hover:border-blue-400 hover:scale-[1.03] transition-all shadow-lg flex flex-col items-center justify-center text-center group h-32`}
+              >
+                <span className={`text-xl font-bold text-slate-200 group-hover:text-blue-300 ${isKh ? 'font-khmer' : ''}`}>
+                  {isKh ? sub.labelKh : sub.labelEn}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <button 
+            onClick={resetToMenu}
+            className={`mt-12 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full font-bold transition-all border border-slate-600 ${isKh ? 'font-khmer' : ''}`}
+          >
+            {isKh ? 'ត្រឡប់ក្រោយ' : 'GO BACK'}
+          </button>
         </div>
       </div>
     );
@@ -453,7 +525,7 @@ export default function MillionaireChallengePage() {
 
         {/* Right Column: Money Ladder */}
         <div className="hidden lg:flex w-[300px] flex-col gap-1 p-6 bg-blue-950/40 rounded-3xl border border-blue-800/50">
-          {PRIZE_LADDER.map((prize, idx) => {
+          {[...PRIZE_LADDER].reverse().map((prize, idx) => {
             const level = PRIZE_LADDER.length - 1 - idx;
             const isCurrent = level === qIndex;
             const isPassed = level < qIndex;
