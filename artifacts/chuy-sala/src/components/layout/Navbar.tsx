@@ -199,6 +199,14 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "A massive, projector-friendly 5x5 game board. Play as a classroom to answer questions across Physics, Chemistry, Biology, English, and History.",
         descKh: "ក្ដារហ្គេម ៥x៥ ដ៏ធំសម្រាប់បញ្ចាំងលើអេក្រង់។ លេងក្នុងថ្នាក់រៀនដើម្បីឆ្លើយសំណួររូបវិទ្យា គីមីវិទ្យា ជីវវិទ្យា ភាសាអង់គ្លេស និងប្រវត្តិវិទ្យា។",
       },
+      {
+        href: "/study-center/crossword",
+        labelEn: "Dynamic Crossword",
+        labelKh: "ល្បែងពាក្យខ្វែង",
+        icon: Blocks,
+        descEn: "A procedurally generated crossword puzzle to test your English vocabulary.",
+        descKh: "ល្បែងពាក្យខ្វែងដែលបង្កើតដោយស្វ័យប្រវត្តិដើម្បីសាកល្បងវាក្យសព្ទអង់គ្លេសរបស់អ្នក។",
+      },
       { href: "/art-of-learning",       labelEn: "The Art of Learning", labelKh: "សិល្បៈនៃការរៀនសូត្រ",   icon: BookOpen, descEn: "How to study smarter, understand learning differences, and see why education changed civilization.", descKh: "របៀបរៀនឲ្យឆ្លាតវៃ យល់ដឹងពីភាពខុសគ្នានៃការរៀន និងមើលថាហេតុអ្វីការអប់រំបានផ្លាស់ប្ដូរអរិយធម៌។" },
       {
         href: "/pathway-to-medicine",
@@ -1197,6 +1205,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Car,
         descEn: "Lift the bonnet on a 4-stroke engine, a triangle-spinning rotary, the 20,000-volt spark plug, the 'air pedal' throttle, turbochargers, mufflers, the clutch, manual vs automatic gearboxes, rack-and-pinion steering, and ABS that pumps brakes 15 times a second.",
         descKh: "បើកគម្របលើម៉ាស៊ីន ៤ ជំហាន រ៉ូតារីត្រីកោណវិល ផ្គរប៊ូហ្គី ២០,០០០ វ៉ុល «ឈ្នាន់ខ្យល់» ធួបូ បំពង់ស៊ីម៉ាំង អាំប្រាយ៉ា ប្រអប់លេខកា ទល់នឹងលេខអូតូ ចង្កូត Rack-and-Pinion និង ABS ដែលលោតហ្វ្រាំង ១៥ ដងក្នុងមួយវិនាទី។",
+      },
+      {
+        href: "/technology/spark-plugs",
+        labelEn: "How Spark Plugs Work",
+        labelKh: "របៀបដែលប៊ូហ្គីដំណើរការ",
+        icon: Zap,
+        descEn: "An interactive 2D animated simulation of the 4-stroke engine cylinder showing ignition timing, the spark plug construction, and the high voltage required to ignite the fuel-air mix.",
+        descKh: "ការពិសោធន៍ចលនា 2D អន្តរកម្មនៃស៊ីឡាំងម៉ាស៊ីន ៤ ជំហាន បង្ហាញពីពេលបញ្ឆេះ ការស្ថាបនារបស់ប៊ូហ្គី និងតង់ស្យុងខ្ពស់ដែលត្រូវការដើម្បីដុតល្បាយឥន្ធនៈនិងខ្យល់។",
       },
       {
         href: "/how-computers-work",

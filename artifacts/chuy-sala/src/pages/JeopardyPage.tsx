@@ -1,15 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLanguageStore } from '@/store/use-language';
-import { JEOPARDY_DATA, JeopardyClue } from '@/data/jeopardy-questions';
+import { JEOPARDY_CATEGORIES, JEOPARDY_QUESTION_BANK, JeopardyClue, JeopardyCategoryMeta } from '@/data/jeopardy-questions';
+
+interface ActiveCategory extends JeopardyCategoryMeta {
+  clues: JeopardyClue[];
+}
 import { MonitorPlay, X, RotateCcw, CheckCircle } from 'lucide-react';
 
 export default function JeopardyPage() {
   const { language } = useLanguageStore();
   const isKh = language === 'kh';
 
+  const [boardData, setBoardData] = useState<ActiveCategory[]>([]);
   const [completedTiles, setCompletedTiles] = useState<string[]>([]);
   const [activeClue, setActiveClue] = useState<JeopardyClue | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const generateBoard = useCallback(() => {
+    // Randomly select 5 categories
+    const shuffledCategories = [...JEOPARDY_CATEGORIES].sort(() => 0.5 - Math.random());
+    const selectedCategories = shuffledCategories.slice(0, 5);
+
+    const newBoard: ActiveCategory[] = selectedCategories.map(cat => {
+      // For each point value, find matching clues and pick one randomly
+      const points = [100, 200, 300, 400, 500];
+      const clues = points.map(p => {
+        const availableClues = JEOPARDY_QUESTION_BANK.filter(
+          q => q.categoryId === cat.id && q.points === p
+        );
+        return availableClues[Math.floor(Math.random() * availableClues.length)];
+      });
+
+      return {
+        ...cat,
+        clues
+      };
+    });
+
+    setBoardData(newBoard);
+    setCompletedTiles([]);
+    setActiveClue(null);
+    setIsFlipped(false);
+  }, []);
+
+  useEffect(() => {
+    generateBoard();
+  }, [generateBoard]);
 
   const handleTileClick = (clue: JeopardyClue) => {
     if (completedTiles.includes(clue.id)) return;
@@ -46,7 +82,7 @@ export default function JeopardyPage() {
             </h1>
           </div>
           <button 
-            onClick={() => setCompletedTiles([])}
+            onClick={generateBoard}
             className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
@@ -62,7 +98,7 @@ export default function JeopardyPage() {
         <div className="flex-1 grid grid-cols-5 gap-2 md:gap-4 lg:gap-6 w-full h-full">
           
           {/* Column Headers */}
-          {JEOPARDY_DATA.map(category => (
+          {boardData.map(category => (
             <div key={category.id} className="flex flex-col gap-2 md:gap-4 lg:gap-6">
               
               {/* Category Header Tile */}

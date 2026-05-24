@@ -1,5 +1,6 @@
 export interface JeopardyClue {
   id: string;
+  categoryId: string;
   points: number;
   clueEn: string;
   clueKh: string;
@@ -7,247 +8,93 @@ export interface JeopardyClue {
   answerKh: string;
 }
 
-export interface JeopardyCategory {
+export interface JeopardyCategoryMeta {
   id: string;
   nameEn: string;
   nameKh: string;
-  clues: JeopardyClue[];
 }
 
-export const JEOPARDY_DATA: JeopardyCategory[] = [
-  {
-    id: "physics",
-    nameEn: "Physics",
-    nameKh: "រូបវិទ្យា",
-    clues: [
-      {
-        id: "p100",
-        points: 100,
-        clueEn: "This fundamental force keeps us anchored to the Earth.",
-        clueKh: "កម្លាំងមូលដ្ឋាននេះរក្សាយើងឱ្យជាប់នឹងផែនដី។",
-        answerEn: "What is gravity?",
-        answerKh: "តើអ្វីទៅជាទំនាញផែនដី?"
-      },
-      {
-        id: "p200",
-        points: 200,
-        clueEn: "It is the standard unit of measurement for electrical resistance.",
-        clueKh: "វាគឺជាឯកតារង្វាស់ស្តង់ដារសម្រាប់រេស៊ីស្តង់អគ្គិសនី។",
-        answerEn: "What is the Ohm?",
-        answerKh: "តើអ្វីទៅជា អូម (Ohm)?"
-      },
-      {
-        id: "p300",
-        points: 300,
-        clueEn: "This theory by Einstein asserts that E = mc².",
-        clueKh: "ទ្រឹស្តីនេះរបស់អែងស្តែងបញ្ជាក់ថា E = mc²។",
-        answerEn: "What is the Theory of Relativity?",
-        answerKh: "តើអ្វីទៅជាទ្រឹស្តីរ៉ឺឡាទីវីតេ?"
-      },
-      {
-        id: "p400",
-        points: 400,
-        clueEn: "This is the approximate speed of light in a vacuum, in kilometers per second.",
-        clueKh: "នេះគឺជាល្បឿនប្រហាក់ប្រហែលនៃពន្លឺនៅក្នុងសុញ្ញកាស គិតជាគីឡូម៉ែត្រក្នុងមួយវិនាទី។",
-        answerEn: "What is 300,000 km/s?",
-        answerKh: "តើអ្វីទៅជា ៣០០,០០០ គ.ម/វិនាទី?"
-      },
-      {
-        id: "p500",
-        points: 500,
-        clueEn: "This quantum mechanics principle states that you cannot simultaneously know the exact position and momentum of a particle.",
-        clueKh: "គោលការណ៍មេកានិចកង់ទិចនេះចែងថា អ្នកមិនអាចដឹងពីទីតាំង និងសន្ទុះពិតប្រាកដនៃភាគល្អិតក្នុងពេលដំណាលគ្នាបានទេ។",
-        answerEn: "What is the Heisenberg Uncertainty Principle?",
-        answerKh: "តើអ្វីទៅជាគោលការណ៍មិនប្រាកដប្រជារបស់ Heisenberg?"
-      }
-    ]
-  },
-  {
-    id: "chemistry",
-    nameEn: "Chemistry",
-    nameKh: "គីមីវិទ្យា",
-    clues: [
-      {
-        id: "c100",
-        points: 100,
-        clueEn: "It is the chemical symbol for water.",
-        clueKh: "វាគឺជានិមិត្តសញ្ញាគីមីសម្រាប់ទឹក។",
-        answerEn: "What is H2O?",
-        answerKh: "តើអ្វីទៅជា H2O?"
-      },
-      {
-        id: "c200",
-        points: 200,
-        clueEn: "This element has the atomic number 1 and is the lightest element.",
-        clueKh: "ធាតុនេះមានលេខអាតូមិច ១ ហើយជាធាតុស្រាលជាងគេ។",
-        answerEn: "What is Hydrogen?",
-        answerKh: "តើអ្វីទៅជា អ៊ីដ្រូសែន?"
-      },
-      {
-        id: "c300",
-        points: 300,
-        clueEn: "A solution with a pH of 7 is considered to be this.",
-        clueKh: "សូលុយស្យុងដែលមាន pH ៧ ត្រូវបានចាត់ទុកថាជាអ្វី។",
-        answerEn: "What is neutral?",
-        answerKh: "តើអ្វីទៅជា អព្យាក្រឹត?"
-      },
-      {
-        id: "c400",
-        points: 400,
-        clueEn: "This table organizes all known chemical elements based on their atomic number.",
-        clueKh: "តារាងនេះរៀបចំធាតុគីមីទាំងអស់ដោយផ្អែកលើលេខអាតូមិចរបស់ពួកវា។",
-        answerEn: "What is the Periodic Table?",
-        answerKh: "តើអ្វីទៅជា តារាងខួបនៃធាតុគីមី?"
-      },
-      {
-        id: "c500",
-        points: 500,
-        clueEn: "It is the industrial process used to artificially fix nitrogen from the air into ammonia.",
-        clueKh: "វាគឺជាដំណើរការឧស្សាហកម្មដែលប្រើដើម្បីទាញយកអាសូតពីខ្យល់ទៅជាអាម៉ូញាក់។",
-        answerEn: "What is the Haber-Bosch process?",
-        answerKh: "តើអ្វីទៅជា ដំណើរការ Haber-Bosch?"
-      }
-    ]
-  },
-  {
-    id: "biology",
-    nameEn: "Biology",
-    nameKh: "ជីវវិទ្យា",
-    clues: [
-      {
-        id: "b100",
-        points: 100,
-        clueEn: "This is known as the powerhouse of the cell.",
-        clueKh: "វាត្រូវបានគេស្គាល់ថាជារោងចក្រថាមពលនៃកោសិកា។",
-        answerEn: "What is the mitochondria?",
-        answerKh: "តើអ្វីទៅជា មីតូកុងទ្រី?"
-      },
-      {
-        id: "b200",
-        points: 200,
-        clueEn: "This process is how plants convert sunlight, water, and carbon dioxide into food.",
-        clueKh: "ដំណើរការនេះគឺជារបៀបដែលរុក្ខជាតិបំប្លែងពន្លឺព្រះអាទិត្យ ទឹក និងកាបូនឌីអុកស៊ីតទៅជាអាហារ។",
-        answerEn: "What is photosynthesis?",
-        answerKh: "តើអ្វីទៅជា រស្មីសំយោគ?"
-      },
-      {
-        id: "b300",
-        points: 300,
-        clueEn: "This is the molecule that carries genetic instructions in all living things.",
-        clueKh: "នេះគឺជាម៉ូលេគុលដែលផ្ទុកព័ត៌មានសេនេទិចនៅក្នុងភាវៈរស់ទាំងអស់។",
-        answerEn: "What is DNA?",
-        answerKh: "តើអ្វីទៅជា ឌីអិនអេ (DNA)?"
-      },
-      {
-        id: "b400",
-        points: 400,
-        clueEn: "These cells in the blood are primarily responsible for fighting infections.",
-        clueKh: "កោសិកាទាំងនេះនៅក្នុងឈាមមានតួនាទីចម្បងក្នុងការប្រយុទ្ធប្រឆាំងនឹងការឆ្លងមេរោគ។",
-        answerEn: "What are white blood cells (Leukocytes)?",
-        answerKh: "តើអ្វីទៅជា គោលិកាស (កោសិកាឈាមស)?"
-      },
-      {
-        id: "b500",
-        points: 500,
-        clueEn: "This revolutionary gene-editing technology acts like molecular scissors.",
-        clueKh: "បច្ចេកវិទ្យាកែសម្រួលហ្សែនដ៏អស្ចារ្យនេះដើរតួដូចជាកន្ត្រៃម៉ូលេគុល។",
-        answerEn: "What is CRISPR (or CRISPR-Cas9)?",
-        answerKh: "តើអ្វីទៅជា CRISPR?"
-      }
-    ]
-  },
-  {
-    id: "english",
-    nameEn: "English",
-    nameKh: "ភាសាអង់គ្លេស",
-    clues: [
-      {
-        id: "e100",
-        points: 100,
-        clueEn: "It is a word that represents a person, place, or thing.",
-        clueKh: "វាគឺជាពាក្យដែលតំណាងឱ្យមនុស្ស ទីកន្លែង ឬវត្ថុ។",
-        answerEn: "What is a noun?",
-        answerKh: "តើអ្វីទៅជា នាម?"
-      },
-      {
-        id: "e200",
-        points: 200,
-        clueEn: "This literary device uses 'like' or 'as' to compare two different things.",
-        clueKh: "វិធីសាស្ត្រតែងនិពន្ធនេះប្រើ 'like' ឬ 'as' ដើម្បីប្រៀបធៀបវត្ថុពីរខុសគ្នា។",
-        answerEn: "What is a simile?",
-        answerKh: "តើអ្វីទៅជា ឧបមា (Simile)?"
-      },
-      {
-        id: "e300",
-        points: 300,
-        clueEn: "Words like 'to', 'too', and 'two' that sound the same but have different meanings.",
-        clueKh: "ពាក្យដូចជា 'to', 'too', និង 'two' ដែលមានសំឡេងដូចគ្នា ប៉ុន្តែមានអត្ថន័យខុសគ្នា។",
-        answerEn: "What are homophones?",
-        answerKh: "តើអ្វីទៅជា Homophones?"
-      },
-      {
-        id: "e400",
-        points: 400,
-        clueEn: "A word that describes or modifies a verb, adjective, or another adverb.",
-        clueKh: "ពាក្យដែលពណ៌នា ឬបញ្ជាក់កិរិយាសព្ទ គុណនាម ឬគុណកិរិយាផ្សេងទៀត។",
-        answerEn: "What is an adverb?",
-        answerKh: "តើអ្វីទៅជា គុណកិរិយា (Adverb)?"
-      },
-      {
-        id: "e500",
-        points: 500,
-        clueEn: "A term for a word, phrase, or sequence that reads the same backward as forward, like 'madam'.",
-        clueKh: "ពាក្យ ឬឃ្លាដែលអាចអានពីមុខទៅក្រោយ និងពីក្រោយទៅមុខដូចគ្នា ឧទាហរណ៍ 'madam'។",
-        answerEn: "What is a palindrome?",
-        answerKh: "តើអ្វីទៅជា Palindrome?"
-      }
-    ]
-  },
-  {
-    id: "history",
-    nameEn: "History",
-    nameKh: "ប្រវត្តិវិទ្យា",
-    clues: [
-      {
-        id: "h100",
-        points: 100,
-        clueEn: "This massive temple complex is a national symbol of Cambodia.",
-        clueKh: "ប្រាសាទដ៏ធំនេះគឺជានិមិត្តសញ្ញាជាតិនៃប្រទេសកម្ពុជា។",
-        answerEn: "What is Angkor Wat?",
-        answerKh: "តើអ្វីទៅជា ប្រាសាទអង្គរវត្ត?"
-      },
-      {
-        id: "h200",
-        points: 200,
-        clueEn: "He was the first President of the United States of America.",
-        clueKh: "គាត់គឺជាប្រធានាធិបតីដំបូងបង្អស់នៃសហរដ្ឋអាមេរិក។",
-        answerEn: "Who is George Washington?",
-        answerKh: "តើនរណាជា George Washington?"
-      },
-      {
-        id: "h300",
-        points: 300,
-        clueEn: "This empire was the most powerful in the ancient Mediterranean before splitting in 395 CE.",
-        clueKh: "អាណាចក្រនេះមានឥទ្ធិពលបំផុតនៅសមុទ្រមេឌីទែរ៉ាណេបុរាណ មុនពេលបែកបាក់នៅឆ្នាំ 395 គ.ស។",
-        answerEn: "What is the Roman Empire?",
-        answerKh: "តើអ្វីទៅជា ចក្រភពរ៉ូម?"
-      },
-      {
-        id: "h400",
-        points: 400,
-        clueEn: "This Cambodian king initiated the construction of the city of Angkor Thom.",
-        clueKh: "ព្រះមហាក្សត្រខ្មែរអង្គនេះបានចាប់ផ្តើមការសាងសង់ទីក្រុងអង្គរធំ។",
-        answerEn: "Who is Jayavarman VII?",
-        answerKh: "តើនរណាជា ព្រះបាទជ័យវរ្ម័នទី ៧?"
-      },
-      {
-        id: "h500",
-        points: 500,
-        clueEn: "This global conflict ended in 1945 following the use of atomic weapons.",
-        clueKh: "ជម្លោះសកលនេះបានបញ្ចប់នៅឆ្នាំ ១៩៤៥ បន្ទាប់ពីការប្រើប្រាស់អាវុធបរមាណូ។",
-        answerEn: "What is World War II?",
-        answerKh: "តើអ្វីទៅជា សង្គ្រាមលោកលើកទី ២?"
-      }
-    ]
-  }
+// Ensure the game uses these categories to randomly pick 5
+export const JEOPARDY_CATEGORIES: JeopardyCategoryMeta[] = [
+  { id: "physics", nameEn: "Physics", nameKh: "រូបវិទ្យា" },
+  { id: "chemistry", nameEn: "Chemistry", nameKh: "គីមីវិទ្យា" },
+  { id: "biology", nameEn: "Biology", nameKh: "ជីវវិទ្យា" },
+  { id: "english", nameEn: "English", nameKh: "ភាសាអង់គ្លេស" },
+  { id: "history", nameEn: "History", nameKh: "ប្រវត្តិវិទ្យា" },
+  { id: "mathematics", nameEn: "Mathematics", nameKh: "គណិតវិទ្យា" },
+];
+
+// Flat question bank
+export const JEOPARDY_QUESTION_BANK: JeopardyClue[] = [
+  /* PHYSICS */
+  { id: "p100_1", categoryId: "physics", points: 100, clueEn: "This fundamental force keeps us anchored to the Earth.", clueKh: "កម្លាំងមូលដ្ឋាននេះរក្សាយើងឱ្យជាប់នឹងផែនដី។", answerEn: "What is gravity?", answerKh: "តើអ្វីទៅជាទំនាញផែនដី?" },
+  { id: "p100_2", categoryId: "physics", points: 100, clueEn: "This state of matter has a definite volume but no definite shape.", clueKh: "ស្ថានភាពនៃរូបធាតុនេះមានមាឌជាក់លាក់ប៉ុន្តែមិនមានរូបរាងជាក់លាក់ទេ។", answerEn: "What is a liquid?", answerKh: "តើអ្វីទៅជាអង្គធាតុរាវ?" },
+  { id: "p200_1", categoryId: "physics", points: 200, clueEn: "It is the standard unit of measurement for electrical resistance.", clueKh: "វាគឺជាឯកតារង្វាស់ស្តង់ដារសម្រាប់រេស៊ីស្តង់អគ្គិសនី។", answerEn: "What is the Ohm?", answerKh: "តើអ្វីទៅជា អូម (Ohm)?" },
+  { id: "p200_2", categoryId: "physics", points: 200, clueEn: "This type of lens is thicker in the middle than at the edges.", clueKh: "ឡង់ទីនេះមានកម្រាស់ក្រាស់នៅចំកណ្តាលជាងនៅគែម។", answerEn: "What is a convex lens?", answerKh: "តើអ្វីទៅជាឡង់ទីប៉ោង?" },
+  { id: "p300_1", categoryId: "physics", points: 300, clueEn: "This theory by Einstein asserts that E = mc².", clueKh: "ទ្រឹស្តីនេះរបស់អែងស្តែងបញ្ជាក់ថា E = mc²។", answerEn: "What is the Theory of Relativity?", answerKh: "តើអ្វីទៅជាទ្រឹស្តីរ៉ឺឡាទីវីតេ?" },
+  { id: "p300_2", categoryId: "physics", points: 300, clueEn: "It is the resistance that one surface or object encounters when moving over another.", clueKh: "វាគឺជាកម្លាំងទប់ដែលផ្ទៃឬវត្ថុមួយជួបប្រទះនៅពេលផ្លាស់ទីលើវត្ថុមួយទៀត។", answerEn: "What is friction?", answerKh: "តើអ្វីទៅជាកម្លាំងកកិត?" },
+  { id: "p400_1", categoryId: "physics", points: 400, clueEn: "This is the approximate speed of light in a vacuum, in kilometers per second.", clueKh: "នេះគឺជាល្បឿនប្រហាក់ប្រហែលនៃពន្លឺនៅក្នុងសុញ្ញកាស គិតជាគីឡូម៉ែត្រក្នុងមួយវិនាទី។", answerEn: "What is 300,000 km/s?", answerKh: "តើអ្វីទៅជា ៣០០,០០០ គ.ម/វិនាទី?" },
+  { id: "p400_2", categoryId: "physics", points: 400, clueEn: "The number of waves that pass a fixed point in unit time.", clueKh: "ចំនួនរលកដែលឆ្លងកាត់ចំណុចថេរក្នុងមួយឯកតាពេល។", answerEn: "What is frequency?", answerKh: "តើអ្វីទៅជាប្រេកង់?" },
+  { id: "p500_1", categoryId: "physics", points: 500, clueEn: "This quantum mechanics principle states that you cannot simultaneously know the exact position and momentum of a particle.", clueKh: "គោលការណ៍មេកានិចកង់ទិចនេះចែងថា អ្នកមិនអាចដឹងពីទីតាំង និងសន្ទុះពិតប្រាកដនៃភាគល្អិតក្នុងពេលដំណាលគ្នាបានទេ។", answerEn: "What is the Heisenberg Uncertainty Principle?", answerKh: "តើអ្វីទៅជាគោលការណ៍មិនប្រាកដប្រជារបស់ Heisenberg?" },
+  { id: "p500_2", categoryId: "physics", points: 500, clueEn: "This principle explains why airplanes are able to fly based on fluid dynamics.", clueKh: "គោលការណ៍នេះពន្យល់ពីមូលហេតុដែលយន្តហោះអាចហោះហើរដោយផ្អែកលើឌីណាមិចនៃសន្ទនីយ៍។", answerEn: "What is Bernoulli's principle?", answerKh: "តើអ្វីទៅជាគោលការណ៍ប៊ែរនូលី?" },
+
+  /* CHEMISTRY */
+  { id: "c100_1", categoryId: "chemistry", points: 100, clueEn: "It is the chemical symbol for water.", clueKh: "វាគឺជានិមិត្តសញ្ញាគីមីសម្រាប់ទឹក។", answerEn: "What is H2O?", answerKh: "តើអ្វីទៅជា H2O?" },
+  { id: "c100_2", categoryId: "chemistry", points: 100, clueEn: "This element is the main component of the air we breathe.", clueKh: "ធាតុនេះគឺជាសមាសធាតុចម្បងនៃខ្យល់ដែលយើងដកដង្ហើម។", answerEn: "What is Nitrogen?", answerKh: "តើអ្វីទៅជាអាសូត?" },
+  { id: "c200_1", categoryId: "chemistry", points: 200, clueEn: "This element has the atomic number 1 and is the lightest element.", clueKh: "ធាតុនេះមានលេខអាតូមិច ១ ហើយជាធាតុស្រាលជាងគេ។", answerEn: "What is Hydrogen?", answerKh: "តើអ្វីទៅជា អ៊ីដ្រូសែន?" },
+  { id: "c200_2", categoryId: "chemistry", points: 200, clueEn: "The center of an atom consisting of protons and neutrons.", clueKh: "ស្នូលនៃអាតូមដែលមានប្រូតុង និងណឺត្រុង។", answerEn: "What is the nucleus?", answerKh: "តើអ្វីទៅជានុយក្លេអ៊ែរ (ស្នូល)?" },
+  { id: "c300_1", categoryId: "chemistry", points: 300, clueEn: "A solution with a pH of 7 is considered to be this.", clueKh: "សូលុយស្យុងដែលមាន pH ៧ ត្រូវបានចាត់ទុកថាជាអ្វី។", answerEn: "What is neutral?", answerKh: "តើអ្វីទៅជា អព្យាក្រឹត?" },
+  { id: "c300_2", categoryId: "chemistry", points: 300, clueEn: "This type of bond involves the sharing of electron pairs between atoms.", clueKh: "សម្ព័ន្ធប្រភេទនេះពាក់ព័ន្ធនឹងការចែករំលែកគូអេឡិចត្រុងរវាងអាតូម។", answerEn: "What is a covalent bond?", answerKh: "តើអ្វីទៅជាសម្ព័ន្ធកូវ៉ាឡង់?" },
+  { id: "c400_1", categoryId: "chemistry", points: 400, clueEn: "This table organizes all known chemical elements based on their atomic number.", clueKh: "តារាងនេះរៀបចំធាតុគីមីទាំងអស់ដោយផ្អែកលើលេខអាតូមិចរបស់ពួកវា។", answerEn: "What is the Periodic Table?", answerKh: "តើអ្វីទៅជា តារាងខួបនៃធាតុគីមី?" },
+  { id: "c400_2", categoryId: "chemistry", points: 400, clueEn: "A substance that increases the rate of a chemical reaction without itself undergoing any permanent chemical change.", clueKh: "សារធាតុដែលបង្កើនល្បឿនប្រតិកម្មគីមីដោយមិនមានការផ្លាស់ប្តូរគីមីជាអចិន្ត្រៃយ៍។", answerEn: "What is a catalyst?", answerKh: "តើអ្វីទៅជាកាតាលីករ?" },
+  { id: "c500_1", categoryId: "chemistry", points: 500, clueEn: "It is the industrial process used to artificially fix nitrogen from the air into ammonia.", clueKh: "វាគឺជាដំណើរការឧស្សាហកម្មដែលប្រើដើម្បីទាញយកអាសូតពីខ្យល់ទៅជាអាម៉ូញាក់។", answerEn: "What is the Haber-Bosch process?", answerKh: "តើអ្វីទៅជា ដំណើរការ Haber-Bosch?" },
+  { id: "c500_2", categoryId: "chemistry", points: 500, clueEn: "This law states that the total pressure of a mixture of gases is equal to the sum of the partial pressures of the individual component gases.", clueKh: "ច្បាប់នេះចែងថាសម្ពាធសរុបនៃល្បាយឧស្ម័នគឺស្មើនឹងផលបូកនៃសម្ពាធដោយឡែកនៃឧស្ម័ននីមួយៗ។", answerEn: "What is Dalton's Law?", answerKh: "តើអ្វីទៅជាច្បាប់ដាល់តុន?" },
+
+  /* BIOLOGY */
+  { id: "b100_1", categoryId: "biology", points: 100, clueEn: "This is known as the powerhouse of the cell.", clueKh: "វាត្រូវបានគេស្គាល់ថាជារោងចក្រថាមពលនៃកោសិកា។", answerEn: "What is the mitochondria?", answerKh: "តើអ្វីទៅជា មីតូកុងទ្រី?" },
+  { id: "b100_2", categoryId: "biology", points: 100, clueEn: "This is the primary pumping organ of the human circulatory system.", clueKh: "នេះគឺជាសរីរាង្គបូមចម្បងនៃប្រព័ន្ធរបត់ឈាមរបស់មនុស្ស។", answerEn: "What is the heart?", answerKh: "តើអ្វីទៅជាបេះដូង?" },
+  { id: "b200_1", categoryId: "biology", points: 200, clueEn: "This process is how plants convert sunlight, water, and carbon dioxide into food.", clueKh: "ដំណើរការនេះគឺជារបៀបដែលរុក្ខជាតិបំប្លែងពន្លឺព្រះអាទិត្យ ទឹក និងកាបូនឌីអុកស៊ីតទៅជាអាហារ។", answerEn: "What is photosynthesis?", answerKh: "តើអ្វីទៅជា រស្មីសំយោគ?" },
+  { id: "b200_2", categoryId: "biology", points: 200, clueEn: "These are the building blocks of proteins.", clueKh: "ទាំងនេះគឺជាបណ្តុំគ្រឹះនៃប្រូតេអ៊ីន។", answerEn: "What are amino acids?", answerKh: "តើអ្វីទៅជាអាស៊ីតអាមីណេ?" },
+  { id: "b300_1", categoryId: "biology", points: 300, clueEn: "This is the molecule that carries genetic instructions in all living things.", clueKh: "នេះគឺជាម៉ូលេគុលដែលផ្ទុកព័ត៌មានសេនេទិចនៅក្នុងភាវៈរស់ទាំងអស់។", answerEn: "What is DNA?", answerKh: "តើអ្វីទៅជា ឌីអិនអេ (DNA)?" },
+  { id: "b300_2", categoryId: "biology", points: 300, clueEn: "This type of cell division results in four daughter cells each with half the number of chromosomes of the parent cell.", clueKh: "ការបែងចែកកោសិកាប្រភេទនេះបង្កើតបានកោសិកាកូនបួន ដែលនីមួយៗមានក្រូម៉ូសូមពាក់កណ្តាលនៃកោសិកាមេ។", answerEn: "What is meiosis?", answerKh: "តើអ្វីទៅជាមេយ៉ូស?" },
+  { id: "b400_1", categoryId: "biology", points: 400, clueEn: "These cells in the blood are primarily responsible for fighting infections.", clueKh: "កោសិកាទាំងនេះនៅក្នុងឈាមមានតួនាទីចម្បងក្នុងការប្រយុទ្ធប្រឆាំងនឹងការឆ្លងមេរោគ។", answerEn: "What are white blood cells (Leukocytes)?", answerKh: "តើអ្វីទៅជា គោលិកាស (កោសិកាឈាមស)?" },
+  { id: "b400_2", categoryId: "biology", points: 400, clueEn: "This green pigment is responsible for the absorption of light to provide energy for photosynthesis.", clueKh: "ជាតិពណ៌បៃតងនេះមានតួនាទីស្រូបយកពន្លឺដើម្បីផ្តល់ថាមពលសម្រាប់រស្មីសំយោគ។", answerEn: "What is chlorophyll?", answerKh: "តើអ្វីទៅជាក្លរ៉ូហ្វីល?" },
+  { id: "b500_1", categoryId: "biology", points: 500, clueEn: "This revolutionary gene-editing technology acts like molecular scissors.", clueKh: "បច្ចេកវិទ្យាកែសម្រួលហ្សែនដ៏អស្ចារ្យនេះដើរតួដូចជាកន្ត្រៃម៉ូលេគុល។", answerEn: "What is CRISPR (or CRISPR-Cas9)?", answerKh: "តើអ្វីទៅជា CRISPR?" },
+  { id: "b500_2", categoryId: "biology", points: 500, clueEn: "He is known as the father of modern genetics due to his work on pea plants.", clueKh: "គាត់ត្រូវបានគេស្គាល់ថាជាបិតានៃហ្សែនវិទ្យាទំនើបដោយសារការស្រាវជ្រាវរបស់គាត់លើរុក្ខជាតិសណ្តែក។", answerEn: "Who is Gregor Mendel?", answerKh: "តើនរណាជា ហ្គ្រេហ្គ័រ ម៉ែនដែល?" },
+
+  /* ENGLISH */
+  { id: "e100_1", categoryId: "english", points: 100, clueEn: "It is a word that represents a person, place, or thing.", clueKh: "វាគឺជាពាក្យដែលតំណាងឱ្យមនុស្ស ទីកន្លែង ឬវត្ថុ។", answerEn: "What is a noun?", answerKh: "តើអ្វីទៅជា នាម?" },
+  { id: "e100_2", categoryId: "english", points: 100, clueEn: "This punctuation mark indicates a pause between parts of a sentence.", clueKh: "សញ្ញាខណ្ឌនេះបង្ហាញពីការផ្អាករវាងផ្នែកនៃប្រយោគ។", answerEn: "What is a comma?", answerKh: "តើអ្វីទៅជាសញ្ញាក្បៀស?" },
+  { id: "e200_1", categoryId: "english", points: 200, clueEn: "This literary device uses 'like' or 'as' to compare two different things.", clueKh: "វិធីសាស្ត្រតែងនិពន្ធនេះប្រើ 'like' ឬ 'as' ដើម្បីប្រៀបធៀបវត្ថុពីរខុសគ្នា។", answerEn: "What is a simile?", answerKh: "តើអ្វីទៅជា ឧបមា (Simile)?" },
+  { id: "e200_2", categoryId: "english", points: 200, clueEn: "A word that takes the place of a noun, like 'he', 'she', or 'it'.", clueKh: "ពាក្យដែលជំនួសនាម ដូចជា 'he', 'she', ឬ 'it'។", answerEn: "What is a pronoun?", answerKh: "តើអ្វីទៅជាសព្វនាម?" },
+  { id: "e300_1", categoryId: "english", points: 300, clueEn: "Words like 'to', 'too', and 'two' that sound the same but have different meanings.", clueKh: "ពាក្យដូចជា 'to', 'too', និង 'two' ដែលមានសំឡេងដូចគ្នា ប៉ុន្តែមានអត្ថន័យខុសគ្នា។", answerEn: "What are homophones?", answerKh: "តើអ្វីទៅជា Homophones?" },
+  { id: "e300_2", categoryId: "english", points: 300, clueEn: "The central idea or underlying message of a story.", clueKh: "គំនិតកណ្តាល ឬសារបង្កប់នៃរឿងមួយ។", answerEn: "What is the theme?", answerKh: "តើអ្វីទៅជាប្រធានបទរឿង?" },
+  { id: "e400_1", categoryId: "english", points: 400, clueEn: "A word that describes or modifies a verb, adjective, or another adverb.", clueKh: "ពាក្យដែលពណ៌នា ឬបញ្ជាក់កិរិយាសព្ទ គុណនាម ឬគុណកិរិយាផ្សេងទៀត។", answerEn: "What is an adverb?", answerKh: "តើអ្វីទៅជា គុណកិរិយា (Adverb)?" },
+  { id: "e400_2", categoryId: "english", points: 400, clueEn: "An exaggerated statement not meant to be taken literally.", clueKh: "សេចក្តីថ្លែងការណ៍បំផ្លើសដែលមិនមានន័យតាមត្រង់។", answerEn: "What is a hyperbole?", answerKh: "តើអ្វីទៅជាការនិយាយបំផ្លើស (Hyperbole)?" },
+  { id: "e500_1", categoryId: "english", points: 500, clueEn: "A term for a word, phrase, or sequence that reads the same backward as forward, like 'madam'.", clueKh: "ពាក្យ ឬឃ្លាដែលអាចអានពីមុខទៅក្រោយ និងពីក្រោយទៅមុខដូចគ្នា ឧទាហរណ៍ 'madam'។", answerEn: "What is a palindrome?", answerKh: "តើអ្វីទៅជា Palindrome?" },
+  { id: "e500_2", categoryId: "english", points: 500, clueEn: "This is a 14-line poem with a specific rhyme scheme, famous in Shakespeare's works.", clueKh: "នេះគឺជាកំណាព្យមាន ១៤ បន្ទាត់ដែលមានទម្រង់ចង្វាក់ជាក់លាក់ ល្បីល្បាញក្នុងស្នាដៃរបស់សេកស្ពៀរ។", answerEn: "What is a sonnet?", answerKh: "តើអ្វីទៅជាកំណាព្យសូណេត?" },
+
+  /* HISTORY */
+  { id: "h100_1", categoryId: "history", points: 100, clueEn: "This massive temple complex is a national symbol of Cambodia.", clueKh: "ប្រាសាទដ៏ធំនេះគឺជានិមិត្តសញ្ញាជាតិនៃប្រទេសកម្ពុជា។", answerEn: "What is Angkor Wat?", answerKh: "តើអ្វីទៅជា ប្រាសាទអង្គរវត្ត?" },
+  { id: "h100_2", categoryId: "history", points: 100, clueEn: "This ancient civilization built the pyramids of Giza.", clueKh: "អរិយធម៌បុរាណនេះបានសាងសង់ពីរ៉ាមីតហ្គីហ្សា។", answerEn: "Who are the Ancient Egyptians?", answerKh: "តើនរណាជាជនជាតិអេហ្ស៊ីបបុរាណ?" },
+  { id: "h200_1", categoryId: "history", points: 200, clueEn: "He was the first President of the United States of America.", clueKh: "គាត់គឺជាប្រធានាធិបតីដំបូងបង្អស់នៃសហរដ្ឋអាមេរិក។", answerEn: "Who is George Washington?", answerKh: "តើនរណាជា George Washington?" },
+  { id: "h200_2", categoryId: "history", points: 200, clueEn: "This famous document was signed in 1215 and limited the powers of the King of England.", clueKh: "ឯកសារដ៏ល្បីល្បាញនេះត្រូវបានចុះហត្ថលេខានៅឆ្នាំ ១២១៥ និងបានកំណត់អំណាចរបស់ព្រះមហាក្សត្រអង់គ្លេស។", answerEn: "What is the Magna Carta?", answerKh: "តើអ្វីទៅជា ម៉ាញ៉ាកាតា?" },
+  { id: "h300_1", categoryId: "history", points: 300, clueEn: "This empire was the most powerful in the ancient Mediterranean before splitting in 395 CE.", clueKh: "អាណាចក្រនេះមានឥទ្ធិពលបំផុតនៅសមុទ្រមេឌីទែរ៉ាណេបុរាណ មុនពេលបែកបាក់នៅឆ្នាំ 395 គ.ស។", answerEn: "What is the Roman Empire?", answerKh: "តើអ្វីទៅជា ចក្រភពរ៉ូម?" },
+  { id: "h300_2", categoryId: "history", points: 300, clueEn: "She was the last active ruler of the Ptolemaic Kingdom of Egypt.", clueKh: "ព្រះនាងគឺជាអ្នកគ្រប់គ្រងចុងក្រោយនៃនគរ Ptolemaic នៃប្រទេសអេហ្ស៊ីប។", answerEn: "Who is Cleopatra?", answerKh: "តើនរណាជា ក្លេអូប៉ាត្រា?" },
+  { id: "h400_1", categoryId: "history", points: 400, clueEn: "This Cambodian king initiated the construction of the city of Angkor Thom.", clueKh: "ព្រះមហាក្សត្រខ្មែរអង្គនេះបានចាប់ផ្តើមការសាងសង់ទីក្រុងអង្គរធំ។", answerEn: "Who is Jayavarman VII?", answerKh: "តើនរណាជា ព្រះបាទជ័យវរ្ម័នទី ៧?" },
+  { id: "h400_2", categoryId: "history", points: 400, clueEn: "This 19th-century conflict in the US was fought between the North and the South.", clueKh: "ជម្លោះនៅសតវត្សរ៍ទី ១៩ នៅសហរដ្ឋអាមេរិកនេះត្រូវបានប្រយុទ្ធគ្នារវាងភាគខាងជើង និងភាគខាងត្បូង។", answerEn: "What is the American Civil War?", answerKh: "តើអ្វីទៅជាសង្គ្រាមស៊ីវិលអាមេរិក?" },
+  { id: "h500_1", categoryId: "history", points: 500, clueEn: "This global conflict ended in 1945 following the use of atomic weapons.", clueKh: "ជម្លោះសកលនេះបានបញ្ចប់នៅឆ្នាំ ១៩៤៥ បន្ទាប់ពីការប្រើប្រាស់អាវុធបរមាណូ។", answerEn: "What is World War II?", answerKh: "តើអ្វីទៅជា សង្គ្រាមលោកលើកទី ២?" },
+  { id: "h500_2", categoryId: "history", points: 500, clueEn: "This period in Europe, from the 14th to 17th century, marked the transition from the Middle Ages to modernity.", clueKh: "សម័យកាលនៅអឺរ៉ុបនេះពីសតវត្សទី១៤ដល់ទី១៧ បានកត់សម្គាល់ការផ្លាស់ប្តូរពីយុគសម័យកណ្តាលទៅភាពទំនើប។", answerEn: "What is the Renaissance?", answerKh: "តើអ្វីទៅជាសម័យកាល നវកម្ម (Renaissance)?" },
+
+  /* MATHEMATICS */
+  { id: "m100_1", categoryId: "mathematics", points: 100, clueEn: "It is the result of adding two or more numbers.", clueKh: "វាគឺជាលទ្ធផលនៃការបូកលេខពីរឬច្រើន។", answerEn: "What is a sum?", answerKh: "តើអ្វីទៅជាផលបូក?" },
+  { id: "m100_2", categoryId: "mathematics", points: 100, clueEn: "This shape has four equal sides and four right angles.", clueKh: "រូបរាងនេះមានជ្រុងស្មើគ្នាបួន និងមុំកែងបួន។", answerEn: "What is a square?", answerKh: "តើអ្វីទៅជាការ៉េ?" },
+  { id: "m200_1", categoryId: "mathematics", points: 200, clueEn: "This mathematical constant is the ratio of a circle's circumference to its diameter.", clueKh: "ថេរគណិតវិទ្យានេះគឺជាសមាមាត្រនៃបរិមាត្ររង្វង់មួយទៅនឹងអង្កត់ផ្ចិតរបស់វា។", answerEn: "What is Pi (π)?", answerKh: "តើអ្វីទៅជា ភី (Pi)?" },
+  { id: "m200_2", categoryId: "mathematics", points: 200, clueEn: "A triangle with all three sides of different lengths.", clueKh: "ត្រីកោណដែលមានជ្រុងទាំងបីមានប្រវែងខុសគ្នា។", answerEn: "What is a scalene triangle?", answerKh: "តើអ្វីទៅជាត្រីកោណសម័ង្ស?" },
+  { id: "m300_1", categoryId: "mathematics", points: 300, clueEn: "This theorem relates the lengths of the sides of a right triangle.", clueKh: "ទ្រឹស្តីបទនេះទាក់ទងនឹងប្រវែងជ្រុងនៃត្រីកោណកែង។", answerEn: "What is the Pythagorean Theorem?", answerKh: "តើអ្វីទៅជាទ្រឹស្តីបទពីតាហ្គ័រ?" },
+  { id: "m300_2", categoryId: "mathematics", points: 300, clueEn: "This is a number greater than 1 that only has two divisors: 1 and itself.", clueKh: "នេះគឺជាលេខធំជាង១ដែលមានតួចែកតែពីរគត់គឺ ១ និងខ្លួនវាផ្ទាល់។", answerEn: "What is a prime number?", answerKh: "តើអ្វីទៅជាចំនួនបឋម?" },
+  { id: "m400_1", categoryId: "mathematics", points: 400, clueEn: "In calculus, this represents the rate of change of a function.", clueKh: "នៅក្នុងគណិតវិទ្យាវិភាគ វាបង្ហាញពីអត្រានៃការផ្លាស់ប្តូរនៃអនុគមន៍មួយ។", answerEn: "What is the derivative?", answerKh: "តើអ្វីទៅជាដេរីវេ?" },
+  { id: "m400_2", categoryId: "mathematics", points: 400, clueEn: "This is the longest side of a right-angled triangle.", clueKh: "នេះគឺជាជ្រុងវែងបំផុតនៃត្រីកោណកែង។", answerEn: "What is the hypotenuse?", answerKh: "តើអ្វីទៅជាអ៊ីប៉ូតេនុស?" },
+  { id: "m500_1", categoryId: "mathematics", points: 500, clueEn: "He is a famous Greek mathematician often called the 'father of geometry'.", clueKh: "គាត់គឺជាគណិតវិទូក្រិកដ៏ល្បីល្បាញ ដែលគេតែងហៅថា 'បិតានៃធរណីមាត្រ'។", answerEn: "Who is Euclid?", answerKh: "តើនរណាជា អឺគ្លីត (Euclid)?" },
+  { id: "m500_2", categoryId: "mathematics", points: 500, clueEn: "This equation represents a straight line on a graph.", clueKh: "សមីការនេះតំណាងឱ្យបន្ទាត់ត្រង់នៅលើក្រាហ្វ។", answerEn: "What is y = mx + c (or y = mx + b)?", answerKh: "តើអ្វីទៅជា y = mx + c?" }
 ];

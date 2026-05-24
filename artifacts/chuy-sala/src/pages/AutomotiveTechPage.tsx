@@ -448,6 +448,14 @@ function BayHeart({
             <Spec en="Spark" kh="ផ្គរ" kh_={kh} value="20,000 V" tone="amber" />
             <Spec en="Sparks/min" kh="ផ្គរ/នាទី" kh_={kh} value="≈ 6,000" tone="orange" />
           </div>
+          <div className="mt-4 pt-3 border-t border-slate-800/40 flex justify-end">
+            <Link
+              href="/technology/spark-plugs"
+              className={`inline-flex items-center gap-1.5 text-xs font-bold text-orange-400 hover:text-orange-300 transition-colors ${kh ? "font-khmer" : ""}`}
+            >
+              <span>{t("Interactive Spark Plug Simulation →", "មើលការពិសោធន៍ប៊ូហ្គីអន្តរកម្ម →")}</span>
+            </Link>
+          </div>
         </PartCard>
       </div>
 

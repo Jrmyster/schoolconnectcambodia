@@ -155,6 +155,7 @@ const StudentArtGallery      = lazy(() => import("@/pages/StudentArtGallery"));
 const OrbitalMechanics         = lazy(() => import("@/pages/Science/OrbitalMechanics"));
 const MillionaireChallengePage = lazy(() => import("@/pages/MillionaireChallengePage"));
 const JeopardyPage             = lazy(() => import("@/pages/JeopardyPage"));
+const DynamicCrosswordPage     = lazy(() => import("@/pages/DynamicCrosswordPage"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
@@ -230,6 +231,7 @@ const MountainsVolcanoesPage    = lazy(() => import("@/pages/MountainsVolcanoesP
 const ChemicalEngineeringPage   = lazy(() => import("@/pages/ChemicalEngineeringPage").then(m => ({ default: m.ChemicalEngineeringPage })));
 const DeepTimePage              = lazy(() => import("@/pages/DeepTimePage").then(m => ({ default: m.DeepTimePage })));
 const AutomotiveTechPage        = lazy(() => import("@/pages/AutomotiveTechPage").then(m => ({ default: m.AutomotiveTechPage })));
+const SparkPlugsPage            = lazy(() => import("@/pages/SparkPlugsPage"));
 const LockMechanicsPage         = lazy(() => import("@/pages/LockMechanicsPage"));
 const WeldingSciencePage        = lazy(() => import("@/pages/WeldingSciencePage"));
 const ElectrostaticPrecipitator = lazy(() => import("@/pages/ElectrostaticPrecipitator"));
@@ -442,9 +444,11 @@ function Router() {
             <Route path="/biology/escape-room" component={EscapeRoomPage} />
             <Route path="/study-center/millionaire" component={MillionaireChallengePage} />
             <Route path="/study-center/jeopardy" component={JeopardyPage} />
+            <Route path="/study-center/crossword" component={DynamicCrosswordPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />
+            <Route path="/technology/spark-plugs" component={SparkPlugsPage} />
             <Route path="/technology/locks" component={LockMechanicsPage} />
             <Route path="/technology/welding" component={WeldingSciencePage} />
             <Route path="/technology/electrostatic-precipitators" component={ElectrostaticPrecipitator} />

@@ -8,6 +8,7 @@ import FourColorMap from "@/components/FourColorMap";
 import EulersFormula from "@/components/EulersFormula";
 import KleinBottle from "@/components/KleinBottle";
 import KnotTheory from "@/components/KnotTheory";
+import GabrielsHorn from "@/components/GabrielsHorn";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Topology: The Mathematics of Shape
@@ -65,6 +66,7 @@ export default function TopologyPage() {
             ["#euler", isKh ? "រូបមន្ត Euler" : "Euler's Formula"],
             ["#klein-bottle", isKh ? "ដប Klein" : "Klein Bottle"],
             ["#knot-theory", isKh ? "ទ្រឹស្តីចំណង" : "Knot Theory"],
+            ["#gabriels-horn", isKh ? "ភាពផ្ទុយគ្នាត្រែ Gabriel" : "Gabriel's Horn Paradox"],
           ].map(([href, label]) => (
             <a
               key={href}
@@ -282,6 +284,25 @@ export default function TopologyPage() {
         
         <div className="mt-8 relative z-10">
           <KnotTheory />
+        </div>
+      </section>
+
+      {/* ── 7. GABRIEL'S HORN PARADOX ─────────────────────────────────────── */}
+      <section
+        id="gabriels-horn"
+        className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24"
+      >
+        <SectionHeader
+          eyebrow={isKh ? "ផ្នែកទី ៧" : "Section 07"}
+          en="Gabriel's Horn Paradox"
+          kh="ភាពផ្ទុយគ្នានៃត្រែ Gabriel"
+          isKh={isKh}
+          subEn="An infinite shape with a finite volume — can you fill it with paint?"
+          subKh="រូបរាងអនន្តដែលមានមាឌកំណត់ — តើអ្នកអាចចាក់ថ្នាំលាបបំពេញវាបានទេ?"
+        />
+        
+        <div className="mt-8 relative z-10">
+          <GabrielsHorn />
         </div>
       </section>
     </div>

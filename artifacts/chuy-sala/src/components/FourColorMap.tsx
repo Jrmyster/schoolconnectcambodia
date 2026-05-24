@@ -1,9 +1,46 @@
 import React, { useState } from 'react';
-import { SVGMap } from 'react-svg-map';
 import cambodiaMap from '@svg-maps/cambodia';
 import { motion } from 'framer-motion';
 import { RotateCcw, AlertTriangle } from 'lucide-react';
 import { useLanguageStore } from '@/store/use-language';
+
+interface SVGMapProps {
+  map: {
+    label: string;
+    viewBox: string;
+    locations: Array<{
+      id: string;
+      name: string;
+      path: string;
+    }>;
+  };
+  onLocationClick: (event: React.MouseEvent<SVGElement>) => void;
+  locationClassName: (location: { id: string; name: string; path: string }) => string;
+}
+
+function SVGMap({ map, onLocationClick, locationClassName }: SVGMapProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={map.viewBox}
+      aria-label={map.label}
+      className="w-full h-auto"
+    >
+      {map.locations.map((location) => (
+        <path
+          key={location.id}
+          id={location.id}
+          name={location.name}
+          d={location.path}
+          className={locationClassName(location)}
+          onClick={onLocationClick}
+          role="button"
+          aria-label={location.name}
+        />
+      ))}
+    </svg>
+  );
+}
 
 // Ensure symmetry in the adjacency graph
 const rawAdjacency: Record<string, string[]> = {

@@ -282,9 +282,6 @@ importers:
       react-leaflet:
         specifier: ^5.0.0
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react-svg-map:
-        specifier: ^2.2.0
-        version: 2.2.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       three:
         specifier: ^0.183.2
         version: 0.183.2
@@ -3321,12 +3318,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  react-svg-map@2.2.0:
-    resolution: {integrity: sha512-slZTt4ffXgOb3ND/WEHOc0ojX5lBEv9FKbTU3tWnTLZPQ9L0e686SBqgVxmsuTD+o52Aor87InMzAzDRTQedpA==}
-    peerDependencies:
-      react: ^16.0.0
-      react-dom: ^16.0.0
 
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
@@ -6470,12 +6461,6 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.2.14
-
-  react-svg-map@2.2.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      prop-types: 15.8.1
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   react-transition-group@4.4.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
