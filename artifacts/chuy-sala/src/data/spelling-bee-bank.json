@@ -1,0 +1,128 @@
+[
+  {
+    "word": "cat",
+    "definitionEn": "A small domesticated carnivorous mammal with soft fur.",
+    "definitionKm": "សត្វចិញ្ចឹមចតុបាទតូចមួយប្រភេទដែលមានរោមទន់។",
+    "origin": "Old English",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "apple",
+    "definitionEn": "A round fruit with red, green, or yellow skin and crisp white flesh.",
+    "definitionKm": "ផ្លែឈើមូលដែលមានសម្បកពណ៌ក្រហម បៃតង ឬលឿង និងសាច់ពណ៌សស្រឡះ។",
+    "origin": "Old English",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "school",
+    "definitionEn": "An institution for educating children.",
+    "definitionKm": "ស្ថាប័នសម្រាប់អប់រំកុមារ។",
+    "origin": "Greek",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "happy",
+    "definitionEn": "Feeling or showing pleasure or contentment.",
+    "definitionKm": "អារម្មណ៍ឬការបង្ហាញការពេញចិត្តឬសេចក្តីរីករាយ។",
+    "origin": "Old Norse",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "water",
+    "definitionEn": "A colorless, transparent, odorless liquid that forms the seas, lakes, and rain.",
+    "definitionKm": "វត្ថុរាវគ្មានពណ៌ ថ្លា គ្មានក្លិន ដែលបង្កើតជាសមុទ្រ បឹង និងទឹកភ្លៀង។",
+    "origin": "Old English",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "friend",
+    "definitionEn": "A person whom one knows and with whom one has a bond of mutual affection.",
+    "definitionKm": "មនុស្សម្នាក់ដែលគេស្គាល់និងមានចំណងមេត្រីភាពទៅវិញទៅមក។",
+    "origin": "Old English",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "dinosaur",
+    "definitionEn": "A fossil reptile of the Mesozoic era, often reaching an enormous size.",
+    "definitionKm": "ល្មូនហ្វូស៊ីលនៃយុគសម័យ Mesozoic ដែលជារឿយៗមានទំហំធំសម្បើម។",
+    "origin": "Greek",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "beautiful",
+    "definitionEn": "Pleasing the senses or mind aesthetically.",
+    "definitionKm": "គាប់ចិត្តដល់វិញ្ញាណ ឬផ្លូវចិត្តផ្នែកសោភណភាព។",
+    "origin": "French",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "science",
+    "definitionEn": "The systematic study of the structure and behavior of the physical and natural world.",
+    "definitionKm": "សកម្មភាពបញ្ញានិងការអនុវត្តដែលគ្របដណ្តប់លើការសិក្សាជាប្រព័ន្ធនៃរចនាសម្ព័ន្ធនិងអាកប្បកិរិយានៃពិភពរូបវន្តនិងធម្មជាតិ។",
+    "origin": "Latin",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "computer",
+    "definitionEn": "An electronic device for storing and processing data.",
+    "definitionKm": "ឧបករណ៍អេឡិចត្រូនិចសម្រាប់រក្សាទុក និងដំណើរការទិន្នន័យ។",
+    "origin": "Latin",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "history",
+    "definitionEn": "The study of past events, particularly in human affairs.",
+    "definitionKm": "ការសិក្សាអំពីព្រឹត្តិការណ៍អតីតកាល ជាពិសេសក្នុងកិច្ចការមនុស្សជាតិ។",
+    "origin": "Greek",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "astronaut",
+    "definitionEn": "A person who is trained to travel in a spacecraft.",
+    "definitionKm": "មនុស្សម្នាក់ដែលត្រូវបានបណ្តុះបណ្តាលឱ្យធ្វើដំណើរក្នុងយានអវកាស។",
+    "origin": "Greek",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "phenomenon",
+    "definitionEn": "A fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question.",
+    "definitionKm": "ហេតុការណ៍ ឬស្ថានភាពដែលត្រូវបានសង្កេតឃើញថាមាន ឬកើតឡើង ជាពិសេសករណីដែលមូលហេតុ ឬការពន្យល់ស្ថិតក្នុងការចោទសួរ។",
+    "origin": "Greek",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "hierarchy",
+    "definitionEn": "A system or organization in which people or groups are ranked one above another according to status or authority.",
+    "definitionKm": "ប្រព័ន្ធឬអង្គការដែលមនុស្សឬក្រុមត្រូវបានចាត់ថ្នាក់បន្តបន្ទាប់គ្នាតាមឋានៈឬអំណាច។",
+    "origin": "Greek",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "accommodate",
+    "definitionEn": "Provide lodging or sufficient space for.",
+    "definitionKm": "ផ្តល់កន្លែងស្នាក់នៅ ឬកន្លែងគ្រប់គ្រាន់សម្រាប់។",
+    "origin": "Latin",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "cacophony",
+    "definitionEn": "A harsh, discordant mixture of sounds.",
+    "definitionKm": "ការលាយឡំនៃសំឡេងស្អក និងមិនចុះសម្រុងគ្នា។",
+    "origin": "Greek",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "perseverance",
+    "definitionEn": "Persistence in doing something despite difficulty or delay in achieving success.",
+    "definitionKm": "ការតស៊ូព្យាយាមក្នុងការធ្វើអ្វីមួយ ទោះបីជាមានការលំបាក ឬការពន្យារពេលក្នុងការសម្រេចបានជោគជ័យក៏ដោយ។",
+    "origin": "Latin",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "quintessential",
+    "definitionEn": "Representing the most perfect or typical example of a quality or class.",
+    "definitionKm": "តំណាងឱ្យឧទហរណ៍ដ៏ល្អឥតខ្ចោះ ឬធម្មតានៃគុណភាព ឬថ្នាក់ណាមួយ។",
+    "origin": "Latin",
+    "difficulty": "Hard"
+  }
+]

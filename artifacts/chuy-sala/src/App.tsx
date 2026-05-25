@@ -133,6 +133,7 @@ const BicyclePhysicsPage        = lazy(() => import("@/pages/BicyclePhysicsPage"
 const RoboticsPage              = lazy(() => import("@/pages/RoboticsPage"));
 const VideoGamesPage            = lazy(() => import("@/pages/VideoGamesPage"));
 const SpellingForgePage         = lazy(() => import("@/pages/SpellingForgePage"));
+const SpellingBeePage           = lazy(() => import("@/pages/SpellingBeePage"));
 const SexualHealthPage          = lazy(() => import("@/pages/SexualHealthPage"));
 const GlobalCitiesPage          = lazy(() => import("@/pages/GlobalCitiesPage"));
 const CinematographyPage        = lazy(() => import("@/pages/CinematographyPage"));
@@ -202,6 +203,13 @@ const SchoolInbox               = lazy(() => import("@/pages/SchoolInbox").then(
 const ElectricalSafetyPage      = lazy(() => import("@/pages/ElectricalSafetyPage").then(m => ({ default: m.ElectricalSafetyPage })));
 const ChemistryHubPage          = lazy(() => import("@/pages/ChemistryHubPage").then(m => ({ default: m.ChemistryHubPage })));
 const OrganicChemistry101Page   = lazy(() => import("@/pages/OrganicChemistry101Page").then(m => ({ default: m.OrganicChemistry101Page })));
+const VseprTheoryPage           = lazy(() => import("@/pages/VseprTheoryPage"));
+const TimelineElementsPage      = lazy(() => import("@/pages/TimelineElementsPage"));
+const GasLawsPage               = lazy(() => import("@/pages/GasLawsPage"));
+const SolubilityPage            = lazy(() => import("@/pages/SolubilityPage"));
+const GabrielSynthesisPage      = lazy(() => import("@/pages/GabrielSynthesisPage"));
+const GrignardReactionPage      = lazy(() => import("@/pages/GrignardReactionPage"));
+const StarEvolutionPage         = lazy(() => import("@/pages/StarEvolutionPage"));
 const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry101Page").then(m => ({ default: m.InorganicChemistry101Page })));
 const InorganicAtomicStructurePage = lazy(() => import("@/pages/InorganicAtomicStructurePage").then(m => ({ default: m.InorganicAtomicStructurePage })));
 const InorganicBondingMolecularPage = lazy(() => import("@/pages/InorganicBondingMolecularPage").then(m => ({ default: m.InorganicBondingMolecularPage })));
@@ -383,6 +391,10 @@ function Router() {
             <Route path="/science/lymphatic-system" component={LymphaticSystemPage} />
             <Route path="/science/integumentary-system" component={IntegumentarySystemPage} />
             <Route path="/science/scale-of-universe" component={ScaleOfUniversePage} />
+            <Route path="/science/star-evolution" component={StarEvolutionPage} />
+            <Route path="/chemistry/solubility" component={SolubilityPage} />
+            <Route path="/chemistry/gabriel-synthesis" component={GabrielSynthesisPage} />
+            <Route path="/chemistry/grignard-reaction" component={GrignardReactionPage} />
             <Route path="/science/kessler-syndrome" component={KesslerSyndromePage} />
             <Route path="/explore/mission-statement" component={MissionStatementPage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
@@ -445,6 +457,7 @@ function Router() {
             <Route path="/study-center/millionaire" component={MillionaireChallengePage} />
             <Route path="/study-center/jeopardy" component={JeopardyPage} />
             <Route path="/study-center/crossword" component={DynamicCrosswordPage} />
+            <Route path="/study-center/spelling-bee" component={SpellingBeePage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />
@@ -488,6 +501,9 @@ function Router() {
             <Route path="/chemistry/ion-calculator" component={IonCalculatorPage} />
             <Route path="/chemistry/flame-test" component={FlameTestPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
+            <Route path="/chemistry/vsepr" component={VseprTheoryPage} />
+            <Route path="/chemistry/element-timeline" component={TimelineElementsPage} />
+            <Route path="/chemistry/gas-laws" component={GasLawsPage} />
             <Route path="/science/chemistry/inorganic" component={InorganicChemistry101Page} />
             <Route path="/science/chemistry/inorganic/atomic-structure" component={InorganicAtomicStructurePage} />
             <Route path="/science/chemistry/inorganic/bonding-molecular" component={InorganicBondingMolecularPage} />
