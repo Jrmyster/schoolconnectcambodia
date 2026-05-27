@@ -1,127 +1,106 @@
 [
   {
-    "word": "cat",
-    "definitionEn": "A small domesticated carnivorous mammal with soft fur.",
-    "definitionKm": "សត្វចិញ្ចឹមចតុបាទតូចមួយប្រភេទដែលមានរោមទន់។",
-    "origin": "Old English",
+    "word": "virus",
+    "definitionEn": "An infective agent that typically consists of a nucleic acid molecule in a protein coat and is able to multiply only within the living cells of a host.",
+    "definitionKm": "ភ្នាក់ងារចម្លងរោគដែលជាទូទៅមានម៉ូលេគុលអាស៊ីតនុយក្លេអ៊ិចនៅក្នុងស្រោបប្រូតេអ៊ីន ហើយអាចបន្តពូជបានតែនៅក្នុងកោសិកានៃភាវៈរស់ដទៃប៉ុណ្ណោះ។",
+    "origin": "Latin",
     "difficulty": "Easy"
   },
   {
-    "word": "apple",
-    "definitionEn": "A round fruit with red, green, or yellow skin and crisp white flesh.",
-    "definitionKm": "ផ្លែឈើមូលដែលមានសម្បកពណ៌ក្រហម បៃតង ឬលឿង និងសាច់ពណ៌សស្រឡះ។",
-    "origin": "Old English",
+    "word": "fossil",
+    "definitionEn": "The remains or impression of a prehistoric organism preserved in petrified form or as a mold or cast in rock.",
+    "definitionKm": "សំណល់ ឬស្នាមនៃសារពាង្គកាយបុរេប្រវត្តិដែលត្រូវបានរក្សាទុកក្នុងទម្រង់ជាថ្ម ឬជាពុម្ពនៅក្នុងថ្ម។",
+    "origin": "Latin",
     "difficulty": "Easy"
   },
   {
-    "word": "school",
-    "definitionEn": "An institution for educating children.",
-    "definitionKm": "ស្ថាប័នសម្រាប់អប់រំកុមារ។",
+    "word": "capital",
+    "definitionEn": "Wealth in the form of money or other assets owned by a person or organization or contributed for a purpose such as starting a company or investing.",
+    "definitionKm": "ទ្រព្យសម្បត្តិជាទម្រង់ប្រាក់ ឬទ្រព្យសកម្មផ្សេងទៀតដែលជាកម្មសិទ្ធិរបស់បុគ្គល ឬអង្គភាពសម្រាប់វិនិយោគ ឬបង្កើតក្រុមហ៊ុន។",
+    "origin": "Latin",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "energy",
+    "definitionEn": "The property of matter and radiation which is manifest as a capacity to perform work.",
+    "definitionKm": "លក្ខណៈសម្បត្តិនៃរូបធាតុ និងវិទ្យុសកម្មដែលបង្ហាញជាសមត្ថភាពក្នុងការធ្វើការងារ។",
     "origin": "Greek",
     "difficulty": "Easy"
   },
   {
-    "word": "happy",
-    "definitionEn": "Feeling or showing pleasure or contentment.",
-    "definitionKm": "អារម្មណ៍ឬការបង្ហាញការពេញចិត្តឬសេចក្តីរីករាយ។",
-    "origin": "Old Norse",
+    "word": "theory",
+    "definitionEn": "A system of ideas intended to explain something, especially one based on general principles independent of the thing to be explained.",
+    "definitionKm": "ប្រព័ន្ធនៃគំនិត ឬគោលការណ៍ដែលបង្កើតឡើងដើម្បីពន្យល់អំពីអ្វីមួយ ជាពិសេសផ្អែកលើគោលការណ៍ទូទៅ។",
+    "origin": "Greek",
     "difficulty": "Easy"
   },
   {
-    "word": "water",
-    "definitionEn": "A colorless, transparent, odorless liquid that forms the seas, lakes, and rain.",
-    "definitionKm": "វត្ថុរាវគ្មានពណ៌ ថ្លា គ្មានក្លិន ដែលបង្កើតជាសមុទ្រ បឹង និងទឹកភ្លៀង។",
-    "origin": "Old English",
-    "difficulty": "Easy"
-  },
-  {
-    "word": "friend",
-    "definitionEn": "A person whom one knows and with whom one has a bond of mutual affection.",
-    "definitionKm": "មនុស្សម្នាក់ដែលគេស្គាល់និងមានចំណងមេត្រីភាពទៅវិញទៅមក។",
-    "origin": "Old English",
-    "difficulty": "Easy"
-  },
-  {
-    "word": "dinosaur",
-    "definitionEn": "A fossil reptile of the Mesozoic era, often reaching an enormous size.",
-    "definitionKm": "ល្មូនហ្វូស៊ីលនៃយុគសម័យ Mesozoic ដែលជារឿយៗមានទំហំធំសម្បើម។",
+    "word": "catalyst",
+    "definitionEn": "A substance that increases the rate of a chemical reaction without itself undergoing any permanent chemical change.",
+    "definitionKm": "សារធាតុដែលបង្កើនល្បឿននៃប្រតិកម្មគីមីដោយខ្លួនវាផ្ទាល់មិនមានការផ្លាស់ប្តូរគីមីជាអចិន្ត្រៃយ៍ឡើយ។",
     "origin": "Greek",
     "difficulty": "Medium"
   },
   {
-    "word": "beautiful",
-    "definitionEn": "Pleasing the senses or mind aesthetically.",
-    "definitionKm": "គាប់ចិត្តដល់វិញ្ញាណ ឬផ្លូវចិត្តផ្នែកសោភណភាព។",
+    "word": "inflation",
+    "definitionEn": "A general increase in prices and fall in the purchasing value of money.",
+    "definitionKm": "ការកើនឡើងទូទៅនៃថ្លៃទំនិញ និងសេវាកម្ម និងការធ្លាក់ចុះនៃតម្លៃទិញរបស់រូបិយប័ណ្ណ។",
+    "origin": "Latin",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "ecosystem",
+    "definitionEn": "A biological community of interacting organisms and their physical environment.",
+    "definitionKm": "សហគមន៍ជីវសាស្ត្រនៃសារពាង្គកាយដែលមានអន្តរកម្មគ្នាទៅវិញទៅមក និងបរិស្ថានរូបវន្តរបស់ពួកគេ។",
+    "origin": "Greek",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "algorithm",
+    "definitionEn": "A process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.",
+    "definitionKm": "ដំណើរការ ឬសំណុំនៃច្បាប់ដែលត្រូវអនុវត្តតាមក្នុងការគណនា ឬប្រតិបត្តិការដោះស្រាយបញ្ហាផ្សេងៗ ជាពិសេសដោយកុំព្យូទ័រ។",
+    "origin": "Arabic",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "hypothesis",
+    "definitionEn": "A proposed explanation made on the basis of limited evidence as a starting point for further investigation.",
+    "definitionKm": "ការពន្យល់ដែលត្រូវបានស្នើឡើងដោយផ្អែកលើភស្តុតាងមានកំណត់ ដើម្បីជាចំណុចចាប់ផ្តើមសម្រាប់ការស៊ើបអង្កេតបន្ថែម។",
+    "origin": "Greek",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "photosynthesis",
+    "definitionEn": "The process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water.",
+    "definitionKm": "ដំណើរការដែលរុក្ខជាតិបៃតង និងសារពាង្គកាយមួយចំនួនទៀតប្រើប្រាស់ពន្លឺព្រះអាទិត្យដើម្បីសំយោគអាហារពីកាបូនឌីអុកស៊ីត និងទឹក។",
+    "origin": "Greek",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "entrepreneur",
+    "definitionEn": "A person who organizes and operates a business or businesses, taking on greater than normal financial risks in order to do so.",
+    "definitionKm": "បុគ្គលដែលរៀបចំ និងដំណើរការអាជីវកម្ម ដោយទទួលខុសត្រូវលើហានិភ័យហិរញ្ញវត្ថុខ្លាំងជាងធម្មតាដើម្បីសម្រេចកិច្ចការនោះ។",
     "origin": "French",
-    "difficulty": "Medium"
-  },
-  {
-    "word": "science",
-    "definitionEn": "The systematic study of the structure and behavior of the physical and natural world.",
-    "definitionKm": "សកម្មភាពបញ្ញានិងការអនុវត្តដែលគ្របដណ្តប់លើការសិក្សាជាប្រព័ន្ធនៃរចនាសម្ព័ន្ធនិងអាកប្បកិរិយានៃពិភពរូបវន្តនិងធម្មជាតិ។",
-    "origin": "Latin",
-    "difficulty": "Medium"
-  },
-  {
-    "word": "computer",
-    "definitionEn": "An electronic device for storing and processing data.",
-    "definitionKm": "ឧបករណ៍អេឡិចត្រូនិចសម្រាប់រក្សាទុក និងដំណើរការទិន្នន័យ។",
-    "origin": "Latin",
-    "difficulty": "Medium"
-  },
-  {
-    "word": "history",
-    "definitionEn": "The study of past events, particularly in human affairs.",
-    "definitionKm": "ការសិក្សាអំពីព្រឹត្តិការណ៍អតីតកាល ជាពិសេសក្នុងកិច្ចការមនុស្សជាតិ។",
-    "origin": "Greek",
-    "difficulty": "Medium"
-  },
-  {
-    "word": "astronaut",
-    "definitionEn": "A person who is trained to travel in a spacecraft.",
-    "definitionKm": "មនុស្សម្នាក់ដែលត្រូវបានបណ្តុះបណ្តាលឱ្យធ្វើដំណើរក្នុងយានអវកាស។",
-    "origin": "Greek",
-    "difficulty": "Medium"
-  },
-  {
-    "word": "phenomenon",
-    "definitionEn": "A fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question.",
-    "definitionKm": "ហេតុការណ៍ ឬស្ថានភាពដែលត្រូវបានសង្កេតឃើញថាមាន ឬកើតឡើង ជាពិសេសករណីដែលមូលហេតុ ឬការពន្យល់ស្ថិតក្នុងការចោទសួរ។",
-    "origin": "Greek",
     "difficulty": "Hard"
   },
   {
-    "word": "hierarchy",
-    "definitionEn": "A system or organization in which people or groups are ranked one above another according to status or authority.",
-    "definitionKm": "ប្រព័ន្ធឬអង្គការដែលមនុស្សឬក្រុមត្រូវបានចាត់ថ្នាក់បន្តបន្ទាប់គ្នាតាមឋានៈឬអំណាច។",
-    "origin": "Greek",
-    "difficulty": "Hard"
-  },
-  {
-    "word": "accommodate",
-    "definitionEn": "Provide lodging or sufficient space for.",
-    "definitionKm": "ផ្តល់កន្លែងស្នាក់នៅ ឬកន្លែងគ្រប់គ្រាន់សម្រាប់។",
+    "word": "infrastructure",
+    "definitionEn": "The basic physical and organizational structures and facilities (e.g. buildings, roads, power supplies) needed for the operation of a society or enterprise.",
+    "definitionKm": "រចនាសម្ព័ន្ធរូបវន្ត និងអង្គការមូលដ្ឋាន (ដូចជា អគារ ផ្លូវថ្នល់ ការផ្គត់ផ្គង់ថាមពល) ដែលចាំបាច់សម្រាប់ប្រតិបត្តិការនៃសង្គម ឬសហគ្រាស។",
     "origin": "Latin",
     "difficulty": "Hard"
   },
   {
-    "word": "cacophony",
-    "definitionEn": "A harsh, discordant mixture of sounds.",
-    "definitionKm": "ការលាយឡំនៃសំឡេងស្អក និងមិនចុះសម្រុងគ្នា។",
+    "word": "chromosome",
+    "definitionEn": "A threadlike structure of nucleic acids and protein found in the nucleus of most living cells, carrying genetic information in the form of genes.",
+    "definitionKm": "រចនាសម្ព័ន្ធស្រដៀងនឹងសរសៃអំបោះនៃអាស៊ីតនុយក្លេអ៊ិច និងប្រូតេអ៊ីនដែលរកឃើញនៅក្នុងណ្វាយូនៃកោសិកាភាគច្រើន ដោយផ្ទុកព័ត៌មានហ្សែនជាទម្រង់ហ្សែន។",
     "origin": "Greek",
     "difficulty": "Hard"
   },
   {
-    "word": "perseverance",
-    "definitionEn": "Persistence in doing something despite difficulty or delay in achieving success.",
-    "definitionKm": "ការតស៊ូព្យាយាមក្នុងការធ្វើអ្វីមួយ ទោះបីជាមានការលំបាក ឬការពន្យារពេលក្នុងការសម្រេចបានជោគជ័យក៏ដោយ។",
-    "origin": "Latin",
-    "difficulty": "Hard"
-  },
-  {
-    "word": "quintessential",
-    "definitionEn": "Representing the most perfect or typical example of a quality or class.",
-    "definitionKm": "តំណាងឱ្យឧទហរណ៍ដ៏ល្អឥតខ្ចោះ ឬធម្មតានៃគុណភាព ឬថ្នាក់ណាមួយ។",
+    "word": "equilibrium",
+    "definitionEn": "A state in which opposing forces or influences are balanced.",
+    "definitionKm": "ស្ថានភាពដែលកម្លាំង ឬឥទ្ធិពលផ្ទុយគ្នាមានតុល្យភាព។",
     "origin": "Latin",
     "difficulty": "Hard"
   }

@@ -66,6 +66,7 @@ const ArchaeologyPaleontologyPage = lazy(() => import("@/pages/ArchaeologyPaleon
 const WomenInSciencePage        = lazy(() => import("@/pages/WomenInSciencePage"));
 const FourierTransformPage      = lazy(() => import("@/pages/FourierTransformPage"));
 const NavierStokesPage          = lazy(() => import("@/pages/NavierStokesPage"));
+const TimeTravelPhysicsPage     = lazy(() => import("@/pages/TimeTravelPhysicsPage"));
 const ElectricalEngineeringPage = lazy(() => import("@/pages/ElectricalEngineeringPage"));
 const CirculatorySystemPage     = lazy(() => import("@/pages/CirculatorySystemPage"));
 const LymphaticSystemPage       = lazy(() => import("@/pages/LymphaticSystemPage"));
@@ -209,6 +210,10 @@ const GasLawsPage               = lazy(() => import("@/pages/GasLawsPage"));
 const SolubilityPage            = lazy(() => import("@/pages/SolubilityPage"));
 const GabrielSynthesisPage      = lazy(() => import("@/pages/GabrielSynthesisPage"));
 const GrignardReactionPage      = lazy(() => import("@/pages/GrignardReactionPage"));
+const TitrationPage             = lazy(() => import("@/pages/TitrationPage"));
+const MoleStoichiometryPage     = lazy(() => import("@/pages/MoleStoichiometryPage"));
+const QuantumMechanicsPage      = lazy(() => import("@/pages/QuantumMechanicsPage"));
+const LewisStructuresPage       = lazy(() => import("@/pages/LewisStructuresPage"));
 const StarEvolutionPage         = lazy(() => import("@/pages/StarEvolutionPage"));
 const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry101Page").then(m => ({ default: m.InorganicChemistry101Page })));
 const InorganicAtomicStructurePage = lazy(() => import("@/pages/InorganicAtomicStructurePage").then(m => ({ default: m.InorganicAtomicStructurePage })));
@@ -386,6 +391,7 @@ function Router() {
             <Route path="/science/women-in-science" component={WomenInSciencePage} />
             <Route path="/science/fourier-transform" component={FourierTransformPage} />
             <Route path="/science/navier-stokes" component={NavierStokesPage} />
+            <Route path="/science/time-travel" component={TimeTravelPhysicsPage} />
             <Route path="/electrical-engineering" component={ElectricalEngineeringPage} />
             <Route path="/science/circulatory-system" component={CirculatorySystemPage} />
             <Route path="/science/lymphatic-system" component={LymphaticSystemPage} />
@@ -395,6 +401,10 @@ function Router() {
             <Route path="/chemistry/solubility" component={SolubilityPage} />
             <Route path="/chemistry/gabriel-synthesis" component={GabrielSynthesisPage} />
             <Route path="/chemistry/grignard-reaction" component={GrignardReactionPage} />
+            <Route path="/chemistry/titration" component={TitrationPage} />
+            <Route path="/chemistry/mole-stoichiometry" component={MoleStoichiometryPage} />
+            <Route path="/chemistry/quantum-mechanics" component={QuantumMechanicsPage} />
+            <Route path="/chemistry/lewis-structures" component={LewisStructuresPage} />
             <Route path="/science/kessler-syndrome" component={KesslerSyndromePage} />
             <Route path="/explore/mission-statement" component={MissionStatementPage} />
             <Route path="/science/weather/sky-color" component={RayleighScatteringPage} />
