@@ -121,7 +121,7 @@ export default function FrugalBlueprintPage() {
   const t = useTranslation();
 
   // Scenario States
-  const [selectedGrade, setSelectedGrade] = useState<string>("5th");
+  const [selectedGrade, setSelectedGrade] = useState<string>("Primary School");
   const [activeScenario, setActiveScenario] = useState<any>(null);
 
   // Cart & Budget
@@ -140,7 +140,7 @@ export default function FrugalBlueprintPage() {
 
   // Set active scenario depending on selected grade
   useEffect(() => {
-    const sc = database.scenarios.find((s) => s.grade === selectedGrade);
+    const sc = database.scenarios.find((s) => s.gradeLevel === selectedGrade);
     setActiveScenario(sc || null);
     
     // Reset selection when changing grade levels
@@ -199,7 +199,7 @@ export default function FrugalBlueprintPage() {
     let success = true;
 
     // Verify success logic: cart must contain all required items
-    for (const reqId of activeScenario.requiredItems) {
+    for (const reqId of activeScenario.requiredItems || []) {
       if (!cart.includes(reqId)) {
         success = false;
         const missingStoreItem = database.storeItems.find((i) => i.id === reqId);
@@ -207,6 +207,17 @@ export default function FrugalBlueprintPage() {
           ? (isKh ? missingStoreItem.nameKh : missingStoreItem.nameEn)
           : reqId;
         break;
+      }
+    }
+
+    // Verify custom successLogic rules if basic items are present
+    if (success && activeScenario.successLogic) {
+      for (const rule of activeScenario.successLogic) {
+        if (!cart.includes(rule.id)) {
+          success = false;
+          missingItemName = isKh ? rule.nameKh : rule.nameEn;
+          break;
+        }
       }
     }
 
@@ -274,25 +285,29 @@ export default function FrugalBlueprintPage() {
           </div>
 
           {/* Grade Level Toggles */}
-          <div className="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-2xl">
-            <span className={`text-[10px] text-indigo-400 font-bold uppercase tracking-widest block ${isKh ? "font-khmer" : ""}`}>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 bg-slate-900/90 border border-slate-800 p-1.5 rounded-2xl">
+            <span className={`text-[10px] text-indigo-400 font-bold uppercase tracking-widest block px-2 ${isKh ? "font-khmer" : ""}`}>
               {t("Grade Level", "កម្រិតថ្នាក់")}
             </span>
-            <div className="flex gap-1.5">
-              {["5th", "8th", "12th"].map((lvl) => (
+            <div className="flex gap-1.5 flex-wrap">
+              {[
+                { value: "Primary School", labelEn: "Primary School", labelKh: "បឋមសិក្សា" },
+                { value: "High School", labelEn: "High School", labelKh: "វិទ្យាល័យ" },
+                { value: "University", labelEn: "University", labelKh: "សាកលវិទ្យាល័យ" }
+              ].map((lvl) => (
                 <button
-                  key={lvl}
+                  key={lvl.value}
                   onClick={() => {
                     playSound("click");
-                    setSelectedGrade(lvl);
+                    setSelectedGrade(lvl.value);
                   }}
-                  className={`px-3 py-1 text-xs font-mono font-black rounded-lg transition-all ${
-                    selectedGrade === lvl
-                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/40 scale-105"
-                      : "bg-slate-950 text-slate-400 hover:text-white"
+                  className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap ${
+                    selectedGrade === lvl.value
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-900/40 scale-105 font-black"
+                      : "bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-900"
                   }`}
                 >
-                  {lvl}
+                  {isKh ? lvl.labelKh : lvl.labelEn}
                 </button>
               ))}
             </div>
@@ -314,7 +329,12 @@ export default function FrugalBlueprintPage() {
               <div className="flex items-center gap-2">
                 <Hammer className="w-6 h-6 text-indigo-400 animate-pulse" />
                 <span className={`text-xs font-bold uppercase tracking-wider text-indigo-400 ${isKh ? "font-khmer" : ""}`}>
-                  {t(`Grade ${selectedGrade} Engineering Challenge`, `វិញ្ញាសាវិស្វកម្មថ្នាក់ទី ${selectedGrade}`)}
+                  {t(
+                    `${selectedGrade} Engineering Challenge`,
+                    `វិញ្ញាសាវិស្វកម្មកម្រិត ${
+                      selectedGrade === "Primary School" ? "បឋមសិក្សា" : selectedGrade === "High School" ? "មធ្យមសិក្សា" : "សាកលវិទ្យាល័យ"
+                    }`
+                  )}
                 </span>
               </div>
 

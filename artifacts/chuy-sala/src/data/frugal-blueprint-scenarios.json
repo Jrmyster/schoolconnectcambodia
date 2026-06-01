@@ -1,31 +1,50 @@
 {
   "scenarios": [
     {
-      "grade": "5th",
+      "gradeLevel": "Primary School",
       "titleEn": "Gravity Water Filtration",
       "titleKh": "ការចម្រោះទឹកតាមទំនាញ",
       "problemEn": "Build a low-cost water filter using basic local materials. The filter must clean muddy water by passing it through layers of sand, charcoal, and cloth inside a plastic bottle container.",
       "problemKm": "សាងសង់តម្រងទឹកដែលមានតម្លៃទាបដោយប្រើវត្ថុធាតុដើមក្នុងស្រុកសាមញ្ញ។ តម្រងត្រូវតែសម្អាតទឹកល្អក់ដោយឱ្យវាឆ្លងកាត់ស្រទាប់ខ្សាច់ ធ្យូង និងក្រណាត់ នៅក្នុងដបជ័រ។",
-      "budget": 65,
+      "budget": 85,
       "requiredItems": ["plastic_bottle", "fine_sand", "activated_charcoal", "cotton_cloth"]
     },
     {
-      "grade": "8th",
-      "titleEn": "Solar Classroom Cooker",
-      "titleKh": "ចង្ក្រានកម្តៅថ្ងៃក្នុងថ្នាក់រៀន",
-      "problemEn": "Design a simple solar cooker to heat up water or food using sunlight. It requires a cardboard box to hold the shape, reflective aluminum foil to concentrate heat, and black paint to absorb the light.",
-      "problemKm": "រចនាចង្ក្រានសូឡាសាមញ្ញមួយដើម្បីកម្តៅទឹក ឬអាហារដោយប្រើពន្លឺព្រះអាទិត្យ។ វាត្រូវការប្រអប់កាតុងដើម្បីរក្សារាង ក្រដាសអាលុយមីញ៉ូមដើម្បីប្រមូលផ្តុំកម្តៅ និងថ្នាំលាបពណ៌ខ្មៅដើម្បីស្រូបពន្លឺ។",
-      "budget": 50,
-      "requiredItems": ["cardboard_box", "aluminum_foil", "black_paint"]
+      "gradeLevel": "High School",
+      "titleEn": "Advanced Water Filtration",
+      "titleKh": "ការចម្រោះទឹកតាមទំនាញកម្រិតខ្ពស់",
+      "problemEn": "Design an advanced gravity filtration system for high school. You must include all basic filtration components (bottle, sand, charcoal, cloth) and incorporate an additional upcycled material like crushed glass to serve as a pre-filter layer, while staying strictly within the budget.",
+      "problemKm": "រចនាប្រព័ន្ធចម្រោះទឹកតាមទំនាញកម្រិតខ្ពស់សម្រាប់វិទ្យាល័យ។ អ្នកត្រូវតែរួមបញ្ចូលសមាសធាតុចម្រោះមូលដ្ឋានទាំងអស់ (ដប ខ្សាច់ ធ្យូង ក្រណាត់) និងរួមបញ្ចូលសម្ភារៈកែច្នៃបន្ថែមដូចជាកម្ទេចកញ្ចក់ ដើម្បីធ្វើជាស្រទាប់ចម្រោះបឋម ដោយស្ថិតក្រោមថវិកាយ៉ាងតឹងរ៉ឹងបំផុត។",
+      "budget": 90,
+      "requiredItems": ["plastic_bottle", "fine_sand", "activated_charcoal", "cotton_cloth"],
+      "successLogic": [
+        {
+          "id": "crushed_glass",
+          "nameEn": "Crushed Glass",
+          "nameKh": "កម្ទេចកញ្ចក់"
+        }
+      ]
     },
     {
-      "grade": "12th",
-      "titleEn": "Zero-Power Classroom Cooling",
-      "titleKh": "ប្រព័ន្ធត្រជាក់ថ្នាក់រៀនគ្មានអគ្គិសនី",
-      "problemEn": "Design an evaporative cooling system for hot afternoons. It must use a water source, clay pots to allow sweat-cooling (evaporation), sand to retain moisture, and a cardboard frame to support the pots.",
-      "problemKm": "រចនាប្រព័ន្ធត្រជាក់ដោយការហួតទឹកសម្រាប់ពេលរសៀលដ៏ក្តៅ។ វាត្រូវតែប្រើប្រភពទឹក ឆ្នាំងដីដើម្បីឱ្យមានការហួតត្រជាក់ ខ្សាច់ដើម្បីរក្សាសំណើម និងប្រអប់កាតុងដើម្បីទ្រឆ្នាំងដី។",
-      "budget": 75,
-      "requiredItems": ["clay_pots", "fine_sand", "water_source", "cardboard_box"]
+      "gradeLevel": "University",
+      "titleEn": "Multi-Stage Water Filtration",
+      "titleKh": "ប្រព័ន្ធចម្រោះទឹកពហុដំណាក់កាល",
+      "problemEn": "Engineer a high-purity multi-stage water filtration system. In addition to the baseline components (bottle, sand, charcoal, cloth), you must include a crushed glass pre-filter and construct a secondary filtration stage using plastic straws, strictly managing your points.",
+      "problemKm": "រចនាប្រព័ន្ធចម្រោះទឹកពហុដំណាក់កាលដែលមានភាពស្អាតខ្ពស់។ បន្ថែមពីលើសមាសធាតុមូលដ្ឋាន (ដប ខ្សាច់ ធ្យូង ក្រណាត់) អ្នកត្រូវតែរួមបញ្ចូលតម្រងកម្ទេចកញ្ចក់ និងបង្កើតដំណាក់កាលចម្រោះទីពីរដោយប្រើទុយោជ័រ ដោយគ្រប់គ្រងថវិកាយ៉ាងតឹងរ៉ឹងបំផុត។",
+      "budget": 100,
+      "requiredItems": ["plastic_bottle", "fine_sand", "activated_charcoal", "cotton_cloth"],
+      "successLogic": [
+        {
+          "id": "crushed_glass",
+          "nameEn": "Crushed Glass",
+          "nameKh": "កម្ទេចកញ្ចក់"
+        },
+        {
+          "id": "plastic_straws",
+          "nameEn": "Plastic Straws",
+          "nameKh": "ទុយោជ័រ"
+        }
+      ]
     }
   ],
   "storeItems": [
