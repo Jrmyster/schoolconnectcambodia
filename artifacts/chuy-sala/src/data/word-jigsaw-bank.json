@@ -1,0 +1,112 @@
+[
+  {
+    "word": "MAP",
+    "hintKm": "ផែនទី",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "HEART",
+    "hintKm": "បេះដូង",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "BOOK",
+    "hintKm": "សៀវភៅ",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "WATER",
+    "hintKm": "ទឹក",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "FLOWER",
+    "hintKm": "ផ្កា",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "SCHOOL",
+    "hintKm": "សាលារៀន",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "ANIMAL",
+    "hintKm": "សត្វ",
+    "difficulty": "Easy"
+  },
+  {
+    "word": "CHEMISTRY",
+    "hintKm": "គីមីវិទ្យា",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "BIOLOGY",
+    "hintKm": "ជីវវិទ្យា",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "PHYSICS",
+    "hintKm": "រូបវិទ្យា",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "STUDENT",
+    "hintKm": "សិស្ស",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "TEACHER",
+    "hintKm": "គ្រូបង្រៀន",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "HISTORY",
+    "hintKm": "ប្រវត្តិវិទ្យា",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "GRAMMAR",
+    "hintKm": "វេយ្យាករណ៍",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "SPELLING",
+    "hintKm": "អក្ខរាវិរុទ្ធ",
+    "difficulty": "Medium"
+  },
+  {
+    "word": "VOCABULARY",
+    "hintKm": "វាក្យសព្ទ",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "STOICHIOMETRY",
+    "hintKm": "ស្តូគីយូម៉ែត្រ",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "THERMODYNAMICS",
+    "hintKm": "ទែម៉ូឌីណាមិច",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "PHOTOSYNTHESIS",
+    "hintKm": "រស្មីសំយោគ",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "INFRASTRUCTURE",
+    "hintKm": "រចនាសម្ព័ន្ធរូបវន្ត",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "EPIDEMIOLOGY",
+    "hintKm": "រោគរាតត្បាត",
+    "difficulty": "Hard"
+  },
+  {
+    "word": "ANTHROPOLOGY",
+    "hintKm": "នរវិទ្យា",
+    "difficulty": "Hard"
+  }
+]

@@ -1,0 +1,202 @@
+{
+  "sets": [
+    {
+      "setId": "space-exploration",
+      "themeEn": "Space Exploration",
+      "themeKh": "ការរុករកអវកាស",
+      "gradeLevel": "5th",
+      "events": [
+        {
+          "eventEn": "Sputnik 1, the first artificial satellite, is launched by the Soviet Union.",
+          "eventKm": "ផ្កាយរណបសិប្បនិម្មិតដំបូងបង្អស់ Sputnik 1 ត្រូវបានបង្ហោះដោយសហភាពសូវៀត។",
+          "year": 1957
+        },
+        {
+          "eventEn": "Apollo 11 lands on the Moon, and Neil Armstrong walks on its surface.",
+          "eventKm": "កប៉ាល់អវកាស Apollo 11 ចុះចតលើព្រះច័ន្ទ ហើយលោក Neil Armstrong ដើរលើផ្ទៃព្រះច័ន្ទ។",
+          "year": 1969
+        },
+        {
+          "eventEn": "Space Shuttle Columbia is launched, initiating the reusable space plane era.",
+          "eventKm": "យានអវកាស Space Shuttle Columbia ត្រូវបានបង្ហោះ ចាប់ផ្តើមយុគសម័យយានអវកាសប្រើឡើងវិញ។",
+          "year": 1981
+        },
+        {
+          "eventEn": "Curiosity Rover lands inside Gale Crater on Mars to study past habitability.",
+          "eventKm": "យានរ៉ូបូត Curiosity ចុះចតក្នុងរណ្ដៅភ្នំ Gale លើភពអង្គារ ដើម្បីសិក្សាពីលទ្ធភាពរស់នៅ។",
+          "year": 2012
+        },
+        {
+          "eventEn": "James Webb Space Telescope is launched to observe the early universe in infrared.",
+          "eventKm": "តេឡេស្កុបអវកាស James Webb ត្រូវបានបង្ហោះ ដើម្បីសង្កេតមើលចក្រវាលដំបូងក្នុងរស្មីអ៊ីនហ្វ្រារ៉េដ។",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "setId": "cambodian-history",
+      "themeEn": "Cambodian History",
+      "themeKh": "ប្រវត្តិសាស្ត្រកម្ពុជា",
+      "gradeLevel": "8th",
+      "events": [
+        {
+          "eventEn": "King Suryavarman II begins the construction of Angkor Wat.",
+          "eventKm": "ព្រះបាទសូរ្យវរ្ម័នទី២ ចាប់ផ្តើមការសាងសង់ប្រាសាទអង្គរវត្ត។",
+          "year": 1113
+        },
+        {
+          "eventEn": "Cambodia gains complete independence from France under King Norodom Sihanouk.",
+          "eventKm": "ប្រទេសកម្ពុជាទទួលបានឯករាជ្យបរិបូណ៌ពីប្រទេសបារាំង ក្រោមព្រះរាជកិច្ចដឹកនាំរបស់ព្រះបាទនរោត្តម សីហនុ។",
+          "year": 1953
+        },
+        {
+          "eventEn": "Phnom Penh is evacuated, marking the start of the Khmer Rouge regime.",
+          "eventKm": "ការជម្លៀសប្រជាជនចេញពីទីក្រុងភ្នំពេញ ដែលជាការចាប់ផ្តើមនៃរបបខ្មែរក្រហម។",
+          "year": 1975
+        },
+        {
+          "eventEn": "The Paris Peace Accords are signed to officially end the Cambodian conflict.",
+          "eventKm": "កិច្ចព្រមព្រៀងសន្តិភាពទីក្រុងប៉ារីសត្រូវបានចុះហត្ថលេខា ដើម្បីបញ្ចប់ជម្លោះនៅកម្ពុជាជាផ្លូវការ។",
+          "year": 1991
+        },
+        {
+          "eventEn": "Cambodia is admitted as the tenth member of the Association of Southeast Asian Nations (ASEAN).",
+          "eventKm": "ប្រទេសកម្ពុជាត្រូវបានអនុញ្ញាតឱ្យចូលជាសមាជិកទីដប់នៃសមាគមប្រជាជាតិអាស៊ីអាគ្នេយ៍ (អាស៊ាន)។",
+          "year": 1999
+        }
+      ]
+    },
+    {
+      "setId": "medical-breakthroughs",
+      "themeEn": "Medical Breakthroughs",
+      "themeKh": "របកគំហើញផ្នែកវេជ្ជសាស្ត្រ",
+      "gradeLevel": "12th",
+      "events": [
+        {
+          "eventEn": "Edward Jenner creates the first smallpox vaccine using cowpox material.",
+          "eventKm": "លោក Edward Jenner បង្កើតវ៉ាក់សាំងជំងឺអុតធំដំបូងបង្អស់ដោយប្រើប្រាស់វីរុសអុតគោ។",
+          "year": 1796
+        },
+        {
+          "eventEn": "Alexander Fleming discovers penicillin, the world's first effective antibiotic.",
+          "eventKm": "លោក Alexander Fleming រកឃើញប៉េនីស៊ីលីន ដែលជាថ្នាំផ្សះមានប្រសិទ្ធភាពដំបូងគេបង្អស់លើលោក។",
+          "year": 1928
+        },
+        {
+          "eventEn": "James Watson, Francis Crick, and Rosalind Franklin discover the double helix structure of DNA.",
+          "eventKm": "លោក James Watson, Francis Crick និងលោកស្រី Rosalind Franklin រកឃើញទម្រង់វង់ពីរជាន់នៃ DNA។",
+          "year": 1953
+        },
+        {
+          "eventEn": "Dolly the Sheep is cloned from an adult somatic cell, a milestone in biology.",
+          "eventKm": "ចៀម Dolly ត្រូវបានក្លូនចេញពីកោសិការាងកាយពេញវ័យ ដែលជាព្រឹត្តិការណ៍ដ៏សំខាន់ក្នុងជីវវិទ្យា។",
+          "year": 1996
+        },
+        {
+          "eventEn": "The Human Genome Project completes the first draft of the complete human DNA sequence.",
+          "eventKm": "គម្រោងក្រូម៉ូសូមមនុស្ស (Human Genome Project) បញ្ចប់សេចក្តីព្រាងដំបូងនៃលំដាប់ DNA មនុស្សទាំងស្រុង។",
+          "year": 2001
+        }
+      ]
+    },
+    {
+      "setId": "world-inventions",
+      "themeEn": "Inventions that Changed the World",
+      "themeKh": "របកគំហើញបច្ចេកវិទ្យាពិភពលោក",
+      "gradeLevel": "5th",
+      "events": [
+        {
+          "eventEn": "Johannes Gutenberg invents the movable-type printing press in Germany.",
+          "eventKm": "លោក Johannes Gutenberg បង្កើតម៉ាស៊ីនបោះពុម្ពអក្សរចល័តនៅប្រទេសអាល្លឺម៉ង់។",
+          "year": 1440
+        },
+        {
+          "eventEn": "James Watt patents the separate condenser, dramatically improving steam engine efficiency.",
+          "eventKm": "លោក James Watt ចុះប៉ាតង់ឧបករណ៍ខាប់ទឹក ដាច់ដោយឡែក ដែលជួយបង្កើនប្រសិទ្ធភាពម៉ាស៊ីនចំហាយទឹកយ៉ាងខ្លាំង។",
+          "year": 1769
+        },
+        {
+          "eventEn": "Alexander Graham Bell receives a patent for the telephone.",
+          "eventKm": "លោក Alexander Graham Bell ទទួលបានប៉ាតង់សម្រាប់ទូរស័ព្ទ។",
+          "year": 1876
+        },
+        {
+          "eventEn": "Orville and Wilbur Wright achieve the first controlled, powered airplane flight.",
+          "eventKm": "លោក Orville និង Wilbur Wright សម្រេចបានការហោះហើរយន្តហោះដែលមានការគ្រប់គ្រង និងម៉ាស៊ីនដំបូងបង្អស់។",
+          "year": 1903
+        },
+        {
+          "eventEn": "Tim Berners-Lee writes the proposal for the World Wide Web at CERN.",
+          "eventKm": "លោក Tim Berners-Lee សរសេរគម្រោងស្នើសុំបង្កើតបណ្តាញសកលលោក World Wide Web នៅមជ្ឈមណ្ឌល CERN។",
+          "year": 1989
+        }
+      ]
+    },
+    {
+      "setId": "ancient-landmarks",
+      "themeEn": "Ancient Civilizations & Landmarks",
+      "themeKh": "អរិយធម៌ និងសំណង់បុរាណល្បីៗ",
+      "gradeLevel": "8th",
+      "events": [
+        {
+          "eventEn": "The Great Pyramid of Giza is completed as a tomb for Pharaoh Khufu.",
+          "eventKm": "មហាប៉ារ៉ាមីតហ្គីហ្សាត្រូវបានសាងសង់រួចរាល់ ដើម្បីធ្វើជាផ្នូរសម្រាប់ព្រះចៅផារ៉ាអុង Khufu។",
+          "year": -2560
+        },
+        {
+          "eventEn": "Romulus and Remus found the city of Rome, according to Roman legend.",
+          "eventKm": "Romulus និង Remus បង្កើតទីក្រុងរ៉ូម យោងទៅតាមរឿងព្រេងរបស់រ៉ូម៉ាំង។",
+          "year": -753
+        },
+        {
+          "eventEn": "Construction of the Colosseum in Rome begins under Emperor Vespasian.",
+          "eventKm": "ការសាងសង់ពហុកីឡដ្ឋាន Colosseum នៅទីក្រុងរ៉ូម ចាប់ផ្តើមក្រោមការដឹកនាំរបស់អធិរាជ Vespasian។",
+          "year": 72
+        },
+        {
+          "eventEn": "The House of Wisdom is established in Baghdad during the Islamic Golden Age.",
+          "eventKm": "វិមានប្រាជ្ញា (House of Wisdom) ត្រូវបានបង្កើតឡើងក្នុងទីក្រុងបាកដាដ ក្នុងយុគសម័យមាសនៃសាសនាឥស្លាម។",
+          "year": 830
+        },
+        {
+          "eventEn": "Machu Picchu is constructed in Peru by the Inca Empire under Pachacuti.",
+          "eventKm": "ទីក្រុងបុរាណ Machu Picchu ត្រូវបានសាងសង់ឡើងនៅប្រទេសប៉េរូ ដោយចក្រភព Inca ក្រោមការដឹកនាំរបស់ព្រះចៅ Pachacuti។",
+          "year": 1450
+        }
+      ]
+    },
+    {
+      "setId": "aviation-flight",
+      "themeEn": "Aviation & Flight History",
+      "themeKh": "កាលប្បវត្តិនៃការហោះហើរ និងអាកាសចរណ៍",
+      "gradeLevel": "12th",
+      "events": [
+        {
+          "eventEn": "The Montgolfier brothers launch the first manned hot air balloon flight in Paris.",
+          "eventKm": "បងប្អូនប្រុស Montgolfier បង្ហោះប៉ោងប៉ោងហោះដែលមានមនុស្សជិះជាលើកដំបូងនៅទីក្រុងប៉ារីស។",
+          "year": 1783
+        },
+        {
+          "eventEn": "Charles Lindbergh completes the first solo non-stop transatlantic flight.",
+          "eventKm": "លោក Charles Lindbergh សម្រេចបានការហោះហើរទោលមិនឈប់ឆ្លងកាត់មហាសមុទ្រអាត្លង់ទិកដំបូងបង្អស់។",
+          "year": 1927
+        },
+        {
+          "eventEn": "The De Havilland Comet, the world's first commercial jet airliner, enters service.",
+          "eventKm": "យន្តហោះ De Havilland Comet ដែលជាយន្តហោះប្រតិកម្មពាណិជ្ជកម្មដំបូងបង្អស់លើលោក បានចាប់ផ្តើមដំណើរការ។",
+          "year": 1952
+        },
+        {
+          "eventEn": "The Concorde supersonic passenger jet makes its first commercial flights.",
+          "eventKm": "យន្តហោះដឹកអ្នកដំណើរល្បឿនលឿនជាងសំឡេង Concorde ធ្វើការហោះហើរពាណិជ្ជកម្មជាលើកដំបូង។",
+          "year": 1976
+        },
+        {
+          "eventEn": "The Rutan Voyager aircraft completes the first non-stop flight around the world without refueling.",
+          "eventKm": "យន្តហោះ Rutan Voyager សម្រេចបានការហោះហើរជុំវិញពិភពលោកដោយមិនឈប់សម្រាក និងមិនចាក់សាំងបន្ថែម។",
+          "year": 1986
+        }
+      ]
+    }
+  ]
+}

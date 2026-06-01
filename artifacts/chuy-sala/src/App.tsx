@@ -46,6 +46,7 @@ const GeometryPage              = lazy(() => import("@/pages/GeometryPage"));
 const LogarithmsPage            = lazy(() => import("@/pages/LogarithmsPage").then(m => ({ default: m.LogarithmsPage })));
 const LimitsDerivativesPage     = lazy(() => import("@/pages/LimitsDerivativesPage").then(m => ({ default: m.LimitsDerivativesPage })));
 const IntegralsPage             = lazy(() => import("@/pages/IntegralsPage").then(m => ({ default: m.IntegralsPage })));
+const IntegrationTechniquesPage = lazy(() => import("@/pages/IntegrationTechniquesPage"));
 const AdvancedMathPage          = lazy(() => import("@/pages/AdvancedMathPage").then(m => ({ default: m.AdvancedMathPage })));
 const TensorsPage               = lazy(() => import("@/pages/TensorsPage"));
 const TopologyPage              = lazy(() => import("@/pages/TopologyPage"));
@@ -103,6 +104,7 @@ const EnergyFuturePage          = lazy(() => import("@/pages/EnergyFuturePage").
 const PublicHealthPage          = lazy(() => import("@/pages/PublicHealthPage").then(m => ({ default: m.PublicHealthPage })));
 const DiseaseDividePage         = lazy(() => import("@/pages/DiseaseDividePage").then(m => ({ default: m.DiseaseDividePage })));
 const CommunicableDiseasesPage  = lazy(() => import("@/pages/CommunicableDiseasesPage"));
+const FeminineHealthPage        = lazy(() => import("@/pages/FeminineHealthPage"));
 const GlobalNgosPage            = lazy(() => import("@/pages/GlobalNgosPage"));
 const AddictionSciencePage      = lazy(() => import("@/pages/AddictionSciencePage"));
 const CompetitionCooperationPage = lazy(() => import("@/pages/CompetitionCooperationPage").then(m => ({ default: m.CompetitionCooperationPage })));
@@ -158,6 +160,15 @@ const OrbitalMechanics         = lazy(() => import("@/pages/Science/OrbitalMecha
 const MillionaireChallengePage = lazy(() => import("@/pages/MillionaireChallengePage"));
 const JeopardyPage             = lazy(() => import("@/pages/JeopardyPage"));
 const DynamicCrosswordPage     = lazy(() => import("@/pages/DynamicCrosswordPage"));
+const EnglishWordJigsawPage     = lazy(() => import("@/pages/EnglishWordJigsawPage"));
+const VocabularyMastermindPage  = lazy(() => import("@/pages/VocabularyMastermindPage"));
+const CollaborativeMadLibsPage  = lazy(() => import("@/pages/CollaborativeMadLibsPage"));
+const SentenceScrambleRelayPage = lazy(() => import("@/pages/SentenceScrambleRelayPage"));
+const TargetNumberPage          = lazy(() => import("@/pages/TargetNumberPage"));
+const GridBattleshipPage        = lazy(() => import("@/pages/GridBattleshipPage"));
+const FrugalBlueprintPage       = lazy(() => import("@/pages/FrugalBlueprintPage"));
+const PixelMapRevealPage        = lazy(() => import("@/pages/PixelMapRevealPage"));
+const HistoricalTimelineSorterPage = lazy(() => import("@/pages/HistoricalTimelineSorterPage"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
@@ -375,9 +386,12 @@ function Router() {
             <Route path="/mathematics/logarithms" component={LogarithmsPage} />
             <Route path="/mathematics/limits-derivatives" component={LimitsDerivativesPage} />
             <Route path="/mathematics/integrals" component={IntegralsPage} />
+            <Route path="/mathematics/integration-techniques" component={IntegrationTechniquesPage} />
             <Route path="/mathematics/advanced" component={AdvancedMathPage} />
             <Route path="/mathematics/tensors" component={TensorsPage} />
             <Route path="/mathematics/topology" component={TopologyPage} />
+            <Route path="/mathematics/target-number" component={TargetNumberPage} />
+            <Route path="/mathematics/grid-battleship" component={GridBattleshipPage} />
             <Route path="/well-being/survival-skills" component={SurvivalSkillsPage} />
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/technology/radio" component={RadioTechPage} />
@@ -389,6 +403,9 @@ function Router() {
             <Route path="/science/veterinary" component={VeterinaryMedicinePage} />
             <Route path="/science/archaeology-paleontology" component={ArchaeologyPaleontologyPage} />
             <Route path="/science/women-in-science" component={WomenInSciencePage} />
+            <Route path="/science/frugal-blueprint" component={FrugalBlueprintPage} />
+            <Route path="/science/pixel-map-reveal" component={PixelMapRevealPage} />
+            <Route path="/science/historical-timeline-sorter" component={HistoricalTimelineSorterPage} />
             <Route path="/science/fourier-transform" component={FourierTransformPage} />
             <Route path="/science/navier-stokes" component={NavierStokesPage} />
             <Route path="/science/time-travel" component={TimeTravelPhysicsPage} />
@@ -451,6 +468,7 @@ function Router() {
             <Route path="/well-being/infant-nutrition" component={InfantNutritionPage} />
             <Route path="/well-being/survival-hydration" component={SurvivalHydrationPage} />
             <Route path="/well-being/soft-skills" component={SoftSkills} />
+            <Route path="/well-being/menstrual-hygiene" component={FeminineHealthPage} />
             <Route path="/science/biology/microscopes" component={MicroscopesPage} />
             <Route path="/future-hub/university-guide" component={UniversityExpectationsPage} />
             <Route path="/study-center/competition-cooperation" component={CompetitionCooperationPage} />
@@ -468,6 +486,10 @@ function Router() {
             <Route path="/study-center/jeopardy" component={JeopardyPage} />
             <Route path="/study-center/crossword" component={DynamicCrosswordPage} />
             <Route path="/study-center/spelling-bee" component={SpellingBeePage} />
+            <Route path="/english/word-jigsaw" component={EnglishWordJigsawPage} />
+            <Route path="/english/vocabulary-mastermind" component={VocabularyMastermindPage} />
+            <Route path="/english/collaborative-mad-libs" component={CollaborativeMadLibsPage} />
+            <Route path="/english/sentence-scramble-relay" component={SentenceScrambleRelayPage} />
             <Route path="/geology/wonders" component={GeologicalWondersPage} />
             <Route path="/science/geology/deep-time" component={DeepTimePage} />
             <Route path="/technology/automotive" component={AutomotiveTechPage} />

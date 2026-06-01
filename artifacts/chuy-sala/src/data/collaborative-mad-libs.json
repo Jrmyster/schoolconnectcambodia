@@ -1,0 +1,30 @@
+[
+  {
+    "title": "The Jungle Adventure",
+    "titleKm": "ការផ្សងព្រេងក្នុងព្រៃ",
+    "templateEn": "One [Adjective 1] day, a giant [Animal] decided to [Verb] near the river. It splashed water all over a sleeping [Noun], making them feel extremely [Adjective 2] and [Emotion].",
+    "templateKm": "នៅថ្ងៃ [Adjective 1] មួយ សត្វ [Animal] ដ៏ធំមួយបានសម្រេចចិត្ត [Verb] នៅក្បែរទន្លេ។ វាបានបាញ់ទឹកសើមជោកជាំលើ [Noun] ដែលកំពុងគេង ធ្វើឱ្យពួកគេមានអារម្មណ៍ [Adjective 2] និង [Emotion] ជាខ្លាំង។",
+    "blanks": ["Adjective 1", "Animal", "Verb", "Noun", "Adjective 2", "Emotion"]
+  },
+  {
+    "title": "The Space Explorer",
+    "titleKm": "អ្នករុករកអវកាស",
+    "templateEn": "Captain [Name] was a very [Adjective 1] explorer. They landed their spaceship on the mysterious planet [Planet] to search for [Plural Noun]. Suddenly, a [Adjective 2] alien appeared and started to [Verb] around them!",
+    "templateKm": "ប្រធានក្រុម [Name] គឺជាអ្នករុករកដ៏ [Adjective 1] មួយរូប។ ពួកគេបានចុះចតកប៉ាល់អវកាសនៅលើភព [Planet] ដ៏អាថ៌កំបាំង ដើម្បីស្វែងរក [Plural Noun]។ រំពេចនោះ មនុស្សភពផ្កាយដ៏ [Adjective 2] ម្នាក់បានលេចខ្លួនមក ហើយបានចាប់ផ្តើម [Verb] ជុំវិញពួកគេ!",
+    "blanks": ["Name", "Adjective 1", "Planet", "Plural Noun", "Adjective 2", "Verb"]
+  },
+  {
+    "title": "A Cooking Adventure",
+    "titleKm": "ដំណើរផ្សងព្រេងធ្វើម្ហូប",
+    "templateEn": "To cook a delicious Khmer soup, first boil some [Food 1] in a [Adjective 1] pot. Next, add a pinch of [Noun] and [Verb] it slowly. Serve it hot with [Food 2] for a [Adjective 2] family dinner!",
+    "templateKm": "ដើម្បីស្លរសម្លខ្មែរឱ្យឆ្ងាញ់ពិសា ដំបូងត្រូវដាំ [Food 1] នៅក្នុងឆ្នាំង [Adjective 1] ឱ្យពុះ។ បញ្ចូល [Noun] មួយចិបចូល ហើយ [Verb] វាសន្សឹមៗ។ យកមកទទួលទាននៅពេលវានៅក្តៅៗជាមួយ [Food 2] សម្រាប់អាហារពេលល្ងាចជាលក្ខណៈគ្រួសារដ៏ [Adjective 2]!",
+    "blanks": ["Food 1", "Adjective 1", "Noun", "Verb", "Food 2", "Adjective 2"]
+  },
+  {
+    "title": "The Magical School",
+    "titleKm": "សាលាវេទមន្ត",
+    "templateEn": "At [School Name] Academy, students learn how to [Verb] using magic. In class, a student mixed a [Color] [Liquid] with a wizard's [Noun], causing a giant explosion that turned the teacher's hair [Adjective]!",
+    "templateKm": "នៅបណ្ឌិត្យសភា [School Name] សិស្សានុសិស្សរៀនពីរបៀប [Verb] ដោយប្រើវេទមន្ត។ ក្នុងថ្នាក់រៀន សិស្សម្នាក់បានលាយ [Liquid] ពណ៌ [Color] ជាមួយ [Noun] របស់គ្រូមន្តអាគម បណ្តាលឱ្យមានការផ្ទុះយ៉ាងខ្លាំង ដែលធ្វើឱ្យសក់របស់គ្រូប្រែជា [Adjective]!",
+    "blanks": ["School Name", "Verb", "Color", "Liquid", "Noun", "Adjective"]
+  }
+]

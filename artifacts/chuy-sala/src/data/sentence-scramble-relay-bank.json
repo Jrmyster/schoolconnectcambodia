@@ -1,0 +1,47 @@
+[
+  {
+    "sentence": "The quick brown fox jumps over the lazy dog.",
+    "hintKm": "កញ្ជ្រោងពណ៌ត្នោតដ៏រហ័សរហួនលោតរំលងឆ្កែដ៏ខ្ជិលច្រអូស។",
+    "gradeLevel": "5th"
+  },
+  {
+    "sentence": "We must wash our hands with soap every day.",
+    "hintKm": "យើងត្រូវលាងដៃនឹងសាប៊ូជារៀងរាល់ថ្ងៃ។",
+    "gradeLevel": "5th"
+  },
+  {
+    "sentence": "I like to read books under the big tree.",
+    "hintKm": "ខ្ញុំចូលចិត្តអានសៀវភៅនៅក្រោមដើមឈើធំ។",
+    "gradeLevel": "5th"
+  },
+  {
+    "sentence": "Water freezes at zero degrees Celsius and boils at one hundred degrees.",
+    "hintKm": "ទឹកកកកកនៅសីតុណ្ហភាពសូន្យអង្សាសេ ហើយពុះនៅសីតុណ្ហភាពមួយរយអង្សា។",
+    "gradeLevel": "8th"
+  },
+  {
+    "sentence": "The Angkor Wat temple is a famous monument in Cambodia.",
+    "hintKm": "ប្រាសាទអង្គរវត្តគឺជាវិមានដ៏ល្បីល្បាញមួយនៅក្នុងប្រទេសកម្ពុជា។",
+    "gradeLevel": "8th"
+  },
+  {
+    "sentence": "Regular exercise and healthy food keep our bodies strong and energetic.",
+    "hintKm": "ការហាត់ប្រាណឱ្យបានទៀងទាត់ និងអាហារសុខភាពធ្វើឱ្យរាងកាយយើងរឹងមាំ និងមានថាមពល។",
+    "gradeLevel": "8th"
+  },
+  {
+    "sentence": "Photosynthesis is the process that green plants use to convert sunlight into chemical energy.",
+    "hintKm": "រស្មីសំយោគគឺជាដំណើរការដែលរុក្ខជាតិបៃតងប្រើដើម្បីបំលែងពន្លឺព្រះអាទិត្យទៅជាថាមពលគីមី។",
+    "gradeLevel": "12th"
+  },
+  {
+    "sentence": "According to Newton's law of gravitation, every mass attracts every other mass.",
+    "hintKm": "យោងទៅតាមច្បាប់ទំនាញរបស់ញូតុន គ្រប់ម៉ាស់ទាំងអស់ទាញម៉ាស់ដទៃទៀត។",
+    "gradeLevel": "12th"
+  },
+  {
+    "sentence": "Education is the most powerful weapon which you can use to change the world.",
+    "hintKm": "ការអប់រំគឺជាអាវុធដ៏មានឥទ្ធិពលបំផុតដែលអ្នកអាចប្រើដើម្បីផ្លាស់ប្តូរពិភពលោក។",
+    "gradeLevel": "12th"
+  }
+]

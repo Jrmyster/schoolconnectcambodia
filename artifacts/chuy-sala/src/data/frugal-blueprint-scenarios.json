@@ -1,0 +1,117 @@
+{
+  "scenarios": [
+    {
+      "grade": "5th",
+      "titleEn": "Gravity Water Filtration",
+      "titleKh": "ការចម្រោះទឹកតាមទំនាញ",
+      "problemEn": "Build a low-cost water filter using basic local materials. The filter must clean muddy water by passing it through layers of sand, charcoal, and cloth inside a plastic bottle container.",
+      "problemKm": "សាងសង់តម្រងទឹកដែលមានតម្លៃទាបដោយប្រើវត្ថុធាតុដើមក្នុងស្រុកសាមញ្ញ។ តម្រងត្រូវតែសម្អាតទឹកល្អក់ដោយឱ្យវាឆ្លងកាត់ស្រទាប់ខ្សាច់ ធ្យូង និងក្រណាត់ នៅក្នុងដបជ័រ។",
+      "budget": 65,
+      "requiredItems": ["plastic_bottle", "fine_sand", "activated_charcoal", "cotton_cloth"]
+    },
+    {
+      "grade": "8th",
+      "titleEn": "Solar Classroom Cooker",
+      "titleKh": "ចង្ក្រានកម្តៅថ្ងៃក្នុងថ្នាក់រៀន",
+      "problemEn": "Design a simple solar cooker to heat up water or food using sunlight. It requires a cardboard box to hold the shape, reflective aluminum foil to concentrate heat, and black paint to absorb the light.",
+      "problemKm": "រចនាចង្ក្រានសូឡាសាមញ្ញមួយដើម្បីកម្តៅទឹក ឬអាហារដោយប្រើពន្លឺព្រះអាទិត្យ។ វាត្រូវការប្រអប់កាតុងដើម្បីរក្សារាង ក្រដាសអាលុយមីញ៉ូមដើម្បីប្រមូលផ្តុំកម្តៅ និងថ្នាំលាបពណ៌ខ្មៅដើម្បីស្រូបពន្លឺ។",
+      "budget": 50,
+      "requiredItems": ["cardboard_box", "aluminum_foil", "black_paint"]
+    },
+    {
+      "grade": "12th",
+      "titleEn": "Zero-Power Classroom Cooling",
+      "titleKh": "ប្រព័ន្ធត្រជាក់ថ្នាក់រៀនគ្មានអគ្គិសនី",
+      "problemEn": "Design an evaporative cooling system for hot afternoons. It must use a water source, clay pots to allow sweat-cooling (evaporation), sand to retain moisture, and a cardboard frame to support the pots.",
+      "problemKm": "រចនាប្រព័ន្ធត្រជាក់ដោយការហួតទឹកសម្រាប់ពេលរសៀលដ៏ក្តៅ។ វាត្រូវតែប្រើប្រភពទឹក ឆ្នាំងដីដើម្បីឱ្យមានការហួតត្រជាក់ ខ្សាច់ដើម្បីរក្សាសំណើម និងប្រអប់កាតុងដើម្បីទ្រឆ្នាំងដី។",
+      "budget": 75,
+      "requiredItems": ["clay_pots", "fine_sand", "water_source", "cardboard_box"]
+    }
+  ],
+  "storeItems": [
+    {
+      "id": "plastic_bottle",
+      "nameEn": "Plastic Bottle",
+      "nameKh": "ដបជ័រ",
+      "cost": 10,
+      "iconName": "Box"
+    },
+    {
+      "id": "cardboard_box",
+      "nameEn": "Cardboard Box",
+      "nameKh": "ប្រអប់កាតុង",
+      "cost": 5,
+      "iconName": "Box"
+    },
+    {
+      "id": "activated_charcoal",
+      "nameEn": "Activated Charcoal",
+      "nameKh": "ធ្យូងសកម្ម",
+      "cost": 30,
+      "iconName": "Flame"
+    },
+    {
+      "id": "fine_sand",
+      "nameEn": "Fine Sand",
+      "nameKh": "ខ្សាច់ម៉ដ្ឋ",
+      "cost": 15,
+      "iconName": "Layers"
+    },
+    {
+      "id": "cotton_cloth",
+      "nameEn": "Cotton Cloth",
+      "nameKh": "ក្រណាត់កប្បាស",
+      "cost": 20,
+      "iconName": "Layers"
+    },
+    {
+      "id": "aluminum_foil",
+      "nameEn": "Aluminum Foil",
+      "nameKh": "ក្រដាសអាលុយមីញ៉ូម",
+      "cost": 20,
+      "iconName": "Sparkles"
+    },
+    {
+      "id": "black_paint",
+      "nameEn": "Black Paint",
+      "nameKh": "ថ្នាំលាបខ្មៅ",
+      "cost": 15,
+      "iconName": "Palette"
+    },
+    {
+      "id": "clay_pots",
+      "nameEn": "Clay Pots",
+      "nameKh": "ឆ្នាំងដីឥដ្ឋ",
+      "cost": 30,
+      "iconName": "CupSoda"
+    },
+    {
+      "id": "water_source",
+      "nameEn": "Water Source",
+      "nameKh": "ប្រភពទឹក",
+      "cost": 10,
+      "iconName": "Droplet"
+    },
+    {
+      "id": "copper_wire",
+      "nameEn": "Copper Wire (Distractor)",
+      "nameKh": "ខ្សែស្ពាន់ (សម្ភារៈបន្ថែម)",
+      "cost": 25,
+      "iconName": "Wrench"
+    },
+    {
+      "id": "plastic_straws",
+      "nameEn": "Plastic Straws (Distractor)",
+      "nameKh": "ទុយោជ័រ (សម្ភារៈបន្ថែម)",
+      "cost": 10,
+      "iconName": "Layers"
+    },
+    {
+      "id": "crushed_glass",
+      "nameEn": "Crushed Glass (Distractor)",
+      "nameKh": "កម្ទេចកញ្ចក់ (សម្ភារៈបន្ថែម)",
+      "cost": 15,
+      "iconName": "HelpCircle"
+    }
+  ]
+}

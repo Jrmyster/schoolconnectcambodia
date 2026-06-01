@@ -1,0 +1,45 @@
+[
+  {
+    "id": "paris-eiffel-tower",
+    "imageUrl": "/images/paris-eiffel-tower.jpg",
+    "answerEn": "Eiffel Tower (Paris, France)",
+    "answerKh": "ប៉មអេហ្វែល (ប៉ារីស ប្រទេសបារាំង)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 20%"
+  },
+  {
+    "id": "phnom-penh-monument",
+    "imageUrl": "/images/phnom-penh-monument.jpg",
+    "answerEn": "Independence Monument (Phnom Penh, Cambodia)",
+    "answerKh": "វិមានឯករាជ្យ (ភ្នំពេញ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 45%"
+  },
+  {
+    "id": "tokyo-shibuya",
+    "imageUrl": "/images/tokyo-shibuya.jpg",
+    "answerEn": "Shibuya Crossing (Tokyo, Japan)",
+    "answerKh": "ផ្លូវកាត់ស៊ីប៊ូយ៉ា (តូក្យូ ប្រទេសជប៉ុន)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "cairo-pyramids",
+    "imageUrl": "/images/cairo-pyramids.jpg",
+    "answerEn": "Giza Pyramids (Cairo, Egypt)",
+    "answerKh": "ពីរ៉ាមីតហ្គីហ្សា (កែរ ប្រទេសអេស៊ីប)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "30% 50%"
+  },
+  {
+    "id": "nyc-statue-liberty",
+    "imageUrl": "/images/nyc-statue-liberty.jpg",
+    "answerEn": "Statue of Liberty (New York, USA)",
+    "answerKh": "រូបសំណាកសេរីភាព (ញូវយ៉ក សហរដ្ឋអាមេរិក)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  }
+]
