@@ -113,18 +113,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["excretory", "kidneys", "kidney", "bladder", "urine", "filtration", "waste", "nephrons", "human body", "anatomy"],
     keywordsKh: ["បញ្ចេញចោល", "តម្រងនោម", "ទឹកនោម", "កាកសំណល់", "រាងកាយ", "រាងកាយមនុស្ស"],
   },
-  {
-    id: "integumentary-system",
-    href: "/science/human-body/integumentary-system",
-    icon: Shield,
-    titleEn: "The Integumentary System",
-    titleKh: "ប្រព័ន្ធស្បែក (ស្បែក សក់ ក្រចក)",
-    categoryEn: "Human Body", categoryKh: "រាងកាយមនុស្ស",
-    descEn: "Your body's largest organ! Learn about the epidermis, melanin, keratin, and how skin protects you.",
-    descKh: "សរីរាង្គធំបំផុតរបស់រាងកាយ! រៀនអំពីអេពីឌែម មេឡានីន និងរបៀបដែលស្បែកការពារអ្នក។",
-    keywordsEn: ["skin", "hair", "nails", "integumentary", "epidermis", "melanin", "keratin", "protection", "human body", "anatomy", "uv"],
-    keywordsKh: ["ស្បែក", "សក់", "ក្រចក", "មេឡានីន", "រាងកាយ", "រាងកាយមនុស្ស"],
-  },
+
   {
     id: "immune-system",
     href: "/science/human-body/immune-system",
