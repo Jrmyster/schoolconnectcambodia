@@ -41,5 +41,177 @@
     "answerKh": "រូបសំណាកសេរីភាព (ញូវយ៉ក សហរដ្ឋអាមេរិក)",
     "type": "World Landmark",
     "revealMethod": "pixelate"
+  },
+  {
+    "id": "china-great-wall",
+    "imageUrl": "https://images.unsplash.com/photo-1508807526345-15e9b7f43f91?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "The Great Wall of China (China)",
+    "answerKh": "មហាកំផែងនៃប្រទេសចិន (ប្រទេសចិន)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 30%"
+  },
+  {
+    "id": "egypt-pyramids-giza",
+    "imageUrl": "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Pyramids of Giza (Cairo, Egypt)",
+    "answerKh": "ពីរ៉ាមីតហ្គីហ្សា (កែរ ប្រទេសអេស៊ីប)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "usa-statue-liberty",
+    "imageUrl": "https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Statue of Liberty (New York, USA)",
+    "answerKh": "រូបសំណាកសេរីភាព (ញូវយ៉ក សហរដ្ឋអាមេរិក)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 15%"
+  },
+  {
+    "id": "india-taj-mahal",
+    "imageUrl": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Taj Mahal (Agra, India)",
+    "answerKh": "ប្រាសាទតាជម៉ាហាល (អាក្រា ប្រទេសឥណ្ឌា)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 50%"
+  },
+  {
+    "id": "italy-colosseum",
+    "imageUrl": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "The Colosseum (Rome, Italy)",
+    "answerKh": "កូឡូសេអ៊ូម (រ៉ូម ប្រទេសអ៊ីតាលី)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "japan-mt-fuji",
+    "imageUrl": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Mount Fuji (Honshu, Japan)",
+    "answerKh": "ភ្នំហ្វូជី (កោះហុងស៊ូ ប្រទេសជប៉ុន)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 40%"
+  },
+  {
+    "id": "australia-sydney-opera-house",
+    "imageUrl": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Sydney Opera House (Sydney, Australia)",
+    "answerKh": "រោងមហោស្រពស៊ីដនី (ស៊ីដនី ប្រទេសអូស្ត្រាលី)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "peru-machu-picchu",
+    "imageUrl": "https://images.unsplash.com/photo-1509216242873-7786f446f465?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Machu Picchu (Cusco Region, Peru)",
+    "answerKh": "ម៉ាជូប៊ិចជូ (តំបន់គូស្កូ ប្រទេសប៉េរូ)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 60%"
+  },
+  {
+    "id": "england-stonehenge",
+    "imageUrl": "https://images.unsplash.com/photo-1599833586167-932f91a5cc68?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Stonehenge (Wiltshire, England)",
+    "answerKh": "ស្តូនហ្វេង (វិលសៀ ប្រទេសអង់គ្លេស)",
+    "type": "World Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "nepal-mt-everest",
+    "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Mount Everest (Himalayas, Nepal/China)",
+    "answerKh": "ភ្នំអេវឺរ៉េស (ជួរភ្នំហិម៉ាល័យ ប្រទេសនេប៉ាល់/ចិន)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 30%"
+  },
+  {
+    "id": "cambodia-bayon-temple",
+    "imageUrl": "https://images.unsplash.com/photo-1543731068-7e0f5beff43a?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Bayon Temple (Angkor Thom, Cambodia)",
+    "answerKh": "ប្រាសាទបាយ័ន (អង្គរធំ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 40%"
+  },
+  {
+    "id": "cambodia-independence-monument",
+    "imageUrl": "https://images.unsplash.com/photo-1559589689-577aabd1db4f?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Independence Monument (Phnom Penh, Cambodia)",
+    "answerKh": "វិមានឯករាជ្យ (ភ្នំពេញ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "cambodia-royal-palace",
+    "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Royal Palace (Phnom Penh, Cambodia)",
+    "answerKh": "ព្រះបរមរាជវាំង (ភ្នំពេញ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "55% 45%"
+  },
+  {
+    "id": "cambodia-preah-vihear",
+    "imageUrl": "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Preah Vihear Temple (Preah Vihear, Cambodia)",
+    "answerKh": "ប្រាសាទព្រះវិហារ (ខេត្តព្រះវិហារ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "cambodia-tonle-sap",
+    "imageUrl": "https://images.unsplash.com/photo-1537956965359-7573183d1f57?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Tonle Sap Lake - Floating Villages (Siem Reap, Cambodia)",
+    "answerKh": "បឹងទន្លេសាប - ភូមិបណ្តែតទឹក (សៀមរាប ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 50%"
+  },
+  {
+    "id": "cambodia-bokor-hill",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Le_Bokor_Palace_-_Kampot_Province.jpg",
+    "answerEn": "Bokor Hill Station (Kampot, Cambodia)",
+    "answerKh": "ស្ថានីយភ្នំបូកគោ (កំពត ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 50%"
+  },
+  {
+    "id": "cambodia-kep-crab-market",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Crab_statue_Kep_Cambodia.jpg",
+    "answerEn": "Kep Crab Market (Kep, Cambodia)",
+    "answerKh": "ផ្សារក្តាមកែប (កែប ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "cambodia-koh-ker",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Koh_Ker_Prasat_Thom.jpg",
+    "answerEn": "Koh Ker Temple - Prasat Prang (Preah Vihear, Cambodia)",
+    "answerKh": "ប្រាសាទកោះកេរ - ប្រាសាទប្រាង្គ (ខេត្តព្រះវិហារ ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 50%"
+  },
+  {
+    "id": "cambodia-neak-pean",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/87/Neak_Pean_0826.jpg",
+    "answerEn": "Neak Pean Temple (Siem Reap, Cambodia)",
+    "answerKh": "ប្រាសាទនាគព័ន្ធ (សៀមរាប ប្រទេសកម្ពុជា)",
+    "type": "Cambodian Landmark",
+    "revealMethod": "pixelate"
+  },
+  {
+    "id": "malaysia-petronas-towers",
+    "imageUrl": "https://images.unsplash.com/photo-1595438596661-d7168750800c?auto=format&fit=crop&w=1200&q=80",
+    "answerEn": "Petronas Twin Towers (Kuala Lumpur, Malaysia)",
+    "answerKh": "អគារភ្លោះភីត្រូណាស (គូឡាឡាំពួរ ប្រទេសម៉ាឡេស៊ី)",
+    "type": "World Landmark",
+    "revealMethod": "zoom",
+    "transformOrigin": "50% 30%"
   }
 ]

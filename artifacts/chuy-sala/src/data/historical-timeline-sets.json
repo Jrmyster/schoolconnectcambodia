@@ -4,7 +4,7 @@
       "setId": "space-exploration",
       "themeEn": "Space Exploration",
       "themeKh": "ការរុករកអវកាស",
-      "gradeLevel": "5th",
+      "gradeLevel": "Primary School",
       "events": [
         {
           "eventEn": "Sputnik 1, the first artificial satellite, is launched by the Soviet Union.",
@@ -37,12 +37,27 @@
       "setId": "cambodian-history",
       "themeEn": "Cambodian History",
       "themeKh": "ប្រវត្តិសាស្ត្រកម្ពុជា",
-      "gradeLevel": "8th",
+      "gradeLevel": "High School",
       "events": [
         {
           "eventEn": "King Suryavarman II begins the construction of Angkor Wat.",
           "eventKm": "ព្រះបាទសូរ្យវរ្ម័នទី២ ចាប់ផ្តើមការសាងសង់ប្រាសាទអង្គរវត្ត។",
           "year": 1113
+        },
+        {
+          "eventEn": "King Jayavarman VII begins building Angkor Thom and the Bayon temple.",
+          "eventKm": "ព្រះបាទជ័យវរ្ម័នទី៧ ចាប់ផ្តើមសាងសង់ក្រុងអង្គរធំ និងប្រាសាទបាយ័ន។",
+          "year": 1181
+        },
+        {
+          "eventEn": "The capital of Angkor is abandoned after being sacked by Ayutthaya forces.",
+          "eventKm": "រាជធានីអង្គរត្រូវបានបោះបង់ចោល បន្ទាប់ពីការវាយលុកពីកងទ័ពអយុធ្យា។",
+          "year": 1431
+        },
+        {
+          "eventEn": "Cambodia becomes a French protectorate to escape neighboring pressures.",
+          "eventKm": "ប្រទេសកម្ពុជាក្លាយជាអាណាព្យាបាលបារាំង ដើម្បីគេចផុតពីសម្ពាធប្រទេសជិតខាង។",
+          "year": 1863
         },
         {
           "eventEn": "Cambodia gains complete independence from France under King Norodom Sihanouk.",
@@ -70,12 +85,32 @@
       "setId": "medical-breakthroughs",
       "themeEn": "Medical Breakthroughs",
       "themeKh": "របកគំហើញផ្នែកវេជ្ជសាស្ត្រ",
-      "gradeLevel": "12th",
+      "gradeLevel": "University",
       "events": [
+        {
+          "eventEn": "Andreas Vesalius publishes the first modern human anatomy book De humani corporis fabrica.",
+          "eventKm": "លោក Andreas Vesalius បោះពុម្ពសៀវភៅកាយវិភាគវិទ្យាមនុស្សទំនើបដំបូងបង្អស់ De humani corporis fabrica។",
+          "year": 1543
+        },
+        {
+          "eventEn": "Antonie van Leeuwenhoek observes live bacteria and protozoa under a microscope for the first time.",
+          "eventKm": "លោក Antonie van Leeuwenhoek សង្កេតឃើញបាក់តេរីរស់ដំបូងគេបង្អស់ក្រោមមីក្រូទស្សន៍។",
+          "year": 1676
+        },
         {
           "eventEn": "Edward Jenner creates the first smallpox vaccine using cowpox material.",
           "eventKm": "លោក Edward Jenner បង្កើតវ៉ាក់សាំងជំងឺអុតធំដំបូងបង្អស់ដោយប្រើប្រាស់វីរុសអុតគោ។",
           "year": 1796
+        },
+        {
+          "eventEn": "Louis Pasteur develops the pasteurization process and the germ theory of disease.",
+          "eventKm": "លោក Louis Pasteur បង្កើតដំណើរការសម្លាប់មេរោគក្នុងទឹកដោះគោ (Pasteurization) និងទ្រឹស្តីមេរោគបង្កជំងឺ។",
+          "year": 1862
+        },
+        {
+          "eventEn": "Wilhelm Röntgen discovers X-rays, opening the field of diagnostic radiology.",
+          "eventKm": "លោក Wilhelm Röntgen រកឃើញកាំរស្មីអ៊ិច (X-rays) បើកទំព័រថ្មីសម្រាប់ការថតកាំរស្មីវិភាគជំងឺ។",
+          "year": 1895
         },
         {
           "eventEn": "Alexander Fleming discovers penicillin, the world's first effective antibiotic.",
@@ -86,6 +121,16 @@
           "eventEn": "James Watson, Francis Crick, and Rosalind Franklin discover the double helix structure of DNA.",
           "eventKm": "លោក James Watson, Francis Crick និងលោកស្រី Rosalind Franklin រកឃើញទម្រង់វង់ពីរជាន់នៃ DNA។",
           "year": 1953
+        },
+        {
+          "eventEn": "The world's first successful human-to-human heart transplant is performed by Dr. Christiaan Barnard in South Africa.",
+          "eventKm": "ការប្តូរបេះដូងពីមនុស្សទៅមនុស្សដោយជោគជ័យដំបូងគេបង្អស់លើលោក ត្រូវបានធ្វើឡើងដោយវេជ្ជបណ្ឌិត Christiaan Barnard។",
+          "year": 1967
+        },
+        {
+          "eventEn": "The World Health Organization officially certifies the global eradication of smallpox.",
+          "eventKm": "អង្គការសុខភាពពិភពលោក (WHO) ប្រកាសជាផ្លូវការអំពីការលុបបំបាត់ជំងឺអុតធំទាំងស្រុងលើសកលលោក។",
+          "year": 1980
         },
         {
           "eventEn": "Dolly the Sheep is cloned from an adult somatic cell, a milestone in biology.",
@@ -103,7 +148,7 @@
       "setId": "world-inventions",
       "themeEn": "Inventions that Changed the World",
       "themeKh": "របកគំហើញបច្ចេកវិទ្យាពិភពលោក",
-      "gradeLevel": "5th",
+      "gradeLevel": "Primary School",
       "events": [
         {
           "eventEn": "Johannes Gutenberg invents the movable-type printing press in Germany.",
@@ -136,7 +181,7 @@
       "setId": "ancient-landmarks",
       "themeEn": "Ancient Civilizations & Landmarks",
       "themeKh": "អរិយធម៌ និងសំណង់បុរាណល្បីៗ",
-      "gradeLevel": "8th",
+      "gradeLevel": "High School",
       "events": [
         {
           "eventEn": "The Great Pyramid of Giza is completed as a tomb for Pharaoh Khufu.",
@@ -144,9 +189,19 @@
           "year": -2560
         },
         {
+          "eventEn": "Code of Hammurabi is written in Babylon, one of the oldest written laws.",
+          "eventKm": "ក្រមច្បាប់ហាំមូរ៉ាប៊ី (Code of Hammurabi) ត្រូវបានសរសេរឡើងនៅបាប៊ីឡូន ដែលជាច្បាប់សរសេរចំណាស់បំផុតមួយ។",
+          "year": -1754
+        },
+        {
           "eventEn": "Romulus and Remus found the city of Rome, according to Roman legend.",
           "eventKm": "Romulus និង Remus បង្កើតទីក្រុងរ៉ូម យោងទៅតាមរឿងព្រេងរបស់រ៉ូម៉ាំង។",
           "year": -753
+        },
+        {
+          "eventEn": "The Great Library of Alexandria is founded in Egypt, becoming the ancient world's capital of knowledge.",
+          "eventKm": "បណ្ណាល័យដ៏អស្ចារ្យនៃអាឡិចសាន់ឌ្រី (Library of Alexandria) ត្រូវបានបង្កើតឡើងនៅស្រុកអភិវឌ្ឍន៍អេស៊ីប។",
+          "year": -285
         },
         {
           "eventEn": "Construction of the Colosseum in Rome begins under Emperor Vespasian.",
@@ -162,6 +217,11 @@
           "eventEn": "Machu Picchu is constructed in Peru by the Inca Empire under Pachacuti.",
           "eventKm": "ទីក្រុងបុរាណ Machu Picchu ត្រូវបានសាងសង់ឡើងនៅប្រទេសប៉េរូ ដោយចក្រភព Inca ក្រោមការដឹកនាំរបស់ព្រះចៅ Pachacuti។",
           "year": 1450
+        },
+        {
+          "eventEn": "Emperor Shah Jahan begins construction of the Taj Mahal in India as a mausoleum.",
+          "eventKm": "អធិរាជ Shah Jahan ចាប់ផ្តើមការសាងសង់វិមានដកដង្ហើម Taj Mahal នៅប្រទេសឥណ្ឌា។",
+          "year": 1632
         }
       ]
     },
@@ -169,12 +229,27 @@
       "setId": "aviation-flight",
       "themeEn": "Aviation & Flight History",
       "themeKh": "កាលប្បវត្តិនៃការហោះហើរ និងអាកាសចរណ៍",
-      "gradeLevel": "12th",
+      "gradeLevel": "University",
       "events": [
+        {
+          "eventEn": "Leonardo da Vinci designs flying machines and gliders, studying avian flight.",
+          "eventKm": "លោក Leonardo da Vinci គូររចនាគំនូរប្លង់ម៉ាស៊ីនហោះហើរ និងយន្តហោះរអិលដោយសិក្សាពីការហោះហើររបស់បក្សី។",
+          "year": 1485
+        },
         {
           "eventEn": "The Montgolfier brothers launch the first manned hot air balloon flight in Paris.",
           "eventKm": "បងប្អូនប្រុស Montgolfier បង្ហោះប៉ោងប៉ោងហោះដែលមានមនុស្សជិះជាលើកដំបូងនៅទីក្រុងប៉ារីស។",
           "year": 1783
+        },
+        {
+          "eventEn": "Sir George Cayley builds a glider that carries a human passenger, defining lift, drag, and thrust.",
+          "eventKm": "លោក George Cayley សាងសង់យន្តហោះរអិលដំបូងគេដែលដឹកមនុស្ស ដោយកំណត់កម្លាំងយោង និងកម្លាំងទាញ។",
+          "year": 1853
+        },
+        {
+          "eventEn": "Orville and Wilbur Wright achieve the first controlled, sustained, powered airplane flight.",
+          "eventKm": "លោក Orville និង Wilbur Wright សម្រេចបានការហោះហើរយន្តហោះប្រើម៉ាស៊ីនដំបូងបង្អស់។",
+          "year": 1903
         },
         {
           "eventEn": "Charles Lindbergh completes the first solo non-stop transatlantic flight.",
@@ -182,9 +257,24 @@
           "year": 1927
         },
         {
+          "eventEn": "Amelia Earhart becomes the first woman to fly solo across the Atlantic Ocean.",
+          "eventKm": "លោកស្រី Amelia Earhart ក្លាយជាស្ត្រីដំបូងគេបង្អស់ដែលហោះហើរទោលឆ្លងកាត់មហាសមុទ្រអាត្លង់ទិក។",
+          "year": 1932
+        },
+        {
+          "eventEn": "Charles Yeager breaks the sound barrier in the Bell X-1 rocket-powered aircraft.",
+          "eventKm": "លោក Chuck Yeager ហោះហើរបំបែករបាំងសំឡេង (sound barrier) ជាលើកដំបូងដោយយន្តហោះរ៉ុក្កែត Bell X-1។",
+          "year": 1947
+        },
+        {
           "eventEn": "The De Havilland Comet, the world's first commercial jet airliner, enters service.",
           "eventKm": "យន្តហោះ De Havilland Comet ដែលជាយន្តហោះប្រតិកម្មពាណិជ្ជកម្មដំបូងបង្អស់លើលោក បានចាប់ផ្តើមដំណើរការ។",
           "year": 1952
+        },
+        {
+          "eventEn": "The Boeing 747 'Jumbo Jet', the world's first wide-body passenger airliner, makes its first test flight.",
+          "eventKm": "យន្តហោះ Boeing 747 'Jumbo Jet' ដែលជាយន្តហោះដឹកអ្នកដំណើរធុនធំដំបូងបង្អស់លើលោក ធ្វើការហោះហើរពិសោធសាកល្បង។",
+          "year": 1969
         },
         {
           "eventEn": "The Concorde supersonic passenger jet makes its first commercial flights.",

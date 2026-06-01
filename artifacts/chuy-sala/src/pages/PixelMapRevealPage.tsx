@@ -16,6 +16,11 @@ import {
 import confetti from "canvas-confetti";
 import roundsData from "@/data/pixel-map-reveal.json";
 
+function getRandomSubset<T>(arr: T[], size: number): T[] {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
+}
+
 // ── Web Audio API sound generator ──────────────────────────────────────────
 const audioCtx =
   typeof window !== "undefined" && (window.AudioContext || (window as any).webkitAudioContext)
@@ -88,13 +93,16 @@ export default function PixelMapRevealPage() {
   const t = useTranslation();
 
   // Round States
+  const [activeRounds, setActiveRounds] = useState<typeof roundsData>(() =>
+    getRandomSubset(roundsData, 5)
+  );
   const [currentRoundIndex, setCurrentRoundIndex] = useState<number>(0);
   const [revealStage, setRevealStage] = useState<number>(0); // 0 to 10
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const currentRound = roundsData[currentRoundIndex];
+  const currentRound = activeRounds[currentRoundIndex];
 
   // Automated Reveal Loop (Ticks every 5 seconds)
   useEffect(() => {
@@ -145,7 +153,14 @@ export default function PixelMapRevealPage() {
     setRevealStage(0);
     setShowAnswer(false);
     if (timerRef.current) clearInterval(timerRef.current);
-    setCurrentRoundIndex((prev) => (prev + 1) % roundsData.length);
+    
+    if (currentRoundIndex >= activeRounds.length - 1) {
+      // Finish last round, generate a new random subset and start a new game
+      setActiveRounds(getRandomSubset(roundsData, 5));
+      setCurrentRoundIndex(0);
+    } else {
+      setCurrentRoundIndex((prev) => prev + 1);
+    }
   };
 
   // Instant show answer reveal
@@ -229,7 +244,7 @@ export default function PixelMapRevealPage() {
               {t("Round", "វគ្គទី")}
             </span>
             <span className="font-mono font-black text-white text-sm">
-              {currentRoundIndex + 1} / {roundsData.length}
+              {currentRoundIndex + 1} / {activeRounds.length}
             </span>
           </div>
         </div>
@@ -341,8 +356,17 @@ export default function PixelMapRevealPage() {
               onClick={nextRound}
               className="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white rounded-full font-bold flex items-center justify-center gap-1.5 cursor-pointer text-sm"
             >
-              <span>{t("Next Round", "វគ្គបន្ទាប់")}</span>
-              <ChevronRight className="w-4 h-4" />
+              {currentRoundIndex >= activeRounds.length - 1 ? (
+                <>
+                  <RotateCcw className="w-4 h-4 text-emerald-400" />
+                  <span>{t("New Game", "ល្បែងថ្មី")}</span>
+                </>
+              ) : (
+                <>
+                  <span>{t("Next Round", "វគ្គបន្ទាប់")}</span>
+                  <ChevronRight className="w-4 h-4" />
+                </>
+              )}
             </button>
           </div>
         </section>

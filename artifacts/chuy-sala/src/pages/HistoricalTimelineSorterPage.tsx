@@ -114,7 +114,7 @@ export default function HistoricalTimelineSorterPage() {
   const t = useTranslation();
 
   // Tier filtering
-  const [selectedGrade, setSelectedGrade] = useState<string>("5th");
+  const [selectedGrade, setSelectedGrade] = useState<string>("Primary School");
   const [activeSets, setActiveSets] = useState<any[]>([]);
   const [activeSetIndex, setActiveSetIndex] = useState<number>(0);
 
@@ -294,26 +294,30 @@ export default function HistoricalTimelineSorterPage() {
             </span>
           </div>
 
-          {/* Grade Selector */}
-          <div className="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-2xl">
-            <span className={`text-[10px] text-indigo-400 font-bold uppercase tracking-widest block ${isKh ? "font-khmer" : ""}`}>
+          {/* Complexity Level Selector */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 bg-slate-900/90 border border-slate-800 p-1.5 rounded-2xl">
+            <span className={`text-[10px] text-indigo-400 font-bold uppercase tracking-widest block px-2 ${isKh ? "font-khmer" : ""}`}>
               {t("Complexity Level", "កម្រិតលំបាក")}
             </span>
-            <div className="flex gap-1.5">
-              {["5th", "8th", "12th"].map((lvl) => (
+            <div className="flex flex-wrap gap-1">
+              {[
+                { value: "Primary School", labelEn: "Primary School", labelKh: "បឋមសិក្សា" },
+                { value: "High School", labelEn: "High School", labelKh: "វិទ្យាល័យ" },
+                { value: "University", labelEn: "University", labelKh: "សាកលវិទ្យាល័យ" }
+              ].map((lvl) => (
                 <button
-                  key={lvl}
+                  key={lvl.value}
                   onClick={() => {
                     playSound("click");
-                    setSelectedGrade(lvl);
+                    setSelectedGrade(lvl.value);
                   }}
-                  className={`px-3 py-1 text-xs font-mono font-black rounded-lg transition-all ${
-                    selectedGrade === lvl
-                      ? "bg-orange-600 text-white shadow-md shadow-orange-900/40 scale-105"
-                      : "bg-slate-950 text-slate-400 hover:text-white"
+                  className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all whitespace-nowrap ${
+                    selectedGrade === lvl.value
+                      ? "bg-orange-600 text-white shadow-md shadow-orange-900/40 scale-105 font-black"
+                      : "bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-900"
                   }`}
                 >
-                  {lvl}
+                  {isKh ? lvl.labelKh : lvl.labelEn}
                 </button>
               ))}
             </div>
@@ -344,11 +348,11 @@ export default function HistoricalTimelineSorterPage() {
           <section
             className="relative w-full max-w-[800px] flex flex-col items-center justify-center"
             style={{
-              height: "min(60vh, 520px)",
+              height: `${eventsList.length * 104 - 16}px`,
             }}
           >
             {/* Horizontal or Vertical Chronology Axis Highlight */}
-            <div className="absolute left-6 md:left-8 top-[3vh] bottom-[3vh] w-1.5 bg-slate-900 rounded-full z-0 flex flex-col justify-between py-6 px-0.5 border border-slate-800">
+            <div className="absolute left-6 md:left-8 top-4 bottom-4 w-1.5 bg-slate-900 rounded-full z-0 flex flex-col justify-between py-6 px-0.5 border border-slate-800">
               <div className="text-[10px] text-slate-600 font-black tracking-widest uppercase rotate-90 translate-x-2">
                 {t("EARLIEST", "ចាស់បំផុត")}
               </div>
@@ -364,8 +368,8 @@ export default function HistoricalTimelineSorterPage() {
                 const isWrong = validationResult && !validationResult.success && validationResult.wrongIndices.includes(index);
                 const isCorrect = validationResult && validationResult.success;
 
-                // Position calculation: each card occupies 11% height offset + margin
-                const topOffset = `calc(${index} * 19.5%)`;
+                // Position calculation: each card is 88px tall with a 16px gap
+                const topOffset = `${index * 104}px`;
 
                 return (
                   <div
@@ -373,7 +377,7 @@ export default function HistoricalTimelineSorterPage() {
                     onClick={() => handleCardClick(index)}
                     style={{
                       top: topOffset,
-                      height: "16.5%",
+                      height: "88px",
                     }}
                     className={`absolute left-0 right-0 border-4 rounded-2xl flex items-center justify-between px-5 md:px-7 select-none transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] shadow-xl ${
                       isSelected
