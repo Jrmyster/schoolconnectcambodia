@@ -959,6 +959,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "សិក្សាពីច្បាប់នៃការធ្វើដំណើរឆ្លងពេលវេលាក្នុងភាពយន្ត៖ ព័ត៌មាន ស្មារតី និងរូបធាតុ ក្រោមបន្ទាត់ពេលវេលា Novikov និងពហុចក្រវាឡ។",
       },
       {
+        href: "/science/time-dilation",
+        labelEn: "Time Dilation Simulator",
+        labelKh: "ឧបករណ៍ក្លែងធ្វើការពន្យារពេល (Time Dilation)",
+        icon: Hourglass,
+        descEn: "Fly a spaceship near the speed of light and watch time slow down compared to Earth. Real-time relativity visualizer.",
+        descKh: "បើកបរយានអវកាសជិតល្បឿនពន្លឺ ហើយមើលពេលវេលាដើរយឺតធៀបនឹងផែនដី។ ឧបករណ៍បង្ហាញរ៉េឡាទីវីតេភ្លាមៗ។",
+      },
+      {
         href: "/electrical-engineering",
         labelEn: "Electrical Engineering Reference",
         labelKh: "ឯកសារយោងវិស្វកម្មអគ្គិសនី",
@@ -989,6 +997,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Wrench,
         descEn: "Inspect the Big Three (metals, polymers, ceramics & glass), pull and crush them in a live stress–strain workshop, and see why plastic waste is also a feedstock.",
         descKh: "ពិនិត្យក្រុមធំទាំងបី (លោហៈ ប្លាស្ទិក សេរ៉ាមិច និងកញ្ចក់) ទាញ និងសង្កត់វាក្នុងសិក្ខាសាលាស្ត្រេស–បន្ទះផ្ទាល់ និងមើលហេតុអ្វីសំណល់ប្លាស្ទិកក៏ជាសម្ភារៈឆៅ។",
+      },
+      {
+        href: "/science/metallurgy",
+        labelEn: "Metallurgy & The Alloy Forge",
+        labelKh: "លោហៈសាស្ត្រ និងការសិតលោហៈធាតុផ្សំ",
+        icon: Flame,
+        descEn: "Combine base metals and additives to forge industrial alloys. Interactive smelting visualizer.",
+        descKh: "ផ្សំលោហៈមូលដ្ឋាន និងសារធាតុបន្ថែមដើម្បីសិតលោហៈធាតុផ្សំ។ ឧបករណ៍ក្លែងធ្វើការរំលាយលោហៈ។",
       },
       {
         href: "/science/chemistry/heisenberg",
@@ -1404,6 +1420,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Radio,
         descEn: "Place radio waves on the electromagnetic spectrum, follow the transmitter–receiver loop from a DJ's microphone to your speaker, meet Marconi & Tesla, and compare AM (long range, more static) vs FM (short range, crystal clear).",
         descKh: "ដាក់រលកវិទ្យុលើវិសាលគមអេឡិចត្រូម៉ាញ៉េទិច ដើរតាមវដ្តឧបករណ៍បញ្ជូន–ឧបករណ៍ទទួល ពីមីក្រូ DJ ដល់ឧបករណ៍បំពងសំឡេងរបស់អ្នក ជួប Marconi និង Tesla និងប្រៀបធៀប AM (ឆ្ងាយ សំឡេងរំខានច្រើន) ទល់នឹង FM (ខ្លី សំឡេងច្បាស់ដូចគ្រីស្តាល់)។",
+      },
+      {
+        href: "/technology/telegraph",
+        labelEn: "Morse Code & The Telegraph",
+        labelKh: "កូដម៉ុស និងតេឡេក្រាម",
+        icon: Radio,
+        descEn: "Translate English messages into Morse code. Send signals out loud with a telegraph audio simulator.",
+        descKh: "បកប្រែសារភាសាអង់គ្លេសទៅជាកូដម៉ុស។ បញ្ជូនសញ្ញាសំឡេងជាមួយឧបករណ៍ក្លែងធ្វើតេឡេក្រាម។",
       },
       {
         href: "/technology/mass-production",

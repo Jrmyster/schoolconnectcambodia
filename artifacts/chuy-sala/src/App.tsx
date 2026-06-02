@@ -68,6 +68,7 @@ const WomenInSciencePage        = lazy(() => import("@/pages/WomenInSciencePage"
 const FourierTransformPage      = lazy(() => import("@/pages/FourierTransformPage"));
 const NavierStokesPage          = lazy(() => import("@/pages/NavierStokesPage"));
 const TimeTravelPhysicsPage     = lazy(() => import("@/pages/TimeTravelPhysicsPage"));
+const TimeDilationPage          = lazy(() => import("@/pages/TimeDilationPage"));
 const ElectricalEngineeringPage = lazy(() => import("@/pages/ElectricalEngineeringPage"));
 const CirculatorySystemPage     = lazy(() => import("@/pages/CirculatorySystemPage"));
 const LymphaticSystemPage       = lazy(() => import("@/pages/LymphaticSystemPage"));
@@ -169,6 +170,7 @@ const GridBattleshipPage        = lazy(() => import("@/pages/GridBattleshipPage"
 const FrugalBlueprintPage       = lazy(() => import("@/pages/FrugalBlueprintPage"));
 const PixelMapRevealPage        = lazy(() => import("@/pages/PixelMapRevealPage"));
 const HistoricalTimelineSorterPage = lazy(() => import("@/pages/HistoricalTimelineSorterPage"));
+const TelegraphPage             = lazy(() => import("@/pages/TelegraphPage"));
 const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
@@ -272,6 +274,7 @@ const PhysicsGyroscopesPage     = lazy(() => import("@/pages/PhysicsGyroscopesPa
 const FrugalPhysicsLab          = lazy(() => import("@/pages/FrugalPhysicsLab").then(m => ({ default: m.FrugalPhysicsLab })));
 const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
+const MetallurgyPage            = lazy(() => import("@/pages/MetallurgyPage"));
 const RecyclingSciencePage      = lazy(() => import("@/pages/RecyclingSciencePage"));
 const EntrepreneurshipPage      = lazy(() => import("@/pages/EntrepreneurshipPage"));
 const ArchitectureStrengthPage  = lazy(() => import("@/pages/ArchitectureStrengthPage").then(m => ({ default: m.ArchitectureStrengthPage })));
@@ -395,6 +398,7 @@ function Router() {
             <Route path="/well-being/survival-skills" component={SurvivalSkillsPage} />
             <Route path="/technology/nanotechnology" component={NanotechnologyPage} />
             <Route path="/technology/radio" component={RadioTechPage} />
+            <Route path="/technology/telegraph" component={TelegraphPage} />
             <Route path="/technology/mass-production" component={MassProductionPage} />
             <Route path="/science/electromagnetism" component={ElectromagnetismPage} />
             <Route path="/science/chemistry/heisenberg" component={HeisenbergPage} />
@@ -409,6 +413,7 @@ function Router() {
             <Route path="/science/fourier-transform" component={FourierTransformPage} />
             <Route path="/science/navier-stokes" component={NavierStokesPage} />
             <Route path="/science/time-travel" component={TimeTravelPhysicsPage} />
+            <Route path="/science/time-dilation" component={TimeDilationPage} />
             <Route path="/electrical-engineering" component={ElectricalEngineeringPage} />
             <Route path="/science/circulatory-system" component={CirculatorySystemPage} />
             <Route path="/science/lymphatic-system" component={LymphaticSystemPage} />
@@ -562,6 +567,7 @@ function Router() {
             <Route path="/physics/gyroscopes" component={PhysicsGyroscopesPage} />
             <Route path="/physics/frugal-lab" component={FrugalPhysicsLab} />
             <Route path="/science/materials" component={MaterialsSciencePage} />
+            <Route path="/science/metallurgy" component={MetallurgyPage} />
             <Route path="/science/materials/recycling" component={RecyclingSciencePage} />
             <Route path="/science/architecture" component={ArchitectureStrengthPage} />
             <Route path="/science/glaciology" component={GlaciologyPage} />
