@@ -875,8 +875,8 @@ const NAV_GROUPS: NavGroup[] = [
       },
       {
         href: "divider:physics",
-        labelEn: "Physics and Engineering",
-        labelKh: "រូបវិទ្យា និងវិស្វកម្ម",
+        labelEn: "Physics",
+        labelKh: "រូបវិទ្យា",
         icon: Atom,
         divider: true,
       },
@@ -989,6 +989,13 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Train,
         descEn: "Why steel-on-steel wheels waste so little energy, the four kinds of trains (including Battambang's bamboo Norry), how 'diesel' locomotives are secretly electric, and why every railway sits on a deep bed of crushed rock.",
         descKh: "ហេតុអ្វីកង់ដែកលើផ្លូវដែកខាតថាមពលតិច ប្រភេទរថភ្លើងបួន (រួមបញ្ចូលណូរីឫស្សីនៃខេត្តបាត់ដំបង) របៀបដែលរថភ្លើង «ឌីសែល» ពិតជាដំណើរការដោយអគ្គិសនី និងហេតុអ្វីផ្លូវដែកទាំងអស់អង្គុយលើគ្រែថ្មកំទេចដ៏ជ្រៅ។",
+      },
+      {
+        href: "divider:materials-science",
+        labelEn: "Materials Science",
+        labelKh: "វិទ្យាសាស្ត្រសម្ភារៈ",
+        icon: Wrench,
+        divider: true,
       },
       {
         href: "/science/materials",
