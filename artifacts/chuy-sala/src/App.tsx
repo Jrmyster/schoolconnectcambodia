@@ -158,6 +158,7 @@ const MissionStatementPage      = lazy(() => import("@/pages/MissionStatementPag
 const WorldHistoryPage          = lazy(() => import("@/pages/WorldHistoryPage"));
 const StudentArtGallery      = lazy(() => import("@/pages/StudentArtGallery"));
 const OrbitalMechanics         = lazy(() => import("@/pages/Science/OrbitalMechanics"));
+const PangeaPage               = lazy(() => import("@/pages/PangeaPage"));
 const MillionaireChallengePage = lazy(() => import("@/pages/MillionaireChallengePage"));
 const JeopardyPage             = lazy(() => import("@/pages/JeopardyPage"));
 const DynamicCrosswordPage     = lazy(() => import("@/pages/DynamicCrosswordPage"));
@@ -350,6 +351,7 @@ function Router() {
             <Route path="/impact" component={ImpactReportPage} />
             <Route path="/art-gallery" component={StudentArtGallery} />
             <Route path="/science/orbital-mechanics" component={OrbitalMechanics} />
+            <Route path="/science/pangea" component={PangeaPage} />
             <Route path="/world-history" component={WorldHistoryPage} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />

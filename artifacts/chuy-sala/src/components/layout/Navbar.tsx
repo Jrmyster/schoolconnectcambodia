@@ -1093,6 +1093,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ម៉ាកម៉ានិងកម្អែលភ្នំភ្លើង «ម៉ាស៊ីន» ចរន្តកម្តៅរបស់ភពផែនដី ភ្នំភ្លើងយក្សយ៉ូឡូស្តូនដែលកំពុងដេក និងរបៀបដែលហិមាល័យ អង់ដេស និងរ៉ូគី សាងសង់ឡើងដោយរឿងតិចតូនិកផ្សេងៗគ្នា។",
       },
       {
+        href: "/science/pangea",
+        labelEn: "Pangea & Continental Drift",
+        labelKh: "ប៉ាងសេ និងការរសាត់ទ្វីប",
+        icon: Globe,
+        descEn: "Explore the supercontinent Pangea, Alfred Wegener's theory of continental drift, and how tectonic plates move over millions of years.",
+        descKh: "ស្វែងយល់ពីមហាទ្វីបប៉ាងសេ ទ្រឹស្ដីរសាត់ទ្វីបរបស់ Alfred Wegener និងការផ្លាស់ទីនៃផ្លាកតិចតូនិកក្នុងរយៈពេលរាប់លានឆ្នាំ។",
+      },
+      {
         href: "/science/geology/deep-time",
         labelEn: "Deep Time (4.5 Billion Years)",
         labelKh: "ពេលវេលាដ៏ជ្រៅ (៤,៥ ពាន់លានឆ្នាំ)",

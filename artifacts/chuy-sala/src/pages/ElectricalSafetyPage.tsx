@@ -50,6 +50,7 @@ import {
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { IncandescentBulbSection } from "./ElectricalIncandescentBulbSection";
 import { ElectricalOscilloscopeSection } from "./ElectricalOscilloscopeSection";
+import { ElectricalMagneticFieldSection } from "./ElectricalMagneticFieldSection";
 
 // ── Core Concept cards (the "Big Three") ────────────────────────────────────
 
@@ -522,6 +523,9 @@ export function ElectricalSafetyPage() {
 
       {/* ── Module: Oscilloscopes ────────────────────────────────────────── */}
       <ElectricalOscilloscopeSection />
+
+      {/* ── Module: Biot-Savart Law ──────────────────────────────────────── */}
+      <ElectricalMagneticFieldSection />
 
       {/* ── Section 4: Safety Protocols ──────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
