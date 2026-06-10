@@ -145,6 +145,9 @@ export function NeurologyPage() {
         </p>
         <BrainMap kh={kh} t={t} />
 
+        {/* ── 1.2 Neurotransmitter Switchboard ──────────────────────── */}
+        <NeurotransmitterSwitchboard kh={kh} t={t} />
+
         {/* ── 1.5 The Bicameral Mind ───────────────────────────── */}
         <BicameralMindCallout kh={kh} t={t} />
 
@@ -230,7 +233,7 @@ function SectionTitle({
 // ─────────────────────────────────────────────────────────────────────────
 // 1. Brain map
 // ─────────────────────────────────────────────────────────────────────────
-type RegionKey = "frontal" | "occipital" | "amygdala" | "hippocampus";
+type RegionKey = "cerebrum" | "cerebellum" | "brainstem" | "vagusnerve";
 
 type Region = {
   key: RegionKey;
@@ -243,7 +246,6 @@ type Region = {
   exampleEn: string;
   exampleKh: string;
   icon: React.ComponentType<{ className?: string }>;
-  // SVG hotspot — ellipse on a side-view brain
   cx: number;
   cy: number;
   rx: number;
@@ -255,82 +257,81 @@ type Region = {
 
 const REGIONS: Region[] = [
   {
-    key: "frontal",
-    nameEn: "Frontal Lobe",
-    nameKh: "ផ្នែកខាងមុខ",
-    nicknameEn: "The Boardroom",
-    nicknameKh: "បន្ទប់ប្រជុំ",
-    jobEn: "Logic, decision-making, planning, and self-control. The last region of the brain to fully mature (around age 25).",
-    jobKh: "តក្កវិជ្ជា ការសម្រេចចិត្ត ការរៀបចំផែនការ និងការគ្រប់គ្រងខ្លួនឯង។ ផ្នែកចុងក្រោយដែលពេញវ័យ (ប្រហែលអាយុ ២៥ ឆ្នាំ)។",
-    exampleEn: "Choosing to study tonight instead of scrolling — that 'choice' lives in the frontal lobe.",
-    exampleKh: "សម្រេចរៀននៅយប់នេះជំនួសការអូសទូរស័ព្ទ — 'ជម្រើស' នោះរស់នៅក្នុងផ្នែកខាងមុខ។",
-    icon: Lightbulb,
-    cx: 120,
-    cy: 110,
-    rx: 60,
-    ry: 50,
+    key: "cerebrum",
+    nameEn: "Cerebrum",
+    nameKh: "ខួរធំ",
+    nicknameEn: "The Main Frame",
+    nicknameKh: "ម៉ាស៊ីនមេ",
+    jobEn: "The largest part of the brain. Handles conscious thoughts, reasoning, language, and voluntary movement.",
+    jobKh: "ផ្នែកធំបំផុតនៃខួរក្បាល។ គ្រប់គ្រងគំនិតដឹងខ្លួន ហេតុផល ភាសា និងចលនាស្ម័គ្រចិត្ត។",
+    exampleEn: "Solving a math problem or choosing what to say — all processed here.",
+    exampleKh: "ការដោះស្រាយលំហាត់គណិតវិទ្យា ឬការជ្រើសរើសអ្វីដែលត្រូវនិយាយ។",
+    icon: Brain,
+    cx: 200,
+    cy: 140,
+    rx: 90,
+    ry: 70,
     color: "#fbbf24",
     glow: "drop-shadow(0 0 8px rgba(251,191,36,0.85))",
   },
   {
-    key: "occipital",
-    nameEn: "Occipital Lobe",
-    nameKh: "ផ្នែកខាងក្រោយ",
-    nicknameEn: "The Display Driver",
-    nicknameKh: "កម្មវិធីបង្ហាញ",
-    jobEn: "Processes everything your eyes send back: colour, motion, shape, and depth — the brain's GPU.",
-    jobKh: "ដំណើរការអ្វីៗដែលភ្នែករបស់អ្នកផ្ញើមកវិញ៖ ពណ៌ ចលនា រូបរាង និងជម្រៅ — GPU នៃខួរក្បាល។",
-    exampleEn: "When you watch a video game render a 3D world, your occipital lobe is what builds the scene from raw light.",
-    exampleKh: "ពេលអ្នកមើលហ្គេមបង្ហាញពិភព 3D ផ្នែកខាងក្រោយរបស់អ្នកគឺជាអ្នកសាងសង់ឆាកនោះពីពន្លឺឆៅ។",
-    icon: Eye,
-    cx: 320,
-    cy: 175,
-    rx: 50,
-    ry: 42,
+    key: "cerebellum",
+    nameEn: "Cerebellum",
+    nameKh: "ខួរតូច",
+    nicknameEn: "The Motor Controller",
+    nicknameKh: "អ្នកគ្រប់គ្រងចលនា",
+    jobEn: "Coordinates voluntary movements, balance, and posture. Houses roughly 50 billion neurons!",
+    jobKh: "សម្របសម្រួលចលនាស្ម័គ្រចិត្ត តុល្យភាព និងឥរិយាបថ។ ផ្ទុកណឺរ៉ូនប្រហែល ៥០ ពាន់លាន!",
+    exampleEn: "Riding a bicycle without falling over or playing a complex piano piece.",
+    exampleKh: "ការជិះកង់ដោយមិនដួល ឬការលេងព្យាណូដ៏ស្មុគស្មាញ។",
+    icon: Activity,
+    cx: 310,
+    cy: 220,
+    rx: 40,
+    ry: 30,
     color: "#38bdf8",
     glow: "drop-shadow(0 0 8px rgba(56,189,248,0.85))",
-    link: { href: "/video-games", labelEn: "See: how a GPU paints pixels →", labelKh: "មើល៖ របៀបដែល GPU គូរភីកសែល →" },
   },
   {
-    key: "amygdala",
-    nameEn: "Amygdala",
-    nameKh: "អាមីដាល់",
-    nicknameEn: "The Alarm System",
-    nicknameKh: "ប្រព័ន្ធរោទ៍",
-    jobEn: "Two almond-shaped clusters that fire fear and emotion. Faster than your conscious mind — that's why you flinch before you 'decide' to.",
-    jobKh: "ក្រុមរូបរាងគ្រាប់ល្អង់ពីរ ដែលបញ្ចេញការភ័យខ្លាច និងអារម្មណ៍។ លឿនជាងគំនិតដឹងខ្លួន — នេះហើយជាមូលហេតុដែលអ្នកញាប់មុនពេលអ្នក 'សម្រេច' ធ្វើ។",
-    exampleEn: "Hearing a snake-shaped stick on a dark path: amygdala fires → adrenaline → you freeze, all before you 'see' it's a stick.",
-    exampleKh: "ពេលឃើញដំបងរូបរាងពស់នៅផ្លូវងងឹត៖ អាមីដាល់បាញ់ → អាដ្រេណាលីន → អ្នកឈប់ស្ងៀម មុនអ្នក 'ឃើញ' វាជាដំបង។",
-    icon: Siren,
-    cx: 200,
-    cy: 195,
-    rx: 22,
-    ry: 18,
+    key: "brainstem",
+    nameEn: "Brain Stem (Medulla)",
+    nameKh: "ដើមខួរក្បាល",
+    nicknameEn: "The Autopilot",
+    nicknameKh: "អ្នកបើកបរស្វ័យប្រវត្តិ",
+    jobEn: "Controls essential, involuntary survival functions like breathing, heart rate, and blood pressure.",
+    jobKh: "គ្រប់គ្រងមុខងាររស់រានមានជីវិតស្វ័យប្រវត្តិ ដូចជាការដកដង្ហើម ចង្វាក់បេះដូង និងសម្ពាធឈាម។",
+    exampleEn: "Keeps your heart beating and lungs breathing while you are fast asleep.",
+    exampleKh: "រក្សាបេះដូងនិងសួតអ្នកឱ្យដំណើរការពេលអ្នកកំពុងលង់លក់។",
+    icon: HeartPulse,
+    cx: 222,
+    cy: 250,
+    rx: 20,
+    ry: 25,
     color: "#f87171",
     glow: "drop-shadow(0 0 8px rgba(248,113,113,0.85))",
   },
   {
-    key: "hippocampus",
-    nameEn: "Hippocampus",
-    nameKh: "ហ៊ីប៉ូកាំប",
-    nicknameEn: "The Inbox",
-    nicknameKh: "ប្រអប់សារ",
-    jobEn: "Catches new short-term memories and decides which ones to keep. Without it, today would never become 'yesterday'.",
-    jobKh: "ចាប់យកការចងចាំខ្លីថ្មីៗ ហើយសម្រេចថាមួយណាត្រូវរក្សាទុក។ បើគ្មានវា ថ្ងៃនេះនឹងមិនអាចក្លាយជា 'ម្សិលមិញ' ឡើយ។",
-    exampleEn: "The name of your new classmate sits here for hours — sleep then files it into long-term storage.",
-    exampleKh: "ឈ្មោះរបស់មិត្តរួមថ្នាក់ថ្មីរបស់អ្នកស្ថិតនៅទីនេះច្រើនម៉ោង — ការគេងបន្ទាប់មកដាក់វាចូលឃ្លាំងរយៈពេលវែង។",
-    icon: Inbox,
-    cx: 240,
-    cy: 200,
-    rx: 22,
-    ry: 16,
+    key: "vagusnerve",
+    nameEn: "The Vagus Nerve",
+    nameKh: "សរសៃប្រសាទ Vagus",
+    nicknameEn: "The Highway",
+    nicknameKh: "ផ្លូវជាតិ",
+    jobEn: "The superhighway connecting the brain to the gut and heart. Triggers the 'rest and digest' response.",
+    jobKh: "ផ្លូវជាតិភ្ជាប់ខួរក្បាលទៅនឹងពោះវៀននិងបេះដូង។ ធ្វើឱ្យសកម្មនូវការឆ្លើយតប 'សម្រាកនិងរំលាយអាហារ'។",
+    exampleEn: "Taking a deep, slow breath to calm your racing heart down after a scare.",
+    exampleKh: "ការដកដង្ហើមវែងៗយឺតៗដើម្បីរម្ងាប់បេះដូងលោតញាប់បន្ទាប់ពីការភ័យខ្លាច។",
+    icon: Workflow,
+    cx: 222,
+    cy: 290,
+    rx: 15,
+    ry: 20,
     color: "#a78bfa",
     glow: "drop-shadow(0 0 8px rgba(167,139,250,0.85))",
   },
 ];
 
 function BrainMap({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
-  const [active, setActive] = useState<RegionKey>("frontal");
+  const [active, setActive] = useState<RegionKey>("cerebrum");
   const region = REGIONS.find((r) => r.key === active)!;
   const reducedMotion = usePrefersReducedMotion();
 
@@ -340,7 +341,7 @@ function BrainMap({ kh, t }: { kh: boolean; t: (en: string, k: string) => string
       <article className="relative rounded-2xl border border-sky-400/30 shadow-lg overflow-hidden p-4" style={CARD_BG}>
         <CornerMarks tone="cyan" />
         <div className="relative">
-          <svg viewBox="0 0 420 280" className="w-full h-auto" role="img" aria-label={t("Brain map", "ផែនទីខួរក្បាល")}>
+          <svg viewBox="0 0 420 320" className="w-full h-auto" role="img" aria-label={t("Brain map", "ផែនទីខួរក្បាល")}>
             <defs>
               <radialGradient id="brain-fill" cx="50%" cy="40%" r="60%">
                 <stop offset="0%" stopColor="#1e293b" />
@@ -352,10 +353,26 @@ function BrainMap({ kh, t }: { kh: boolean; t: (en: string, k: string) => string
             </defs>
 
             {/* baseline */}
-            <line x1="40" y1="245" x2="380" y2="245" stroke="rgba(148,163,184,0.3)" strokeWidth="1" strokeDasharray="3 3" />
-            <text x="40" y="262" fontSize="9" fontFamily="monospace" fill="rgba(148,163,184,0.7)">
+            <line x1="40" y1="300" x2="380" y2="300" stroke="rgba(148,163,184,0.3)" strokeWidth="1" strokeDasharray="3 3" />
+            <text x="40" y="315" fontSize="9" fontFamily="monospace" fill="rgba(148,163,184,0.7)">
               {kh ? "ទិដ្ឋភាពចំហៀង" : "LATERAL VIEW"}
             </text>
+
+            {/* Vagus nerve path extending down */}
+            <path
+              d="M 222 260 C 222 280, 215 300, 222 320"
+              fill="none"
+              stroke="url(#brain-grid)"
+              strokeWidth="10"
+              opacity="0.5"
+            />
+            <path
+              d="M 222 260 C 222 280, 215 300, 222 320"
+              fill="none"
+              stroke="#a78bfa"
+              strokeWidth="3"
+              strokeDasharray="4 2"
+            />
 
             {/* brain silhouette (cerebrum + cerebellum + brainstem) */}
             <path
@@ -447,7 +464,7 @@ function BrainMap({ kh, t }: { kh: boolean; t: (en: string, k: string) => string
                     textAnchor="middle"
                     pointerEvents="none"
                   >
-                    {r.key === "amygdala" ? "AMG" : r.key === "hippocampus" ? "HIP" : r.key === "frontal" ? "FRONT" : "OCC"}
+                    {r.key === "cerebrum" ? "CEREBRUM" : r.key === "cerebellum" ? "CEREBELLUM" : r.key === "brainstem" ? "STEM" : "VAGUS"}
                   </text>
                 </g>
               );
@@ -493,21 +510,21 @@ function BrainMap({ kh, t }: { kh: boolean; t: (en: string, k: string) => string
               <region.icon className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <div className={`text-[10px] font-mono uppercase tracking-widest text-sky-300/70 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
+              <div className={`text-[1vw] md:text-[0.8vw] font-mono uppercase tracking-widest text-sky-300/70 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
                 {t("Region", "តំបន់")}
               </div>
-              <h3 className={`text-lg font-bold text-amber-50 leading-tight ${kh ? "font-khmer" : ""}`}>
+              <h3 className={`text-[4vw] md:text-[1.8vw] font-bold text-amber-50 leading-tight ${kh ? "font-khmer" : ""}`}>
                 {kh ? region.nameKh : region.nameEn}
               </h3>
-              <div className={`text-xs italic text-sky-200/70 ${kh ? "font-khmer not-italic" : ""}`}>
+              <div className={`text-[2.5vw] md:text-[1vw] italic text-sky-200/70 ${kh ? "font-khmer not-italic" : ""}`}>
                 {kh ? `«${region.nicknameKh}»` : `"${region.nicknameEn}"`}
               </div>
             </div>
           </div>
 
-          <p className={`text-sm text-sky-100/90 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
-            {kh ? region.jobKh : region.jobEn}
-          </p>
+          <p className={`text-[2.8vw] md:text-[1.1vw] text-sky-100/90 leading-relaxed mb-3 ${kh ? "font-khmer leading-loose" : ""}`}>
+                {kh ? region.jobKh : region.jobEn}
+              </p>
 
           <div className="border-t border-dashed border-sky-300/20 pt-3">
             <div className={`text-[10px] font-mono uppercase tracking-widest text-amber-300/80 mb-1 ${kh ? "font-khmer normal-case tracking-normal text-xs" : ""}`}>
@@ -1384,3 +1401,140 @@ function BicameralMindCallout({ kh, t }: { kh: boolean; t: (en: string, k: strin
 }
 
 export default NeurologyPage;
+
+// ─────────────────────────────────────────────────────────────────────────
+// Neurotransmitter Switchboard
+// ─────────────────────────────────────────────────────────────────────────
+type Neurotransmitter = {
+  id: string;
+  name: string;
+  type: "excitatory" | "inhibitory";
+  effectEn: string;
+  effectKh: string;
+};
+
+const NEUROTRANSMITTERS: Neurotransmitter[] = [
+  // Excitatory
+  { id: "glutamate", name: "Glutamate", type: "excitatory", effectEn: "Learning, memory, and fast brain signals.", effectKh: "ការរៀន ការចងចាំ និងសញ្ញាខួរក្បាលលឿន។" },
+  { id: "dopamine", name: "Dopamine", type: "excitatory", effectEn: "Focus, desire, motivation, and reward.", effectKh: "ការផ្តោតអារម្មណ៍ ចំណង់ ការជំរុញ និងរង្វាន់។" },
+  { id: "epinephrine", name: "Epinephrine", type: "excitatory", effectEn: "Adrenaline! Fight or flight, high energy.", effectKh: "អាដ្រេណាលីន! តស៊ូ ឬរត់គេច ថាមពលខ្ពស់។" },
+  { id: "acetylcholine", name: "Acetylcholine", type: "excitatory", effectEn: "Muscle contractions, attention, and awakening.", effectKh: "ការកន្ត្រាក់សាច់ដុំ ការយកចិត្តទុកដាក់ និងការភ្ញាក់ដឹងខ្លួន។" },
+  // Inhibitory
+  { id: "gaba", name: "GABA", type: "inhibitory", effectEn: "Calming, muscle tone, relaxation, and sleep.", effectKh: "ធ្វើឱ្យស្ងប់ សាច់ដុំសម្រាក និងការគេង។" },
+  { id: "serotonin", name: "Serotonin", type: "inhibitory", effectEn: "Mood balancing, digestion, and happiness.", effectKh: "តុល្យភាពអារម្មណ៍ ការរំលាយអាហារ និងសុភមង្គល។" },
+];
+
+function NeurotransmitterSwitchboard({ kh, t }: { kh: boolean; t: (en: string, k: string) => string }) {
+  const [activeNt, setActiveNt] = useState<string | null>(null);
+
+  const activeData = NEUROTRANSMITTERS.find((nt) => nt.id === activeNt);
+
+  return (
+    <div className="mb-10">
+      <SectionTitle
+        en="The Neurotransmitter Switchboard"
+        kh="ផ្ទាំងបញ្ជាសារធាតុបញ្ជូនសរសៃប្រសាទ"
+        numberLabel="01.5"
+        icon={Zap}
+      />
+      <p className={`text-sm sm:text-base text-sky-100/80 leading-relaxed mb-5 max-w-3xl ${kh ? "font-khmer leading-loose" : ""}`}>
+        {t(
+          "Toggle the switches below to release neurotransmitters. Excitatory chemicals turn the brain's activity UP, while Inhibitory chemicals turn it DOWN.",
+          "បិទបើកកុងតាក់ខាងក្រោមដើម្បីបញ្ចេញសារធាតុបញ្ជូនសរសៃប្រសាទ។ សារធាតុគីមីរំញោចធ្វើឱ្យសកម្មភាពខួរក្បាលកើនឡើង ខណៈសារធាតុគីមីរារាំងធ្វើឱ្យវាថយចុះ។"
+        )}
+      </p>
+
+      <div className="grid md:grid-cols-[1fr_1fr] gap-6" style={CARD_BG}>
+        {/* Controls Panel */}
+        <div className="p-4 sm:p-6 border border-sky-400/20 rounded-2xl relative shadow-lg">
+          <CornerMarks tone="cyan" />
+          <div className="grid grid-cols-2 gap-4">
+            {/* Excitatory Column */}
+            <div>
+              <h4 className="text-[3vw] md:text-[1.2vw] font-bold text-amber-500 mb-4 border-b border-amber-500/30 pb-2 uppercase tracking-widest flex items-center gap-2">
+                <Zap className="w-4 h-4" />
+                {t("Excitatory", "រំញោច")}
+              </h4>
+              <div className="space-y-3">
+                {NEUROTRANSMITTERS.filter(n => n.type === "excitatory").map(nt => {
+                  const isActive = activeNt === nt.id;
+                  return (
+                    <button
+                      key={nt.id}
+                      onClick={() => setActiveNt(isActive ? null : nt.id)}
+                      className={`w-full text-left px-[3vw] py-[2vw] md:px-[1vw] md:py-[0.8vw] rounded-xl border-2 transition-all font-bold text-[3.5vw] md:text-[1vw] ${
+                        isActive 
+                          ? "bg-amber-500/20 border-amber-500 text-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.6)]" 
+                          : "bg-slate-900/60 border-amber-500/20 text-sky-100 hover:border-amber-500/50"
+                      }`}
+                    >
+                      {nt.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Inhibitory Column */}
+            <div>
+              <h4 className="text-[3vw] md:text-[1.2vw] font-bold text-indigo-400 mb-4 border-b border-indigo-400/30 pb-2 uppercase tracking-widest flex items-center gap-2">
+                <Moon className="w-4 h-4" />
+                {t("Inhibitory", "រារាំង")}
+              </h4>
+              <div className="space-y-3">
+                {NEUROTRANSMITTERS.filter(n => n.type === "inhibitory").map(nt => {
+                  const isActive = activeNt === nt.id;
+                  return (
+                    <button
+                      key={nt.id}
+                      onClick={() => setActiveNt(isActive ? null : nt.id)}
+                      className={`w-full text-left px-[3vw] py-[2vw] md:px-[1vw] md:py-[0.8vw] rounded-xl border-2 transition-all font-bold text-[3.5vw] md:text-[1vw] ${
+                        isActive 
+                          ? "bg-indigo-500/20 border-indigo-400 text-indigo-200 shadow-[0_0_15px_rgba(129,140,248,0.6)]" 
+                          : "bg-slate-900/60 border-indigo-400/20 text-sky-100 hover:border-indigo-400/50"
+                      }`}
+                    >
+                      {nt.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Output Panel */}
+        <div className="p-6 sm:p-8 border border-sky-400/20 rounded-2xl relative shadow-lg flex flex-col justify-center min-h-[25vh]">
+          <CornerMarks tone="gold" />
+          {activeData ? (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[2vw] md:text-[0.8vw] font-bold mb-4 uppercase tracking-widest ${
+                activeData.type === "excitatory" 
+                  ? "bg-amber-500/20 border-amber-500/50 text-amber-300" 
+                  : "bg-indigo-500/20 border-indigo-400/50 text-indigo-300"
+              }`}>
+                {activeData.type === "excitatory" ? <Zap className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+                {t("Status: Active", "ស្ថានភាព៖ សកម្ម")}
+              </div>
+              <h3 className={`text-[6vw] md:text-[2.5vw] font-bold mb-4 leading-tight ${kh ? "font-khmer" : ""} ${
+                activeData.type === "excitatory" ? "text-amber-400" : "text-indigo-300"
+              }`} style={{ textShadow: `0 0 20px ${activeData.type === "excitatory" ? 'rgba(251,191,36,0.5)' : 'rgba(129,140,248,0.5)'}` }}>
+                {activeData.name}
+              </h3>
+              <p className={`text-[4vw] md:text-[1.5vw] leading-relaxed text-sky-50 ${kh ? "font-khmer leading-loose" : ""}`}>
+                {kh ? activeData.effectKh : activeData.effectEn}
+              </p>
+            </div>
+          ) : (
+            <div className="text-center opacity-50 flex flex-col items-center">
+              <Activity className="w-12 h-12 mb-4 text-sky-300" />
+              <p className={`text-[3vw] md:text-[1.2vw] ${kh ? "font-khmer" : ""}`}>
+                {t("Awaiting chemical release... Toggle a switch.", "កំពុងរង់ចាំការបញ្ចេញគីមី... បិទបើកកុងតាក់។")}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

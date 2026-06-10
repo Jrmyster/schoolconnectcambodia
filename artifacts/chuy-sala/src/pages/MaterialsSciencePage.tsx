@@ -29,6 +29,7 @@ import {
   Filter,
   Sun,
   AlertTriangle,
+  Smartphone,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 
@@ -124,6 +125,51 @@ export function MaterialsSciencePage() {
             </div>
           </div>
         </header>
+
+        {/* ── Massive Link Card: Anatomy of a Smartphone ───────────── */}
+        <Link
+          href="/science/materials/smartphone-anatomy"
+          data-testid="card-smartphone-anatomy"
+          className="group block mt-8 mb-12 rounded-3xl border border-indigo-500/30 bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950/40 hover:border-indigo-400/60 transition-colors text-white shadow-xl overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(99, 102, 241, 0.15) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-6 sm:px-10 py-8 sm:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8">
+            <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center border-2 border-indigo-400/40 shadow-inner group-hover:scale-105 transition-transform">
+              <Smartphone className="w-8 h-8 sm:w-10 sm:h-10" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-indigo-400/80 mb-2 ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <span>{t("Interactive Visualizer", "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្ម")}</span>
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+                {t("Anatomy of a Smartphone", "កាយវិភាគវិទ្យានៃស្មាតហ្វូន")}
+              </h2>
+              <p
+                className={`mt-2 text-base sm:text-lg text-indigo-100/70 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Interactive teardown of the critical metals and rare earth elements that power modern smartphones.",
+                  "ការដោះកាយវិភាគអន្តរកម្មនៃលោហៈសំខាន់ៗ និងធាតុRare Earthដែលផ្តល់ថាមពលដល់ស្មាតហ្វូនទំនើប។"
+                )}
+              </p>
+            </div>
+          </div>
+        </Link>
 
         {/* ── 1. The Big Three ────────────────────────────────── */}
         <div id="big-three" className="scroll-mt-24" />

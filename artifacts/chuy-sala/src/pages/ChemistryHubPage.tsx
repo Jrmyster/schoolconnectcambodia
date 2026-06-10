@@ -12,12 +12,14 @@ import {
   Dna,
   Flame,
   Factory,
+  Recycle,
 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { ChemistryUnitConverter } from "@/components/widgets/ChemistryUnitConverter";
 import { MolarMassLookup } from "@/components/widgets/MolarMassLookup";
 import { EquationBalancer } from "@/components/widgets/EquationBalancer";
 import { PeriodicTable } from "@/components/widgets/PeriodicTable";
+import { ElectronConfigurationExplorer } from "@/components/widgets/ElectronConfigurationExplorer";
 
 type Module = {
   href: string;
@@ -389,6 +391,56 @@ export function ChemistryHubPage() {
         <div className="mb-10 sm:mb-12">
           <PeriodicTable />
         </div>
+
+        {/* ── Electron Configuration Explorer (full width) ──────── */}
+        <div className="mb-10 sm:mb-12">
+          <ElectronConfigurationExplorer />
+        </div>
+
+        {/* ── Massive Link Card: Polymers & Plastics ───────────── */}
+        <Link
+          href="/science/chemistry/polymers-plastics"
+          data-testid="card-polymers-plastics"
+          className="group block mb-10 sm:mb-12 rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/40 hover:border-cyan-400/60 transition-colors text-white shadow-xl overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(34, 211, 238, 0.15) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(34, 211, 238, 0.15) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-6 sm:px-10 py-8 sm:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8">
+            <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border-2 border-cyan-400/40 shadow-inner group-hover:scale-105 transition-transform">
+              <Recycle className="w-8 h-8 sm:w-10 sm:h-10" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-cyan-400/80 mb-2 ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <span>{t("Interactive Visualizer", "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្ម")}</span>
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+                {t("Polymers & Plastics: The 7 Types", "ប៉ូលីមែរ និងប្លាស្ទិក៖ ប្រភេទទាំង ៧")}
+              </h2>
+              <p
+                className={`mt-2 text-base sm:text-lg text-cyan-100/70 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Interactive sorting station explaining the chemistry of everyday plastics and how to responsibly upcycle them.",
+                  "ស្ថានីយ៍ចាត់ថ្នាក់អន្តរកម្មដែលពន្យល់ពីគីមីវិទ្យានៃប្លាស្ទិកប្រចាំថ្ងៃ និងរបៀបកែច្នៃពួកវាឡើងវិញដោយការទទួលខុសត្រូវ។"
+                )}
+              </p>
+            </div>
+          </div>
+        </Link>
 
         {/* ── Module grid ───────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">

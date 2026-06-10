@@ -105,6 +105,7 @@ const EnergyFuturePage          = lazy(() => import("@/pages/EnergyFuturePage").
 const PublicHealthPage          = lazy(() => import("@/pages/PublicHealthPage").then(m => ({ default: m.PublicHealthPage })));
 const DiseaseDividePage         = lazy(() => import("@/pages/DiseaseDividePage").then(m => ({ default: m.DiseaseDividePage })));
 const CommunicableDiseasesPage  = lazy(() => import("@/pages/CommunicableDiseasesPage"));
+const HivAidsPage               = lazy(() => import("@/pages/HivAidsPage"));
 const FeminineHealthPage        = lazy(() => import("@/pages/FeminineHealthPage"));
 const GlobalNgosPage            = lazy(() => import("@/pages/GlobalNgosPage"));
 const AddictionSciencePage      = lazy(() => import("@/pages/AddictionSciencePage"));
@@ -116,6 +117,7 @@ const RespiratorySystemPage      = lazy(() => import("@/pages/RespiratorySystemP
 const DigestiveSystemPage        = lazy(() => import("@/pages/Science/DigestiveSystem"));
 const ReproductiveSystem         = lazy(() => import("@/pages/Science/ReproductiveSystem"));
 const ExcretorySystemPage        = lazy(() => import("@/pages/Science/ExcretorySystem"));
+const PhotosynthesisPage         = lazy(() => import("@/pages/PhotosynthesisPage"));
 const BotanyPage                 = lazy(() => import("@/pages/BotanyPage").then(m => ({ default: m.BotanyPage })));
 const MicrobiologyPage           = lazy(() => import("@/pages/MicrobiologyPage"));
 const GeologicalWondersPage      = lazy(() => import("@/pages/GeologicalWondersPage").then(m => ({ default: m.GeologicalWondersPage })));
@@ -218,6 +220,7 @@ const SchoolInbox               = lazy(() => import("@/pages/SchoolInbox").then(
 const ElectricalSafetyPage      = lazy(() => import("@/pages/ElectricalSafetyPage").then(m => ({ default: m.ElectricalSafetyPage })));
 const ChemistryHubPage          = lazy(() => import("@/pages/ChemistryHubPage").then(m => ({ default: m.ChemistryHubPage })));
 const OrganicChemistry101Page   = lazy(() => import("@/pages/OrganicChemistry101Page").then(m => ({ default: m.OrganicChemistry101Page })));
+const PolymersPlasticsPage      = lazy(() => import("@/pages/PolymersPlasticsPage"));
 const VseprTheoryPage           = lazy(() => import("@/pages/VseprTheoryPage"));
 const TimelineElementsPage      = lazy(() => import("@/pages/TimelineElementsPage"));
 const GasLawsPage               = lazy(() => import("@/pages/GasLawsPage"));
@@ -227,6 +230,7 @@ const GrignardReactionPage      = lazy(() => import("@/pages/GrignardReactionPag
 const TitrationPage             = lazy(() => import("@/pages/TitrationPage"));
 const MoleStoichiometryPage     = lazy(() => import("@/pages/MoleStoichiometryPage"));
 const QuantumMechanicsPage      = lazy(() => import("@/pages/QuantumMechanicsPage"));
+const HilbertSpacePage          = lazy(() => import("@/pages/HilbertSpacePage"));
 const LewisStructuresPage       = lazy(() => import("@/pages/LewisStructuresPage"));
 const StarEvolutionPage         = lazy(() => import("@/pages/StarEvolutionPage"));
 const InorganicChemistry101Page = lazy(() => import("@/pages/InorganicChemistry101Page").then(m => ({ default: m.InorganicChemistry101Page })));
@@ -253,7 +257,9 @@ const FunLabPage                = lazy(() => import("@/pages/FunLabPage").then(m
 const PhysicsHubPage            = lazy(() => import("@/pages/PhysicsHubPage").then(m => ({ default: m.PhysicsHubPage })));
 const PhysicsModulePlaceholder  = lazy(() => import("@/pages/PhysicsHubPage").then(m => ({ default: m.PhysicsModulePlaceholder })));
 const BiologyHubPage            = lazy(() => import("@/pages/BiologyHubPage").then(m => ({ default: m.BiologyHubPage })));
+const GeneticsExplorerPage      = lazy(() => import("@/pages/GeneticsExplorerPage"));
 const GeologyHubPage            = lazy(() => import("@/pages/GeologyHubPage").then(m => ({ default: m.GeologyHubPage })));
+const AtmosphericSciencePage    = lazy(() => import("@/pages/AtmosphericSciencePage"));
 const MountainsVolcanoesPage    = lazy(() => import("@/pages/MountainsVolcanoesPage").then(m => ({ default: m.MountainsVolcanoesPage })));
 const ChemicalEngineeringPage   = lazy(() => import("@/pages/ChemicalEngineeringPage").then(m => ({ default: m.ChemicalEngineeringPage })));
 const DeepTimePage              = lazy(() => import("@/pages/DeepTimePage").then(m => ({ default: m.DeepTimePage })));
@@ -269,6 +275,7 @@ const HowComputersWorkPage      = lazy(() => import("@/pages/HowComputersWorkPag
 const PhysicsMotionPage         = lazy(() => import("@/pages/PhysicsMotionPage").then(m => ({ default: m.PhysicsMotionPage })));
 const PhysicsForcesPage         = lazy(() => import("@/pages/PhysicsForcesPage").then(m => ({ default: m.PhysicsForcesPage })));
 const PhysicsEnergyPage         = lazy(() => import("@/pages/PhysicsEnergyPage").then(m => ({ default: m.PhysicsEnergyPage })));
+const WorkEnergyPowerPage       = lazy(() => import("@/pages/WorkEnergyPowerPage"));
 const PhysicsWavesPage          = lazy(() => import("@/pages/PhysicsWavesPage").then(m => ({ default: m.PhysicsWavesPage })));
 const DoubleSlitPage            = lazy(() => import("@/pages/DoubleSlitPage"));
 const PhysicsGyroscopesPage     = lazy(() => import("@/pages/PhysicsGyroscopesPage").then(m => ({ default: m.PhysicsGyroscopesPage })));
@@ -276,6 +283,7 @@ const FrugalPhysicsLab          = lazy(() => import("@/pages/FrugalPhysicsLab").
 const SimpleMachinesPage        = lazy(() => import("@/pages/SimpleMachinesPage").then(m => ({ default: m.SimpleMachinesPage })));
 const MaterialsSciencePage      = lazy(() => import("@/pages/MaterialsSciencePage").then(m => ({ default: m.MaterialsSciencePage })));
 const MetallurgyPage            = lazy(() => import("@/pages/MetallurgyPage"));
+const SmartphoneMetalsPage      = lazy(() => import("@/pages/SmartphoneMetalsPage"));
 const RecyclingSciencePage      = lazy(() => import("@/pages/RecyclingSciencePage"));
 const EntrepreneurshipPage      = lazy(() => import("@/pages/EntrepreneurshipPage"));
 const ArchitectureStrengthPage  = lazy(() => import("@/pages/ArchitectureStrengthPage").then(m => ({ default: m.ArchitectureStrengthPage })));
@@ -428,6 +436,7 @@ function Router() {
             <Route path="/chemistry/titration" component={TitrationPage} />
             <Route path="/chemistry/mole-stoichiometry" component={MoleStoichiometryPage} />
             <Route path="/chemistry/quantum-mechanics" component={QuantumMechanicsPage} />
+            <Route path="/science/physics/hilbert-space" component={HilbertSpacePage} />
             <Route path="/chemistry/lewis-structures" component={LewisStructuresPage} />
             <Route path="/science/kessler-syndrome" component={KesslerSyndromePage} />
             <Route path="/explore/mission-statement" component={MissionStatementPage} />
@@ -468,6 +477,8 @@ function Router() {
             <Route path="/well-being/disease-divide" component={DiseaseDividePage} />
             <Route path="/well-being/communicable-diseases" component={CommunicableDiseasesPage} />
             <Route path="/well-being/global-ngos" component={GlobalNgosPage} />
+            <Route path="/well-being/hiv-aids" component={HivAidsPage} />
+            <Route path="/well-being/feminine-health" component={FeminineHealthPage} />
             <Route path="/well-being/addiction-science" component={AddictionSciencePage} />
             <Route path="/well-being/sanctuary/structural-violence" component={StructuralViolencePage} />
             <Route path="/well-being/abundance-vs-scarcity" component={AbundanceScarcityPage} />
@@ -486,6 +497,7 @@ function Router() {
             <Route path="/science/human-body/digestive-system" component={DigestiveSystemPage} />
             <Route path="/science/human-body/reproductive-system" component={ReproductiveSystem} />
             <Route path="/science/human-body/excretory-system" component={ExcretorySystemPage} />
+            <Route path="/biology/photosynthesis" component={PhotosynthesisPage} />
             <Route path="/biology/botany" component={BotanyPage} />
             <Route path="/science/biology/microbiology" component={MicrobiologyPage} />
             <Route path="/biology/escape-room" component={EscapeRoomPage} />
@@ -540,6 +552,7 @@ function Router() {
             <Route path="/chemistry/ion-calculator" component={IonCalculatorPage} />
             <Route path="/chemistry/flame-test" component={FlameTestPage} />
             <Route path="/chemistry/organic-101" component={OrganicChemistry101Page} />
+            <Route path="/science/chemistry/polymers-plastics" component={PolymersPlasticsPage} />
             <Route path="/chemistry/vsepr" component={VseprTheoryPage} />
             <Route path="/chemistry/element-timeline" component={TimelineElementsPage} />
             <Route path="/chemistry/gas-laws" component={GasLawsPage} />
@@ -563,6 +576,7 @@ function Router() {
             <Route path="/physics/motion" component={PhysicsMotionPage} />
             <Route path="/physics/forces" component={PhysicsForcesPage} />
             <Route path="/physics/energy" component={PhysicsEnergyPage} />
+            <Route path="/physics/work-energy-power" component={WorkEnergyPowerPage} />
             <Route path="/physics/waves" component={PhysicsWavesPage} />
             <Route path="/physics/waves/double-slit" component={DoubleSlitPage} />
             <Route path="/physics/simple-machines" component={SimpleMachinesPage} />
@@ -570,6 +584,7 @@ function Router() {
             <Route path="/physics/frugal-lab" component={FrugalPhysicsLab} />
             <Route path="/science/materials" component={MaterialsSciencePage} />
             <Route path="/science/metallurgy" component={MetallurgyPage} />
+            <Route path="/science/materials/smartphone-anatomy" component={SmartphoneMetalsPage} />
             <Route path="/science/materials/recycling" component={RecyclingSciencePage} />
             <Route path="/science/architecture" component={ArchitectureStrengthPage} />
             <Route path="/science/glaciology" component={GlaciologyPage} />
@@ -577,7 +592,9 @@ function Router() {
             <Route path="/science/disproven-theories" component={DisprovenTheoriesPage} />
             <Route path="/physics/:slug" component={PhysicsModulePlaceholder} />
             <Route path="/biology" component={BiologyHubPage} />
+            <Route path="/science/biology/genetics-explorer" component={GeneticsExplorerPage} />
             <Route path="/geology" component={GeologyHubPage} />
+            <Route path="/science/earth-science/atmosphere" component={AtmosphericSciencePage} />
             <Route path="/science/geology" component={MountainsVolcanoesPage} />
             <Route path="/science/chemical-engineering" component={ChemicalEngineeringPage} />
             <Route path="/disaster-prep" component={DisasterPrepPage} />

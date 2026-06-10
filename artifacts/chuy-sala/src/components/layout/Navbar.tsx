@@ -595,6 +595,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "កោសិកា ហ្សែន ការវិវត្ត និងបណ្តាញជីវិតនៃទន្លេមេគង្គ — ទ្វេភាសា និងអន្តរកម្ម។",
       },
       {
+        href: "/science/biology/genetics-explorer",
+        labelEn: "Genetics Explorer",
+        labelKh: "អ្នករុករកហ្សែន",
+        icon: Dna,
+        descEn: "Explore the structural hierarchy of DNA, chromosomes, and base pairing.",
+        descKh: "ស្វែងយល់ពីរចនាសម្ព័ន្ធនៃឌីអិនអេ ក្រូម៉ូសូម និងការចាប់គូបាសអាសូត។",
+      },
+      {
         href: "/biology/escape-room",
         labelEn: "Digital Escape Room",
         labelKh: "បន្ទប់រត់គេចឌីជីថល",
@@ -649,6 +657,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Microscope,
         descEn: "How two pieces of curved glass let humans see what eyes alone cannot — the 0.1 mm limit of the naked eye, how a convex lens bends light to a focal point, and the simple math of compound magnification (eyepiece × objective).",
         descKh: "របៀបដែលកញ្ចក់កោងពីរបន្ទះអនុញ្ញាតឱ្យមនុស្សមើលឃើញអ្វីដែលភ្នែកតែឯងមិនអាច — ដែនកំណត់ ០,១ មម នៃភ្នែកទទេ របៀបដែលឡង់ទីប៉ោងបង្វែរពន្លឺទៅចំណុចប្រសព្វ និងគណិតវិទ្យាសាមញ្ញនៃការពង្រីកផ្សំ (ឡង់ទីភ្នែក × ឡង់ទីវត្ថុ)។",
+      },
+      {
+        href: "/biology/photosynthesis",
+        labelEn: "Photosynthesis & The Leaf Factory",
+        labelKh: "រស្មីសំយោគ និងរោងចក្រស្លឹក",
+        icon: Leaf,
+        descEn: "Explore the mechanics of photosynthesis, the leaf factory simulator, and the science behind autumn colors.",
+        descKh: "ស្វែងយល់ពីយន្តការនៃរស្មីសំយោគ ម៉ាស៊ីនក្លែងធ្វើរោងចក្រស្លឹក និងវិទ្យាសាស្ត្រនៅពីក្រោយពណ៌សរទរដូវ។",
       },
       {
         href: "/biology/botany",
@@ -734,6 +750,14 @@ const NAV_GROUPS: NavGroup[] = [
         labelEn: "5. Organic Chemistry 101",
         labelKh: "៥. គីមីសរីរាង្គ ១០១",
         icon: Hexagon,
+      },
+      {
+        href: "/science/chemistry/polymers-plastics",
+        labelEn: "Polymers & Plastics: The 7 Types",
+        labelKh: "ប៉ូលីមែរ និងប្លាស្ទិក៖ ប្រភេទទាំង ៧",
+        icon: Recycle,
+        descEn: "Explore the chemistry of everyday plastics and how to responsibly upcycle them.",
+        descKh: "ស្វែងយល់ពីគីមីវិទ្យានៃប្លាស្ទិកប្រចាំថ្ងៃ និងរបៀបកែច្នៃពួកវាឡើងវិញដោយការទទួលខុសត្រូវ។",
       },
       {
         href: "/chemistry/gabriel-synthesis",
@@ -907,6 +931,12 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Zap,
       },
       {
+        href: "/physics/work-energy-power",
+        labelEn: "Work, Energy & Power Simulator",
+        labelKh: "ម៉ាស៊ីនក្លែងធ្វើកម្មន្ត និងថាមពល",
+        icon: Zap,
+      },
+      {
         href: "/physics/waves",
         labelEn: "4. Waves, Sound & Light",
         labelKh: "៤. រលក សំឡេង និងពន្លឺ",
@@ -933,6 +963,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Sigma,
         descEn: "Essential equations for measurement, kinematics, dynamics, momentum, and circular motion with interactive calculators.",
         descKh: "សមីការចាំបាច់សម្រាប់ការវាស់វែង គីណេម៉ាទិច ឌីណាមិច សន្ទុះ និងចលនារង្វង់ ជាមួយម៉ាស៊ីនគិតលេខអន្តរកម្ម។",
+      },
+      {
+        href: "/science/physics/hilbert-space",
+        labelEn: "8. Hilbert Space & Quantum States",
+        labelKh: "៨. លំហហ៊ីលប៊ឺត និងស្ថានភាពកង់ទិច",
+        icon: Atom,
+        descEn: "Explore the invisible arena of quantum systems, the Schrödinger equation, and interact with the Bloch Sphere simulator.",
+        descKh: "ស្វែងយល់ពីទីលានមើលមិនឃើញនៃប្រព័ន្ធកង់ទិច សមីការ Schrödinger និងសាកល្បងជាមួយឧបករណ៍ត្រាប់តាម Bloch Sphere។",
       },
       {
         href: "/science/fourier-transform",
@@ -1014,6 +1052,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ផ្សំលោហៈមូលដ្ឋាន និងសារធាតុបន្ថែមដើម្បីសិតលោហៈធាតុផ្សំ។ ឧបករណ៍ក្លែងធ្វើការរំលាយលោហៈ។",
       },
       {
+        href: "/science/materials/smartphone-anatomy",
+        labelEn: "Anatomy of a Smartphone",
+        labelKh: "កាយវិភាគវិទ្យានៃស្មាតហ្វូន",
+        icon: Smartphone,
+        descEn: "Explore the critical metals and rare earth elements that power modern life.",
+        descKh: "ស្វែងយល់ពីលោហៈសំខាន់ៗ និងធាតុRare Earthដែលផ្តល់ថាមពលដល់ជីវិតសម័យទំនើប។",
+      },
+      {
         href: "/science/chemistry/heisenberg",
         labelEn: "Quantum Uncertainty (Heisenberg)",
         labelKh: "ភាពមិនប្រាកដប្រជាកង់ទិច (ហៃសិនបឺគ)",
@@ -1085,6 +1131,14 @@ const NAV_GROUPS: NavGroup[] = [
         descKh: "ប្លាកធរណីសាស្ត្រ វដ្ដថ្ម និងទីតាំងភូគព្ភវិទ្យារបស់កម្ពុជា — ផែនទី និងតារាងអន្តរកម្ម។",
       },
       {
+        href: "/science/earth-science/atmosphere",
+        labelEn: "Atmospheric Science & Ozone",
+        labelKh: "វិទ្យាសាស្ត្របរិយាកាស និងអូហ្សូន",
+        icon: CloudRain,
+        descEn: "Explore the layers of the atmosphere and travel through time to see the ozone hole.",
+        descKh: "ស្វែងយល់ពីស្រទាប់បរិយាកាស និងធ្វើដំណើរតាមពេលវេលាដើម្បីមើលប្រហោងអូហ្សូន។",
+      },
+      {
         href: "/science/geology",
         labelEn: "Mountains & Volcanoes",
         labelKh: "ភ្នំ និងភ្នំភ្លើង",
@@ -1092,6 +1146,7 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Magma vs. lava, the convection-current 'engine' of the planet, the sleeping Yellowstone supervolcano, and how the Himalayas, Andes, and Rockies were each built by a different tectonic story.",
         descKh: "ម៉ាកម៉ានិងកម្អែលភ្នំភ្លើង «ម៉ាស៊ីន» ចរន្តកម្តៅរបស់ភពផែនដី ភ្នំភ្លើងយក្សយ៉ូឡូស្តូនដែលកំពុងដេក និងរបៀបដែលហិមាល័យ អង់ដេស និងរ៉ូគី សាងសង់ឡើងដោយរឿងតិចតូនិកផ្សេងៗគ្នា។",
       },
+
       {
         href: "/science/pangea",
         labelEn: "Pangea & Continental Drift",
@@ -1633,6 +1688,14 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Bug,
         descEn: "An interactive guide to the pathogens that threaten human health — from Malaria and Dengue to Measles and Typhoid. Learn how they spread, their symptoms, and the critical prevention tactics that save lives.",
         descKh: "មគ្គុទ្ទេសក៍អន្តរកម្មស្តីពីភ្នាក់ងារបង្កជំងឺ ដែលគំរាមកំហែងសុខភាពមនុស្ស — ពីគ្រុនចាញ់ និងគ្រុនឈាម ដល់កញ្ជ្រិល និងគ្រុនពោះវៀន។ ស្វែងយល់ពីរបៀបដែលវារាលដាល រោគសញ្ញា និងវិធីសាស្ត្រការពារដ៏សំខាន់។",
+      },
+      {
+        href: "/well-being/hiv-aids",
+        labelEn: "Understanding HIV & AIDS",
+        labelKh: "ការយល់ដឹងអំពីមេរោគអេដស៍ និងជំងឺអេដស៍",
+        icon: HeartPulse,
+        descEn: "Exploring the anatomy, viral life cycle, and modern treatments of HIV/AIDS.",
+        descKh: "ស្វែងយល់ពីរចនាសម្ព័ន្ធ វដ្តជីវិតមេរោគ និងការព្យាបាលទំនើបនៃមេរោគអេដស៍/ជំងឺអេដស៍។",
       },
       {
         href: "/well-being/global-ngos",

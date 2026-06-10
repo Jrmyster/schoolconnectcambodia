@@ -325,6 +325,54 @@ export function PhysicsHubPage() {
         {/* ── Floating Scientific Calculator ────────────────────── */}
         <ScientificCalculator />
 
+        {/* ── Massive Link Card: Work, Energy & Power ───────────── */}
+        <Link
+          href="/physics/work-energy-power"
+          data-testid="card-work-energy-power"
+          className="group block mt-8 mb-4 rounded-3xl border border-amber-500/30 bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950/40 hover:border-amber-400/60 transition-colors text-white shadow-xl overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(251, 191, 36, 0.15) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(251, 191, 36, 0.15) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-6 sm:px-10 py-8 sm:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8">
+            <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center border-2 border-amber-400/40 shadow-inner group-hover:scale-105 transition-transform">
+              <Zap className="w-8 h-8 sm:w-10 sm:h-10" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-amber-400/80 mb-2 ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <span>{t("Interactive Visualizer", "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្ម")}</span>
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+                {t("Work, Energy & Power", "កម្មន្ត ថាមពល និងអនុភាព")}
+              </h2>
+              <p
+                className={`mt-2 text-base sm:text-lg text-amber-100/70 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Interactive simulators for computing work, power, and visualizing the conservation of energy.",
+                  "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្មសម្រាប់ការគណនាកម្មន្ត អនុភាព និងការមើលឃើញការអភិរក្សថាមពល។"
+                )}
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-400 group-hover:text-slate-900 transition-colors self-end md:self-center">
+              <ArrowRight className="w-6 h-6" aria-hidden />
+            </div>
+          </div>
+        </Link>
+
         {/* ── Module grid ───────────────────────────────────────── */}
         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 mt-10">
           {PHYSICS_MODULES.map((m) => (

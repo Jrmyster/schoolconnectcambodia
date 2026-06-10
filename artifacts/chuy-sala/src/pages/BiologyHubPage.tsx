@@ -8,6 +8,7 @@ import { NaturalSelectionSim } from "@/components/biology/NaturalSelectionSim";
 import { HumanEvolutionTimeline } from "@/components/biology/HumanEvolutionTimeline";
 import { MekongEcology } from "@/components/biology/MekongEcology";
 import { TonleSapEcology } from "@/components/biology/TonleSapEcology";
+import { Link } from "wouter";
 
 const NATURE_BG: CSSProperties = {
   backgroundColor: "#f5f7f0",
@@ -77,6 +78,96 @@ export function BiologyHubPage() {
             </div>
           </div>
         </header>
+
+        {/* ── Massive Link Card: Photosynthesis & The Leaf Factory ───────────── */}
+        <Link
+          href="/biology/photosynthesis"
+          data-testid="card-photosynthesis"
+          className="group block mt-8 mb-4 rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950/40 hover:border-emerald-400/60 transition-colors text-white shadow-xl overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(52, 211, 153, 0.15) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(52, 211, 153, 0.15) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-6 sm:px-10 py-8 sm:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8">
+            <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border-2 border-emerald-400/40 shadow-inner group-hover:scale-105 transition-transform">
+              <Leaf className="w-8 h-8 sm:w-10 sm:h-10" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-400/80 mb-2 ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <span>{t("Interactive Visualizer", "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្ម")}</span>
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+                {t("Photosynthesis & The Leaf Factory", "រស្មីសំយោគ និងរោងចក្រស្លឹក")}
+              </h2>
+              <p
+                className={`mt-2 text-base sm:text-lg text-emerald-100/70 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Interactive simulators for exploring photosynthesis, the leaf factory, and the science behind autumn colors.",
+                  "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្មសម្រាប់ការស្វែងយល់ពីរស្មីសំយោគ រោងចក្រស្លឹក និងវិទ្យាសាស្ត្រនៅពីក្រោយពណ៌សរទរដូវ។"
+                )}
+              </p>
+            </div>
+          </div>
+        </Link>
+
+        {/* ── Massive Link Card: Genetics Explorer ───────────── */}
+        <Link
+          href="/science/biology/genetics-explorer"
+          data-testid="card-genetics-explorer"
+          className="group block mb-10 rounded-3xl border border-fuchsia-500/30 bg-gradient-to-r from-slate-900 via-slate-800 to-fuchsia-950/40 hover:border-fuchsia-400/60 transition-colors text-white shadow-xl overflow-hidden relative"
+        >
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(217, 70, 239, 0.15) 1px, transparent 1px), " +
+                "linear-gradient(90deg, rgba(217, 70, 239, 0.15) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+            aria-hidden
+          />
+          <div className="relative px-6 sm:px-10 py-8 sm:py-10 flex flex-col md:flex-row items-start md:items-center gap-6 sm:gap-8">
+            <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-fuchsia-500/10 text-fuchsia-400 flex items-center justify-center border-2 border-fuchsia-400/40 shadow-inner group-hover:scale-105 transition-transform">
+              <Dna className="w-8 h-8 sm:w-10 sm:h-10" aria-hidden />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div
+                className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-fuchsia-400/80 mb-2 ${
+                  kh ? "font-khmer normal-case tracking-normal" : ""
+                }`}
+              >
+                <span>{t("Interactive Visualizer", "ម៉ាស៊ីនក្លែងធ្វើអន្តរកម្ម")}</span>
+              </div>
+              <h2 className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-tight ${kh ? "font-khmer leading-snug" : ""}`}>
+                {t("Genetics Explorer", "អ្នករុករកហ្សែន")}
+              </h2>
+              <p
+                className={`mt-2 text-base sm:text-lg text-fuchsia-100/70 leading-relaxed ${
+                  kh ? "font-khmer leading-loose" : ""
+                }`}
+              >
+                {t(
+                  "Explore the structural hierarchy of DNA, chromosomes, and base pairing.",
+                  "ស្វែងយល់ពីរចនាសម្ព័ន្ធនៃឌីអិនអេ ក្រូម៉ូសូម និងការចាប់គូបាសអាសូត។"
+                )}
+              </p>
+            </div>
+          </div>
+        </Link>
 
         <Section number="01" Icon={Microscope} en="The Cell & Genetics" kh="កោសិកា និងហ្សែន"
           subEn="The microscopic factories of life and the code that runs them."
