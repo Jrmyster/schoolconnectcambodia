@@ -22,6 +22,15 @@ import {
   Orbit,
   FlaskConical,
   Sparkles,
+  Battery,
+  Waves,
+  RadioTower,
+  Cpu,
+  Eye,
+  Microscope,
+  Box,
+  Binary,
+  Zap,
 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { InlineMath } from "react-katex";

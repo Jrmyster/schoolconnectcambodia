@@ -124,6 +124,7 @@ export default function GeneticsExplorerPage() {
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [selectedBase1, selectedBase2]);
 
   return (
@@ -256,7 +257,7 @@ export default function GeneticsExplorerPage() {
                   <button
                     key={base.id}
                     onClick={() => handleBaseClick(base.id)}
-                    disabled={pairingStatus !== "IDLE" || (selectedBase1 && selectedBase2)}
+                    disabled={pairingStatus !== "IDLE" || Boolean(selectedBase1 && selectedBase2)}
                     className={`relative p-6 rounded-2xl border-2 border-b-4 flex flex-col items-center justify-center transition-transform active:translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed
                       ${base.bgClass} ${base.borderClass} ${base.textClass}
                     `}

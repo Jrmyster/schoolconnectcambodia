@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { Link } from "wouter";
 import { Mountain, Compass, Globe2 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { PlateTectonicsMap } from "@/components/geology/PlateTectonicsMap";
