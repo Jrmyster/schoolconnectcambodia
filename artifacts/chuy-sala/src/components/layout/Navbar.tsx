@@ -447,11 +447,18 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    labelEn: "Science",
-    labelKh: "វិទ្យាសាស្ត្រ",
-    icon: Atom,
-    color: "cyan",
+    labelEn: "Learn",
+    labelKh: "រៀនសូត្រ",
+    icon: BookOpen,
+    color: "indigo",
     items: [
+      {
+        href: "divider:science",
+        labelEn: "Science",
+        labelKh: "វិទ្យាសាស្ត្រ",
+        icon: Atom,
+        divider: true,
+      },
       {
         href: "/science/disproven-theories",
         labelEn: "Disproven Theories",
@@ -1387,14 +1394,13 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "White sunlight is a hidden rainbow. Run it through Earth's nitrogen-and-oxygen obstacle course, derive Rayleigh's I ∝ 1/λ⁴ law, and discover why the sky is blue at noon and red at sunset.",
         descKh: "ពន្លឺព្រះអាទិត្យពណ៌សគឺជាឥន្ធនូលាក់។ បញ្ជូនវាកាត់ទីលានឧបសគ្គអាសូត-អុកស៊ីសែននៃផែនដី ទាញច្បាប់ I ∝ 1/λ⁴ របស់រ៉េឡេ និងរកឃើញហេតុអ្វីមេឃមានពណ៌ខៀវនៅថ្ងៃត្រង់ និងពណ៌ក្រហមនៅពេលថ្ងៃលិច។",
       },
-    ],
-  },
-  {
-    labelEn: "Technology",
-    labelKh: "បច្ចេកវិទ្យា",
-    icon: Cpu,
-    color: "lime",
-    items: [
+      {
+        href: "divider:technology",
+        labelEn: "Technology",
+        labelKh: "បច្ចេកវិទ្យា",
+        icon: Cpu,
+        divider: true,
+      },
       {
         href: "/technology/automotive",
         labelEn: "How Cars Work",
@@ -1619,19 +1625,13 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Maritime Tech: Shipping & Buoyancy — three sections in a heavy industrial / oceanic aesthetic (deep-sea blues, steel greys, cargo orange and red accents). The physics of floating: Archimedes' Principle and the steel-paradox of average density that lets a 220,000-tonne container ship float while a steel nail sinks. Engineering mega-ships: 400-metre Ever Ace-class vessels carrying 24,000 TEU, and the Plimsoll Line — Samuel Plimsoll's painted load-line (TF, F, T, S, W, WNA) that stops captains from overloading. The invisible highways: shipping lanes set by the IMO, and the three global chokepoints that carry 90% of all trade — the Strait of Malacca right next to Cambodia, the Suez Canal, and the Panama Canal.",
         descKh: "បច្ចេកវិទ្យាសមុទ្រ៖ ការដឹកជញ្ជូន និងការអណ្តែត — បីផ្នែកក្នុងរចនាបថឧស្សាហកម្មធុនធ្ងន់ និងសមុទ្រ (ខៀវសមុទ្រជ្រៅ ប្រផេះដែក សញ្ញាពណ៌ទឹកក្រូច និងពណ៌ក្រហមនៃកុងតឺន័រ)។ រូបវិទ្យានៃការអណ្តែត៖ គោលការណ៍ Archimedes និងភាពផ្ទុយនៃដែកដែលដង់ស៊ីតេមធ្យមធ្វើឱ្យកប៉ាល់ដឹកកុងតឺន័រ ២២០,០០០ តោនអណ្តែត ខណៈដែលដែកគោលលង់។ ការរចនាកប៉ាល់យក្ស៖ កប៉ាល់ Ever Ace ប្រវែង ៤០០ ម៉ែត្រដឹក TEU ២៤,០០០ និងបន្ទាត់ Plimsoll — បន្ទាត់ផ្ទុក (TF, F, T, S, W, WNA) ដែល Samuel Plimsoll លាបទប់ស្កាត់នាយកនាវាមិនឱ្យដឹកធ្ងន់ហួស។ មហាវិថីមើលមិនឃើញ៖ ផ្លូវនាវាចរ និងចំណុចច្របាច់ពិភពលោកបី — ច្រកម៉ាឡាកានៅជិតកម្ពុជា ព្រែកជីកស៊ុយអេស និងព្រែកជីកប៉ាណាម៉ា — ដែលដឹក ៩០% នៃពាណិជ្ជកម្មសកល។",
       },
-    ],
-  },
-  {
-    labelEn: "Well-being",
-    labelKh: "សុខុមាលភាព",
-    icon: Smile,
-    color: "emerald",
-    // Only highlight this dropdown when the URL is actually under /well-being.
-    // The items list also contains cross-cutting links to /science, /sanctuary,
-    // /music-theory, /human-engine, /electrical-safety, /sexual-health, etc.,
-    // so per-item matching used to light Well-being up on those pages too.
-    basePaths: ["/well-being"],
-    items: [
+      {
+        href: "divider:well-being",
+        labelEn: "Well-being",
+        labelKh: "សុខុមាលភាព",
+        icon: Smile,
+        divider: true,
+      },
       { href: "/sanctuary",          labelEn: "Sanctuary",             labelKh: "សន្តិភាព",                 icon: Leaf },
       {
         href: "/well-being/menstrual-hygiene",
@@ -1796,14 +1796,13 @@ const NAV_GROUPS: NavGroup[] = [
         icon: Globe,
         external: true,
       },
-    ],
-  },
-  {
-    labelEn: "English",
-    labelKh: "ភាសាអង់គ្លេស",
-    icon: LanguagesIcon,
-    color: "indigo",
-    items: [
+      {
+        href: "divider:english",
+        labelEn: "English",
+        labelKh: "អង់គ្លេស",
+        icon: LanguagesIcon,
+        divider: true,
+      },
       {
         href: "/english/word-jigsaw",
         labelEn: "English Word Jigsaw",
