@@ -1,6 +1,6 @@
+import { DengueHealthNotice } from "@/components/DengueHealthNotice";
 import { Link } from "wouter";
 import { MapPin, GraduationCap, Heart, CheckCircle2, Languages, Wrench, ExternalLink, PersonStanding } from "lucide-react";
-import { useListSchools, useListNeeds, useListCompletedProjects } from "@workspace/api-client-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { WeatherWidget } from "@/components/WeatherWidget";
 import { GlobalSearch } from "@/components/GlobalSearch";
@@ -13,12 +13,6 @@ import { RainySeasonAlert } from "@/components/RainySeasonAlert";
 export function Home() {
   const t = useTranslation();
   const { language, toggleLanguage } = useLanguageStore();
-
-  const { data: schools } = useListSchools();
-  const { data: needs } = useListNeeds();
-  const { data: completed } = useListCompletedProjects();
-
-  const activeNeeds = Array.isArray(needs) ? needs.filter(n => n.status === 'active') : [];
 
   return (
     <div className="w-full min-h-screen">
@@ -65,16 +59,16 @@ export function Home() {
           </div>
 
           <h1 className={`text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg ${language === 'kh' ? 'font-khmer leading-relaxed sm:leading-snug' : 'font-display tracking-tight leading-tight'}`}>
-            {t("Bridge the gap for", "តភ្ជាប់គម្លាតសម្រាប់")}<br />
+            {t("Explore, learn and build with", "ស្វែងយល់ និងសិក្សាជាមួយ")}<br />
             <span className="text-accent underline decoration-4 underline-offset-8">
-              {t("rural Cambodian schools", "សាលារៀននៅជនបទកម្ពុជា")}
+              {t("School Connect STEM", "មជ្ឈមណ្ឌល STEM កម្ពុជា")}
             </span>
           </h1>
 
           <p className={`text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto font-medium drop-shadow-md ${language === 'kh' ? 'font-khmer' : ''}`}>
             {t(
-              "Directly connect with schools in need. Browse requests for books, infrastructure, and technology, and see exactly where your donation goes.",
-              "ភ្ជាប់ទំនាក់ទំនងផ្ទាល់ជាមួយសាលារៀនដែលកំពុងខ្វះខាត។ ស្វែងរកតម្រូវការសៀវភៅ ហេដ្ឋារចនាសម្ព័ន្ធ និងបច្ចេកវិទ្យា ហើយមើលឱ្យច្បាស់ពីទីកន្លែងដែលអំណោយរបស់អ្នកទៅដល់។"
+              "Discover bilingual lessons, interactive science and mathematics, and practical skills for your future.",
+              "ស្វែងយល់មេរៀនពីរភាសា វិទ្យាសាស្ត្រ គណិតវិទ្យា និងជំនាញសម្រាប់អនាគតរបស់អ្នក។"
             )}
           </p>
 
@@ -88,13 +82,13 @@ export function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/map" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-primary text-white shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
+            <Link href="/science" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-primary text-white shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300">
               <MapPin className="w-5 h-5" />
-              <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Explore Map", "រុករកផែនទី")}</span>
+              <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Explore Science", "ស្វែងយល់វិទ្យាសាស្ត្រ")}</span>
             </Link>
-            <Link href="/needs" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-white text-foreground shadow-xl shadow-black/10 hover:-translate-y-1 hover:bg-gray-50 transition-all duration-300">
+            <Link href="/mathematics" className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-white text-foreground shadow-xl shadow-black/10 hover:-translate-y-1 hover:bg-gray-50 transition-all duration-300">
               <Heart className="w-5 h-5 text-destructive" />
-              <span className={language === 'kh' ? 'font-khmer' : ''}>{t("View All Needs", "មើលតម្រូវការទាំងអស់")}</span>
+              <span className={language === 'kh' ? 'font-khmer' : ''}>{t("Explore Mathematics", "ស្វែងយល់គណិតវិទ្យា")}</span>
             </Link>
           </div>
 
@@ -107,98 +101,14 @@ export function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="relative -mt-8 z-30 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="bg-card rounded-2xl shadow-2xl border border-border p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border">
-          <div className="flex flex-col items-center text-center pt-4 md:pt-0">
-            <div className="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-4">
-              <GraduationCap className="w-8 h-8" />
-            </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
-              <CountUp value={schools?.length ?? 0} />
-            </h3>
-            <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
-              {t("Registered Schools", "សាលារៀនដែលបានចុះឈ្មោះ")}
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center text-center pt-8 md:pt-0">
-            <div className="w-16 h-16 bg-orange-50 text-accent rounded-2xl flex items-center justify-center mb-4">
-              <Heart className="w-8 h-8" />
-            </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
-              <CountUp value={activeNeeds.length} />
-            </h3>
-            <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
-              {t("Active Needs", "តម្រូវការសកម្ម")}
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center text-center pt-8 md:pt-0">
-            <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-4">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-            <h3 className="text-4xl font-black text-foreground font-display mb-2 tabular-nums">
-              <CountUp value={completed?.length ?? 0} />
-            </h3>
-            <p className={`text-muted-foreground font-semibold ${language === 'kh' ? 'font-khmer' : ''}`}>
-              {t("Completed Projects", "គម្រោងបានបញ្ចប់")}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works — placed directly under the stats bar so visitors learn
-          the donation flow before scrolling into deeper content. The stats
-          card sits with mb-16 above this band, and the section's own py-20
-          gives generous breathing room so the two never visually collide. */}
-      <section className="py-20 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className={`text-3xl md:text-4xl font-bold text-foreground mb-4 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-              {t("How it works", "តើវាដំណើរការយ៉ាងដូចម្តេច?")}
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              {t("We believe in total transparency. See exactly what schools need and contact them directly.", "យើងជឿជាក់លើតម្លាភាពទាំងស្រុង។ សូមមើលយ៉ាងច្បាស់នូវអ្វីដែលសាលារៀនត្រូវការ ហើយទាក់ទងពួកគេដោយផ្ទាល់។")}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              {
-                step: "01",
-                title: t("Find a School", "ស្វែងរកសាលារៀន"),
-                desc: t("Browse the interactive map to find rural schools and see their specific needs.", "រុករកផែនទីអន្តរកម្មដើម្បីស្វែងរកសាលារៀននៅជនបទ និងមើលតម្រូវការជាក់លាក់របស់ពួកគេ។")
-              },
-              {
-                step: "02",
-                title: t("Contact Directly", "ទាក់ទងដោយផ្ទាល់"),
-                desc: t("Click 'Donate' to email the school administration directly. No middlemen.", "ចុច 'បរិច្ចាគ' ដើម្បីផ្ញើអ៊ីមែលទៅរដ្ឋបាលសាលាដោយផ្ទាល់។ គ្មានអ្នកកណ្តាលទេ។")
-              },
-              {
-                step: "03",
-                title: t("See the Impact", "មើលពីផលប៉ះពាល់"),
-                desc: t("Schools post 'Thank You' photos on the transparency log once items are received.", "សាលារៀនបង្ហោះរូបភាព 'អរគុណ' នៅលើកំណត់ហេតុតម្លាភាពនៅពេលទទួលបានសម្ភារៈ។")
-              }
-            ].map((item) => (
-              <div key={item.step} className="relative bg-white p-8 rounded-3xl shadow-lg border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <span aria-hidden="true" className="absolute -top-6 -left-6 text-7xl font-black text-primary/10 font-display select-none">
-                  {item.step}
-                </span>
-                <h3 className={`text-xl font-bold text-foreground mb-4 mt-4 relative z-10 ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-                  {item.title}
-                </h3>
-                <p className={`text-muted-foreground relative z-10 ${language === 'kh' ? 'font-khmer leading-loose text-sm' : ''}`}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Learning Path Discovery Quiz — onboarding for new visitors */}
       <LearningPathQuiz />
+      <DengueHealthNotice locale={language === "kh" ? "km" : "en"} />
+      <section className="max-w-6xl mx-auto p-6 my-8 rounded-2xl bg-sky-50 border border-sky-200">
+        <h2 className="text-2xl font-bold">{t("Capability Simulators", "ឧបករណ៍សាកល្បងសមត្ថភាព")}</h2>
+        <p className="my-3">{t("Explore how technology changes what people can do.", "ស្វែងយល់ពីរបៀបដែលបច្ចេកវិទ្យាផ្លាស់ប្តូរសមត្ថភាពមនុស្ស។")}</p>
+        <a className="inline-block rounded-xl bg-sky-800 text-white px-5 py-3" href="https://fastandfaster.netlify.app/" target="_blank" rel="noopener noreferrer">{t("Open Capability Simulator ↗", "បើកឧបករណ៍សាកល្បងសមត្ថភាព ↗")}</a>
+      </section>
 
       {/* Weather Widget */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">

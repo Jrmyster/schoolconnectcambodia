@@ -1,3 +1,4 @@
+import { MAP_SITE_URL } from "@/config/sites";
 import { Heart } from "lucide-react";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { DownloadGuideButton } from "@/components/DownloadGuideButton";
@@ -5,16 +6,16 @@ import { DownloadGuideButton } from "@/components/DownloadGuideButton";
 export function Footer() {
   const t = useTranslation();
   const language = useLanguageStore((s) => s.language);
-  
+
   return (
     <footer className="bg-foreground text-secondary py-12 mt-20 border-t-4 border-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <img 
-                src={`${import.meta.env.BASE_URL}images/logo.png`} 
-                alt="Chouy Sala Logo" 
+              <img
+                src={`${import.meta.env.BASE_URL}images/logo.png`}
+                alt="Chouy Sala Logo"
                 className="w-10 h-10 object-contain rounded-lg bg-white p-1"
               />
               <div className="flex flex-col">
@@ -28,12 +29,12 @@ export function Footer() {
             </div>
             <p className="text-secondary/80 text-sm leading-relaxed max-w-sm">
               {t(
-                "Connecting rural Cambodian schools with donors globally. Help provide essential resources for a better education.",
-                "ភ្ជាប់សាលារៀននៅតាមជនបទកម្ពុជាជាមួយសប្បុរសជនទូទាំងពិភពលោក។ ជួយផ្តល់ធនធានចាំបាច់សម្រាប់ការអប់រំដ៏ល្អប្រសើរ។"
+                "Bilingual learning, practical science, and student tools for Cambodia.",
+                "ការសិក្សាពីរភាសា វិទ្យាសាស្ត្រ និងឧបករណ៍សម្រាប់សិស្សកម្ពុជា។"
               )}
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-display font-bold text-lg text-white mb-6">
               {t("Contact Us", "ទំនាក់ទំនង")}
@@ -52,21 +53,22 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-display font-bold text-lg text-white mb-6">
-              {t("Make a Difference", "បង្កើតភាពខុសគ្នា")}
+              {t("Learning Resources", "ធនធានសិក្សា")}
             </h4>
             <div className="bg-white/10 p-6 rounded-2xl border border-white/10 backdrop-blur-sm flex flex-col gap-4">
               <p className="text-sm flex items-center gap-2">
                 <Heart className="w-4 h-4 text-destructive flex-shrink-0" fill="currentColor" />
-                {t("100% of your donation goes directly to the schools.", "១០០% នៃការបរិច្ចាគរបស់អ្នកទៅដល់សាលារៀនដោយផ្ទាល់។")}
+                {t("Keep learning with our downloadable guide.", "បន្តសិក្សាជាមួយមគ្គុទ្ទេសក៍ដែលអាចទាញយកបាន។")}
               </p>
+              <a href={MAP_SITE_URL} target="_blank" rel="noopener noreferrer" className="underline">Digital Map</a>
               <DownloadGuideButton className="w-full justify-center" />
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-secondary/50 space-y-4">
           <p>© {new Date().getFullYear()} Chouy Sala. {t("All rights reserved.", "រក្សាសិទ្ធិគ្រប់យ៉ាង។")}</p>
           <div className="max-w-2xl mx-auto text-xs text-secondary/40 leading-relaxed">

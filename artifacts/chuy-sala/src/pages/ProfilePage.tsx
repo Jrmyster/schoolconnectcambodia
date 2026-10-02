@@ -121,13 +121,9 @@ export function ProfilePage() {
                 {t("Your Profile", "ប្រូហ្វាយរបស់អ្នក", kh)}
               </p>
               <h1 className={`text-2xl sm:text-3xl font-bold text-white mb-1 ${kh ? "font-khmer" : ""}`}>
-                {user.school
-                  ? (kh ? user.school.nameKh : user.school.nameEn)
-                  : user.email}
+                {user.email}
               </h1>
-              {user.school && (
-                <p className="text-blue-200 text-sm">{user.email}</p>
-              )}
+
             </div>
           </div>
         </div>

@@ -49,7 +49,7 @@ export default function NotFound() {
             </span>
           </Link>
           <Link
-            href="/needs"
+            href="/science"
             data-testid="link-browse"
             className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-3 rounded-xl bg-white border-2 border-amber-200 text-amber-900 font-bold text-sm hover:bg-amber-50 hover:border-amber-300 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
           >

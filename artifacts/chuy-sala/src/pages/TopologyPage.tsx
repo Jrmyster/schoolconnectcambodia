@@ -1,14 +1,19 @@
-import { useState, useMemo, useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, ContactShadows, Html } from "@react-three/drei";
-import * as THREE from "three";
-import { Sigma, RotateCw, Fingerprint, BoxSelect, Map as MapIcon } from "lucide-react";
-import { useLanguageStore } from "@/store/use-language";
-import FourColorMap from "@/components/FourColorMap";
+import { TopologyDiagram } from "@/components/diagrams/LearningDiagrams";
+import { useState } from "react";
+
 import EulersFormula from "@/components/EulersFormula";
+import FourColorMap from "@/components/FourColorMap";
+import GabrielsHorn from "@/components/GabrielsHorn";
 import KleinBottle from "@/components/KleinBottle";
 import KnotTheory from "@/components/KnotTheory";
-import GabrielsHorn from "@/components/GabrielsHorn";
+import { useLanguageStore } from "@/store/use-language";
+import {
+  BoxSelect,
+  Fingerprint,
+  Map as MapIcon,
+  RotateCw,
+  Sigma,
+} from "lucide-react";
 
 // ════════════════════════════════════════════════════════════════════════════
 //  Topology: The Mathematics of Shape
@@ -39,12 +44,16 @@ export default function TopologyPage() {
           {isKh ? (
             <>
               ថតវិទ្យា៖{" "}
-              <span className="math-text-ink text-indigo-800">គណិតវិទ្យានៃរូបរាង</span>
+              <span className="math-text-ink text-indigo-800">
+                គណិតវិទ្យានៃរូបរាង
+              </span>
             </>
           ) : (
             <>
               Topology:{" "}
-              <span className="math-text-ink text-indigo-800">The Mathematics of Shape</span>
+              <span className="math-text-ink text-indigo-800">
+                The Mathematics of Shape
+              </span>
             </>
           )}
         </h1>
@@ -61,12 +70,18 @@ export default function TopologyPage() {
         <nav className="mt-6 flex flex-wrap gap-2 text-xs">
           {[
             ["#mobius", isKh ? "បន្ទះ Möbius" : "Möbius Strip"],
-            ["#homeomorphism", isKh ? "ការបំប្លែងពែង-ដូណាត់" : "Torus-Mug Homeomorphism"],
+            [
+              "#homeomorphism",
+              isKh ? "ការបំប្លែងពែង-ដូណាត់" : "Torus-Mug Homeomorphism",
+            ],
             ["#four-color", isKh ? "ទ្រឹស្តីបទពណ៌ ៤" : "Four Color Theorem"],
             ["#euler", isKh ? "រូបមន្ត Euler" : "Euler's Formula"],
             ["#klein-bottle", isKh ? "ដប Klein" : "Klein Bottle"],
             ["#knot-theory", isKh ? "ទ្រឹស្តីចំណង" : "Knot Theory"],
-            ["#gabriels-horn", isKh ? "ភាពផ្ទុយគ្នាត្រែ Gabriel" : "Gabriel's Horn Paradox"],
+            [
+              "#gabriels-horn",
+              isKh ? "ភាពផ្ទុយគ្នាត្រែ Gabriel" : "Gabriel's Horn Paradox",
+            ],
           ].map(([href, label]) => (
             <a
               key={href}
@@ -101,21 +116,13 @@ export default function TopologyPage() {
               <CardCorners />
               <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-indigo-100 shadow-sm">
                 <RotateCw className="w-4 h-4 text-indigo-600 animate-[spin_4s_linear_infinite]" />
-                <span className={`text-xs text-indigo-800 ${isKh ? "font-khmer" : "font-medium"}`}>
+                <span
+                  className={`text-xs text-indigo-800 ${isKh ? "font-khmer" : "font-medium"}`}
+                >
                   {isKh ? "អូសដើម្បីបង្វិល" : "Drag to rotate"}
                 </span>
               </div>
-              <Canvas camera={{ position: [0, 3, 5], fov: 45 }}>
-                <Suspense fallback={<CanvasLoader isKh={isKh} />}>
-                  <ambientLight intensity={0.6} />
-                  <directionalLight position={[10, 10, 5]} intensity={1} />
-                  <pointLight position={[-10, -10, -5]} intensity={0.5} color="#818cf8" />
-                  <MobiusMesh />
-                  <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2} far={4} />
-                  <OrbitControls enableZoom={true} autoRotate autoRotateSpeed={1.5} />
-                  <Environment preset="city" />
-                </Suspense>
-              </Canvas>
+              <TopologyDiagram kind="mobius" />
             </article>
           </div>
 
@@ -128,10 +135,14 @@ export default function TopologyPage() {
                   TOP-01 · MÖBIUS
                 </span>
               </div>
-              <h3 className={`text-2xl font-bold text-slate-900 mb-3 ${isKh ? "font-khmer" : ""}`}>
+              <h3
+                className={`text-2xl font-bold text-slate-900 mb-3 ${isKh ? "font-khmer" : ""}`}
+              >
                 {isKh ? "សកលលោកមួយចំហៀង" : "A One-Sided Universe"}
               </h3>
-              <div className={`space-y-4 text-sm text-slate-700 ${isKh ? "font-khmer leading-relaxed" : "leading-relaxed"}`}>
+              <div
+                className={`space-y-4 text-sm text-slate-700 ${isKh ? "font-khmer leading-relaxed" : "leading-relaxed"}`}
+              >
                 <p>
                   {isKh
                     ? "ប្រសិនបើអ្នកយកបន្ទះក្រដាសមួយ បង្វិលវាពាក់កណ្តាលជុំ រួចបិទចុងទាំងពីរចូលគ្នា អ្នកនឹងទទួលបានបន្ទះ Möbius។"
@@ -172,10 +183,14 @@ export default function TopologyPage() {
                   TOP-02 · HOMEOMORPHISM
                 </span>
               </div>
-              <h3 className={`text-2xl font-bold text-slate-900 mb-3 ${isKh ? "font-khmer" : ""}`}>
+              <h3
+                className={`text-2xl font-bold text-slate-900 mb-3 ${isKh ? "font-khmer" : ""}`}
+              >
                 {isKh ? "ពែងកាហ្វេ និង នំដូណាត់" : "The Coffee Mug & The Donut"}
               </h3>
-              <div className={`space-y-4 text-sm text-slate-700 ${isKh ? "font-khmer leading-relaxed" : "leading-relaxed"}`}>
+              <div
+                className={`space-y-4 text-sm text-slate-700 ${isKh ? "font-khmer leading-relaxed" : "leading-relaxed"}`}
+              >
                 <p>
                   {isKh
                     ? "ក្នុងថតវិទ្យា វត្ថុពីរត្រូវបានចាត់ទុកថា «ដូចគ្នា» (Homeomorphic) ប្រសិនបើអ្នកអាចបំប្លែងវត្ថុមួយទៅជាមួយទៀតដោយការទាញ ឬបត់ ដោយមិនហែក។"
@@ -214,7 +229,7 @@ export default function TopologyPage() {
           subEn="Color the map of Cambodia without letting adjacent provinces share the same color."
           subKh="ផាត់ពណ៌ផែនទីប្រទេសកម្ពុជា ដោយមិនឱ្យខេត្តដែលនៅជាប់គ្នាមានពណ៌ដូចគ្នាឡើយ។"
         />
-        
+
         <div className="mt-8 relative z-10">
           <article className="blueprint-card p-6 md:p-10 w-full relative rounded-xl border border-indigo-200 bg-white/50 backdrop-blur-sm">
             <CardCorners />
@@ -224,7 +239,7 @@ export default function TopologyPage() {
                 TOP-03 · FOUR_COLOR_MAP
               </span>
             </div>
-            
+
             <FourColorMap />
           </article>
         </div>
@@ -243,7 +258,7 @@ export default function TopologyPage() {
           subEn="A magical constant that connects the vertices, edges, and faces of 3D shapes."
           subKh="ថេរដ៏អស្ចារ្យដែលភ្ជាប់កំពូល គែម និងផ្ទៃមុខនៃរូបរាង ៣ វិមាត្រ។"
         />
-        
+
         <div className="mt-8 relative z-10">
           <EulersFormula />
         </div>
@@ -262,7 +277,7 @@ export default function TopologyPage() {
           subEn="A shape with no edges and no inside or outside."
           subKh="រូបរាងដែលគ្មានគែម និងគ្មានខាងក្នុង ឬខាងក្រៅ។"
         />
-        
+
         <div className="mt-8 relative z-10">
           <KleinBottle />
         </div>
@@ -281,7 +296,7 @@ export default function TopologyPage() {
           subEn="The mathematical study of closed loops in 3D space."
           subKh="ការសិក្សាគណិតវិទ្យាអំពីរង្វង់បិទជិតនៅក្នុងលំហ ៣ វិមាត្រ។"
         />
-        
+
         <div className="mt-8 relative z-10">
           <KnotTheory />
         </div>
@@ -300,7 +315,7 @@ export default function TopologyPage() {
           subEn="An infinite shape with a finite volume — can you fill it with paint?"
           subKh="រូបរាងអនន្តដែលមានមាឌកំណត់ — តើអ្នកអាចចាក់ថ្នាំលាបបំពេញវាបានទេ?"
         />
-        
+
         <div className="mt-8 relative z-10">
           <GabrielsHorn />
         </div>
@@ -337,82 +352,9 @@ function SectionHeader({ eyebrow, en, kh, subEn, subKh, isKh }: any) {
   );
 }
 
-function CanvasLoader({ isKh }: { isKh: boolean }) {
-  return (
-    <Html center>
-      <div className="flex flex-col items-center gap-3">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-        <span className={`text-sm whitespace-nowrap text-indigo-800 ${isKh ? "font-khmer" : "font-medium"}`}>
-          {isKh ? "កំពុងផ្ទុក..." : "Loading..."}
-        </span>
-      </div>
-    </Html>
-  );
-}
-
 /* ════════════════════════════════════════════════════════════════════════
  * 3D Möbius Strip
  * ════════════════════════════════════════════════════════════════════════ */
-
-function MobiusMesh() {
-  const geometry = useMemo(() => {
-    const segmentsU = 150;
-    const segmentsV = 30;
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array((segmentsU + 1) * (segmentsV + 1) * 3);
-    const indices = [];
-
-    let idx = 0;
-    for (let i = 0; i <= segmentsU; i++) {
-      const u = (i / segmentsU) * Math.PI * 2;
-      for (let j = 0; j <= segmentsV; j++) {
-        // v from -1 to 1
-        const v = (j / segmentsV) * 2 - 1;
-        const R = 1.8;
-        const w = 0.6; // half-width
-
-        const x = (R + v * w * Math.cos(u / 2)) * Math.cos(u);
-        const z = (R + v * w * Math.cos(u / 2)) * Math.sin(u);
-        const y = v * w * Math.sin(u / 2);
-
-        pos[idx * 3] = x;
-        pos[idx * 3 + 1] = y;
-        pos[idx * 3 + 2] = z;
-        idx++;
-      }
-    }
-
-    for (let i = 0; i < segmentsU; i++) {
-      for (let j = 0; j < segmentsV; j++) {
-        const a = i * (segmentsV + 1) + j;
-        const b = (i + 1) * (segmentsV + 1) + j;
-        const c = i * (segmentsV + 1) + (j + 1);
-        const d = (i + 1) * (segmentsV + 1) + (j + 1);
-        indices.push(a, b, d);
-        indices.push(a, d, c);
-      }
-    }
-
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    geo.setIndex(indices);
-    geo.computeVertexNormals();
-    return geo;
-  }, []);
-
-  return (
-    <mesh geometry={geometry}>
-      <meshStandardMaterial
-        color="#4f46e5"
-        side={THREE.DoubleSide}
-        roughness={0.2}
-        metalness={0.1}
-      />
-      <mesh geometry={geometry}>
-        <meshBasicMaterial color="#ffffff" wireframe={true} transparent opacity={0.15} />
-      </mesh>
-    </mesh>
-  );
-}
 
 /* ════════════════════════════════════════════════════════════════════════
  * 3D Torus to Mug Homeomorphism
@@ -424,27 +366,21 @@ function TorusMugScene({ isKh }: { isKh: boolean }) {
   return (
     <>
       <div className="absolute inset-0">
-        <Canvas camera={{ position: [4, 4, 4], fov: 40 }}>
-          <Suspense fallback={<CanvasLoader isKh={isKh} />}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[5, 10, 5]} intensity={1.2} />
-            <directionalLight position={[-5, -5, -5]} intensity={0.5} color="#fef3c7" />
-            <TorusMugMesh morphValue={morphValue} />
-            <ContactShadows position={[0, -1.8, 0]} opacity={0.5} scale={10} blur={2} />
-            <OrbitControls enableZoom={false} autoRotate={false} />
-            <Environment preset="city" />
-          </Suspense>
-        </Canvas>
+        <TopologyDiagram kind="mug" morph={morphValue} />
       </div>
-      
+
       {/* Interactive UI Overlay */}
       <div className="absolute bottom-4 left-0 right-0 px-6 flex flex-col items-center z-10 pointer-events-none">
         <div className="bg-white/90 backdrop-blur-md px-5 py-3 rounded-xl border border-amber-200 shadow-lg w-full max-w-sm pointer-events-auto">
           <div className="flex justify-between items-center mb-2">
-            <span className={`text-xs font-bold text-amber-700 ${isKh ? "font-khmer" : ""}`}>
+            <span
+              className={`text-xs font-bold text-amber-700 ${isKh ? "font-khmer" : ""}`}
+            >
               {isKh ? "នំដូណាត់ (Torus)" : "Donut (Torus)"}
             </span>
-            <span className={`text-xs font-bold text-indigo-700 ${isKh ? "font-khmer" : ""}`}>
+            <span
+              className={`text-xs font-bold text-indigo-700 ${isKh ? "font-khmer" : ""}`}
+            >
               {isKh ? "ពែងកាហ្វេ (Mug)" : "Coffee Mug"}
             </span>
           </div>
@@ -466,118 +402,6 @@ function TorusMugScene({ isKh }: { isKh: boolean }) {
   );
 }
 
-function TorusMugMesh({ morphValue }: { morphValue: number }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(() => {
-    const segmentsU = 100;
-    const segmentsV = 60;
-    const geo = new THREE.BufferGeometry();
-    const posArray = new Float32Array((segmentsU + 1) * (segmentsV + 1) * 3);
-    const mugArray = new Float32Array((segmentsU + 1) * (segmentsV + 1) * 3);
-    const indexArray = [];
-
-    let idx = 0;
-    for (let i = 0; i <= segmentsU; i++) {
-      const u = (i / segmentsU) * Math.PI * 2;
-      for (let j = 0; j <= segmentsV; j++) {
-        const v = (j / segmentsV) * Math.PI * 2;
-        
-        // --- TORUS (Base Shape) ---
-        const R = 1.2;
-        const r = 0.5;
-        const tx = (R + r * Math.cos(v)) * Math.cos(u);
-        const ty = r * Math.sin(v);
-        const tz = (R + r * Math.cos(v)) * Math.sin(u);
-        posArray[idx * 3] = tx;
-        posArray[idx * 3 + 1] = ty;
-        posArray[idx * 3 + 2] = tz;
-        
-        // --- MUG (Morphed Shape) ---
-        // bodyWeight determines how much of the cylinder body this vertex is (u near PI is body, u near 0 is handle)
-        const bodyWeight = (1 - Math.cos(u)) / 2; 
-        
-        const mR = R - 0.7 * bodyWeight; // hole shrinks for body
-        const mr = r + 0.8 * bodyWeight; // tube thickens for body
-        
-        let mx = (mR + mr * Math.cos(v)) * Math.cos(u);
-        let my = mr * Math.sin(v);
-        let mz = (mR + mr * Math.cos(v)) * Math.sin(u);
-        
-        // Make body taller
-        my *= 1 + 1.2 * bodyWeight;
-        
-        if (bodyWeight > 0.0) {
-          const topness = Math.max(0, Math.sin(v));
-          const innerness = Math.max(0, -Math.cos(v));
-          // Create cup well (indent inner top)
-          const indent = topness * innerness * bodyWeight;
-          my -= 3.5 * indent;
-          
-          // Flatten bottom
-          const bottomness = Math.max(0, -Math.sin(v));
-          if (bottomness > 0.5) {
-             my += 1.5 * (bottomness - 0.5) * bodyWeight; 
-          }
-        }
-        
-        // Center the mug vertically and horizontally a bit
-        mugArray[idx * 3] = mx + 0.5 * bodyWeight;
-        mugArray[idx * 3 + 1] = my + 0.2 * bodyWeight;
-        mugArray[idx * 3 + 2] = mz;
-        
-        idx++;
-      }
-    }
-
-    for (let i = 0; i < segmentsU; i++) {
-      for (let j = 0; j < segmentsV; j++) {
-        const a = i * (segmentsV + 1) + j;
-        const b = (i + 1) * (segmentsV + 1) + j;
-        const c = i * (segmentsV + 1) + (j + 1);
-        const d = (i + 1) * (segmentsV + 1) + (j + 1);
-        indexArray.push(a, b, d);
-        indexArray.push(a, d, c);
-      }
-    }
-
-    geo.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
-    geo.setIndex(indexArray);
-    geo.computeVertexNormals();
-
-    // Prepare Morph Target for Mug
-    geo.morphAttributes.position = [];
-    geo.morphAttributes.position[0] = new THREE.BufferAttribute(mugArray, 3);
-    
-    // Create temp geo to compute morph normals for smooth shading
-    const tempMugGeo = new THREE.BufferGeometry();
-    tempMugGeo.setAttribute("position", new THREE.BufferAttribute(mugArray, 3));
-    tempMugGeo.setIndex(indexArray);
-    tempMugGeo.computeVertexNormals();
-    geo.morphAttributes.normal = [];
-    geo.morphAttributes.normal[0] = tempMugGeo.attributes.normal;
-
-    return geo;
-  }, []);
-
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.morphTargetInfluences![0] = morphValue;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} geometry={geometry} morphTargetInfluences={[0]} position={[0, -0.2, 0]}>
-      <meshStandardMaterial
-        color="#f59e0b"
-        roughness={0.2}
-        metalness={0.1}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
-  );
-}
-
 /* ════════════════════════════════════════════════════════════════════════
  * Shared Aesthetic Chrome
  * ════════════════════════════════════════════════════════════════════════ */
@@ -585,31 +409,72 @@ function TorusMugMesh({ morphValue }: { morphValue: number }) {
 function CardCorners() {
   return (
     <>
-      <span className="absolute top-1.5 left-1.5 w-2 h-2 border-t border-l border-indigo-400" aria-hidden />
-      <span className="absolute top-1.5 right-1.5 w-2 h-2 border-t border-r border-indigo-400" aria-hidden />
-      <span className="absolute bottom-1.5 left-1.5 w-2 h-2 border-b border-l border-indigo-400" aria-hidden />
-      <span className="absolute bottom-1.5 right-1.5 w-2 h-2 border-b border-r border-indigo-400" aria-hidden />
+      <span
+        className="absolute top-1.5 left-1.5 w-2 h-2 border-t border-l border-indigo-400"
+        aria-hidden
+      />
+      <span
+        className="absolute top-1.5 right-1.5 w-2 h-2 border-t border-r border-indigo-400"
+        aria-hidden
+      />
+      <span
+        className="absolute bottom-1.5 left-1.5 w-2 h-2 border-b border-l border-indigo-400"
+        aria-hidden
+      />
+      <span
+        className="absolute bottom-1.5 right-1.5 w-2 h-2 border-b border-r border-indigo-400"
+        aria-hidden
+      />
     </>
   );
 }
 
 function GraphPaperBg() {
   return (
-    <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden="true">
+    <div
+      className="absolute inset-0 -z-10 pointer-events-none"
+      aria-hidden="true"
+    >
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(180deg, #f8fafc 0%, #eef2ff 60%, #e0e7ff 100%)",
+          background:
+            "linear-gradient(180deg, #f8fafc 0%, #eef2ff 60%, #e0e7ff 100%)",
         }}
       />
-      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+      <svg
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+      >
         <defs>
-          <pattern id="geo-grid-fine" width="20" height="20" patternUnits="userSpaceOnUse">
-            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#c7d2fe" strokeWidth="0.5" opacity="0.55" />
+          <pattern
+            id="geo-grid-fine"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 20 0 L 0 0 0 20"
+              fill="none"
+              stroke="#c7d2fe"
+              strokeWidth="0.5"
+              opacity="0.55"
+            />
           </pattern>
-          <pattern id="geo-grid-bold" width="100" height="100" patternUnits="userSpaceOnUse">
+          <pattern
+            id="geo-grid-bold"
+            width="100"
+            height="100"
+            patternUnits="userSpaceOnUse"
+          >
             <rect width="100" height="100" fill="url(#geo-grid-fine)" />
-            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#a5b4fc" strokeWidth="0.9" opacity="0.5" />
+            <path
+              d="M 100 0 L 0 0 0 100"
+              fill="none"
+              stroke="#a5b4fc"
+              strokeWidth="0.9"
+              opacity="0.5"
+            />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#geo-grid-bold)" />

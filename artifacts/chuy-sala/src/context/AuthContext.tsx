@@ -1,19 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-export interface AuthSchool {
-  id: number;
-  nameEn: string;
-  nameKh: string;
-  province: string;
-  district: string;
-  photoUrl?: string | null;
-  contactEmail?: string | null;
-  contactPhone?: string | null;
-  description?: string | null;
-  studentCount?: number | null;
-}
-
-export type UserRole = "student" | "school";
+export type UserRole = "student";
 
 export interface AuthUser {
   id: number;
@@ -21,14 +8,13 @@ export interface AuthUser {
   schoolId: number | null;
   role: UserRole;
   isAdmin: boolean;
-  school: AuthSchool | null;
 }
 
 interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, role: UserRole, schoolId?: number) => Promise<void>;
+  register: (email: string, password: string, role: UserRole) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -63,11 +49,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(u);
   };
 
-  const register = async (email: string, password: string, role: UserRole, schoolId?: number) => {
+  const register = async (email: string, password: string, role: UserRole) => {
     const u = await apiCall<AuthUser>(`${API}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, role, schoolId }),
+      body: JSON.stringify({ email, password, role }),
     });
     setUser(u);
   };

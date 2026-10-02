@@ -1,9 +1,5 @@
-export * from "./schools";
-export * from "./needs";
-export * from "./completedProjects";
 export * from "./users";
 export * from "./passwordResetTokens";
-export * from "./stories";
 export * from "./conversations";
 export * from "./messages";
 export * from "./savedCareers";
@@ -13,6 +9,4 @@ export * from "./skepticCompletions";
 export * from "./books";
 export * from "./authorOfMonth";
 export * from "./challengeCompletions";
-export * from "./notifications";
-export * from "./schoolMessages";
 export * from "./quizCompletions";

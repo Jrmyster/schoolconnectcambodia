@@ -1,11 +1,6 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
-import schoolsRouter from "./schools";
-import needsRouter from "./needs";
-import completedProjectsRouter from "./completedProjects";
-import uploadRouter from "./upload";
 import authRouter from "./auth";
-import storiesRouter from "./stories";
 import openaiRouter from "./openai";
 import interviewRouter from "./interview";
 import adminMetricsRouter from "./adminMetrics";
@@ -17,8 +12,6 @@ import skepticRouter from "./skeptic";
 import booksRouter from "./books";
 import authorsRouter from "./authors";
 import achievementsRouter from "./achievements";
-import notificationsRouter from "./notifications";
-import schoolMessagesRouter from "./schoolMessages";
 import impactRouter from "./impact";
 import galacticGrammarRouter from "./galacticGrammar";
 
@@ -26,11 +19,6 @@ const router: IRouter = Router();
 
 router.use(healthRouter);
 router.use(authRouter);
-router.use(schoolsRouter);
-router.use(needsRouter);
-router.use(completedProjectsRouter);
-router.use(uploadRouter);
-router.use(storiesRouter);
 router.use(openaiRouter);
 router.use(interviewRouter);
 router.use(adminMetricsRouter);
@@ -42,8 +30,6 @@ router.use(skepticRouter);
 router.use(booksRouter);
 router.use(authorsRouter);
 router.use(achievementsRouter);
-router.use(notificationsRouter);
-router.use(schoolMessagesRouter);
 router.use(impactRouter);
 router.use(galacticGrammarRouter);
 

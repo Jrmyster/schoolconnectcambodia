@@ -1,7 +1,7 @@
 import { Router, type IRouter } from "express";
 import { randomUUID } from "crypto";
 import { db } from "@workspace/db";
-import { usersTable, schoolsTable, passwordResetTokensTable } from "@workspace/db/schema";
+import { usersTable, passwordResetTokensTable } from "@workspace/db/schema";
 import { eq, and, gt, isNull } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 
@@ -44,14 +44,8 @@ router.post("/auth/register", async (req, res) => {
 
     // A synthetic student-PIN email is reserved for the `student` role —
     // refuse direct API attempts to register a "school" account with a 4-digit PIN.
-    const normalizedRole = isStudentPin
-      ? "student"
-      : role === "school"
-        ? "school"
-        : role === "student"
-          ? "student"
-          : null;
-    if (!normalizedRole) return res.status(400).json({ error: "Please select an account type (Student or School Official)." });
+    if (role && role !== "student") return res.status(400).json({ error: "Use the Digital Map site for school accounts." });
+    const normalizedRole = "student";
 
     const existing = await db.select().from(usersTable).where(eq(usersTable.email, normalizedEmail)).limit(1);
     if (existing.length > 0) {
@@ -66,20 +60,14 @@ router.post("/auth/register", async (req, res) => {
     const [user] = await db.insert(usersTable).values({
       email: normalizedEmail,
       passwordHash,
-      schoolId: normalizedRole === "school" ? (schoolId ?? null) : null,
       role: normalizedRole,
     }).returning();
 
     req.session.userId = user.id;
     await req.session.save();
 
-    let school = null;
-    if (user.schoolId) {
-      const rows = await db.select().from(schoolsTable).where(eq(schoolsTable.id, user.schoolId)).limit(1);
-      school = rows[0] ?? null;
-    }
 
-    res.status(201).json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin, school });
+    res.status(201).json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }
@@ -92,7 +80,7 @@ router.post("/auth/login", async (req, res) => {
 
     const rows = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
     const user = rows[0];
-    if (!user) return res.status(401).json({ error: "Invalid email or password." });
+    if (!user || user.role !== "student") return res.status(401).json({ error: "Invalid email or password." });
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Invalid email or password." });
@@ -100,13 +88,8 @@ router.post("/auth/login", async (req, res) => {
     req.session.userId = user.id;
     await req.session.save();
 
-    let school = null;
-    if (user.schoolId) {
-      const schoolRows = await db.select().from(schoolsTable).where(eq(schoolsTable.id, user.schoolId)).limit(1);
-      school = schoolRows[0] ?? null;
-    }
 
-    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin, school });
+    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }
@@ -114,7 +97,7 @@ router.post("/auth/login", async (req, res) => {
 
 router.post("/auth/logout", (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie("chsid");
+    res.clearCookie("stem.sid");
     res.json({ ok: true });
   });
 });
@@ -126,18 +109,13 @@ router.get("/auth/me", async (req, res) => {
 
     const rows = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
     const user = rows[0];
-    if (!user) {
+    if (!user || user.role !== "student") {
       req.session.destroy(() => {});
       return res.status(401).json({ error: "Session expired." });
     }
 
-    let school = null;
-    if (user.schoolId) {
-      const schoolRows = await db.select().from(schoolsTable).where(eq(schoolsTable.id, user.schoolId)).limit(1);
-      school = schoolRows[0] ?? null;
-    }
 
-    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin, school });
+    res.json({ id: user.id, email: user.email, schoolId: user.schoolId, role: user.role, isAdmin: user.isAdmin });
   } catch (e) {
     res.status(500).json({ error: String(e) });
   }

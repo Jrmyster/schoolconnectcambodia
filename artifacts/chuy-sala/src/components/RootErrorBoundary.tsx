@@ -48,7 +48,7 @@ export class RootErrorBoundary extends Component<Props, State> {
       try {
         if ("caches" in window) {
           caches.keys().then((keys) => {
-            keys.forEach((k) => {
+            keys.filter((k) => k.startsWith("stem-pwa-") || k.startsWith("school-connect-stem-")).forEach((k) => {
               caches.delete(k).catch(() => {});
             });
           }).catch(() => {});
@@ -69,7 +69,7 @@ export class RootErrorBoundary extends Component<Props, State> {
       }
       if ("caches" in window) {
         const keys = await caches.keys();
-        await Promise.all(keys.map((k) => caches.delete(k).catch(() => false)));
+        await Promise.all(keys.filter((k) => k.startsWith("stem-pwa-") || k.startsWith("school-connect-stem-")).map((k) => caches.delete(k).catch(() => false)));
       }
     } catch {
       /* ignore — reload regardless */

@@ -1,14 +1,21 @@
 {
-  "name": "workspace",
+  "name": "school-connect-stem-workspace",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
+    "verify:api": "node verification/run-api.mjs",
+    "verify:boundary": "bash verification/check-stem-boundary.sh",
+    "verify:geometry": "node verification/run-geometry.mjs",
+    "verify:browser": "node verification/browser-smoke.cjs",
+    "verify:content": "node verification/check-content.cjs"
   },
   "private": true,
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "playwright": "1.51.1",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2"
   },

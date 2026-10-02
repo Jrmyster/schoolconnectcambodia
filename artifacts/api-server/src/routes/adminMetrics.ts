@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db } from "@workspace/db";
-import { storiesTable, conversations } from "@workspace/db/schema";
+import { conversations } from "@workspace/db/schema";
 import { count, gte, eq } from "drizzle-orm";
 import { openai } from "@workspace/integrations-openai-ai-server";
 import { requireAdmin } from "../middleware/rbac";
@@ -17,19 +17,9 @@ router.get("/admin/weekly-metrics", requireAdmin, async (_req, res) => {
   try {
     const since = weekAgo();
 
-    const [
-      [pendingStoriesRow],
-      [newStoriesRow],
-      [aiSessionsRow],
-    ] = await Promise.all([
-      db.select({ c: count() }).from(storiesTable).where(eq(storiesTable.status, "pending")),
-      db.select({ c: count() }).from(storiesTable).where(gte(storiesTable.createdAt, since)),
-      db.select({ c: count() }).from(conversations).where(gte(conversations.createdAt, since)),
-    ]);
+    const [aiSessionsRow] = await db.select({ c: count() }).from(conversations).where(gte(conversations.createdAt, since));
 
     res.json({
-      pendingStories:       pendingStoriesRow?.c ?? 0,
-      newStoriesThisWeek:   newStoriesRow?.c    ?? 0,
       aiChatSessionsThisWeek: aiSessionsRow?.c  ?? 0,
       weekStart: since.toISOString(),
     });
@@ -42,8 +32,6 @@ router.get("/admin/weekly-metrics", requireAdmin, async (_req, res) => {
 router.post("/admin/weekly-summary", requireAdmin, async (req, res) => {
   const { metrics } = req.body as {
     metrics: {
-      pendingStories: number;
-      newStoriesThisWeek: number;
       aiChatSessionsThisWeek: number;
     };
   };
@@ -53,8 +41,8 @@ router.post("/admin/weekly-summary", requireAdmin, async (req, res) => {
     return;
   }
 
-  const systemPrompt = `You are the School Connect Cambodia platform assistant helping the admin with their weekly review. 
-Respond in clear, warm, professional English. Be concise (max 200 words). 
+  const systemPrompt = `You are the School Connect Cambodia platform assistant helping the admin with their weekly review.
+Respond in clear, warm, professional English. Be concise (max 200 words).
 Format the response with these sections:
 📊 **This Week at a Glance**
 🔔 **Action Items** (bulleted — things needing immediate attention)
@@ -64,12 +52,10 @@ Keep a supportive, mission-driven tone focused on helping Cambodian students.`;
   const userMsg = `It's Sunday evening — time for the weekly School Connect Cambodia check-in.
 
 Here are this week's platform metrics:
-- Pending Alumni Story submissions awaiting review: ${metrics.pendingStories}
-- New Alumni Story submissions received this week: ${metrics.newStoriesThisWeek}
 - AI Tutor (Get AI Review) chat sessions this week: ${metrics.aiChatSessionsThisWeek}
 - Job Interview Simulator: real-time sessions (not persisted in DB)
 
-Please give me a concise weekly summary, highlight what needs my attention (especially any pending story reviews), and give one motivating insight about the platform's engagement this week.`;
+Please give me a concise weekly summary, highlight what needs my attention , and give one motivating insight about the platform's engagement this week.`;
 
   try {
     const completion = await openai.chat.completions.create({

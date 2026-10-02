@@ -3,7 +3,6 @@ import cors from "cors";
 import path from "path";
 import session from "express-session";
 import router from "./routes";
-import { uploadsDir } from "./routes/upload";
 
 const app: Express = express();
 
@@ -30,7 +29,7 @@ if (!SESSION_SECRET && process.env["NODE_ENV"] === "production") {
 }
 
 app.use(session({
-  name: "chsid",
+  name: "stem.sid",
   secret: SESSION_SECRET ?? "chouy-sala-dev-only-secret-do-not-use-in-prod",
   resave: false,
   saveUninitialized: false,
@@ -43,7 +42,6 @@ app.use(session({
 }));
 
 // Serve uploaded photos as static files
-app.use("/api/uploads", express.static(uploadsDir));
 
 app.use("/api", router);
 

@@ -24,10 +24,11 @@
 // v3 = navigation strategy switched from stale-while-revalidate to
 //      network-first (fixes white-screen-of-death from stale index.html
 //      pointing at evicted JS chunks after a redeploy).
-const VERSION = "v4";
-const SHELL_CACHE = `chouy-sala-shell-${VERSION}`;
-const ASSET_CACHE = `chouy-sala-assets-${VERSION}`;
-const RUNTIME_CACHE = `chouy-sala-runtime-${VERSION}`;
+const CACHE_PREFIX = "stem-pwa-v1";
+const VERSION = "v5";
+const SHELL_CACHE = `${CACHE_PREFIX}-shell-${VERSION}`;
+const ASSET_CACHE = `${CACHE_PREFIX}-assets-${VERSION}`;
+const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${VERSION}`;
 const KEEP = new Set([SHELL_CACHE, ASSET_CACHE, RUNTIME_CACHE]);
 
 // SW scope ends with a trailing slash; everything we precache is relative to it.
@@ -77,9 +78,9 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
       const keys = await caches.keys();
-      // Drop any cache from a prior version (chouy-sala-shell-v1, etc).
+      // Retire only this application's previous caches, including its old namespace.
       await Promise.all(
-        keys.filter((k) => !KEEP.has(k)).map((k) => caches.delete(k)),
+        keys.filter((k) => (k.startsWith("stem-pwa-") || k.startsWith("school-connect-stem-")) && !KEEP.has(k)).map((k) => caches.delete(k)),
       );
       await self.clients.claim();
     })(),
@@ -206,18 +207,15 @@ async function handleNavigation(request) {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
-  // SPA route changes (top-level HTML navigations) → SWR + shell fallback.
+  if (!isSameOriginGet(request)) return;
+  const url = new URL(request.url);
+  // Private APIs bypass caching, including direct browser navigations.
+  if (isApi(url)) return;
+  // HTML navigations use network-first with an offline shell fallback.
   if (request.mode === "navigate") {
     event.respondWith(handleNavigation(request));
     return;
   }
-
-  if (!isSameOriginGet(request)) return;
-
-  const url = new URL(request.url);
-
-  // API calls bypass the SW entirely — let them fail loudly when offline.
-  if (isApi(url)) return;
 
   // Hashed static build artefacts → cache-first (fast, offline-resilient).
   if (isStaticAsset(url)) {

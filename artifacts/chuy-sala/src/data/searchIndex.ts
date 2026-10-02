@@ -400,18 +400,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsKh: ["គ្រួសារ", "សាច់ញាតិ", "ម្ដាយ", "ម៉ាក់", "ឪពុក", "ប៉ា", "ជីដូន", "យាយ", "ជីតា", "តា", "បងប្រុស", "ប្អូនប្រុស", "បងស្រី", "ប្អូនស្រី", "មីង", "ពូ", "បងប្អូនជីដូនមួយ", "វាក្យសព្ទ"],
     type: "module",
   },
-  {
-    id: "submit-story",
-    href: "/submit-story",
-    icon: FileText,
-    titleEn: "Submit a Story",
-    titleKh: "ដាក់ស្នើរឿង",
-    categoryEn: "Language", categoryKh: "ភាសា",
-    descEn: "Share your own writing with the Chouy Sala community.",
-    descKh: "ចែករំលែកការសរសេររបស់អ្នកជាមួយសហគមន៍ ជួយសាលា។",
-    keywordsEn: ["submit", "story", "essay", "publish", "share writing"],
-    keywordsKh: ["ដាក់ស្នើ", "រឿង", "ចែករំលែក"],
-  },
+
 
   // ── CAREER / LAUNCHPAD ───────────────────────────────────
   {
@@ -426,18 +415,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
     keywordsEn: ["career", "careers", "job", "jobs", "work", "profession", "future", "launchpad", "pathway", "engineer", "doctor", "teacher", "interview", "resume", "salary", "university", "major"],
     keywordsKh: ["អាជីព", "ការងារ", "មុខរបរ", "អនាគត", "វិស្វកម្ម", "វេជ្ជបណ្ឌិត", "គ្រូ", "សាកលវិទ្យាល័យ"],
   },
-  {
-    id: "alumni",
-    href: "/alumni",
-    icon: GraduationCap,
-    titleEn: "Alumni Voices",
-    titleKh: "សំលេងសិស្សចាស់",
-    categoryEn: "Career", categoryKh: "អាជីព",
-    descEn: "Stories from graduates who walked the same path you're on now.",
-    descKh: "រឿងរ៉ាវពីបណ្ឌិតបញ្ចប់ការសិក្សាដែលធ្លាប់ដើរផ្លូវដូចអ្នកសព្វថ្ងៃ។",
-    keywordsEn: ["alumni", "graduates", "stories", "mentor", "role model"],
-    keywordsKh: ["សិស្សចាស់", "បញ្ចប់ការសិក្សា", "រឿង"],
-  },
+
 
   // ── AUTOMOTIVE ──────────────────────────────────────────
   {
@@ -540,54 +518,10 @@ export const SEARCH_INDEX: SearchEntry[] = [
   },
 
   // ── DONATIONS / COMMUNITY ───────────────────────────────
-  {
-    id: "map",
-    href: "/map",
-    icon: MapPin,
-    titleEn: "School Map",
-    titleKh: "ផែនទីសាលា",
-    categoryEn: "Community", categoryKh: "សហគមន៍",
-    descEn: "Browse rural Cambodian schools by location and see what they need.",
-    descKh: "រុករកសាលារៀននៅជនបទកម្ពុជាតាមទីតាំង និងមើលអ្វីដែលពួកគេត្រូវការ។",
-    keywordsEn: ["map", "school", "schools", "location", "find school", "rural", "cambodia"],
-    keywordsKh: ["ផែនទី", "សាលា", "ទីតាំង", "ជនបទ", "កម្ពុជា"],
-  },
-  {
-    id: "needs",
-    href: "/needs",
-    icon: Heart,
-    titleEn: "Browse Needs",
-    titleKh: "រុករកតម្រូវការ",
-    categoryEn: "Community", categoryKh: "សហគមន៍",
-    descEn: "Active requests from schools — books, desks, computers, repairs.",
-    descKh: "ការស្នើសុំសកម្មពីសាលា — សៀវភៅ តុ កុំព្យូទ័រ ការជួសជុល។",
-    keywordsEn: ["donate", "donation", "give", "help", "need", "needs", "request", "support", "books", "supplies"],
-    keywordsKh: ["ឧបត្ថម្ភ", "បរិច្ចាគ", "ជួយ", "តម្រូវការ", "សៀវភៅ"],
-  },
-  {
-    id: "charities",
-    href: "/charities",
-    icon: Building2,
-    titleEn: "Charity Directory",
-    titleKh: "បញ្ជីអង្គការសប្បុរសធម៌",
-    categoryEn: "Community", categoryKh: "សហគមន៍",
-    descEn: "Verified NGOs working with rural Cambodian schools.",
-    descKh: "អង្គការ NGO ដែលបានផ្ទៀងផ្ទាត់ ដែលធ្វើការជាមួយសាលាជនបទ។",
-    keywordsEn: ["charity", "ngo", "non-profit", "organization", "directory"],
-    keywordsKh: ["អង្គការ", "សប្បុរសធម៌", "NGO"],
-  },
-  {
-    id: "projects",
-    href: "/projects",
-    icon: Users,
-    titleEn: "Completed Projects",
-    titleKh: "គម្រោងបញ្ចប់",
-    categoryEn: "Community", categoryKh: "សហគមន៍",
-    descEn: "See the impact: photos, stories, and outcomes of finished donations.",
-    descKh: "មើលផលប៉ះពាល់៖ រូបថត រឿងរ៉ាវ និងលទ្ធផលនៃអំណោយដែលបានបញ្ចប់។",
-    keywordsEn: ["completed", "projects", "results", "impact", "stories", "before after"],
-    keywordsKh: ["គម្រោង", "បញ្ចប់", "លទ្ធផល"],
-  },
+
+
+
+
   {
     id: "reading-list",
     href: "/reading-list",

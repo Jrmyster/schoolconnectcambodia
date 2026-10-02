@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db } from "@workspace/db";
-import { usersTable, schoolsTable, spaceLeaderboardTable } from "@workspace/db/schema";
+import { usersTable, spaceLeaderboardTable } from "@workspace/db/schema";
 import { eq, gt, desc, asc } from "drizzle-orm";
 
 const router = Router();
@@ -14,10 +14,9 @@ router.get("/leaderboard/provincial", async (_req, res) => {
       email: usersTable.email,
       expPoints: usersTable.expPoints,
       schoolId: usersTable.schoolId,
-      province: schoolsTable.province,
+      province: usersTable.province,
     })
     .from(usersTable)
-    .leftJoin(schoolsTable, eq(usersTable.schoolId, schoolsTable.id))
     .where(gt(usersTable.expPoints, 0))
     .orderBy(desc(usersTable.expPoints))
     .limit(100);

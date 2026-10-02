@@ -154,14 +154,7 @@ const EXCLUDED_PREFIXES = [
   "/dashboard",
   "/profile",
   "/admin",
-  "/school-inbox",
-  "/submit-need",
-  "/submit-story",
-  "/charities",
-  "/needs",
-  "/projects",
   "/impact",
-  "/map",
   "/api",
 ];
 

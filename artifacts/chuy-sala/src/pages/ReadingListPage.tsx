@@ -247,10 +247,6 @@ export function ReadingListPage() {
                 <Plus className="w-4 h-4" />
                 {t("Recommend a Book", "ណែនាំសៀវភៅ")}
               </button>
-            ) : user && user.role === "school" ? (
-              <span className={`inline-flex items-center gap-2 bg-white/15 border border-white/30 text-white/90 font-medium px-5 py-2.5 rounded-xl text-sm ${kh ? "font-khmer" : ""}`}>
-                {t("Reading List recommendations are for student accounts.", "ការណែនាំសៀវភៅសម្រាប់គណនីសិស្សតែប៉ុណ្ណោះ។")}
-              </span>
             ) : (
               <Link href="/login"
                 className={`inline-flex items-center gap-2 bg-white/20 border border-white/30 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-white/30 transition-all ${kh ? "font-khmer text-sm" : ""}`}>

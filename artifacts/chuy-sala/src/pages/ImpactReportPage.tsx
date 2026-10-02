@@ -30,8 +30,6 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 interface ImpactStatsResponse {
   vitalSigns: {
     studentsGuided: number;
-    activeNeeds: number;
-    projectsCompleted: number;
   };
   learningTrends: Array<{
     key: string;
@@ -233,28 +231,8 @@ export function ImpactReportPage() {
               hintEn="Learning Path Discovery Quiz completions"
               hintKh="ការបញ្ចប់កម្រងសំណួរស្វែងរកផ្លូវសិក្សា"
             />
-            <VitalCard
-              kh={kh}
-              loading={loading}
-              icon={<ClipboardList className="w-6 h-6" />}
-              tone="amber"
-              value={data?.vitalSigns.activeNeeds ?? 0}
-              labelEn="Active School Needs"
-              labelKh="សំណើសាលាកំពុងសកម្ម"
-              hintEn="Open requests from rural high schools"
-              hintKh="សំណើបើកចំហពីសាលាមធ្យមជនបទ"
-            />
-            <VitalCard
-              kh={kh}
-              loading={loading}
-              icon={<CheckCircle2 className="w-6 h-6" />}
-              tone="emerald"
-              value={data?.vitalSigns.projectsCompleted ?? 0}
-              labelEn="Projects Funded & Completed"
-              labelKh="គម្រោងបានឧបត្ថម្ភ និងបញ្ចប់"
-              hintEn="Verified outcomes from donors and NGOs"
-              hintKh="លទ្ធផលដែលបានផ្ទៀងផ្ទាត់ពីម្ចាស់ជំនួយ និង NGO"
-            />
+
+
           </div>
         </section>
 
@@ -438,7 +416,7 @@ export function ImpactReportPage() {
           </div>
           <p className="mt-2">
             {t(
-              "Figures are pulled directly from the Chouy Sala production database at the time of generation. Quiz completions are recorded anonymously to measure reach. Completed projects are verified by partner schools before publication.",
+              "Figures are pulled directly from the Chouy Sala production database at the time of generation. Quiz completions are recorded anonymously to measure reach.",
               "តួលេខទាំងនេះត្រូវបានទាញដោយផ្ទាល់ពីមូលដ្ឋានទិន្នន័យជួយសាលានៅពេលបង្កើត។ ការបញ្ចប់កម្រងសំណួរត្រូវបានកត់ត្រាដោយអនាមិកដើម្បីវាស់ស្ទង់វិសាលភាព។ គម្រោងដែលបានបញ្ចប់ត្រូវបានផ្ទៀងផ្ទាត់ដោយសាលាដៃគូមុនពេលបោះពុម្ពផ្សាយ។"
             )}
           </p>

@@ -2,9 +2,6 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import {
   quizCompletionsTable,
-  needsTable,
-  completedProjectsTable,
-  schoolsTable,
 } from "@workspace/db/schema";
 import { eq, count, desc, sql } from "drizzle-orm";
 
@@ -77,15 +74,6 @@ router.get("/impact-stats", async (_req, res) => {
     .select({ studentsGuided: count() })
     .from(quizCompletionsTable);
 
-  const [{ activeNeeds }] = await db
-    .select({ activeNeeds: count() })
-    .from(needsTable)
-    .where(eq(needsTable.status, "active"));
-
-  const [{ projectsCompleted }] = await db
-    .select({ projectsCompleted: count() })
-    .from(completedProjectsTable);
-
   // 2) Learning trends — group quiz curiosity choices into 4 buckets
   const grouped = await db
     .select({
@@ -121,20 +109,6 @@ router.get("/impact-stats", async (_req, res) => {
   ];
 
   // 3) Live impact feed — recent successes blended from completed projects + recent quiz milestones
-  const recentProjects = await db
-    .select({
-      id: completedProjectsTable.id,
-      titleEn: completedProjectsTable.titleEn,
-      titleKh: completedProjectsTable.titleKh,
-      schoolName: schoolsTable.nameEn,
-      schoolNameKh: schoolsTable.nameKh,
-      completedAt: completedProjectsTable.completedAt,
-    })
-    .from(completedProjectsTable)
-    .leftJoin(schoolsTable, eq(completedProjectsTable.schoolId, schoolsTable.id))
-    .orderBy(desc(completedProjectsTable.completedAt))
-    .limit(8);
-
   // Bundle quiz completions by day for the last 14 days
   const dailyQuizzes = await db
     .select({
@@ -154,15 +128,6 @@ router.get("/impact-stats", async (_req, res) => {
     kh: string;
   }> = [];
 
-  for (const p of recentProjects) {
-    feed.push({
-      id: `project-${p.id}`,
-      type: "project",
-      timestamp: p.completedAt.toISOString(),
-      en: `${p.schoolName ?? "A school"} successfully received: ${p.titleEn}.`,
-      kh: `${p.schoolNameKh ?? "សាលាមួយ"} បានទទួលដោយជោគជ័យ៖ ${p.titleKh}។`,
-    });
-  }
   for (const d of dailyQuizzes) {
     if (Number(d.total) <= 0) continue;
     feed.push({
@@ -179,8 +144,6 @@ router.get("/impact-stats", async (_req, res) => {
   return res.json({
     vitalSigns: {
       studentsGuided: Number(studentsGuided),
-      activeNeeds: Number(activeNeeds),
-      projectsCompleted: Number(projectsCompleted),
     },
     learningTrends,
     feed: feed.slice(0, 14),

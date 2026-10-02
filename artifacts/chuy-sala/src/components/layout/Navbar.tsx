@@ -9,7 +9,7 @@ import { useState, useRef, useEffect, useId, useLayoutEffect, ComponentType } fr
 import { createPortal } from "react-dom";
 import { useLanguageStore, useTranslation } from "@/store/use-language";
 import { useAuth } from "@/context/AuthContext";
-import { NotificationBell } from "@/components/NotificationBell";
+import { MAP_SITE_URL } from "@/config/sites";
 import { ThemePalette } from "@/components/ThemePalette";
 import { GlobalSearch } from "@/components/GlobalSearch";
 import { InstallAppButton } from "@/components/InstallAppButton";
@@ -109,10 +109,8 @@ const NAV_GROUPS: NavGroup[] = [
     icon: Compass,
     color: "slate",
     items: [
+      { href: MAP_SITE_URL, labelEn: "Digital Map", labelKh: "ផែនទីឌីជីថល", icon: Map, external: true },
       { href: "/",          labelEn: "Home",        labelKh: "ទំព័រដើម",  icon: Heart },
-      { href: "/map",       labelEn: "Map",          labelKh: "ផែនទី",     icon: Map },
-      { href: "/needs",     labelEn: "Browse Needs", labelKh: "តម្រូវការ", icon: Heart },
-      { href: "/projects",  labelEn: "Completed",    labelKh: "បានបញ្ចប់", icon: CheckCircle },
       { href: "/art-gallery", labelEn: "Student Art Gallery", labelKh: "វិចិត្រសាលសិល្បៈសិស្ស", icon: Palette },
       {
         href: "/cambodia",
@@ -147,8 +145,6 @@ const NAV_GROUPS: NavGroup[] = [
         descEn: "Where to Apply — a directory of the top 5 national public universities in Cambodia and what they are famous for teaching: RUPP (science, humanities, IT, foreign languages), ITC / Sala Techno (engineering, architecture, computer science), RUA (agronomy, veterinary medicine, food science), RULE (law, public administration, finance), and NUM (business, accounting, entrepreneurship). Each card links out to the university's official website and Facebook page.",
         descKh: "កន្លែងដែលត្រូវដាក់ពាក្យ — បញ្ជីសាកលវិទ្យាល័យសាធារណៈជាតិកំពូលទាំង ៥ នៅកម្ពុជា និងអ្វីដែលពួកគេល្បីល្បាញក្នុងការបង្រៀន ៖ RUPP (វិទ្យាសាស្ត្រ មនុស្សសាស្ត្រ បច្ចេកវិទ្យាព័ត៌មាន ភាសាបរទេស), ITC / សាលាតិចណូ (វិស្វកម្ម ស្ថាបត្យកម្ម វិទ្យាសាស្ត្រកុំព្យូទ័រ), RUA (កសិកម្ម វេជ្ជសាស្ត្រសត្វ វិទ្យាសាស្ត្រអាហារ), RULE (នីតិសាស្ត្រ រដ្ឋបាលសាធារណៈ ហិរញ្ញវត្ថុ), និង NUM (ពាណិជ្ជកម្ម គណនេយ្យ សហគ្រិនភាព)។ កាតនីមួយៗភ្ជាប់ទៅគេហទំព័រផ្លូវការ និងទំព័រ Facebook របស់សាកលវិទ្យាល័យ។",
       },
-      { href: "/charities", labelEn: "Partners",      labelKh: "ដៃគូ",          icon: Handshake },
-      { href: "/alumni",    labelEn: "Alumni",         labelKh: "រឿងជោគជ័យ",   icon: Star },
       { href: "/reading-list", labelEn: "Reading List", labelKh: "បញ្ជីសៀវភៅអាន", icon: BookOpen },
 
       // ── Career Resources (merged in from the former "Career" dropdown) ──
@@ -2007,7 +2003,7 @@ const NAV_GROUPS: NavGroup[] = [
 ];
 
 const ADMIN_ITEM: NavItem = {
-  href: "/admin",
+  href: "/admin/students",
   labelEn: "Admin",
   labelKh: "គ្រប់គ្រង",
   icon: PlusCircle,
@@ -2375,14 +2371,9 @@ export function Navbar() {
 
           {/* Right controls */}
           <div className="flex items-center gap-3">
-            {/* Bell + Theme + Language toggles — hidden on mobile (toggles
-                are surfaced inside the hamburger drawer below) so the mobile
-                header stays strictly Logo (left) ↔ Hamburger (right).
-                NotificationBell already self-hides for non-school accounts;
-                wrapping in `hidden lg:flex` ensures it never appears in the
-                mobile header even for school users. */}
+            {/* Theme and language toggles appear in the mobile drawer,
+                keeping the mobile header focused on the logo and menu. */}
             <div className="hidden lg:flex items-center gap-3">
-              <NotificationBell />
               <ThemePalette />
               <LanguageToggle />
             </div>
@@ -2394,7 +2385,7 @@ export function Navbar() {
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20">
                     <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className={`text-xs font-semibold text-primary truncate max-w-[120px] ${kh ? "font-khmer text-sm" : ""}`}>
-                      {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
+                      {user.email}
                     </span>
                   </div>
                   <Link
@@ -2472,7 +2463,7 @@ export function Navbar() {
 
             {user?.isAdmin && (
               <Link
-                href="/admin"
+                href="/admin/students"
                 className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all ${
                   location.startsWith("/admin")
                     ? "bg-primary text-primary-foreground border-primary shadow-sm"
@@ -2619,7 +2610,7 @@ export function Navbar() {
 
             {user?.isAdmin && (
               <Link
-                href="/admin"
+                href="/admin/students"
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-primary border-2 border-primary/25 hover:bg-primary/5 text-sm transition-all ${kh ? "font-khmer" : ""}`}
               >
@@ -2647,7 +2638,7 @@ export function Navbar() {
                   <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-primary/10 border border-primary/20">
                     <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className={`text-sm font-semibold text-primary truncate ${kh ? "font-khmer" : ""}`}>
-                      {user.school ? (kh ? user.school.nameKh : user.school.nameEn) : user.email}
+                      {user.email}
                     </span>
                   </div>
 

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/AuthContext";
-import { useListSchools } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Button } from "@/components/ui/button";
@@ -40,8 +39,6 @@ interface RegisterForm {
   identifier: string;
   secret: string;
   confirmSecret: string;
-  schoolId: string;
-  role: UserRole;
 }
 
 export function Login() {
@@ -55,7 +52,6 @@ export function Login() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const { data: schools } = useListSchools();
 
   const inputClass =
     "w-full px-4 py-3 rounded-xl border-2 border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all bg-background text-sm";
@@ -93,7 +89,7 @@ export function Login() {
         "ប្រើឈ្មោះ និងថ្នាក់របស់អ្នក ឧ. sokha_12A",
       )
     : null;
-  const identifierPlaceholder = isPin ? "sokha_12A" : "school@example.com";
+  const identifierPlaceholder = isPin ? "sokha_12A" : "student@example.com";
 
   const secretLabel = isPin
     ? t("4-Digit PIN", "លេខសម្ងាត់ ៤ ខ្ទង់")
@@ -138,15 +134,6 @@ export function Login() {
   };
 
   const onRegister = async (data: RegisterForm) => {
-    // PIN-mode students always register as `student` and have no school
-    // selector. Email-mode users still pick a role + (optional) school.
-    if (!isPin && !data.role) {
-      toast({
-        variant: "destructive",
-        title: t("Please select an account type", "សូមជ្រើសរើសប្រភេទគណនី"),
-      });
-      return;
-    }
     if (data.secret !== data.confirmSecret) {
       toast({
         variant: "destructive",
@@ -158,12 +145,7 @@ export function Login() {
     }
     try {
       const email = transformIdentifier(data.identifier);
-      const role: UserRole = isPin ? "student" : data.role;
-      const schoolId =
-        !isPin && role === "school" && data.schoolId
-          ? Number(data.schoolId)
-          : undefined;
-      await register(email, data.secret.trim(), role, schoolId);
+      await register(email, data.secret.trim(), "student");
       toast({
         title: t("Account created!", "បានបង្កើតគណនី!"),
         description: t("You are now signed in.", "អ្នកបានចូលទៅក្នុងប្រព័ន្ធ។"),
@@ -468,66 +450,7 @@ export function Login() {
             >
               {/* Role selector — only in EMAIL mode (PIN mode is always
                   student) */}
-              {!isPin && (
-                <div>
-                  <label className={labelClass}>
-                    {t("I am registering as a:", "ខ្ញុំចុះឈ្មោះជា៖")}*
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {(
-                      [
-                        { value: "student", icon: User, en: "Student", kh: "សិស្ស" },
-                        {
-                          value: "school",
-                          icon: SchoolIcon,
-                          en: "School Official",
-                          kh: "មន្ត្រីសាលា",
-                        },
-                      ] as const
-                    ).map((opt) => {
-                      const Icon = opt.icon;
-                      const checked = watchReg("role") === opt.value;
-                      return (
-                        <label
-                          key={opt.value}
-                          className={`relative flex flex-col items-center gap-1.5 px-3 py-4 rounded-xl border-2 cursor-pointer transition-all ${
-                            checked
-                              ? "border-primary bg-primary/5 ring-4 ring-primary/10"
-                              : "border-border hover:border-primary/40 hover:bg-muted/30"
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            value={opt.value}
-                            {...regReg("role", { required: true })}
-                            className="sr-only"
-                          />
-                          <Icon
-                            className={`w-6 h-6 ${
-                              checked ? "text-primary" : "text-muted-foreground"
-                            }`}
-                          />
-                          <span
-                            className={`text-sm font-semibold ${
-                              checked ? "text-primary" : "text-foreground"
-                            } ${kh ? "font-khmer text-base" : ""}`}
-                          >
-                            {kh ? opt.kh : opt.en}
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                  {regErrors.role && (
-                    <p className="text-destructive text-xs mt-1">
-                      {t(
-                        "Please select an account type",
-                        "សូមជ្រើសរើសប្រភេទគណនី",
-                      )}
-                    </p>
-                  )}
-                </div>
-              )}
+
 
               <div>
                 <label className={labelClass} htmlFor="reg-identifier">
@@ -679,29 +602,7 @@ export function Login() {
               </div>
 
               {/* School linker — only in email mode AND school role */}
-              {!isPin && watchReg("role") === "school" && (
-                <div>
-                  <label className={labelClass}>
-                    {t("Link to School", "ភ្ជាប់ទៅសាលា")}{" "}
-                    <span className="font-normal text-muted-foreground text-xs">
-                      ({t("optional", "ស្រេចចិត្ត")})
-                    </span>
-                  </label>
-                  <select {...regReg("schoolId")} className={inputClass}>
-                    <option value="">
-                      {t(
-                        "— Select your school (optional) —",
-                        "— ជ្រើសរើសសាលា (ស្រេចចិត្ត) —",
-                      )}
-                    </option>
-                    {schools?.map((s) => (
-                      <option key={s.id} value={s.id}>
-                        {kh ? s.nameKh : s.nameEn} — {s.province}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+
 
               <Button
                 type="submit"

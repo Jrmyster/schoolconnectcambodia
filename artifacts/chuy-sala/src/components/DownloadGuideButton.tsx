@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FileDown, Loader2, CheckCircle2 } from "lucide-react";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { generateResourceGuide } from "@/lib/generatePDF";
+
 
 interface DownloadGuideButtonProps {
   className?: string;
@@ -20,6 +20,7 @@ export function DownloadGuideButton({ className = "" }: DownloadGuideButtonProps
     setStatus("loading");
     setProgress(kh ? "កំពុងរៀបចំ…" : "Preparing…");
     try {
+      const { generateResourceGuide } = await import("@/lib/generatePDF");
       await generateResourceGuide((step) => setProgress(step));
       setStatus("done");
       setTimeout(() => setStatus("idle"), 3500);

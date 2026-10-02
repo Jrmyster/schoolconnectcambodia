@@ -1,22 +1,8 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
-import { useRef, useState, useEffect, Suspense, useCallback, Component, type ReactNode } from "react";
-import * as THREE from "three";
-import { X, AlertCircle } from "lucide-react";
+import { SolarDiagram } from "@/components/diagrams/LearningDiagrams";
 
-// ── WebGL error boundary ──────────────────────────────────────────────────────
+import { useCallback, useState } from "react";
 
-interface EBState { hasError: boolean }
-class WebGLErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, EBState> {
-  constructor(props: { children: ReactNode; fallback: ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  static getDerivedStateFromError() { return { hasError: true }; }
-  render() {
-    return this.state.hasError ? this.props.fallback : this.props.children;
-  }
-}
+import { X } from "lucide-react";
 
 // ── Planet data ──────────────────────────────────────────────────────────────
 
@@ -162,172 +148,6 @@ const PLANETS: PlanetConfig[] = [
   },
 ];
 
-// ── Orbit ring (static, centered on Sun) ─────────────────────────────────────
-
-function OrbitRing({ distance }: { distance: number }) {
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]}>
-      <ringGeometry args={[distance - 0.03, distance + 0.03, 128]} />
-      <meshBasicMaterial
-        color="#FFFFFF"
-        opacity={0.07}
-        transparent
-        side={THREE.DoubleSide}
-        depthWrite={false}
-      />
-    </mesh>
-  );
-}
-
-// ── The Sun ───────────────────────────────────────────────────────────────────
-
-function Sun() {
-  const sunRef = useRef<THREE.Mesh>(null);
-  useFrame((_, delta) => {
-    if (sunRef.current) sunRef.current.rotation.y += delta * 0.08;
-  });
-
-  return (
-    <group>
-      <pointLight intensity={4} distance={120} decay={1.2} color="#FFA040" />
-      <mesh ref={sunRef}>
-        <sphereGeometry args={[1.6, 64, 64]} />
-        <meshBasicMaterial color="#FDB813" />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[1.82, 32, 32]} />
-        <meshBasicMaterial color="#FF8C00" opacity={0.18} transparent depthWrite={false} />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[2.1, 32, 32]} />
-        <meshBasicMaterial color="#FF5500" opacity={0.07} transparent depthWrite={false} />
-      </mesh>
-    </group>
-  );
-}
-
-// ── Individual planet ─────────────────────────────────────────────────────────
-
-interface PlanetMeshProps {
-  config: PlanetConfig;
-  onSelect: (c: PlanetConfig) => void;
-  isSelected: boolean;
-}
-
-function PlanetMesh({ config, onSelect, isSelected }: PlanetMeshProps) {
-  const groupRef = useRef<THREE.Group>(null);
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((_, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * config.speed * 0.18;
-    }
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.35;
-    }
-  });
-
-  return (
-    <>
-      <OrbitRing distance={config.distance} />
-      <group ref={groupRef} rotation={[0, config.startAngle, 0]}>
-        <mesh
-          ref={meshRef}
-          position={[config.distance, 0, 0]}
-          onClick={(e) => { e.stopPropagation(); onSelect(config); }}
-          onPointerOver={() => { document.body.style.cursor = "pointer"; }}
-          onPointerOut={() => { document.body.style.cursor = "default"; }}
-        >
-          <sphereGeometry args={[config.radius, 40, 40]} />
-          <meshStandardMaterial
-            color={config.color}
-            emissive={isSelected ? (config.emissive ?? "#222222") : "#000000"}
-            emissiveIntensity={isSelected ? 0.6 : 0}
-            roughness={config.roughness ?? 0.8}
-            metalness={config.metalness ?? 0.1}
-          />
-        </mesh>
-
-        {config.hasRings && (
-          <mesh
-            position={[config.distance, 0, 0]}
-            rotation={[Math.PI / 2.2, 0.15, 0]}
-          >
-            <ringGeometry args={[config.radius * 1.45, config.radius * 2.5, 80]} />
-            <meshBasicMaterial
-              color={config.ringColor ?? "#C9A84C"}
-              opacity={0.65}
-              transparent
-              side={THREE.DoubleSide}
-              depthWrite={false}
-            />
-          </mesh>
-        )}
-
-        {isSelected && (
-          <mesh position={[config.distance, 0, 0]}>
-            <sphereGeometry args={[config.radius * 1.35, 32, 32]} />
-            <meshBasicMaterial
-              color={config.labelColor}
-              opacity={0.18}
-              transparent
-              depthWrite={false}
-            />
-          </mesh>
-        )}
-      </group>
-    </>
-  );
-}
-
-// ── Scene (inside Canvas) ─────────────────────────────────────────────────────
-
-interface SceneProps {
-  onPlanetSelect: (c: PlanetConfig | null) => void;
-  selectedName: string | null;
-}
-
-function Scene({ onPlanetSelect, selectedName }: SceneProps) {
-  const handleSelect = useCallback(
-    (config: PlanetConfig) => {
-      onPlanetSelect(selectedName === config.name ? null : config);
-    },
-    [onPlanetSelect, selectedName],
-  );
-
-  const handleMiss = useCallback(() => {
-    onPlanetSelect(null);
-  }, [onPlanetSelect]);
-
-  return (
-    <>
-      <ambientLight intensity={0.12} />
-      <Stars radius={100} depth={60} count={3000} factor={4} saturation={0} fade speed={0.3} />
-      <Sun />
-      {PLANETS.map((p) => (
-        <PlanetMesh
-          key={p.name}
-          config={p}
-          onSelect={handleSelect}
-          isSelected={selectedName === p.name}
-        />
-      ))}
-      <OrbitControls
-        enablePan={false}
-        minDistance={4}
-        maxDistance={55}
-        dampingFactor={0.1}
-        enableDamping
-        makeDefault
-      />
-      <mesh visible={false} onPointerDown={handleMiss}>
-        <sphereGeometry args={[100, 8, 8]} />
-        <meshBasicMaterial side={THREE.BackSide} />
-      </mesh>
-    </>
-  );
-}
-
 // ── Planet info panel (2D overlay) ────────────────────────────────────────────
 
 function PlanetPanel({
@@ -342,7 +162,10 @@ function PlanetPanel({
   return (
     <div
       className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 rounded-2xl border border-white/20 backdrop-blur-md p-4 animate-in fade-in slide-in-from-bottom-2 duration-200"
-      style={{ background: "rgba(5,15,35,0.92)", boxShadow: `0 0 40px ${planet.labelColor}30, 0 8px 32px rgba(0,0,0,0.6)` }}
+      style={{
+        background: "rgba(5,15,35,0.92)",
+        boxShadow: `0 0 40px ${planet.labelColor}30, 0 8px 32px rgba(0,0,0,0.6)`,
+      }}
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
@@ -353,7 +176,9 @@ function PlanetPanel({
             {kh ? planet.nameKh : planet.name}
           </h3>
           {kh && (
-            <p className="text-white/40 text-xs font-mono mt-0.5">{planet.name}</p>
+            <p className="text-white/40 text-xs font-mono mt-0.5">
+              {planet.name}
+            </p>
           )}
         </div>
         <button
@@ -372,7 +197,9 @@ function PlanetPanel({
       >
         <p className="text-white/80 mb-2 leading-relaxed">{planet.factEn}</p>
         <div className="border-t border-white/10 pt-2 mt-2">
-          <p className={`text-white/60 text-sm leading-loose font-khmer`}>{planet.factKh}</p>
+          <p className={`text-white/60 text-sm leading-loose font-khmer`}>
+            {planet.factKh}
+          </p>
         </div>
       </div>
     </div>
@@ -383,90 +210,63 @@ function PlanetPanel({
 
 function Hint({ kh }: { kh: boolean }) {
   return (
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 backdrop-blur-sm text-white/45 text-xs font-semibold pointer-events-none whitespace-nowrap"
-      style={{ background: "rgba(0,0,0,0.45)" }}>
-      <span>{kh ? "ចុចលើភពណាមួយ ✦ អូសដើម្បីបង្វិល" : "Click a planet · Drag to rotate · Scroll to zoom"}</span>
+    <div
+      className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 backdrop-blur-sm text-white/45 text-xs font-semibold pointer-events-none whitespace-nowrap"
+      style={{ background: "rgba(0,0,0,0.45)" }}
+    >
+      <span>
+        {kh
+          ? "ចុចលើភពណាមួយ ✦ អូសដើម្បីបង្វិល"
+          : "Click a planet · Drag to rotate · Use the zoom slider"}
+      </span>
     </div>
   );
 }
 
 // ── Public component ──────────────────────────────────────────────────────────
 
-function WebGLFallback({ kh }: { kh: boolean }) {
-  return (
-    <div className="w-full rounded-3xl border border-white/10 flex flex-col items-center justify-center gap-3 text-white/50 px-6 text-center"
-      style={{ height: "520px", background: "#000810" }}>
-      <AlertCircle className="w-8 h-8 text-amber-400" />
-      <p className={`text-sm max-w-xs ${kh ? "font-khmer leading-loose" : ""}`}>
-        {kh
-          ? "កម្មវិធីរុករករបស់អ្នកមិនគាំទ្រ WebGL ទេ។ សូមប្រើ Chrome ឬ Firefox ដើម្បីមើលប្រព័ន្ធព្រះអាទិត្យ 3D។"
-          : "Your browser does not support WebGL. Try Chrome or Firefox to view the 3D Solar System."}
-      </p>
-    </div>
-  );
-}
-
-function checkWebGL(): boolean {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
-  } catch {
-    return false;
-  }
-}
-
 export function SolarSystem3D({ kh }: { kh: boolean }) {
   const [selected, setSelected] = useState<PlanetConfig | null>(null);
-  const [webglOk, setWebglOk] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setWebglOk(checkWebGL());
-  }, []);
 
   const handleSelect = useCallback((c: PlanetConfig | null) => {
     setSelected(c);
   }, []);
 
-  if (webglOk === null) {
-    return (
-      <div className="w-full rounded-3xl border border-white/10 flex items-center justify-center"
-        style={{ height: "520px", background: "#000810" }} />
-    );
-  }
-
-  if (!webglOk) {
-    return <WebGLFallback kh={kh} />;
-  }
-
   return (
-    <WebGLErrorBoundary fallback={<WebGLFallback kh={kh} />}>
-    <div
-      className="relative w-full rounded-3xl overflow-hidden border border-white/10"
-      style={{ height: "520px", background: "#000810" }}
-      aria-label={kh ? "ប្រព័ន្ធព្រះអាទិត្យ 3D" : "Interactive 3D Solar System"}
-    >
-      <Canvas
-        camera={{ position: [0, 16, 26], fov: 52 }}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-        dpr={[1, 1.5]}
+    <>
+      <div
+        className="relative w-full rounded-3xl overflow-hidden border border-white/10"
+        style={{ height: "520px", background: "#000810" }}
+        aria-label={
+          kh ? "ប្រព័ន្ធព្រះអាទិត្យ 3D" : "Interactive 3D Solar System"
+        }
       >
-        <Suspense fallback={null}>
-          <Scene onPlanetSelect={handleSelect} selectedName={selected?.name ?? null} />
-        </Suspense>
-      </Canvas>
+        <SolarDiagram<PlanetConfig>
+          planets={PLANETS}
+          onSelect={handleSelect}
+          kh={kh}
+        />
 
-      {selected ? (
-        <PlanetPanel planet={selected} kh={kh} onClose={() => setSelected(null)} />
-      ) : (
-        <Hint kh={kh} />
-      )}
+        {selected ? (
+          <PlanetPanel
+            planet={selected}
+            kh={kh}
+            onClose={() => setSelected(null)}
+          />
+        ) : (
+          <Hint kh={kh} />
+        )}
 
-      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 backdrop-blur-sm text-white/50 text-xs pointer-events-none"
-        style={{ background: "rgba(0,0,0,0.5)" }}>
-        <span className="w-2 h-2 rounded-full bg-[#FDB813]" />
-        <span className={kh ? "font-khmer" : ""}>{kh ? "ប្រព័ន្ធព្រះអាទិត្យ" : "Solar System"}</span>
+        <div
+          className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 backdrop-blur-sm text-white/50 text-xs pointer-events-none"
+          style={{ background: "rgba(0,0,0,0.5)" }}
+        >
+          <span className="w-2 h-2 rounded-full bg-[#FDB813]" />
+          <span className={kh ? "font-khmer" : ""}>
+            {kh ? "ប្រព័ន្ធព្រះអាទិត្យ" : "Solar System"}
+          </span>
+        </div>
       </div>
-    </div>
-    </WebGLErrorBoundary>
+    </>
   );
 }

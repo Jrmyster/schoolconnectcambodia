@@ -1,42 +1,9 @@
-import React, { useRef, useState, useEffect, useMemo, Suspense, Component, type ReactNode } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import * as THREE from "three";
+import { Diagram } from "@/components/diagrams/LearningDiagrams";
+import { useMemo, useState } from "react";
+
 import { useLanguageStore, useTranslation } from "@/store/use-language";
-import { ArrowLeft, Sparkles, HelpCircle, Activity, ShieldAlert, Award, RefreshCw, Hexagon } from "lucide-react";
+import { ArrowLeft, HelpCircle, Hexagon, RefreshCw } from "lucide-react";
 import { Link } from "wouter";
-
-// ── WebGL Compatibility Checker ──────────────────────────────────────────────
-function hasWebGL(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(
-      canvas.getContext("webgl2") ||
-      canvas.getContext("webgl") ||
-      canvas.getContext("experimental-webgl")
-    );
-  } catch {
-    return false;
-  }
-}
-
-// ── WebGL Error Boundary ─────────────────────────────────────────────────────
-class CanvasErrorBoundary extends Component<
-  { fallback: ReactNode; children: ReactNode },
-  { hasError: boolean }
-> {
-  state = { hasError: false };
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-  componentDidCatch(err: unknown) {
-    console.warn("[VSEPR Canvas] WebGL canvas failed:", err);
-  }
-  render() {
-    return this.state.hasError ? this.props.fallback : this.props.children;
-  }
-}
 
 // ── Types for Molecule Coordinates ──────────────────────────────────────────
 interface AtomData {
@@ -162,176 +129,278 @@ const MOLECULES: MoleculeConfig[] = [
 ];
 
 // ── 3D Render Cylinder Bond Component ──────────────────────────────────────
-function CylinderBond({ from, to, color = "#64748b" }: { from: [number, number, number]; to: [number, number, number]; color?: string }) {
-  const pFrom = useMemo(() => new THREE.Vector3(...from), [from]);
-  const pTo = useMemo(() => new THREE.Vector3(...to), [to]);
-  const dir = useMemo(() => new THREE.Vector3().subVectors(pTo, pFrom), [pFrom, pTo]);
-  const length = useMemo(() => dir.length(), [dir]);
-  const midpoint = useMemo(() => new THREE.Vector3().addVectors(pFrom, pTo).multiplyScalar(0.5), [pFrom, pTo]);
-
-  const up = useMemo(() => new THREE.Vector3(0, 1, 0), []);
-  const q = useMemo(() => new THREE.Quaternion().setFromUnitVectors(up, dir.clone().normalize()), [dir, up]);
-
-  return (
-    <mesh position={midpoint} quaternion={q}>
-      <cylinderGeometry args={[0.07, 0.07, length, 16]} />
-      <meshStandardMaterial color={color} roughness={0.4} metalness={0.1} />
-    </mesh>
-  );
-}
 
 // ── 3D Render Lone Pair Lobe Component ──────────────────────────────────────
-function LonePairLobe({ rotation }: { rotation: [number, number, number] }) {
-  return (
-    <group rotation={rotation}>
-      {/* Translucent Electron Cloud Lobe */}
-      <mesh position={[0, 0.9, 0]} scale={[0.42, 0.85, 0.42]}>
-        <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial
-          color="#22d3ee" // Neon Cyan
-          emissive="#0891b2"
-          emissiveIntensity={0.5}
-          transparent={true}
-          opacity={0.35}
-          roughness={0.1}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Two Tiny Glowing Electrons inside the cloud */}
-      <mesh position={[-0.15, 0.9, 0]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#fbbf24" emissive="#d97706" emissiveIntensity={0.8} />
-      </mesh>
-      <mesh position={[0.15, 0.9, 0]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color="#fbbf24" emissive="#d97706" emissiveIntensity={0.8} />
-      </mesh>
-    </group>
-  );
-}
 
 // ── 3D Model Renderer ────────────────────────────────────────────────────────
-function Molecule3D({ config }: { config: MoleculeConfig }) {
-  return (
-    <group>
-      {/* Atoms */}
-      {config.atoms.map((atom, idx) => (
-        <mesh key={`atom-${idx}`} position={atom.pos}>
-          <sphereGeometry args={[atom.size, 32, 32]} />
-          <meshStandardMaterial
-            color={atom.color}
-            roughness={0.2}
-            metalness={0.15}
-            emissive={atom.color}
-            emissiveIntensity={0.06}
-          />
-        </mesh>
-      ))}
-
-      {/* Bonds */}
-      {config.bonds.map((bond, idx) => (
-        <CylinderBond key={`bond-${idx}`} from={bond.from} to={bond.to} />
-      ))}
-
-      {/* Lone Pairs */}
-      {config.lonePairs.map((lp, idx) => (
-        <LonePairLobe key={`lp-${idx}`} rotation={lp.rotation} />
-      ))}
-    </group>
-  );
-}
 
 // ── 2D SVG Fallback Component ────────────────────────────────────────────────
-function Molecule2D({ config, isKh }: { config: MoleculeConfig; isKh: boolean }) {
+function Molecule2D({
+  config,
+  isKh,
+}: {
+  config: MoleculeConfig;
+  isKh: boolean;
+}) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 gap-4">
-      {config.id === "CH4" && (
-        <svg viewBox="0 0 200 200" className="w-48 h-48" aria-hidden="true">
-          {/* Bonds */}
-          <line x1="100" y1="100" x2="100" y2="40" stroke="#64748b" strokeWidth="6" />
-          <line x1="100" y1="100" x2="155" y2="120" stroke="#64748b" strokeWidth="6" />
-          {/* Wedged bond */}
-          <polygon points="100,100 60,135 70,140" fill="#38bdf8" />
-          {/* Dashed bond */}
-          <line x1="100" y1="100" x2="115" y2="140" stroke="#64748b" strokeWidth="4" strokeDasharray="6,4" />
-          {/* Central Atom */}
-          <circle cx="100" cy="100" r="20" fill="#374151" />
-          <text x="100" y="106" fill="#fff" fontSize="18" fontWeight="bold" textAnchor="middle">C</text>
-          {/* Hydrogens */}
-          <circle cx="100" cy="40" r="14" fill="#cbd5e1" />
-          <text x="100" y="45" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="155" cy="120" r="14" fill="#cbd5e1" />
-          <text x="155" y="125" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="65" cy="137" r="14" fill="#cbd5e1" />
-          <text x="65" y="142" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="115" cy="140" r="14" fill="#cbd5e1" />
-          <text x="115" y="145" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-        </svg>
-      )}
+    <Diagram title={config.formula + " molecular geometry"}>
+      {(angle) => (
+        <g
+          transform={`translate(150 30) rotate(${(angle * 180) / Math.PI} 150 150)`}
+        >
+          {config.id === "CH4" && (
+            <svg viewBox="0 0 200 200" width="300" height="300">
+              {/* Bonds */}
+              <line
+                x1="100"
+                y1="100"
+                x2="100"
+                y2="40"
+                stroke="#64748b"
+                strokeWidth="6"
+              />
+              <line
+                x1="100"
+                y1="100"
+                x2="155"
+                y2="120"
+                stroke="#64748b"
+                strokeWidth="6"
+              />
+              {/* Wedged bond */}
+              <polygon points="100,100 60,135 70,140" fill="#38bdf8" />
+              {/* Dashed bond */}
+              <line
+                x1="100"
+                y1="100"
+                x2="115"
+                y2="140"
+                stroke="#64748b"
+                strokeWidth="4"
+                strokeDasharray="6,4"
+              />
+              {/* Central Atom */}
+              <circle cx="100" cy="100" r="20" fill="#374151" />
+              <text
+                x="100"
+                y="106"
+                fill="#fff"
+                fontSize="18"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                C
+              </text>
+              {/* Hydrogens */}
+              <circle cx="100" cy="40" r="14" fill="#cbd5e1" />
+              <text
+                x="100"
+                y="45"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="155" cy="120" r="14" fill="#cbd5e1" />
+              <text
+                x="155"
+                y="125"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="65" cy="137" r="14" fill="#cbd5e1" />
+              <text
+                x="65"
+                y="142"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="115" cy="140" r="14" fill="#cbd5e1" />
+              <text
+                x="115"
+                y="145"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+            </svg>
+          )}
 
-      {config.id === "NH3" && (
-        <svg viewBox="0 0 200 200" className="w-48 h-48" aria-hidden="true">
-          {/* Lone pair cloud lobe */}
-          <path d="M100,90 C80,50 85,25 100,25 C115,25 120,50 100,90 Z" fill="#22d3ee" fillOpacity="0.3" stroke="#22d3ee" strokeWidth="2" />
-          <circle cx="95" cy="45" r="3" fill="#fbbf24" />
-          <circle cx="105" cy="45" r="3" fill="#fbbf24" />
-          {/* Bonds */}
-          <line x1="100" y1="90" x2="155" y2="115" stroke="#64748b" strokeWidth="6" />
-          <polygon points="100,90 60,125 70,130" fill="#38bdf8" />
-          <line x1="100" y1="90" x2="115" y2="135" stroke="#64748b" strokeWidth="4" strokeDasharray="6,4" />
-          {/* Central Atom */}
-          <circle cx="100" cy="90" r="20" fill="#2563eb" />
-          <text x="100" y="96" fill="#fff" fontSize="18" fontWeight="bold" textAnchor="middle">N</text>
-          {/* Hydrogens */}
-          <circle cx="155" cy="115" r="14" fill="#cbd5e1" />
-          <text x="155" y="120" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="65" cy="127" r="14" fill="#cbd5e1" />
-          <text x="65" y="132" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="115" cy="135" r="14" fill="#cbd5e1" />
-          <text x="115" y="140" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-        </svg>
-      )}
+          {config.id === "NH3" && (
+            <svg viewBox="0 0 200 200" width="300" height="300">
+              {/* Lone pair cloud lobe */}
+              <path
+                d="M100,90 C80,50 85,25 100,25 C115,25 120,50 100,90 Z"
+                fill="#22d3ee"
+                fillOpacity="0.3"
+                stroke="#22d3ee"
+                strokeWidth="2"
+              />
+              <circle cx="95" cy="45" r="3" fill="#fbbf24" />
+              <circle cx="105" cy="45" r="3" fill="#fbbf24" />
+              {/* Bonds */}
+              <line
+                x1="100"
+                y1="90"
+                x2="155"
+                y2="115"
+                stroke="#64748b"
+                strokeWidth="6"
+              />
+              <polygon points="100,90 60,125 70,130" fill="#38bdf8" />
+              <line
+                x1="100"
+                y1="90"
+                x2="115"
+                y2="135"
+                stroke="#64748b"
+                strokeWidth="4"
+                strokeDasharray="6,4"
+              />
+              {/* Central Atom */}
+              <circle cx="100" cy="90" r="20" fill="#2563eb" />
+              <text
+                x="100"
+                y="96"
+                fill="#fff"
+                fontSize="18"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                N
+              </text>
+              {/* Hydrogens */}
+              <circle cx="155" cy="115" r="14" fill="#cbd5e1" />
+              <text
+                x="155"
+                y="120"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="65" cy="127" r="14" fill="#cbd5e1" />
+              <text
+                x="65"
+                y="132"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="115" cy="135" r="14" fill="#cbd5e1" />
+              <text
+                x="115"
+                y="140"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+            </svg>
+          )}
 
-      {config.id === "H2O" && (
-        <svg viewBox="0 0 200 200" className="w-48 h-48" aria-hidden="true">
-          {/* 2 Lone pair lobes */}
-          <g transform="rotate(-30 100 90)">
-            <path d="M100,90 C85,55 90,30 100,30 C110,30 115,55 100,90 Z" fill="#22d3ee" fillOpacity="0.3" stroke="#22d3ee" strokeWidth="2" />
-            <circle cx="96" cy="48" r="3" fill="#fbbf24" />
-            <circle cx="104" cy="48" r="3" fill="#fbbf24" />
-          </g>
-          <g transform="rotate(30 100 90)">
-            <path d="M100,90 C85,55 90,30 100,30 C110,30 115,55 100,90 Z" fill="#22d3ee" fillOpacity="0.3" stroke="#22d3ee" strokeWidth="2" />
-            <circle cx="96" cy="48" r="3" fill="#fbbf24" />
-            <circle cx="104" cy="48" r="3" fill="#fbbf24" />
-          </g>
-          {/* Bonds */}
-          <line x1="100" y1="90" x2="50" y2="135" stroke="#64748b" strokeWidth="6" />
-          <line x1="100" y1="90" x2="150" y2="135" stroke="#64748b" strokeWidth="6" />
-          {/* Central Atom */}
-          <circle cx="100" cy="90" r="20" fill="#dc2626" />
-          <text x="100" y="96" fill="#fff" fontSize="18" fontWeight="bold" textAnchor="middle">O</text>
-          {/* Hydrogens */}
-          <circle cx="50" cy="135" r="14" fill="#cbd5e1" />
-          <text x="50" y="140" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-          <circle cx="150" cy="135" r="14" fill="#cbd5e1" />
-          <text x="150" y="140" fill="#000" fontSize="12" fontWeight="bold" textAnchor="middle">H</text>
-        </svg>
+          {config.id === "H2O" && (
+            <svg viewBox="0 0 200 200" width="300" height="300">
+              {/* 2 Lone pair lobes */}
+              <g transform="rotate(-30 100 90)">
+                <path
+                  d="M100,90 C85,55 90,30 100,30 C110,30 115,55 100,90 Z"
+                  fill="#22d3ee"
+                  fillOpacity="0.3"
+                  stroke="#22d3ee"
+                  strokeWidth="2"
+                />
+                <circle cx="96" cy="48" r="3" fill="#fbbf24" />
+                <circle cx="104" cy="48" r="3" fill="#fbbf24" />
+              </g>
+              <g transform="rotate(30 100 90)">
+                <path
+                  d="M100,90 C85,55 90,30 100,30 C110,30 115,55 100,90 Z"
+                  fill="#22d3ee"
+                  fillOpacity="0.3"
+                  stroke="#22d3ee"
+                  strokeWidth="2"
+                />
+                <circle cx="96" cy="48" r="3" fill="#fbbf24" />
+                <circle cx="104" cy="48" r="3" fill="#fbbf24" />
+              </g>
+              {/* Bonds */}
+              <line
+                x1="100"
+                y1="90"
+                x2="50"
+                y2="135"
+                stroke="#64748b"
+                strokeWidth="6"
+              />
+              <line
+                x1="100"
+                y1="90"
+                x2="150"
+                y2="135"
+                stroke="#64748b"
+                strokeWidth="6"
+              />
+              {/* Central Atom */}
+              <circle cx="100" cy="90" r="20" fill="#dc2626" />
+              <text
+                x="100"
+                y="96"
+                fill="#fff"
+                fontSize="18"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                O
+              </text>
+              {/* Hydrogens */}
+              <circle cx="50" cy="135" r="14" fill="#cbd5e1" />
+              <text
+                x="50"
+                y="140"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+              <circle cx="150" cy="135" r="14" fill="#cbd5e1" />
+              <text
+                x="150"
+                y="140"
+                fill="#000"
+                fontSize="12"
+                fontWeight="bold"
+                textAnchor="middle"
+              >
+                H
+              </text>
+            </svg>
+          )}
+        </g>
       )}
-
-      <div className="flex items-center gap-1.5 text-amber-500">
-        <ShieldAlert className="w-5 h-5" aria-hidden="true" />
-        <span className={`text-xs font-bold ${isKh ? "font-khmer" : ""}`}>
-          {isKh ? "ការបើកដំណើរការ ៣ វិមាត្រត្រូវការ WebGL" : "3D Mode Requires WebGL"}
-        </span>
-      </div>
-      <p className={`text-[11px] text-slate-400 max-w-xs ${isKh ? "font-khmer leading-loose" : ""}`}>
-        {isKh
-          ? "កម្មវិធីរុករករបស់អ្នកមិនគាំទ្រ WebGL ទេ។ បង្ហាញដ្យាក្រាម ២ វិមាត្រជំនួសវិញ។"
-          : "Your browser does not support WebGL. Displaying 2D diagram fallback."}
-      </p>
-    </div>
+    </Diagram>
   );
 }
 
@@ -342,13 +411,8 @@ export default function VseprTheoryPage() {
   const t = useTranslation();
 
   const [activeId, setActiveId] = useState<string>("CH4");
-  const [webglOk, setWebglOk] = useState<boolean>(true);
-  const [resetKey, setResetKey] = useState<number>(0);
 
-  // Check WebGL availability on mount
-  useEffect(() => {
-    setWebglOk(hasWebGL());
-  }, []);
+  const [resetKey, setResetKey] = useState<number>(0);
 
   const activeMolecule = useMemo(() => {
     return MOLECULES.find((m) => m.id === activeId) || MOLECULES[0];
@@ -362,9 +426,14 @@ export default function VseprTheoryPage() {
       {/* Top Header */}
       <header className="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md relative z-10">
         <div className="max-w-[1600px] mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/chemistry" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+          <Link
+            href="/chemistry"
+            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+          >
             <ArrowLeft className="w-5 h-5" />
-            <span className={isKh ? "font-khmer" : "font-semibold"}>{t("Back to Chemistry", "ត្រឡប់ទៅមជ្ឈមណ្ឌលគីមី")}</span>
+            <span className={isKh ? "font-khmer" : "font-semibold"}>
+              {t("Back to Chemistry", "ត្រឡប់ទៅមជ្ឈមណ្ឌលគីមី")}
+            </span>
           </Link>
 
           <div className="flex items-center gap-2">
@@ -390,7 +459,10 @@ export default function VseprTheoryPage() {
         <div className="lg:col-span-7 flex flex-col gap-6">
           <div
             className="w-full relative h-[450px] sm:h-[500px] rounded-3xl border-2 border-slate-800 bg-slate-950/80 shadow-[inset_0_0_40px_rgba(34,211,238,0.05),_0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden cursor-grab active:cursor-grabbing"
-            aria-label={t("Interactive 3D molecule viewer", "កម្មវិធីបង្ហាញម៉ូលេគុល ៣ វិមាត្រ")}
+            aria-label={t(
+              "Interactive 3D molecule viewer",
+              "កម្មវិធីបង្ហាញម៉ូលេគុល ៣ វិមាត្រ",
+            )}
           >
             {/* Title overlay */}
             <div className="absolute top-4 left-6 z-10 pointer-events-none">
@@ -401,52 +473,19 @@ export default function VseprTheoryPage() {
                 className={`text-2xl sm:text-3xl font-black text-white ${isKh ? "font-khmer mt-1" : ""}`}
                 style={{ fontSize: "max(1.5rem, 2.5vw)" }}
               >
-                {isKh ? activeMolecule.nameKh : activeMolecule.nameEn} ({activeMolecule.formula})
+                {isKh ? activeMolecule.nameKh : activeMolecule.nameEn} (
+                {activeMolecule.formula})
               </h2>
             </div>
 
-            {/* Canvas / fallback view */}
-            {webglOk ? (
-              <CanvasErrorBoundary
-                fallback={<Molecule2D config={activeMolecule} isKh={isKh} />}
-              >
-                <Canvas
-                  key={`${activeId}-${resetKey}`}
-                  camera={{ position: [3, 2, 4], fov: 45 }}
-                  dpr={[1, 2]}
-                  gl={{ antialias: true, alpha: true, failIfMajorPerformanceCaveat: false }}
-                  onCreated={({ gl }) => {
-                    gl.setClearColor(0x000000, 0);
-                  }}
-                >
-                  <Suspense fallback={null}>
-                    <ambientLight intensity={0.8} />
-                    <directionalLight position={[6, 8, 4]} intensity={1.2} />
-                    <directionalLight position={[-6, -4, -3]} intensity={0.4} color="#0891b2" />
-                    <Molecule3D config={activeMolecule} />
-                    <OrbitControls
-                      enablePan={false}
-                      enableZoom={true}
-                      minDistance={2.5}
-                      maxDistance={7}
-                      makeDefault
-                    />
-                  </Suspense>
-                </Canvas>
-              </CanvasErrorBoundary>
-            ) : (
-              <Molecule2D config={activeMolecule} isKh={isKh} />
-            )}
+            {/* Interactive SVG molecule diagram */}
+            <Molecule2D
+              key={`${activeId}-${resetKey}`}
+              config={activeMolecule}
+              isKh={isKh}
+            />
 
             {/* Instruction helper */}
-            {webglOk && (
-              <div className="absolute bottom-4 left-6 pointer-events-none flex items-center gap-1.5 bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl backdrop-blur-md">
-                <Activity className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-                <span className={`text-[11px] font-bold text-slate-300 ${isKh ? "font-khmer" : ""}`}>
-                  {t("Click & drag to rotate molecule", "ចុច និងអូសដើម្បីបង្វិលម៉ូលេគុល")}
-                </span>
-              </div>
-            )}
 
             {/* Reset angle button */}
             <button
@@ -475,7 +514,9 @@ export default function VseprTheoryPage() {
                 style={{ fontSize: "max(1.1rem, 2vw)" }}
               >
                 <span className="block font-mono">{m.id}</span>
-                <span className={`block font-normal mt-0.5 text-xs opacity-75 ${isKh ? "font-khmer" : ""}`}>
+                <span
+                  className={`block font-normal mt-0.5 text-xs opacity-75 ${isKh ? "font-khmer" : ""}`}
+                >
                   {isKh ? m.nameKh : m.nameEn}
                 </span>
               </button>
@@ -502,17 +543,23 @@ export default function VseprTheoryPage() {
             <div className="grid grid-cols-2 gap-4">
               {/* Shape */}
               <div className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-2xl">
-                <span className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}>
+                <span
+                  className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}
+                >
                   {t("Molecular Shape", "ទម្រង់ម៉ូលេគុល")}
                 </span>
-                <span className={`text-base font-bold text-white block ${isKh ? "font-khmer" : ""}`}>
+                <span
+                  className={`text-base font-bold text-white block ${isKh ? "font-khmer" : ""}`}
+                >
                   {isKh ? activeMolecule.shapeKh : activeMolecule.shapeEn}
                 </span>
               </div>
 
               {/* Bond Angle */}
               <div className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-2xl">
-                <span className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}>
+                <span
+                  className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}
+                >
                   {t("Bond Angle", "មុំចំណង")}
                 </span>
                 <span className="text-xl font-black text-cyan-300 block font-mono">
@@ -522,7 +569,9 @@ export default function VseprTheoryPage() {
 
               {/* Lone Pairs */}
               <div className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-2xl">
-                <span className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}>
+                <span
+                  className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}
+                >
                   {t("Lone Pairs count", "គូអេឡិចត្រុងសេរី")}
                 </span>
                 <span className="text-xl font-black text-amber-400 block font-mono">
@@ -532,10 +581,14 @@ export default function VseprTheoryPage() {
 
               {/* Polarity */}
               <div className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-2xl">
-                <span className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}>
+                <span
+                  className={`block text-[10px] text-slate-500 mb-1 ${isKh ? "font-khmer" : "tracking-widest uppercase"}`}
+                >
                   {t("Polarity", "ប៉ូលម៉ូលេគុល")}
                 </span>
-                <span className={`text-base font-bold text-white block ${isKh ? "font-khmer" : ""}`}>
+                <span
+                  className={`text-base font-bold text-white block ${isKh ? "font-khmer" : ""}`}
+                >
                   {isKh ? activeMolecule.polarityKh : activeMolecule.polarityEn}
                 </span>
               </div>
@@ -584,7 +637,7 @@ export default function VseprTheoryPage() {
             >
               {t(
                 "Valence shell electron pairs (both bonding and non-bonding) surround the central atom and repel each other to get as far apart as possible. Because Lone Pairs (LP) are closer to the central nucleus than Bond Pairs (BP), they occupy more spatial volume. As the count of lone pairs increases, they push the bonding atoms closer together, reducing the default tetrahedral angle (109.5°) to 107° in Ammonia and 104.5° in Water.",
-                "គូអេឡិចត្រុងស្រទាប់ក្រៅ (ទាំងគូចងសម្ព័ន្ធ និងគូសេរី) នៅជុំវិញអាតូមកណ្តាល ច្រានគ្នាទៅវិញទៅមកដើម្បីនៅឆ្ងាយពីគ្នាបំផុតតាមដែលអាចធ្វើទៅបាន។ ដោយសារតែគូសេរី (LP) ស្ថិតនៅជិតស្នូលអាតូមកណ្តាលជាងគូចង (BP) ពួកវាត្រូវការលំហធំជាង។ នៅពេលគូសេរីកើនឡើង ពួកវារុញច្រានអាតូមចងសម្ព័ន្ធឱ្យខិតជិតគ្នា ដោយកាត់បន្ថយមុំចតុកោណមុខបួនពីដើម (១០៩.៥°) មកត្រឹម ១០៧° ក្នុងអាម៉ូញាក់ និង ១០៤.៥° ក្នុងទឹក។"
+                "គូអេឡិចត្រុងស្រទាប់ក្រៅ (ទាំងគូចងសម្ព័ន្ធ និងគូសេរី) នៅជុំវិញអាតូមកណ្តាល ច្រានគ្នាទៅវិញទៅមកដើម្បីនៅឆ្ងាយពីគ្នាបំផុតតាមដែលអាចធ្វើទៅបាន។ ដោយសារតែគូសេរី (LP) ស្ថិតនៅជិតស្នូលអាតូមកណ្តាលជាងគូចង (BP) ពួកវាត្រូវការលំហធំជាង។ នៅពេលគូសេរីកើនឡើង ពួកវារុញច្រានអាតូមចងសម្ព័ន្ធឱ្យខិតជិតគ្នា ដោយកាត់បន្ថយមុំចតុកោណមុខបួនពីដើម (១០៩.៥°) មកត្រឹម ១០៧° ក្នុងអាម៉ូញាក់ និង ១០៤.៥° ក្នុងទឹក។",
               )}
             </p>
           </div>

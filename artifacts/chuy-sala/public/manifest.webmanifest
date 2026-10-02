@@ -1,16 +1,18 @@
 {
-  "name": "Chouy Sala — School Connect",
-  "short_name": "School Connect",
-  "description": "Bilingual (English/Khmer) educational portal for Cambodian students. Career guides, exam prep, scientific literacy tools, and school donation resources — works offline.",
+  "name": "KhmerOne STEM",
+  "short_name": "KhmerOne STEM",
+  "description": "Bilingual STEM lessons, student tools and offline learning.",
   "start_url": ".",
   "scope": ".",
-  "id": "chouy-sala",
+  "id": "school-connect-stem",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0f172a",
   "theme_color": "#1e3a8a",
   "lang": "en",
-  "categories": ["education"],
+  "categories": [
+    "education"
+  ],
   "icons": [
     {
       "src": "icons/icon-192.png",

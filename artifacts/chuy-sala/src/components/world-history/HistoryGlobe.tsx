@@ -1,11 +1,10 @@
-import { Component, ReactNode, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader, ThreeEvent } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import * as THREE from "three";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import * as Dialog from "@radix-ui/react-dialog";
-import { X, Globe2, Clock, ChevronRight } from "lucide-react";
+import { HistoryMapDiagram } from "@/components/diagrams/LearningDiagrams";
+import { useState } from "react";
+
 import { useLanguageStore, useTranslation } from "@/store/use-language";
+import * as Dialog from "@radix-ui/react-dialog";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronRight, Clock, Globe2, X } from "lucide-react";
 
 /* ──────────────────────────────────────────────────────────────────────────────
  * Eras
@@ -257,298 +256,27 @@ const CONTENT: Record<EraId, Record<RegionId, RegionEraEntry>> = {
   },
 };
 
-/* ──────────────────────────────────────────────────────────────────────────────
- * Geometry helpers
- * ────────────────────────────────────────────────────────────────────────────── */
-
-const GLOBE_RADIUS = 1.4;
-
-/** Convert lat/lng (degrees) to a 3D point on a sphere of `radius`. */
-function latLngToVec3(latDeg: number, lngDeg: number, radius: number): [number, number, number] {
-  const phi = (90 - latDeg) * (Math.PI / 180);
-  const theta = (lngDeg + 180) * (Math.PI / 180);
-  const x = -radius * Math.sin(phi) * Math.cos(theta);
-  const z = radius * Math.sin(phi) * Math.sin(theta);
-  const y = radius * Math.cos(phi);
-  return [x, y, z];
-}
-
-/* ──────────────────────────────────────────────────────────────────────────────
- * 3D scene parts
- * ────────────────────────────────────────────────────────────────────────────── */
-
-/* ── Texture URLs (served from public/textures/, cached by SW for offline use) ──
- * Diffuse  — NASA "Blue Marble" composite (continents, oceans, ice).
- * Specular — white = water (so light bounces off oceans, not landmasses).
- * Note: a separate night-lights texture used to be applied as an emissive map
- * for the Modern era, but it tinted the whole sphere yellow when blended with
- * the directional light. All four eras now share the identical base material;
- * the era's identity is carried by the atmospheric halo color. */
-const TEX_BASE = `${import.meta.env.BASE_URL}textures/`;
-const EARTH_DIFFUSE_URL = `${TEX_BASE}earth-blue-marble.jpg`;
-const EARTH_SPECULAR_URL = `${TEX_BASE}earth-water.png`;
-
-/**
- * Realistic, textured Earth. Suspends while the diffuse + specular maps load
- * — the parent <Suspense fallback> renders a flat-coloured sphere in the
- * meantime so the user never sees a blank canvas.
- *
- * Coordinate alignment: Three.js sphereGeometry's default UV mapping with
- * latLngToVec3() above puts longitude 0 at +x and latitude 0 at the equator,
- * matching the equirectangular Blue Marble texture. Region pins keep the
- * exact same world-coordinates and remain pinned to the correct real-world
- * latitude/longitude on the new realistic globe (verified: NYC ≈ -74°,40°
- * lands in eastern North America; Cambodia ≈ 105°,12° lands on the
- * Indochinese peninsula).
- */
-function TexturedEarth() {
-  // Loading either map will suspend this component until both resolve.
-  // useLoader caches by URL so we only pay this cost once per session.
-  const [diffuse, specular] = useLoader(THREE.TextureLoader, [
-    EARTH_DIFFUSE_URL,
-    EARTH_SPECULAR_URL,
-  ]);
-
-  // Configure colour space synchronously *before* first render so the very
-  // first paint is gamma-correct (no brief over-dark flash). The specular
-  // map is data, not colour — leave it as the default linear space.
-  useMemo(() => {
-    diffuse.colorSpace = THREE.SRGBColorSpace;
-  }, [diffuse]);
-
-  return (
-    <mesh>
-      <sphereGeometry args={[GLOBE_RADIUS, 64, 64]} />
-      <meshPhongMaterial
-        map={diffuse}
-        specularMap={specular}
-        // White-ish specular highlight on water; subtle so it doesn't blow out.
-        specular={new THREE.Color("#3a4a5e")}
-        shininess={12}
-      />
-    </mesh>
-  );
-}
-
 /** Fallback shown while textures are downloading on first visit. */
-function FallbackSphere() {
-  return (
-    <mesh>
-      <sphereGeometry args={[GLOBE_RADIUS, 32, 32]} />
-      <meshStandardMaterial color="#1e3a8a" roughness={0.9} />
-    </mesh>
-  );
-}
-
-function GlobeMesh({
-  era,
-  spinning,
-  children,
-}: {
-  era: EraDef;
-  spinning: boolean;
-  /** Anything that should rotate WITH the Earth — region pins, labels, etc. */
-  children?: ReactNode;
-}) {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame((_, delta) => {
-    if (spinning && groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.15;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      {/* Realistic Earth — suspends until textures load. Same base material
-          for every era so the diffuse map always reads correctly. */}
-      <Suspense fallback={<FallbackSphere />}>
-        <TexturedEarth />
-      </Suspense>
-
-      {/* Era-tinted atmospheric halo — back-side material gives a cheap glow. */}
-      <mesh scale={1.08}>
-        <sphereGeometry args={[GLOBE_RADIUS, 32, 32]} />
-        <meshBasicMaterial
-          color={era.atmosphereColor}
-          transparent
-          opacity={0.18}
-          side={THREE.BackSide}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Anything passed as children lives INSIDE the rotating group, so it
-          inherits the Earth's rotation.y — region pins stay glued to their
-          real-world latitude/longitude as the planet spins. */}
-      {children}
-    </group>
-  );
-}
-
-function RegionPin({
-  region,
-  hovered,
-  active,
-  onPointerDown,
-  onPointerOver,
-  onPointerOut,
-}: {
-  region: RegionDef;
-  hovered: boolean;
-  active: boolean;
-  onPointerDown: (e: ThreeEvent<PointerEvent>) => void;
-  onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
-  onPointerOut: (e: ThreeEvent<PointerEvent>) => void;
-}) {
-  const pos = useMemo(
-    () => latLngToVec3(region.lat, region.lng, GLOBE_RADIUS + 0.04),
-    [region.lat, region.lng],
-  );
-
-  const ringScale = hovered || active ? 1.5 : 1;
-
-  return (
-    <group position={pos}>
-      {/* Pulsing ring (cheap — just a torus that scales). */}
-      <mesh scale={ringScale}>
-        <torusGeometry args={[0.08, 0.012, 6, 16]} />
-        <meshBasicMaterial color={region.pinColor} transparent opacity={0.7} />
-      </mesh>
-      {/* Solid pin head — clickable. Larger hit area than visual. */}
-      <mesh
-        onPointerDown={onPointerDown}
-        onPointerOver={onPointerOver}
-        onPointerOut={onPointerOut}
-      >
-        <sphereGeometry args={[0.07, 12, 12]} />
-        <meshStandardMaterial
-          color={region.pinColor}
-          emissive={region.pinColor}
-          emissiveIntensity={hovered || active ? 0.8 : 0.35}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-function Scene({
-  era,
-  spinning,
-  hoveredRegion,
-  onRegionClick,
-  onRegionHover,
-  onUserInteractStart,
-  onUserInteractEnd,
-}: {
-  era: EraDef;
-  spinning: boolean;
-  hoveredRegion: RegionId | null;
-  onRegionClick: (id: RegionId) => void;
-  onRegionHover: (id: RegionId | null) => void;
-  onUserInteractStart: () => void;
-  onUserInteractEnd: () => void;
-}) {
-  return (
-    <>
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[5, 3, 5]} intensity={0.9} />
-
-      <GlobeMesh era={era} spinning={spinning}>
-        {/* Pins are children of the rotating group, so they spin with Earth
-            and stay locked to their real-world latitude/longitude. */}
-        {REGIONS.map((region) => (
-          <RegionPin
-            key={region.id}
-            region={region}
-            hovered={hoveredRegion === region.id}
-            active={false}
-            onPointerDown={(e) => {
-              e.stopPropagation();
-              onRegionClick(region.id);
-            }}
-            onPointerOver={(e) => {
-              e.stopPropagation();
-              document.body.style.cursor = "pointer";
-              onRegionHover(region.id);
-            }}
-            onPointerOut={() => {
-              document.body.style.cursor = "";
-              onRegionHover(null);
-            }}
-          />
-        ))}
-      </GlobeMesh>
-
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        rotateSpeed={0.6}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={(5 * Math.PI) / 6}
-        // Use the real drag lifecycle so auto-spin pauses for the *exact*
-        // duration the user is dragging — no timeout guessing.
-        onStart={onUserInteractStart}
-        onEnd={onUserInteractEnd}
-      />
-    </>
-  );
-}
 
 /* ──────────────────────────────────────────────────────────────────────────────
  * Main exported component
  * ────────────────────────────────────────────────────────────────────────────── */
 
-/** Synchronously probe whether WebGL is even available before mounting THREE.
- * On older phones / locked-down browsers this returns false and we can render
- * a graceful DOM-only fallback instead of letting THREE throw at construction. */
-function detectWebGL(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    const probe = document.createElement("canvas");
-    const gl =
-      probe.getContext("webgl") ||
-      (probe.getContext("experimental-webgl") as WebGLRenderingContext | null);
-    return !!gl;
-  } catch {
-    return false;
-  }
-}
-
 export default function HistoryGlobe() {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const kh = language === "kh";
-  const reduceMotion = useReducedMotion();
 
   const [eraIdx, setEraIdx] = useState(0);
   const [hoveredRegion, setHoveredRegion] = useState<RegionId | null>(null);
   const [openRegion, setOpenRegion] = useState<RegionId | null>(null);
-  // When the user grabs the globe we pause the auto-spin so they have full control.
-  // Driven by OrbitControls onStart/onEnd, so it tracks the actual drag lifecycle.
-  const [userInteracting, setUserInteracting] = useState(false);
-  // WebGL availability: probed once on mount. SSR-safe (defaults to false).
-  const [webglOk, setWebglOk] = useState(false);
-  useEffect(() => {
-    setWebglOk(detectWebGL());
-  }, []);
-
-  // Reset any leaked global cursor state if we unmount mid-hover (e.g. route change).
-  useEffect(() => {
-    return () => {
-      document.body.style.cursor = "";
-    };
-  }, []);
-
   const era = ERAS[eraIdx];
-  const spinning = !reduceMotion && !userInteracting && openRegion === null;
-  // Save battery on low-end Android: only ask R3F to render every frame
-  // while something is actually animating. When idle (modal open, paused),
-  // OrbitControls and state changes still trigger an `invalidate()` redraw.
-  const frameloop: "always" | "demand" = spinning ? "always" : "demand";
-
-  const entry: RegionEraEntry | null = openRegion ? CONTENT[era.id][openRegion] : null;
-  const openRegionDef = openRegion ? REGIONS.find((r) => r.id === openRegion)! : null;
+  const entry: RegionEraEntry | null = openRegion
+    ? CONTENT[era.id][openRegion]
+    : null;
+  const openRegionDef = openRegion
+    ? REGIONS.find((r) => r.id === openRegion)!
+    : null;
 
   return (
     <section
@@ -559,9 +287,11 @@ export default function HistoryGlobe() {
       <div className="rounded-3xl bg-white/85 backdrop-blur-sm border border-white/80 shadow-xl ring-1 ring-black/5 overflow-hidden">
         {/* Header band */}
         <div className="px-5 sm:px-7 pt-6 pb-3">
-          <div className={`inline-flex items-center gap-1.5 rounded-full bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-bold ${kh ? "font-khmer" : ""}`}>
+          <div
+            className={`inline-flex items-center gap-1.5 rounded-full bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-bold ${kh ? "font-khmer" : ""}`}
+          >
             <Globe2 className="w-3.5 h-3.5" />
-            {t("Interactive 3D Globe", "ផែនដី 3D អន្តរកម្ម")}
+            {t("Interactive History Map", "ផែនដី 3D អន្តរកម្ម")}
           </div>
           <h2
             id="history-globe-title"
@@ -569,48 +299,31 @@ export default function HistoryGlobe() {
           >
             {t("Interactive History Globe", "ផែនដីប្រវត្តិសាស្ត្រអន្តរកម្ម")}
           </h2>
-          <p className={`mt-1 text-sm sm:text-base text-slate-700 ${kh ? "font-khmer leading-loose" : ""}`}>
+          <p
+            className={`mt-1 text-sm sm:text-base text-slate-700 ${kh ? "font-khmer leading-loose" : ""}`}
+          >
             {t(
-              "Drag to spin the Earth. Tap a glowing region to see what was happening there. Move the slider to travel through time.",
-              "អូសដើម្បីបង្វិលផែនដី។ ចុចលើតំបន់ភ្លឺដើម្បីមើលអ្វីដែលកំពុងកើតឡើងនៅទីនោះ។ រំកិលគ្រាប់រំកិលដើម្បីធ្វើដំណើរតាមពេលវេលា។"
+              "Select a region on the map. Tap a glowing region to see what was happening there. Move the slider to travel through time.",
+              "អូសដើម្បីបង្វិលផែនដី។ ចុចលើតំបន់ភ្លឺដើម្បីមើលអ្វីដែលកំពុងកើតឡើងនៅទីនោះ។ រំកិលគ្រាប់រំកិលដើម្បីធ្វើដំណើរតាមពេលវេលា។",
             )}
           </p>
         </div>
 
-        {/* Canvas */}
+        {/* SVG history map */}
         <div
           className="relative w-full h-[360px] sm:h-[440px] lg:h-[500px]"
           // Keep the canvas background neutral so the era atmosphere reads.
-          style={{ background: "linear-gradient(180deg, #0f172a 0%, #1e293b 100%)" }}
+          style={{
+            background: "linear-gradient(180deg, #0f172a 0%, #1e293b 100%)",
+          }}
         >
-          {webglOk ? (
-            <WebGLBoundary fallback={<GlobeFallback kh={kh} />}>
-              <Canvas
-                // Cap DPR so high-density mobile screens don't render at 3x.
-                dpr={[1, 1.5]}
-                // Lower default FOV gives a slightly more "global" feel.
-                camera={{ position: [0, 0, 4.2], fov: 45 }}
-                // Pre-tested setting that keeps three's renderer reasonably fast.
-                gl={{ antialias: true, powerPreference: "low-power", failIfMajorPerformanceCaveat: false }}
-                // Idle frames are skipped; R3F invalidates on state/prop changes.
-                frameloop={frameloop}
-              >
-                <Scene
-                  era={era}
-                  spinning={spinning}
-                  hoveredRegion={hoveredRegion}
-                  onRegionClick={(id) => setOpenRegion(id)}
-                  onRegionHover={setHoveredRegion}
-                  onUserInteractStart={() => setUserInteracting(true)}
-                  onUserInteractEnd={() => setUserInteracting(false)}
-                />
-              </Canvas>
-            </WebGLBoundary>
-          ) : (
-            <GlobeFallback kh={kh} />
-          )}
+          <HistoryMapDiagram
+            regions={REGIONS}
+            onSelect={(r) => setOpenRegion(r.id)}
+            kh={kh}
+          />
 
-          {/* Region legend — DOM, not WebGL. Cheap and accessible. */}
+          {}
           <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-auto flex flex-wrap gap-1.5 max-w-full">
             {REGIONS.map((r) => (
               <button
@@ -637,7 +350,9 @@ export default function HistoryGlobe() {
           </div>
 
           {/* Era badge — current era shown over the globe. */}
-          <div className={`absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 text-slate-900 px-3 py-1 text-xs font-bold shadow ${kh ? "font-khmer" : ""}`}>
+          <div
+            className={`absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 text-slate-900 px-3 py-1 text-xs font-bold shadow ${kh ? "font-khmer" : ""}`}
+          >
             <Clock className="w-3 h-3" />
             {kh ? era.shortKh : era.shortEn}
           </div>
@@ -646,10 +361,14 @@ export default function HistoryGlobe() {
         {/* Time Machine slider */}
         <div className="px-5 sm:px-7 py-5 border-t border-slate-200/70 bg-white">
           <div className="flex items-center justify-between mb-3">
-            <span className={`text-xs font-bold uppercase tracking-wider text-slate-600 ${kh ? "font-khmer" : ""}`}>
+            <span
+              className={`text-xs font-bold uppercase tracking-wider text-slate-600 ${kh ? "font-khmer" : ""}`}
+            >
               {t("Time Machine", "ម៉ាស៊ីនពេលវេលា")}
             </span>
-            <span className={`text-sm font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}>
+            <span
+              className={`text-sm font-bold text-slate-900 ${kh ? "font-khmer" : ""}`}
+            >
               {kh ? era.labelKh : era.labelEn}
             </span>
           </div>
@@ -675,12 +394,18 @@ export default function HistoryGlobe() {
                 onClick={() => setEraIdx(i)}
                 data-testid={`globe-era-stop-${e.id}`}
                 className={`text-left rounded-md px-1.5 py-1 transition-colors ${
-                  i === eraIdx ? "bg-indigo-600 text-white" : "hover:bg-slate-100"
+                  i === eraIdx
+                    ? "bg-indigo-600 text-white"
+                    : "hover:bg-slate-100"
                 } ${kh ? "font-khmer" : ""}`}
                 aria-current={i === eraIdx ? "true" : undefined}
               >
-                <div className="leading-tight">{i + 1}. {kh ? e.labelKh : e.labelEn}</div>
-                <div className={`text-[10px] opacity-80 font-normal ${kh ? "font-khmer" : ""}`}>
+                <div className="leading-tight">
+                  {i + 1}. {kh ? e.labelKh : e.labelEn}
+                </div>
+                <div
+                  className={`text-[10px] opacity-80 font-normal ${kh ? "font-khmer" : ""}`}
+                >
                   {kh ? e.shortKh : e.shortEn}
                 </div>
               </button>
@@ -698,47 +423,6 @@ export default function HistoryGlobe() {
         kh={kh}
       />
     </section>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────────────────────
- * WebGL error boundary + fallback — older devices may fail to get a WebGL
- * context. We catch the error and show a friendly bilingual card instead of
- * letting the whole page crash.
- * ────────────────────────────────────────────────────────────────────────────── */
-
-class WebGLBoundary extends Component<
-  { children: ReactNode; fallback: ReactNode },
-  { hasError: boolean }
-> {
-  state = { hasError: false };
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-  componentDidCatch(err: unknown) {
-    // eslint-disable-next-line no-console
-    console.warn("HistoryGlobe: WebGL unavailable —", err);
-  }
-  render() {
-    return this.state.hasError ? this.props.fallback : this.props.children;
-  }
-}
-
-function GlobeFallback({ kh }: { kh: boolean }) {
-  return (
-    <div
-      data-testid="globe-fallback"
-      className="absolute inset-0 grid place-items-center p-6 text-center"
-    >
-      <div className="max-w-md text-white/90">
-        <Globe2 className="w-10 h-10 mx-auto opacity-80" />
-        <p className={`mt-3 text-sm ${kh ? "font-khmer leading-loose" : ""}`}>
-          {kh
-            ? "ឧបករណ៍របស់អ្នកមិនអាចបង្ហាញផែនដី 3D បានទេ ប៉ុន្តែអ្នកនៅតែអាចប្រើកម្មវិធីរំកិលពេលវេលា និងអានព័ត៌មានតំបន់នីមួយៗតាមបន្ទប់ខាងក្រោម។"
-            : "Your device can't display the 3D globe, but you can still use the Time Machine slider below and read the regional history in the era cards further down the page."}
-        </p>
-      </div>
-    </div>
   );
 }
 
@@ -780,9 +464,15 @@ function RegionEraModal({
             </Dialog.Overlay>
             <Dialog.Content asChild>
               <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.98 }}
+                initial={
+                  reduceMotion ? false : { opacity: 0, y: 12, scale: 0.98 }
+                }
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.98 }}
+                exit={
+                  reduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: 8, scale: 0.98 }
+                }
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 data-testid="globe-region-modal"
                 className="fixed inset-0 z-50 grid place-items-center p-4 pointer-events-none"
@@ -793,7 +483,9 @@ function RegionEraModal({
                     style={{ backgroundColor: region.pinColor }}
                   >
                     <Dialog.Title asChild>
-                      <h3 className={`text-base font-bold text-white ${kh ? "font-khmer" : ""}`}>
+                      <h3
+                        className={`text-base font-bold text-white ${kh ? "font-khmer" : ""}`}
+                      >
                         <span className="inline-flex items-center gap-1.5">
                           <Globe2 className="w-4 h-4" />
                           {kh ? region.nameKh : region.nameEn}
@@ -815,25 +507,35 @@ function RegionEraModal({
                   </div>
 
                   <div className="p-6">
-                    <div className={`text-xs font-bold uppercase tracking-wider text-slate-500 ${kh ? "font-khmer" : ""}`}>
+                    <div
+                      className={`text-xs font-bold uppercase tracking-wider text-slate-500 ${kh ? "font-khmer" : ""}`}
+                    >
                       {kh ? era.shortKh : era.shortEn}
                     </div>
-                    <h4 className={`mt-1 text-2xl font-bold text-slate-900 leading-tight ${kh ? "font-khmer" : "font-display"}`}>
+                    <h4
+                      className={`mt-1 text-2xl font-bold text-slate-900 leading-tight ${kh ? "font-khmer" : "font-display"}`}
+                    >
                       {kh ? entry.headlineKh : entry.headlineEn}
                     </h4>
 
                     <Dialog.Description asChild>
-                      <p className={`mt-3 text-slate-700 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                      <p
+                        className={`mt-3 text-slate-700 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                      >
                         {kh ? entry.bodyKh : entry.bodyEn}
                       </p>
                     </Dialog.Description>
 
                     {entry.highlightEn && (
                       <div className="mt-5 rounded-xl bg-amber-50 border border-amber-200 p-4">
-                        <div className={`text-[11px] font-bold uppercase tracking-wider text-amber-800 ${kh ? "font-khmer" : ""}`}>
+                        <div
+                          className={`text-[11px] font-bold uppercase tracking-wider text-amber-800 ${kh ? "font-khmer" : ""}`}
+                        >
                           {t("Why it matters", "ហេតុអ្វីបានជាសំខាន់")}
                         </div>
-                        <p className={`mt-1.5 text-sm text-amber-950 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}>
+                        <p
+                          className={`mt-1.5 text-sm text-amber-950 leading-relaxed ${kh ? "font-khmer leading-loose" : ""}`}
+                        >
                           {kh ? entry.highlightKh : entry.highlightEn}
                         </p>
                       </div>

@@ -11,7 +11,6 @@ import { RouteTracker } from "@/components/RouteTracker";
 import { Footer } from "@/components/layout/Footer";
 import { AIChatPanel } from "@/components/AIChatPanel";
 import { PWAStatusBar } from "@/components/PWAStatusBar";
-import { AdminRoute } from "@/components/AdminRoute";
 import { HeatSafetyAlert } from "@/components/HeatSafetyAlert";
 import { MascotCheer } from "@/components/MascotCheer";
 import { BackToTop } from "@/components/BackToTop";
@@ -178,16 +177,11 @@ const NotFound                  = lazy(() => import("@/pages/not-found"));
 
 // Named exports — wrapped to look like default exports
 const Home                      = lazy(() => import("@/pages/Home").then(m => ({ default: m.Home })));
-const MapPage                   = lazy(() => import("@/pages/MapPage").then(m => ({ default: m.MapPage })));
-const BrowseNeeds               = lazy(() => import("@/pages/BrowseNeeds").then(m => ({ default: m.BrowseNeeds })));
-const CompletedProjects         = lazy(() => import("@/pages/CompletedProjects").then(m => ({ default: m.CompletedProjects })));
-const Admin                     = lazy(() => import("@/pages/Admin").then(m => ({ default: m.Admin })));
-const AdminDashboard            = lazy(() => import("@/pages/AdminDashboard").then(m => ({ default: m.AdminDashboard })));
+
 const Login                     = lazy(() => import("@/pages/Login").then(m => ({ default: m.Login })));
 const ForgotPassword            = lazy(() => import("@/pages/ForgotPassword").then(m => ({ default: m.ForgotPassword })));
 const ResetPassword             = lazy(() => import("@/pages/ResetPassword").then(m => ({ default: m.ResetPassword })));
-const SchoolProfile             = lazy(() => import("@/pages/SchoolProfile").then(m => ({ default: m.SchoolProfile })));
-const CharityDirectory          = lazy(() => import("@/pages/CharityDirectory").then(m => ({ default: m.CharityDirectory })));
+
 const LaunchpadPage             = lazy(() => import("@/pages/LaunchpadPage").then(m => ({ default: m.LaunchpadPage })));
 const SanctuaryPage             = lazy(() => import("@/pages/SanctuaryPage").then(m => ({ default: m.SanctuaryPage })));
 const StructuralViolencePage    = lazy(() => import("@/pages/StructuralViolence").then(m => ({ default: m.StructuralViolence })));
@@ -197,7 +191,7 @@ const InfantNutritionPage       = lazy(() => import("@/pages/InfantNutritionPage
 const SurvivalHydrationPage     = lazy(() => import("@/pages/SurvivalHydrationPage").then(m => ({ default: m.SurvivalHydrationPage })));
 const MicroscopesPage           = lazy(() => import("@/pages/Microscopes").then(m => ({ default: m.Microscopes })));
 const UniversityExpectationsPage = lazy(() => import("@/pages/UniversityExpectations").then(m => ({ default: m.UniversityExpectations })));
-const AlumniPage                = lazy(() => import("@/pages/AlumniPage").then(m => ({ default: m.AlumniPage })));
+
 const SafetyPage                = lazy(() => import("@/pages/SafetyPage").then(m => ({ default: m.SafetyPage })));
 const ExamPrepPage              = lazy(() => import("@/pages/ExamPrepPage").then(m => ({ default: m.ExamPrepPage })));
 const EnglishWritingPage        = lazy(() => import("@/pages/EnglishWritingPage").then(m => ({ default: m.EnglishWritingPage })));
@@ -208,15 +202,14 @@ const BridgesPage               = lazy(() => import("@/pages/BridgesPage").then(
 const PlumbingSewersPage        = lazy(() => import("@/pages/PlumbingSewersPage").then(m => ({ default: m.PlumbingSewersPage })));
 const PumpsPage                 = lazy(() => import("@/pages/PumpsPage").then(m => ({ default: m.PumpsPage })));
 const VexillologyPage           = lazy(() => import("@/pages/VexillologyPage").then(m => ({ default: m.VexillologyPage })));
-const SubmitStoryPage           = lazy(() => import("@/pages/SubmitStoryPage").then(m => ({ default: m.SubmitStoryPage })));
-const SubmitNeedPage            = lazy(() => import("@/pages/SubmitNeedPage").then(m => ({ default: m.SubmitNeedPage })));
+
 const SpacePage                 = lazy(() => import("@/pages/SpacePage").then(m => ({ default: m.SpacePage })));
 const ProfilePage               = lazy(() => import("@/pages/ProfilePage").then(m => ({ default: m.ProfilePage })));
 const ScientificLiteracyPage    = lazy(() => import("@/pages/ScientificLiteracyPage").then(m => ({ default: m.ScientificLiteracyPage })));
 const ReadingListPage           = lazy(() => import("@/pages/ReadingListPage").then(m => ({ default: m.ReadingListPage })));
 const Dashboard                 = lazy(() => import("@/pages/Dashboard").then(m => ({ default: m.Dashboard })));
 const FinLitIntroPage           = lazy(() => import("@/pages/FinLitIntroPage").then(m => ({ default: m.FinLitIntroPage })));
-const SchoolInbox               = lazy(() => import("@/pages/SchoolInbox").then(m => ({ default: m.SchoolInbox })));
+
 const ElectricalSafetyPage      = lazy(() => import("@/pages/ElectricalSafetyPage").then(m => ({ default: m.ElectricalSafetyPage })));
 const ChemistryHubPage          = lazy(() => import("@/pages/ChemistryHubPage").then(m => ({ default: m.ChemistryHubPage })));
 const OrganicChemistry101Page   = lazy(() => import("@/pages/OrganicChemistry101Page").then(m => ({ default: m.OrganicChemistry101Page })));
@@ -353,9 +346,7 @@ function Router() {
         <Suspense fallback={<PageLoading />}>
           <Switch>
             <Route path="/" component={Home} />
-            <Route path="/map" component={MapPage} />
-            <Route path="/needs" component={BrowseNeeds} />
-            <Route path="/projects" component={CompletedProjects} />
+
             <Route path="/impact" component={ImpactReportPage} />
             <Route path="/art-gallery" component={StudentArtGallery} />
             <Route path="/science/orbital-mechanics" component={OrbitalMechanics} />
@@ -364,11 +355,10 @@ function Router() {
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
-            <Route path="/school/:id" component={SchoolProfile} />
-            <Route path="/charities" component={CharityDirectory} />
+
             <Route path="/launchpad" component={LaunchpadPage} />
             <Route path="/sanctuary" component={SanctuaryPage} />
-            <Route path="/alumni" component={AlumniPage} />
+
             <Route path="/safety" component={SafetyPage} />
             <Route path="/exam-prep" component={ExamPrepPage} />
             <Route path="/english-writing" component={EnglishWritingPage} />
@@ -378,8 +368,7 @@ function Router() {
             <Route path="/technology/plumbing" component={PlumbingSewersPage} />
             <Route path="/technology/pumps" component={PumpsPage} />
             <Route path="/study-center/flags" component={VexillologyPage} />
-            <Route path="/submit-story" component={SubmitStoryPage} />
-            <Route path="/submit-need" component={SubmitNeedPage} />
+
             <Route path="/space" component={SpacePage} />
             <Route path="/oceanography" component={OceanographyPage} />
             <Route path="/technology/horology" component={HorologyPage} />
@@ -542,7 +531,7 @@ function Router() {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/finlit-intro" component={FinLitIntroPage} />
-            <Route path="/school-inbox" component={SchoolInbox} />
+
             <Route path="/electrical-safety" component={ElectricalSafetyPage} />
             <Route path="/chemistry" component={ChemistryHubPage} />
             <Route path="/chemistry/building-blocks" component={ChemistryBuildingBlocksPage} />
@@ -616,12 +605,7 @@ function Router() {
             <Route path="/study-center/philosophy" component={PhilosophyPage} />
             <Route path="/study-center/sociology" component={SociologyPage} />
             <Route path="/study-center/anthropology" component={AnthropologyPage} />
-            <Route path="/admin/dashboard">
-              {() => <AdminRoute component={AdminDashboard} />}
-            </Route>
-            <Route path="/admin">
-              {() => <AdminRoute component={Admin} />}
-            </Route>
+
             <Route component={NotFound} />
           </Switch>
         </Suspense>
