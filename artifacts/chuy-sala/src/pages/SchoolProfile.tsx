@@ -1,7 +1,6 @@
+import { SchoolLocation } from "@/features/cambodia-earth/components/SchoolLocation";
 import { useState } from "react";
 import { useParams, Link } from "wouter";
-import { MapContainer, TileLayer, Marker, ZoomControl, useMap } from "react-leaflet";
-import L from "leaflet";
 import { useGetSchool, useListNeeds } from "@workspace/api-client-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
@@ -10,25 +9,6 @@ import { NeedCard } from "@/components/NeedCard";
 import { SendSchoolMessageModal } from "@/components/SendSchoolMessageModal";
 import { Loader2, MapPin, Phone, Mail, Users, Pencil, ArrowLeft, GraduationCap, MessageSquare } from "lucide-react";
 
-import iconUrl from "leaflet/dist/images/marker-icon.png";
-import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
-import shadowUrl from "leaflet/dist/images/marker-shadow.png";
-
-const schoolIcon = L.icon({
-  iconUrl,
-  iconRetinaUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-function FlyToMarker({ lat, lng }: { lat: number; lng: number }) {
-  const map = useMap();
-  map.setView([lat, lng], 13, { animate: true });
-  return null;
-}
 
 export function SchoolProfile() {
   const { id } = useParams<{ id: string }>();
@@ -197,21 +177,7 @@ export function SchoolProfile() {
             </span>
           </div>
           <div className="h-64 mt-4 relative z-0">
-            <MapContainer
-              center={[school.latitude, school.longitude]}
-              zoom={13}
-              className="w-full h-full"
-              zoomControl={false}
-              scrollWheelZoom={false}
-            >
-              <ZoomControl position="topright" />
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <FlyToMarker lat={school.latitude} lng={school.longitude} />
-              <Marker position={[school.latitude, school.longitude]} icon={schoolIcon} />
-            </MapContainer>
+            <SchoolLocation latitude={school.latitude} longitude={school.longitude} label={language === "kh" ? school.nameKh : school.nameEn} />
           </div>
         </div>
       )}

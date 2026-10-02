@@ -1,6 +1,6 @@
 import ReactGA from "react-ga4";
 
-export const GA_MEASUREMENT_ID = "G-1RQCE56X41";
+export const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim();
 
 /**
  * Google Analytics 4 helpers for the Chuy Sala PWA.
@@ -53,7 +53,7 @@ declare global {
 let initialised = false;
 
 export function initAnalytics(): void {
-  if (initialised) return;
+  if (initialised || !GA_MEASUREMENT_ID) return;
   if (typeof window === "undefined") return;
   try {
     ReactGA.initialize(GA_MEASUREMENT_ID, {

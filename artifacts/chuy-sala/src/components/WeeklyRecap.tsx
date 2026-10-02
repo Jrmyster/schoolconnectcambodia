@@ -7,7 +7,7 @@ import {
 interface Metrics {
   pendingStories: number;
   newStoriesThisWeek: number;
-  aiChatSessionsThisWeek: number;
+  messagesThisWeek: number;
   weekStart: string;
 }
 
@@ -154,7 +154,7 @@ export function WeeklyRecap() {
       >
         <CheckCircle2 size={15} className="flex-shrink-0 mt-0.5 text-blue-600" />
         <p className="text-xs text-blue-800 leading-relaxed">
-          <strong>Your recurring task:</strong> Check for new Alumni Story submissions and Resume feedback requests, then review engagement from the Interview Simulator.
+          <strong>Your recurring task:</strong> Review new Alumni Story submissions and activity across the school network.
         </p>
       </div>
 
@@ -192,19 +192,19 @@ export function WeeklyRecap() {
               />
               <MetricTile
                 icon={<MessageSquare size={18} />}
-                value={metrics.aiChatSessionsThisWeek}
-                label="AI Tutor sessions this week"
+                value={metrics.messagesThisWeek}
+                label="School messages this week"
                 accent="#0891B2"
               />
             </div>
             <p className="text-xs text-slate-400 mt-3 italic">
-              Interview Simulator sessions are real-time and not persisted — check live traffic for those.
+              Messages count network activity; private message content is not included.
             </p>
           </>
         ) : null}
       </div>
 
-      {/* ── AI Summary button ── */}
+      {/* ── Weekly Summary button ── */}
       <div className="px-6 pb-6 bg-white border-t" style={{ borderColor: "#F1F5F9" }}>
         <button
           onClick={generateSummary}
@@ -213,15 +213,15 @@ export function WeeklyRecap() {
           style={{ background: "linear-gradient(135deg,#1E3A5F,#2563EB)", color: "white" }}
         >
           {summaryLoading ? (
-            <><Loader2 size={15} className="animate-spin" /> Generating AI summary…</>
+            <><Loader2 size={15} className="animate-spin" /> Generating weekly summary…</>
           ) : (
-            <><Sparkles size={15} /> Generate AI Weekly Summary</>
+            <><Sparkles size={15} /> Generate Weekly Summary</>
           )}
         </button>
 
         {summaryError && (
           <p className="mt-3 text-xs text-red-500 text-center">
-            AI summary failed. Please try again in a moment.
+            weekly summary failed. Please try again in a moment.
           </p>
         )}
 

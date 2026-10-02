@@ -30,7 +30,7 @@ if (!SESSION_SECRET && process.env["NODE_ENV"] === "production") {
 }
 
 app.use(session({
-  name: "chsid",
+  name: "map.sid",
   secret: SESSION_SECRET ?? "chouy-sala-dev-only-secret-do-not-use-in-prod",
   resave: false,
   saveUninitialized: false,

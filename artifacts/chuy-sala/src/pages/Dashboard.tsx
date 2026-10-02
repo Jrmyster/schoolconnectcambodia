@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { useListNeeds } from "@workspace/api-client-react";
-import { StudentDashboard } from "./StudentDashboard";
+
 import {
   Eye,
   EyeOff,
@@ -41,7 +41,7 @@ export function Dashboard() {
     );
   }
 
-  return user.role === "school" ? <SchoolDashboard /> : <StudentDashboard />;
+  return <SchoolDashboard />;
 }
 
 /* ─── School Dashboard (The Resource Map) ─────────────────────────── */

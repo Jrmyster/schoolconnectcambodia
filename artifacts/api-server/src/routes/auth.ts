@@ -44,6 +44,7 @@ router.post("/auth/register", async (req, res) => {
 
     // A synthetic student-PIN email is reserved for the `student` role —
     // refuse direct API attempts to register a "school" account with a 4-digit PIN.
+    if (isStudentPin || role !== "school") return res.status(400).json({error:"Use the STEM & Learning Hub for student accounts."});
     const normalizedRole = isStudentPin
       ? "student"
       : role === "school"
@@ -92,7 +93,7 @@ router.post("/auth/login", async (req, res) => {
 
     const rows = await db.select().from(usersTable).where(eq(usersTable.email, email.toLowerCase())).limit(1);
     const user = rows[0];
-    if (!user) return res.status(401).json({ error: "Invalid email or password." });
+    if (!user || (user.role !== "school" && !user.isAdmin)) return res.status(401).json({ error: "Invalid email or password." });
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Invalid email or password." });
@@ -114,7 +115,7 @@ router.post("/auth/login", async (req, res) => {
 
 router.post("/auth/logout", (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie("chsid");
+    res.clearCookie("map.sid");
     res.json({ ok: true });
   });
 });

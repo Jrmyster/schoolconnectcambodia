@@ -1,97 +1,65 @@
-import { useListSchools, useListNeeds } from "@workspace/api-client-react";
-import { MapComponent } from "@/components/MapComponent";
-import { useTranslation, useLanguageStore } from "@/store/use-language";
-import { localizeProvince } from "@/lib/province-data";
+import { useState } from "react";
 import { Link } from "wouter";
-import { Loader2, Map as MapIcon, ChevronRight, FlaskConical } from "lucide-react";
-
-const DEMO_PREFIX = "DEMO:";
-
+import { useListSchools } from "@workspace/api-client-react";
+import CambodiaEarth from "@/features/cambodia-earth/components/CambodiaEarth";
+import { useTranslation, useLanguageStore } from "@/store/use-language";
 export function MapPage() {
-  const t = useTranslation();
-  const { language } = useLanguageStore();
-
-  const { data: schools, isLoading: isLoadingSchools } = useListSchools();
-  const { data: needs, isLoading: isLoadingNeeds } = useListNeeds();
-
-  const isLoading = isLoadingSchools || isLoadingNeeds;
-
+  const t = useTranslation(),
+    kh = useLanguageStore((s) => s.language) === "kh";
+  const [search, setSearch] = useState("");
+  const { data, isLoading, isError, refetch } = useListSchools();
+  const schools = Array.isArray(data) ? data : [];
+  const visible = schools.filter((s) =>
+    `${s.nameEn} ${s.nameKh} ${s.province}`
+      .toLowerCase()
+      .includes(search.toLowerCase()),
+  );
   return (
-    <div className="w-full h-[calc(100vh-5rem)] flex flex-col md:flex-row bg-background">
-      {/* Sidebar for Map */}
-      <div className="w-full md:w-80 lg:w-96 bg-card border-r border-border flex flex-col h-1/3 md:h-full z-10 shadow-xl shadow-black/5">
-        <div className="p-6 border-b border-border bg-white">
-          <div className="flex items-center gap-3 text-primary mb-2">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <MapIcon className="w-6 h-6" />
-            </div>
-            <h1 className={`text-2xl font-bold ${language === 'kh' ? 'font-khmer' : 'font-display'}`}>
-              {t("School Map", "ផែនទីសាលា")}
-            </h1>
-          </div>
-          <p className={`text-muted-foreground text-sm ${language === 'kh' ? 'font-khmer' : ''}`}>
-            {t("Explore schools across Cambodia. Click on a pin to view active needs.", "ស្វែងរកសាលារៀននៅទូទាំងប្រទេសកម្ពុជា។ ចុចលើម្ជុលដើម្បីមើលតម្រូវការសកម្ម។")}
-          </p>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-secondary/20">
-          {isLoading ? (
-            <div className="flex items-center justify-center h-32 text-primary">
-              <Loader2 className="w-8 h-8 animate-spin" />
-            </div>
-          ) : (
-            schools?.map(school => {
-              const activeCount = needs?.filter(n => n.schoolId === school.id && n.status === 'active').length || 0;
-              return (
-                <Link key={school.id} href={`/school/${school.id}`} className={`block bg-white p-4 rounded-xl border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group ${school.description?.startsWith(DEMO_PREFIX) ? 'border-amber-200 hover:border-amber-400' : 'border-border hover:border-primary/40'}`}>
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                        {school.description?.startsWith(DEMO_PREFIX) && (
-                          <FlaskConical className="w-3 h-3 text-amber-500 flex-shrink-0" />
-                        )}
-                        <h3 className={`font-bold text-foreground leading-tight ${language === 'kh' ? 'font-khmer text-sm' : ''}`}>
-                          {t(school.nameEn, school.nameKh)}
-                        </h3>
-                      </div>
-                      {school.description?.startsWith(DEMO_PREFIX) && (
-                        <span className="inline-block text-[9px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full leading-none">
-                          Demo entry
-                        </span>
-                      )}
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground/40 group-hover:text-primary transition-colors flex-shrink-0 mt-0.5" />
-                  </div>
-                  <div className="flex items-center justify-between text-xs mt-2">
-                    <span className="text-muted-foreground">{localizeProvince(school.province, language)}</span>
-                    {activeCount > 0 ? (
-                      <span className="font-bold text-accent bg-accent/10 px-2 py-1 rounded-md">
-                        {activeCount} {t("Needs", "តម្រូវការ")}
-                      </span>
-                    ) : (
-                      <span className="text-muted-foreground bg-black/5 px-2 py-1 rounded-md">
-                        {t("No needs", "គ្មានតម្រូវការ")}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              );
-            })
-          )}
-        </div>
-
-      </div>
-
-      {/* Map Container */}
-      <div className="flex-1 h-2/3 md:h-full relative z-0">
-        {!isLoading && schools && needs ? (
-          <MapComponent schools={schools} needs={needs} />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-muted/30">
-            <Loader2 className="w-12 h-12 text-primary animate-spin" />
+    <>
+      <CambodiaEarth schools={schools} />
+      <section className="max-w-6xl mx-auto p-6 space-y-4" id="schools">
+        <h2 className="text-2xl font-bold">
+          {t("School Directory", "បញ្ជីសាលារៀន")}
+        </h2>
+        <label className="block">
+          {t("Search schools or provinces", "ស្វែងរកសាលា ឬខេត្ត")}
+          <input
+            className="block w-full border rounded-lg p-3 mt-2"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </label>
+        {isLoading && (
+          <p role="status">{t("Loading schools…", "កំពុងផ្ទុកសាលា…")}</p>
+        )}
+        {isError && (
+          <div role="alert">
+            {t(
+              "School data is unavailable. The landscape explorer remains available.",
+              "ទិន្នន័យសាលាមិនអាចប្រើបាន។ ផែនទីនៅតែអាចប្រើបាន។",
+            )}{" "}
+            <button className="underline" onClick={() => void refetch()}>
+              {t("Retry", "ព្យាយាមម្តងទៀត")}
+            </button>
           </div>
         )}
-      </div>
-    </div>
+        {!isLoading && !isError && visible.length === 0 && (
+          <p>{t("No schools found.", "រកមិនឃើញសាលា។")}</p>
+        )}
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {visible.map((s) => (
+            <li key={s.id}>
+              <Link
+                href={`/school/${s.id}`}
+                className="block border rounded-xl p-4 hover:bg-sky-50"
+              >
+                <strong>{kh ? s.nameKh : s.nameEn}</strong>
+                <p>{s.province}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   );
 }

@@ -4,15 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx --env-file=.env ./src/index.ts",
-    "build": "tsx ./build.ts",
+    "dev": "node --env-file-if-exists=.env --import tsx ./src/index.ts",
+    "build": "node --import tsx ./build.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@workspace/api-zod": "workspace:*",
     "@workspace/db": "workspace:*",
-    "@workspace/integrations-openai-ai-server": "workspace:*",
-    "@workspace/integrations-gemini-ai": "workspace:*",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2",

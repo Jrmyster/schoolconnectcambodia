@@ -3,7 +3,7 @@ import { useListNeeds, NeedCategory } from "@workspace/api-client-react";
 import { NeedCard } from "@/components/NeedCard";
 import { useTranslation, useLanguageStore } from "@/store/use-language";
 import { Loader2, Search, SearchX, Heart, SlidersHorizontal, Share2, Copy, Check } from "lucide-react";
-import { DownloadGuideButton } from "@/components/DownloadGuideButton";
+import { STEM_SITE_URL } from "@/config/sites";
 
 const SHARE_TITLE =
   "Check out School Connect Cambodia - Supporting rural education through tech.";
@@ -294,7 +294,7 @@ export function BrowseNeeds() {
                 "រក្សាទុកមគ្គុទ្ទេសក៍ធនធាននៅលើឧបករណ៍របស់អ្នក ហើយចែករំលែកជាមួយសិស្ស និងគ្រូនៅតំបន់ដែលមានអ៊ីនធឺណិតមិនស្ថិតស្ថេរ។"
               )}
             </p>
-            <DownloadGuideButton />
+            <a href={STEM_SITE_URL} target="_blank" rel="noopener noreferrer" className="underline">STEM &amp; Learning Hub ↗</a>
           </div>
 
           {/* Spread the Word */}

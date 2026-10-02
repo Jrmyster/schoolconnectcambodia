@@ -1,245 +1,248 @@
 openapi: 3.1.0
 info:
-  title: Api
+  title: School Connect Map API
   version: 0.1.0
   description: Chuy Sala (Help School) API specification
 servers:
-  - url: /api
-    description: Base API path
+- url: /api
+  description: Base API path
 tags:
-  - name: health
-    description: Health operations
-  - name: openai
-    description: OpenAI AI chat operations
-  - name: schools
-    description: School operations
-  - name: needs
-    description: School needs/requests
-  - name: completedProjects
-    description: Completed project transparency log
+- name: health
+  description: Health operations
+- name: schools
+  description: School operations
+- name: needs
+  description: School needs/requests
+- name: completedProjects
+  description: Completed project transparency log
 paths:
   /healthz:
     get:
       operationId: healthCheck
-      tags: [health]
+      tags:
+      - health
       summary: Health check
       responses:
-        "200":
+        '200':
           description: Healthy
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HealthStatus"
-
+                $ref: '#/components/schemas/HealthStatus'
   /schools:
     get:
       operationId: listSchools
-      tags: [schools]
+      tags:
+      - schools
       summary: List all schools with optional filters
       parameters:
-        - name: province
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: search
-          in: query
-          required: false
-          schema:
-            type: string
+      - name: province
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: List of schools
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/School"
+                  $ref: '#/components/schemas/School'
     post:
       operationId: createSchool
-      tags: [schools]
+      tags:
+      - schools
       summary: Create a new school profile
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateSchoolRequest"
+              $ref: '#/components/schemas/CreateSchoolRequest'
       responses:
-        "201":
+        '201':
           description: School created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/School"
-
+                $ref: '#/components/schemas/School'
   /schools/{id}:
     get:
       operationId: getSchool
-      tags: [schools]
+      tags:
+      - schools
       summary: Get a school by ID
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: School details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/School"
-        "404":
+                $ref: '#/components/schemas/School'
+        '404':
           description: Not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/ErrorResponse'
   /needs:
     get:
       operationId: listNeeds
-      tags: [needs]
+      tags:
+      - needs
       summary: List active needs with optional filters
       parameters:
-        - name: category
-          in: query
-          required: false
-          schema:
-            $ref: "#/components/schemas/NeedCategory"
-        - name: province
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: schoolId
-          in: query
-          required: false
-          schema:
-            type: integer
+      - name: category
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/NeedCategory'
+      - name: province
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: schoolId
+        in: query
+        required: false
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: List of needs
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Need"
+                  $ref: '#/components/schemas/Need'
     post:
       operationId: createNeed
-      tags: [needs]
+      tags:
+      - needs
       summary: Create a new need/request for a school
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateNeedRequest"
+              $ref: '#/components/schemas/CreateNeedRequest'
       responses:
-        "201":
+        '201':
           description: Need created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Need"
-
+                $ref: '#/components/schemas/Need'
   /needs/{id}:
     get:
       operationId: getNeed
-      tags: [needs]
+      tags:
+      - needs
       summary: Get a need by ID
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
-        "200":
+        '200':
           description: Need details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Need"
-        "404":
+                $ref: '#/components/schemas/Need'
+        '404':
           description: Not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: '#/components/schemas/ErrorResponse'
     patch:
       operationId: updateNeedFunding
-      tags: [needs]
+      tags:
+      - needs
       summary: Update funded amount for a need
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateNeedFundingRequest"
+              $ref: '#/components/schemas/UpdateNeedFundingRequest'
       responses:
-        "200":
+        '200':
           description: Need updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Need"
-
+                $ref: '#/components/schemas/Need'
   /completed-projects:
     get:
       operationId: listCompletedProjects
-      tags: [completedProjects]
+      tags:
+      - completedProjects
       summary: List completed projects / transparency log
       parameters:
-        - name: province
-          in: query
-          required: false
-          schema:
-            type: string
+      - name: province
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: List of completed projects
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/CompletedProject"
+                  $ref: '#/components/schemas/CompletedProject'
     post:
       operationId: createCompletedProject
-      tags: [completedProjects]
+      tags:
+      - completedProjects
       summary: Post a completed project with thank-you photo
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateCompletedProjectRequest"
+              $ref: '#/components/schemas/CreateCompletedProjectRequest'
       responses:
-        "201":
+        '201':
           description: Completed project created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CompletedProject"
-
+                $ref: '#/components/schemas/CompletedProject'
   /provinces:
     get:
       operationId: listProvinces
-      tags: [schools]
+      tags:
+      - schools
       summary: List all Cambodian provinces that have schools
       responses:
-        "200":
+        '200':
           description: List of provinces
           content:
             application/json:
@@ -247,123 +250,6 @@ paths:
                 type: array
                 items:
                   type: string
-
-  /openai/conversations:
-    get:
-      operationId: listOpenaiConversations
-      tags: [openai]
-      summary: List all conversations
-      responses:
-        "200":
-          description: List of conversations
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/OpenaiConversation"
-    post:
-      operationId: createOpenaiConversation
-      tags: [openai]
-      summary: Create a new conversation
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateOpenaiConversationBody"
-      responses:
-        "201":
-          description: Created conversation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OpenaiConversation"
-  /openai/conversations/{id}:
-    get:
-      operationId: getOpenaiConversation
-      tags: [openai]
-      summary: Get conversation with messages
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Conversation with messages
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OpenaiConversationWithMessages"
-        "404":
-          description: Not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OpenaiError"
-    delete:
-      operationId: deleteOpenaiConversation
-      tags: [openai]
-      summary: Delete a conversation
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "204":
-          description: Deleted
-        "404":
-          description: Not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OpenaiError"
-  /openai/conversations/{id}/messages:
-    get:
-      operationId: listOpenaiMessages
-      tags: [openai]
-      summary: List messages in a conversation
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: List of messages
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/OpenaiMessage"
-    post:
-      operationId: sendOpenaiMessage
-      tags: [openai]
-      summary: Send a text message and receive a streaming text response
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SendOpenaiMessageBody"
-      responses:
-        "200":
-          description: SSE stream of assistant text chunks
-          content:
-            text/event-stream: {}
-
 components:
   schemas:
     HealthStatus:
@@ -372,36 +258,32 @@ components:
         status:
           type: string
       required:
-        - status
-
+      - status
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
       required:
-        - error
-
+      - error
     NeedCategory:
       type: string
       enum:
-        - Stationery
-        - Electronics
-        - Infrastructure
-        - Books
-        - Sports
-        - Other
-        - Furniture
-        - WASH
-        - Teacher Training
-
+      - Stationery
+      - Electronics
+      - Infrastructure
+      - Books
+      - Sports
+      - Other
+      - Furniture
+      - WASH
+      - Teacher Training
     NeedStatus:
       type: string
       enum:
-        - active
-        - funded
-        - completed
-
+      - active
+      - funded
+      - completed
     School:
       type: object
       properties:
@@ -438,15 +320,14 @@ components:
           type: string
           format: date-time
       required:
-        - id
-        - nameEn
-        - nameKh
-        - province
-        - district
-        - latitude
-        - longitude
-        - createdAt
-
+      - id
+      - nameEn
+      - nameKh
+      - province
+      - district
+      - latitude
+      - longitude
+      - createdAt
     CreateSchoolRequest:
       type: object
       properties:
@@ -478,13 +359,12 @@ components:
           type: integer
           nullable: true
       required:
-        - nameEn
-        - nameKh
-        - province
-        - district
-        - latitude
-        - longitude
-
+      - nameEn
+      - nameKh
+      - province
+      - district
+      - latitude
+      - longitude
     Need:
       type: object
       properties:
@@ -493,7 +373,7 @@ components:
         schoolId:
           type: integer
         school:
-          $ref: "#/components/schemas/School"
+          $ref: '#/components/schemas/School'
           nullable: true
         titleEn:
           type: string
@@ -504,7 +384,7 @@ components:
         descriptionKh:
           type: string
         category:
-          $ref: "#/components/schemas/NeedCategory"
+          $ref: '#/components/schemas/NeedCategory'
         photoUrl:
           type: string
           nullable: true
@@ -513,7 +393,7 @@ components:
         fundedAmount:
           type: number
         status:
-          $ref: "#/components/schemas/NeedStatus"
+          $ref: '#/components/schemas/NeedStatus'
         contactEmail:
           type: string
           nullable: true
@@ -521,18 +401,17 @@ components:
           type: string
           format: date-time
       required:
-        - id
-        - schoolId
-        - titleEn
-        - titleKh
-        - descriptionEn
-        - descriptionKh
-        - category
-        - goalAmount
-        - fundedAmount
-        - status
-        - createdAt
-
+      - id
+      - schoolId
+      - titleEn
+      - titleKh
+      - descriptionEn
+      - descriptionKh
+      - category
+      - goalAmount
+      - fundedAmount
+      - status
+      - createdAt
     CreateNeedRequest:
       type: object
       properties:
@@ -547,7 +426,7 @@ components:
         descriptionKh:
           type: string
         category:
-          $ref: "#/components/schemas/NeedCategory"
+          $ref: '#/components/schemas/NeedCategory'
         photoUrl:
           type: string
           nullable: true
@@ -557,24 +436,22 @@ components:
           type: string
           nullable: true
       required:
-        - schoolId
-        - titleEn
-        - titleKh
-        - descriptionEn
-        - descriptionKh
-        - category
-        - goalAmount
-
+      - schoolId
+      - titleEn
+      - titleKh
+      - descriptionEn
+      - descriptionKh
+      - category
+      - goalAmount
     UpdateNeedFundingRequest:
       type: object
       properties:
         fundedAmount:
           type: number
         status:
-          $ref: "#/components/schemas/NeedStatus"
+          $ref: '#/components/schemas/NeedStatus'
       required:
-        - fundedAmount
-
+      - fundedAmount
     CompletedProject:
       type: object
       properties:
@@ -586,7 +463,7 @@ components:
         schoolId:
           type: integer
         school:
-          $ref: "#/components/schemas/School"
+          $ref: '#/components/schemas/School'
           nullable: true
         titleEn:
           type: string
@@ -600,7 +477,7 @@ components:
           type: string
           nullable: true
         category:
-          $ref: "#/components/schemas/NeedCategory"
+          $ref: '#/components/schemas/NeedCategory'
         completedAt:
           type: string
           format: date-time
@@ -608,16 +485,15 @@ components:
           type: string
           format: date-time
       required:
-        - id
-        - schoolId
-        - titleEn
-        - titleKh
-        - descriptionEn
-        - descriptionKh
-        - category
-        - completedAt
-        - createdAt
-
+      - id
+      - schoolId
+      - titleEn
+      - titleKh
+      - descriptionEn
+      - descriptionKh
+      - category
+      - completedAt
+      - createdAt
     CreateCompletedProjectRequest:
       type: object
       properties:
@@ -638,90 +514,15 @@ components:
           type: string
           nullable: true
         category:
-          $ref: "#/components/schemas/NeedCategory"
+          $ref: '#/components/schemas/NeedCategory'
         completedAt:
           type: string
           format: date-time
       required:
-        - schoolId
-        - titleEn
-        - titleKh
-        - descriptionEn
-        - descriptionKh
-        - category
-        - completedAt
-
-    OpenaiConversation:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-      required:
-        - id
-        - title
-        - createdAt
-    OpenaiMessage:
-      type: object
-      properties:
-        id:
-          type: integer
-        conversationId:
-          type: integer
-        role:
-          type: string
-        content:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-      required:
-        - id
-        - conversationId
-        - role
-        - content
-        - createdAt
-    OpenaiConversationWithMessages:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        messages:
-          type: array
-          items:
-            $ref: "#/components/schemas/OpenaiMessage"
-      required:
-        - id
-        - title
-        - createdAt
-        - messages
-    CreateOpenaiConversationBody:
-      type: object
-      properties:
-        title:
-          type: string
-      required:
-        - title
-    SendOpenaiMessageBody:
-      type: object
-      properties:
-        content:
-          type: string
-      required:
-        - content
-    OpenaiError:
-      type: object
-      properties:
-        error:
-          type: string
-      required:
-        - error
+      - schoolId
+      - titleEn
+      - titleKh
+      - descriptionEn
+      - descriptionKh
+      - category
+      - completedAt
