@@ -1,0 +1,2 @@
+BACKEND_API_URL=https://your-stem-backend.example.com
+BACKEND_PROXY_SECRET=replace-with-the-same-secret-as-this-backend

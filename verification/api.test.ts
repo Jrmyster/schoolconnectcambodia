@@ -1,9 +1,24 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+import { promisify } from "node:util";
+import { createSessionStore } from "../artifacts/api-server/src/session-store";
 import app from "../artifacts/api-server/src/app";
 import { database } from "./test-db";
 async function main() {
   await database.exec(readFileSync("verification/.tmp/schema.sql", "utf8"));
+  for (let pass = 0; pass < 2; pass++) {
+    for (const name of readdirSync("deployment/migrations").sort()) {
+      await database.exec(readFileSync("deployment/migrations/" + name, "utf8"));
+    }
+  }
+  const firstStore = createSessionStore();
+  const secondStore = createSessionStore();
+  await promisify(firstStore.set.bind(firstStore))("restart-fixture", { cookie: { maxAge: 60000 }, userId: 123 } as any);
+  const restored = await promisify(secondStore.get.bind(secondStore))("restart-fixture");
+  assert.equal(restored?.userId, 123, "a different server session-store instance restores the PostgreSQL session");
+  await promisify(secondStore.destroy.bind(secondStore))("restart-fixture");
+  assert.equal(await promisify(firstStore.get.bind(firstStore))("restart-fixture"), undefined);
+
   const tables = await database.query<{ table_name: string }>(
     "SELECT table_name FROM information_schema.tables WHERE table_schema='public'",
   );

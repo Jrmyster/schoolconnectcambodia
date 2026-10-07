@@ -1,3 +1,5 @@
+> Updated production configuration, persistence changes and remaining launch steps: [deployment/README.md](../deployment/README.md). The historical findings below predate these changes.
+
 # Deployment readiness — School Connect Stem
 
 Checked 2026-10-02. Refactor commit: `d38d1c7`. No deployment or live database migration has been performed.

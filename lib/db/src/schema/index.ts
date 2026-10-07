@@ -10,3 +10,4 @@ export * from "./books";
 export * from "./authorOfMonth";
 export * from "./challengeCompletions";
 export * from "./quizCompletions";
+export * from "./sessions";
