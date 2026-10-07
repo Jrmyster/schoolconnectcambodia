@@ -71,8 +71,9 @@ router.post("/auth/register", async (req, res) => {
       role: normalizedRole,
     }).returning();
 
+    await new Promise<void>((resolve, reject) => req.session.regenerate((error) => error ? reject(error) : resolve()));
     req.session.userId = user.id;
-    await req.session.save();
+    await new Promise<void>((resolve, reject) => req.session.save((error) => error ? reject(error) : resolve()));
 
     let school = null;
     if (user.schoolId) {
@@ -98,8 +99,9 @@ router.post("/auth/login", async (req, res) => {
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Invalid email or password." });
 
+    await new Promise<void>((resolve, reject) => req.session.regenerate((error) => error ? reject(error) : resolve()));
     req.session.userId = user.id;
-    await req.session.save();
+    await new Promise<void>((resolve, reject) => req.session.save((error) => error ? reject(error) : resolve()));
 
     let school = null;
     if (user.schoolId) {

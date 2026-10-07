@@ -6,3 +6,4 @@ export * from "./notifications";
 export * from "./stories";
 export * from "./users";
 export * from "./passwordResetTokens";
+export * from "./sessions";

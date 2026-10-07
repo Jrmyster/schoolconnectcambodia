@@ -11,6 +11,10 @@ await mkdir("verification/.tmp", { recursive: true });
 const env = {
   ...process.env,
   NODE_ENV: "test",
+  R2_ENDPOINT: "https://storage.test.invalid",
+  R2_BUCKET: "isolated-test",
+  R2_ACCESS_KEY_ID: "test-only",
+  R2_SECRET_ACCESS_KEY: "test-only",
   DATABASE_URL: "postgresql://unused:unused@127.0.0.1:1/unused",
   SESSION_SECRET: "isolated-test-session-secret",
   AI_INTEGRATIONS_OPENAI_API_KEY: "test-only",

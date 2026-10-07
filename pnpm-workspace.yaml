@@ -5,6 +5,7 @@ packages:
   - scripts
 
 allowBuilds:
+  workerd: true
   '@google/genai': true
   core-js: true
   esbuild: true

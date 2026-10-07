@@ -7,18 +7,28 @@
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
     "verify:api": "node verification/run-api.mjs",
-    "verify:browser": "node verification/browser-smoke.cjs"
+    "verify:browser": "node verification/browser-smoke.cjs",
+    "typecheck:worker": "tsc -p tsconfig.worker.json",
+    "verify:worker": "node --experimental-strip-types --test verification/worker.test.mjs",
+    "db:migrate:production": "node deployment/migrate.mjs",
+    "deploy:dry-run": "wrangler deploy --dry-run --outdir .wrangler/dry-run",
+    "deploy:production": "wrangler deploy"
   },
   "private": true,
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.8",
     "playwright": "1.51.1",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "wrangler": "^4.147.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-win32-x64-msvc": "^4.60.3",
     "@tailwindcss/oxide-win32-x64-msvc": "^4.2.4",
     "lightningcss-win32-x64-msvc": "^1.32.0"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.13.0"
   }
 }

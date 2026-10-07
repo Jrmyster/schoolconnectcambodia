@@ -1,44 +1,25 @@
 import { Router, type IRouter } from "express";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
+import { requireRole } from "../middleware/rbac";
+import { savePhoto, readPhoto, photoMime } from "../storage/photos";
 
-// Resolve uploads dir relative to process cwd (works in both ESM dev and CJS prod bundle)
-const uploadsDir = path.resolve(process.cwd(), "uploads");
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadsDir),
-  filename: (_req, file, cb) => {
-    const ext = path.extname(file.originalname) || ".jpg";
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e6)}${ext}`;
-    cb(null, unique);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
-  fileFilter: (_req, file, cb) => {
-    if (file.mimetype.startsWith("image/")) {
-      cb(null, true);
-    } else {
-      cb(new Error("Only image files are allowed"));
-    }
-  },
-});
-
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024, files: 1 } });
 const router: IRouter = Router();
-
-router.post("/upload", upload.single("photo"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-  const url = `/api/uploads/${req.file.filename}`;
-  res.json({ url });
+router.post("/upload", requireRole("school"), (req, res) => {
+  upload.single("photo")(req, res, async (error) => {
+    if (error) { res.status(error.code === "LIMIT_FILE_SIZE" ? 413 : 400).json({ error: "Upload one photo up to 10 MB." }); return; }
+    if (!req.file) { res.status(400).json({ error: "No file uploaded" }); return; }
+    if (!photoMime(req.file.buffer)) { res.status(415).json({ error: "Upload a JPEG, PNG, GIF or WebP image." }); return; }
+    try { res.json({ url: await savePhoto(req.file.buffer) }); }
+    catch { res.status(503).json({ error: "Photo storage is temporarily unavailable." }); }
+  });
 });
-
-export { uploadsDir };
+router.get("/uploads/:filename", async (req, res) => {
+  try {
+    const bytes = await readPhoto(String(req.params.filename));
+    const mime = bytes && photoMime(bytes);
+    if (!bytes || !mime) { res.status(404).json({ error: "Photo not found." }); return; }
+    res.set({ "Content-Type": mime, "X-Content-Type-Options": "nosniff", "Cache-Control": "no-store" }).send(bytes);
+  } catch { res.status(503).json({ error: "Photo storage is temporarily unavailable." }); }
+});
 export default router;
